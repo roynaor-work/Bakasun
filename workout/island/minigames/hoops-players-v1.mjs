@@ -13,6 +13,37 @@ import {shareSkeletons} from './hoops-perf.mjs';
 import {compactAvatar} from './hoops-lod.mjs';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
+const IDENTITY=new THREE.Quaternion(),_a=new THREE.Vector3(),_b=new THREE.Vector3(),_c=new THREE.Vector3(),_t1=new THREE.Vector3(),_t2=new THREE.Vector3(),_q=new THREE.Quaternion(),_pq=new THREE.Quaternion(),_wq=new THREE.Quaternion();
+/** World-space limb aim, independent of the rig's local bone axes (a local rotateX on this
+ * MakeHuman/Mixamo arm swung the hand behind the back): rotate `upper` about its own joint so
+ * the line joint -> `end` points at `target`, by `weight` (0..1). Child world matrices are
+ * refreshed so chained calls (upper arm, then forearm) see the new pose. */
+export function aimLimb(upper,end,target,weight){
+ if(!upper||!end||!(weight>0))return;
+ upper.getWorldPosition(_a);end.getWorldPosition(_b);_b.sub(_a);_c.copy(target).sub(_a);
+ if(_b.lengthSq()<1e-8||_c.lengthSq()<1e-8)return;
+ _q.setFromUnitVectors(_b.normalize(),_c.normalize());if(weight<1)_q.slerp(IDENTITY,1-weight);
+ upper.parent.getWorldQuaternion(_pq);upper.getWorldQuaternion(_wq);
+ upper.quaternion.copy(_pq.invert()).multiply(_q).multiply(_wq);upper.updateWorldMatrix(false,true);
+}
+/** The steal reach as a pure timeline over the engine act (duration 0.4 s, contact at reachAt),
+ * following the motion2 steal clips: reach out to the ball (steal_fail: the hand comes back
+ * empty), or touch, gather to the chest and stand ready (steal_success). `result` is the
+ * engine's verdict once it has arrived ('steal' | 'stealMiss' | null). Returns the reference
+ * clip, the reach weight (hand toward the ball), the gather weight (hand to the chest), the
+ * lunge (step toward the ball, 0..1) and the crouch. */
+export function stealLayer(actT,result,steal={reachAt:0.14,duration:0.4}){
+ const t=Math.max(0,actT),touch=steal.reachAt,end=steal.duration,success=result==='steal';
+ const clip=success?'steal_success':'steal_fail';
+ // reach: out by the contact, held a moment, then withdrawn (a miss withdraws later and lower)
+ const out=Math.min(1,t/touch),back=t<=touch+0.04?0:Math.min(1,(t-touch-0.04)/(end-touch-0.04));
+ const reach=out*(1-(success?Math.min(1,back*1.6):back*back));
+ const gather=success?Math.min(1,Math.max(0,(t-touch)/(end-touch))):0;
+ const lunge=Math.sin(Math.min(1,t/end)*Math.PI)*(success?0.8:1);
+ const crouch=Math.sin(Math.min(1,t/end)*Math.PI);
+ return {clip,reach,gather,lunge,crouch,touched:t>=touch};
+}
+
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;
 
 export async function loadPlayerAssetsV1(cfg,base,onProgress){
@@ -84,11 +115,12 @@ export function createAvatarV1(assets,card,teamLook,opts={}){
  const actions={};
  for(const [name,clip] of assets.clips){const a=mixer.clipAction(clip);a.enabled=true;a.setEffectiveWeight(0);a.play();actions[name]=a;}
  const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand'),rIdx:bone(root,'RightHandMiddle1'),lIdx:bone(root,'LeftHandMiddle1')};
- const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm');
+ const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm'),neck=bone(root,'Neck'),hips=bone(root,'Hips');
+ let stealResult=null,stealSeen=0;
  const packed=compactAvatar(root,{maxTriangles:4000,teamLook});
  const av={root,mixer,actions,hands,kind,scale,cur:null,weights:{},card,mats,packed,
   applyKit(kit){for(const m of mats){if(m.userData.kitPart){if(!m.userData.sharedMap)m.map?.dispose();m.userData.sharedMap=false;m.map=m.userData.kitPart==='jersey'?jerseyTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:false}):shortsTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent});}}packed.refreshMaps({}, {primary:kit.base,secondary:kit.accent,trim:kit.accent});},
-  event(){},get motionState(){return this.cur||'idle';},
+  event(e){const type=typeof e==='string'?e:e?.type;if(type==='steal'||type==='stealMiss'){stealResult=type;stealSeen=0;}},get motionState(){return this.cur||'idle';},get stealResult(){return stealResult;},
   dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);packed.dispose();for(const m of mats){if(!m.userData.sharedMap&&!m.userData.sourceMap)m.map?.dispose?.();m.dispose();}},
  };
  // locomotion state
@@ -132,7 +164,25 @@ export function createAvatarV1(assets,card,teamLook,opts={}){
   mixer.update(dt);av.cur=name;
   // procedural layers on top of the clip: pass push, steal reach, ball carry
   if(p.act==='pass'&&rArm&&lArm){const u=Math.min(1,p.actT/0.16);const k=Math.sin(u*Math.PI)*0.9;rArm.rotateX(-k);lArm.rotateX(-k);rFore&&rFore.rotateX(-k*0.6);lFore&&lFore.rotateX(-k*0.6);}
-  if(p.act==='steal'&&rArm){const u=Math.min(1,p.actT/0.4);const k=Math.sin(u*Math.PI)*1.1;rArm.rotateX(-k);spine&&spine.rotateX(k*0.25);}
+  if(p.act==='steal'&&rArm&&hands.r){
+   // v4: a real reach, hands toward the ball (world space), a step and a crouch into it, then
+   // either the gather of a success or the empty hand of a miss (see stealLayer)
+   if(p.actT<0.02&&stealSeen>0.3)stealResult=null;stealSeen+=dt;
+   const L=stealLayer(p.actT,stealResult,ctx.steal);
+   root.updateMatrixWorld(true);
+   const fx=Math.sin(p.face),fz=Math.cos(p.face);
+   const target=ctx.ball&&Number.isFinite(ctx.ball.x)?_t1.set(ctx.ball.x,Math.max(0.3,ctx.ball.y),ctx.ball.z):_t1.set(root.position.x+fx*0.75,0.75,root.position.z+fz*0.75);
+   if(L.gather>0){hips.getWorldPosition(_t2);_t2.x+=fx*0.25;_t2.y+=0.45*scale;_t2.z+=fz*0.25;target.lerp(_t2,L.gather);}
+   const w=Math.max(L.reach,L.gather*0.9);
+   if(w>0){
+    aimLimb(rArm,hands.r,target,w);rFore&&aimLimb(rFore,hands.r,target,w*0.85);
+    // the other hand comes forward too, lower and wider, like a defender's second hand
+    _t2.set(target.x-fz*0.35,target.y+0.15,target.z+fx*0.35);aimLimb(lArm,hands.l,_t2,w*0.55);
+    // the chest follows the hand a little
+    if(spine&&neck){neck.getWorldPosition(_t2);_t2.set(_t2.x+(target.x-_t2.x)*0.6,_t2.y-0.25*w,_t2.z+(target.z-_t2.z)*0.6);aimLimb(spine,neck,_t2,w*0.35);}
+   }
+   root.position.x+=fx*0.18*L.lunge;root.position.z+=fz*0.18*L.lunge;root.position.y-=0.07*L.crouch;
+  }
   if(ctx.contest&&lArm&&rArm&&!p.hasBall&&p.act!=='shoot'&&!p.air){lArm.rotateZ(-0.9*ctx.contest);rArm.rotateZ(0.9*ctx.contest);}
   // block and rebound: both arms reach straight up through the jump
   if(p.air&&(p.act==='block'||p.act==='rebound')&&lArm&&rArm){const k=Math.min(1,0.35+ctx.airU*1.4);lArm.rotateZ(-2.6*k);rArm.rotateZ(2.6*k);lFore&&lFore.rotateZ(-1.6*k);rFore&&rFore.rotateZ(1.6*k);}

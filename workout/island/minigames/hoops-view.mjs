@@ -180,7 +180,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right'},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
