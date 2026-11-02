@@ -1,0 +1,501 @@
+{
+  "schemaVersion": 1,
+  "allPassed": true,
+  "limits": {
+    "maxBytesPerGLB": 1500000,
+    "maxTextureDimension": 1024
+  },
+  "tools": {
+    "validator": "2.0.0-dev.3.10"
+  },
+  "canonicalSkeleton": {
+    "file": "motion2/alpine.json",
+    "sha256": "912c924b5bcfa756cfea08eacbf45b0d78e68c076585d6e6213afcaa927798b7"
+  },
+  "assets": [
+    {
+      "id": "skier",
+      "file": "skier3/skier.glb",
+      "bytes": 424676,
+      "sha256": "515a24f5e5a8d0c9a40a41b6bddb4a8bc3924550f35a6a0197f0c2d0f34e4268",
+      "triangles": 24918,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 24758,
+      "vertices": 13258,
+      "primitives": 3,
+      "materials": 2,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": {
+        "jointCount": 18,
+        "jointNames": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "hierarchyMatchesCanonical": true,
+        "inverseBindMatricesValid": true,
+        "maxBindMatrixError": 0.0000051492737322966775,
+        "maxWeightSumError": 0,
+        "weightedVertices": 12890
+      },
+      "animations": [
+        {
+          "name": "glide",
+          "durationSeconds": 1.2000000476837158,
+          "channels": 40,
+          "animatedNodes": 20,
+          "animatedJoints": 18,
+          "varyingJoints": 8,
+          "loop": true,
+          "maxLoopSeamError": 0
+        },
+        {
+          "name": "crouch",
+          "durationSeconds": 1.2000000476837158,
+          "channels": 40,
+          "animatedNodes": 20,
+          "animatedJoints": 18,
+          "varyingJoints": 1,
+          "loop": true,
+          "maxLoopSeamError": 0,
+          "glidePoseDifference": 0.3863755762577057
+        },
+        {
+          "name": "boost",
+          "durationSeconds": 0.800000011920929,
+          "channels": 40,
+          "animatedNodes": 20,
+          "animatedJoints": 18,
+          "varyingJoints": 11,
+          "loop": true,
+          "maxLoopSeamError": 0
+        },
+        {
+          "name": "fall",
+          "durationSeconds": 1.100000023841858,
+          "channels": 40,
+          "animatedNodes": 20,
+          "animatedJoints": 18,
+          "varyingJoints": 15,
+          "loop": false,
+          "maxLoopSeamError": 0.6946583522833958
+        },
+        {
+          "name": "get_up",
+          "durationSeconds": 1.899999976158142,
+          "channels": 40,
+          "animatedNodes": 20,
+          "animatedJoints": 18,
+          "varyingJoints": 15,
+          "loop": false,
+          "maxLoopSeamError": 0.6946583522833958,
+          "fallRecoverySeamError": 0
+        }
+      ],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "finish-gate",
+      "file": "alpine-world/models/finish-gate.glb",
+      "bytes": 2648,
+      "sha256": "b598a29121405ceed9d863b1b9026c87fe4417039ce086b6249ffaae1520381c",
+      "triangles": 256,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 256,
+      "vertices": 552,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "fir-a",
+      "file": "alpine-world/models/fir-a.glb",
+      "bytes": 3232,
+      "sha256": "cc864ac0fb8460c9eb8c752458bfc377f440a64c9c2422cf8e5edb6c965494c6",
+      "triangles": 87,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 87,
+      "vertices": 231,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "fir-b",
+      "file": "alpine-world/models/fir-b.glb",
+      "bytes": 3336,
+      "sha256": "85383fc5a62fca18387120564ab09863f8ccafdcc4b86fb5c26e2f587fbf5507",
+      "triangles": 96,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "fir-c",
+      "file": "alpine-world/models/fir-c.glb",
+      "bytes": 3308,
+      "sha256": "c00d0e96075c7e695f97fc581174a2cc588559940a45dd92bb92cfdd7b64d7e5",
+      "triangles": 96,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "ice-wall",
+      "file": "alpine-world/models/ice-wall.glb",
+      "bytes": 22480,
+      "sha256": "c967bf1ace394251e5956fa11fec6ac1faea4f57d230cbbeb19ddde0f472ffbd",
+      "triangles": 3696,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 3696,
+      "vertices": 8329,
+      "primitives": 4,
+      "materials": 4,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "mogul",
+      "file": "alpine-world/models/mogul.glb",
+      "bytes": 5152,
+      "sha256": "4af5508039d428938395f698312282eab25b721c5463f8a639c949a585023baa",
+      "triangles": 384,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 384,
+      "vertices": 296,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "rock-large",
+      "file": "alpine-world/models/rock-large.glb",
+      "bytes": 1980,
+      "sha256": "92cd3014446fb4448b0adb70b6e93ab323fd803788d07cc70ea2e91f311876e3",
+      "triangles": 54,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 54,
+      "vertices": 154,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "rock-small",
+      "file": "alpine-world/models/rock-small.glb",
+      "bytes": 1988,
+      "sha256": "9b60a4ff1d0d86121eda8e01af38660889d0a20982e922f04bfed38b6927d6da",
+      "triangles": 54,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 54,
+      "vertices": 154,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "slalom-gate",
+      "file": "alpine-world/models/slalom-gate.glb",
+      "bytes": 5132,
+      "sha256": "6497d0009819c01342a998128d8a96578fcc0b8bb08220b6f53e856e1220b008",
+      "triangles": 220,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 220,
+      "vertices": 424,
+      "primitives": 4,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "snow-powder",
+      "file": "alpine-world/models/snow-powder.glb",
+      "bytes": 39684,
+      "sha256": "2e104cfd3e22bab5b5cb10a3ad0b562b6e4ab40627cdc774477bd1854d5b4fc9",
+      "triangles": 96,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 96,
+      "vertices": 192,
+      "primitives": 16,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "ski-powder-atlas",
+          "width": 384,
+          "height": 384,
+          "mimeType": "image/png"
+        }
+      ],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [
+        {
+          "name": "snow_puff",
+          "durationSeconds": 0.800000011920929,
+          "channels": 16,
+          "finiteSamples": true,
+          "strictlyIncreasingTimes": true
+        }
+      ],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "snow-sign",
+      "file": "alpine-world/models/snow-sign.glb",
+      "bytes": 1828,
+      "sha256": "d053c4ef9537fe310159fa258226d5a74a7130ecee2d1c55140ea9126c00d861",
+      "triangles": 69,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 69,
+      "vertices": 139,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "start-gate",
+      "file": "alpine-world/models/start-gate.glb",
+      "bytes": 2632,
+      "sha256": "6512bafc5ff6c570862f46832e07eca579e9a1edc79afd9dc8df722178daa138",
+      "triangles": 256,
+      "triangleCounting": "all scene mesh instances in the default pose; animated visibility may draw fewer",
+      "uniqueMeshTriangles": 256,
+      "vertices": 552,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "degenerateTriangles": 0,
+      "dracoRequired": true,
+      "allPrimitivesDraco": true,
+      "skin": null,
+      "animations": [],
+      "validator": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    }
+  ],
+  "externalTextures": [
+    {
+      "file": "alpine-world/textures/ski-powder-atlas.png",
+      "width": 384,
+      "height": 384,
+      "bytes": 15811,
+      "sha256": "1c80a996963ba68b6efd7fd3abcf3012a3f9186a09af7088508c657f47a181b4"
+    }
+  ],
+  "errors": [],
+  "worldCategories": [
+    "gates",
+    "ice-walls",
+    "moguls",
+    "powder",
+    "rocks",
+    "signs",
+    "trees"
+  ],
+  "totals": {
+    "files": 13,
+    "bytes": 518076,
+    "triangles": 30282,
+    "maximumFileBytes": 424676
+  }
+}

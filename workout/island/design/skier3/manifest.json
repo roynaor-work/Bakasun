@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "kind": "alpine-skier-design",
+  "license": "CC0-1.0",
+  "file": "skier.glb",
+  "rig": "rig.json",
+  "bytes": 424676,
+  "sha256": "515a24f5e5a8d0c9a40a41b6bddb4a8bc3924550f35a6a0197f0c2d0f34e4268",
+  "vertices": 13258,
+  "triangles": 24918,
+  "bounds": {
+    "min": [
+      -0.6707726120948792,
+      0.004000000189989805,
+      -0.44999998807907104
+    ],
+    "max": [
+      0.6709718108177185,
+      1.2961571216583252,
+      0.4510069489479065
+    ]
+  },
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "compression": "KHR_draco_mesh_compression",
+  "maxTextureDimension": 0,
+  "clips": [
+    {
+      "name": "glide",
+      "label": "גלישה",
+      "durationSeconds": 1.2,
+      "loop": true,
+      "samples": 129,
+      "source": {
+        "file": "../motion/alpine.json",
+        "state": "glide"
+      },
+      "bake": {
+        "hz": 60,
+        "interpolation": "LINEAR",
+        "sourceInterpolation": "smoothstep + shortest arc slerp",
+        "minimumCharacterY": -4.336808689942018e-17,
+        "maxSupportErrorMeters": 2.3293278042513244e-8,
+        "maxPoleGripCorrectionMeters": 0
+      }
+    },
+    {
+      "name": "crouch",
+      "label": "כריעה",
+      "durationSeconds": 1.2,
+      "loop": true,
+      "samples": 74,
+      "source": {
+        "file": "../motion2/alpine/alpine.json",
+        "state": "tuck"
+      },
+      "bake": {
+        "hz": 60,
+        "interpolation": "LINEAR",
+        "sourceInterpolation": "smoothstep + shortest arc slerp",
+        "minimumCharacterY": -5.204170427930421e-18,
+        "maxSupportErrorMeters": 2.329312601134781e-8,
+        "maxPoleGripCorrectionMeters": 0
+      }
+    },
+    {
+      "name": "boost",
+      "label": "בוסט",
+      "durationSeconds": 0.8,
+      "loop": true,
+      "samples": 98,
+      "source": {
+        "file": "../motion/alpine.json",
+        "state": "pole_push"
+      },
+      "bake": {
+        "hz": 60,
+        "interpolation": "LINEAR",
+        "sourceInterpolation": "smoothstep + shortest arc slerp",
+        "minimumCharacterY": -8.326672684688674e-17,
+        "maxSupportErrorMeters": 2.329332686457075e-8,
+        "maxPoleGripCorrectionMeters": 0
+      }
+    },
+    {
+      "name": "fall",
+      "label": "נפילה",
+      "durationSeconds": 1.1,
+      "loop": false,
+      "samples": 73,
+      "source": {
+        "file": "../motion2/alpine/alpine.json",
+        "state": "fall_forward"
+      },
+      "bake": {
+        "hz": 60,
+        "interpolation": "LINEAR",
+        "sourceInterpolation": "smoothstep + shortest arc slerp",
+        "minimumCharacterY": -8.239936510889834e-17,
+        "maxSupportErrorMeters": 2.3293277973124304e-8,
+        "maxPoleGripCorrectionMeters": 0.004980646460955847
+      }
+    },
+    {
+      "name": "get_up",
+      "label": "קימה",
+      "durationSeconds": 1.9,
+      "loop": false,
+      "samples": 120,
+      "source": {
+        "file": "../motion2/alpine/alpine.json",
+        "state": "recover_forward"
+      },
+      "bake": {
+        "hz": 60,
+        "interpolation": "LINEAR",
+        "sourceInterpolation": "smoothstep + shortest arc slerp",
+        "minimumCharacterY": -6.245004513516506e-17,
+        "maxSupportErrorMeters": 2.3293416417935475e-8,
+        "maxPoleGripCorrectionMeters": 0.004980646460955847
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "skier",
+      "file": "skier.glb",
+      "category": "character",
+      "bytes": 424676,
+      "sha256": "515a24f5e5a8d0c9a40a41b6bddb4a8bc3924550f35a6a0197f0c2d0f34e4268",
+      "vertices": 13258,
+      "triangles": 24918,
+      "animations": [
+        {
+          "name": "glide",
+          "label": "גלישה",
+          "durationSeconds": 1.2,
+          "loop": true,
+          "samples": 129,
+          "source": {
+            "file": "../motion/alpine.json",
+            "state": "glide"
+          },
+          "bake": {
+            "hz": 60,
+            "interpolation": "LINEAR",
+            "sourceInterpolation": "smoothstep + shortest arc slerp",
+            "minimumCharacterY": -4.336808689942018e-17,
+            "maxSupportErrorMeters": 2.3293278042513244e-8,
+            "maxPoleGripCorrectionMeters": 0
+          }
+        },
+        {
+          "name": "crouch",
+          "label": "כריעה",
+          "durationSeconds": 1.2,
+          "loop": true,
+          "samples": 74,
+          "source": {
+            "file": "../motion2/alpine/alpine.json",
+            "state": "tuck"
+          },
+          "bake": {
+            "hz": 60,
+            "interpolation": "LINEAR",
+            "sourceInterpolation": "smoothstep + shortest arc slerp",
+            "minimumCharacterY": -5.204170427930421e-18,
+            "maxSupportErrorMeters": 2.329312601134781e-8,
+            "maxPoleGripCorrectionMeters": 0
+          }
+        },
+        {
+          "name": "boost",
+          "label": "בוסט",
+          "durationSeconds": 0.8,
+          "loop": true,
+          "samples": 98,
+          "source": {
+            "file": "../motion/alpine.json",
+            "state": "pole_push"
+          },
+          "bake": {
+            "hz": 60,
+            "interpolation": "LINEAR",
+            "sourceInterpolation": "smoothstep + shortest arc slerp",
+            "minimumCharacterY": -8.326672684688674e-17,
+            "maxSupportErrorMeters": 2.329332686457075e-8,
+            "maxPoleGripCorrectionMeters": 0
+          }
+        },
+        {
+          "name": "fall",
+          "label": "נפילה",
+          "durationSeconds": 1.1,
+          "loop": false,
+          "samples": 73,
+          "source": {
+            "file": "../motion2/alpine/alpine.json",
+            "state": "fall_forward"
+          },
+          "bake": {
+            "hz": 60,
+            "interpolation": "LINEAR",
+            "sourceInterpolation": "smoothstep + shortest arc slerp",
+            "minimumCharacterY": -8.239936510889834e-17,
+            "maxSupportErrorMeters": 2.3293277973124304e-8,
+            "maxPoleGripCorrectionMeters": 0.004980646460955847
+          }
+        },
+        {
+          "name": "get_up",
+          "label": "קימה",
+          "durationSeconds": 1.9,
+          "loop": false,
+          "samples": 120,
+          "source": {
+            "file": "../motion2/alpine/alpine.json",
+            "state": "recover_forward"
+          },
+          "bake": {
+            "hz": 60,
+            "interpolation": "LINEAR",
+            "sourceInterpolation": "smoothstep + shortest arc slerp",
+            "minimumCharacterY": -6.245004513516506e-17,
+            "maxSupportErrorMeters": 2.3293416417935475e-8,
+            "maxPoleGripCorrectionMeters": 0.004980646460955847
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "../characters2/skier.glb",
+      "sha256": "21681776d7130dac0db5254befb367904da89bf0f482ba54291d5db21cb55fdd"
+    },
+    {
+      "file": "../characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2"
+    },
+    {
+      "file": "../viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78"
+    },
+    {
+      "file": "../viewer/retarget.js",
+      "sha256": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a"
+    },
+    {
+      "file": "../viewer/animation.js",
+      "sha256": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe"
+    },
+    {
+      "file": "../motion/alpine.json",
+      "sha256": "c6fc39a0b465d0dc74607e9af391c0736148042204e44942068914538d29dc87"
+    },
+    {
+      "file": "../motion2/alpine/alpine.json",
+      "sha256": "f8fe30d7e712ce6d0c04d7b49d461abbdc11935d691e16c547cd4b0b444536f8"
+    }
+  ]
+}
