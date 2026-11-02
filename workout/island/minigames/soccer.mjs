@@ -405,10 +405,18 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     tackler.slideWon=attempt(tackler,slideVariant(config,tackler.slideKind),'slide-contact',first);
   }
   let distributionLayout=null;
+  /** Outlets for a keeper holding the ball: two short options inside the throw reach
+   * on either side, one runner far enough for a punt. Slots stick to IDs for 1.2 s
+   * so crossing runners do not swap jobs; other team-mates keep the open-play shape. */
   function distributionOutlet(keeper,p){
-    if(!distributionLayout||distributionLayout.owner!==keeper.id||distributionLayout.at+1.2<s.elapsed||Math.hypot(distributionLayout.x-keeper.x,distributionLayout.z-keeper.z)>2.5)
-      distributionLayout={owner:keeper.id,at:s.elapsed,x:keeper.x,z:keeper.z,targets:createRestartLayout({type:'goalKick',team:keeper.team,x:keeper.x,z:keeper.z,player:keeper.id},s,config)};
-    const slot=distributionLayout.targets[p.id];return slot&&slot.duty.startsWith('goal-kick')?slot:null;
+    if(!distributionLayout||distributionLayout.owner!==keeper.id||distributionLayout.at+1.2<s.elapsed||Math.hypot(distributionLayout.x-keeper.x,distributionLayout.z-keeper.z)>2.5){
+      const d=direction(keeper.team),reach=(config.restarts.throwReach||9)*.8,inset=Math.max(rules.playerBoundary,.5),side=Math.min(hz-inset,Math.sqrt(Math.max(1,reach*reach-16))),far=Math.min(config.goalkeeping.puntMinDistance??14,hx*.7);
+      const mates=players.filter(q=>q.team===keeper.team&&q.id!==keeper.id&&q.role!=='keeper').sort((a,b)=>distance(a,keeper)-distance(b,keeper)||a.id-b.id),targets=[];
+      const slots=[[4,side,'goal-kick-outlet'],[4,-side,'goal-kick-outlet'],[far,keeper.z*.3,'goal-kick-run']];
+      mates.slice(0,slots.length).forEach((q,i)=>{const [ahead,z,duty]=slots[i];targets[q.id]={x:clamp(keeper.x+d*ahead,-hx+inset,hx-inset),z:clamp(i<2?keeper.z+z:z,-hz+inset,hz-inset),duty};});
+      distributionLayout={owner:keeper.id,at:s.elapsed,x:keeper.x,z:keeper.z,targets};
+    }
+    return distributionLayout.targets[p.id]||null;
   }
   function sprint(dt,moving,requested,available){sprintMeterStep(s.sprint,config.sprint,dt,{requested,moving,available,regen:effects.regen});}
   function restart(type,teamId,x,z) {
@@ -551,7 +559,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function ball(dt) {
     const b=s.ball;let from={x:b.x,y:b.y,z:b.z};b.grace=Math.max(0,b.grace-dt);
-    if(b.owner!==null){const p=players[b.owner];if(p.hands){const pose=p.restartMotion&&!p.restartMotion.released?restartBallPose(p.restartMotion.kind,p.restartMotion.elapsed):null;b.x=p.x+p.fx*(pose?.forward??config.goalkeeping.holdForward)-p.fz*(pose?.side??0);b.z=p.z+p.fz*(pose?.forward??config.goalkeeping.holdForward)+p.fx*(pose?.side??0);b.y=pose?.height??config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;const puntDrop=p.distribution&&p.restartMotion.kind==='keeperPunt'&&p.restartMotion.elapsed>=restartActionProfile('keeperPunt').drop;if(!inPenaltyArea(p,p,s,config)||!puntDrop&&!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
+    // An authored wind-up may swing the held ball a little past the area line while the feet stay inside: that is not carrying.
+    if(b.owner!==null){const p=players[b.owner];if(p.hands){const pose=p.restartMotion&&!p.restartMotion.released?restartBallPose(p.restartMotion.kind,p.restartMotion.elapsed):null;b.x=p.x+p.fx*(pose?.forward??config.goalkeeping.holdForward)-p.fz*(pose?.side??0);b.z=p.z+p.fz*(pose?.forward??config.goalkeeping.holdForward)+p.fx*(pose?.side??0);b.y=pose?.height??config.goalkeeping.holdHeight;b.vx=p.vx;b.vz=p.vz;b.vy=0;const puntDrop=p.distribution&&p.restartMotion.kind==='keeperPunt'&&p.restartMotion.elapsed>=restartActionProfile('keeperPunt').drop;if(!inPenaltyArea(p,p,s,config)||!puntDrop&&!p.distribution&&!inPenaltyArea(p,b,s,config)){p.hands=false;b.y=ph.ballRadius;}}
       else {Object.assign(b,followDribbleBall(p,b,dt,config,{sprintLead:p.id===s.controlled&&liveControl}));if(b.owner===null){b.lastTeam=p.team;b.lastPlayer=p.id;b.grace=.12;event('heavy-touch',{player:p.id,team:p.team});}}
     }
     else if(b.flight?.kind==='physical-loft')stepLoftBall(b,dt,config);
