@@ -17,7 +17,7 @@ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island
  * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
  * camera and grooves recording engine positions. The Mixamo rig has authored sport outerwear; attribution is in ASSETS.md.
  * This local candidate includes a separately reviewed engine feel proposal; it is not a released build. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../design/characters/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
+export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
   let vfx=null,feel=null;
@@ -212,13 +212,20 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   }
   // Finish arch and chequered line, built once at the finish.
   const finish = new THREE.Group(); {
-    const half = pipe.lip + .9;
-    for (const x of [-half, half]) box(.55, 6.2, .55, navy, finish, x, pipe.lipHeight + 3.1, 0);
-    const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .6, 1.3, .22), new THREE.MeshStandardMaterial({map: textTexture('FINISH', '#123d59', '#ffffff'), roughness: .7}));
-    banner.position.set(0, pipe.lipHeight + 5.7, 0); finish.add(banner);
+    const half = pipe.lip + .9, packGate = designWorld.gate?.('finish-gate');
+    if (packGate) { packGate.scale.setScalar(2.35); packGate.position.set(0, 0, 0); finish.add(packGate); }
+    else {
+      for (const x of [-half, half]) box(.55, 6.2, .55, navy, finish, x, pipe.lipHeight + 3.1, 0);
+      const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .6, 1.3, .22), new THREE.MeshStandardMaterial({map: textTexture('FINISH', '#123d59', '#ffffff'), roughness: .7}));
+      banner.position.set(0, pipe.lipHeight + 5.7, 0); finish.add(banner);
+    }
     for (let i = 0; i < 26; i++) for (let j = 0; j < 2; j++) { const t = box(pipe.F * 2 / 26, .02, .6, (i + j) % 2 ? navy : white, finish, -pipe.F + (i + .5) * pipe.F * 2 / 26, .03, j * .6 - .3); t.castShadow = false; }
     finish.userData.perf = 'finish'; scene.add(finish); place(finish, course.length, 0, 0);
   }
+  // Start gate over the first metres of the course (visual only).
+  const startGate = designWorld.gate?.('start-gate');
+  if (startGate) { const g = new THREE.Group(); startGate.scale.setScalar(2.1); g.add(startGate); g.userData.perf = 'finish'; scene.add(g); place(g, 13, 0, 0); }
+  const powder = designWorld.createPowder?.(scene, 4);
 
   // ---------- Riders ----------
   const contactTex=canvasTexture(128,128,(ctx,w,h)=>{const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);g.addColorStop(0,'rgba(25,45,65,.55)');g.addColorStop(1,'rgba(25,45,65,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);});
@@ -345,7 +352,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const t = state.timeMs / 1000, playing = state.phase !== 'menu', portrait = camera.aspect < .9, dt = Math.min(.1, Math.max(0, t - lastT)), wall = performance.now() / 1000, wdt = Math.min(.1, Math.max(0, wall - snowAt));
     lastT = t; snowAt = wall;
     const player = state.player, ps = player.s ?? 0, feedback=feel.update(state,wdt);
-    if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
+    if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.wasAirborne=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
     lastTrackS=ps;rememberTracks(canonicalState);
     if(trackFull){trackAttr.clearUpdateRanges();trackAttr.needsUpdate=true;trackFull=false;}
     placeScenery(ps, wall);scenery.update(ps,look.fogFar);
@@ -367,12 +374,15 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
       let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
       if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
-      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); } } const c = Math.min(1, (t - r.crashAt) / crashSeconds), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
+      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); powder?.emit(P, 2.1); } } const c = Math.min(1, (t - r.crashAt) / crashSeconds), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
         // A real wipe-out: the rider tumbles two full somersaults in the first half, thrown up off the snow, then slides and lies flat before getting up.
         const tc = Math.min(1, c / .5); if (!reduced) { flip = -Math.PI * 4 * (1 - (1 - tc) ** 3); lift = Math.sin(tc * Math.PI) * .55; } }
       else r.crashAt = -1;
       if(s.hit&&!r.wasHit&&!s.crashed){r.hitAt=t;if(id==='player'){worldPoint(s.s??ps,s.x,surf+.35,P);burst(P,puffColor,reduced?8:22,2.5);}}
       r.wasHit=!!s.hit;
+      // Landing: a puff of animated powder where the rider touches down (player only; quiet in reduced motion).
+      if (id === 'player' && r.wasAirborne && !s.airborne && !s.crashed && !reduced) { worldPoint(s.s ?? ps, s.x, surf + .08, P); powder?.emit(P, s.airKind === 'pipe' ? 1.7 : 1.2); }
+      r.wasAirborne = !!s.airborne;
       const impact=s.crashed?0:Math.max(0,1-(t-r.hitAt)/.65)**2;
       // A readable recoil and knee compression, including reduced-motion mode.
       flip-=impact*.28;roll+=side*impact*.16;drop+=impact*.1;
@@ -404,7 +414,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     // A coin that vanishes beside the player was collected: sparkle where it was.
     for (const [id, c] of lastCoins) if (!seen.has(id) && Math.abs(c.s - ps) < 4 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 9, 2.4); }
     lastCoins = seen;
-    stepBursts(dt);
+    stepBursts(dt); powder?.update(wdt);
 
     // Camera: a chase rig along the path that rises with the rider on walls and in the air.
     const px = player.x, boost = !!player.boosting, absY = surfaceHeight(px, pipe) + Math.max(0, player.height ?? 0);
@@ -482,6 +492,6 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     get modelError() { return modelError; },
     get rockTextureError(){return rockTextureError;},
     mode: 'alpine-feel-v9',
-    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),designAssets:{...designWorld.metrics(),powderActive:powder?.active?.()??0},quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
   };
 }

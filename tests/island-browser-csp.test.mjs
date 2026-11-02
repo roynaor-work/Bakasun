@@ -131,8 +131,9 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await alpine.page.waitForFunction(()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase),null,{timeout:20000});
       const phase=await alpine.page.evaluate(()=>window.__perfSession.snapshot.phase);
       assert.ok(['countdown','racing'].includes(phase));assert.equal(loaded.metrics.mode,'model');
-      // 12 authored clips + 'getup' (the get-up clip from design/motion2/alpine, baked with the rest and played in place of 'recover')
-      assert.equal(loaded.metrics.character.clips,13);assert.equal(loaded.metrics.character.trianglesPerRider,1920);
+      // The GPT/Codex skier3 asset: its 5 embedded clips become 10 game states (idle/glide/tuck/air/pole_push/fall/recover/getup/land/celebrate).
+      assert.equal(loaded.metrics.character.mode,'skier3');assert.equal(loaded.metrics.character.bones,18);
+      assert.equal(loaded.metrics.character.clips,10);assert.equal(loaded.metrics.character.trianglesPerRider,24918);
       await alpine.csp.assertClean();
       reports.push({name:'alpine-session-start-result',phase,...loaded});
       await alpine.page.evaluate(()=>window.__perfSession.dispose());
