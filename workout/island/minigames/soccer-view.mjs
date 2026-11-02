@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261101-1';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261101-1';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261101-1';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261101-1';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261101-1';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261102-1';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261102-1';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261102-1';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261102-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261102-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {loadDesignCharacters,soccerDesignCharacterError} from './soccer-design-character.mjs';
@@ -13,16 +13,16 @@ import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261101-1';
-import {playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261101-1';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261101-1';
-import {passDestination} from './soccer.mjs?v=island-v2-20261101-1';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261101-1';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261101-1';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261102-1';
+import {playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261102-1';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261102-1';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261102-1';
+import {passDestination} from './soccer.mjs?v=island-v2-20261102-1';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261102-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261102-1';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261101-1';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261102-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
