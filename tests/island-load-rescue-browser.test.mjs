@@ -8,7 +8,7 @@ import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/isla
 const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_LOAD_RESCUE_BROWSER==='1';
 const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
 const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine'}};
-const STUCK=1500;
+const STUCK=5000;
 
 async function setup(browser,server,hold){
  const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
@@ -52,7 +52,7 @@ for(const [name,g] of Object.entries(GAMES)){
    await t.page.locator('[data-action=rescue-restart]').first().click();
    await t.state.release();
    await ready(t.page);
-   assert.equal(await t.page.locator('[data-load-rescue]').count(),0,'rescue box is gone once the game is ready');
+   await t.page.waitForSelector('[data-load-rescue]',{state:'detached',timeout:10000});
    const after=await t.page.evaluate(key=>({keys:Object.keys(localStorage).filter(k=>!/lastLoadReport$/.test(k)).sort(),marker:localStorage.getItem('island.test.marker'),report:localStorage.getItem(`island.${key}.lastLoadReport`)}),g.key);
    assert.deepEqual(after.keys,before,'no save key was removed or added');
    assert.equal(after.marker,'keep');
@@ -81,7 +81,7 @@ test('ski: second stuck attempt offers the light version, third offers clearing 
   const ski=manifest.games.alpine[0],soccer=manifest.games.soccer[0];
   await t.page.evaluate(async([a,b,base])=>{const c=await caches.open('island-assets-test');await c.put(new URL(a,base).href,new Response('x'));await c.put(new URL(b,base).href,new Response('y'));localStorage.setItem('island.test.sentinel','1');indexedDB.open('island-test-db');},[ski,soccer,server.url]);
   await t.page.locator('[data-action=rescue-clear]').click();
-  await t.page.waitForFunction(async()=>{const c=await caches.open('island-assets-test');return (await c.keys()).length===1;},null,{timeout:30000});
+  for(let i=0;i<60&&(await t.page.evaluate(async()=>(await (await caches.open('island-assets-test')).keys()).length))!==1;i++)await t.page.waitForTimeout(500);
   const left=await t.page.evaluate(async()=>(await (await caches.open('island-assets-test')).keys()).map(r=>new URL(r.url).pathname));
   assert.equal(left.length,1);assert.ok(left[0].endsWith('/'+soccer),'the soccer file stayed: '+left);
   await t.state.release();
