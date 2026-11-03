@@ -42,6 +42,9 @@ export function runAlpineSession(ctx) {
     },
     /** Same action as the opening button; also used by tests. */
     start() { if (disposed || !ready() || engine.phase !== 'menu') return false; audio.unlock(); engine.command({type: 'start'}); last = 0; return true; },
+    /** Shared loading contract (ui/load-rescue.mjs): ready once the view is attached; loadFailed is the reason string. */
+    get ready() { return Boolean(view) && !renderError; },
+    get loadFailed() { return renderError; },
     dispose() {
       if (disposed) return; disposed = true; clearTimeout(loadTimer);
       if (frame !== undefined) cancelAnimationFrame(frame); abort.abort(); input?.dispose(); kitHud?.destroy(); audio.dispose(); view?.dispose(); engine.dispose();
@@ -155,7 +158,7 @@ export function runAlpineSession(ctx) {
     if (!loading.querySelector('button')) { const back = el('button', 'alpine-primary alpine-back', t('alpine.backIsland')); back.type = 'button'; back.dataset.action = 'alpine-back'; back.onclick = () => ctx.cancel(); loading.append(back); back.focus(); }
   }
   const params = new URLSearchParams(globalThis.location?.search || '');
-  if (params.get('quality') === 'low') quality = 'low';
+  if (params.get('quality') === 'low' || ctx.lite) quality = 'low';
   governor = createQualityGovernor(balance.render, quality);
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   const loadStart = performance.now();

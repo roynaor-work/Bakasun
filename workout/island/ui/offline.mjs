@@ -93,6 +93,21 @@ export async function offlineStatus(version=DATA_VERSION){
   return {supported:true,version,total:all.size,have,complete:have===all.size,shell:{total:shell.length,have:shellHave,complete:shellHave===shell.length},games};
 }
 
+/** "Clear this game's asset cache": removes only this game's own asset files from the
+ * island-assets-* caches (never the shell, never localStorage, IndexedDB or saves).
+ * Returns how many cache entries were deleted. */
+export async function clearGameAssets(game,{version=DATA_VERSION,cacheStorage=globalThis.caches,fetcher=globalThis.fetch}={}){
+  if(!cacheStorage||!OFFLINE_GAMES[game])return 0;
+  const manifest=await loadManifest(version,fetcher),own=new Set(pathsFor(manifest,[game]).map(p=>hrefOf(p)));
+  let removed=0;
+  for(const name of await cacheStorage.keys()){
+    if(!name.startsWith('island-assets-'))continue;
+    const cache=await cacheStorage.open(name);
+    for(const request of await cache.keys()){const u=new URL(request.url);u.search='';u.hash='';if(own.has(u.href)&&await cache.delete(request))removed++;}
+  }
+  return removed;
+}
+
 let running=null;
 /** Download the named games (all by default). One download at a time; a second call
  * joins the first. onProgress({done,total,bytes,percent}). Resolves with
