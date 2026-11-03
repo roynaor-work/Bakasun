@@ -187,7 +187,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
     time += dt * (state === 'recover' ? 1.9 : state === 'fall' ? 1.15 : 1);
     // Riding layer targets: full on the ground in glide/carve, partial in the air and pole push, off elsewhere.
-    const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : (state === 'air' || state === 'pole_push') ? .55 : 0;
+    const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : state === 'tuck' ? .45 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
     const follow = 1 - Math.exp(-8 * dt);
     ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-7 * dt));
@@ -209,6 +209,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     }
     if (!frame.airborne && lastAir || frame.landing && state === 'glide') events.push('ground_contact', 'receive');
     if (frame.boosting && !lastBoost) events.push('boost_confirmed', 'action');
+    // Embedded skier3 clips: the authored crouch takes over at speed (hysteresis so it never flickers).
+    if (moving && !frame.airborne && !frame.crashed) { if (speed01 > .72) events.push('fast'); else if (speed01 < .5) events.push('slow'); }
     if (moving) { if (!(phase === 'menu' && context.previewRun)) events.push('moving'); }
     else events.push('stopped');
     if ((moving && speed < lastSpeed - .8 || !moving) && !frame.hit) events.push('slowing');
@@ -230,7 +232,70 @@ export function createAlpineMotionPlayer(baked, bones) {
   return {update, event, reset, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length, carveHeld, carveStrength})};
 }
 
-export async function loadAlpineCharacters({modelUrl = asset('../design/characters/skier.glb'), isDisposed = () => false} = {}) {
+
+const SKIER3_URL = asset('../design/skier3/skier.glb');
+const edge = (source, target, on, priority = 10, blend = .12) => ({source, target, on, priority, visualBlendSeconds: blend, crossfadeSeconds: blend});
+/** State graph for the five clips embedded in design/skier3/skier.glb. Same events as the authored graph,
+ * minus the left/right carve clips: leaning into turns is the procedural riding layer's job. */
+const SKIER3_TRANSITIONS = [
+  edge('idle', 'glide', 'moving'), edge('glide', 'idle', 'stopped'), edge('tuck', 'idle', 'stopped'), edge('pole_push', 'idle', 'clip_finished_and_stopped'),
+  edge('glide', 'tuck', 'fast', 12), edge('tuck', 'glide', 'slow', 12),
+  edge('glide', 'pole_push', 'boost_confirmed', 40), edge('tuck', 'pole_push', 'boost_confirmed', 40),
+  edge('pole_push', 'glide', 'clip_finished_and_moving'),
+  edge('glide', 'air', 'takeoff', 50), edge('tuck', 'air', 'takeoff', 50), edge('pole_push', 'air', 'takeoff', 50),
+  edge('air', 'land', 'ground_contact', 60), edge('glide', 'land', 'receive', 40), edge('land', 'glide', 'clip_finished_and_moving'), edge('land', 'idle', 'clip_finished_and_stopped'),
+  edge('*', 'fall', 'fall_confirmed', 100, .12), edge('fall', 'recover', 'recovery_allowed', 90, .18), edge('recover', 'idle', 'clip_finished', 90, .18),
+  edge('*', 'celebrate', 'result_success', 80, .2), edge('celebrate', 'idle', 'clip_finished'),
+  edge('*', 'idle', 'reset', 110, 0)
+];
+
+/** Samples the clips embedded in the GLB into the same baked format the authored data produces, so the
+ * existing state machine and riding layer drive them unchanged. Local transforms only: no retargeting. */
+export function bakeEmbeddedSkier(gltf, isDisposed = () => false) {
+  const bones = []; gltf.scene.traverse(o => { if (o.isBone) bones.push(o); });
+  if (bones.length !== 18) throw Error(`alpine.skier3.bones:${bones.length}`);
+  const names = bones.map(b => b.name), stride = names.length * 7, FPS = 30;
+  const byName = Object.fromEntries(gltf.animations.map(a => [a.name, a]));
+  for (const need of ['glide', 'crouch', 'boost', 'fall', 'get_up']) if (!byName[need]) throw Error(`alpine.skier3.clip:${need}`);
+  const sampleClip = (clip, {loop, from = 0, to = clip.duration}) => {
+    const interp = {};
+    for (const track of clip.tracks) { const [node, prop] = track.name.split('.'); (interp[node] ||= {})[prop] = track.createInterpolant(); }
+    const frames = Math.max(2, Math.round((to - from) * FPS) + 1), times = new Float32Array(frames), values = new Float32Array(frames * stride);
+    for (let k = 0; k < frames; k++) {
+      if (isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true});
+      const t = Math.min(to, from + k / FPS); times[k] = t - from;
+      for (let b = 0; b < names.length; b++) {
+        const i = interp[names[b]] || {}, o = k * stride + b * 7;
+        (i.position ? i.position.evaluate(t) : bones[b].position.toArray()).forEach((v, n) => { values[o + n] = v; });
+        (i.quaternion ? i.quaternion.evaluate(t) : bones[b].quaternion.toArray()).forEach((v, n) => { values[o + 3 + n] = v; });
+      }
+    }
+    return {times, values, duration: to - from, loop};
+  };
+  const glide = sampleClip(byName.glide, {loop: true}), crouch = sampleClip(byName.crouch, {loop: true});
+  const boost = sampleClip(byName.boost, {loop: false}), fall = sampleClip(byName.fall, {loop: false}), getUp = sampleClip(byName.get_up, {loop: false});
+  const clips = {
+    idle: glide, glide, tuck: crouch, air: crouch, pole_push: boost, fall, recover: getUp, getup: getUp,
+    // Landing absorbs through the first half second of the authored crouch; celebrating is two pole pumps.
+    land: sampleClip(byName.crouch, {loop: false, to: .5}), celebrate: boost
+  };
+  return {names, stride, clips, transitions: SKIER3_TRANSITIONS, initialState: 'idle', motionScale: 1, embedded: true,
+    bindProof: {source: 'embedded', clips: gltf.animations.map(a => a.name)}};
+}
+
+const LEGACY_URL = asset('../design/characters/skier.glb');
+/** Prefers the GPT/Codex skier3 asset (embedded clips); a failed load falls back silently to the earlier
+ * retargeted skier, and the view falls back again to its procedural rider if both fail. */
+export async function loadAlpineCharacters({modelUrl = SKIER3_URL, isDisposed = () => false} = {}) {
+  if (modelUrl === SKIER3_URL) {
+    try { return await loadCharacters({modelUrl, embedded: true, isDisposed}); }
+    catch (error) { if (error?.disposed || isDisposed()) throw error; skier3Failure = String(error?.message || error); modelUrl = LEGACY_URL; }
+  }
+  return loadCharacters({modelUrl, embedded: false, isDisposed});
+}
+let skier3Failure = null;
+
+async function loadCharacters({modelUrl, embedded, isDisposed}) {
   const loadStarted = performance.now();
   const draco = new DRACOLoader();
   draco.setDecoderPath(asset('../vendor/draco/')); draco.setDecoderConfig({type: 'wasm'}); draco.setWorkerLimit(1);
@@ -247,7 +312,7 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
   }
   try {
     const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
-    const results = await Promise.allSettled([
+    const results = await Promise.allSettled(embedded ? [loader.loadAsync(modelUrl)] : [
       loader.loadAsync(modelUrl), json('../design/characters/rig.json'), json('../design/motion/alpine.json'), json('../design/viewer/retarget-map.json'),
       json('../design/motion2/alpine/alpine.json').catch(() => null) // optional: the richer get-up clip
     ]);
@@ -255,12 +320,16 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
     gltf?.scene.traverse(o => { if (o.geometry) ownedGeometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) ownedMaterials.add(m); });
     const failed = results.find(result => result.status === 'rejected');
     if (failed) throw failed.reason;
-    const [, rig, motion, map, motion2] = results.map(result => result.value);
-    // 'getup' plays in place of the short authored 'recover': the rider climbs back onto the skis from lying on the side.
-    if (motion2?.states?.recover_side) motion.states = {...motion.states, getup: motion2.states.recover_side};
     if (isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true});
     const bakeStarted = performance.now();
-    const baked = bakeAlpineMotion(gltf.scene, rig, motion, map, isDisposed);
+    let baked;
+    if (embedded) baked = bakeEmbeddedSkier(gltf, isDisposed);
+    else {
+      const [, rig, motion, map, motion2] = results.map(result => result.value);
+      // 'getup' plays in place of the short authored 'recover': the rider climbs back onto the skis from lying on the side.
+      if (motion2?.states?.recover_side) motion.states = {...motion.states, getup: motion2.states.recover_side};
+      baked = bakeAlpineMotion(gltf.scene, rig, motion, map, isDisposed);
+    }
     const bakeMs = performance.now() - bakeStarted, loadMs = performance.now() - loadStarted;
     // All Draco work has completed; workers never survive into the race.
     draco.dispose();
@@ -298,7 +367,7 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
         actors.add(actor); return actor;
       },
       dispose,
-      metrics() { return {mode: 'design-skier', clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
+      metrics() { return {mode: embedded ? 'skier3' : 'design-skier', fallbackReason: embedded ? null : skier3Failure, clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: embedded ? 24918 : 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
     };
   } catch (error) { dispose(); throw error; }
 }

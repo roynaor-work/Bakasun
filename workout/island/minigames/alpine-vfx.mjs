@@ -235,3 +235,10 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
     },
   };
 }
+
+/** Stand-in when a flipbook file could not be downloaded: the race runs without snow,
+ * scrape and speed effects (and without the authored crash camera) instead of failing to open. */
+export function inertAlpineVfx(reason) {
+  return {update() {}, applyCamera() { return false; }, warmUp() {}, reset() {}, dispose() {},
+    metrics: () => ({active: 0, capacity: 0, spawned: 0, cameraActive: false, missing: true, reason: String(reason?.message || reason)})};
+}

@@ -1,0 +1,657 @@
+{
+  "schemaVersion": 1,
+  "kind": "alpine-world-design-assets",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "maxFileBytes": 1500000,
+  "maxTextureEdge": 1024,
+  "modelCount": 12,
+  "totalModelBytes": 93400,
+  "totalStoredTriangles": 5364,
+  "models": [
+    {
+      "id": "fir-a",
+      "displayName": "אשוח רחב",
+      "category": "trees",
+      "file": "models/fir-a.glb",
+      "bytes": 3232,
+      "sha256": "cc864ac0fb8460c9eb8c752458bfc377f440a64c9c2422cf8e5edb6c965494c6",
+      "triangles": 87,
+      "vertices": 231,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -1.197529,
+          0,
+          -1.203741
+        ],
+        [
+          1.197557,
+          4.408,
+          1.203724
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          -0.007943,
+          4.4,
+          0.048201
+        ],
+        "anchor_trunk_base": [
+          -0.047943,
+          0,
+          0.048201
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/fir-a.glb",
+        "sha256": "cc864ac0fb8460c9eb8c752458bfc377f440a64c9c2422cf8e5edb6c965494c6",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "fir-b",
+      "displayName": "אשוח גבוה",
+      "category": "trees",
+      "file": "models/fir-b.glb",
+      "bytes": 3336,
+      "sha256": "85383fc5a62fca18387120564ab09863f8ccafdcc4b86fb5c26e2f587fbf5507",
+      "triangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -0.908247,
+          0,
+          -0.840576
+        ],
+        [
+          0.908274,
+          5.208,
+          0.840561
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          -0.092109,
+          5.2,
+          -0.04446
+        ],
+        "anchor_trunk_base": [
+          -0.002109,
+          0,
+          -0.01446
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/fir-b.glb",
+        "sha256": "85383fc5a62fca18387120564ab09863f8ccafdcc4b86fb5c26e2f587fbf5507",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "fir-c",
+      "displayName": "אשוח צעיר",
+      "category": "trees",
+      "file": "models/fir-c.glb",
+      "bytes": 3308,
+      "sha256": "c00d0e96075c7e695f97fc581174a2cc588559940a45dd92bb92cfdd7b64d7e5",
+      "triangles": 96,
+      "vertices": 258,
+      "primitives": 2,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -1.201449,
+          0,
+          -1.23666
+        ],
+        [
+          1.201431,
+          3.258,
+          1.236661
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_tree_tip": [
+          0.059045,
+          3.25,
+          -0.011645
+        ],
+        "anchor_trunk_base": [
+          0.039045,
+          0,
+          -0.051645
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/fir-c.glb",
+        "sha256": "c00d0e96075c7e695f97fc581174a2cc588559940a45dd92bb92cfdd7b64d7e5",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "rock-small",
+      "displayName": "סלע קטן",
+      "category": "rocks",
+      "file": "models/rock-small.glb",
+      "bytes": 1988,
+      "sha256": "9b60a4ff1d0d86121eda8e01af38660889d0a20982e922f04bfed38b6927d6da",
+      "triangles": 54,
+      "vertices": 154,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -0.337674,
+          0,
+          -0.246654
+        ],
+        [
+          0.337674,
+          0.616496,
+          0.246654
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rock_top": [
+          -0.010194,
+          0.6165,
+          0.018691
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/rock-small.glb",
+        "sha256": "9b60a4ff1d0d86121eda8e01af38660889d0a20982e922f04bfed38b6927d6da",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "rock-large",
+      "displayName": "סלע גדול",
+      "category": "rocks",
+      "file": "models/rock-large.glb",
+      "bytes": 1980,
+      "sha256": "92cd3014446fb4448b0adb70b6e93ab323fd803788d07cc70ea2e91f311876e3",
+      "triangles": 54,
+      "vertices": 154,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -1.350697,
+          0,
+          -0.986616
+        ],
+        [
+          1.350697,
+          2.465983,
+          0.986615
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_rock_top": [
+          -0.040778,
+          2.466,
+          0.074762
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/rock-large.glb",
+        "sha256": "92cd3014446fb4448b0adb70b6e93ab323fd803788d07cc70ea2e91f311876e3",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "snow-sign",
+      "displayName": "שלט מסלול",
+      "category": "signs",
+      "file": "models/snow-sign.glb",
+      "bytes": 1828,
+      "sha256": "d053c4ef9537fe310159fa258226d5a74a7130ecee2d1c55140ea9126c00d861",
+      "triangles": 69,
+      "vertices": 139,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -0.65,
+          0,
+          -0.06
+        ],
+        [
+          0.649997,
+          1.96,
+          0.066001
+        ]
+      ],
+      "anchors": {
+        "anchor_mount": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/snow-sign.glb",
+        "sha256": "d053c4ef9537fe310159fa258226d5a74a7130ecee2d1c55140ea9126c00d861",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "slalom-gate",
+      "displayName": "שער סלאלום",
+      "category": "gates",
+      "file": "models/slalom-gate.glb",
+      "bytes": 5132,
+      "sha256": "6497d0009819c01342a998128d8a96578fcc0b8bb08220b6f53e856e1220b008",
+      "triangles": 220,
+      "vertices": 424,
+      "primitives": 4,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -1.59,
+          0,
+          -0.11
+        ],
+        [
+          1.59,
+          2.349996,
+          0.110006
+        ]
+      ],
+      "anchors": {
+        "anchor_banner_center": [
+          0,
+          1.68,
+          0
+        ],
+        "anchor_gate_center": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_pole_left": [
+          -1.5,
+          0,
+          0
+        ],
+        "anchor_pole_right": [
+          1.5,
+          0,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/slalom-gate.glb",
+        "sha256": "6497d0009819c01342a998128d8a96578fcc0b8bb08220b6f53e856e1220b008",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "start-gate",
+      "displayName": "שער זינוק",
+      "category": "gates",
+      "file": "models/start-gate.glb",
+      "bytes": 2632,
+      "sha256": "6512bafc5ff6c570862f46832e07eca579e9a1edc79afd9dc8df722178daa138",
+      "triangles": 256,
+      "vertices": 552,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -2.72,
+          0,
+          -0.26
+        ],
+        [
+          2.72,
+          3.674978,
+          0.259969
+        ]
+      ],
+      "anchors": {
+        "anchor_gate_center": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/start-gate.glb",
+        "sha256": "6512bafc5ff6c570862f46832e07eca579e9a1edc79afd9dc8df722178daa138",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "finish-gate",
+      "displayName": "שער סיום",
+      "category": "gates",
+      "file": "models/finish-gate.glb",
+      "bytes": 2648,
+      "sha256": "b598a29121405ceed9d863b1b9026c87fe4417039ce086b6249ffaae1520381c",
+      "triangles": 256,
+      "vertices": 552,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -2.72,
+          0,
+          -0.26
+        ],
+        [
+          2.72,
+          3.674978,
+          0.259969
+        ]
+      ],
+      "anchors": {
+        "anchor_gate_center": [
+          0,
+          0,
+          0
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../models2/finish-gate.glb",
+        "sha256": "b598a29121405ceed9d863b1b9026c87fe4417039ce086b6249ffaae1520381c",
+        "license": "repository terms; ../models2/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "mogul",
+      "displayName": "מוגול",
+      "category": "moguls",
+      "file": "models/mogul.glb",
+      "bytes": 5152,
+      "sha256": "4af5508039d428938395f698312282eab25b721c5463f8a639c949a585023baa",
+      "triangles": 384,
+      "vertices": 296,
+      "primitives": 1,
+      "materials": 1,
+      "textures": [],
+      "bounds": [
+        [
+          -1.8,
+          0,
+          -2.5
+        ],
+        [
+          1.799985,
+          0.650034,
+          2.5
+        ]
+      ],
+      "anchors": {
+        "anchor_back": [
+          0,
+          0,
+          2.5
+        ],
+        "anchor_front": [
+          0,
+          0,
+          -2.5
+        ],
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_peak": [
+          0,
+          0.65,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "../alpine-track/models/mogul.glb",
+        "sha256": "4af5508039d428938395f698312282eab25b721c5463f8a639c949a585023baa",
+        "license": "CC0-1.0; ../alpine-track/LICENSES.md",
+        "copyPolicy": "byte-identical reuse"
+      },
+      "animations": []
+    },
+    {
+      "id": "ice-wall",
+      "displayName": "קיר קרח",
+      "category": "ice-walls",
+      "file": "models/ice-wall.glb",
+      "bytes": 22480,
+      "sha256": "c967bf1ace394251e5956fa11fec6ac1faea4f57d230cbbeb19ddde0f472ffbd",
+      "triangles": 3696,
+      "vertices": 8329,
+      "primitives": 4,
+      "materials": 4,
+      "textures": [],
+      "bounds": [
+        [
+          -5,
+          -0.12,
+          -1.062782
+        ],
+        [
+          5,
+          3.554708,
+          0.919975
+        ]
+      ],
+      "anchors": {
+        "anchor_origin": [
+          0,
+          0,
+          0
+        ],
+        "anchor_snap_left": [
+          -5,
+          0,
+          0
+        ],
+        "anchor_snap_right": [
+          5,
+          0,
+          0
+        ],
+        "anchor_top": [
+          0,
+          3.48,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "tools/build-originals.py",
+        "sha256": "09725b5afc0a14143b4a4bee8a4ee0f22870913f57540de3e3430828bdfba2ce",
+        "license": "original contribution under repository terms"
+      },
+      "animations": []
+    },
+    {
+      "id": "snow-powder",
+      "displayName": "אבקת שלג",
+      "category": "powder",
+      "file": "models/snow-powder.glb",
+      "bytes": 39684,
+      "sha256": "2e104cfd3e22bab5b5cb10a3ad0b562b6e4ab40627cdc774477bd1854d5b4fc9",
+      "triangles": 96,
+      "vertices": 192,
+      "primitives": 16,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "ski-powder-atlas",
+          "mimeType": "image/png",
+          "width": 384,
+          "height": 384,
+          "bytes": 15811,
+          "embedded": true
+        }
+      ],
+      "bounds": [
+        [
+          -0.85,
+          0,
+          -0.736122
+        ],
+        [
+          0.85,
+          1.42,
+          0.736122
+        ]
+      ],
+      "anchors": {
+        "anchor_emitter": [
+          0,
+          0.02,
+          0
+        ]
+      },
+      "units": "metres",
+      "up": "+Y",
+      "forward": "+Z",
+      "compression": "KHR_draco_mesh_compression required on every primitive",
+      "source": {
+        "file": "tools/build-originals.py",
+        "sha256": "09725b5afc0a14143b4a4bee8a4ee0f22870913f57540de3e3430828bdfba2ce",
+        "license": "original contribution under repository terms",
+        "atlas": {
+          "file": "../alpine-track/vfx/ski-powder-atlas.png",
+          "sha256": "1c80a996963ba68b6efd7fd3abcf3012a3f9186a09af7088508c657f47a181b4",
+          "license": "CC0-1.0"
+        }
+      },
+      "animations": [
+        {
+          "name": "snow_puff",
+          "durationSeconds": 0.8,
+          "loop": false,
+          "presentationOnly": true,
+          "frameCount": 16,
+          "fps": 20
+        }
+      ],
+      "notes": "16 atlas frames on three crossed cards each; 96 stored triangles, 6 visible triangles per frame. Default pose displays frame 7. Play snow_puff once for 0.8s; reset/restart for a new emission. Set transparent mesh material.depthWrite=false in Three.js."
+    }
+  ]
+}

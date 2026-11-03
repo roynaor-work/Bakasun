@@ -207,3 +207,4 @@ textures recursively. `kid-full.glb` remains the existing load-failure fallback.
 The turf and audio attributions below remain applicable. No EA/club assets or
 real-player likenesses are included. Codex graphics v3 is excluded from this
 integration; it requires separate visual approval.
+- חיבור נכסי GPT/Codex לסקי (02.11.2026, PR 238, ענף `claude/ski-assets-v5`): הסקיאר `design/skier3/skier.glb` (18 עצמות, חמישה קליפים מוטמעים: glide, crouch, boost, fall, get_up) נטען דרך `alpine-character.mjs` (`bakeEmbeddedSkier` דוגם את הקליפים למבנה האפוי הקיים, ומכונת המצבים ושכבת הרכיבה נשארות). עולם: `design/alpine-world/models/*` דרך `alpine-design-world.mjs` (סלעים קטן וגדול, שלטים, מוגולים, קיר קרח, שער זינוק וסיום, אבקת שלג מונפשת ברגע נחיתה ונפילה). כל קובץ אופציונלי: כשל טעינה חוזר בשקט לסקיאר ולעולם הקודמים (`metrics().character.fallbackReason`). בלי שינוי בפיזיקה, בכיול ובגרסת השמירה.
