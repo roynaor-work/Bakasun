@@ -49,8 +49,8 @@ for(const [name,g] of Object.entries(GAMES)){
    const text=await t.page.locator('[data-load-rescue]').innerText();
    assert.ok(!text.includes('!'),'no exclamation marks');
    assert.match(text,/נתקע\? אתחול המשחק/);
-   await t.state.release();
    await t.page.locator('[data-action=rescue-restart]').first().click();
+   await t.state.release();
    await ready(t.page);
    assert.equal(await t.page.locator('[data-load-rescue]').count(),0,'rescue box is gone once the game is ready');
    const after=await t.page.evaluate(key=>({keys:Object.keys(localStorage).filter(k=>!/lastLoadReport$/.test(k)).sort(),marker:localStorage.getItem('island.test.marker'),report:localStorage.getItem(`island.${key}.lastLoadReport`)}),g.key);
