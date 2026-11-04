@@ -169,7 +169,7 @@ test('authored control JSON loads locally and supplies live HUD-kit button label
  assert.equal(pass.children.find(n=>n.classList.contains('ih-action-label')).textContent,authored.hoops.controls.pass.label);
  const rect=authored.hoops.layouts['390x844'].slots.secondary;
  assert.equal(pass.parent.style.width,rect.width+'px');assert.equal(pass.parent.style.height,rect.height+'px');assert.ok(pass.parent.style.right.includes(rect.offset_x+'px'));
- assert.equal(f.nodes.zone.style.width,'96px');assert.match(f.nodes.help.textContent,/קצרה בנגיעה.*רחוקה בהחזקה/);
+ assert.equal(f.nodes.zone.style['--hoops-stick-size'],'96px','authored stick size drives the ring');assert.match(f.nodes.zone.style.width,/^min\(calc\(50%/,'touch area spans the left thumb region, clear of the actions (floating stick)');assert.ok(f.nodes.zone.style.left.includes('12px'),'always anchored left');assert.match(f.nodes.help.textContent,/קצרה בנגיעה.*רחוקה בהחזקה/);
 });
 test('held pass visibly becomes a long pass at the authored threshold and releases only once',t=>{
  const f=fixture(t,authored),label=f.nodes.pass.children.find(n=>n.classList.contains('ih-action-label'));

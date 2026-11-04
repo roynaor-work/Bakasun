@@ -1,4 +1,6 @@
-/** Basketball input: independent captured touches, explicit defence actions and a
+/** Basketball input. The movement stick is always on the left (it floats to the first touch anywhere in the
+ * left thumb area) and the actions are always on the right, in both screen orientations: there is no
+ * handedness setting and no saved value is read. Independent captured touches, explicit defence actions and a
  * held sprint button. Q/move taps cross over; holding for longMove seconds spins.
  * Space shoots/blocks, E passes/steals, R spins, F fakes, Shift sprints.
  * One queued edge reaches each fixed step; ownership changes discard stale actions. */
@@ -17,7 +19,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  const now=()=>win.performance?.now?.()??Date.now(),label=k=>labels[k]&&!labels[k].startsWith('hoops.')?labels[k]:(HE[k]||k);
  const node=(tag,cls)=>{const n=doc.createElement(tag);n.className=cls;return n;};
  const edges=[],keys=new Set(),sprintKeys=new Set(),records=new Map();
- let enabled=true,disposed=false,mode='ball',paintedMode=null,stick={x:0,y:0},stickPointer=null,center=null,lockB=null,gestureId=0,shotSource=null,cancelShot=false,sprintTap=false,profileData=null,movementEnabled=true,sprintSince=null,autoSprinting=false,playIndex=0;
+ let idle=null,enabled=true,disposed=false,mode='ball',paintedMode=null,stick={x:0,y:0},stickPointer=null,center=null,lockB=null,gestureId=0,shotSource=null,cancelShot=false,sprintTap=false,profileData=null,movementEnabled=true,sprintSince=null,autoSprinting=false,playIndex=0;
  const zone=node('div','hoops-stick-zone'),ring=node('div','hoops-stick'),knob=node('span','hoops-knob');
  ring.append(knob);zone.append(ring);zone.setAttribute('role','application');zone.setAttribute('aria-label',label('stick'));
  root.classList.add('ih-kit');root.dataset.theme='hoops';
@@ -40,8 +42,9 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  elements.alt=elements.move;elements.help=help;root.append(zone,pad,top,help);
  function releaseCapture(el,id){if(id!==null)try{if(el.hasPointerCapture?.(id))el.releasePointerCapture(id);}catch{}}
  function releaseStick(){
-  const pointer=stickPointer;stickPointer=null;stick={x:0,y:0};center=null;lockB=null;sprintSince=null;autoSprinting=false;knob.style.transform='';ring.style.left='';ring.style.top='';zone.classList.remove('active');releaseCapture(zone,pointer);
+  const pointer=stickPointer;stickPointer=null;stick={x:0,y:0};center=null;lockB=null;sprintSince=null;autoSprinting=false;knob.style.transform='';zone.classList.remove('active');idleRing();releaseCapture(zone,pointer);
  }
+ function idleRing(){if(idle){ring.style.left=idle.x+'px';ring.style.top=idle.y+'px';}}
  function placeRing(x,y){
   const z=zone.getBoundingClientRect(),r=ring.offsetWidth/2||52;
   const lx=Math.max(r,Math.min(z.width-r,x-z.left)),ly=Math.max(r,Math.min(z.height-r,y-z.top));
@@ -82,8 +85,18 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  function layout(){
   if(!profileData)return;const bounds=root.getBoundingClientRect(),landscape=bounds.width>=bounds.height;
   const slots=profileData.hoops.layouts[landscape?'844x390':'390x844'].slots;
-  applyRect(zone,slots.stick);zone.style.setProperty('--hoops-stick-size',slots.stick.width+'px');
   for(const record of records.values())if(record.slot&&slots[record.slot])applyRect(record.host,slots[record.slot]);
+  applyRect(zone,slots.stick);zone.style.setProperty('--hoops-stick-size',slots.stick.width+'px');
+  // The authored stick slot is where the idle ring is drawn. The touch area is the whole left thumb
+  // region: from the left edge to just before the nearest action slot (never past mid-screen) and from
+  // below the top bar to the bottom. Written as CSS calc over the same safe-area variables as the slots,
+  // so it stays clear of the actions when the insets change, and independent of which actions are shown.
+  const slot=zone.getBoundingClientRect(),gap=8,st=slots.stick,safe=side=>'var(--ih-safe-'+side+',env(safe-area-inset-'+side+',0px))';
+  const reach=Math.max(0,...Object.entries(slots).filter(([k,r])=>k!=='stick'&&k!=='pause'&&r.anchor_x==='right').map(([,r])=>r.offset_x+r.width)),L='('+st.offset_x+'px + '+safe('left')+')';
+  zone.style.width='min(calc(50% - '+L+'), calc(100% - '+(reach+gap)+'px - '+safe('right')+' - '+L+'))';
+  zone.style.height='';zone.style.top='max(30%, calc(72px + '+safe('top')+'))';
+  const h=zone.getBoundingClientRect().height||slot.height;
+  idle={x:slot.width/2,y:Math.max(slot.height/2,h-slot.height/2)};if(stickPointer===null)idleRing();
  }
  function setProfile(value){
   if(disposed)return;profileData=validateHoopsControlsProfile(value);const thresholds=profileData.interaction.gesture_thresholds;

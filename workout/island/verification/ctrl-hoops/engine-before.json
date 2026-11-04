@@ -1,0 +1,75 @@
+{
+ "startFull": {
+  "d2cm": 3,
+  "v1": 4,
+  "d5cm": 5,
+  "d20cm": 9,
+  "ms": {
+   "d2cm": 50,
+   "v1": 67,
+   "d5cm": 83,
+   "d20cm": 150
+  }
+ },
+ "startHalf": {
+  "d2cm": 3,
+  "v1": 4,
+  "d5cm": 5,
+  "d20cm": 11,
+  "ms": {
+   "d2cm": 50,
+   "v1": 67,
+   "d5cm": 83,
+   "d20cm": 183
+  }
+ },
+ "startLight": {
+  "d2cm": 4,
+  "d5cm": 9,
+  "d20cm": 35,
+  "ms": {
+   "d2cm": 67,
+   "d5cm": 150,
+   "d20cm": 583
+  }
+ },
+ "stop": {
+  "fromSpeed": 5.5,
+  "toHalfMs": null,
+  "steps": 13,
+  "halfSteps": 7
+ },
+ "reverse": {
+  "steps": 18
+ },
+ "shot": [
+  {
+   "releaseSteps": 8,
+   "holdSteps": 1
+  },
+  {
+   "releaseSteps": 8,
+   "holdSteps": 3
+  },
+  {
+   "releaseSteps": 9,
+   "holdSteps": 8
+  },
+  {
+   "releaseSteps": 21,
+   "holdSteps": 20
+  },
+  {
+   "releaseSteps": 46,
+   "holdSteps": 45
+  }
+ ],
+ "steal": {
+  "pressToResolveSteps": 9,
+  "note": "steal.reachAt=0.14 s ties the resolution to the reach animation"
+ },
+ "switch": {
+  "controlChangedStep": 1,
+  "velocityFollowsStep": 4
+ }
+}

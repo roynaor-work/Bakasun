@@ -1,9 +1,9 @@
-import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261104-2';
-import {gameContext} from './context.mjs?v=island-v2-20261104-2';
-import {createTennis} from './tennis.mjs?v=island-v2-20261104-2';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261104-2';
-import {createTennisControls,applyTennisSample} from './tennis-controls.mjs?v=island-v2-20261104-2';
-import {tennisIcon,tennisScoreCells,tennisEventFeedback,tennisLiveFeedback} from './tennis-ui.mjs?v=island-v2-20261104-2';
+import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261104-3';
+import {gameContext} from './context.mjs?v=island-v2-20261104-3';
+import {createTennis} from './tennis.mjs?v=island-v2-20261104-3';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261104-3';
+import {createTennisControls,applyTennisSample} from './tennis-controls.mjs?v=island-v2-20261104-3';
+import {tennisIcon,tennisScoreCells,tennisEventFeedback,tennisLiveFeedback} from './tennis-ui.mjs?v=island-v2-20261104-3';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};
@@ -14,7 +14,7 @@ export function startTennis(ctx){
  const session={dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
- const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261104-2',import.meta.url);screen.append(powerStyle);
+ const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261104-3',import.meta.url);screen.append(powerStyle);
  screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls||'';return n;};
  const zone=node('div','soccer-stick-zone'),stick=node('div','soccer-joystick'),knob=node('span','soccer-knob'),home=node('div','tennis-stick-home');
@@ -33,7 +33,7 @@ export function startTennis(ctx){
  const meter=node('div','tennis-serve-meter'),needle=node('span','tennis-serve-needle'),perfectBand=node('span','tennis-perfect-band');meter.setAttribute('aria-label',t('tennis.accuracy'));meter.append(perfectBand,needle);canvas.after(meter);
  perfectBand.style.height=`${balance.serve.perfectWidth*100}%`;perfectBand.style.bottom=`${(1-balance.serve.perfectWidth)*50}%`;
  const powerMeter=node('div','tennis-power-meter'),powerFill=node('span','tennis-power-fill');powerMeter.setAttribute('role','meter');powerMeter.setAttribute('aria-label',t('tennis.power'));powerMeter.setAttribute('aria-valuemin','0');powerMeter.setAttribute('aria-valuemax','100');powerMeter.style.setProperty('--safe',`${balance.shotPower.safeMax[ctx.difficulty]*100}%`);powerMeter.append(powerFill);canvas.after(powerMeter);
- input=createTennisControls({root:controls,config:balance.controls,onCancel:cancel,onGesture:()=>audio.unlock()});let right=balance.controls.rightHanded;try{const v=localStorage.getItem(balance.controls.handednessKey);if(v!==null)right=v==='right';}catch{}input.setHanded(right);input.setEnabled(!paused);
+ input=createTennisControls({root:controls,config:balance.controls,onCancel:cancel,onGesture:()=>audio.unlock()});input.setHanded(true);/* stick always on the left; saved hand value ignored */input.setEnabled(!paused);
  if(new URLSearchParams(location.search).get('dev')==='1')session.debug={model,fallback,inspectCamera:(...args)=>view?.inspectCamera?.(...args),qualitySample:(...args)=>view?.observeFrame(...args)};
  function fallback(){if(disposed||view?.metrics().mode==='canvas')return;view?.dispose();view=createTennisFallback(canvas,viewConfig);}
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();fallback();},{signal:abort.signal});

@@ -1,12 +1,12 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261104-2';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261104-3';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261104-2';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261104-2';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261104-2';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261104-2';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261104-2';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261104-2';
-import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261104-2';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261104-3';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261104-3';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261104-3';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261104-3';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261104-3';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261104-3';
+import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261104-3';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -96,7 +96,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     return selectTeamPass(p,s,config)||nearest(p.team,p,p.id);
   }
   function kick(p,power=0,pass=false,forceLoft=false,release=false,toward=null) {
-    if(s.ball.owner!==p.id || p.cooldown>0)return;
+    if(s.ball.owner!==p.id)return;
+    // A tap that lands in the last moments of kick cooldown (a one-two return) is kept for the
+    // input-buffer window instead of being dropped; it fires with the power it was released at.
+    if(p.cooldown>0){
+      if(p.id===s.controlled&&!p.hands&&!p.distribution&&!release&&!s.bufferedAction&&p.cooldown<=(config.assistance?.contact?.inputBufferSeconds??.18)){rememberAction(pass?'pass':'shot',p,pass?s.passAim:s.kickAim);s.bufferedAction.released=true;s.bufferedAction.power=power;}
+      return;
+    }
     if(p.distribution)return;
     if(p.hands&&!release){
       const kind=pass?'keeperThrow':'keeperPunt';
@@ -202,13 +208,15 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     event('loft',{team:p.team,player:p.id,target:mate.id,x:tx,z,distance:len,power});
   }
   const keeperMotion=config.players.keeperMotion?{...config.players,...config.players.keeperMotion}:config.players;
+  // The selected team-0 player answers the stick faster than the AI (config.players.controlled); AI movement is unchanged.
+  const humanMotion=config.players.controlled?{...config.players,...config.players.controlled}:config.players;
   let referenceTick=-1,referenceSpeed=0;
   function teamReference(){
     if(referenceTick===tickCount)return referenceSpeed;referenceTick=tickCount;let best=-Infinity;
     for(const q of players)if(q.team===0){const v=(config.players.speed+(q.speed-1)*config.players.speedPerRank)*personal(q).pace;if(v>best)best=v;}
     return referenceSpeed=best;
   }
-  function move(p,dx,dz,dt,multiplier=1) {const pm=p.role==='keeper'?keeperMotion:config.players;
+  function move(p,dx,dz,dt,multiplier=1) {const pm=p.role==='keeper'?keeperMotion:p.team===0&&p.id===s.controlled?humanMotion:config.players;
     const length=Math.hypot(dx,dz),reference=teamReference(),speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*multiplier*personal(p).pace:Math.max(opponent.speed*multiplier*personal(p).pace,reference*config.opponents.minSpeedRatio*attack.speed);
     const scale=length>1?1/length:1;
     // Turn the body toward intent before redirecting momentum. Reversals brake
@@ -366,7 +374,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(pass&&action.aim)s.passAim=action.aim;if(!pass&&action.aim)s.kickAim=action.aim;
     s.bufferedAction=null;
     if(stillHeld&&!action.released){s.charging=true;s.chargeKind=pass?'pass':'shot';s.charge=0;}
-    else {kick(p,pass?0:.12,pass);s.charging=false;s.charge=0;s.chargeKind=null;}
+    else {kick(p,action.power??(pass?0:.12),pass);s.charging=false;s.charge=0;s.chargeKind=null;}
   }
   function standingAttempt(p){p.stealTime=config.steal.animationSeconds;const dx=s.ball.x-p.x,dz=s.ball.z-p.z,len=Math.hypot(dx,dz)||1;p.fx=dx/len;p.fz=dz/len;return attempt(p,config.steal,'steal');}
   function attempt(p,settings,type,contact=null){

@@ -87,3 +87,37 @@
 
 /* the game's name is not shown on the opening card either: the track name below is the heading */
 .game-screen[data-game=alpineRush] .alpine-title{display:none!important}
+/* ctrl-ski (04/11, רועי: "הג'ויסטיקים צריכים להיות בצד שמאל כל הזמן"): the steering stick is always on the left,
+   the boost and trick cluster always on the right, in both phone orientations. There is no left/right switch and no
+   saved side; nothing here depends on page direction or on a stored setting. */
+.game-screen[data-game=alpineRush] .alpine-footer{direction:ltr!important;flex-direction:row!important;justify-content:space-between!important}
+.game-screen[data-game=alpineRush] .alpine-joystick{order:0!important;margin:0!important;transition:transform .14s ease-out}
+.game-screen[data-game=alpineRush] .alpine-joystick[data-floating=true]{transition:none}
+.game-screen[data-game=alpineRush] .alpine-actions{order:2!important;margin-left:auto!important;transform:scale(1.14);transform-origin:100% 100%}
+/* Larger touch targets: boost 66 -> 92 px in landscape, 76 -> 84 px in portrait; trick buttons 48 -> 67 px in landscape; stick 100 -> 116 / 112 -> 124 px. */
+@media(max-width:700px){
+ /* Portrait is only 390 px wide: the trick arc must stay right of the middle, so the cluster keeps its size and only the boost grows. */
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:none}
+ .game-screen[data-game=alpineRush] .alpine-actions .alpine-boost{width:84px;min-width:84px;height:84px;min-height:84px}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:124px!important;height:124px!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:136px!important}
+}
+@media(max-height:600px) and (min-width:701px){
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(1.4)}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:116px!important;height:116px!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
+}
+
+/* The stick and the action cluster never overlap and the actions always sit above the stick. */
+.game-screen[data-game=alpineRush] .alpine-joystick{z-index:1}
+.game-screen[data-game=alpineRush] .alpine-actions{position:relative;z-index:3}
+@media(max-width:380px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:108px!important;height:108px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.88)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
+}
+@media(max-width:340px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:100px!important;height:100px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.8)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:112px!important}
+}
