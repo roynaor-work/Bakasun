@@ -16,7 +16,7 @@ export function teamThink(api,dt,mode){
   const T=S.teams[t];
   if(!T.ai)T.ai={assign:{},plan:null,planT:0,lastPossession:null,zoneShift:0};
   const ai=T.ai;
-  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;}
+  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;ai.chain=0;}
   ai.transition=Math.max(0,(ai.transition||0)-dt);
   assignDefence(api,t);
   for(const p of api.onCourt(t)){
@@ -196,6 +196,8 @@ function offenseMove(api,p,t){
  const S=api.S,T=S.teams[t],s=api.side(t),rim=api.court.rim(s),h=api.holder();
  const transition=T.ai.transition>0;
  if(h===p){handlerMove(api,p,t);return;}
+ // three-second rule: leave the lane before the count runs out
+ if(h&&p.paintT>1.7){const o=FIVE_OUT[p.pos]||[-5,0];p.role=null;setGoal(p,spot(api,t,o[0],o[1]),1);return;}
  // catch a pass coming my way
  if(p.intent.catchAt){setGoal(p,p.intent.catchAt,1,null,false);return;}
  const call=T.call||(T.tactics.offense==='pnr'&&T.ai.planT<3?'pnr':null);
@@ -228,6 +230,8 @@ function handlerMove(api,p,t){
  const front=api.court.frontcourt(s,p.x);
  const top=spot(api,t,-7.4,p.z*0.3);
  if(p.act)return;
+ // A dead dribble (ball held in both hands): shoot or pass, never walk with it.
+ if(p.dead){const q=api.onCourt(t).filter(o=>o!==p&&laneClear(api,t,p,o,0.7)).sort((a,c)=>openness(api,t,c)-openness(api,t,a))[0];if(q&&(S.shotClock>6||api.rand()<0.5)&&api.dist(p,rim)>3)api.startPass(p,q,'chest');else api.startShot(p,false);return;}
  if(!front||S.teams[t].ai.transition>0&&api.court.distToRim(s,p.x,p.z)>9){
   // push the ball up the floor; attack in transition if the lane is clear
   if(laneClear(api,t,p,rim,1.6)&&S.teams[t].ai.transition>0){setGoal(p,{x:rim.x-s*0.8,z:0},1,null,true);}
@@ -235,7 +239,7 @@ function handlerMove(api,p,t){
   return;
  }
  const d=api.court.distToRim(s,p.x,p.z),open=openness(api,t,p),clock=S.shotClock;
- const hurry=clock<4.5;
+ const hurry=clock<6.5;
  // someone asked for the ball (the child's teammate pressed pass)
  if(p.intent.wantPass){const q=api.byId(p.intent.wantPass);p.intent.wantPass=null;if(q){api.startPass(p,q,null);return;}}
  const pref=rolePreference(p,T.tactics.pace??0.5),myShot=shotValue(api,p,t,pref);
@@ -271,11 +275,12 @@ function handlerMove(api,p,t){
  // play call: pick and roll if the defender is close
  if(best.kind==='hold'&&(T.tactics.offense==='pnr'||T.call==='pnr')&&!T.ai.plan){T.ai.plan='pnr';T.ai.planT=0;}
  if(best.kind==='shoot'){api.startShot(p,false);return;}
- if(best.kind==='pass'){api.startPass(p,best.q,api.dist(p,best.q)>9?'lob':(api.rand()<0.25?'bounce':'chest'));return;}
+ if(best.kind==='pass'){T.ai.chain=(T.ai.chain||0)+1;api.startPass(p,best.q,api.dist(p,best.q)>9?'lob':(api.rand()<0.25?'bounce':'chest'));return;}
  if(best.kind==='drive'){setGoal(p,{x:rim.x-s*0.9,z:p.z*0.3},1,null,true);if(d<3.2)api.startShot(p,false);return;}
  // isolation / patience: probe toward an open lane, sometimes a crossover
  const ang=Math.sin(S.tick/70+p.slot)*0.8;
- setGoal(p,{x:rim.x-s*(6.2+Math.cos(ang)),z:clamp(p.z+Math.sin(ang)*2,-5,5)},0.6);
+ const prog=clamp((24-clock)/18,0,1),reach=6.4-prog*3.2;
+ setGoal(p,{x:rim.x-s*(reach+Math.cos(ang)*0.6),z:clamp(p.z+Math.sin(ang)*2*(1-prog*0.6),-5,5)},0.6+prog*0.35,null,prog>0.5);
  if(open<1.1&&api.rand()<0.25*api.eff(p,'handle'))api.startMove(p);
 }
 
