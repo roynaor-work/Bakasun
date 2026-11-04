@@ -7,6 +7,7 @@ import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
 import {loadAlpineCharacters} from './alpine-character.mjs';
 import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
+import {bodyTarget,followBody,carvePose} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
 import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261104-2';
@@ -385,7 +386,10 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       // On a wall the rider stands square to the surface; in pipe air the body eases upright.
       const rollTarget = s.airKind === 'pipe' ? side * wallAngle(pipe.lip, pipe) * .55 : s.airborne ? 0 : side * wallAngle(s.x, pipe);
       r.roll += (rollTarget - r.roll) * dampWeight(11,wdt);
-      place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll, lean * .24, s.airKind === 'ramp' ? r.air * .12 : 0);
+      // Body first: the tilt follows the stick intent, then the carve banks the board into the turn (more at speed).
+      r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
+      const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll;
+      place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, carve.yaw, s.airKind === 'ramp' ? r.air * .12 : 0);
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
       let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
       if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
