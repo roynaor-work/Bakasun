@@ -24,3 +24,10 @@ button>.ik-icon.ik-lock:first-child{margin-inline:0 6px}
 .ik-result .game-result{margin-block:10px 0}
 .ik-result .result-row,.ik-result .result-row span,.ik-result .result-row bdi{color:#173e40}
 @media(orientation:landscape) and (max-height:500px){.ik-result{padding:10px 16px}.ik-result .ik-trophy{display:none}.ik-opening-small .ik-intro{max-block-size:96px}}
+.adventure-home-actions .ik-wrap{grid-column:1/-1}
+.adventure-home-actions .ik-wrap>.ik-button,.adventure-home-actions .ik-wrap>.ik-button:hover{min-height:64px;padding:4px 16px 8px;border:8px solid transparent;border-image:var(--ik-bridge-surface,url("../design/ui-kit-v2/buttons/primary-default.svg")) 22 fill / 22px;background:transparent;box-shadow:none;color:var(--ik-button-ink);font-size:17px;font-weight:700}
+.modal[data-result] .ik-wrap{margin-block:8px}
+.modal[data-result] .ik-wrap>.ik-button{border:8px solid transparent;border-image:var(--ik-bridge-surface,url("../design/ui-kit-v2/buttons/primary-default.svg")) 22 fill / 22px;background:transparent;box-shadow:none;color:var(--ik-button-ink)}
+@media(hover:hover){.ik-wrap>.ik-button.ik-primary:hover{--ik-bridge-surface:url("../design/ui-kit-v2/buttons/primary-hover.svg")}}
+.ik-wrap>.ik-button.ik-primary:active{--ik-bridge-surface:url("../design/ui-kit-v2/buttons/primary-pressed.svg")}
+.ik-wrap>.ik-button.ik-primary:disabled{--ik-bridge-surface:url("../design/ui-kit-v2/buttons/primary-disabled.svg")}
