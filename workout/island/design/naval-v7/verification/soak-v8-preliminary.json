@@ -1,0 +1,149 @@
+{
+  "startedAt": "2026-11-04T21:10:59.735Z",
+  "requestedMinutes": 75,
+  "elapsedMinutes": 32.521283333333336,
+  "phases": 33,
+  "samples": 129,
+  "last": {
+    "at": "2026-11-04T21:43:31.011Z",
+    "elapsedSeconds": 1951.277,
+    "phase": 32,
+    "heapUsedBytes": 8393696,
+    "metrics": {
+      "three": "160",
+      "state": {
+        "ship": "corvette",
+        "fleet": "tide",
+        "weather": "storm",
+        "view": "near",
+        "quality": "balanced",
+        "adaptiveScale": 0.64,
+        "paused": false,
+        "reduced": false,
+        "crew": true,
+        "time": 1871.578699999464,
+        "frozen": false,
+        "theta": 0.79,
+        "elevation": 0.22,
+        "zoom": 1,
+        "storm": 1,
+        "loading": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 0.64,
+        "bufferWidth": 249,
+        "bufferHeight": 540
+      },
+      "triangles": 28092,
+      "drawCalls": 15,
+      "geometries": 41,
+      "textures": 10,
+      "programs": 20,
+      "cpuFrame": {
+        "samples": 600,
+        "meanMs": 44.02600000000015,
+        "p95Ms": 83.39999999990687,
+        "fps": 22.713850906282573
+      },
+      "lod": [
+        {
+          "type": "corvette",
+          "fleet": "tide",
+          "lod": 0,
+          "triangles": 6921
+        },
+        {
+          "type": "destroyer",
+          "fleet": "ember",
+          "lod": 1,
+          "triangles": 3235
+        },
+        {
+          "type": "cruiser",
+          "fleet": "tide",
+          "lod": 1,
+          "triangles": 4281
+        },
+        {
+          "type": "carrier",
+          "fleet": "ember",
+          "lod": 0,
+          "triangles": 8093
+        }
+      ],
+      "crewInstances": 14,
+      "effects": {
+        "capacity": 96,
+        "allocatedCapacity": 320,
+        "active": 50,
+        "waterColumnCapacity": 3
+      },
+      "dracoWorkers": 2,
+      "renderer": "WebKit WebGL",
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "environmentProbes": [
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        },
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        }
+      ],
+      "adaptationEvents": [
+        {
+          "simulationTime": 1183.0459999998654,
+          "averageMs": 72.21944444444833,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 1185.4624999998646,
+          "averageMs": 56.016666666662786,
+          "scale": 0.64
+        },
+        {
+          "simulationTime": 1463.4650999996925,
+          "averageMs": 235.63611111110853,
+          "scale": 0.88
+        },
+        {
+          "simulationTime": 1464.6316999996914,
+          "averageMs": 216.65833333333205,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 1466.0649999996901,
+          "averageMs": 186.10277777777648,
+          "scale": 0.64
+        },
+        {
+          "simulationTime": 1743.367799999538,
+          "averageMs": 129.625,
+          "scale": 0.88
+        },
+        {
+          "simulationTime": 1745.3842999995363,
+          "averageMs": 109.25555555555427,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 1747.4008999995353,
+          "averageMs": 95.36666666667185,
+          "scale": 0.64
+        }
+      ],
+      "reducedMotion": false,
+      "offline": true
+    }
+  },
+  "errors": 0,
+  "externalRequests": 0,
+  "completion": "Preliminary v8 run interrupted after detecting a separate WebGL recovery defect; not a completed burn-in."
+}

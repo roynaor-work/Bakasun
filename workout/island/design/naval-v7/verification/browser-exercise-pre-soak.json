@@ -1,0 +1,1653 @@
+{
+  "startedAt": "2026-11-04T21:05:11.823Z",
+  "sourceSha256": "24fc7d8e9c5d6d5a3ec4b833f5fe9938d627b315b48e6e7e823e15e99a270c99",
+  "rendererMode": "Chromium ANGLE/SwiftShader software; not a physical phone",
+  "checks": [
+    {
+      "label": "Offline startup",
+      "pass": true,
+      "details": {
+        "wallMs": 2499
+      }
+    },
+    {
+      "label": "Selection corvette/tide",
+      "pass": true,
+      "details": {
+        "triangles": 28276
+      }
+    },
+    {
+      "label": "Selection corvette/ember",
+      "pass": true,
+      "details": {
+        "triangles": 28276
+      }
+    },
+    {
+      "label": "Selection destroyer/tide",
+      "pass": true,
+      "details": {
+        "triangles": 26664
+      }
+    },
+    {
+      "label": "Selection destroyer/ember",
+      "pass": true,
+      "details": {
+        "triangles": 26664
+      }
+    },
+    {
+      "label": "Selection cruiser/tide",
+      "pass": true,
+      "details": {
+        "triangles": 28592
+      }
+    },
+    {
+      "label": "Selection cruiser/ember",
+      "pass": true,
+      "details": {
+        "triangles": 28592
+      }
+    },
+    {
+      "label": "Selection carrier/tide",
+      "pass": true,
+      "details": {
+        "triangles": 23364
+      }
+    },
+    {
+      "label": "Selection carrier/ember",
+      "pass": true,
+      "details": {
+        "triangles": 23364
+      }
+    },
+    {
+      "label": "No overflow 390×844",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scrollWidth": 390,
+        "targets": [
+          {
+            "label": "קרוב",
+            "x": 29.515625,
+            "y": 135,
+            "w": 45.8125,
+            "h": 44
+          },
+          {
+            "label": "רחוק",
+            "x": 75.328125,
+            "y": 135,
+            "w": 46.140625,
+            "h": 44
+          },
+          {
+            "label": "השהיית התנועה",
+            "x": 19,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "פתיחת אפשרויות",
+            "x": 78,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "קורבטה01",
+            "x": 280.25,
+            "y": 683,
+            "w": 80.75,
+            "h": 72
+          },
+          {
+            "label": "משחתת02",
+            "x": 196.5,
+            "y": 683,
+            "w": 80.75,
+            "h": 72
+          },
+          {
+            "label": "סיירת03",
+            "x": 112.75,
+            "y": 683,
+            "w": 80.75,
+            "h": 72
+          },
+          {
+            "label": "נושאת04",
+            "x": 29,
+            "y": 683,
+            "w": 80.75,
+            "h": 72
+          },
+          {
+            "label": "צי הגאות, כחול־ירוק",
+            "x": 318,
+            "y": 775,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "צי הגחלת, אדום",
+            "x": 274,
+            "y": 775,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "שקיעה",
+            "x": 185.8125,
+            "y": 775,
+            "w": 46.75,
+            "h": 44
+          },
+          {
+            "label": "סערה",
+            "x": 141.8125,
+            "y": 775,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "מטחFIRE",
+            "x": 28,
+            "y": 774,
+            "w": 72.375,
+            "h": 46
+          }
+        ]
+      }
+    },
+    {
+      "label": "Touch targets 390×844",
+      "pass": true,
+      "details": []
+    },
+    {
+      "label": "No overflow 844×390",
+      "pass": true,
+      "details": {
+        "width": 844,
+        "scrollWidth": 844,
+        "targets": [
+          {
+            "label": "קרוב",
+            "x": 26,
+            "y": 67,
+            "w": 45.8125,
+            "h": 44
+          },
+          {
+            "label": "רחוק",
+            "x": 71.8125,
+            "y": 67,
+            "w": 46.140625,
+            "h": 44
+          },
+          {
+            "label": "השהיית התנועה",
+            "x": 125.953125,
+            "y": 67,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "פתיחת אפשרויות",
+            "x": 174.953125,
+            "y": 67,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "קורבטה01",
+            "x": 699.640625,
+            "y": 304,
+            "w": 110.359375,
+            "h": 62
+          },
+          {
+            "label": "משחתת02",
+            "x": 586.265625,
+            "y": 304,
+            "w": 110.375,
+            "h": 62
+          },
+          {
+            "label": "סיירת03",
+            "x": 472.90625,
+            "y": 304,
+            "w": 110.359375,
+            "h": 62
+          },
+          {
+            "label": "נושאת04",
+            "x": 359.53125,
+            "y": 304,
+            "w": 110.375,
+            "h": 62
+          },
+          {
+            "label": "צי הגאות, כחול־ירוק",
+            "x": 290.53125,
+            "y": 313,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "צי הגחלת, אדום",
+            "x": 246.53125,
+            "y": 313,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "שקיעה",
+            "x": 191.78125,
+            "y": 313,
+            "w": 48.75,
+            "h": 44
+          },
+          {
+            "label": "סערה",
+            "x": 147.640625,
+            "y": 313,
+            "w": 44.140625,
+            "h": 44
+          },
+          {
+            "label": "מטחFIRE",
+            "x": 34,
+            "y": 311,
+            "w": 107.640625,
+            "h": 48
+          }
+        ]
+      }
+    },
+    {
+      "label": "Touch targets 844×390",
+      "pass": true,
+      "details": []
+    },
+    {
+      "label": "No overflow 320×568",
+      "pass": true,
+      "details": {
+        "width": 320,
+        "scrollWidth": 320,
+        "targets": [
+          {
+            "label": "קרוב",
+            "x": 29.515625,
+            "y": 135,
+            "w": 45.8125,
+            "h": 44
+          },
+          {
+            "label": "רחוק",
+            "x": 75.328125,
+            "y": 135,
+            "w": 46.140625,
+            "h": 44
+          },
+          {
+            "label": "השהיית התנועה",
+            "x": 19,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "פתיחת אפשרויות",
+            "x": 78,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "קורבטה01",
+            "x": 227.75,
+            "y": 407,
+            "w": 63.25,
+            "h": 72
+          },
+          {
+            "label": "משחתת02",
+            "x": 161.5,
+            "y": 407,
+            "w": 63.25,
+            "h": 72
+          },
+          {
+            "label": "סיירת03",
+            "x": 95.25,
+            "y": 407,
+            "w": 63.25,
+            "h": 72
+          },
+          {
+            "label": "נושאת04",
+            "x": 29,
+            "y": 407,
+            "w": 63.25,
+            "h": 72
+          },
+          {
+            "label": "צי הגאות, כחול־ירוק",
+            "x": 248,
+            "y": 499,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "צי הגחלת, אדום",
+            "x": 204,
+            "y": 499,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "שקיעה",
+            "x": 150.8125,
+            "y": 499,
+            "w": 46.75,
+            "h": 44
+          },
+          {
+            "label": "סערה",
+            "x": 106.8125,
+            "y": 499,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "מטחFIRE",
+            "x": 28,
+            "y": 498,
+            "w": 72.375,
+            "h": 46
+          }
+        ]
+      }
+    },
+    {
+      "label": "Touch targets 320×568",
+      "pass": true,
+      "details": []
+    },
+    {
+      "label": "No overflow 360×800",
+      "pass": true,
+      "details": {
+        "width": 360,
+        "scrollWidth": 360,
+        "targets": [
+          {
+            "label": "קרוב",
+            "x": 29.515625,
+            "y": 135,
+            "w": 45.8125,
+            "h": 44
+          },
+          {
+            "label": "רחוק",
+            "x": 75.328125,
+            "y": 135,
+            "w": 46.140625,
+            "h": 44
+          },
+          {
+            "label": "השהיית התנועה",
+            "x": 19,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "פתיחת אפשרויות",
+            "x": 78,
+            "y": 83,
+            "w": 54,
+            "h": 44
+          },
+          {
+            "label": "קורבטה01",
+            "x": 257.75,
+            "y": 639,
+            "w": 73.25,
+            "h": 72
+          },
+          {
+            "label": "משחתת02",
+            "x": 181.5,
+            "y": 639,
+            "w": 73.25,
+            "h": 72
+          },
+          {
+            "label": "סיירת03",
+            "x": 105.25,
+            "y": 639,
+            "w": 73.25,
+            "h": 72
+          },
+          {
+            "label": "נושאת04",
+            "x": 29,
+            "y": 639,
+            "w": 73.25,
+            "h": 72
+          },
+          {
+            "label": "צי הגאות, כחול־ירוק",
+            "x": 288,
+            "y": 731,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "צי הגחלת, אדום",
+            "x": 244,
+            "y": 731,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "שקיעה",
+            "x": 170.8125,
+            "y": 731,
+            "w": 46.75,
+            "h": 44
+          },
+          {
+            "label": "סערה",
+            "x": 126.8125,
+            "y": 731,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "מטחFIRE",
+            "x": 28,
+            "y": 730,
+            "w": 72.375,
+            "h": 46
+          }
+        ]
+      }
+    },
+    {
+      "label": "Touch targets 360×800",
+      "pass": true,
+      "details": []
+    },
+    {
+      "label": "No overflow 1440×900",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "targets": [
+          {
+            "label": "קרוב",
+            "x": 45,
+            "y": 119,
+            "w": 45.8125,
+            "h": 44
+          },
+          {
+            "label": "רחוק",
+            "x": 90.8125,
+            "y": 119,
+            "w": 46.140625,
+            "h": 44
+          },
+          {
+            "label": "השהיית התנועה",
+            "x": 145.953125,
+            "y": 119,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "פתיחת אפשרויות",
+            "x": 195.953125,
+            "y": 119,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "קורבטה01",
+            "x": 882.25,
+            "y": 713,
+            "w": 157.75,
+            "h": 77
+          },
+          {
+            "label": "משחתת02",
+            "x": 721.5,
+            "y": 713,
+            "w": 157.75,
+            "h": 77
+          },
+          {
+            "label": "סיירת03",
+            "x": 560.75,
+            "y": 713,
+            "w": 157.75,
+            "h": 77
+          },
+          {
+            "label": "נושאת04",
+            "x": 400,
+            "y": 713,
+            "w": 157.75,
+            "h": 77
+          },
+          {
+            "label": "צי הגאות, כחול־ירוק",
+            "x": 987,
+            "y": 813,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "צי הגחלת, אדום",
+            "x": 943,
+            "y": 813,
+            "w": 44,
+            "h": 44
+          },
+          {
+            "label": "שקיעה",
+            "x": 743.6875,
+            "y": 813,
+            "w": 70.75,
+            "h": 44
+          },
+          {
+            "label": "סערה",
+            "x": 677.546875,
+            "y": 813,
+            "w": 66.140625,
+            "h": 44
+          },
+          {
+            "label": "מטחFIRE",
+            "x": 409,
+            "y": 812,
+            "w": 140,
+            "h": 46
+          }
+        ]
+      }
+    },
+    {
+      "label": "Touch targets 1440×900",
+      "pass": true,
+      "details": []
+    },
+    {
+      "label": "Pause freezes simulation",
+      "pass": true,
+      "details": {
+        "p0": 4.149799999999999,
+        "p1": 4.149799999999999
+      }
+    },
+    {
+      "label": "Resume advances simulation",
+      "pass": true
+    },
+    {
+      "label": "Native modal opens",
+      "pass": true
+    },
+    {
+      "label": "Escape closes modal",
+      "pass": true
+    },
+    {
+      "label": "Low profile changes quality",
+      "pass": true
+    },
+    {
+      "label": "Crew can be hidden",
+      "pass": true
+    },
+    {
+      "label": "Keyboard orbit",
+      "pass": true,
+      "details": {
+        "a0": 0.48,
+        "a1": 0.5599999999999999
+      }
+    },
+    {
+      "label": "Keyboard zoom",
+      "pass": true
+    },
+    {
+      "label": "Pointer orbit",
+      "pass": true
+    },
+    {
+      "label": "Storm switch",
+      "pass": true
+    },
+    {
+      "label": "Salvo produces pooled splash",
+      "pass": true
+    },
+    {
+      "label": "Particle pool is bounded",
+      "pass": true,
+      "details": {
+        "capacity": 96,
+        "allocatedCapacity": 320,
+        "active": 0,
+        "waterColumnCapacity": 3
+      }
+    },
+    {
+      "label": "Particle stress creates no geometry growth",
+      "pass": true,
+      "details": {
+        "before": 38,
+        "after": 38
+      }
+    },
+    {
+      "label": "Reduced motion starts paused",
+      "pass": true,
+      "details": {
+        "ship": "cruiser",
+        "fleet": "tide",
+        "weather": "sunset",
+        "view": "near",
+        "quality": "balanced",
+        "adaptiveScale": 1,
+        "paused": true,
+        "reduced": true,
+        "crew": true,
+        "time": 0,
+        "frozen": false,
+        "theta": 0.48,
+        "elevation": 0.22,
+        "zoom": 1,
+        "storm": 0,
+        "loading": false
+      }
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "performance": [
+    {
+      "profile": "low",
+      "viewport": [
+        390,
+        844
+      ],
+      "view": "near",
+      "frames": 40,
+      "wallMs": 4083.100000000002,
+      "meanMs": 102.07750000000006,
+      "p95Ms": 200,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "low",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 5.066299999999999,
+          "frozen": false,
+          "theta": 0.48,
+          "elevation": 0.22,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 0.78,
+          "bufferWidth": 304,
+          "bufferHeight": 658
+        },
+        "triangles": 14848,
+        "drawCalls": 11,
+        "geometries": 38,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 62,
+          "meanMs": 98.11290322580645,
+          "p95Ms": 183.40000000000146,
+          "fps": 10.192339306263356
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 4281
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2992
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 96,
+          "allocatedCapacity": 320,
+          "active": 47,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "low",
+      "viewport": [
+        390,
+        844
+      ],
+      "view": "far",
+      "frames": 36,
+      "wallMs": 4216.500000000004,
+      "meanMs": 117.1250000000001,
+      "p95Ms": 233.3000000000029,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "low",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 4.816500000000001,
+          "frozen": false,
+          "theta": 0.58,
+          "elevation": 0.3,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 0.78,
+          "bufferWidth": 304,
+          "bufferHeight": 658
+        },
+        "triangles": 15996,
+        "drawCalls": 15,
+        "geometries": 40,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 52,
+          "meanMs": 118.26346153846163,
+          "p95Ms": 200,
+          "fps": 8.455697025871174
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 975
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 831
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 96,
+          "allocatedCapacity": 320,
+          "active": 48,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "low",
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "near",
+      "frames": 25,
+      "wallMs": 4033.199999999997,
+      "meanMs": 161.3279999999999,
+      "p95Ms": 300,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "low",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 3.166399999999996,
+          "frozen": false,
+          "theta": 0.79,
+          "elevation": 0.22,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 0.78,
+          "bufferWidth": 658,
+          "bufferHeight": 304
+        },
+        "triangles": 41470,
+        "drawCalls": 19,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 36,
+          "meanMs": 168.04722222222213,
+          "p95Ms": 466.70000000000437,
+          "fps": 5.950708299585107
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 96,
+          "allocatedCapacity": 320,
+          "active": 38,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "low",
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "far",
+      "frames": 26,
+      "wallMs": 4116.5,
+      "meanMs": 158.32692307692307,
+      "p95Ms": 299.90000000000146,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "low",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 3.333500000000002,
+          "frozen": false,
+          "theta": 0.58,
+          "elevation": 0.3,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 0.78,
+          "bufferWidth": 658,
+          "bufferHeight": 304
+        },
+        "triangles": 21463,
+        "drawCalls": 15,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 38,
+          "meanMs": 160.95789473684215,
+          "p95Ms": 333.20000000000437,
+          "fps": 6.212804917925576
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 4281
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2992
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 96,
+          "allocatedCapacity": 320,
+          "active": 40,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "balanced",
+      "viewport": [
+        390,
+        844
+      ],
+      "view": "near",
+      "frames": 26,
+      "wallMs": 4116.5,
+      "meanMs": 158.32692307692307,
+      "p95Ms": 366.6000000000058,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "adaptiveScale": 0.88,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 3.2498999999999962,
+          "frozen": false,
+          "theta": 0.48,
+          "elevation": 0.22,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 0.88,
+          "bufferWidth": 343,
+          "bufferHeight": 742
+        },
+        "triangles": 24016,
+        "drawCalls": 17,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 38,
+          "meanMs": 163.58947368421056,
+          "p95Ms": 366.6000000000058,
+          "fps": 6.112862750144777
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2992
+          }
+        ],
+        "crewInstances": 6,
+        "effects": {
+          "capacity": 160,
+          "allocatedCapacity": 320,
+          "active": 38,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          },
+          {
+            "simulationTime": 3.149899999999996,
+            "averageMs": 156.47499999999997,
+            "scale": 0.88
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "balanced",
+      "viewport": [
+        390,
+        844
+      ],
+      "view": "far",
+      "frames": 29,
+      "wallMs": 4033.0999999999985,
+      "meanMs": 139.0724137931034,
+      "p95Ms": 283.40000000000146,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "balanced",
+          "adaptiveScale": 0.88,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 3.5832999999999977,
+          "frozen": false,
+          "theta": 0.58,
+          "elevation": 0.3,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 0.88,
+          "bufferWidth": 343,
+          "bufferHeight": 742
+        },
+        "triangles": 16124,
+        "drawCalls": 15,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 42,
+          "meanMs": 146.81904761904767,
+          "p95Ms": 300,
+          "fps": 6.811105345096002
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 975
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 831
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 160,
+          "allocatedCapacity": 320,
+          "active": 41,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          },
+          {
+            "simulationTime": 3.149899999999996,
+            "averageMs": 156.47499999999997,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 3.233299999999997,
+            "averageMs": 143.51111111111115,
+            "scale": 0.88
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "balanced",
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "near",
+      "frames": 21,
+      "wallMs": 4183.200000000004,
+      "meanMs": 199.20000000000022,
+      "p95Ms": 433.3000000000029,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 2.5166000000000137,
+          "frozen": false,
+          "theta": 0.79,
+          "elevation": 0.22,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 41598,
+        "drawCalls": 19,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 31,
+          "meanMs": 199.45806451612918,
+          "p95Ms": 433.3999999999942,
+          "fps": 5.013585198602661
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 160,
+          "allocatedCapacity": 320,
+          "active": 30,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          },
+          {
+            "simulationTime": 3.149899999999996,
+            "averageMs": 156.47499999999997,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 3.233299999999997,
+            "averageMs": 143.51111111111115,
+            "scale": 0.88
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "profile": "balanced",
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "far",
+      "frames": 21,
+      "wallMs": 4216.5,
+      "meanMs": 200.78571428571428,
+      "p95Ms": 350,
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "balanced",
+          "adaptiveScale": 1,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 2.5831000000000066,
+          "frozen": false,
+          "theta": 0.58,
+          "elevation": 0.3,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 21591,
+        "drawCalls": 15,
+        "geometries": 41,
+        "textures": 10,
+        "programs": 16,
+        "cpuFrame": {
+          "samples": 29,
+          "meanMs": 194.82068965517252,
+          "p95Ms": 350,
+          "fps": 5.132925059294132
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 4281
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2992
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 160,
+          "allocatedCapacity": 320,
+          "active": 32,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.8497,
+            "averageMs": 99.53055555555557,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 4.149799999999999,
+            "averageMs": 108.32777777777775,
+            "scale": 0.76
+          },
+          {
+            "simulationTime": 3.149899999999996,
+            "averageMs": 156.47499999999997,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 3.233299999999997,
+            "averageMs": 143.51111111111115,
+            "scale": 0.88
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      }
+    }
+  ],
+  "completedAt": "2026-11-04T21:06:29.678Z",
+  "pass": true
+}

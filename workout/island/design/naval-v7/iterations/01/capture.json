@@ -1,0 +1,1072 @@
+{
+  "round": "01",
+  "startedAt": "2026-11-04T20:38:06.265Z",
+  "navigationMode": "local HTML via Playwright setContent; environment administrator blocks file:// navigation",
+  "sourceSha256": "79de45b6021ca957a565f457a281d8b059ba7b656bd24c823db682773e1c6a78",
+  "screens": [
+    {
+      "file": "390x844-near.png",
+      "options": {
+        "time": 12,
+        "ship": "cruiser",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "quality": "balanced"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.79,
+          "elevation": 0.28,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "triangles": 40968,
+        "drawCalls": 18,
+        "geometries": 17,
+        "textures": 5,
+        "programs": 8,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      },
+      "ui": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "buttons": [
+          {
+            "text": "קרוב",
+            "width": 45.8125,
+            "height": 40,
+            "x": 29.515625,
+            "y": 135
+          },
+          {
+            "text": "רחוק",
+            "width": 46.140625,
+            "height": 40,
+            "x": 75.328125,
+            "y": 135
+          },
+          {
+            "text": "המשך התנועה",
+            "width": 54,
+            "height": 44,
+            "x": 19,
+            "y": 83
+          },
+          {
+            "text": "פתיחת אפשרויות",
+            "width": 54,
+            "height": 44,
+            "x": 78,
+            "y": 83
+          },
+          {
+            "text": "קורבטה01",
+            "width": 80.75,
+            "height": 72,
+            "x": 280.25,
+            "y": 683
+          },
+          {
+            "text": "משחתת02",
+            "width": 80.75,
+            "height": 72,
+            "x": 196.5,
+            "y": 683
+          },
+          {
+            "text": "סיירת03",
+            "width": 80.75,
+            "height": 72,
+            "x": 112.75,
+            "y": 683
+          },
+          {
+            "text": "נושאת04",
+            "width": 80.75,
+            "height": 72,
+            "x": 29,
+            "y": 683
+          },
+          {
+            "text": "צי הגאות, כחול־ירוק",
+            "width": 34,
+            "height": 44,
+            "x": 328,
+            "y": 775
+          },
+          {
+            "text": "צי הגחלת, אדום",
+            "width": 34,
+            "height": 44,
+            "x": 294,
+            "y": 775
+          },
+          {
+            "text": "שקיעה",
+            "width": 45.96875,
+            "height": 40,
+            "x": 196.078125,
+            "y": 777
+          },
+          {
+            "text": "סערה",
+            "width": 41.765625,
+            "height": 40,
+            "x": 154.3125,
+            "y": 777
+          },
+          {
+            "text": "מטחFIRE",
+            "width": 74.375,
+            "height": 46,
+            "x": 28,
+            "y": 774
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-far.png",
+      "options": {
+        "time": 12,
+        "ship": "cruiser",
+        "fleet": "tide",
+        "view": "far",
+        "weather": "sunset",
+        "quality": "balanced"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.58,
+          "elevation": 0.65,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "triangles": 37460,
+        "drawCalls": 24,
+        "geometries": 30,
+        "textures": 6,
+        "programs": 9,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 7037
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 5921
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      },
+      "ui": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "buttons": [
+          {
+            "text": "קרוב",
+            "width": 45.8125,
+            "height": 40,
+            "x": 29.515625,
+            "y": 135
+          },
+          {
+            "text": "רחוק",
+            "width": 46.140625,
+            "height": 40,
+            "x": 75.328125,
+            "y": 135
+          },
+          {
+            "text": "המשך התנועה",
+            "width": 54,
+            "height": 44,
+            "x": 19,
+            "y": 83
+          },
+          {
+            "text": "פתיחת אפשרויות",
+            "width": 54,
+            "height": 44,
+            "x": 78,
+            "y": 83
+          },
+          {
+            "text": "קורבטה01",
+            "width": 80.75,
+            "height": 72,
+            "x": 280.25,
+            "y": 683
+          },
+          {
+            "text": "משחתת02",
+            "width": 80.75,
+            "height": 72,
+            "x": 196.5,
+            "y": 683
+          },
+          {
+            "text": "סיירת03",
+            "width": 80.75,
+            "height": 72,
+            "x": 112.75,
+            "y": 683
+          },
+          {
+            "text": "נושאת04",
+            "width": 80.75,
+            "height": 72,
+            "x": 29,
+            "y": 683
+          },
+          {
+            "text": "צי הגאות, כחול־ירוק",
+            "width": 34,
+            "height": 44,
+            "x": 328,
+            "y": 775
+          },
+          {
+            "text": "צי הגחלת, אדום",
+            "width": 34,
+            "height": 44,
+            "x": 294,
+            "y": 775
+          },
+          {
+            "text": "שקיעה",
+            "width": 45.96875,
+            "height": 40,
+            "x": 196.078125,
+            "y": 777
+          },
+          {
+            "text": "סערה",
+            "width": 41.765625,
+            "height": 40,
+            "x": 154.3125,
+            "y": 777
+          },
+          {
+            "text": "מטחFIRE",
+            "width": 74.375,
+            "height": 46,
+            "x": 28,
+            "y": 774
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-near.png",
+      "options": {
+        "time": 12,
+        "ship": "cruiser",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "quality": "balanced"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.79,
+          "elevation": 0.28,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 60240,
+        "drawCalls": 25,
+        "geometries": 45,
+        "textures": 7,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 4997
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      },
+      "ui": {
+        "scrollWidth": 844,
+        "innerWidth": 844,
+        "buttons": [
+          {
+            "text": "קרוב",
+            "width": 45.8125,
+            "height": 38,
+            "x": 26,
+            "y": 67
+          },
+          {
+            "text": "רחוק",
+            "width": 46.140625,
+            "height": 38,
+            "x": 71.8125,
+            "y": 67
+          },
+          {
+            "text": "המשך התנועה",
+            "width": 44,
+            "height": 44,
+            "x": 125.953125,
+            "y": 64
+          },
+          {
+            "text": "פתיחת אפשרויות",
+            "width": 44,
+            "height": 44,
+            "x": 174.953125,
+            "y": 64
+          },
+          {
+            "text": "קורבטה01",
+            "width": 113.15625,
+            "height": 62,
+            "x": 696.84375,
+            "y": 304
+          },
+          {
+            "text": "משחתת02",
+            "width": 113.15625,
+            "height": 62,
+            "x": 580.6875,
+            "y": 304
+          },
+          {
+            "text": "סיירת03",
+            "width": 113.15625,
+            "height": 62,
+            "x": 464.53125,
+            "y": 304
+          },
+          {
+            "text": "נושאת04",
+            "width": 113.15625,
+            "height": 62,
+            "x": 348.375,
+            "y": 304
+          },
+          {
+            "text": "צי הגאות, כחול־ירוק",
+            "width": 33,
+            "height": 44,
+            "x": 290.375,
+            "y": 313
+          },
+          {
+            "text": "צי הגחלת, אדום",
+            "width": 33,
+            "height": 44,
+            "x": 257.375,
+            "y": 313
+          },
+          {
+            "text": "שקיעה",
+            "width": 47.96875,
+            "height": 44,
+            "x": 200.40625,
+            "y": 313
+          },
+          {
+            "text": "סערה",
+            "width": 43.765625,
+            "height": 44,
+            "x": 156.640625,
+            "y": 313
+          },
+          {
+            "text": "מטחFIRE",
+            "width": 113.640625,
+            "height": 48,
+            "x": 34,
+            "y": 311
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-far.png",
+      "options": {
+        "time": 12,
+        "ship": "cruiser",
+        "fleet": "tide",
+        "view": "far",
+        "weather": "sunset",
+        "quality": "balanced"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "far",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.58,
+          "elevation": 0.65,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 51430,
+        "drawCalls": 31,
+        "geometries": 45,
+        "textures": 7,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 7037
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 8,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      },
+      "ui": {
+        "scrollWidth": 844,
+        "innerWidth": 844,
+        "buttons": [
+          {
+            "text": "קרוב",
+            "width": 45.8125,
+            "height": 38,
+            "x": 26,
+            "y": 67
+          },
+          {
+            "text": "רחוק",
+            "width": 46.140625,
+            "height": 38,
+            "x": 71.8125,
+            "y": 67
+          },
+          {
+            "text": "המשך התנועה",
+            "width": 44,
+            "height": 44,
+            "x": 125.953125,
+            "y": 64
+          },
+          {
+            "text": "פתיחת אפשרויות",
+            "width": 44,
+            "height": 44,
+            "x": 174.953125,
+            "y": 64
+          },
+          {
+            "text": "קורבטה01",
+            "width": 113.15625,
+            "height": 62,
+            "x": 696.84375,
+            "y": 304
+          },
+          {
+            "text": "משחתת02",
+            "width": 113.15625,
+            "height": 62,
+            "x": 580.6875,
+            "y": 304
+          },
+          {
+            "text": "סיירת03",
+            "width": 113.15625,
+            "height": 62,
+            "x": 464.53125,
+            "y": 304
+          },
+          {
+            "text": "נושאת04",
+            "width": 113.15625,
+            "height": 62,
+            "x": 348.375,
+            "y": 304
+          },
+          {
+            "text": "צי הגאות, כחול־ירוק",
+            "width": 33,
+            "height": 44,
+            "x": 290.375,
+            "y": 313
+          },
+          {
+            "text": "צי הגחלת, אדום",
+            "width": 33,
+            "height": 44,
+            "x": 257.375,
+            "y": 313
+          },
+          {
+            "text": "שקיעה",
+            "width": 47.96875,
+            "height": 44,
+            "x": 200.40625,
+            "y": 313
+          },
+          {
+            "text": "סערה",
+            "width": 43.765625,
+            "height": 44,
+            "x": 156.640625,
+            "y": 313
+          },
+          {
+            "text": "מטחFIRE",
+            "width": 113.640625,
+            "height": 48,
+            "x": 34,
+            "y": 311
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-storm-impact.png",
+      "options": {
+        "time": 12,
+        "view": "near",
+        "weather": "storm",
+        "ship": "destroyer",
+        "fleet": "ember",
+        "effect": "splash"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "destroyer",
+          "fleet": "ember",
+          "weather": "storm",
+          "view": "near",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.79,
+          "elevation": 0.28,
+          "zoom": 1,
+          "storm": 1,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 57080,
+        "drawCalls": 22,
+        "geometries": 51,
+        "textures": 7,
+        "programs": 11,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 4997
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 7961
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 7037
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "active": 64
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "844x390-carrier-detail.png",
+      "options": {
+        "time": 12,
+        "view": "near",
+        "weather": "sunset",
+        "ship": "carrier",
+        "fleet": "tide",
+        "elevation": 0.39
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "carrier",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.79,
+          "elevation": 0.39,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 54506,
+        "drawCalls": 26,
+        "geometries": 51,
+        "textures": 7,
+        "programs": 11,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "844x390-storm-fire.png",
+      "options": {
+        "time": 12,
+        "view": "far",
+        "weather": "storm",
+        "ship": "cruiser",
+        "fleet": "ember",
+        "effect": "explosion"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "ember",
+          "weather": "storm",
+          "view": "far",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 0.58,
+          "elevation": 0.65,
+          "zoom": 1,
+          "storm": 1,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 51430,
+        "drawCalls": 32,
+        "geometries": 51,
+        "textures": 7,
+        "programs": 11,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 7037
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 8,
+        "effects": {
+          "capacity": 320,
+          "active": 48
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "390x844-corvette-detail.png",
+      "options": {
+        "time": 12,
+        "view": "near",
+        "weather": "sunset",
+        "ship": "corvette",
+        "fleet": "ember",
+        "angle": 1.13
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "corvette",
+          "fleet": "ember",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "balanced",
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.28,
+          "zoom": 1,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 43286,
+        "drawCalls": 18,
+        "geometries": 55,
+        "textures": 7,
+        "programs": 11,
+        "cpuFrame": {
+          "samples": 3,
+          "meanMs": 77.76666666666672,
+          "p95Ms": 100,
+          "fps": 12.858979854264886
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 6921
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 5813
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 7037
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "active": 0
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "reducedMotion": false,
+        "offline": true
+      }
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "failedRequests": [],
+  "completedAt": "2026-11-04T20:38:14.864Z"
+}

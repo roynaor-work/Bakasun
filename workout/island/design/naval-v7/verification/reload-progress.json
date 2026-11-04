@@ -1,0 +1,132 @@
+{
+  "startedAt": "2026-11-04T23:05:47.559Z",
+  "requestedMinutes": 15,
+  "elapsedMinutes": 15.081533333333333,
+  "cycles": 17,
+  "last": {
+    "cycle": 16,
+    "startedAt": "2026-11-04T23:20:45.119Z",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "ship": "corvette",
+    "fleet": "tide",
+    "weather": "sunset",
+    "coldLoadMs": 1585,
+    "contextLoss": null,
+    "lifecycleFreeze": true,
+    "lifecycleTime": {
+      "before": 3.716300000000001,
+      "after": 4.6162
+    },
+    "beforeDispose": {
+      "three": "160",
+      "state": {
+        "ship": "corvette",
+        "fleet": "tide",
+        "weather": "sunset",
+        "view": "near",
+        "quality": "balanced",
+        "adaptiveScale": 0.88,
+        "paused": false,
+        "reduced": false,
+        "crew": true,
+        "time": 4.6829,
+        "frozen": false,
+        "theta": 0.48,
+        "elevation": 0.22,
+        "zoom": 1,
+        "storm": 0,
+        "loading": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 0.88,
+        "bufferWidth": 343,
+        "bufferHeight": 742
+      },
+      "triangles": 28276,
+      "drawCalls": 15,
+      "geometries": 21,
+      "textures": 8,
+      "programs": 9,
+      "cpuFrame": {
+        "samples": 62,
+        "meanMs": 103.49193548387096,
+        "p95Ms": 233.30000000000018,
+        "fps": 9.66258863866594
+      },
+      "lod": [
+        {
+          "type": "corvette",
+          "fleet": "tide",
+          "lod": 0,
+          "triangles": 6921
+        },
+        {
+          "type": "destroyer",
+          "fleet": "ember",
+          "lod": 1,
+          "triangles": 3235
+        },
+        {
+          "type": "cruiser",
+          "fleet": "tide",
+          "lod": 1,
+          "triangles": 4281
+        },
+        {
+          "type": "carrier",
+          "fleet": "ember",
+          "lod": 0,
+          "triangles": 8093
+        }
+      ],
+      "crewInstances": 14,
+      "effects": {
+        "capacity": 160,
+        "allocatedCapacity": 320,
+        "active": 46,
+        "waterColumnCapacity": 3
+      },
+      "dracoWorkers": 2,
+      "renderer": "WebKit WebGL",
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "environmentProbes": [
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        },
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        }
+      ],
+      "contextLost": false,
+      "contextRestores": 0,
+      "adaptationEvents": [
+        {
+          "simulationTime": 2.9998000000000005,
+          "averageMs": 114.8111111111111,
+          "scale": 0.88
+        }
+      ],
+      "reducedMotion": false,
+      "offline": true
+    },
+    "afterDispose": {
+      "geometries": 0,
+      "textures": 0,
+      "programMetadataCount": 1
+    },
+    "completedAt": "2026-11-04T23:20:53.141Z"
+  },
+  "errors": 0,
+  "externalRequests": 0
+}
