@@ -13,10 +13,15 @@ import { islandChromium } from './helpers/island-browser.mjs';
 
 const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const W = path.join(root, 'workout');
-const WANTED = ['push-ups', 'crunches', 'plank', 'bicycle', 'jumping-jacks', 'squat-jumps', 'high-knees', 'side-hops', 'leg-raises', 'squats', 'jump-rope', 'burpees'];
+const FIRST = ['push-ups', 'crunches', 'plank', 'bicycle', 'jumping-jacks', 'squat-jumps', 'high-knees', 'side-hops', 'leg-raises', 'squats', 'jump-rope', 'burpees'];
+const WANTED = EXERCISES.map(e => e.id); // כל הקטלוג: 12 מ-royiki-style + 38 מ-royiki-style-2
+const SOURCES = ['design/royiki-style', 'design/royiki-style-2'];
+const sourceOf = async id => { for (const d of SOURCES) { try { return await readFile(path.join(W, d, 'animations', id + '.svg'), 'utf8'); } catch { /* */ } } throw new Error(id + ' has no design source'); };
 
-test('12 exercises have a royiki animation, each matching a real exercise', () => {
+test('all 50 exercises have a royiki animation, each matching a real exercise', () => {
+  assert.equal(WANTED.length, 50);
   assert.deepEqual([...ROYIKI_IDS].sort(), [...WANTED].sort());
+  assert.ok(FIRST.every(hasRoyiki));
   for (const id of WANTED) {
     const ex = EXERCISES.find(e => e.id === id);
     assert.ok(ex, id + ' missing from the exercise catalog');
@@ -32,16 +37,18 @@ test('12 exercises have a royiki animation, each matching a real exercise', () =
 test('every SVG exists, is local-only, self-contained, and identical to the design source', async () => {
   const files = (await readdir(path.join(W, 'royiki'))).filter(f => f.endsWith('.svg')).sort();
   assert.deepEqual(files, WANTED.map(i => i + '.svg').sort());
+  let total = 0;
   for (const id of WANTED) {
     const text = await readFile(path.join(W, 'royiki', id + '.svg'), 'utf8');
-    const source = await readFile(path.join(W, 'design/royiki-style/animations', id + '.svg'), 'utf8');
-    assert.equal(text, source, id + ' drifted from design/royiki-style (copy it again)');
+    assert.equal(text, await sourceOf(id), id + ' drifted from its design source (copy it again)');
     assert.match(text, /<svg[^>]+data-exercise="/);
     assert.match(text, new RegExp(`data-exercise="${id}"`));
     assert.doesNotMatch(text, /<script|<image|<foreignObject|https?:\/\/(?!www\.w3\.org)|xlink:href="(?!#)/i);
     assert.match(text, /<animate/);
-    assert.ok((await stat(path.join(W, 'royiki', id + '.svg'))).size < 300000);
+    assert.ok((await stat(path.join(W, 'royiki', id + '.svg'))).size < 60000, id + ' over 60KB');
+    total += (await stat(path.join(W, 'royiki', id + '.svg'))).size;
   }
+  assert.ok(total < 2_000_000, 'total ' + total);
 });
 
 test('unique ids keep several copies in one DOM apart', () => {
@@ -51,12 +58,15 @@ test('unique ids keep several copies in one DOM apart', () => {
   assert.notEqual(a, b);
 });
 
-test('catalog.js of the design folder still lists the same 12 animations', async () => {
-  const sandbox = { window: {} };
-  vm.runInNewContext(await readFile(path.join(W, 'design/royiki-style/catalog.js'), 'utf8'), sandbox);
-  const list = sandbox.window.ROYIKI_CATALOG.exercises;
+test('the two design catalogs together list the same 50 animations, with the same durations', async () => {
+  const list = [];
+  for (const d of SOURCES) {
+    const sandbox = { window: {} };
+    vm.runInNewContext(await readFile(path.join(W, d, 'catalog.js'), 'utf8'), sandbox);
+    list.push(...sandbox.window.ROYIKI_CATALOG.exercises);
+  }
   assert.deepEqual(Array.from(list, e => e.id).sort(), [...WANTED].sort());
-  for (const e of list) assert.equal(ROYIKI[e.id].ms, e.durationMs);
+  for (const e of list) { assert.equal(ROYIKI[e.id].ms, e.durationMs, e.id); assert.equal(ROYIKI[e.id].src, e.sourceCycleMs, e.id); }
 });
 
 // ---- דפדפן: מסך תרגיל ב-390×844 (דורש Playwright; בלעדיו מדלגים) ----
@@ -87,7 +97,7 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     const errors = []; page.on('pageerror', e => errors.push(String(e)));
     const external = []; page.on('request', r => { const u = new URL(r.url()); if (!['127.0.0.1', ''].includes(u.hostname) && u.protocol.startsWith('http')) external.push(r.url()); });
     await page.goto(srv.url + '#/home');
-    // כל 12: SVG נטען, מונפש (הפיקסלים משתנים) ו-onRep נקרא
+    // כל 50: SVG נטען, מונפש (הפיקסלים משתנים) ו-onRep נקרא
     for (const id of WANTED) {
       await page.goto(srv.url + '#/exercise/' + id);
       await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"] svg.royiki-svg', { timeout: 15000 });
@@ -113,10 +123,6 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     await page.click('#help'); await page.waitForSelector('#helpbox .helpcard');
     const h1 = await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()); await page.waitForTimeout(400);
     assert.notEqual(h1, await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()));
-    // תרגיל בלי התאמה נשאר כמו קודם (תלת-ממד)
-    await page.goto(srv.url + '#/exercise/' + EXERCISES.find(e => !hasRoyiki(e.id)).id);
-    await page.waitForSelector('.exmedia.stage3d, svg.figure', { timeout: 15000 });
-    assert.equal(await page.locator('.exmedia.royiki').count(), 0);
     // הגדרה: מעבר לתלת-ממד ולמקלות, נשמר אחרי טעינה מחדש
     await page.goto(srv.url + '#/settings');
     await page.selectOption('#animstyle', 'stick');
