@@ -12,7 +12,7 @@ const PACK = ['rock-small', 'rock-large', 'snow-sign', 'mogul', 'ice-wall', 'sta
 
 /** One decode per model, one merged geometry per prop. All geometry is authored
  * design data; this adapter changes placement only and never creates colliders. */
-export async function loadAlpineWorld({isDisposed = () => false} = {}) {
+export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds = false} = {}) {
   const decoder = new DRACOLoader().setDecoderPath(asset('../vendor/draco/')).setDecoderConfig({type: 'wasm'}).setWorkerLimit(2);
   const loader = new GLTFLoader().setDRACOLoader(decoder), textureLoader = new T.TextureLoader();
   const geometries = new Set(), materials = new Set(), textures = new Set(), models = {}, worlds = new Set(), powders = new Set();
@@ -78,7 +78,8 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
         } catch {}
       }),
       (async () => { try { powderGltf = await loader.loadAsync(asset('../design/alpine-world/models/snow-powder.glb')); } catch {} })(),
-      ...[['snow', '../design/environment/textures/snow.webp'], ['landscape', '../design/environment/backgrounds/ski-mountains-landscape.webp'], ['portrait', '../design/environment/backgrounds/ski-mountains-portrait.webp']].map(async ([id, path]) => {
+      // With an alpine-v5 environment active the earlier mountain backdrops are not downloaded at all.
+      ...[['snow', '../design/environment/textures/snow.webp'], ['landscape', '../design/environment/backgrounds/ski-mountains-landscape.webp'], ['portrait', '../design/environment/backgrounds/ski-mountains-portrait.webp']].filter(([id]) => id === 'snow' || !skipBackgrounds).map(async ([id, path]) => {
         const t = await textureLoader.loadAsync(asset(path)); textures.add(t); t.colorSpace = T.SRGBColorSpace;
         if (id === 'snow') { snowTexture = t; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = 4; }
         else { t.generateMipmaps = false; t.minFilter = t.magFilter = T.LinearFilter; if (id === 'landscape') landscape = t; else portrait = t; }
@@ -160,7 +161,7 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
     if (normalY < 0) { const ix = g.index; for (let i = 0; i < ix.count; i += 3) { const b = ix.getX(i + 1); ix.setX(i + 1, ix.getX(i + 2)); ix.setX(i + 2, b); } g.computeVertexNormals(); }
     g.computeBoundingSphere(); g.userData.designModel = 'ski-slope/slope_surface'; g.userData.authoredRows = authoredRows.length; g.userData.adaptedRows = rows.length; g.userData.wallSegments = 48; return ownGeometry(g);
   }
-  function createArtWorld(scene, {course, deckEdge, terrainY, place, frameAt, mobile = false, density = 1} = {}) {
+  function createArtWorld(scene, {course, deckEdge, terrainY, place, frameAt, mobile = false, density = 1, env = null} = {}) {
     check(); const objects = [], pools = [], trees = [], rocks = [], fences = [], dummy = new T.Object3D(), frame = {};
     let seed = 82317, quality = 'high', lastWindow = '', treeCount = 0, shadowTrees = 0, nearTrees = 0, farTrees = 0, distantTrees = 0, rockCount = 0, fenceCount = 0, clearance = Infinity, dead = false;
     const rnd = () => ((seed = Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296;
@@ -173,7 +174,7 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
     // Rock variants: [large near (shadow), large far, small near (shadow), small far]. Without the pack all four use the old rock.
     const unit = g => { const b = g.boundingBox, c = g.clone(); c.translate(-(b.min.x + b.max.x) / 2, -b.min.y, -(b.min.z + b.max.z) / 2); c.scale(1 / (b.max.x - b.min.x), 1 / (b.max.y - b.min.y), 1 / (b.max.z - b.min.z)); c.computeBoundingBox(); c.computeBoundingSphere(); return ownGeometry(c); };
     const rockGeo = [pack['rock-large'] ? unit(pack['rock-large']) : models.rock, pack['rock-small'] ? unit(pack['rock-small']) : models.rock];
-    const rockPools = [pool(rockGeo[0], 40, 'rocks', true), pool(rockGeo[0], 80, 'rocks'), pool(rockGeo[1], 40, 'rocks', true), pool(rockGeo[1], 80, 'rocks')], fencePool = pool(models.fence, 112, 'fence');
+    const rockPools = [pool(rockGeo[0], 40, 'rocks', true), pool(rockGeo[0], 80, 'rocks'), pool(rockGeo[1], 40, 'rocks', true), pool(rockGeo[1], 80, 'rocks')], fencePool = pool(env?.fenceGeometry || models.fence, 112, 'fence');
     const signPool = pack['snow-sign'] ? pool(pack['snow-sign'], 40, 'signs') : null, mogulPool = pack.mogul ? pool(pack.mogul, 160, 'moguls') : null;
     const icePool = pack['ice-wall'] ? pool(pack['ice-wall'], 90, 'iceWall') : null; if (icePool) icePool.mesh.material = iceMaterial;
     const signs = [], moguls = [], iceWalls = [];
@@ -207,12 +208,13 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
       const x = side * (deckEdge + 40 + rnd() * 3), ss = s + rnd() * .6;
       iceWalls.push({s: ss, matrix: matrixAt(ss, x, terrainY(ss, Math.abs(x), side) - .02, scale.set(1, 1.35, 1), side > 0 ? Math.PI / 2 : -Math.PI / 2)});
     }
-    for (let s = -20; s < course.length + 80; s += 9) for (const side of [-1, 1]) {
-      const x = side * (deckEdge + .75); fences.push({s, matrix: matrixAt(s, x, terrainY(s, Math.abs(x), side) - .03, scale.set(3, 1, 1), Math.PI / 2)});
+    // alpine-v5 fence: 6 m modules at scale 1; the earlier fence is a 3 m module stretched over 9 m.
+    for (let s = -20; s < course.length + 80; s += env ? 6 : 9) for (const side of [-1, 1]) {
+      const x = side * (deckEdge + .75); fences.push({s, matrix: matrixAt(s, x, terrainY(s, Math.abs(x), side) - .03, env ? scale.set(1, 1, 1) : scale.set(3, 1, 1), Math.PI / 2)});
     }
     function add(p, matrix) { if (p.count < p.capacity) p.mesh.setMatrixAt(p.count++, matrix); }
     function background(camera) {
-      const t = camera.aspect < 1 ? portrait : landscape, image = t.image, sourceAspect = image.width / image.height, aspect = Math.max(.1, camera.aspect);
+      const t = env ? env.backgroundFor(camera.aspect) : camera.aspect < 1 ? portrait : landscape; if (!t) return; const image = t.image, sourceAspect = image.width / image.height, aspect = Math.max(.1, camera.aspect);
       const rx = sourceAspect > aspect ? aspect / sourceAspect : 1, ry = sourceAspect > aspect ? 1 : sourceAspect / aspect;
       t.repeat.set(rx, ry); t.offset.set((1 - rx) / 2, (1 - ry) / 2); t.updateMatrix(); scene.background = t;
     }
@@ -232,12 +234,13 @@ export async function loadAlpineWorld({isDisposed = () => false} = {}) {
         if (signPool) for (const sign of signs) if (sign.s > ps - 20 && sign.s < ps + Math.min(limit, 200)) add(signPool, sign.matrix);
         if (mogulPool) for (const mogul of moguls) if (mogul.s > ps - 20 && mogul.s < ps + Math.min(limit, quality === 'low' ? 80 : 160)) add(mogulPool, mogul.matrix);
         if (icePool && quality !== 'low') for (const wall of iceWalls) if (wall.s > ps - 30 && wall.s < ps + Math.min(limit, 200)) add(icePool, wall.matrix);
-        for (const fence of fences) if (fence.s > ps - 20 && fence.s < ps + Math.min(limit, 220)) { add(fencePool, fence.matrix); fenceCount++; }
+        const fenceReach = env ? (quality === 'low' ? 90 : 150) : 220;
+        for (const fence of fences) if (fence.s > ps - 20 && fence.s < ps + Math.min(limit, fenceReach)) { add(fencePool, fence.matrix); fenceCount++; }
         for (const p of pools) { const m = p.mesh; m.count = p.count; m.visible = p.count > 0; m.instanceMatrix.clearUpdateRanges(); if (p.count) { m.instanceMatrix.addUpdateRange(0, p.count * 16); m.instanceMatrix.needsUpdate = true; } }
       },
       setQuality(value) { quality = value === 'low' ? 'low' : 'high'; lastWindow = ''; },
-      metrics() { return {trees: treeCount, nearTrees, farTrees, distantTrees, shadowTrees, treeVariants: 3, treeDeckClearance: Number(clearance.toFixed(3)), rocks: rockCount, fences: fenceCount, designWorld: true, pack: {signs: signPool?.count ?? 0, moguls: mogulPool?.count ?? 0, iceWalls: icePool?.count ?? 0, rockVariants: pack['rock-large'] && pack['rock-small'] ? 2 : 1}, designModels: MODELS.length, designSurface: 'ski-slope', background: scene.background === portrait ? 'portrait' : 'landscape'}; },
-      dispose() { if (dead) return; dead = true; for (const o of objects) { scene.remove(o); o.dispose(); } if (scene.background === landscape || scene.background === portrait) scene.background = null; worlds.delete(world); },
+      metrics() { return {trees: treeCount, nearTrees, farTrees, distantTrees, shadowTrees, treeVariants: 3, treeDeckClearance: Number(clearance.toFixed(3)), rocks: rockCount, fences: fenceCount, designWorld: true, pack: {signs: signPool?.count ?? 0, moguls: mogulPool?.count ?? 0, iceWalls: icePool?.count ?? 0, rockVariants: pack['rock-large'] && pack['rock-small'] ? 2 : 1}, designModels: MODELS.length, designSurface: 'ski-slope', background: env ? (env.metrics().backgrounds[0] || 'none') : scene.background === portrait ? 'portrait' : 'landscape', environment: env?.id ?? null}; },
+      dispose() { if (dead) return; dead = true; for (const o of objects) { scene.remove(o); o.dispose(); } if (scene.background && (scene.background === landscape || scene.background === portrait || scene.background.isTexture)) scene.background = null; worlds.delete(world); },
     };
     worlds.add(world); return world;
   }

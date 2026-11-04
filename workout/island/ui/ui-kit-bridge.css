@@ -1,0 +1,26 @@
+/* Island UI Kit v2 in the island's own screens: menu badges, opening cards, stage labels and result panel.
+   The kit's own rules live in ../design/ui-kit-v2/ui-kit.css; this file only fits them to the island layout. */
+.adventure-kit-badge{position:absolute;inset-block-start:6px;inset-inline-start:6px;z-index:2;display:grid;place-items:center;padding:3px;border-radius:12px;background:#f8eed9;box-shadow:0 2px 8px #0005;line-height:0}
+.adventure-kit-badge .ik-game-icon{inline-size:30px;block-size:30px}
+.adventure-emblem[data-preview=unavailable] .ik-intro{inset:0;position:absolute;inline-size:100%;block-size:100%;object-fit:contain;background:#f8eed9}
+.ik-opening{border-radius:12px;overflow:hidden;background:#f8eed9;border:1px solid #cfd9cb;line-height:0}
+.ik-opening .ik-intro{display:block;inline-size:100%;block-size:auto;aspect-ratio:8/5}
+.ik-opening-small{margin-block:0 12px}
+.ik-opening-small .ik-intro{max-block-size:150px;inline-size:auto;margin-inline:auto}
+.adventure-game-hero .ik-opening{aspect-ratio:auto}
+.ik-wrap{display:block}
+.ik-wrap>.ik-button{inline-size:100%;margin:0}
+.ik-stage-label{display:inline-block}
+.stage-map button .ik-rating-inline,.soccer-league-matches button .ik-rating-inline{display:inline-flex;gap:2px;margin-inline-start:6px;vertical-align:middle}
+.ik-rating.ik-rating-inline>img,.ik-rating.ik-rating-inline>img:nth-child(2){inline-size:16px;block-size:16px}
+.ik-icon{display:inline-block;vertical-align:middle}
+.ik-icon.ik-lock,.ik-icon.ik-check{margin-inline-start:6px}
+button>.ik-icon.ik-lock:first-child{margin-inline:0 6px}
+.ik-result-wrap{margin-block:12px}
+.ik-result{color:#173e40}
+.ik-result .ik-trophy{display:block;margin:0 auto 6px;inline-size:112px;block-size:auto}
+.ik-result .ik-rating>img{inline-size:46px;block-size:46px}
+.ik-result .ik-rating>img:nth-child(2){inline-size:54px;block-size:54px}
+.ik-result .game-result{margin-block:10px 0}
+.ik-result .result-row,.ik-result .result-row span,.ik-result .result-row bdi{color:#173e40}
+@media(orientation:landscape) and (max-height:500px){.ik-result{padding:10px 16px}.ik-result .ik-trophy{display:none}.ik-opening-small .ik-intro{max-block-size:96px}}
