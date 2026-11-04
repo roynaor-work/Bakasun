@@ -15,4 +15,4 @@
 
 הדוח המלא: `workout/island/design/hoops-v5/README.md`. צילומי טלפון: `workout/island/design/hoops-v5/previews/`.
 
-להגיש כ־**Draft PR** מענף `codex/hoops-v5-20261104` אל `main`, ללא מיזוג. טיוטה מקומית זו הוכנה מראש; פרסום הענף וה־PR ממתינים לאישור מפורש לאחר חסימת ביקורת האישור האוטומטית.
+נפתח [PR #253 כטיוטה](https://github.com/roynaor-work/Bakasun/pull/253) מענף `codex/hoops-v5-20261104` אל `main`, לאחר אישור הפרסום ב־04/11/2026. לא בוצע מיזוג.
