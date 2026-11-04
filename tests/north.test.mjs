@@ -73,6 +73,7 @@ test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי �
       assert.ok(p.contents.some(c => stems.some(st => c.includes(st))), `${p.id}: הערת הכשרות "${p.kosherNote}" לא תואמת לתכולה`);
     }
   }
+  for (const o of [...BUILD.addons, ...BUILD.packs]) assert.ok(o.img && existsSync(new URL('../north/' + o.img, import.meta.url)), o.id + ' תמונה קיימת');
   const all = JSON.stringify(PRODUCTS) + JSON.stringify(BUILD);
   assert.ok(!/[؀-ۿ]/.test(all));
 });

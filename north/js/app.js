@@ -134,7 +134,7 @@ function homeHtml() {
 }
 
 /* ---------- בונה מארז ---------- */
-function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}"><span class="i">${icon(o.icon)}</span><b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
+function opt(o, on) { return `<button class="opt ${on ? 'on' : ''}" data-bopt="${o.id}">${o.img ? `<img class="ph" src="${o.img}" alt="" width="190" height="238" loading="lazy" decoding="async">` : `<span class="i">${icon(o.icon)}</span>`}<b>${esc(o.name)}${o.kosher === false ? ' <span class="nk sm">לא כשר</span>' : ''}</b><span class="p">${o.price ? money(o.price) : 'כלול'}</span></button>`; }
 function buildStepsHtml() {
   const b = state.build;
   return `
