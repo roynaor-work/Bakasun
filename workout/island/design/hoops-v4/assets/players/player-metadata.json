@@ -1,0 +1,1238 @@
+{
+  "schemaVersion": 1,
+  "paletteMaterials": [
+    "team_primary",
+    "team_secondary",
+    "team_trim"
+  ],
+  "teams": {
+    "amber": {
+      "team_primary": "#F5A536",
+      "team_secondary": "#132A3D",
+      "team_trim": "#FFE9B5"
+    },
+    "cyan": {
+      "team_primary": "#20BFCC",
+      "team_secondary": "#14394E",
+      "team_trim": "#D1FCFF"
+    }
+  },
+  "players": [
+    {
+      "id": "pg",
+      "role": "PG",
+      "height": 1.78,
+      "source": "guard",
+      "width": 0.9,
+      "depth": 0.9,
+      "build": "compact, lean playmaker",
+      "hair": "source close crop",
+      "path": "pg.glb",
+      "sourcePath": "workout/island/assets/models/hoops-guard.glb",
+      "sourceSha256": "18aef27df33f6860e87e2b2b8c06f0beaed77b5134b8691ec8dca98e6ea01502",
+      "sourceLicense": "MakeHuman core assets CC0-1.0; repository provenance ASSETS.md",
+      "heightMeters": 1.7799999713897705,
+      "chestWidthMeters": 0.39928458631038666,
+      "coordinateSystem": {
+        "up": "+Y",
+        "front": "+Z",
+        "units": "metres"
+      },
+      "restBoundsBlenderZUp": {
+        "min": [
+          -0.56976717710495,
+          -0.37283793091773987,
+          0
+        ],
+        "max": [
+          0.5697670578956604,
+          0.11416345089673996,
+          1.7799999713897705
+        ]
+      },
+      "jointNames": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3"
+      ],
+      "clips": {
+        "idle": {
+          "durationSeconds": 1,
+          "loop": true,
+          "method": "Original upright neutral review pose; relaxed arms, straight legs.",
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": 9.863708738677701e-10,
+            "minAfterMeters": 9.863708738677701e-10,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "dribble": {
+          "durationSeconds": 1.1666666666666667,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "dribble_stand",
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 36,
+            "minBeforeMeters": -0.005413818173110485,
+            "minAfterMeters": 0.00006867246702313423,
+            "maximumPelvisLiftMeters": 0.0059138181731104855,
+            "correctedSamples": 6,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "shoot": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "jumpshot",
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7666666667,
+              "bone": "mixamorig:RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.03755836933851242,
+            "minAfterMeters": 0.0004996748175472021,
+            "maximumPelvisLiftMeters": 0.03805836933851242,
+            "correctedSamples": 21,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "run",
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 23,
+            "minBeforeMeters": 0.0005004396662116051,
+            "minAfterMeters": 0.0005004396662116051,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0.024383681908249855,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1,
+          "loop": false,
+          "method": "Original planted-ankle IK lunge and right-hand poke",
+          "events": [
+            {
+              "name": "steal_reach",
+              "atSeconds": 0.48,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.022242818027734756,
+            "minAfterMeters": 0.0004996691714040935,
+            "maximumPelvisLiftMeters": 0.022742818027734757,
+            "correctedSamples": 29,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.1333333333333333,
+          "loop": false,
+          "method": "CMU jump with original overhead two-hand block IK",
+          "sourceAction": "jump",
+          "events": [
+            {
+              "name": "block_apex",
+              "atSeconds": 0.5,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 35,
+            "minBeforeMeters": -0.030169982463121414,
+            "minAfterMeters": 0.0004997005453333259,
+            "maximumPelvisLiftMeters": 0.030669982463121415,
+            "correctedSamples": 17,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        }
+      },
+      "rawBytes": 1398156,
+      "triangles": 26767,
+      "bytes": 345344,
+      "exportAnimations": [
+        {
+          "name": "idle",
+          "channels": 4
+        },
+        {
+          "name": "dribble",
+          "channels": 53
+        },
+        {
+          "name": "shoot",
+          "channels": 53
+        },
+        {
+          "name": "run",
+          "channels": 53
+        },
+        {
+          "name": "steal",
+          "channels": 12
+        },
+        {
+          "name": "block",
+          "channels": 53
+        }
+      ]
+    },
+    {
+      "id": "sg",
+      "role": "SG",
+      "height": 1.88,
+      "source": "wing",
+      "width": 0.95,
+      "depth": 0.94,
+      "build": "slender shooting guard",
+      "hair": "source short swept crop",
+      "path": "sg.glb",
+      "sourcePath": "workout/island/assets/models/hoops-wing.glb",
+      "sourceSha256": "42bce07c8dee04a4094aee42ffe790c8330557509755c01cfeac39895c3041ac",
+      "sourceLicense": "MakeHuman core assets CC0-1.0; repository provenance ASSETS.md",
+      "heightMeters": 1.8799999952316284,
+      "chestWidthMeters": 0.43628862500190735,
+      "coordinateSystem": {
+        "up": "+Y",
+        "front": "+Z",
+        "units": "metres"
+      },
+      "restBoundsBlenderZUp": {
+        "min": [
+          -0.631425142288208,
+          -0.4025250971317291,
+          0
+        ],
+        "max": [
+          0.631425142288208,
+          0.12049778550863266,
+          1.8799999952316284
+        ]
+      },
+      "jointNames": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3"
+      ],
+      "clips": {
+        "idle": {
+          "durationSeconds": 1,
+          "loop": true,
+          "method": "Original upright neutral review pose; relaxed arms, straight legs.",
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": 2.3524646675099348e-9,
+            "minAfterMeters": 2.3524646675099348e-9,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "dribble": {
+          "durationSeconds": 1.1666666666666667,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "dribble_stand",
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 36,
+            "minBeforeMeters": -0.006852437276393175,
+            "minAfterMeters": 0.00014537177048623562,
+            "maximumPelvisLiftMeters": 0.007352437276393176,
+            "correctedSamples": 12,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "shoot": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "jumpshot",
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7666666667,
+              "bone": "mixamorig:RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.041310593485832214,
+            "minAfterMeters": 0.0004998761578463018,
+            "maximumPelvisLiftMeters": 0.041810593485832215,
+            "correctedSamples": 21,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "run",
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 23,
+            "minBeforeMeters": 0.0005021346732974052,
+            "minAfterMeters": 0.0005021346732974052,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0.02195168015360832,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1,
+          "loop": false,
+          "method": "Original planted-ankle IK lunge and right-hand poke",
+          "events": [
+            {
+              "name": "steal_reach",
+              "atSeconds": 0.48,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.025529613718390465,
+            "minAfterMeters": 0.0004999033990316093,
+            "maximumPelvisLiftMeters": 0.026029613718390465,
+            "correctedSamples": 29,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.1333333333333333,
+          "loop": false,
+          "method": "CMU jump with original overhead two-hand block IK",
+          "sourceAction": "jump",
+          "events": [
+            {
+              "name": "block_apex",
+              "atSeconds": 0.5,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 35,
+            "minBeforeMeters": -0.024907810613512993,
+            "minAfterMeters": 0.000110238092020154,
+            "maximumPelvisLiftMeters": 0.025407810613512993,
+            "correctedSamples": 16,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        }
+      },
+      "rawBytes": 1450032,
+      "triangles": 28995,
+      "bytes": 344108,
+      "exportAnimations": [
+        {
+          "name": "idle",
+          "channels": 4
+        },
+        {
+          "name": "dribble",
+          "channels": 53
+        },
+        {
+          "name": "shoot",
+          "channels": 53
+        },
+        {
+          "name": "run",
+          "channels": 53
+        },
+        {
+          "name": "steal",
+          "channels": 12
+        },
+        {
+          "name": "block",
+          "channels": 53
+        }
+      ]
+    },
+    {
+      "id": "sf",
+      "role": "SF",
+      "height": 1.99,
+      "source": "forward",
+      "width": 1.01,
+      "depth": 1,
+      "build": "balanced athletic wing",
+      "hair": "source short crop",
+      "path": "sf.glb",
+      "sourcePath": "workout/island/assets/models/hoops-forward.glb",
+      "sourceSha256": "0acfdc3d45a71efe8d29a2fbf9377ff9d14fd5f27f14b54c35c784c8af0c8eb6",
+      "sourceLicense": "MakeHuman core assets CC0-1.0; repository provenance ASSETS.md",
+      "heightMeters": 1.9900000095367432,
+      "chestWidthMeters": 0.4714735597372055,
+      "coordinateSystem": {
+        "up": "+Y",
+        "front": "+Z",
+        "units": "metres"
+      },
+      "restBoundsBlenderZUp": {
+        "min": [
+          -0.6869087815284729,
+          -0.4356999397277832,
+          0
+        ],
+        "max": [
+          0.6869089603424072,
+          0.13456279039382935,
+          1.9900000095367432
+        ]
+      },
+      "jointNames": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3"
+      ],
+      "clips": {
+        "idle": {
+          "durationSeconds": 1,
+          "loop": true,
+          "method": "Original upright neutral review pose; relaxed arms, straight legs.",
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -2.93796507122579e-8,
+            "minAfterMeters": -2.93796507122579e-8,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "dribble": {
+          "durationSeconds": 1.1666666666666667,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "dribble_stand",
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 36,
+            "minBeforeMeters": -0.0067060538567602634,
+            "minAfterMeters": 0.00032961973920464516,
+            "maximumPelvisLiftMeters": 0.007206053856760264,
+            "correctedSamples": 5,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "shoot": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "jumpshot",
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7666666667,
+              "bone": "mixamorig:RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.04253506660461426,
+            "minAfterMeters": 0.0005000862292945385,
+            "maximumPelvisLiftMeters": 0.04303506660461426,
+            "correctedSamples": 21,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "run",
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 23,
+            "minBeforeMeters": 0.0005020224489271641,
+            "minAfterMeters": 0.0005020224489271641,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0.02425369907915592,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1,
+          "loop": false,
+          "method": "Original planted-ankle IK lunge and right-hand poke",
+          "events": [
+            {
+              "name": "steal_reach",
+              "atSeconds": 0.48,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.02803969755768776,
+            "minAfterMeters": 0.000500070455018431,
+            "maximumPelvisLiftMeters": 0.02853969755768776,
+            "correctedSamples": 29,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.1333333333333333,
+          "loop": false,
+          "method": "CMU jump with original overhead two-hand block IK",
+          "sourceAction": "jump",
+          "events": [
+            {
+              "name": "block_apex",
+              "atSeconds": 0.5,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 35,
+            "minBeforeMeters": -0.021739622578024864,
+            "minAfterMeters": 0.0005000133533030748,
+            "maximumPelvisLiftMeters": 0.022239622578024865,
+            "correctedSamples": 15,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        }
+      },
+      "rawBytes": 1522868,
+      "triangles": 29277,
+      "bytes": 372168,
+      "exportAnimations": [
+        {
+          "name": "idle",
+          "channels": 4
+        },
+        {
+          "name": "dribble",
+          "channels": 53
+        },
+        {
+          "name": "shoot",
+          "channels": 53
+        },
+        {
+          "name": "run",
+          "channels": 53
+        },
+        {
+          "name": "steal",
+          "channels": 12
+        },
+        {
+          "name": "block",
+          "channels": 53
+        }
+      ]
+    },
+    {
+      "id": "pf",
+      "role": "PF",
+      "height": 2.09,
+      "source": "big",
+      "width": 1.11,
+      "depth": 1.12,
+      "build": "broad muscular power forward",
+      "hair": "full afro",
+      "path": "pf.glb",
+      "sourcePath": "workout/island/assets/models/hoops-big.glb",
+      "sourceSha256": "1bf6c29da21adcd81fbbfa6ecd460bf64b4a83dd2a91af7531988e8e477f817d",
+      "sourceLicense": "MakeHuman core assets CC0-1.0; repository provenance ASSETS.md",
+      "heightMeters": 2.090038731577806,
+      "chestWidthMeters": 0.546105682849884,
+      "coordinateSystem": {
+        "up": "+Y",
+        "front": "+Z",
+        "units": "metres"
+      },
+      "restBoundsBlenderZUp": {
+        "min": [
+          -0.7778720259666443,
+          -0.5166887044906616,
+          -0.00003881740849465132
+        ],
+        "max": [
+          0.7778722047805786,
+          0.1535036861896515,
+          2.0899999141693115
+        ]
+      },
+      "jointNames": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3"
+      ],
+      "clips": {
+        "idle": {
+          "durationSeconds": 1,
+          "loop": true,
+          "method": "Original upright neutral review pose; relaxed arms, straight legs.",
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.000038819536712253466,
+            "minAfterMeters": 0.000015063065802678466,
+            "maximumPelvisLiftMeters": 0.0005388195367122535,
+            "correctedSamples": 3,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "dribble": {
+          "durationSeconds": 1.1666666666666667,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "dribble_stand",
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 36,
+            "minBeforeMeters": -0.008677528239786625,
+            "minAfterMeters": 0.0001580333337187767,
+            "maximumPelvisLiftMeters": 0.009177528239786625,
+            "correctedSamples": 5,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "shoot": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "jumpshot",
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7666666667,
+              "bone": "mixamorig:RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.0405915342271328,
+            "minAfterMeters": 0.0004998361691832542,
+            "maximumPelvisLiftMeters": 0.0410915342271328,
+            "correctedSamples": 23,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "run",
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 23,
+            "minBeforeMeters": 0.0005024215206503868,
+            "minAfterMeters": 0.0005024215206503868,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0.025674962520599365,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1,
+          "loop": false,
+          "method": "Original planted-ankle IK lunge and right-hand poke",
+          "events": [
+            {
+              "name": "steal_reach",
+              "atSeconds": 0.48,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.03199194371700287,
+            "minAfterMeters": 0.0004998428048565984,
+            "maximumPelvisLiftMeters": 0.03249194371700287,
+            "correctedSamples": 29,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.1333333333333333,
+          "loop": false,
+          "method": "CMU jump with original overhead two-hand block IK",
+          "sourceAction": "jump",
+          "events": [
+            {
+              "name": "block_apex",
+              "atSeconds": 0.5,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 35,
+            "minBeforeMeters": -0.020702844485640526,
+            "minAfterMeters": 0.0004998911172151566,
+            "maximumPelvisLiftMeters": 0.021202844485640526,
+            "correctedSamples": 14,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        }
+      },
+      "rawBytes": 1450184,
+      "triangles": 27309,
+      "bytes": 365144,
+      "exportAnimations": [
+        {
+          "name": "idle",
+          "channels": 5
+        },
+        {
+          "name": "dribble",
+          "channels": 53
+        },
+        {
+          "name": "shoot",
+          "channels": 53
+        },
+        {
+          "name": "run",
+          "channels": 53
+        },
+        {
+          "name": "steal",
+          "channels": 12
+        },
+        {
+          "name": "block",
+          "channels": 53
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "role": "C",
+      "height": 2.2,
+      "source": "big",
+      "width": 0.95,
+      "depth": 0.98,
+      "build": "long-limbed centre, narrower than power forward",
+      "hair": "flattened close afro",
+      "path": "c.glb",
+      "sourcePath": "workout/island/assets/models/hoops-big.glb",
+      "sourceSha256": "1bf6c29da21adcd81fbbfa6ecd460bf64b4a83dd2a91af7531988e8e477f817d",
+      "sourceLicense": "MakeHuman core assets CC0-1.0; repository provenance ASSETS.md",
+      "heightMeters": 2.200000047683716,
+      "chestWidthMeters": 0.46738772094249725,
+      "coordinateSystem": {
+        "up": "+Y",
+        "front": "+Z",
+        "units": "metres"
+      },
+      "restBoundsBlenderZUp": {
+        "min": [
+          -0.66574627161026,
+          -0.4521026313304901,
+          0
+        ],
+        "max": [
+          0.6657464504241943,
+          0.13431572914123535,
+          2.200000047683716
+        ]
+      },
+      "jointNames": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3"
+      ],
+      "clips": {
+        "idle": {
+          "durationSeconds": 1,
+          "loop": true,
+          "method": "Original upright neutral review pose; relaxed arms, straight legs.",
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -6.456803447463244e-8,
+            "minAfterMeters": -6.456803447463244e-8,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "dribble": {
+          "durationSeconds": 1.1666666666666667,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "dribble_stand",
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 36,
+            "minBeforeMeters": -0.002355138072744012,
+            "minAfterMeters": 0.0004997137002646923,
+            "maximumPelvisLiftMeters": 0.002855138072744012,
+            "correctedSamples": 3,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "shoot": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "jumpshot",
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7666666667,
+              "bone": "mixamorig:RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.033340416848659515,
+            "minAfterMeters": 0.0004998345393687487,
+            "maximumPelvisLiftMeters": 0.033840416848659516,
+            "correctedSamples": 19,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "method": "CMU native retarget from repository hoops-anim.glb",
+          "sourceAction": "run",
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 23,
+            "minBeforeMeters": 0.0005024191923439503,
+            "minAfterMeters": 0.0005024191923439503,
+            "maximumPelvisLiftMeters": 0,
+            "correctedSamples": 0,
+            "constantRunBaselineDropMeters": 0.03706099194288254,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1,
+          "loop": false,
+          "method": "Original planted-ankle IK lunge and right-hand poke",
+          "events": [
+            {
+              "name": "steal_reach",
+              "atSeconds": 0.48,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 31,
+            "minBeforeMeters": -0.027232345193624496,
+            "minAfterMeters": 0.000499764340929687,
+            "maximumPelvisLiftMeters": 0.027732345193624497,
+            "correctedSamples": 29,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.1333333333333333,
+          "loop": false,
+          "method": "CMU jump with original overhead two-hand block IK",
+          "sourceAction": "jump",
+          "events": [
+            {
+              "name": "block_apex",
+              "atSeconds": 0.5,
+              "bone": "mixamorig:RightHand"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 30,
+            "sampleCount": 35,
+            "minBeforeMeters": -0.01832268200814724,
+            "minAfterMeters": 0.0004997754003852606,
+            "maximumPelvisLiftMeters": 0.01882268200814724,
+            "correctedSamples": 12,
+            "constantRunBaselineDropMeters": 0,
+            "method": "Evaluated deformed-mesh floor correction; airborne poses retained."
+          }
+        }
+      },
+      "rawBytes": 1449816,
+      "triangles": 27310,
+      "bytes": 364300,
+      "exportAnimations": [
+        {
+          "name": "idle",
+          "channels": 4
+        },
+        {
+          "name": "dribble",
+          "channels": 53
+        },
+        {
+          "name": "shoot",
+          "channels": 53
+        },
+        {
+          "name": "run",
+          "channels": 53
+        },
+        {
+          "name": "steal",
+          "channels": 12
+        },
+        {
+          "name": "block",
+          "channels": 53
+        }
+      ]
+    }
+  ],
+  "animationSource": {
+    "path": "workout/island/assets/models/hoops-anim.glb",
+    "sha256": "95010f7bab25fc052030f5f34da9dfd9f75d8262c713fddad6d02b22c880b793",
+    "license": "CMU Graphics Lab Motion Capture Database: free use in research and commercial products; do not sell motion data separately. CMU motion is not CC0.",
+    "acknowledgement": "The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217."
+  }
+}

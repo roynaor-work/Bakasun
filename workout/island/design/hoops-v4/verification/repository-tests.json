@@ -1,0 +1,56 @@
+{
+  "scope": "Repository-wide test run followed by targeted reproduction of sandbox failures; no existing repository files changed.",
+  "command": "npm test",
+  "fullRun": {
+    "testUnits": 247,
+    "passed": 244,
+    "failed": 3,
+    "durationMilliseconds": 367118.339158,
+    "exitCode": 1,
+    "logSha256": "fb47d1ab047165e2126bbde4a1db52e92800accca57b7ffb89a53c8f80cda403",
+    "failures": [
+      {
+        "file": "tests/cam-lab-keyframes.test.mjs",
+        "cause": "spawnSync node EPERM in extract-tool subprocess test"
+      },
+      {
+        "file": "tests/island-browser-csp.test.mjs",
+        "cause": "listen EPERM 127.0.0.1 in local HTTP server test"
+      },
+      {
+        "file": "tests/workout-dad-test.test.mjs",
+        "cause": "spawnSync node EPERM in calendar-countdown subprocess test"
+      }
+    ]
+  },
+  "targetedReruns": [
+    {
+      "name": "keyframes",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "repository-keyframes.log",
+      "sha256": "d953a1513ee790876bdd655020a6f32220da477750edd4c59527596f538dd573"
+    },
+    {
+      "name": "csp",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 1,
+      "exitCode": 0,
+      "log": "repository-csp.log",
+      "sha256": "219fe58e351ed07fb4d86efa53004ecba08e8a9748a86b51efffd77a5b4aecba"
+    },
+    {
+      "name": "workout-dad",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "repository-workout-dad.log",
+      "sha256": "70a81128bf03af9cdc5804bffaee39cc3e1c0a6ea9e89889492edb0432133484"
+    }
+  ],
+  "conclusion": "All three default-sandbox failures passed when rerun with the execution environment network entitlement, which permits local server/subprocess operations. The full suite was not repeated. The opt-in CSP browser scenario remained skipped."
+}

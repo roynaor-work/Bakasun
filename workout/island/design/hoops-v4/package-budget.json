@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "runtimeAssetBytes": 2688416,
+  "packageBytesExcludingThisReport": 4958454,
+  "note": "Runtime budget counts the eight GLB assets. Evidence, source, docs, shared repository vendor modules and this report are separate.",
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 33,
+      "sha256": "235f1fb09aff391a0d326e977a7675cafd2aee644c75928fdb3e3aa125b7998e"
+    },
+    {
+      "file": "assets/arena-provenance.json",
+      "bytes": 5724,
+      "sha256": "a11193ade29f86d7f6c4a1fb9f7b146b4b7aab1c345c70f4590581e7682d3fef"
+    },
+    {
+      "file": "assets/arena-validation.json",
+      "bytes": 15148,
+      "sha256": "9614059dc716b3658a9552622b0cd3d7eeb3a9eab6925d1d2d145d776c9c59bd"
+    },
+    {
+      "file": "assets/arena.authoring.json",
+      "bytes": 2563,
+      "sha256": "40597dd810fa84e993aa2eac4f8b5bf3625ebc0d789cd7906dcf91a8dcd1e166"
+    },
+    {
+      "file": "assets/arena.glb",
+      "bytes": 881400,
+      "sha256": "ed6e3b61a5106ab9f55f9216703742274e71619e76a0120fafe337ed2eb74859"
+    },
+    {
+      "file": "assets/ball.authoring.json",
+      "bytes": 606,
+      "sha256": "38209d69fc33640d9acdd860b23e8c3e1ce2908c6f731da1b5df07368bee0860"
+    },
+    {
+      "file": "assets/ball.glb",
+      "bytes": 9172,
+      "sha256": "7cffb8670075097bab4f6d6a0b78b582169d006fb95a347e8703085f1caf6ef0"
+    },
+    {
+      "file": "assets/hoop.authoring.json",
+      "bytes": 687,
+      "sha256": "371794fcbbb2e67eee613e74806c1d29d1051b5ccef51cac4481301ad02c55f9"
+    },
+    {
+      "file": "assets/hoop.glb",
+      "bytes": 6780,
+      "sha256": "bf5e56205fc244fe7d2af67e325fe12d3fdff986f55a76295eac5145f6facc48"
+    },
+    {
+      "file": "assets/players/c.glb",
+      "bytes": 364300,
+      "sha256": "04edc3ff5e24c47bec452e5d1eba277fcbfc0997d05d3df6173e2b752defefc1"
+    },
+    {
+      "file": "assets/players/pf.glb",
+      "bytes": 365144,
+      "sha256": "672986747a564e9495ed10968e9285288eaf989d0bf28e6fbdea640ec52215a3"
+    },
+    {
+      "file": "assets/players/pg.glb",
+      "bytes": 345344,
+      "sha256": "4392c4a87ead7ea4cf7efe4d302ff6e3d8d42278dc55b30440f26a82162b86f2"
+    },
+    {
+      "file": "assets/players/player-metadata.json",
+      "bytes": 40497,
+      "sha256": "a5c944e5b451e15a50d6a159c516ef5e16bc4e8b1a35fb59b005aea6db8e02d9"
+    },
+    {
+      "file": "assets/players/sf.glb",
+      "bytes": 372168,
+      "sha256": "70419fd45ef3ce7b78d614d5fdeb15415e910eafad98abc579a17e07f5f58bcf"
+    },
+    {
+      "file": "assets/players/sg.glb",
+      "bytes": 344108,
+      "sha256": "05e6759db24984deac8b4192631bb5b3d24d080cb6ae35646bb16d8379a7a6b5"
+    },
+    {
+      "file": "inventory.json",
+      "bytes": 1317,
+      "sha256": "7cc2c6cddb40f9196a2fd12bb70b8bb7d79227ed12c5c047af874ec55991dda5"
+    },
+    {
+      "file": "LICENSES.md",
+      "bytes": 3065,
+      "sha256": "3e2584e19b5a4928bf8eafdad340c28f79202b6242f48c0f1c688b5dc26345ee"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 32492,
+      "sha256": "085847a0e782b3cea30be86b5cb2bfbb47445b719376e3664e265070f4b609c9"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 13151,
+      "sha256": "c1bee978fe3540f01ddafa5ac03b0dba009a84197c1b149b5e859c356825646b"
+    },
+    {
+      "file": "preview.html",
+      "bytes": 5946,
+      "sha256": "d874410454d7b7aadde966b051d488c70a11b3470575105cd9de77c875fdfe3d"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 22723,
+      "sha256": "b96285fc5977a45869877c5048276797705260b3cb55b7080717cea03972519b"
+    },
+    {
+      "file": "previews/lineup-front.png",
+      "bytes": 343829,
+      "sha256": "94c2fa1de99e6f4f3f4529099721861a587ca350dad48cd35bebf9eeb1e4b107"
+    },
+    {
+      "file": "previews/lineup-front.webp",
+      "bytes": 50896,
+      "sha256": "3990463c072fa0790c5ecb2185852da9d6292c081af48f8786e87b817521f597"
+    },
+    {
+      "file": "README.md",
+      "bytes": 2749,
+      "sha256": "f69ecd8f54c9616098cf05a430a24fc8e2345c847a515c18ccb2ed0a177a7005"
+    },
+    {
+      "file": "source/build_arena.py",
+      "bytes": 13527,
+      "sha256": "38556db55bc60b9268eb86986ba36baddcb00cf5bfee845eb2d105a98407d83a"
+    },
+    {
+      "file": "source/build_characters.py",
+      "bytes": 8937,
+      "sha256": "4c08a66bb6402ca92bfb7d7e2118dea6144ee80abf5166afb4978e3e578a5143"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 16012,
+      "sha256": "c583c124ecb57c507f7fbfc2a4411458548d75a1f80b12b4e2a386ed961ef1fd"
+    },
+    {
+      "file": "source/character_animations.py",
+      "bytes": 15703,
+      "sha256": "82c628b7bb2394084ca978d17f1100e9c05a7dc6f3b2b2e65288211998b64551"
+    },
+    {
+      "file": "source/compress_arena.mjs",
+      "bytes": 1211,
+      "sha256": "b44e3e652914d4df4011cb531a2e6b4378de1721eab11ee8c09b3e14461203fd"
+    },
+    {
+      "file": "source/compress_characters.mjs",
+      "bytes": 4194,
+      "sha256": "910f2fb4a7e1fc855ba05d4088afc56f74fc6da0f4f9d764a2cee4f168122ba6"
+    },
+    {
+      "file": "source/package.json",
+      "bytes": 447,
+      "sha256": "953074f8e92de5068fa0875972b012db7e57a67f9b383f9b3dd814dbf5abee1a"
+    },
+    {
+      "file": "source/package.mjs",
+      "bytes": 3463,
+      "sha256": "17d21af282efa389c9ca9b1473121782217cc1cf1bd3b61bd08e04f407f50762"
+    },
+    {
+      "file": "source/README.md",
+      "bytes": 3136,
+      "sha256": "d96e627d7325e21d6e965d8891d8906ee5f5147e4796be42ac65ab19a71eb5b3"
+    },
+    {
+      "file": "source/validate_arena.mjs",
+      "bytes": 2950,
+      "sha256": "0aefde5b2843aa111b52ee2b79de03db6aaf347f51a0605b777cb6eb97ffdfc2"
+    },
+    {
+      "file": "source/validate.mjs",
+      "bytes": 8912,
+      "sha256": "2cc1a4f3e3586d5b1026778079b297347c91059cc384017e6be7a03313c10577"
+    },
+    {
+      "file": "VALIDATION.md",
+      "bytes": 8693,
+      "sha256": "a6ff4d8178288a3b1a70899754470fc3be9ff705d34b99ce690e97c6971dd1f3"
+    },
+    {
+      "file": "verification/browser-validation.json",
+      "bytes": 263961,
+      "sha256": "bfbd29082fa07a5db847b1dbbacc69c08e7afc681e6a7c96cd77911516c74832"
+    },
+    {
+      "file": "verification/gltf-validation.json",
+      "bytes": 377148,
+      "sha256": "7a23ba7b59a5ee49d3991ae2cb03c33db8e7e6b0823adfb0728332273a235e06"
+    },
+    {
+      "file": "verification/motion-validation.json",
+      "bytes": 13175,
+      "sha256": "adb75ee4ad24eea4f7ed11f9912a91a87ccb760cbf6c3b07cf03f0d014e8e8b4"
+    },
+    {
+      "file": "verification/previews/actions-contact-sheet.webp",
+      "bytes": 58678,
+      "sha256": "6de83b327ca38dd489f7071adea822be57fb3b06a4e8116ed0bcd6ff37fd643b"
+    },
+    {
+      "file": "verification/previews/arena.webp",
+      "bytes": 120054,
+      "sha256": "7655efd1556635c89c65f599d94ed764c58431adff436230c46cc1ca1c38b6bb"
+    },
+    {
+      "file": "verification/previews/block-0.webp",
+      "bytes": 17522,
+      "sha256": "31ed30b4177584c45f6498201d5ffccd3aa350898cb23b6aab935e53009b6239"
+    },
+    {
+      "file": "verification/previews/block-1.webp",
+      "bytes": 18772,
+      "sha256": "544bd15769b7cbc892e1ff5438d52acf0d66644ed5a1fddb5736e40a2b25d97d"
+    },
+    {
+      "file": "verification/previews/block-2.webp",
+      "bytes": 18778,
+      "sha256": "65a6438c03c9d38224ed93b43baeff8247f12686206293c7d7dfb6fe3de723b5"
+    },
+    {
+      "file": "verification/previews/block-390x844.webp",
+      "bytes": 18418,
+      "sha256": "ead3ddbca6b38affd91318f9b19fd72829131ff0f0148bb1b591ef418a219bf0"
+    },
+    {
+      "file": "verification/previews/block-844x390.webp",
+      "bytes": 12860,
+      "sha256": "ccd67fab58aa8e3d88eac196539bfbf690c5bec73ee1632f280edc6169cc74b1"
+    },
+    {
+      "file": "verification/previews/c-back.webp",
+      "bytes": 16164,
+      "sha256": "5ef6922967abf2143e935ea9eac1f57b325c4529f0bb4e49c9993437f04c12c4"
+    },
+    {
+      "file": "verification/previews/c-front.webp",
+      "bytes": 17250,
+      "sha256": "120e59ed20a37a5630a5e62ab2683049c858773c9381232e00c8526bb6fbb2d7"
+    },
+    {
+      "file": "verification/previews/c-three-quarter.webp",
+      "bytes": 18352,
+      "sha256": "f8377820d6e1de1d3fe146f2776a0f09a0eb64dbfc2767c33dd64c70508bb4b7"
+    },
+    {
+      "file": "verification/previews/dribble-0.webp",
+      "bytes": 20210,
+      "sha256": "ce0cb06c11a48d57cb4fab79598120cdaef3a205eeaa0619223131c42a1d153b"
+    },
+    {
+      "file": "verification/previews/dribble-1.webp",
+      "bytes": 23246,
+      "sha256": "cf8cb3ecfa31cd9a12b8dcaa723f6e2346b50c7a88858604b902d27c2c744648"
+    },
+    {
+      "file": "verification/previews/dribble-2.webp",
+      "bytes": 23396,
+      "sha256": "62364b2cd7f81ff01bab4a46379d41ec78a76c8cd9cd29a16b06674c9b9b358c"
+    },
+    {
+      "file": "verification/previews/pf-back.webp",
+      "bytes": 17182,
+      "sha256": "a93690a423c5229fa0bccad67b18df5ea70d29e02d4a088b7f9772c2b1eba845"
+    },
+    {
+      "file": "verification/previews/pf-front.webp",
+      "bytes": 18622,
+      "sha256": "80f09ba9ae2b6bd768a13c930d2e36bdd7bb869e638eb7985f76966170cc5337"
+    },
+    {
+      "file": "verification/previews/pf-three-quarter.webp",
+      "bytes": 20060,
+      "sha256": "3bc4c83b0cd99cb5ea228e016e9b2ce36278c6bb8cbd196cbcbc7c1086c338c5"
+    },
+    {
+      "file": "verification/previews/pg-back.webp",
+      "bytes": 14452,
+      "sha256": "db79f6e61a5dab134b2a57300827a0b277dfc22956cee24a19912bee24cc0fe4"
+    },
+    {
+      "file": "verification/previews/pg-front.webp",
+      "bytes": 14848,
+      "sha256": "37a80c92022acd794ce57b8c36a5ff6da915a41d80b16a0cdc23d139ead2c18c"
+    },
+    {
+      "file": "verification/previews/pg-three-quarter.webp",
+      "bytes": 15800,
+      "sha256": "890d698b7370fb7b1bee8b5a21b834e7d96a5399e9f7fa97afb87b874d168855"
+    },
+    {
+      "file": "verification/previews/prop-ball.webp",
+      "bytes": 29362,
+      "sha256": "be158931aa2ee316ea5294ef3ad7bda1fb511285e59233f3d3c2d08bc7a3ee80"
+    },
+    {
+      "file": "verification/previews/prop-hoop.webp",
+      "bytes": 16364,
+      "sha256": "b6d4f93c18bc9f83ae62db3682077129db05df28647214eeab2899b3451ff780"
+    },
+    {
+      "file": "verification/previews/roles-contact-sheet.webp",
+      "bytes": 17668,
+      "sha256": "fbbdf5d59bed07ae8ea3a4d45958709d281352541f64e95cdf8bad47d69e2744"
+    },
+    {
+      "file": "verification/previews/run-0.webp",
+      "bytes": 19738,
+      "sha256": "e53d5cbacfab9e6f73a1aaf1b64a58bddc90ef535cc86b034bf7757a9fb650db"
+    },
+    {
+      "file": "verification/previews/run-1.webp",
+      "bytes": 21162,
+      "sha256": "7311b72f5aa631f171e63f5d76f9e6268b39c15097fde7420b9c20780b9c5b8e"
+    },
+    {
+      "file": "verification/previews/run-2.webp",
+      "bytes": 20646,
+      "sha256": "00b800c6033919de8068fdf6fabd2046857eee7e349c6d011070a728e2131dd2"
+    },
+    {
+      "file": "verification/previews/sf-back.webp",
+      "bytes": 16020,
+      "sha256": "57aeed463b700a071f7c80a6508f53e28c862e7efd85158171c636d5aba949b8"
+    },
+    {
+      "file": "verification/previews/sf-front.webp",
+      "bytes": 17670,
+      "sha256": "8fac9e217009c7543d8c480aa483b423a861eceedfc14a62a40334bdec72cdbb"
+    },
+    {
+      "file": "verification/previews/sf-three-quarter.webp",
+      "bytes": 18940,
+      "sha256": "3cf36a990431ee1233dbf6b0f4fadb4e80065d20c20daf930e83d3d6ebbf96c0"
+    },
+    {
+      "file": "verification/previews/sg-back.webp",
+      "bytes": 15492,
+      "sha256": "8f17c77aa09eb7ad7a7a137accbb212b2826d83dd715f5cafe9c8e4afb071821"
+    },
+    {
+      "file": "verification/previews/sg-front.webp",
+      "bytes": 16454,
+      "sha256": "5693231091854b1754d819076ce1787a2ac2ccfad46fad783828a34eb9c45b18"
+    },
+    {
+      "file": "verification/previews/sg-three-quarter.webp",
+      "bytes": 17760,
+      "sha256": "d8221e69634af7f3bdaf8d57749a1d9f02164c404d961b3198afdb4d61ac8b6c"
+    },
+    {
+      "file": "verification/previews/shoot-0.webp",
+      "bytes": 18118,
+      "sha256": "9973e5a0aee865439676dcbd9c7f5af913cb55e6a8fd6a92955ca5630f364e28"
+    },
+    {
+      "file": "verification/previews/shoot-1.webp",
+      "bytes": 19452,
+      "sha256": "65dbfb1909fac664ab74ac724a8865985bcc091efa743b36c2a2b70c61cd0f11"
+    },
+    {
+      "file": "verification/previews/shoot-2.webp",
+      "bytes": 19404,
+      "sha256": "f63d4a9b9ae39db58608d08c87f60bc1c4fa3d2cdde955ffd3aec05db542d197"
+    },
+    {
+      "file": "verification/previews/steal-0.webp",
+      "bytes": 20182,
+      "sha256": "72a7ae42dfcaaabc90d3d22bcd3078d07660a576edbd65c13edbdb35494180d7"
+    },
+    {
+      "file": "verification/previews/steal-1.webp",
+      "bytes": 22006,
+      "sha256": "ebe8c58916542e20bf03f2235d44cb70cab44d08a322c3e6d5aeec455eaa8a95"
+    },
+    {
+      "file": "verification/previews/steal-2.webp",
+      "bytes": 21702,
+      "sha256": "0a891fad569b198972cb55e2a6dd9918641ca1bcd15e9cd1e1cb31416e0e8b0f"
+    },
+    {
+      "file": "verification/previews/team-lineup-away.webp",
+      "bytes": 51502,
+      "sha256": "cd69c22f609e14c5989b5ad27f8117ef05bd084a1d786a749029a56bfe8d3e7b"
+    },
+    {
+      "file": "verification/previews/team-lineup.webp",
+      "bytes": 50896,
+      "sha256": "3990463c072fa0790c5ecb2185852da9d6292c081af48f8786e87b817521f597"
+    },
+    {
+      "file": "verification/previews/viewer-390x844.webp",
+      "bytes": 26364,
+      "sha256": "20aee24c049a6d9c81ad8c0b71cb87fd753a1b6ce8fc02e8754d743681c68af4"
+    },
+    {
+      "file": "verification/previews/viewer-844x390.webp",
+      "bytes": 21658,
+      "sha256": "75705a8784a1f7e3c7268729298a9f4d19c04a6d6ad5219d3a78946ddcf72a69"
+    },
+    {
+      "file": "verification/repository-csp.log",
+      "bytes": 331,
+      "sha256": "219fe58e351ed07fb4d86efa53004ecba08e8a9748a86b51efffd77a5b4aecba"
+    },
+    {
+      "file": "verification/repository-keyframes.log",
+      "bytes": 1209,
+      "sha256": "d953a1513ee790876bdd655020a6f32220da477750edd4c59527596f538dd573"
+    },
+    {
+      "file": "verification/repository-tests.json",
+      "bytes": 1838,
+      "sha256": "291d7b60e8dff3496ffce10433edaf65260901852a8e99a1febb8845a3b49629"
+    },
+    {
+      "file": "verification/repository-workout-dad.log",
+      "bytes": 541,
+      "sha256": "70a81128bf03af9cdc5804bffaee39cc3e1c0a6ea9e89889492edb0432133484"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "id": "arena",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "details": {
+    "spectators": 489,
+    "poses": {
+      "raised_arms": 89,
+      "clapping": 134,
+      "resting": 266
+    },
+    "skinColors": 6,
+    "shirtColors": 6,
+    "geometry": "merged 3D bodies; no billboards or portraits",
+    "rows": 5,
+    "rowStepM": 0.85,
+    "seatPlaneOffsetM": 0.23,
+    "shoeSoleAboveRowM": 0.0,
+    "sideSeatOutwardCorrectionM": 0.4,
+    "minimumShoeSupportInsetM": 0.04,
+    "rearRowsReducedTessellation": true
+  },
+  "bounds": [
+    [
+      -17.799999237060547,
+      -0.10999999940395355,
+      -23.799999237060547
+    ],
+    [
+      17.799999237060547,
+      9.27883529663086,
+      23.799999237060547
+    ]
+  ],
+  "triangles": 213316,
+  "meshes": 21,
+  "textures": 0,
+  "anchors": {
+    "anchor_rim_center_south": [
+      0.0,
+      3.05,
+      12.425
+    ],
+    "anchor_rim_center_north": [
+      0.0,
+      3.05,
+      -12.425
+    ],
+    "anchor_ball_spot": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "anchor_free_throw_north": [
+      0.0,
+      0.0,
+      -8.2
+    ],
+    "anchor_free_throw_south": [
+      0.0,
+      0.0,
+      8.2
+    ],
+    "anchor_scoreboard_center": [
+      0.0,
+      5.3,
+      -19.0
+    ],
+    "anchor_team_home": [
+      -8.8,
+      0.0,
+      5.8
+    ],
+    "anchor_team_away": [
+      8.8,
+      0.0,
+      -5.8
+    ],
+    "anchor_hanging_scoreboard_center": [
+      0.0,
+      6.15,
+      -0.0
+    ],
+    "anchor_court_center": [
+      0.0,
+      0.035,
+      -0.0
+    ],
+    "anchor_stand_east": [
+      13.4,
+      2.5,
+      -0.0
+    ],
+    "anchor_stand_west": [
+      -13.4,
+      2.5,
+      -0.0
+    ],
+    "anchor_stand_north": [
+      0.0,
+      2.5,
+      -19.75
+    ],
+    "anchor_stand_south": [
+      0.0,
+      2.5,
+      19.75
+    ],
+    "anchor_lineup_PG": [
+      -2.8,
+      0.035,
+      -0.0
+    ],
+    "anchor_lineup_SG": [
+      -1.4,
+      0.035,
+      -0.0
+    ],
+    "anchor_lineup_SF": [
+      0.0,
+      0.035,
+      -0.0
+    ],
+    "anchor_lineup_PF": [
+      1.4,
+      0.035,
+      -0.0
+    ],
+    "anchor_lineup_C": [
+      2.8,
+      0.035,
+      -0.0
+    ]
+  },
+  "objects": [
+    "arena_shell",
+    "backboard",
+    "backboard_target",
+    "basket_frame",
+    "beams",
+    "court_markings",
+    "court_runoff",
+    "court_surface",
+    "floodlights",
+    "handrails",
+    "hanging_scoreboard",
+    "individual_seats",
+    "lighting_trusses",
+    "net",
+    "painted_keys",
+    "rim",
+    "roof",
+    "scoreboard",
+    "seated_crowd",
+    "stand_stairs",
+    "team_benches"
+  ]
+}

@@ -1,0 +1,563 @@
+{
+  "tool": "glTF Validator + glTF Transform independent Draco decode",
+  "results": [
+    {
+      "filename": "arena.glb",
+      "bytes": 881400,
+      "sha256": "ed6e3b61a5106ab9f55f9216703742274e71619e76a0120fafe337ed2eb74859",
+      "dracoRequired": true,
+      "meshes": 21,
+      "triangles": 213316,
+      "textures": 0,
+      "finiteGeometry": true,
+      "anchors": {
+        "anchor_ball_spot": [
+          0,
+          0,
+          0
+        ],
+        "anchor_court_center": [
+          0,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_free_throw_north": [
+          0,
+          0,
+          -8.199999809265137
+        ],
+        "anchor_free_throw_south": [
+          0,
+          0,
+          8.199999809265137
+        ],
+        "anchor_hanging_scoreboard_center": [
+          0,
+          6.150000095367432,
+          0
+        ],
+        "anchor_lineup_C": [
+          2.799999952316284,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_lineup_PF": [
+          1.399999976158142,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_lineup_PG": [
+          -2.799999952316284,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_lineup_SF": [
+          0,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_lineup_SG": [
+          -1.399999976158142,
+          0.03500000014901161,
+          0
+        ],
+        "anchor_rim_center_north": [
+          0,
+          3.049999952316284,
+          -12.425000190734863
+        ],
+        "anchor_rim_center_south": [
+          0,
+          3.049999952316284,
+          12.425000190734863
+        ],
+        "anchor_scoreboard_center": [
+          0,
+          5.300000190734863,
+          -19
+        ],
+        "anchor_stand_east": [
+          13.399999618530273,
+          2.5,
+          0
+        ],
+        "anchor_stand_north": [
+          0,
+          2.5,
+          -19.75
+        ],
+        "anchor_stand_south": [
+          0,
+          2.5,
+          19.75
+        ],
+        "anchor_stand_west": [
+          -13.399999618530273,
+          2.5,
+          0
+        ],
+        "anchor_team_away": [
+          8.800000190734863,
+          0,
+          -5.800000190734863
+        ],
+        "anchor_team_home": [
+          -8.800000190734863,
+          0,
+          5.800000190734863
+        ]
+      },
+      "compressedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/1"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/4"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/5"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/6"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/7"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/8"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/9"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/10"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/11"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/12"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/17"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/18"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/7"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/8"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/9"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/10"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/11"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/12"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/13"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/14"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/15"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/16"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/17"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/18"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/19"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/20"
+          }
+        ]
+      },
+      "decodedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/1"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/4"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/5"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/6"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/7"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/8"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/9"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/10"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/11"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/12"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/17"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/18"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "filename": "ball.glb",
+      "bytes": 9172,
+      "sha256": "7cffb8670075097bab4f6d6a0b78b582169d006fb95a347e8703085f1caf6ef0",
+      "dracoRequired": true,
+      "meshes": 1,
+      "triangles": 2064,
+      "textures": 0,
+      "finiteGeometry": true,
+      "anchors": {
+        "anchor_ball_center": [
+          0,
+          0,
+          0
+        ]
+      },
+      "compressedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          }
+        ]
+      },
+      "decodedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "filename": "hoop.glb",
+      "bytes": 6780,
+      "sha256": "bf5e56205fc244fe7d2af67e325fe12d3fdff986f55a76295eac5145f6facc48",
+      "dracoRequired": true,
+      "meshes": 1,
+      "triangles": 1344,
+      "textures": 0,
+      "finiteGeometry": true,
+      "anchors": {
+        "anchor_mount": [
+          0,
+          0,
+          -3.2750000953674316
+        ],
+        "anchor_rim_center": [
+          0,
+          3.049999952316284,
+          0
+        ]
+      },
+      "compressedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          }
+        ]
+      },
+      "decodedValidation": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/1"
+          }
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}
