@@ -2,6 +2,7 @@
    Screens never touch storage directly; they call db.* and subscribe to changes. */
 
 const KEY = 'bakasun.v1';
+const SAFE_ID = /^[A-Za-z0-9_.:-]{1,80}$/;
 const COLS = ['cases', 'clients', 'calls', 'tasks', 'quotes', 'suppliers', 'links', 'schedule', 'staff', 'payments', 'checks', 'groups', 'catalog', 'notes', 'approvals', 'team', 'contacts', 'print', 'receipts', 'participants', 'history', 'contracts', 'checklists', 'budget', 'runsheet', 'casefiles', 'workgroups', 'notifications'];
 let onChange = null; // the cloud hooks in here
 let onSaveError = null, saveError = ''; // the device refused to save (storage full / private mode): the screen must say so in red
@@ -89,7 +90,9 @@ export const db = {
       if (!Array.isArray(data[c])) return;
       const a = state[c];
       data[c].forEach(r => {
-        if (!r || !r.id) return;
+        if (!r || typeof r !== 'object' || Array.isArray(r) || typeof r.id !== 'string' || !SAFE_ID.test(r.id)) return; // a backup is data, never markup: ids become attributes and URLs
+        if (typeof r.attempts !== 'undefined') r.attempts = Math.max(0, Math.min(999, parseInt(r.attempts, 10) || 0));
+        if (typeof r.aboutId !== 'undefined' && !(typeof r.aboutId === 'string' && SAFE_ID.test(r.aboutId))) r.aboutId = '';
         if (!r.updated) r.updated = nowIso(); // a backup row without a stamp would lose to any cloud copy forever
         const i = a.findIndex(x => x.id === r.id);
         if (i < 0) { a.push(r); n++; if (onChange) onChange({ col: c, id: r.id, data: r }); }

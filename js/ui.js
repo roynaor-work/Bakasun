@@ -30,16 +30,30 @@ export function dialog(title, bodyHtml, opts) {
   return new Promise(resolve => {
     const wrap = document.createElement('div');
     wrap.className = 'modal';
-    wrap.innerHTML = `<form class="modal-card" method="dialog"><h2>${esc(title)}</h2><div class="modal-body">${bodyHtml}</div>
+    const opener = document.activeElement;
+    const hid = 'dlg' + Math.random().toString(36).slice(2, 8);
+    wrap.innerHTML = `<form class="modal-card" method="dialog" role="dialog" aria-modal="true" aria-labelledby="${hid}"><h2 id="${hid}">${esc(title)}</h2><div class="modal-body">${bodyHtml}</div>
       <div class="row end"><button type="button" class="btn ghost" data-x="cancel">${esc(opts.cancel || t('cancel'))}</button>
       <button type="submit" class="btn ${opts.danger ? 'danger' : 'primary'}">${esc(opts.ok || t('save'))}</button></div></form>`;
     document.body.appendChild(wrap);
     const form = wrap.querySelector('form');
     addContactPicker(form);
-    const done = v => { wrap.remove(); resolve(v); };
+    const done = v => { document.removeEventListener('keydown', onKey, true); wrap.remove(); resolve(v); if (opener && opener.isConnected && opener.focus) try { opener.focus(); } catch (x) { /* */ } };
+    const onKey = e => {
+      if (!wrap.isConnected) { document.removeEventListener('keydown', onKey, true); return; }
+      if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(null); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...form.querySelectorAll('a[href],button:not([disabled]),input:not([type=hidden]):not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(x => x.offsetParent !== null || x === document.activeElement);
+      if (!f.length) return;
+      const a = f[0], z = f[f.length - 1];
+      if (!form.contains(document.activeElement)) { e.preventDefault(); a.focus(); }
+      else if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    };
+    document.addEventListener('keydown', onKey, true);
     wrap.addEventListener('click', e => { if (e.target === wrap || e.target.dataset.x === 'cancel') done(null); });
     form.addEventListener('submit', e => { e.preventDefault(); const o = {}; new FormData(form).forEach((v, k) => { o[k] = k in o ? [].concat(o[k], v) : v; }); done(o); });
-    const first = form.querySelector('input,textarea,select'); if (first) setTimeout(() => first.focus(), 50);
+    const first = form.querySelector('input:not([type=hidden]),textarea,select') || form.querySelector('button.primary,button.danger,button'); if (first) setTimeout(() => first.focus(), 50);
   });
 }
 export function confirmDialog(msg, okLabel) { return dialog(msg, '', { ok: okLabel || t('delete'), danger: true }).then(r => r !== null); }

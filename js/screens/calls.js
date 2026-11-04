@@ -21,7 +21,7 @@ export function render(ctx) {
   const card = c => {
     const cs = c.caseId ? db.get('cases', c.caseId) : null;
     return `<div class="card" data-id="${esc(c.id)}">
-      <div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${c.status === CALL.callback && c.callbackAt ? `<span class="badge warn">${esc(Office.fmt(c.callbackAt))}</span>` : ''}${c.attempts ? `<span class="badge muted"><span class="count">${c.attempts}</span> ${esc(t('attempts'))}</span>` : ''}</span></div>
+      <div class="row between"><span class="title">${esc(c.name)}</span><span class="row">${c.status === CALL.callback && c.callbackAt ? `<span class="badge warn">${esc(Office.fmt(c.callbackAt))}</span>` : ''}${c.attempts ? `<span class="badge muted"><span class="count">${esc(String(parseInt(c.attempts, 10) || 0))}</span> ${esc(t('attempts'))}</span>` : ''}</span></div>
       ${c.why ? `<div class="sub"><b>${esc(t('why'))}:</b> ${esc(c.why)}</div>` : ''}
       <div class="sub">${cs ? `<a href="#/case/${esc(cs.id)}">${esc(cs.client)}${cs.date ? ' · ' + esc(Office.fmt(cs.date)) : ''}</a> · ` : ''}<span class="ltr">${esc(phonePretty(c.phone))}</span>${c.phone ? copyBtn(c.phone, { icon: true }) : ''}${c.note ? ' · ' + esc(c.note) : ''}</div>
       ${tab !== 'done' ? `<div class="row"><button class="btn primary" data-dial>${esc(t('call'))}</button><button class="btn wa sm" data-msg>${esc(t('sendMsg'))}</button></div>

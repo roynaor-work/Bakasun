@@ -26,7 +26,7 @@ import { caseEvent } from '../logic/ics.js';
 
 let tab = 'open';
 let caseTab = 'details';
-const BACK = (href, label) => `<a class="icon" href="${href}" aria-label="${esc(label)}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+const BACK = (href, label) => `<a class="icon" href="${esc(href)}" aria-label="${esc(label)}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 
 export function render(ctx) {
   if (ctx.name === 'case' && ctx.id) return renderOne(ctx);

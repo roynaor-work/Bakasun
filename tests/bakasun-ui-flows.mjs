@@ -24,7 +24,7 @@ function element(tag) {
   el.dispatch = (type, event) => listeners[type]?.(event);
   return el;
 }
-globalThis.document = { __bakasunCopy: true, createElement: element, addEventListener() {}, getElementById: () => null,
+globalThis.document = { __bakasunCopy: true, createElement: element, addEventListener() {}, getElementById: () => null, removeEventListener() {},
   body: { appendChild(el) { if (el.className === 'modal') modals.push(el); } },
   querySelector(selector) { const match = /\.modal #([\w-]+)/.exec(selector); return match ? modals.at(-1)?.querySelector('#' + match[1]) || null : null; }
 };
@@ -103,18 +103,17 @@ test('B3-U03 control: OS share-sheet cancellation is handled without triggering 
   navigator.share = async () => { throw Object.assign(new Error('Cancelled'), { name: 'AbortError' }); };
   assert.equal(await shareFile({ name: 'b3.txt', type: 'text/plain', blob: new Blob(['בדיקה']) }), true);
 });
-test('B3-U04 current: modal lacks dialog semantics, keyboard dismissal and focus containment', async () => {
+test('B3-U04 fix: shared modal exposes its role, modal flag and a title it is labelled by', async () => {
   const pending = dialog('בדיקה', ''); const wrap = modals.at(-1);
-  assert.doesNotMatch(wrap.innerHTML, /role="dialog"|aria-modal|aria-labelledby/);
-  // Resolve the real dialog with its form, avoiding leaked promises.
-  wrap.querySelector('form').submit({}); await pending;
+  const markup = wrap.innerHTML; wrap.querySelector('form').submit({}); await pending;
+  assert.match(markup, /role="dialog"/); assert.match(markup, /aria-modal="true"/);
+  const id = /aria-labelledby="([^"]+)"/.exec(markup)?.[1];
+  assert.ok(id); assert.match(markup, new RegExp('<h2 id="' + id + '">'));
 });
-test('B3-U04 fix: shared modal exposes its role and accessible title',
-  { skip: 'B3-U04: dialog creates a div/form without dialog role, aria-modal, Escape handling, focus trap or focus restoration.' }, async () => {
-    const pending = dialog('בדיקה', ''); const wrap = modals.at(-1);
-    const markup = wrap.innerHTML; wrap.querySelector('form').submit({}); await pending;
-    assert.match(markup, /role="dialog"/); assert.match(markup, /aria-modal="true"/);
-  });
+test('B3-U04 fix (source): the dialog handles Escape, traps Tab and returns focus to the opener', () => {
+  const src = readFileSync(new URL('../js/ui.js', import.meta.url), 'utf8');
+  assert.match(src, /e\.key === 'Escape'/); assert.match(src, /e\.key !== 'Tab'/); assert.match(src, /opener\.focus\(\)/);
+});
 
 test('B3-F10 current: a numeric zero VAT and zero markup setting revert to defaults in a new quote', () => {
   db.setting('vat', 0); db.setting('defaultMargin', 0);
@@ -138,13 +137,15 @@ function luminance(hex) {
 }
 const ratio = (a, b) => (Math.max(luminance(a), luminance(b)) + 0.05) / (Math.min(luminance(a), luminance(b)) + 0.05);
 const accents = [...css.matchAll(/--accent:\s*(#[\da-f]{6})/gi)].map(match => match[1]);
-test('B3-U05 current: primary button colors fail WCAG AA for 16px bold text in both themes', () => {
+const inks = [...css.matchAll(/--accent-ink:\s*(#[\da-f]{3,6})/gi)].map(match => match[1].length === 4 ? '#' + [...match[1].slice(1)].map(x => x + x).join('') : match[1]);
+test('B3-U05 fix: primary button text on the action color is at least 4.5:1 in the light and dark themes', () => {
   assert.match(css, /\.btn\.primary\s*\{[^}]*color:\s*var\(--accent-ink\)/);
-  assert.match(css, /--accent-ink:\s*#fff/);
-  assert.ok(ratio(accents[0], '#ffffff') < 4.5);
-  assert.ok(ratio(accents[1], '#ffffff') < 4.5);
+  assert.equal(accents.length, 3); // light, dark (media query), dark (forced)
+  assert.ok(ratio(accents[0], inks[0]) >= 4.5, 'light ' + ratio(accents[0], inks[0]));
+  assert.ok(ratio(accents[1], inks[1]) >= 4.5, 'dark ' + ratio(accents[1], inks[1]));
+  assert.ok(ratio(accents[2], inks[2]) >= 4.5, 'dark forced ' + ratio(accents[2], inks[2]));
 });
-test('B3-U05 fix: primary button contrast is at least 4.5:1',
-  { skip: 'B3-U05: white text on the current light/dark accent backgrounds is below 4.5:1 at the button font size.' }, () => {
-    assert.ok(accents.every(color => ratio(color, '#ffffff') >= 4.5));
-  });
+test('B3-U05 fix: the accent is also readable as text on the page and nav backgrounds (active nav link)', () => {
+  assert.ok(ratio(accents[0], '#F7F2EA') >= 4.5); assert.ok(ratio(accents[0], '#FFFFFF') >= 4.5);
+  assert.ok(ratio(accents[1], '#17141A') >= 4.5); assert.ok(ratio(accents[1], '#1D191F') >= 4.5);
+});

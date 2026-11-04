@@ -14,7 +14,7 @@ import * as RS from '../logic/runsheet.js';
 const ui = { day: {}, liveDay: {} }; // the chosen day per case survives re-renders
 const kindT = k => t('rsKind' + k.charAt(0).toUpperCase() + k.slice(1));
 const statusT = s => t(s === 'done' ? 'rsDone' : s === 'late' ? 'rsLate' : 'rsPlanned');
-const BACK = href => `<a class="icon" href="${href}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+const BACK = href => `<a class="icon" href="${esc(href)}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 const nowHHMM = () => { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
 const timeOf = b => Office.hhmm(b.start) + (Office.minutes(b.end) != null ? '–' + Office.hhmm(b.end) : '');
 
