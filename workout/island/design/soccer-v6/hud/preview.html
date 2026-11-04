@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#09191c">
+  <meta name="description" content="ממשק שידור כדורגל עצמאי: תוצאה, החלפה, שער, חזרה מהירה ושליטה במגע.">
+  <title>כדורגל 06 · על הקו</title>
+  <link rel="icon" type="image/svg+xml" href="assets/radar.svg">
+  <link rel="stylesheet" href="hud.css">
+</head>
+<body>
+  <main id="match" aria-label="תצוגת ממשק שידור, כדורגל שש מול שש">
+    <div class="match-backdrop" aria-hidden="true"></div>
+    <div class="pitch-shade" aria-hidden="true"></div>
+    <div id="hud"></div>
+  </main>
+  <button id="open-preview" class="preview-toggle" aria-label="פתיחת מצבי תצוגה" aria-haspopup="dialog">
+    <svg aria-hidden="true"><use href="assets/hud-symbols.svg#grid"/></svg><span>תצוגות</span>
+  </button>
+  <dialog id="preview-panel" aria-labelledby="panel-title">
+    <form method="dialog" class="panel-heading"><div><span class="kicker">כדורגל / 06</span><h1 id="panel-title">על הקו</h1></div><button class="close-panel" aria-label="סגירה">×</button></form>
+    <p class="panel-intro">כל רגע, בשפה של שידור.</p>
+    <fieldset><legend>רגע במשחק</legend><div class="state-options">
+      <button data-state="live"><span>01</span>שידור חי</button>
+      <button data-state="substitution"><span>02</span>החלפה</button>
+      <button data-state="goal"><span>03</span>שער</button>
+      <button data-state="replay"><span>04</span>חזרה מהירה</button>
+    </div></fieldset>
+    <fieldset><legend>צבעי קבוצה</legend><div class="theme-options">
+      <button data-theme="coast" aria-pressed="true"><i class="swatch coast"></i>חוף / רכס</button>
+      <button data-theme="dusk" aria-pressed="false"><i class="swatch dusk"></i>אופק / חול</button>
+    </div></fieldset>
+    <label class="freeze-option"><input id="freeze-clock" type="checkbox">הקפאת שעון לתצוגה</label>
+    <a class="asset-link" href="assets.html">אוסף הרכיבים <svg aria-hidden="true"><use href="assets/hud-symbols.svg#arrow"/></svg></a>
+    <p class="panel-note">מסירה · בעיטה · עומק · לחיצה ממושכת לספרינט<br>גרירת הג׳ויסטיק משמאל לשליטה בכיוון</p>
+  </dialog>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>
