@@ -1,0 +1,59 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>כדורגל: השוואת שחקנים לאורך הזמן</title>
+<style>
+body{direction:rtl;text-align:right;unicode-bidi:embed;font-family:system-ui,sans-serif;background:#0f1d24;color:#eaf2f0;margin:0;padding:16px;line-height:1.5}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:22px 0 6px}
+.ltr{direction:ltr;display:inline-block}
+table{border-collapse:collapse;margin:8px 0 14px}th,td{border:1px solid #2c4650;padding:5px 9px;font-size:14px;text-align:right}th{background:#16303a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:10px}
+figure{margin:0;background:#16303a;border-radius:8px;overflow:hidden}figure img{width:100%;display:block}figcaption{padding:6px 10px;font-size:13px}
+.note{background:#16303a;border-right:4px solid #b8f65b;padding:8px 12px;border-radius:6px;font-size:14px}
+</style>
+</head>
+<body>
+<h1>כדורגל: אותו שחקן, אותה תאורה, אותה מצלמה (<span class="ltr">844×390</span>)</h1>
+<p>כל הצילומים מאותו רגע פתיחה של משחק ליגה, שש מול שש. שתי שורות לכל ערכה: <b>רמה 0</b> (צללים, רזולוציה מלאה, קהל מלא, שחקנים קרובים מפורטים) ו<b>רמה 2</b> (מה שהמשחק עבר אליו אוטומטית אחרי חריגה מתקציב המשולשים: בלי צללים, רזולוציה .85, קהל שליש, רשת קלה).</p>
+<div class="note">המסקנה: ההבדל שרועי ראה אינו ברשת הדמות. מאז הרחבה לשש מול שש הסצנה חרגה מהתקציב כבר בשנייה הראשונה, והמשחק ירד לרמה 2 גם בטלפון חזק. חזרנו לרמה 0 בעזרת רמת פירוט לפי מרחק. פירוט ב-<span class="ltr">REPORT.md</span>.</div>
+
+<h2>מה כל ערכה</h2>
+<table>
+<tr><th>ערכה</th><th>מתי</th><th>משולשים לשחקן</th><th>סה״כ בסצנה ברמה 0 (12 שחקנים, בלי LOD)</th><th>קריאות ציור</th></tr>
+<tr><td><span class="ltr">kid</span> איור (kid-full.glb)</td><td>26/10</td><td>15,012</td><td>216K</td><td>97 (מעל התקרה 90)</td></tr>
+<tr><td><span class="ltr">athlete</span> ריאליסטי (MakeHuman)</td><td>29/10</td><td>11,614 (קל 5,336)</td><td>175K</td><td>49</td></tr>
+<tr><td><span class="ltr">v4</span> (characters2)</td><td>31/10</td><td>26,109</td><td>349K</td><td>37</td></tr>
+<tr><td><span class="ltr">v5</span> (GPT, מצויר) ברירת מחדל היום</td><td>04/11</td><td>13,054 (קל 3,344)</td><td>192K</td><td>37</td></tr>
+</table>
+<p>תקרת המשחק: 130K משולשים לכל הסצנה (אצטדיון וקהל כ-36K).</p>
+
+<h2>רמה 0 (הרמה הטובה): רחוק וקרוב</h2>
+<div class="grid">
+<figure><img src="chars-kid-t0-far.webp" alt=""><figcaption><span class="ltr">kid</span> רחוק</figcaption></figure>
+<figure><img src="chars-athlete-t0-far.webp" alt=""><figcaption><span class="ltr">athlete</span> רחוק</figcaption></figure>
+<figure><img src="chars-v4-t0-far.webp" alt=""><figcaption><span class="ltr">v4</span> רחוק</figcaption></figure>
+<figure><img src="chars-v5-t0-far.webp" alt=""><figcaption><span class="ltr">v5</span> רחוק</figcaption></figure>
+<figure><img src="chars-kid-t0-close.webp" alt=""><figcaption><span class="ltr">kid</span> קרוב</figcaption></figure>
+<figure><img src="chars-athlete-t0-close.webp" alt=""><figcaption><span class="ltr">athlete</span> קרוב</figcaption></figure>
+<figure><img src="chars-v4-t0-close.webp" alt=""><figcaption><span class="ltr">v4</span> קרוב</figcaption></figure>
+<figure><img src="chars-v5-t0-close.webp" alt=""><figcaption><span class="ltr">v5</span> קרוב</figcaption></figure>
+</div>
+
+<h2>רמה 2 (מה שהמשחק הציג אחרי החריגה מהתקציב)</h2>
+<div class="grid">
+<figure><img src="chars-kid-t2-far.webp" alt=""><figcaption><span class="ltr">kid</span> רחוק</figcaption></figure>
+<figure><img src="chars-athlete-t2-far.webp" alt=""><figcaption><span class="ltr">athlete</span> רחוק</figcaption></figure>
+<figure><img src="chars-v4-t2-far.webp" alt=""><figcaption><span class="ltr">v4</span> רחוק</figcaption></figure>
+<figure><img src="chars-v5-t2-far.webp" alt=""><figcaption><span class="ltr">v5</span> רחוק</figcaption></figure>
+<figure><img src="chars-kid-t2-close.webp" alt=""><figcaption><span class="ltr">kid</span> קרוב</figcaption></figure>
+<figure><img src="chars-athlete-t2-close.webp" alt=""><figcaption><span class="ltr">athlete</span> קרוב</figcaption></figure>
+<figure><img src="chars-v4-t2-close.webp" alt=""><figcaption><span class="ltr">v4</span> קרוב</figcaption></figure>
+<figure><img src="chars-v5-t2-close.webp" alt=""><figcaption><span class="ltr">v5</span> קרוב</figcaption></figure>
+</div>
+
+<h2>להפעלה בטלפון</h2>
+<p>הוסיפו לכתובת המשחק: <span class="ltr">?soccerChars=kid|athlete|v4|v5</span> לבחירת ערכה, ו<span class="ltr">?soccerTier=0|2</span> לקיבוע רמה.</p>
+</body>
+</html>
