@@ -1,0 +1,329 @@
+{
+  "units": "meters",
+  "groundY": 0.23,
+  "props": [
+    {
+      "asset": "farm-island",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "farm-shelter",
+      "position": [
+        -3.5,
+        0.23,
+        -2.4
+      ],
+      "rotationY": 0.15
+    },
+    {
+      "asset": "guard-station",
+      "position": [
+        3.7,
+        0.23,
+        1.9
+      ],
+      "rotationY": -0.35
+    },
+    {
+      "asset": "alarm-bell",
+      "position": [
+        1.6,
+        0.23,
+        3.3
+      ]
+    },
+    {
+      "asset": "farm-gate",
+      "position": [
+        0,
+        0.23,
+        3.45
+      ]
+    },
+    {
+      "asset": "crop-patch",
+      "position": [
+        3.2,
+        0.23,
+        -2.9
+      ],
+      "rotationY": 0.1
+    },
+    {
+      "asset": "crop-patch",
+      "position": [
+        3.5,
+        0.23,
+        -0.6
+      ],
+      "rotationY": 0.1
+    },
+    {
+      "asset": "hay-bale",
+      "position": [
+        -4.8,
+        0.23,
+        -1.1
+      ]
+    },
+    {
+      "asset": "hay-bale",
+      "position": [
+        -4.8,
+        0.23,
+        -0.55
+      ]
+    },
+    {
+      "asset": "hay-bale",
+      "position": [
+        -4.8,
+        0.81,
+        -0.85
+      ]
+    },
+    {
+      "asset": "farm-trough",
+      "position": [
+        -3,
+        0.23,
+        1.7
+      ]
+    },
+    {
+      "asset": "island-palm",
+      "position": [
+        -5.8,
+        0.23,
+        -2.4
+      ],
+      "scale": 1.1
+    },
+    {
+      "asset": "island-palm",
+      "position": [
+        -5.6,
+        0.23,
+        3.2
+      ],
+      "scale": 1.1
+    },
+    {
+      "asset": "island-palm",
+      "position": [
+        5.9,
+        0.23,
+        2.7
+      ],
+      "scale": 1.1
+    },
+    {
+      "asset": "island-palm",
+      "position": [
+        5.3,
+        0.23,
+        -3.8
+      ],
+      "scale": 1.1
+    },
+    {
+      "asset": "island-palm",
+      "position": [
+        0,
+        0.23,
+        -5.4
+      ],
+      "scale": 1.1
+    }
+  ],
+  "fence": [
+    {
+      "position": [
+        -4,
+        0.23,
+        3.45
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        -2,
+        0.23,
+        3.45
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        2,
+        0.23,
+        3.45
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        4,
+        0.23,
+        3.45
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        -4,
+        0.23,
+        -4
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        -2,
+        0.23,
+        -4
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        0,
+        0.23,
+        -4
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        2,
+        0.23,
+        -4
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        4,
+        0.23,
+        -4
+      ],
+      "rotationY": 0
+    },
+    {
+      "position": [
+        -5,
+        0.23,
+        -2.95
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "position": [
+        5,
+        0.23,
+        -2.95
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "position": [
+        -5,
+        0.23,
+        -0.95
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "position": [
+        5,
+        0.23,
+        -0.95
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "position": [
+        -5,
+        0.23,
+        1.05
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "position": [
+        5,
+        0.23,
+        1.05
+      ],
+      "rotationY": 1.5707963267948966
+    }
+  ],
+  "boars": [
+    {
+      "asset": "boar-amber",
+      "position": [
+        -2,
+        0.23,
+        0.4
+      ],
+      "rotationY": 0.65,
+      "scale": 1
+    },
+    {
+      "asset": "boar-ash",
+      "position": [
+        0.4,
+        0.23,
+        -1.5
+      ],
+      "rotationY": -0.9,
+      "scale": 1.08
+    },
+    {
+      "asset": "boar-striped",
+      "position": [
+        0,
+        0.23,
+        0.35
+      ],
+      "rotationY": 1.2,
+      "scale": 0.72
+    }
+  ],
+  "guards": [
+    {
+      "asset": "guard-ranger",
+      "position": [
+        -1.5,
+        0.23,
+        3.8
+      ],
+      "rotationY": 2.7,
+      "scale": 1.25
+    },
+    {
+      "asset": "guard-lookout",
+      "position": [
+        3.8,
+        0.23,
+        1
+      ],
+      "rotationY": -1,
+      "scale": 1.25
+    },
+    {
+      "asset": "guard-keeper",
+      "position": [
+        -4.6,
+        0.23,
+        2.4
+      ],
+      "rotationY": 0.65,
+      "scale": 1.25
+    }
+  ]
+}

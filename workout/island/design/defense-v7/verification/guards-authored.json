@@ -1,0 +1,105 @@
+[
+  {
+    "id": "guard-ranger",
+    "bytes": 302256,
+    "triangles": 14632,
+    "joints": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "animations": [
+      "patrol",
+      "idle",
+      "alert"
+    ],
+    "atlas": "guard-ranger-atlas.png"
+  },
+  {
+    "id": "guard-lookout",
+    "bytes": 306744,
+    "triangles": 16365,
+    "joints": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "animations": [
+      "patrol",
+      "idle",
+      "alert"
+    ],
+    "atlas": "guard-lookout-atlas.png"
+  },
+  {
+    "id": "guard-keeper",
+    "bytes": 303100,
+    "triangles": 14825,
+    "joints": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "animations": [
+      "patrol",
+      "idle",
+      "alert"
+    ],
+    "atlas": "guard-keeper-atlas.png"
+  },
+  {
+    "id": "guard-crowd",
+    "lod": 0,
+    "filename": "guard-crowd.glb",
+    "triangles": 180,
+    "bytes": 2356,
+    "groups": [
+      "shell"
+    ]
+  }
+]
