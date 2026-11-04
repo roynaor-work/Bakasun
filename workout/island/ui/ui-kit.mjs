@@ -52,6 +52,7 @@ export function kitResultPanel({win, stars, ratingLabel, max = 3}, ...children) 
 }
 /** Gives an existing island button the kit's primary surface (same node, same data-action and handler). Returns the wrapper to append. */
 export function kitPrimary(node) {
+  if (!node?.classList) return node; // not a real element (headless fakes): leave as is
   const wrap = document.createElement('span'); wrap.className = 'island-kit ik-wrap';
   node.classList.remove('primary-button'); node.classList.add('ik-button', 'ik-primary'); wrap.append(node); return wrap;
 }
