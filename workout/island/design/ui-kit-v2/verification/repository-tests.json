@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-04",
+  "baseBranch": "main",
+  "baseCommit": "c8ab72ea",
+  "fullSuite": {
+    "command": "npm test",
+    "environment": "restricted workspace sandbox",
+    "exitCode": 1,
+    "tests": 258,
+    "passed": 255,
+    "failed": 3,
+    "skipped": 0,
+    "durationMs": 158520.484372,
+    "failedFiles": [
+      "tests/cam-lab-keyframes.test.mjs",
+      "tests/island-browser-csp.test.mjs",
+      "tests/workout-dad-test.test.mjs"
+    ]
+  },
+  "targetedRerun": {
+    "command": "node --test tests/cam-lab-keyframes.test.mjs tests/island-browser-csp.test.mjs tests/workout-dad-test.test.mjs",
+    "environment": "permissions for subprocesses and a loopback HTTP server",
+    "exitCode": 0,
+    "tests": 16,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 1,
+    "skippedReason": "The optional production CSP browser integration requires ISLAND_CSP_BROWSER=1. The UI kit browser checks were run separately and passed."
+  },
+  "mainBaseline": {
+    "source": "temporary archive of origin/main without ui-kit-v2",
+    "command": "node --test tests/cam-lab-keyframes.test.mjs tests/island-browser-csp.test.mjs",
+    "environment": "permissions for subprocesses and a loopback HTTP server",
+    "exitCode": 0,
+    "passed": 11,
+    "failed": 0,
+    "skipped": 1
+  },
+  "limitation": "The full suite was not rerun outside the restricted sandbox."
+}
