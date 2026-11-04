@@ -1,5 +1,5 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
-import { STORE, SHIPPING, CITIES, OUT_OF_AREA, PAY, CLOUD, IMG } from './config.js';
+import { STORE, SHIPPING, CITIES, OUT_OF_AREA, PAY, CLOUD, IMG, LOCAL } from './config.js';
 import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
 import * as C from './cart.js';
 import { icon, logo } from './icons.js';
@@ -54,7 +54,7 @@ function homeHtml() {
   const occName = state.occ ? OCCASIONS.find(o => o.id === state.occ).name : '';
   return `
   <section class="hero">
-    <img src="${IMG('1726758004519-7ccecda8b076', 1800)}" alt="" fetchpriority="high">
+    <img src="${LOCAL('hero')}" alt="" fetchpriority="high">
     <div class="wrap">
       <span class="kicker">צומת הגומא · הגליל העליון</span>
       <h1>מארז שמרגישים<br>עוד לפני <em>שפותחים</em></h1>
@@ -113,11 +113,11 @@ function homeHtml() {
         <button class="btn gold" type="submit">שולחים ונחזור באותו יום</button>
       </form>
     </div>
-    <div class="art reveal"><img src="${IMG('1691017296011-ea9532242c7e', 1000)}" alt="" loading="lazy"></div>
+    <div class="art reveal"><img src="${LOCAL('banner-gifts')}" alt="" loading="lazy"></div>
   </div></div></section>
 
   <section class="blk about" id="about"><div class="wrap"><div class="lay">
-    <div class="art reveal"><img src="${IMG('1783018563064-bd08fcc49f8d', 1000)}" alt="" loading="lazy"></div>
+    <div class="art reveal"><img src="${LOCAL('banner-whisky')}" alt="" loading="lazy"></div>
     <div class="reveal">
       <span class="kicker">מי אנחנו</span>
       <h2 style="font-size:clamp(30px,3.6vw,44px);color:#fff;margin:12px 0 16px">חנות אלכוהול בצומת הגומא, עם נוף להרי נפתלי</h2>
@@ -422,7 +422,7 @@ document.addEventListener('click', e => {
     const { base, addons, pack, price } = buildParts(); if (!base) return;
     state.build.note = $('#bnote').value.trim();
     const parts = [base, ...addons, pack];
-    const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: IMG('1688851472616-7ad0980dab23', 300), note: state.build.note, kosher: parts.some(p => p.kosher === false) ? false : true };
+    const item = { id: 'custom', name: 'מארז בהרכבה אישית', price, variant: base.name, parts: parts.map(p => ({ id: p.id, name: p.name })), img: LOCAL('home-bar-product'), note: state.build.note, kosher: parts.some(p => p.kosher === false) ? false : true };
     item.key = C.lineKey('custom', state.build.note, parts);
     cart = C.addItem(cart, item); saveCart(); toast('המארז שלכם נוסף לסל');
     state.build = { base: null, addons: [], pack: BUILD.packs[0].id, note: '' }; saveBuild(); refreshBuild(); openDrawer(); return;

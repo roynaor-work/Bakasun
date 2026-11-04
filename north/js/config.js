@@ -48,4 +48,6 @@ export const CLOUD = {
   table: 'north_orders',
 };
 
+/* תמונות מקומיות v2 (north/img/v2), ללא תלות ברשת חיצונית */
+export const LOCAL = name => `img/v2/${name}.webp`;
 export const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?w=${w}&q=78&auto=format&fit=crop`;
