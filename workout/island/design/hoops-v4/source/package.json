@@ -1,0 +1,15 @@
+{
+  "name": "island-hoops-v4-tools",
+  "private": true,
+  "type": "module",
+  "description": "Build and verification tools only; the preview uses repository-local vendor modules.",
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "draco3dgltf": "1.5.9",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
+  }
+}

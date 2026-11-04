@@ -1,0 +1,18 @@
+✔ counted repetition retains the actual deepest camera frame, not the return frame; rejected captures the rejection instant (72.502252ms)
+✔ interval captures start at five seconds, use detection timestamps and never catch up with duplicate images (2.062741ms)
+✔ all seven exercises select their own extreme, including raised knees and bridge (4.452316ms)
+✔ 60-image cap evicts intervals first, then bottoms, then oldest rejections (3.245359ms)
+✔ 8 MB limit includes Base64, Unicode metadata and JSON envelope, with the same priority order (358.279723ms)
+✔ private mode never encodes or keeps a bitmap; revocation during asynchronous JPEG discards its result (19.082142ms)
+✔ unfinished/help/tracking rejections keep last detection metadata and independent pair candidates (8.025119ms)
+✔ FPS diagnostics compare measured encoding intervals to idle intervals and flag >10% loss (0.717178ms)
+✔ frames chunks resume across a new worker queue; older three-part records still upload (820.203559ms)
+✔ extract tool writes named JPEG files and rejects path traversal (288.37396ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1596.016306
