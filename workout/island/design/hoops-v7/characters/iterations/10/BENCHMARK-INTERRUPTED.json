@@ -1,0 +1,6 @@
+{
+  "stoppedAtUtc": "2026-11-04T22:28:02.645857+00:00",
+  "complete": false,
+  "reason": "Cached euro_step phase0.82 screenshot showed cropped actor head because actionEnvelope lacked Euro-step lift. Stop benchmark before changing camera, then rerun on the final preview. Partial timing is not final performance evidence.",
+  "command": "node source/benchmark.mjs --seconds6 --warmup2"
+}

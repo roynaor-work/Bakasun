@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical18-basketball-target-bind",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "units": "metres",
+  "rotationFormat": "quaternion-xyzw",
+  "rotationSpace": "parent-local absolute target-bind",
+  "boneCount": 18,
+  "bones": [
+    {
+      "name": "Root",
+      "parent": null
+    },
+    {
+      "name": "Hips",
+      "parent": "Root"
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips"
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine"
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest"
+    },
+    {
+      "name": "Head",
+      "parent": "Neck"
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest"
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm"
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm"
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest"
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm"
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm"
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips"
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg"
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg"
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips"
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg"
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg"
+    }
+  ],
+  "profileBindFile": "rig.json",
+  "retargetAdapter": "source/retarget-motion2.mjs",
+  "retargetMap": "retarget-map.json",
+  "compatibility": "The18 names and hierarchy match motion2. Per-role A-pose translations and measured limb lengths differ from the motion2 canonical rest, so canonical source rotations require the delivered explicit retarget adapter before applying to these skins.",
+  "grounding": "Runtime and baked clips use the same actual decoded skin extremal probes. FALL also probes every official_trousers vertex because blended knee vertices can lie inside the bind-pose extrema. Supporting soles target3mm above the ground; airborne soles preserve authored swing/jump clearance. Four fixed fall constraint passes project body/hand probes toward2mm clearance while retaining the same authored sole baseline. Independent full-vertex live and baked audits measure remaining floor residuals.",
+  "handSemantics": "Left/RightHand palmPoint is an actual verified palmar skin vertex in each profile bind frame. grip_left and grip_right morphs curl digits toward the actual palmar hemisphere. freeGrip remains active without a ball.",
+  "samplePose": "createMotionController(root,{profile}).setAction(id,{immediate:true}).seek(phase).snapshot()",
+  "sourceSha256": "27c37c661a2619d72c254a04ba542bcde2766568b9b35ae452a1d52c68f5f1cc"
+}

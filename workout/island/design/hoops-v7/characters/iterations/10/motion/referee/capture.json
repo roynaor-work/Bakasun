@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": 1,
+  "iteration": "10",
+  "role": "referee",
+  "label": "",
+  "yaw": 1.1,
+  "phases": [
+    0,
+    0.55,
+    0.7678571429,
+    0.95
+  ],
+  "selectedActions": [
+    "fall"
+  ],
+  "startedAtUtc": "2026-11-04T22:22:34.041Z",
+  "finishedAtUtc": "2026-11-04T22:22:58.109Z",
+  "source": "/tmp/hoops-v7-motion-wms3hy",
+  "inputs": [
+    {
+      "file": "BRIEF.md",
+      "bytes": 3684,
+      "sha256": "ac04ab231561598df47c5a92976dc04cb13d7dae0e78adc96bcc4e2b82df80b9"
+    },
+    {
+      "file": "LICENSES.md",
+      "bytes": 2978,
+      "sha256": "dfc985495efa79121fde7ac1005d7b988339dbff47c5b81a0b522c06ccb15ed9"
+    },
+    {
+      "file": "README.md",
+      "bytes": 7302,
+      "sha256": "d7a5cee8368078712036c2290d7bf6b1ec86720e46d3e88c83aee09517886f64"
+    },
+    {
+      "file": "REFERENCE.md",
+      "bytes": 2817,
+      "sha256": "ee77d2f20201c76da28e9776a65f1cff6fd36935856c6eb23ad9ad585fdee480"
+    },
+    {
+      "file": "RETARGET.md",
+      "bytes": 7715,
+      "sha256": "9faba8e66daccd093667815a04c3dc04987af5349434450c811f03e2ef5ac86c"
+    },
+    {
+      "file": "index.html",
+      "bytes": 7355,
+      "sha256": "7dc7e69dc07fbb85c485fd611003b30ef698030c429c4880cc7cd82aa2658793"
+    },
+    {
+      "file": "model-authoring.json",
+      "bytes": 82576,
+      "sha256": "8dd5c7ce40f90a78cab407acf53de9725f52ef6ee5b6b103ae69fa13b8b06064"
+    },
+    {
+      "file": "models/c-lod1.glb",
+      "bytes": 970800,
+      "sha256": "e6f43ccd2b5428e72a23f358c47493f9dfdb08703b7d14752bbce759e093f345"
+    },
+    {
+      "file": "models/c.glb",
+      "bytes": 1372088,
+      "sha256": "6338bfc8cb94b510d9d1cb774011cf32fb988763c65fce4afb8f17d8db76dba5"
+    },
+    {
+      "file": "models/pf-lod1.glb",
+      "bytes": 975308,
+      "sha256": "929f9976fd9217fdadd568140803c6e4a820b743e0d4f0222e8394a0b2c84517"
+    },
+    {
+      "file": "models/pf.glb",
+      "bytes": 1378400,
+      "sha256": "bd9ec13349d21fd9ec1023d180ea013194d4c5f64c48e912063245d95718eb69"
+    },
+    {
+      "file": "models/pg-lod1.glb",
+      "bytes": 972668,
+      "sha256": "4f9ee0fc5b7d08836981483d279dc7025b417501486268797995478b8a9dd651"
+    },
+    {
+      "file": "models/pg.glb",
+      "bytes": 1359984,
+      "sha256": "9cffb187cce91eb732b391039e314ae7d655c93bb07dd95785c78d9946aef7aa"
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "bytes": 1022264,
+      "sha256": "7799703bd700636030d15cfd87726f069564c3a9c28f52496da371d50cb95edc"
+    },
+    {
+      "file": "models/referee.glb",
+      "bytes": 1424020,
+      "sha256": "e8c9f4af42dab33efc3f17753031c7e24d518f5e4040dd13e8a2a15c5f921e61"
+    },
+    {
+      "file": "models/sf-lod1.glb",
+      "bytes": 997104,
+      "sha256": "1a92b795029749011682de85b47dc06391ca0757eb4bd6f4f4fbef79e9e608a3"
+    },
+    {
+      "file": "models/sf.glb",
+      "bytes": 1407228,
+      "sha256": "4787f93c548e153ddb5d25b2d380e786fc1f1e07e592c99fec40dfc16b63eefd"
+    },
+    {
+      "file": "models/sg-lod1.glb",
+      "bytes": 989664,
+      "sha256": "a6701f9724f0b8dc612a492a54c502c8610a9f40093a4945d9a367008095364b"
+    },
+    {
+      "file": "models/sg.glb",
+      "bytes": 1394140,
+      "sha256": "881ced1dafff228a1286dff13a5c3fd4915fe49cd4491a3081eed8b2d176b5f9"
+    },
+    {
+      "file": "motion-contract.json",
+      "bytes": 2795,
+      "sha256": "f806a03cba9f94b1181770c70eac8317cc5c73df933f62bef57bcc848862bad1"
+    },
+    {
+      "file": "motions.json",
+      "bytes": 55811,
+      "sha256": "1e792dc646a8225a21dbbd5a6e82b254c077399bcef4b67c01fd4ca506032b62"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 17015,
+      "sha256": "e9bcaefbd800ae9a5e7632606957100e895c081cc6b46fcce307f7fb796ed9b1"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 39451,
+      "sha256": "7cd9eeb28ddea1be9038d3967ccf94a0a2512d5a491e4b5d96956b1322abd327"
+    },
+    {
+      "file": "retarget-map.json",
+      "bytes": 274875,
+      "sha256": "931db32222acf82b0975675de9c4414caf02290a204798919b79eaf53b3521de"
+    },
+    {
+      "file": "review.html",
+      "bytes": 46578,
+      "sha256": "afc83485fcc03da275bd7a5573c1085688b673a70ed42dbc69fc8067a6226bc7"
+    },
+    {
+      "file": "rig.json",
+      "bytes": 68401,
+      "sha256": "64b17ba39851a14eae93c9235373dae57f9219bb5fd0e4843462246a9be8098f"
+    },
+    {
+      "file": "source/archive-evidence.py",
+      "bytes": 1968,
+      "sha256": "97446581ad4ba259d177897f35f176c4cbd33aa085cecaf05644ef72f615b4e0"
+    },
+    {
+      "file": "source/benchmark.mjs",
+      "bytes": 6577,
+      "sha256": "763597ae6b5e8a2dfcf681c55b6c1126f96a23562f9c2716fd409e9acb730659"
+    },
+    {
+      "file": "source/build-inventory.py",
+      "bytes": 1257,
+      "sha256": "d2292c330551dd6e8331ac6c10cb9fce9b659fb82d71293eb885b9a953bf7785"
+    },
+    {
+      "file": "source/build-report.py",
+      "bytes": 15821,
+      "sha256": "17788281095dc9496d2fc57aea28fade0dadbf08c8f1bd7ec2d480fe1d351df0"
+    },
+    {
+      "file": "source/build-review.mjs",
+      "bytes": 6006,
+      "sha256": "75848347c601b6e4c53c54038c63e965edd35673993accb0c199007feb7679dc"
+    },
+    {
+      "file": "source/build_characters.mjs",
+      "bytes": 43304,
+      "sha256": "0552f952537d887b4ea7222a75f3edea280ac9c784830bb6693709c313e70659"
+    },
+    {
+      "file": "source/capture-motion.mjs",
+      "bytes": 6602,
+      "sha256": "c009b6c639973836d3322532565fec0b6be588c8e6f105db5a1a5aa7f3e91b8e"
+    },
+    {
+      "file": "source/capture-transition.mjs",
+      "bytes": 8209,
+      "sha256": "b64a303ac6710d542fd2e0c1fcf69c0854edc40fba31a634f5c8f43f0d364e48"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 9365,
+      "sha256": "42ce845298a945442d4b5082c5761b85e7553432d4c18b81d7bce72bedc5973d"
+    },
+    {
+      "file": "source/model_helpers_atlas.py",
+      "bytes": 6742,
+      "sha256": "77fb456806319a2588bb6900f693a1879666b7add769858c36ac957bfd02842b"
+    },
+    {
+      "file": "source/model_helpers_garments.mjs",
+      "bytes": 9816,
+      "sha256": "1788ff82850376c87b78717bdbe16860641dafabda6de86b65377791f327cbc7"
+    },
+    {
+      "file": "source/model_helpers_hair.mjs",
+      "bytes": 8933,
+      "sha256": "0e815f8554622c7633590a17276a6285c9804ca9c9d5d657642084a13b821b34"
+    },
+    {
+      "file": "source/model_helpers_pants.mjs",
+      "bytes": 5256,
+      "sha256": "a9e795892352f2a677c8b03325525d749fd9fcbf3e4f9a9c1aad76aeb2b250d0"
+    },
+    {
+      "file": "source/motion-checks.mjs",
+      "bytes": 3300,
+      "sha256": "5f079b390a03195a53a988999a69d251edfa1f8c7e39143e8b05892e54ae246f"
+    },
+    {
+      "file": "source/motion-export.mjs",
+      "bytes": 43746,
+      "sha256": "3bb171e8d081303a70702dae37c050f06fd91c36ed8121f4d2074c4065d4312e"
+    },
+    {
+      "file": "source/motion.mjs",
+      "bytes": 50514,
+      "sha256": "27c37c661a2619d72c254a04ba542bcde2766568b9b35ae452a1d52c68f5f1cc"
+    },
+    {
+      "file": "source/package-offline.mjs",
+      "bytes": 11687,
+      "sha256": "00345a3e03dbb3d9817ae5437266c0e171f3aeceb1ada4e8124fd65871685803"
+    },
+    {
+      "file": "source/package.json",
+      "bytes": 560,
+      "sha256": "7678be61f8a2096b63de3e01992b28aa555ddaf9908d359f7f1555b1be341f1f"
+    },
+    {
+      "file": "source/requirements.txt",
+      "bytes": 30,
+      "sha256": "dee66a6fd7af314ef9bffcc1170d09684e468588fbe5d8668c6379b0b9e65839"
+    },
+    {
+      "file": "source/retarget-motion2.mjs",
+      "bytes": 26817,
+      "sha256": "330d2a0c888e48dc3337237d57c35b36d800d5b334d221cde91f454181aa3aea"
+    },
+    {
+      "file": "source/validate-assets.mjs",
+      "bytes": 31581,
+      "sha256": "217e65afb69bde9826c0cd927ad32079fa3743ffb100e653c371762f2814a607"
+    },
+    {
+      "file": "source/validate-dribble-physics.mjs",
+      "bytes": 4445,
+      "sha256": "8261406b1fae14ea34a50f257abbf16637415b790106f01f789b5985e2fb0bae"
+    },
+    {
+      "file": "source/validate-motion.mjs",
+      "bytes": 11152,
+      "sha256": "2d0f0ae47bd0704f94fb9066b7ff450a6249383fc637383adcd18452adf4b9cf"
+    },
+    {
+      "file": "source/validate-offline.mjs",
+      "bytes": 14267,
+      "sha256": "61ca58d68b1bdf7c132645c9136aeeac8fbf1af28921b3d2e79590de96946f41"
+    },
+    {
+      "file": "source/validate-skin.mjs",
+      "bytes": 12503,
+      "sha256": "930adddc227a035e8fa59d8eb9da6c41f50da042115ec8152c2fe594dbeb8db2"
+    },
+    {
+      "file": "source/write-motion-manifest.mjs",
+      "bytes": 12873,
+      "sha256": "e04cf1115ea87b521e8be0f5819abe0e46eef8b3ce3e7314963fcae7cbc48223"
+    },
+    {
+      "file": "textures/atlas-layout.json",
+      "bytes": 786,
+      "sha256": "0b75507d87f33ea491fa55dda1d2aad5cb0b4c0228762cecd78454f7d714f1f3"
+    },
+    {
+      "file": "textures/c-atlas.png",
+      "bytes": 717198,
+      "sha256": "14a4012b62398d2ff63e226ae5accf7722aed0a5d292a4b2a2e2eeefe212acc2"
+    },
+    {
+      "file": "textures/cloth-normal.png",
+      "bytes": 214782,
+      "sha256": "c2dab32aa9a541d4375fbf825e6747f944bb80aa656f1745832dc1dd62bcfec3"
+    },
+    {
+      "file": "textures/pf-atlas.png",
+      "bytes": 723353,
+      "sha256": "8bcb0560b8822fcb768bb182fc0ea3ce78754a00cf8e4450c235188b875ce4b0"
+    },
+    {
+      "file": "textures/pg-atlas.png",
+      "bytes": 724622,
+      "sha256": "bb7f4f0fd0514879fa370f320c7186d664d5384d2f2db9b4c0095000911c09ff"
+    },
+    {
+      "file": "textures/referee-atlas.png",
+      "bytes": 832142,
+      "sha256": "094002e2df0b89ce831fd9270de7c51bd34df4ccf2a73efd6b4c5c014cd16fb7"
+    },
+    {
+      "file": "textures/sf-atlas.png",
+      "bytes": 819003,
+      "sha256": "b1ba9753968210c765b3e70d52e43e8a67013f77c2823167620673694c5f44b1"
+    },
+    {
+      "file": "textures/sg-atlas.png",
+      "bytes": 818218,
+      "sha256": "e590c80444085e14e464d0d58f87577e6862c762a0b4c3e02e5e2e4a656cb63c"
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "bytes": 13640,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "vendor/LICENSE.meshoptimizer",
+      "bytes": 1079,
+      "sha256": "e4a26033e3551fb2722888949fbb41e77aee628e8e8f04dcffeee301aa7e5634"
+    },
+    {
+      "file": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "bytes": 8019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    },
+    {
+      "file": "vendor/draco/LICENSE.draco",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "vendor/draco/README.md",
+      "bytes": 407,
+      "sha256": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923"
+    },
+    {
+      "file": "vendor/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "file": "vendor/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "file": "vendor/meshopt_decoder.module.js",
+      "bytes": 32483,
+      "sha256": "4ac97b2c44347dacb9a0ca9c3740c8678d166fdcf02bc1612f371e27418e70a7"
+    },
+    {
+      "file": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "scope": "Rendered stage screenshots, 390×844 viewport, four phases per action. Contact sheets concatenate screenshots and add phase labels without modifying the rendered model.",
+  "screenshots": [
+    {
+      "file": "fall-00.webp",
+      "role": "referee",
+      "action": "fall",
+      "phase": 0,
+      "bytes": 19792,
+      "sha256": "41cef9a6f317efb7983e7c786abd86b2bcfb483d8e990328f63f6057603bb5ab",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "fall",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "high",
+        "viewport": {
+          "width": 390,
+          "height": 471,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 36102,
+          "calls": 11,
+          "geometries": 21,
+          "textures": 23,
+          "fps": 0
+        },
+        "performance": {
+          "readyAtUtc": "2026-11-04T22:22:39.531Z",
+          "renderedFrames": 10,
+          "playbackFrames": 0,
+          "playbackWallSeconds": 0,
+          "latestRenderCpuMs": 0.6000000005587935,
+          "meanRenderCpuMs": 720.9399999999441,
+          "recentRenderCpuP95Ms": 5064,
+          "recentFrameGapMeanMs": 0,
+          "longFramesOver50ms": 0,
+          "timingScope": "Renderer CPU submission and actual wall-clock RAF gaps; no GPU timer and no physical-phone measurement."
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            3.984260443096129,
+            0.9563360620655028,
+            2.0478614885015913
+          ],
+          "target": [
+            0,
+            0.7998000061511993,
+            0.02
+          ],
+          "yaw": 1.1,
+          "pitch": 0.035,
+          "distance": 4.473371997919428
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 36098,
+            "heightMeters": 1.8600000143051147,
+            "motion": {
+              "action": "fall",
+              "time": 0,
+              "phase": 0,
+              "transition": null,
+              "contact": [],
+              "handContactErrorMeters": 0,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.1050231461039013,
+                    0
+                  ],
+                  "position": [
+                    0.20370138218037429,
+                    0.10502314610390134,
+                    0
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.10621208344367147,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037429,
+                    0.10621208344367145,
+                    -2.7755575615628914e-17
+                  ],
+                  "errorMeters": 3.925231146709438e-17
+                }
+              },
+              "soleProbeHeights": {
+                "left": 0.002893221438940472,
+                "right": 0.002842129724456112
+              },
+              "groundProbeCount": {
+                "leftFoot": 42,
+                "rightFoot": 41,
+                "leftHand": 22,
+                "rightHand": 22,
+                "body": 4023
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1160000085830688,
+                0.34
+              ],
+              "ballVisible": false,
+              "frame": 7,
+              "rootMotion": false,
+              "handTargets": {
+                "left": [
+                  0.26040000200271607,
+                  1.0230000078678132,
+                  0.025
+                ],
+                "right": [
+                  -0.26040000200271607,
+                  1.0230000078678132,
+                  0.025
+                ]
+              },
+              "elbows": {
+                "left": [
+                  0.2364357574988557,
+                  1.2504943953774463,
+                  0.1913473440301934
+                ],
+                "right": [
+                  -0.23643578630039438,
+                  1.2504941882244143,
+                  0.19134759905123655
+                ]
+              },
+              "ballVelocityMetersPerSecond": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "fall-01.webp",
+      "role": "referee",
+      "action": "fall",
+      "phase": 0.55,
+      "bytes": 16800,
+      "sha256": "db93bce12081458121174bb6aa0b7e940e8e41733df3600fa8f5bd066c998521",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "fall",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "high",
+        "viewport": {
+          "width": 390,
+          "height": 471,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 36102,
+          "calls": 11,
+          "geometries": 21,
+          "textures": 23,
+          "fps": 0
+        },
+        "performance": {
+          "readyAtUtc": "2026-11-04T22:22:39.531Z",
+          "renderedFrames": 15,
+          "playbackFrames": 0,
+          "playbackWallSeconds": 0,
+          "latestRenderCpuMs": 0.5,
+          "meanRenderCpuMs": 480.946666666617,
+          "recentRenderCpuP95Ms": 5064,
+          "recentFrameGapMeanMs": 0,
+          "longFramesOver50ms": 0,
+          "timingScope": "Renderer CPU submission and actual wall-clock RAF gaps; no GPU timer and no physical-phone measurement."
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            3.984260443096129,
+            0.9563360620655028,
+            2.0478614885015913
+          ],
+          "target": [
+            0,
+            0.7998000061511993,
+            0.02
+          ],
+          "yaw": 1.1,
+          "pitch": 0.035,
+          "distance": 4.473371997919428
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 36098,
+            "heightMeters": 1.8600000143051147,
+            "motion": {
+              "action": "fall",
+              "time": 1.54,
+              "phase": 0.55,
+              "transition": null,
+              "contact": [],
+              "handContactErrorMeters": 0,
+              "footErrors": {
+                "left": {
+                  "support": false,
+                  "target": [
+                    0.33,
+                    0.11460444718490409,
+                    -0.12
+                  ],
+                  "position": [
+                    0.32999999999999996,
+                    0.11460444718490431,
+                    -0.12
+                  ],
+                  "errorMeters": 2.2887833992611187e-16
+                },
+                "right": {
+                  "support": false,
+                  "target": [
+                    0.65,
+                    0.11792552414213359,
+                    0.12
+                  ],
+                  "position": [
+                    0.6500000000000001,
+                    0.11792552414213368,
+                    0.12000000000000019
+                  ],
+                  "errorMeters": 2.4394924734781536e-16
+                }
+              },
+              "soleProbeHeights": {
+                "left": 0.029625250023536824,
+                "right": 0.039535667177783944
+              },
+              "groundProbeCount": {
+                "leftFoot": 42,
+                "rightFoot": 41,
+                "leftHand": 22,
+                "rightHand": 22,
+                "body": 4023
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1160000085830688,
+                0.34
+              ],
+              "ballVisible": false,
+              "frame": 9,
+              "rootMotion": false,
+              "handTargets": {
+                "left": [
+                  -0.36,
+                  0.10999999999999999,
+                  0.24
+                ],
+                "right": [
+                  -0.44,
+                  0.09999999999999998,
+                  0.16
+                ]
+              },
+              "elbows": {
+                "left": [
+                  -0.45968978643489244,
+                  0.34863222454352727,
+                  0.35452522918072105
+                ],
+                "right": [
+                  -0.6475550776186425,
+                  0.07027341490439198,
+                  0.34983316183884433
+                ]
+              },
+              "ballVelocityMetersPerSecond": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "fall-02.webp",
+      "role": "referee",
+      "action": "fall",
+      "phase": 0.7678571429,
+      "bytes": 19682,
+      "sha256": "1dd55dd41af0cdf33faec8fd0d77fb7b32e6b1560c9073d83e6baaac8cebdad6",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "fall",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "high",
+        "viewport": {
+          "width": 390,
+          "height": 471,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 36102,
+          "calls": 11,
+          "geometries": 21,
+          "textures": 23,
+          "fps": 0
+        },
+        "performance": {
+          "readyAtUtc": "2026-11-04T22:22:39.531Z",
+          "renderedFrames": 20,
+          "playbackFrames": 0,
+          "playbackWallSeconds": 0,
+          "latestRenderCpuMs": 0.6000000005587935,
+          "meanRenderCpuMs": 361.2249999999534,
+          "recentRenderCpuP95Ms": 5064,
+          "recentFrameGapMeanMs": 0,
+          "longFramesOver50ms": 0,
+          "timingScope": "Renderer CPU submission and actual wall-clock RAF gaps; no GPU timer and no physical-phone measurement."
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            3.984260443096129,
+            0.9563360620655028,
+            2.0478614885015913
+          ],
+          "target": [
+            0,
+            0.7998000061511993,
+            0.02
+          ],
+          "yaw": 1.1,
+          "pitch": 0.035,
+          "distance": 4.473371997919428
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 36098,
+            "heightMeters": 1.8600000143051147,
+            "motion": {
+              "action": "fall",
+              "time": 2.15000000012,
+              "phase": 0.7678571429000001,
+              "transition": null,
+              "contact": [],
+              "handContactErrorMeters": 0,
+              "footErrors": {
+                "left": {
+                  "support": false,
+                  "target": [
+                    0.13769770403762754,
+                    0.09635774759291074,
+                    -0.3764030612831633
+                  ],
+                  "position": [
+                    0.13769770403762763,
+                    0.0963577475929106,
+                    -0.37640306128316336
+                  ],
+                  "errorMeters": 1.7109685898544713e-16
+                },
+                "right": {
+                  "support": false,
+                  "target": [
+                    -0.12836643603817433,
+                    0.11947169269846032,
+                    0.3214595481510569
+                  ],
+                  "position": [
+                    -0.1283664360381745,
+                    0.1194716926984602,
+                    0.32145954815105715
+                  ],
+                  "errorMeters": 3.469446951953614e-16
+                }
+              },
+              "soleProbeHeights": {
+                "left": 0.00526094065312515,
+                "right": 0.006250395893960868
+              },
+              "groundProbeCount": {
+                "leftFoot": 42,
+                "rightFoot": 41,
+                "leftHand": 22,
+                "rightHand": 22,
+                "body": 4023
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1160000085830688,
+                0.34
+              ],
+              "ballVisible": false,
+              "frame": 11,
+              "rootMotion": false,
+              "handTargets": {
+                "left": [
+                  0.12252890794215732,
+                  0.5201250263181423,
+                  0.2690730827829247
+                ],
+                "right": [
+                  -0.23342403440447607,
+                  0.44581728333559656,
+                  0.2625739911661541
+                ]
+              },
+              "elbows": {
+                "left": [
+                  0.12063001050189512,
+                  0.7915233734505698,
+                  0.34868935995801764
+                ],
+                "right": [
+                  -0.2669960310245302,
+                  0.716163103292501,
+                  0.33863625589204904
+                ]
+              },
+              "ballVelocityMetersPerSecond": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "fall-03.webp",
+      "role": "referee",
+      "action": "fall",
+      "phase": 0.95,
+      "bytes": 21010,
+      "sha256": "6a4118ae5ab68397da08cb5fe3244bd4a70bc232e86a4e20c6c495ffdde18d92",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "fall",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "high",
+        "viewport": {
+          "width": 390,
+          "height": 471,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 36102,
+          "calls": 11,
+          "geometries": 21,
+          "textures": 23,
+          "fps": 0
+        },
+        "performance": {
+          "readyAtUtc": "2026-11-04T22:22:39.531Z",
+          "renderedFrames": 25,
+          "playbackFrames": 0,
+          "playbackWallSeconds": 0,
+          "latestRenderCpuMs": 0.40000000037252903,
+          "meanRenderCpuMs": 289.4479999999702,
+          "recentRenderCpuP95Ms": 2062.5,
+          "recentFrameGapMeanMs": 0,
+          "longFramesOver50ms": 0,
+          "timingScope": "Renderer CPU submission and actual wall-clock RAF gaps; no GPU timer and no physical-phone measurement."
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            3.984260443096129,
+            0.9563360620655028,
+            2.0478614885015913
+          ],
+          "target": [
+            0,
+            0.7998000061511993,
+            0.02
+          ],
+          "yaw": 1.1,
+          "pitch": 0.035,
+          "distance": 4.473371997919428
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 36098,
+            "heightMeters": 1.8600000143051147,
+            "motion": {
+              "action": "fall",
+              "time": 2.6599999999999997,
+              "phase": 0.95,
+              "transition": null,
+              "contact": [],
+              "handContactErrorMeters": 0,
+              "footErrors": {
+                "left": {
+                  "support": false,
+                  "target": [
+                    0.1284375,
+                    0.1650759287368563,
+                    -0.1468750000000001
+                  ],
+                  "position": [
+                    0.12843749999999987,
+                    0.16507592873685606,
+                    -0.14687500000000026
+                  ],
+                  "errorMeters": 3.3074585536510505e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2,
+                    0.09997820368067642,
+                    0.34
+                  ],
+                  "position": [
+                    -0.20000000000000004,
+                    0.09997820368067639,
+                    0.33999999999999997
+                  ],
+                  "errorMeters": 6.798699777552591e-17
+                }
+              },
+              "soleProbeHeights": {
+                "left": 0.03593486364526158,
+                "right": 0.002900263030257347
+              },
+              "groundProbeCount": {
+                "leftFoot": 42,
+                "rightFoot": 41,
+                "leftHand": 22,
+                "rightHand": 22,
+                "body": 4023
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1160000085830688,
+                0.34
+              ],
+              "ballVisible": false,
+              "frame": 13,
+              "rootMotion": false,
+              "handTargets": {
+                "left": [
+                  0.29335625205188987,
+                  0.960375007241964,
+                  0.21562500000000004
+                ],
+                "right": [
+                  -0.29335625205188987,
+                  0.960375007241964,
+                  0.21562500000000004
+                ]
+              },
+              "elbows": {
+                "left": [
+                  0.2452459023804946,
+                  1.190719861058907,
+                  0.3725519346016509
+                ],
+                "right": [
+                  -0.2509127451482012,
+                  1.189217341755982,
+                  0.37633948004567225
+                ]
+              },
+              "ballVelocityMetersPerSecond": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "error": null
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "file": "sheet-fall.webp",
+      "action": "fall",
+      "bytes": 77234,
+      "sha256": "85be05dd62597b1401318dfac2a1d16cbaa8bb76ada610e8496748987c708aed"
+    }
+  ],
+  "pass": true
+}
