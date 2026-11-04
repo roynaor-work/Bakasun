@@ -44,6 +44,7 @@ export function startHoops(ctx){
   setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
   dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
+  get ready(){return Boolean(view)&&!error;},get loadFailed(){return error;},
   get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying};},
  };
  const canvas=ctx.canvas;if(!canvas)return session;
@@ -99,7 +100,7 @@ export function startHoops(ctx){
   const forceFail=dev&&params.get('hoopsFail')==='1';
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
-  const quality=Number(params.get('hoopsQuality')||setup.quality||2);
+  const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
   const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261102-2');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
