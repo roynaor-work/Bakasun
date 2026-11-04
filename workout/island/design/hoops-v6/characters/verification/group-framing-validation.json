@@ -1,0 +1,1738 @@
+{
+  "schemaVersion": 1,
+  "scope": "Full deformed body vertex projection for lineup and 6v6 plus official, across all 17 clips at normalized phases 0/.25/.5/.75/1, both portrait and broadcast cameras, in both required viewports. Detail camera and deliberate user orbit/zoom are excluded.",
+  "phases": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "records": [
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "lineup",
+      "camera": "portrait",
+      "actors": 6,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5053868839058956,
+            "maxX": 0.49973336596182116,
+            "minY": -0.2708481284040579,
+            "maxY": 0.13546545277664482
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5854165837784785,
+            "maxX": 0.5269404394679151,
+            "minY": -0.26659366680229635,
+            "maxY": 0.13001404521238655
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5759037494895947,
+            "maxX": 0.5422795242448291,
+            "minY": -0.26618466606952446,
+            "maxY": 0.13075375821702342
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5474389470718695,
+            "maxX": 0.5394242333595229,
+            "minY": -0.2710046192121933,
+            "maxY": 0.10611311918944576
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5195223269328231,
+            "maxX": 0.5146150205820343,
+            "minY": -0.26853813857419606,
+            "maxY": 0.10558838112459434
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.522429754609664,
+            "maxX": 0.5194412832169086,
+            "minY": -0.41797051344859615,
+            "maxY": 0.04620778673427766
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.6166405457554115,
+            "maxX": 0.6205401246579458,
+            "minY": -0.41578850361518127,
+            "maxY": 0.1591903523846709
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.591964895292515,
+            "maxX": 0.5252157934937082,
+            "minY": -0.4137910363483367,
+            "maxY": 0.029649339561664188
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5729058098433258,
+            "maxX": 0.5967288412577716,
+            "minY": -0.4158928894324954,
+            "maxY": 0.20699355478833756
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5250788461198578,
+            "maxX": 0.523792156237058,
+            "minY": -0.41622734458915767,
+            "maxY": 0.2708481950853657
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5236765773166839,
+            "maxX": 0.5069016568510987,
+            "minY": -0.4162273249444803,
+            "maxY": 0.175725571364142
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5328206733027651,
+            "maxX": 0.5015850937262223,
+            "minY": -0.2707446352382697,
+            "maxY": 0.13535976508448025
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5425437252641981,
+            "maxX": 0.5331036706125942,
+            "minY": -0.26919831785739334,
+            "maxY": 0.11811442369313649
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5221398916536245,
+            "maxX": 0.5043640193956404,
+            "minY": -0.26672684272636055,
+            "maxY": 0.1414516227255134
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5131539905802027,
+            "maxX": 0.5031540603768164,
+            "minY": -0.27240987137435974,
+            "maxY": 0.1360608106016903
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.6232372796014517,
+            "maxX": 0.627496473987365,
+            "minY": -0.2724149338357219,
+            "maxY": 0.053393174297973016
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5131103052042997,
+            "maxX": 0.5188444444603912,
+            "minY": -0.4166471985601066,
+            "maxY": 0.06221551680863888
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "lineup",
+      "camera": "broadcast",
+      "actors": 6,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.38925668575363287,
+            "maxX": 0.42174789695840137,
+            "minY": -0.3625329961972129,
+            "maxY": 0.17063791662531683
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.41866885116513963,
+            "maxX": 0.4816409474775654,
+            "minY": -0.3522841147318678,
+            "maxY": 0.15957387724240646
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.39745980749524484,
+            "maxX": 0.47569966457577645,
+            "minY": -0.3544232139081605,
+            "maxY": 0.16119384938964124
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4065223852194795,
+            "maxX": 0.4657970294610598,
+            "minY": -0.36046452337786655,
+            "maxY": 0.14454373678843072
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4077683212659188,
+            "maxX": 0.44865185718123335,
+            "minY": -0.3591669653033169,
+            "maxY": 0.14498971265233856
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3981631721517112,
+            "maxX": 0.4617897913980139,
+            "minY": -0.47574141990047863,
+            "maxY": 0.08067672256305129
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4356246365283903,
+            "maxX": 0.4494890134695452,
+            "minY": -0.49266063158259243,
+            "maxY": 0.1793658589641617
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3949489989653654,
+            "maxX": 0.41610045302644516,
+            "minY": -0.4749705082186228,
+            "maxY": 0.07369244594588152
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.47203531965944984,
+            "maxX": 0.4417107861074361,
+            "minY": -0.4891803369047451,
+            "maxY": 0.24098404711630259
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.38872259572440165,
+            "maxX": 0.44646152909737463,
+            "minY": -0.48140877762637513,
+            "maxY": 0.2813529841418971
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3849305266289435,
+            "maxX": 0.44102559013704873,
+            "minY": -0.48130331427480644,
+            "maxY": 0.20379971740513753
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3893206583015778,
+            "maxX": 0.4583271120506291,
+            "minY": -0.3697580814954585,
+            "maxY": 0.1703872713906645
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.40794762296690135,
+            "maxX": 0.46848081513925616,
+            "minY": -0.36584872015298936,
+            "maxY": 0.1593597057865919
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4420751206738773,
+            "maxX": 0.45643677331842103,
+            "minY": -0.35185166619111224,
+            "maxY": 0.17244932851353378
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.44411273749849756,
+            "maxX": 0.47375947847024796,
+            "minY": -0.37435085822857866,
+            "maxY": 0.1722815206684852
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4327880941567692,
+            "maxX": 0.5240231952799492,
+            "minY": -0.38487980664766797,
+            "maxY": 0.08598590072507534
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4043751008093799,
+            "maxX": 0.4202908232130135,
+            "minY": -0.4797093032522288,
+            "maxY": 0.11171725443088712
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "scrimmage",
+      "camera": "portrait",
+      "actors": 13,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5812827866140264,
+            "maxX": 0.543460805294222,
+            "minY": -0.33884837907403836,
+            "maxY": 0.14037553671190922
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.6118306014717309,
+            "maxX": 0.5582973346616807,
+            "minY": -0.3318232767090975,
+            "maxY": 0.13467341445138387
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5927797206751121,
+            "maxX": 0.5533422643678382,
+            "minY": -0.33111153045655406,
+            "maxY": 0.1351715063901114
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5956123112571803,
+            "maxX": 0.5423704364011646,
+            "minY": -0.3439795708707086,
+            "maxY": 0.12533693344307145
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5867876547538932,
+            "maxX": 0.5474435801865023,
+            "minY": -0.33705412050118927,
+            "maxY": 0.12556847940527252
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5731682285699691,
+            "maxX": 0.5439644944155038,
+            "minY": -0.4157030529002683,
+            "maxY": 0.08456244016455065
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.6040079669926992,
+            "maxX": 0.5859196332089004,
+            "minY": -0.41495739160744116,
+            "maxY": 0.1397827532351153
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5914174108302777,
+            "maxX": 0.5511899293189078,
+            "minY": -0.40518402564115685,
+            "maxY": 0.08246387232020284
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.6222543483194366,
+            "maxX": 0.6091981631619552,
+            "minY": -0.4204819711769507,
+            "maxY": 0.17448345676204882
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5756584795462507,
+            "maxX": 0.5407725747536002,
+            "minY": -0.4162186702820391,
+            "maxY": 0.19569968205202504
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5724172154085565,
+            "maxX": 0.5350247206082821,
+            "minY": -0.4162186578689284,
+            "maxY": 0.1525284856707836
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5814129116944958,
+            "maxX": 0.5432616451460278,
+            "minY": -0.3387892208606822,
+            "maxY": 0.1405862157461999
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5895745815294315,
+            "maxX": 0.5513465183574119,
+            "minY": -0.3429492433049089,
+            "maxY": 0.1326637007235205
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5926649764627135,
+            "maxX": 0.5775246752272488,
+            "minY": -0.3271376151701613,
+            "maxY": 0.14124888414991632
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5946157793816956,
+            "maxX": 0.5701688854573331,
+            "minY": -0.3372349708064783,
+            "maxY": 0.14195412228952264
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.6196861837341044,
+            "maxX": 0.5836605862305879,
+            "minY": -0.3668690549519308,
+            "maxY": 0.09355745420372091
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5859106111683502,
+            "maxX": 0.5484182692087752,
+            "minY": -0.4148870352342429,
+            "maxY": 0.10119907096086223
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "scrimmage",
+      "camera": "broadcast",
+      "actors": 13,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45318523856553655,
+            "maxX": 0.6052183665692005,
+            "minY": -0.3696558137139388,
+            "maxY": 0.18610209063890248
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4645555641140086,
+            "maxX": 0.6213683104258363,
+            "minY": -0.36420567579393776,
+            "maxY": 0.18195154600176405
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45633748676161223,
+            "maxX": 0.6305952025562875,
+            "minY": -0.36333503948807694,
+            "maxY": 0.1823074824942838
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45333121712545577,
+            "maxX": 0.6265713877477246,
+            "minY": -0.37354933938343876,
+            "maxY": 0.171501591905552
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4747357272122417,
+            "maxX": 0.6140197308808966,
+            "minY": -0.3690205092329551,
+            "maxY": 0.17150725812858936
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.46886548713396886,
+            "maxX": 0.6089961189000822,
+            "minY": -0.44404905511693565,
+            "maxY": 0.13058593764676435
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.46274718179265534,
+            "maxX": 0.6658905619457126,
+            "minY": -0.44950657226689367,
+            "maxY": 0.18069282316479032
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45588068649968877,
+            "maxX": 0.6061588424187204,
+            "minY": -0.44476326788652015,
+            "maxY": 0.12926899095257513
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4922411120011961,
+            "maxX": 0.6502150892375655,
+            "minY": -0.4495509307470417,
+            "maxY": 0.20970348338395525
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.44976503303421783,
+            "maxX": 0.6173034799261901,
+            "minY": -0.4468110777831848,
+            "maxY": 0.22939793721339866
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4468936072027259,
+            "maxX": 0.6007595720993136,
+            "minY": -0.446742627407269,
+            "maxY": 0.18931071124392887
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45293674798361766,
+            "maxX": 0.6061516046141764,
+            "minY": -0.37290606374300056,
+            "maxY": 0.18598552447736455
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.46027480784650976,
+            "maxX": 0.6273457877396836,
+            "minY": -0.37509561607261693,
+            "maxY": 0.17709514311770258
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5228047754576016,
+            "maxX": 0.6080122861650903,
+            "minY": -0.35785109516700503,
+            "maxY": 0.18623867659285848
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.5172785523691413,
+            "maxX": 0.6069150445082457,
+            "minY": -0.36338613371884465,
+            "maxY": 0.18773128728393815
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.45097290229986176,
+            "maxX": 0.6748238896690298,
+            "minY": -0.3880832550790354,
+            "maxY": 0.1409002226715473
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4507348466978305,
+            "maxX": 0.6073466879819618,
+            "minY": -0.44517079402189,
+            "maxY": 0.14329379452150576
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "mode": "lineup",
+      "camera": "portrait",
+      "actors": 6,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4046415312495518,
+            "maxX": 0.43064539991332845,
+            "minY": -0.6383287427820088,
+            "maxY": 0.3125448125338956
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4712201886314062,
+            "maxX": 0.4641538559150484,
+            "minY": -0.6256333747891893,
+            "maxY": 0.30065643088102895
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.46819796500843935,
+            "maxX": 0.47606225034636945,
+            "minY": -0.6220831635934528,
+            "maxY": 0.3025725703492644
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4369724313544899,
+            "maxX": 0.470606037658809,
+            "minY": -0.6407492407520173,
+            "maxY": 0.2459526960114907
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.41586850750144067,
+            "maxX": 0.4495365712616643,
+            "minY": -0.6305041073727871,
+            "maxY": 0.2446895176126435
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3158521498409304,
+            "maxX": 0.3272977078425586,
+            "minY": -0.7159177693855675,
+            "maxY": 0.07968975383364577
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.377477608566393,
+            "maxX": 0.38728608615082033,
+            "minY": -0.7149535128523521,
+            "maxY": 0.2711117488940174
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.36180233924421984,
+            "maxX": 0.3267729790575578,
+            "minY": -0.705624462603464,
+            "maxY": 0.05036602108705689
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3423883659142007,
+            "maxX": 0.36795887597184623,
+            "minY": -0.710441277779037,
+            "maxY": 0.3490565879947492
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.31685048272432537,
+            "maxX": 0.3310856420147562,
+            "minY": -0.7112684228092716,
+            "maxY": 0.4612852498095793
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.31651331250551823,
+            "maxX": 0.319233658060058,
+            "minY": -0.7112683895101465,
+            "maxY": 0.2986535649623549
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4367325897445509,
+            "maxX": 0.4393153734733815,
+            "minY": -0.6380875499606428,
+            "maxY": 0.3124082730251547
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4383051950721287,
+            "maxX": 0.4687366699343789,
+            "minY": -0.6331012207627551,
+            "maxY": 0.2733473125231606
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.42308197325602337,
+            "maxX": 0.43629014161704677,
+            "minY": -0.6254540485504406,
+            "maxY": 0.3295046884157447
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.4205845489145122,
+            "maxX": 0.4383877504250544,
+            "minY": -0.651620610446157,
+            "maxY": 0.3139449895436662
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.5129051464605031,
+            "maxX": 0.541321032955297,
+            "minY": -0.6444215310067886,
+            "maxY": 0.1266012529336918
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.3086469316067051,
+            "maxX": 0.32387669151233156,
+            "minY": -0.7118310609689324,
+            "maxY": 0.10531169392405726
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "mode": "lineup",
+      "camera": "broadcast",
+      "actors": 6,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22169447234242423,
+            "maxX": 0.22489741931730117,
+            "minY": -0.5564636215827629,
+            "maxY": 0.2533565353678114
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.24122062973898456,
+            "maxX": 0.2569274199218371,
+            "minY": -0.5394151808647113,
+            "maxY": 0.23739983983158236
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22589109468090665,
+            "maxX": 0.25312912512506625,
+            "minY": -0.5438327459928581,
+            "maxY": 0.23971322489518385
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.23070644734955584,
+            "maxX": 0.24720877024911705,
+            "minY": -0.5536866896538034,
+            "maxY": 0.21427121545774802
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22978742544226316,
+            "maxX": 0.23922508234272793,
+            "minY": -0.5514376622163931,
+            "maxY": 0.21487970440574675
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.1886093766512228,
+            "maxX": 0.21464939737634386,
+            "minY": -0.6152956634572205,
+            "maxY": 0.10295618740185548
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.20714526964296262,
+            "maxX": 0.20564491787053255,
+            "minY": -0.639203640441055,
+            "maxY": 0.229658721479218
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.18857801658418727,
+            "maxX": 0.19217253592761666,
+            "minY": -0.6144447374480595,
+            "maxY": 0.09361783477385238
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22387885924816261,
+            "maxX": 0.20168672737003182,
+            "minY": -0.6341051020898151,
+            "maxY": 0.30752125027703353
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.18479666051887406,
+            "maxX": 0.20684127523869741,
+            "minY": -0.622946090734683,
+            "maxY": 0.36118023131950133
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.1824635008468347,
+            "maxX": 0.20340723519415205,
+            "minY": -0.6228124033781355,
+            "maxY": 0.2605355338962825
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22181525703807053,
+            "maxX": 0.2450085289342065,
+            "minY": -0.5694150975563027,
+            "maxY": 0.2529497450622499
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.22851039466229583,
+            "maxX": 0.25018809304620115,
+            "minY": -0.5627104289093481,
+            "maxY": 0.23599376202187047
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.24579568271103464,
+            "maxX": 0.24511491478853298,
+            "minY": -0.5408871104987648,
+            "maxY": 0.25638464429384833
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.24658762631649092,
+            "maxX": 0.2536820880018125,
+            "minY": -0.5783569268087471,
+            "maxY": 0.25554548539983074
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.24588106581125221,
+            "maxX": 0.27850457824065133,
+            "minY": -0.5966980350726417,
+            "maxY": 0.12791473654837726
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 30,
+          "ndc": {
+            "minX": -0.19306762190722038,
+            "maxX": 0.19407688618832708,
+            "minY": -0.6205770042742015,
+            "maxY": 0.1421625070468967
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "mode": "scrimmage",
+      "camera": "portrait",
+      "actors": 13,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3956313507024175,
+            "maxX": 0.35137836159006525,
+            "minY": -0.6521463885597358,
+            "maxY": 0.2412368192191361
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4209088019168017,
+            "maxX": 0.35824182062016274,
+            "minY": -0.6368761790053237,
+            "maxY": 0.23194131816835295
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4078833480547067,
+            "maxX": 0.3566305037327635,
+            "minY": -0.6353670965996402,
+            "maxY": 0.23278678006032028
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.40362863204334376,
+            "maxX": 0.3504707598971077,
+            "minY": -0.66421113063768,
+            "maxY": 0.21463540166216605
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.39645085237831645,
+            "maxX": 0.3525141292232318,
+            "minY": -0.6486322153969798,
+            "maxY": 0.21500442911856665
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.33782509890838286,
+            "maxX": 0.3097154282586473,
+            "minY": -0.6920337235835283,
+            "maxY": 0.13047392877692648
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.357108776031224,
+            "maxX": 0.3368685841400924,
+            "minY": -0.6912435457866054,
+            "maxY": 0.2163724272827656
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3562170217765904,
+            "maxX": 0.3145431538758328,
+            "minY": -0.6723495763349991,
+            "maxY": 0.12654569685508785
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3681500863463454,
+            "maxX": 0.34892347101972565,
+            "minY": -0.704957684951007,
+            "maxY": 0.2691118668749146
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.34524583588935176,
+            "maxX": 0.3121937187383787,
+            "minY": -0.6930536314226685,
+            "maxY": 0.3037583671666454
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.34201758500898544,
+            "maxX": 0.3079799362605805,
+            "minY": -0.6930536111549327,
+            "maxY": 0.23577733466588485
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.39572288346210255,
+            "maxX": 0.351268732439477,
+            "minY": -0.6520375677209663,
+            "maxY": 0.24162626964931375
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.4013633225312416,
+            "maxX": 0.3569875600047964,
+            "minY": -0.6618966310146459,
+            "maxY": 0.22768511318782284
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.39636720761982885,
+            "maxX": 0.3667433785326521,
+            "minY": -0.6269723090410803,
+            "maxY": 0.24307401093114633
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3989878096331512,
+            "maxX": 0.36206199986164056,
+            "minY": -0.6511518257797283,
+            "maxY": 0.24390928751228727
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.42017077741943154,
+            "maxX": 0.37486810475110854,
+            "minY": -0.7162178370855764,
+            "maxY": 0.16078953670437723
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3484279131365553,
+            "maxX": 0.3146404535899611,
+            "minY": -0.69043445098008,
+            "maxY": 0.15564450892527334
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "mode": "scrimmage",
+      "camera": "broadcast",
+      "actors": 13,
+      "clips": [
+        {
+          "name": "idle",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2669900310678995,
+            "maxX": 0.3496793265246199,
+            "minY": -0.6226679311634328,
+            "maxY": 0.27919232923442244
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2721330839833266,
+            "maxX": 0.35964060768640577,
+            "minY": -0.6125309317097224,
+            "maxY": 0.2732165670984023
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.26658838296222037,
+            "maxX": 0.36474947579243566,
+            "minY": -0.6108370381298058,
+            "maxY": 0.27374506988942016
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2652742433366215,
+            "maxX": 0.3615483961098583,
+            "minY": -0.6304275223455742,
+            "maxY": 0.25735475765680527
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.27698173425423456,
+            "maxX": 0.35528762175620576,
+            "minY": -0.6216500621930413,
+            "maxY": 0.2573594364947192
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.24610560929171946,
+            "maxX": 0.3170910451026612,
+            "minY": -0.6595290386876643,
+            "maxY": 0.17925886411015066
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.24268874494213769,
+            "maxX": 0.3449423849771143,
+            "minY": -0.6686952378526508,
+            "maxY": 0.24841773136523237
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2401795954721514,
+            "maxX": 0.31345458405611093,
+            "minY": -0.6606057631801189,
+            "maxY": 0.17677949681335114
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2570877042636565,
+            "maxX": 0.3357874215233653,
+            "minY": -0.6687693060234648,
+            "maxY": 0.28780158692036406
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.23719271311729415,
+            "maxX": 0.3229908298962449,
+            "minY": -0.6637587660524007,
+            "maxY": 0.31827065392453824
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2349725953619948,
+            "maxX": 0.31248189084801753,
+            "minY": -0.6636602424660841,
+            "maxY": 0.2602148419731955
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.26685840280307255,
+            "maxX": 0.3510636560608255,
+            "minY": -0.6292023915181891,
+            "maxY": 0.27903368354747915
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.26861294991949614,
+            "maxX": 0.3637766531623944,
+            "minY": -0.6334394092589866,
+            "maxY": 0.26577884180959094
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.304285839431444,
+            "maxX": 0.3514356692080346,
+            "minY": -0.6003265684722233,
+            "maxY": 0.27967540539303776
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.3016880539687153,
+            "maxX": 0.35028237166419957,
+            "minY": -0.6108426943978253,
+            "maxY": 0.28156011255529734
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.2632413496523076,
+            "maxX": 0.38653552124167806,
+            "minY": -0.6595148433464391,
+            "maxY": 0.21202832650700554
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "groupFrames": 5,
+          "actorPoses": 65,
+          "ndc": {
+            "minX": -0.23810276231359906,
+            "maxX": 0.3154272186284637,
+            "minY": -0.6610328924661897,
+            "maxY": 0.19639949323165404
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    }
+  ],
+  "groupFrames": 680,
+  "actorPoses": 6460,
+  "pageErrors": [],
+  "sourceSha256": "e7ac9589ac510460fdf06441367444de775b7276f3fb5a35e50fc3ffcb740e4b",
+  "pass": true
+}

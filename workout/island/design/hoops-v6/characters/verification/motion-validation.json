@@ -1,0 +1,3670 @@
+{
+  "sampleRateHz": 60,
+  "toleranceMeters": 0.001,
+  "scope": "Independent three.js r160 CPU skinning over every delivered vertex at 60Hz. Includes embedded clips and PG clips transferred directly onto every other model. These are sampled bounds, not a proof over continuous time.",
+  "assets": [
+    {
+      "file": "models/pg-lod0.glb",
+      "poses": 1504,
+      "minY": 0.007969181347267557,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.007999962908207365,
+          "maxMinimumY": 0.007999962908207365,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.007969181347267557,
+          "maxMinimumY": 0.012252342309162596,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.007997499649963064,
+          "maxMinimumY": 0.01225195810136695,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007980252231922464,
+          "maxMinimumY": 0.008370940182889239,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007980978587162828,
+          "maxMinimumY": 0.008143984283718372,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007997586871197395,
+          "maxMinimumY": 0.029469754875294248,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008317371472590058,
+          "maxMinimumY": 0.32013934405233657,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.007996465382058195,
+          "maxMinimumY": 0.15785813282376104,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.008005640646787113,
+          "maxMinimumY": 0.6480195438340748,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.007996991913458755,
+          "maxMinimumY": 1.071144073833187,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.007996982168374555,
+          "maxMinimumY": 0.5978283547741072,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008069173220448062,
+          "maxMinimumY": 0.010028601735257717,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007987503662544177,
+          "maxMinimumY": 0.00927600853515937,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.00891847813759362,
+          "maxMinimumY": 0.1141884021446192,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007998500827732914,
+          "maxMinimumY": 0.06392831457316961,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007993955518047852,
+          "maxMinimumY": 0.01858860264641489,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.007971402489313236,
+          "maxMinimumY": 0.00865316064109468,
+          "pass": true
+        }
+      ],
+      "cross": [],
+      "pass": true,
+      "sha256": "f2d1957913100ecdbb9bdf9d3fd1d8c78416a7794983c87fb272e08774d6a2c9",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/pg-lod1.glb",
+      "poses": 3008,
+      "minY": 0.007986328060473877,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.009328051563835047,
+          "maxMinimumY": 0.009328051563835047,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.009072320869260677,
+          "maxMinimumY": 0.01405994107251379,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.009072219772487745,
+          "maxMinimumY": 0.01406148297939089,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.00798832811258239,
+          "maxMinimumY": 0.008265216715513958,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.008354176824196119,
+          "maxMinimumY": 0.008838547199035207,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007987402910781358,
+          "maxMinimumY": 0.028743313911419967,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008006681177782204,
+          "maxMinimumY": 0.3197842106424437,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.007987366029156395,
+          "maxMinimumY": 0.15734535586555032,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.008008154480573303,
+          "maxMinimumY": 0.6463394044025021,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008315330888736362,
+          "maxMinimumY": 1.071533156905803,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008314609166855159,
+          "maxMinimumY": 0.5982174323728393,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008006838705976538,
+          "maxMinimumY": 0.01108240690126169,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007992756915492734,
+          "maxMinimumY": 0.008832176039678842,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.007996852011459395,
+          "maxMinimumY": 0.11366018851653811,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007988064282215324,
+          "maxMinimumY": 0.06312803868042767,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007986328060473877,
+          "maxMinimumY": 0.018682804180793336,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008895856359746506,
+          "maxMinimumY": 0.00989092939566423,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.009328051563835047,
+          "maxMinimumY": 0.009328051563835047,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.009072320869260677,
+          "maxMinimumY": 0.01405994107251379,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.009072219772487745,
+          "maxMinimumY": 0.01406148297939089,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.00798832811258239,
+          "maxMinimumY": 0.008265216715513958,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.008354176824196119,
+          "maxMinimumY": 0.008838547199035207,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007987402910781358,
+          "maxMinimumY": 0.028743313911419967,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008006681177782204,
+          "maxMinimumY": 0.3197842106424437,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.007987366029156395,
+          "maxMinimumY": 0.15734535586555032,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.008008154480573303,
+          "maxMinimumY": 0.6463394044025021,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008315330888736362,
+          "maxMinimumY": 1.071533156905803,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008314609166855159,
+          "maxMinimumY": 0.5982174323728393,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008006838705976538,
+          "maxMinimumY": 0.01108240690126169,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007992756915492734,
+          "maxMinimumY": 0.008832176039678842,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.007996852011459395,
+          "maxMinimumY": 0.11366018851653811,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007988064282215324,
+          "maxMinimumY": 0.06312803868042767,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007986328060473877,
+          "maxMinimumY": 0.018682804180793336,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008895856359746506,
+          "maxMinimumY": 0.00989092939566423,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "0fb06b8fb1e61a2cb99b164e02bdb7d1a840e75182081164e666f4550bfa3b68",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/sg-lod0.glb",
+      "poses": 3008,
+      "minY": 0.007984827274859795,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.008770472790649951,
+          "maxMinimumY": 0.008770472790649951,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.007997351776554973,
+          "maxMinimumY": 0.020725158370419973,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.007996893166900144,
+          "maxMinimumY": 0.020725150499987414,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.0079915203856758,
+          "maxMinimumY": 0.008222089839104161,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.009532840834045583,
+          "maxMinimumY": 0.010292217746851117,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008004840323186331,
+          "maxMinimumY": 0.029277744392165198,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.009484720247867206,
+          "maxMinimumY": 0.32170354731877265,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.008000909947507568,
+          "maxMinimumY": 0.15927058193861154,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007993235517254133,
+          "maxMinimumY": 0.650586268770543,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.009365684496672728,
+          "maxMinimumY": 1.0812938375025887,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.009688356423744307,
+          "maxMinimumY": 0.607978232809327,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.009100255470748185,
+          "maxMinimumY": 0.01135865774734661,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.008008031566376068,
+          "maxMinimumY": 0.010452133312644824,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.007997446410560617,
+          "maxMinimumY": 0.11968914423445945,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007984827274859795,
+          "maxMinimumY": 0.07092094678744233,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.00798491920702088,
+          "maxMinimumY": 0.017759348801707417,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008256906481869703,
+          "maxMinimumY": 0.009355249052988302,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.017752410129119666,
+          "maxMinimumY": 0.017752410129119666,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.015718743440488,
+          "maxMinimumY": 0.020724936516930623,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.015964205959973353,
+          "maxMinimumY": 0.020725325634380776,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.018810650494650735,
+          "maxMinimumY": 0.019501968759495114,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.018749143959631506,
+          "maxMinimumY": 0.019772702225567255,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.01083638546954628,
+          "maxMinimumY": 0.029277689452174252,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.010644100276653357,
+          "maxMinimumY": 0.32170354731877265,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.01149689889810819,
+          "maxMinimumY": 0.15927053042571654,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.012317147061984807,
+          "maxMinimumY": 0.650586268770543,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.019179515900655055,
+          "maxMinimumY": 1.0812939925841194,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.019306545019498193,
+          "maxMinimumY": 0.6079782676804981,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.017821626133401113,
+          "maxMinimumY": 0.020012269037585857,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.0181998429548396,
+          "maxMinimumY": 0.020509271741186184,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.01451964854740341,
+          "maxMinimumY": 0.12621163460641907,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010591194069090988,
+          "maxMinimumY": 0.07092094678744233,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.010384852649304444,
+          "maxMinimumY": 0.025339451287141195,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.017890356168346156,
+          "maxMinimumY": 0.01937417903661492,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "ba3f02a9dd122a7b03acdb05b68dba1ac83a9a5e2fe1f2aa451c4b68a934b880",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/sg-lod1.glb",
+      "poses": 3008,
+      "minY": 0.00762625442327447,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.007999840093082789,
+          "maxMinimumY": 0.007999840093082789,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.011113041031828462,
+          "maxMinimumY": 0.021277233858987447,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.00919153887153762,
+          "maxMinimumY": 0.02127679250679596,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007971333715476503,
+          "maxMinimumY": 0.008202027033476991,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007978760410762798,
+          "maxMinimumY": 0.0081975198236548,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.00799675386156906,
+          "maxMinimumY": 0.028322537239370726,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.007996546584197753,
+          "maxMinimumY": 0.3204671319674538,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.00799613849918444,
+          "maxMinimumY": 0.15671156762658042,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.008009976158567942,
+          "maxMinimumY": 0.6486168487753787,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.00799619699296695,
+          "maxMinimumY": 1.0817633778167313,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.007996510139143426,
+          "maxMinimumY": 0.6084477601858334,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.007996750759730595,
+          "maxMinimumY": 0.0109874016501869,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.00798791077063764,
+          "maxMinimumY": 0.009235615271232385,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008572262852274904,
+          "maxMinimumY": 0.12134149805854974,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007997628066289253,
+          "maxMinimumY": 0.07276707766941978,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007992057263985164,
+          "maxMinimumY": 0.016210850088072826,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.007998087478499942,
+          "maxMinimumY": 0.010030901200712053,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.0169817635593588,
+          "maxMinimumY": 0.0169817635593588,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.016504896364038624,
+          "maxMinimumY": 0.02336096963465361,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.01702068617077688,
+          "maxMinimumY": 0.023362483203396837,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.018790463824451438,
+          "maxMinimumY": 0.019481951153015757,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.016614201802712447,
+          "maxMinimumY": 0.018281550216691006,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008842864496021244,
+          "maxMinimumY": 0.02832248229937978,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.00762625442327447,
+          "maxMinimumY": 0.3204671319674538,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.010420431084874268,
+          "maxMinimumY": 0.15671151611368542,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.010429611239500293,
+          "maxMinimumY": 0.6486168487753787,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.017173189577319475,
+          "maxMinimumY": 1.0817635270964754,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.0171700664570682,
+          "maxMinimumY": 0.6084477899170213,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.015964312580921132,
+          "maxMinimumY": 0.021034681019796803,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.01609701815327424,
+          "maxMinimumY": 0.020316051272664233,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.015094463371584743,
+          "maxMinimumY": 0.12786398839259713,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010287472730055702,
+          "maxMinimumY": 0.07276707766941978,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.009190861109211135,
+          "maxMinimumY": 0.025915543132396593,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.01711972394904003,
+          "maxMinimumY": 0.020396791190489573,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "3dd4e9ff3fea00a56ad344f2dcc4117d119c2c012026f27e42164c0f5a99049f",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/sf-lod0.glb",
+      "poses": 3008,
+      "minY": 0.007985991637425933,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.007999792411562054,
+          "maxMinimumY": 0.007999792411562054,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.008403330092111742,
+          "maxMinimumY": 0.023694706892737043,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.008006451324515653,
+          "maxMinimumY": 0.024584316549771563,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.008793343048663239,
+          "maxMinimumY": 0.009086486259317855,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.008087257378693674,
+          "maxMinimumY": 0.008950388476484336,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007996062088712527,
+          "maxMinimumY": 0.032163722963538935,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.007997012868654384,
+          "maxMinimumY": 0.3242450321570368,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.0080061860599356,
+          "maxMinimumY": 0.16176912476496239,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.00799752613718588,
+          "maxMinimumY": 0.6530027779061999,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008785211932131248,
+          "maxMinimumY": 1.0881363447397876,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008785240309230204,
+          "maxMinimumY": 0.6148206495647517,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.007996926571519465,
+          "maxMinimumY": 0.011890475085055929,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007986928982316838,
+          "maxMinimumY": 0.009457841062433282,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.0102598627957664,
+          "maxMinimumY": 0.12238861745717189,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007985991637425933,
+          "maxMinimumY": 0.07230719982639253,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.008004403687977803,
+          "maxMinimumY": 0.018473952703042376,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008215386370758523,
+          "maxMinimumY": 0.011890475085055929,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.020287637420052632,
+          "maxMinimumY": 0.020287637420052632,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.019546804105606278,
+          "maxMinimumY": 0.02646617423879079,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.020320624142326996,
+          "maxMinimumY": 0.026465537522719382,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.024348258961885468,
+          "maxMinimumY": 0.02503289709034578,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.0244528606633519,
+          "maxMinimumY": 0.025422846937237537,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.013218852087086189,
+          "maxMinimumY": 0.032163724326321606,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.013047355624191875,
+          "maxMinimumY": 0.3242450321570368,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.013935524823838807,
+          "maxMinimumY": 0.16176907325206738,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.014729225585161166,
+          "maxMinimumY": 0.6530027779061999,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.021907370995172433,
+          "maxMinimumY": 1.0881365076280265,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.022646547223649293,
+          "maxMinimumY": 0.6148208057545856,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.020356875679352893,
+          "maxMinimumY": 0.027463436521746907,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.02387346140253469,
+          "maxMinimumY": 0.02605966849093137,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.017679629206432377,
+          "maxMinimumY": 0.129808500107066,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.013567878632462968,
+          "maxMinimumY": 0.07230719982639253,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.012816408752156186,
+          "maxMinimumY": 0.03164049722077808,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.02042560263309592,
+          "maxMinimumY": 0.0270817877357192,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "1d685cd27165a8f22d7fde06fa819c9ac93e14288b439c7fb084ad546b9309b4",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/sf-lod1.glb",
+      "poses": 3008,
+      "minY": 0.007977540881840349,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.01042448536806999,
+          "maxMinimumY": 0.01042448536806999,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.008004851433132024,
+          "maxMinimumY": 0.025461149025350495,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.008896395451726446,
+          "maxMinimumY": 0.026350708096993632,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007982830628621946,
+          "maxMinimumY": 0.008210091450859453,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007984758756954957,
+          "maxMinimumY": 0.00820088641879928,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007995471104512139,
+          "maxMinimumY": 0.03275000241997956,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008058485573051862,
+          "maxMinimumY": 0.32269683536400895,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.007991723647817,
+          "maxMinimumY": 0.16186131270010978,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007993880556949625,
+          "maxMinimumY": 0.6507490080759155,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008005609432391569,
+          "maxMinimumY": 1.0907524043084633,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008005758261115967,
+          "maxMinimumY": 0.6174366757962033,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.00907392808644573,
+          "maxMinimumY": 0.015066503432935736,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007993578626455358,
+          "maxMinimumY": 0.009621409881801818,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008010634603254137,
+          "maxMinimumY": 0.12205298200283239,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.00849405070362165,
+          "maxMinimumY": 0.07666352870495709,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007984200954152337,
+          "maxMinimumY": 0.016565382652405827,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.007977540881840349,
+          "maxMinimumY": 0.014315109653786252,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.022712329313230636,
+          "maxMinimumY": 0.022712329313230636,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.01992265396485085,
+          "maxMinimumY": 0.0282325851811383,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.01992270158703708,
+          "maxMinimumY": 0.028232078194143584,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.0235377468145675,
+          "maxMinimumY": 0.024128446418320664,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.024203051581462753,
+          "maxMinimumY": 0.02477547248055033,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.01305221584437398,
+          "maxMinimumY": 0.03275000445118641,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.012897723715907184,
+          "maxMinimumY": 0.32269683536400895,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.013715071031876316,
+          "maxMinimumY": 0.16186126118721478,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.013423094164180369,
+          "maxMinimumY": 0.6507490080759155,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.02423177441901842,
+          "maxMinimumY": 1.0907525529749809,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.02422815864886653,
+          "maxMinimumY": 0.6174368192446369,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.02353290493968104,
+          "maxMinimumY": 0.029741764997487635,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.024067182953034033,
+          "maxMinimumY": 0.026047642296695164,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.015430399659345095,
+          "maxMinimumY": 0.1294728645842605,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.012502399251031512,
+          "maxMinimumY": 0.07666352870495709,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.011347021217743752,
+          "maxMinimumY": 0.030880600909762003,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.02285029107999082,
+          "maxMinimumY": 0.02742283168718792,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "c263ec45a4e218052d2f4b38b3ea80277d16d30a043c61c673b1e10d6082ad4a",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/pf-lod0.glb",
+      "poses": 3008,
+      "minY": 0.007970101891276183,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.007999865664723927,
+          "maxMinimumY": 0.007999865664723927,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.007997694318746664,
+          "maxMinimumY": 0.018147335669169914,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.007997263979749765,
+          "maxMinimumY": 0.018149006452271608,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007979740108934192,
+          "maxMinimumY": 0.0081751470707059,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007979023883036906,
+          "maxMinimumY": 0.008150462829126796,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.007988430057574505,
+          "maxMinimumY": 0.03253280230588423,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.00799010999594891,
+          "maxMinimumY": 0.32330573422294423,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.00798934589453711,
+          "maxMinimumY": 0.16113020331664402,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.008002512410076183,
+          "maxMinimumY": 0.6514237553083886,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.007995674201764405,
+          "maxMinimumY": 1.0773143073029172,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.00799612625054477,
+          "maxMinimumY": 0.6039987218695744,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008010000534638673,
+          "maxMinimumY": 0.010035381475029696,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007987588181196695,
+          "maxMinimumY": 0.008555830605420287,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.007989021514453982,
+          "maxMinimumY": 0.11471069582129036,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007987400248746425,
+          "maxMinimumY": 0.07200257065049133,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007986482941433056,
+          "maxMinimumY": 0.01877109083163274,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.007970101891276183,
+          "maxMinimumY": 0.008590292064921136,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.014222731418128137,
+          "maxMinimumY": 0.014222731418128137,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.013504916746395895,
+          "maxMinimumY": 0.018147392384316757,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.013504617483425057,
+          "maxMinimumY": 0.018149006556921282,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.014041021962284794,
+          "maxMinimumY": 0.014509466999144797,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.014176432824283129,
+          "maxMinimumY": 0.014411625295357612,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.011895614571790045,
+          "maxMinimumY": 0.032532740977642076,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.01271524397083923,
+          "maxMinimumY": 0.3233055769878784,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.011896843009225591,
+          "maxMinimumY": 0.161130151803749,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.012465082696015622,
+          "maxMinimumY": 0.6514237553083886,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.01420219137219519,
+          "maxMinimumY": 1.0773143121920508,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.014201297907641295,
+          "maxMinimumY": 0.6039985933176438,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.013793611076111913,
+          "maxMinimumY": 0.01624664293427147,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.01389268981572345,
+          "maxMinimumY": 0.015221353149178834,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.01320769737469134,
+          "maxMinimumY": 0.1199293759095025,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010554691709755488,
+          "maxMinimumY": 0.07200257065049133,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.011142007841166474,
+          "maxMinimumY": 0.02157421431846039,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.014360671472238455,
+          "maxMinimumY": 0.015394203730882173,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "3b908e2b806d9b0e3ffe4120c9ac0d18693b02b07ddd5803eb5f718f573ce0ba",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/pf-lod1.glb",
+      "poses": 3008,
+      "minY": 0.007981594711515902,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.009193052658462403,
+          "maxMinimumY": 0.009193052658462403,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.011576966558141812,
+          "maxMinimumY": 0.019394993512718776,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.009270980252480437,
+          "maxMinimumY": 0.019394198124914115,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.00909238261520803,
+          "maxMinimumY": 0.009541437541281075,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.008203683340986503,
+          "maxMinimumY": 0.009761537175722874,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008579868944430483,
+          "maxMinimumY": 0.03176060058450171,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008706543016714322,
+          "maxMinimumY": 0.32249723050240714,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.008049215496386857,
+          "maxMinimumY": 0.16153585528889103,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007981594711515902,
+          "maxMinimumY": 0.6501049181040863,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008729663801598361,
+          "maxMinimumY": 1.0776401436047438,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.00872998508488065,
+          "maxMinimumY": 0.6043245530251822,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008582409306213096,
+          "maxMinimumY": 0.010983646715617072,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007993719278992294,
+          "maxMinimumY": 0.010052206812729052,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008403078201018262,
+          "maxMinimumY": 0.1196403494112647,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.009661108482677844,
+          "maxMinimumY": 0.07125069043178926,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007982352917990035,
+          "maxMinimumY": 0.017668181024247512,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.00871975709708789,
+          "maxMinimumY": 0.00962478999175569,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.015415924918601786,
+          "maxMinimumY": 0.015415924918601786,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.015650860374269892,
+          "maxMinimumY": 0.019930776031272038,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.0155264352382657,
+          "maxMinimumY": 0.019932291127045972,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.015316787981400619,
+          "maxMinimumY": 0.015667572111397618,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.014398734417617753,
+          "maxMinimumY": 0.01602364805348776,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.012859525332361676,
+          "maxMinimumY": 0.031760538593500365,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.010937431617882923,
+          "maxMinimumY": 0.3224970732673413,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.011907269104724089,
+          "maxMinimumY": 0.16153580377599602,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.011175293806537711,
+          "maxMinimumY": 0.6501049181040863,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.014972885959876878,
+          "maxMinimumY": 1.0776401485126041,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.01497227377189989,
+          "maxMinimumY": 0.6043244247048849,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.014366017257803156,
+          "maxMinimumY": 0.01719490492512983,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.013805867824672156,
+          "maxMinimumY": 0.01625964850131417,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.01362170027308143,
+          "maxMinimumY": 0.12485902953678324,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.012396225226957464,
+          "maxMinimumY": 0.07125069043178926,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.011296191843062442,
+          "maxMinimumY": 0.021937277283872573,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.015417837672474403,
+          "maxMinimumY": 0.016084695070388004,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "0b4c0ab1c940f0dc2c4ade5713909ee7326ea5aa6faf3fc823bb130e0321963c",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/c-lod0.glb",
+      "poses": 3008,
+      "minY": 0.007957412629094553,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.00799985685727547,
+          "maxMinimumY": 0.00799985685727547,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.007997614195915449,
+          "maxMinimumY": 0.01815929251411969,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.007997183846923911,
+          "maxMinimumY": 0.018160963286182354,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007971293866485091,
+          "maxMinimumY": 0.00816284317487995,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007966799177768605,
+          "maxMinimumY": 0.008138238043475857,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008001069138603373,
+          "maxMinimumY": 0.032538737151024906,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008000966819117316,
+          "maxMinimumY": 0.32328685857627293,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.007996360847574498,
+          "maxMinimumY": 0.16111211172427337,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007999360376455546,
+          "maxMinimumY": 0.6514319524040741,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.007983418720799105,
+          "maxMinimumY": 1.0773151736256483,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.007983857474764778,
+          "maxMinimumY": 0.603999588204452,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008000513947758837,
+          "maxMinimumY": 0.010035678799359755,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007975412100016063,
+          "maxMinimumY": 0.008544499168284111,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008015010134516366,
+          "maxMinimumY": 0.11472930712995118,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.007999609973236574,
+          "maxMinimumY": 0.07200566039548234,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007998586262629745,
+          "maxMinimumY": 0.018771292557065736,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.007957412629094553,
+          "maxMinimumY": 0.00859062256037452,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.014222722610679677,
+          "maxMinimumY": 0.014222722610679677,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.01350483662356468,
+          "maxMinimumY": 0.01815934922926653,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.013504537350599203,
+          "maxMinimumY": 0.01816096339083203,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.014028893866451918,
+          "maxMinimumY": 0.01449949510934596,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.014164208119014829,
+          "maxMinimumY": 0.01439939766423546,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.011900317807072264,
+          "maxMinimumY": 0.032538675822782755,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.012699016823462514,
+          "maxMinimumY": 0.3232867013412071,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.011907329274330025,
+          "maxMinimumY": 0.16111206021137836,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.012461930662394982,
+          "maxMinimumY": 0.6514319524040741,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.014189935891229888,
+          "maxMinimumY": 1.0773151785147819,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.014189043461787162,
+          "maxMinimumY": 0.6039994596525214,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.013784124489232075,
+          "maxMinimumY": 0.01624694025860153,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.013881938427906986,
+          "maxMinimumY": 0.015208762913494073,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.013233685994753724,
+          "maxMinimumY": 0.11994798721816333,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010566761750115181,
+          "maxMinimumY": 0.07200566039548234,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.011154111162363162,
+          "maxMinimumY": 0.021574416043893388,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.014360662664789995,
+          "maxMinimumY": 0.015381403312220602,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "d28857812d6e47dbf6a4ac32ea1092bc7a6ff087ac71ec813e4c662870cf54ce",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/c-lod1.glb",
+      "poses": 3008,
+      "minY": 0.007982979189961372,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.009192877713422646,
+          "maxMinimumY": 0.009192877713422646,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.01157404167060955,
+          "maxMinimumY": 0.0193916303973192,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.009267585401715649,
+          "maxMinimumY": 0.019390835205022435,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.009098682940917206,
+          "maxMinimumY": 0.009548752741321567,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.00820168092308271,
+          "maxMinimumY": 0.009768840646582556,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008577746491334906,
+          "maxMinimumY": 0.03175691901732511,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008695636710612357,
+          "maxMinimumY": 0.32249902535823516,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.008080270333264057,
+          "maxMinimumY": 0.1615336825934997,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007994778676352562,
+          "maxMinimumY": 0.6501063200693263,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008727849710021279,
+          "maxMinimumY": 1.0776395018683778,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008728168039075055,
+          "maxMinimumY": 0.6043239112792745,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.008580219911369273,
+          "maxMinimumY": 0.010983214995990757,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.007992884431116322,
+          "maxMinimumY": 0.010060091875565915,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008433298482746565,
+          "maxMinimumY": 0.11963504796162647,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.009659190771112658,
+          "maxMinimumY": 0.07124875518956594,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007982979189961372,
+          "maxMinimumY": 0.017668502126669122,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008718370150621529,
+          "maxMinimumY": 0.009624518412294239,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.015415749973562029,
+          "maxMinimumY": 0.015415749973562029,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.01564305731085296,
+          "maxMinimumY": 0.019935852991760462,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.015523040387500912,
+          "maxMinimumY": 0.019937350557408362,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.015323364074424556,
+          "maxMinimumY": 0.01567483545007331,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.014396719572436524,
+          "maxMinimumY": 0.016030951524347442,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.012857879976082176,
+          "maxMinimumY": 0.03175685702632376,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.010931549755321105,
+          "maxMinimumY": 0.3224988681231693,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.011938323941601289,
+          "maxMinimumY": 0.1615336310806047,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.011170418955461461,
+          "maxMinimumY": 0.6501063200693263,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.014970854910798512,
+          "maxMinimumY": 1.0776395067762383,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.014970241603040241,
+          "maxMinimumY": 0.6043237829589772,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.014363827862959333,
+          "maxMinimumY": 0.017194473205503512,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.013805032976796186,
+          "maxMinimumY": 0.016267533564151032,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.013651920554809734,
+          "maxMinimumY": 0.12485372808714501,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.012397554617177689,
+          "maxMinimumY": 0.07124875518956594,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.011292678115120611,
+          "maxMinimumY": 0.021944687595591317,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.01541645072600804,
+          "maxMinimumY": 0.016084114887857444,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "6c958f7e3c937057fce44ee1c431e37d31f630120d4fcac93fd7093a7bfcc28a",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/referee-lod0.glb",
+      "poses": 3008,
+      "minY": 0.007983795668926852,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.008770253356684797,
+          "maxMinimumY": 0.008770253356684797,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.007996578597737633,
+          "maxMinimumY": 0.020722668926291408,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.007996112653080912,
+          "maxMinimumY": 0.020722661083414706,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007983795668926852,
+          "maxMinimumY": 0.008214803553489766,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.009525076683518659,
+          "maxMinimumY": 0.010289426466111655,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008001863003479853,
+          "maxMinimumY": 0.029271996092695957,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.009474339686969317,
+          "maxMinimumY": 0.3217039961182905,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.00799665392560396,
+          "maxMinimumY": 0.15927278722113913,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007984965973322877,
+          "maxMinimumY": 0.650609087154417,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.009365462557618002,
+          "maxMinimumY": 1.0812936690465118,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.00968816898820867,
+          "maxMinimumY": 0.6079780643484736,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.009099802541841558,
+          "maxMinimumY": 0.011358134230796733,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.00800012582092045,
+          "maxMinimumY": 0.010450104979238851,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008010025597246402,
+          "maxMinimumY": 0.11968086501495397,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.008002068538560511,
+          "maxMinimumY": 0.07093369991381687,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.008004536583149095,
+          "maxMinimumY": 0.017751210865694325,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008256292149737958,
+          "maxMinimumY": 0.00935502961902315,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.01775219069515451,
+          "maxMinimumY": 0.01775219069515451,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.01571599952811086,
+          "maxMinimumY": 0.02072244707280206,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.015961304414948717,
+          "maxMinimumY": 0.020722836217808065,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.01880292577790179,
+          "maxMinimumY": 0.01949487146815989,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.018746505347276166,
+          "maxMinimumY": 0.019765050518055487,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.01084191557880107,
+          "maxMinimumY": 0.02927194115270501,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.010661099739150609,
+          "maxMinimumY": 0.3217039961182905,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.01149289747748293,
+          "maxMinimumY": 0.15927273570824413,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.012316430492305068,
+          "maxMinimumY": 0.650609087154417,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.019179587969571477,
+          "maxMinimumY": 1.0812938241280428,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.019303948221890983,
+          "maxMinimumY": 0.6079780992196446,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.017821406699280794,
+          "maxMinimumY": 0.020011856836268632,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.01819714003864572,
+          "maxMinimumY": 0.02050087861450513,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.014532227734089194,
+          "maxMinimumY": 0.12620335538691357,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010615146286655143,
+          "maxMinimumY": 0.07093369991381687,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.010388387666683263,
+          "maxMinimumY": 0.025322885135383184,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.017890136734381005,
+          "maxMinimumY": 0.019373573532083584,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "ec63cf7938065207320619c4ca8d6b9fc74796c1582db4b531cb02a99ba50f5e",
+      "unchangedDuringMeasurement": true
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "poses": 3008,
+      "minY": 0.007634561368179471,
+      "clips": [
+        {
+          "name": "idle",
+          "source": "embedded",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.007999863914400456,
+          "maxMinimumY": 0.007999863914400456,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "embedded",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.011119654871557465,
+          "maxMinimumY": 0.021283435555653662,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "embedded",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.009192659314642849,
+          "maxMinimumY": 0.021282994178329257,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "embedded",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.007987583373877907,
+          "maxMinimumY": 0.008218247478855637,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "embedded",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.007985239943946348,
+          "maxMinimumY": 0.008203926013236372,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "embedded",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008000123786389323,
+          "maxMinimumY": 0.028329030928311807,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "embedded",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.008003434613309397,
+          "maxMinimumY": 0.32046865282831055,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "embedded",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.00799920460879637,
+          "maxMinimumY": 0.1567221817332658,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "embedded",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.007994550528761898,
+          "maxMinimumY": 0.6486248608835159,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "embedded",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.008002657752408014,
+          "maxMinimumY": 1.0817686414218926,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "embedded",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.008002917437425105,
+          "maxMinimumY": 0.608453023799381,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "embedded",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.00800347389292763,
+          "maxMinimumY": 0.010992543758457103,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "embedded",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.00799526105832854,
+          "maxMinimumY": 0.009251770067260263,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "embedded",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.008574729463593016,
+          "maxMinimumY": 0.12133749631866882,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "embedded",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.00799912487042534,
+          "maxMinimumY": 0.0727680563950189,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "embedded",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.007989780992634851,
+          "maxMinimumY": 0.01620994803833449,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "embedded",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.008003731654741258,
+          "maxMinimumY": 0.010030943263527147,
+          "pass": true
+        }
+      ],
+      "cross": [
+        {
+          "name": "idle",
+          "source": "pg-lod0 transfer",
+          "duration": 2,
+          "samples": 121,
+          "minY": 0.016981787380676464,
+          "maxMinimumY": 0.016981787380676464,
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "source": "pg-lod0 transfer",
+          "duration": 1,
+          "samples": 61,
+          "minY": 0.016506144253049776,
+          "maxMinimumY": 0.023377030621207356,
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "source": "pg-lod0 transfer",
+          "duration": 0.800000011920929,
+          "samples": 50,
+          "minY": 0.017021806613882105,
+          "maxMinimumY": 0.023378544185150694,
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2000000476837158,
+          "samples": 74,
+          "minY": 0.018806713482852844,
+          "maxMinimumY": 0.01949816089658519,
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "source": "pg-lod0 transfer",
+          "duration": 1.2999999523162842,
+          "samples": 79,
+          "minY": 0.016620656142171755,
+          "maxMinimumY": 0.018287960010856467,
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "source": "pg-lod0 transfer",
+          "duration": 2.1666667461395264,
+          "samples": 132,
+          "minY": 0.008851655112784032,
+          "maxMinimumY": 0.028328975988320862,
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "source": "pg-lod0 transfer",
+          "duration": 1.600000023841858,
+          "samples": 98,
+          "minY": 0.007634561368179471,
+          "maxMinimumY": 0.32046865282831055,
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "source": "pg-lod0 transfer",
+          "duration": 1.4333332777023315,
+          "samples": 87,
+          "minY": 0.010431322055196687,
+          "maxMinimumY": 0.1567221302203708,
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "source": "pg-lod0 transfer",
+          "duration": 1.8666666746139526,
+          "samples": 114,
+          "minY": 0.010434820790879318,
+          "maxMinimumY": 0.6486248608835159,
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "source": "pg-lod0 transfer",
+          "duration": 1.899999976158142,
+          "samples": 115,
+          "minY": 0.017179650336760537,
+          "maxMinimumY": 1.0817687907016367,
+          "pass": true
+        },
+        {
+          "name": "block",
+          "source": "pg-lod0 transfer",
+          "duration": 1.5,
+          "samples": 91,
+          "minY": 0.01717652837129497,
+          "maxMinimumY": 0.608453053530569,
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "source": "pg-lod0 transfer",
+          "duration": 1.100000023841858,
+          "samples": 68,
+          "minY": 0.01597103571411817,
+          "maxMinimumY": 0.021039823128067004,
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "source": "pg-lod0 transfer",
+          "duration": 1.7999999523162842,
+          "samples": 109,
+          "minY": 0.016103554434294967,
+          "maxMinimumY": 0.020308511906350468,
+          "pass": true
+        },
+        {
+          "name": "run",
+          "source": "pg-lod0 transfer",
+          "duration": 0.7333333492279053,
+          "samples": 46,
+          "minY": 0.015096929982902853,
+          "maxMinimumY": 0.12785998665271622,
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "source": "pg-lod0 transfer",
+          "duration": 1.3333333730697632,
+          "samples": 82,
+          "minY": 0.010288437110921103,
+          "maxMinimumY": 0.0727680563950189,
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "source": "pg-lod0 transfer",
+          "duration": 0.5,
+          "samples": 31,
+          "minY": 0.009188584837860822,
+          "maxMinimumY": 0.0259313347786093,
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "source": "pg-lod0 transfer",
+          "duration": 2.4000000953674316,
+          "samples": 146,
+          "minY": 0.017119747770357695,
+          "maxMinimumY": 0.02040178960176014,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "sha256": "e23fe86c79e0fd673827f783905ccb6eaeccc1d05022898e276c15f98b6f2fab",
+      "unchangedDuringMeasurement": true
+    }
+  ],
+  "pass": true
+}
