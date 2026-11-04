@@ -62,11 +62,8 @@ export function navalChargePower(seconds,config){
  const c=config.aimControls||{},min=config.ballistics?.minPower??.35;
  return min+(1-min)*Math.max(0,Math.min(1,seconds/Math.max(.05,c.chargeSeconds??.9)));
 }
-export function navalHanded(config,storage=globalThis.localStorage){
- const c=config.aimControls||{};let right=config.controls?.rightHanded!==false;
- try{const saved=storage?.getItem(c.handednessKey);if(saved==='left'||saved==='right')right=saved==='right';}catch{}
- return right;
-}
+// Movement stick is always on the left half (04/11 request); the saved hand value is ignored.
+export function navalHanded(){return true;}
 export function createNavalInput(ctx,getModel,getView){
  navalWeaponIcons(ctx.controls);
  const abort=new AbortController(),options={signal:abort.signal},controls=ctx.controls,fire=controls.querySelector('#shoot'),canvas=ctx.canvas,balance=ctx.balance,c=balance.aimControls||{};

@@ -9,7 +9,7 @@ await verify('naval-feel',[{width:844,height:390}],async({page,context,viewport,
  const client=await context.newCDPSession(page),touch=(type,points=[])=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points}),DEG=180/Math.PI;
  await page.evaluate(left=>{const {engine,data,games}=window.__island;engine.tick=()=>({ok:true});data.featureFlags.events=false;games.now=()=>0;engine.state.minigameProgress.navalDuel.stage=10;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;if(left)localStorage.setItem('island.naval.hand','left');else localStorage.removeItem('island.naval.hand');},left);
  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
- const b=await page.locator('#shoot').boundingBox(),pad={x:b.x+b.width/2+(left?1:-1)*viewport.width*.27,y:b.y+b.height/2-40},report={left};
+ const b=await page.locator('#shoot').boundingBox(),pad={x:b.x+b.width/2+-viewport.width*.27,y:b.y+b.height/2-40},report={left};
  // Enemy patrol over eight seconds of game time, read from the running page.
  {const s0=await snap(),e0=s0.enemies.filter(e=>e.active).map(e=>({i:e.index,x:e.x,z:e.z}));let path=0,last=e0[0],minZ=0,maxZ=0,headings=new Set();const cz=e0[0].z;
   for(let i=0;i<160;i++){await tick(50);const s=await snap(),e=s.enemies.find(x=>x.index===e0[0].i);path+=Math.hypot(e.x-last.x,e.z-last.z);last={x:e.x,z:e.z};minZ=Math.min(minZ,e.z-cz);maxZ=Math.max(maxZ,e.z-cz);headings.add(Math.round(e.heading*4));}
@@ -17,7 +17,8 @@ await verify('naval-feel',[{width:844,height:390}],async({page,context,viewport,
   assert.ok(report.patrol.speed>7&&report.patrol.speed<=8.05,'stage 3 sails at about 8 units per second');assert.ok(Math.max(-minZ,maxZ)<=24.01,'inside the stage 3 patrol width');assert.ok(report.patrol.trails>0,'the enemy leaves a wake');}
  // Slow correction: one pixel every 40 ms, then a fast swing of 16 pixels every 16 ms.
  await touch('touchStart',[pad]);await tick(120);let s=await snap();const startYaw=s.turret.yaw;let x=pad.x;
- const dir=left?-1:1;for(let i=0;i<40;i++){x+=dir;await touch('touchMove',[{x,y:pad.y}]);await tick(40);}
+ const dir=1; // a saved 'left' hand is ignored: aiming pad is always right of the stick
+ for(let i=0;i<40;i++){x+=dir;await touch('touchMove',[{x,y:pad.y}]);await tick(40);}
  s=await snap();const slow=Math.abs(s.turret.yaw-startYaw)*DEG/40;
  const fastStart=s.turret.yaw;for(let i=0;i<15;i++){x+=16*dir;await touch('touchMove',[{x,y:pad.y}]);await tick(16);}
  s=await snap();const fast=Math.abs(s.turret.yaw-fastStart)*DEG/240;

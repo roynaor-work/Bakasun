@@ -76,7 +76,7 @@ test('Naval drag, power ring and handedness are deterministic pure mappings',()=
  const start={yaw:0,elevation:10},a=navalAimFromDrag(start,50,-40,b),z=navalAimFromDrag(start,50,-40,b);assert.deepEqual(a,z);assert.ok(a.yaw>0&&a.elevation>10);
  assert.equal(navalAimFromDrag(start,0,-99999,b).elevation,c.maxElevation);assert.equal(navalAimFromDrag(start,0,99999,b).elevation,c.minElevation);
  assert.equal(navalChargePower(0,b),c.minPower);assert.equal(navalChargePower(b.aimControls.chargeSeconds,b),1);assert.equal(navalChargePower(99,b),1);assert.ok(navalChargePower(.3,b)<navalChargePower(.6,b));
- const store=v=>({getItem:()=>v});assert.equal(navalHanded(b,store(null)),true);assert.equal(navalHanded(b,store('left')),false);assert.equal(navalHanded(b,store('right')),true);assert.equal(navalHanded(b,{getItem(){throw Error('blocked');}}),true);
+ const store=v=>({getItem:()=>v});assert.equal(navalHanded(b,store(null)),true);assert.equal(navalHanded(b,store('left')),true);assert.equal(navalHanded(b,store('right')),true);assert.equal(navalHanded(b,{getItem(){throw Error('blocked');}}),true);
 });
 test('Naval aim step and render budget stay inside the repository limits',()=>{
  assert.equal(NAVAL_STEP,1/120);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
