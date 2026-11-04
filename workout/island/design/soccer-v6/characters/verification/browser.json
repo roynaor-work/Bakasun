@@ -1,0 +1,5960 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-04T16:59:56.018379+00:00",
+  "renderer": "Chromium headless, ANGLE SwiftShader software renderer",
+  "phonePerformanceVerified": false,
+  "method": "Actual local GLTFLoader/Draco/SkeletonUtils; baked floor lifts; exact skinned vertex minima; uniform plus event/contact phases",
+  "uniformSamplesPerClip": 21,
+  "externalRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failures": [],
+  "layouts": [
+    {
+      "width": 390,
+      "height": 844,
+      "documentWidth": 390,
+      "documentHeight": 844,
+      "canvas": {
+        "width": 390,
+        "height": 461
+      },
+      "controls": [
+        {
+          "id": "play",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "speed",
+          "width": 54,
+          "height": 44
+        },
+        {
+          "id": "character",
+          "width": 169,
+          "height": 44
+        },
+        {
+          "id": "clip",
+          "width": 169,
+          "height": 44
+        },
+        {
+          "id": "kit",
+          "width": 169,
+          "height": 44
+        },
+        {
+          "id": "view",
+          "width": 169,
+          "height": 44
+        },
+        {
+          "id": "SUMMARY",
+          "width": 350,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "documentWidth": 844,
+      "documentHeight": 390,
+      "canvas": {
+        "width": 608,
+        "height": 248
+      },
+      "controls": [
+        {
+          "id": "play",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "speed",
+          "width": 54,
+          "height": 44
+        },
+        {
+          "id": "character",
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "clip",
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "kit",
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "view",
+          "width": 97.5,
+          "height": 44
+        },
+        {
+          "id": "SUMMARY",
+          "width": 203,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "documentWidth": 1440,
+      "documentHeight": 1000,
+      "canvas": {
+        "width": 1138,
+        "height": 775
+      },
+      "controls": [
+        {
+          "id": "play",
+          "width": 84,
+          "height": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "speed",
+          "width": 60,
+          "height": 44
+        },
+        {
+          "id": "character",
+          "width": 253,
+          "height": 46
+        },
+        {
+          "id": "clip",
+          "width": 253,
+          "height": 46
+        },
+        {
+          "id": "kit",
+          "width": 253,
+          "height": 46
+        },
+        {
+          "id": "view",
+          "width": 253,
+          "height": 46
+        },
+        {
+          "id": "SUMMARY",
+          "width": 253,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "documentWidth": 320,
+      "documentHeight": 740,
+      "canvas": {
+        "width": 320,
+        "height": 357
+      },
+      "controls": [
+        {
+          "id": "play",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "speed",
+          "width": 54,
+          "height": 44
+        },
+        {
+          "id": "character",
+          "width": 139,
+          "height": 44
+        },
+        {
+          "id": "clip",
+          "width": 139,
+          "height": 44
+        },
+        {
+          "id": "kit",
+          "width": 139,
+          "height": 44
+        },
+        {
+          "id": "view",
+          "width": 139,
+          "height": 44
+        },
+        {
+          "id": "SUMMARY",
+          "width": 290,
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/player-01-kit-a-lod0.glb",
+      "triangles": 7171,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030000539965305533,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003095123315593272,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031708002793586418,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035703498067935,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030040009289592495,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025092566267441,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030686212871928378,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030048192864911387,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030105332963113922,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030083074071099725,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030322709445660123,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756209992232955,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123850730664117,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054137526950357,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032618087564027926,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002541740026573,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008709947453123,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030087083991396134,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001010681218925,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002580202343527,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030000539965305533,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-01",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-01-kit-b-lod0.glb",
+      "triangles": 7171,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030000539965305533,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003095123315593272,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031708002793586418,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035703498067935,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030040009289592495,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025092566267441,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030686212871928378,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030048192864911387,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030105332963113922,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030083074071099725,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030322709445660123,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756209992232955,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123850730664117,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054137526950357,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032618087564027926,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002541740026573,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008709947453123,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030087083991396134,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001010681218925,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002580202343527,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030000539965305533,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-01",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-01-kit-a-lod1.glb",
+      "triangles": 2699,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000141857547216,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094744646900005,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710643496386595,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038060732349263,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032698633450554,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812481209023,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030553162289351163,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030006010566053683,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003001251362722536,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003009398576638095,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597752477983,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751397302013726,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473461921794,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053781545149681,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032620714104399234,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022293921483836,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087961748749446,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008410688624223,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897452046405,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681813460293,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000141857547216,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-01",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-01-kit-b-lod1.glb",
+      "triangles": 2699,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000141857547216,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094744646900005,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710643496386595,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038060732349263,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032698633450554,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812481209023,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030553162289351163,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030006010566053683,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003001251362722536,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003009398576638095,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597752477983,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751397302013726,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473461921794,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053781545149681,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032620714104399234,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022293921483836,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087961748749446,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008410688624223,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897452046405,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681813460293,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000141857547216,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-01",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-02-kit-a-lod0.glb",
+      "triangles": 7175,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418595932356,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947428157814478,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710628238933985,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038266721060317,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032780994352463,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248910291,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030684249705315025,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030046864980873313,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109018083745035,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003008773256122671,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597547214833,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075138740208044,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124735046723125,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053739544868761,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032619818212352783,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022297281789966,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087953621693673,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084099203737955,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897450188542,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.00300266818655855,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418595932356,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-02",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-02-kit-b-lod0.glb",
+      "triangles": 7175,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418595932356,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947428157814478,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710628238933985,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038266721060317,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032780994352463,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248910291,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030684249705315025,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030046864980873313,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109018083745035,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003008773256122671,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597547214833,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075138740208044,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124735046723125,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053739544868761,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032619818212352783,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022297281789966,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087953621693673,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084099203737955,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897450188542,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.00300266818655855,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418595932356,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-02",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-02-kit-a-lod1.glb",
+      "triangles": 2696,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996518736048056,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094863480508924,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031706802786185626,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035593451750633,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003573537829339,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030246895526496002,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068270517289291,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030009288930997746,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030102671801150466,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030209602721271746,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318657058310966,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075652267783814,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123864399888498,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054010572224819,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003349553067143192,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002798397002066,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232296171225307,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088151825426283,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.002999697965557803,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782803885955,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996518736048056,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-02",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-02-kit-b-lod1.glb",
+      "triangles": 2696,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996518736048056,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094863480508924,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031706802786185626,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035593451750633,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003573537829339,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030246895526496002,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068270517289291,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030009288930997746,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030102671801150466,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030209602721271746,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318657058310966,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075652267783814,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123864399888498,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054010572224819,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003349553067143192,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002798397002066,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232296171225307,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088151825426283,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.002999697965557803,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782803885955,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996518736048056,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-02",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-03-kit-a-lod0.glb",
+      "triangles": 7183,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418635672624,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947493761862713,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171069879243399,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038198310857137,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032891547234816,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248905456,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030732012152264888,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003004580736987863,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109201944001993,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003006104722899281,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597548472083,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751422439894704,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473504410463,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542410095615313,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032617458289279228,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022277560074586,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087954070821786,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008409900933523,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.003000189745054208,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681898248347,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418635672624,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-03",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-03-kit-b-lod0.glb",
+      "triangles": 7183,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418635672624,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947493761862713,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171069879243399,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038198310857137,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032891547234816,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248905456,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030732012152264888,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003004580736987863,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109201944001993,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003006104722899281,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597548472083,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751422439894704,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473504410463,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542410095615313,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032617458289279228,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022277560074586,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087954070821786,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008409900933523,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.003000189745054208,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681898248347,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418635672624,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-03",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-03-kit-a-lod1.glb",
+      "triangles": 2707,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996518661398464,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030948579842564137,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003170673119857666,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003536713823196,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003549765142305,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030246895517230966,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030689130586855646,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030009185600379136,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030102479230533653,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003021066526451323,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318657299227697,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756493465498233,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012386389812695,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053662422789677,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0033493013628025994,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002800504954748,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232305202690015,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088160897932103,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996979657679838,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782700814324,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996518661398464,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-03",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-03-kit-b-lod1.glb",
+      "triangles": 2707,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996518661398464,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030948579842564137,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003170673119857666,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003536713823196,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003549765142305,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030246895517230966,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030689130586855646,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030009185600379136,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030102479230533653,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003021066526451323,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318657299227697,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756493465498233,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012386389812695,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053662422789677,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0033493013628025994,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002800504954748,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232305202690015,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088160897932103,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996979657679838,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782700814324,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996518661398464,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-03",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-04-kit-a-lod0.glb",
+      "triangles": 7166,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418563688096,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094742119931173,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710616815501594,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038014530040305,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003266869264264,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248210761,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068711510997031,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003004785393363806,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010898379166172,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030086562415744394,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597729112195,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751383792544332,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124734667882277,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053699154282663,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032618043188627557,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002230127854142,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008796068224278,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084105761261056,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897452189823,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002668180771764,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418563688096,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-04",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-04-kit-b-lod0.glb",
+      "triangles": 7166,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418563688096,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094742119931173,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031710616815501594,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038014530040305,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003266869264264,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248210761,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068711510997031,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003004785393363806,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010898379166172,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030086562415744394,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597729112195,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751383792544332,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124734667882277,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053699154282663,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032618043188627557,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002230127854142,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008796068224278,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084105761261056,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897452189823,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002668180771764,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418563688096,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-04",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-04-kit-a-lod1.glb",
+      "triangles": 2692,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.002999651873216271,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094869164349914,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031706800435298815,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035679873962415,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003572232686883,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003024689552580267,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068386675922293,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003000928533431377,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010266522598627,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030209277050906036,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003031865707633939,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756553044043906,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123864362340356,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542645991428474,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0033498253562494473,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030027984706901406,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232296864111784,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088152876008613,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996979655208655,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782797580027,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.002999651873216271,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-04",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-04-kit-b-lod1.glb",
+      "triangles": 2692,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.002999651873216271,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094869164349914,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031706800435298815,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035679873962415,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003572232686883,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003024689552580267,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068386675922293,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003000928533431377,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010266522598627,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030209277050906036,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003031865707633939,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756553044043906,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123864362340356,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542645991428474,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0033498253562494473,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030027984706901406,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232296864111784,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088152876008613,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996979655208655,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782797580027,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.002999651873216271,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-04",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-05-kit-a-lod0.glb",
+      "triangles": 7177,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418641046962,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094748274078887,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171068863377348,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038154368827183,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003291621517597,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812492072356,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003073131626002805,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030045650326353986,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109177415390273,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030063582355848023,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597470000973,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751416507816256,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124735207537785,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053972601874483,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003261607081703616,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002228005423084,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087950939370134,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008409563116995,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897450457,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681916150667,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418641046962,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-05",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-05-kit-b-lod0.glb",
+      "triangles": 7177,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418641046962,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094748274078887,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171068863377348,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038154368827183,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003291621517597,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812492072356,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003073131626002805,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030045650326353986,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109177415390273,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030063582355848023,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597470000973,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030751416507816256,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124735207537785,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053972601874483,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003261607081703616,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002228005423084,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087950939370134,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008409563116995,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897450457,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681916150667,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418641046962,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-05",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-05-kit-a-lod1.glb",
+      "triangles": 2713,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996574113234243,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094863659433662,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031704482010882964,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035576440855267,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003920792675521,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003024690483877754,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068519264189008,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.00301028008400496,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010447243257823,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030095663457337385,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318666396088583,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756527987154947,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003672387366197955,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053592228056151,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003262372239734232,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030078594456549434,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003020896522227555,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088162051508677,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.002999698896903458,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030024294849945767,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996574113234243,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-05",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-05-kit-b-lod1.glb",
+      "triangles": 2713,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996574113234243,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094863659433662,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031704482010882964,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035576440855267,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003920792675521,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003024690483877754,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068519264189008,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.00301028008400496,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.003010447243257823,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030095663457337385,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030318666396088583,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756527987154947,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003672387366197955,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003053592228056151,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003262372239734232,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030078594456549434,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003020896522227555,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088162051508677,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.002999698896903458,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030024294849945767,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996574113234243,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-05",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-06-kit-a-lod0.glb",
+      "triangles": 7174,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000053992209222,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030951163463023134,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031707965309684984,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035499533775474,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003986972199847,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030250925656703596,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068125420098492,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030046128046790285,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030105231408374105,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030086320467694536,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.00303227096009181,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756172862567936,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012385040730557,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054158538878582,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003261858943732869,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002542856615634,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087105343857036,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008708962915876,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001010682869575,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002580196106037,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000053992209222,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-06",
+      "lod": 0,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-06-kit-b-lod0.glb",
+      "triangles": 7174,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000053992209222,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030951163463023134,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031707965309684984,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035499533775474,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.003003986972199847,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030250925656703596,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.003068125420098492,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030046128046790285,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030105231408374105,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030086320467694536,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.00303227096009181,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756172862567936,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012385040730557,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.003054158538878582,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.003261858943732869,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002542856615634,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030087105343857036,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.003008708962915876,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001010682869575,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.003002580196106037,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000053992209222,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-06",
+      "lod": 0,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/player-06-kit-a-lod1.glb",
+      "triangles": 2697,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000141862556098,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947457588180616,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171066154846582,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003835206637123,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032872933723693,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812492028563,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030555932784440167,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030002405532961497,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109106791640127,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030092877668701605,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003032359747113961,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075140307526106,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473520516633,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542237831090446,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032622922996294462,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002228763250123,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008795083046031,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084096388793106,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897449454104,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681903143355,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000141862556098,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-06",
+      "lod": 1,
+      "kit": "kit-a"
+    },
+    {
+      "path": "assets/player-06-kit-b-lod1.glb",
+      "triangles": 2697,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000141862556098,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947457588180616,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171066154846582,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003835206637123,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032872933723693,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812492028563,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030555932784440167,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030002405532961497,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109106791640127,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030092877668701605,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003032359747113961,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075140307526106,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473520516633,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030542237831090446,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032622922996294462,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002228763250123,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008795083046031,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084096388793106,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0030001897449454104,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681903143355,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000141862556098,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "player-06",
+      "lod": 1,
+      "kit": "kit-b"
+    },
+    {
+      "path": "assets/goalkeeper-lod0.glb",
+      "triangles": 7175,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0030001418602453598,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947467902138993,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171066851420077,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003809916057541,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032784980438864,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003025181248468934,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030683461176950286,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003004843903875676,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.00301091202071771,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030088376864049506,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003032359766198002,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.00307514086956578,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030124734807699637,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030545111032149463,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032619656618063375,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.00300222865269739,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008795834555219,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084103310734564,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.003000189745149425,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681851301204,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0030001418602453598,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "goalkeeper",
+      "lod": 0,
+      "kit": "keeper"
+    },
+    {
+      "path": "assets/goalkeeper-lod1.glb",
+      "triangles": 2695,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996518695550173,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030948677315105737,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031706733591490965,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030035660281996605,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030035621384110773,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030246895526130184,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030682896975680676,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030009193544361466,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030102491215007517,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.003021664130204457,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003031865706782334,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756545386696494,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.0030123864380076915,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030540423535320993,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0033494615206434916,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.003002800335932858,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030232296151666525,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088152456091526,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996979655274956,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030021782768749564,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996518695550173,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "goalkeeper",
+      "lod": 1,
+      "kit": "keeper"
+    },
+    {
+      "path": "assets/referee-lod0.glb",
+      "triangles": 7175,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.003000141859545096,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.0030947472695819576,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.003171067227702048,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.0030038150098999315,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030032757511589785,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.0030251812482211616,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.0030728342563037664,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.003005059576961771,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030109128414393897,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030066289613657274,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.0030323597726407926,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.003075141129363564,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003012473467351451,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.00305379444168008,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032618331314512305,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.0030022285759170554,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.003008796089065289,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030084106137778883,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.003000189745148839,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030026681834459815,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.003000141859545096,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "referee",
+      "lod": 0,
+      "kit": "referee"
+    },
+    {
+      "path": "assets/referee-lod1.glb",
+      "triangles": 2712,
+      "clips": [
+        {
+          "id": "idle",
+          "samples": 21,
+          "minimumY": 0.0029996574115152552,
+          "maxQuaternionError": 1.113567349442235e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "run",
+          "samples": 21,
+          "minimumY": 0.003094865326844942,
+          "maxQuaternionError": 8.21875678624906e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "sprint",
+          "samples": 23,
+          "minimumY": 0.0031709290921306567,
+          "maxQuaternionError": 1.2275449545740003e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_left",
+          "samples": 21,
+          "minimumY": 0.003003552544675518,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "turn_right",
+          "samples": 21,
+          "minimumY": 0.0030033879315726313,
+          "maxQuaternionError": 1.1949384814968766e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "decelerate",
+          "samples": 21,
+          "minimumY": 0.003024690483326013,
+          "maxQuaternionError": 9.476545104192269e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_straight",
+          "samples": 25,
+          "minimumY": 0.00306831002345756,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "kick_curve",
+          "samples": 25,
+          "minimumY": 0.0030166734564475266,
+          "maxQuaternionError": 1.1472014449509516e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_short",
+          "samples": 24,
+          "minimumY": 0.0030099138086463525,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "pass_long",
+          "samples": 24,
+          "minimumY": 0.0030093198795818413,
+          "maxQuaternionError": 1.0837946096131645e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "header",
+          "samples": 23,
+          "minimumY": 0.003031866653955693,
+          "maxQuaternionError": 1.043503727871098e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "dribble",
+          "samples": 23,
+          "minimumY": 0.0030756536976501957,
+          "maxQuaternionError": 1.1429652779781918e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "slide",
+          "samples": 23,
+          "minimumY": 0.003672387336317551,
+          "maxQuaternionError": 1.1051795034688894e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "fall",
+          "samples": 21,
+          "minimumY": 0.0030538228968425563,
+          "maxQuaternionError": 1.0157100716057244e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "getup",
+          "samples": 21,
+          "minimumY": 0.0032620958563222696,
+          "maxQuaternionError": 9.972564996019173e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "celebrate",
+          "samples": 25,
+          "minimumY": 0.00300785999084174,
+          "maxQuaternionError": 9.406799783562292e-10,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "samples": 23,
+          "minimumY": 0.0030208970413363526,
+          "maxQuaternionError": 1.2078589239905568e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "samples": 23,
+          "minimumY": 0.0030088167755532667,
+          "maxQuaternionError": 1.26633059593928e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_ready",
+          "samples": 21,
+          "minimumY": 0.0029996988969859355,
+          "maxQuaternionError": 1.4847456597522068e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        },
+        {
+          "id": "keeper_catch",
+          "samples": 23,
+          "minimumY": 0.0030024294818915276,
+          "maxQuaternionError": 1.2058096743317037e-09,
+          "finite": true,
+          "bakedEnvelopeAvailable": true
+        }
+      ],
+      "minimumY": 0.0029996574115152552,
+      "maxQuaternionError": 1.4847456597522068e-09,
+      "finite": true,
+      "bakedEnvelopeAvailable": true,
+      "character": "referee",
+      "lod": 1,
+      "kit": "referee"
+    }
+  ],
+  "screenshots": [
+    "previews/match-390x844.png",
+    "previews/match-844x390.png",
+    "previews/hero-390x844.png",
+    "previews/hero-844x390.png",
+    "previews/player-01-lod0-full.png",
+    "previews/player-01-lod0-head.png",
+    "previews/player-01-lod1-full.png",
+    "previews/player-01-lod1-head.png",
+    "previews/player-02-lod0-full.png",
+    "previews/player-02-lod0-head.png",
+    "previews/player-02-lod1-full.png",
+    "previews/player-02-lod1-head.png",
+    "previews/player-03-lod0-full.png",
+    "previews/player-03-lod0-head.png",
+    "previews/player-03-lod1-full.png",
+    "previews/player-03-lod1-head.png",
+    "previews/player-04-lod0-full.png",
+    "previews/player-04-lod0-head.png",
+    "previews/player-04-lod1-full.png",
+    "previews/player-04-lod1-head.png",
+    "previews/player-05-lod0-full.png",
+    "previews/player-05-lod0-head.png",
+    "previews/player-05-lod1-full.png",
+    "previews/player-05-lod1-head.png",
+    "previews/player-06-lod0-full.png",
+    "previews/player-06-lod0-head.png",
+    "previews/player-06-lod1-full.png",
+    "previews/player-06-lod1-head.png",
+    "previews/goalkeeper-lod0-full.png",
+    "previews/goalkeeper-lod0-head.png",
+    "previews/goalkeeper-lod1-full.png",
+    "previews/goalkeeper-lod1-head.png",
+    "previews/referee-lod0-full.png",
+    "previews/referee-lod0-head.png",
+    "previews/referee-lod1-full.png",
+    "previews/referee-lod1-head.png",
+    "previews/roster-lod0-full.png",
+    "previews/roster-lod0-head.png",
+    "previews/roster-lod1-full.png",
+    "previews/roster-lod1-head.png"
+  ],
+  "inputSha256": {
+    "asset-manifest.json": "202135846f7685574217e7f7e95897241d0e9565d6de1fc43007baf606103f57",
+    "motion/soccer-v6.json": "d2ec9090f9734ffa20ba1822e1b91a09b1c850cbfbf904da365edbeabdad0533",
+    "motion/floor-clearance.json": "349ee6b8d52f39ae192d0ab05f268342c9f9014b1b7a869bf9ca696cd9959759",
+    "preview.html": "a1f352bfa3110cb8ba53e4aa00d63e44b6a30a6c514a0fd542a90dcdf1acda79",
+    "preview.css": "dea88a9d2a578adbc57800d05dce49cb0643f2de16088f3a72d06f2095c99d1e",
+    "preview.js": "7d19860741c66f4000f90241e5a8f7152748131abbd813875ebb751f435d1a5a",
+    "source/check-browser.py": "40fc56e1f0b3893bc8cd4e6f152efc1cde87a1d5de1898f7a39f2bfbf3185832"
+  },
+  "clearanceReady": true,
+  "metadata": {
+    "characters": [
+      {
+        "id": "player-01",
+        "role": "field",
+        "label": "איתן",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-01-kit-a-basecolor.png",
+              "normal": "textures/player-01-normal.png",
+              "orm": "textures/player-01-orm.png"
+            },
+            "lod0": "assets/player-01-kit-a-lod0.glb",
+            "lod0Triangles": 7171,
+            "lod0BytesBeforeDraco": 911124,
+            "lod1": "assets/player-01-kit-a-lod1.glb",
+            "lod1Triangles": 2699,
+            "lod1BytesBeforeDraco": 731856,
+            "lod0Bytes": 700284,
+            "lod0Sha256": "027493f36bffa815d96485e708660076f6129dd78a05d3b15c5dee3cf89072cf",
+            "lod1Bytes": 641180,
+            "lod1Sha256": "b8bea129397b2052adfd5ee5939792f7dca9d8f215b694b31df70dfdbb3bfbbb"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-01-kit-b-basecolor.png",
+              "normal": "textures/player-01-normal.png",
+              "orm": "textures/player-01-orm.png"
+            },
+            "lod0": "assets/player-01-kit-b-lod0.glb",
+            "lod0Triangles": 7171,
+            "lod0BytesBeforeDraco": 911088,
+            "lod1": "assets/player-01-kit-b-lod1.glb",
+            "lod1Triangles": 2699,
+            "lod1BytesBeforeDraco": 731820,
+            "lod0Bytes": 700244,
+            "lod0Sha256": "cef534e24816982dcaf8d2741d212a42dcbf3d0c81b074a3f10c012f3f2be493",
+            "lod1Bytes": 641140,
+            "lod1Sha256": "008d5abc1f7daf679d5133a3b93916617903682b086e3337c7fb8c2e08935517"
+          }
+        ]
+      },
+      {
+        "id": "player-02",
+        "role": "field",
+        "label": "גיא",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-02-kit-a-basecolor.png",
+              "normal": "textures/player-02-normal.png",
+              "orm": "textures/player-02-orm.png"
+            },
+            "lod0": "assets/player-02-kit-a-lod0.glb",
+            "lod0Triangles": 7175,
+            "lod0BytesBeforeDraco": 956012,
+            "lod1": "assets/player-02-kit-a-lod1.glb",
+            "lod1Triangles": 2696,
+            "lod1BytesBeforeDraco": 756092,
+            "lod0Bytes": 730368,
+            "lod0Sha256": "c95f982c2453a21e916067270f547901a0a561e63ef1e2da33265c6c883985ee",
+            "lod1Bytes": 662064,
+            "lod1Sha256": "e8dbdaf5f0bbe71069acd3de29e8b304690ab6e90f9f73f0affd98b18f21b503"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-02-kit-b-basecolor.png",
+              "normal": "textures/player-02-normal.png",
+              "orm": "textures/player-02-orm.png"
+            },
+            "lod0": "assets/player-02-kit-b-lod0.glb",
+            "lod0Triangles": 7175,
+            "lod0BytesBeforeDraco": 955876,
+            "lod1": "assets/player-02-kit-b-lod1.glb",
+            "lod1Triangles": 2696,
+            "lod1BytesBeforeDraco": 755956,
+            "lod0Bytes": 730232,
+            "lod0Sha256": "52a5d7aa907bbdf5f0e3531773418ea2307963a2996107fb80f1b9f4f1341370",
+            "lod1Bytes": 661928,
+            "lod1Sha256": "9fe55b4e2153341a9ceab47684f76c99bfb4f412a2c8a9b804165eeef47f71f8"
+          }
+        ]
+      },
+      {
+        "id": "player-03",
+        "role": "field",
+        "label": "ליאם",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-03-kit-a-basecolor.png",
+              "normal": "textures/player-03-normal.png",
+              "orm": "textures/player-03-orm.png"
+            },
+            "lod0": "assets/player-03-kit-a-lod0.glb",
+            "lod0Triangles": 7183,
+            "lod0BytesBeforeDraco": 905328,
+            "lod1": "assets/player-03-kit-a-lod1.glb",
+            "lod1Triangles": 2707,
+            "lod1BytesBeforeDraco": 734884,
+            "lod0Bytes": 706764,
+            "lod0Sha256": "54201bc2dd2ea45227b899df7961ff992c13ccbd1554aef187f13c372c92cf7a",
+            "lod1Bytes": 649632,
+            "lod1Sha256": "19eb4f38ac0379bd1a2bc9e8c0055c1822bdbb09a02601eb057e515b82dd6cd5"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-03-kit-b-basecolor.png",
+              "normal": "textures/player-03-normal.png",
+              "orm": "textures/player-03-orm.png"
+            },
+            "lod0": "assets/player-03-kit-b-lod0.glb",
+            "lod0Triangles": 7183,
+            "lod0BytesBeforeDraco": 905236,
+            "lod1": "assets/player-03-kit-b-lod1.glb",
+            "lod1Triangles": 2707,
+            "lod1BytesBeforeDraco": 734792,
+            "lod0Bytes": 706668,
+            "lod0Sha256": "161dc988151abc7b6f4944d778ceb512dbdd682dfe34dc25a938a3c771da5228",
+            "lod1Bytes": 649536,
+            "lod1Sha256": "43b10b52d4f758b0583360bc6b3d0410911ece07f5b1e440d681bb5bb3d71216"
+          }
+        ]
+      },
+      {
+        "id": "player-04",
+        "role": "field",
+        "label": "נבו",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-04-kit-a-basecolor.png",
+              "normal": "textures/player-04-normal.png",
+              "orm": "textures/player-04-orm.png"
+            },
+            "lod0": "assets/player-04-kit-a-lod0.glb",
+            "lod0Triangles": 7166,
+            "lod0BytesBeforeDraco": 914576,
+            "lod1": "assets/player-04-kit-a-lod1.glb",
+            "lod1Triangles": 2692,
+            "lod1BytesBeforeDraco": 742908,
+            "lod0Bytes": 715568,
+            "lod0Sha256": "b6046021dadc745eb1dadf73d621168f3afd57ac83d73ca56e229f9e07bc0a6a",
+            "lod1Bytes": 658388,
+            "lod1Sha256": "70b08819e757a003ffb5566b9f1a78afc19960362671f614324205a69e58fe14"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-04-kit-b-basecolor.png",
+              "normal": "textures/player-04-normal.png",
+              "orm": "textures/player-04-orm.png"
+            },
+            "lod0": "assets/player-04-kit-b-lod0.glb",
+            "lod0Triangles": 7166,
+            "lod0BytesBeforeDraco": 914588,
+            "lod1": "assets/player-04-kit-b-lod1.glb",
+            "lod1Triangles": 2692,
+            "lod1BytesBeforeDraco": 742920,
+            "lod0Bytes": 715576,
+            "lod0Sha256": "1f50db2761bd7a62a4799e05b2aa6db6432ff02883ac84fa9434a7696fe0d021",
+            "lod1Bytes": 658396,
+            "lod1Sha256": "fa1e9c6f89648c86f33710de220f6a48d503da5d94fd23d42805be6acf903643"
+          }
+        ]
+      },
+      {
+        "id": "player-05",
+        "role": "field",
+        "label": "רון",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-05-kit-a-basecolor.png",
+              "normal": "textures/player-05-normal.png",
+              "orm": "textures/player-05-orm.png"
+            },
+            "lod0": "assets/player-05-kit-a-lod0.glb",
+            "lod0Triangles": 7177,
+            "lod0BytesBeforeDraco": 940460,
+            "lod1": "assets/player-05-kit-a-lod1.glb",
+            "lod1Triangles": 2713,
+            "lod1BytesBeforeDraco": 754692,
+            "lod0Bytes": 723344,
+            "lod0Sha256": "34a5c2f0cd48d56d8eaa33b91c71ea51c4b035c778441836106fd6875f58c18f",
+            "lod1Bytes": 659884,
+            "lod1Sha256": "94a5083ae132302ca93e95a19e072e597dd6143c4c715ce41e414a077e01f9af"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-05-kit-b-basecolor.png",
+              "normal": "textures/player-05-normal.png",
+              "orm": "textures/player-05-orm.png"
+            },
+            "lod0": "assets/player-05-kit-b-lod0.glb",
+            "lod0Triangles": 7177,
+            "lod0BytesBeforeDraco": 940368,
+            "lod1": "assets/player-05-kit-b-lod1.glb",
+            "lod1Triangles": 2713,
+            "lod1BytesBeforeDraco": 754600,
+            "lod0Bytes": 723256,
+            "lod0Sha256": "adedec77b65b3ddbf121f35bdb99e8b14ae6fda8f2bdf32c35cc11c7546c9124",
+            "lod1Bytes": 659796,
+            "lod1Sha256": "e6315a7500029430e33e5350120dce18d22bfc03198a05ef552c3781b12ca822"
+          }
+        ]
+      },
+      {
+        "id": "player-06",
+        "role": "field",
+        "label": "עומר",
+        "kits": [
+          {
+            "id": "kit-a",
+            "color": "#125b41",
+            "textures": {
+              "basecolor": "textures/player-06-kit-a-basecolor.png",
+              "normal": "textures/player-06-normal.png",
+              "orm": "textures/player-06-orm.png"
+            },
+            "lod0": "assets/player-06-kit-a-lod0.glb",
+            "lod0Triangles": 7174,
+            "lod0BytesBeforeDraco": 927108,
+            "lod1": "assets/player-06-kit-a-lod1.glb",
+            "lod1Triangles": 2697,
+            "lod1BytesBeforeDraco": 747816,
+            "lod0Bytes": 716616,
+            "lod0Sha256": "ddfef220af756cb3976f20ce45353f1572c25f6374828ff36c6385f5bd973095",
+            "lod1Bytes": 657628,
+            "lod1Sha256": "b374a13baf36f7a8878248f7e37e0d45c28ee4690916d7d8b4dd70c7842dbbb1"
+          },
+          {
+            "id": "kit-b",
+            "color": "#1c3e84",
+            "textures": {
+              "basecolor": "textures/player-06-kit-b-basecolor.png",
+              "normal": "textures/player-06-normal.png",
+              "orm": "textures/player-06-orm.png"
+            },
+            "lod0": "assets/player-06-kit-b-lod0.glb",
+            "lod0Triangles": 7174,
+            "lod0BytesBeforeDraco": 927016,
+            "lod1": "assets/player-06-kit-b-lod1.glb",
+            "lod1Triangles": 2697,
+            "lod1BytesBeforeDraco": 747724,
+            "lod0Bytes": 716520,
+            "lod0Sha256": "88ef690d7fb0e055bbc4aaa98f90e58230329f8b1f838d9c4c11191419f11e9d",
+            "lod1Bytes": 657532,
+            "lod1Sha256": "d09995ebb4f8e1ae059b5333dfce0f5d26c6320ff76985ae0d6b4de5d6aa56ea"
+          }
+        ]
+      },
+      {
+        "id": "goalkeeper",
+        "role": "goalkeeper",
+        "label": "שוער",
+        "kits": [
+          {
+            "id": "keeper",
+            "color": "#e28f1c",
+            "textures": {
+              "basecolor": "textures/goalkeeper-keeper-basecolor.png",
+              "normal": "textures/goalkeeper-normal.png",
+              "orm": "textures/goalkeeper-orm.png"
+            },
+            "lod0": "assets/goalkeeper-lod0.glb",
+            "lod0Triangles": 7175,
+            "lod0BytesBeforeDraco": 990496,
+            "lod1": "assets/goalkeeper-lod1.glb",
+            "lod1Triangles": 2695,
+            "lod1BytesBeforeDraco": 793708,
+            "lod0Bytes": 772368,
+            "lod0Sha256": "6082de718f8a515a0ea252395091e4cdeec287a150f40aa67a26a417a8045d57",
+            "lod1Bytes": 703924,
+            "lod1Sha256": "af3feb9ae0086ed71cd16ccf6511bcd161f678c785693a5eecb30b6e388651a3"
+          }
+        ]
+      },
+      {
+        "id": "referee",
+        "role": "referee",
+        "label": "שופט",
+        "kits": [
+          {
+            "id": "referee",
+            "color": "#d3dc2d",
+            "textures": {
+              "basecolor": "textures/referee-referee-basecolor.png",
+              "normal": "textures/referee-normal.png",
+              "orm": "textures/referee-orm.png"
+            },
+            "lod0": "assets/referee-lod0.glb",
+            "lod0Triangles": 7175,
+            "lod0BytesBeforeDraco": 1005264,
+            "lod1": "assets/referee-lod1.glb",
+            "lod1Triangles": 2712,
+            "lod1BytesBeforeDraco": 819668,
+            "lod0Bytes": 787924,
+            "lod0Sha256": "9224ff92d86503aa87066eea0a3548bf4d359f789b34dc8b40abb8cddaf6d24f",
+            "lod1Bytes": 724276,
+            "lod1Sha256": "fbf6308daf79aaf914dad21bc7c21bfa3cdaa38a3c030187030f6b7042dad7ee"
+          }
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "run",
+      "sprint",
+      "turn_left",
+      "turn_right",
+      "decelerate",
+      "kick_straight",
+      "kick_curve",
+      "pass_short",
+      "pass_long",
+      "header",
+      "dribble",
+      "slide",
+      "fall",
+      "getup",
+      "celebrate",
+      "keeper_dive_left",
+      "keeper_dive_right",
+      "keeper_ready",
+      "keeper_catch"
+    ],
+    "gl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+  },
+  "crossfades": [
+    {
+      "transitionTo": "idle",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999953,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "run",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999967,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "sprint",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999497,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "turn_left",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999463,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "turn_right",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999953,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "decelerate",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999584,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "kick_straight",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.00199999999999996,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "kick_curve",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.00199999999999996,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "pass_short",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999998908,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "pass_long",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999463,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "header",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999463,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "dribble",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999953,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "slide",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999953,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "fall",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999567,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "getup",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999185,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "celebrate",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999584,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "keeper_dive_left",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999584,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "keeper_dive_right",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.001999999999999953,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "keeper_ready",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999497,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    },
+    {
+      "transitionTo": "keeper_catch",
+      "immediateRadians": 0,
+      "interruptionRadians": 0,
+      "fadeSamples": 16,
+      "fadeMinimumY": 0.0019999999999999463,
+      "fadeFinite": true,
+      "actors": 1,
+      "clip": "run",
+      "lod": 1,
+      "calls": 12,
+      "triangles": 2712,
+      "minimumY": 0.019059922354655836,
+      "lifts": [
+        0.001316
+      ],
+      "paths": [
+        "assets/referee-lod1.glb"
+      ],
+      "bakedEnvelopeAvailable": true,
+      "finite": true
+    }
+  ],
+  "scrub": {
+    "time": 0.458333333125,
+    "duration": 0.733333333,
+    "playing": false
+  },
+  "match": {
+    "actors": 12,
+    "clip": "run",
+    "lod": 1,
+    "calls": 23,
+    "triangles": 32404,
+    "minimumY": 0.003092281000701115,
+    "lifts": [
+      0.001316,
+      0.015640600009175994,
+      0.014686400006771,
+      0.001316,
+      0.010425799979635206,
+      0.0146836600118062,
+      0.010431919991867405,
+      0.001316,
+      0.013442279979635211,
+      0.0149085400118062,
+      0.0025479999805959994,
+      0.008654240094348785
+    ],
+    "paths": [
+      "assets/player-01-kit-a-lod1.glb",
+      "assets/player-02-kit-a-lod1.glb",
+      "assets/player-03-kit-a-lod1.glb",
+      "assets/player-04-kit-a-lod1.glb",
+      "assets/player-05-kit-a-lod1.glb",
+      "assets/goalkeeper-lod1.glb",
+      "assets/player-01-kit-b-lod1.glb",
+      "assets/player-02-kit-b-lod1.glb",
+      "assets/player-03-kit-b-lod1.glb",
+      "assets/player-04-kit-b-lod1.glb",
+      "assets/player-05-kit-b-lod1.glb",
+      "assets/goalkeeper-lod1.glb"
+    ],
+    "bakedEnvelopeAvailable": true,
+    "finite": true,
+    "renderTriangles": 121358,
+    "drawsText": "23"
+  },
+  "loadErrors": [],
+  "durationSeconds": 153.32,
+  "success": true
+}
