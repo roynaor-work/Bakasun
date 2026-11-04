@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createSoccer} from '../workout/island/minigames/soccer.mjs';
-import {createSoccerGestureRecognizer,shapeStick,soccerDesignLayout} from '../workout/island/minigames/soccer-design-controls.mjs';
+import {createSoccerGestureRecognizer,shapeStick,soccerDesignLayout,soccerPadRect} from '../workout/island/minigames/soccer-design-controls.mjs';
 
 const read=async p=>readFile(new URL('../workout/island/'+p,import.meta.url),'utf8');
 const config=JSON.parse(await read('data/config.json')).minigames.soccer,interaction=JSON.parse(await read('design/controls/interaction.json')),contract=JSON.parse(await read('design/controls/soccer.json'));
@@ -78,4 +78,16 @@ test('ctrl-soccer: a tap in the last 180 ms of kick cooldown is buffered, an ear
 test('ctrl-soccer: swipe aim survives the release and manual aim is not overridden by assist',()=>{
   const r=rig();r.rec.begin('kick',7,792,338,button,0);r.rec.move(7,822,308,0);const held=r.rec.sample(1,0,{kick:{x:1,z:0}});r.rec.end(7,822,308,0);const after=r.rec.sample(1,16,{kick:{x:1,z:0}});
   assert.equal(held.kickAim.manual,true);assert.equal(after.kickAim.manual,true);assert.ok(Math.abs(after.kickAim.z+.707)<.01);
+});
+
+test('ctrl-soccer: the stick pad never intersects an action button or the pause button, in five screen sizes',()=>{
+  const hit=(a,b)=>a.left<b.right&&b.left<a.right&&a.top<b.bottom&&b.top<a.bottom;
+  for(const [w,h] of [[390,844],[844,390],[360,740],[320,568],[740,360]]){
+    const layout=soccerDesignLayout(contract,w,h,true),geometry=config.controls.stick[h>w?'padPortrait':'padLandscape'],pad=soccerPadRect(layout,w,h,geometry);
+    const rect=s=>({left:s.x,top:s.y,right:s.x+s.width,bottom:s.y+s.height});
+    for(const slot of ['primary','secondary','sprint','trick','pause'])assert.equal(hit(pad,rect(layout[slot])),false,`${w}x${h}: pad overlaps ${slot}`);
+    const stick=rect(layout.stick);assert.ok(stick.left>=pad.left&&stick.right<=pad.right&&stick.top>=pad.top&&stick.bottom<=pad.bottom,`${w}x${h}: home stick inside pad`);
+    assert.ok(pad.right<=w/2+.5||pad.right<=Math.min(...['primary','secondary','sprint','trick'].map(k=>layout[k].x))-8+.5,`${w}x${h}: pad stays left of the buttons`);
+    assert.ok(pad.left===0,'pad starts at the left edge');
+  }
 });

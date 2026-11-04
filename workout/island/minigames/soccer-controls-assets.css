@@ -21,3 +21,4 @@
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-pad{position:absolute;left:0;bottom:0;width:46%;height:60%;z-index:0;touch-action:none;pointer-events:auto;background:none}
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{z-index:1}
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone .soccer-joystick{transition:opacity 80ms ease}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions{z-index:3}

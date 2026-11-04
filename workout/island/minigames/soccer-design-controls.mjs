@@ -31,6 +31,15 @@ export function soccerDesignLayout(contract,width,height,rightHanded=true){
   }));
 }
 
+/** The floating-stick pad: always the lower-left, never wider than the gap before the first action
+ * button (8 px clear), so the pad and the action buttons can never intersect. */
+export function soccerPadRect(layout,width,height,geometry={widthPct:46,heightPct:60}){
+  const actions=['primary','secondary','sprint','trick'].map(name=>layout[name]).filter(Boolean),firstAction=Math.min(width,...actions.map(slot=>slot.x));
+  const stick=layout.stick,minWidth=stick?stick.x+stick.width:0;
+  const w=Math.max(minWidth,Math.min(width*geometry.widthPct/100,firstAction-8)),h=Math.max(stick?stick.height+(stick.offset_y||0):0,height*geometry.heightPct/100);
+  return {left:0,top:height-h,width:w,height:h,right:w,bottom:height};
+}
+
 export function applySoccerDesignLayout({root,nodes,contract,width,height,rightHanded=true}){
   const layout=soccerDesignLayout(contract,width,height,rightHanded);root.dataset.designControls='true';
   for(const [slot,node]of Object.entries(nodes)){

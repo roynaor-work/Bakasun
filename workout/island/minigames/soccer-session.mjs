@@ -12,7 +12,7 @@ import {gameContext} from './context.mjs?v=island-v2-20261104-2';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261104-2';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
-import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout} from './soccer-design-controls.mjs';
+import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -113,7 +113,7 @@ export function startSoccer(ctx) {
     score.append(homeScore,awayScore);roster.append(home,score,away,clock);status.after(roster);status.classList.add('soccer-live-status');canvas.classList.add('soccer-canvas');
     const nodes={pad,stick:zone,primary:shoot,secondary:pass,sprint,trick:swap,pause:canvas.closest('.game-screen')?.querySelector('.game-pause')};
     const autoAim=action=>{const s=model.getState(),p=s.players[s.controlled],target=s.practiceTarget||(s.restart?.type==='corner'?{x:s.attackDir*balance.pitch.length/2-s.attackDir*balance.pitch.penaltyDepth/2,z:0}:null);if(action==='pass'&&!target)return s.moving?{...s.aim}:{x:p.fx,z:p.fz};return {x:(target?.x??s.attackDir*balance.pitch.length/2)-p.x,z:(target?.z??0)-p.z};};
-    const layoutControls=()=>{if(!contracts)return;const rect=controls.getBoundingClientRect(),area=rect.width||window.innerWidth,tall=rect.height||window.innerHeight,geometry=balance.controls.stick?.[tall>area?'padPortrait':'padLandscape']||{widthPct:46,heightPct:60};pad.style.width=`${geometry.widthPct}%`;pad.style.height=`${geometry.heightPct}%`;applySoccerDesignLayout({root:controls,nodes,contract:contracts.controls,width:rect.width||window.innerWidth,height:rect.height||window.innerHeight,rightHanded:handed});};
+    const layoutControls=()=>{if(!contracts)return;const rect=controls.getBoundingClientRect(),w=rect.width||window.innerWidth,h=rect.height||window.innerHeight,geometry=balance.controls.stick?.[h>w?'padPortrait':'padLandscape']||{widthPct:46,heightPct:60};const layout=applySoccerDesignLayout({root:controls,nodes,contract:contracts.controls,width:w,height:h,rightHanded:handed}),area=soccerPadRect(layout,w,h,geometry);pad.style.width=`${area.width}px`;pad.style.height=`${area.height}px`;};
     document.addEventListener('visibilitychange',()=>{last=0;input?.setEnabled(!document.hidden&&!paused&&contractsReady&&!view?.loading());model.clearInput();},options);
     for(const type of ['resize','orientationchange'])window.addEventListener(type,()=>{input?.reset();model.clearInput();layoutControls();},options);
     window.addEventListener('pagehide',()=>ctx.cancel(),options);
