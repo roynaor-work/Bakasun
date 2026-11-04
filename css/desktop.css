@@ -46,3 +46,11 @@ nav.bottom .brand, nav.bottom .side-more { display: none; }
     outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
   nav.bottom a:focus-visible { outline-offset: -3px; }
 }
+
+/* the badge on the nav: bottom bar (a count on the "more" icon) and desktop rail (a count at the end of the row) */
+nav.bottom li { position: relative; }
+nav.bottom .nbadge { position: absolute; inset-block-start: 4px; inset-inline-end: calc(50% - 22px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-size: 11.5px; font-weight: 800; line-height: 18px; text-align: center; pointer-events: none; box-shadow: 0 0 0 2px var(--nav); }
+@media (min-width: 900px) {
+  nav.bottom .nbadge { position: static; margin-inline-start: auto; box-shadow: none; }
+}

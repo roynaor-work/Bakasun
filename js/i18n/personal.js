@@ -2,6 +2,7 @@
    Settings → "אישי" (landing screen, theme, text size, dashboard widgets) and the global search screen. */
 export const PERSONAL = {
   he: {
+    loading: 'טוענת…', screenLoadFailed: 'המסך לא נטען. כנראה אין חיבור. נסי שוב כשיש חיבור.',
     version: 'גרסת האפליקציה', versionUnknown: 'לא ידועה (פתיחה מהדפדפן)', checkUpdate: 'בדיקת עדכון', updateChecked: 'נבדק. אם יש גרסה חדשה, האפליקציה תתרענן לבד.', newVersion: 'גרסה חדשה נטענה, מרעננת...',
     personal: 'אישי', personalHint: 'איך האפליקציה נפתחת ונראית לך. נשמר יחד עם שאר ההגדרות.',
     landing: 'המסך שנפתח ראשון', theme: 'מראה', themeAuto: 'לפי המכשיר', themeLight: 'בהיר', themeDark: 'כהה',
@@ -11,6 +12,7 @@ export const PERSONAL = {
     srHint: 'Enter פותח את התוצאה הראשונה. מכל מסך: המקש / פותח חיפוש.', srShowAll: 'הצגת כל {n}', srStaff: 'צוות האירוע', srHelp: 'עזרה ופקודות', srOpenFirst: 'פתיחה'
   },
   fr: {
+    loading: 'Chargement…', screenLoadFailed: 'L’écran ne s’est pas chargé. Probablement pas de connexion. Réessayez avec une connexion.',
     version: 'Version de l’application', versionUnknown: 'inconnue (ouverte dans le navigateur)', checkUpdate: 'Vérifier les mises à jour', updateChecked: 'Vérifié. S’il y a une nouvelle version, l’application se recharge seule.', newVersion: 'Nouvelle version chargée, rechargement...',
     personal: 'Personnel', personalHint: 'Comment l’application s’ouvre et s’affiche pour vous. Enregistré avec les autres réglages.',
     landing: 'Écran d’ouverture', theme: 'Apparence', themeAuto: 'Comme l’appareil', themeLight: 'Clair', themeDark: 'Sombre',
@@ -20,6 +22,7 @@ export const PERSONAL = {
     srHint: 'Entrée ouvre le premier résultat. Depuis n’importe quel écran : la touche / ouvre la recherche.', srShowAll: 'Voir les {n}', srStaff: 'Équipe de l’événement', srHelp: 'Aide et commandes', srOpenFirst: 'Ouvrir'
   },
   en: {
+    loading: 'Loading…', screenLoadFailed: 'The screen did not load. There is probably no connection. Try again when you are online.',
     version: 'App version', versionUnknown: 'unknown (opened in the browser)', checkUpdate: 'Check for update', updateChecked: 'Checked. If there is a new version the app reloads by itself.', newVersion: 'New version loaded, reloading...',
     personal: 'Personal', personalHint: 'How the app opens and looks for you. Saved with the other settings.',
     landing: 'Opening screen', theme: 'Appearance', themeAuto: 'Follow the device', themeLight: 'Light', themeDark: 'Dark',

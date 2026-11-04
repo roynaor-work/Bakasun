@@ -4,49 +4,32 @@ import { t, setLang, dir, lang } from './i18n.js';
 import { db } from './store.js';
 import { esc } from './ui.js';
 import * as today from './screens/today.js';
-import * as help from './screens/help.js';
-import * as share from './screens/share.js';
-import * as lead from './screens/lead.js';
-import * as cases from './screens/cases.js';
-import * as clients from './screens/clients.js';
-import * as calls from './screens/calls.js';
-import * as tasks from './screens/tasks.js';
-import * as search from './screens/search.js';
-import * as settings from './screens/settings.js';
-import * as more from './screens/more.js';
-import * as suppliers from './screens/suppliers.js';
-import * as quotes from './screens/quotes.js';
-import * as groups from './screens/groups.js';
-import * as money from './screens/money.js';
-import * as notes from './screens/notes.js';
-import * as assist from './screens/assist.js';
-import * as portal from './screens/portal.js';
-import * as receipts from './screens/receipts.js';
-import * as dashboard from './screens/dashboard.js';
-import * as calendar from './screens/calendar.js';
-import * as participants from './screens/participants.js';
-import * as contracts from './screens/contracts.js';
-import * as budget from './screens/budget.js';
-import * as runsheet from './screens/runsheet.js';
-import * as casefiles from './screens/casefiles.js';
-import './screens/workgroup.js';
-import * as templatesScreen from './screens/templates.js';
-import * as importMail from './screens/importMail.js';
-import * as rules from './screens/rules.js';
-import * as board from './screens/board.js';
-import { quickNote } from './notes.js';
+import { ensureCss } from './lazycss.js';
 import { setChangeHook } from './store.js';
 import { enqueue } from './cloud.js';
 setChangeHook(enqueue);
 import { startHistory } from './logic/history.js'; startHistory();
 
-const ROUTES = {
-  today, lead, cases, 'case': cases, clients, client: clients, calls, tasks, search, settings, more,
-  suppliers, supplier: suppliers, quotes, quote: quotes, groups, money, notes, assist, portal, receipts, help, share,
-  dashboard, calendar, participants, contracts, contract: contracts,
-  budget, runsheet, files: casefiles, notifications: rules, board,
-  templates: templatesScreen, 'import': importMail
+/* Only "today" (the usual landing) ships with the first load. Every other screen is a module fetched on demand:
+   [loader, stylesheets it needs, extra modules that must be loaded with it]. Deep links, back and forward all go through route(). */
+const S = n => () => import('./screens/' + n + '.js');
+/* loaded one after the other, in this order: the order the modules register their tabs is the order of the tabs on the case */
+const CASE_TABS_LOAD = ['workgroup', 'calendar', 'participants', 'contracts', 'budget', 'runsheet', 'casefiles'];
+const CASE_TABS_CSS = ['participants', 'contracts', 'budget', 'runsheet', 'casefiles', 'calendar', 'templates'];
+const LAZY = {
+  lead: [S('lead')], cases: [S('cases'), CASE_TABS_CSS, CASE_TABS_LOAD], 'case': [S('cases'), CASE_TABS_CSS, CASE_TABS_LOAD],
+  clients: [S('clients')], client: [S('clients')], calls: [S('calls')], tasks: [S('tasks'), ['tasks2']],
+  search: [S('search')], settings: [S('settings'), ['rules']], more: [S('more')],
+  suppliers: [S('suppliers')], supplier: [S('suppliers')], quotes: [S('quotes')], quote: [S('quotes')],
+  groups: [S('groups')], money: [S('money')], notes: [S('notes')], assist: [S('assist'), ['templates']], portal: [S('portal')],
+  receipts: [S('receipts')], help: [S('help')], share: [S('share')],
+  dashboard: [S('dashboard'), ['dashboard']], calendar: [S('calendar'), ['calendar']],
+  participants: [S('participants'), ['participants']], contracts: [S('contracts'), ['contracts']], contract: [S('contracts'), ['contracts']],
+  budget: [S('budget'), ['budget']], runsheet: [S('runsheet'), ['runsheet']], files: [S('casefiles'), ['casefiles']],
+  notifications: [S('rules'), ['rules']], board: [S('board'), ['board']],
+  templates: [S('templates'), ['templates']], 'import': [S('importMail'), ['importmail']]
 };
+const ROUTES = { today };
 const NAV = [
   ['today', 'today', 'M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z'],
   ['cases', 'cases', 'M4 6h16v13H4zM4 10h16M8 6V4h8v2'],
@@ -101,7 +84,7 @@ function drawNav(active) {
 
 export function go(hash) { location.hash = hash; }
 
-document.addEventListener('click', e => { const b = e.target.closest('[data-quicknote]'); if (b) { e.preventDefault(); quickNote(); } });
+document.addEventListener('click', e => { const b = e.target.closest('[data-quicknote]'); if (b) { e.preventDefault(); import('./notes.js').then(m => m.quickNote()); } });
 
 /* After every navigation: the tab title carries the screen name, focus moves to the screen's heading (so a keyboard / screen-reader
    user starts at the top of the new screen, not on <body>), and a polite live region says which screen opened. */
@@ -117,14 +100,35 @@ function announceScreen() {
   live.textContent = name ? t('pageLoaded') + ': ' + name : '';
 }
 
-function route() {
+const idle = (fn, timeout) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout }) : setTimeout(fn, Math.min(timeout, 1500)));
+let routeSeq = 0;
+async function loadScreen(name) {
+  const spec = LAZY[name];
+  if (!spec) return today;
+  const [load, css = [], extra = []] = spec;
+  const [mod] = await Promise.all([load(), ensureCss(css), (async () => { for (const n of extra) await import('./screens/' + n + '.js'); })()]);
+  return mod;
+}
+async function route() {
+  const seq = ++routeSeq;
   applyLang();
   document.querySelectorAll('.modal').forEach(m => m.remove());
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   const name = parts[0] || landing();
-  const screen = ROUTES[name] || today;
   if (unsub) { unsub(); unsub = null; }
   drawNav(name);
+  let screen = ROUTES[name];
+  if (!screen) {
+    // a slow connection: say so while the screen's module arrives, instead of a blank page
+    const wait = setTimeout(() => { if (seq === routeSeq && !app.firstElementChild) app.innerHTML = '<p class="muted" role="status" aria-live="polite">' + esc(t('loading')) + '</p>'; }, 400);
+    try { screen = await loadScreen(name); } catch (e) {
+      clearTimeout(wait); if (seq !== routeSeq) return;
+      console.error(e); app.innerHTML = '<p class="warnbox" role="alert">' + esc(t('screenLoadFailed')) + '</p>'; return;
+    }
+    clearTimeout(wait);
+    if (seq !== routeSeq) return; // she moved on while it loaded
+    ROUTES[name] = screen;
+  }
   const ctx = { root: app, name, id: parts[1] || null, query: parts.slice(2) };
   const draw = () => { try { screen.render(ctx); } catch (e) { console.error(e); app.innerHTML = `<p class="warnbox">${esc(String(e && e.message || e))}</p>`; } };
   draw();
@@ -155,10 +159,14 @@ if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude\.
     // a new version was published: it installs in the background, then the app reloads itself once (no stale screens)
     reg.addEventListener('updatefound', () => { const nw = reg.installing; if (!nw) return; nw.addEventListener('statechange', () => { if (nw.state === 'installed' && navigator.serviceWorker.controller) { import('./ui.js').then(m => m.toast(t('newVersion'), 2500)); setTimeout(() => location.reload(), 2600); } }); });
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
+    // the first screen is cached already; once the page is idle the worker caches the rest, so every screen opens with no network
+    const precache = () => navigator.serviceWorker.ready.then(r => r.active && r.active.postMessage('precache')).catch(() => {});
+    idle(precache, 3000);
   }).catch(() => { /* offline shell is optional */ });
 }
 
-import { startNotify } from './notify.js'; startNotify();
+// reminders (the rules engine and the badge on the menu) start once the first screen is up, not in its way
+idle(() => import('./notify.js').then(m => m.startNotify()), 2500);
 // a save that failed on the device is shown in red at once (and again at most once a minute), never swallowed
 import { setSaveErrorHook } from './store.js';
 { let lastWarn = 0; setSaveErrorHook(msg => { if (Date.now() - lastWarn < 60000) return; lastWarn = Date.now(); import('./ui.js').then(m => m.toast(t('saveFailed') + ' ' + msg, 8000)); let bar = document.getElementById('savebar'); if (!bar) { bar = document.createElement('div'); bar.id = 'savebar'; bar.className = 'warnbox savebar'; document.body.prepend(bar); } bar.textContent = t('saveFailed') + ' ' + msg; }); }
