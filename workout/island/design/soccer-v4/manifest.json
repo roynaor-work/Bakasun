@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 1,
+  "kind": "design-assets-not-runtime",
+  "license": "CC0-1.0",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "runtimeBudgetBytes": 2000000,
+  "characterBudgetBytes": 300000,
+  "textureMaxSize": 512,
+  "rig": "../characters/rig.json",
+  "palette": {
+    "home": {
+      "shirt": "#2198AF",
+      "shorts": "#102C43",
+      "socks": "#EDF1E8",
+      "accent": "#EDF1E8",
+      "shoes": "#E57750"
+    },
+    "away": {
+      "shirt": "#E57750",
+      "shorts": "#F1EADD",
+      "socks": "#E57750",
+      "accent": "#F1EADD",
+      "shoes": "#213242"
+    },
+    "keeper": {
+      "shirt": "#E6B84A",
+      "shorts": "#283747",
+      "socks": "#283747",
+      "accent": "#283747",
+      "shoes": "#213242",
+      "gloves": "#F1EADD"
+    }
+  },
+  "clips": {
+    "soccer-player": [
+      {
+        "name": "idle",
+        "durationSeconds": 1.8,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "run",
+        "durationSeconds": 0.72,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "sprint",
+        "durationSeconds": 0.56,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "kick",
+        "durationSeconds": 0.68,
+        "loop": false,
+        "events": [
+          {
+            "atSeconds": 0.24,
+            "name": "visual_contact",
+            "time": 0.3529411764705882
+          }
+        ]
+      },
+      {
+        "name": "pass",
+        "durationSeconds": 0.86,
+        "loop": false,
+        "events": [
+          {
+            "time": 0.22,
+            "name": "visual_backswing",
+            "domain": "presentation",
+            "atSeconds": 0.1892
+          },
+          {
+            "time": 0.38,
+            "name": "visual_contact",
+            "domain": "presentation",
+            "atSeconds": 0.3268
+          },
+          {
+            "time": 0.9,
+            "name": "visual_replant",
+            "domain": "presentation",
+            "atSeconds": 0.774
+          }
+        ]
+      },
+      {
+        "name": "throw_in",
+        "durationSeconds": 1.8199999999999998,
+        "loop": false,
+        "events": [
+          {
+            "name": "presentation_ball_gather",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_overhead_loaded",
+            "time": 0.3560439560439561,
+            "atSeconds": 0.648
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_throw_release",
+            "time": 0.6140659340659341,
+            "atSeconds": 1.1176
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_throw_follow_through",
+            "time": 0.7626373626373627,
+            "atSeconds": 1.388
+          },
+          {
+            "name": "presentation_ready",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          }
+        ]
+      }
+    ],
+    "goalkeeper": [
+      {
+        "name": "idle",
+        "durationSeconds": 1.8,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "run",
+        "durationSeconds": 0.72,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "sprint",
+        "durationSeconds": 0.56,
+        "loop": true,
+        "events": []
+      },
+      {
+        "name": "kick",
+        "durationSeconds": 0.68,
+        "loop": false,
+        "events": [
+          {
+            "atSeconds": 0.24,
+            "name": "visual_contact",
+            "time": 0.3529411764705882
+          }
+        ]
+      },
+      {
+        "name": "pass",
+        "durationSeconds": 0.86,
+        "loop": false,
+        "events": [
+          {
+            "time": 0.22,
+            "name": "visual_backswing",
+            "domain": "presentation",
+            "atSeconds": 0.1892
+          },
+          {
+            "time": 0.38,
+            "name": "visual_contact",
+            "domain": "presentation",
+            "atSeconds": 0.3268
+          },
+          {
+            "time": 0.9,
+            "name": "visual_replant",
+            "domain": "presentation",
+            "atSeconds": 0.774
+          }
+        ]
+      },
+      {
+        "name": "throw_in",
+        "durationSeconds": 1.8199999999999998,
+        "loop": false,
+        "events": [
+          {
+            "name": "presentation_ball_gather",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_overhead_loaded",
+            "time": 0.3560439560439561,
+            "atSeconds": 0.648
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0.4945054945054946,
+            "atSeconds": 0.9
+          },
+          {
+            "name": "presentation_throw_release",
+            "time": 0.6140659340659341,
+            "atSeconds": 1.1176
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0.6703296703296704,
+            "atSeconds": 1.22
+          },
+          {
+            "name": "presentation_throw_follow_through",
+            "time": 0.7626373626373627,
+            "atSeconds": 1.388
+          },
+          {
+            "name": "presentation_ready",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 1,
+            "atSeconds": 1.8199999999999998
+          }
+        ]
+      },
+      {
+        "name": "keeper_throw",
+        "durationSeconds": 1.18,
+        "loop": false,
+        "events": [
+          {
+            "name": "presentation_keeper_gather",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_LeftFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_RightFoot_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "presentation_keeper_throw_release",
+            "time": 0.56,
+            "atSeconds": 0.6608
+          },
+          {
+            "name": "presentation_keeper_follow",
+            "time": 0.75,
+            "atSeconds": 0.885
+          },
+          {
+            "name": "presentation_LeftFoot_release",
+            "time": 1,
+            "atSeconds": 1.18
+          },
+          {
+            "name": "presentation_RightFoot_release",
+            "time": 1,
+            "atSeconds": 1.18
+          }
+        ]
+      },
+      {
+        "name": "keeper_punt",
+        "durationSeconds": 1.65,
+        "loop": false,
+        "events": [
+          {
+            "time": 0.18,
+            "name": "visual_ball_release",
+            "domain": "presentation",
+            "atSeconds": 0.297
+          },
+          {
+            "time": 0.48000000000000004,
+            "name": "visual_contact",
+            "domain": "presentation",
+            "atSeconds": 0.792
+          },
+          {
+            "time": 0.92,
+            "name": "visual_replant",
+            "domain": "presentation",
+            "atSeconds": 1.518
+          }
+        ]
+      },
+      {
+        "name": "keeper_dive_left",
+        "durationSeconds": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "time": 0.18000000000000002,
+            "name": "visual_push_off",
+            "domain": "presentation",
+            "atSeconds": 0.261
+          },
+          {
+            "time": 0.5,
+            "name": "visual_glove_contact",
+            "domain": "presentation",
+            "atSeconds": 0.725
+          },
+          {
+            "time": 0.8200000000000001,
+            "name": "visual_side_land",
+            "domain": "presentation",
+            "atSeconds": 1.189
+          },
+          {
+            "time": 1,
+            "name": "visual_dive_settled",
+            "domain": "presentation",
+            "atSeconds": 1.45
+          }
+        ]
+      },
+      {
+        "name": "keeper_dive_right",
+        "durationSeconds": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "time": 0.18000000000000002,
+            "name": "visual_push_off",
+            "domain": "presentation",
+            "atSeconds": 0.261
+          },
+          {
+            "time": 0.5,
+            "name": "visual_glove_contact",
+            "domain": "presentation",
+            "atSeconds": 0.725
+          },
+          {
+            "time": 0.8200000000000001,
+            "name": "visual_side_land",
+            "domain": "presentation",
+            "atSeconds": 1.189
+          },
+          {
+            "time": 1,
+            "name": "visual_dive_settled",
+            "domain": "presentation",
+            "atSeconds": 1.45
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "../characters2/soccer-player.glb",
+      "sha256": "94277964ab6e83c64ff37820a4b00b7e13f060c45eab4245e5e4df3e5c731d3a"
+    },
+    {
+      "path": "../characters2/goalkeeper.glb",
+      "sha256": "697f4947c4b0f044d5697a8a77efa18a3b535bf15945c8795624855a089e3de4"
+    },
+    {
+      "path": "../characters2/regions.json",
+      "sha256": "fc9fad65fce70f58f510771b4c1a84bb9da1371edb7ea503253b1e36481a34c2"
+    },
+    {
+      "path": "../characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2"
+    },
+    {
+      "path": "../viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78"
+    },
+    {
+      "path": "../viewer/retarget.js",
+      "sha256": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a"
+    },
+    {
+      "path": "../viewer/animation.js",
+      "sha256": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe"
+    },
+    {
+      "path": "../motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b"
+    },
+    {
+      "path": "../motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "path": "../motion2/soccer/throws-receives.json",
+      "sha256": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2"
+    },
+    {
+      "path": "../models2/soccer-stadium.glb",
+      "sha256": "777ddbc6a38df64b282a96b070923907486c54799f4b47d3ce7b7b3334a3f8f6"
+    },
+    {
+      "path": "../../data/config.json",
+      "sha256": "aaf734743e196a4bedd5a25f438f4bae134e3081e6b79c6ea736511f02e820a3"
+    }
+  ],
+  "assets": [
+    {
+      "path": "soccer-player.glb",
+      "bytes": 177372,
+      "sha256": "ef4dcd3343933031023057d5a954eb9e6e08b3294a47a26aa433608c2527cb74"
+    },
+    {
+      "path": "goalkeeper.glb",
+      "bytes": 258528,
+      "sha256": "4cc52a5abb692add49979b67668a2876b0c668f013c5627984fddfdf000d5316"
+    },
+    {
+      "path": "soccer-stadium.glb",
+      "bytes": 905744,
+      "sha256": "f969b395d59b4002940102a3627a9d5fef95dcae86cdcb56a53f28c3fc567ae9"
+    }
+  ],
+  "groundY": 0.048,
+  "grass": {
+    "tileMetres": 4,
+    "uvRepeat": [
+      17,
+      26.25
+    ],
+    "mowingBandMetres": 7.5,
+    "mowingBands": 14,
+    "macro": "nonperiodic vertex colour, 13 incommensurate sine waves plus local goalmouth wear",
+    "normalConvention": "OpenGL tangent-space +Y; linear, flipY=false"
+  },
+  "cameras": {
+    "main": {
+      "position": [
+        13.244214,
+        7.042073,
+        8
+      ],
+      "target": [
+        0,
+        0,
+        8
+      ],
+      "fov": 42,
+      "elevationDegrees": 28,
+      "distance": 15,
+      "portrait": {
+        "position": [
+          16.086933,
+          13.49854,
+          8
+        ],
+        "target": [
+          0,
+          0,
+          8
+        ],
+        "fov": 42,
+        "elevationDegrees": 40,
+        "distance": 21
+      },
+      "source": "../../data/config.json minigames.soccer.view.camera; side view rotated to stadium +Z length"
+    },
+    "turf": {
+      "position": [
+        5,
+        3.6,
+        6
+      ],
+      "target": [
+        0,
+        0.05,
+        0
+      ],
+      "fov": 48
+    }
+  },
+  "rootMotion": false,
+  "events": "presentation only; simulation owns ball physics and outcomes",
+  "soccer-player": {
+    "path": "soccer-player.glb",
+    "heightMetres": 1.2819477061275393,
+    "displayScale": 1.4041134372301147,
+    "triangles": 26180
+  },
+  "goalkeeper": {
+    "path": "goalkeeper.glb",
+    "heightMetres": 1.2820530871395022,
+    "displayScale": 1.4039980232145717,
+    "triangles": 25756
+  },
+  "stadium": {
+    "path": "soccer-stadium.glb",
+    "spectators": 2524,
+    "crowdDrawCalls": 1,
+    "crowdTriangles": 65624,
+    "pitchTriangles": 15232
+  },
+  "runtimeBytes": 1341644
+}
