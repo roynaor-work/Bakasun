@@ -1,16 +1,16 @@
 import * as T from '../vendor/three.module.js';
 
-/** One sun/shadow pass. Only the original players, ball and goal cast shadows.
+/** Late-afternoon sun: warmer key from a lower angle (longer, softer player shadows), cool sky fill. One sun/shadow pass. Only the original players, ball and goal cast shadows.
  * This is deliberately independent of gameplay and of the city's lighting. */
 export function createSoccerLighting(scene,renderer,config){
- renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;
+ renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
- const ambient=new T.HemisphereLight('#dae9ff','#4f6344',1.35);
- const sun=new T.DirectionalLight('#fff0d4',2.75);sun.position.set(-14,26,-17);sun.target.position.set(0,0,0);sun.castShadow=true;
+ const ambient=new T.HemisphereLight('#d6e6ff','#5a6a45',1.25);
+ const sun=new T.DirectionalLight('#ffe6bd',3.05);sun.position.set(-20,21,-15);sun.target.position.set(0,0,0);sun.castShadow=true;
  const extent=Math.hypot(config.pitch.length,config.pitch.width)/2+3,camera=sun.shadow.camera;
  Object.assign(camera,{left:-extent,right:extent,top:extent,bottom:-extent,near:1,far:75});camera.updateProjectionMatrix();
- sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0002;sun.shadow.normalBias=.025;sun.shadow.radius=2;
- const fill=new T.DirectionalLight('#b9d6f1',.45);fill.position.set(16,10,14);
+ sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0002;sun.shadow.normalBias=.025;sun.shadow.radius=3;
+ const fill=new T.DirectionalLight('#a9c8ee',.5);fill.position.set(16,10,14);
  scene.add(ambient,sun,sun.target,fill);let quality=0,disposed=false;
  function setQuality(level){
   quality=Math.max(0,Math.min(3,Math.floor(level)));sun.castShadow=quality<2;renderer.shadowMap.enabled=quality<2;
