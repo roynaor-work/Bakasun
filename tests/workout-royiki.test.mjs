@@ -102,7 +102,8 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
       await page.goto(srv.url + '#/exercise/' + id);
       await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"] svg.royiki-svg', { timeout: 15000 });
       const t = () => page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime());
-      const a = await t(); await page.waitForTimeout(300); const b = await t();
+      const a = await t(); let b = a;
+      for (let i = 0; i < 25 && b === a; i++) { await page.waitForTimeout(200); b = await t(); } // בעומס (npm test במקביל) המסגרת הראשונה מתעכבת
       assert.notEqual(a, b, id + ' did not animate'); /* ציר הזמן של ה-SMIL מתקדם (צילום פיקסלים איטי מדי ב-swiftshader) */
     }
     assert.equal(await page.locator('.exmedia.stage3d').count(), 0);
