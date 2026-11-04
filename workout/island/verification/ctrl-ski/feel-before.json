@@ -1,0 +1,85 @@
+{
+ "label": "before",
+ "root": "/tmp/claude-0/-home-user-Bakasun/18255976-0ee7-5ee7-99bc-b151d89d419e/scratchpad/before/workout/island",
+ "config": {
+  "lateralResponse": 9,
+  "steerExpo": 1.15,
+  "steerAttack": 18,
+  "steerRelease": 22,
+  "turnPush": 2.5,
+  "steerBoostExpo": 0,
+  "steerBoostSoften": 0,
+  "lateralBoostDamp": 0
+ },
+ "metrics": {
+  "engineLeanMs": 50,
+  "bodyLeanMs": 116.7,
+  "yawVisibleMs": 133.3,
+  "trackMovesMs": 83.3,
+  "heading100": 12.8,
+  "heading250": 20.8,
+  "turnRate300": 72,
+  "peakHeading": 22.8,
+  "ratio": [
+   {
+    "stick": 0.25,
+    "lean": 0.202,
+    "headingDeg": 4.9,
+    "lateral": 1.71
+   },
+   {
+    "stick": 0.5,
+    "lean": 0.447,
+    "headingDeg": 10.8,
+    "lateral": 3.8
+   },
+   {
+    "stick": 0.75,
+    "lean": 0.712,
+    "headingDeg": 16.8,
+    "lateral": 6.05
+   },
+   {
+    "stick": 1,
+    "lean": 0.991,
+    "headingDeg": 22.8,
+    "lateral": 8.42
+   }
+  ],
+  "straightMs": 283.3,
+  "bodyUprightMs": 450,
+  "reverseMs": 150,
+  "boostStartMs": 16.7,
+  "boostPlus10Ms": 166.7,
+  "boostBaseKmh": 72,
+  "boostSpeedKmh": 111.6,
+  "boostLeanMs": 50,
+  "boostBodyMs": 116.7,
+  "boostHeadingSmallStick": 3.6,
+  "cruiseHeadingSmallStick": 5.6,
+  "trickStartMs": null,
+  "airLeanMs": 50,
+  "fallControlMs": 1633.3,
+  "fallLockSeconds": 1.5,
+  "pilotRaces": [
+   {
+    "stage": 1,
+    "seconds": 64.7,
+    "rank": 1,
+    "won": true
+   },
+   {
+    "stage": 2,
+    "seconds": 75.7,
+    "rank": 2,
+    "won": true
+   },
+   {
+    "stage": 3,
+    "seconds": 81.2,
+    "rank": 1,
+    "won": true
+   }
+  ]
+ }
+}

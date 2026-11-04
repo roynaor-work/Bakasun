@@ -2,6 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {AlpineDracoLoader as DRACOLoader} from './alpine-draco.mjs';
 import {Retargeter} from '../design/viewer/retarget.js';
+import {bodyTarget, followBody} from './alpine-steer.mjs';
 
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const smooth = x => (x = clamp(x)) * x * (3 - 2 * x);
@@ -182,7 +183,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (restarted) reset();
     const speed = context.speedKmh ?? (lastS !== null && dt > 0 ? Math.max(0, ((frame.s ?? lastS) - lastS) / dt * 3.6) : 0);
     const moving = phase === 'menu' && !!context.previewRun || (phase === 'racing' || phase === 'finished') && (speed > .5 || phase === 'racing');
-    const lean = clamp(Number(frame.lean) || 0, -1, 1);
+    const lean = bodyTarget(frame);
     carveHeld = moving && !frame.airborne && !frame.crashed && Math.abs(lean) > .2;
     carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
     time += dt * (state === 'recover' ? 1.9 : state === 'fall' ? 1.15 : 1);
@@ -190,7 +191,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : state === 'tuck' ? .45 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
     const follow = 1 - Math.exp(-8 * dt);
-    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-7 * dt));
+    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean = followBody(ride.lean, lean, dt);
     if (dt > 0) ride.rate += (((ride.lean - ride.prevLean) / dt) - ride.rate) * (1 - Math.exp(-9 * dt)); ride.prevLean = ride.lean;
     ride.arms += (((state === 'fall' || state === 'recover' || state === 'celebrate') ? 0 : 1) - ride.arms) * (1 - Math.exp(-7 * dt));
     ride.boost += ((frame.boosting && rideWeight > 0 && !frame.airborne ? 1 : 0) - ride.boost) * (1 - Math.exp(-9 * dt));
