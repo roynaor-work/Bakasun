@@ -6,16 +6,13 @@
   <title>שאלון מארזים · הרוח הצפונית</title>
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0c0a09">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .sv{max-width:760px;margin:0 auto;padding:28px 16px 90px}
     .sv h1{font-size:clamp(30px,6vw,44px);color:#fff;margin:10px 0 6px}
     .sv .lead{color:var(--muted);margin:0 0 22px;font-size:17px}
     .sv .panel{margin-bottom:16px}
-    .sv .panel h3 .hint{margin-inline-start:auto;font-weight:400;font-size:13px;font-family:var(--b);color:var(--dim)}
+    .sv .panel h2 .hint{margin-inline-start:auto;font-weight:400;font-size:13px;font-family:var(--b);color:var(--dim)}
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
     @media (max-width:560px){.row3{grid-template-columns:1fr 1fr}}
@@ -48,52 +45,52 @@
     <div class="prog"><span id="pcount">0 מתוך 0</span><span class="bar"><i id="pbar"></i></span><span>מולא</span></div>
 
     <form id="f" novalidate>
-      <section class="panel"><h3><span class="no">1</span>מי ממלא</h3>
-        <div class="row2"><div class="field"><label>שם</label><input name="who" value="מתן הררי"></div><div class="field"><label>טלפון</label><input name="who_phone" type="tel" inputmode="tel"></div></div>
+      <section class="panel"><h2><span class="no">1</span>מי ממלא</h2>
+        <div class="row2"><div class="field"><label for="sv-who">שם</label><input id="sv-who" name="who" value="מתן הררי"></div><div class="field"><label for="sv-who_phone">טלפון</label><input id="sv-who_phone" name="who_phone" type="tel" inputmode="tel"></div></div>
       </section>
 
-      <section class="panel"><h3><span class="no">2</span>אלכוהול: מה קבוע על המדף<span class="hint">לכל קטגוריה</span></h3>
+      <section class="panel"><h2><span class="no">2</span>אלכוהול: מה קבוע על המדף<span class="hint">לכל קטגוריה</span></h2>
         <div class="list" id="alc"></div>
       </section>
 
-      <section class="panel"><h3><span class="no">3</span>מוצרים למארזים: מה יש, מה אפשר להחזיק<span class="hint">קבוע = תמיד במלאי</span></h3>
+      <section class="panel"><h2><span class="no">3</span>מוצרים למארזים: מה יש, מה אפשר להחזיק<span class="hint">קבוע = תמיד במלאי</span></h2>
         <div class="list" id="goods"></div>
       </section>
 
-      <section class="panel"><h3><span class="no">4</span>אריזה וחריטה</h3>
+      <section class="panel"><h2><span class="no">4</span>אריזה וחריטה</h2>
         <div class="list" id="pack"></div>
-        <div class="field"><label>כשרות: אילו מוצרים (אלכוהול, ממתקים, גבינות, ריבות) בלי הכשר? ואיזה הכשר יש לשאר?</label><textarea name="kosher" placeholder="למשל: פרלינים בלגיים בלי הכשר; הדבש והחטיפים בד"ץ; רוב הוויסקי בלי הכשר"></textarea></div>
-        <div class="field"><label>חריטה על פלאסק/כוס: יש מכשיר, ספק חיצוני, או אין?</label><input name="engrave" placeholder="למשל: ספק בקריית שמונה, 24 שעות, 25 ₪ לפריט"></div>
+        <div class="field"><label for="sv-kosher">כשרות: אילו מוצרים (אלכוהול, ממתקים, גבינות, ריבות) בלי הכשר? ואיזה הכשר יש לשאר?</label><textarea id="sv-kosher" name="kosher" placeholder="למשל: פרלינים בלגיים בלי הכשר; הדבש והחטיפים בד"ץ; רוב הוויסקי בלי הכשר"></textarea></div>
+        <div class="field"><label for="sv-engrave">חריטה על פלאסק/כוס: יש מכשיר, ספק חיצוני, או אין?</label><input id="sv-engrave" name="engrave" placeholder="למשל: ספק בקריית שמונה, 24 שעות, 25 ₪ לפריט"></div>
       </section>
 
-      <section class="panel"><h3><span class="no">5</span>ספקים</h3>
-        <div class="field"><label>מוצרי הטיפוח (נרות, סבונים, שמפו, מפיצי ריח): מאיזה יצרן, ומה מחיר הקנייה?</label><textarea name="sup_care" placeholder="שם היצרן, טלפון, מחיר קנייה לפריט, מינימום הזמנה"></textarea></div>
-        <div class="field"><label>דבש, חטיפים, שוקולד: מי הספק?</label><textarea name="sup_food"></textarea></div>
-        <div class="field"><label>מאגתד וניצן: מה אתה לוקח היום, ומה היית רוצה לקחת למארזים?</label><textarea name="sup_import" placeholder="אגתד: ריבות, קוויאר, שוקולד... ניצן: טבסקו, וויסקי..."></textarea></div>
-        <div class="field"><label>עוד ספק שכדאי להכניס?</label><input name="sup_other"></div>
+      <section class="panel"><h2><span class="no">5</span>ספקים</h2>
+        <div class="field"><label for="sv-sup_care">מוצרי הטיפוח (נרות, סבונים, שמפו, מפיצי ריח): מאיזה יצרן, ומה מחיר הקנייה?</label><textarea id="sv-sup_care" name="sup_care" placeholder="שם היצרן, טלפון, מחיר קנייה לפריט, מינימום הזמנה"></textarea></div>
+        <div class="field"><label for="sv-sup_food">דבש, חטיפים, שוקולד: מי הספק?</label><textarea id="sv-sup_food" name="sup_food"></textarea></div>
+        <div class="field"><label for="sv-sup_import">מאגתד וניצן: מה אתה לוקח היום, ומה היית רוצה לקחת למארזים?</label><textarea id="sv-sup_import" name="sup_import" placeholder="אגתד: ריבות, קוויאר, שוקולד... ניצן: טבסקו, וויסקי..."></textarea></div>
+        <div class="field"><label for="sv-sup_other">עוד ספק שכדאי להכניס?</label><input id="sv-sup_other" name="sup_other"></div>
       </section>
 
-      <section class="panel"><h3><span class="no">6</span>תפעול</h3>
+      <section class="panel"><h2><span class="no">6</span>תפעול</h2>
         <div class="row2">
-          <div class="field"><label>מי אורז את המארזים?</label><input name="op_who" placeholder="אני / עובד / שנינו"></div>
-          <div class="field"><label>זמן הכנה למארז מהזמנה</label><input name="op_time" placeholder="למשל: אותו יום עד 16:00"></div>
+          <div class="field"><label for="sv-op_who">מי אורז את המארזים?</label><input id="sv-op_who" name="op_who" placeholder="אני / עובד / שנינו"></div>
+          <div class="field"><label for="sv-op_time">זמן הכנה למארז מהזמנה</label><input id="sv-op_time" name="op_time" placeholder="למשל: אותו יום עד 16:00"></div>
         </div>
         <div class="row2">
-          <div class="field"><label>משלוחים: מי מוביל ולאן?</label><input name="op_ship" placeholder="שליח / אנחנו / חברת משלוחים, אזור"></div>
-          <div class="field"><label>עלות משלוח שאתה משלם</label><input name="op_shipcost" inputmode="numeric"></div>
+          <div class="field"><label for="sv-op_ship">משלוחים: מי מוביל ולאן?</label><input id="sv-op_ship" name="op_ship" placeholder="שליח / אנחנו / חברת משלוחים, אזור"></div>
+          <div class="field"><label for="sv-op_shipcost">עלות משלוח שאתה משלם</label><input id="sv-op_shipcost" name="op_shipcost" inputmode="numeric"></div>
         </div>
         <div class="row2">
-          <div class="field"><label>שעות פתיחה נכונות להיום</label><input name="op_hours" placeholder="א׳-ה׳ 10:00-22:00 · ו׳ 9:00-15:00"></div>
-          <div class="field"><label>מקום אחסון למארזים מוכנים (כמה?)</label><input name="op_storage"></div>
+          <div class="field"><label for="sv-op_hours">שעות פתיחה נכונות להיום</label><input id="sv-op_hours" name="op_hours" placeholder="א׳-ה׳ 10:00-22:00 · ו׳ 9:00-15:00"></div>
+          <div class="field"><label for="sv-op_storage">מקום אחסון למארזים מוכנים (כמה?)</label><input id="sv-op_storage" name="op_storage"></div>
         </div>
-        <div class="field"><label>תשלום: יש ביט לעסקים על החנות? מסוף אשראי? מה עוד?</label><input name="op_pay" placeholder="ביט לעסקים כן/לא, מספר, Grow, מסוף"></div>
+        <div class="field"><label for="sv-op_pay">תשלום: יש ביט לעסקים על החנות? מסוף אשראי? מה עוד?</label><input id="sv-op_pay" name="op_pay" placeholder="ביט לעסקים כן/לא, מספר, Grow, מסוף"></div>
       </section>
 
-      <section class="panel"><h3><span class="no">7</span>מה מבקשים ממך בחנות</h3>
-        <div class="field"><label>3 המתנות שאנשים הכי מבקשים (וכמה הם מוכנים לשלם)</label><textarea name="ask_top"></textarea></div>
-        <div class="field"><label>מארז שמכרת בעבר ועבד טוב</label><textarea name="ask_worked"></textarea></div>
-        <div class="field"><label>לקוחות עסקיים באזור שמתאימים למתנות לעובדים</label><textarea name="ask_biz" placeholder="שמות, איש קשר, כמה עובדים"></textarea></div>
-        <div class="field"><label>הערות, רעיונות, מה שלא שאלנו</label><textarea name="notes"></textarea></div>
+      <section class="panel"><h2><span class="no">7</span>מה מבקשים ממך בחנות</h2>
+        <div class="field"><label for="sv-ask_top">3 המתנות שאנשים הכי מבקשים (וכמה הם מוכנים לשלם)</label><textarea id="sv-ask_top" name="ask_top"></textarea></div>
+        <div class="field"><label for="sv-ask_worked">מארז שמכרת בעבר ועבד טוב</label><textarea id="sv-ask_worked" name="ask_worked"></textarea></div>
+        <div class="field"><label for="sv-ask_biz">לקוחות עסקיים באזור שמתאימים למתנות לעובדים</label><textarea id="sv-ask_biz" name="ask_biz" placeholder="שמות, איש קשר, כמה עובדים"></textarea></div>
+        <div class="field"><label for="sv-notes">הערות, רעיונות, מה שלא שאלנו</label><textarea id="sv-notes" name="notes"></textarea></div>
       </section>
 
       <section class="panel">
@@ -104,7 +101,7 @@
     </form>
 
     <section class="panel done" id="done">
-      <h3>תודה! השאלון נשלח</h3>
+      <h2>תודה. השאלון נשלח</h2>
       <p style="margin:0;color:var(--muted)" id="donemsg"></p>
       <div class="copyrow"><a class="btn line sm" id="mailbtn" href="#">שליחה גם במייל לרועי</a><button class="btn line sm" id="copybtn">העתקת התשובות</button></div>
       <pre id="out" style="text-align:right;white-space:pre-wrap;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;line-height:1.5;font-family:var(--b);color:var(--muted)"></pre>
@@ -127,7 +124,7 @@
         <label><input type="radio" name="${k}" value="קבוע"> קבוע</label>
         <label><input type="radio" name="${k}" value="אפשר"> אפשר להחזיק</label>
         <label><input type="radio" name="${k}" value="לא"> לא</label>
-        <div class="more"><input name="${k}_n" placeholder="${prefix === 'a' ? 'כמה מותגים' : 'ספק / מותג'}"><input name="${k}_p" placeholder="טווח מחיר מדף" inputmode="numeric"><input name="${k}_x" placeholder="דוגמאות / הערה"></div></div>`;
+        <div class="more"><input name="${k}_n" aria-label="${esc(name)}: ${prefix === 'a' ? 'כמה מותגים' : 'ספק או מותג'}" placeholder="${prefix === 'a' ? 'כמה מותגים' : 'ספק / מותג'}"><input name="${k}_p" aria-label="${esc(name)}: טווח מחיר מדף" placeholder="טווח מחיר מדף" inputmode="numeric"><input name="${k}_x" aria-label="${esc(name)}: דוגמאות והערות" placeholder="דוגמאות / הערה"></div></div>`;
     }
     $('#alc').innerHTML = ALC.map((n, i) => tri('a', n, i)).join('');
     $('#goods').innerHTML = GOODS.map((n, i) => tri('g', n, i)).join('');

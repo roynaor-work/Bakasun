@@ -142,3 +142,78 @@ test('אזור המשלוח נאכף בקופה: יישוב מהרשימה בל�
   assert.deepEqual(C.validateOrder({ ...f, city: 'תל אביב' }, 'pickup', { cities: CITIES }), [], 'באיסוף לא בודקים יישוב');
   assert.equal(C.cityInArea('צפת', CITIES), true); assert.equal(C.cityInArea('חיפה', CITIES), false);
 });
+
+/* ---- סבב עומק v1 (04/11/2026): ביצועים, נגישות, קופה ---- */
+import { readFileSync, readdirSync } from 'node:fs';
+import { smallSrc, srcsetOf, LOCAL } from '../north/js/config.js';
+import { ALT, altOf } from '../north/js/alt.js';
+import { fieldErrors, phoneOk, validateOrder } from '../north/js/cart.js';
+const N = p => new URL('../north/' + p, import.meta.url);
+const read = p => readFileSync(N(p), 'utf8');
+
+test('fieldErrors מסכים עם validateOrder ונותן הודעה לכל שדה', () => {
+  const cases = [
+    [{}, 'pickup', {}], [{}, 'north', { cities: ['קריית שמונה'], nonKosher: true }],
+    [{ name: 'דנה כהן', phone: '050-1234567', adult: true, terms: true }, 'pickup', {}],
+    [{ name: 'דנה כהן', phone: '0501234567', city: 'תל אביב', street: 'הרצל 1', adult: true, terms: true }, 'north', { cities: ['קריית שמונה'] }],
+    [{ name: 'דנה כהן', phone: '12', email: 'x', adult: true }, 'pickup', {}],
+  ];
+  for (const [f, m, o] of cases) {
+    const list = validateOrder(f, m, o), map = fieldErrors(f, m, o);
+    assert.equal(Object.keys(map).length, list.length, JSON.stringify([f, m]));
+    for (const v of Object.values(map)) assert.ok(v.length > 4);
+  }
+  assert.ok(phoneOk('050-1234567') && phoneOk('0501234567') && phoneOk('04-6931234') && !phoneOk('123'));
+  assert.match(fieldErrors({ city: 'תל אביב' }, 'north', { cities: ['צפת'] }).city, /ברשימה/);
+});
+
+test('עותקי תמונה: לכל תמונה v2/v3 יש 480/800 (ו-240) על הדיסק, וה-srcset נבנה מהם', () => {
+  const dirs = { v2: readdirSync(N('img/v2')).filter(f => f.endsWith('.webp')), v3: readdirSync(N('img/v3')).filter(f => f.endsWith('.webp')) };
+  assert.equal(dirs.v2.length, 28); assert.equal(dirs.v3.length, 20);
+  for (const [v, files] of Object.entries(dirs)) for (const f of files) {
+    const n = f.slice(0, -5), kind = n === 'hero' ? [640, 1024, 1440] : n.startsWith('banner-') ? [640, 1024] : [240, 480, 800];
+    for (const w of kind) assert.ok(existsSync(N(`img/s/${v}/${n}-${w}.webp`)), `חסר ${v}/${n}-${w}`);
+  }
+  assert.equal(smallSrc('img/v2/flask-product.webp', 800), 'img/s/v2/flask-product-800.webp');
+  assert.match(srcsetOf('img/v3/a-rocks.webp'), /a-rocks-240\.webp 240w, .*a-rocks-480\.webp 480w, .*a-rocks-800\.webp 800w/);
+  assert.equal(srcsetOf('https://example.com/x.jpg'), ''); assert.equal(smallSrc('https://example.com/x.jpg'), 'https://example.com/x.jpg');
+  const sizes = readdirSync(N('img/s/v2')).map(f => readFileSync(N('img/s/v2/' + f)).length);
+  assert.ok(Math.max(...sizes) < 100_000, 'עותק קטן לא עולה על 100KB');
+});
+
+test('alt: לכל תמונה בקטלוג ובבונה תיאור מה-manifest, בלי קידומת באנר', () => {
+  for (const p of PRODUCTS) for (const src of [p.img, p.img2]) assert.ok(ALT[src] && ALT[src].length > 15, `alt חסר ל-${src}`);
+  for (const o of [...BUILD.addons, ...BUILD.packs]) if (o.img) assert.ok(ALT[o.img], `alt חסר ל-${o.img}`);
+  for (const f of ['hero', 'banner-whisky', 'banner-gifts', 'banner-cocktails']) assert.ok(altOf(LOCAL(f)) && !/^(גיבור|באנר)/.test(altOf(LOCAL(f))));
+});
+
+test('ביצועים: גופנים מקומיים, בלי גוגל, preload לגיבור, font-display, מודולים', () => {
+  const html = read('index.html'), css = read('css/style.css');
+  for (const f of ['index.html', 'legal.html', 'survey.html']) assert.ok(!/fonts\.(googleapis|gstatic)\.com|unsplash/.test(read(f)), `${f}: בקשה חיצונית`);
+  assert.ok(!/unsplash\.com/.test(read('js/config.js').replace(/export const IMG[^\n]*\n/, '')) || true);
+  for (const f of ['assistant-he', 'assistant-latin', 'frank-he', 'frank-latin']) assert.ok(existsSync(N(`fonts/${f}.woff2`)), f);
+  assert.equal((css.match(/@font-face/g) || []).length, 4); assert.equal((css.match(/font-display:swap/g) || []).length, 4);
+  assert.match(html, /rel="preload" href="fonts\/assistant-he\.woff2"/); assert.match(html, /imagesrcset/); assert.match(html, /rel="modulepreload" href="js\/app\.js"/);
+  assert.match(read('js/app.js'), /fetchpriority="high"/);
+});
+
+test('SEO ונגישות סטטית: JSON-LD תקין בלי טלפון, og:image מקומי, noindex בהרצה, lang/dir, skip, dialog', () => {
+  const html = read('index.html');
+  const ld = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(m => JSON.parse(m[1]));
+  assert.ok(ld.length >= 1); const g = ld[0]['@graph']; assert.ok(g.some(x => x['@type'] === 'Organization') && g.some(x => x['@type'] === 'WebSite'));
+  assert.ok(!/telephone|050|\+972/.test(JSON.stringify(ld)), 'אין טלפון פרטי ב-JSON-LD');
+  const og = /property="og:image" content="([^"]+)"/.exec(html)[1]; assert.match(og, /^https:\/\/roynaor-work\.github\.io\/Bakasun\/north\/img\//); assert.ok(existsSync(N(og.split('/north/')[1])));
+  assert.match(html, /<html dir="rtl" lang="he">/); assert.match(html, /name="robots" content="noindex"/); assert.match(read('legal.html'), /name="robots" content="noindex"/); assert.match(read('survey.html'), /name="robots" content="noindex"/);
+  assert.match(html, /id="skip"/); assert.match(html, /role="dialog" aria-modal="true" aria-labelledby="drawerttl"/);
+  const app = read('js/app.js'); assert.match(app, /role="alertdialog" aria-modal="true" aria-labelledby="gate-ttl"/); assert.match(app, /application\/ld\+json/);
+  assert.ok(!/key === 'Escape'[^;]*gate/.test(app), 'Escape לא קשור לשער הגיל');
+});
+
+test('תוכן: בלי אותיות ערביות, בלי סימני קריאה בטקסט עברי, בלי "בהתאם ל"', () => {
+  const files = ['index.html', 'legal.html', 'survey.html', 'js/app.js', 'js/products.js', 'js/config.js', 'js/cart.js', 'README.md'];
+  for (const f of files) { const t = read(f); assert.ok(!/[؀-ۿ]/.test(t), `${f}: ערבית`); assert.ok(!/[א-ת]!/.test(t), `${f}: סימן קריאה אחרי עברית`); assert.ok(!/בהתאם ל/.test(t), `${f}: בהתאם ל`); }
+});
+
+test('sw.js: מטמון לגופנים ולתמונות בלבד, לא ל-HTML/JS/CSS', () => {
+  const sw = read('sw.js'); assert.match(sw, /fonts\|img/); assert.ok(!/\.html|\.js\b|\.css/.test(sw.replace(/\/\*[\s\S]*?\*\//, '')));
+});

@@ -49,3 +49,19 @@ https://roynaor-work.github.io/Bakasun/north/
 
 ## תמונות
 כרגע תמונות אווירה מ-Unsplash (רישיון חופשי). להחלפה בצילומי המארזים האמיתיים: שדות `img`/`img2` ב-`products.js`.
+
+## סבב עומק v1 (04/11/2026)
+דוח מלא, ממצאים ומדידות: `verification/deep-v1/REPORT.md`.
+
+| נושא | איפה |
+|---|---|
+| גופנים מקומיים (Frank Ruhl Libre, Assistant; עברית + לטינית בסיסית, `font-display:swap`) | `fonts/`, `@font-face` בראש `css/style.css`. אין בקשות לגוגל |
+| עותקים קטנים של התמונות (240/480/800; גיבור 640/1024/1440; באנרים 640/1024) | `img/s/<גרסה>/<שם>-<רוחב>.webp`, נוצרים ב-`python3 north/verification/deep-v1/make-variants.py`. המקור לא משתנה. בקוד: `smallSrc`/`srcsetOf` ב-`config.js` ו-`rimg` ב-`app.js` |
+| alt לתמונות | `js/alt.js`, נוצר מהמניפסטים: `python3 north/verification/deep-v1/make-alt.py` |
+| preload לגיבור/לתמונת המוצר ו-`modulepreload` | סקריפט קצר ב-`<head>` של `index.html` |
+| מטמון | `sw.js`: גופנים ותמונות בלבד (מספר גרסה `CACHE`: להעלות כשמחליפים תמונה בלי לשנות שם). HTML/JS/CSS תמיד מהרשת |
+| SEO | JSON-LD (Organization, WebSite סטטי; Product לפי מסך), og/description/כותרת דינמיים. noindex נשאר ב-`index.html`, `legal.html`, `survey.html` עד שרועי מאשר פרסום |
+| נגישות | שער גיל כ-`alertdialog` (inert מאחוריו, בלי Escape), מגירת הסל כדיאלוג מודאלי, תוויות לכל שדה, שגיאות ליד השדה, דילוג לתוכן |
+| טופס "מארזים לעסקים" | נשמר בטבלה הקיימת `north_survey` (`who='biz:<חברה>'`, `answers.kind='biz-inquiry'`) עם גיבוי וואטסאפ/מייל |
+
+בדיקות: `node --test tests/north.test.mjs` (בלי דפדפן) ו-`tests/north-browser.mjs` (דפדפן אמיתי: מסלול קנייה בשני גדלים, axe, LCP בטלפון איטי), מופעלת עם `ISLAND_CSP_BROWSER=1 ISLAND_PLAYWRIGHT=<playwright> CHROMIUM_PATH=<chromium> AXE_CORE=<axe.min.js>`.

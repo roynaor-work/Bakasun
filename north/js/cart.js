@@ -80,6 +80,25 @@ export function validateOrder(f, method, opts = {}) {
   return errs;
 }
 
+export const phoneOk = v => /^0\d{1,2}-?\d{7}$/.test(String(v || '').replace(/\s/g, ''));
+
+/* שגיאות לפי שדה, להצגה ליד השדה: { name: 'הודעה', ... }. אותם כללים כמו validateOrder. */
+export function fieldErrors(f, method, opts = {}) {
+  const e = {};
+  if (!f.name || f.name.trim().length < 2) e.name = 'כותבים שם מלא';
+  if (!phoneOk(f.phone)) e.phone = 'מספר טלפון ישראלי, למשל 050-1234567';
+  if (f.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) e.email = 'כתובת מייל לא תקינה, למשל name@example.com';
+  if (method !== 'pickup') {
+    if (!f.city || f.city.trim().length < 2) e.city = 'בוחרים יישוב מהרשימה';
+    else if (opts.cities && !cityInArea(f.city, opts.cities)) e.city = 'משלוחים רק ליישובים ברשימה. אפשר לבחור איסוף מהחנות, או לכתוב לנו.';
+    if (!f.street || f.street.trim().length < 2) e.street = 'כותבים רחוב ומספר';
+  }
+  if (!f.adult) e.adult = 'צריך לאשר גיל 18 ומעלה';
+  if (!f.terms) e.terms = 'צריך לאשר את התקנון';
+  if (opts.nonKosher && !f.kosherOk) e.kosherOk = 'צריך לאשר שהמארז כולל מוצר לא כשר';
+  return e;
+}
+
 /* טקסט ההזמנה להודעה/מייל. */
 export function orderText(order) {
   const lines = [`הזמנה ${order.no} · ${order.store}`, ''];

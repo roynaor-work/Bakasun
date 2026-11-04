@@ -7,17 +7,45 @@
   <meta name="description" content="מארזי וויסקי, קוקטיילים, יין ופינוק מהרוח הצפונית בצומת הגומא. מארז בהרכבה אישית, חריטה על פלאסק, איסוף מהחנות או משלוח באזור. תשלום בכרטיס אשראי או ביט.">
   <meta name="theme-color" content="#0c0a09">
   <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://roynaor-work.github.io/Bakasun/north/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:site_name" content="הרוח הצפונית">
   <meta property="og:title" content="הרוח הצפונית · מארזים">
   <meta property="og:description" content="מארזי אלכוהול ופינוק מהצפון. בונים לבד או בוחרים מוכן.">
-  <meta property="og:image" content="https://roynaor-work.github.io/Bakasun/north/img/v2/hero.webp">
+  <meta property="og:url" content="https://roynaor-work.github.io/Bakasun/north/">
+  <meta property="og:image" content="https://roynaor-work.github.io/Bakasun/north/img/s/v2/hero-1440.webp">
+  <meta property="og:image:width" content="1440">
+  <meta property="og:image:height" content="810">
+  <meta property="og:image:alt" content="מארז מתנה עם בקבוק וויסקי, כוסות ותוספות באור ענברי">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="icons/north.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/assistant-he.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/frank-he.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="modulepreload" href="js/app.js">
+  <link rel="modulepreload" href="js/config.js">
+  <link rel="modulepreload" href="js/products.js">
+  <link rel="modulepreload" href="js/cart.js">
+  <link rel="modulepreload" href="js/icons.js">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+  /* הקדמת טעינה של התמונה הראשית (גיבור בבית, תמונת המוצר בעמוד מוצר), עם אותם srcset/sizes של התמונה עצמה */
+  (function () {
+    var h = location.hash, m = /^#\/p\/([a-z0-9-]+)$/.exec(h), l = document.createElement('link'), n, w, sz;
+    l.rel = 'preload'; l.as = 'image'; l.setAttribute('fetchpriority', 'high');
+    if (m) { n = 'img/s/v2/' + m[1] + '-product-'; w = [240, 480, 800]; sz = '(min-width:1000px) 560px, 100vw'; }
+    else if (!h || /^#\/(#.*)?$/.test(h)) { n = 'img/s/v2/hero-'; w = [640, 1024, 1440]; sz = '100vw'; }
+    else return;
+    l.setAttribute('imagesrcset', w.map(function (x) { return n + x + '.webp ' + x + 'w'; }).join(', '));
+    l.setAttribute('imagesizes', sz);
+    document.head.appendChild(l);
+  })();
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://roynaor-work.github.io/Bakasun/north/#org","name":"הרוח הצפונית","legalName":"ראמן מזואי בע\"מ","url":"https://roynaor-work.github.io/Bakasun/north/","logo":"https://roynaor-work.github.io/Bakasun/north/icons/north.svg","sameAs":["https://www.instagram.com/haruah_hatzfonit_wine/"],"address":{"@type":"PostalAddress","streetAddress":"צומת הגומא, מתחם דור אלון","addressRegion":"הגליל העליון","addressCountry":"IL"}},{"@type":"WebSite","name":"הרוח הצפונית · מארזים","url":"https://roynaor-work.github.io/Bakasun/north/","inLanguage":"he","publisher":{"@id":"https://roynaor-work.github.io/Bakasun/north/#org"}}]}</script>
 </head>
 <body style="direction:rtl; text-align:right; unicode-bidi:embed">
   <header class="top">
+    <a class="skip" href="#" id="skip">דילוג לתוכן</a>
     <div class="wrap">
       <a class="logo" href="#/"><span class="mark">ר</span><span>הרוח הצפונית</span></a>
       <nav class="menu" id="menu" aria-label="ניווט">
@@ -45,15 +73,15 @@
 
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="bg" data-close></div>
-    <aside class="pane" role="dialog" aria-label="הסל שלי">
-      <header><h3>הסל שלי</h3><button class="x" data-close aria-label="סגירה"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+    <div class="pane" role="dialog" aria-modal="true" aria-labelledby="drawerttl" tabindex="-1">
+      <div class="dhead"><h2 id="drawerttl">הסל שלי</h2><button class="x" data-close aria-label="סגירה"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
       <div id="cartbody"></div>
-    </aside>
+    </div>
   </div>
 
   <div class="toast" id="toast" role="status"></div>
   <div id="gate"></div>
-  <a class="wa hide" id="wa" target="_blank" rel="noopener" aria-label="וואטסאפ"></a>
+  <aside class="wa-wrap" aria-label="יצירת קשר בוואטסאפ"><a class="wa hide" id="wa" target="_blank" rel="noopener" aria-label="וואטסאפ"></a></aside>
 
   <script type="module" src="js/app.js"></script>
 </body>
