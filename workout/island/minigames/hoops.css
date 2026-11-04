@@ -217,3 +217,7 @@
 .game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=defense]{background:#1d5ad6}
 .game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=passing]{background:#6d3e82}
 .game-screen[data-game=streetSlam] .hoops-role-bars i[data-ability=speed]{background:#c2a000}
+
+/* Stacking: the actions and the top bar always sit above the (floating) stick touch area. */
+.game-screen[data-game=streetSlam] .hoops-stick-zone{z-index:1}
+.game-screen[data-game=streetSlam] .hoops-actions,.game-screen[data-game=streetSlam] .hoops-topbar{z-index:2}
