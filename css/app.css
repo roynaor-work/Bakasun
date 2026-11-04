@@ -1,7 +1,7 @@
 :root {
   /* softer than the poster palette: warm cream, white cards, brown ink, coral for the one main action, soft greens and ambers */
   --bg: #F7F2EA; --card: #FFFFFF; --ink: #2B2420; --ink-2: #4A403A; --muted: #7A6E66; --line: #E8DFD3;
-  --accent: #D9573F; --accent-ink: #fff; --accent-soft: #FBE9E4; --ok: #2F7D5B; --ok-soft: #E3F2EA; --warn: #8A6410; --warn-soft: #FBF0D2; --gold: #C9A227;
+  --accent: #BF4530; --accent-ink: #fff; --accent-soft: #FBE9E4; --ok: #2F7D5B; --ok-soft: #E3F2EA; --warn: #8A6410; --warn-soft: #FBF0D2; --gold: #C9A227;
   --wa: #25A05C; --nav: #FFFFFF;
   --f-body: 'Assistant', 'Noto Sans Hebrew', 'Segoe UI', Arial, sans-serif;
   --f-head: 'Heebo', 'Assistant', 'Noto Sans Hebrew', Arial, sans-serif;
@@ -11,14 +11,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
-    --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
+    --accent: #E8735C; --accent-ink: #17141A; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
     --ok-ink: #BFE8D0; --late: #FF8A73; --st-none-line: #6E3F38; --st-none-bg: #3A2623; --st-wait-line: #6E5A2E; --st-wait-bg: #3A3118; --st-offer-line: #365472; --st-offer-bg: #1F2E3E; --st-chosen-line: #2F5A3E; --st-chosen-bg: #1E3529;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #17141A; --card: #221E24; --ink: #F2ECE4; --ink-2: #D9D0C6; --muted: #A79C93; --line: #3A3339;
-  --accent: #E8735C; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
+  --accent: #E8735C; --accent-ink: #17141A; --accent-soft: #3D2622; --ok: #7FCFA4; --ok-soft: #1E3529; --warn: #E6B85A; --warn-soft: #3B3118; --wa: #43C47C; --nav: #1D191F;
   --ok-ink: #BFE8D0; --late: #FF8A73; --st-none-line: #6E3F38; --st-none-bg: #3A2623; --st-wait-line: #6E5A2E; --st-wait-bg: #3A3118; --st-offer-line: #365472; --st-offer-bg: #1F2E3E; --st-chosen-line: #2F5A3E; --st-chosen-bg: #1E3529;
   color-scheme: dark;
 }
@@ -96,7 +96,7 @@ nav.bottom svg { width: 24px; height: 24px; }
 .btn.sm { min-height: 38px; padding: 0 12px; font-size: 15px; }
 .btn.icon, .icon { width: var(--tap); height: var(--tap); padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--card); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
 .btn svg, .icon svg { width: 20px; height: 20px; flex: none; }
-.btn.rec { background: var(--accent); color: #fff; border-color: transparent; }
+.btn.rec { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
 .btn.rec.on { animation: pulse 1.2s infinite; }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(184,53,43,.5); } 50% { box-shadow: 0 0 0 10px rgba(184,53,43,0); } }
 .tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
@@ -138,7 +138,7 @@ a.card, a.card:visited { color: inherit; text-decoration: none; }
 /* chips for people in groups, checklists, and schedule rows */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { min-height: 38px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); font-weight: 600; font-size: 15px; cursor: pointer; }
-.chip.on { background: var(--accent); color: #fff; border-color: transparent; }
+.chip.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
 .cont { cursor: pointer; } .cont.overc { border-color: var(--accent); }
 .chk { display: flex; align-items: center; gap: 10px; min-height: 40px; cursor: pointer; }
 .chk input { width: 22px; height: 22px; min-height: 0; margin: 0; accent-color: var(--accent); }
@@ -197,3 +197,6 @@ ul.open a { color: var(--ink); text-decoration: underline dotted; }
 
 /* the device refused to save: a red bar at the very top until a save succeeds */
 .savebar { position: sticky; top: 0; z-index: 50; margin: 0; border-radius: 0; text-align: center; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+#app h1:focus, #app:focus { outline: none; }

@@ -15,7 +15,7 @@ import { KINDS, BUCKET, guessKind, humanSize, sortFiles, filterFiles, cloudPathF
 const ui = { q: '', kind: '' }; // filters of the all-files screen survive re-renders
 const lastTry = {}; // fileId → time of the last upload attempt, so a failing upload is not hammered on every render
 const kindLabel = k => t('k_' + (KINDS.includes(k) ? k : 'other'));
-const BACK = href => `<a class="icon" href="${href}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+const BACK = href => `<a class="icon" href="${esc(href)}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 const ICON = {
   quote: 'M6 3h9l5 5v13H6zM14 3v6h6M9 13h6M9 17h6', contract: 'M6 3h9l5 5v13H6zM14 3v6h6M9 16l2 2 4-4', menu: 'M7 3v18M7 3c-2 0-3 2-3 4s1 4 3 4M17 3v7a3 3 0 0 0 0 6v5',
   permit: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4', insurance: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z', invoice: 'M6 3h12v18l-2-1.5L14 21l-2-1.5L10 21l-2-1.5L6 21zM9 8h6M9 12h6M9 16h4',

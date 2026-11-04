@@ -16,7 +16,7 @@ const rsvpLabel = k => t(RSVP_KEY[k] || 'pInvited');
 const roomLabel = k => t(ROOM_KEY[k] || 'pRoomNone');
 const dietLabel = k => t('d' + k.charAt(0).toUpperCase() + k.slice(1));
 const signerOf = s => s.signer || DEFAULTS.signer;
-const BACK = href => `<a class="icon" href="${href}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+const BACK = href => `<a class="icon" href="${esc(href)}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 
 /* ---------------- the full screen ---------------- */
 export function render({ root, id }) {

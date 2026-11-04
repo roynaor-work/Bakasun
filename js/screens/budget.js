@@ -18,7 +18,7 @@ const stLabel = s => t('bgSt_' + (LINE_STATUSES.includes(s) ? s : 'estimate'));
 const M = n => Office.money(n);
 const N = n => `<span class="bg-n">${esc(M(n))}</span>`;
 const signerOf = s => s.signer || DEFAULTS.signer;
-const BACK = (href, label) => `<a class="icon" href="${href}" aria-label="${esc(label)}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+const BACK = (href, label) => `<a class="icon" href="${esc(href)}" aria-label="${esc(label)}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
 
 /** Seed payments (and any payment added without a case) get their case once per session: idempotent, nothing else changes. */
 function attachOnce() {

@@ -4,7 +4,7 @@ import { esc } from '../ui.js';
 
 export const noLive = true;
 export function render({ root }) {
-  const item = (href, label, d, soon) => `<a class="card tap row" href="${href}" ${soon ? 'aria-disabled="true" style="opacity:.55"' : ''}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg><span class="title grow">${esc(label)}</span>${soon ? `<span class="badge muted">${esc(t('soon'))}</span>` : ''}</a>`;
+  const item = (href, label, d, soon) => `<a class="card tap row" href="${esc(href)}" ${soon ? 'aria-disabled="true" style="opacity:.55"' : ''}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg><span class="title grow">${esc(label)}</span>${soon ? `<span class="badge muted">${esc(t('soon'))}</span>` : ''}</a>`;
   root.innerHTML = `<header class="top"><h1>${esc(t('more'))}</h1></header><div class="list">
     ${item('#/dashboard', t('dashboard') === 'dashboard' ? 'לוח בקרה' : t('dashboard'), 'M4 4h7v7H4zM13 4h7v4h-7zM13 11h7v9h-7zM4 14h7v6H4z')}
     ${item('#/calendar', t('calendar') === 'calendar' ? 'יומן' : t('calendar'), 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4')}
