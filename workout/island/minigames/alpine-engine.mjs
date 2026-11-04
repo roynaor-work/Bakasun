@@ -53,7 +53,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const ai = index === 0 ? null : level.ai[index - 1];
     return {
       id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, steerOut: 0, alt: 0, vy: 0, airborne: false, airKind: null,
-      tank: physics.boostStartTank, boostTime: 0, padTime: 0, hitTime: 0, grace: 0, landTime: 0, crashTime: 0,
+      tank: physics.boostStartTank, boostTime: 0, padTime: 0, hitTime: 0, grace: 0, landTime: 0, crashTime: 0, glideT: 0, glideBonus: 0,
       ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
       trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
       finished: false, finishTicks: 0, peak: 0, collisions: 0,
@@ -197,6 +197,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds;
       r.boostTime = 0; r.padTime = 0; r.trick = null; r.airScore = 0; r.airTricks = 0;
     } else { r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds; }
+    r.glideT = 0;
     const impactSide = rock ? separateRock(r, object) : 0;
     emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1) });
     if (rock) emit('crash', { riderId: r.id, objectId: object.id, objectType: 'rock' });
@@ -210,20 +211,28 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const surface = surfaceHeight(r.x, pipe), impact = r.vy;
     r.alt = surface; r.vy = 0; r.airborne = false; r.landTime = physics.landSeconds;
     if (r.airKind === 'pipe') r.vx = -Math.sign(r.x) * Math.min(physics.pipeReturnSpeed, Math.abs(impact) * .6);
-    r.airKind = null;
+    const kind = r.airKind; r.airKind = null;
     if (r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
       // An unfinished trick on landing is a fall: a big slowdown and a longer recovery.
-      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds;
+      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds; r.glideT = 0;
       emit('crash', { riderId: r.id, objectId: r.trick.id }); r.trick = null; r.airScore = 0; r.airTricks = 0;
       return;
     }
     if (r.trick) { completeTrick(r); }
+    landGlide(r, kind);
     if (r.airTricks > 0) {
       const points = Math.round(r.airScore * (1 + physics.comboBonus * (r.airTricks - 1)));
       r.trickScore += points; r.tank = Math.min(1, r.tank + physics.trickCharge * r.airTricks);
       emit('trick', { riderId: r.id, objectId: r.lastTrick, value: points, count: r.airTricks });
     } else emit('land', { riderId: r.id });
     r.airScore = 0; r.airTricks = 0;
+  }
+  /** Downhill after a jump: a clean, straight landing keeps the rider accelerating for a moment (more with tricks);
+   * a sideways landing scrubs a little speed instead. The glide never lifts speed above the boost cap. */
+  function landGlide(r, kind) {
+    const g = physics.landGlide; if (!g || kind === 'fall') return;
+    if (Math.abs(r.vx) > g.slideVx * physics.lateralSpeed) { r.speed *= 1 - g.slideLoss; r.glideT = 0; return; }
+    r.glideBonus = Math.min(g.max, g.base + g.perTrick * r.airTricks); r.glideT = g.seconds;
   }
   function completeTrick(r) { r.airScore += tricks[r.trick.id].points; r.airTricks++; r.lastTrick = r.trick.id; r.trick = null; }
 
@@ -299,10 +308,15 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const angle = r.airborne ? 0 : wallAngle(r.x, pipe), onWall = angle > 0;
     const boosted = r.boostTime > 0 || r.padTime > 0;
     const skill = r.ai ? r.ai.speed : wax;
-    const target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * (onWall ? physics.wallSpeedFactor : 1);
+    let target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * (onWall ? physics.wallSpeedFactor : 1);
+    let glide = 1;
+    if (r.glideT > 0 && physics.landGlide && !r.airborne && r.crashTime <= 0) {
+      const g = physics.landGlide; glide = g.accelMul;
+      target = Math.min(Math.max(target, physics.boostSpeed * skill), target + r.glideBonus * r.glideT / g.seconds); r.glideT = Math.max(0, r.glideT - dt);
+    }
     // A boost must help below cruising speed too; use the same acceleration rule for
     // the player, rivals and boost pads without changing their configured speed caps.
-    const acceleration = physics.acceleration * (boosted ? 2 : 1);
+    const acceleration = physics.acceleration * (boosted ? 2 : 1) * glide;
     if (r.speed < target) r.speed = Math.min(target, r.speed + acceleration * dt);
     else r.speed = Math.max(target, r.speed - physics.deceleration * dt);
     if (r.boostTime > 0) { r.boostTime = Math.max(0, r.boostTime - dt); if (r.boostTime === 0) emit('boost-end', { riderId: r.id }); }

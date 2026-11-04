@@ -1,3 +1,4 @@
+import {decalCorners} from './alpine-arrows.mjs';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
@@ -126,9 +127,8 @@ export function createEnvRig(scene, env, {course, deckEdge, terrainY, place, wor
     if (quads.length) {
       const pos = new Float32Array(quads.length * 12), uv = new Float32Array(quads.length * 8), index = [], out = new T.Vector3();
       quads.forEach((q, n) => {
-        const h = q.size / 2, [u0, v0, u1, v1] = q.f.uv;
-        [[q.s - h, q.x - h, 0, 0], [q.s - h, q.x + h, 1, 0], [q.s + h, q.x - h, 0, 1], [q.s + h, q.x + h, 1, 1]].forEach(([ss, xx, fu, fv], c) => {
-          worldPoint(ss, xx, .035, out); out.toArray(pos, (n * 4 + c) * 3); uv[(n * 4 + c) * 2] = u0 + (u1 - u0) * fu; uv[(n * 4 + c) * 2 + 1] = v0 + (v1 - v0) * fv;
+        decalCorners({s: q.s, x: q.x, size: q.size, uv: q.f.uv}).forEach((c, k) => {
+          worldPoint(c.s, c.x, .035, out); out.toArray(pos, (n * 4 + k) * 3); uv[(n * 4 + k) * 2] = c.u; uv[(n * 4 + k) * 2 + 1] = c.v;
         });
         const b = n * 4; index.push(b, b + 1, b + 2, b + 1, b + 3, b + 2);
       });

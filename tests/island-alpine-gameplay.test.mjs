@@ -63,7 +63,7 @@ test('Alpine buffered input remains deterministic at 30, 60 and 120 fps without 
     const e = engine(); let pressed = false;
     for (let n = 0; n < fps * 8; n++) {
       if (!pressed && e.snapshot().timeMs >= (launch - 6) * STEP * 1000) { e.command({type: 'trick', id: 'grab'}); pressed = true; }
-      e.step(1 / fps); assert.ok(e.debug()[0].speed <= base.physics.baseSpeed);
+      e.step(1 / fps); assert.ok(e.debug()[0].speed <= base.physics.baseSpeed + base.physics.landGlide.max, 'only the landing glide may pass the cruise cap');
     }
     assert.equal(e.snapshot().score, base.physics.tricks.grab.points); states.push(e.debug()); e.dispose();
   }
@@ -228,4 +228,32 @@ test('Alpine ctrl-ski: the stick is always on the left, the actions always on th
   const source = (await Promise.all(['alpine-session.mjs', 'alpine-controls.mjs', 'alpine-screen.mjs'].map(f => readFile(new URL(`../workout/island/minigames/${f}`, import.meta.url), 'utf8')))).join('\n');
   assert.doesNotMatch(source, /handed|handedness|controlSides|setHanded|island\.alpine\.(hand|side)/i, 'no handedness or side setting is read');
   assert.ok(source.indexOf("footer.append(joystick, center, actions)") > 0, 'DOM order: stick first, actions last');
+});
+
+/** Downhill after a jump (04/11): speed keeps rising after a clean landing, a sideways landing scrubs a little, and a fall still costs the most. */
+function landing({trick = null, sideways = false} = {}) {
+  const e = engine(); let before = null, after = null, peak = 0, landed = false, extra = 0;
+  for (let n = 0; n < 60 * 12; n++) {
+    const d = e.debug()[0];
+    if (d.airborne && before === null) before = d.speed;
+    if (trick && d.airborne && !d.trick && d.height > .4 && d.vy > 0 && !landed) e.command({type: 'trick', id: trick});
+    if (sideways && d.airborne) e.command({type: 'steer', value: 1});
+    e.step(STEP);
+    const t = e.drainEvents(); const q = e.debug()[0];
+    if (t.some(x => x.type === 'land' || x.type === 'trick' || x.type === 'crash') && !landed) { landed = true; after = q.speed; extra = 0; }
+    if (landed) { peak = Math.max(peak, q.speed); if (++extra > 90) break; }
+  }
+  e.dispose(); return {before, after, peak};
+}
+test('Alpine landing: a clean landing after a ramp keeps accelerating (downhill), never past the boost cap', () => {
+  const r = landing(); assert.ok(r.before >= base.physics.baseSpeed - 1e-9);
+  assert.ok(r.peak > r.before + 0.5, `speed keeps rising after the landing: ${r.before} -> ${r.peak}`);
+  assert.ok(r.peak <= base.physics.baseSpeed + base.physics.landGlide.max + 1e-9 && r.peak < base.physics.boostSpeed);
+});
+test('Alpine landing: a trick adds to the glide, a crash from an unfinished trick still costs speed', () => {
+  const plain = landing(), grab = landing({trick: 'grab'});
+  assert.ok(grab.peak >= plain.peak - 1e-9, `trick landing glides at least as far: ${plain.peak} vs ${grab.peak}`);
+  const e = engine(); ticks(e, launch + 3); let crashed = false;
+  for (let n = 0; n < 60 * 8 && !crashed; n++) { const d = e.debug()[0]; if (d.airborne && !d.trick && d.vy < 0) e.command({type: 'trick', id: 'combo'}); e.step(STEP); crashed = e.drainEvents().some(x => x.type === 'crash'); }
+  assert.ok(crashed, 'a combo that cannot finish before the landing is a fall'); assert.ok(e.debug()[0].speed < base.physics.baseSpeed * .6); e.dispose();
 });
