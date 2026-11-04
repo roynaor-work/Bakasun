@@ -1,0 +1,258 @@
+{
+  "started": "2026-11-04T21:33:59.885418+00:00",
+  "conditions": "Actual shipped createAvatarV1 and compactAvatar, five current lod-v4 bodies, synthetic card/colours only; no animation clips or WebGL frame benchmark; same island document CSP on a synthetic local probe document.",
+  "errors": [],
+  "result": {
+    "revision": "160",
+    "roles": [
+      {
+        "role": "PG",
+        "path": "design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+        "meshes": [
+          {
+            "name": "hoops-adult-lod",
+            "bones": 52,
+            "triangles": 4621
+          },
+          {
+            "name": "hoops-adult-alpha",
+            "bones": 52,
+            "triangles": 639
+          }
+        ],
+        "textureCount": 2,
+        "textures": [
+          {
+            "slots": [
+              "hoops-adult-lod:map"
+            ],
+            "width": 1024,
+            "height": 512,
+            "canvas": true
+          },
+          {
+            "slots": [
+              "hoops-adult-alpha:map"
+            ],
+            "width": 1024,
+            "height": 1024,
+            "canvas": true
+          }
+        ],
+        "packing": {
+          "sourceTriangles": 5260,
+          "triangles": 5260,
+          "bodyTriangles": 4621,
+          "hairTriangles": 639,
+          "vertices": 2962,
+          "drawCalls": 2,
+          "multiplier": 1,
+          "targetMet": false,
+          "maxDisplacement": 0,
+          "headDisplacement": 0,
+          "atlasWidth": 1024,
+          "atlasHeight": 512
+        }
+      },
+      {
+        "role": "SG",
+        "path": "design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+        "meshes": [
+          {
+            "name": "hoops-adult-lod",
+            "bones": 52,
+            "triangles": 4613
+          },
+          {
+            "name": "hoops-adult-alpha",
+            "bones": 52,
+            "triangles": 640
+          }
+        ],
+        "textureCount": 2,
+        "textures": [
+          {
+            "slots": [
+              "hoops-adult-lod:map"
+            ],
+            "width": 1024,
+            "height": 512,
+            "canvas": true
+          },
+          {
+            "slots": [
+              "hoops-adult-alpha:map"
+            ],
+            "width": 1024,
+            "height": 1024,
+            "canvas": true
+          }
+        ],
+        "packing": {
+          "sourceTriangles": 5253,
+          "triangles": 5253,
+          "bodyTriangles": 4613,
+          "hairTriangles": 640,
+          "vertices": 2925,
+          "drawCalls": 2,
+          "multiplier": 1,
+          "targetMet": false,
+          "maxDisplacement": 0,
+          "headDisplacement": 0,
+          "atlasWidth": 1024,
+          "atlasHeight": 512
+        }
+      },
+      {
+        "role": "SF",
+        "path": "design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+        "meshes": [
+          {
+            "name": "hoops-adult-lod",
+            "bones": 52,
+            "triangles": 4611
+          },
+          {
+            "name": "hoops-adult-alpha",
+            "bones": 52,
+            "triangles": 672
+          }
+        ],
+        "textureCount": 2,
+        "textures": [
+          {
+            "slots": [
+              "hoops-adult-lod:map"
+            ],
+            "width": 1024,
+            "height": 512,
+            "canvas": true
+          },
+          {
+            "slots": [
+              "hoops-adult-alpha:map"
+            ],
+            "width": 1024,
+            "height": 1024,
+            "canvas": true
+          }
+        ],
+        "packing": {
+          "sourceTriangles": 5283,
+          "triangles": 5283,
+          "bodyTriangles": 4611,
+          "hairTriangles": 672,
+          "vertices": 2895,
+          "drawCalls": 2,
+          "multiplier": 1,
+          "targetMet": false,
+          "maxDisplacement": 0,
+          "headDisplacement": 0,
+          "atlasWidth": 1024,
+          "atlasHeight": 512
+        }
+      },
+      {
+        "role": "PF",
+        "path": "design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+        "meshes": [
+          {
+            "name": "hoops-adult-lod",
+            "bones": 52,
+            "triangles": 4615
+          },
+          {
+            "name": "hoops-adult-alpha",
+            "bones": 52,
+            "triangles": 1233
+          }
+        ],
+        "textureCount": 2,
+        "textures": [
+          {
+            "slots": [
+              "hoops-adult-lod:map"
+            ],
+            "width": 1024,
+            "height": 512,
+            "canvas": true
+          },
+          {
+            "slots": [
+              "hoops-adult-alpha:map"
+            ],
+            "width": 1024,
+            "height": 1024,
+            "canvas": true
+          }
+        ],
+        "packing": {
+          "sourceTriangles": 5848,
+          "triangles": 5848,
+          "bodyTriangles": 4615,
+          "hairTriangles": 1233,
+          "vertices": 2909,
+          "drawCalls": 2,
+          "multiplier": 1,
+          "targetMet": false,
+          "maxDisplacement": 0,
+          "headDisplacement": 0,
+          "atlasWidth": 1024,
+          "atlasHeight": 512
+        }
+      },
+      {
+        "role": "C",
+        "path": "design/hoops/lod-v4/hoops-v4-c-lod.glb",
+        "meshes": [
+          {
+            "name": "hoops-adult-lod",
+            "bones": 52,
+            "triangles": 4615
+          },
+          {
+            "name": "hoops-adult-alpha",
+            "bones": 52,
+            "triangles": 1136
+          }
+        ],
+        "textureCount": 2,
+        "textures": [
+          {
+            "slots": [
+              "hoops-adult-lod:map"
+            ],
+            "width": 1024,
+            "height": 512,
+            "canvas": true
+          },
+          {
+            "slots": [
+              "hoops-adult-alpha:map"
+            ],
+            "width": 1024,
+            "height": 1024,
+            "canvas": true
+          }
+        ],
+        "packing": {
+          "sourceTriangles": 5751,
+          "triangles": 5751,
+          "bodyTriangles": 4615,
+          "hairTriangles": 1136,
+          "vertices": 2901,
+          "drawCalls": 2,
+          "multiplier": 1,
+          "targetMet": false,
+          "maxDisplacement": 0,
+          "headDisplacement": 0,
+          "atlasWidth": 1024,
+          "atlasHeight": 512
+        }
+      }
+    ]
+  },
+  "csp": [],
+  "externalBlocked": [],
+  "finished": "2026-11-04T21:34:08.181173+00:00"
+}

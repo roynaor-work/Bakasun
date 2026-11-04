@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-04T20:47:23.520Z",
+  "conditions": "same modules and URL identities as static graph; synthetic one-file manifest, Cache API and fetch; no remote request",
+  "control": {
+    "samePromise": true,
+    "fetchCount": 1
+  },
+  "reproduction": {
+    "distinctFunctionIdentities": true,
+    "fetchCount": 2,
+    "uniqueUrls": 1
+  }
+}

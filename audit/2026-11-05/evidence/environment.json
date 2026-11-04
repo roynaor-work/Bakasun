@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-04T22:09:19.256564+00:00",
+  "base": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "node": "v24.19.0",
+  "python": "3.12.14",
+  "system": "Linux",
+  "architecture": "x86_64",
+  "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "packages": {
+    "playwright": "1.62.0",
+    "Pillow": "12.3.0",
+    "node-playwright": "1.57.0",
+    "axe-core": "4.11.0",
+    "pglite": "0.3.15",
+    "es-module-lexer": "1.7.0",
+    "node-playwright-ci-comparison": "1.62.1"
+  },
+  "cgroupLimits": {
+    "cpu.max": "400000 100000",
+    "memory.max": "17179869184"
+  },
+  "renderer": "SwiftShader; no physical phone GPU",
+  "conditions": "Browser contexts were synthetic, with external app requests blocked. CPU/GPU emulation is not a medium-phone measurement. No environment variables, credentials or host/user identifiers dumped.",
+  "ciComparisonConditions": "Pinned CI Playwright version, existing system Chromium and Node 24; no bundled-browser download or hosted Node 22 runner reproduction."
+}

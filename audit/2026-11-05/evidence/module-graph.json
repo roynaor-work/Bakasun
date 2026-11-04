@@ -1,0 +1,1989 @@
+{
+  "at": "2026-11-04T20:40:21.673Z",
+  "method": "es-module-lexer static imports from the shipped entry; URL query is part of module identity; dynamic imports are listed but not traversed",
+  "apps": {
+    "bakasun": {
+      "entry": "js/app.js",
+      "staticModuleIdentities": 124,
+      "uniqueFiles": 124,
+      "totalDecodedBytes": 1600221,
+      "totalGzipBytes": 573077,
+      "duplicateIdentities": [],
+      "missing": [],
+      "external": [],
+      "dynamic": [
+        {
+          "from": "js/app.js",
+          "to": "js/ui.js"
+        },
+        {
+          "from": "js/app.js",
+          "to": "js/ui.js"
+        },
+        {
+          "from": "js/screens/share.js",
+          "to": "js/screens/casefiles.js"
+        },
+        {
+          "from": "js/screens/assist.js",
+          "to": "js/screens/quotes.js"
+        },
+        {
+          "from": "js/screens/receipts.js",
+          "to": "js/logic/receipts.js"
+        },
+        {
+          "from": "js/screens/workgroup.js",
+          "to": "js/notes.js"
+        },
+        {
+          "from": "js/logic/participants.js",
+          "to": "js/store.js"
+        }
+      ],
+      "expressions": [],
+      "modules": [
+        {
+          "path": "js/app.js",
+          "query": "",
+          "bytes": 10499,
+          "gzipBytes": 4171
+        },
+        {
+          "path": "js/i18n.js",
+          "query": "",
+          "bytes": 18677,
+          "gzipBytes": 6913
+        },
+        {
+          "path": "js/store.js",
+          "query": "",
+          "bytes": 6392,
+          "gzipBytes": 2385
+        },
+        {
+          "path": "js/ui.js",
+          "query": "",
+          "bytes": 11992,
+          "gzipBytes": 4475
+        },
+        {
+          "path": "js/screens/today.js",
+          "query": "",
+          "bytes": 19155,
+          "gzipBytes": 5276
+        },
+        {
+          "path": "js/screens/help.js",
+          "query": "",
+          "bytes": 1170,
+          "gzipBytes": 643
+        },
+        {
+          "path": "js/screens/share.js",
+          "query": "",
+          "bytes": 5584,
+          "gzipBytes": 1955
+        },
+        {
+          "path": "js/screens/lead.js",
+          "query": "",
+          "bytes": 10028,
+          "gzipBytes": 3437
+        },
+        {
+          "path": "js/screens/cases.js",
+          "query": "",
+          "bytes": 42270,
+          "gzipBytes": 11176
+        },
+        {
+          "path": "js/screens/clients.js",
+          "query": "",
+          "bytes": 9593,
+          "gzipBytes": 3282
+        },
+        {
+          "path": "js/screens/calls.js",
+          "query": "",
+          "bytes": 6476,
+          "gzipBytes": 2259
+        },
+        {
+          "path": "js/screens/tasks.js",
+          "query": "",
+          "bytes": 27386,
+          "gzipBytes": 8556
+        },
+        {
+          "path": "js/screens/search.js",
+          "query": "",
+          "bytes": 6083,
+          "gzipBytes": 2642
+        },
+        {
+          "path": "js/screens/settings.js",
+          "query": "",
+          "bytes": 29847,
+          "gzipBytes": 8768
+        },
+        {
+          "path": "js/screens/more.js",
+          "query": "",
+          "bytes": 3141,
+          "gzipBytes": 1378
+        },
+        {
+          "path": "js/screens/suppliers.js",
+          "query": "",
+          "bytes": 6710,
+          "gzipBytes": 2358
+        },
+        {
+          "path": "js/screens/quotes.js",
+          "query": "",
+          "bytes": 17241,
+          "gzipBytes": 5842
+        },
+        {
+          "path": "js/screens/groups.js",
+          "query": "",
+          "bytes": 5745,
+          "gzipBytes": 2178
+        },
+        {
+          "path": "js/screens/money.js",
+          "query": "",
+          "bytes": 11550,
+          "gzipBytes": 3739
+        },
+        {
+          "path": "js/screens/notes.js",
+          "query": "",
+          "bytes": 3248,
+          "gzipBytes": 1500
+        },
+        {
+          "path": "js/screens/assist.js",
+          "query": "",
+          "bytes": 56241,
+          "gzipBytes": 16011
+        },
+        {
+          "path": "js/screens/portal.js",
+          "query": "",
+          "bytes": 13124,
+          "gzipBytes": 5068
+        },
+        {
+          "path": "js/screens/receipts.js",
+          "query": "",
+          "bytes": 12405,
+          "gzipBytes": 4629
+        },
+        {
+          "path": "js/screens/dashboard.js",
+          "query": "",
+          "bytes": 7849,
+          "gzipBytes": 3055
+        },
+        {
+          "path": "js/screens/calendar.js",
+          "query": "",
+          "bytes": 12966,
+          "gzipBytes": 4471
+        },
+        {
+          "path": "js/screens/participants.js",
+          "query": "",
+          "bytes": 17694,
+          "gzipBytes": 5671
+        },
+        {
+          "path": "js/screens/contracts.js",
+          "query": "",
+          "bytes": 22890,
+          "gzipBytes": 7178
+        },
+        {
+          "path": "js/screens/budget.js",
+          "query": "",
+          "bytes": 21388,
+          "gzipBytes": 6520
+        },
+        {
+          "path": "js/screens/runsheet.js",
+          "query": "",
+          "bytes": 27719,
+          "gzipBytes": 8621
+        },
+        {
+          "path": "js/screens/casefiles.js",
+          "query": "",
+          "bytes": 21183,
+          "gzipBytes": 7257
+        },
+        {
+          "path": "js/screens/workgroup.js",
+          "query": "",
+          "bytes": 10996,
+          "gzipBytes": 3702
+        },
+        {
+          "path": "js/screens/templates.js",
+          "query": "",
+          "bytes": 16144,
+          "gzipBytes": 5410
+        },
+        {
+          "path": "js/screens/importMail.js",
+          "query": "",
+          "bytes": 11649,
+          "gzipBytes": 4119
+        },
+        {
+          "path": "js/screens/rules.js",
+          "query": "",
+          "bytes": 9424,
+          "gzipBytes": 3269
+        },
+        {
+          "path": "js/screens/board.js",
+          "query": "",
+          "bytes": 20475,
+          "gzipBytes": 6661
+        },
+        {
+          "path": "js/notes.js",
+          "query": "",
+          "bytes": 6698,
+          "gzipBytes": 2665
+        },
+        {
+          "path": "js/cloud.js",
+          "query": "",
+          "bytes": 26736,
+          "gzipBytes": 8680
+        },
+        {
+          "path": "js/logic/history.js",
+          "query": "",
+          "bytes": 8955,
+          "gzipBytes": 3478
+        },
+        {
+          "path": "js/logic/cloudLink.js",
+          "query": "",
+          "bytes": 1391,
+          "gzipBytes": 737
+        },
+        {
+          "path": "js/data/cloudcfg.js",
+          "query": "",
+          "bytes": 443,
+          "gzipBytes": 373
+        },
+        {
+          "path": "js/notify.js",
+          "query": "",
+          "bytes": 7166,
+          "gzipBytes": 2691
+        },
+        {
+          "path": "js/i18n-more.js",
+          "query": "",
+          "bytes": 80901,
+          "gzipBytes": 25725
+        },
+        {
+          "path": "js/i18n-extra.js",
+          "query": "",
+          "bytes": 1168,
+          "gzipBytes": 503
+        },
+        {
+          "path": "js/logic/core.js",
+          "query": "",
+          "bytes": 1740,
+          "gzipBytes": 851
+        },
+        {
+          "path": "js/logic/office.js",
+          "query": "",
+          "bytes": 52188,
+          "gzipBytes": 17480
+        },
+        {
+          "path": "js/logic/extra.js",
+          "query": "",
+          "bytes": 8309,
+          "gzipBytes": 3087
+        },
+        {
+          "path": "js/logic/commands.js",
+          "query": "",
+          "bytes": 36652,
+          "gzipBytes": 13044
+        },
+        {
+          "path": "js/logic/approvals.js",
+          "query": "",
+          "bytes": 5185,
+          "gzipBytes": 2023
+        },
+        {
+          "path": "js/data/defaults.js",
+          "query": "",
+          "bytes": 3086,
+          "gzipBytes": 1457
+        },
+        {
+          "path": "js/logic/rfq.js",
+          "query": "",
+          "bytes": 26416,
+          "gzipBytes": 9546
+        },
+        {
+          "path": "js/logic/money.js",
+          "query": "",
+          "bytes": 6644,
+          "gzipBytes": 2455
+        },
+        {
+          "path": "js/logic/print.js",
+          "query": "",
+          "bytes": 5606,
+          "gzipBytes": 2203
+        },
+        {
+          "path": "js/logic/travel.js",
+          "query": "",
+          "bytes": 11056,
+          "gzipBytes": 4615
+        },
+        {
+          "path": "js/logic/receipts.js",
+          "query": "",
+          "bytes": 3418,
+          "gzipBytes": 1565
+        },
+        {
+          "path": "js/screens/rfq.js",
+          "query": "",
+          "bytes": 23475,
+          "gzipBytes": 7499
+        },
+        {
+          "path": "js/logic/openItems.js",
+          "query": "",
+          "bytes": 12533,
+          "gzipBytes": 4504
+        },
+        {
+          "path": "js/data/helpText.js",
+          "query": "",
+          "bytes": 37348,
+          "gzipBytes": 12732
+        },
+        {
+          "path": "js/logic/contacts.js",
+          "query": "",
+          "bytes": 19708,
+          "gzipBytes": 7308
+        },
+        {
+          "path": "js/contactsImport.js",
+          "query": "",
+          "bytes": 5636,
+          "gzipBytes": 2002
+        },
+        {
+          "path": "js/files.js",
+          "query": "",
+          "bytes": 3193,
+          "gzipBytes": 1512
+        },
+        {
+          "path": "js/data/places.js",
+          "query": "",
+          "bytes": 39145,
+          "gzipBytes": 12946
+        },
+        {
+          "path": "js/voice.js",
+          "query": "",
+          "bytes": 4274,
+          "gzipBytes": 1683
+        },
+        {
+          "path": "js/logic/brief.js",
+          "query": "",
+          "bytes": 7767,
+          "gzipBytes": 3342
+        },
+        {
+          "path": "js/recbox.js",
+          "query": "",
+          "bytes": 4167,
+          "gzipBytes": 1839
+        },
+        {
+          "path": "js/data/catalog.js",
+          "query": "",
+          "bytes": 8424,
+          "gzipBytes": 2334
+        },
+        {
+          "path": "js/labels.js",
+          "query": "",
+          "bytes": 977,
+          "gzipBytes": 468
+        },
+        {
+          "path": "js/logic/rfqFlow.js",
+          "query": "",
+          "bytes": 3186,
+          "gzipBytes": 1325
+        },
+        {
+          "path": "js/logic/quotes.js",
+          "query": "",
+          "bytes": 4196,
+          "gzipBytes": 1717
+        },
+        {
+          "path": "js/calendar.js",
+          "query": "",
+          "bytes": 1360,
+          "gzipBytes": 731
+        },
+        {
+          "path": "js/caseTabs.js",
+          "query": "",
+          "bytes": 368,
+          "gzipBytes": 271
+        },
+        {
+          "path": "js/logic/ics.js",
+          "query": "",
+          "bytes": 3929,
+          "gzipBytes": 1658
+        },
+        {
+          "path": "js/logic/taskTree.js",
+          "query": "",
+          "bytes": 9398,
+          "gzipBytes": 3561
+        },
+        {
+          "path": "js/logic/recurring.js",
+          "query": "",
+          "bytes": 5311,
+          "gzipBytes": 2110
+        },
+        {
+          "path": "js/logic/workdays.js",
+          "query": "",
+          "bytes": 3966,
+          "gzipBytes": 1640
+        },
+        {
+          "path": "js/data/docsList.js",
+          "query": "",
+          "bytes": 5147,
+          "gzipBytes": 1875
+        },
+        {
+          "path": "js/logic/search.js",
+          "query": "",
+          "bytes": 15564,
+          "gzipBytes": 5261
+        },
+        {
+          "path": "js/logic/undo.js",
+          "query": "",
+          "bytes": 2062,
+          "gzipBytes": 955
+        },
+        {
+          "path": "js/logic/templates.js",
+          "query": "",
+          "bytes": 4011,
+          "gzipBytes": 1681
+        },
+        {
+          "path": "js/papers.js",
+          "query": "",
+          "bytes": 1535,
+          "gzipBytes": 717
+        },
+        {
+          "path": "js/logic/dashboard.js",
+          "query": "",
+          "bytes": 11334,
+          "gzipBytes": 3702
+        },
+        {
+          "path": "js/data/brand.js",
+          "query": "",
+          "bytes": 57539,
+          "gzipBytes": 41077
+        },
+        {
+          "path": "js/logic/groups.js",
+          "query": "",
+          "bytes": 3592,
+          "gzipBytes": 1453
+        },
+        {
+          "path": "js/logic/agenda.js",
+          "query": "",
+          "bytes": 4766,
+          "gzipBytes": 1983
+        },
+        {
+          "path": "js/logic/nav.js",
+          "query": "",
+          "bytes": 6719,
+          "gzipBytes": 2631
+        },
+        {
+          "path": "js/logic/howto.js",
+          "query": "",
+          "bytes": 3616,
+          "gzipBytes": 1811
+        },
+        {
+          "path": "js/speak.js",
+          "query": "",
+          "bytes": 2628,
+          "gzipBytes": 1345
+        },
+        {
+          "path": "js/logic/questions.js",
+          "query": "",
+          "bytes": 13916,
+          "gzipBytes": 5043
+        },
+        {
+          "path": "js/logic/questions2.js",
+          "query": "",
+          "bytes": 22829,
+          "gzipBytes": 7409
+        },
+        {
+          "path": "js/logic/workgroup.js",
+          "query": "",
+          "bytes": 11173,
+          "gzipBytes": 4497
+        },
+        {
+          "path": "js/logic/msgTemplates.js",
+          "query": "",
+          "bytes": 12208,
+          "gzipBytes": 4745
+        },
+        {
+          "path": "js/screens/actions.js",
+          "query": "",
+          "bytes": 38783,
+          "gzipBytes": 10458
+        },
+        {
+          "path": "js/logic/recent.js",
+          "query": "",
+          "bytes": 945,
+          "gzipBytes": 562
+        },
+        {
+          "path": "js/pdfedit.js",
+          "query": "",
+          "bytes": 3159,
+          "gzipBytes": 1511
+        },
+        {
+          "path": "js/logic/calendarGrid.js",
+          "query": "",
+          "bytes": 5498,
+          "gzipBytes": 2003
+        },
+        {
+          "path": "js/logic/participants.js",
+          "query": "",
+          "bytes": 17041,
+          "gzipBytes": 6040
+        },
+        {
+          "path": "js/signature.js",
+          "query": "",
+          "bytes": 6306,
+          "gzipBytes": 2365
+        },
+        {
+          "path": "js/logic/contracts.js",
+          "query": "",
+          "bytes": 18558,
+          "gzipBytes": 6440
+        },
+        {
+          "path": "js/logic/checklists.js",
+          "query": "",
+          "bytes": 6417,
+          "gzipBytes": 2593
+        },
+        {
+          "path": "js/logic/budget.js",
+          "query": "",
+          "bytes": 18090,
+          "gzipBytes": 6314
+        },
+        {
+          "path": "js/logic/runsheet.js",
+          "query": "",
+          "bytes": 25999,
+          "gzipBytes": 9292
+        },
+        {
+          "path": "js/logic/caseFiles.js",
+          "query": "",
+          "bytes": 9829,
+          "gzipBytes": 4125
+        },
+        {
+          "path": "js/data/messageTemplates.js",
+          "query": "",
+          "bytes": 15600,
+          "gzipBytes": 5159
+        },
+        {
+          "path": "js/i18n/templates.js",
+          "query": "",
+          "bytes": 7427,
+          "gzipBytes": 2710
+        },
+        {
+          "path": "js/logic/mailImport.js",
+          "query": "",
+          "bytes": 39121,
+          "gzipBytes": 14281
+        },
+        {
+          "path": "js/logic/rules.js",
+          "query": "",
+          "bytes": 30493,
+          "gzipBytes": 9703
+        },
+        {
+          "path": "js/logic/pipeline.js",
+          "query": "",
+          "bytes": 11635,
+          "gzipBytes": 4139
+        },
+        {
+          "path": "js/i18n/dashboard.js",
+          "query": "",
+          "bytes": 5533,
+          "gzipBytes": 1846
+        },
+        {
+          "path": "js/i18n/calendar.js",
+          "query": "",
+          "bytes": 3754,
+          "gzipBytes": 1545
+        },
+        {
+          "path": "js/i18n/participants.js",
+          "query": "",
+          "bytes": 7401,
+          "gzipBytes": 2749
+        },
+        {
+          "path": "js/i18n/contracts.js",
+          "query": "",
+          "bytes": 11411,
+          "gzipBytes": 3829
+        },
+        {
+          "path": "js/i18n/budget.js",
+          "query": "",
+          "bytes": 11661,
+          "gzipBytes": 3860
+        },
+        {
+          "path": "js/i18n/runsheet.js",
+          "query": "",
+          "bytes": 10529,
+          "gzipBytes": 3605
+        },
+        {
+          "path": "js/i18n/casefiles.js",
+          "query": "",
+          "bytes": 8228,
+          "gzipBytes": 3055
+        },
+        {
+          "path": "js/i18n/rules.js",
+          "query": "",
+          "bytes": 8712,
+          "gzipBytes": 3187
+        },
+        {
+          "path": "js/i18n/board.js",
+          "query": "",
+          "bytes": 7000,
+          "gzipBytes": 2497
+        },
+        {
+          "path": "js/i18n/tasks2.js",
+          "query": "",
+          "bytes": 10738,
+          "gzipBytes": 3878
+        },
+        {
+          "path": "js/i18n/personal.js",
+          "query": "",
+          "bytes": 3702,
+          "gzipBytes": 1621
+        },
+        {
+          "path": "js/i18n/voice2.js",
+          "query": "",
+          "bytes": 12072,
+          "gzipBytes": 4045
+        },
+        {
+          "path": "js/i18n/workgroup.js",
+          "query": "",
+          "bytes": 5176,
+          "gzipBytes": 2018
+        },
+        {
+          "path": "js/i18n/importmail.js",
+          "query": "",
+          "bytes": 6142,
+          "gzipBytes": 2429
+        },
+        {
+          "path": "js/i18n/rfq.js",
+          "query": "",
+          "bytes": 5258,
+          "gzipBytes": 2088
+        },
+        {
+          "path": "js/logic/translate.js",
+          "query": "",
+          "bytes": 9217,
+          "gzipBytes": 3234
+        },
+        {
+          "path": "js/logic/trash.js",
+          "query": "",
+          "bytes": 6160,
+          "gzipBytes": 2549
+        },
+        {
+          "path": "js/data/checklistTemplates.js",
+          "query": "",
+          "bytes": 6934,
+          "gzipBytes": 2227
+        }
+      ]
+    },
+    "workout": {
+      "entry": "workout/js/app.js",
+      "staticModuleIdentities": 69,
+      "uniqueFiles": 67,
+      "totalDecodedBytes": 2000651,
+      "totalGzipBytes": 579120,
+      "duplicateIdentities": [
+        {
+          "path": "workout/cam-lab/counter.mjs",
+          "queries": [
+            "?v=20261010-camera-1",
+            ""
+          ]
+        },
+        {
+          "path": "workout/cam-lab/placement.mjs",
+          "queries": [
+            "?v=20261010-camera-1",
+            ""
+          ]
+        }
+      ],
+      "missing": [],
+      "external": [],
+      "dynamic": [
+        {
+          "from": "workout/js/app.js",
+          "to": "workout/js/stage3d.js"
+        },
+        {
+          "from": "workout/js/app.js",
+          "to": "workout/js/char3d.js"
+        },
+        {
+          "from": "workout/js/app.js",
+          "to": "workout/js/stage3d.js"
+        },
+        {
+          "from": "workout/js/char3d.js",
+          "to": "workout/3d/model/character.js"
+        }
+      ],
+      "expressions": [],
+      "modules": [
+        {
+          "path": "workout/js/app.js",
+          "query": "",
+          "bytes": 101327,
+          "gzipBytes": 29511
+        },
+        {
+          "path": "workout/js/exercises.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 35394,
+          "gzipBytes": 9662
+        },
+        {
+          "path": "workout/js/programs.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 5359,
+          "gzipBytes": 1839
+        },
+        {
+          "path": "workout/js/count.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 5225,
+          "gzipBytes": 2044
+        },
+        {
+          "path": "workout/js/vids.js",
+          "query": "?v=20261011-vids-signed-1",
+          "bytes": 8800,
+          "gzipBytes": 2815
+        },
+        {
+          "path": "workout/js/figure.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 7063,
+          "gzipBytes": 2736
+        },
+        {
+          "path": "workout/js/royiki.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 4255,
+          "gzipBytes": 1931
+        },
+        {
+          "path": "workout/js/store.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 5742,
+          "gzipBytes": 2200
+        },
+        {
+          "path": "workout/js/logic.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 15947,
+          "gzipBytes": 5893
+        },
+        {
+          "path": "workout/js/belts.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 1538,
+          "gzipBytes": 783
+        },
+        {
+          "path": "workout/js/companion.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 2126,
+          "gzipBytes": 982
+        },
+        {
+          "path": "workout/js/rest-days.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 2402,
+          "gzipBytes": 1135
+        },
+        {
+          "path": "workout/js/voice-lines.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 21074,
+          "gzipBytes": 6830
+        },
+        {
+          "path": "workout/js/outdoors.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 2047,
+          "gzipBytes": 837
+        },
+        {
+          "path": "workout/js/dad-test.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 1426,
+          "gzipBytes": 739
+        },
+        {
+          "path": "workout/js/games/index.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 2450,
+          "gzipBytes": 1124
+        },
+        {
+          "path": "workout/js/games/engine.js",
+          "query": "?v=island-people-scale-20261026-1",
+          "bytes": 39443,
+          "gzipBytes": 13159
+        },
+        {
+          "path": "workout/js/cloud.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 3907,
+          "gzipBytes": 1700
+        },
+        {
+          "path": "workout/js/games/lobby.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 4687,
+          "gzipBytes": 1946
+        },
+        {
+          "path": "workout/js/parent.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 32485,
+          "gzipBytes": 9670
+        },
+        {
+          "path": "workout/js/weekly.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 3921,
+          "gzipBytes": 1604
+        },
+        {
+          "path": "workout/js/together.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 1846,
+          "gzipBytes": 807
+        },
+        {
+          "path": "workout/js/intro.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 9292,
+          "gzipBytes": 3061
+        },
+        {
+          "path": "workout/js/speech.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 4686,
+          "gzipBytes": 1950
+        },
+        {
+          "path": "workout/js/workout-copy.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 804,
+          "gzipBytes": 428
+        },
+        {
+          "path": "workout/js/say.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 28136,
+          "gzipBytes": 6417
+        },
+        {
+          "path": "workout/js/minute-test.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 3723,
+          "gzipBytes": 1463
+        },
+        {
+          "path": "workout/js/camera-session.mjs",
+          "query": "?v=20261013-frames-1",
+          "bytes": 11971,
+          "gzipBytes": 3726
+        },
+        {
+          "path": "workout/js/camera-screen.mjs",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 12671,
+          "gzipBytes": 4448
+        },
+        {
+          "path": "js/data/cloudcfg.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 443,
+          "gzipBytes": 373
+        },
+        {
+          "path": "workout/js/vids-cloud.js",
+          "query": "?v=20261011-vids-signed-1",
+          "bytes": 4491,
+          "gzipBytes": 1899
+        },
+        {
+          "path": "workout/js/royiki-data.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 2052,
+          "gzipBytes": 758
+        },
+        {
+          "path": "workout/js/say-ui.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 6134,
+          "gzipBytes": 2207
+        },
+        {
+          "path": "workout/cam-lab/placement-lines.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 1567,
+          "gzipBytes": 651
+        },
+        {
+          "path": "workout/js/games/arcade.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 99780,
+          "gzipBytes": 30665
+        },
+        {
+          "path": "workout/js/games/arcade2.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 55798,
+          "gzipBytes": 17855
+        },
+        {
+          "path": "workout/js/games/sport.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 38926,
+          "gzipBytes": 12786
+        },
+        {
+          "path": "workout/js/games/sport3d.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 16154,
+          "gzipBytes": 5922
+        },
+        {
+          "path": "workout/js/games/puzzle.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 24974,
+          "gzipBytes": 8237
+        },
+        {
+          "path": "workout/js/games/quick.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 26964,
+          "gzipBytes": 9047
+        },
+        {
+          "path": "workout/js/games/more.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 18476,
+          "gzipBytes": 6645
+        },
+        {
+          "path": "workout/js/games/batch4.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 75480,
+          "gzipBytes": 24396
+        },
+        {
+          "path": "workout/js/games/demos.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 19049,
+          "gzipBytes": 6667
+        },
+        {
+          "path": "workout/js/games/celebrate.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 41589,
+          "gzipBytes": 13025
+        },
+        {
+          "path": "workout/js/games/celebrate3d.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 46420,
+          "gzipBytes": 14518
+        },
+        {
+          "path": "workout/js/games/sprites.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 53615,
+          "gzipBytes": 14533
+        },
+        {
+          "path": "workout/js/net.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 3903,
+          "gzipBytes": 1756
+        },
+        {
+          "path": "workout/js/voice-player.js",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 6402,
+          "gzipBytes": 2512
+        },
+        {
+          "path": "workout/cam-lab/counter.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 32068,
+          "gzipBytes": 9483
+        },
+        {
+          "path": "workout/cam-lab/feedback.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 7650,
+          "gzipBytes": 2989
+        },
+        {
+          "path": "workout/cam-lab/placement.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 3909,
+          "gzipBytes": 1659
+        },
+        {
+          "path": "workout/cam-lab/recording.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 12740,
+          "gzipBytes": 3850
+        },
+        {
+          "path": "workout/cam-lab/video-recording.mjs",
+          "query": "?v=20261013-frames-1",
+          "bytes": 8057,
+          "gzipBytes": 2570
+        },
+        {
+          "path": "workout/cam-lab/upload.mjs",
+          "query": "?v=20261013-frames-1",
+          "bytes": 28995,
+          "gzipBytes": 8469
+        },
+        {
+          "path": "workout/cam-lab/upload-background.mjs",
+          "query": "?v=20261013-frames-1",
+          "bytes": 6302,
+          "gzipBytes": 2155
+        },
+        {
+          "path": "workout/cam-lab/keyframes.mjs",
+          "query": "?v=20261013-frames-1",
+          "bytes": 10581,
+          "gzipBytes": 3614
+        },
+        {
+          "path": "workout/js/camera-demo.mjs",
+          "query": "?v=20261014-w2g-1",
+          "bytes": 2361,
+          "gzipBytes": 831
+        },
+        {
+          "path": "workout/cam-lab/camera.mjs",
+          "query": "?v=20261010-camera-1",
+          "bytes": 10173,
+          "gzipBytes": 3506
+        },
+        {
+          "path": "workout/js/games/layer3d.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 1460,
+          "gzipBytes": 819
+        },
+        {
+          "path": "workout/js/char3d.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 44914,
+          "gzipBytes": 14721
+        },
+        {
+          "path": "workout/cam-lab/counter.mjs",
+          "query": "",
+          "bytes": 32068,
+          "gzipBytes": 9483
+        },
+        {
+          "path": "workout/cam-lab/rest-calibration.mjs",
+          "query": "",
+          "bytes": 3400,
+          "gzipBytes": 1219
+        },
+        {
+          "path": "workout/cam-lab/people.mjs",
+          "query": "",
+          "bytes": 4752,
+          "gzipBytes": 1823
+        },
+        {
+          "path": "workout/cam-lab/placement.mjs",
+          "query": "",
+          "bytes": 3909,
+          "gzipBytes": 1659
+        },
+        {
+          "path": "workout/3d/lib/three.module.min.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 670681,
+          "gzipBytes": 167540
+        },
+        {
+          "path": "workout/3d/lib/loaders/FBXLoader.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 101543,
+          "gzipBytes": 23701
+        },
+        {
+          "path": "workout/3d/lib/libs/fflate.module.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 83291,
+          "gzipBytes": 20127
+        },
+        {
+          "path": "workout/3d/lib/curves/NURBSCurve.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 1935,
+          "gzipBytes": 819
+        },
+        {
+          "path": "workout/3d/lib/curves/NURBSUtils.js",
+          "query": "?v=20261010-camera-1",
+          "bytes": 7898,
+          "gzipBytes": 2191
+        }
+      ]
+    },
+    "island": {
+      "entry": "workout/island/app.mjs",
+      "staticModuleIdentities": 107,
+      "uniqueFiles": 104,
+      "totalDecodedBytes": 1509912,
+      "totalGzipBytes": 442187,
+      "duplicateIdentities": [
+        {
+          "path": "workout/island/release.mjs",
+          "queries": [
+            "?v=island-v2-20261104-3",
+            ""
+          ]
+        },
+        {
+          "path": "workout/island/ui/offline.mjs",
+          "queries": [
+            "?v=island-v2-20261104-3",
+            ""
+          ]
+        },
+        {
+          "path": "workout/island/ui/load-report.mjs",
+          "queries": [
+            "?v=island-v2-20261104-3",
+            ""
+          ]
+        }
+      ],
+      "missing": [],
+      "external": [],
+      "dynamic": [
+        {
+          "from": "workout/island/ui/soccer-card.mjs",
+          "to": "workout/island/minigames/soccer-design-character.mjs"
+        },
+        {
+          "from": "workout/island/ui/soccer-card.mjs",
+          "to": "workout/island/minigames/soccer-design-contracts.mjs"
+        }
+      ],
+      "expressions": [
+        {
+          "path": "workout/island/engine/load-data.mjs",
+          "offset": 1508
+        }
+      ],
+      "modules": [
+        {
+          "path": "workout/island/app.mjs",
+          "query": "",
+          "bytes": 5986,
+          "gzipBytes": 2187
+        },
+        {
+          "path": "workout/island/ui/release-watch.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 937,
+          "gzipBytes": 480
+        },
+        {
+          "path": "workout/island/view/learning-buildings.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1924,
+          "gzipBytes": 928
+        },
+        {
+          "path": "workout/island/learning/interface.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 20347,
+          "gzipBytes": 6784
+        },
+        {
+          "path": "workout/island/release.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 272,
+          "gzipBytes": 225
+        },
+        {
+          "path": "workout/island/ui/translate.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 390,
+          "gzipBytes": 278
+        },
+        {
+          "path": "workout/island/engine/load-data.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2139,
+          "gzipBytes": 918
+        },
+        {
+          "path": "workout/island/engine/engine.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 32697,
+          "gzipBytes": 8827
+        },
+        {
+          "path": "workout/island/view/island-view.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 34572,
+          "gzipBytes": 10310
+        },
+        {
+          "path": "workout/island/ui/interface.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 52942,
+          "gzipBytes": 13605
+        },
+        {
+          "path": "workout/island/activity/runtime.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 8320,
+          "gzipBytes": 2541
+        },
+        {
+          "path": "workout/island/ui/activity.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 45905,
+          "gzipBytes": 12577
+        },
+        {
+          "path": "workout/island/ui/press.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3905,
+          "gzipBytes": 1414
+        },
+        {
+          "path": "workout/island/ui/game-shell.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 14619,
+          "gzipBytes": 4949
+        },
+        {
+          "path": "workout/island/ui/city-access.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 12037,
+          "gzipBytes": 4461
+        },
+        {
+          "path": "workout/island/view/city-navigation.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1872,
+          "gzipBytes": 918
+        },
+        {
+          "path": "workout/island/ui/offline.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 11415,
+          "gzipBytes": 4245
+        },
+        {
+          "path": "workout/island/view/buildings.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 28929,
+          "gzipBytes": 9349
+        },
+        {
+          "path": "workout/island/view/environment.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4850,
+          "gzipBytes": 1929
+        },
+        {
+          "path": "workout/island/learning/voice.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1443,
+          "gzipBytes": 644
+        },
+        {
+          "path": "workout/island/learning/state.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3996,
+          "gzipBytes": 1640
+        },
+        {
+          "path": "workout/island/learning/questions.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 15280,
+          "gzipBytes": 5751
+        },
+        {
+          "path": "workout/island/engine/registry.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2810,
+          "gzipBytes": 873
+        },
+        {
+          "path": "workout/island/engine/city-runtime.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3992,
+          "gzipBytes": 1448
+        },
+        {
+          "path": "workout/island/learning/runtime.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3401,
+          "gzipBytes": 1201
+        },
+        {
+          "path": "workout/island/engine/city-management.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 14190,
+          "gzipBytes": 4352
+        },
+        {
+          "path": "workout/island/activity/fire-certificates.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1152,
+          "gzipBytes": 535
+        },
+        {
+          "path": "workout/island/activity/progress.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2080,
+          "gzipBytes": 835
+        },
+        {
+          "path": "workout/island/activity/availability.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 340,
+          "gzipBytes": 246
+        },
+        {
+          "path": "workout/island/activity/soccer-team.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1781,
+          "gzipBytes": 793
+        },
+        {
+          "path": "workout/island/minigames/soccer-campaign.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 9361,
+          "gzipBytes": 3422
+        },
+        {
+          "path": "workout/island/activity/soccer-card.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2820,
+          "gzipBytes": 1045
+        },
+        {
+          "path": "workout/island/engine/placement-help.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2500,
+          "gzipBytes": 1132
+        },
+        {
+          "path": "workout/island/engine/ready-plots.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 16658,
+          "gzipBytes": 5418
+        },
+        {
+          "path": "workout/island/activity/soccer-roster.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 6319,
+          "gzipBytes": 2360
+        },
+        {
+          "path": "workout/island/engine/rules.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5608,
+          "gzipBytes": 1609
+        },
+        {
+          "path": "workout/island/engine/metrics.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3860,
+          "gzipBytes": 1195
+        },
+        {
+          "path": "workout/island/engine/economy.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3298,
+          "gzipBytes": 1131
+        },
+        {
+          "path": "workout/island/engine/persistence.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 25487,
+          "gzipBytes": 7056
+        },
+        {
+          "path": "workout/island/engine/episodes.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 843,
+          "gzipBytes": 404
+        },
+        {
+          "path": "workout/island/engine/hooks.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 499,
+          "gzipBytes": 299
+        },
+        {
+          "path": "workout/island/minigames/hoops-franchise.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 9250,
+          "gzipBytes": 3555
+        },
+        {
+          "path": "workout/island/vendor/three.module.js",
+          "query": "",
+          "bytes": 670681,
+          "gzipBytes": 167540
+        },
+        {
+          "path": "workout/island/view/city-depth.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 7087,
+          "gzipBytes": 2493
+        },
+        {
+          "path": "workout/island/view/avatar.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 8323,
+          "gzipBytes": 3100
+        },
+        {
+          "path": "workout/island/view/city-citizens.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5397,
+          "gzipBytes": 2096
+        },
+        {
+          "path": "workout/island/view/city-lighting.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1425,
+          "gzipBytes": 745
+        },
+        {
+          "path": "workout/island/view/city-occlusion.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4182,
+          "gzipBytes": 1630
+        },
+        {
+          "path": "workout/island/view/local-models.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2914,
+          "gzipBytes": 1298
+        },
+        {
+          "path": "workout/island/view/meshy-pilot.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5657,
+          "gzipBytes": 2202
+        },
+        {
+          "path": "workout/island/engine/paths.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2080,
+          "gzipBytes": 964
+        },
+        {
+          "path": "workout/island/view/city-life.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3374,
+          "gzipBytes": 1584
+        },
+        {
+          "path": "workout/island/view/batch.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1725,
+          "gzipBytes": 832
+        },
+        {
+          "path": "workout/island/view/ultra-island-roads.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2932,
+          "gzipBytes": 1204
+        },
+        {
+          "path": "workout/island/view/city-streets.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 11019,
+          "gzipBytes": 4030
+        },
+        {
+          "path": "workout/island/view/city-traffic.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2288,
+          "gzipBytes": 1059
+        },
+        {
+          "path": "workout/island/view/city-overlay.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2517,
+          "gzipBytes": 1142
+        },
+        {
+          "path": "workout/island/view/city-growth.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1906,
+          "gzipBytes": 902
+        },
+        {
+          "path": "workout/island/view/planning-frame.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 829,
+          "gzipBytes": 399
+        },
+        {
+          "path": "workout/island/view/city-sites.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4843,
+          "gzipBytes": 1956
+        },
+        {
+          "path": "workout/island/view/ready-plots.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2740,
+          "gzipBytes": 1175
+        },
+        {
+          "path": "workout/island/engine/city-sites.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 6040,
+          "gzipBytes": 2299
+        },
+        {
+          "path": "workout/island/view/city-traffic-model.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5151,
+          "gzipBytes": 2183
+        },
+        {
+          "path": "workout/island/ui/city-depth.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5090,
+          "gzipBytes": 1995
+        },
+        {
+          "path": "workout/island/ui/city-management.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 18073,
+          "gzipBytes": 5329
+        },
+        {
+          "path": "workout/island/ui/ready-plots.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 6568,
+          "gzipBytes": 2220
+        },
+        {
+          "path": "workout/island/activity/equipment.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1721,
+          "gzipBytes": 715
+        },
+        {
+          "path": "workout/island/activity/eligibility.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 357,
+          "gzipBytes": 246
+        },
+        {
+          "path": "workout/island/minigames/context.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1268,
+          "gzipBytes": 649
+        },
+        {
+          "path": "workout/island/ui/adventure-emblems.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2886,
+          "gzipBytes": 1431
+        },
+        {
+          "path": "workout/island/ui/ui-kit.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4685,
+          "gzipBytes": 1940
+        },
+        {
+          "path": "workout/island/minigames/naval-upgrades.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5180,
+          "gzipBytes": 2070
+        },
+        {
+          "path": "workout/island/activity/hangar.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 930,
+          "gzipBytes": 470
+        },
+        {
+          "path": "workout/island/ui/hangar-preview.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 6230,
+          "gzipBytes": 2755
+        },
+        {
+          "path": "workout/island/minigames/sound.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3667,
+          "gzipBytes": 1537
+        },
+        {
+          "path": "workout/island/minigames/icons.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3801,
+          "gzipBytes": 1564
+        },
+        {
+          "path": "workout/island/activity/alien-upgrades.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 800,
+          "gzipBytes": 425
+        },
+        {
+          "path": "workout/island/minigames/art.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 12825,
+          "gzipBytes": 4040
+        },
+        {
+          "path": "workout/island/ui/soccer-card.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 6233,
+          "gzipBytes": 2614
+        },
+        {
+          "path": "workout/island/ui/offline-panel.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4243,
+          "gzipBytes": 1778
+        },
+        {
+          "path": "workout/island/ui/hoops-club.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 8652,
+          "gzipBytes": 3021
+        },
+        {
+          "path": "workout/island/ui/load-rescue.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4064,
+          "gzipBytes": 1725
+        },
+        {
+          "path": "workout/island/ui/load-report.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3292,
+          "gzipBytes": 1567
+        },
+        {
+          "path": "workout/island/release.mjs",
+          "query": "",
+          "bytes": 272,
+          "gzipBytes": 225
+        },
+        {
+          "path": "workout/island/view/ultra-island-terrain.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5518,
+          "gzipBytes": 2383
+        },
+        {
+          "path": "workout/island/view/ultra-island-water.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4691,
+          "gzipBytes": 2165
+        },
+        {
+          "path": "workout/island/view/ultra-island-flora.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3371,
+          "gzipBytes": 1342
+        },
+        {
+          "path": "workout/island/view/ultra-island-scenery.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 7697,
+          "gzipBytes": 3041
+        },
+        {
+          "path": "workout/island/view/coastal-surfaces.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1703,
+          "gzipBytes": 927
+        },
+        {
+          "path": "workout/island/learning/banks.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5650,
+          "gzipBytes": 1928
+        },
+        {
+          "path": "workout/island/engine/city-depth.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 8561,
+          "gzipBytes": 2825
+        },
+        {
+          "path": "workout/island/engine/city-connections.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1389,
+          "gzipBytes": 685
+        },
+        {
+          "path": "workout/island/engine/city-hall.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1618,
+          "gzipBytes": 790
+        },
+        {
+          "path": "workout/island/activity/state.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4543,
+          "gzipBytes": 1431
+        },
+        {
+          "path": "workout/island/minigames/hoops-league.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 9575,
+          "gzipBytes": 4187
+        },
+        {
+          "path": "workout/island/minigames/hoops-roles.mjs",
+          "query": "",
+          "bytes": 1990,
+          "gzipBytes": 948
+        },
+        {
+          "path": "workout/island/vendor/GLTFLoader.js",
+          "query": "",
+          "bytes": 108527,
+          "gzipBytes": 23465
+        },
+        {
+          "path": "workout/island/view/skeleton-utils.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 1246,
+          "gzipBytes": 524
+        },
+        {
+          "path": "workout/island/minigames/model-art.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 5181,
+          "gzipBytes": 2164
+        },
+        {
+          "path": "workout/island/presentation/surfaces.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 3064,
+          "gzipBytes": 1560
+        },
+        {
+          "path": "workout/island/vendor/BufferGeometryUtils.js",
+          "query": "",
+          "bytes": 31918,
+          "gzipBytes": 6905
+        },
+        {
+          "path": "workout/island/view/plot-landscape.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 4047,
+          "gzipBytes": 1794
+        },
+        {
+          "path": "workout/island/view/street-surfaces.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 2596,
+          "gzipBytes": 1210
+        },
+        {
+          "path": "workout/island/view/street-distribution.mjs",
+          "query": "?v=island-v2-20261104-3",
+          "bytes": 718,
+          "gzipBytes": 457
+        },
+        {
+          "path": "workout/island/minigames/soccer-design-screens.mjs",
+          "query": "",
+          "bytes": 6629,
+          "gzipBytes": 2626
+        },
+        {
+          "path": "workout/island/ui/offline.mjs",
+          "query": "",
+          "bytes": 11415,
+          "gzipBytes": 4245
+        },
+        {
+          "path": "workout/island/ui/load-report.mjs",
+          "query": "",
+          "bytes": 3292,
+          "gzipBytes": 1567
+        }
+      ]
+    },
+    "north": {
+      "entry": "north/js/app.js",
+      "staticModuleIdentities": 5,
+      "uniqueFiles": 5,
+      "totalDecodedBytes": 78880,
+      "totalGzipBytes": 25475,
+      "duplicateIdentities": [],
+      "missing": [],
+      "external": [],
+      "dynamic": [],
+      "expressions": [],
+      "modules": [
+        {
+          "path": "north/js/app.js",
+          "query": "",
+          "bytes": 45793,
+          "gzipBytes": 13855
+        },
+        {
+          "path": "north/js/config.js",
+          "query": "",
+          "bytes": 6122,
+          "gzipBytes": 2641
+        },
+        {
+          "path": "north/js/products.js",
+          "query": "",
+          "bytes": 15555,
+          "gzipBytes": 4466
+        },
+        {
+          "path": "north/js/cart.js",
+          "query": "",
+          "bytes": 5217,
+          "gzipBytes": 2176
+        },
+        {
+          "path": "north/js/icons.js",
+          "query": "",
+          "bytes": 6193,
+          "gzipBytes": 2337
+        }
+      ]
+    }
+  }
+}

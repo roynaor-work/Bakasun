@@ -1,0 +1,39 @@
+{
+  "started": "2026-11-04T22:02:19.792Z",
+  "conditions": "Original supabase/family.sql without rewriting, PGlite with real pgcrypto extension, original workout cloud.js imported with synthetic storage/window/navigator and intercepted fetch; no remote request or real family code.",
+  "cases": [
+    {
+      "name": "same-session-after-family-code-change",
+      "initialAck": 1,
+      "clientReportedSuccess": true,
+      "clientPending": 0,
+      "persistedQueueLength": 0,
+      "rpc": [
+        {
+          "rowCount": 1,
+          "acknowledged": 1
+        }
+      ],
+      "oldFamilyRows": 1,
+      "oldFamilyRevision": 1,
+      "newFamilyRows": 0,
+      "oldFamilyWasNotOverwritten": true
+    },
+    {
+      "name": "distinct-id-positive-control",
+      "clientReportedSuccess": true,
+      "clientPending": 0,
+      "newFamilyRows": 1,
+      "revision": 3
+    },
+    {
+      "name": "offline-queue-same-id-different-family",
+      "firstPending": 1,
+      "afterSecondPending": 1,
+      "queuedRows": 1,
+      "distinctFamilies": 1,
+      "firstFamilyEntryRetained": false
+    }
+  ],
+  "finished": "2026-11-04T22:02:21.808Z"
+}

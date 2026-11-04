@@ -1,0 +1,74 @@
+{
+  "started": "2026-11-04T20:27:16.648Z",
+  "conditions": "Unmodified source handlers, TypeScript stripped; all network and environment dependencies synthetic",
+  "cases": [
+    {
+      "name": "payment-amount-validation",
+      "input": "missing",
+      "finite": false,
+      "accepted": true
+    },
+    {
+      "name": "payment-amount-validation",
+      "input": null,
+      "finite": false,
+      "accepted": true
+    },
+    {
+      "name": "payment-amount-validation",
+      "input": "invalid",
+      "finite": false,
+      "accepted": true
+    },
+    {
+      "name": "payment-amount-validation",
+      "input": "Infinity",
+      "finite": false,
+      "accepted": false
+    },
+    {
+      "name": "payment-amount-validation",
+      "input": 0,
+      "finite": true,
+      "accepted": false
+    },
+    {
+      "name": "payment-amount-validation",
+      "input": 100,
+      "finite": true,
+      "accepted": true
+    },
+    {
+      "name": "payment-order-authorization-and-return-origin",
+      "status": 200,
+      "readSavedOrder": false,
+      "patchTarget": "https://audit.invalid/rest/v1/north_orders?order_no=eq.audit-existing-order",
+      "patch": {
+        "grow_process_id": "audit-process",
+        "grow_process_token": "synthetic",
+        "status": "awaiting_payment",
+        "total": 10,
+        "totals": {
+          "subtotal": 10,
+          "shipping": 0,
+          "total": 10,
+          "clientTotal": 1000
+        }
+      },
+      "returnUrl": "https://untrusted.audit.invalid/return?paid=1&no=audit-existing-order"
+    },
+    {
+      "name": "north-fresh-SQL",
+      "compiled": false,
+      "code": "42703",
+      "message": "column \"grow_process_id\" does not exist"
+    },
+    {
+      "name": "bootstrap-membership",
+      "syntheticAuthUsers": 2,
+      "membersAdded": 2,
+      "unrelatedUserEnrolled": true
+    }
+  ],
+  "finished": "2026-11-04T20:27:18.079Z"
+}

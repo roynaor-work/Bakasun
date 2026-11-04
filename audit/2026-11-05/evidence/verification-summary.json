@@ -1,0 +1,1647 @@
+{
+  "at": "2026-11-04T22:29:20.503378+00:00",
+  "base": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "node": "v24.19.0",
+  "pythonPlaywright": "1.62.0",
+  "conditions": "Existing tests unchanged; ISLAND_PLAYWRIGHT adapter only selects system Chromium and blocks external requests. No live payment/database/email action.",
+  "unitRuns": [
+    {
+      "complete": true,
+      "totals": {
+        "tests": 3278,
+        "suites": 0,
+        "pass": 3227,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 51,
+        "todo": 0
+      },
+      "durationMs": 417695.679069,
+      "B3Skipped": 33,
+      "selectedTests": [
+        {
+          "status": "ok",
+          "name": "B3-C01 current: verified payment info without an amount passes order matching",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C01 fix: payment verification requires a finite matching amount",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 current: caller-supplied items replace the total of the order named by the caller",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 current (static): fresh SQL bootstrap references Grow columns before adding them",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C04 control: an explicit transaction mismatch or known insufficient payment is rejected",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 current: service worker activation deletes pending shared files and other applications caches",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 current: a callback appears in the call queue but is absent from both calendars",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 fix: a scheduled callback is visible on its due day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 current: an impossible date rolls into March and RFQ validation accepts it",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 fix: impossible event dates are rejected rather than normalized",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 current: voice parsing treats 12 am as noon and permits impossible minutes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 current: ISO timestamps use the UTC date prefix rather than the local business day",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 current: ICS DTSTAMP lacks the required UTC Z suffix",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 current: the Other RFQ template displays its internal key in all languages",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 fix: all RFQ template titles are translated",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 current: French currency formatting always uses English thousands and decimals",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 fix: currency formatting uses the selected French locale",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 current: translating an exclusion leaves its Hebrew negation next to translated VAT",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L04 control: Hebrew is RTL while French and English are LTR",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 current: total supplier cost becomes a unit cost and is multiplied by 40",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 fix: importing the event preserves its total supplier cost",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 current: two quote items from one supplier lose the second item in the budget",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 fix: budget import preserves all quote items",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 current: monthly report combines 100 ILS and 100 EUR into the same 200 total",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 fix: monthly report never adds different currencies into one total",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 current: the generic money parser drops a French decimal comma",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 fix: French decimal amounts preserve cents",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 current: the new contract ignores the quote VAT rate and uses settings",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 current: client history sees zero revenue for a quote saved as lines",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 fix: client history computes the accepted quote total from its lines",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 current: the board reports zero for a quote using cost plus default markup",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 fix: the board and the quote editor agree on automatic prices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 current: quote numbering wraps after 999 and can reuse BS-2026-000",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 fix: quote sequence continues beyond three digits",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 current: one payment is counted as income in both its invoice and payment months",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 fix: cash income counts the payment only in the paid month",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q01 fix (static): the smoke test sets the actual UI language and checks the resulting document language",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 current: the root 3D prototype references files absent from the repository root",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 fix: every local prototype import and stylesheet exists",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q03 current (static): independent ICS implementations duplicate timestamp creation",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: a record that already holds markup in attempts is rendered as a number, never as an HTML element",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported backup never creates an HTML element from attempts, and attempts is stored as an integer",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: note subject URLs escape identifiers that are already in the store",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported note cannot carry an attribute-breaking aboutId",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: backup import skips non-object rows and ids that are not plain identifiers",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 control: the shared escaping helper handles element and attribute boundaries",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 current: CSV export preserves a formula supplied as participant data",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 current (static): bootstrap adds every auth.users row without a membership allowlist",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 control: the checked-in Supabase browser JWT is an anon key, not a service-role secret",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 current: the supposedly fictional e2e fixture contains the production default business phone",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 fix: shared fixtures contain no production default phone",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 current: an older remote tombstone deletes a newer local client",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 fix: a stale tombstone cannot override a newer edit",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 current: import keeps the local setting but queues the rejected backup value for cloud sync",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 fix: an ignored backup setting is never sent to other devices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 current: corrupt stored JSON silently starts empty and is overwritten by the next save",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 current: JSON backup contains file metadata but no file bytes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 fix: the complete backup includes local attachment bytes",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S05 control: quota failures are exposed through the save-error hook",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 current: cancelling event attachment removes the shared file from the inbox",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 fix: cancelling event selection keeps the shared file available",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 current: accountant share-files button has no handler while the dialog is open",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 current: opening an accountant email marks the entire month as sent",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U03 control: OS share-sheet cancellation is handled without triggering a download fallback",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix: shared modal exposes its role, modal flag and a title it is labelled by",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix (source): the dialog handles Escape, traps Tab and returns focus to the opener",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 current: a numeric zero VAT and zero markup setting revert to defaults in a new quote",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: primary button text on the action color is at least 4.5:1 in the light and dark themes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: the accent is also readable as text on the page and nav backgrounds (active nav link)",
+          "skipped": false
+        }
+      ],
+      "skipNames": [
+        "audit 01-07, 16: poisoned backup, CSP, dialog, labels, buttons, focus and title in Chromium",
+        "B3-C01 fix: payment verification requires a finite matching amount",
+        "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+        "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+        "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+        "B3-D01 fix: a scheduled callback is visible on its due day",
+        "B3-D02 fix: impossible event dates are rejected rather than normalized",
+        "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+        "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+        "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+        "B3-L01 fix: all RFQ template titles are translated",
+        "B3-L02 fix: currency formatting uses the selected French locale",
+        "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+        "B3-F01 fix: importing the event preserves its total supplier cost",
+        "B3-F02 fix: budget import preserves all quote items",
+        "B3-F03 fix: monthly report never adds different currencies into one total",
+        "B3-F04 fix: French decimal amounts preserve cents",
+        "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+        "B3-F06 fix: client history computes the accepted quote total from its lines",
+        "B3-F07 fix: the board and the quote editor agree on automatic prices",
+        "B3-F08 fix: quote sequence continues beyond three digits",
+        "B3-F09 fix: cash income counts the payment only in the paid month",
+        "B3-Q02 fix: every local prototype import and stylesheet exists",
+        "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+        "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+        "B3-A04 fix: shared fixtures contain no production default phone",
+        "B3-S01 fix: a stale tombstone cannot override a newer edit",
+        "B3-S02 fix: an ignored backup setting is never sent to other devices",
+        "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+        "B3-S04 fix: the complete backup includes local attachment bytes",
+        "B3-S07 fix: cancelling event selection keeps the shared file available",
+        "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+        "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+        "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+        "browser: stick left / actions right in both orientations, floating stick with boost under a second finger",
+        "browser: environments per stage, rotate, offline list, silent fallbacks, kit screens",
+        "browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently",
+        "actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco",
+        "soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay",
+        "one button downloads soccer, basketball and ski; status counts the real cache; saves stay untouched; then the island opens offline with all three games",
+        "automatic download fills the device cache after open, and a data saver skips it",
+        "a missing or blocked asset never hangs a game: soccer, basketball and ski still reach the playing screen",
+        "soccer supplied controls in the native game, with real CSP, both orientations and lifecycle cancellation",
+        "soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations",
+        "soccer reopens after a real worker failure under the shipped index CSP",
+        "soccer assets download once into the service worker cache and the next match loads without network",
+        "soccer uses the v4 turf, and falls back to the 1k pair when a v4 file fails, under the shipped CSP",
+        "soccer falls back to the v4 characters when a v5 file fails, under the shipped CSP"
+      ]
+    },
+    {
+      "complete": true,
+      "totals": {
+        "tests": 3278,
+        "suites": 0,
+        "pass": 3227,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 51,
+        "todo": 0
+      },
+      "durationMs": 371171.905279,
+      "B3Skipped": 33,
+      "selectedTests": [
+        {
+          "status": "ok",
+          "name": "B3-C01 current: verified payment info without an amount passes order matching",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C01 fix: payment verification requires a finite matching amount",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 current: caller-supplied items replace the total of the order named by the caller",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 current (static): fresh SQL bootstrap references Grow columns before adding them",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C04 control: an explicit transaction mismatch or known insufficient payment is rejected",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 current: service worker activation deletes pending shared files and other applications caches",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 current: a callback appears in the call queue but is absent from both calendars",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 fix: a scheduled callback is visible on its due day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 current: an impossible date rolls into March and RFQ validation accepts it",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 fix: impossible event dates are rejected rather than normalized",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 current: voice parsing treats 12 am as noon and permits impossible minutes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 current: ISO timestamps use the UTC date prefix rather than the local business day",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 current: ICS DTSTAMP lacks the required UTC Z suffix",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 current: the Other RFQ template displays its internal key in all languages",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 fix: all RFQ template titles are translated",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 current: French currency formatting always uses English thousands and decimals",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 fix: currency formatting uses the selected French locale",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 current: translating an exclusion leaves its Hebrew negation next to translated VAT",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L04 control: Hebrew is RTL while French and English are LTR",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 current: total supplier cost becomes a unit cost and is multiplied by 40",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 fix: importing the event preserves its total supplier cost",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 current: two quote items from one supplier lose the second item in the budget",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 fix: budget import preserves all quote items",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 current: monthly report combines 100 ILS and 100 EUR into the same 200 total",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 fix: monthly report never adds different currencies into one total",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 current: the generic money parser drops a French decimal comma",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 fix: French decimal amounts preserve cents",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 current: the new contract ignores the quote VAT rate and uses settings",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 current: client history sees zero revenue for a quote saved as lines",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 fix: client history computes the accepted quote total from its lines",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 current: the board reports zero for a quote using cost plus default markup",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 fix: the board and the quote editor agree on automatic prices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 current: quote numbering wraps after 999 and can reuse BS-2026-000",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 fix: quote sequence continues beyond three digits",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 current: one payment is counted as income in both its invoice and payment months",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 fix: cash income counts the payment only in the paid month",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q01 fix (static): the smoke test sets the actual UI language and checks the resulting document language",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 current: the root 3D prototype references files absent from the repository root",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 fix: every local prototype import and stylesheet exists",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q03 current (static): independent ICS implementations duplicate timestamp creation",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: a record that already holds markup in attempts is rendered as a number, never as an HTML element",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported backup never creates an HTML element from attempts, and attempts is stored as an integer",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: note subject URLs escape identifiers that are already in the store",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported note cannot carry an attribute-breaking aboutId",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: backup import skips non-object rows and ids that are not plain identifiers",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 control: the shared escaping helper handles element and attribute boundaries",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 current: CSV export preserves a formula supplied as participant data",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 current (static): bootstrap adds every auth.users row without a membership allowlist",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 control: the checked-in Supabase browser JWT is an anon key, not a service-role secret",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 current: the supposedly fictional e2e fixture contains the production default business phone",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 fix: shared fixtures contain no production default phone",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 current: an older remote tombstone deletes a newer local client",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 fix: a stale tombstone cannot override a newer edit",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 current: import keeps the local setting but queues the rejected backup value for cloud sync",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 fix: an ignored backup setting is never sent to other devices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 current: corrupt stored JSON silently starts empty and is overwritten by the next save",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 current: JSON backup contains file metadata but no file bytes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 fix: the complete backup includes local attachment bytes",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S05 control: quota failures are exposed through the save-error hook",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 current: cancelling event attachment removes the shared file from the inbox",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 fix: cancelling event selection keeps the shared file available",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 current: accountant share-files button has no handler while the dialog is open",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 current: opening an accountant email marks the entire month as sent",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U03 control: OS share-sheet cancellation is handled without triggering a download fallback",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix: shared modal exposes its role, modal flag and a title it is labelled by",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix (source): the dialog handles Escape, traps Tab and returns focus to the opener",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 current: a numeric zero VAT and zero markup setting revert to defaults in a new quote",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: primary button text on the action color is at least 4.5:1 in the light and dark themes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: the accent is also readable as text on the page and nav backgrounds (active nav link)",
+          "skipped": false
+        }
+      ],
+      "skipNames": [
+        "audit 01-07, 16: poisoned backup, CSP, dialog, labels, buttons, focus and title in Chromium",
+        "B3-C01 fix: payment verification requires a finite matching amount",
+        "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+        "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+        "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+        "B3-D01 fix: a scheduled callback is visible on its due day",
+        "B3-D02 fix: impossible event dates are rejected rather than normalized",
+        "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+        "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+        "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+        "B3-L01 fix: all RFQ template titles are translated",
+        "B3-L02 fix: currency formatting uses the selected French locale",
+        "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+        "B3-F01 fix: importing the event preserves its total supplier cost",
+        "B3-F02 fix: budget import preserves all quote items",
+        "B3-F03 fix: monthly report never adds different currencies into one total",
+        "B3-F04 fix: French decimal amounts preserve cents",
+        "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+        "B3-F06 fix: client history computes the accepted quote total from its lines",
+        "B3-F07 fix: the board and the quote editor agree on automatic prices",
+        "B3-F08 fix: quote sequence continues beyond three digits",
+        "B3-F09 fix: cash income counts the payment only in the paid month",
+        "B3-Q02 fix: every local prototype import and stylesheet exists",
+        "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+        "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+        "B3-A04 fix: shared fixtures contain no production default phone",
+        "B3-S01 fix: a stale tombstone cannot override a newer edit",
+        "B3-S02 fix: an ignored backup setting is never sent to other devices",
+        "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+        "B3-S04 fix: the complete backup includes local attachment bytes",
+        "B3-S07 fix: cancelling event selection keeps the shared file available",
+        "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+        "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+        "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+        "browser: stick left / actions right in both orientations, floating stick with boost under a second finger",
+        "browser: environments per stage, rotate, offline list, silent fallbacks, kit screens",
+        "browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently",
+        "actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco",
+        "soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay",
+        "one button downloads soccer, basketball and ski; status counts the real cache; saves stay untouched; then the island opens offline with all three games",
+        "automatic download fills the device cache after open, and a data saver skips it",
+        "a missing or blocked asset never hangs a game: soccer, basketball and ski still reach the playing screen",
+        "soccer supplied controls in the native game, with real CSP, both orientations and lifecycle cancellation",
+        "soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations",
+        "soccer reopens after a real worker failure under the shipped index CSP",
+        "soccer assets download once into the service worker cache and the next match loads without network",
+        "soccer uses the v4 turf, and falls back to the 1k pair when a v4 file fails, under the shipped CSP",
+        "soccer falls back to the v4 characters when a v5 file fails, under the shipped CSP"
+      ]
+    },
+    {
+      "complete": true,
+      "totals": {
+        "tests": 3278,
+        "suites": 0,
+        "pass": 3227,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 51,
+        "todo": 0
+      },
+      "durationMs": 353444.014386,
+      "B3Skipped": 33,
+      "selectedTests": [
+        {
+          "status": "ok",
+          "name": "B3-C01 current: verified payment info without an amount passes order matching",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C01 fix: payment verification requires a finite matching amount",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 current: caller-supplied items replace the total of the order named by the caller",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 current (static): fresh SQL bootstrap references Grow columns before adding them",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-C04 control: an explicit transaction mismatch or known insufficient payment is rejected",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 current: service worker activation deletes pending shared files and other applications caches",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 current: a callback appears in the call queue but is absent from both calendars",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D01 fix: a scheduled callback is visible on its due day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 current: an impossible date rolls into March and RFQ validation accepts it",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D02 fix: impossible event dates are rejected rather than normalized",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 current: voice parsing treats 12 am as noon and permits impossible minutes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 current: ISO timestamps use the UTC date prefix rather than the local business day",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 current: ICS DTSTAMP lacks the required UTC Z suffix",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 current: the Other RFQ template displays its internal key in all languages",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L01 fix: all RFQ template titles are translated",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 current: French currency formatting always uses English thousands and decimals",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L02 fix: currency formatting uses the selected French locale",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 current: translating an exclusion leaves its Hebrew negation next to translated VAT",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-L04 control: Hebrew is RTL while French and English are LTR",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 current: total supplier cost becomes a unit cost and is multiplied by 40",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F01 fix: importing the event preserves its total supplier cost",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 current: two quote items from one supplier lose the second item in the budget",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F02 fix: budget import preserves all quote items",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 current: monthly report combines 100 ILS and 100 EUR into the same 200 total",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F03 fix: monthly report never adds different currencies into one total",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 current: the generic money parser drops a French decimal comma",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F04 fix: French decimal amounts preserve cents",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 current: the new contract ignores the quote VAT rate and uses settings",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 current: client history sees zero revenue for a quote saved as lines",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F06 fix: client history computes the accepted quote total from its lines",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 current: the board reports zero for a quote using cost plus default markup",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F07 fix: the board and the quote editor agree on automatic prices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 current: quote numbering wraps after 999 and can reuse BS-2026-000",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F08 fix: quote sequence continues beyond three digits",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 current: one payment is counted as income in both its invoice and payment months",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F09 fix: cash income counts the payment only in the paid month",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q01 fix (static): the smoke test sets the actual UI language and checks the resulting document language",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 current: the root 3D prototype references files absent from the repository root",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q02 fix: every local prototype import and stylesheet exists",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-Q03 current (static): independent ICS implementations duplicate timestamp creation",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: a record that already holds markup in attempts is rendered as a number, never as an HTML element",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported backup never creates an HTML element from attempts, and attempts is stored as an integer",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: note subject URLs escape identifiers that are already in the store",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: an imported note cannot carry an attribute-breaking aboutId",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 fix: backup import skips non-object rows and ids that are not plain identifiers",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A01 control: the shared escaping helper handles element and attribute boundaries",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 current: CSV export preserves a formula supplied as participant data",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 current (static): bootstrap adds every auth.users row without a membership allowlist",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 control: the checked-in Supabase browser JWT is an anon key, not a service-role secret",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 current: the supposedly fictional e2e fixture contains the production default business phone",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-A04 fix: shared fixtures contain no production default phone",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 current: an older remote tombstone deletes a newer local client",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S01 fix: a stale tombstone cannot override a newer edit",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 current: import keeps the local setting but queues the rejected backup value for cloud sync",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S02 fix: an ignored backup setting is never sent to other devices",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 current: corrupt stored JSON silently starts empty and is overwritten by the next save",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 current: JSON backup contains file metadata but no file bytes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S04 fix: the complete backup includes local attachment bytes",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-S05 control: quota failures are exposed through the save-error hook",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 current: cancelling event attachment removes the shared file from the inbox",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-S07 fix: cancelling event selection keeps the shared file available",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 current: accountant share-files button has no handler while the dialog is open",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 current: opening an accountant email marks the entire month as sent",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U03 control: OS share-sheet cancellation is handled without triggering a download fallback",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix: shared modal exposes its role, modal flag and a title it is labelled by",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U04 fix (source): the dialog handles Escape, traps Tab and returns focus to the opener",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 current: a numeric zero VAT and zero markup setting revert to defaults in a new quote",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+          "skipped": true
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: primary button text on the action color is at least 4.5:1 in the light and dark themes",
+          "skipped": false
+        },
+        {
+          "status": "ok",
+          "name": "B3-U05 fix: the accent is also readable as text on the page and nav backgrounds (active nav link)",
+          "skipped": false
+        }
+      ],
+      "skipNames": [
+        "audit 01-07, 16: poisoned backup, CSP, dialog, labels, buttons, focus and title in Chromium",
+        "B3-C01 fix: payment verification requires a finite matching amount",
+        "B3-C02 fix: payment creation validates the stored order and its ownership before repricing",
+        "B3-C03 fix (static): policy columns exist before the north insert policy is created",
+        "B3-S06 fix: worker upgrades delete only old shell caches owned by this application",
+        "B3-D01 fix: a scheduled callback is visible on its due day",
+        "B3-D02 fix: impossible event dates are rejected rather than normalized",
+        "B3-D03 fix: midnight and minutes are valid when parsed from voice input",
+        "B3-D04 fix: timestamps on the month boundary are attributed to the business day",
+        "B3-D05 fix: ICS metadata uses a UTC DTSTAMP (RFC 5545)",
+        "B3-L01 fix: all RFQ template titles are translated",
+        "B3-L02 fix: currency formatting uses the selected French locale",
+        "B3-L03 fix: the glossary preserves the full negative VAT meaning",
+        "B3-F01 fix: importing the event preserves its total supplier cost",
+        "B3-F02 fix: budget import preserves all quote items",
+        "B3-F03 fix: monthly report never adds different currencies into one total",
+        "B3-F04 fix: French decimal amounts preserve cents",
+        "B3-F05 fix: a contract priced from a quote preserves that quote VAT rate",
+        "B3-F06 fix: client history computes the accepted quote total from its lines",
+        "B3-F07 fix: the board and the quote editor agree on automatic prices",
+        "B3-F08 fix: quote sequence continues beyond three digits",
+        "B3-F09 fix: cash income counts the payment only in the paid month",
+        "B3-Q02 fix: every local prototype import and stylesheet exists",
+        "B3-A02 fix: text cells beginning with formula characters are neutralized in CSV",
+        "B3-A03 fix (static): organization bootstrap uses an explicit user allowlist",
+        "B3-A04 fix: shared fixtures contain no production default phone",
+        "B3-S01 fix: a stale tombstone cannot override a newer edit",
+        "B3-S02 fix: an ignored backup setting is never sent to other devices",
+        "B3-S03 fix: corrupt stored data is reported and retained for recovery",
+        "B3-S04 fix: the complete backup includes local attachment bytes",
+        "B3-S07 fix: cancelling event selection keeps the shared file available",
+        "B3-U01 fix: accountant attachments are shareable before closing the dialog",
+        "B3-U02 fix: preparing an email without confirmation leaves the month pending",
+        "B3-F10 fix: new quotes preserve explicit numeric zero defaults",
+        "browser: stick left / actions right in both orientations, floating stick with boost under a second finger",
+        "browser: environments per stage, rotate, offline list, silent fallbacks, kit screens",
+        "browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently",
+        "actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco",
+        "soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key",
+        "ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay",
+        "one button downloads soccer, basketball and ski; status counts the real cache; saves stay untouched; then the island opens offline with all three games",
+        "automatic download fills the device cache after open, and a data saver skips it",
+        "a missing or blocked asset never hangs a game: soccer, basketball and ski still reach the playing screen",
+        "soccer supplied controls in the native game, with real CSP, both orientations and lifecycle cancellation",
+        "soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations",
+        "soccer reopens after a real worker failure under the shipped index CSP",
+        "soccer assets download once into the service worker cache and the next match loads without network",
+        "soccer uses the v4 turf, and falls back to the 1k pair when a v4 file fails, under the shipped CSP",
+        "soccer falls back to the v4 characters when a v5 file fails, under the shipped CSP"
+      ]
+    }
+  ],
+  "csp": {
+    "complete": true,
+    "totals": {
+      "tests": 3,
+      "suites": 0,
+      "pass": 3,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 91451.38282,
+    "B3Skipped": 0,
+    "selectedTests": [],
+    "skipNames": []
+  },
+  "offline": {
+    "complete": true,
+    "totals": {
+      "tests": 3,
+      "suites": 0,
+      "pass": 2,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 1018742.440586,
+    "B3Skipped": 0,
+    "selectedTests": [
+      {
+        "status": "not ok",
+        "name": "automatic download fills the device cache after open, and a data saver skips it",
+        "skipped": false
+      }
+    ],
+    "skipNames": []
+  },
+  "offlineAutoRepeat": {
+    "complete": true,
+    "totals": {
+      "tests": 1,
+      "suites": 0,
+      "pass": 0,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 145616.80975,
+    "B3Skipped": 0,
+    "selectedTests": [
+      {
+        "status": "not ok",
+        "name": "automatic download fills the device cache after open, and a data saver skips it",
+        "skipped": false
+      }
+    ],
+    "skipNames": []
+  },
+  "offlineAutoLaterRepeat": {
+    "complete": true,
+    "totals": {
+      "tests": 1,
+      "suites": 0,
+      "pass": 0,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 154348.896496,
+    "B3Skipped": 0,
+    "selectedTests": [
+      {
+        "status": "not ok",
+        "name": "automatic download fills the device cache after open, and a data saver skips it",
+        "skipped": false
+      }
+    ],
+    "skipNames": []
+  },
+  "offlineCiRuntime": {
+    "complete": true,
+    "totals": {
+      "tests": 1,
+      "suites": 0,
+      "pass": 0,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 157338.337577,
+    "B3Skipped": 0,
+    "selectedTests": [
+      {
+        "status": "not ok",
+        "name": "automatic download fills the device cache after open, and a data saver skips it",
+        "skipped": false
+      }
+    ],
+    "skipNames": []
+  },
+  "cspCiRuntime": {
+    "complete": true,
+    "totals": {
+      "tests": 2,
+      "suites": 0,
+      "pass": 2,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 81811.300017,
+    "B3Skipped": 0,
+    "selectedTests": [],
+    "skipNames": []
+  },
+  "nodePlaywrightVersions": {
+    "default": "1.57.0",
+    "ciComparison": "1.62.1",
+    "meaning": "CI version comparison uses the pinned driver with the same system Chromium and Node 24, not the complete hosted CI runner."
+  },
+  "soccerBrowser": {
+    "complete": true,
+    "totals": {
+      "tests": 6,
+      "suites": 0,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationMs": 283305.507548,
+    "B3Skipped": 0,
+    "selectedTests": [],
+    "skipNames": []
+  },
+  "autoDiagnostics": {
+    "oneActivePage": {
+      "complete": true,
+      "totals": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "durationMs": 88674.776787,
+      "B3Skipped": 0,
+      "selectedTests": [],
+      "skipNames": []
+    },
+    "twoPagesRepeat": {
+      "complete": true,
+      "totals": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "durationMs": 216899.408267,
+      "B3Skipped": 0,
+      "selectedTests": [],
+      "skipNames": []
+    },
+    "meaning": "Diagnostic interventions and repeated original setup are reported separately; closing the saver page is not a fix or passing result for the unchanged original setup."
+  },
+  "defaultRuntimeException": {
+    "focusedFile": "tests/workout-royiki.test.mjs",
+    "reason": "Playwright package available but its default browser binary missing; server opened before launch and outside finally; timeout exit 124 after 35 seconds",
+    "productFailure": false
+  },
+  "githubObserved": {
+    "baseCommitWorkflowRuns": [],
+    "baseCommitStatuses": [],
+    "meaning": "Connector returned empty lists; live CI status and branch protection are not established."
+  }
+}
