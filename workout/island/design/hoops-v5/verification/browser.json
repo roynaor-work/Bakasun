@@ -1,0 +1,582 @@
+{
+  "allPassed": true,
+  "renderer": "Chromium WebGL / SwiftShader; emulated phone viewports, not a physical device",
+  "scriptCSP": "script-src 'self'; static same-origin Draco worker",
+  "results": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "touchTargets": [
+        {
+          "text": "הפעלת תנועה",
+          "x": 82.0625,
+          "y": 697,
+          "w": 96.328125,
+          "h": 44
+        },
+        {
+          "text": "חיסכון",
+          "x": 18,
+          "y": 697,
+          "w": 57.0625,
+          "h": 44
+        },
+        {
+          "text": "01אולם",
+          "x": 283.75,
+          "y": 764,
+          "w": 84.25,
+          "h": 52
+        },
+        {
+          "text": "02פרקט",
+          "x": 196.5,
+          "y": 764,
+          "w": 84.25,
+          "h": 52
+        },
+        {
+          "text": "03יציע",
+          "x": 109.25,
+          "y": 764,
+          "w": 84.25,
+          "h": 52
+        },
+        {
+          "text": "04חומרים",
+          "x": 22,
+          "y": 764,
+          "w": 84.25,
+          "h": 52
+        }
+      ],
+      "states": [
+        {
+          "view": "arena",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.05710000000009313,
+          "drawCalls": 72,
+          "triangles": 65000,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 148,
+            "height": 320
+          },
+          "canvas": [
+            390,
+            844
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.998824884859935,
+            0.0023238519046972746
+          ],
+          "frameMs": 333.39999999999964
+        },
+        {
+          "view": "floor",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.05710000000009313,
+          "drawCalls": 66,
+          "triangles": 64902,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 148,
+            "height": 320
+          },
+          "canvas": [
+            390,
+            844
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.998824884859935,
+            0.0023238519046972746
+          ],
+          "frameMs": 16.699999999999818
+        },
+        {
+          "view": "crowd",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.05710000000009313,
+          "drawCalls": 58,
+          "triangles": 61158,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 148,
+            "height": 320
+          },
+          "canvas": [
+            390,
+            844
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.998824884859935,
+            0.0023238519046972746
+          ],
+          "frameMs": 16.699999999999818
+        },
+        {
+          "view": "materials",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.05710000000009313,
+          "drawCalls": 8,
+          "triangles": 7790,
+          "reflection": false,
+          "reflectionSize": {
+            "width": 148,
+            "height": 320
+          },
+          "canvas": [
+            390,
+            844
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.998824884859935,
+            0.0023238519046972746
+          ],
+          "frameMs": 16.699999999999818
+        }
+      ],
+      "diagnostics": {
+        "textures": [
+          {
+            "name": "maple-color",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "maple-normal",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "name": "maple-roughness",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "name": "leather-color",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "leather-normal",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "ribbon",
+            "width": 1024,
+            "height": 128
+          },
+          {
+            "name": "scoreboard",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "shot-clock",
+            "width": 256,
+            "height": 128
+          },
+          {
+            "name": "jersey-deep-teal",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "jersey-warm-ivory",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "crowd-atlas",
+            "width": 1024,
+            "height": 1024
+          }
+        ],
+        "models": {
+          "arena": {
+            "meshes": 30,
+            "mapped": 5
+          },
+          "court": {
+            "meshes": 6,
+            "mapped": 1
+          },
+          "hoops": {
+            "meshes": 10,
+            "mapped": 1
+          },
+          "crowd": {
+            "meshes": 1,
+            "mapped": 1
+          },
+          "ball": {
+            "meshes": 1,
+            "mapped": 1
+          },
+          "uniforms": {
+            "meshes": 2,
+            "mapped": 2
+          }
+        }
+      },
+      "crowdMorphsChanged": true,
+      "pauseFrozen": true,
+      "orbitAndKeyboard": true,
+      "orientationResize": true,
+      "reflectionPixelDelta": [
+        2.969181459566075,
+        3.5237015121630506,
+        3.1473701512163053
+      ],
+      "economyReducesDrawCalls": true,
+      "staticDracoWorkers": 2
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "touchTargets": [
+        {
+          "text": "הפעלת תנועה",
+          "x": 90.0625,
+          "y": 16,
+          "w": 102.328125,
+          "h": 44
+        },
+        {
+          "text": "חיסכון",
+          "x": 20,
+          "y": 16,
+          "w": 63.0625,
+          "h": 44
+        },
+        {
+          "text": "01אולם",
+          "x": 529.46875,
+          "y": 325,
+          "w": 97,
+          "h": 44
+        },
+        {
+          "text": "02פרקט",
+          "x": 427.46875,
+          "y": 325,
+          "w": 97,
+          "h": 44
+        },
+        {
+          "text": "03יציע",
+          "x": 325.46875,
+          "y": 325,
+          "w": 97,
+          "h": 44
+        },
+        {
+          "text": "04חומרים",
+          "x": 217.53125,
+          "y": 325,
+          "w": 102.9375,
+          "h": 44
+        }
+      ],
+      "states": [
+        {
+          "view": "arena",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.062000000000000006,
+          "drawCalls": 74,
+          "triangles": 65216,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 321,
+            "height": 148
+          },
+          "canvas": [
+            844,
+            390
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.9985826100517707,
+            0.0028029630617383157
+          ],
+          "frameMs": 16.699999999999818
+        },
+        {
+          "view": "floor",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.062000000000000006,
+          "drawCalls": 66,
+          "triangles": 64924,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 321,
+            "height": 148
+          },
+          "canvas": [
+            844,
+            390
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.9985826100517707,
+            0.0028029630617383157
+          ],
+          "frameMs": 16.699999999999818
+        },
+        {
+          "view": "crowd",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.062000000000000006,
+          "drawCalls": 60,
+          "triangles": 61048,
+          "reflection": true,
+          "reflectionSize": {
+            "width": 321,
+            "height": 148
+          },
+          "canvas": [
+            844,
+            390
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.9985826100517707,
+            0.0028029630617383157
+          ],
+          "frameMs": 16.699999999999818
+        },
+        {
+          "view": "materials",
+          "paused": true,
+          "economy": false,
+          "elapsed": 0.062000000000000006,
+          "drawCalls": 8,
+          "triangles": 7790,
+          "reflection": false,
+          "reflectionSize": {
+            "width": 321,
+            "height": 148
+          },
+          "canvas": [
+            844,
+            390
+          ],
+          "crowdAnimation": [
+            "Crowd_Sway_4s"
+          ],
+          "models": [
+            "arena",
+            "court",
+            "hoops",
+            "crowd",
+            "ball",
+            "uniforms"
+          ],
+          "crowdWeights": [
+            0.9985826100517707,
+            0.0028029630617383157
+          ],
+          "frameMs": 16.699999999999818
+        }
+      ],
+      "diagnostics": {
+        "textures": [
+          {
+            "name": "shot-clock",
+            "width": 256,
+            "height": 128
+          },
+          {
+            "name": "maple-color",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "maple-normal",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "name": "maple-roughness",
+            "width": 512,
+            "height": 512
+          },
+          {
+            "name": "ribbon",
+            "width": 1024,
+            "height": 128
+          },
+          {
+            "name": "scoreboard",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "leather-color",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "leather-normal",
+            "width": 1024,
+            "height": 512
+          },
+          {
+            "name": "jersey-deep-teal",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "jersey-warm-ivory",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "name": "crowd-atlas",
+            "width": 1024,
+            "height": 1024
+          }
+        ],
+        "models": {
+          "arena": {
+            "meshes": 30,
+            "mapped": 5
+          },
+          "court": {
+            "meshes": 6,
+            "mapped": 1
+          },
+          "hoops": {
+            "meshes": 10,
+            "mapped": 1
+          },
+          "crowd": {
+            "meshes": 1,
+            "mapped": 1
+          },
+          "ball": {
+            "meshes": 1,
+            "mapped": 1
+          },
+          "uniforms": {
+            "meshes": 2,
+            "mapped": 2
+          }
+        }
+      },
+      "crowdMorphsChanged": true,
+      "pauseFrozen": true,
+      "orbitAndKeyboard": true,
+      "orientationResize": true,
+      "reflectionPixelDelta": [
+        2.8676276987888363,
+        3.398532122169563,
+        3.221399420747762
+      ],
+      "economyReducesDrawCalls": true,
+      "staticDracoWorkers": 2
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "desktopScreenshots": [
+    "arena-desktop.png",
+    "materials-desktop.png"
+  ],
+  "reducedMotionAndDPR2": {
+    "pausedOnLoad": true,
+    "canvas": [
+      585,
+      1266
+    ],
+    "effectiveDPR": 1.5
+  },
+  "missingAssetShowsRetry": true
+}
