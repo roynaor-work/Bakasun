@@ -29,7 +29,7 @@ test('ctrl-soccer: the stick is on the left and the actions on the right, in bot
   assert.ok(!session.includes('handednessKey'),'a saved island.soccer.handed value is never read by the soccer session');
   assert.ok(/handed=true/.test(session),'the soccer session is always right-handed layout (stick left)');
   assert.ok(!/this\.soccerHandedness\(\)/.test(activity),'no handedness switch in the soccer menu');
-  assert.ok(/id==='tennis'\)dialog\.append\(this\.soccerHandedness/.test(activity),'tennis keeps its own switch');
+  assert.ok(!/this\.soccerHandedness\(/.test(activity.replace(/soccerHandedness\(id='soccer'\)\{/,'')),'no game keeps a handedness switch (stick always left everywhere)');
   assert.ok(!/soccer\]\s*\.soccer-controls\.left-handed/.test(await read('minigames/soccer-controls.css')+await read('styles.css')),'no soccer left-handed CSS');
 });
 
