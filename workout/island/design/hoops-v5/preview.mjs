@@ -118,7 +118,10 @@ function setView(next){
   if(view==='arena')frameCourt();
   if(view==='floor'){aim.set(7,1.1,0);Object.assign(orbit,{yaw:-1.15,pitch:.17,distance:camera.aspect<1?16.5:12.3});}
   if(view==='crowd'){aim.set(-6.5,3.4,-13.3);Object.assign(orbit,{yaw:.13,pitch:.13,distance:camera.aspect<1?11.5:9.2});}
-  if(view==='materials'){aim.set(0,.89,.13);Object.assign(orbit,{yaw:.12,pitch:.10,distance:camera.aspect<1?3.7:2.5});}
+  if(view==='materials'){
+    const short=camera.aspect>=1&&innerHeight<500;
+    aim.set(0,short?.60:.89,.13);Object.assign(orbit,{yaw:.12,pitch:.10,distance:camera.aspect<1?3.7:(short?2.8:2.5)});
+  }
   for(const b of document.querySelectorAll('[data-view]'))b.setAttribute('aria-pressed',String(b.dataset.view===view));
   $('#view-label').textContent=labels[view][0];$('#caption').textContent=labels[view][1];
   dirty=true;updateCamera();
