@@ -6,7 +6,8 @@ export function alienIcon(kind){
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');
  const p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d',paths[kind]||paths.upgrade);p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','1.8');p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');svg.append(p);return svg;
 }
-export function alienHandedness(c){try{const hand=localStorage.getItem(c.handednessKey);return hand===null?c.rightHanded:hand==='right';}catch{return c.rightHanded;}}
+// Stick is always on the left; the saved hand value is ignored.
+export function alienHandedness(){return true;}
 
 // These preflight screens belong to the shared UI. Decorate only alien-owned
 // nodes, so parallel games need no edits to that UI or the shared stylesheet.
@@ -31,10 +32,6 @@ if(typeof document!=='undefined'){
     const intro=dialog.querySelector('[data-action=game-understood]')&&dialog.querySelector('h2')?.textContent===strings['minigame.alienDefense'];
     if(dialog.dataset.stageMap!=='alienDefense'&&dialog.dataset.hangar!=='true'&&!intro)continue;
     dialog.dataset.alienPresentation='true';
-    if(!dialog.querySelector('[data-alien-hand]')){
-     const label=document.createElement('div');label.className='alien-hand';label.dataset.alienHand='true';const input=document.createElement('button');input.type='button';input.setAttribute('role','switch');input.setAttribute('aria-label',strings['alien.stickSide']);let right=alienHandedness(c);const text=document.createElement('span');const update=()=>{input.setAttribute('aria-checked',String(right));text.textContent=strings[right?'alien.stickLeft':'alien.stickRight'];};
-     input.onclick=()=>{right=!right;try{localStorage.setItem(c.handednessKey,right?'right':'left');}catch{}update();};update();input.append(alienIcon('hand'));label.append(input,text);dialog.append(label);
-    }
     if(dialog.dataset.hangar==='true'){
      const stats=dialog.querySelector(':scope > p:not(.modal-subtitle)');
      if(stats&&!stats.dataset.alienStats){

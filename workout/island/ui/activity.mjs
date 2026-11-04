@@ -240,7 +240,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
     dialog.dataset.intro=id;
     {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
-    if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
+    if(id==='soccer')dialog.append(this.soccerHandedness(id));
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
