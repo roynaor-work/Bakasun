@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090f18">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <title>מצלמות המגרש · Broadcast 01</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main class="app">
+    <header class="masthead">
+      <div class="identity"><span class="identity-mark" aria-hidden="true">◉</span><div><h1>מצלמות המגרש</h1><span lang="en" dir="ltr">BROADCAST STUDY / 01</span></div></div>
+      <div class="sport-switch" role="group" aria-label="ענף ספורט"><button data-sport="soccer" aria-pressed="true">כדורגל</button><button data-sport="basketball" aria-pressed="false">כדורסל</button></div>
+    </header>
+    <section class="stage" id="stage" aria-label="תצוגת מצלמה תלת ממדית">
+      <canvas id="canvas" aria-label="מגרש ושתי קבוצות בדויות בשש מול שש"></canvas>
+      <div class="stage-shade" aria-hidden="true"></div>
+      <div class="broadcast-top">
+        <div class="scorebug" dir="ltr"><span class="team team-a">בית</span><strong id="score">1<span>:</span>0</strong><span class="team team-b">חוץ</span><time id="match-clock">64:28</time></div>
+        <div class="on-air"><i></i><span id="air-label">שידור חי</span></div>
+      </div>
+      <div class="loading" id="loading" role="status"><span class="spinner"></span><strong>מכינים את המגרש</strong><span>תאורה, מצלמות ותנועה</span></div>
+      <div class="error" id="error" role="alert" hidden></div>
+      <div class="frame-label"><span id="camera-index" dir="ltr">CAM 01</span><strong id="camera-label">מצלמת שידור</strong><span id="lens-label" dir="ltr">49° FOV</span></div>
+      <div class="telemetry" dir="ltr"><span id="tier-badge">BALANCED</span><span><b id="fps">—</b> FPS</span><span>6 × 6</span></div>
+      <div class="replay-strip" id="replay-strip" hidden><button id="return-live">חזרה לשידור <span aria-hidden="true">↗</span></button><label for="replay-time">הילוך חוזר <b dir="ltr">0.45×</b></label><input id="replay-time" type="range" min="0" max="1" step="0.001" value="0" aria-label="מיקום בהילוך החוזר"></div>
+    </section>
+    <section class="desk" aria-label="בקרת מצלמות ואפקטים">
+      <div class="camera-bar" role="group" aria-label="בחירת מצלמה">
+        <button data-camera="broadcast" aria-pressed="true"><span class="cam-icon" aria-hidden="true">▰</span><span>שידור</span><small dir="ltr">01</small></button>
+        <button data-camera="side" aria-pressed="false"><span class="cam-icon" aria-hidden="true">↔</span><span>צד</span><small dir="ltr">02</small></button>
+        <button data-camera="shoulder" aria-pressed="false"><span class="cam-icon" aria-hidden="true">⌁</span><span>מעל הכתף</span><small dir="ltr">03</small></button>
+        <button data-camera="replay" aria-pressed="false"><span class="cam-icon" aria-hidden="true">↶</span><span>הילוך חוזר</span><small dir="ltr">04</small></button>
+      </div>
+      <div class="finish-bar">
+        <button id="fx" class="fx-switch" aria-pressed="true"><i></i><span>גימור שידור</span><small id="fx-label">פעיל</small></button>
+        <label class="quality-control">איכות <select id="quality" aria-label="דרגת איכות"><option value="auto">אוטומטית</option><option value="economy">חסכונית</option><option value="balanced">מאוזנת</option><option value="high">גבוהה</option></select></label>
+        <button id="play" class="play" aria-pressed="true" aria-label="השהיית התנועה">Ⅱ</button>
+      </div>
+      <div class="desk-notes"><span id="effect-note">גוון · Bloom · עומק עדין · Vignette</span><button id="details" aria-expanded="false" aria-controls="metrics">נתוני תצוגה <span aria-hidden="true">↗</span></button></div>
+    </section>
+  </main>
+  <aside id="metrics" class="metrics" hidden aria-label="נתוני תצוגה"><button id="close-metrics" aria-label="סגירת נתוני תצוגה">×</button><h2>נתוני תצוגה</h2><p id="metrics-body"></p><p>יעד: 30fps בטלפון בינוני. הנתון החי מתאר את הדפדפן הנוכחי.</p><a href="REPORT.md">דוח ומדידות</a><a href="ADAPTIVE-QUALITY.md">שלוש דרגות איכות</a><a href="cameras.json" download>הורדת הגדרות מצלמה</a></aside>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
