@@ -1,0 +1,398 @@
+[
+ {
+  "renderer": "render stubbed (input+sim path at 60 Hz rAF)",
+  "viewport": "844x390",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 117,
+    "w": 410,
+    "h": 176
+   },
+   "ring": {
+    "x": 12,
+    "y": 189,
+    "w": 104,
+    "h": 104
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 680,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 608,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 680,
+     "y": 242,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 752,
+     "y": 226,
+     "w": 80,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "reach": [
+   {
+    "el": "game-pause",
+    "reachable": true
+   },
+   {
+    "el": "hoops-kit-trigger",
+    "reachable": true
+   },
+   {
+    "el": "pass",
+    "reachable": true
+   },
+   {
+    "el": "move",
+    "reachable": true
+   },
+   {
+    "el": "fake",
+    "reachable": true
+   },
+   {
+    "el": "sprint",
+    "reachable": true
+   },
+   {
+    "el": "timeout",
+    "reachable": true
+   }
+  ],
+  "trials": 8,
+  "median": {
+   "eventToConsume": 0.8,
+   "eventToRender2cm": 1,
+   "eventToRender5cm": 16.9,
+   "frameMedian": 16.7,
+   "frameP95": 19.9
+  },
+  "errors": []
+ },
+ {
+  "renderer": "render stubbed (input+sim path at 60 Hz rAF)",
+  "viewport": "390x844",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 253,
+    "w": 166,
+    "h": 176
+   },
+   "ring": {
+    "x": 12,
+    "y": 333,
+    "w": 96,
+    "h": 96
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 250,
+     "y": 696,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 250,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 186,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 314,
+     "y": 768,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "reach": [
+   {
+    "el": "game-pause",
+    "reachable": true
+   },
+   {
+    "el": "hoops-kit-trigger",
+    "reachable": true
+   },
+   {
+    "el": "pass",
+    "reachable": true
+   },
+   {
+    "el": "move",
+    "reachable": true
+   },
+   {
+    "el": "fake",
+    "reachable": true
+   },
+   {
+    "el": "sprint",
+    "reachable": true
+   },
+   {
+    "el": "timeout",
+    "reachable": true
+   }
+  ],
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1.1,
+   "eventToRender2cm": 1.5,
+   "eventToRender5cm": 17,
+   "frameMedian": 16.7,
+   "frameP95": 18.7
+  },
+  "errors": []
+ },
+ {
+  "renderer": "full SwiftShader render (software GL, slow frames)",
+  "viewport": "844x390",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 117,
+    "w": 410,
+    "h": 176
+   },
+   "ring": {
+    "x": 12,
+    "y": 189,
+    "w": 104,
+    "h": 104
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 680,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 608,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 680,
+     "y": 242,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 752,
+     "y": 226,
+     "w": 80,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ],
+   "floating": {
+    "touch": {
+     "x": 238,
+     "y": 170
+    },
+    "ringCenter": {
+     "x": 238,
+     "y": 170
+    }
+   }
+  },
+  "reach": [
+   {
+    "el": "game-pause",
+    "reachable": true
+   },
+   {
+    "el": "hoops-kit-trigger",
+    "reachable": true
+   },
+   {
+    "el": "pass",
+    "reachable": true
+   },
+   {
+    "el": "move",
+    "reachable": true
+   },
+   {
+    "el": "fake",
+    "reachable": true
+   },
+   {
+    "el": "sprint",
+    "reachable": true
+   },
+   {
+    "el": "timeout",
+    "reachable": true
+   }
+  ],
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1.2,
+   "eventToRender2cm": 8,
+   "eventToRender5cm": 8,
+   "frameMedian": 289,
+   "frameP95": 321.3
+  },
+  "errors": []
+ },
+ {
+  "renderer": "full SwiftShader render (software GL, slow frames)",
+  "viewport": "390x844",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 253,
+    "w": 166,
+    "h": 176
+   },
+   "ring": {
+    "x": 12,
+    "y": 333,
+    "w": 96,
+    "h": 96
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 250,
+     "y": 696,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 250,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 186,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 314,
+     "y": 768,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ],
+   "floating": {
+    "touch": {
+     "x": 103,
+     "y": 306
+    },
+    "ringCenter": {
+     "x": 103,
+     "y": 306
+    }
+   }
+  },
+  "reach": [
+   {
+    "el": "game-pause",
+    "reachable": true
+   },
+   {
+    "el": "hoops-kit-trigger",
+    "reachable": true
+   },
+   {
+    "el": "pass",
+    "reachable": true
+   },
+   {
+    "el": "move",
+    "reachable": true
+   },
+   {
+    "el": "fake",
+    "reachable": true
+   },
+   {
+    "el": "sprint",
+    "reachable": true
+   },
+   {
+    "el": "timeout",
+    "reachable": true
+   }
+  ],
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1,
+   "eventToRender2cm": 11.1,
+   "eventToRender5cm": 11.1,
+   "frameMedian": 289.3,
+   "frameP95": 317.4
+  },
+  "errors": []
+ }
+]
