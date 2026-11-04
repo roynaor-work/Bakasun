@@ -100,7 +100,7 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     await page.goto(srv.url + '#/exercise/jump-rope');
     await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"]');
     const reps = await page.evaluate(async () => {
-      const { RoyikiStage } = await import('./js/royiki.js?v=20261110-royiki-1');
+      const { RoyikiStage } = await import('./js/royiki.js?v=20261010-camera-1');
       const box = document.createElement('div'); document.body.appendChild(box);
       const ex = { id: 'jump-rope', frames: [[{}, 480]] };
       return await new Promise(res => { const s = new RoyikiStage(box, ex, { onReady: st => { let n = 0; const t0 = performance.now(); st.onRep = () => { n++; }; st.play(ex, 2); setTimeout(() => { st.dispose(); res({ n, ms: performance.now() - t0 }); }, 2300); } }); });

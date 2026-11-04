@@ -1,7 +1,7 @@
 // רועיקי: אנימציות SVG דו-ממדיות (royiki/<id>.svg, SMIL) במסך התרגיל. אותו ממשק כמו Figure ו-Stage3D:
 // play(ex, speed) / still / stop / onRep(n) / dispose / pace. הקבצים מקומיים בלבד, נטענים לפי הצורך.
 // SMIL אין לו קצב ניגון, לכן מקפיאים את האנימציה ומקדמים אותה ידנית (setCurrentTime) בקצב הרצוי.
-import { ROYIKI, ROYIKI_SPEED } from './royiki-data.js';
+import { ROYIKI, ROYIKI_SPEED } from './royiki-data.js?v=20261010-camera-1';
 import { cycleMs } from './figure.js?v=20261010-camera-1';
 
 export const ROYIKI_IDS = Object.keys(ROYIKI);
