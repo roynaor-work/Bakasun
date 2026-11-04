@@ -1,6 +1,7 @@
-import {Art,T,fs,path,root,out,io,acc,paletteAtlas,draco,weld,prune,dedup,rgb} from './mesh.mjs';
+import {Art,T,fs,path,root,out,io,acc,paletteAtlas,draco,weld,prune,dedup,rgb,discardAnimation,resample} from './mesh.mjs';
 import {Retargeter} from '../../viewer/retarget.js';
 import {sample} from '../../viewer/animation.js';
+import {repairSurfaceNormals} from './surface-normals.mjs';
 
 const design=path.dirname(root);
 const read=async p=>JSON.parse(await fs.readFile(path.join(design,p),'utf8'));
@@ -60,7 +61,7 @@ async function make(look,index){
     ['JOINTS_0','VEC4',new Uint16Array(joints)],['WEIGHTS_0','VEC4',new Float32Array(weights)]])prim.setAttribute(semantic,acc(doc,semantic,type,array));
   prim.setIndices(acc(doc,'Guard triangles','SCALAR',new Uint32Array(indices)));
   for(const animation of [...doc.getRoot().listAnimations()]){
-    if(animation.getName()==='run')animation.setName('patrol');else animation.dispose();
+    if(animation.getName()==='run')animation.setName('patrol');else discardAnimation(animation);
   }
   const actor=doc.getRoot().listNodes().find(n=>n.getMesh());actor.setName('Guard');
   actor.setExtras({fictional:true,role:id,units:'meters',heightMeters:1.36,canonicalSkeleton:'motion2 / 18',
@@ -108,11 +109,13 @@ async function make(look,index){
     }
   }
   const atlasId=id;await paletteAtlas(doc,atlasId);
-  await doc.transform(weld(),dedup(),prune(),draco({method:'edgebreaker',encodeSpeed:5,decodeSpeed:5,quantizePosition:14,quantizeNormal:10,quantizeTexcoord:12}));
+  await doc.transform(weld(),dedup(),resample({tolerance:1e-5}),prune());
+  const repairedNormals=repairSurfaceNormals(doc);
+  await doc.transform(weld(),dedup(),prune(),draco({method:'edgebreaker',encodeSpeed:5,decodeSpeed:5,quantizePosition:16,quantizeNormal:12,quantizeTexcoord:12}));
   await io.write(path.join(out,id+'.glb'),doc);
   // Far guards become rigid instanced crowd silhouettes. Close guards stay skinned.
   // A separate low-poly crowd model supplies the distant alternative.
-  report.push({id,bytes:(await fs.stat(path.join(out,id+'.glb'))).size,triangles:prim.getIndices().getCount()/3,joints:doc.getRoot().listSkins()[0].listJoints().map(j=>j.getName()),animations:doc.getRoot().listAnimations().map(a=>a.getName()),atlas:atlasId+'-atlas.png'});
+  report.push({id,bytes:(await fs.stat(path.join(out,id+'.glb'))).size,triangles:prim.getIndices().getCount()/3,repairedNormals,joints:doc.getRoot().listSkins()[0].listJoints().map(j=>j.getName()),animations:doc.getRoot().listAnimations().map(a=>a.getName()),atlas:atlasId+'-atlas.png'});
   console.log(id,report.at(-1).triangles);
 }
 for(const [i,look]of ['quiff','curls','knot'].entries())await make(look,i);

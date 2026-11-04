@@ -13,7 +13,7 @@ function rivet(a,p,lod){if(!lod)a.sphere(p,[.028,.028,.028],'gold',8,4);}
 function window(a,p,scale=[.1,.08,.055],lod=0){a.sphere(p,scale,'glass',lod?10:16,lod?5:8,'emission');}
 
 function scout(lod){
-  const a=new Art('alien-scout'),n=lod?20:40;
+  const a=new Art('alien-scout',lod),n=lod?20:40;
   a.sphere([0,0,0],[1.1,.24,1.1],'teal',n,lod?8:16);
   a.sphere([0,.08,0],[.97,.22,.97],'cream',n,lod?8:12);
   a.sphere([0,.3,0],[.58,.4,.58],'mint',n,lod?8:16);
@@ -28,7 +28,7 @@ function scout(lod){
   return a.anchor('fire',[0,-.42,0]).anchor('hit',[0,.2,0]);
 }
 function manta(lod){
-  const a=new Art('alien-manta'),seg=lod?16:28;
+  const a=new Art('alien-manta',lod),seg=lod?16:28;
   a.sphere([0,.06,.12],[.40,.28,1.18],'lavender',seg,lod?8:12);
   a.fin([[0,-1.02],[.30,-.63],[1.60,.37],[1.72,.76],[.94,.55],[.38,.16],[0,.42]],.15,'cream');
   a.fin([[0,-1.02],[-.30,-.63],[-1.60,.37],[-1.72,.76],[-.94,.55],[-.38,.16],[0,.42]],.15,'cream');
@@ -42,7 +42,7 @@ function manta(lod){
   return a.anchor('fire_left',[.34,.07,1.35]).anchor('fire_right',[-.34,.07,1.35]).anchor('hit',[0,.2,.2]);
 }
 function bomber(lod){
-  const a=new Art('alien-beetle'),n=lod?16:28;
+  const a=new Art('alien-beetle',lod),n=lod?16:28;
   a.sphere([0,0,0],[.88,.41,1.05],'dark',n,12);
   for(const s of [-1,1]){
     a.sphere([s*.42,.21,0],[.45,.32,.97],'coral',n,12);
@@ -57,7 +57,7 @@ function bomber(lod){
   return a.anchor('bomb',[0,-.5,.1]).anchor('hit',[0,.2,0]);
 }
 function carrier(lod){
-  const a=new Art('alien-carrier'),n=lod?28:56;
+  const a=new Art('alien-carrier',lod),n=lod?28:56;
   a.ring([0,0,0],1.06,.26,'lavender',[Math.PI/2,0,0],n);
   a.ring([0,.13,0],1.08,.17,'cream',[Math.PI/2,0,0],n);
   a.ring([0,-.08,0],1.06,.055,'gold',[Math.PI/2,0,0],n);
@@ -72,7 +72,7 @@ function carrier(lod){
   return a.anchor('deploy',[0,-.45,0]).anchor('hit',[0,.3,0]);
 }
 function harvester(lod){
-  const a=new Art('alien-harvester'),n=lod?16:28;
+  const a=new Art('alien-harvester',lod),n=lod?16:28;
   a.sphere([0,.04,0],[.62,.43,.62],'teal',n,12);a.sphere([0,.26,0],[.45,.37,.45],'cream',n,12);
   a.sphere([0,.36,.3],[.23,.20,.23],'gold',n,10,'emission');
   for(let i=0;i<3;i++){const t=i/3*Math.PI*2,dir=(r,y)=>[Math.sin(t)*r,y,Math.cos(t)*r];
@@ -85,7 +85,7 @@ function harvester(lod){
   return a.anchor('tractor',[0,-.5,0]).anchor('hit',[0,.22,0]);
 }
 function boss(lod){
-  const a=new Art('alien-boss'),n=lod?28:56;
+  const a=new Art('alien-boss',lod),n=lod?28:56;
   a.sphere([0,0,0],[1.64,.42,1.64],'purple',n,16);
   a.ring([0,.15,0],1.63,.16,'cream',[Math.PI/2,0,0],n);
   a.ring([0,-.10,0],1.48,.075,'gold',[Math.PI/2,0,0],n);
@@ -104,7 +104,7 @@ function boss(lod){
   return a.anchor('beam',[0,-.65,0]).anchor('hit',[0,.4,0]);
 }
 function plane(lod){
-  const a=new Art('defender-plane'),n=lod?16:32;
+  const a=new Art('defender-plane',lod),n=lod?16:32;
   a.sphere([0,0,0],[.26,.27,1.17],'cream',n,12);
   a.fin([[-.12,-.72],[-.53,-.48],[-1.36,.22],[-1.44,.44],[-.50,.22],[-.15,.11]],.10,'teal');
   a.fin([[.12,-.72],[.53,-.48],[1.36,.22],[1.44,.44],[.50,.22],[.15,.11]],.10,'teal');
@@ -124,7 +124,7 @@ function plane(lod){
 }
 
 function boar(kind,lod){
-  const id=['boar-amber','boar-ash','boar-striped'][kind],a=new Art(id),n=lod?12:24,small=kind===2,skin=['brown','ash','piglet'][kind];
+  const id=['boar-amber','boar-ash','boar-striped'][kind],a=new Art(id,lod),n=lod?12:24,small=kind===2,skin=['brown','ash','piglet'][kind];
   const bulk=kind===1?1.12:1;
   a.sphere([0,.70,0],[.38*bulk,.42*bulk,.63],skin,n,lod?6:12);
   a.sphere([0,.78,.49],[.33,.34,.42],skin,n,12);
@@ -133,8 +133,8 @@ function boar(kind,lod){
   for(const s of [-1,1]){
     a.sphere([s*.075,.68,1.04],[.035,.025,.016],'eye',10,6);
     a.sphere([s*.267,.84,.68],[.070,.075,.056],'cream',12,8);
-    a.sphere([s*.282,.85,.708],[.034,.040,.022],'eye',12,8);
-    if(!lod)a.sphere([s*.289,.865,.723],[.009,.011,.007],'white',8,4);
+    a.sphere([s*.323,.85,.720],[.034,.040,.022],'eye',12,8);
+    if(!lod)a.sphere([s*.344,.868,.734],[.009,.011,.007],'white',8,4);
     a.tube([[s*.24,.96,.47],[s*.35,1.20,.40],[s*.36,1.22,.55],[s*.21,1.02,.58]], [.13,.05,.023,.06],skin,10);
     a.tube([[s*.25,1.02,.51],[s*.31,1.14,.46],[s*.32,1.15,.54]], [.06,.035,.009],'coral',8);
     if(!small)a.tube([[s*.21,.56,.83],[s*.30,.56,.91],[s*.34,.66,.94],[s*.33,.76,.94]], [.065,.055,.035,.003],'white',12);
@@ -142,7 +142,7 @@ function boar(kind,lod){
       const group=g+(s>0?'_left':'_right');
       a.pivot(group,[s*.24,.58,z]);
       a.tube([[s*.24,.58,z],[s*.25,.30,z+.03],[s*.26,.12,z+.07]], [.13,.10,.085],skin,10,group);
-      a.box([s*.26,.105,z+.11],[.18,.17,.24],'dark',.035,group);
+      a.box([s*.26,.085,z+.11],[.18,.17,.24],'dark',.035,group);
       if(!lod)a.tube([[s*.26,.10,z+.235],[s*.26,.18,z+.235]],.008,'sand',6,group);
     }
   }
@@ -156,30 +156,40 @@ function boar(kind,lod){
     }
   }else for(let i=0;i<5;i++)a.tube([[0,1.07,-.45+i*.16],[0,1.17,-.40+i*.16]], [.045,.002],'wood',6);
   a.anchor('hit',[0,.7,.1]).anchor('ground',[0,0,0]).anchor('nose',[0,.66,1.05]);
-  const times=[0,.2,.4,.6,.8],channels=[];
+  const times=Array.from({length:9},(_,i)=>i*.1),channels=[];
   for(const g of ['front_left','front_right','back_left','back_right']){
     const sign=['front_left','back_right'].includes(g)?1:-1;
-    channels.push({node:g,path:'rotation',values:[0,1,0,-1,0].flatMap(v=>q([v*sign*.17,0,0]))});
+    const angles=times.map(t=>Math.sin(t/.8*Math.PI*2)*sign*.17),pivot=a.pivots.get(g);
+    channels.push({node:g,path:'rotation',values:angles.flatMap(v=>q([v,0,0]))});
+    const positions=angles.flatMap(angle=>{
+      let min=Infinity;
+      for(const part of a.parts.filter(p=>p.group===g)){
+        const p=part.geo.attributes.position;
+        for(let i=0;i<p.count;i++)min=Math.min(min,pivot[1]+Math.cos(angle)*(p.getY(i)-pivot[1])-Math.sin(angle)*(p.getZ(i)-pivot[2]));
+      }
+      return [pivot[0],pivot[1]+Math.max(0,-min),pivot[2]];
+    });
+    channels.push({node:g,path:'translation',values:positions});
   }
   return {art:a,animation:{name:'trot',times,channels}};
 }
 
 function fence(lod){
-  const a=new Art('farm-fence');
+  const a=new Art('farm-fence',lod);
   for(const x of [-1,1]){a.box([x,.64,0],[.15,1.28,.18],'wood',lod?0:.025);a.box([x,1.27,0],[.21,.12,.24],'cream',lod?0:.025);}
   for(const y of [.42,.91])a.box([0,y,0],[2.1,.14,.13],'cream',lod?0:.02);
   if(!lod)for(const x of [-1,1])for(const y of [.42,.91])a.sphere([x,y,.078],[.026,.026,.013],'gold',8,4);
   return a.anchor('left',[-1,0,0]).anchor('right',[1,0,0]);
 }
 function gate(lod){
-  const a=new Art('farm-gate');for(const s of [-1,1]){a.box([s*1.2,.78,0],[.21,1.56,.23],'wood',.03);a.box([s*1.2,1.57,0],[.28,.12,.3],'cream',.03);}
+  const a=new Art('farm-gate',lod);for(const s of [-1,1]){a.box([s*1.2,.78,0],[.21,1.56,.23],'wood',.03);a.box([s*1.2,1.57,0],[.28,.12,.3],'cream',.03);}
   for(const y of [.3,.7,1.1])a.box([0,y,0],[2.16,.12,.12],'cream',.025);
   a.tube([[-1.04,.3,0],[1.04,1.1,0]],.055,'wood',10);
   a.box([.91,.77,.11],[.18,.18,.10],'gold',.025);
   return a.anchor('hinge',[-1.2,0,0]).anchor('latch',[1.2,.77,0]);
 }
 function bell(lod){
-  const a=new Art('alarm-bell');
+  const a=new Art('alarm-bell',lod);
   for(const x of [-.43,.43])a.box([x,1.14,0],[.12,2.28,.13],'wood',.02);
   a.box([0,2.24,0],[1.08,.16,.18],'cream',.03);
   a.tube([[0,2.19,0],[0,1.95,0]],.025,'dark',8);
@@ -193,7 +203,7 @@ function bell(lod){
   return a.anchor('clapper',[0,1.55,0]).anchor('light',[.55,1.47,.02]);
 }
 function shelter(lod){
-  const a=new Art('farm-shelter');
+  const a=new Art('farm-shelter',lod);
   for(const x of [-1.45,1.45])for(const z of [-.96,.96])a.box([x,1.12,z],[.15,2.24,.15],'wood',.02);
   a.box([0,.72,-.96],[2.9,1.4,.12],'cream',.04);
   for(let i=0;i<9;i++)a.box([-1.3+i*.325,.72,-.88],[.24,1.32,.045],i%2?'cream':'sand',.02);
@@ -206,7 +216,7 @@ function shelter(lod){
   return a.anchor('door',[0,0,1.2]).anchor('roof',[0,2.7,0]);
 }
 function watch(lod){
-  const a=new Art('guard-station');
+  const a=new Art('guard-station',lod);
   a.box([0,.12,0],[1.8,.24,1.8],'sand',.07);
   for(const x of [-.67,.67])for(const z of [-.67,.67])a.box([x,1.12,z],[.15,2.24,.15],'wood',.025);
   a.box([0,2.26,0],[1.9,.18,1.9],'teal',.06);
@@ -220,7 +230,7 @@ function watch(lod){
   return a.anchor('guard',[0,0,.9]).anchor('lamp',[.85,2.6,0]);
 }
 function palm(lod){
-  const a=new Art('island-palm'),n=lod?8:12;
+  const a=new Art('island-palm',lod),n=lod?8:12;
   a.tube([[0,0,0],[.06,.9,.02],[.17,1.8,0],[.26,2.65,.05]],[.18,.15,.12,.10],'wood',n);
   if(!lod)for(let i=0;i<10;i++)a.ring([.02+i*.023,.24+i*.24,.02],.168-i*.006,.022,'sand',[Math.PI/2,0,0],12);
   for(let i=0;i<(lod?6:8);i++){
@@ -232,12 +242,12 @@ function palm(lod){
   return a;
 }
 function cloud(lod){
-  const a=new Art('island-cloud');
+  const a=new Art('island-cloud',lod);
   for(const [x,y,z,s]of [[-.8,0,0,.55],[-.25,.2,.1,.7],[.42,.05,0,.72],[.94,-.10,0,.46]])a.sphere([x,y,z],[s,s*.6,s*.7],'white',lod?12:20,lod?6:10);
   return a;
 }
 function planet(kind,lod){
-  const a=new Art(kind?'planet-ring':'planet-moon'),n=lod?20:40;
+  const a=new Art(kind?'planet-ring':'planet-moon',lod),n=lod?20:40;
   a.sphere([0,0,0],[1,1,1],kind?'coral':'lavender',n,lod?12:24);
   if(kind){a.ring([0,0,0],1.65,.06,'sand',[1.15,0,.2],lod?32:64);a.ring([0,0,0],1.45,.025,'cream',[1.15,0,.2],lod?32:64);}
   else for(const [x,y,z,s]of [[-.38,.35,.83,.17],[.33,-.4,.83,.24],[.45,.52,.65,.14],[-.23,-.3,.92,.10]])a.sphere([x,y,z],[s,s,s*.16],'purple',lod?12:20,8);

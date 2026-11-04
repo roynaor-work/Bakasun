@@ -23,4 +23,4 @@ export const catalog=[
   {id:'planet-moon',name:'ירח לבנדר',family:'חלל',color:'#9D96BF',description:'משטח לבנדר ומכתשים סגולים.'}
 ];
 export const ids=catalog.map(x=>x.id);
-export const lodIds=new Set(ids);
+export const lodIds=new Set([...ids,'crop-patch','hay-bale','farm-trough']);

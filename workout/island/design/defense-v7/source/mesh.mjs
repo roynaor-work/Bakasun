@@ -6,7 +6,7 @@ import * as T from '../vendor/three.module.js';
 const require=createRequire(process.env.DEFENSE_TOOLS || '/tmp/defense-v7-tools/package.json');
 export const {Document,NodeIO}=require('@gltf-transform/core');
 export const {ALL_EXTENSIONS}=require('@gltf-transform/extensions');
-export const {draco,weld,simplify,prune,dedup}=require('@gltf-transform/functions');
+export const {draco,weld,simplify,prune,dedup,resample}=require('@gltf-transform/functions');
 export const codec=require('draco3dgltf');
 export {T,fs,path};
 export const root=path.resolve(import.meta.dirname,'..');
@@ -21,9 +21,14 @@ export const P={cream:'#F1E6CE',white:'#FFF8E9',teal:'#318E88',mint:'#A3D9BD',da
   ash:'#697176',piglet:'#AE835B',eye:'#162C36',glass:'#7DDCD3',red:'#CB655B'};
 export const rgb=x=>new T.Color(P[x]||x);
 export const acc=(doc,name,type,array)=>doc.createAccessor(name).setType(type).setArray(array).setBuffer(doc.getRoot().listBuffers()[0]);
+export function discardAnimation(animation){
+  for(const channel of [...animation.listChannels()])channel.dispose();
+  for(const sampler of [...animation.listSamplers()])sampler.dispose();
+  animation.dispose();
+}
 
 export class Art {
-  constructor(id){this.id=id;this.parts=[];this.anchors={};this.groups=new Map();this.pivots=new Map();}
+  constructor(id,lod=0){this.id=id;this.lowDetail=!!lod;this.parts=[];this.anchors={};this.groups=new Map();this.pivots=new Map();}
   add(g,color='cream',position=[0,0,0],rotation=[0,0,0],scale=[1,1,1],group='shell',glow=false){
     const geo=g.index?g.toNonIndexed():g.clone();
     geo.applyMatrix4(new T.Matrix4().compose(new T.Vector3(...position),new T.Quaternion().setFromEuler(new T.Euler(...rotation)),new T.Vector3(...scale)));
@@ -34,10 +39,11 @@ export class Art {
       colors.push(c.r*shade,c.g*shade,c.b*shade);
     }
     geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));
-    this.parts.push({geo,group,glow});g.dispose();return this;
+    this.parts.push({geo,group,glow,baseColor:c.toArray()});g.dispose();return this;
   }
   sphere(p,s,color,seg=24,rings=12,group='shell'){return this.add(new T.SphereGeometry(1,seg,rings),color,p,[0,0,0],s,group);}
   box(p,s,color,bevel=.05,group='shell'){
+    if(this.lowDetail)bevel=0;
     if(bevel<=0)return this.add(new T.BoxGeometry(...s),color,p,[0,0,0],[1,1,1],group);
     // Explicit bevelled solid, no runtime primitive construction for delivered art.
     const shape=new T.Shape();const [w,h,d]=s,r=Math.min(bevel,w/2,h/2,d/2);
@@ -46,7 +52,9 @@ export class Art {
     shape.lineTo(x+w,y+h-r);shape.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
     shape.lineTo(x+r,y+h);shape.quadraticCurveTo(x,y+h,x,y+h-r);shape.lineTo(x,y+r);shape.quadraticCurveTo(x,y,x+r,y);
     const g=new T.ExtrudeGeometry(shape,{depth:Math.max(.001,d-2*r),bevelEnabled:r>0,bevelSize:r*.42,bevelThickness:r,bevelSegments:2,steps:1,curveSegments:3});
-    g.translate(0,0,-d/2+r);return this.add(g,color,p,[0,0,0],[1,1,1],group);
+    g.translate(0,0,-d/2+r);g.computeBoundingBox();
+    const actual=g.boundingBox.getSize(new T.Vector3());g.scale(w/actual.x,h/actual.y,d/actual.z);
+    return this.add(g,color,p,[0,0,0],[1,1,1],group);
   }
   tube(points,radii,color,segments=10,group='shell'){
     const positions=[],normals=[],uvs=[];const rings=points.length;
@@ -60,8 +68,8 @@ export class Art {
       }
     }
     const indices=[];
-    for(let i=0;i<rings-1;i++)for(let j=0;j<segments;j++){const a=i*segments+j,b=i*segments+(j+1)%segments,c=a+segments,d=b+segments;indices.push(a,c,b,b,c,d);}
-    for(let j=1;j<segments-1;j++){indices.push(0,j,j+1);const o=(rings-1)*segments;indices.push(o,o+j+1,o+j);}
+    for(let i=0;i<rings-1;i++)for(let j=0;j<segments;j++){const a=i*segments+j,b=i*segments+(j+1)%segments,c=a+segments,d=b+segments;indices.push(a,b,c,b,d,c);}
+    for(let j=1;j<segments-1;j++){indices.push(0,j+1,j);const o=(rings-1)*segments;indices.push(o,o+j,o+j+1);}
     const g=new T.BufferGeometry().setAttribute('position',new T.Float32BufferAttribute(positions,3)).setAttribute('normal',new T.Float32BufferAttribute(normals,3)).setAttribute('uv',new T.Float32BufferAttribute(uvs,2)).setIndex(indices);
     return this.add(g,color,[0,0,0],[0,0,0],[1,1,1],group);
   }
@@ -76,17 +84,17 @@ export class Art {
   }
   anchor(name,p){this.anchors[name]=p;return this;}
   pivot(name,p){this.pivots.set(name,p);return this;}
-  async write({lod=0,texture=false,animations=[]}={}){
+  async write({lod=0,texture=false,animations=[],mergeStaticGroups=false}={}){
     const doc=new Document();doc.createBuffer();const scene=doc.createScene(this.id),rootNode=doc.createNode('asset_root');scene.addChild(rootNode);
     const standard=doc.createMaterial('Island painted enamel').setRoughnessFactor(.8).setMetallicFactor(0);
     const glow=doc.createMaterial('Luminous details').setRoughnessFactor(.5).setEmissiveFactor([.28,.45,.37]);
     const groups=new Map();let total=0;
-    for(const part of this.parts){const key=part.group+(part.glow?'-glow':'');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(part);}
+    for(const part of this.parts){const group=mergeStaticGroups&&!this.pivots.has(part.group)?'shell':part.group;const key=group+(part.glow?'-glow':'');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(part);}
     for(const [name,parts]of groups){
       const attributes={POSITION:[],NORMAL:[],COLOR_0:[]};
       const pivot=this.pivots.get(name)||[0,0,0];
-      for(const {geo}of parts)for(const [a,b]of [['POSITION','position'],['NORMAL','normal'],['COLOR_0','color']]){
-        const values=Array.from(geo.attributes[b].array);
+      for(const {geo,baseColor}of parts)for(const [a,b]of [['POSITION','position'],['NORMAL','normal'],['COLOR_0','color']]){
+        const values=a==='COLOR_0'&&texture?Array.from({length:geo.attributes.position.count*3},(_,i)=>baseColor[i%3]):Array.from(geo.attributes[b].array);
         if(a==='POSITION')for(let i=0;i<values.length;i++)values[i]-=pivot[i%3];
         attributes[a].push(...values);
       }
@@ -107,9 +115,9 @@ export class Art {
         animation.addChannel(doc.createAnimationChannel().setTargetNode(node).setTargetPath(c.path).setSampler(sampler)).addSampler(sampler);
       }
     }
-    await doc.transform(weld(),dedup(),prune());
+    await doc.transform(weld(),dedup(),prune({keepLeaves:true}));
     if(texture)await paletteAtlas(doc,this.id+(lod?'-lod'+lod:''));
-    await doc.transform(draco({method:'edgebreaker',encodeSpeed:5,decodeSpeed:5,quantizePosition:14,quantizeNormal:10,quantizeColor:8,quantizeTexcoord:12}));
+    await doc.transform(prune({keepLeaves:true}),draco({method:'edgebreaker',encodeSpeed:5,decodeSpeed:5,quantizePosition:14,quantizeNormal:10,quantizeColor:8,quantizeTexcoord:12}));
     const filename=this.id+(lod?'-lod'+lod:'')+'.glb';await io.write(path.join(out,filename),doc);
     return {id:this.id,lod,filename,triangles:total,bytes:(await fs.stat(path.join(out,filename))).size,groups:[...groups.keys()]};
   }

@@ -22,7 +22,7 @@ export class DefenseEffects {
     this.lasers=[0,1].map(()=>mesh(new T.CylinderGeometry(.018,.018,1,6),this.laserMaterial));
     this.atlas=atlas?.clone();
     if(this.atlas){this.atlas.repeat.set(.25,.25);this.atlas.generateMipmaps=false;this.atlas.minFilter=T.LinearFilter;this.atlas.magFilter=T.LinearFilter;
-      this.spriteMaterial=new T.SpriteMaterial({map:this.atlas,transparent:true,depthWrite:false,toneMapped:false,opacity:0});this.materials.push(this.spriteMaterial);
+      this.spriteMaterial=new T.SpriteMaterial({map:this.atlas,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,opacity:0});this.materials.push(this.spriteMaterial);
       this.sprite=new T.Sprite(this.spriteMaterial);this.root.add(this.sprite);
     }
     this.root.visible=false;
@@ -54,7 +54,7 @@ export class DefenseEffects {
     this.embers.instanceMatrix.needsUpdate=true;
     if(this.sprite){
       const frame=Math.min(15,Math.floor(u*16));this.atlas.offset.set((frame%4)/4,1-(Math.floor(frame/4)+1)/4);
-      this.sprite.scale.setScalar(.35+u*2.3);this.sprite.position.y=.12;this.spriteMaterial.opacity=(1-u)*.9;
+      this.sprite.scale.setScalar(.45+u*3.1);this.sprite.position.y=.25;this.spriteMaterial.opacity=(1-u)*.9;
     }
   }
   reset(){this.age=99;this.root.visible=false;}
