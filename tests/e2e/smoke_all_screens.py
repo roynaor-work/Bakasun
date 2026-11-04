@@ -12,9 +12,11 @@ async def main():
             await seed(pg)
             st = json.loads(await pg.evaluate("localStorage['bakasun.v1']")); cid = st['cases'][0]['id']
             for lang in ['he', 'fr', 'en']:
-                await pg.evaluate(f"(()=>{{const s=JSON.parse(localStorage['bakasun.v1']); s.settings.uiLang='{lang}'; localStorage['bakasun.v1']=JSON.stringify(s);}})()")
+                await pg.evaluate(f"(()=>{{const s=JSON.parse(localStorage['bakasun.v1']); s.settings.lang='{lang}'; localStorage['bakasun.v1']=JSON.stringify(s);}})()")
                 for r in ROUTES + [f'#/case/{cid}', f'#/runsheet/{cid}/live', f'#/participants/{cid}', f'#/files/{cid}', f'#/budget/{cid}', f'#/runsheet/{cid}']:
                     await pg.goto('http://localhost:8765/' + r); await pg.wait_for_timeout(350)
+                    got = await pg.evaluate('document.documentElement.lang')
+                    if got != lang: errs.append(f'lang {label} {r}: wanted {lang}, got {got}')
                     if await pg.evaluate("document.documentElement.scrollWidth > document.documentElement.clientWidth + 2"): errs.append(f'hscroll {label} {lang} {r}')
                     if r == f'#/case/{cid}':
                         for tab in TABS:
