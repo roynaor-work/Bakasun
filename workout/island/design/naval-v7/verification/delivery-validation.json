@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-04T23:22:34.136017+00:00",
+  "checkedAt": "2026-11-04T23:24:16.728143+00:00",
   "sourceSha256": "3fb26ea164c2d51cf5b376019c928f4da19cb99f026e1e43c2b512bcc66510bd",
   "pass": true,
   "scopePass": true,
-  "publicationPass": false,
+  "publicationPass": true,
   "pending": [],
   "rounds": 10,
   "mandatoryImages": 40,
@@ -930,8 +930,8 @@
       "check": "Only added files inside requested folder",
       "pass": true,
       "details": {
-        "trackedChanges": 299,
-        "untrackedFiles": 2,
+        "trackedChanges": 301,
+        "untrackedFiles": 1,
         "unexpectedTracked": [],
         "unexpectedUntracked": []
       }
@@ -945,6 +945,35 @@
       "check": "Authored source has no credential/phone-pattern literals",
       "pass": true,
       "details": []
+    },
+    {
+      "check": "Draft PR recorded without merge",
+      "pass": true,
+      "details": {
+        "schemaVersion": 1,
+        "prNumber": 273,
+        "prUrl": "https://github.com/roynaor-work/Bakasun/pull/273",
+        "draft": true,
+        "merged": false,
+        "branch": "codex/naval-v7-20261105",
+        "base": "main",
+        "baseCommit": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+        "packageCommit": "a9049d5424fb7b8c15a865cc561217c4943c981e",
+        "runtimeSha256": "3fb26ea164c2d51cf5b376019c928f4da19cb99f026e1e43c2b512bcc66510bd",
+        "completedAt": "2026-11-04T23:24:15.870645+00:00"
+      }
+    },
+    {
+      "check": "At least three elapsed hours of documented work",
+      "pass": true,
+      "details": {
+        "hours": 3.236075179166667
+      }
+    },
+    {
+      "check": "Every final self-score is at least 8",
+      "pass": true,
+      "details": null
     }
   ]
 }
