@@ -123,17 +123,32 @@ export function createUltraSoccerStadium(scene,config,track){
   pitchMaterial.customProgramCacheKey=()=> 'soccer-turf-world-mowing-v1';
   const pitch=new T.Mesh(track(new T.PlaneGeometry(config.pitch.length,config.pitch.width)),pitchMaterial);pitch.rotation.x=-Math.PI/2;pitch.receiveShadow=true;scene.add(pitch);
   const loader=new T.TextureLoader(),maps=[];
-  const ready=Promise.all(['turf-albedo-1k.jpg','turf-normal-gl-1k.jpg'].map(file=>loader.loadAsync(new URL('../assets/soccer-realism/'+file,import.meta.url).href).then(texture=>{
+  // Turf maps: the lightweight 512px v4 set (4 m tile, 113 KB) first; if either
+  // file fails, the previous 1k ambientCG pair (2 m tile, 835 KB) takes over.
+  const TURF_SETS=[
+    {id:'v4',files:['turf-color-512.jpg','turf-normal-512.jpg'],base:'../assets/soccer-v4/',tile:4,tint:'#c9d8c4'},
+    {id:'1k',files:['turf-albedo-1k.jpg','turf-normal-gl-1k.jpg'],base:'../assets/soccer-realism/',tile:2,tint:'#b5d2b7'}
+  ];
+  let turfSet=null;
+  const loadTurf=async set=>{
+    const textures=await Promise.all(set.files.map(file=>loader.loadAsync(new URL(set.base+file,import.meta.url).href)));
     // An exited session must never upload a late texture to a disposed renderer.
-    if(disposed){texture.dispose();return null;}maps.push(texture);track(texture);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(config.pitch.length/2,config.pitch.width/2);texture.anisotropy=8;return texture;
-  }))).then(([albedo,normal])=>{
-    if(disposed)return;if(!albedo||!normal)return;
-    albedo.colorSpace=T.SRGBColorSpace;normal.colorSpace=T.NoColorSpace;
-    pitchMaterial.map=albedo;pitchMaterial.normalMap=normal;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);pitchMaterial.color.set('#b5d2b7');pitchMaterial.needsUpdate=true;turfStatus='ready';
-  }).catch(()=>{if(!disposed)turfStatus='fallback';});
+    if(disposed){textures.forEach(texture=>texture.dispose());return null;}
+    for(const texture of textures){maps.push(texture);track(texture);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(config.pitch.length/set.tile,config.pitch.width/set.tile);texture.anisotropy=8;}
+    return textures;
+  };
+  const ready=(async()=>{
+    let textures=null;
+    for(const set of TURF_SETS){
+      try{textures=await loadTurf(set);if(textures){turfSet=set;break;}if(disposed)return;}catch{if(disposed)return;}
+    }
+    if(!textures)throw Error('soccer turf maps unavailable');
+    const [albedo,normal]=textures;albedo.colorSpace=T.SRGBColorSpace;normal.colorSpace=T.NoColorSpace;
+    pitchMaterial.map=albedo;pitchMaterial.normalMap=normal;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);pitchMaterial.color.set(turfSet.tint);pitchMaterial.needsUpdate=true;turfStatus='ready';
+  })().catch(()=>{if(!disposed)turfStatus='fallback';});
   // Gradient contact-shadow texture shared by all eight original characters.
   const shadowBytes=new Uint8Array(64*64*4);
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){const r=Math.hypot((x-31.5)/31.5,(y-31.5)/31.5),at=(y*64+x)*4;shadowBytes[at]=12;shadowBytes[at+1]=27;shadowBytes[at+2]=21;shadowBytes[at+3]=Math.round(Math.max(0,1-r)**2*210);}
   const shadowMap=track(new T.DataTexture(shadowBytes,64,64));shadowMap.needsUpdate=true;
-  return {shadowMap,ready,finishCount:batches.size,identity:'The Island Ground',metrics:()=>({turfStatus,turfMaps:maps.length}),setQuality(level){quality=level;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);},update(direction){for(const {mesh,side}of roofs)mesh.visible=side!==direction;},dispose(){disposed=true;}};
+  return {shadowMap,ready,finishCount:batches.size,identity:'The Island Ground',metrics:()=>({turfStatus,turfMaps:maps.length,turfSet:turfSet?.id||null}),setQuality(level){quality=level;pitchMaterial.normalScale.setScalar(quality>=2?.12:.28);},update(direction){for(const {mesh,side}of roofs)mesh.visible=side!==direction;},dispose(){disposed=true;}};
 }
