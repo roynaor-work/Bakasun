@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <meta name="description" content="12 הדגמות תרגילים מצוירות עם דמות האימון הסגולה. לולאות SVG עצמאיות, קלות וחלקות.">
+  <title>ככה עושים את זה — האימון שלי</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%238b5cf6'/%3E%3Cpath d='M16 14h17L23 36' fill='none' stroke='%23fff8ed' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="catalog.js" defer></script>
+  <script src="gallery.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#exercises">דלגו לתרגילים</a>
+  <div class="page">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="האימון שלי — דף הבית של ההדגמות"><span class="brand-mark" aria-hidden="true">7</span><span>האימון שלי<span class="brand-sub">ספריית התנועה</span></span></a>
+      <span class="edition"><span class="status-dot" aria-hidden="true"></span>מצויר. ברור. בתנועה.</span>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">לומדים לזוז, תרגיל אחרי תרגיל</p>
+          <h1 id="page-title">ככה עושים <span>את זה.</span></h1>
+          <p class="intro-copy">12 תרגילים מוכרים, עם חבר אחד בסגול.<br>מסתכלים על התנועה, ואז מצטרפים.</p>
+        </div>
+        <div class="intro-stamp" aria-label="12 הדגמות בתנועה רציפה">
+          <svg viewBox="0 0 80 64" aria-hidden="true"><path d="M17 37a24 24 0 0 1 42-18M63 27A24 24 0 0 1 21 45"/><path d="m49 19 12 1-1-12M31 45l-12-1 1 12"/></svg>
+          <strong>פשוט להיכנס לקצב</strong><span>כל תרגיל בלולאה רציפה</span>
+        </div>
+      </section>
+      <section class="library" aria-label="ספריית ההדגמות">
+        <div class="toolbar">
+          <nav id="filters" class="filters" aria-label="סינון לפי קבוצת תרגילים"></nav>
+          <div class="playback">
+            <button id="toggle-all" class="primary-button" type="button"></button>
+            <button id="restart-all" class="icon-button" type="button" title="התחלה מחדש של כל ההדגמות" aria-label="התחלה מחדש של כל ההדגמות"></button>
+          </div>
+        </div>
+        <p id="motion-note" class="motion-note" hidden>ההדגמות מושהות לפי הגדרת התנועה במכשיר. אפשר להפעיל אותן בלחיצה.</p>
+        <p id="results" class="results" role="status" aria-live="polite"></p>
+        <div id="exercises" class="exercise-grid" tabindex="-1"></div>
+        <noscript><p>להצגת הספרייה יש להפעיל JavaScript. אפשר לפתוח את <a href="animations/jumping-jacks.svg">הדגמת פתח־סגור</a> ישירות.</p></noscript>
+      </section>
+    </main>
+    <footer class="footer">
+      <p><span class="footer-dot" aria-hidden="true"></span>אותה דמות. 12 דרכים להתחזק.</p>
+      <p id="asset-summary" dir="ltr"></p>
+    </footer>
+  </div>
+  <dialog id="focus-dialog" aria-labelledby="focus-title">
+    <div class="dialog-heading"><div><p id="focus-category" class="eyebrow"></p><h2 id="focus-title"></h2></div><button id="close-dialog" class="icon-button" type="button" aria-label="סגירת התצוגה המוגדלת"></button></div>
+    <div id="focus-stage" class="focus-stage"></div>
+    <div class="timeline"><button id="focus-toggle" class="icon-button" type="button"></button><label class="visually-hidden" for="seek">מיקום לאורך התנועה</label><input id="seek" type="range" min="0" max="1000" value="0" step="1" dir="ltr"><output id="focus-time" dir="ltr"></output></div>
+    <div class="dialog-footer"><a id="focus-download" class="text-button" download>הורדת SVG</a><button id="copy-embed" class="text-button" type="button">העתקת קוד הטמעה</button><span id="copy-status" role="status" aria-live="polite"></span></div>
+  </dialog>
+</body>
+</html>

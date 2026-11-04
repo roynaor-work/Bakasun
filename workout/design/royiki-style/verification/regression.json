@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "045b60e4d0212755ff63d007fbed2cdaf13e7d93",
+  "fullSuite": {
+    "command": "npm test",
+    "testFiles": 247,
+    "passedInitially": 244,
+    "initialFailures": 3
+  },
+  "initialFailureCause": "The execution sandbox prevented local socket listen and synchronous child-process spawn (EPERM).",
+  "retry": {
+    "command": "node --test --test-reporter=tap tests/cam-lab-keyframes.test.mjs tests/island-browser-csp.test.mjs tests/workout-dad-test.test.mjs",
+    "permissions": "Local subprocess/socket permissions enabled by the execution approval system",
+    "subtests": 16,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 1,
+    "skipReason": "Existing opt-in ISLAND_CSP_BROWSER browser integration was not enabled."
+  },
+  "result": "All 247 test files passed across the initial suite and the focused permission-corrected retry. No application or existing test files were changed."
+}
