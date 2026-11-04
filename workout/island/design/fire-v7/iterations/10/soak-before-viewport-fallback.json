@@ -1,0 +1,784 @@
+{
+  "startedAt": "2026-11-04T21:58:54.646Z",
+  "requestedSecondsPerOrientation": 1800,
+  "browser": "151.0.7922.173",
+  "renderer": "SwiftShader CPU rendering; not a physical phone",
+  "runs": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "startedAt": "2026-11-04T21:58:59.751Z",
+      "heapStart": {
+        "usedSize": 8040320,
+        "totalSize": 8462336,
+        "embedderHeapUsedSize": 1014288,
+        "backingStorageSize": 19529843
+      },
+      "samples": [
+        {
+          "elapsedSeconds": 0,
+          "time": 0,
+          "frames": 3,
+          "triangles": 32240,
+          "drawCalls": 41,
+          "particles": 39,
+          "memory": {
+            "geometries": 44,
+            "textures": 25
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 39,
+          "burning": 1,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": null,
+          "heapBytes": 8447300
+        },
+        {
+          "elapsedSeconds": 10.085,
+          "time": 10,
+          "frames": 36,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 39,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 3.2721864154685174,
+          "heapBytes": 9224560
+        },
+        {
+          "elapsedSeconds": 20.12,
+          "time": 18.52949999999998,
+          "frames": 124,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 39,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 8.769307424015944,
+          "heapBytes": 10841920
+        },
+        {
+          "elapsedSeconds": 30.377,
+          "time": 35,
+          "frames": 235,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 39,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 10.821877742029836,
+          "heapBytes": 10439708
+        },
+        {
+          "elapsedSeconds": 40.409,
+          "time": 44.06659999999995,
+          "frames": 344,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 39,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 10.865231259968102,
+          "heapBytes": 10715664
+        },
+        {
+          "elapsedSeconds": 50.606,
+          "time": 53.489299999999886,
+          "frames": 466,
+          "triangles": 29906,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 41,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 11.964303226439146,
+          "heapBytes": 10893296
+        },
+        {
+          "elapsedSeconds": 60.625,
+          "time": 62.0491999999998,
+          "frames": 550,
+          "triangles": 30546,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 43,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 8.384070266493664,
+          "heapBytes": 11643584
+        },
+        {
+          "elapsedSeconds": 70.653,
+          "time": 65.12,
+          "frames": 657,
+          "triangles": 30574,
+          "drawCalls": 45,
+          "particles": 130,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 43,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 10.670123653769439,
+          "heapBytes": 10961280
+        },
+        {
+          "elapsedSeconds": 80.719,
+          "time": 75.09299999999989,
+          "frames": 825,
+          "triangles": 30098,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 45,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 16.689847009735765,
+          "heapBytes": 11119664
+        },
+        {
+          "elapsedSeconds": 90.791,
+          "time": 115.11670000000001,
+          "frames": 1011,
+          "triangles": 29478,
+          "drawCalls": 36,
+          "particles": 6,
+          "memory": {
+            "geometries": 42,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 0,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.467037331215245,
+          "heapBytes": 11131976
+        },
+        {
+          "elapsedSeconds": 100.942,
+          "time": 125.23299999999963,
+          "frames": 1237,
+          "triangles": 29478,
+          "drawCalls": 36,
+          "particles": 6,
+          "memory": {
+            "geometries": 42,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 0,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 22.263816372771164,
+          "heapBytes": 10627432
+        },
+        {
+          "elapsedSeconds": 111.045,
+          "time": 0,
+          "frames": 1440,
+          "triangles": 29298,
+          "drawCalls": 41,
+          "particles": 24,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 1,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 20.093041670790836,
+          "heapBytes": 10512740
+        },
+        {
+          "elapsedSeconds": 121.067,
+          "time": 0,
+          "frames": 1608,
+          "triangles": 29298,
+          "drawCalls": 41,
+          "particles": 24,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 1,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 16.7631211335063,
+          "heapBytes": 12069404
+        },
+        {
+          "elapsedSeconds": 131.089,
+          "time": 10,
+          "frames": 1788,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 17.960486928756726,
+          "heapBytes": 10967212
+        },
+        {
+          "elapsedSeconds": 141.108,
+          "time": 20.11640000000006,
+          "frames": 1982,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 19.363209901187734,
+          "heapBytes": 11254732
+        },
+        {
+          "elapsedSeconds": 151.201,
+          "time": 35,
+          "frames": 2201,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 21.698206677895595,
+          "heapBytes": 12037012
+        },
+        {
+          "elapsedSeconds": 161.213,
+          "time": 45.08289999999991,
+          "frames": 2415,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 21.37435077906512,
+          "heapBytes": 14020992
+        },
+        {
+          "elapsedSeconds": 171.311,
+          "time": 55.09919999999984,
+          "frames": 2601,
+          "triangles": 29906,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.419489007724277,
+          "heapBytes": 10725024
+        },
+        {
+          "elapsedSeconds": 181.343,
+          "time": 64.9987999999998,
+          "frames": 2762,
+          "triangles": 30522,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 16.048644338118052,
+          "heapBytes": 10890016
+        },
+        {
+          "elapsedSeconds": 191.349,
+          "time": 65,
+          "frames": 2949,
+          "triangles": 29906,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.688786727963222,
+          "heapBytes": 10428876
+        },
+        {
+          "elapsedSeconds": 201.383,
+          "time": 75.16629999999992,
+          "frames": 3117,
+          "triangles": 30074,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 16.7430735499302,
+          "heapBytes": 11869224
+        },
+        {
+          "elapsedSeconds": 211.477,
+          "time": 115,
+          "frames": 3316,
+          "triangles": 29478,
+          "drawCalls": 36,
+          "particles": 6,
+          "memory": {
+            "geometries": 42,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 0,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 19.714681989300587,
+          "heapBytes": 11389800
+        },
+        {
+          "elapsedSeconds": 221.509,
+          "time": 125.16959999999978,
+          "frames": 3513,
+          "triangles": 29478,
+          "drawCalls": 36,
+          "particles": 6,
+          "memory": {
+            "geometries": 42,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 0,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 19.63716108452954,
+          "heapBytes": 13183860
+        },
+        {
+          "elapsedSeconds": 231.62,
+          "time": 0,
+          "frames": 3696,
+          "triangles": 29298,
+          "drawCalls": 41,
+          "particles": 24,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 1,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.09909999010975,
+          "heapBytes": 10574312
+        },
+        {
+          "elapsedSeconds": 241.642,
+          "time": 0,
+          "frames": 3863,
+          "triangles": 29298,
+          "drawCalls": 41,
+          "particles": 24,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 1,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 16.663340650568763,
+          "heapBytes": 13567940
+        },
+        {
+          "elapsedSeconds": 251.665,
+          "time": 10,
+          "frames": 4051,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.756859223785302,
+          "heapBytes": 10376068
+        },
+        {
+          "elapsedSeconds": 261.699,
+          "time": 20.182900000000085,
+          "frames": 4268,
+          "triangles": 29350,
+          "drawCalls": 41,
+          "particles": 60,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 3,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 21.62647000199318,
+          "heapBytes": 12204580
+        },
+        {
+          "elapsedSeconds": 271.842,
+          "time": 35,
+          "frames": 4492,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 22.084195997239537,
+          "heapBytes": 13335824
+        },
+        {
+          "elapsedSeconds": 281.857,
+          "time": 45.09969999999998,
+          "frames": 4721,
+          "triangles": 29690,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 22.865701447828158,
+          "heapBytes": 12841700
+        },
+        {
+          "elapsedSeconds": 291.961,
+          "time": 55.14919999999991,
+          "frames": 4911,
+          "triangles": 29906,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 18.804433887569306,
+          "heapBytes": 13495196
+        },
+        {
+          "elapsedSeconds": 301.991,
+          "time": 64.98889999999993,
+          "frames": 5071,
+          "triangles": 30542,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 15.952143569292167,
+          "heapBytes": 11254772
+        },
+        {
+          "elapsedSeconds": 312.042,
+          "time": 65,
+          "frames": 5264,
+          "triangles": 29906,
+          "drawCalls": 41,
+          "particles": 96,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 5,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 19.20206944582631,
+          "heapBytes": 12091220
+        },
+        {
+          "elapsedSeconds": 322.073,
+          "time": 75.10289999999986,
+          "frames": 5442,
+          "triangles": 30094,
+          "drawCalls": 45,
+          "particles": 114,
+          "memory": {
+            "geometries": 44,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 4,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 17.744990529358976,
+          "heapBytes": 13507004
+        },
+        {
+          "elapsedSeconds": 332.179,
+          "time": 115,
+          "frames": 5667,
+          "triangles": 29478,
+          "drawCalls": 36,
+          "particles": 6,
+          "memory": {
+            "geometries": 42,
+            "textures": 30
+          },
+          "lod": {
+            "high": 0,
+            "low": 11
+          },
+          "loadedAssets": 51,
+          "burning": 0,
+          "horizontalOverflow": false,
+          "error": null,
+          "observedFps": 22.2640015832179,
+          "heapBytes": 12023636
+        }
+      ],
+      "cycles": 3,
+      "lastPhase": 9
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "sourceHashes": {
+    "preview.html": "b531aa17409d364e0fff44dd08bf277e9d97486315e9017b7483d46c685ad4ac",
+    "preview.css": "ed90fe403a3d818578d4327fe281557b220489941517baf216f53e1c0564a9fb",
+    "preview.js": "67018b7ba38743c9cc2c1f29706a68c7d938697513e9e2c6eeb062f14272f148",
+    "effects.js": "315450aa1f0481f5f098cb81b2a3e84c1f5a8e2d837ff2d2be43e27b2111bc34",
+    "simulation.js": "836b37801922f4c20303fdcbe96caf4c245cb066f1832eb9ab478fa9d0da1f86",
+    "manifest.json": "021d7baf9eaf54d5f6fdfaa2d39c1287ad9fc3622e90add70518a58086e5caed"
+  },
+  "interruptedFor": "Finalize dynamic mobile viewport height before the definitive run; JavaScript and assets remain unchanged."
+}

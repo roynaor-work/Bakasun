@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3,viewport-fit=cover">
+  <meta name="theme-color" content="#111c29">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' file:; style-src 'self' file:; img-src 'self' data: blob: file:; connect-src data: blob:; worker-src blob:; font-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>רחוב תחת אש · Fire v7</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main id="app">
+    <canvas id="scene" aria-label="סצנת כיבוי תלת־ממדית. גרירה מסובבת; צביטה מקרבת." tabindex="0"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="masthead">
+      <div class="identity"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 36"><path d="M17 2c2 8 11 12 11 21a12 12 0 0 1-24 0c0-5 3-8 6-12 0 6 2 7 3 7 3-3 5-8 4-16Z"/><path class="flame-core" d="M17 18c1 5 6 6 5 10a6 6 0 0 1-12-1c0-4 4-6 7-9Z"/></svg></span><div><p class="eyebrow">RESCUE DISTRICT <span>07</span></p><h1>רחוב תחת אש<span>.</span></h1></div></div>
+      <button id="info" class="icon-button" aria-label="מידע על התצוגה" title="מידע">i</button>
+    </header>
+    <aside class="scene-label" aria-live="polite"><span class="status-dot"></span><span id="scene-title">מבט מבצעי</span><span class="label-rule"></span><span id="scene-subtitle">חמישה מבנים · שלושה צוותים</span></aside>
+    <div class="view-controls" aria-label="מצלמה">
+      <button id="near" aria-pressed="true" title="מבט קרוב"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="5.5"/><path d="m14 14 6 6M10 7v6M7 10h6"/></svg><span>קרוב</span></button>
+      <button id="far" aria-pressed="false" title="מבט רחב"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg><span>רחב</span></button>
+      <button id="home" aria-label="איפוס מצלמה" title="איפוס מצלמה"><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 7M5 3v5h5"/></svg></button>
+    </div>
+    <div id="selection-label" class="selection-label" hidden></div>
+    <footer class="console">
+      <nav class="tabs" aria-label="תצוגות">
+        <button data-view="scene" aria-pressed="true">הרחוב <span>01</span></button>
+        <button data-view="fleet" aria-pressed="false">הרכבים <span>02</span></button>
+        <button data-view="crew" aria-pressed="false">הצוות <span>03</span></button>
+        <button data-view="buildings" aria-pressed="false">המבנים <span>04</span></button>
+        <button data-view="effects" aria-pressed="false">האפקטים <span>05</span></button>
+      </nav>
+      <div id="scene-panel" class="control-panel">
+        <div class="panel-top"><div class="incident"><span class="small-label">מוקדים פעילים</span><strong id="active-fires">1<span>/5</span></strong></div><div class="heat-block"><div><span>חום המבנה</span><strong id="heat-value">90%</strong></div><div class="meter"><i id="heat-bar"></i></div></div><button id="water" class="water-button" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 2C9 7 5 10 5 15a7 7 0 0 0 14 0c0-5-4-8-7-13Z"/><path d="M8 15c0 3 2 4 4 4"/></svg><span>הפעלת מים</span></button></div>
+        <div class="panel-bottom"><label class="select-label">יעד <select id="target" aria-label="מבנה לכיבוי"><option value="0">בית השורה</option><option value="1">החנות</option><option value="2" selected>המחסן</option><option value="3">בניין הדירות</option><option value="4">בית המלאכה</option></select></label><button id="spread" class="text-button" aria-pressed="true"><span class="toggle-dot"></span>התפשטות</button><button id="pause" class="text-button" aria-pressed="false">השהיה <span aria-hidden="true">Ⅱ</span></button><button id="reset" class="text-button" aria-label="איפוס השרפה">↺</button></div>
+      </div>
+      <div id="asset-panel" class="control-panel" hidden><div class="asset-controls"><button id="previous" class="icon-button" aria-label="הנכס הקודם">→</button><div class="asset-caption"><span id="asset-index" class="small-label"></span><strong id="asset-name"></strong><span id="asset-description"></span></div><button id="next" class="icon-button" aria-label="הנכס הבא">←</button></div><div class="asset-options"><label id="damage-label">נזק <select id="damage"><option value="intact">תקין</option><option value="scorched">פיח וסדקים</option><option value="burning" selected>שרפה פעילה</option><option value="ruined">חורבן</option></select></label><label id="clip-label">תנועה <select id="clip"><option value="role">פעולת הצוות</option><option value="idle">עמידה</option><option value="walk">הליכה</option></select></label><label id="atlas-label">אטלס <select id="atlas-size"><option>256</option><option selected>512</option><option>1024</option></select></label><button id="rotate" class="text-button" aria-pressed="false">סיבוב אוטומטי</button></div></div>
+      <div class="utility"><span class="offline"><i></i>מקומי · ללא רשת</span><label>איכות <select id="quality"><option value="mobile" selected>נייד</option><option value="detail">פרטים</option><option value="low">חסכונית</option></select></label><button id="metrics-toggle" class="text-button" aria-pressed="false">מדדים</button><span class="edition">FIRE / V7</span></div>
+    </footer>
+    <div id="metrics" class="metrics" hidden><span id="fps-value">—</span><small>fps · מדידת הדפדפן הנוכחי</small><dl><dt>משולשים</dt><dd id="triangles-value">—</dd><dt>קריאות ציור</dt><dd id="draws-value">—</dd><dt>חלקיקים</dt><dd id="particles-value">—</dd><dt>קהל</dt><dd id="crowd-value">—</dd><dt>LOD</dt><dd id="lod-value">—</dd></dl></div>
+    <div id="loading" role="status"><span class="loading-orbit"></span><strong>מרכיבים את הרחוב</strong><span id="load-progress">נכסים מקומיים · ללא רשת</span></div>
+    <div id="error" role="alert" hidden></div>
+    <dialog id="about"><button id="close-info" class="icon-button" aria-label="סגירה">×</button><p class="eyebrow">FIRE V7 / LOCAL SHOWCASE</p><h2>פרטים שעומדים<br>גם בתנועה.</h2><p>שלושה רכבי חילוץ, שלושה כבאים, חמישה מבנים בארבע רמות נזק ומערכת אש ומים. הכול בדיוני ונשמר מקומית.</p><p>גרירה מסובבת, צביטה מקרבת. בחרו נכס כדי לבחון את הפרטים, או הפעילו מים ברחוב וצפו בחום יורד.</p><p>מצב נייד מגביל צפיפות פיקסלים וחלקיקים. יעד הביצועים הוא 30fps; המדדים מציגים את הדפדפן שבו פתחתם את הקובץ.</p><a href="REPORT.md">דוח המסירה והבדיקות ↗</a><p class="small-label">דמויות וציוד בדיוניים · תצוגה חזותית</p></dialog>
+  </main>
+  <script src="vendor/fire-core.js"></script>
+  <script src="assets-data.js"></script>
+  <script src="simulation.js"></script>
+  <script src="effects.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>

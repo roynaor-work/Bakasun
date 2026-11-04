@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-11-04T21:57:16.231Z",
+  "passed": true,
+  "scenario": "Prepend an ignited neighbour before an existing source; compare centres, sizes, UV frame, alpha and rotation of the existing emitter",
+  "checks": [
+    {
+      "kind": "flame",
+      "particles": 6,
+      "changedValues": 0,
+      "phaseStable": true
+    },
+    {
+      "kind": "smoke",
+      "particles": 3,
+      "changedValues": 0,
+      "phaseStable": true
+    },
+    {
+      "kind": "ember",
+      "particles": 2,
+      "changedValues": 0,
+      "phaseStable": true
+    }
+  ]
+}
