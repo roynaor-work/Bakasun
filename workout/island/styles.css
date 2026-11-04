@@ -175,9 +175,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{background:#4d8ccc66}
 .game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{background:#9f6dc966}
 .game-screen[data-game=soccer] .soccer-controls .held{background:#ffe4a5a1!important;color:#173d54!important;text-shadow:none}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
 .soccer-action-icon{width:25px;height:25px;flex:none}
 .soccer-sprint[data-exhausted=true]{opacity:.65}
 .soccer-goal-banner{position:absolute;top:26%;left:50%;transform:translateX(-50%) rotate(-5deg);font-size:clamp(48px,10vw,110px);font-weight:900;color:#fff0a5;text-shadow:0 4px 0 #9e6835,0 8px 24px #10293f;pointer-events:none;z-index:1}

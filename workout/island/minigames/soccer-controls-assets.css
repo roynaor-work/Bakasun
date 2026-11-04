@@ -16,3 +16,8 @@
 .game-screen[data-game=soccer] .soccer-loading[data-error=true]::after{display:none}
 @media(orientation:portrait){.game-screen[data-game=soccer] .soccer-fixture{top:calc(66px + env(safe-area-inset-top,0px));max-width:78%;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button{transition:none;animation:none}}
+
+/* Floating stick pad (04/11/2026): the lower-left touch area; size set from config.controls.stick. */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-pad{position:absolute;left:0;bottom:0;width:46%;height:60%;z-index:0;touch-action:none;pointer-events:auto;background:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{z-index:1}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone .soccer-joystick{transition:opacity 80ms ease}

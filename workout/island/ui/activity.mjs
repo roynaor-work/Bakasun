@@ -202,11 +202,11 @@ export class ActivityInterface {
       const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
       // League ladder (29/10/2026): no difficulty or keeper choice; the league is the difficulty.
       const league=this.data.config.minigames.soccer.league;
-      if(league?.leagues?.length){dialog.append(this.soccerLeague(id,p),this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));}
+      if(league?.leagues?.length){dialog.append(this.soccerLeague(id,p),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));}
       else{
       for(const key of Object.keys(this.data.config.minigames.soccer.difficulties)){
         const choose=button(this.t(`soccer.difficulty.${key}`),'soccer-difficulty',()=>{const r=this.engine.setSoccerDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.soccerCard.difficulty===key));choices.append(choose);
-      }dialog.append(choices,this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
+      }dialog.append(choices,button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
       const roles=el('fieldset','soccer-role-choice');roles.append(el('legend','',this.t('soccer.chooseRole')));for(const role of ['field','keeper']){const choice=button(this.t('soccer.playRole.'+role),'soccer-role',()=>{this.engine.setSoccerRole(role);this.stages(id);});choice.dataset.role=role;choice.setAttribute('aria-pressed',String(this.engine.state.soccerRoster.role===role));roles.append(choice);}dialog.append(roles);
       }
     }
@@ -240,7 +240,7 @@ export class ActivityInterface {
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
     dialog.dataset.intro=id;
     {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
-    if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
+    if(id==='tennis')dialog.append(this.soccerHandedness(id)); // soccer: the stick is always on the left (no handedness switch)
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }

@@ -25,8 +25,6 @@
 .game-screen[data-game=soccer] #soccer-switch{position:absolute;right:104px;bottom:106px;width:52px;height:52px;min-width:48px;min-height:48px;border-radius:50%;padding:5px;pointer-events:auto}
 .game-screen[data-game=soccer] #soccer-switch > svg{width:23px;height:23px}
 .game-screen[data-game=soccer] #soccer-switch > .soccer-action-label{font-size:10px}
-.game-screen[data-game=soccer] .soccer-controls.left-handed #soccer-switch{right:auto;left:104px}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{left:max(24px,env(safe-area-inset-left))}
 .game-screen[data-game=soccer] .soccer-stamina-ring{position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(#a4d8b7 var(--stamina,100%),#203c4180 0);mask:radial-gradient(transparent 64%,#000 66% 70%,transparent 72%);pointer-events:none}
 .game-screen[data-game=soccer] #sprint[data-exhausted=true]{opacity:.75}
 .game-screen[data-game=soccer] #sprint[data-exhausted=true] .soccer-stamina-ring{background:conic-gradient(#d9a16e var(--stamina,0%),#203c4180 0)}
@@ -34,7 +32,6 @@
 .game-screen[data-game=soccer] .soccer-knob{background:radial-gradient(circle at 35% 28%,#d7e2d5,#8baea6);border:1px solid #e3eed9a6;box-shadow:0 3px 7px #06171e59,inset 0 1px 0 #f7ffe54d}
 .game-screen[data-game=soccer] .soccer-move-hint{position:absolute;left:max(24px,env(safe-area-inset-left));bottom:max(24px,env(safe-area-inset-bottom));width:100px;height:100px;border:1px solid #e4f0d95e;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e5eed8;font-size:12px;background:radial-gradient(circle,#d7e6d51c 22%,#12302350 24% 38%,transparent 40%);pointer-events:none;text-shadow:0 1px 4px #06191d}
 .game-screen[data-game=soccer] .soccer-stick-zone:has(.soccer-joystick:not([hidden])) .soccer-move-hint{display:none}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-move-hint{left:auto;right:max(24px,env(safe-area-inset-right))}
 .game-screen[data-game=soccer] .action-direction{border:1px solid #e1dab5ad;inset:-12px}
 .game-screen[data-game=soccer] .action-direction:after{border-left-color:#e1dab5}
 @media(hover:hover) and (pointer:fine){
@@ -46,8 +43,7 @@
 }
 @media(max-height:380px) and (orientation:landscape){
  .game-screen[data-game=soccer] .soccer-actions{right:max(20px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}
- .game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{left:max(20px,env(safe-area-inset-left))}
-}
+ }
 
 /* Stamina bar under the sprint button: drains while held, refills after a pause (v4). */
 .game-screen[data-game=soccer] .soccer-stamina-bar{position:absolute;left:4px;right:4px;bottom:-11px;height:6px;border-radius:3px;background:#0f1a1dcc;border:1px solid #bfd9c580;overflow:hidden;pointer-events:none;direction:ltr}

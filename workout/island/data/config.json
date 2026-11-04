@@ -7754,6 +7754,7 @@
     "maxTurnLean": 0.2,
     "lowSpeedTurnBoost": 2.5,
     "keeperMotion": {"acceleration": 19, "deceleration": 14, "turnRate": 18, "lowSpeedTurnBoost": 1.5},
+    "controlled": {"acceleration": 22, "deceleration": 17, "turnRate": 18},
     "turnDrive": 0.4
    },
    "team": {
@@ -8435,6 +8436,8 @@
     "switchKey": "KeyC",
     "floating": true,
     "handednessKey": "island.soccer.handed",
+    "stick": {"deadZone": 0.06, "saturation": 0.8, "expo": 1.25, "padLandscape": {"widthPct": 46, "heightPct": 66}, "padPortrait": {"widthPct": 58, "heightPct": 42}},
+    "vibrate": {"kick": 12, "pass": 8, "switch": 6},
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
    },
