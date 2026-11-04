@@ -4,6 +4,7 @@ import { PROGRAMS, programById, DEFAULT_PLAN, DAY_NAMES } from './programs.js?v=
 import { numWord, timeCue, parseCount, canListen, listenCount } from './count.js?v=20261010-camera-1';
 import { refreshVideos, refreshCloud, cloudUpload, setVideoFamily, cloudVideos, sourceOf, hasVideo, localVideos, saveVideo, deleteVideo, videoUrl, vidStatus } from './vids.js?v=20261011-vids-signed-1';
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
+import { RoyikiStage, hasRoyiki } from './royiki.js?v=20261110-royiki-1';
 import { store } from './store.js?v=20261014-w2g-1';
 import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261014-w2g-1';
 import { beltCard } from './belts.js?v=20261014-w2g-1';
@@ -77,8 +78,12 @@ const webgl = () => {
   } catch { webglSupported = false; }
   return webglSupported;
 };
-const use3d = () => store.profile.stage3d !== false && webgl();
-const stageHtml = ex => hasVideo(ex.id) ? `<div class="exmedia" data-vid="${ex.id}"></div>` : use3d() ? `<div class="exmedia stage3d" data-ex3d="${ex.id}"></div>` : figSvg(ex.id);
+const use3d = () => animStyle() !== 'stick' && webgl();
+// סגנון האנימציה בתרגילים (הגדרות): 'royiki' (ברירת מחדל: דו-ממד מצויר לתרגילים שיש להם, אחרת הקיים) / '3d' / 'stick'. profile.stage3d===false הישן = דמות מקלות
+const animStyle = () => store.profile.animStyle || (store.profile.stage3d === false ? 'stick' : 'royiki');
+const stageKind = (ex, withVideo = true) => withVideo && hasVideo(ex.id) ? 'vid' : animStyle() === 'royiki' && hasRoyiki(ex.id) ? 'royiki' : animStyle() !== 'stick' && use3d() ? '3d' : 'stick';
+const stageHtmlOf = (ex, withVideo = true) => ({ vid: `<div class="exmedia" data-vid="${ex.id}"></div>`, royiki: `<div class="exmedia royiki" data-royiki="${ex.id}"></div>`, '3d': `<div class="exmedia stage3d" data-ex3d="${ex.id}"></div>`, stick: figSvg(ex.id) })[stageKind(ex, withVideo)];
+const stageHtml = ex => stageHtmlOf(ex);
 // אותה דמות מוכרת, בפוזה שקטה. כשל ב-WebGL משאיר דמות ותג אימונים ב-SVG.
 function wireCompanion(workouts) {
   app.querySelectorAll('[data-companion-portrait]').forEach(box => wireCompanionPortrait(box, workouts));
@@ -116,7 +121,27 @@ function wireStage3d(box) {
   import('./stage3d.js?v=20261010-camera-1').then(m => { if (f._disposed || !box.isConnected) return; f._created = new m.Stage3D(box, null, { onReady: s => { if (f._disposed) s.dispose(); else f._attach(s); }, onFail: fallback }); }).catch(fallback);
   f.play(ex, 1); figures.push(f); return f;
 }
+// רועיקי: SVG מקומי. אם הטעינה נכשלת, נופלים לתלת-ממד (אם מופעל) או לדמות המקלות
+function wireRoyiki(box) {
+  const ex = byId[box.dataset.royiki];
+  let stageReady;
+  const ready = new Promise(resolve => { stageReady = resolve; });
+  const f = { ready, _s: null, _rep: null, _last: null, get onRep() { return this._rep; }, set onRep(fn) { this._rep = fn; if (this._s) this._s.onRep = fn; },
+    play(e, speed = 1) { this._last = ['play', e, speed]; if (this._s) this._s.play(e, speed); }, still(e) { this._last = ['still', e]; if (this._s) this._s.still(e); },
+    pace(e, duration) { this.play(e, cycleMs(e.frames) / duration / (this._s instanceof Figure ? 1 : .7)); },
+    stop() { if (this._s) this._s.stop(); }, dispose() { if (this._disposed) return; this._disposed = true; this._created?.dispose(); if (this._s !== this._created) this._s?.dispose?.(); this._s?.stop(); this._s = null; stageReady(); },
+    _attach(s) { this._s = s; s.onRep = this._rep; if (this._last) { const [k, e, sp] = this._last; k === 'play' ? s.play(e, sp) : s.still(e); } stageReady(); } };
+  const fallback = () => {
+    f._created?.dispose(); if (f._disposed || !box.isConnected) return;
+    box.classList.remove('royiki'); delete box.dataset.royiki; box.innerHTML = '';
+    if (use3d()) { box.classList.add('stage3d'); box.dataset.ex3d = ex.id; f._attach(wireStage3d(box)); }
+    else { box.innerHTML = figSvg(ex.id); f._attach(new Figure(box.querySelector('svg'))); }
+  };
+  f._created = new RoyikiStage(box, ex, { onReady: s => { if (f._disposed) s.dispose(); else f._attach(s); }, onFail: fallback });
+  f.play(ex, 1); figures.push(f); return f;
+}
 function wireStage() {
+  const boxR = app.querySelector('.exmedia[data-royiki]'); if (boxR) return wireRoyiki(boxR);
   const box3 = app.querySelector('.exmedia[data-ex3d]'); if (box3) return wireStage3d(box3);
   const box = app.querySelector('.exmedia[data-vid]');
   if (!box) return figs()[0];
@@ -479,7 +504,7 @@ function openWorkoutCamera(it, ex, options = {}) {
     saveW();
   };
   activeCamera = cameraScreen({ host: app, item: it, exercise: ex, uploads: cameraUploads, mount, esc,
-    stageHtml: e => use3d() ? `<div class="exmedia stage3d" data-ex3d="${e.id}"></div>` : figSvg(e.id),
+    stageHtml: e => stageHtmlOf(e, false),
     wireStage: () => {
       const stage = wireStage();
       if (!stage.pace) stage.pace = (e, duration) => stage.play(e, cycleMs(e.frames) / duration);
@@ -1043,7 +1068,8 @@ function settings() {
       <div class="toggle"><b>צלילים</b><input type="checkbox" id="sound" ${p.sound ? 'checked' : ''}></div>
       <div class="toggle"><b>הסבר בקול בעברית</b><input type="checkbox" id="voice" ${p.voice !== false ? 'checked' : ''}></div>
       <div class="toggle"><b>סרטון פתיחה לפני אימון</b><input type="checkbox" id="intro" ${p.intro !== false ? 'checked' : ''}></div>
-      <div class="toggle"><b>דמות מצוירת בתלת-ממד בתרגילים</b><input type="checkbox" id="stage3d" ${p.stage3d !== false ? 'checked' : ''}></div>
+      <label class="field">סגנון האנימציה בתרגילים<select id="animstyle">${[['royiki', 'רועיקי (דו-ממד מצויר)'], ['3d', 'תלת-ממד מצויר'], ['stick', 'דמות מקלות']].map(([k, n]) => `<option value="${k}" ${k === animStyle() ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <p class="muted small">רועיקי קיים ב-12 תרגילים; בשאר התרגילים מוצג התלת-ממד (דמות המקלות אם הטלפון לא תומך).</p>
       <label class="toggle"><b>אימון עם מצלמה</b><input type="checkbox" id="workout-camera-setting" ${p.camera === true ? 'checked' : ''} aria-describedby="workout-camera-info"></label>
       <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. הגדרת שליחה נעשית רק דרך קישור המעבדה.</p>
       <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
@@ -1134,7 +1160,7 @@ function settings() {
   app.querySelectorAll('[data-playvid]').forEach(b => b.onclick = async () => { const box = app.querySelector(`.vidprev[data-prev="${b.dataset.playvid}"]`); if (!box.hidden) { box.hidden = true; box.innerHTML = ''; return; } const m = await videoUrl(b.dataset.playvid, store.profile.familyCode); if (!m) return; box.innerHTML = m.kind === 'image' ? `<img class="exvid" src="${m.url}" alt="">` : `<video class="exvid" src="${m.url}" autoplay muted loop playsinline controls></video>`; box.hidden = false; });
   app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid; if (!confirm(`למחוק מהטלפון הזה את הסרטון של "${byId[id].name}"?`)) return; await deleteVideo(id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
-  $('#stage3d').onchange = e => store.setProfile({ stage3d: e.target.checked }); /* כיבוי = דמות המקלות (טלפון איטי / בלי WebGL) */
+  $('#animstyle').onchange = e => store.setProfile({ animStyle: e.target.value, stage3d: e.target.value !== 'stick' }); /* מקלות = טלפון איטי / בלי WebGL; stage3d נשמר להתאמה לאחור */
   $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
   $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
   $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });
