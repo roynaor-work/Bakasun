@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08161e">
+  <meta name="description" content="מעבדת שחקנים תלת־ממדית: סגל, תנועה ותצוגת משחק בשישה מול שישה.">
+  <title>סגל / 06 — מעבדת שחקנים</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2308161e' d='M0 0h32v32H0z'/%3E%3Cpath stroke='%23d4f778' stroke-width='4' d='m7 26 3-10m4 10 5-17m4 17 6-23'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="wordmark" href="./preview.html" aria-label="סגל 06, מעבדת שחקנים">
+        <span class="wordmark-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="wordmark-title">סגל <b>/</b> <span dir="ltr">06</span></span>
+      </a>
+      <div class="edition"><span class="eyebrow" lang="en" dir="ltr">PLAYER LAB</span><span>דור חדש. אותו משחק.</span></div>
+      <div class="live-tag" aria-label="תצוגה חיה"><span></span><b lang="en">LIVE</b><i lang="en">V.06</i></div>
+    </header>
+
+    <main class="workspace">
+      <section class="stage-shell" aria-label="תצוגת שחקן תלת־ממדית">
+        <div class="viewport" id="viewport">
+          <canvas id="stage" aria-label="מודל שחקן מונפש; גרירה מסובבת את המבט"></canvas>
+          <div class="stage-heading" aria-hidden="true">
+            <span class="eyebrow" lang="en" dir="ltr">THE NEXT LINEUP</span>
+            <h1>על המגרש.</h1>
+            <p>אופי בכל תנועה.</p>
+          </div>
+          <div class="view-marker" aria-hidden="true"><span></span><span lang="en" dir="ltr">REAL-TIME 3D</span></div>
+          <div class="player-caption">
+            <span class="caption-rule" aria-hidden="true"></span>
+            <div><span class="eyebrow">השחקן שבחרת</span><strong id="character-label">טוען סגל…</strong><span id="clip-label">טוען תנועה…</span></div>
+          </div>
+          <div class="orbit-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8c-2 1-3 2.4-3 4s1.5 3.3 4 4.3M19 8c2 1 3 2.4 3 4s-1.5 3.3-4 4.3M6 13v4H2M18 13v4h4"/><circle cx="12" cy="10" r="3"/><path d="M9 15c1.8-.7 4.2-.7 6 0"/></svg><span>גרירה לסיבוב</span></div>
+          <div class="stage-corner stage-corner-a" aria-hidden="true"></div><div class="stage-corner stage-corner-b" aria-hidden="true"></div>
+        </div>
+
+        <div class="transport" aria-label="בקרת ניגון">
+          <div class="transport-actions">
+            <button class="play-button" id="play" type="button" aria-label="השהיה" title="ניגון או השהיה"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>השהיה</span></button>
+            <button class="reset-button" id="reset" type="button" aria-label="חזרה לתחילת התנועה" title="חזרה להתחלה"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8a6 6 0 1 1 0 5M4 4v4h4"/></svg></button>
+          </div>
+          <div class="timeline"><label class="visually-hidden" for="scrub">מיקום בתנועה</label><input id="scrub" type="range" min="0" max="1" step="0.001" value="0"><output id="time" for="scrub" dir="ltr">0.00 / 0.00</output></div>
+          <div class="speed-field"><label for="speed">מהירות</label><select id="speed" dir="ltr"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></div>
+        </div>
+      </section>
+
+      <aside class="control-room" aria-label="בחירת שחקן ותצוגה">
+        <div class="panel-heading"><div><span class="eyebrow" lang="en" dir="ltr">BUILD YOUR LINEUP</span><h2>הסגל שלך</h2></div><span class="section-index" aria-hidden="true">01—06</span></div>
+        <div class="primary-fields">
+          <div class="field"><label for="character"><span class="field-index" aria-hidden="true">01</span>שחקן</label><select id="character"><option value="">טוען סגל…</option></select></div>
+          <div class="field"><label for="clip"><span class="field-index" aria-hidden="true">02</span>תנועה</label><select id="clip"><option value="">טוען תנועות…</option></select></div>
+          <div class="field"><label for="kit"><span class="field-index" aria-hidden="true">03</span>מדים</label><select id="kit"><option value="home" selected title="ירוק ושנהב">בית · ירוק</option><option value="away" title="כחול ושנהב">חוץ · כחול</option></select></div>
+          <div class="field"><label for="view"><span class="field-index" aria-hidden="true">04</span>תצוגה</label><select id="view"><option value="hero" selected>שחקן יחיד</option><option value="match">משחק · 6×6</option></select></div>
+        </div>
+        <details class="advanced">
+          <summary><span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/><path d="M7 3v4M13 8v4M8 13v4"/></svg>כלי תצוגה</span><svg class="details-chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary>
+          <div class="advanced-content">
+            <div class="field lod-field"><label for="lod">רמת פירוט <span lang="en">LOD</span></label><select id="lod"><option value="auto" selected>אוטומטי</option><option value="0">0 · פירוט מלא</option><option value="1">1 · פירוט מופחת</option></select></div>
+            <label class="check-field" for="skeleton"><input id="skeleton" type="checkbox"><span>הצגת שלד</span><span class="toggle-indicator" aria-hidden="true"></span></label>
+            <label class="check-field" for="wireframe"><input id="wireframe" type="checkbox"><span>רשת משולשים</span><span class="toggle-indicator" aria-hidden="true"></span></label>
+          </div>
+        </details>
+        <div class="panel-note"><span class="kit-chip" aria-hidden="true"><i></i><i></i></span><p>אותו סגל, שתי ערכות.<br><span>בחרו שחקן. תנו לתנועה לדבר.</span></p></div>
+      </aside>
+    </main>
+
+    <footer class="telemetry" aria-label="נתוני תצוגה חיים">
+      <p class="status"><span class="status-dot" aria-hidden="true"></span><span id="status" role="status">טוען את המעבדה…</span></p>
+      <dl class="metrics"><div><dt lang="en">FPS</dt><dd id="fps">—</dd></div><div><dt>משולשים</dt><dd id="triangles">—</dd></div><div><dt lang="en">DRAWS</dt><dd id="draws">—</dd></div><div><dt>נכס</dt><dd id="asset-size">—</dd></div></dl>
+      <span class="telemetry-note">נתוני רינדור חיים</span>
+    </footer>
+  </div>
+  <noscript><p class="noscript">כדי לצפות בסגל המונפש, יש להפעיל JavaScript בדפדפן.</p></noscript>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

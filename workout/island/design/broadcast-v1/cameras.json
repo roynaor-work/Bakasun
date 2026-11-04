@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "units": "metres",
+  "coordinates": {"up": "+Y", "attack": "+Z", "pitchOrigin": "centre"},
+  "lens": {"near": 0.12, "far": 240, "rollDegrees": 0},
+  "transition": {"seconds": 1.15, "easing": "quintic-smootherstep", "followHalfLifeSeconds": 0.28, "maxFollowSpeedMetresPerSecond": 12, "interrupt": "start from current pose", "fovInterpolation": "tan-half-angle", "orientation": "quaternion-shortest-arc"},
+  "tracking": {"leadSeconds": 0.22, "maxLeadMetres": 1.7, "minimumHeight": 1.5, "deadZoneMetres": 0.18},
+  "replay": {"historySeconds": 6, "sampleRateHz": 30, "playbackRate": 0.45, "entrySeconds": 0.9, "returnSeconds": 1.1, "pathInterpolation": "quintic between local event keyframes", "liveSimulation": "continues behind independent history playback", "maximumActors": 12},
+  "sports": {
+    "soccer": {
+      "field": {"width": 68, "length": 105, "surfaceY": 0.06},
+      "broadcast": {
+        "label": "שידור",
+        "landscape": {"offset": [18, 13, 16], "targetOffset": [0, 0.85, 2], "fov": 49},
+        "portrait": {"offset": [17, 19, 19], "targetOffset": [0, 0.85, 2], "fov": 60},
+        "trackWeight": 0.35, "focusRangeMetres": 24, "dofMultiplier": 0.16, "motionMultiplier": 0.45
+      },
+      "side": {
+        "label": "צד",
+        "landscape": {"offset": [24, 6.4, 2], "targetOffset": [0, 1, 0], "fov": 49},
+        "portrait": {"offset": [33, 13, 3], "targetOffset": [0, 1, 0], "fov": 66},
+        "trackWeight": 0.7, "focusRangeMetres": 12, "dofMultiplier": 0.5, "motionMultiplier": 0.65
+      },
+      "shoulder": {
+        "label": "מעל הכתף",
+        "landscape": {"offset": [2.2, 2.45, -6.2], "targetOffset": [0, 1.15, 3.8], "fov": 54},
+        "portrait": {"offset": [2.7, 3.3, -8.8], "targetOffset": [0, 1.1, 4.5], "fov": 64},
+        "trackWeight": 1, "focusRangeMetres": 10, "dofMultiplier": 0.65, "motionMultiplier": 0.8
+      },
+      "replay": {
+        "label": "הילוך חוזר", "fov": 48, "portraitFov": 61, "focusRangeMetres": 7, "dofMultiplier": 1, "motionMultiplier": 0.35,
+        "keyframes": [{"t": 0, "offset": [-7, 3.5, 8], "targetOffset": [0, 1, 0]}, {"t": 0.5, "offset": [-3, 2.6, 8.5], "targetOffset": [0, 1.1, 0]}, {"t": 1, "offset": [6, 3.2, 7], "targetOffset": [0, 1, 0]}],
+        "portraitDistanceMultiplier": 1.25
+      }
+    },
+    "basketball": {
+      "field": {"width": 15, "length": 28, "surfaceY": 0.06, "rimHeight": 3.05},
+      "broadcast": {
+        "label": "שידור",
+        "landscape": {"offset": [14, 10, 12], "targetOffset": [0, 0.9, 2], "fov": 49},
+        "portrait": {"offset": [15, 15, 16], "targetOffset": [0, 1, 2], "fov": 60},
+        "trackWeight": 0.3, "focusRangeMetres": 20, "dofMultiplier": 0.14, "motionMultiplier": 0.4
+      },
+      "side": {
+        "label": "צד",
+        "landscape": {"offset": [17.5, 4.7, 0.5], "targetOffset": [0, 1.25, 0.4], "fov": 52},
+        "portrait": {"offset": [24, 9.4, 1.2], "targetOffset": [0, 1.3, 0.4], "fov": 68},
+        "trackWeight": 0.65, "focusRangeMetres": 10, "dofMultiplier": 0.45, "motionMultiplier": 0.6
+      },
+      "shoulder": {
+        "label": "מעל הכתף",
+        "landscape": {"offset": [1.7, 2.25, -5], "targetOffset": [0, 1.7, 3.2], "fov": 56},
+        "portrait": {"offset": [2.2, 3.1, -7.1], "targetOffset": [0, 1.6, 3.8], "fov": 65},
+        "trackWeight": 1, "focusRangeMetres": 8, "dofMultiplier": 0.6, "motionMultiplier": 0.8
+      },
+      "replay": {
+        "label": "הילוך חוזר", "fov": 47, "portraitFov": 61, "focusRangeMetres": 6, "dofMultiplier": 1, "motionMultiplier": 0.4,
+        "keyframes": [{"t": 0, "offset": [-5.6, 2.6, 6], "targetOffset": [0, 1.3, 0]}, {"t": 0.5, "offset": [-1.5, 3.4, 7.2], "targetOffset": [0, 1.45, 0]}, {"t": 1, "offset": [5.6, 2.9, 5.8], "targetOffset": [0, 1.3, 0]}],
+        "portraitDistanceMultiplier": 1.3
+      }
+    }
+  }
+}

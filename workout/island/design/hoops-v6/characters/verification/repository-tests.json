@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "existingTestsModified": false,
+  "fullRun": {
+    "command": "npm test",
+    "passed": 3203,
+    "failed": 1,
+    "skipped": 50,
+    "total": 3254,
+    "failureFile": "tests/workout-royiki.test.mjs",
+    "reason": "Playwright default chromium_headless_shell-1234 executable is absent; failed launch left the test HTTP server open. Its stalled process was terminated after the suite had reported its other results."
+  },
+  "targetedRerun": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/hoops-v6-playwright node --test tests/workout-royiki.test.mjs",
+    "browserConfiguration": "Temporary isolated Playwright registry path with symlink to installed /usr/bin/chromium; no repository files modified.",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "interpretation": "The full run had an environment launch failure; all five tests in the affected file passed after browser configuration. The entire suite was not repeated."
+}

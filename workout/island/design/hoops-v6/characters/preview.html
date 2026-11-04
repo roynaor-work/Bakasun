@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101316">
+  <link rel="icon" href="data:,">
+  <title>HOOPS 06 · מעבדת דמויות</title>
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="identity" href="./preview.html" aria-label="מעבדת דמויות כדורסל"><span class="identity-mark">H<span>6</span></span><span><b>מעבדת דמויות</b><small>HOOPS / CHARACTER COLLECTION</small></span></a>
+      <span class="edition"><i></i> סגל 06 <span class="edition-divider">/</span> תצוגה חיה</span>
+    </header>
+    <main class="workspace">
+      <section class="stage" aria-label="תצוגת שחקנים בתלת־ממד">
+        <div id="viewport" class="viewport"><canvas id="court" aria-label="מגרש תלת־ממד; גרירה לסיבוב, גלילה להתקרבות"></canvas></div>
+        <div class="stage-heading"><span class="eyebrow">FIVE POSITIONS. ONE GAME.</span><h1>המשחק מתחיל<br>בפרטים.</h1><p>סגל מקורי · תנועה · חומר</p></div>
+        <div class="stage-meta"><span class="live-dot"></span><span id="modeLabel">מצלמת סגל</span><span class="stage-meta-separator">|</span><span id="lodReadout">LOD 0</span></div>
+        <div class="camera-tools" aria-label="מצלמה"><button data-camera="portrait" class="active" title="גוף מלא" aria-label="גוף מלא">◉</button><button data-camera="detail" title="תקריב פנים" aria-label="תקריב פנים">⌕</button><button data-camera="broadcast" title="מצלמת שידור" aria-label="מצלמת שידור">▱</button></div>
+        <div id="loading" class="loading" role="status"><span class="spinner"></span><b>מכינים את הסגל</b><small>טוען דמות וחומרים מקומיים</small></div>
+        <div id="failure" class="failure" role="alert" hidden><b>הדמות לא נטענה</b><span>יש לפתוח את הדף דרך שרת מקומי משורש המאגר.</span><button id="retry">טעינה מחדש</button></div>
+        <div class="athlete-caption"><span class="caption-rule"></span><div><span id="profileNumber" class="profile-number">01</span><strong id="profileName">רכז</strong><small id="profileDescription">PG / POINT GUARD</small></div><span id="profileHeight" class="profile-height">1.85 <small>מ׳</small></span></div>
+        <div class="telemetry" dir="ltr"><span><b id="fps">—</b> FPS</span><span><b id="triangles">—</b> TRI</span><span><b id="calls">—</b> CALLS</span></div>
+        <nav id="roster" class="roster" aria-label="בחירת עמדה"></nav>
+      </section>
+      <aside class="controls" aria-label="כלי התצוגה">
+        <div class="panel-title"><span>תנועה וחומר</span><small>PLAYER INSPECTOR</small></div>
+        <div class="mode-selector" role="group" aria-label="מצב תצוגה"><button data-mode="solo" class="active">שחקן</button><button data-mode="lineup">סגל</button><button data-mode="scrimmage">6 × 6</button></div>
+        <div class="clip-control"><label for="clip">מהלך <span id="clipCounter">01 / 17</span></label><select id="clip" aria-label="בחירת אנימציה"></select></div>
+        <div class="transport"><button id="playPause" class="play-button" aria-label="השהיית תנועה">Ⅱ</button><input id="timeline" type="range" min="0" max="1000" value="0" step="1" aria-label="ציר זמן של האנימציה"><output id="timeReadout" dir="ltr">0.00 / —</output><select id="speed" aria-label="מהירות תנועה"><option value="0.5">½×</option><option value="1" selected>1×</option><option value="1.5">1½×</option></select></div>
+        <div class="material-row"><div class="team-control"><span>צבע קבוצה</span><div role="group" aria-label="צבעי קבוצה"><button data-team="amber" class="swatch amber active" aria-label="ענבר" title="ענבר"></button><button data-team="teal" class="swatch teal" aria-label="טורקיז" title="טורקיז"></button></div></div><div class="lod-control"><span>פירוט</span><div role="group" aria-label="רמת פירוט"><button data-lod="0" class="active">LOD 0</button><button data-lod="1">LOD 1</button></div></div></div>
+        <div class="asset-note"><i></i><span>18 עצמות · אטלס 1K · Draco<span id="assetBudget">עד 8K / 3K משולשים</span></span></div>
+        <a href="./REPORT.md" class="report-link">דוח נכסים ואימות <span>↗</span></a>
+      </aside>
+    </main>
+    <footer><span>דמויות מקוריות. צבעי קבוצה בלבד.</span><span dir="ltr">LOCAL WEBGL · THREE r160</span></footer>
+  </div>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>

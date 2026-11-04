@@ -1,0 +1,29 @@
+{
+  "scope": "Existing repository tests executed without editing any test files. Asset/browser verification is reported separately.",
+  "initial": {
+    "command": "npm test",
+    "files": 266,
+    "passed": 262,
+    "failed": 4,
+    "reason": "Sandbox denied child-process/server operations in three files. The remaining browser suite could not find the bundled Chromium executable."
+  },
+  "rechecks": [
+    {
+      "command": "node --test tests/cam-lab-keyframes.test.mjs tests/island-browser-csp.test.mjs tests/workout-dad-test.test.mjs",
+      "runtime": "Same files, process/socket permissions enabled",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 1,
+      "skip": "Existing opt-in ISLAND_CSP_BROWSER integration was not enabled."
+    },
+    {
+      "command": "ISLAND_PLAYWRIGHT=/tmp/soccer-v6-playwright.mjs node --test tests/workout-royiki.test.mjs",
+      "runtime": "Temporary external Playwright launch adapter selects installed /usr/bin/chromium; repository test files unchanged.",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "allInitiallyFailingFilesPassedOnRecheck": true,
+  "existingFilesChanged": false
+}

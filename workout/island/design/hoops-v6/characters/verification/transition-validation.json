@@ -1,0 +1,3266 @@
+{
+  "schemaVersion": 1,
+  "scope": "Independent full deformed mesh audit of simultaneous weighted animation poses after the viewer transition floor guard; not a proof for every continuous blend. 8 transition pairs, 3 source phases, 13 blend weights, all 6 characters and both LODs. Camera projection audit of every clip for all 6 LOD0 characters at phases 0/.25/.5/.75/1 in both required viewports, excluding the intentionally cropped detail camera.",
+  "poses": 3744,
+  "blendDurationSeconds": 0.24,
+  "sourcePhases": [
+    0.15,
+    0.5,
+    0.85
+  ],
+  "blendWeights": "0..1 inclusive at 1/12 increments",
+  "records": [
+    {
+      "id": "pg",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999884,
+          "maximumPresentationRootLiftMeters": 0.006305170436980373,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999776,
+          "maximumPresentationRootLiftMeters": 0.024423925199173156,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998665,
+          "maximumPresentationRootLiftMeters": 0.013807869945555353,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999851,
+          "maximumPresentationRootLiftMeters": 0.0042303408868617914,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999892,
+          "maximumPresentationRootLiftMeters": 0.0024382489543986943,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999776,
+          "maximumPresentationRootLiftMeters": 0.053324230678711865,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999754,
+          "maximumPresentationRootLiftMeters": 0.051439806349180744,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.00399999999999979,
+          "maximumPresentationRootLiftMeters": 0.022885295493248574,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/pg-lod0.glb",
+      "sha256": "f2d1957913100ecdbb9bdf9d3fd1d8c78416a7794983c87fb272e08774d6a2c9"
+    },
+    {
+      "id": "pg",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999883,
+          "maximumPresentationRootLiftMeters": 0.005622011114781894,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999889,
+          "maximumPresentationRootLiftMeters": 0.024007353467012205,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.00399999999999983,
+          "maximumPresentationRootLiftMeters": 0.01490211490321724,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999863,
+          "maximumPresentationRootLiftMeters": 0.004345987411198064,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999926,
+          "maximumPresentationRootLiftMeters": 0.002370317080476936,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999844,
+          "maximumPresentationRootLiftMeters": 0.053202495160468974,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999775,
+          "maximumPresentationRootLiftMeters": 0.0526058512096545,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998335,
+          "maximumPresentationRootLiftMeters": 0.02217425312586852,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/pg-lod1.glb",
+      "sha256": "0fb06b8fb1e61a2cb99b164e02bdb7d1a840e75182081164e666f4550bfa3b68"
+    },
+    {
+      "id": "sg",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999849,
+          "maximumPresentationRootLiftMeters": 0.004843736378933394,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998335,
+          "maximumPresentationRootLiftMeters": 0.023508067119131604,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999877,
+          "maximumPresentationRootLiftMeters": 0.02133918027496356,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999976,
+          "maximumPresentationRootLiftMeters": 0.002833195560331356,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999991,
+          "maximumPresentationRootLiftMeters": 7.086521105460243e-05,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.00399999999999983,
+          "maximumPresentationRootLiftMeters": 0.05762921477783445,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999865,
+          "maximumPresentationRootLiftMeters": 0.05936146124100909,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999869,
+          "maximumPresentationRootLiftMeters": 0.02177843679968559,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/sg-lod0.glb",
+      "sha256": "ba3f02a9dd122a7b03acdb05b68dba1ac83a9a5e2fe1f2aa451c4b68a934b880"
+    },
+    {
+      "id": "sg",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999979,
+          "maximumPresentationRootLiftMeters": 0.0054828458305380915,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999997815,
+          "maximumPresentationRootLiftMeters": 0.023034278490031895,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999837,
+          "maximumPresentationRootLiftMeters": 0.022522649175415476,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999934,
+          "maximumPresentationRootLiftMeters": 0.0028536883863451,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0040000000000000565,
+          "maximumPresentationRootLiftMeters": 0.00046296279983864923,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.00399999999999983,
+          "maximumPresentationRootLiftMeters": 0.05824881567653789,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998405,
+          "maximumPresentationRootLiftMeters": 0.06074509297686288,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999854,
+          "maximumPresentationRootLiftMeters": 0.022215692290673685,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/sg-lod1.glb",
+      "sha256": "3dd4e9ff3fea00a56ad344f2dcc4117d119c2c012026f27e42164c0f5a99049f"
+    },
+    {
+      "id": "sf",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999716,
+          "maximumPresentationRootLiftMeters": 0.003698951032785414,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999851,
+          "maximumPresentationRootLiftMeters": 0.021895855264794664,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999905,
+          "maximumPresentationRootLiftMeters": 0.024665388595321552,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998995,
+          "maximumPresentationRootLiftMeters": 0.0024428615745706733,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.005334600056678321,
+          "maximumPresentationRootLiftMeters": 0,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999809,
+          "maximumPresentationRootLiftMeters": 0.060287578843841894,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998335,
+          "maximumPresentationRootLiftMeters": 0.06204712591017322,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999863,
+          "maximumPresentationRootLiftMeters": 0.020114476028334816,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/sf-lod0.glb",
+      "sha256": "1d685cd27165a8f22d7fde06fa819c9ac93e14288b439c7fb084ad546b9309b4"
+    },
+    {
+      "id": "sf",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998925,
+          "maximumPresentationRootLiftMeters": 0.004520523777105849,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999927,
+          "maximumPresentationRootLiftMeters": 0.022759275905517733,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999846,
+          "maximumPresentationRootLiftMeters": 0.026399416779586002,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999979,
+          "maximumPresentationRootLiftMeters": 0.002670412366011678,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.007028485974637596,
+          "maximumPresentationRootLiftMeters": 0,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999997884,
+          "maximumPresentationRootLiftMeters": 0.05948587429827443,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999786,
+          "maximumPresentationRootLiftMeters": 0.06250739251791129,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999824,
+          "maximumPresentationRootLiftMeters": 0.020928407339859983,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/sf-lod1.glb",
+      "sha256": "c263ec45a4e218052d2f4b38b3ea80277d16d30a043c61c673b1e10d6082ad4a"
+    },
+    {
+      "id": "pf",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999844,
+          "maximumPresentationRootLiftMeters": 0.006338013027415415,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999835,
+          "maximumPresentationRootLiftMeters": 0.026760049554495385,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999809,
+          "maximumPresentationRootLiftMeters": 0.017927558634874857,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999811,
+          "maximumPresentationRootLiftMeters": 0.0035303410717660404,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999931,
+          "maximumPresentationRootLiftMeters": 0.0011570962408467703,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999802,
+          "maximumPresentationRootLiftMeters": 0.05962699163421284,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999719,
+          "maximumPresentationRootLiftMeters": 0.0610546485513668,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999886,
+          "maximumPresentationRootLiftMeters": 0.024959669260872116,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/pf-lod0.glb",
+      "sha256": "3b908e2b806d9b0e3ffe4120c9ac0d18693b02b07ddd5803eb5f718f573ce0ba"
+    },
+    {
+      "id": "pf",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999822,
+          "maximumPresentationRootLiftMeters": 0.005715152939346835,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.00399999999999988,
+          "maximumPresentationRootLiftMeters": 0.025151183107479717,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999946,
+          "maximumPresentationRootLiftMeters": 0.01817892496548948,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999931,
+          "maximumPresentationRootLiftMeters": 0.0027664417300823415,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0040000000000000625,
+          "maximumPresentationRootLiftMeters": 0.0005493657134381935,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999809,
+          "maximumPresentationRootLiftMeters": 0.05864504699970445,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999764,
+          "maximumPresentationRootLiftMeters": 0.06062294916410357,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999823,
+          "maximumPresentationRootLiftMeters": 0.024375419906220656,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/pf-lod1.glb",
+      "sha256": "0b4c0ab1c940f0dc2c4ade5713909ee7326ea5aa6faf3fc823bb130e0321963c"
+    },
+    {
+      "id": "c",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999891,
+          "maximumPresentationRootLiftMeters": 0.0064420232969683525,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999945,
+          "maximumPresentationRootLiftMeters": 0.027649566621472273,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999836,
+          "maximumPresentationRootLiftMeters": 0.018463184196051814,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998734,
+          "maximumPresentationRootLiftMeters": 0.0035012920449763833,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999828,
+          "maximumPresentationRootLiftMeters": 0.001060756156494539,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999809,
+          "maximumPresentationRootLiftMeters": 0.06175399412497809,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999867,
+          "maximumPresentationRootLiftMeters": 0.06324999405212015,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999847,
+          "maximumPresentationRootLiftMeters": 0.025779929890063107,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/c-lod0.glb",
+      "sha256": "d28857812d6e47dbf6a4ac32ea1092bc7a6ff087ac71ec813e4c662870cf54ce"
+    },
+    {
+      "id": "c",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999907,
+          "maximumPresentationRootLiftMeters": 0.005782451037785482,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998865,
+          "maximumPresentationRootLiftMeters": 0.025958558111003404,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999785,
+          "maximumPresentationRootLiftMeters": 0.018725138469378823,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.0039999999999998075,
+          "maximumPresentationRootLiftMeters": 0.0026937942161039344,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.004000000000000009,
+          "maximumPresentationRootLiftMeters": 0.00042777401857895577,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999754,
+          "maximumPresentationRootLiftMeters": 0.060722105266998005,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999844,
+          "maximumPresentationRootLiftMeters": 0.06280342280003842,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999853,
+          "maximumPresentationRootLiftMeters": 0.025160308402758125,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/c-lod1.glb",
+      "sha256": "6c958f7e3c937057fce44ee1c431e37d31f630120d4fcac93fd7093a7bfcc28a"
+    },
+    {
+      "id": "referee",
+      "lod": 0,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999943,
+          "maximumPresentationRootLiftMeters": 0.0048134732523844,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999971,
+          "maximumPresentationRootLiftMeters": 0.022816796211886103,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999754,
+          "maximumPresentationRootLiftMeters": 0.0207086496766521,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.004,
+          "maximumPresentationRootLiftMeters": 0.0028842217046028077,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999962,
+          "maximumPresentationRootLiftMeters": 0.00021391339914171147,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999828,
+          "maximumPresentationRootLiftMeters": 0.05566425697217171,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999865,
+          "maximumPresentationRootLiftMeters": 0.057353902492434064,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999827,
+          "maximumPresentationRootLiftMeters": 0.021133898424457283,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/referee-lod0.glb",
+      "sha256": "ec63cf7938065207320619c4ca8d6b9fc74796c1582db4b531cb02a99ba50f5e"
+    },
+    {
+      "id": "referee",
+      "lod": 1,
+      "transitions": [
+        {
+          "from": "idle",
+          "to": "dunk",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999905,
+          "maximumPresentationRootLiftMeters": 0.0054236271352010364,
+          "pass": true
+        },
+        {
+          "from": "idle",
+          "to": "dribble_between_legs",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999882,
+          "maximumPresentationRootLiftMeters": 0.0223514188127825,
+          "pass": true
+        },
+        {
+          "from": "run",
+          "to": "block",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999831,
+          "maximumPresentationRootLiftMeters": 0.021842713774958663,
+          "pass": true
+        },
+        {
+          "from": "dribble_behind_back",
+          "to": "shoot_jump",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999983,
+          "maximumPresentationRootLiftMeters": 0.002879541814644504,
+          "pass": true
+        },
+        {
+          "from": "shoot_jump",
+          "to": "dribble_stationary",
+          "poses": 39,
+          "minFullMeshYmeters": 0.004000000000000009,
+          "maximumPresentationRootLiftMeters": 0.0005850950386747577,
+          "pass": true
+        },
+        {
+          "from": "defensive_slide",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999795,
+          "maximumPresentationRootLiftMeters": 0.05627537294188224,
+          "pass": true
+        },
+        {
+          "from": "eurostep",
+          "to": "run",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999804,
+          "maximumPresentationRootLiftMeters": 0.058672756605894646,
+          "pass": true
+        },
+        {
+          "from": "dunk",
+          "to": "idle",
+          "poses": 39,
+          "minFullMeshYmeters": 0.003999999999999801,
+          "maximumPresentationRootLiftMeters": 0.02154964695738653,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "model": "models/referee-lod1.glb",
+      "sha256": "e23fe86c79e0fd673827f783905ccb6eaeccc1d05022898e276c15f98b6f2fab"
+    }
+  ],
+  "framing": [
+    {
+      "id": "pg",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.28509960925905437,
+            "maxX": 0.2513599018884824,
+            "minY": -0.8915190754418422,
+            "maxY": 0.6435988407526997
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6551058851506015,
+            "maxX": 0.33328668344271944,
+            "minY": -0.8669502205723042,
+            "maxY": 0.6254337884326726
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6263573721888097,
+            "maxX": 0.4126417746822196,
+            "minY": -0.8561178592660433,
+            "maxY": 0.6291411321129627
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.47653878411455747,
+            "maxX": 0.4058518688645581,
+            "minY": -0.9013833559244766,
+            "maxY": 0.5361253308831619
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.34824195499889493,
+            "maxX": 0.2917843710294869,
+            "minY": -0.8773673857446765,
+            "maxY": 0.5349273222878989
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2543204777819208,
+            "maxX": 0.21688889971751504,
+            "minY": -0.865250074166835,
+            "maxY": 0.31017398156802256
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5633380107022395,
+            "maxX": 0.5370272298179123,
+            "minY": -0.8646377893933789,
+            "maxY": 0.5896909842348038
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4811809169829126,
+            "maxX": 0.2638887766121705,
+            "minY": -0.8448484476865041,
+            "maxY": 0.25446682828087946
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.40207905058907684,
+            "maxX": 0.4916267105836983,
+            "minY": -0.8512179387262047,
+            "maxY": 0.6954603220329174
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2615413466408167,
+            "maxX": 0.22411529948183007,
+            "minY": -0.8569671698994229,
+            "maxY": 0.879502280693054
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.257168055756007,
+            "maxX": 0.17772107335666695,
+            "minY": -0.856594673441029,
+            "maxY": 0.6314241440516447
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4321648615891782,
+            "maxX": 0.25132212170742413,
+            "minY": -0.8914660690508821,
+            "maxY": 0.6434459472528288
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4618772235692728,
+            "maxX": 0.36840888931781224,
+            "minY": -0.885597881119772,
+            "maxY": 0.5815438550199026
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3705230633304765,
+            "maxX": 0.2664004270035061,
+            "minY": -0.8630548787414456,
+            "maxY": 0.6785550806630536
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3433567444347432,
+            "maxX": 0.27640253192029063,
+            "minY": -0.9419262476034599,
+            "maxY": 0.6404573565772134
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6912315653498299,
+            "maxX": 0.6445771940992637,
+            "minY": -0.7214324377675738,
+            "maxY": 0.27596149381977797
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2238951536286519,
+            "maxX": 0.242438944977463,
+            "minY": -0.8562430793535148,
+            "maxY": 0.33654372028601964
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "sg",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.30752591969867843,
+            "maxX": 0.2759181597021071,
+            "minY": -0.9008145586567479,
+            "maxY": 0.7292635579365557
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.7117143951473249,
+            "maxX": 0.3686284574180837,
+            "minY": -0.8675092298885809,
+            "maxY": 0.7072462559061139
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6806102275600318,
+            "maxX": 0.45445827801336985,
+            "minY": -0.8620671463417072,
+            "maxY": 0.7111077128935647
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5172210561591872,
+            "maxX": 0.44579481621727435,
+            "minY": -0.9124832188767978,
+            "maxY": 0.6104088424255483
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3785461013761651,
+            "maxX": 0.3210393034835088,
+            "minY": -0.882995247138401,
+            "maxY": 0.6102131035023729
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.26158719846917283,
+            "maxX": 0.22651095284158304,
+            "minY": -0.868717233294107,
+            "maxY": 0.31052075150863806
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5767856150292713,
+            "maxX": 0.554376679165375,
+            "minY": -0.8618181206020479,
+            "maxY": 0.5895812479321001
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4921609030682091,
+            "maxX": 0.2717959375328712,
+            "minY": -0.8445650542919343,
+            "maxY": 0.253859167988011
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.42478048480734465,
+            "maxX": 0.5051801341224036,
+            "minY": -0.8541411980552253,
+            "maxY": 0.695333689241535
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.26990477750811354,
+            "maxX": 0.23393237099429737,
+            "minY": -0.8593257066121295,
+            "maxY": 0.8792318472054962
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2663403416844533,
+            "maxX": 0.1853527404402262,
+            "minY": -0.8593256493144584,
+            "maxY": 0.6312358487947971
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.46783465350025705,
+            "maxX": 0.27634816530032763,
+            "minY": -0.9003407029903286,
+            "maxY": 0.7294520890605516
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5025062670446716,
+            "maxX": 0.40686344903766514,
+            "minY": -0.8920569367226947,
+            "maxY": 0.658692288851376
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4012756954021447,
+            "maxX": 0.2945037359520983,
+            "minY": -0.8675997761786106,
+            "maxY": 0.7707626452821935
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3693239277843399,
+            "maxX": 0.30293290094156466,
+            "minY": -0.9461953637390101,
+            "maxY": 0.7303647639241153
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.7506332937757118,
+            "maxX": 0.7042528173811204,
+            "minY": -0.7261261484894739,
+            "maxY": 0.3336556371652134
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2295591241165369,
+            "maxX": 0.2496678768733871,
+            "minY": -0.8596633286461042,
+            "maxY": 0.3318849846916202
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "sf",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.33230687423309846,
+            "maxX": 0.30246181382700704,
+            "minY": -0.9061233097298367,
+            "maxY": 0.7800948762172351
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.7684263786803488,
+            "maxX": 0.40662438023922026,
+            "minY": -0.8688636982288317,
+            "maxY": 0.7600617457744985
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.734345496357521,
+            "maxX": 0.4995288160099652,
+            "minY": -0.8634589436995685,
+            "maxY": 0.7636091509095261
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5579251986556973,
+            "maxX": 0.48865949598869163,
+            "minY": -0.9199007972062899,
+            "maxY": 0.657256340859512
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4075519911561777,
+            "maxX": 0.3540843675535849,
+            "minY": -0.890740780409627,
+            "maxY": 0.6556030493045769
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2700815551288434,
+            "maxX": 0.23846097756113208,
+            "minY": -0.871362826069157,
+            "maxY": 0.3090817222979045
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5934378491314284,
+            "maxX": 0.5764572544617474,
+            "minY": -0.860209555665439,
+            "maxY": 0.5889133930770053
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.506383520520418,
+            "maxX": 0.2823443836041706,
+            "minY": -0.8432075921919316,
+            "maxY": 0.2523458751654765
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4303731435190183,
+            "maxX": 0.5229620209005307,
+            "minY": -0.8552399245041395,
+            "maxY": 0.6947427125699556
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2789563636912335,
+            "maxX": 0.24559812365871064,
+            "minY": -0.8591880219908147,
+            "maxY": 0.8788380523883674
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2744517859809943,
+            "maxX": 0.19618711687786555,
+            "minY": -0.8591880219908147,
+            "maxY": 0.6308638105797424
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5025174924795944,
+            "maxX": 0.3029894909691982,
+            "minY": -0.902838295212389,
+            "maxY": 0.7834358044031028
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5465420356086662,
+            "maxX": 0.45071379123746896,
+            "minY": -0.9003338614579693,
+            "maxY": 0.707982798341903
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4323944873590394,
+            "maxX": 0.31991268196027095,
+            "minY": -0.8667189191860089,
+            "maxY": 0.826777055376614
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3948753490941985,
+            "maxX": 0.33023052544011255,
+            "minY": -0.9502264606101745,
+            "maxY": 0.7831584172026779
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.8092451421886919,
+            "maxX": 0.7662641938268083,
+            "minY": -0.7293902439692983,
+            "maxY": 0.3688978999496124
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.24050459112259545,
+            "maxX": 0.2587828992451234,
+            "minY": -0.8594622052946996,
+            "maxY": 0.33141029221961027
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "pf",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3770001752999482,
+            "maxX": 0.3538674534949746,
+            "minY": -0.9061320925831089,
+            "maxY": 0.8643437383501024
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.8543975211135537,
+            "maxX": 0.47061260279390993,
+            "minY": -0.870002137024524,
+            "maxY": 0.8421320450222958
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.813806685317943,
+            "maxX": 0.5737204889347485,
+            "minY": -0.8634370310085776,
+            "maxY": 0.8460296921775727
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6221796846135497,
+            "maxX": 0.5597630782799556,
+            "minY": -0.9181182421248538,
+            "maxY": 0.7403055106770585
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4595478670500898,
+            "maxX": 0.4124343310090702,
+            "minY": -0.887032755373382,
+            "maxY": 0.7391326264365095
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2883360629303543,
+            "maxX": 0.2636022757109176,
+            "minY": -0.8682852828082946,
+            "maxY": 0.3076401679710576
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6305771584891818,
+            "maxX": 0.6261813964847468,
+            "minY": -0.8603262445692413,
+            "maxY": 0.58704241102189
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5379264795429662,
+            "maxX": 0.30562403781108355,
+            "minY": -0.8442406481878223,
+            "maxY": 0.25124430305347595
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4740603951746475,
+            "maxX": 0.5624509153275872,
+            "minY": -0.8516736457414051,
+            "maxY": 0.6932696510184936
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.30149677944590275,
+            "maxX": 0.2715503496167338,
+            "minY": -0.860648336743641,
+            "maxY": 0.8771649253730607
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2962761390794462,
+            "maxX": 0.2214728568303413,
+            "minY": -0.8602837273769132,
+            "maxY": 0.6293476388522727
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5529230678072757,
+            "maxX": 0.35437448858591275,
+            "minY": -0.9060710560679387,
+            "maxY": 0.8642952510401493
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6135161315483726,
+            "maxX": 0.5235964268007468,
+            "minY": -0.8984594998159108,
+            "maxY": 0.7936254536184641
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4767525620612775,
+            "maxX": 0.3740793000917794,
+            "minY": -0.868423640621678,
+            "maxY": 0.9108447437411632
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4302903141796019,
+            "maxX": 0.3815022705357048,
+            "minY": -0.9573687853979639,
+            "maxY": 0.8615594297655367
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.893989841301491,
+            "maxX": 0.8733480846550306,
+            "minY": -0.7330877651843737,
+            "maxY": 0.4241623287972211
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2632796268163003,
+            "maxX": 0.2793131441967918,
+            "minY": -0.8596706180888491,
+            "maxY": 0.33100939944518937
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "c",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.36713690746180244,
+            "maxX": 0.34118865164875817,
+            "minY": -0.9073533788714255,
+            "maxY": 0.9029097832236418
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.83350036736645,
+            "maxX": 0.446728177585808,
+            "minY": -0.8714781695017582,
+            "maxY": 0.8826626239486292
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.7991588353121123,
+            "maxX": 0.5474912650987214,
+            "minY": -0.8636450050874473,
+            "maxY": 0.8867167874083614
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6051211972006787,
+            "maxX": 0.5348118055122622,
+            "minY": -0.9191485786081725,
+            "maxY": 0.7767050171219407
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4475750749782586,
+            "maxX": 0.39266740432502467,
+            "minY": -0.8879082441155418,
+            "maxY": 0.7755096564008171
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.27214857698332695,
+            "maxX": 0.24158616661015767,
+            "minY": -0.8674410756645792,
+            "maxY": 0.30762376330112695
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5957895260915662,
+            "maxX": 0.5800640243951997,
+            "minY": -0.8610795001206578,
+            "maxY": 0.5871048083685702
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5084443396221429,
+            "maxX": 0.2843056358933342,
+            "minY": -0.844418067644896,
+            "maxY": 0.25116575504717303
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.42889928331346455,
+            "maxX": 0.5256115778617695,
+            "minY": -0.8518156591821032,
+            "maxY": 0.693194454812416
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.28302143028328913,
+            "maxX": 0.24880489342522302,
+            "minY": -0.8595867409147554,
+            "maxY": 0.8772357628961622
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2787106051712146,
+            "maxX": 0.20207404634986256,
+            "minY": -0.8592224335536358,
+            "maxY": 0.6292521766078509
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.5499944748358169,
+            "maxX": 0.34161752997714057,
+            "minY": -0.9072898934811804,
+            "maxY": 0.903024818894154
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6009171117664344,
+            "maxX": 0.4989844153966961,
+            "minY": -0.8989171131313337,
+            "maxY": 0.8320376829642562
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4702119174943194,
+            "maxX": 0.35896765133959546,
+            "minY": -0.8695606917145895,
+            "maxY": 0.9525122592080013
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4333360912532363,
+            "maxX": 0.36932004069820545,
+            "minY": -0.9619344512474879,
+            "maxY": 0.9011374207872125
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.88163086658138,
+            "maxX": 0.8383317458880409,
+            "minY": -0.7344913764544697,
+            "maxY": 0.44837235478864207
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.24627285301612703,
+            "maxX": 0.2597130118959184,
+            "minY": -0.8587379735670368,
+            "maxY": 0.3309815567750068
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "referee",
+      "width": 390,
+      "height": 844,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.28592355326867036,
+            "maxX": 0.2542920922919152,
+            "minY": -0.8975419463943457,
+            "maxY": 0.6538014586746025
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.660138915871746,
+            "maxX": 0.3347262506857579,
+            "minY": -0.8662268417987131,
+            "maxY": 0.6341581139750684
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6320776950417518,
+            "maxX": 0.4144526243995402,
+            "minY": -0.8605400269766464,
+            "maxY": 0.6376895053024569
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.47986237767638384,
+            "maxX": 0.40738942993374494,
+            "minY": -0.9083632623930786,
+            "maxY": 0.541058076705732
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3512246846046554,
+            "maxX": 0.2951253014340602,
+            "minY": -0.8804994422971059,
+            "maxY": 0.5408048325865062
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2534026864192603,
+            "maxX": 0.2157341020649875,
+            "minY": -0.8682563160805346,
+            "maxY": 0.31050083946904034
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.559207350118259,
+            "maxX": 0.531352312167672,
+            "minY": -0.862228549097102,
+            "maxY": 0.5895932245282454
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.47728531517713524,
+            "maxX": 0.2611317881889681,
+            "minY": -0.8446251468835811,
+            "maxY": 0.25381614106469635
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.39666201682581037,
+            "maxX": 0.4867728429599694,
+            "minY": -0.8541984675754851,
+            "maxY": 0.6953067008986018
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.26071458901530303,
+            "maxX": 0.2226174867403342,
+            "minY": -0.8588238909901279,
+            "maxY": 0.8792781191610685
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2576071508525273,
+            "maxX": 0.17594498257545438,
+            "minY": -0.858823833807856,
+            "maxY": 0.6311822077525735
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4370342620634589,
+            "maxX": 0.2546414024358339,
+            "minY": -0.8970866268054191,
+            "maxY": 0.6540556066266299
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4669613431850449,
+            "maxX": 0.3707088534979321,
+            "minY": -0.8889118855451207,
+            "maxY": 0.5873153807644805
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3739445804341069,
+            "maxX": 0.2712176196920929,
+            "minY": -0.8661895177823218,
+            "maxY": 0.6915281338371404
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.34711082845285185,
+            "maxX": 0.2801506319717573,
+            "minY": -0.9410867646220007,
+            "maxY": 0.6551599659969847
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.6980299319471247,
+            "maxX": 0.6475940682169655,
+            "minY": -0.723381954159489,
+            "maxY": 0.2831596046056528
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.22130585225416757,
+            "maxX": 0.2398277937976371,
+            "minY": -0.8592250186231609,
+            "maxY": 0.3318838912193708
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "pg",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10435421960193722,
+            "maxX": 0.09200456804890933,
+            "minY": -0.8915190754418422,
+            "maxY": 0.6435988407526997
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.23978659100654753,
+            "maxX": 0.12199200077745578,
+            "minY": -0.8669502205723042,
+            "maxY": 0.6254337884326726
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.22926385250599066,
+            "maxX": 0.15103812482953766,
+            "minY": -0.8561178592660433,
+            "maxY": 0.6291411321129627
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17442617005183214,
+            "maxX": 0.1485528344266003,
+            "minY": -0.9013833559244766,
+            "maxY": 0.5361253308831619
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.12746603736500392,
+            "maxX": 0.10680102442075587,
+            "minY": -0.8773673857446765,
+            "maxY": 0.5349273222878989
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09308821943564735,
+            "maxX": 0.07938724268744439,
+            "minY": -0.865250074166835,
+            "maxY": 0.31017398156802256
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.20619705032820212,
+            "maxX": 0.19656658814189054,
+            "minY": -0.8646377893933789,
+            "maxY": 0.5896909842348038
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17612531707635687,
+            "maxX": 0.09659047733050669,
+            "minY": -0.8448484476865041,
+            "maxY": 0.25446682828087946
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1471718802125241,
+            "maxX": 0.1799487619494168,
+            "minY": -0.8512179387262047,
+            "maxY": 0.6954603220329174
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09573125404581873,
+            "maxX": 0.08203230175959311,
+            "minY": -0.8569671698994229,
+            "maxY": 0.879502280693054
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09413051050722657,
+            "maxX": 0.06505075178865624,
+            "minY": -0.856594673441029,
+            "maxY": 0.6314241440516447
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1581841062066825,
+            "maxX": 0.09199073947397361,
+            "minY": -0.8914660690508821,
+            "maxY": 0.6434459472528288
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.169059639691352,
+            "maxX": 0.13484768442542447,
+            "minY": -0.885597881119772,
+            "maxY": 0.5815438550199026
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.13562152967820348,
+            "maxX": 0.0975098097602561,
+            "minY": -0.8630548787414456,
+            "maxY": 0.6785550806630536
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.12567791728536543,
+            "maxX": 0.10117085249433905,
+            "minY": -0.9419262476034599,
+            "maxY": 0.6404573565772134
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.324026907230782,
+            "maxX": 0.29755404845946576,
+            "minY": -0.9099175941869236,
+            "maxY": 0.35254697214037567
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.08195172238325964,
+            "maxX": 0.0887392549221345,
+            "minY": -0.856243079353515,
+            "maxY": 0.3365437202860196
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "sg",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.11256285984020314,
+            "maxX": 0.10099355907413139,
+            "minY": -0.9008145586567479,
+            "maxY": 0.7292635579365557
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.260506846986165,
+            "maxX": 0.13492805232846314,
+            "minY": -0.8675092298885809,
+            "maxY": 0.7072462559061139
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2491218747535636,
+            "maxX": 0.16634410361689864,
+            "minY": -0.8620671463417072,
+            "maxY": 0.7111077128935647
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.18931698930579158,
+            "maxX": 0.16317304071319166,
+            "minY": -0.9124832188767978,
+            "maxY": 0.6104088424255483
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.13855818005198123,
+            "maxX": 0.11750912624411845,
+            "minY": -0.882995247138401,
+            "maxY": 0.6102131035023729
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09574803706343794,
+            "maxX": 0.08290917611744823,
+            "minY": -0.868717233294107,
+            "maxY": 0.31052075150863806
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.21111923965953835,
+            "maxX": 0.20291695898905898,
+            "minY": -0.8618181206020479,
+            "maxY": 0.5895812479321001
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1801442909435926,
+            "maxX": 0.09948471352146862,
+            "minY": -0.8445650542919343,
+            "maxY": 0.253859167988011
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1554812232447675,
+            "maxX": 0.18490968399344163,
+            "minY": -0.8541411980552253,
+            "maxY": 0.695333689241535
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09879249746042645,
+            "maxX": 0.08562561722965772,
+            "minY": -0.8593257066121295,
+            "maxY": 0.8792318472054962
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09748781689749636,
+            "maxX": 0.06784414973415456,
+            "minY": -0.8593256493144584,
+            "maxY": 0.6312358487947971
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17124022125334282,
+            "maxX": 0.10115095283115333,
+            "minY": -0.9003407029903286,
+            "maxY": 0.7294520890605516
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1839309758396802,
+            "maxX": 0.14892310031298198,
+            "minY": -0.8920569367226947,
+            "maxY": 0.658692288851376
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1468778303405746,
+            "maxX": 0.10779638602454585,
+            "minY": -0.8675997761786106,
+            "maxY": 0.7707626452821935
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.13518261341858728,
+            "maxX": 0.1108816899176581,
+            "minY": -0.9461953637390101,
+            "maxY": 0.7303647639241153
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.35239276322620106,
+            "maxX": 0.32531663020771073,
+            "minY": -0.9167864503903611,
+            "maxY": 0.4282998460219682
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.08402488979884379,
+            "maxX": 0.0913852408233963,
+            "minY": -0.8596633286461042,
+            "maxY": 0.3318849846916202
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "sf",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.12163336392876095,
+            "maxX": 0.11070925920710063,
+            "minY": -0.9061233097298367,
+            "maxY": 0.7800948762172351
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2812649770974172,
+            "maxX": 0.14883559462345222,
+            "minY": -0.8688636982288317,
+            "maxY": 0.7600617457744985
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2687904462224465,
+            "maxX": 0.18284114769176632,
+            "minY": -0.8634589436995685,
+            "maxY": 0.7636091509095261
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2042158137406219,
+            "maxX": 0.1788626806171479,
+            "minY": -0.9199007972062899,
+            "maxY": 0.657256340859512
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1491751254757915,
+            "maxX": 0.1296045194356098,
+            "minY": -0.890740780409627,
+            "maxY": 0.6556030493045769
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09885720288286565,
+            "maxX": 0.08728321053676337,
+            "minY": -0.871362826069157,
+            "maxY": 0.3090817222979045
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.21721441074334147,
+            "maxX": 0.2109990507513141,
+            "minY": -0.860209555665439,
+            "maxY": 0.5889133930770053
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.18535015618058615,
+            "maxX": 0.1033457319937295,
+            "minY": -0.8432075921919316,
+            "maxY": 0.2523458751654765
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.15752828860860105,
+            "maxX": 0.19141833871451971,
+            "minY": -0.8552399245041395,
+            "maxY": 0.6947427125699556
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1021056244575276,
+            "maxX": 0.08989560033671247,
+            "minY": -0.8591880219908147,
+            "maxY": 0.8788380523883674
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10045682636618695,
+            "maxX": 0.07180982650572863,
+            "minY": -0.8591880219908147,
+            "maxY": 0.6308638105797424
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.183935084654505,
+            "maxX": 0.11090240340858956,
+            "minY": -0.902838295212389,
+            "maxY": 0.7834358044031028
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.20004926612780077,
+            "maxX": 0.1649735195030711,
+            "minY": -0.9003338614579693,
+            "maxY": 0.707982798341903
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.15826815549063847,
+            "maxX": 0.1170967520912749,
+            "minY": -0.8667189191860089,
+            "maxY": 0.826777055376614
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1445351293250114,
+            "maxX": 0.1208733637362788,
+            "minY": -0.9502264606101745,
+            "maxY": 0.7831584172026779
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3802584646172343,
+            "maxX": 0.3543604533950415,
+            "minY": -0.9217360925310182,
+            "maxY": 0.473587515506474
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.08803122874320247,
+            "maxX": 0.094721587192754,
+            "minY": -0.8594622052946997,
+            "maxY": 0.3314102922196102
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "pf",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1379923290160392,
+            "maxX": 0.12952512298408259,
+            "minY": -0.9061320925831089,
+            "maxY": 0.8643437383501024
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3127327560264028,
+            "maxX": 0.17225702633205303,
+            "minY": -0.870002137024524,
+            "maxY": 0.8421320450222958
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2978754049291852,
+            "maxX": 0.20999732005253943,
+            "minY": -0.8634370310085776,
+            "maxY": 0.8460296921775727
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.22773470510452637,
+            "maxX": 0.2048885277243773,
+            "minY": -0.9181182421248538,
+            "maxY": 0.7403055106770585
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1682070317822575,
+            "maxX": 0.15096219479694617,
+            "minY": -0.887032755373382,
+            "maxY": 0.7391326264365095
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10553884976689638,
+            "maxX": 0.09648561019988103,
+            "minY": -0.8682852828082946,
+            "maxY": 0.3076401679710576
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.23080840918709844,
+            "maxX": 0.22919944060688596,
+            "minY": -0.8603262445692413,
+            "maxY": 0.58704241102189
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.19689573802578247,
+            "maxX": 0.11186671928543064,
+            "minY": -0.8442406481878223,
+            "maxY": 0.25124430305347595
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1735190122189381,
+            "maxX": 0.20587234926749243,
+            "minY": -0.8516736457414051,
+            "maxY": 0.6932696510184936
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.11035603034792789,
+            "maxX": 0.09939482165736264,
+            "minY": -0.860648336743641,
+            "maxY": 0.8771649253730607
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10844513382765619,
+            "maxX": 0.08106509580145226,
+            "minY": -0.8602837273769132,
+            "maxY": 0.6293476388522727
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.20238489765346757,
+            "maxX": 0.12971071163277686,
+            "minY": -0.9060710560679387,
+            "maxY": 0.8642952510401493
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.22456360879385048,
+            "maxX": 0.19165054854742677,
+            "minY": -0.8984594998159108,
+            "maxY": 0.7936254536184641
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1745044186010183,
+            "maxX": 0.136923209161069,
+            "minY": -0.868423640621678,
+            "maxY": 0.9108447437411632
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.15749797081512035,
+            "maxX": 0.13964021845412708,
+            "minY": -0.9573687853979639,
+            "maxY": 0.8615594297655367
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.42010859831037545,
+            "maxX": 0.4050151913403374,
+            "minY": -0.9271958498373286,
+            "maxY": 0.5454064150848806
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09636751191945644,
+            "maxX": 0.10223621583688264,
+            "minY": -0.8596706180888493,
+            "maxY": 0.3310093994451891
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "c",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1343821044329555,
+            "maxX": 0.12488433629346564,
+            "minY": -0.9073533788714255,
+            "maxY": 0.9029097832236418
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.30508382877305384,
+            "maxX": 0.1635146763873796,
+            "minY": -0.8714781695017582,
+            "maxY": 0.8826626239486292
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.29251389299945196,
+            "maxX": 0.20039670996651834,
+            "minY": -0.8636450050874473,
+            "maxY": 0.8867167874083614
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.2214908342476494,
+            "maxX": 0.19575568252506376,
+            "minY": -0.9191485786081725,
+            "maxY": 0.7767050171219407
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.16382466389210393,
+            "maxX": 0.1437269614221857,
+            "minY": -0.8879082441155418,
+            "maxY": 0.7755096564008171
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09961378916190464,
+            "maxX": 0.08842711482048778,
+            "minY": -0.8674410756645792,
+            "maxY": 0.30762376330112695
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.21807518854156024,
+            "maxX": 0.21231922675108944,
+            "minY": -0.8610795001206578,
+            "maxY": 0.5871048083685702
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.18610447208322864,
+            "maxX": 0.104063603731997,
+            "minY": -0.844418067644896,
+            "maxY": 0.25116575504717303
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1569888156435113,
+            "maxX": 0.19238814870373552,
+            "minY": -0.8518156591821032,
+            "maxY": 0.693194454812416
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10359354951272616,
+            "maxX": 0.09106936538429418,
+            "minY": -0.8595867409147554,
+            "maxY": 0.8772357628961622
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10201567014775582,
+            "maxX": 0.07396460298016318,
+            "minY": -0.8592224335536358,
+            "maxY": 0.6292521766078509
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.20131295288699608,
+            "maxX": 0.12504131743903382,
+            "minY": -0.9072898934811804,
+            "maxY": 0.903024818894154
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.21995202451104326,
+            "maxX": 0.18264188224452083,
+            "minY": -0.8989171131313337,
+            "maxY": 0.8320376829642562
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.1721103646026546,
+            "maxX": 0.1313919342619868,
+            "minY": -0.8695606917145895,
+            "maxY": 0.9525122592080013
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.15861280815364434,
+            "maxX": 0.13518119063922557,
+            "minY": -0.9619344512474879,
+            "maxY": 0.9011374207872125
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.4152998548825271,
+            "maxX": 0.3886289018353229,
+            "minY": -0.9291732669488466,
+            "maxY": 0.5770214270679538
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09014256965287075,
+            "maxX": 0.09506203374779437,
+            "minY": -0.858737973567037,
+            "maxY": 0.3309815567750066
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    },
+    {
+      "id": "referee",
+      "width": 844,
+      "height": 390,
+      "clips": [
+        {
+          "name": "idle",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.10465580554357581,
+            "maxX": 0.09307782957343304,
+            "minY": -0.8975419463943457,
+            "maxY": 0.6538014586746025
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_stationary",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.24162881728845154,
+            "maxX": 0.12251892158454565,
+            "minY": -0.8662268417987131,
+            "maxY": 0.6341581139750684
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_crossover",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.23135764642153225,
+            "maxX": 0.15170094513139112,
+            "minY": -0.8605400269766464,
+            "maxY": 0.6376895053024569
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_between_legs",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17564269578934472,
+            "maxX": 0.14911562364220923,
+            "minY": -0.9083632623930786,
+            "maxY": 0.541058076705732
+          },
+          "pass": true
+        },
+        {
+          "name": "dribble_behind_back",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.12855779761364705,
+            "maxX": 0.10802389591475654,
+            "minY": -0.8804994422971059,
+            "maxY": 0.5408048325865062
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_set",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09275228280754483,
+            "maxX": 0.07896455530410897,
+            "minY": -0.8682563160805346,
+            "maxY": 0.31050083946904034
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_jump",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.204685116085984,
+            "maxX": 0.19448941376681803,
+            "minY": -0.862228549097102,
+            "maxY": 0.5895932245282454
+          },
+          "pass": true
+        },
+        {
+          "name": "shoot_fadeaway",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17469942074707642,
+            "maxX": 0.09558134450109815,
+            "minY": -0.8446251468835811,
+            "maxY": 0.25381614106469635
+          },
+          "pass": true
+        },
+        {
+          "name": "layup",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.145189098361675,
+            "maxX": 0.17817211423936996,
+            "minY": -0.8541984675754851,
+            "maxY": 0.6953067008986018
+          },
+          "pass": true
+        },
+        {
+          "name": "dunk",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09542863824415329,
+            "maxX": 0.08148406151417553,
+            "minY": -0.8588238909901279,
+            "maxY": 0.8792781191610685
+          },
+          "pass": true
+        },
+        {
+          "name": "block",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.09429123126811254,
+            "maxX": 0.06440065420382504,
+            "minY": -0.858823833807856,
+            "maxY": 0.6311822077525735
+          },
+          "pass": true
+        },
+        {
+          "name": "steal",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.15996643936295538,
+            "maxX": 0.09320568659702705,
+            "minY": -0.8970866268054191,
+            "maxY": 0.6540556066266299
+          },
+          "pass": true
+        },
+        {
+          "name": "eurostep",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.17092056589972404,
+            "maxX": 0.1356895339381354,
+            "minY": -0.8889118855451207,
+            "maxY": 0.5873153807644805
+          },
+          "pass": true
+        },
+        {
+          "name": "run",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.13687389809825137,
+            "maxX": 0.09927303344546594,
+            "minY": -0.8661895177823218,
+            "maxY": 0.6915281338371404
+          },
+          "pass": true
+        },
+        {
+          "name": "decelerate",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.12705201425115215,
+            "maxX": 0.10254275916540496,
+            "minY": -0.9410867646220007,
+            "maxY": 0.6551599659969847
+          },
+          "pass": true
+        },
+        {
+          "name": "defensive_slide",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.3274194204781752,
+            "maxX": 0.2988334070778084,
+            "minY": -0.9125069146308289,
+            "maxY": 0.362513474946339
+          },
+          "pass": true
+        },
+        {
+          "name": "celebration",
+          "poses": 5,
+          "ndc": {
+            "minX": -0.08100396757941838,
+            "maxX": 0.08778350249461779,
+            "minY": -0.8592250186231609,
+            "maxY": 0.3318838912193708
+          },
+          "pass": true
+        }
+      ],
+      "overflowPixels": 0,
+      "pass": true
+    }
+  ],
+  "framingPhases": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "framingPoses": 1020,
+  "pageErrors": [],
+  "pass": true,
+  "transitionResultsReusedAfterCameraOnlyChange": true,
+  "transitionGuardSha256": "2c703fb1b0ee1936ad289b8451834fb0d70119dbce0fa3752a47ba1ad78577fd",
+  "sourceSha256": {
+    "preview.js": "e7ac9589ac510460fdf06441367444de775b7276f3fb5a35e50fc3ffcb740e4b",
+    "asset-metadata.json": "c0ed82a5c2f9db14fa72e80afe3d050c09b9b361e6ff71f4866adb617c9dd1b4"
+  },
+  "minimumFullMeshYmeters": 0.003999999999999716,
+  "maximumPresentationRootLiftMeters": 0.06324999405212015,
+  "soloFramingAuditSourceSha256": "770ccf2e57287898bfe98cbeb57f20992a03d287827bbbed50f6519492b8b638",
+  "groupFramingReport": "group-framing-validation.json",
+  "groupFramingPass": true,
+  "subsequentSourceChanges": "Final source change affected group camera fitting only; the solo camera branch, animation data and floor guard are unchanged from the retained audits."
+}

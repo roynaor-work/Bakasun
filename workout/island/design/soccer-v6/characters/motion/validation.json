@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "kind": "authored-motion-validation",
+  "sampleRateHz": 30,
+  "capturedMocap": false,
+  "checks": {
+    "complete18BonePoses": true,
+    "normalizedQuaternions": true,
+    "uniform30Hz": true,
+    "identityRoot": true,
+    "closedLoops": true,
+    "exactFallGetupSeam": true
+  },
+  "clips": {
+    "idle": {
+      "durationSeconds": 2.4,
+      "framesIncludingEnd": 73,
+      "loop": true,
+      "maxAngularSpeedRadiansPerSecond": 0.057933104,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "run": {
+      "durationSeconds": 0.733333333,
+      "framesIncludingEnd": 23,
+      "loop": true,
+      "maxAngularSpeedRadiansPerSecond": 5.613148834,
+      "maxCanonicalPlantedSoleDriftMeters": 0.000142223,
+      "minimumCanonicalSoleHeightMeters": -0.000141607,
+      "loopAngularErrorRadians": 3e-08,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "sprint": {
+      "durationSeconds": 0.566666667,
+      "framesIncludingEnd": 18,
+      "loop": true,
+      "maxAngularSpeedRadiansPerSecond": 10.315746309,
+      "maxCanonicalPlantedSoleDriftMeters": 1.8639e-05,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 3e-08,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "turn_left": {
+      "durationSeconds": 0.5,
+      "framesIncludingEnd": 16,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 7.152156447,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "turn_right": {
+      "durationSeconds": 0.5,
+      "framesIncludingEnd": 16,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 7.152156447,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "decelerate": {
+      "durationSeconds": 0.433333333,
+      "framesIncludingEnd": 14,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 4.803267601,
+      "maxCanonicalPlantedSoleDriftMeters": 5.103e-06,
+      "minimumCanonicalSoleHeightMeters": -4.976e-06,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "kick_straight": {
+      "durationSeconds": 0.866666667,
+      "framesIncludingEnd": 27,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 11.375839577,
+      "maxCanonicalPlantedSoleDriftMeters": 9.4749e-05,
+      "minimumCanonicalSoleHeightMeters": -2.095e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "kick_curve": {
+      "durationSeconds": 0.933333333,
+      "framesIncludingEnd": 29,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 8.425163758,
+      "maxCanonicalPlantedSoleDriftMeters": 5.5831e-05,
+      "minimumCanonicalSoleHeightMeters": -2.3553e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "pass_short": {
+      "durationSeconds": 0.566666667,
+      "framesIncludingEnd": 18,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 13.896879433,
+      "maxCanonicalPlantedSoleDriftMeters": 2.526e-05,
+      "minimumCanonicalSoleHeightMeters": -1.2116e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "pass_long": {
+      "durationSeconds": 0.9,
+      "framesIncludingEnd": 28,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 8.879491382,
+      "maxCanonicalPlantedSoleDriftMeters": 4.4372e-05,
+      "minimumCanonicalSoleHeightMeters": -1.8697e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "header": {
+      "durationSeconds": 1.266666667,
+      "framesIncludingEnd": 39,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 14.677901268,
+      "maxCanonicalPlantedSoleDriftMeters": 8.8338e-05,
+      "minimumCanonicalSoleHeightMeters": -8.8236e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "dribble": {
+      "durationSeconds": 0.933333333,
+      "framesIncludingEnd": 29,
+      "loop": true,
+      "maxAngularSpeedRadiansPerSecond": 4.329894462,
+      "maxCanonicalPlantedSoleDriftMeters": 0.000114801,
+      "minimumCanonicalSoleHeightMeters": -0.0001139,
+      "loopAngularErrorRadians": 3e-08,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "slide": {
+      "durationSeconds": 1.466666667,
+      "framesIncludingEnd": 45,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 10.665960863,
+      "maxCanonicalPlantedSoleDriftMeters": 0.000253364,
+      "minimumCanonicalSoleHeightMeters": -0.0002522,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "fall": {
+      "durationSeconds": 0.866666667,
+      "framesIncludingEnd": 27,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 4.782540414,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "getup": {
+      "durationSeconds": 1.1,
+      "framesIncludingEnd": 34,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 9.568811832,
+      "maxCanonicalPlantedSoleDriftMeters": 0.000146144,
+      "minimumCanonicalSoleHeightMeters": -0.000144223,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "celebrate": {
+      "durationSeconds": 1.8,
+      "framesIncludingEnd": 55,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 10.380710069,
+      "maxCanonicalPlantedSoleDriftMeters": 1.7448e-05,
+      "minimumCanonicalSoleHeightMeters": -1.3633e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "keeper_dive_left": {
+      "durationSeconds": 1.466666667,
+      "framesIncludingEnd": 45,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 6.408913855,
+      "maxCanonicalPlantedSoleDriftMeters": 3.3868e-05,
+      "minimumCanonicalSoleHeightMeters": -3.1901e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "keeper_dive_right": {
+      "durationSeconds": 1.466666667,
+      "framesIncludingEnd": 45,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 6.408913855,
+      "maxCanonicalPlantedSoleDriftMeters": 3.3868e-05,
+      "minimumCanonicalSoleHeightMeters": -3.1901e-05,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "keeper_ready": {
+      "durationSeconds": 2.0,
+      "framesIncludingEnd": 61,
+      "loop": true,
+      "maxAngularSpeedRadiansPerSecond": 0.071172622,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 3e-08,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    },
+    "keeper_catch": {
+      "durationSeconds": 0.9,
+      "framesIncludingEnd": 28,
+      "loop": false,
+      "maxAngularSpeedRadiansPerSecond": 3.125414346,
+      "maxCanonicalPlantedSoleDriftMeters": 0,
+      "minimumCanonicalSoleHeightMeters": 0,
+      "loopAngularErrorRadians": 0,
+      "floorClearanceScope": "Canonical sole point only; whole skinned-mesh audit is separate."
+    }
+  },
+  "clipCount": 20,
+  "totalKeyframes": 670,
+  "pass": true
+}

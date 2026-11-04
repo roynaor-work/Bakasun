@@ -1,0 +1,34 @@
+{
+  "command": "npm test",
+  "exitCode": 1,
+  "fileSuites": 266,
+  "passedFileSuites": 262,
+  "failedFileSuites": 4,
+  "diagnosticCommand": "node --test --test-isolation=none --test-reporter=spec tests/cam-lab-keyframes.test.mjs tests/island-browser-csp.test.mjs tests/workout-dad-test.test.mjs tests/workout-royiki.test.mjs",
+  "diagnosticResults": {
+    "tests": 21,
+    "passed": 16,
+    "failed": 4,
+    "skipped": 1
+  },
+  "failures": [
+    {
+      "file": "tests/cam-lab-keyframes.test.mjs",
+      "reason": "spawnSync node EPERM"
+    },
+    {
+      "file": "tests/island-browser-csp.test.mjs",
+      "reason": "listen EPERM 127.0.0.1"
+    },
+    {
+      "file": "tests/workout-dad-test.test.mjs",
+      "reason": "spawnSync node EPERM"
+    },
+    {
+      "file": "tests/workout-royiki.test.mjs",
+      "reason": "listen EPERM 127.0.0.1"
+    }
+  ],
+  "testFilesModified": false,
+  "note": "Failures are sandbox permission denials in unchanged test files. No broader repository-serving exception was requested. HUD browser verification used an isolated server exposing only the new HUD directory."
+}
