@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "id": "sunset",
+  "environmentIds": [
+    "sunset"
+  ],
+  "units": "meters",
+  "up": "+Y",
+  "downhill": "+Z",
+  "label": "שקיעה",
+  "backgroundColor": "#887990",
+  "snowTint": "#fff3ed",
+  "fog": {
+    "type": "linear",
+    "color": "#b6abc0",
+    "nearMeters": 65,
+    "farMeters": 240
+  },
+  "hemisphere": {
+    "sky": "#e8d6ee",
+    "ground": "#7d91b3",
+    "intensity": 2.1
+  },
+  "sun": {
+    "color": "#ffcf9d",
+    "intensity": 3.0,
+    "position": [
+      -35,
+      22,
+      -18
+    ]
+  },
+  "exposure": 1.0,
+  "powderTint": "#fff0e3",
+  "ambientSnowRate": 5,
+  "backgrounds": {
+    "landscape": "sunset-landscape",
+    "portrait": "sunset-portrait",
+    "projection": "camera-backplate",
+    "objectFit": "cover",
+    "mipmaps": false,
+    "parallax": false,
+    "repeat": false,
+    "notes": "Baked distant lighting; foreground uses the live lights below. Not an HDR environment map."
+  },
+  "assets": [
+    "sunset-landscape",
+    "sunset-portrait",
+    "snow-albedo",
+    "snow-normal",
+    "snow-roughness",
+    "powder-spray",
+    "landing-cloud",
+    "snow-flecks",
+    "route-and-snow",
+    "safety-fence-sunset",
+    "route-marker-sunset"
+  ],
+  "surface": {
+    "albedo": "snow-albedo",
+    "normal": "snow-normal",
+    "roughness": "snow-roughness",
+    "normalScale": 0.22,
+    "roughnessChannel": "R",
+    "metalness": 0,
+    "repeatMeters": [
+      4,
+      4
+    ]
+  },
+  "effects": {
+    "powder": "powder-spray",
+    "landing": "landing-cloud",
+    "flakes": "snow-flecks",
+    "maxConcurrentLanding": 2,
+    "maxConcurrentPowder": 3,
+    "maxAmbientParticles": 48,
+    "maxTransparentScreenFraction": 0.12,
+    "reducedMotion": "Disable drifting fog, cones and ambient snow; show brief static contact cue."
+  },
+  "previewCamera": {
+    "position": [
+      0,
+      3.1,
+      -8
+    ],
+    "target": [
+      0,
+      0.2,
+      20
+    ],
+    "fovLandscape": 59,
+    "fovPortrait": 66,
+    "near": 0.1,
+    "far": 300
+  },
+  "loadPolicy": {
+    "oneEnvironmentAtATime": true,
+    "oneBackgroundOrientationAtATime": true,
+    "discardOldBackgroundOnRotate": true,
+    "shadowCastingLightsMax": 1,
+    "postprocessing": false,
+    "realtimeSpotLightsMax": 0
+  }
+}

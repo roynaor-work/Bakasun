@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "id": "night-floodlit",
+  "environmentIds": [
+    "night-floodlit"
+  ],
+  "units": "meters",
+  "up": "+Y",
+  "downhill": "+Z",
+  "label": "לילה עם זרקורים",
+  "backgroundColor": "#081d42",
+  "snowTint": "#b2cbed",
+  "fog": {
+    "type": "linear",
+    "color": "#152d50",
+    "nearMeters": 48,
+    "farMeters": 185
+  },
+  "hemisphere": {
+    "sky": "#98b9f5",
+    "ground": "#354564",
+    "intensity": 0.85
+  },
+  "sun": {
+    "color": "#afcfff",
+    "intensity": 0.9,
+    "position": [
+      -25,
+      35,
+      -15
+    ]
+  },
+  "exposure": 1.05,
+  "powderTint": "#d2eaff",
+  "ambientSnowRate": 8,
+  "backgrounds": {
+    "landscape": "night-floodlit-landscape",
+    "portrait": "night-floodlit-portrait",
+    "projection": "camera-backplate",
+    "objectFit": "cover",
+    "mipmaps": false,
+    "parallax": false,
+    "repeat": false,
+    "notes": "Baked distant lighting; foreground uses the live lights below. Not an HDR environment map."
+  },
+  "assets": [
+    "night-floodlit-landscape",
+    "night-floodlit-portrait",
+    "snow-albedo",
+    "snow-normal",
+    "snow-roughness",
+    "powder-spray",
+    "landing-cloud",
+    "snow-flecks",
+    "route-and-snow",
+    "safety-fence-night-floodlit",
+    "route-marker-night-floodlit",
+    "floodlight-tower",
+    "light-cone",
+    "light-pool"
+  ],
+  "surface": {
+    "albedo": "snow-albedo",
+    "normal": "snow-normal",
+    "roughness": "snow-roughness",
+    "normalScale": 0.22,
+    "roughnessChannel": "R",
+    "metalness": 0,
+    "repeatMeters": [
+      4,
+      4
+    ]
+  },
+  "effects": {
+    "powder": "powder-spray",
+    "landing": "landing-cloud",
+    "flakes": "snow-flecks",
+    "maxConcurrentLanding": 2,
+    "maxConcurrentPowder": 3,
+    "maxAmbientParticles": 48,
+    "maxTransparentScreenFraction": 0.12,
+    "reducedMotion": "Disable drifting fog, cones and ambient snow; show brief static contact cue."
+  },
+  "previewCamera": {
+    "position": [
+      0,
+      3.1,
+      -8
+    ],
+    "target": [
+      0,
+      0.2,
+      20
+    ],
+    "fovLandscape": 59,
+    "fovPortrait": 66,
+    "near": 0.1,
+    "far": 300
+  },
+  "loadPolicy": {
+    "oneEnvironmentAtATime": true,
+    "oneBackgroundOrientationAtATime": true,
+    "discardOldBackgroundOnRotate": true,
+    "shadowCastingLightsMax": 1,
+    "postprocessing": false,
+    "realtimeSpotLightsMax": 2
+  },
+  "floodlights": {
+    "model": "floodlight-tower",
+    "cone": "light-cone",
+    "pool": "light-pool",
+    "placements": [
+      {
+        "position": [
+          -9,
+          0,
+          20
+        ],
+        "target": [
+          1,
+          0,
+          33
+        ]
+      },
+      {
+        "position": [
+          9,
+          0,
+          48
+        ],
+        "target": [
+          -1,
+          0,
+          58
+        ]
+      }
+    ],
+    "color": "#fff0d0",
+    "intensityCandela": 420,
+    "distanceMeters": 44,
+    "angleRadians": 0.62,
+    "penumbra": 0.5,
+    "decay": 2,
+    "castShadow": false,
+    "maxLiveLights": 2,
+    "reducedMotion": "Static light pools, omit cone billboards.",
+    "lowEnd": "Emissive lenses + light pools; disable realtime spot lights."
+  }
+}

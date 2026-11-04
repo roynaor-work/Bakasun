@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "checkedDate": "2026-11-04",
+  "environmentCount": 3,
+  "assetCount": 23,
+  "runtimeFileCount": 30,
+  "runtimeFileBytes": 1064913,
+  "maxAllowedFileBytes": 1500000,
+  "largestRuntimeFile": {
+    "path": "backgrounds/sunset-landscape.webp",
+    "bytes": 138576,
+    "sha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511"
+  },
+  "allPackageFilesWithinLimit": true,
+  "checks": [
+    "SHA-256 and byte counts",
+    "complete environment membership and preload lists",
+    "independent GLB binary/accessor/normal/bounds/anchor checks",
+    "decoded WebP/PNG dimensions and alpha",
+    "exact tile edge equality",
+    "per-cell transparent gutters",
+    "half-texel UV coordinates",
+    "animation blank endpoints and durations",
+    "no unlisted runtime files",
+    "all package files under decimal 1.5 MB"
+  ],
+  "models": [
+    {
+      "id": "safety-fence-sunset",
+      "triangles": 592,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "route-marker-sunset",
+      "triangles": 129,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "safety-fence-fog",
+      "triangles": 592,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "route-marker-fog",
+      "triangles": 129,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "safety-fence-night-floodlit",
+      "triangles": 592,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "route-marker-night-floodlit",
+      "triangles": 129,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "anchors": 2
+    },
+    {
+      "id": "floodlight-tower",
+      "triangles": 488,
+      "drawCalls": 3,
+      "bounds": {
+        "min": [
+          -1.05,
+          -0.3,
+          -0.186
+        ],
+        "max": [
+          1.05,
+          11.97,
+          0.214
+        ]
+      },
+      "anchors": 4
+    }
+  ],
+  "images": [
+    {
+      "id": "sunset-landscape",
+      "size": [
+        1536,
+        864
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "sunset-portrait",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "fog-landscape",
+      "size": [
+        1536,
+        864
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "fog-portrait",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "night-floodlit-landscape",
+      "size": [
+        1536,
+        864
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "night-floodlit-portrait",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "snow-albedo",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "edgeMaxError": 0
+    },
+    {
+      "id": "snow-normal",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGB",
+      "edgeMaxError": 0
+    },
+    {
+      "id": "snow-roughness",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGB",
+      "edgeMaxError": 0
+    },
+    {
+      "id": "powder-spray",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "frameCoveragePixels": [
+        0,
+        373,
+        616,
+        884,
+        1195,
+        1571,
+        1990,
+        2450,
+        2929,
+        3416,
+        3906,
+        4336,
+        4673,
+        4794,
+        4265,
+        0
+      ]
+    },
+    {
+      "id": "landing-cloud",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "frameCoveragePixels": [
+        0,
+        1280,
+        1847,
+        2366,
+        2942,
+        3575,
+        4195,
+        4768,
+        5266,
+        5693,
+        6044,
+        6301,
+        6428,
+        6343,
+        5570,
+        0
+      ]
+    },
+    {
+      "id": "snow-flecks",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "frameCoveragePixels": [
+        747,
+        796,
+        811,
+        566,
+        716,
+        724,
+        636,
+        611,
+        831,
+        768,
+        893,
+        820,
+        661,
+        683,
+        657,
+        618
+      ]
+    },
+    {
+      "id": "route-and-snow",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "frameCoveragePixels": [
+        2289,
+        2576,
+        2242,
+        2242,
+        2853,
+        2076,
+        3724,
+        5210,
+        2356,
+        1481,
+        1481,
+        3116,
+        2379,
+        1036,
+        380,
+        2852
+      ]
+    },
+    {
+      "id": "fog-ribbon",
+      "size": [
+        512,
+        128
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "id": "light-cone",
+      "size": [
+        128,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "id": "light-pool",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Does not assert FPS or physical-device GPU memory.",
+    "Host gameplay integration is a separate task."
+  ]
+}

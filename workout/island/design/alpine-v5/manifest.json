@@ -1,0 +1,1167 @@
+{
+  "schemaVersion": 1,
+  "id": "island-alpine-v5-environments-fx",
+  "created": "2026-11-04",
+  "integrationStatus": "design-assets-ready-for-host-integration",
+  "byteUnits": "decimal: 1 MB = 1,000,000 bytes",
+  "maxFileBytes": 1500000,
+  "units": "meters",
+  "up": "+Y",
+  "downhill": "+Z",
+  "environmentIds": [
+    "sunset",
+    "fog",
+    "night-floodlit"
+  ],
+  "environments": [
+    {
+      "id": "sunset",
+      "label": "שקיעה",
+      "path": "environments/sunset.json",
+      "environmentIds": [
+        "sunset"
+      ],
+      "file": {
+        "path": "environments/sunset.json",
+        "bytes": 2222,
+        "sha256": "0b09acdce923c07126ff4ec3ad8b05711944ef8f4b1c597b7b2e4ca05d5e00fb"
+      },
+      "assetIds": [
+        "sunset-landscape",
+        "sunset-portrait",
+        "snow-albedo",
+        "snow-normal",
+        "snow-roughness",
+        "powder-spray",
+        "landing-cloud",
+        "snow-flecks",
+        "route-and-snow",
+        "safety-fence-sunset",
+        "route-marker-sunset"
+      ],
+      "residentBudgets": {
+        "landscape": {
+          "transferBytes": 437993,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 10813439,
+          "uniqueModelTriangles": 721,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        },
+        "portrait": {
+          "transferBytes": 374715,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 9191423,
+          "uniqueModelTriangles": 721,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        }
+      }
+    },
+    {
+      "id": "fog",
+      "label": "ערפל",
+      "path": "environments/fog.json",
+      "environmentIds": [
+        "fog"
+      ],
+      "file": {
+        "path": "environments/fog.json",
+        "bytes": 2407,
+        "sha256": "0cc8d6ca3688a2f523285abd1d5ecacc9679cf3bd4266556d393622718721938"
+      },
+      "assetIds": [
+        "fog-landscape",
+        "fog-portrait",
+        "snow-albedo",
+        "snow-normal",
+        "snow-roughness",
+        "powder-spray",
+        "landing-cloud",
+        "snow-flecks",
+        "route-and-snow",
+        "safety-fence-fog",
+        "route-marker-fog",
+        "fog-ribbon"
+      ],
+      "residentBudgets": {
+        "landscape": {
+          "transferBytes": 423569,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 11075583,
+          "uniqueModelTriangles": 721,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        },
+        "portrait": {
+          "transferBytes": 369711,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 9453567,
+          "uniqueModelTriangles": 721,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        }
+      }
+    },
+    {
+      "id": "night-floodlit",
+      "label": "לילה עם זרקורים",
+      "path": "environments/night-floodlit.json",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "file": {
+        "path": "environments/night-floodlit.json",
+        "bytes": 3153,
+        "sha256": "2caeeeb34f5eeaef301644eab65e836b1eae8809c1819838ada4e18551f6a35a"
+      },
+      "assetIds": [
+        "night-floodlit-landscape",
+        "night-floodlit-portrait",
+        "snow-albedo",
+        "snow-normal",
+        "snow-roughness",
+        "powder-spray",
+        "landing-cloud",
+        "snow-flecks",
+        "route-and-snow",
+        "safety-fence-night-floodlit",
+        "route-marker-night-floodlit",
+        "floodlight-tower",
+        "light-cone",
+        "light-pool"
+      ],
+      "residentBudgets": {
+        "landscape": {
+          "transferBytes": 475793,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 11206655,
+          "uniqueModelTriangles": 1209,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        },
+        "portrait": {
+          "transferBytes": 416493,
+          "decodedTextureBytesRGBA8WithMipmapsUpperBound": 9584639,
+          "uniqueModelTriangles": 1209,
+          "notes": "One source allocation per unique texture; excludes framebuffer, render targets and catalog thumbnails. Not a measured mobile GPU allocation."
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "sunset-landscape",
+      "kind": "background",
+      "path": "backgrounds/sunset-landscape.webp",
+      "environmentIds": [
+        "sunset"
+      ],
+      "width": 1536,
+      "height": 864,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "landscape",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "df576ef841b9d6ae68e6214ba9e385c02de841bf9791de246f06f360e7caf241",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.5,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/sunset-landscape.webp",
+        "bytes": 138576,
+        "sha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "sunset-portrait",
+      "kind": "background",
+      "path": "backgrounds/sunset-portrait.webp",
+      "environmentIds": [
+        "sunset"
+      ],
+      "width": 720,
+      "height": 1280,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "portrait",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "df576ef841b9d6ae68e6214ba9e385c02de841bf9791de246f06f360e7caf241",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.37,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/sunset-portrait.webp",
+        "bytes": 75298,
+        "sha256": "ed27e02931a703e8800848bf62aebc1b90d33276b3b74ad605e5b73cf67c0adc"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "fog-landscape",
+      "kind": "background",
+      "path": "backgrounds/fog-landscape.webp",
+      "environmentIds": [
+        "fog"
+      ],
+      "width": 1536,
+      "height": 864,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "landscape",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "1a69d4ae28e24ce178d32f6c8d44560eaaf1d80c737fc8deac29b4a9c579e082",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.5,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/fog-landscape.webp",
+        "bytes": 117206,
+        "sha256": "e436fe34d22048d8d50c294716823657b039fb8d37e25b412df9a2bb87d08a1f"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "fog-portrait",
+      "kind": "background",
+      "path": "backgrounds/fog-portrait.webp",
+      "environmentIds": [
+        "fog"
+      ],
+      "width": 720,
+      "height": 1280,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "portrait",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "1a69d4ae28e24ce178d32f6c8d44560eaaf1d80c737fc8deac29b4a9c579e082",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.37,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/fog-portrait.webp",
+        "bytes": 63348,
+        "sha256": "e1b3cf153377e107030f2a45b7b6dee27d5ace4e9b929ee3864540f2d34d2db5"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "night-floodlit-landscape",
+      "kind": "background",
+      "path": "backgrounds/night-floodlit-landscape.webp",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "width": 1536,
+      "height": 864,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "landscape",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "a0465e2c1aa2fb16e1482e2c4ec7184dde401f5ec60ba6211617b1dc45e77654",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.5,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/night-floodlit-landscape.webp",
+        "bytes": 125752,
+        "sha256": "95b8b39da5d3091f4c68e56ff91f6139f67d64b72e307298ff3db0a5a3948ba9"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "night-floodlit-portrait",
+      "kind": "background",
+      "path": "backgrounds/night-floodlit-portrait.webp",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "width": 720,
+      "height": 1280,
+      "colorSpace": "srgb",
+      "alpha": false,
+      "orientation": "portrait",
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "projection": "camera-backplate",
+      "hdr": false,
+      "lightingBaked": true,
+      "source": {
+        "sha256": "a0465e2c1aa2fb16e1482e2c4ec7184dde401f5ec60ba6211617b1dc45e77654",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "tool": "image_gen.imagegen"
+      },
+      "cropCenter": [
+        0.37,
+        0.5
+      ],
+      "file": {
+        "path": "backgrounds/night-floodlit-portrait.webp",
+        "bytes": 66452,
+        "sha256": "125140052db144f0b153840530742f6aaa5411f0f3838b6899645bc32d700bd2"
+      },
+      "provenance": "image_gen original background",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "snow-albedo",
+      "kind": "surface",
+      "path": "textures/snow-albedo.webp",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "width": 512,
+      "height": 512,
+      "colorSpace": "srgb",
+      "wrap": "repeat",
+      "tileMeters": [
+        4,
+        4
+      ],
+      "mipmaps": true,
+      "normalConvention": null,
+      "dataChannel": "RGB",
+      "file": {
+        "path": "textures/snow-albedo.webp",
+        "bytes": 67672,
+        "sha256": "b7f8a21b20f1e90960e421bb8b6470368b3874028b7f5d94dce13f6e9fedc69b"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "snow-normal",
+      "kind": "surface",
+      "path": "textures/snow-normal.webp",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "width": 256,
+      "height": 256,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "tileMeters": [
+        4,
+        4
+      ],
+      "mipmaps": true,
+      "normalConvention": "OpenGL +Y tangent space",
+      "dataChannel": "RGB",
+      "file": {
+        "path": "textures/snow-normal.webp",
+        "bytes": 50344,
+        "sha256": "393dbb74ff1ff74947dfdbee6e3ae808b7b99f507dc4c5c0b4462c8cc26419a0"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "snow-roughness",
+      "kind": "surface",
+      "path": "textures/snow-roughness.webp",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "width": 256,
+      "height": 256,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "tileMeters": [
+        4,
+        4
+      ],
+      "mipmaps": true,
+      "normalConvention": null,
+      "dataChannel": "R",
+      "file": {
+        "path": "textures/snow-roughness.webp",
+        "bytes": 6116,
+        "sha256": "5e6d3ac1b425b915c677f62f309709ef6a2a3f739ee222e867f0bde51fc2b289"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "powder-spray",
+      "kind": "animated-atlas",
+      "path": "atlases/powder-spray.png",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "metadata": "atlases/powder-spray.json",
+      "width": 512,
+      "height": 512,
+      "frameCount": 16,
+      "colorSpace": "srgb",
+      "alpha": true,
+      "file": {
+        "path": "atlases/powder-spray.png",
+        "bytes": 25611,
+        "sha256": "ec6e24a06beea2284a24e5c289f67e5f0ed9100983d837f727236cbe13f2d05a"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works",
+      "metadataFile": {
+        "path": "atlases/powder-spray.json",
+        "bytes": 4606,
+        "sha256": "2741f0fd5ec2dacfb4450653d3c4166da3b8fdbcb57dfbff1053986a9811151a"
+      }
+    },
+    {
+      "id": "landing-cloud",
+      "kind": "animated-atlas",
+      "path": "atlases/landing-cloud.png",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "metadata": "atlases/landing-cloud.json",
+      "width": 512,
+      "height": 512,
+      "frameCount": 16,
+      "colorSpace": "srgb",
+      "alpha": true,
+      "file": {
+        "path": "atlases/landing-cloud.png",
+        "bytes": 23178,
+        "sha256": "a860808e3d609f4ba4ac8e7ae0808ed186bb7f4d433cdef86b45f64ad5cc994d"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works",
+      "metadataFile": {
+        "path": "atlases/landing-cloud.json",
+        "bytes": 4608,
+        "sha256": "d7f1fb8df311f832a9c59801b042545402fb456d73d1bb36eb1582280d2d4d53"
+      }
+    },
+    {
+      "id": "snow-flecks",
+      "kind": "particle-atlas",
+      "path": "atlases/snow-flecks.png",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "metadata": "atlases/snow-flecks.json",
+      "width": 256,
+      "height": 256,
+      "alpha": true,
+      "colorSpace": "srgb",
+      "file": {
+        "path": "atlases/snow-flecks.png",
+        "bytes": 11600,
+        "sha256": "32556a814ff63ee72a373368ccff2f9b0c7466f98871efdce23a7378380e6b3c"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works",
+      "metadataFile": {
+        "path": "atlases/snow-flecks.json",
+        "bytes": 4051,
+        "sha256": "fb86dc9386dce54d6de66904414df9f54149ddefcc67e78befedb68e13835c66"
+      }
+    },
+    {
+      "id": "route-and-snow",
+      "kind": "decal-atlas",
+      "path": "decals/route-and-snow.png",
+      "environmentIds": [
+        "sunset",
+        "fog",
+        "night-floodlit"
+      ],
+      "metadata": "decals/route-and-snow.json",
+      "width": 512,
+      "height": 512,
+      "alpha": true,
+      "colorSpace": "srgb",
+      "file": {
+        "path": "decals/route-and-snow.png",
+        "bytes": 37845,
+        "sha256": "732a9cf0362b4c5633cb1f5e854a3616be79eadbc4ab0bcc3f969975beb2b69d"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works",
+      "metadataFile": {
+        "path": "decals/route-and-snow.json",
+        "bytes": 7030,
+        "sha256": "869fa41a8b68140d5c43234a85d5cea2ebc3eefc6f154059f78a1056825d75ae"
+      }
+    },
+    {
+      "id": "fog-ribbon",
+      "kind": "overlay",
+      "path": "effects/fog-ribbon.png",
+      "environmentIds": [
+        "fog"
+      ],
+      "width": 512,
+      "height": 128,
+      "alpha": true,
+      "colorSpace": "srgb",
+      "alphaMode": "straight",
+      "blendMode": "alpha",
+      "depthWrite": false,
+      "depthTest": true,
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "filter": "linear",
+      "file": {
+        "path": "effects/fog-ribbon.png",
+        "bytes": 6962,
+        "sha256": "7ac5d2432865800a4f980ad42e135721142094e6618189bd2b336907b2373e35"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "light-cone",
+      "kind": "overlay",
+      "path": "effects/light-cone.png",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "width": 128,
+      "height": 256,
+      "alpha": true,
+      "colorSpace": "srgb",
+      "alphaMode": "straight",
+      "blendMode": "alpha",
+      "depthWrite": false,
+      "depthTest": true,
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "filter": "linear",
+      "file": {
+        "path": "effects/light-cone.png",
+        "bytes": 4490,
+        "sha256": "57ba0d9b5ec102473fb8696cd6b97eaaf742523a0d9380a014639bf387266501"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "light-pool",
+      "kind": "overlay",
+      "path": "effects/light-pool.png",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "width": 256,
+      "height": 256,
+      "alpha": true,
+      "colorSpace": "srgb",
+      "alphaMode": "straight",
+      "blendMode": "alpha",
+      "depthWrite": false,
+      "depthTest": true,
+      "wrap": "clamp-to-edge",
+      "mipmaps": false,
+      "filter": "linear",
+      "file": {
+        "path": "effects/light-pool.png",
+        "bytes": 8154,
+        "sha256": "664a9fa3cc58e7687018c203102bb03489a22ee90c2e609a757583637994e40b"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "safety-fence-sunset",
+      "kind": "model",
+      "path": "models/safety-fence-sunset.glb",
+      "environmentIds": [
+        "sunset"
+      ],
+      "triangles": 592,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_snap_left": [
+          -3,
+          0,
+          0
+        ],
+        "anchor_snap_right": [
+          3,
+          0,
+          0
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "widthMeters": 6,
+      "burialMeters": 0.12,
+      "includesEndPosts": true,
+      "joinPolicy": "Align snap anchors; coincident end posts overlap intentionally. Suitable for instancing.",
+      "file": {
+        "path": "models/safety-fence-sunset.glb",
+        "bytes": 45108,
+        "sha256": "e0621641735e0da949ba835db4ff5c270f149ba0b7a4f40d453e5a5df9cf0d9f"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "route-marker-sunset",
+      "kind": "model",
+      "path": "models/route-marker-sunset.glb",
+      "environmentIds": [
+        "sunset"
+      ],
+      "triangles": 129,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_sign": [
+          0,
+          1.57,
+          -0.03
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "front": "-Z",
+      "arrow": "+Y on sign face",
+      "burialMeters": 0.12,
+      "file": {
+        "path": "models/route-marker-sunset.glb",
+        "bytes": 11648,
+        "sha256": "3b3404a2e7199c59bd1adec7a13ec1b466fd0d539d037a015a0989907b575d1b"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "safety-fence-fog",
+      "kind": "model",
+      "path": "models/safety-fence-fog.glb",
+      "environmentIds": [
+        "fog"
+      ],
+      "triangles": 592,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_snap_left": [
+          -3,
+          0,
+          0
+        ],
+        "anchor_snap_right": [
+          3,
+          0,
+          0
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "widthMeters": 6,
+      "burialMeters": 0.12,
+      "includesEndPosts": true,
+      "joinPolicy": "Align snap anchors; coincident end posts overlap intentionally. Suitable for instancing.",
+      "file": {
+        "path": "models/safety-fence-fog.glb",
+        "bytes": 45100,
+        "sha256": "3761d269cb610339ad2414df8cd34784e688017c2e922c13dee35cb6978870c1"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "route-marker-fog",
+      "kind": "model",
+      "path": "models/route-marker-fog.glb",
+      "environmentIds": [
+        "fog"
+      ],
+      "triangles": 129,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_sign": [
+          0,
+          1.57,
+          -0.03
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "front": "-Z",
+      "arrow": "+Y on sign face",
+      "burialMeters": 0.12,
+      "file": {
+        "path": "models/route-marker-fog.glb",
+        "bytes": 11640,
+        "sha256": "19eb9ad30dfee7ea39f758a38b1e87bb95bb261a7d5446e85ba5b4356b4be908"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "safety-fence-night-floodlit",
+      "kind": "model",
+      "path": "models/safety-fence-night-floodlit.glb",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "triangles": 592,
+      "bounds": {
+        "min": [
+          -3.052,
+          -0.12,
+          -0.052
+        ],
+        "max": [
+          3.052,
+          1.27,
+          0.052
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_snap_left": [
+          -3,
+          0,
+          0
+        ],
+        "anchor_snap_right": [
+          3,
+          0,
+          0
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "widthMeters": 6,
+      "burialMeters": 0.12,
+      "includesEndPosts": true,
+      "joinPolicy": "Align snap anchors; coincident end posts overlap intentionally. Suitable for instancing.",
+      "file": {
+        "path": "models/safety-fence-night-floodlit.glb",
+        "bytes": 45168,
+        "sha256": "7e56d9078b4afdd1c06036522055378edc80139c49ea27a4efa77a2cd1f9b56e"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "route-marker-night-floodlit",
+      "kind": "model",
+      "path": "models/route-marker-night-floodlit.glb",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "triangles": 129,
+      "bounds": {
+        "min": [
+          -0.25,
+          -0.12,
+          -0.045
+        ],
+        "max": [
+          0.25,
+          1.99,
+          0.045
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_sign": [
+          0,
+          1.57,
+          -0.03
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "front": "-Z",
+      "arrow": "+Y on sign face",
+      "burialMeters": 0.12,
+      "file": {
+        "path": "models/route-marker-night-floodlit.glb",
+        "bytes": 11704,
+        "sha256": "b4f895a3af357b90cd26fa009a779b713f34341d6e55ebff8efa52d6c2484b18"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    },
+    {
+      "id": "floodlight-tower",
+      "kind": "model",
+      "path": "models/floodlight-tower.glb",
+      "environmentIds": [
+        "night-floodlit"
+      ],
+      "triangles": 488,
+      "bounds": {
+        "min": [
+          -1.05,
+          -0.3,
+          -0.186
+        ],
+        "max": [
+          1.05,
+          11.97,
+          0.214
+        ]
+      },
+      "units": "meters",
+      "up": "+Y",
+      "forward": "+Z",
+      "anchors": {
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_lamp_0": [
+          -0.72,
+          11.75,
+          0.22
+        ],
+        "anchor_lamp_1": [
+          0.0,
+          11.75,
+          0.22
+        ],
+        "anchor_lamp_2": [
+          0.72,
+          11.75,
+          0.22
+        ]
+      },
+      "drawCalls": 3,
+      "compression": "none; small self-contained glTF 2.0, no decoder required",
+      "front": "+Z",
+      "heightMeters": 11.97,
+      "burialMeters": 0.3,
+      "lighting": "Emissive lenses only. Place runtime lights at anchors; emission alone does not illuminate snow.",
+      "file": {
+        "path": "models/floodlight-tower.glb",
+        "bytes": 37864,
+        "sha256": "76594e7697fea01bef67557699c2e04502aa4c5a1fbf514e12fd9fddc817770e"
+      },
+      "provenance": "original procedural geometry/particles/geometric symbols",
+      "license": "See LICENSES.md; repository terms for new AI-assisted works"
+    }
+  ],
+  "files": [
+    {
+      "path": "backgrounds/sunset-landscape.webp",
+      "bytes": 138576,
+      "sha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511"
+    },
+    {
+      "path": "backgrounds/sunset-portrait.webp",
+      "bytes": 75298,
+      "sha256": "ed27e02931a703e8800848bf62aebc1b90d33276b3b74ad605e5b73cf67c0adc"
+    },
+    {
+      "path": "backgrounds/fog-landscape.webp",
+      "bytes": 117206,
+      "sha256": "e436fe34d22048d8d50c294716823657b039fb8d37e25b412df9a2bb87d08a1f"
+    },
+    {
+      "path": "backgrounds/fog-portrait.webp",
+      "bytes": 63348,
+      "sha256": "e1b3cf153377e107030f2a45b7b6dee27d5ace4e9b929ee3864540f2d34d2db5"
+    },
+    {
+      "path": "backgrounds/night-floodlit-landscape.webp",
+      "bytes": 125752,
+      "sha256": "95b8b39da5d3091f4c68e56ff91f6139f67d64b72e307298ff3db0a5a3948ba9"
+    },
+    {
+      "path": "backgrounds/night-floodlit-portrait.webp",
+      "bytes": 66452,
+      "sha256": "125140052db144f0b153840530742f6aaa5411f0f3838b6899645bc32d700bd2"
+    },
+    {
+      "path": "textures/snow-albedo.webp",
+      "bytes": 67672,
+      "sha256": "b7f8a21b20f1e90960e421bb8b6470368b3874028b7f5d94dce13f6e9fedc69b"
+    },
+    {
+      "path": "textures/snow-normal.webp",
+      "bytes": 50344,
+      "sha256": "393dbb74ff1ff74947dfdbee6e3ae808b7b99f507dc4c5c0b4462c8cc26419a0"
+    },
+    {
+      "path": "textures/snow-roughness.webp",
+      "bytes": 6116,
+      "sha256": "5e6d3ac1b425b915c677f62f309709ef6a2a3f739ee222e867f0bde51fc2b289"
+    },
+    {
+      "path": "atlases/powder-spray.png",
+      "bytes": 25611,
+      "sha256": "ec6e24a06beea2284a24e5c289f67e5f0ed9100983d837f727236cbe13f2d05a"
+    },
+    {
+      "path": "atlases/powder-spray.json",
+      "bytes": 4606,
+      "sha256": "2741f0fd5ec2dacfb4450653d3c4166da3b8fdbcb57dfbff1053986a9811151a"
+    },
+    {
+      "path": "atlases/landing-cloud.png",
+      "bytes": 23178,
+      "sha256": "a860808e3d609f4ba4ac8e7ae0808ed186bb7f4d433cdef86b45f64ad5cc994d"
+    },
+    {
+      "path": "atlases/landing-cloud.json",
+      "bytes": 4608,
+      "sha256": "d7f1fb8df311f832a9c59801b042545402fb456d73d1bb36eb1582280d2d4d53"
+    },
+    {
+      "path": "atlases/snow-flecks.png",
+      "bytes": 11600,
+      "sha256": "32556a814ff63ee72a373368ccff2f9b0c7466f98871efdce23a7378380e6b3c"
+    },
+    {
+      "path": "atlases/snow-flecks.json",
+      "bytes": 4051,
+      "sha256": "fb86dc9386dce54d6de66904414df9f54149ddefcc67e78befedb68e13835c66"
+    },
+    {
+      "path": "decals/route-and-snow.png",
+      "bytes": 37845,
+      "sha256": "732a9cf0362b4c5633cb1f5e854a3616be79eadbc4ab0bcc3f969975beb2b69d"
+    },
+    {
+      "path": "decals/route-and-snow.json",
+      "bytes": 7030,
+      "sha256": "869fa41a8b68140d5c43234a85d5cea2ebc3eefc6f154059f78a1056825d75ae"
+    },
+    {
+      "path": "effects/fog-ribbon.png",
+      "bytes": 6962,
+      "sha256": "7ac5d2432865800a4f980ad42e135721142094e6618189bd2b336907b2373e35"
+    },
+    {
+      "path": "effects/light-cone.png",
+      "bytes": 4490,
+      "sha256": "57ba0d9b5ec102473fb8696cd6b97eaaf742523a0d9380a014639bf387266501"
+    },
+    {
+      "path": "effects/light-pool.png",
+      "bytes": 8154,
+      "sha256": "664a9fa3cc58e7687018c203102bb03489a22ee90c2e609a757583637994e40b"
+    },
+    {
+      "path": "models/safety-fence-sunset.glb",
+      "bytes": 45108,
+      "sha256": "e0621641735e0da949ba835db4ff5c270f149ba0b7a4f40d453e5a5df9cf0d9f"
+    },
+    {
+      "path": "models/route-marker-sunset.glb",
+      "bytes": 11648,
+      "sha256": "3b3404a2e7199c59bd1adec7a13ec1b466fd0d539d037a015a0989907b575d1b"
+    },
+    {
+      "path": "models/safety-fence-fog.glb",
+      "bytes": 45100,
+      "sha256": "3761d269cb610339ad2414df8cd34784e688017c2e922c13dee35cb6978870c1"
+    },
+    {
+      "path": "models/route-marker-fog.glb",
+      "bytes": 11640,
+      "sha256": "19eb9ad30dfee7ea39f758a38b1e87bb95bb261a7d5446e85ba5b4356b4be908"
+    },
+    {
+      "path": "models/safety-fence-night-floodlit.glb",
+      "bytes": 45168,
+      "sha256": "7e56d9078b4afdd1c06036522055378edc80139c49ea27a4efa77a2cd1f9b56e"
+    },
+    {
+      "path": "models/route-marker-night-floodlit.glb",
+      "bytes": 11704,
+      "sha256": "b4f895a3af357b90cd26fa009a779b713f34341d6e55ebff8efa52d6c2484b18"
+    },
+    {
+      "path": "models/floodlight-tower.glb",
+      "bytes": 37864,
+      "sha256": "76594e7697fea01bef67557699c2e04502aa4c5a1fbf514e12fd9fddc817770e"
+    },
+    {
+      "path": "environments/sunset.json",
+      "bytes": 2222,
+      "sha256": "0b09acdce923c07126ff4ec3ad8b05711944ef8f4b1c597b7b2e4ca05d5e00fb"
+    },
+    {
+      "path": "environments/fog.json",
+      "bytes": 2407,
+      "sha256": "0cc8d6ca3688a2f523285abd1d5ecacc9679cf3bd4266556d393622718721938"
+    },
+    {
+      "path": "environments/night-floodlit.json",
+      "bytes": 3153,
+      "sha256": "2caeeeb34f5eeaef301644eab65e836b1eae8809c1819838ada4e18551f6a35a"
+    }
+  ],
+  "runtimeFileBytes": 1064913,
+  "largestRuntimeFile": {
+    "path": "backgrounds/sunset-landscape.webp",
+    "bytes": 138576,
+    "sha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511"
+  },
+  "preview": {
+    "path": "preview.html",
+    "localDependencies": [
+      "../../vendor/three.module.js",
+      "../../vendor/GLTFLoader.js"
+    ],
+    "network": "local static server only; no CDN or remote requests"
+  },
+  "verification": {
+    "structural": "verification/asset-report.json",
+    "gltf": "verification/gltf-report.json",
+    "browser": "verification/browser-report.json",
+    "report": "REPORT.md"
+  },
+  "policies": {
+    "load": "Only active environment; pick one background orientation. Shared IDs are intentional, not missing attribution.",
+    "modelLoading": "Standard GLTFLoader; no Draco, external buffers or external textures.",
+    "atlas": "Straight alpha; sRGB; linear filter; no mipmaps; clamp-to-edge; half-texel UV inset.",
+    "surfaces": "Repeat; sRGB albedo; linear-data normal and roughness; mipmaps permitted.",
+    "gameplay": "Visual assets only. Host owns collision, land events, score and physics."
+  }
+}
