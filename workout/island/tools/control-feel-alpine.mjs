@@ -103,13 +103,13 @@ M.ratio = [.25, .5, .75, 1].map(v => { const e = bench(); for (let i = 0; i < 30
 
 // 5. Jump and trick: ramp at 30 m. Ticks from the trick request in the air to the trick starting; steering in the air.
 {
-  const e = bench([{type: 'ramp', x: 0, s: 60}]); let airAt = null, trickMs = null, n = 0;
+  const e = bench([{type: 'ramp', x: 0, s: 150}], {warm: 0}); let airAt = null, trickMs = null, n = 0;
   for (; n < 600 && airAt === null; n++) { e.command({type: 'steer', value: 0}); e.step(DT); if (player(e).airborne) airAt = n; }
   if (airAt !== null) {
     e.command({type: 'trick', id: 'grab'});
     for (let k = 1; k <= 30; k++) { e.step(DT); if (player(e).trick) { trickMs = k * MS; break; } }
     M.trickStartMs = trickMs;
-    const ea = bench([{type: 'ramp', x: 0, s: 60}]); for (let i = 0; i < 600 && !player(ea).airborne; i++) { ea.command({type: 'steer', value: 0}); ea.step(DT); }
+    const ea = bench([{type: 'ramp', x: 0, s: 150}], {warm: 0}); for (let i = 0; i < 600 && !player(ea).airborne; i++) { ea.command({type: 'steer', value: 0}); ea.step(DT); }
     M.airLeanMs = timeTo(ea, () => ea.command({type: 'steer', value: 1}), f => f.lean >= VISIBLE, 40);
   }
 }
