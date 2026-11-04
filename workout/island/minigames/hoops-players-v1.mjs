@@ -11,6 +11,7 @@ import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {jerseyTexture,shortsTexture} from './hoops-textures.mjs';
 import {shareSkeletons} from './hoops-perf.mjs';
 import {compactAvatar} from './hoops-lod.mjs';
+import {jerseyUVs,shortsColors,v4RoleKey} from './hoops-v4.mjs';
 
 const BODY_FOR_POS={PG:'guard',SG:'guard',SF:'wing',PF:'forward',C:'big'};
 const IDENTITY=new THREE.Quaternion(),_a=new THREE.Vector3(),_b=new THREE.Vector3(),_c=new THREE.Vector3(),_t1=new THREE.Vector3(),_t2=new THREE.Vector3(),_q=new THREE.Quaternion(),_pq=new THREE.Quaternion(),_wq=new THREE.Quaternion();
@@ -65,19 +66,31 @@ export function stealLayer(actT,result,steal={reachAt:0.14,duration:0.4}){
 }
 const HAIR=/short0|afro|long0|bob0|braid|pony/i;
 
+/** The motion clips every body plays (CMU clips retargeted to the shared Mixamo rig plus the authored shot
+ * clips). `load(url)` returns a parsed glTF; both the v3 and the v4 bodies use the same clips. */
+export async function loadMotionClips(cfg,base,load){
+ const anim=await load(new URL(cfg.animations,base).href);
+ const clips=new Map(anim.animations.map(c=>[c.name,c]));
+ // the rest hip height of the rig the clips were made on: other bodies scale the hip track by their own ratio (hoops-v4)
+ let hips=null;anim.scene.traverse(o=>{if(!hips&&o.isBone&&/Hips$/.test(o.name))hips=o;});clips.restHipsY=hips?hips.position.y:0;
+ const r=await fetch(new URL('design/hoops/legacy-shot-fake.json',base));if(!r.ok)throw Error('Basketball action clips unavailable');const authored=await r.json();for(const clip of authored.clips){const c=THREE.AnimationClip.parse(clip);clips.set(c.name,c);}
+ return clips;
+}
+/** Bodies + clips as the avatar factory expects them. Skin textures of all bodies share the MakeHuman UV
+ * layout: any skin fits any body. */
+export function bundlePlayerAssets(bodies,clips,extra={}){
+ const skins=[];
+ for(const k of Object.keys(bodies))bodies[k].scene.traverse(o=>{if(o.isMesh&&/^Human_x/.test(o.name)&&o.material.map&&!skins.includes(o.material.map))skins.push(o.material.map);});
+ return {bodies,clips,skins,...extra,dispose(){const tex=new Set();for(const g of Object.values(bodies))g.scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const t of Object.values(o.material))if(t?.isTexture)tex.add(t);o.material.dispose();}});for(const t of tex)t.dispose();for(const t of this.shorts?.values()||[])t.dispose();}};
+}
 export async function loadPlayerAssetsV1(cfg,base,onProgress){
  const loader=new GLTFLoader();
  const paths=cfg.lodModels||cfg.models,names=Object.keys(paths);let done=0;
  const tick=()=>{done++;onProgress?.(done/(names.length+1));};
  const bodies={};
  await Promise.all(names.map(async k=>{const g=await loader.loadAsync(new URL(paths[k],base).href);bodies[k]=g;tick();}));
- const anim=await loader.loadAsync(new URL(cfg.animations,base).href);tick();
- const clips=new Map(anim.animations.map(c=>[c.name,c]));
- const r=await fetch(new URL('design/hoops/legacy-shot-fake.json',base));if(!r.ok)throw Error('Basketball action clips unavailable');const authored=await r.json();for(const clip of authored.clips){const c=THREE.AnimationClip.parse(clip);clips.set(c.name,c);}
- // skin textures of all bodies share the MakeHuman UV layout: any skin fits any body
- const skins=[];
- for(const k of names)bodies[k].scene.traverse(o=>{if(o.isMesh&&/^Human_x/.test(o.name)&&o.material.map&&!skins.includes(o.material.map))skins.push(o.material.map);});
- return {bodies,clips,skins,dispose(){const tex=new Set();for(const g of Object.values(bodies))g.scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const t of Object.values(o.material))if(t?.isTexture)tex.add(t);o.material.dispose();}});for(const t of tex)t.dispose();for(const t of this.shorts?.values()||[])t.dispose();}};
+ const clips=await loadMotionClips(cfg,base,url=>loader.loadAsync(url));tick();
+ return bundlePlayerAssets(bodies,clips);
 }
 
 /** Bone lookup that ignores the "mixamorig:" prefix variants the exporter may write. */
@@ -98,7 +111,7 @@ function teamShorts(assets,teamLook){
 }
 
 export function createAvatarV1(assets,card,teamLook,opts={}){
- const kind=card.look?.body||BODY_FOR_POS[card.pos]||'wing';
+ const v4=!!assets.v4,kind=v4?(assets.bodies[card.pos]?card.pos:v4RoleKey(card.pos)):(card.look?.body||BODY_FOR_POS[card.pos]||'wing');
  const src=assets.bodies[kind]||Object.values(assets.bodies)[0];
  const root=cloneSkinned(src.scene);root.name='player-'+card.id;
  // the clone gives every skinned mesh its own Skeleton over the same bones: share one
@@ -113,6 +126,13 @@ export function createAvatarV1(assets,card,teamLook,opts={}){
    const ga=o.geometry.attributes;
    if(!ga.trim&&(ga.color_1||ga.color))o.geometry.setAttribute('trim',ga.color_1||ga.color);
    const isJ=/Jersey/.test(name);
+   if(v4&&!isJ){
+    // v4 shorts are colour-only: the base piece (team_secondary in the asset) takes the club colour a little
+    // darker, the trim piece the second colour; the atlas packer paints the flat colour into its tile
+    const colors=shortsColors(teamLook),trimPart=/trim/i.test(o.material?.name||''),m=new THREE.MeshStandardMaterial({color:trimPart?new THREE.Color(colors.trim):new THREE.Color(colors.base).multiplyScalar(.72),roughness:.78,metalness:0});
+    m.userData.kitPart=trimPart?'shorts-trim':'shorts-base';o.material=m;mats.push(m);return;
+   }
+   if(v4&&isJ&&!ga.uv){const n=ga.normal;o.geometry.setAttribute('uv',new THREE.BufferAttribute(jerseyUVs(ga.position.array,n.array),2));}
    const map=isJ?jerseyTexture({primary:teamLook.primary,secondary:teamLook.secondary,trim:teamLook.trim,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:teamLook.darkText}):teamShorts(assets,teamLook);
    const m=new THREE.MeshStandardMaterial({map,roughness:0.78,metalness:0,side:THREE.DoubleSide});if(!isJ)m.userData.sharedMap=true;
    m.userData.kitPart=isJ?'jersey':'shorts';m.onBeforeCompile=trimShader(teamLook.trim,isJ?teamLook.secondary:new THREE.Color(teamLook.primary).multiplyScalar(0.55));
@@ -128,17 +148,17 @@ export function createAvatarV1(assets,card,teamLook,opts={}){
   o.material=m;mats.push(m);
  });
  if(card.look?.hidden)for(const h of card.look.hidden)root.traverse(o=>{if(o.isMesh&&o.name.includes(h))o.visible=false;});
- const scale=(card.ratings?.height||200)/(opts.baseHeights?.[kind]||(kind==='guard'?188:kind==='wing'?198:kind==='forward'?203:209));
+ const scale=(card.ratings?.height||200)/((v4&&assets.baseHeights?.[kind])||opts.baseHeights?.[kind]||(kind==='guard'?188:kind==='wing'?198:kind==='forward'?203:209));
  root.scale.setScalar(scale);
  const mixer=new THREE.AnimationMixer(root);
  const actions={};
- for(const [name,clip] of assets.clips){const a=mixer.clipAction(clip);a.enabled=true;a.setEffectiveWeight(0);a.play();actions[name]=a;}
+ for(const [name,clip] of (assets.roleClips?.[kind]||assets.clips)){const a=mixer.clipAction(clip);a.enabled=true;a.setEffectiveWeight(0);a.play();actions[name]=a;}
  const hands={r:bone(root,'RightHand'),l:bone(root,'LeftHand'),rIdx:bone(root,'RightHandMiddle1'),lIdx:bone(root,'LeftHandMiddle1')};
  const spine=bone(root,'Spine2'),rArm=bone(root,'RightArm'),lArm=bone(root,'LeftArm'),rFore=bone(root,'RightForeArm'),lFore=bone(root,'LeftForeArm'),neck=bone(root,'Neck'),hips=bone(root,'Hips');
  let stealResult=null,stealSeen=0,lastVx=0,lastVz=0,lastFace=null,leanPitch=0,leanRoll=0,chestYaw=0,loco=null;const Y_AXIS=new THREE.Vector3(0,1,0),_ax=new THREE.Vector3(),_lq=new THREE.Quaternion();
  const packed=compactAvatar(root,{maxTriangles:4000,teamLook});
  const av={root,mixer,actions,hands,kind,scale,cur:null,weights:{},card,mats,packed,
-  applyKit(kit){for(const m of mats){if(m.userData.kitPart){if(!m.userData.sharedMap)m.map?.dispose();m.userData.sharedMap=false;m.map=m.userData.kitPart==='jersey'?jerseyTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:false}):shortsTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent});}}packed.refreshMaps({}, {primary:kit.base,secondary:kit.accent,trim:kit.accent});},
+  applyKit(kit){for(const m of mats){const part=m.userData.kitPart;if(part==='shorts-base'){m.color.set(kit.base).multiplyScalar(.72);continue;}if(part==='shorts-trim'){m.color.set(kit.accent);continue;}if(m.userData.kitPart){if(!m.userData.sharedMap)m.map?.dispose();m.userData.sharedMap=false;m.map=m.userData.kitPart==='jersey'?jerseyTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent,number:card.number,wordmark:teamLook.wordmark,name:card.shortName||card.name,dark:false}):shortsTexture({primary:kit.base,secondary:kit.accent,trim:kit.accent});}}packed.refreshMaps({}, {primary:kit.base,secondary:kit.accent,trim:kit.accent});},
   event(e){const type=typeof e==='string'?e:e?.type;if(type==='steal'||type==='stealMiss'){stealResult=type;stealSeen=0;}},get motionState(){return this.cur||'idle';},get stealResult(){return stealResult;},
   dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);packed.dispose();for(const m of mats){if(!m.userData.sharedMap&&!m.userData.sourceMap)m.map?.dispose?.();m.dispose();}},
  };

@@ -2,7 +2,7 @@
 // handler, a wide arena shot and the rim, in each phone viewport, plus an optional frame
 // sequence (one tick apart) of the ball handler for motion review. Software WebGL
 // (SwiftShader): the pictures show materials, lighting and poses, not the phone's GPU speed.
-// Usage: node workout/island/tools/hoops-shots.mjs out=/tmp/shots [viewports=844x390,390x844] [seq=24] [ticks=2] [seed=4242] [dpr=2] [warm=900]
+// Usage: node workout/island/tools/hoops-shots.mjs out=/tmp/shots [viewports=844x390,390x844] [seq=24] [ticks=2] [extra=hoopsV4=0] [seed=4242] [dpr=2] [warm=900]
 //        PLAYWRIGHT_MODULE and CHROMIUM_PATH select the browser; writes <viewport>-<name>.jpg into `out`.
 import {createRequire} from 'node:module';
 import {createServer} from 'node:http';
@@ -24,7 +24,7 @@ try{
  for(const viewport of viewports){
   const tag=`${viewport.width}x${viewport.height}`,context=await browser.newContext({viewport,hasTouch:true,isMobile:true,deviceScaleFactor:dpr});context.setDefaultTimeout(300000);
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await page.goto(`${base}?dev=1&dur=3600&seed=${seed}&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick`,{waitUntil:'load'});
+  await page.goto(`${base}?dev=1&dur=3600&seed=${seed}&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick${args.extra?'&'+args.extra:''}`,{waitUntil:'load'});
   await page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||s.renderMetrics?.calls>0&&s.stepsRun>30);});
   const err=await page.evaluate(()=>window.__session.snapshot.error);if(err)throw Error(tag+': '+err);
   await page.evaluate(()=>{document.getElementById('perf').hidden=true;const d=window.__session.debug;d.hold=true;});
