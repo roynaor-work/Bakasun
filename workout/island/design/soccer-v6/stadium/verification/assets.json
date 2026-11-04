@@ -1,0 +1,401 @@
+{
+  "pass": true,
+  "unit": "MB = 1,000,000 bytes",
+  "glbBudgetBytes": 1500000,
+  "textureMaxDimension": 1024,
+  "assets": [
+    {
+      "path": "assets/crowd-six.glb",
+      "bytes": 49276,
+      "MB": 0.049276,
+      "triangles": 3036,
+      "primitives": 6,
+      "triangleBudget": null,
+      "requiredExtensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 0,
+      "animations": [],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 7,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          }
+        ]
+      },
+      "sha256": "6ae877e16836fa597863b32ffcb7f42669e45718bc9d238363611d677d7e9a9e",
+      "pass": true
+    },
+    {
+      "path": "assets/goals.glb",
+      "bytes": 11624,
+      "MB": 0.011624,
+      "triangles": 3480,
+      "primitives": 2,
+      "triangleBudget": null,
+      "requiredExtensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 0,
+      "animations": [],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 3,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          }
+        ]
+      },
+      "sha256": "fdd9487bfd4ad08e7edb3b2b1beff6178609b5d62ebc7a09e7d6c0b7b2aa8be7",
+      "pass": true
+    },
+    {
+      "path": "assets/pitch.glb",
+      "bytes": 812108,
+      "MB": 0.812108,
+      "triangles": 4312,
+      "primitives": 3,
+      "triangleBudget": null,
+      "requiredExtensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 3,
+      "animations": [],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 4,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          }
+        ]
+      },
+      "sha256": "4036d2b01f0ac89ad7fb6c6d664b039a72265981d6952a99ef208752026e0252",
+      "pass": true
+    },
+    {
+      "path": "assets/scale-athlete-lod0.glb",
+      "bytes": 139000,
+      "MB": 0.139,
+      "triangles": 7414,
+      "primitives": 1,
+      "triangleBudget": 8000,
+      "requiredExtensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 0,
+      "animations": [
+        "idle",
+        "run",
+        "sprint",
+        "kick",
+        "pass",
+        "throw_in"
+      ],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          }
+        ]
+      },
+      "sha256": "7f80b45e3512059688d775141b24ba0f711b98cc068a49e19a43cec98a6deb6a",
+      "pass": true
+    },
+    {
+      "path": "assets/scale-athlete-lod1.glb",
+      "bytes": 116784,
+      "MB": 0.116784,
+      "triangles": 2531,
+      "primitives": 1,
+      "triangleBudget": 3000,
+      "requiredExtensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 0,
+      "animations": [
+        "idle",
+        "run",
+        "sprint",
+        "kick",
+        "pass",
+        "throw_in"
+      ],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          }
+        ]
+      },
+      "sha256": "075d7b239aaf7eab6a92eff1ac7927e41acc9a4c61dd95ef61b34700370472b9",
+      "pass": true
+    },
+    {
+      "path": "assets/stadium-shell.glb",
+      "bytes": 226984,
+      "MB": 0.226984,
+      "triangles": 7916,
+      "primitives": 7,
+      "triangleBudget": null,
+      "requiredExtensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "embeddedTextures": 2,
+      "animations": [],
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 8,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/7"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/8"
+          }
+        ]
+      },
+      "sha256": "cae769d7f2fb2fd3ae11bc4105a5fb639961def9d227d992621a3d8274de1b26",
+      "pass": true
+    }
+  ],
+  "textures": [
+    {
+      "path": "textures/architecture-atlas.webp",
+      "bytes": 158530,
+      "MB": 0.15853,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "pass": true,
+      "sha256": "c5fd77b1ca3844f30cad503d8b489058ad66851a453654b32b64ca2df6d51da7"
+    },
+    {
+      "path": "textures/crowd-atlas.png",
+      "bytes": 108057,
+      "MB": 0.108057,
+      "width": 1024,
+      "height": 256,
+      "channels": 4,
+      "pass": true,
+      "sha256": "ddc51247f79bfd704f0ac95062647986ea0ae1c367e685b4255230312b854a89"
+    },
+    {
+      "path": "textures/led-panels.webp",
+      "bytes": 24612,
+      "MB": 0.024612,
+      "width": 1024,
+      "height": 256,
+      "channels": 3,
+      "pass": true,
+      "sha256": "f1a38df6b705998aad57039e70b09697dfe08a0f470e9a9464671f77dc587bb8"
+    },
+    {
+      "path": "textures/particles-atlas.png",
+      "bytes": 10515,
+      "MB": 0.010515,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "pass": true,
+      "sha256": "4d5520bd4ccceea4116826e55fe68d901f956036794ec02c3ee129e699eb4bb5"
+    },
+    {
+      "path": "textures/turf-albedo.jpg",
+      "bytes": 304131,
+      "MB": 0.304131,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "pass": true,
+      "sha256": "e700ba02e4cc80486663bbd65c6b6277a82151247777ae8b73cbd0f7bbf0bd29"
+    },
+    {
+      "path": "textures/turf-normal.webp",
+      "bytes": 442084,
+      "MB": 0.442084,
+      "width": 512,
+      "height": 512,
+      "channels": 3,
+      "pass": true,
+      "sha256": "bb3716e51eaa05f956d5af4eba2d010790361178b3ae4649753bec5a60a48dd9"
+    },
+    {
+      "path": "textures/turf-roughness.webp",
+      "bytes": 49152,
+      "MB": 0.049152,
+      "width": 512,
+      "height": 512,
+      "channels": 3,
+      "pass": true,
+      "sha256": "0f24d3e55b283e757998a6a5bd01f69338768d7ff367f0fbd8e04c2b3b520aef"
+    }
+  ],
+  "crowd": {
+    "count": 6530,
+    "near": 154,
+    "far": 6376,
+    "variants": 6,
+    "nearTriangles": [
+      506,
+      506,
+      506,
+      506,
+      506,
+      506
+    ],
+    "farTrianglesPerInstance": 2
+  },
+  "assetBytes": 1355776,
+  "externalTextureBytes": 1097081
+}
