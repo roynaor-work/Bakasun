@@ -14,7 +14,7 @@ const core = new Set();
 (function walk(f) { if (core.has(f)) return; core.add(f); deps(f).forEach(walk); })(path.join(root, 'js/app.js'));
 core.add(path.join(root, 'js/theme-boot.js')); core.add(path.join(root, 'js/lazycss.js'));
 const all = []; (function w(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? w(p) : all.push(p); } })(path.join(root, 'js'));
-const css = fs.readdirSync(path.join(root, 'css')).filter(f => f.endsWith('.css')).map(f => path.join(root, 'css', f));
+const css = []; (function w(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? w(p) : /\.(css|ttf)$/.test(f) && css.push(p); } })(path.join(root, 'css'));
 const CORE_CSS = ['app.css', 'desktop.css'].map(f => path.join(root, 'css', f));
 const shell = ['./', './index.html', './manifest.json', './icons/icon.svg', './icons/icon-192.png'];
 const CORE = [...shell, ...CORE_CSS.map(rel), ...[...core].map(rel).sort()];

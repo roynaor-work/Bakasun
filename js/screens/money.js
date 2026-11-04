@@ -25,7 +25,7 @@ export function render({ root }) {
     const pay = db.get('payments', p.row) || {};
     return `<div class="card" data-id="${esc(p.row)}"><div class="row between"><span class="title">${esc(p.client)}</span><span class="ltr big">${esc(Office.money(p.amount))}</span></div>
       <div class="sub">${esc(payStatusLabel(p.status))}${p.due ? ' · ' + esc(p.due) : ''}${p.late > 0 ? ` · <span class="badge">${esc(t('overdue'))} <span class="count">${p.late}</span></span>` : ''}${p.note ? ' · ' + esc(p.note) : ''}${pay.invoiceNo ? ` · <span class="ltr">${esc(pay.invoiceNo)}</span>` : ''}</div>
-      <div class="row"><select data-status class="grow">${Object.values(Office.PAY).map(v => `<option value="${esc(v)}"${v === p.status ? ' selected' : ''}>${esc(payStatusLabel(v))}</option>`).join('')}</select></div>
+      <div class="row"><select data-status class="grow" aria-label="${esc(t('fStatus'))}">${Object.values(Office.PAY).map(v => `<option value="${esc(v)}"${v === p.status ? ' selected' : ''}>${esc(payStatusLabel(v))}</option>`).join('')}</select></div>
       <div class="row">${p.status === Office.PAY.due ? `<button class="btn wa sm" data-invoice>${esc(t('askInvoice'))}</button>` : ''}<button class="btn sm" data-remind>${esc(t('remind'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button></div></div>`;
   };
   root.innerHTML = `<header class="top"><a class="icon" href="#/more" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('money'))}</h1><button class="btn sm" id="new">+ ${esc(t('newPayment'))}</button></header>

@@ -20,16 +20,10 @@ import { DASH_WIDGETS, widgetsOn, widgetsSetting } from '../logic/dashboard.js';
 
 export const noLive = true;
 
-/* Her look (settings → "אישי"): the theme attribute on <html> (app.js sets it on every route too) and the text-size class.
-   Runs at start (app.js imports this module) and whenever a setting changes, also when the cloud brings one. */
+/* Her look (settings → "אישי"): applied by js/personal.js (started by app.js), here only the form. */
 const LANDINGS = ['today', 'dashboard', 'calendar', 'board', 'tasks'];
 const WIDGET_LABEL = { now: 'dbNow', events: 'dbOpenEvents', tasksOverdue: 'dbTasksOverdue', tasksToday: 'dbTasksToday', tasksWeek: 'dbTasksWeek', calls: 'dbCalls', money: 'dbUnpaid', quotes: 'dbQuotes', suppliers: 'dbSuppliers', leads: 'dbLeads', next14: 'dbNext14', moneyByEvent: 'dbMoneyByEvent' };
-export function applyPersonal() {
-  const s = db.settings(); const h = document.documentElement;
-  if (s.theme === 'light' || s.theme === 'dark') h.dataset.theme = s.theme; else delete h.dataset.theme;
-  h.classList.toggle('text-large', s.textSize === 'large');
-}
-applyPersonal(); db.subscribe(applyPersonal);
+import { applyPersonal } from '../personal.js';
 
 function personalSection(s) {
   const on = widgetsOn(s.dashWidgets);
@@ -37,10 +31,12 @@ function personalSection(s) {
     <form class="stack card" id="personalForm"><div class="grid2">
       ${field('landing', t('landing'), LANDINGS.includes(s.landing) ? s.landing : 'today', { type: 'select', options: LANDINGS.map(k => [k, t(k)]) })}
       ${field('theme', t('theme'), s.theme === 'light' || s.theme === 'dark' ? s.theme : 'auto', { type: 'select', options: [['auto', t('themeAuto')], ['light', t('themeLight')], ['dark', t('themeDark')]] })}
+      ${field('design', t('designLabel'), s.design === 'new' ? 'new' : 'classic', { type: 'select', options: [['classic', t('designClassic')], ['new', t('designNew')]] })}
       ${field('textSize', t('textSize'), s.textSize === 'large' ? 'large' : 'normal', { type: 'select', options: [['normal', t('textNormal')], ['large', t('textLarge')]] })}
     </div>
     <h3>${esc(t('dashWidgets'))}</h3><p class="hint">${esc(t('dashWidgetsHint'))}</p>
     <div class="grid2">${DASH_WIDGETS.map(k => `<label class="chk"><input type="checkbox" name="w" value="${k}"${on[k] ? ' checked' : ''}> ${esc(t(WIDGET_LABEL[k]))}</label>`).join('')}</div>
+    <p class="hint">${esc(t('designHint'))}</p>
     <div class="row"><button class="btn primary" type="submit">${esc(t('save'))}</button></div></form></section>`;
 }
 
@@ -134,6 +130,7 @@ export function render({ root }) {
     db.setting('landing', String(fd.get('landing') || 'today'));
     db.setting('theme', String(fd.get('theme') || 'auto'));
     db.setting('textSize', String(fd.get('textSize') || 'normal'));
+    db.setting('design', fd.get('design') === 'new' ? 'new' : 'classic');
     db.setting('dashWidgets', widgetsSetting(fd.getAll('w').map(String)));
     applyPersonal(); toast(t('saved')); render({ root });
   };

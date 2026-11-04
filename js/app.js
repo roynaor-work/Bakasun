@@ -5,6 +5,7 @@ import { db } from './store.js';
 import { esc } from './ui.js';
 import * as today from './screens/today.js';
 import { ensureCss } from './lazycss.js';
+import { startPersonal } from './personal.js';
 import { setChangeHook } from './store.js';
 import { enqueue } from './cloud.js';
 setChangeHook(enqueue);
@@ -101,6 +102,31 @@ function announceScreen() {
 }
 
 const idle = (fn, timeout) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout }) : setTimeout(fn, Math.min(timeout, 1500)));
+startPersonal();
+/* Every dialog gets dialog semantics, also the ones built by hand in a screen (a name for the screen reader, focus moved inside,
+   Escape closes it). The shared dialog() in ui.js already sets its own and handles its own Escape. */
+new MutationObserver(muts => muts.forEach(m => m.addedNodes.forEach(n => {
+  if (n.nodeType !== 1 || !n.classList.contains('modal') || n.querySelector('[role=dialog]') || n.hasAttribute('role')) return;
+  const card = n.querySelector('.modal-card'); if (!card) return;
+  const target = card.tagName === 'FORM' ? n : card; // role=dialog is not allowed on a <form> element
+  const h = card.querySelector('h2, b'); if (h && !h.id) h.id = 'dlg' + Math.random().toString(36).slice(2, 8);
+  target.setAttribute('role', 'dialog'); target.setAttribute('aria-modal', 'true');
+  if (h) target.setAttribute('aria-labelledby', h.id); else target.setAttribute('aria-label', t('app'));
+  if (!n.contains(document.activeElement)) { card.setAttribute('tabindex', '-1'); try { card.focus({ preventScroll: true }); } catch (e) { /* */ } }
+}))).observe(document.body, { childList: true });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const all = document.querySelectorAll('.modal'); const m = all[all.length - 1]; if (!m) return;
+  const x = m.querySelector('[data-x=cancel], #pvClose, [data-close]'); if (x) x.click(); // only a close button that the screen itself provided: never remove a dialog that is waiting for an answer
+});
+/* "/" anywhere (not while typing in a field) opens the search; on the search screen it just focuses the box. */
+const typing = el => !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable);
+document.addEventListener('keydown', e => {
+  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey || typing(e.target) || document.querySelector('.modal')) return;
+  e.preventDefault();
+  const box = document.getElementById('q');
+  if (location.hash.replace(/^#\/?/, '').split('/')[0] === 'search' && box) { box.focus(); box.select(); } else location.hash = '#/search';
+});
 let routeSeq = 0;
 async function loadScreen(name) {
   const spec = LAZY[name];
@@ -129,6 +155,7 @@ async function route() {
     if (seq !== routeSeq) return; // she moved on while it loaded
     ROUTES[name] = screen;
   }
+  app.dataset.screen = name; // lets the optional new design skin one screen at a time (css/newdesign.css)
   const ctx = { root: app, name, id: parts[1] || null, query: parts.slice(2) };
   const draw = () => { try { screen.render(ctx); } catch (e) { console.error(e); app.innerHTML = `<p class="warnbox">${esc(String(e && e.message || e))}</p>`; } };
   draw();

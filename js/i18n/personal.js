@@ -2,6 +2,7 @@
    Settings → "אישי" (landing screen, theme, text size, dashboard widgets) and the global search screen. */
 export const PERSONAL = {
   he: {
+    designLabel: 'עיצוב', designClassic: 'הרגיל', designNew: 'חדש (ניסיוני)', designHint: 'העיצוב החדש משנה צבעים, מסגרות ואת המראה של "היום" ושל לוח האירועים. אפשר לחזור לרגיל בכל רגע. הנתונים לא משתנים.',
     loading: 'טוענת…', screenLoadFailed: 'המסך לא נטען. כנראה אין חיבור. נסי שוב כשיש חיבור.',
     version: 'גרסת האפליקציה', versionUnknown: 'לא ידועה (פתיחה מהדפדפן)', checkUpdate: 'בדיקת עדכון', updateChecked: 'נבדק. אם יש גרסה חדשה, האפליקציה תתרענן לבד.', newVersion: 'גרסה חדשה נטענה, מרעננת...',
     personal: 'אישי', personalHint: 'איך האפליקציה נפתחת ונראית לך. נשמר יחד עם שאר ההגדרות.',
@@ -12,6 +13,7 @@ export const PERSONAL = {
     srHint: 'Enter פותח את התוצאה הראשונה. מכל מסך: המקש / פותח חיפוש.', srShowAll: 'הצגת כל {n}', srStaff: 'צוות האירוע', srHelp: 'עזרה ופקודות', srOpenFirst: 'פתיחה'
   },
   fr: {
+    designLabel: 'Design', designClassic: 'Habituel', designNew: 'Nouveau (essai)', designHint: 'Le nouveau design change les couleurs, les cadres et l’aspect de « Aujourd’hui » et du tableau des événements. Retour à l’habituel à tout moment. Les données ne changent pas.',
     loading: 'Chargement…', screenLoadFailed: 'L’écran ne s’est pas chargé. Probablement pas de connexion. Réessayez avec une connexion.',
     version: 'Version de l’application', versionUnknown: 'inconnue (ouverte dans le navigateur)', checkUpdate: 'Vérifier les mises à jour', updateChecked: 'Vérifié. S’il y a une nouvelle version, l’application se recharge seule.', newVersion: 'Nouvelle version chargée, rechargement...',
     personal: 'Personnel', personalHint: 'Comment l’application s’ouvre et s’affiche pour vous. Enregistré avec les autres réglages.',
@@ -22,6 +24,7 @@ export const PERSONAL = {
     srHint: 'Entrée ouvre le premier résultat. Depuis n’importe quel écran : la touche / ouvre la recherche.', srShowAll: 'Voir les {n}', srStaff: 'Équipe de l’événement', srHelp: 'Aide et commandes', srOpenFirst: 'Ouvrir'
   },
   en: {
+    designLabel: 'Design', designClassic: 'Classic', designNew: 'New (trial)', designHint: 'The new design changes colours, frames and the look of Today and the events board. You can switch back any time. Your data does not change.',
     loading: 'Loading…', screenLoadFailed: 'The screen did not load. There is probably no connection. Try again when you are online.',
     version: 'App version', versionUnknown: 'unknown (opened in the browser)', checkUpdate: 'Check for update', updateChecked: 'Checked. If there is a new version the app reloads by itself.', newVersion: 'New version loaded, reloading...',
     personal: 'Personal', personalHint: 'How the app opens and looks for you. Saved with the other settings.',

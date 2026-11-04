@@ -39,7 +39,7 @@ export function guessSupplier(text, suppliers) {
   const t = str(text); const list = suppliers || [];
   const phones = [...t.matchAll(/(?:\+972[\s\-]?|0)5\d[\s\-]?\d{3}[\s\-]?\d{4}/g)].map(m => phoneDigits(m[0]));
   for (const p of phones) { const hit = list.find(s => s.phone && phoneDigits(s.phone) === p); if (hit) return hit; }
-  const mails = [...t.matchAll(/[A-Za-z0-9._%+\-]+@([A-Za-z0-9.\-]+\.[A-Za-z]{2,})/g)];
+  const mails = [...t.matchAll(/[A-Za-z0-9._%+\-]{1,64}@([A-Za-z0-9.\-]{1,255}\.[A-Za-z]{2,24})/g)];
   for (const m of mails) { const dom = m[1].toLowerCase(); const hit = list.find(s => s.email && s.email.toLowerCase().indexOf('@' + dom) >= 0 && !/gmail|walla|hotmail|outlook|yahoo/.test(dom)); if (hit) return hit; }
   const hay = Office.normHe(t); let best = null, bl = 0;
   list.forEach(s => {
@@ -72,7 +72,7 @@ const GOT_QUOTE = loose(/(קיבלתי|יש לי|הגיעה|got|received|i recei
 const QUOTE_FROM = loose(/^(הצעה|הצעת מחיר|quote|quotation|offer|devis|offre|proposition)\s+(מ|from|de|du|d')/i);
 const WANTS_ROY = loose(/(רועי|roy|בקש|ask|demande)/i);
 export function parseCommand(text, docs, people) {
-  const t = trim(text);
+  const t = trim(Office.calm(text));
   const out = { kind: 'unknown', text: t, doc: null, to: null };
   if (!t) return out;
   const tp = polite(t); // "please" / "s'il te plaît" / "בבקשה" do not change an instruction (a message body keeps its words)
@@ -93,7 +93,7 @@ export function parseCommand(text, docs, people) {
     (people || []).filter(p => p.about === 'supplier' || !p.about).forEach(p => (p.names || []).forEach(n => { const k = Office.normHe(n); if (k && k.length >= 3 && k.length > bl && Office.normHe(t).indexOf(k) >= 0) { bp = p; bl = k.length; } }));
     out.kind = 'supplierQuote'; out.supplier = bp; return out;
   }
-  const email = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t);
+  const email = /[A-Za-z0-9._%+\-]{1,64}@[A-Za-z0-9.\-]{1,255}\.[A-Za-z]{2,24}/.exec(t);
   // an Israeli mobile in any grouping the speech engine produces ("052-58708-38", "052 587 0838", "0525870838"), or an international number
   const phone = /(?:\+972[\s\-]?|0)5\d(?:[\s\-]?\d){7}(?!\d)/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
   out.phoneFound = phone ? phonePretty(phone[0]) : '';
@@ -221,9 +221,9 @@ export function findClientIn(text, clients) {
 }
 
 export function parseInvoiceRequest(text, clients) {
-  const t = spelledLetters(str(text).replace(/[‎‏]/g, ''));
+  const t = spelledLetters(Office.calm(text).replace(/[‎‏]/g, ''));
   const out = { client: '', taxId: '', address: '', email: '', items: [], total: 0, kind: /חשבון עסקה|דרישת תשלום|proforma/i.test(t) ? 'חשבון עסקה' : 'חשבונית', channel: /(?:^|\s)(?:במייל|באימייל|מייל|by e?-?mail|par (?:e-?)?mail|courriel)(?=\s|$)/i.test(t) ? 'mail' : /וואטסאפ|whatsapp/i.test(t) ? 'wa' : '' };
-  const em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t); if (em) out.email = em[0];
+  const em = /[A-Za-z0-9._%+\-]{1,64}@[A-Za-z0-9.\-]{1,255}\.[A-Za-z]{2,24}/.exec(t); if (em) out.email = em[0];
   // the company number, also as she dictates it: "ח.פ. 514 572 312", "חפ 51-457-2312"
   const ID_WORD = "(?:ח\\.?\\s?פ\\.?|ע\\.?\\s?ר\\.?|ע\\.?\\s?מ\\.?|ת\\.?\\s?ז\\.?|מס'? ?חברה|מספר חברה|company no\\.?|company number|registration number|reg\\.? no\\.?|reg\\.?|vat (?:no\\.?|number)|siret|siren|numéro de (?:société|siret|tva)|n° ?(?:siret|tva)?)";
   const ID_AHEAD = "(?:" + ID_WORD + "\\s*:?\\s*)?(?:\\d{8,9}|\\d{2,3}[\\s\\-]\\d{3}[\\s\\-]\\d{3,4})(?!\\d)";
@@ -234,7 +234,7 @@ export function parseInvoiceRequest(text, clients) {
     // the number itself, with or without "ח.פ." before it (the recognizer sometimes drops the letters)
     || new RegExp("(?:חשבונית(?:\\s+מס)?|חשבון\\s+עסקה|דרישת\\s+תשלום|invoice|facture)\\s+(?:לי\\s+)?(?:בבקשה\\s+|please\\s+)?(?:ל|for\\s+|to\\s+|pour\\s+|à\\s+)([^\\n,.]{2,60}?)\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t)
     // the words right before the number ("... מועצה אזורית גליל עליון ח.פ. 500...")
-    || new RegExp("((?:[^\\s\\d,.]+\\s+){1,6}?[^\\s\\d,.]+)\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t)
+    || new RegExp("((?:[^\\s\\d,.]{1,40}\\s+){1,6}?[^\\s\\d,.]{1,40})\\s*,?\\s*(?=" + ID_AHEAD + ")", 'i').exec(t)
     // no company number at all: "invoice for Alpha Ltd 3000 plus VAT" / "facture pour Alpha : 10 000 € HT" / "חשבונית לחברת אלפא על 5000"
     || loose(/(?:חשבונית(?:\s+מס)?|חשבון\s+עסקה|דרישת\s+תשלום|invoice|facture)\s+(?:לי\s+)?(?:בבקשה\s+|please\s+)?(?:(?:à|to|for|ל)\s*(?:roy|רועי)\s+)?(?:ל|for\s+|to\s+|pour\s+|à\s+)(?!(?:roy|רועי)(?:\s|$))([^\n,.:\d]{2,60}?)\s*(?=[:,]?\s*(?:על\s|of\s|sur\s|de\s|pour\s|d'un montant|\d))/i).exec(t);
   if (cl) {

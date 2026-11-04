@@ -9,7 +9,7 @@ let selected = null;
 
 export function render({ root, id }) {
   const cs = db.get('cases', id);
-  if (!cs) { root.innerHTML = empty(t('noResults')); return; }
+  if (!cs) { root.innerHTML = `<h1 class="sr-only">${esc(t('groups'))}</h1>` + empty(t('noResults')); return; }
   let g = db.list('groups', x => x.caseId === id)[0];
   const back = `<a class="icon" href="#/case/${esc(id)}" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
   if (!g) {

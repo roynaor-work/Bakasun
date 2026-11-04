@@ -49,7 +49,7 @@ export function clientIn(text, clients) {
 
 /** {lead, needs: [supplier types], tasks: [{title}], days, rooms, open: [questions still unanswered]} */
 export function parseBrief(text, places, today, clients) {
-  const t = str(text);
+  const t = Office.calm(text);
   const lead = Office.parseLead(t, places || [], today);
   const known = clientIn(t, clients); if (known && !lead.client) { lead.client = known.name; if (!lead.phone) lead.phone = str(known.phone); if (!lead.email) lead.email = str(known.email); if (!lead.name) lead.name = str(known.contact); if (known.lang) lead.lang = known.lang; }
   const needs = NEEDS.filter(([, re]) => re.test(t)).map(([type]) => type);

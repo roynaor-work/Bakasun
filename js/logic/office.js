@@ -96,8 +96,15 @@ var Office = (function () {
    * (date, participants, budget, place, kind, purpose) plus name, phone, e-mail and language.
    * places: [[he, en], ...] (the official list). today: Date, for the year of "15/10" and month names.
    */
+  /** Text that comes from outside (a pasted mail, a dictation, a message) is bounded before the many regexes read it:
+   *  at most `max` characters (default 60,000, far more than any real message), a run of one repeated character cut to 200,
+   *  a digit run cut to 20 digits and a word cut to 500 characters. Real text is untouched; a hostile 200 KB line can no longer freeze the screen. */
+  function calm(text, max) {
+    var s = str(text); if (s.length > (max || 60000)) s = s.slice(0, max || 60000);
+    return s.replace(/(.)\1{199,}/gs, function (m, c) { return new Array(201).join(c); }).replace(/\d{21,}/g, function (m) { return m.slice(0, 20); }).replace(/[^\s]{501,}/g, function (m) { return m.slice(0, 500); });
+  }
   function parseLead(text, places, today) {
-    var raw = str(text), t = raw.replace(/[‎‏‪-‮⁦-⁩]/g, '');
+    var raw = calm(text), t = raw.replace(/[‎‏‪-‮⁦-⁩]/g, '');
     today = day(today) || day(new Date());
     var out = { date: '', dateText: '', participants: '', budget: '', place: '', kind: '', purpose: '', name: '', phone: '', email: '', lang: 'he' };
 
@@ -106,7 +113,7 @@ var Office = (function () {
     if (lat > he * 2) out.lang = /\b(bonjour|nous|pour|merci|mariage|personnes|avec|le|la|les|une)\b/i.test(t) ? 'fr' : 'en';
 
     // e-mail and phone
-    var em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(t);
+    var em = /[A-Za-z0-9._%+\-]{1,64}@[A-Za-z0-9.\-]{1,255}\.[A-Za-z]{2,24}/.exec(t);
     if (em) out.email = em[0];
     var ph = /(?:\+972[\s\-]?|0)(5\d)[\s\-]?(\d{3})[\s\-]?(\d{4})\b/.exec(t) || /(?:\+|00)\d[\d\s\-]{7,16}\d/.exec(t);
     if (ph) out.phone = ph[1] ? '0' + ph[1] + '-' + ph[2] + ph[3] : ph[0].replace(/[\s\-]/g, '');
@@ -653,7 +660,7 @@ var Office = (function () {
   return {
     STATUS: STATUS, OPEN: OPEN, ACTIVE: ACTIVE, KINDS: KINDS, PAY: PAY, FIELD_HE: FIELD_HE, CHECK_SEED: CHECK_SEED, SCHEDULE_TPL: SCHEDULE_TPL, QL: QL,
     day: day, fmt: fmt, iso: iso, daysBetween: daysBetween, addDays: addDays, addMonths: addMonths, minutes: minutes, hhmm: hhmm, num: num, money: money, yes: yes,
-    parseLead: parseLead, followupQuestions: followupQuestions, missingOf: missingOf,
+    calm: calm, parseLead: parseLead, followupQuestions: followupQuestions, missingOf: missingOf,
     clientHistory: clientHistory, latestQuote: latestQuote,
     quoteTotals: quoteTotals, nextQuoteNo: nextQuoteNo, lineFromPrice: lineFromPrice, cloneQuote: cloneQuote, quoteHtml: quoteHtml, quoteMessage: quoteMessage,
     followups: followups, eventLine: eventLine, supplierRequest: supplierRequest, changeMessage: changeMessage, rankSuppliers: rankSuppliers,

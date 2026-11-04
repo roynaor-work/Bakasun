@@ -71,7 +71,7 @@ test('audit 01-07, 16: poisoned backup, CSP, dialog, labels, buttons, focus and 
     await page.goto(base + 'index.html#/calls'); await page.waitForSelector('#new');
     await page.focus('#new'); await page.keyboard.press('Enter');
     await page.waitForSelector('.modal [role=dialog]');
-    const d = await page.evaluate(() => { const f = document.querySelector('.modal form'); return { modal: f.getAttribute('aria-modal'), label: document.getElementById(f.getAttribute('aria-labelledby'))?.tagName }; });
+    const d = await page.evaluate(() => { const f = document.querySelector('.modal [role=dialog]'); return { modal: f.getAttribute('aria-modal'), label: document.getElementById(f.getAttribute('aria-labelledby'))?.tagName }; });
     assert.deepEqual(d, { modal: 'true', label: 'H2' });
     for (let i = 0; i < 12; i++) { await page.keyboard.press('Tab'); assert.ok(await page.evaluate(() => !!document.activeElement.closest('.modal')), 'focus escaped the dialog'); }
     await page.keyboard.press('Shift+Tab'); assert.ok(await page.evaluate(() => !!document.activeElement.closest('.modal')));

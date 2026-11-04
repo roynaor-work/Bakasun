@@ -34,7 +34,7 @@ const CLEAN_MARKS = /[\u200e\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g;
 /** Mail header value "Name <mail>" / "mail" / "Name" / "name@x <name@x>" → {name, email}. */
 export function parseAddress(v) {
   const s = trim(str(v).replace(CLEAN_MARKS, '').replace(/^mailto:/i, ''));
-  const em = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/.exec(s);
+  const em = /[A-Za-z0-9._%+\-]{1,64}@[A-Za-z0-9.\-]{1,255}\.[A-Za-z]{2,24}/.exec(s);
   let name = s.replace(/<[^>]*>/g, ' ').replace(/\([^)]*\)/g, ' ');
   if (em) name = name.replace(em[0], ' ');
   name = trim(name.replace(/^["'\s]+|["'\s]+$/g, '').replace(/^(.+?),\s+(.+)$/, (m, a, b) => /\s/.test(a) ? m : b + ' ' + a));
@@ -44,7 +44,7 @@ export function parseAddress(v) {
 
 /** Splits a pasted mail into its parts. {headers:{from,subject,date,to}, body, signature, quoted, hadQuote} */
 export function cleanMail(text) {
-  let lines = str(text).replace(CLEAN_MARKS, '').replace(/\r\n?/g, '\n').split('\n');
+  let lines = Office.calm(text).replace(CLEAN_MARKS, '').replace(/\r\n?/g, '\n').split('\n');
   // a forwarded mail: what is after the marker is the client's mail
   const fw = lines.findIndex(l => FORWARD_RE.test(l));
   if (fw >= 0) lines = lines.slice(fw + 1);
@@ -315,7 +315,7 @@ export function takeName(text) {
 /* ---------------- 3. the client ---------------- */
 
 const norm = v => Office.normHe(str(v)).replace(/[.׳'"״\-]/g, '').replace(/\s+/g, '');
-const emailsIn = s => (str(s).toLowerCase().match(/[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}/g) || []);
+const emailsIn = s => (str(s).toLowerCase().match(/[a-z0-9._%+\-]{1,64}@[a-z0-9.\-]{1,255}\.[a-z]{2,24}/g) || []);
 
 /** The client the mail belongs to: sender e-mail, the e-mail's domain, the organisation or an alias in the text, the contact's name.
     {client, by: 'email'|'domain'|'name'|'contact'|'phone'} or null. */

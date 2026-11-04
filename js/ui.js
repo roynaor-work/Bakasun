@@ -32,9 +32,9 @@ export function dialog(title, bodyHtml, opts) {
     wrap.className = 'modal';
     const opener = document.activeElement;
     const hid = 'dlg' + Math.random().toString(36).slice(2, 8);
-    wrap.innerHTML = `<form class="modal-card" method="dialog" role="dialog" aria-modal="true" aria-labelledby="${hid}"><h2 id="${hid}">${esc(title)}</h2><div class="modal-body">${bodyHtml}</div>
+    wrap.innerHTML = `<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="${hid}"><form method="dialog" class="modal-form"><h2 id="${hid}">${esc(title)}</h2><div class="modal-body">${bodyHtml}</div>
       <div class="row end"><button type="button" class="btn ghost" data-x="cancel">${esc(opts.cancel || t('cancel'))}</button>
-      <button type="submit" class="btn ${opts.danger ? 'danger' : 'primary'}">${esc(opts.ok || t('save'))}</button></div></form>`;
+      <button type="submit" class="btn ${opts.danger ? 'danger' : 'primary'}">${esc(opts.ok || t('save'))}</button></div></form></div>`;
     document.body.appendChild(wrap);
     const form = wrap.querySelector('form');
     addContactPicker(form);

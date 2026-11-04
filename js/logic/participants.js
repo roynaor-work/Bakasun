@@ -19,7 +19,7 @@ export function label(group, key, lang) { const x = L[group] && L[group][key]; r
 const DIET_WORDS = [[/צמחוני|צמחונית|vegetarian|végétarien|vegetarien|veggie/i, 'vegetarian'], [/טבעוני|טבעונית|vegan|végan/i, 'vegan'], [/כשר|כשרה|kosher|casher|kasher/i, 'kosher'], [/ללא גלוטן|בלי גלוטן|גלוטן|gluten/i, 'glutenfree'], [/אלרגי|אלרגיה|allerg/i, 'allergy']];
 const ROOM_WORDS = [[/^(סינגל|יחיד|single|simple)$/i, 'single'], [/^(זוגי|כפול|double)$/i, 'double']];
 
-const EMAIL_RE = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/;
+const EMAIL_RE = /[\w.+-]{1,64}@[\w-]{1,63}(?:\.[\w-]{1,63}){1,8}/;
 const PHONE_RE = /(?:\+|00)?\d[\d\s().-]{5,}\d/;
 const isPhoneToken = s => !/[A-Za-z֐-׿]/.test(s) && !!phoneDigits(s) && str(s).replace(/\D/g, '').length >= 7;
 

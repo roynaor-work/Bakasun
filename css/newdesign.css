@@ -1,0 +1,78 @@
+/* "עיצוב חדש" (pilot, off by default): the look proposed in design/bakasun-ui (GPT, 04/11/2026) as a skin over the existing screens.
+   Loaded only when settings → "אישי" → "עיצוב" is "חדש" (js/personal.js sets <html data-design="new"> and loads this file).
+   Colours, radii and the nav come from tokens and apply on every screen; the structural rules are scoped to the two pilot screens
+   (#app[data-screen="today"] and #app[data-screen="board"]). No markup or logic changes. Logical properties only; no Arabic letters. */
+
+@font-face { font-family: 'Baka Noto'; src: url('fonts/NotoSansHebrew-Regular.ttf') format('truetype'); font-weight: 400 600; font-display: swap; }
+@font-face { font-family: 'Baka Noto'; src: url('fonts/NotoSansHebrew-Bold.ttf') format('truetype'); font-weight: 700 900; font-display: swap; }
+
+/* ---------- tokens: light ---------- */
+html[data-design="new"] {
+  --bg: #f7f5f0; --card: #fffefa; --ink: #2c302e; --ink-2: #3f4541; --muted: #5d645e; --line: #e3e5dc;
+  --accent: #a8412c; --accent-ink: #ffffff; --accent-soft: #f9eae3; --accent-fill: #ba4833;
+  --ok: #35684e; --ok-soft: #e9efe5; --warn: #7a5a14; --warn-soft: #f7f0dc; --wa: #2d6b4c; --nav: #fffefa; --on-green: #fff; --badge-ink: #a8412c;
+  --hero: #eceee3; --r: 20px;
+  --f-body: 'Baka Noto', 'Assistant', 'Noto Sans Hebrew', 'Segoe UI', Arial, sans-serif;
+  --f-head: 'Baka Noto', 'Heebo', 'Assistant', 'Noto Sans Hebrew', Arial, sans-serif;
+  --late: #a93a27;
+}
+/* ---------- tokens: dark (a planned palette, not an inversion) ---------- */
+@media (prefers-color-scheme: dark) {
+  html[data-design="new"]:not([data-theme="light"]) {
+    --bg: #181d1a; --card: #222924; --ink: #f3f2e9; --ink-2: #dcdccf; --muted: #b1b9af; --line: #3b443d;
+    --accent: #f6a48c; --accent-ink: #2a1710; --accent-soft: #40302a; --accent-fill: #ba4833;
+    --ok: #b1d1aa; --ok-soft: #2d3c2e; --warn: #ecd18d; --warn-soft: #3c3625; --wa: #6fcf9a; --nav: #1d231f; --on-green: #0b2417; --badge-ink: #f6a48c;
+    --hero: #30392c; --late: #ff9d86;
+  }
+}
+html[data-design="new"][data-theme="dark"] {
+  --bg: #181d1a; --card: #222924; --ink: #f3f2e9; --ink-2: #dcdccf; --muted: #b1b9af; --line: #3b443d;
+  --accent: #f6a48c; --accent-ink: #2a1710; --accent-soft: #40302a; --accent-fill: #ba4833;
+  --ok: #b1d1aa; --ok-soft: #2d3c2e; --warn: #ecd18d; --warn-soft: #3c3625; --wa: #6fcf9a; --nav: #1d231f; --on-green: #0b2417; --badge-ink: #f6a48c;
+  --hero: #30392c; --late: #ff9d86;
+}
+
+/* ---------- shared look (every screen) ---------- */
+html[data-design="new"] body { line-height: 1.6; }
+html[data-design="new"] .btn { border-radius: 12px; }
+html[data-design="new"] .btn.primary, html[data-design="new"] .fab { background: var(--accent-fill); color: #fff; border-color: transparent; }
+html[data-design="new"] .chip.on { background: var(--accent-fill); color: #fff; }
+html[data-design="new"] .card { border-radius: 20px; box-shadow: none; padding: 16px 18px; }
+html[data-design="new"] input, html[data-design="new"] textarea, html[data-design="new"] select { border-radius: 12px; }
+html[data-design="new"] nav.bottom { background: var(--nav); }
+html[data-design="new"] nav.bottom a.on { color: var(--accent); }
+html[data-design="new"] nav.bottom a.on svg { background: var(--accent-soft); border-radius: 12px; padding: 5px; width: 36px; height: 30px; box-sizing: border-box; }
+html[data-design="new"] .modal-card { border-radius: 22px; }
+html[data-design="new"] .badge.late { background: var(--accent-soft); color: var(--late); }
+html[data-design="new"] :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+html[data-design="new"] .tabs button.on { background: var(--ink); color: var(--bg); }
+
+/* ---------- the two pilot screens ---------- */
+html[data-design="new"] #app[data-screen="today"] .top h1,
+html[data-design="new"] #app[data-screen="board"] .top h1 { font-size: 30px; font-weight: 700; letter-spacing: -.8px; line-height: 1.25; }
+html[data-design="new"] #app[data-screen="today"] .sec,
+html[data-design="new"] #app[data-screen="board"] .sec { margin-top: 26px; gap: 12px; }
+html[data-design="new"] #app[data-screen="today"] .sec-h h2,
+html[data-design="new"] #app[data-screen="board"] .sec-h h2 { font-size: 19px; letter-spacing: -.3px; }
+
+/* today: the question box reads as one search field, the cards as calm surfaces, the first upcoming event as the hero */
+html[data-design="new"] #app[data-screen="today"] #askBox { background: var(--card); border-radius: 16px; }
+html[data-design="new"] #app[data-screen="today"] .card.tap { background: var(--card); }
+html[data-design="new"] #app[data-screen="today"] .sec:first-of-type > .list > .card.tap:first-child { background: var(--hero); border-color: transparent; padding: 22px; }
+html[data-design="new"] #app[data-screen="today"] .sec:first-of-type > .list > .card.tap:first-child .title { font-size: 22px; line-height: 1.4; }
+html[data-design="new"] #app[data-screen="today"] .card .title { font-weight: 700; }
+html[data-design="new"] #app[data-screen="today"] .card.warnbox { background: var(--accent-soft); border-color: transparent; }
+html[data-design="new"] #app[data-screen="today"] .badge { border-radius: 10px; padding: 2px 10px; }
+
+/* board: filter chips as 44px pills, columns as soft surfaces, cards with air */
+html[data-design="new"] #app[data-screen="board"] .chip { min-height: 44px; border-radius: 12px; background: var(--card); color: var(--muted); font-weight: 700; padding: 0 14px; }
+html[data-design="new"] #app[data-screen="board"] .chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+html[data-design="new"] #app[data-screen="board"] .bd-search { border-radius: 14px; min-height: 48px; background: var(--card); }
+html[data-design="new"] #app[data-screen="board"] .bd-col { background: var(--hero); border-color: transparent; border-radius: 22px; padding: 14px; gap: 12px; }
+html[data-design="new"] #app[data-screen="board"] .bd-col.over { background: var(--accent-soft); }
+html[data-design="new"] #app[data-screen="board"] .bd-col-h h2 { font-size: 18px; }
+html[data-design="new"] #app[data-screen="board"] .bd-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; box-shadow: none; }
+html[data-design="new"] #app[data-screen="board"] .bd-card .title { font-size: 18px; }
+html[data-design="new"] #app[data-screen="board"] .bd-col-f { border-top-color: var(--line); }
+
+@media (prefers-reduced-motion: reduce) { html[data-design="new"] * { scroll-behavior: auto !important; transition: none !important; } }

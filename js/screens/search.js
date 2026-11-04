@@ -19,18 +19,12 @@ const recents = () => { try { const a = JSON.parse(localStorage.getItem(RECENT_K
 const saveRecents = list => { try { localStorage.setItem(RECENT_KEY, JSON.stringify(list)); } catch (e) { /* private mode: no memory, no harm */ } };
 const remember = s => { if (s && s.trim()) saveRecents(addRecent(recents(), s)); };
 
-/* "/" anywhere (not while typing in a field) opens the search; on the search screen it just focuses the box. Installed once. */
-const typing = el => !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable);
-document.addEventListener('keydown', e => {
-  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey || typing(e.target) || document.querySelector('.modal')) return;
-  e.preventDefault();
-  const box = document.getElementById('q');
-  if (location.hash.replace(/^#\/?/, '').split('/')[0] === 'search' && box) { box.focus(); box.select(); } else location.hash = '#/search';
-});
+/* The "/" shortcut lives in app.js (it has to work before this screen has ever loaded). */
 
 export function render({ root, id }) {
   if (id) { try { q = decodeURIComponent(id); } catch (e) { q = id; } }
   root.innerHTML = `<header class="top"><a class="icon" href="#/today" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <h1 class="sr-only">${esc(t('srTitle'))}</h1>
     <input id="q" type="search" placeholder="${esc(t('searchPh'))}" value="${esc(q)}" autocomplete="off" enterkeyhint="go" aria-label="${esc(t('srTitle'))}" autofocus></header>
     <div id="recent" class="sec"></div><p class="hint" id="srHint">${esc(t('srHint'))}</p><div id="res" class="stack"></div>`;
   const inp = root.querySelector('#q'), res = root.querySelector('#res'), rec = root.querySelector('#recent'), hint = root.querySelector('#srHint');

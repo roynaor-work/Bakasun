@@ -1,3 +1,4 @@
+import os
 import asyncio, json
 from playwright.async_api import async_playwright
 import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tests', 'e2e') if 'scratchpad' in os.path.abspath(__file__) else os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, '/home/user/bakasun/tests/e2e')
@@ -6,13 +7,14 @@ ROUTES = ['#/today', '#/dashboard', '#/calendar', '#/board', '#/board/stats', '#
 TABS = ['participants', 'contract', 'checklist', 'history', 'budget', 'runsheet', 'files']
 async def main():
     async with async_playwright() as p:
-        b = await p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
+        b = await p.chromium.launch(executable_path=os.environ.get('BAKASUN_BROWSER', '/opt/pw-browsers/chromium'))
         for W, H, label in [(400, 860, 'phone'), (1280, 800, 'desktop')]:
             ctx = await b.new_context(viewport={'width': W, 'height': H}); pg = await ctx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)[:140]))
             await seed(pg)
             st = json.loads(await pg.evaluate("localStorage['bakasun.v1']")); cid = st['cases'][0]['id']
             for lang in ['he', 'fr', 'en']:
                 await pg.evaluate(f"(()=>{{const s=JSON.parse(localStorage['bakasun.v1']); s.settings.lang='{lang}'; localStorage['bakasun.v1']=JSON.stringify(s);}})()")
+                await pg.reload()  # the store lives in memory: the language written above is read on the next load
                 for r in ROUTES + [f'#/case/{cid}', f'#/runsheet/{cid}/live', f'#/participants/{cid}', f'#/files/{cid}', f'#/budget/{cid}', f'#/runsheet/{cid}']:
                     await pg.goto('http://localhost:8765/' + r); await pg.wait_for_timeout(350)
                     got = await pg.evaluate('document.documentElement.lang')

@@ -65,7 +65,7 @@ function statusLabelIn(st, L) { const m = { 'פנייה': { en: 'Inquiry', fr: '
 export const noLive = true;
 export function render({ root, id }) {
   const cs = db.get('cases', id);
-  if (!cs) { root.innerHTML = empty(t('noResults')); return; }
+  if (!cs) { root.innerHTML = `<h1 class="sr-only">${esc(t('portal'))}</h1>` + empty(t('noResults')); return; }
   let lang = cs.lang || 'he';
   const draw = () => {
     root.innerHTML = `<header class="top"><a class="icon" href="#/case/${esc(id)}/money" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('portal'))}</h1></header>

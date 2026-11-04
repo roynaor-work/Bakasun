@@ -86,14 +86,14 @@ function drawForm(box, lead, s) {
       ${field('name', t('fName'), lead.name)}
       ${field('phone', t('fPhone'), lead.phone, { ltr: true, inputmode: 'tel' })}
       ${field('email', t('fEmail'), lead.email, { ltr: true, inputmode: 'email' })}
-      <div class="f${isMissing('kind')}"><span>${esc(t('fKind'))}</span><select name="kind">${kinds.map(o => `<option value="${esc(o[0])}"${o[0] === lead.kind ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select></div>
-      <div class="f${isMissing('date')}"><span>${esc(t('fDate'))}</span><input name="date" type="date" value="${esc(lead.date)}"></div>
-      <div class="f${isMissing('participants')}"><span>${esc(t('fParticipants'))}</span><input name="participants" value="${esc(lead.participants)}"></div>
-      <div class="f${isMissing('budget')}"><span>${esc(t('fBudget'))}</span><input name="budget" value="${esc(lead.budget)}"></div>
-      <div class="f${isMissing('place')}"><span>${esc(t('fPlace'))}</span><input name="place" value="${esc(lead.place)}"></div>
-      <div class="f"><span>${esc(t('fLang'))}</span><select name="lang">${langs.map(o => `<option value="${o[0]}"${o[0] === lead.lang ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select></div>
+      <label class="f${isMissing('kind')}"><span>${esc(t('fKind'))}</span><select name="kind">${kinds.map(o => `<option value="${esc(o[0])}"${o[0] === lead.kind ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select></label>
+      <label class="f${isMissing('date')}"><span>${esc(t('fDate'))}</span><input name="date" type="date" value="${esc(lead.date)}"></label>
+      <label class="f${isMissing('participants')}"><span>${esc(t('fParticipants'))}</span><input name="participants" value="${esc(lead.participants)}"></label>
+      <label class="f${isMissing('budget')}"><span>${esc(t('fBudget'))}</span><input name="budget" value="${esc(lead.budget)}"></label>
+      <label class="f${isMissing('place')}"><span>${esc(t('fPlace'))}</span><input name="place" value="${esc(lead.place)}"></label>
+      <label class="f"><span>${esc(t('fLang'))}</span><select name="lang">${langs.map(o => `<option value="${o[0]}"${o[0] === lead.lang ? ' selected' : ''}>${esc(o[1])}</option>`).join('')}</select></label>
     </div>
-    <div class="f${isMissing('purpose')}"><span>${esc(t('fPurpose'))}</span><input name="purpose" value="${esc(lead.purpose)}"></div>
+    <label class="f${isMissing('purpose')}"><span>${esc(t('fPurpose'))}</span><input name="purpose" value="${esc(lead.purpose)}"></label>
     <div class="f"><span>${esc(t('needsFound'))}</span><p class="hint">${esc((lead.needs || []).length ? t('needsHint') : t('noNeeds'))}</p>
       <div class="pick">${SUPPLIER_TYPES.map(x => `<label class="chk"><input type="checkbox" name="needs" value="${esc(x)}"${(lead.needs || []).includes(x) ? ' checked' : ''}> ${esc(supplierTypeLabel(x))}</label>`).join('')}</div></div>
     ${(lead.tasks || []).length ? `<div class="f"><span>${esc(t('tasksFound'))}</span><div class="pick">${lead.tasks.map((x, i) => `<label class="chk"><input type="checkbox" name="tasks" value="${i}" checked> ${esc(x.title)}</label>`).join('')}</div></div>` : ''}
