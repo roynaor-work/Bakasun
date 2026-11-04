@@ -1,0 +1,521 @@
+{
+  "generator": "tools/hoops-build-v4-lod.mjs",
+  "targetTriangles": 5200,
+  "created": "2026-11-04",
+  "method": "Offline meshoptimizer quadric-error edge collapse (same flags and attribute weights as hoops-build-lod.mjs); skeleton, bind pose and node transforms identical; source GLBs unchanged",
+  "tools": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "meshoptimizer": "1.3.0",
+    "draco3dgltf": "1.5.7"
+  },
+  "assets": [
+    {
+      "role": "pg",
+      "source": "design/hoops-v4/assets/players/pg.glb",
+      "sourceSha256": "4392c4a87ead7ea4cf7efe4d302ff6e3d8d42278dc55b30440f26a82162b86f2",
+      "sourceBytes": 345344,
+      "output": "design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "outputSha256": "e47e9289215e6c81671b61e4a78a2a4acdbf42667b9328efd5a6e72992e88f49",
+      "bytes": 244148,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 5260,
+      "sourceTriangles": 26767,
+      "meshes": [
+        {
+          "name": "Human.eyebrow001_x",
+          "kind": "face",
+          "before": 192,
+          "after": 94,
+          "vertices": 65,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "kind": "face",
+          "before": 368,
+          "after": 182,
+          "vertices": 140,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.low-poly_x",
+          "kind": "face",
+          "before": 172,
+          "after": 84,
+          "vertices": 52,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.shoes06_x",
+          "kind": "shoe",
+          "before": 2082,
+          "after": 519,
+          "vertices": 345,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short04_x",
+          "kind": "hair",
+          "before": 1050,
+          "after": 363,
+          "vertices": 369,
+          "ratio": 0.347,
+          "error": 0.02
+        },
+        {
+          "name": "Human_x",
+          "kind": "body",
+          "before": 18876,
+          "after": 2600,
+          "vertices": 1596,
+          "ratio": 0.138,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "kind": "cloth",
+          "before": 2137,
+          "after": 716,
+          "vertices": 461,
+          "ratio": 0.336,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 1786,
+          "after": 598,
+          "vertices": 359,
+          "ratio": 0.336,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 104,
+          "after": 104,
+          "vertices": 124,
+          "ratio": 0.336,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "role": "sg",
+      "source": "design/hoops-v4/assets/players/sg.glb",
+      "sourceSha256": "05e6759db24984deac8b4192631bb5b3d24d080cb6ae35646bb16d8379a7a6b5",
+      "sourceBytes": 344108,
+      "output": "design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "outputSha256": "f4a9e71d996f1f1ff9ab27b9f7709da2c9a0d3a98dabc3db592fe764f7af147c",
+      "bytes": 235528,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 5253,
+      "sourceTriangles": 28995,
+      "meshes": [
+        {
+          "name": "Human.eyebrow003_x",
+          "kind": "face",
+          "before": 192,
+          "after": 95,
+          "vertices": 68,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "kind": "face",
+          "before": 368,
+          "after": 182,
+          "vertices": 140,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.low-poly_x",
+          "kind": "face",
+          "before": 172,
+          "after": 84,
+          "vertices": 52,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.shoes06_x",
+          "kind": "shoe",
+          "before": 2082,
+          "after": 520,
+          "vertices": 349,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short02_x",
+          "kind": "hair",
+          "before": 3344,
+          "after": 363,
+          "vertices": 219,
+          "ratio": 0.109,
+          "error": 0.02
+        },
+        {
+          "name": "Human_x",
+          "kind": "body",
+          "before": 18802,
+          "after": 2600,
+          "vertices": 1590,
+          "ratio": 0.138,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "kind": "cloth",
+          "before": 2135,
+          "after": 714,
+          "vertices": 444,
+          "ratio": 0.335,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 1808,
+          "after": 603,
+          "vertices": 361,
+          "ratio": 0.335,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 92,
+          "after": 92,
+          "vertices": 92,
+          "ratio": 0.335,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "role": "sf",
+      "source": "design/hoops-v4/assets/players/sf.glb",
+      "sourceSha256": "70419fd45ef3ce7b78d614d5fdeb15415e910eafad98abc579a17e07f5f58bcf",
+      "sourceBytes": 372168,
+      "output": "design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "outputSha256": "7b101f44784aed33f5e7b3313278a908c453bcd4c2ab5539bdb8ef84046774c8",
+      "bytes": 255148,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 5283,
+      "sourceTriangles": 29277,
+      "meshes": [
+        {
+          "name": "Human.eyebrow006_x",
+          "kind": "face",
+          "before": 192,
+          "after": 94,
+          "vertices": 68,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "kind": "face",
+          "before": 368,
+          "after": 182,
+          "vertices": 137,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.low-poly_x",
+          "kind": "face",
+          "before": 172,
+          "after": 84,
+          "vertices": 52,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.shoes06_x",
+          "kind": "shoe",
+          "before": 2082,
+          "after": 520,
+          "vertices": 350,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human.short01_x",
+          "kind": "hair",
+          "before": 3678,
+          "after": 396,
+          "vertices": 416,
+          "ratio": 0.099,
+          "error": 0.02
+        },
+        {
+          "name": "Human_x",
+          "kind": "body",
+          "before": 18798,
+          "after": 2600,
+          "vertices": 1589,
+          "ratio": 0.138,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "kind": "cloth",
+          "before": 2082,
+          "after": 705,
+          "vertices": 432,
+          "ratio": 0.339,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 1819,
+          "after": 616,
+          "vertices": 370,
+          "ratio": 0.339,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 86,
+          "after": 86,
+          "vertices": 86,
+          "ratio": 0.339,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "role": "pf",
+      "source": "design/hoops-v4/assets/players/pf.glb",
+      "sourceSha256": "672986747a564e9495ed10968e9285288eaf989d0bf28e6fbdea640ec52215a3",
+      "sourceBytes": 365144,
+      "output": "design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "outputSha256": "78ada2df6b698f2a2a8f7055746f0d9f3e33da9d34059955b8995270be4174e4",
+      "bytes": 264488,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 5848,
+      "sourceTriangles": 27309,
+      "meshes": [
+        {
+          "name": "Human.afro01_x",
+          "kind": "hair",
+          "before": 1752,
+          "after": 957,
+          "vertices": 1522,
+          "ratio": 0.208,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyebrow002_x",
+          "kind": "face",
+          "before": 192,
+          "after": 94,
+          "vertices": 67,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "kind": "face",
+          "before": 368,
+          "after": 182,
+          "vertices": 139,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.low-poly_x",
+          "kind": "face",
+          "before": 172,
+          "after": 84,
+          "vertices": 52,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.shoes06_x",
+          "kind": "shoe",
+          "before": 2082,
+          "after": 520,
+          "vertices": 352,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "kind": "body",
+          "before": 18796,
+          "after": 2600,
+          "vertices": 1585,
+          "ratio": 0.138,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "kind": "cloth",
+          "before": 2035,
+          "after": 696,
+          "vertices": 437,
+          "ratio": 0.343,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 1819,
+          "after": 622,
+          "vertices": 370,
+          "ratio": 0.343,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 93,
+          "after": 93,
+          "vertices": 93,
+          "ratio": 0.343,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "role": "c",
+      "source": "design/hoops-v4/assets/players/c.glb",
+      "sourceSha256": "04edc3ff5e24c47bec452e5d1eba277fcbfc0997d05d3df6173e2b752defefc1",
+      "sourceBytes": 364300,
+      "output": "design/hoops/lod-v4/hoops-v4-c-lod.glb",
+      "outputSha256": "d9c62643b8a05ba196d5b8bc4c1e0a3425fd2ab523a97481c3cb97a42de46087",
+      "bytes": 263716,
+      "bones": 52,
+      "bindIdentical": true,
+      "originalNodeTransforms": true,
+      "triangles": 5751,
+      "sourceTriangles": 27310,
+      "meshes": [
+        {
+          "name": "Human.afro01_x",
+          "kind": "hair",
+          "before": 1752,
+          "after": 860,
+          "vertices": 1430,
+          "ratio": 0.208,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyebrow002_x",
+          "kind": "face",
+          "before": 192,
+          "after": 94,
+          "vertices": 67,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.eyelashes01_x",
+          "kind": "face",
+          "before": 368,
+          "after": 182,
+          "vertices": 140,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.low-poly_x",
+          "kind": "face",
+          "before": 172,
+          "after": 84,
+          "vertices": 52,
+          "ratio": 0.497,
+          "error": 0.02
+        },
+        {
+          "name": "Human.shoes06_x",
+          "kind": "shoe",
+          "before": 2082,
+          "after": 520,
+          "vertices": 348,
+          "ratio": 0.25,
+          "error": 0.025
+        },
+        {
+          "name": "Human_x",
+          "kind": "body",
+          "before": 18796,
+          "after": 2600,
+          "vertices": 1581,
+          "ratio": 0.138,
+          "error": 0.005
+        },
+        {
+          "name": "Jersey",
+          "kind": "cloth",
+          "before": 2036,
+          "after": 696,
+          "vertices": 436,
+          "ratio": 0.342,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 1819,
+          "after": 622,
+          "vertices": 374,
+          "ratio": 0.342,
+          "error": 0.03
+        },
+        {
+          "name": "Shorts",
+          "kind": "cloth",
+          "before": 93,
+          "after": 93,
+          "vertices": 93,
+          "ratio": 0.342,
+          "error": 0.03
+        }
+      ]
+    },
+    {
+      "role": "arena",
+      "source": "design/hoops-v4/assets/arena.glb",
+      "sourceSha256": "ed6e3b61a5106ab9f55f9216703742274e71619e76a0120fafe337ed2eb74859",
+      "sourceBytes": 881400,
+      "output": "design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+      "outputSha256": "864aaed95a61f4563b09d498a032e1c5278c9929fb55247f9c7ed75ee619db94",
+      "bytes": 601672,
+      "originalNodeTransforms": true,
+      "triangles": 109478,
+      "sourceTriangles": 213316,
+      "meshes": [
+        {
+          "name": "seated_crowd",
+          "before": 188796,
+          "after": 84958,
+          "vertices": 191116,
+          "ratio": 0.45,
+          "error": 0.02
+        }
+      ]
+    }
+  ]
+}

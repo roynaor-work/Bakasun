@@ -44,6 +44,32 @@ function mappedMaterial(mesh,map,{vertexColors=true,roughness=.85}={}){
  const mat=mesh.material.clone();mat.map=map;mat.vertexColors=vertexColors;mat.color.set(0xffffff);mat.roughness=roughness;mesh.material=mat;return mat;
 }
 
+/** Split one static, vertex-coloured mesh into spatial chunks (a columns x rows grid over its x/z extent, empty
+ * cells dropped) so frustum culling can skip the stands the camera does not see. The chunks share the vertex
+ * buffers of the source and only own their index, so nothing is duplicated; each gets its own bounding sphere
+ * (three.js would otherwise measure every vertex of the shared buffer). Returns a Group named like the mesh. */
+export function splitStaticMesh(mesh,{columns=3,rows=3}={}){
+ const source=mesh.geometry,position=source.attributes.position,index=source.index,count=index?index.count:position.count,box=new THREE.Box3().setFromBufferAttribute(position);
+ const point=new THREE.Vector3(),buckets=new Map(),sx=Math.max(1e-6,box.max.x-box.min.x),sz=Math.max(1e-6,box.max.z-box.min.z);
+ for(let t=0;t<count;t+=3){
+  const a=index?index.getX(t):t,b=index?index.getX(t+1):t+1,c=index?index.getX(t+2):t+2;
+  const cx=(position.getX(a)+position.getX(b)+position.getX(c))/3,cz=(position.getZ(a)+position.getZ(b)+position.getZ(c))/3;
+  const col=Math.min(columns-1,Math.floor((cx-box.min.x)/sx*columns)),row=Math.min(rows-1,Math.floor((cz-box.min.z)/sz*rows)),key=col*rows+row;
+  let bucket=buckets.get(key);if(!bucket){bucket={indices:[],box:new THREE.Box3()};buckets.set(key,bucket);}
+  bucket.indices.push(a,b,c);for(const v of [a,b,c])bucket.box.expandByPoint(point.set(position.getX(v),position.getY(v),position.getZ(v)));
+ }
+ const group=new THREE.Group();group.name=mesh.name;group.position.copy(mesh.position);group.quaternion.copy(mesh.quaternion);group.scale.copy(mesh.scale);
+ let chunk=0;
+ for(const [,bucket] of [...buckets].sort((x,y)=>x[0]-y[0])){
+  const geometry=new THREE.BufferGeometry();for(const [name,attribute] of Object.entries(source.attributes))geometry.setAttribute(name,attribute);
+  geometry.setIndex(new THREE.BufferAttribute(position.count>65535?new Uint32Array(bucket.indices):new Uint16Array(bucket.indices),1));
+  geometry.boundingBox=bucket.box.clone();geometry.boundingSphere=bucket.box.getBoundingSphere(new THREE.Sphere());
+  const part=new THREE.Mesh(geometry,mesh.material);part.name=mesh.name+'-'+chunk++;part.castShadow=mesh.castShadow;part.receiveShadow=mesh.receiveShadow;group.add(part);
+ }
+ mesh.parent?.add(group);mesh.parent?.remove(mesh);
+ return group;
+}
+
 function openBroadcastCanopy(mesh){
  // The live sideline camera is at y=7 m, inside the authored near canopy
  // (local x=12.6..15.4, |z|<=18, y=6.85..7.15). Cut away that canopy,
@@ -84,7 +110,7 @@ function crowdSpots(court){
  * court, court-apron, basket-1/basket--1, stands, arena-shell, arena-ceiling,
  * arena-fixtures and arena-scoreboard. Court overlays and lighting are retained.
  * All loading completes before the visible arena is changed. */
-export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4}={}){
+export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4,venue:venueSource}={}){
  const base=assetBase||new URL('../',import.meta.url);
  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
@@ -97,9 +123,13 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
  try{
   // Wait for every load, including failures, before releasing partially loaded assets.
   const bake=async name=>{const t=await textureLoader.loadAsync(new URL('design/baked/basketball-arena-'+name+'.webp',base).href);owned.textures.add(t);return t;};
-  const all=await Promise.allSettled([loadModel('basketball-arena','design/models2/'),loadModel('basketball-hoop'),loadTexture('stand-concrete'),loadTexture('parquet'),loadModel('basketball-arena'),bake('ao'),bake('light')]);
+  // v4 (02/11): the venue with 489 modelled spectators (design/hoops-v4); same object names as the v3 venue
+  const loadVenue=venueSource?loadHoopsGLTF(loader,new URL(venueSource,base).href).then(g=>{mergeResources(owned,resources(g.scene));return g.scene;}):loadModel('basketball-arena','design/models2/');
+  const all=await Promise.allSettled([loadVenue,loadModel('basketball-hoop'),loadTexture('stand-concrete'),loadTexture('parquet'),loadModel('basketball-arena'),bake('ao'),bake('light')]);
   const failed=all.find(r=>r.status==='rejected');if(failed)throw failed.reason;
   [venue,hoopSource,concrete,parquetMap,reference,ao,light]=all.map(r=>r.value);
+  // validate before anything visible changes, so the caller can fall back to the v3 venue untouched
+  if(venueSource)for(const need of ['seated_crowd','court_surface','arena_shell','individual_seats','roof','scoreboard','anchor_scoreboard_center'])if(!venue.getObjectByName(need))throw Error('Basketball v4 venue lacks '+need);
  }catch(error){release(owned);throw error;}finally{draco.dispose();}
  try{
   venue.name='design-basketball-arena-v2';
@@ -127,7 +157,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
   const shell=venue.getObjectByName('arena_shell'),p=shell.geometry.attributes.position,n=shell.geometry.attributes.normal,uv=new Float32Array(p.count*2);
   for(let i=0;i<p.count;i++){uv[i*2]=(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/8;uv[i*2+1]=p.getY(i)/8;}shell.geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));
   owned.materials.add(mappedMaterial(shell,concrete,{roughness:.95}));
-  venue.getObjectByName('seating').material.color.set('#3a4659');
+  venue.getObjectByName('seating')?.material.color.set('#3a4659');
   // the authored team benches and rails are bright teal boxes: give them the dark courtside finish
   for(const name of ['team_benches','handrails']){const m=venue.getObjectByName(name);if(m){m.material.vertexColors=false;m.material.color.set(name==='team_benches'?'#232a3a':'#5a6272');m.material.needsUpdate=true;}}
   // every static unlit venue part with the same shading becomes one draw call (the floor, the shell,
@@ -190,10 +220,12 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
   }
   // The apron remains under the authored surface and retains team tinting.
   const apron=arena.getObjectByName('court-apron');
-  arena.add(venue,...baskets);dyn.nets=nets;dyn.crowdSpots=crowdSpots(court);
+  // the 3D crowd (v4 venue): one static mesh cut into eight chunks so the camera culls the stands it does not see
+  let crowd3d=venue.getObjectByName('seated_crowd');if(crowd3d?.isMesh)crowd3d=splitStaticMesh(crowd3d);
+  arena.add(venue,...baskets);dyn.nets=nets;dyn.crowdSpots=crowd3d?[]:crowdSpots(court);
   mergeResources(owned,resources(venue));for(const b of baskets)mergeResources(owned,resources(b));mergeResources(owned,resources(ball));
   if(apron)mergeResources(owned,resources(apron));
   release(resources(removed),resources(arena));
-  return {ball,baked,version:2,dispose(){if(disposed)return;disposed=true;release(owned);},anchors:{rims:baskets.map((b,i)=>({side:[1,-1][i],position:b.getObjectByName('anchor_rim_center').getWorldPosition(new THREE.Vector3()).toArray()}))}};
+  return {ball,baked,version:2,crowd3d:!!crowd3d,venue:venueSource||'design/models2/basketball-arena.glb',dispose(){if(disposed)return;disposed=true;release(owned);},anchors:{rims:baskets.map((b,i)=>({side:[1,-1][i],position:b.getObjectByName('anchor_rim_center').getWorldPosition(new THREE.Vector3()).toArray()}))}};
  }catch(error){release(owned);throw error;}
 }

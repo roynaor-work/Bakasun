@@ -10,6 +10,7 @@ import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
 import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261102-2';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
+import {v4ArenaEnabled} from './hoops-v4.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -33,7 +34,15 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const looks=teams.map(t=>t.look);
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
  scene.add(arena);mark('arena');
- const models=await replaceArenaAssets(arena,dyn,court,{assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
+ // v4 assets (02/11) are an upgrade, never a requirement: any load failure falls back to the v3 venue and bodies
+ const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[];
+ const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
+ const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
+ let models=null;
+ if(v4ArenaEnabled(config.assets,quality,params)){
+  try{models=await replaceArenaAssets(arena,dyn,court,{...arenaOptions,venue:config.assets.v4.arena});}catch(error){onFallback('arena',error);}
+ }
+ if(!models)models=await replaceArenaAssets(arena,dyn,court,arenaOptions);
  loadingModels=models;mark('models');
  // lacquered floor: the players, the ball and the baskets mirrored into a small target that the
  // parquet mixes in (quality 2 only; one extra pass over the reflection layer, shadow map reused)
@@ -52,9 +61,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
 
  // crowd: instanced sprites from the spectator atlas (or plain silhouettes if it fails)
  let crowd=null;
- try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
+ if(!models.crowd3d)try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
  mark('crowd');
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
@@ -291,7 +300,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:1,clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

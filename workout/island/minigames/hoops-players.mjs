@@ -11,12 +11,44 @@ const SKINS=['#81513b','#b47c56','#d9a478','#68402c','#9d6548','#edc09b'];
 const HAIRS=['#222b38','#17191e','#422c22','#68462e','#28201b','#241c18'];
 async function json(path,base){const response=await fetch(new URL(path,base));if(!response.ok)throw Error('Basketball asset unavailable: '+path+' ('+response.status+')');return response.json();}
 function releaseScene(scene){const materials=new Set(),geometries=new Set();scene?.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])materials.add(m);});for(const g of geometries)g.dispose();for(const m of materials){for(const value of Object.values(m))if(value?.isTexture)value.dispose();m.dispose();}}
-import {loadPlayerAssetsV1,createAvatarV1} from './hoops-players-v1.mjs';
+import {loadPlayerAssetsV1,createAvatarV1,loadMotionClips,bundlePlayerAssets} from './hoops-players-v1.mjs';
+import {V4_ROLES,v4Enabled} from './hoops-v4.mjs';
 /** Default (v3, 01/11): the textured motion-capture athletes. `assets.characterVersion: 2`
  * (or ?hoopsCharacters=2) selects the characters2 low-poly athlete with the motion2 clips. */
-export async function loadPlayerAssets(cfg,base,onProgress){
- if((cfg.characterVersion??1)!==2)return loadPlayerAssetsV1(cfg,base,onProgress);
- return loadPlayerAssetsV2(cfg,base,onProgress);
+export async function loadPlayerAssets(cfg,base,onProgress,{params,onFallback}={}){
+ if((cfg.characterVersion??1)===2)return loadPlayerAssetsV2(cfg,base,onProgress);
+ // v4 (02/11): the five position bodies; any failure falls back to the v3 bodies instead of stopping the game
+ if(v4Enabled(cfg,params)){
+  try{return await loadPlayerAssetsV4(cfg,base,onProgress);}
+  catch(error){onFallback?.('players',error);}
+ }
+ return loadPlayerAssetsV1(cfg,base,onProgress);
+}
+/** Rest hip height (local y of the Hips bone) of a loaded body. */
+function hipRestY(scene){let hips=null;scene.traverse(o=>{if(!hips&&o.isBone&&/Hips$/.test(o.name))hips=o;});if(!hips)throw Error('Basketball v4 body has no hips');return hips.position.y;}
+/** The v3 clips were made on one rig; a body with longer or shorter legs plays them with its hip track scaled by
+ * its own hip height, otherwise the feet float (PG) or sink into the floor (C). Other tracks are shared. */
+export function hipScaledClips(clips,ratio){
+ if(!(ratio>0.5&&ratio<2))throw Error('Basketball v4 hip ratio out of range: '+ratio);
+ const scaled=new Map();
+ for(const [name,clip] of clips)scaled.set(name,new THREE.AnimationClip(clip.name,clip.duration,clip.tracks.map(t=>/Hips\.position$/.test(t.name)?new THREE.VectorKeyframeTrack(t.name,t.times,Float32Array.from(t.values,v=>v*ratio)):t),clip.blendMode));
+ return scaled;
+}
+/** Five bodies by position (reduced skins of design/hoops-v4 players, Draco) with the v3 motion clips. */
+export async function loadPlayerAssetsV4(cfg,base,onProgress){
+ const v4=cfg.v4,draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco),bodies={};
+ let done=0;const tick=()=>onProgress?.(++done/(V4_ROLES.length+1));
+ try{
+  const pending=await Promise.allSettled([
+   ...V4_ROLES.map(async role=>{const path=v4.players?.[role];if(!path)throw Error('Basketball v4 body missing: '+role);bodies[role]=await loadHoopsGLTF(loader,new URL(path,base).href);tick();}),
+   loadMotionClips(cfg,base,url=>loadHoopsGLTF(loader,url)).then(c=>{tick();return c;})
+  ]);
+  const failure=pending.find(r=>r.status==='rejected');if(failure)throw failure.reason;
+  const clips=pending[pending.length-1].value;
+  for(const role of V4_ROLES){let skinned=0;bodies[role].scene.traverse(o=>{if(o.isSkinnedMesh)skinned++;});if(!skinned)throw Error('Basketball v4 body has no skin: '+role);}
+  return bundlePlayerAssets(bodies,clips,{v4:true,baseHeights:v4.baseHeights,roleClips:Object.fromEntries(V4_ROLES.map(role=>[role,hipScaledClips(clips,hipRestY(bodies[role].scene)/clips.restHipsY)]))});
+ }catch(error){for(const g of Object.values(bodies))releaseScene(g.scene);throw error;}
+ finally{draco.dispose();}
 }
 export async function loadPlayerAssetsV2(cfg,base,onProgress){
  const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco);let character;
