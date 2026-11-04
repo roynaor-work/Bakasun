@@ -4,6 +4,8 @@ const brand=path.resolve(__dirname,'..'),root=path.resolve(brand,'../..');
 const read=f=>JSON.parse(fs.readFileSync(path.join(brand,f),'utf8'));
 const round=process.argv[2]||'09';if(!/^\d{2}$/.test(round))throw Error('Round required');
 const dir='iterations/'+round+'/',capture=read(dir+'checks.json'),ui=read(dir+'interaction-checks.json'),stress=read(dir+'stress-checks.json'),mobile=read(dir+'mobile-checks.json'),measure=read(dir+'measurements.json'),phoneMeasure=read(dir+'mobile-measurements.json');
+const delivery=read('DELIVERY.json');
+const publication=delivery.pullRequest?`[PR #${delivery.pullRequest.number}](${delivery.pullRequest.url}) נפתח כטיוטה מול main; לא מוזג.`:'המסירה מיועדת ל־PR כטיוטה בלבד, ללא מיזוג.';
 const scores=read('scores.json'),review=read('verification/visual-review.json'),tests=read('verification/repository-tests.json'),catalog=read('catalog.json'),manifest=JSON.parse(fs.readFileSync(path.join(root,'north/img/v4/manifest.json'))),thumbs=JSON.parse(fs.readFileSync(path.join(root,'north/img/v4/thumbnails.json')));
 if(!capture.passed||!ui.passed||!stress.passed||!mobile.passed||!measure.summary.allAverageFpsAtLeast30||measure.summary.contrastFlags||!phoneMeasure.summary.allAverageFpsAtLeast30||phoneMeasure.summary.contrastFlags||tests.failed||tests.exitCode)throw Error('Acceptance evidence is not clean');
 if(scores.items.some(s=>s.score<8)||review.reviews.some(r=>r.score<8)||manifest.productPhotoCount!==72||manifest.bannerCount!==6)throw Error('Incomplete scope or below acceptance score');
@@ -24,7 +26,7 @@ const body=`# הרוח הצפונית — דוח צילום v4 ומותג v1
 
 תחילת עבודה: ${nice(started)}. עדכון דוח זה: ${nice(now)}; חלון עבודה מצטבר: ${Math.floor(minutes/60)} שעות ו־${minutes%60} דקות. זמני הרינדור המקוריים נשמרים בכל \`checks.json\`.
 
-ענף: \`codex/north-brand-v4-20261105\`, בסיס \`5d1fca7d\` מול \`main\`. המסירה מיועדת ל־PR כטיוטה בלבד, ללא מיזוג. פרטי PR מתועדים ב־[DELIVERY.json](DELIVERY.json) וב־[SESSION.md](SESSION.md).
+ענף: \`codex/north-brand-v4-20261105\`, בסיס \`5d1fca7d\` מול \`main\`. ${publication} פרטי PR מתועדים ב־[DELIVERY.json](DELIVERY.json) וב־[SESSION.md](SESSION.md).
 
 ## מה השתנה ולמה
 
@@ -59,6 +61,7 @@ ${table(['סבב','צילומי רינדור עיקריים','מידות CSS','�
 - **${mobile.checks.filter(c=>c.pass).length}/${mobile.checks.length}** בדיקות mobile עם מגע ו־DPR 2; שני מבדקי axe נוספים נקיים במצב שבע בחירות. פאנינג תמונה דרך אירועי מגע, בחירת כל הזוויות וגובה חלון מקלדת מצומצם נבדקו.
 - **${stress.checks.length}/${stress.checks.length}** מצבי קצה: 180 אותיות ללא רווחים בשני הכיוונים, תפריט לאחר שינוי רוחב, סינון ריק, שחזור פוקוס וארבע הדמיות מלאות.
 - **הריפו:** \`npm test\` — ${tests.passed.toLocaleString('en-US')} עברו, ${tests.failed} נכשלו, ${tests.skipped} דולגו מתוך ${tests.tests.toLocaleString('en-US')}. [סיכום סביבת ההרצה](verification/repository-tests.json). לא נערכו בדיקות קיימות. ההרצה הסופית משתמשת בדפדפן המותקן דרך קונפיגורציה זמנית ב־\`/tmp\`, אחרי תיקון בעיית סביבת ההרצה הראשונית.
+- **GitHub:** בדיקות \`test\` ו־\`alpine-csp\` על קומיט הממשק עברו גם בדחיפה וגם ב־PR; [ראיות CI](verification/github-runtime-checks.json). עדכון המסירה שלאחר מכן כולל תיעוד ומלאי קבצים.
 - **ביצועים:** שמונה תרחישי גלילה של שלוש שניות עם CPU מואט פי 4: ${ranges(measure)}fps בממוצע ב־DPR 1, ו־${ranges(phoneMeasure)}fps ב־mobile/DPR 2. כל 16 התרחישים מעל יעד 30fps. אלה מדידות Chromium במחשב, **לא בדיקה בטלפון פיזי** ולא הבטחה לכל מכשיר.
 - **ניגודיות:** ${measure.summary.contrastTextRuns} מקטעי טקסט ב־DPR 1 ועוד ${phoneMeasure.summary.contrastTextRuns} במצב mobile, אפס התראות בכל ${measure.summary.contrastViews+phoneMeasure.summary.contrastViews} מצבי המדידה. גבולות פקדים 3.602:1 ומעלה על ארבעת משטחי הממשק. מדידת פיקסלים שמרנית, עם הסתרת טקסט וחסימת אזורים מכוסים; אינה תחליף לביקורת נגישות אנושית מלאה.
 - **ללא רשת:** הבדיקות פעלו ב־offline, כל קובץ נענה מתוך שתי תיקיות המסירה ואפס בקשות חיצוניות נרשמו. מדיניות Chromium בסביבה חוסמת \`file://\`; האימות ממפה loopback לקבצים מקומיים ישירות, ללא שרת מאזין או שינוי מדיניות. המוצר עצמו משתמש בנתיבים יחסיים וסקריפטים רגילים ואין בו \`fetch\`, CDN או מודולים המחייבים שרת.
