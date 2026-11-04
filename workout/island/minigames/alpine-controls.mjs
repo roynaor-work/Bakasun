@@ -11,6 +11,7 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   const keys = new Set(), metresPerWidth = config.dragMetresPerWidth ?? 22, half = config.trackHalfWidth ?? 10;
   let enabled = true, drag = null, joy = null, shift = {x: 0, y: 0}, boostQueued = false, trickQueued = null, lastX = 0, lastLean = 0;
   const steerKeys = new Set(['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD']);
+  const actionButtons = [boostButton, ...trickButtons];
   const knob = joystick?.querySelector('[data-joystick-knob]');
   function setKnob(value) { if (knob) knob.style.transform = `translate(calc(-50% + ${(value * 70).toFixed(1)}%), -50%)`; if (joystick) { joystick.dataset.active = String(value !== 0 || !!joy); joystick.setAttribute('aria-valuenow', value.toFixed(2)); } }
   function releaseDrag() {
@@ -31,7 +32,10 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   function placeStick(event, home) {
     if (!joystick.style) return;
     const area = canvas.getBoundingClientRect(), box = joystick.getBoundingClientRect(), w = box.width || 0, h = box.height || 0;
-    const left = (area.left || 0) + w / 2 + 8, right = (area.left || 0) + (area.width || 0) / 2 - w / 2 - 4;
+    // The stick lives in the left zone only: never past the middle of the screen and never under an action button.
+    let limit = (area.left || 0) + (area.width || 0) / 2;
+    for (const b of actionButtons) { const r = b?.getBoundingClientRect?.(); if (r && Number.isFinite(r.left) && r.width > 0) limit = Math.min(limit, r.left - 8); }
+    const left = (area.left || 0) + w / 2 + 8, right = limit - w / 2 - 4;
     const top = (area.top || 0) + (area.height || 0) * .3 + h / 2, bottom = (area.top || 0) + (area.height || 0) - h / 2 - 8;
     const cx = Math.max(left, Math.min(Math.max(left, right), event.clientX)), cy = Math.max(top, Math.min(Math.max(top, bottom), event.clientY));
     shift = {x: cx - home.x, y: cy - home.y}; joystick.style.transform = `translate(${shift.x.toFixed(1)}px, ${shift.y.toFixed(1)}px)`;
@@ -104,6 +108,8 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   }, options);
   win.addEventListener('keyup', event => keys.delete(event.code), options);
   win.addEventListener('blur', cancel, options);
+  // Rotating the phone or resizing mid-game: drop any held stick so it can never stay where the old layout put it.
+  win.addEventListener('resize', cancel, options); win.addEventListener('orientationchange', cancel, options);
   doc.addEventListener('visibilitychange', () => { if (doc.hidden) cancel(); }, options);
   return {
     /** Steering value [-1,1] for this frame plus one-shot boost and trick requests. */

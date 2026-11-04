@@ -107,3 +107,17 @@
  .game-screen[data-game=alpineRush] .alpine-joystick{width:116px!important;height:116px!important}
  .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
 }
+
+/* The stick and the action cluster never overlap and the actions always sit above the stick. */
+.game-screen[data-game=alpineRush] .alpine-joystick{z-index:1}
+.game-screen[data-game=alpineRush] .alpine-actions{position:relative;z-index:3}
+@media(max-width:380px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:108px!important;height:108px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.88)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
+}
+@media(max-width:340px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:100px!important;height:100px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.8)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:112px!important}
+}

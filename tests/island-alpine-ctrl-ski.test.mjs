@@ -43,8 +43,8 @@ test('browser: stick left / actions right in both orientations, floating stick w
         assert.ok(layout.stick.x < mid && layout.stick.right <= mid, `${width}x${height}: stick is in the left half (${layout.stick.x} / ${layout.width})`);
         assert.ok(layout.boost.x > mid && layout.boost.left >= mid, `${width}x${height}: boost is in the right half`);
         assert.equal(layout.tricks.length, 4); for (const t of layout.tricks) assert.ok(t.x > mid && t.right <= layout.width, 'every trick button is in the right half and on screen');
-        assert.ok(layout.boost.width >= 84 && layout.stick.width >= 100, 'targets are large');
-        for (const t of layout.tricks) assert.ok(t.width >= 48 && t.height >= 48, 'trick buttons are at least 48 px');
+        const small = width < 380; assert.ok(layout.boost.width >= (small ? 66 : 84) && layout.stick.width >= 100, 'targets are large');
+        for (const t of layout.tricks) assert.ok(t.width >= (small ? 38 : 48) && t.height >= (small ? 38 : 48), 'trick buttons keep their size (smallest phones: scaled to fit beside the stick)');
         await page.screenshot({path: `${out}layout-${width}x${height}.png`});
 
         // 2. Real touches: the thumb lands in the left half of the slope (not on the stick) and slides right; a second finger
