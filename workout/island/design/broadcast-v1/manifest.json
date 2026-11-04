@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "kind": "standalone-design-review",
+  "entry": "preview.html",
+  "config": [
+    "cameras.json",
+    "quality.json"
+  ],
+  "threeRevision": "160",
+  "unit": "decimal MB = bytes / 1000000",
+  "runtimeGlbBytes": 3483080,
+  "maximumGlbBytes": 1193888,
+  "sources": [
+    {
+      "path": "../hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "bytes": 244148,
+      "sha256": "e47e9289215e6c81671b61e4a78a2a4acdbf42667b9328efd5a6e72992e88f49"
+    },
+    {
+      "path": "../soccer-v4/soccer-stadium.glb",
+      "bytes": 905744,
+      "sha256": "f969b395d59b4002940102a3627a9d5fef95dcae86cdcb56a53f28c3fc567ae9"
+    },
+    {
+      "path": "../hoops/lod-v4/hoops-v4-arena-lod.glb",
+      "bytes": 601672,
+      "sha256": "864aaed95a61f4563b09d498a032e1c5278c9929fb55247f9c7ed75ee619db94"
+    }
+  ],
+  "files": [
+    {
+      "path": "ADAPTIVE-QUALITY.md",
+      "bytes": 6145,
+      "MB": 0.0061,
+      "sha256": "e41500f13c79011ec2e5f84784db4b9fc61a47d8fa0246582e15732709496713"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 2720,
+      "MB": 0.0027,
+      "sha256": "95eec03048e3d5d633cdefa94c5c4fe3137d33a6ac6911de309a905503588e39"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5450,
+      "MB": 0.0054,
+      "sha256": "533ba2316eaff5071ccdf21604b3a7b268c1b8230725005a184cdc4cd56815ea"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3853,
+      "MB": 0.0039,
+      "sha256": "23bc8b0df829fbdd778469819c5284e62ad1385bbe1e6497189619de471537c9"
+    },
+    {
+      "path": "assets/athlete-albedo.png",
+      "bytes": 552806,
+      "MB": 0.5528,
+      "sha256": "01c45dd3a71c41a704169b3f8a90b55278e4e96c0b7bdbdde44352dac8883f6c",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "assets/athlete-lod0.glb",
+      "bytes": 1193888,
+      "MB": 1.1939,
+      "sha256": "5f494a554f707d75713fb33323cbac7c2177c45fcf018c5b908a81089b7720fd"
+    },
+    {
+      "path": "assets/athlete-lod1.glb",
+      "bytes": 1166708,
+      "MB": 1.1667,
+      "sha256": "92fac6276e1776e5669d3135f7b403dcbff4a406a96a8cf86a5280bddf731e62"
+    },
+    {
+      "path": "assets/athlete-normal.png",
+      "bytes": 307415,
+      "MB": 0.3074,
+      "sha256": "30a203d2da11a024d7a3f3bf04ebfaf71ecee585246aca597257fe7562f829e5",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "assets/basketball-stage.glb",
+      "bytes": 44992,
+      "MB": 0.045,
+      "sha256": "f780cf493dcefe3446da0ce25c23fc1f870d543b0a87067c94736de02cc4beff"
+    },
+    {
+      "path": "assets/geometry.json",
+      "bytes": 365,
+      "MB": 0.0004,
+      "sha256": "211af50a3afce0a7ef858c5e7b8c3c761d562c9b5e288451a002ec25af2ca562"
+    },
+    {
+      "path": "assets/soccer-stage.glb",
+      "bytes": 515740,
+      "MB": 0.5157,
+      "sha256": "f89711e8fa5b573408afc8e2241882778bff5d69ddcc7af983408a16a94aa87b"
+    },
+    {
+      "path": "assets/spectator.glb",
+      "bytes": 561752,
+      "MB": 0.5618,
+      "sha256": "8c63f01c2012eb43dc7677a1ed769e961b9b597fe17616d1ad9fa9ef86cd3b01"
+    },
+    {
+      "path": "camera-rig.mjs",
+      "bytes": 7018,
+      "MB": 0.007,
+      "sha256": "abddabfd059ac8f631e9c628df2d0f32ad5e484781567ddd387c01588988f411"
+    },
+    {
+      "path": "cameras.json",
+      "bytes": 3879,
+      "MB": 0.0039,
+      "sha256": "93f9c85bd6f341ab6f3f06a05b54d5e3a384b7cb73c43685aa842edad93cab1b"
+    },
+    {
+      "path": "mobile-post.mjs",
+      "bytes": 8912,
+      "MB": 0.0089,
+      "sha256": "bb5e2bf97002484b50620c15efbf625a857171ba9560f706b6dd8530d9933554"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 8643,
+      "MB": 0.0086,
+      "sha256": "957e88fe40ba9499d7d266f3b21bafad330ab412f23b776cd16de69f6bde1bb1"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 4746,
+      "MB": 0.0047,
+      "sha256": "cd9d98c871efa09b7df44fe4b793270bc5c84f342d102ec2507605a801ccaf6b"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 29088,
+      "MB": 0.0291,
+      "sha256": "596eef14abb148486e057d75f5a86771272e6ffa89cf31c2e77646f28f4532bd"
+    },
+    {
+      "path": "previews/basketball-broadcast-390x844.png",
+      "bytes": 289084,
+      "MB": 0.2891,
+      "sha256": "1ef5f1315d7d73fdf5a2dc193e58149d63b81b8274cd346e29442e517fb5fc41",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/basketball-broadcast-844x390.png",
+      "bytes": 292047,
+      "MB": 0.292,
+      "sha256": "12a81fbc78c1c50cc0c53f1cb782010b4cec30d7b7f639be9677b6c8450deb36",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/basketball-effects-off-390x844.png",
+      "bytes": 283970,
+      "MB": 0.284,
+      "sha256": "787e33491eff4813964f6b65fdafdab189421223e9d4e2b5002941a90cbbafe8",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/basketball-effects-off-844x390.png",
+      "bytes": 284725,
+      "MB": 0.2847,
+      "sha256": "cd4fa782f4d875025608db6c530a8f9fc3970aa8f910168f6c18a13705af2a4c",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/basketball-replay-390x844.png",
+      "bytes": 177045,
+      "MB": 0.177,
+      "sha256": "6e946efcd950eb0a372a74ac4dc16076e52d10469b4e4aed7f1c2dbbe30894cf",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/basketball-replay-844x390.png",
+      "bytes": 258412,
+      "MB": 0.2584,
+      "sha256": "c3d392441dedeac17db393b006a534fcc1483f7599df4404f77d47f24dce6345",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/basketball-shoulder-390x844.png",
+      "bytes": 170438,
+      "MB": 0.1704,
+      "sha256": "84cdd877054b4fc755ca3a119279c56bf2da2c4482f5e914eb261f55a4314e9f",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/basketball-shoulder-844x390.png",
+      "bytes": 231850,
+      "MB": 0.2319,
+      "sha256": "898562ef96b89744c83dc8ee4ba1d146a91aa3de5bc957671d55dc606625a91b",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/basketball-side-390x844.png",
+      "bytes": 150525,
+      "MB": 0.1505,
+      "sha256": "4b65446314e22face927317ecc68649f3b723d2832b537708029584762f38133",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/basketball-side-844x390.png",
+      "bytes": 146526,
+      "MB": 0.1465,
+      "sha256": "01911c2b7d484b3e3ee81c426e8a7faf06e07f72eb9f3b79800c17e990ba8afe",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/context-restored-844x390.png",
+      "bytes": 292130,
+      "MB": 0.2921,
+      "sha256": "42e1fc0d9b54181fd15d63ae3f6d54ecde24bf5ee66f2b9c75b930ac5ed03e26",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/soccer-broadcast-390x844.png",
+      "bytes": 254933,
+      "MB": 0.2549,
+      "sha256": "fc312ac2e3fdede67fcf592d05f53f12ea5a80d58c3f8f93eb1aecd3df580d62",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/soccer-broadcast-844x390.png",
+      "bytes": 230924,
+      "MB": 0.2309,
+      "sha256": "2663a1cef0e023ae88628eb7d6fbc17fdc577855e507028b72f23c74b686f76d",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/soccer-effects-off-390x844.png",
+      "bytes": 253923,
+      "MB": 0.2539,
+      "sha256": "bfa94f2cc654fc879bf0983ff81c5cfdb6be7d269c2e50d91096341f7329f07e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/soccer-effects-off-844x390.png",
+      "bytes": 232552,
+      "MB": 0.2326,
+      "sha256": "d7a625630ea16838814e20d9c873c537ccb02d9737040976b99dfcf93f5557b4",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/soccer-replay-390x844.png",
+      "bytes": 172741,
+      "MB": 0.1727,
+      "sha256": "6701a3d67418e78d070ee351b23566863c2bf6b63231dd48fbdbae2607095d4b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/soccer-replay-844x390.png",
+      "bytes": 201344,
+      "MB": 0.2013,
+      "sha256": "cbad7ccf0933c635095592e57716b4a3bc83fe49d5879241aae30570a071e40e",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/soccer-shoulder-390x844.png",
+      "bytes": 184231,
+      "MB": 0.1842,
+      "sha256": "03c2d51fec1be35d887ba82e1431094a7164d9bdc36a8aacc8f288d09bc4e987",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/soccer-shoulder-844x390.png",
+      "bytes": 207819,
+      "MB": 0.2078,
+      "sha256": "3b4d948e46bf96fa2a2f383dfc0209eaa31978ab2ec0ad92c517df60f1664a79",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews/soccer-side-390x844.png",
+      "bytes": 194722,
+      "MB": 0.1947,
+      "sha256": "4130800fe784d97fcad1b9d2a2f704ac3f0b73c950efd128a854a20e0c37f4a0",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "previews/soccer-side-844x390.png",
+      "bytes": 190221,
+      "MB": 0.1902,
+      "sha256": "4e8ea4698bb7060ef78e60770ae63225071fa0d67e78a41704cd527ceff5dcc9",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "previews.html",
+      "bytes": 7786,
+      "MB": 0.0078,
+      "sha256": "a126a9befae8c86d96f7fb1582d78aee258e481f0a37d30004652339742b9cab"
+    },
+    {
+      "path": "quality.json",
+      "bytes": 2942,
+      "MB": 0.0029,
+      "sha256": "2daee2f8da03ff694ab909821517925807abe49e86689f8a90b74ef0769b2ead"
+    },
+    {
+      "path": "source/audit-assets.mjs",
+      "bytes": 4007,
+      "MB": 0.004,
+      "sha256": "788a068155520c59e705fec1a4cbe7c4e8723c6fc9a2d6f5a90998a2bc6b5da0"
+    },
+    {
+      "path": "source/build-assets.py",
+      "bytes": 8809,
+      "MB": 0.0088,
+      "sha256": "b50e02736485499b10853227ef138c42e5939252a332cb89d54f8828e95a6bfe"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 10914,
+      "MB": 0.0109,
+      "sha256": "31630d3d335acbb65f0cf7c2d8650fe33c27a9dde9afe28d081803d1bba83057"
+    },
+    {
+      "path": "source/finalize-report.py",
+      "bytes": 9533,
+      "MB": 0.0095,
+      "sha256": "eff0534aa6b4eabb5ad50d0d55133d1390207e153199aa073ef703cde24f45dd"
+    },
+    {
+      "path": "source/pack-assets.mjs",
+      "bytes": 3141,
+      "MB": 0.0031,
+      "sha256": "0ca37554ec18ed03d4d1846dc96843a7361fd63f6ed09ae814cdf1c9713654ef"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 6931,
+      "MB": 0.0069,
+      "sha256": "84090b82456c5ff815263cbea347f205111a855cbb5ce06937866fc3b6c127b6"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 98210,
+      "MB": 0.0982,
+      "sha256": "784a0ddbf0fe2d742dc0c5d517c1ec22dc372bee382acc08c33815f2a68e243c"
+    },
+    {
+      "path": "verification/high-closeups.json",
+      "bytes": 20401,
+      "MB": 0.0204,
+      "sha256": "c902f8a26ed2e4fd3bfcf33c5e39c50a2cbf935df10fc6d8783d0ede6996a2b3"
+    },
+    {
+      "path": "verification/repository-checks.json",
+      "bytes": 490,
+      "MB": 0.0005,
+      "sha256": "cf57d910a048077f4f8d1e1ec96515388506297a9f03066c2fea9c98574bf5c4"
+    }
+  ]
+}

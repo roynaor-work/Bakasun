@@ -1,0 +1,261 @@
+{
+  "date": "2026-11-04",
+  "units": "decimal MB = bytes / 1000000",
+  "assets": [
+    {
+      "name": "athlete-lod0.glb",
+      "bytes": 1193888,
+      "MB": 1.1939,
+      "triangles": 5260,
+      "primitives": 1,
+      "materials": 1,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/png"
+        },
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/png"
+        }
+      ],
+      "animations": [
+        "block",
+        "dribble",
+        "idle",
+        "run",
+        "shoot",
+        "steal"
+      ],
+      "sha256": "5f494a554f707d75713fb33323cbac7c2177c45fcf018c5b908a81089b7720fd",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          }
+        ]
+      },
+      "decodedValidator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": []
+      }
+    },
+    {
+      "name": "athlete-lod1.glb",
+      "bytes": 1166708,
+      "MB": 1.1667,
+      "triangles": 2577,
+      "primitives": 1,
+      "materials": 1,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/png"
+        },
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/png"
+        }
+      ],
+      "animations": [
+        "block",
+        "dribble",
+        "idle",
+        "run",
+        "shoot",
+        "steal"
+      ],
+      "sha256": "92fac6276e1776e5669d3135f7b403dcbff4a406a96a8cf86a5280bddf731e62",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          }
+        ]
+      },
+      "decodedValidator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": []
+      }
+    },
+    {
+      "name": "basketball-stage.glb",
+      "bytes": 44992,
+      "MB": 0.045,
+      "triangles": 9594,
+      "primitives": 1,
+      "materials": 1,
+      "images": [],
+      "animations": [],
+      "sha256": "f780cf493dcefe3446da0ce25c23fc1f870d543b0a87067c94736de02cc4beff",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          }
+        ]
+      },
+      "decodedValidator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": []
+      }
+    },
+    {
+      "name": "soccer-stage.glb",
+      "bytes": 515740,
+      "MB": 0.5157,
+      "triangles": 20961,
+      "primitives": 2,
+      "materials": 2,
+      "images": [
+        {
+          "width": 512,
+          "height": 512,
+          "mimeType": "image/png"
+        }
+      ],
+      "animations": [],
+      "sha256": "f89711e8fa5b573408afc8e2241882778bff5d69ddcc7af983408a16a94aa87b",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          }
+        ]
+      },
+      "decodedValidator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": []
+      }
+    },
+    {
+      "name": "spectator.glb",
+      "bytes": 561752,
+      "MB": 0.5618,
+      "triangles": 244,
+      "primitives": 1,
+      "materials": 1,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/png"
+        }
+      ],
+      "animations": [],
+      "sha256": "8c63f01c2012eb43dc7677a1ed769e961b9b597fe17616d1ad9fa9ef86cd3b01",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_MESH_TANGENT",
+            "message": "Tangents are not used because the material has no normal texture.",
+            "severity": 2,
+            "pointer": "/meshes/0/primitives/0/attributes/TANGENT"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          }
+        ]
+      },
+      "decodedValidator": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNUSED_MESH_TANGENT",
+            "message": "Tangents are not used because the material has no normal texture.",
+            "severity": 2,
+            "pointer": "/meshes/0/primitives/0/attributes/TANGENT"
+          }
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "../hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "bytes": 244148,
+      "sha256": "e47e9289215e6c81671b61e4a78a2a4acdbf42667b9328efd5a6e72992e88f49"
+    },
+    {
+      "path": "../soccer-v4/soccer-stadium.glb",
+      "bytes": 905744,
+      "sha256": "f969b395d59b4002940102a3627a9d5fef95dcae86cdcb56a53f28c3fc567ae9"
+    },
+    {
+      "path": "../hoops/lod-v4/hoops-v4-arena-lod.glb",
+      "bytes": 601672,
+      "sha256": "864aaed95a61f4563b09d498a032e1c5278c9929fb55247f9c7ed75ee619db94"
+    }
+  ],
+  "passed": true
+}
