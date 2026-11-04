@@ -1,4 +1,5 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261104-1';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261104-2';
+import {kitGameIcon,kitIntro} from './ui-kit.mjs?v=island-v2-20261104-2';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({
@@ -22,6 +23,9 @@ export function gameEmblem(id){
   image.alt='';image.width=960;image.height=600;image.decoding='async';image.draggable=false;
   // A missing capture stays a quiet surface, without substituting a drawing
   // for the game's real assets. The game entry remains available.
-  image.onerror=()=>{holder.dataset.preview='unavailable';image.hidden=true;};
-  holder.append(image);return holder;
+  image.onerror=()=>{holder.dataset.preview='unavailable';image.hidden=true;const card=kitIntro(id);if(card)holder.append(card);};
+  holder.append(image);
+  // The kit's game symbol sits on the card corner; a missing file simply leaves the capture alone.
+  const icon=kitGameIcon(id,30);if(icon){const badge=document.createElement('span');badge.className='adventure-kit-badge';badge.append(icon);holder.append(badge);}
+  return holder;
 }
