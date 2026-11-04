@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-04",
+  "assetFiles": 20,
+  "allAssetsDecode": true,
+  "allAssetsUnder200000Bytes": true,
+  "manifestHashesAndDimensionsMatch": true,
+  "csvRowsMatch": true,
+  "buildAddonsCovered": "13/13",
+  "buildPacksCovered": "3/3",
+  "composedExampleWithinMaxAddons": true,
+  "visualReview": "20/20 final WebP images inspected at native size; no readable branding; counts and framing checked",
+  "browser": [
+    {
+      "viewport": "desktop",
+      "size": "1440x1080",
+      "imagesLoaded": 20,
+      "filters": "passed",
+      "search": "passed",
+      "clipboard": "passed",
+      "fullSizeZoom": "passed",
+      "keyboard": "passed",
+      "pageOverflow": false,
+      "javascriptErrors": [],
+      "httpErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "size": "390x844",
+      "imagesLoaded": 20,
+      "filters": "passed",
+      "search": "passed",
+      "clipboard": "passed",
+      "fullSizeZoom": "passed",
+      "keyboard": "passed",
+      "pageOverflow": false,
+      "javascriptErrors": [],
+      "httpErrors": []
+    }
+  ],
+  "previewImages": [
+    "desktop.webp",
+    "mobile.webp",
+    "contact-sheet.webp"
+  ],
+  "projectTests": {
+    "command": "npm test",
+    "total": 3217,
+    "passed": 3170,
+    "failed": 0,
+    "skipped": 47
+  }
+}
