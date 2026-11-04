@@ -94,6 +94,7 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
   try {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
     const page = await ctx.newPage();
+    page.setDefaultTimeout(90000); page.setDefaultNavigationTimeout(90000); // npm test מריץ קבצי דפדפן במקביל; swiftshader איטי בעומס
     const errors = []; page.on('pageerror', e => errors.push(String(e)));
     const external = []; page.on('request', r => { const u = new URL(r.url()); if (!['127.0.0.1', ''].includes(u.hostname) && u.protocol.startsWith('http')) external.push(r.url()); });
     await page.goto(srv.url + '#/home');
