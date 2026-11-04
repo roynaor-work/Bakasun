@@ -1,0 +1,495 @@
+{
+  "viewports": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "document": {
+        "width": 390,
+        "height": 844
+      },
+      "stick": {
+        "x": 21,
+        "y": 651,
+        "w": 126,
+        "h": 126,
+        "right": 147,
+        "bottom": 777
+      },
+      "actions": [
+        {
+          "action": "shoot",
+          "x": 287,
+          "y": 623,
+          "w": 76,
+          "h": 76,
+          "right": 363,
+          "bottom": 699
+        },
+        {
+          "action": "through",
+          "x": 171,
+          "y": 641,
+          "w": 58,
+          "h": 58,
+          "right": 229,
+          "bottom": 699
+        },
+        {
+          "action": "pass",
+          "x": 199,
+          "y": 725,
+          "w": 64,
+          "h": 64,
+          "right": 263,
+          "bottom": 789
+        },
+        {
+          "action": "sprint",
+          "x": 309,
+          "y": 722,
+          "w": 62,
+          "h": 62,
+          "right": 371,
+          "bottom": 784
+        }
+      ],
+      "radarMarkers": 12,
+      "webglCanvases": 0,
+      "animations": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "document": {
+        "width": 844,
+        "height": 390
+      },
+      "stick": {
+        "x": 24,
+        "y": 253,
+        "w": 112,
+        "h": 112,
+        "right": 136,
+        "bottom": 365
+      },
+      "actions": [
+        {
+          "action": "shoot",
+          "x": 737,
+          "y": 203,
+          "w": 76,
+          "h": 76,
+          "right": 813,
+          "bottom": 279
+        },
+        {
+          "action": "through",
+          "x": 621,
+          "y": 221,
+          "w": 58,
+          "h": 58,
+          "right": 679,
+          "bottom": 279
+        },
+        {
+          "action": "pass",
+          "x": 649,
+          "y": 305,
+          "w": 64,
+          "h": 64,
+          "right": 713,
+          "bottom": 369
+        },
+        {
+          "action": "sprint",
+          "x": 759,
+          "y": 302,
+          "w": 62,
+          "h": 62,
+          "right": 821,
+          "bottom": 364
+        }
+      ],
+      "radarMarkers": 12,
+      "webglCanvases": 0,
+      "animations": 0
+    }
+  ],
+  "interactions": [
+    {
+      "check": "pass tap / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "through + shoot tap / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "two-finger joystick + held sprint / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "touch cancellation releases controls / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "keyboard + blur releases sprint / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "pause / resume / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "preview menu + theme + substitution / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "goal + replay + pause + skip + automatic completion / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "automatic substitution dismissal / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "reduced motion / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "asset gallery, decoded SVGs, no horizontal overflow / 390x844",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "pass tap / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "through + shoot tap / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "two-finger joystick + held sprint / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "touch cancellation releases controls / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "keyboard + blur releases sprint / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "pause / resume / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "preview menu + theme + substitution / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "goal + replay + pause + skip + automatic completion / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "automatic substitution dismissal / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "reduced motion / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "asset gallery, decoded SVGs, no horizontal overflow / 844x390",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "check": "control clearance / 320x700 / simulated insets=False",
+      "pass": true,
+      "detail": {
+        "stick": {
+          "x": 16,
+          "y": 523,
+          "r": 126,
+          "b": 633
+        },
+        "buttons": [
+          {
+            "x": 232.44000244140625,
+            "y": 505.55999755859375,
+            "r": 296.2799987792969,
+            "b": 569.4000244140625
+          },
+          {
+            "x": 135,
+            "y": 520.6799926757812,
+            "r": 183.72000122070312,
+            "b": 569.4000244140625
+          },
+          {
+            "x": 158.52000427246094,
+            "y": 591.239990234375,
+            "r": 212.27999877929688,
+            "b": 645
+          },
+          {
+            "x": 250.92001342773438,
+            "y": 588.719970703125,
+            "r": 303,
+            "b": 640.7999877929688
+          }
+        ]
+      }
+    },
+    {
+      "check": "control clearance / 390x844 / simulated insets=True",
+      "pass": true,
+      "detail": {
+        "stick": {
+          "x": 41,
+          "y": 653,
+          "r": 145,
+          "b": 757
+        },
+        "buttons": [
+          {
+            "x": 267,
+            "y": 603,
+            "r": 343,
+            "b": 679
+          },
+          {
+            "x": 151,
+            "y": 621,
+            "r": 209,
+            "b": 679
+          },
+          {
+            "x": 179,
+            "y": 705,
+            "r": 243,
+            "b": 769
+          },
+          {
+            "x": 289,
+            "y": 702,
+            "r": 351,
+            "b": 764
+          }
+        ]
+      }
+    },
+    {
+      "check": "control clearance / 844x390 / simulated insets=True",
+      "pass": true,
+      "detail": {
+        "stick": {
+          "x": 44,
+          "y": 233,
+          "r": 156,
+          "b": 345
+        },
+        "buttons": [
+          {
+            "x": 717,
+            "y": 183,
+            "r": 793,
+            "b": 259
+          },
+          {
+            "x": 601,
+            "y": 201,
+            "r": 659,
+            "b": 259
+          },
+          {
+            "x": 629,
+            "y": 285,
+            "r": 693,
+            "b": 349
+          },
+          {
+            "x": 739,
+            "y": 282,
+            "r": 801,
+            "b": 344
+          }
+        ]
+      }
+    }
+  ],
+  "performance": [
+    {
+      "viewport": "390x844",
+      "cpuSlowdown": 4,
+      "samples": 150,
+      "p50Ms": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "over33ms": 0,
+      "meanMs": 16.66600000000001,
+      "physicalPhone": false
+    },
+    {
+      "viewport": "844x390",
+      "cpuSlowdown": 4,
+      "samples": 150,
+      "p50Ms": 16.69999999999891,
+      "p95Ms": 16.799999999999272,
+      "over33ms": 0,
+      "meanMs": 16.665999999999997,
+      "physicalPhone": false
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "viewport": "390x844",
+      "externalRequests": 0,
+      "uniquePaths": [
+        "/assets.html",
+        "/assets/action-buttons.svg",
+        "/assets/goal.svg",
+        "/assets/hud-symbols.svg",
+        "/assets/pitch-backdrop.webp",
+        "/assets/quick-replay.svg",
+        "/assets/radar.svg",
+        "/assets/scoreboard.svg",
+        "/assets/sprint-meter.svg",
+        "/assets/substitution.svg",
+        "/gallery.css",
+        "/hud.css",
+        "/hud.js",
+        "/preview.html?freeze=1",
+        "/preview.js"
+      ]
+    },
+    {
+      "viewport": "844x390",
+      "externalRequests": 0,
+      "uniquePaths": [
+        "/assets.html",
+        "/assets/action-buttons.svg",
+        "/assets/goal.svg",
+        "/assets/hud-symbols.svg",
+        "/assets/pitch-backdrop.webp",
+        "/assets/quick-replay.svg",
+        "/assets/radar.svg",
+        "/assets/scoreboard.svg",
+        "/assets/sprint-meter.svg",
+        "/assets/substitution.svg",
+        "/gallery.css",
+        "/hud.css",
+        "/hud.js",
+        "/preview.html?freeze=1",
+        "/preview.js"
+      ]
+    }
+  ],
+  "assetAudit": [
+    {
+      "path": "assets/action-buttons.svg",
+      "bytes": 1640,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/goal.svg",
+      "bytes": 1347,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/hud-symbols.svg",
+      "bytes": 1697,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/pitch-backdrop.webp",
+      "bytes": 83398,
+      "under100KB": true,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "assets/quick-replay.svg",
+      "bytes": 1338,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/radar.svg",
+      "bytes": 1386,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/scoreboard.svg",
+      "bytes": 1477,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/sprint-meter.svg",
+      "bytes": 689,
+      "under100KB": true,
+      "validXML": true
+    },
+    {
+      "path": "assets/substitution.svg",
+      "bytes": 1766,
+      "under100KB": true,
+      "validXML": true
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "pass": true,
+  "notes": [
+    "HUD adds zero WebGL triangles and zero WebGL draw calls. Browser SVG tessellation is implementation-dependent and is not a 3D mesh count.",
+    "Background is a static 1024px bake, not runtime models. No LOD or Draco assets are loaded.",
+    "CPU slowdown is a desktop Chromium simulation and does not establish stable 30fps on a physical phone."
+  ],
+  "followupChecks": [
+    {
+      "check": "Goal swash separated from scoreboard after final landscape placement",
+      "viewports": [
+        "390x844",
+        "844x390"
+      ],
+      "pass": true
+    },
+    {
+      "check": "Full-size goal screenshots refreshed after final placement",
+      "pass": true
+    }
+  ]
+}
