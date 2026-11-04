@@ -60,7 +60,7 @@
 - הרצה מלאה (`ISLAND_CSP_BROWSER=1 ISLAND_SOCCER_BROWSER=1`): 3,296 בדיקות: 3,255 עברו, 8 נכשלו, 33 דולגו. הכשלים:
   - `soccer supplied controls` (`setViewportSize`) ו-`soccer assets download once`: כשלי סביבה ידועים, מתועדים בדוח v5, לא תוקנו.
   - `soccer motion2 native restart`: פסק זמן תחת עומס הסוויטה; בהרצה נפרדת עובר (6/6).
-  - `ski: second stuck attempt` ו-`automatic download fills the device cache` (ומשנה שלהן): לא נבדקו מול `main`; לא נוגעים בקבצי הכדורגל שלי, ולא נקבע שאינם קשורים.
+  - `ski: second stuck attempt` (`island-load-rescue-browser`) ו-`automatic download fills the device cache` (`island-offline-browser`): נכשלו רק בהרצה המלאה (פסקי זמן תחת עומס); בהרצה נפרדת כל הקובץ עובר (4/4 ו-3/3).
 
 ## לא נבדק
 טלפון פיזי; זיכרון GPU בטלפון חלש; הצללים והתאורה על מכשיר אמיתי.
