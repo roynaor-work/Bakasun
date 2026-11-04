@@ -53,8 +53,9 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
   return sounded;
  }
  function ensureBed(){
-  if(!decoded||disposed||paused||muted||final||bed||context?.state!=='running')return;
-  play('ambience');
+  if(!decoded||disposed||paused||muted||final||context?.state!=='running')return;
+  // No continuous bed: the steady hall-noise loop read as a constant whistle/hiss.
+  // The crowd sounds only on events (score, final) and the referee whistle only on a call.
   if(!openingPlayed&&buffers.has(aliases.opening))openingPlayed=layer('opening');
  }
  function unlock(){
@@ -119,7 +120,7 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
    if(paused){stop();pauseTimer=setTimeout(()=>{if(paused&&!disposed&&context?.state==='running')void context.suspend().catch(()=>{});},fade()*1000);}
    else {stop(true);if(bedGain)bedGain.gain.value=1;unlock();}
   },
-  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
+  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
   dispose(){if(disposed)return;disposed=true;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];stop(true);buffers.clear();for(const node of [bedGain,master,limiter])try{node?.disconnect();}catch{}if(context&&context.state!=='closed')void context.close().catch(()=>{});context=null;},
  };
 }
