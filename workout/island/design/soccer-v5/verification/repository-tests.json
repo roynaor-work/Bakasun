@@ -1,0 +1,69 @@
+{
+  "command": "npm test",
+  "date": "2026-11-04",
+  "baseCommit": "c8ab72eab66bece7542f950438ae867d4af38890",
+  "networkGrant": true,
+  "exitCode": 0,
+  "tests": 3217,
+  "suites": 0,
+  "passed": 3170,
+  "failed": 0,
+  "skipped": 47,
+  "elapsedSeconds": 152.63,
+  "failingTests": [],
+  "logFile": "/tmp/soccer-v5-repository-tests-final.log",
+  "baselineVerification": {
+    "commit": "427d8b3129f4c55f1e0a6f2aa7a013d90df405b6",
+    "worktree": "/tmp/soccer-v5-baseline",
+    "containsSoccerV5": false,
+    "command": "node --test --test-reporter=tap <each failing file>",
+    "results": [
+      {
+        "file": "tests/cam-lab-keyframes.test.mjs",
+        "exitCode": 1,
+        "logFile": "/tmp/soccer-v5-baseline-cam-lab-keyframes.test.log",
+        "summary": "TAP version 13\n# Subtest: tests/cam-lab-keyframes.test.mjs\nnot ok 1 - tests/cam-lab-keyframes.test.mjs\n  ---\n  duration_ms: 817.81852\n  type: 'test'\n  location: '/tmp/soccer-v5-baseline/tests/cam-lab-keyframes.test.mjs:1:1'\n  failureType: 'testCodeFailure'\n  exitCode: 1\n  signal: ~\n  error: 'test failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 827.177935\n",
+        "failsWithoutSoccerV5": true
+      },
+      {
+        "file": "tests/island-browser-csp.test.mjs",
+        "exitCode": 1,
+        "logFile": "/tmp/soccer-v5-baseline-island-browser-csp.test.log",
+        "summary": "TAP version 13\n# Subtest: tests/island-browser-csp.test.mjs\nnot ok 1 - tests/island-browser-csp.test.mjs\n  ---\n  duration_ms: 89.866781\n  type: 'test'\n  location: '/tmp/soccer-v5-baseline/tests/island-browser-csp.test.mjs:1:1'\n  failureType: 'testCodeFailure'\n  exitCode: 1\n  signal: ~\n  error: 'test failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 97.5131\n",
+        "failsWithoutSoccerV5": true
+      },
+      {
+        "file": "tests/workout-dad-test.test.mjs",
+        "exitCode": 1,
+        "logFile": "/tmp/soccer-v5-baseline-workout-dad-test.test.log",
+        "summary": "TAP version 13\n# Subtest: tests/workout-dad-test.test.mjs\nnot ok 1 - tests/workout-dad-test.test.mjs\n  ---\n  duration_ms: 112.280907\n  type: 'test'\n  location: '/tmp/soccer-v5-baseline/tests/workout-dad-test.test.mjs:1:1'\n  failureType: 'testCodeFailure'\n  exitCode: 1\n  signal: ~\n  error: 'test failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 120.672781\n",
+        "failsWithoutSoccerV5": true
+      }
+    ],
+    "allFailuresReproduced": true,
+    "diagnosticLimit": "The isolated Node runner reports file-level test failed, without an assertion cause. The same three file failures reproduced in the clean base checkout."
+  },
+  "baselineFailureSourcesUnchangedOnNewBase": true,
+  "previousSandboxRun": {
+    "baseCommit": "427d8b3129f4c55f1e0a6f2aa7a013d90df405b6",
+    "exitCode": 1,
+    "tests": 258,
+    "passed": 255,
+    "failed": 3,
+    "skipped": 0,
+    "failingTests": [
+      "tests/cam-lab-keyframes.test.mjs",
+      "tests/island-browser-csp.test.mjs",
+      "tests/workout-dad-test.test.mjs"
+    ]
+  },
+  "targetedCspWithNetworkGrant": {
+    "command": "node --test --test-reporter=tap tests/island-browser-csp.test.mjs",
+    "networkGrant": true,
+    "exitCode": 0,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 1,
+    "note": "The opt-in ISLAND_CSP_BROWSER integration case stayed skipped; the local HTTP server check passed with loopback networking allowed."
+  }
+}

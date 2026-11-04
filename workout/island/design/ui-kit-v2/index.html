@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="ערכת הממשק של האי: תשעה משחקים, אייקוני SVG, כרטיסי פתיחה, כפתורים, תוצאות ותנועה קצרה.">
+  <title>האי · ערכת ממשק 02</title>
+  <link rel="icon" href="icons/menu/island.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="ui-kit.css">
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" defer></script>
+</head>
+<body class="island-kit">
+  <a class="skip" href="#main">דילוג לתוכן</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="wordmark" href="#main"><img src="icons/menu/island.svg" width="44" height="44" alt=""><strong>האי</strong><span>ערכת ממשק</span></a>
+      <nav class="navigation" aria-label="חלקי הערכה"><a href="#games">משחקים</a><a href="#buttons">כפתורים</a><a href="#icons">אייקונים</a><a href="#results">תוצאות</a><a href="#motion">תנועה</a></nav>
+      <span class="kit-version">UI / 02</span>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy"><span class="eyebrow">תשעה משחקים. מקום אחד.</span><h1 id="page-title">כל האי.<br><em>שפה אחת.</em></h1><p>ערכת ממשק בגווני ים, חול ואלמוג.<br>מהבחירה במשחק ועד לכוכב האחרון.</p>
+        <div class="hero-links"><a class="ik-button ik-primary" href="#games">בוחרים משחק<img src="icons/menu/next.svg" width="24" height="24" alt=""></a><a class="quiet-link" href="manifest.json" download><img src="icons/menu/download.svg" width="22" height="22" alt="">קובץ המפתח</a></div>
+        <div class="meta-row"><span><b>09</b> משחקים</span><span><b>SVG</b> מקורי</span><span><b>100KB</b> עד לקובץ</span></div>
+      </div>
+      <div class="hero-art"><img src="surfaces/island.svg" width="440" height="350" alt="אי קטן עם דקל, מוקף מים"><span class="art-label" dir="ltr">ISLAND COLLECTION / 02</span></div>
+    </section>
+    <noscript><p class="no-script-note">כל הנכסים והדוגמאות מוצגים גם ללא JavaScript. לחצו על איור לצפייה בקובץ. פתיחת החלונית והפעלה חוזרת של ההנפשה דורשות JavaScript.</p></noscript>
+    <section id="games" class="section" aria-labelledby="games-title">
+      <div class="section-head"><div class="section-title"><span class="section-number">01</span><h2 id="games-title">לאן משחקים היום?</h2></div><p class="section-note">כרטיס פתיחה ואייקון ייחודי לכל משחק.<br>בחרו כרטיס כדי לראות את מסך הפתיחה.</p></div>
+      <div class="game-grid"><article class="game-card ik-card-enter" style="--ik-order:0;--game-accent:#C2DFA2">
+          <a href="intro/soccer.svg" class="game-art-link" aria-label="פתיחת איור ליגת האי"><img class="game-art" src="intro/soccer.svg" width="720" height="450" alt="איור ליגת האי" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">ספורט</span><h3>ליגת האי</h3><p>הקבוצה שלכם. הדרך לאליפות.</p>
+          <button type="button" class="card-open" data-game="soccer" data-name="ליגת האי" data-category="ספורט" data-instruction="מוסרים, בועטים ומתקדמים יחד עם הקבוצה." aria-haspopup="dialog"><img src="icons/games/soccer.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:1;--game-accent:#EBC9AE">
+          <a href="intro/tennis.svg" class="game-art-link" aria-label="פתיחת איור טניס באי"><img class="game-art" src="intro/tennis.svg" width="720" height="450" alt="איור טניס באי" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">ספורט</span><h3>טניס באי</h3><p>כל חבטה פותחת הזדמנות.</p>
+          <button type="button" class="card-open" data-game="tennis" data-name="טניס באי" data-category="ספורט" data-instruction="מכוונים את החבטה ושומרים על הקצב." aria-haspopup="dialog"><img src="icons/games/tennis.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:2;--game-accent:#EBC285">
+          <a href="intro/streetSlam.svg" class="game-art-link" aria-label="פתיחת איור ליגת האי בכדורסל"><img class="game-art" src="intro/streetSlam.svg" width="720" height="450" alt="איור ליגת האי בכדורסל" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">ספורט</span><h3>ליגת האי בכדורסל</h3><p>מהמסירה הראשונה עד לסל.</p>
+          <button type="button" class="card-open" data-game="streetSlam" data-name="ליגת האי בכדורסל" data-category="ספורט" data-instruction="מניעים את הכדור ומוצאים את הזריקה הפנויה." aria-haspopup="dialog"><img src="icons/games/streetSlam.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:3;--game-accent:#BEDBE3">
+          <a href="intro/alpineRush.svg" class="game-art-link" aria-label="פתיחת איור מרוץ סנובורד"><img class="game-art" src="intro/alpineRush.svg" width="720" height="450" alt="איור מרוץ סנובורד" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">ספורט חורף</span><h3>מרוץ סנובורד</h3><p>מסלול חדש. אוויר פסגות.</p>
+          <button type="button" class="card-open" data-game="alpineRush" data-name="מרוץ סנובורד" data-category="ספורט חורף" data-instruction="בוחרים קו גלישה ושומרים על השליטה בסיבובים." aria-haspopup="dialog"><img src="icons/games/alpineRush.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:4;--game-accent:#E5BBB0">
+          <a href="intro/islandRacing.svg" class="game-art-link" aria-label="פתיחת איור מרוצי האי"><img class="game-art" src="intro/islandRacing.svg" width="720" height="450" alt="איור מרוצי האי" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">מרוצים</span><h3>מרוצי האי</h3><p>מהחוף עד לקו הסיום.</p>
+          <button type="button" class="card-open" data-game="islandRacing" data-name="מרוצי האי" data-category="מרוצים" data-instruction="נכנסים לסיבוב ומוצאים את הדרך קדימה." aria-haspopup="dialog"><img src="icons/games/islandRacing.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:5;--game-accent:#B2D5DB">
+          <a href="intro/navalDuel.svg" class="game-art-link" aria-label="פתיחת איור קרב ספינות"><img class="game-art" src="intro/navalDuel.svg" width="720" height="450" alt="איור קרב ספינות" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">ים פתוח</span><h3>קרב ספינות</h3><p>מרחב כחול. מהלך מדויק.</p>
+          <button type="button" class="card-open" data-game="navalDuel" data-name="קרב ספינות" data-category="ים פתוח" data-instruction="מנווטים בין האיים ומתזמנים את המהלך הבא." aria-haspopup="dialog"><img src="icons/games/navalDuel.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:6;--game-accent:#EFBE9E">
+          <a href="intro/fireRescue.svg" class="game-art-link" aria-label="פתיחת איור כיבוי שריפה"><img class="game-art" src="intro/fireRescue.svg" width="720" height="450" alt="איור כיבוי שריפה" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">חילוץ והצלה</span><h3>כיבוי שריפה</h3><p>כל טיפה עושה הבדל.</p>
+          <button type="button" class="card-open" data-game="fireRescue" data-name="כיבוי שריפה" data-category="חילוץ והצלה" data-instruction="מכוונים את המים ועוזרים להחזיר את השקט לעיר." aria-haspopup="dialog"><img src="icons/games/fireRescue.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:7;--game-accent:#CEC7E6">
+          <a href="intro/alienDefense.svg" class="game-art-link" aria-label="פתיחת איור הגנה מפני חייזרים"><img class="game-art" src="intro/alienDefense.svg" width="720" height="450" alt="איור הגנה מפני חייזרים" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">חלל</span><h3>הגנה מפני חייזרים</h3><p>מגינים על האי מלמעלה.</p>
+          <button type="button" class="card-open" data-game="alienDefense" data-name="הגנה מפני חייזרים" data-category="חלל" data-instruction="מתמרנים בין החלליות ושומרים על האי." aria-haspopup="dialog"><img src="icons/games/alienDefense.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article>
+<article class="game-card ik-card-enter" style="--ik-order:8;--game-accent:#D5D4A3">
+          <a href="intro/boarDefense.svg" class="game-art-link" aria-label="פתיחת איור אי החזירים — הגנת החווה"><img class="game-art" src="intro/boarDefense.svg" width="720" height="450" alt="איור אי החזירים — הגנת החווה" loading="lazy"></a>
+          <div class="game-copy"><span class="game-category">הגנת החוף</span><h3>אי החזירים — הגנת החווה</h3><p>החווה שלכם בידיים טובות.</p>
+          <button type="button" class="card-open" data-game="boarDefense" data-name="אי החזירים — הגנת החווה" data-category="הגנת החוף" data-instruction="מגינים על החווה מול החזירים הרובוטיים." aria-haspopup="dialog"><img src="icons/games/boarDefense.svg" alt="" width="32" height="32"><span>תצוגת פתיחה</span><img src="icons/menu/next.svg" alt="" width="24" height="24"></button></div></article></div>
+    </section>
+    <section id="buttons" class="section" aria-labelledby="buttons-title">
+      <div class="section-head"><div class="section-title"><span class="section-number">02</span><h2 id="buttons-title">אותה תחושה בכל לחיצה</h2></div><p class="section-note">פעולה ראשית, פעולה משנית וכפתור אייקון.<br>ארבעה מצבים לכל כפתור.</p></div>
+      <div class="button-board"><div class="button-state"><span class="state-label">רגיל</span><button class="ik-button ik-primary sample-default" type="button"><img src="icons/menu/play.svg" width="24" height="24" alt="">מתחילים</button><button class="ik-button ik-secondary sample-default" type="button"><img src="icons/menu/levels.svg" width="24" height="24" alt="">בחירת שלב</button><button class="ik-button ik-icon-button sample-default" type="button" aria-label="הגדרות — רגיל"><img src="icons/menu/settings.svg" width="26" height="26" alt=""></button></div>
+<div class="button-state"><span class="state-label">מעבר עכבר</span><button class="ik-button ik-primary sample-hover" type="button"><img src="icons/menu/play.svg" width="24" height="24" alt="">מתחילים</button><button class="ik-button ik-secondary sample-hover" type="button"><img src="icons/menu/levels.svg" width="24" height="24" alt="">בחירת שלב</button><button class="ik-button ik-icon-button sample-hover" type="button" aria-label="הגדרות — מעבר עכבר"><img src="icons/menu/settings.svg" width="26" height="26" alt=""></button></div>
+<div class="button-state"><span class="state-label">לחיצה</span><button class="ik-button ik-primary sample-pressed" type="button"><img src="icons/menu/play.svg" width="24" height="24" alt="">מתחילים</button><button class="ik-button ik-secondary sample-pressed" type="button"><img src="icons/menu/levels.svg" width="24" height="24" alt="">בחירת שלב</button><button class="ik-button ik-icon-button sample-pressed" type="button" aria-label="הגדרות — לחיצה"><img src="icons/menu/settings.svg" width="26" height="26" alt=""></button></div>
+<div class="button-state"><span class="state-label">לא זמין</span><button class="ik-button ik-primary sample-disabled" type="button" disabled><img src="icons/menu/play.svg" width="24" height="24" alt="">מתחילים</button><button class="ik-button ik-secondary sample-disabled" type="button" disabled><img src="icons/menu/levels.svg" width="24" height="24" alt="">בחירת שלב</button><button class="ik-button ik-icon-button sample-disabled" type="button" aria-label="הגדרות — לא זמין" disabled><img src="icons/menu/settings.svg" width="26" height="26" alt=""></button></div></div><p class="board-caption">דוגמאות חזותיות למצבים. כפתורים לא זמינים אינם מגיבים. טבעת המיקוד מופיעה בניווט במקלדת.</p>
+      <p class="status" id="button-status" role="status" aria-live="polite"></p>
+    </section>
+    <section id="icons" class="section" aria-labelledby="icons-title">
+      <div class="section-head"><div class="section-title"><span class="section-number">03</span><h2 id="icons-title">סימנים שמרגישים בבית</h2></div><p class="section-note">קווים מעוגלים, צורות ברורות וללא מותגים.<br>לחיצה על אייקון מורידה את קובץ ה־SVG.</p></div>
+      <div class="game-icon-row" aria-label="אייקוני משחקים"><a class="game-icon-tile" href="icons/games/soccer.svg" download><img src="icons/games/soccer.svg" width="48" height="48" alt=""><span>ליגת האי</span></a>
+<a class="game-icon-tile" href="icons/games/tennis.svg" download><img src="icons/games/tennis.svg" width="48" height="48" alt=""><span>טניס באי</span></a>
+<a class="game-icon-tile" href="icons/games/streetSlam.svg" download><img src="icons/games/streetSlam.svg" width="48" height="48" alt=""><span>ליגת האי בכדורסל</span></a>
+<a class="game-icon-tile" href="icons/games/alpineRush.svg" download><img src="icons/games/alpineRush.svg" width="48" height="48" alt=""><span>מרוץ סנובורד</span></a>
+<a class="game-icon-tile" href="icons/games/islandRacing.svg" download><img src="icons/games/islandRacing.svg" width="48" height="48" alt=""><span>מרוצי האי</span></a>
+<a class="game-icon-tile" href="icons/games/navalDuel.svg" download><img src="icons/games/navalDuel.svg" width="48" height="48" alt=""><span>קרב ספינות</span></a>
+<a class="game-icon-tile" href="icons/games/fireRescue.svg" download><img src="icons/games/fireRescue.svg" width="48" height="48" alt=""><span>כיבוי שריפה</span></a>
+<a class="game-icon-tile" href="icons/games/alienDefense.svg" download><img src="icons/games/alienDefense.svg" width="48" height="48" alt=""><span>הגנה מפני חייזרים</span></a>
+<a class="game-icon-tile" href="icons/games/boarDefense.svg" download><img src="icons/games/boarDefense.svg" width="48" height="48" alt=""><span>אי החזירים — הגנת החווה</span></a></div>
+      <div class="icon-grid" aria-label="אייקוני תפריט"><a class="icon-tile" href="icons/menu/island.svg" download><img src="icons/menu/island.svg" width="32" height="32" alt="" loading="lazy"><span>האי</span><code dir="ltr">island</code></a>
+<a class="icon-tile" href="icons/menu/home.svg" download><img src="icons/menu/home.svg" width="32" height="32" alt="" loading="lazy"><span>בית</span><code dir="ltr">home</code></a>
+<a class="icon-tile" href="icons/menu/games.svg" download><img src="icons/menu/games.svg" width="32" height="32" alt="" loading="lazy"><span>משחקים</span><code dir="ltr">games</code></a>
+<a class="icon-tile" href="icons/menu/play.svg" download><img src="icons/menu/play.svg" width="32" height="32" alt="" loading="lazy"><span>מתחילים</span><code dir="ltr">play</code></a>
+<a class="icon-tile" href="icons/menu/pause.svg" download><img src="icons/menu/pause.svg" width="32" height="32" alt="" loading="lazy"><span>השהיה</span><code dir="ltr">pause</code></a>
+<a class="icon-tile" href="icons/menu/back.svg" download><img src="icons/menu/back.svg" width="32" height="32" alt="" loading="lazy"><span>חזרה</span><code dir="ltr">back</code></a>
+<a class="icon-tile" href="icons/menu/next.svg" download><img src="icons/menu/next.svg" width="32" height="32" alt="" loading="lazy"><span>המשך</span><code dir="ltr">next</code></a>
+<a class="icon-tile" href="icons/menu/close.svg" download><img src="icons/menu/close.svg" width="32" height="32" alt="" loading="lazy"><span>סגירה</span><code dir="ltr">close</code></a>
+<a class="icon-tile" href="icons/menu/menu.svg" download><img src="icons/menu/menu.svg" width="32" height="32" alt="" loading="lazy"><span>תפריט</span><code dir="ltr">menu</code></a>
+<a class="icon-tile" href="icons/menu/settings.svg" download><img src="icons/menu/settings.svg" width="32" height="32" alt="" loading="lazy"><span>הגדרות</span><code dir="ltr">settings</code></a>
+<a class="icon-tile" href="icons/menu/sound-on.svg" download><img src="icons/menu/sound-on.svg" width="32" height="32" alt="" loading="lazy"><span>צליל פעיל</span><code dir="ltr">sound-on</code></a>
+<a class="icon-tile" href="icons/menu/sound-off.svg" download><img src="icons/menu/sound-off.svg" width="32" height="32" alt="" loading="lazy"><span>צליל כבוי</span><code dir="ltr">sound-off</code></a>
+<a class="icon-tile" href="icons/menu/help.svg" download><img src="icons/menu/help.svg" width="32" height="32" alt="" loading="lazy"><span>עזרה</span><code dir="ltr">help</code></a>
+<a class="icon-tile" href="icons/menu/info.svg" download><img src="icons/menu/info.svg" width="32" height="32" alt="" loading="lazy"><span>מידע</span><code dir="ltr">info</code></a>
+<a class="icon-tile" href="icons/menu/shop.svg" download><img src="icons/menu/shop.svg" width="32" height="32" alt="" loading="lazy"><span>חנות</span><code dir="ltr">shop</code></a>
+<a class="icon-tile" href="icons/menu/trophy.svg" download><img src="icons/menu/trophy.svg" width="32" height="32" alt="" loading="lazy"><span>הישגים</span><code dir="ltr">trophy</code></a>
+<a class="icon-tile" href="icons/menu/levels.svg" download><img src="icons/menu/levels.svg" width="32" height="32" alt="" loading="lazy"><span>שלבים</span><code dir="ltr">levels</code></a>
+<a class="icon-tile" href="icons/menu/lock.svg" download><img src="icons/menu/lock.svg" width="32" height="32" alt="" loading="lazy"><span>נעול</span><code dir="ltr">lock</code></a>
+<a class="icon-tile" href="icons/menu/unlock.svg" download><img src="icons/menu/unlock.svg" width="32" height="32" alt="" loading="lazy"><span>פתוח</span><code dir="ltr">unlock</code></a>
+<a class="icon-tile" href="icons/menu/star.svg" download><img src="icons/menu/star.svg" width="32" height="32" alt="" loading="lazy"><span>כוכב</span><code dir="ltr">star</code></a>
+<a class="icon-tile" href="icons/menu/coin.svg" download><img src="icons/menu/coin.svg" width="32" height="32" alt="" loading="lazy"><span>מטבע</span><code dir="ltr">coin</code></a>
+<a class="icon-tile" href="icons/menu/gift.svg" download><img src="icons/menu/gift.svg" width="32" height="32" alt="" loading="lazy"><span>מתנה</span><code dir="ltr">gift</code></a>
+<a class="icon-tile" href="icons/menu/profile.svg" download><img src="icons/menu/profile.svg" width="32" height="32" alt="" loading="lazy"><span>שחקן</span><code dir="ltr">profile</code></a>
+<a class="icon-tile" href="icons/menu/team.svg" download><img src="icons/menu/team.svg" width="32" height="32" alt="" loading="lazy"><span>קבוצה</span><code dir="ltr">team</code></a>
+<a class="icon-tile" href="icons/menu/retry.svg" download><img src="icons/menu/retry.svg" width="32" height="32" alt="" loading="lazy"><span>שוב</span><code dir="ltr">retry</code></a>
+<a class="icon-tile" href="icons/menu/check.svg" download><img src="icons/menu/check.svg" width="32" height="32" alt="" loading="lazy"><span>אישור</span><code dir="ltr">check</code></a>
+<a class="icon-tile" href="icons/menu/missions.svg" download><img src="icons/menu/missions.svg" width="32" height="32" alt="" loading="lazy"><span>משימות</span><code dir="ltr">missions</code></a>
+<a class="icon-tile" href="icons/menu/map.svg" download><img src="icons/menu/map.svg" width="32" height="32" alt="" loading="lazy"><span>מפה</span><code dir="ltr">map</code></a>
+<a class="icon-tile" href="icons/menu/fullscreen.svg" download><img src="icons/menu/fullscreen.svg" width="32" height="32" alt="" loading="lazy"><span>מסך מלא</span><code dir="ltr">fullscreen</code></a>
+<a class="icon-tile" href="icons/menu/download.svg" download><img src="icons/menu/download.svg" width="32" height="32" alt="" loading="lazy"><span>הורדה</span><code dir="ltr">download</code></a>
+<a class="icon-tile" href="icons/menu/copy.svg" download><img src="icons/menu/copy.svg" width="32" height="32" alt="" loading="lazy"><span>העתקה</span><code dir="ltr">copy</code></a>
+<a class="icon-tile" href="icons/menu/heart.svg" download><img src="icons/menu/heart.svg" width="32" height="32" alt="" loading="lazy"><span>חיים</span><code dir="ltr">heart</code></a>
+<a class="icon-tile" href="icons/menu/timer.svg" download><img src="icons/menu/timer.svg" width="32" height="32" alt="" loading="lazy"><span>זמן</span><code dir="ltr">timer</code></a>
+<a class="icon-tile" href="icons/menu/shield.svg" download><img src="icons/menu/shield.svg" width="32" height="32" alt="" loading="lazy"><span>הגנה</span><code dir="ltr">shield</code></a>
+<a class="icon-tile" href="icons/menu/flag.svg" download><img src="icons/menu/flag.svg" width="32" height="32" alt="" loading="lazy"><span>דגל</span><code dir="ltr">flag</code></a>
+<a class="icon-tile" href="icons/menu/share.svg" download><img src="icons/menu/share.svg" width="32" height="32" alt="" loading="lazy"><span>שיתוף</span><code dir="ltr">share</code></a></div>
+    </section>
+    <section id="results" class="section" aria-labelledby="results-title">
+      <div class="section-head"><div class="section-title"><span class="section-number">04</span><h2 id="results-title">מקום לכל הישג</h2></div><p class="section-note">תוצאה ברורה, שלושה כוכבים ודרך להמשיך.<br>המספרים כאן הם נתוני הדגמה.</p></div>
+      <div class="results-layout">
+        <div class="result-demo"><article class="ik-result" id="result-example" aria-labelledby="result-heading"><p class="result-kicker">תוצאה לדוגמה · ליגת האי</p><img src="rewards/trophy.svg" width="180" height="160" alt=""><h3 id="result-heading" data-result-title>כל הכבוד!</h3><p class="result-description" data-result-description>עוד צעד בדרך לאליפות.</p>
+          <div class="ik-rating" role="img" aria-label="2 מתוך 3 כוכבים" data-rating><img src="rewards/star-filled.svg" width="56" height="56" alt=""><img src="rewards/star-filled.svg" width="64" height="64" alt=""><img src="rewards/star-empty.svg" width="56" height="56" alt=""></div>
+          <div class="result-score"><bdi dir="ltr">1,240</bdi><span>נקודות לדוגמה</span></div>
+          <div class="result-actions"><button type="button" class="ik-button ik-primary" id="result-replay"><img src="icons/menu/retry.svg" width="24" height="24" alt="">שוב</button><a class="ik-button ik-secondary" href="#games">בחירת משחק</a></div>
+        </article></div>
+        <div class="result-detail"><h3>גם ניסיון נוסף<br>מתחיל בחיוך.</h3><p>מילוי ברור מבדיל בין כוכב שנצבר לכוכב שמחכה. המלל נשאר חד וקריא, והתוצאה מקבלת מקום משלה.</p>
+          <label class="rating-control" for="rating-count">דירוג לתצוגה<select id="rating-count"><option value="0">0 מתוך 3</option><option value="1">1 מתוך 3</option><option value="2" selected>2 מתוך 3</option><option value="3">3 מתוך 3</option></select></label>
+          <p class="status" id="rating-status" role="status" aria-live="polite">מוצגים 2 מתוך 3 כוכבים.</p>
+          <div class="rating-swatches"><a class="rating-swatch" href="rewards/rating-0.svg" download><img src="rewards/rating-0.svg" width="110" height="40" alt=""><span>0 / 3</span></a><a class="rating-swatch" href="rewards/rating-1.svg" download><img src="rewards/rating-1.svg" width="110" height="40" alt=""><span>1 / 3</span></a><a class="rating-swatch" href="rewards/rating-2.svg" download><img src="rewards/rating-2.svg" width="110" height="40" alt=""><span>2 / 3</span></a><a class="rating-swatch" href="rewards/rating-3.svg" download><img src="rewards/rating-3.svg" width="110" height="40" alt=""><span>3 / 3</span></a></div>
+        </div>
+      </div>
+    </section>
+    <section id="motion" class="section" aria-labelledby="motion-title">
+      <div class="section-head"><div class="section-title"><span class="section-number">05</span><h2 id="motion-title">קצת תנועה. בדיוק במידה.</h2></div><p class="section-note">כניסה קצרה לכרטיסים ולתוצאות.<br>בהעדפת תנועה מופחתת הכול מופיע מיד.</p></div>
+      <div class="motion-layout"><div class="motion-stage"><div class="motion-sample" id="motion-sample"><h3>כל כוכב בזמן שלו</h3><div class="ik-rating" id="motion-stars" role="img" aria-label="3 מתוך 3 כוכבים"><img src="rewards/star-filled.svg" width="56" height="56" alt=""><img src="rewards/star-filled.svg" width="64" height="64" alt=""><img src="rewards/star-filled.svg" width="56" height="56" alt=""></div></div></div><div class="motion-copy"><p>הכרטיס עולה בעדינות. הכוכבים מצטרפים בזה אחר זה. אין לולאות או הבהובים.</p><button class="ik-button ik-secondary" id="motion-replay" type="button"><img src="icons/menu/retry.svg" width="24" height="24" alt="">הפעלה חוזרת</button><small id="motion-preference" role="status">כניסה: 240ms · כוכבים: 280ms</small></div></div>
+      <div class="palette" aria-label="צבעי הערכה"><div class="swatch" style="background:#173E40;color:#FFFCF4">דיו · 173E40</div><div class="swatch" style="background:#24786D;color:#FFFCF4">ים · 24786D</div><div class="swatch" style="background:#B9DDC8">נענע · B9DDC8</div><div class="swatch" style="background:#F8EED9">חול · F8EED9</div><div class="swatch" style="background:#EB947F">אלמוג · EB947F</div><div class="swatch" style="background:#E9BA57">שמש · E9BA57</div><div class="swatch" style="background:#FFFCF4">נייר · FFFCF4</div></div>
+    </section>
+  </main>
+  <footer class="footer wrap"><span>האי · ערכת ממשק 02 · איורים מקוריים ללא מותגים</span><div><a href="README.md">מדריך שימוש</a><a href="manifest.json" download>Manifest</a><a href="LICENSE.txt">CC0</a></div></footer>
+  <dialog class="ik-dialog" id="game-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-note">
+    <div class="dialog-toolbar"><span id="dialog-note">תצוגת ערכה · דוגמה חזותית</span><button type="button" class="dialog-close" id="dialog-close" aria-label="סגירת התצוגה"><img src="icons/menu/close.svg" width="24" height="24" alt=""></button></div>
+    <div id="dialog-intro"><img class="dialog-art" id="dialog-art" src="intro/soccer.svg" width="720" height="450" alt=""><div class="dialog-copy"><p class="category" id="dialog-category">ספורט</p><h2 id="dialog-title">ליגת האי</h2><p id="dialog-instruction">מוסרים, בועטים ומתקדמים יחד עם הקבוצה.</p><div class="dialog-actions"><button type="button" class="ik-button ik-primary" id="dialog-start"><img src="icons/menu/play.svg" width="24" height="24" alt="">מתחילים</button><button type="button" class="ik-button ik-secondary" id="dialog-back">חזרה</button></div></div></div>
+    <div class="dialog-result" id="dialog-result" hidden><article class="ik-result"><p class="result-kicker">תוצאה לדוגמה</p><img src="rewards/trophy.svg" width="180" height="160" alt=""><h2 id="dialog-result-title" tabindex="-1">כל הכבוד!</h2><p class="result-description">עוד צעד בדרך שלכם.</p><div class="ik-rating" id="dialog-stars" role="img" aria-label="2 מתוך 3 כוכבים"><img src="rewards/star-filled.svg" width="56" height="56" alt=""><img src="rewards/star-filled.svg" width="64" height="64" alt=""><img src="rewards/star-empty.svg" width="56" height="56" alt=""></div><div class="result-score"><bdi dir="ltr">1,240</bdi><span>נקודות לדוגמה</span></div><div class="result-actions"><button type="button" class="ik-button ik-primary" id="dialog-again">שוב</button><button type="button" class="ik-button ik-secondary" id="dialog-menu">בחירת משחק</button></div></article></div>
+  </dialog>
+</body>
+</html>

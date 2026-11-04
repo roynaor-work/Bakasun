@@ -1,0 +1,1260 @@
+{
+  "schemaVersion": 1,
+  "kind": "soccer-v5-cartoon",
+  "style": "A / original fictional toon athletes",
+  "license": "CC0-1.0",
+  "maxBytesPerGLB": 1500000,
+  "rig": "rig.json",
+  "assets": [
+    {
+      "file": "models/teal-quiff.glb",
+      "bytes": 453528,
+      "sha256": "9e17179a87f7d2a690c3e076cf19033b4a742aae901e85638f932ddf6119ea79",
+      "triangles": 12564,
+      "vertices": 6775,
+      "id": "teal-quiff",
+      "category": "character",
+      "look": "quiff",
+      "team": "teal",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/teal-curls.glb",
+      "bytes": 493248,
+      "sha256": "7983b94552cd6a5a0bb221c330a074945e412ac4e4b83e7642af04e641a22324",
+      "triangles": 14297,
+      "vertices": 7717,
+      "id": "teal-curls",
+      "category": "character",
+      "look": "curls",
+      "team": "teal",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/teal-knot.glb",
+      "bytes": 457692,
+      "sha256": "1f43e52e49a51ad1f4f5235d91698d5a3e72b143f32f052bdd4ac296e35b584d",
+      "triangles": 12757,
+      "vertices": 6876,
+      "id": "teal-knot",
+      "category": "character",
+      "look": "knot",
+      "team": "teal",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/coral-quiff.glb",
+      "bytes": 453536,
+      "sha256": "a2f36c6f3fb4c874681da28a6d66ebdc5a5a6308116072004161fc794ea30ce2",
+      "triangles": 12564,
+      "vertices": 6775,
+      "id": "coral-quiff",
+      "category": "character",
+      "look": "quiff",
+      "team": "coral",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/coral-curls.glb",
+      "bytes": 493272,
+      "sha256": "7582ba60cc29ca5238ceea0cf0448b8eb1525fd20758060bec383142841fecec",
+      "triangles": 14297,
+      "vertices": 7717,
+      "id": "coral-curls",
+      "category": "character",
+      "look": "curls",
+      "team": "coral",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/coral-knot.glb",
+      "bytes": 457704,
+      "sha256": "a321a9f6712dacc1d3a05f46139cb447b80a3d045b1529c1525b76b0d45c0307",
+      "triangles": 12757,
+      "vertices": 6876,
+      "id": "coral-knot",
+      "category": "character",
+      "look": "knot",
+      "team": "coral",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/goalkeeper.glb",
+      "bytes": 454500,
+      "sha256": "b5b4b267cc15531367807cdab17bd1786b1fb7ba736a93b5dccaed3b059fa575",
+      "triangles": 12616,
+      "vertices": 6787,
+      "id": "goalkeeper",
+      "category": "character",
+      "look": "quiff",
+      "team": "keeper",
+      "jointCount": 18,
+      "expressions": [
+        "neutral",
+        "smile",
+        "focus"
+      ],
+      "clips": [
+        {
+          "name": "run",
+          "label": "ריצה",
+          "durationSeconds": 0.72,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "run"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 109,
+            "minimumY": -8.196568423990414e-17,
+            "maxSupportErrorMeters": 0.000017207805700812382
+          }
+        },
+        {
+          "name": "sprint",
+          "label": "ספרינט",
+          "durationSeconds": 0.5,
+          "loop": true,
+          "rootMotion": false,
+          "source": {
+            "file": "source/build.mjs",
+            "state": "derived run / lean + stride + cadence"
+          },
+          "events": [],
+          "bake": {
+            "hz": 60,
+            "samples": 95,
+            "minimumY": -6.418476861114186e-17,
+            "maxSupportErrorMeters": 5.875646979030181e-8
+          }
+        },
+        {
+          "name": "kick",
+          "label": "בעיטה",
+          "durationSeconds": 0.68,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion/soccer.json",
+            "state": "kick"
+          },
+          "events": [
+            {
+              "atSeconds": 0.24,
+              "name": "visual_contact",
+              "time": 0.352941176
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 108,
+            "minimumY": -1.222980050563649e-16,
+            "maxSupportErrorMeters": 5.09026503673668e-8
+          }
+        },
+        {
+          "name": "pass",
+          "label": "מסירה",
+          "durationSeconds": 0.86,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "short_pass"
+          },
+          "events": [
+            {
+              "time": 0.22,
+              "name": "visual_backswing",
+              "domain": "presentation",
+              "atSeconds": 0.1892
+            },
+            {
+              "time": 0.38,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.3268
+            },
+            {
+              "time": 0.9,
+              "name": "visual_replant",
+              "domain": "presentation",
+              "atSeconds": 0.774
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 151,
+            "minimumY": -1.6609977282477928e-16,
+            "maxSupportErrorMeters": 5.8756341764722236e-8
+          }
+        },
+        {
+          "name": "slide",
+          "label": "גלישה",
+          "durationSeconds": 1.45,
+          "loop": false,
+          "rootMotion": false,
+          "source": {
+            "file": "../motion2/soccer.json",
+            "state": "slide_tackle"
+          },
+          "events": [
+            {
+              "time": 0.2,
+              "name": "visual_support_release",
+              "domain": "presentation",
+              "atSeconds": 0.29
+            },
+            {
+              "time": 0.43,
+              "name": "visual_contact",
+              "domain": "presentation",
+              "atSeconds": 0.6235
+            },
+            {
+              "time": 0.62,
+              "name": "visual_palm_ground",
+              "domain": "presentation",
+              "atSeconds": 0.899
+            },
+            {
+              "time": 1,
+              "name": "visual_slide_settled",
+              "domain": "presentation",
+              "atSeconds": 1.45
+            }
+          ],
+          "bake": {
+            "hz": 60,
+            "samples": 185,
+            "minimumY": -1.6132928326584306e-16,
+            "maxSupportErrorMeters": 5.8757262971893014e-8
+          }
+        }
+      ]
+    },
+    {
+      "file": "models/stadium-evening.glb",
+      "bytes": 159528,
+      "sha256": "1fad3de3be0a2975f1241ab5fbf268293a512797726b1963435aa3730bf86d84",
+      "triangles": 9464,
+      "vertices": 18290,
+      "id": "stadium",
+      "category": "environment",
+      "fieldMeters": [
+        68,
+        105
+      ],
+      "textureMaxDimension": 1024,
+      "punctualLights": 4
+    },
+    {
+      "file": "models/crowd.glb",
+      "bytes": 692764,
+      "sha256": "0fb9dfb1646843479d5b23758ade102b81e4d9073394adcecc66e82f571c9169",
+      "triangles": 169904,
+      "vertices": 134008,
+      "id": "crowd",
+      "category": "environment",
+      "spectators": 224,
+      "gestures": 4,
+      "skinTones": 6,
+      "clothingColors": 6
+    },
+    {
+      "file": "models/flags.glb",
+      "bytes": 23244,
+      "sha256": "ee0db2dca5330065e27590d961b297a8518766467bde694e87989c3a0e0374c8",
+      "triangles": 896,
+      "vertices": 744,
+      "id": "flags",
+      "category": "environment",
+      "flags": 8,
+      "clips": [
+        {
+          "name": "flag_wave",
+          "loop": true,
+          "durationSeconds": 2.4
+        }
+      ]
+    },
+    {
+      "file": "models/ball.glb",
+      "bytes": 2712,
+      "sha256": "e7b33a6e92dc30c7597fe480a5686491d5d80d9f1c7091576cafda4ddf6ef30b",
+      "triangles": 116,
+      "vertices": 180,
+      "id": "ball",
+      "category": "equipment",
+      "diameterMeters": 0.22
+    }
+  ],
+  "sources": [
+    {
+      "file": "source/characters.py",
+      "sha256": "18c0d8ab241227cc6f010c09f49259ae098248c3cc2b19e6d87a3dc1878fa4cb"
+    },
+    {
+      "file": "source/build.mjs",
+      "sha256": "ad7f6b6ad412a4a2399e8d56ce50de584d4fc2aba0450232aae3f9d3d53dd89e"
+    },
+    {
+      "file": "source/common.mjs",
+      "sha256": "2ac97cd7805bea4303be3fe68fedf88daec930a2320cbfa9e42ea253a07f0e5a"
+    },
+    {
+      "file": "../characters2/source/mesh.py",
+      "sha256": "8c55edd1aafd81c23aafa53b2083ce9f1eb6aeee9860641fe225f6b83701d180"
+    },
+    {
+      "file": "../characters2/source/body.py",
+      "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71"
+    },
+    {
+      "file": "../characters2/source/head_hands.py",
+      "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2"
+    },
+    {
+      "file": "../characters2/source/gear.py",
+      "sha256": "64c637018e3d209ad2e0e81df4bf2e62164ca03926e5cebcb4a26fe5018f010f"
+    },
+    {
+      "file": "../characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2"
+    },
+    {
+      "file": "../viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78"
+    },
+    {
+      "file": "../viewer/retarget.js",
+      "sha256": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a"
+    },
+    {
+      "file": "../viewer/animation.js",
+      "sha256": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe"
+    },
+    {
+      "file": "../motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b"
+    },
+    {
+      "file": "../motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "file": "source/environment.mjs",
+      "sha256": "2ef266a5cab2660bd004e08c52aaa82a2bb45042eba7fc26a290e944f68390da"
+    },
+    {
+      "file": "source/turf.py",
+      "sha256": "9a70425d543ad34eafc6f2f27daf42f2db41803148fcda02417ea5f6d4053aaa"
+    },
+    {
+      "file": "textures/turf.jpg",
+      "sha256": "74d123c7e823aa48af46493211d47c376e9bb4f95fb4bb292bf3bc5ab2002e03"
+    },
+    {
+      "file": "../models2/soccer-stadium.glb",
+      "sha256": "777ddbc6a38df64b282a96b070923907486c54799f4b47d3ce7b7b3334a3f8f6"
+    },
+    {
+      "file": "../models/soccer-ball.glb",
+      "sha256": "a1fefe6f0cb4d75a6914ea945f157d07e9563f47331594e86c7f1ac90ad46b3d"
+    },
+    {
+      "file": "../characters/soccer-player.glb",
+      "sha256": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5"
+    },
+    {
+      "file": "../variants/regions.json",
+      "sha256": "c64884671e7c0ce0ad7ce5405560f05f71fc6a4dddade304c6baa1d8c6e08719"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+:root{color-scheme:dark;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:#08131b;color:#edf2f2}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+#stage{height:100svh;min-height:300px;position:relative;overflow:hidden;background:#08131b}
+#arena{display:block;width:100%;height:100%;touch-action:none;outline-offset:-5px}
+#stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(#061019d9,transparent 20%,transparent 79%,#06101988);z-index:1}header,.tools,.scene-note,nav{z-index:2}#loading{z-index:3}
+header{position:absolute;top:calc(30px + env(safe-area-inset-top));right:calc(34px + env(safe-area-inset-right));pointer-events:none;text-shadow:0 2px 20px #000;background:linear-gradient(270deg,#08131bce,#08131b00);padding:10px 12px;margin:-10px -12px;border-radius:5px}
+.edition{font-size:11px;letter-spacing:3px;display:flex;align-items:center;gap:11px;color:#d7c392}
+.spark{display:block;width:6px;height:6px;border-radius:50%;background:#dcbd7d;box-shadow:0 0 15px #e8c47477}
+.version{color:#7c939e;border-left:1px solid #607078;padding-left:10px;letter-spacing:1px}
+h1{font-size:clamp(24px,3vw,42px);font-weight:500;letter-spacing:-1px;margin:10px 0 6px}
+header p{margin:0;color:#b9c7cc;font-size:13px;line-height:1.5}
+.tools{position:absolute;left:calc(25px + env(safe-area-inset-left));top:calc(28px + env(safe-area-inset-top));display:flex;gap:7px}
+.tools button{min-height:44px;padding:0 15px;font-size:12px;border:1px solid #ffffff29;background:#0a1722de;border-radius:6px}
+button:hover{border-color:#d8c18c;background:#19313d}button:focus-visible,#arena:focus-visible{outline:2px solid #e8ca8b;outline-offset:3px}
+.tools button[aria-pressed=true]{border-color:#d8c18c;color:#e8ca8b}
+nav{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:6px;background:#081721ee;border:1px solid #ffffff20;border-radius:10px;box-shadow:0 8px 35px #0009}
+nav button{display:flex;align-items:center;justify-content:center;gap:13px;min-width:112px;min-height:52px;padding:0 16px;border:1px solid transparent;border-radius:6px;background:transparent;font-size:14px;white-space:nowrap}
+nav button[aria-pressed=true]{background:#dcc18a;color:#10232b}
+.view-number{font-size:10px;letter-spacing:1px;opacity:.7;font-variant-numeric:tabular-nums}
+.scene-note{position:absolute;bottom:calc(39px + env(safe-area-inset-bottom));right:34px;display:flex;flex-direction:column;gap:6px;pointer-events:none;text-shadow:0 2px 6px #000}
+.scene-note span:first-child{font-size:13px;color:#ede6d8}.scene-note span:last-child{font-size:11px;color:#a9bcc5}
+#loading{position:absolute;inset:0;background:#08131bf2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px;text-align:center}
+#loading[hidden]{display:none}.spinner{width:29px;height:29px;border:1px solid #d4b47c33;border-top-color:#d4b47c;border-radius:50%;animation:spin 1.1s linear infinite}
+#loading.failed .spinner{display:none}#retry{padding:14px 24px;background:#dcc18a;color:#10232b;border:0;border-radius:5px}.no-script{position:absolute;inset:30% 20%;background:#08131b;padding:30px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){header{top:calc(24px + env(safe-area-inset-top));right:22px}h1{font-size:30px}.edition{font-size:9px;letter-spacing:2.3px}header p{max-width:260px;font-size:12px}.tools{top:auto;bottom:calc(103px + env(safe-area-inset-bottom));left:18px}.tools button{min-height:44px;padding:0 12px}.scene-note{bottom:calc(113px + env(safe-area-inset-bottom));right:22px}.scene-note span:last-child{display:none}nav{bottom:calc(22px + env(safe-area-inset-bottom));width:calc(100% - 32px);gap:3px;padding:5px}nav button{min-width:0;flex:1;min-height:52px;padding:0 7px;gap:7px;font-size:13px}.view-number{font-size:9px}}
+@media(max-height:500px) and (min-width:601px){header{top:17px;right:23px}h1{font-size:25px;margin-top:7px}header p{font-size:11px}.tools{top:16px;left:20px}.tools button{min-height:44px}nav{bottom:14px}nav button{min-height:44px;min-width:97px}.scene-note{bottom:24px;right:23px}.scene-note span:last-child{display:none}}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}

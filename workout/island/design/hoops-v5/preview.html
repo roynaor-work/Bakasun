@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08131b">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' blob:; worker-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>לילה על הפרקט · אולם v5</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <main id="stage" aria-label="תצוגת אולם כדורסל תלת ממדית">
+    <canvas id="arena" tabindex="0" aria-label="גררו לסיבוב המבט; חצים לסיבוב ופלוס או מינוס לזום"></canvas>
+    <header>
+      <div class="edition" dir="ltr"><span class="spark"></span> ISLAND COURTS <span class="version">05</span></div>
+      <h1>לילה על הפרקט</h1>
+      <p id="caption">אולם מלא. אור ממוקד. רגע לפני השריקה.</p>
+    </header>
+    <div class="tools">
+      <button id="motion" type="button" aria-pressed="false">עצירת תנועה</button>
+      <button id="economy" type="button" aria-pressed="false">חיסכון</button>
+    </div>
+    <div class="scene-note" aria-hidden="true"><span id="view-label">מבט אולם</span><span>גררו כדי לסובב</span></div>
+    <nav aria-label="בחירת מבט">
+      <button type="button" data-view="arena" aria-pressed="true"><span class="view-number">01</span>אולם</button>
+      <button type="button" data-view="floor" aria-pressed="false"><span class="view-number">02</span>פרקט</button>
+      <button type="button" data-view="crowd" aria-pressed="false"><span class="view-number">03</span>יציע</button>
+      <button type="button" data-view="materials" aria-pressed="false"><span class="view-number">04</span>חומרים</button>
+    </nav>
+    <div id="loading" role="status" aria-live="polite"><span class="spinner"></span><p id="load-message">מדליקים את האולם…</p><button id="retry" type="button" hidden>ניסיון נוסף</button></div>
+    <noscript><p class="no-script">יש להפעיל JavaScript כדי להציג את האולם.</p></noscript>
+  </main>
+</body>
+</html>
