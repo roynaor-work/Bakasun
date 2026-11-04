@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-04",
+  "baseCommit": "c8ab72eab66bece7542f950438ae867d4af38890",
+  "catalogCoverage": {
+    "previous": 12,
+    "new": 38,
+    "total": 50,
+    "duplicates": 0,
+    "batches": [
+      19,
+      19
+    ]
+  },
+  "assets": {
+    "animatedSvg": 38,
+    "staticPosters": 38,
+    "maximumRawBytes": 57064,
+    "limitBytes": 60000,
+    "animatedSvgTotalBytes": 1294017
+  },
+  "validation": {
+    "buildCheck": "passed",
+    "integrity": "passed; 762 synchronized animated attributes; cyclic pose velocity and attribute closure checked",
+    "browser": "passed; 304 keyframes, 1216 bounds samples, 38 native img embeddings; no page errors or external requests",
+    "npmTest": {
+      "command": "npm test",
+      "exitCode": 0,
+      "tests": 3217,
+      "pass": 3170,
+      "fail": 0,
+      "skipped": 47,
+      "durationMs": 147498.530082
+    }
+  },
+  "limitations": [
+    "Direct file:// navigation blocked by managed Chromium; disconnected gallery checked with exact local responses.",
+    "Browser rendering checked in Chromium only; phone, Safari and Firefox remain unverified.",
+    "47 existing opt-in tests skipped by the repository npm test configuration."
+  ],
+  "scope": "New assets and tools only in workout/design/royiki-style-2; ops/CONTROL.md handoff entry. Application logic and release versions unchanged."
+}
