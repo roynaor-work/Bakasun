@@ -1,21 +1,24 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261102-2';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261102-2';
-import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261102-2';
-import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261102-2';
-import {createSound} from '../minigames/sound.mjs?v=island-v2-20261102-2';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261102-2';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261102-2';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261102-2';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261102-2';
-import {gameContext} from '../minigames/context.mjs?v=island-v2-20261102-2';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261102-2';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261102-2';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261102-2';
-import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261102-2';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261102-2';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261102-2';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261102-2';
-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261102-2';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261104-1';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261104-1';
+import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261104-1';
+import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261104-1';
+import {createSound} from '../minigames/sound.mjs?v=island-v2-20261104-1';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261104-1';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261104-1';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261104-1';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261104-1';
+import {gameContext} from '../minigames/context.mjs?v=island-v2-20261104-1';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261104-1';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261104-1';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261104-1';
+import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261104-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261104-1';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261104-1';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261104-1';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261104-1';
+import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261104-1';
+import {noteManualRestart} from './load-report.mjs?v=island-v2-20261104-1';
+import {clearGameAssets} from './offline.mjs?v=island-v2-20261104-1';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -41,7 +44,7 @@ export class ActivityInterface {
     this.unsubscribeEngine=engine.subscribe(()=>this.render());this.render();
   }
   cleanup(eventId) {
-    this.closing=true;const current=this.current;this.current=null;current?.cancel();
+    this.closing=true;this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();
     this.shell?.dispose();this.shell=null;
     if(eventId)this.activity.cancel(eventId);
     if(!this.switching)this.navigation.leave();
@@ -237,7 +240,7 @@ export class ActivityInterface {
     if(this.requireBuilding(id))return;
     if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId,stage);else this.launch(id,eventId,stage);
   }
-  launch(id,eventId,stageNumber,drill) {
+  launch(id,eventId,stageNumber,drill,rescue={attempts:0,lite:false}) {
     if(id==='navalDuel')ensureNavalTheme();
     if(this.requireBuilding(id))return;
     // Switching from instructions must retain the event's playing state.
@@ -275,6 +278,7 @@ export class ActivityInterface {
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
+    if(rescue.lite)context.lite=true;
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
@@ -288,8 +292,23 @@ export class ActivityInterface {
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
     this.current=response;if(id==='navalDuel')this.lastNavalFleet=response.session.snapshot.composition;
     this.shell.bind(response.session);
+    if(RESCUE_GAMES[id]){this.rescueWatch?.stop();this.rescueWatch=watchLoading({session:response.session,dialog,t:this.t,attempts:rescue.attempts,
+      onRestart:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'restart'),onLite:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'lite'),onClear:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'clear'),
+      onBack:()=>{this.ui.closeModal();this.menu();}});}
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
     canvas.focus();
+  }
+  /** "Stuck? Restart the game": a clean cancel of the current session (dispose frees WebGL and workers)
+   * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
+   * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
+  async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
+    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite'};
+    this.closing=true;
+    try{this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
+    let count=0;
+    if(kind==='clear'){try{count=await clearGameAssets(key);}catch{}this.ui.toast('rescue.cleared',{count});}
+    noteManualRestart(key,this.t('rescue.report.'+kind,{n:next.attempts,count}));
+    this.launch(id,eventId,stageNumber,drill,next);
   }
   outdoorPrompt(dialog){
     const phrases=this.data.config.minigames.soccer.training.outdoorMessages,index=this.engine.state.soccerRoster.training.completed+(this.engine.state.minigameWins.soccer||0);
@@ -328,7 +347,7 @@ export class ActivityInterface {
   alpineResult(dialog,summary,a){
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
-    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261102-2',import.meta.url).href;dialog.append(css);
+    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261104-1',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
     const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);

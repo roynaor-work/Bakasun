@@ -13,30 +13,39 @@ const { esc } = await import('../js/ui.js');
 const root = () => ({ innerHTML: '', querySelector: () => ({}), querySelectorAll: () => [] });
 const payload = '<img src=x onerror="window.__b3Xss=1">';
 
-function callMarkup() {
-  db.importJson(JSON.stringify({ calls: [{ id: 'b3-call', name: 'איש קשר בדיקה', status: 'todo', attempts: payload, updated: '2999-01-01T00:00:00.000Z' }] }));
+const poisonedAttempts = payload;
+const poisonedAboutId = 'b3-client" onclick="window.__b3NoteXss=1';
+function callMarkup(viaImport) {
+  const row = { id: 'b3-call', name: 'איש קשר בדיקה', status: 'todo', attempts: poisonedAttempts, updated: '2999-01-01T00:00:00.000Z' };
+  if (viaImport) db.importJson(JSON.stringify({ calls: [row] })); else db.put('calls', row);
   const element = root(); calls.render({ root: element }); return element.innerHTML;
 }
-test('B3-A01 current: imported attempts is emitted as executable HTML in the call screen', () => {
-  assert.ok(callMarkup().includes(payload));
+test('B3-A01 fix: a record that already holds markup in attempts is rendered as a number, never as an HTML element', () => {
+  assert.ok(!callMarkup(false).includes('<img'));
 });
-test('B3-A01 fix: imported attempts never creates an HTML element',
-  { skip: 'B3-A01: calls.render inserts c.attempts into innerHTML without esc or numeric validation; also confirmed in Chromium.' }, () => {
-    assert.ok(!callMarkup().includes(payload));
-  });
+test('B3-A01 fix: an imported backup never creates an HTML element from attempts, and attempts is stored as an integer', () => {
+  assert.ok(!callMarkup(true).includes('<img'));
+  assert.equal(db.get('calls', 'b3-call').attempts, 0);
+});
 
-function noteMarkup() {
-  db.importJson(JSON.stringify({ notes: [{ id: 'b3-note', text: 'בדיקה', about: 'client', aboutLabel: 'לקוח בדיקה',
-    aboutId: 'b3-client" onclick="window.__b3NoteXss=1', updated: '2999-01-01T00:00:00.000Z' }] }));
+function noteMarkup(viaImport) {
+  const row = { id: 'b3-note', text: 'בדיקה', about: 'client', aboutLabel: 'לקוח בדיקה', aboutId: poisonedAboutId, updated: '2999-01-01T00:00:00.000Z' };
+  if (viaImport) db.importJson(JSON.stringify({ notes: [row] })); else db.put('notes', row);
   const element = root(); notes.render({ root: element }); return element.innerHTML;
 }
-test('B3-A01 current: imported note subject can break out of its href attribute', () => {
-  assert.match(noteMarkup(), /href="#\/client\/b3-client" onclick="window\.__b3NoteXss=1"/);
+test('B3-A01 fix: note subject URLs escape identifiers that are already in the store', () => {
+  const html = noteMarkup(false);
+  assert.doesNotMatch(html, /" onclick=/);
+  assert.match(html, /href="#\/client\/b3-client&quot; onclick=&quot;/);
 });
-test('B3-A01 fix: note subject URLs escape imported identifiers',
-  { skip: 'B3-A01: notes.render inserts LINK[n.about](n.aboutId) into an unescaped href.' }, () => {
-    assert.doesNotMatch(noteMarkup(), /onclick="window\.__b3NoteXss/);
-  });
+test('B3-A01 fix: an imported note cannot carry an attribute-breaking aboutId', () => {
+  assert.doesNotMatch(noteMarkup(true), /onclick=/);
+});
+test('B3-A01 fix: backup import skips non-object rows and ids that are not plain identifiers', () => {
+  const before = db.list('clients').length;
+  const n = db.importJson(JSON.stringify({ clients: [null, 5, 'x', [], { id: 7 }, { id: 'a"b' }, { id: '<i>' }, { id: 'ok-1', name: 'תקין', updated: '2999-01-01T00:00:00.000Z' }] }));
+  assert.equal(n, 1); assert.equal(db.list('clients').length, before + 1);
+});
 
 test('B3-A01 control: the shared escaping helper handles element and attribute boundaries', () => {
   assert.equal(esc(payload), '&lt;img src=x onerror=&quot;window.__b3Xss=1&quot;&gt;');

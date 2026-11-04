@@ -1,5 +1,5 @@
-import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261102-2';
-import {soccerResult} from '../minigames/soccer-result.mjs?v=island-v2-20261102-2';
+import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261104-1';
+import {soccerResult} from '../minigames/soccer-result.mjs?v=island-v2-20261104-1';
 
 export function install(registry,data) {
   const balance=data.config.minigames.soccer;

@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261102-2';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261102-2';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261102-2';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261102-2';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261102-2';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261104-1';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261104-1';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261104-1';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261104-1';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261104-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {loadDesignCharacters,soccerDesignCharacterError} from './soccer-design-character.mjs';
@@ -13,20 +13,20 @@ import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261102-2';
-import {playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261102-2';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261102-2';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261102-2';
-import {passDestination} from './soccer.mjs?v=island-v2-20261102-2';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261102-2';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261102-2';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261104-1';
+import {playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261104-1';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261104-1';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261104-1';
+import {passDestination} from './soccer.mjs?v=island-v2-20261104-1';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261104-1';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261104-1';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261102-2';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261104-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
-export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
+export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
   globalThis.performance?.mark?.('soccer:view-construct-start');
   const restartAim={};let restartAttachment=null,restartStrike=null;
   config=expandSoccerConfig(config);
@@ -361,9 +361,10 @@ export function createSoccerView({canvas,config,playArea,layoutNodes=[],onAsset=
   }
   /** What this match actually loaded and why anything fell back; filled when assets settle. */
   function report(){if(loadReport.ms===null&&assetStatus!=='loading')loadReport.ms=Math.round((globalThis.performance?.now?.()??0)-loadStart);let gpu=null;try{const gl=renderer.getContext(),info=gl.getExtension('WEBGL_debug_renderer_info');gpu=info?gl.getParameter(info.UNMASKED_RENDERER_WEBGL):null;}catch{}return {...loadReport,assetStatus,scene:designSceneReady?'design':designScene?.metrics().status||'disabled',sceneFailure:designScene?.metrics().failure||null,quality,gpu,warmup:warmed,webgl2:!!renderer.capabilities?.isWebGL2};}
+  if(lite){lowerQuality();lowerQuality();loadReport.lite=true;}
   return {ready,render,qualitySample,report,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
-    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    metrics:()=>({triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }

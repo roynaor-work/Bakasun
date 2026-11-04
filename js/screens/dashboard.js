@@ -21,7 +21,7 @@ const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const kindKey = k => 'dbKind' + k.charAt(0).toUpperCase() + k.slice(1);
 
 function tile(href, icon, n, label, sub, tone) {
-  return `<a class="card tap dash-tile ${tone || ''}" href="${href}">
+  return `<a class="card tap dash-tile ${esc(tone || '')}" href="${esc(href)}">
     <span class="dash-ico">${svg(ICONS[icon])}</span>
     <span class="dash-body"><span class="dash-n">${esc(n)}</span><span class="dash-l">${esc(label)}</span>${sub ? `<span class="dash-s">${esc(sub)}</span>` : ''}</span></a>`;
 }

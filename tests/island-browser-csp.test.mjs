@@ -11,7 +11,7 @@ test('island server sends the exact shipped CSP on index, tools and viewer HTML'
     const original=source.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"/i)?.[1];
     assert.ok(original,'The production index must declare its policy');
     assert.equal(await readIslandCsp(),original);
-    for(const page of ['', 'tools/perf-alpine.html', 'design/viewer/viewer.html']){
+    for(const page of ['', 'tools/perf-alpine.html', 'tools/perf-hoops.html', 'design/viewer/viewer.html']){
       const response=await fetch(server.url+page);
       assert.equal(response.status,200,page);
       assert.equal(response.headers.get('content-security-policy'),original,page);
@@ -23,7 +23,7 @@ test('island server sends the exact shipped CSP on index, tools and viewer HTML'
 // Opt-in browser integration, run separately from Node-only CI/unit tests:
 // ISLAND_CSP_BROWSER=1 node --test tests/island-browser-csp.test.mjs
 test('actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco',
-  {skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:120000},async()=>{
+  {skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:420000},async()=>{
   const server=await serveIsland(),chromium=await islandChromium();
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const reports=[];
@@ -139,6 +139,34 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await alpine.page.evaluate(()=>window.__perfSession.dispose());
       await alpine.csp.assertClean();
     }finally{await alpine.close();await alpine.csp.assertClean();}
+
+    // Basketball v4 (02/11, GPT/Codex hoops-v4 package): the real perf page, the whole game session and the
+    // production CSP. First the five position bodies and the 3D-crowd venue must load from the static Draco worker
+    // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
+    // bodies and the v3 venue (sprite crowd) and still start.
+    const hoopsUrl='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
+    const hoops=await fixture('hoops-v4-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];hoops.page.on('request',r=>requests.push(r.url()));
+      await hoops.page.goto(server.url+hoopsUrl,{waitUntil:'load'});
+      const live=await hoopsReady(hoops.page);
+      assert.equal(live.error,null);assert.equal(live.m.characterVersion,4);assert.deepEqual(live.m.v4Fallbacks,[]);assert.equal(live.m.crowd3d,true);assert.ok(live.m.arenaSource.endsWith('lod-v4/hoops-v4-arena-lod.glb'));
+      assert.ok(requests.every(u=>u.startsWith(server.url)||/^(data|blob):/.test(u)),'no request leaves the island origin');
+      for(const role of ['pg','sg','sf','pf','c'])assert.ok(requests.some(u=>u.includes(`lod-v4/hoops-v4-${role}-lod.glb`)),role+' body requested');
+      assert.ok(requests.some(u=>u.includes('lod-v4/hoops-v4-arena-lod.glb')));
+      assert.ok(!requests.some(u=>/design\/hoops\/lod\/hoops-(guard|wing|forward|big)-lod/.test(u)),'the v3 bodies are not downloaded when v4 loads');
+      await hoops.csp.assertClean();reports.push({name:'hoops-v4-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await hoops.close();await hoops.csp.assertClean();}
+    const fallback=await fixture('hoops-v4-fallback',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await fallback.page.route(/design\/hoops\/lod-v4\//,route=>route.abort());
+      await fallback.page.goto(server.url+hoopsUrl,{waitUntil:'load'});
+      const live=await hoopsReady(fallback.page);
+      assert.equal(live.error,null,'a missing v4 asset never stops the game');assert.equal(live.m.characterVersion,1);assert.deepEqual([...live.m.v4Fallbacks].sort(),['arena','players']);
+      assert.equal(live.m.crowd3d,false);assert.ok(live.m.crowd>0,'the v3 sprite crowd is back');assert.ok(live.m.arenaSource.endsWith('models2/basketball-arena.glb'));
+      await fallback.csp.assertClean();reports.push({name:'hoops-v4-fallback-result',...live.m,loadTimes:undefined});
+    }finally{await fallback.close();await fallback.csp.assertClean();}
   }finally{
     await browser.close();await server.close();
     if(process.env.ISLAND_CSP_AUDIT_DIR){await mkdir(process.env.ISLAND_CSP_AUDIT_DIR,{recursive:true});await writeFile(path.join(process.env.ISLAND_CSP_AUDIT_DIR,'csp-negative-fixtures.json'),JSON.stringify(reports,null,2)+'\n');}

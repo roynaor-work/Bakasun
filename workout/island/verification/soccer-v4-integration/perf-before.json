@@ -1,0 +1,74 @@
+{
+ "tag": "base",
+ "viewport": [
+  "844",
+  "390"
+ ],
+ "errs": [
+  "Failed to load resource: the server responded with a status of 404 (File not found)",
+  "Failed to load resource: the server responded with a status of 404 (File not found)"
+ ],
+ "ext": [],
+ "mb": 1.91,
+ "files": {
+  "assets/soccer-realism/turf-albedo-1k.jpg": 356383,
+  "assets/soccer-realism/turf-normal-gl-1k.jpg": 478627,
+  "design/environment/textures/grass-mown.webp": 159586,
+  "design/environment/textures/stand-concrete.webp": 115602,
+  "design/environment/textures/crowd-dots.webp": 142986,
+  "design/environment/backgrounds/stadium-day-landscape.webp": 48784,
+  "design/environment/backgrounds/stadium-day-portrait.webp": 34282,
+  "design/models2/soccer-stadium.glb": 153156,
+  "design/models/soccer-ball.glb": 3564,
+  "design/models/soccer-goal.glb": 19408,
+  "design/characters2/soccer-player.glb": 101256,
+  "design/characters2/goalkeeper.glb": 100252,
+  "design/vfx/atlases/goal-burst.webp": 110040,
+  "design/vfx/atlases/landing-dust.webp": 85306,
+  "design/vfx/atlases/confetti.webp": 90786
+ },
+ "fps": 9.3,
+ "frameMs": {
+  "mean": 107.39,
+  "p50": 100,
+  "p95": 200,
+  "p99": 283.4,
+  "max": 333.3
+ },
+ "renderMs": {
+  "mean": 6.39,
+  "p50": 2.8,
+  "p95": 9.3,
+  "p99": 193.7,
+  "max": 283.2
+ },
+ "glMs": {
+  "mean": 5.09,
+  "p50": 1.7,
+  "p95": 7.2,
+  "p99": 186.3,
+  "max": 279.2
+ },
+ "assetReadyMs": 6779,
+ "quality": {
+  "final": 3,
+  "pixelRatio": 0.85,
+  "changes": [
+   {
+    "atSeconds": 0.6,
+    "quality": 3
+   }
+  ],
+  "crowdCount": 10,
+  "shadows": false,
+  "triangles": 48781,
+  "drawCalls": 30,
+  "assetStatus": "ready",
+  "turf": {
+   "turfStatus": "ready",
+   "turfMaps": 1,
+   "source": "design/environment"
+  },
+  "lod": 2
+ }
+}

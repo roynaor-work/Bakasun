@@ -1,15 +1,16 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261102-2';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261102-2';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261102-2';
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261102-2';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261102-2';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261102-2';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261102-2';
-import {createControls} from './controls.mjs?v=island-v2-20261102-2';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261102-2';
-import {gameContext} from './context.mjs?v=island-v2-20261102-2';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261104-1';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261104-1';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261104-1';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261104-1';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261104-1';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261104-1';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261104-1';
+import {createControls} from './controls.mjs?v=island-v2-20261104-1';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261104-1';
+import {gameContext} from './context.mjs?v=island-v2-20261104-1';
 import {expandSoccerConfig} from './soccer-squad.mjs';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261104-1';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout} from './soccer-design-controls.mjs';
 
@@ -68,20 +69,20 @@ export function startSoccer(ctx) {
       const r=view?.report?.();if(!r)return;
       const lines=[`island ${new URL(import.meta.url).searchParams.get('v')||'dev'} · ${new Date().toISOString()}`,`assets ${r.assetStatus} · characters ${r.characters} · scene ${r.scene} · ${r.ms} ms · quality ${r.quality}`,`screen ${innerWidth}x${innerHeight} @${devicePixelRatio} · webgl2 ${r.webgl2} · gpu ${r.gpu||'?'}`,`ua ${navigator.userAgent}`];
       if(r.characterError)lines.push('characters fell back: '+r.characterError);if(r.athleteError)lines.push('athlete fell back: '+r.athleteError);if(r.sceneError||r.sceneFailure)lines.push('scene fell back: '+(r.sceneFailure||r.sceneError));
-      globalThis.localStorage?.setItem('island.soccer.lastLoadReport',lines.join('\n'));
+      globalThis.localStorage?.setItem('island.soccer.lastLoadReport',[...lines,...manualReportLines('soccer')].join('\n'));
       if(r.assetStatus!=='ready'||r.characters!=='design-glb-v2'||r.scene!=='design'){const note=element('div','soccer-load-note','הגרפיקה המלאה לא נטענה; דוח הטעינה שמור בתפריט הכדורגל');note.setAttribute('role','status');canvas.after(note);setTimeout(()=>note.remove(),7000);}
     }catch{}
   }
   const events=new AbortController(),options={signal:events.signal};
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();audio.dispose({finish:Boolean(model.result&&!context.drill)});input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused&&contractsReady&&!view?.loading()&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
-  const session={dispose,setPaused,get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,audio:audio.snapshot,contractsStatus:contractsError?'error':contractsReady?'ready':'loading',contractsError,controlsState:input?.snapshot,renderMetrics:view?.metrics()};}};
+  const session={dispose,setPaused,get ready(){return Boolean(view)&&contractsReady&&!view.loading();},get loadFailed(){return contractsError;},get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,audio:audio.snapshot,contractsStatus:contractsError?'error':contractsReady?'ready':'loading',contractsError,controlsState:input?.snapshot,renderMetrics:view?.metrics()};}};
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261102-2',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261104-1',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261102-2',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261104-1',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
@@ -127,7 +128,7 @@ export function startSoccer(ctx) {
       if(event.type==='possession'&&event.player!==model.getState().controlled)return;
       feedback.textContent=t(key==='pass'&&event.target==null?'soccer.pass':`soccer.feedback.${key}`,{number:number(event.target??event.player)});feedback.dataset.action=key;feedback.hidden=false;feedbackTime=1.1;
     }
-    view=createSoccerView({canvas,config:viewConfig,onEdge:point=>{edge.hidden=!point;if(point){edge.style.left=`${point.x}px`;edge.style.top=`${point.y}px`;edge.style.transform=`translate(-50%,-50%) rotate(${point.angle}rad)`;}},onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
+    view=createSoccerView({canvas,config:viewConfig,lite:Boolean(ctx.lite),onEdge:point=>{edge.hidden=!point;if(point){edge.style.left=`${point.x}px`;edge.style.top=`${point.y}px`;edge.style.transform=`translate(-50%,-50%) rotate(${point.angle}rad)`;}},onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
     const plans=new Map(),icons={shot:'shoot',pass:'pass',sprint:'sprint',slide:'slide',switch:'switch',tackle:'steal',throw:'pass',corner:'pass',short:'pass',goal_kick:'shoot',free_kick:'shoot',dive:'slide',rush:'sprint',roll:'pass',punt:'shoot'};
     function syncControls(s){
       if(!contractsReady||!input)return;
