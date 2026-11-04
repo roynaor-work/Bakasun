@@ -1,0 +1,6309 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "budgets": {
+    "lod0Triangles": 8000,
+    "lod1Triangles": 3000,
+    "GLBBytes": 1500000,
+    "textureEdgePixels": 1024,
+    "canonicalBones": 18
+  },
+  "assetCount": 28,
+  "totalGLBBytes": 19431036,
+  "largestGLB": {
+    "path": "assets/referee-lod0.glb",
+    "bytes": 787924,
+    "MB": 0.787924,
+    "sha256": "9224ff92d86503aa87066eea0a3548bf4d359f789b34dc8b40abb8cddaf6d24f",
+    "lod": 0,
+    "triangleBudget": 8000,
+    "triangles": 7175,
+    "vertices": 5157,
+    "drawPrimitives": 1,
+    "textureCount": 3,
+    "textures": [
+      {
+        "name": "referee-basecolor",
+        "size": [
+          1024,
+          1024
+        ],
+        "mimeType": "image/png",
+        "bytes": 538328
+      },
+      {
+        "name": "referee-normal",
+        "size": [
+          1024,
+          1024
+        ],
+        "mimeType": "image/png",
+        "bytes": 125893
+      },
+      {
+        "name": "referee-orm",
+        "size": [
+          1024,
+          1024
+        ],
+        "mimeType": "image/png",
+        "bytes": 4655
+      }
+    ],
+    "skins": [
+      {
+        "joints": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "inverseBindMatrixCount": 18
+      }
+    ],
+    "skeletonEvidence": [
+      {
+        "name": "Root",
+        "parent": null,
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "Hips",
+        "parent": "Root",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "Spine",
+        "parent": "Hips",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "Chest",
+        "parent": "Spine",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "Neck",
+        "parent": "Chest",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "Head",
+        "parent": "Neck",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftArm",
+        "parent": "Chest",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftForeArm",
+        "parent": "LeftArm",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftHand",
+        "parent": "LeftForeArm",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightArm",
+        "parent": "Chest",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightForeArm",
+        "parent": "RightArm",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightHand",
+        "parent": "RightForeArm",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftUpLeg",
+        "parent": "Hips",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftLeg",
+        "parent": "LeftUpLeg",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "LeftFoot",
+        "parent": "LeftLeg",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightUpLeg",
+        "parent": "Hips",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightLeg",
+        "parent": "RightUpLeg",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      },
+      {
+        "name": "RightFoot",
+        "parent": "RightLeg",
+        "restTranslationErrorMeters": 0,
+        "restRotationErrorRadians": 0
+      }
+    ],
+    "draco": true,
+    "validation": {
+      "compressed": {
+        "errors": 0,
+        "warnings": 1,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/0/primitives/0/material"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          }
+        ]
+      },
+      "decoded": {
+        "errors": 0,
+        "warnings": 1,
+        "messages": [
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/0/primitives/0/material"
+          }
+        ]
+      }
+    }
+  },
+  "sourceHashes": {
+    "source/audit-assets.mjs": "5793906d5531256aa9d435c5388dc5e6fc064d08320c1edd18b415f36dadf8cd",
+    "source/build-characters.py": "339254ceb71a4856a23a64fe9e3cbf8ddd902d4329ca27b8484ee209b22d67a8",
+    "source/build-motion.py": "cbeaa9d47ea88984ecd607c5679c0f52e711043a3773262c725a437e5527fb3d",
+    "source/check-browser.py": "40fc56e1f0b3893bc8cd4e6f152efc1cde87a1d5de1898f7a39f2bfbf3185832",
+    "source/compress-assets.mjs": "07fa4d63d237bd1007aa806bc96b8a5f7b30179ca77ef676bdbeae60c3e83bfd",
+    "source/makehuman/LICENSE.ASSETS.md": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+    "source/makehuman/LICENSE.md": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+    "source/makehuman/SOURCE-RESEARCH.md": "9d565cb168808945e3b835f43a40d60a745ee9a6d1fadb9bc8d1e25a6f2ea1dc",
+    "source/makehuman/african-male-young.target": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+    "source/makehuman/asian-male-young.target": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+    "source/makehuman/base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "source/makehuman/caucasian-male-young.target": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+    "source/makehuman/hair/afro01/afro01.mhclo": "7ab4f15afcf53b4a0e45a215ae81a74e3331fcc37061c5e2ef58b1735a6f4d9b",
+    "source/makehuman/hair/afro01/afro01.obj": "d82bfa64bead1b164d54d655c2211a2fe0f59526da03575737a89612e5f47c1c",
+    "source/makehuman/hair/afro01/afro_diffuse.png": "14df28d804cb46fe7d25c6334140b5b5589f15734b3c7bd4fa7e2797a4646d9e",
+    "source/makehuman/hair/short01/short01.mhclo": "389c2e84f5daa4d5fab19e55edf7f6e7d92207eadb3864c5b32ecaf6d8c7c325",
+    "source/makehuman/hair/short01/short01.obj": "9ada607454a3abdb336e6b5d0b944e342c5ef55bc26c08b5f04fee3f4ba36a46",
+    "source/makehuman/hair/short01/short01_diffuse.png": "fd4b9e9a54f9361dd206a2cfa64cce062e240f9828e3f4502d14ee63056b044c",
+    "source/makehuman/hair/short02/short02.mhclo": "e379e5a370c4a61a45d7787955324c08cd5fb9e3a8cf13d970350553722fb8f4",
+    "source/makehuman/hair/short02/short02.obj": "f89527df7598b98aff9dfba7b96b416968bc2bee334bcb90b7414eb13e32a42e",
+    "source/makehuman/hair/short02/short02_diffuse.png": "e715e366708e36f366f0d2a40ea4ddde967cca2c8c051b283dbeaed1cbc053ad",
+    "source/makehuman/hair/short02/short02_normal.png": "acf697c010ba28244a9af3c8a3469d2860446faa601c1c5713513614a5f347f3",
+    "source/makehuman/hair/short03/short03.mhclo": "4c618b130e2f045e4144a386d84d1195c77cd7814fc98b953c2865cfba89dde8",
+    "source/makehuman/hair/short03/short03.obj": "f1f866a3726c2ec067d1c9ddc1d977809f7fca41ee9a69c1a82b9be1ecca69c9",
+    "source/makehuman/hair/short03/short03_diffuse.png": "d99eb8b12897279acc77ee973fd387317d785933811e2815e582a5e8b8176571",
+    "source/makehuman/hair/short04/short04.mhclo": "65c1ce5f74f43cdcdbfa75d97191a3aa02970e446260fb47220499df59312254",
+    "source/makehuman/hair/short04/short04.obj": "ad658fc72338c2b01f40aa69bd2d3eaa15fba73606ec65bc7cfb081533034c8b",
+    "source/makehuman/hair/short04/short04_diffuse.png": "1f060d01d3edab37b9dc6c0c24758a0bc9305f1fcf1e3d003fab3d7328eacbef",
+    "source/makehuman/head-oval.target": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d",
+    "source/makehuman/head-rectangular.target": "bbfcbd4d6334df18515e73abb707b8a948adb74e0aba88a728c8e146dd5f4e4b",
+    "source/makehuman/head-scale-horiz-decr.target": "cadb55b340cb94e96131860beb68b2e46204fccc7ee8f963f66cc9d22b03af0c",
+    "source/makehuman/head-scale-vert-incr.target": "d9560ee80b9125da34cc95ece61192a295ab53c50a314c0084ddb3b0f38cc7d6",
+    "source/makehuman/head-square.target": "001d0d135d964daf4ad99ba46a0f77c5bc2378f04e53c2b5a20242ab19cbf265",
+    "source/makehuman/mouth-scale-horiz-incr.target": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+    "source/makehuman/nose-scale-depth-incr.target": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+    "source/makehuman/nose-width1-incr.target": "d340bc76601f9061826849d2fc9146ba6fbf7ee0604799849a417c934f53bea0",
+    "source/makehuman/official-system-assets.md": "f33900d0cd0c101b7a18b9c14569c3df93c62e8b0d23c9ed9a1bfba388538b8c",
+    "source/makehuman/skin-dark-diffuse.png": "6c7822f62eb45fbc658592fc2ec6291f4b01279b638d5940a7fa2dedbafbd525",
+    "source/makehuman/skin-diffuse.png": "ef5cde3401a5eaa19d8fdd73718a98f969fb481a434f8a1eb77e7b47c89315b4",
+    "source/makehuman/universal-male-young-averagemuscle-minweight.target": "fac0d53b7051f4d1f06230d0b419e916eb5bae5ce67c031a9998fdde05229755",
+    "source/makehuman/universal-male-young-maxmuscle-averageweight.target": "c171ff9cc95e96273beb3e3b1969a01988c2d4982ebc6fe04bf81cf72ee3b295",
+    "source/makehuman/universal-male-young-maxmuscle-minweight.target": "5873f11edc96fde72a79ec35fa1d292a6a1a594b5eadfd82d59faf48834561de",
+    "motion/manifest.json": "76bdbf18c8ab9370c153c8825e1d09ad0bf09c0f2e3562e45347ec37d6a0f63c",
+    "motion/soccer-v6.json": "d2ec9090f9734ffa20ba1822e1b91a09b1c850cbfbf904da365edbeabdad0533",
+    "motion/validation.json": "ea5b1b4b2ae9122ff4ea4990a4c769ca0a180cc9c3a48fcebdd45c27915ea1ec"
+  },
+  "assets": [
+    {
+      "path": "assets/goalkeeper-lod0.glb",
+      "bytes": 772368,
+      "MB": 0.772368,
+      "sha256": "6082de718f8a515a0ea252395091e4cdeec287a150f40aa67a26a417a8045d57",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7175,
+      "vertices": 5254,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "goalkeeper-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 525368
+        },
+        {
+          "name": "goalkeeper-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "goalkeeper-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/goalkeeper-lod1.glb",
+      "bytes": 703924,
+      "MB": 0.703924,
+      "sha256": "af3feb9ae0086ed71cd16ccf6511bcd161f678c785693a5eecb30b6e388651a3",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2695,
+      "vertices": 2244,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "goalkeeper-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 525368
+        },
+        {
+          "name": "goalkeeper-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "goalkeeper-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-01-kit-a-lod0.glb",
+      "bytes": 700284,
+      "MB": 0.700284,
+      "sha256": "027493f36bffa815d96485e708660076f6129dd78a05d3b15c5dee3cf89072cf",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7171,
+      "vertices": 4863,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-01-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 460161
+        },
+        {
+          "name": "player-01-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-01-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-01-kit-a-lod1.glb",
+      "bytes": 641180,
+      "MB": 0.64118,
+      "sha256": "b8bea129397b2052adfd5ee5939792f7dca9d8f215b694b31df70dfdbb3bfbbb",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2699,
+      "vertices": 2163,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-01-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 460161
+        },
+        {
+          "name": "player-01-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-01-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-01-kit-b-lod0.glb",
+      "bytes": 700244,
+      "MB": 0.700244,
+      "sha256": "cef534e24816982dcaf8d2741d212a42dcbf3d0c81b074a3f10c012f3f2be493",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7171,
+      "vertices": 4863,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-01-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 460128
+        },
+        {
+          "name": "player-01-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-01-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-01-kit-b-lod1.glb",
+      "bytes": 641140,
+      "MB": 0.64114,
+      "sha256": "008d5abc1f7daf679d5133a3b93916617903682b086e3337c7fb8c2e08935517",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2699,
+      "vertices": 2163,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-01-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 460128
+        },
+        {
+          "name": "player-01-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-01-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-02-kit-a-lod0.glb",
+      "bytes": 730368,
+      "MB": 0.730368,
+      "sha256": "c95f982c2453a21e916067270f547901a0a561e63ef1e2da33265c6c883985ee",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7175,
+      "vertices": 5390,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-02-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 483450
+        },
+        {
+          "name": "player-02-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "player-02-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-02-kit-a-lod1.glb",
+      "bytes": 662064,
+      "MB": 0.662064,
+      "sha256": "e8dbdaf5f0bbe71069acd3de29e8b304690ab6e90f9f73f0affd98b18f21b503",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2696,
+      "vertices": 2320,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-02-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 483450
+        },
+        {
+          "name": "player-02-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "player-02-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-02-kit-b-lod0.glb",
+      "bytes": 730232,
+      "MB": 0.730232,
+      "sha256": "52a5d7aa907bbdf5f0e3531773418ea2307963a2996107fb80f1b9f4f1341370",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7175,
+      "vertices": 5390,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-02-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 483314
+        },
+        {
+          "name": "player-02-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "player-02-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-02-kit-b-lod1.glb",
+      "bytes": 661928,
+      "MB": 0.661928,
+      "sha256": "9fe55b4e2153341a9ceab47684f76c99bfb4f412a2c8a9b804165eeef47f71f8",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2696,
+      "vertices": 2320,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-02-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 483314
+        },
+        {
+          "name": "player-02-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 118296
+        },
+        {
+          "name": "player-02-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-03-kit-a-lod0.glb",
+      "bytes": 706764,
+      "MB": 0.706764,
+      "sha256": "54201bc2dd2ea45227b899df7961ff992c13ccbd1554aef187f13c372c92cf7a",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7183,
+      "vertices": 4555,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-03-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 472044
+        },
+        {
+          "name": "player-03-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-03-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-03-kit-a-lod1.glb",
+      "bytes": 649632,
+      "MB": 0.649632,
+      "sha256": "19eb4f38ac0379bd1a2bc9e8c0055c1822bdbb09a02601eb057e515b82dd6cd5",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2707,
+      "vertices": 2002,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-03-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 472044
+        },
+        {
+          "name": "player-03-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-03-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-03-kit-b-lod0.glb",
+      "bytes": 706668,
+      "MB": 0.706668,
+      "sha256": "161dc988151abc7b6f4944d778ceb512dbdd682dfe34dc25a938a3c771da5228",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7183,
+      "vertices": 4555,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-03-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 471951
+        },
+        {
+          "name": "player-03-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-03-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-03-kit-b-lod1.glb",
+      "bytes": 649536,
+      "MB": 0.649536,
+      "sha256": "43b10b52d4f758b0583360bc6b3d0410911ece07f5b1e440d681bb5bb3d71216",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2707,
+      "vertices": 2002,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-03-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 471951
+        },
+        {
+          "name": "player-03-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-03-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-04-kit-a-lod0.glb",
+      "bytes": 715568,
+      "MB": 0.715568,
+      "sha256": "b6046021dadc745eb1dadf73d621168f3afd57ac83d73ca56e229f9e07bc0a6a",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7166,
+      "vertices": 4567,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-04-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 480388
+        },
+        {
+          "name": "player-04-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-04-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-04-kit-a-lod1.glb",
+      "bytes": 658388,
+      "MB": 0.658388,
+      "sha256": "70b08819e757a003ffb5566b9f1a78afc19960362671f614324205a69e58fe14",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2692,
+      "vertices": 1999,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-04-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 480388
+        },
+        {
+          "name": "player-04-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-04-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-04-kit-b-lod0.glb",
+      "bytes": 715576,
+      "MB": 0.715576,
+      "sha256": "1f50db2761bd7a62a4799e05b2aa6db6432ff02883ac84fa9434a7696fe0d021",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7166,
+      "vertices": 4567,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-04-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 480400
+        },
+        {
+          "name": "player-04-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-04-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-04-kit-b-lod1.glb",
+      "bytes": 658396,
+      "MB": 0.658396,
+      "sha256": "fa1e9c6f89648c86f33710de220f6a48d503da5d94fd23d42805be6acf903643",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2692,
+      "vertices": 1999,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-04-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 480400
+        },
+        {
+          "name": "player-04-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-04-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-05-kit-a-lod0.glb",
+      "bytes": 723344,
+      "MB": 0.723344,
+      "sha256": "34a5c2f0cd48d56d8eaa33b91c71ea51c4b035c778441836106fd6875f58c18f",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7177,
+      "vertices": 5154,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-05-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 473671
+        },
+        {
+          "name": "player-05-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-05-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-05-kit-a-lod1.glb",
+      "bytes": 659884,
+      "MB": 0.659884,
+      "sha256": "94a5083ae132302ca93e95a19e072e597dd6143c4c715ce41e414a077e01f9af",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2713,
+      "vertices": 2325,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-05-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 473671
+        },
+        {
+          "name": "player-05-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-05-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-05-kit-b-lod0.glb",
+      "bytes": 723256,
+      "MB": 0.723256,
+      "sha256": "adedec77b65b3ddbf121f35bdb99e8b14ae6fda8f2bdf32c35cc11c7546c9124",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7177,
+      "vertices": 5154,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-05-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 473579
+        },
+        {
+          "name": "player-05-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-05-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-05-kit-b-lod1.glb",
+      "bytes": 659796,
+      "MB": 0.659796,
+      "sha256": "e6315a7500029430e33e5350120dce18d22bfc03198a05ef552c3781b12ca822",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2713,
+      "vertices": 2325,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-05-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 473579
+        },
+        {
+          "name": "player-05-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-05-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-06-kit-a-lod0.glb",
+      "bytes": 716616,
+      "MB": 0.716616,
+      "sha256": "ddfef220af756cb3976f20ce45353f1572c25f6374828ff36c6385f5bd973095",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7174,
+      "vertices": 4858,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-06-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 476411
+        },
+        {
+          "name": "player-06-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-06-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-06-kit-a-lod1.glb",
+      "bytes": 657628,
+      "MB": 0.657628,
+      "sha256": "b374a13baf36f7a8878248f7e37e0d45c28ee4690916d7d8b4dd70c7842dbbb1",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2697,
+      "vertices": 2158,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-06-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 476411
+        },
+        {
+          "name": "player-06-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-06-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-06-kit-b-lod0.glb",
+      "bytes": 716520,
+      "MB": 0.71652,
+      "sha256": "88ef690d7fb0e055bbc4aaa98f90e58230329f8b1f838d9c4c11191419f11e9d",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7174,
+      "vertices": 4858,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-06-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 476318
+        },
+        {
+          "name": "player-06-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-06-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/player-06-kit-b-lod1.glb",
+      "bytes": 657532,
+      "MB": 0.657532,
+      "sha256": "d09995ebb4f8e1ae059b5333dfce0f5d26c6320ff76985ae0d6b4de5d6aa56ea",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2697,
+      "vertices": 2158,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "player-06-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 476318
+        },
+        {
+          "name": "player-06-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "player-06-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/referee-lod0.glb",
+      "bytes": 787924,
+      "MB": 0.787924,
+      "sha256": "9224ff92d86503aa87066eea0a3548bf4d359f789b34dc8b40abb8cddaf6d24f",
+      "lod": 0,
+      "triangleBudget": 8000,
+      "triangles": 7175,
+      "vertices": 5157,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "referee-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 538328
+        },
+        {
+          "name": "referee-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "referee-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/referee-lod1.glb",
+      "bytes": 724276,
+      "MB": 0.724276,
+      "sha256": "fbf6308daf79aaf914dad21bc7c21bfa3cdaa38a3c030187030f6b7042dad7ee",
+      "lod": 1,
+      "triangleBudget": 3000,
+      "triangles": 2712,
+      "vertices": 2334,
+      "drawPrimitives": 1,
+      "textureCount": 3,
+      "textures": [
+        {
+          "name": "referee-basecolor",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 538328
+        },
+        {
+          "name": "referee-normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 125893
+        },
+        {
+          "name": "referee-orm",
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png",
+          "bytes": 4655
+        }
+      ],
+      "skins": [
+        {
+          "joints": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "inverseBindMatrixCount": 18
+        }
+      ],
+      "skeletonEvidence": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationErrorMeters": 0,
+          "restRotationErrorRadians": 0
+        }
+      ],
+      "draco": true,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 1,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "floorEnvelope": {
+    "sampleRateHz": 60,
+    "verificationRateHz": 120,
+    "clearancePadMeters": 0.002,
+    "models": 28,
+    "clips": 20,
+    "totalVertexFrames": 261206140,
+    "minimumRawYMeters": -0.06169,
+    "maximumRequiredLiftMeters": 0.06373,
+    "path": "motion/floor-clearance.json"
+  },
+  "errors": []
+}

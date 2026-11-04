@@ -1,0 +1,703 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical-human-skin-rig",
+  "units": "meters",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "rotationFormat": "quaternion-xyzw",
+  "rotationSpace": "parent-local",
+  "restPose": "arms down, legs straight, feet forward",
+  "canonicalSource": "../../motion/soccer.json",
+  "bones": [
+    {
+      "name": "Root",
+      "parent": null,
+      "restTranslationMeters": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "restTranslationMeters": [
+        0.0,
+        0.86,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        0.86,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -0.86,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        1.06,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -1.06,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "restTranslationMeters": [
+        0.0,
+        0.18,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        1.24,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -1.24,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        1.34,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -1.34,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "restTranslationMeters": [
+        0.0,
+        0.13,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.0,
+        1.4700000000000002,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.0,
+        -1.4700000000000002,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0.16,
+        0.06,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.16,
+        1.3,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.16,
+        -1.3,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "restTranslationMeters": [
+        0.0,
+        -0.27,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.16,
+        1.03,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.16,
+        -1.03,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "restTranslationMeters": [
+        0.0,
+        -0.24,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.16,
+        0.79,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.16,
+        -0.79,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        -0.16,
+        0.06,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.16,
+        1.3,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.16,
+        -1.3,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "restTranslationMeters": [
+        0.0,
+        -0.27,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.16,
+        1.03,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.16,
+        -1.03,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "restTranslationMeters": [
+        0.0,
+        -0.24,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.16,
+        0.79,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.16,
+        -0.79,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0.1,
+        0.0,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.1,
+        0.86,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.1,
+        -0.86,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "restTranslationMeters": [
+        0.0,
+        -0.41,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.1,
+        0.45,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.1,
+        -0.45,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "restTranslationMeters": [
+        0.0,
+        -0.37,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        0.1,
+        0.08000000000000002,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.1,
+        -0.08000000000000002,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.1,
+        0.86,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.1,
+        -0.86,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "restTranslationMeters": [
+        0.0,
+        -0.41,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.1,
+        0.45,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.1,
+        -0.45,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "restTranslationMeters": [
+        0.0,
+        -0.37,
+        0.0
+      ],
+      "restRotationQuaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "worldRestPositionMeters": [
+        -0.1,
+        0.08000000000000002,
+        0.0
+      ],
+      "inverseBindMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.1,
+        -0.08000000000000002,
+        -0.0,
+        1.0
+      ]
+    }
+  ],
+  "restHeightMeters": 1.76,
+  "skinWeights": "up to four influences per vertex, normalized",
+  "bindRotationsIdentity": true
+}
