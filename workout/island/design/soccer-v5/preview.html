@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'">
+  <meta name="theme-color" content="#112d3b">
+  <title>כדורגל · מהדורת ערב</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./preview.html" aria-label="חזרה לתצוגת הכדורגל">
+      <span class="brand-mark" aria-hidden="true">✳︎</span><span>האי שלי<span class="brand-sub">כדורגל · מהדורת ערב</span></span>
+    </a>
+    <span class="edition"><span class="live-dot"></span> מצויר, מלא אופי <span class="edition-no">05</span></span>
+  </header>
+  <main>
+    <section id="stage" aria-label="תצוגת תלת־ממד של השחקנים והאצטדיון">
+      <canvas id="canvas" tabindex="0" aria-label="גרירה לסיבוב, גלילה או צביטה לקירוב. כפתור איפוס המבט מחזיר למצלמה הראשית."></canvas>
+      <div class="scene-heading"><span class="eyebrow">נפגשים מתחת לזרקורים</span><h1>כל אחד.<br>והמשחק שלו.</h1><p id="scene-caption">שלושה מראות. אותה אהבה לכדור.</p></div>
+      <div class="team-picker" role="group" aria-label="צבעי המדים">
+        <button data-team="teal" aria-pressed="true"><i class="swatch teal"></i>טורקיז</button>
+        <button data-team="coral" aria-pressed="false"><i class="swatch coral"></i>קורל</button>
+        <button data-team="keeper" aria-pressed="false"><i class="swatch amber"></i>שוער</button>
+      </div>
+      <div id="loading" role="status">השחקנים בדרך למגרש…</div>
+      <div id="error" role="alert" hidden></div>
+      <button id="reset" class="reset" aria-label="איפוס מבט">↺</button>
+      <div class="stage-bottom"><span id="appearance">בלורית · תלתלים · שיער אסוף</span><span class="drag-hint">גרירה לסיבוב <span aria-hidden="true">↔</span></span></div>
+    </section>
+    <section class="review-controls" aria-label="בחירת תצוגה ותנועות">
+      <nav class="views" aria-label="זוויות תצוגה">
+        <button data-view="players" aria-pressed="true">השחקנים</button>
+        <button data-view="faces" aria-pressed="false">מקרוב</button>
+        <button data-view="roster" aria-pressed="false">כל הסגל</button>
+        <button data-view="stadium" aria-pressed="false">האצטדיון</button>
+      </nav>
+      <div class="motion-row">
+        <label class="clip-label" for="clip">תנועה
+          <select id="clip"><option value="run">ריצה</option><option value="sprint">ספרינט</option><option value="kick">בעיטה</option><option value="pass">מסירה</option><option value="slide">גלישה</option></select>
+        </label>
+        <button id="play" class="play" aria-label="ניגון תנועה" aria-pressed="false"><span id="play-icon" aria-hidden="true">▶︎</span><span id="play-label">ניגון</span></button>
+        <label class="timeline-label" for="timeline"><span class="sr-only">מיקום בתנועה</span><input id="timeline" type="range" min="0" max="1000" value="0" step="1"><output id="time">0.00 / 0.72</output></label>
+      </div>
+      <div class="detail-row">
+        <div class="looks" role="group" aria-label="מראה הפנים"><span class="group-label">מראה</span><button data-look="quiff" aria-pressed="true">בלורית</button><button data-look="curls" aria-pressed="false">תלתלים</button><button data-look="knot" aria-pressed="false">אסוף</button></div>
+        <div class="expressions" role="group" aria-label="הבעת פנים"><span class="group-label">הבעה</span><button data-expression="neutral" aria-pressed="true">רגוע</button><button data-expression="smile" aria-pressed="false">חיוך</button><button data-expression="focus" aria-pressed="false">ריכוז</button></div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>
