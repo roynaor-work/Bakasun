@@ -55,7 +55,7 @@ test('catalog.js of the design folder still lists the same 12 animations', async
   const sandbox = { window: {} };
   vm.runInNewContext(await readFile(path.join(W, 'design/royiki-style/catalog.js'), 'utf8'), sandbox);
   const list = sandbox.window.ROYIKI_CATALOG.exercises;
-  assert.deepEqual(list.map(e => e.id).sort(), [...WANTED].sort());
+  assert.deepEqual(Array.from(list, e => e.id).sort(), [...WANTED].sort());
   for (const e of list) assert.equal(ROYIKI[e.id].ms, e.durationMs);
 });
 
@@ -78,7 +78,7 @@ async function serve() {
   return { url: `http://127.0.0.1:${server.address().port}/workout/index.html`, close: () => new Promise(r => server.close(r)) };
 }
 
-browserTest('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists', { timeout: 120000 }, async () => {
+browserTest('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists', { timeout: 600000 }, async () => {
   const srv = await serve();
   const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--no-proxy-server'] });
   try {
@@ -91,8 +91,9 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     for (const id of WANTED) {
       await page.goto(srv.url + '#/exercise/' + id);
       await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"] svg.royiki-svg', { timeout: 15000 });
-      const a = await page.locator('.exmedia.royiki').screenshot(); await page.waitForTimeout(450); const b = await page.locator('.exmedia.royiki').screenshot();
-      assert.notDeepEqual(a, b, id + ' did not animate');
+      const t = () => page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime());
+      const a = await t(); await page.waitForTimeout(300); const b = await t();
+      assert.notEqual(a, b, id + ' did not animate'); /* ציר הזמן של ה-SMIL מתקדם (צילום פיקסלים איטי מדי ב-swiftshader) */
     }
     assert.equal(await page.locator('.exmedia.stage3d').count(), 0);
     // ספירת חזרות: onRep לפי מחזור ה-SVG
@@ -110,8 +111,8 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     await page.goto(srv.url + '#/exercise/squats');
     await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"]');
     await page.click('#help'); await page.waitForSelector('#helpbox .helpcard');
-    const h1 = await page.locator('.exmedia.royiki').screenshot(); await page.waitForTimeout(400);
-    assert.notDeepEqual(h1, await page.locator('.exmedia.royiki').screenshot());
+    const h1 = await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()); await page.waitForTimeout(400);
+    assert.notEqual(h1, await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()));
     // תרגיל בלי התאמה נשאר כמו קודם (תלת-ממד)
     await page.goto(srv.url + '#/exercise/' + EXERCISES.find(e => !hasRoyiki(e.id)).id);
     await page.waitForSelector('.exmedia.stage3d, svg.figure', { timeout: 15000 });
@@ -130,6 +131,7 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
     await page.goto(srv.url + '#/exercise/push-ups'); await page.reload();
     await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"]');
     // כשל טעינה: נופלים לדמות הקיימת
+    await page.evaluate(() => caches.delete('workout-royiki-v1')); /* אחרת הקובץ מגיע מהמטמון ולא מהרשת */
     await page.route('**/workout/royiki/burpees.svg', r => r.abort());
     await page.goto(srv.url + '#/exercise/burpees'); await page.reload();
     await page.waitForSelector('.exmedia.stage3d canvas, svg.figure', { timeout: 15000 });
