@@ -1,0 +1,49 @@
+{
+  "audits": 10,
+  "failedChecks": [
+    {
+      "name": "axe home 390x844",
+      "violations": 2
+    },
+    {
+      "name": "axe product 390x844",
+      "violations": 2
+    },
+    {
+      "name": "axe builder 390x844",
+      "violations": 3
+    },
+    {
+      "name": "axe index 390x844",
+      "violations": 1
+    },
+    {
+      "name": "axe home 844x390",
+      "violations": 2
+    },
+    {
+      "name": "axe product 844x390",
+      "violations": 2
+    },
+    {
+      "name": "axe builder 844x390",
+      "violations": 2
+    },
+    {
+      "name": "axe index 844x390",
+      "violations": 1
+    },
+    {
+      "name": "copy has usable outcome"
+    },
+    {
+      "name": "interaction missing files",
+      "missing": 33
+    }
+  ],
+  "ruleIds": [
+    "label-content-name-mismatch",
+    "region",
+    "aria-prohibited-attr"
+  ]
+}

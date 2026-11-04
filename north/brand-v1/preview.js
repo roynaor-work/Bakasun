@@ -1,0 +1,46 @@
+(() => {
+  'use strict';
+  const {$,$$,esc,price,icon,toast,copy}=window.NorthUI;
+  const D=window.NORTH,A=window.NORTH_ASSETS||[];
+  const colors=[['שחור חם','#15120f'],['שחור עמוק','#0e0c0a'],['זהב מאופק','#c8a45a'],['זהב בהיר','#e4cca0'],['שנהב','#f0e6d2'],['טקסט משני','#c1b4a2']];
+  $('#swatches').innerHTML=colors.map(([name,hex])=>`<div class="swatch"><span class="swatch-color" style="background:${hex}" aria-hidden="true"></span><span><strong>${name}</strong><code>${hex.toUpperCase()}</code></span><button class="icon-btn" data-copy-color="${hex}" aria-label="העתקת צבע ${name}">${icon('copy')}</button></div>`).join('');
+  const names={birthday:'יום הולדת',holiday:'חג',thanks:'תודה',work:'לעבודה',couple:'לזוג',host:'מארחים',box:'מארז',bottle:'משקה',gift:'מתנה',personal:'אישי'};
+  $('#icon-specimens').innerHTML=Object.entries(names).map(([id,name])=>`<div class="icon-specimen"><a href="icons/${id}.svg" download aria-label="הורדת אייקון ${name}"><img src="icons/${id}.svg" width="27" height="27" alt=""><span>${name} <span aria-hidden="true">↓</span></span></a></div>`).join('');
+  $('#photo-product').insertAdjacentHTML('beforeend',D.products.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join(''));
+  $('#photo-role').insertAdjacentHTML('beforeend',D.roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join(''));
+  const photos=A.filter(a=>a.kind==='product').sort((a,b)=>D.products.findIndex(p=>p.id===a.productId)-D.products.findIndex(p=>p.id===b.productId)||D.roles.findIndex(r=>r.id===a.role)-D.roles.findIndex(r=>r.id===b.role)),banners=A.filter(a=>a.kind==='banner'),mockups=A.filter(a=>a.kind==='mockup');
+  const mockupNames={'bag-mockup.webp':'שקית מתנה','wrapping-mockup.webp':'נייר עטיפה','sticker-mockup.webp':'מדבקת סגירה','greeting-mockup.webp':'כרטיס ברכה'};
+  const dimensions=(w,h)=>'\u2066'+w+'×'+h+'\u2069';
+  let filtered=photos,selection=0,currentAsset=null,modalList=photos;
+  const label=a=>a.kind==='mockup'?mockupNames[a.file]:a.kind==='banner'?(names[a.occasion]||a.occasion):(D.products.find(p=>p.id===a.productId)?.name||a.productId)+' · '+(D.roles.find(r=>r.id===a.role)?.name||a.role);
+  const src=a=>(a.kind==='mockup'?'assets/':'../img/v4/')+a.file;
+  const thumb=a=>a.kind==='banner'?src(a):'../img/v4/thumbs/'+a.file;
+  function renderPhotos(){
+    const product=$('#photo-product').value,role=$('#photo-role').value,search=$('#photo-search').value.trim();
+    filtered=photos.filter(a=>(product==='all'||a.productId===product)&&(role==='all'||a.role===role)&&(!search||(label(a)+' '+a.file).includes(search)));
+    $('#photo-count').textContent=`מוצגות ${filtered.length} מתוך ${photos.length} תמונות מוצר · ${dimensions(800,1000)} · WebP עד 200KB`;
+    $('#photo-grid').innerHTML=filtered.length?filtered.map((a,i)=>`<article class="photo-card"><button class="photo-open" data-open-asset="${i}" aria-label="הגדלת ${esc(label(a))}"><img src="${thumb(a)}" width="320" height="400" alt="${esc(label(a))}, הדמיית צילום" loading="lazy" decoding="async"><span class="role">${D.roles.find(r=>r.id===a.role)?.name||''}</span></button><div class="photo-card-body"><h3>${esc(D.products.find(p=>p.id===a.productId)?.name)}</h3><p>${(a.bytes/1000).toFixed(1)}KB · ${dimensions(a.width,a.height)}</p><div class="photo-card-actions"><button data-copy-path="north/img/v4/${a.file}" aria-label="העתקת נתיב ${esc(label(a))}">העתקת נתיב</button><a href="${src(a)}" download aria-label="WebP להורדה — ${esc(label(a))}">WebP <span aria-hidden="true">↓</span></a></div></div></article>`).join(''):'<div class="no-results"><p>לא נמצאו תמונות לסינון הזה.</p><button class="btn secondary" data-reset-photos>ניקוי הסינון והחיפוש</button></div>';
+  }
+  ['#photo-product','#photo-role'].forEach(s=>$(s).addEventListener('change',renderPhotos));$('#photo-search').addEventListener('input',renderPhotos);renderPhotos();
+  $('#banner-grid').innerHTML=banners.map((a,i)=>`<article class="banner-card"><button data-open-banner="${i}"><img src="${src(a)}" width="1024" height="384" alt="באנר ${names[a.occasion]}, הדמיית צילום" loading="lazy"><span class="banner-caption"><span>${names[a.occasion]}</span><small>${(a.bytes/1000).toFixed(1)}KB · ${dimensions(1024,384)} ↗</small></span></button></article>`).join('');
+  function openAsset(list,i){modalList=list;selection=i;currentAsset=list[i];if(!currentAsset)return;updateAsset();$('#asset-dialog').showModal();}
+  function updateAsset(){const a=currentAsset;$('#asset-title').textContent=label(a);$('#asset-image').src=src(a);$('#asset-image').alt=label(a)+' — הדמיית צילום';$('#asset-caption').textContent=a.kind==='mockup'?'הדמיית חומר וגימור מוצעים; קובץ SVG הוא מקור הגרפיקה.':a.role==='scale'?'קנה מידה חזותי בלבד; מידות האריזה טרם נמדדו.':a.role==='packaging'?'הצעת אריזה להמחשה, לפני אישור חומר ומידה.':`${dimensions(a.width,a.height)} · ${(a.bytes/1000).toFixed(1)}KB · ללא מותג קריא`;
+    $('#asset-download').href=src(a);$('#asset-download').download=a.file;$('#asset-image-wrap').classList.remove('native');$('#asset-native').setAttribute('aria-pressed','false');
+  }
+  function move(delta){selection=(selection+delta+modalList.length)%modalList.length;currentAsset=modalList[selection];updateAsset();}
+  $('#asset-prev').addEventListener('click',()=>move(-1));$('#asset-next').addEventListener('click',()=>move(1));$('#asset-copy').addEventListener('click',()=>copy((currentAsset.kind==='mockup'?'north/brand-v1/assets/':'north/img/v4/')+currentAsset.file));$('#asset-native').addEventListener('click',e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';e.currentTarget.setAttribute('aria-pressed',String(on));$('#asset-image-wrap').classList.toggle('native',on);});
+  $('#asset-dialog').addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();move(-1);}if(e.key==='ArrowLeft'){e.preventDefault();move(1);}});
+  document.addEventListener('click',e=>{const c=e.target.closest('[data-copy-color]'),p=e.target.closest('[data-copy-path]'),a=e.target.closest('[data-open-asset]'),b=e.target.closest('[data-open-banner]'),l=e.target.closest('[data-logo-bg]');const m=e.target.closest('[data-open-mockup]'),reset=e.target.closest('[data-reset-photos]');if(reset){$('#photo-product').value='all';$('#photo-role').value='all';$('#photo-search').value='';renderPhotos();$('#photo-search').focus();}if(m)openAsset(mockups,mockups.findIndex(a=>a.file===m.dataset.openMockup+'.webp'));if(c)copy(c.dataset.copyColor);if(p)copy(p.dataset.copyPath);if(a)openAsset(filtered,+a.dataset.openAsset);if(b)openAsset(banners,+b.dataset.openBanner);if(l){$('#logo-stage').classList.toggle('light',l.dataset.logoBg==='light');$$('[data-logo-bg]').forEach(el=>el.setAttribute('aria-pressed',String(el===l)));}});
+  let framePage='home',orientation='portrait';
+  const pageNames={home:'דף הבית',product:'דף מוצר',builder:'בונה מארז'};
+  function resizeFrame(){const [w,h]=orientation==='portrait'?[390,844]:[844,390];const box=$('#frame-sizing'),frame=$('#site-frame'),available=$('.frame-stage').clientWidth-28,scale=Math.min(1,available/w);frame.style.width=w+'px';frame.style.height=h+'px';frame.style.transform=`scale(${scale})`;box.style.width=w*scale+'px';box.style.height=h*scale+'px';}
+  new ResizeObserver(resizeFrame).observe($('.frame-stage'));
+  $$('[data-preview-page]').forEach(b=>b.addEventListener('click',()=>{framePage=b.dataset.previewPage;$$('[data-preview-page]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('#site-frame').src=framePage+'.html';$('#site-frame').title='תצוגה אינטראקטיבית של '+pageNames[framePage];$('#frame-open').href=framePage+'.html';}));
+  $$('[data-frame-size]').forEach(b=>b.addEventListener('click',()=>{orientation=b.dataset.frameSize;$$('[data-frame-size]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));resizeFrame();}));resizeFrame();
+  const rounds=[['בסיס והיררכיה','צילום ראשי, שלושה דפים וקריאות בטלפון'],['זוויות ותכולה','גלריות, ספירת פריטים ומשקל טעינה'],['חומרים ואריזה','מדבקה, נייר ושקית, אחידות האור'],['מצבי קצה','סינון, מקלדת, בונה וגלריות'],['רוחב וביצועים','מצב לרוחב, טעינה מקומית וניגודיות'],['דיוק ושימושיות','ברכה ארוכה, כוכב אחיד וביקורת תכולה'],['מסירה וביקורת חוזרת','צילום מתוקן, תיעוד ותקציב סופי'],['קבלה סופית','גלילה נגישה, מגע ומסירת הקבצים'],['דיוק גרסאות ומסירה','הפרדה בין תכולת בסיס לגרסה שנבחרה']];
+  const W=window.NORTH_WEIGHTS||{};
+  const completed=W.completedRounds||[];
+  $('#process-cards').innerHTML=rounds.map(([name,desc],i)=>{const nn=String(i+1).padStart(2,'0'),done=completed.includes(nn);return `<${done?'a':'div'} class="process-card" ${done?`href="iterations/${nn}/CRITIQUE.md"`:''}><span class="round">${nn}</span><h3>${name}</h3><p>${done?desc:'מתוכנן · טרם הושלם'}</p></${done?'a':'div'}>`;}).join('');
+  $('#metrics').innerHTML=[[photos.length,'תמונות מוצר'],[banners.length,'באנרים רחבים'],[completed.length,'סבבי בדיקה שהושלמו'],['0','בקשות חיצוניות בתצוגה']].map(([n,t])=>`<div class="metric"><strong>${n}</strong><span>${t}</span></div>`).join('');
+  $('#weights-table').innerHTML=(W.files||[]).slice().sort((a,b)=>b.bytes-a.bytes).slice(0,8).map(f=>`<tr><td><code dir="ltr">${esc(f.file)}</code></td><td dir="ltr">${(f.bytes/1000000).toFixed(3)}</td><td>0</td><td>0 · תמונה דו־ממדית</td></tr>`).join('');
+})();

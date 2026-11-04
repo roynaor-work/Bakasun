@@ -1,0 +1,43 @@
+{
+  "createdAt": "2026-11-04T23:05:50.656Z",
+  "method": "The harness deliberately denies both Clipboard API and execCommand. The real clipboard is not touched; application code and browser policy are unchanged.",
+  "checks": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "open": true,
+      "value": "#15120f",
+      "readonly": true,
+      "label": "טקסט להעתקה ידנית",
+      "selected": true,
+      "fits": true,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "name": "fallback Escape restores copy control 390",
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "open": true,
+      "value": "#15120f",
+      "readonly": true,
+      "label": "טקסט להעתקה ידנית",
+      "selected": true,
+      "fits": true,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "name": "fallback Escape restores copy control 844",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

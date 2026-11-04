@@ -1,0 +1,550 @@
+{
+  "products": [
+    {
+      "id": "single-malt",
+      "cat": "whisky",
+      "occ": [
+        "thanks",
+        "holiday",
+        "work"
+      ],
+      "name": "הסינגל מאלט",
+      "sub": "וויסקי סקוטי, שתי כוסות, קופסת עץ",
+      "price": 349,
+      "contents": [
+        "בקבוק סינגל מאלט 700 מ\"ל (בחירה מהמדף לפי תקציב)",
+        "זוג כוסות וויסקי בעיצוב כבד",
+        "קופסת עץ עם מכסה ומילוי קש",
+        "כרטיס ברכה בכתב יד"
+      ],
+      "variants": [
+        {
+          "id": "std",
+          "name": "סינגל מאלט 10-12 שנה",
+          "price": 349
+        },
+        {
+          "id": "up",
+          "name": "סינגל מאלט 15-18 שנה",
+          "price": 549
+        }
+      ]
+    },
+    {
+      "id": "flask",
+      "cat": "whisky",
+      "occ": [
+        "birthday",
+        "thanks",
+        "work"
+      ],
+      "name": "הפלאסק",
+      "sub": "פלאסק נירוסטה עם חריטה, בורבון ומשפך",
+      "price": 189,
+      "contents": [
+        "פלאסק נירוסטה 8 אונקיות",
+        "חריטה אישית (עד 20 תווים)",
+        "בורבון או וויסקי 200 מ\"ל",
+        "משפך נירוסטה",
+        "קופסת מתנה שחורה"
+      ],
+      "personalize": {
+        "label": "טקסט לחריטה",
+        "max": 20
+      }
+    },
+    {
+      "id": "shaker",
+      "cat": "cocktail",
+      "occ": [
+        "birthday",
+        "couple",
+        "host"
+      ],
+      "name": "שייקר וג׳ין",
+      "sub": "שייקר בוסטון, ג׳יגר, ג׳ין וארבע טוניק",
+      "price": 289,
+      "contents": [
+        "שייקר בוסטון נירוסטה",
+        "ג׳יגר כפול",
+        "כפית בר",
+        "בקבוק ג׳ין 700 מ\"ל",
+        "4 בקבוקי טוניק פרימיום",
+        "כרטיס 3 מתכונים"
+      ],
+      "variants": [
+        {
+          "id": "gin",
+          "name": "עם ג׳ין",
+          "price": 289
+        },
+        {
+          "id": "vodka",
+          "name": "עם וודקה",
+          "price": 269
+        },
+        {
+          "id": "rum",
+          "name": "עם רום",
+          "price": 279
+        }
+      ]
+    },
+    {
+      "id": "old-fashioned",
+      "cat": "cocktail",
+      "occ": [
+        "thanks",
+        "work",
+        "birthday"
+      ],
+      "name": "אולד פאשן",
+      "sub": "בורבון, ביטרס, סוכר ושתי כוסות רוקס",
+      "price": 329,
+      "contents": [
+        "בקבוק בורבון 700 מ\"ל",
+        "ביטרס תפוז",
+        "קוביות סוכר חום",
+        "תבנית קרח לקוביות גדולות",
+        "זוג כוסות רוקס",
+        "קופסת עץ"
+      ]
+    },
+    {
+      "id": "birthday",
+      "cat": "gift",
+      "occ": [
+        "birthday",
+        "couple"
+      ],
+      "name": "יום הולדת שמח",
+      "sub": "מבעבע, פרלינים, נר ריחני וכרטיס",
+      "price": 199,
+      "contents": [
+        "מבעבע 750 מ\"ל (פרוסקו או קאווה)",
+        "קופסת פרלינים 12 יח׳",
+        "נר סויה ריחני",
+        "כרטיס ברכה בכתב יד",
+        "קופסת מתנה עם סרט"
+      ],
+      "variants": [
+        {
+          "id": "prosecco",
+          "name": "פרוסקו",
+          "price": 199
+        },
+        {
+          "id": "champ",
+          "name": "שמפניה",
+          "price": 399
+        }
+      ],
+      "kosher": false,
+      "kosherNote": "הפרלינים ללא הכשר"
+    },
+    {
+      "id": "spa",
+      "cat": "spa",
+      "occ": [
+        "couple",
+        "thanks",
+        "birthday"
+      ],
+      "name": "ערב של פינוק",
+      "sub": "נר, סבון טבעי, שמפו, מפיץ ריח ורוזה",
+      "price": 249,
+      "contents": [
+        "נר סויה ריחני",
+        "סבון טבעי בעבודת יד",
+        "שמפו טבעי 250 מ\"ל",
+        "מפיץ ריח עם מקלות",
+        "בקבוק רוזה 750 מ\"ל",
+        "קופסת מתנה"
+      ]
+    },
+    {
+      "id": "honey",
+      "cat": "sweet",
+      "occ": [
+        "holiday",
+        "host",
+        "thanks"
+      ],
+      "name": "מהצפון בדבש",
+      "sub": "דבש גלילי, חטיפים, שוקולד ויין אדום",
+      "price": 219,
+      "contents": [
+        "דבש גלילי 350 גר׳",
+        "חטיפי אגוזים ופירות יבשים",
+        "טבלת שוקולד מריר 70%",
+        "יין אדום גלילי 750 מ\"ל",
+        "סלסלת קש"
+      ]
+    },
+    {
+      "id": "wine-cheese",
+      "cat": "wine",
+      "occ": [
+        "host",
+        "couple",
+        "holiday"
+      ],
+      "name": "יין וגבינות",
+      "sub": "שני יינות, קרקרים, ריבה, זיתים וקרש הגשה",
+      "price": 299,
+      "contents": [
+        "יין אדום 750 מ\"ל",
+        "יין לבן 750 מ\"ל",
+        "קרקרים לגבינות",
+        "ריבת תאנים או משמש",
+        "זיתים",
+        "קרש הגשה מעץ"
+      ],
+      "kosher": false,
+      "kosherNote": "הגבינות והריבה המיובאות ללא הכשר"
+    },
+    {
+      "id": "gin-tonic",
+      "cat": "cocktail",
+      "occ": [
+        "birthday",
+        "couple",
+        "host"
+      ],
+      "name": "ג׳ין וטוניק",
+      "sub": "ג׳ין, ארבע טוניק, שתי כוסות קופה ותבלינים",
+      "price": 279,
+      "contents": [
+        "בקבוק ג׳ין 700 מ\"ל",
+        "4 בקבוקי טוניק",
+        "זוג כוסות קופה",
+        "ערכת תבלינים לג׳ין",
+        "קופסת מתנה"
+      ]
+    },
+    {
+      "id": "irish",
+      "cat": "whisky",
+      "occ": [
+        "thanks",
+        "work"
+      ],
+      "name": "אירי אמיתי",
+      "sub": "וויסקי אירי, ליקר קרם ושתי כוסות",
+      "price": 259,
+      "contents": [
+        "וויסקי אירי 700 מ\"ל",
+        "ליקר קרם אירי 700 מ\"ל",
+        "זוג כוסות",
+        "קופסת מתנה שחורה"
+      ]
+    },
+    {
+      "id": "home-bar",
+      "cat": "cocktail",
+      "occ": [
+        "host",
+        "work",
+        "birthday"
+      ],
+      "name": "הבר הביתי",
+      "sub": "וויסקי, ג׳ין, וודקה, ג׳יגר וספר קוקטיילים",
+      "price": 549,
+      "contents": [
+        "וויסקי 700 מ\"ל",
+        "ג׳ין 700 מ\"ל",
+        "וודקה 700 מ\"ל",
+        "ג׳יגר נירוסטה",
+        "ספר קוקטיילים",
+        "ארגז עץ גדול"
+      ]
+    },
+    {
+      "id": "choc-wine",
+      "cat": "sweet",
+      "occ": [
+        "couple",
+        "birthday",
+        "thanks"
+      ],
+      "name": "שוקולד ויין",
+      "sub": "פרלינים, יין קינוח ושתי כוסות",
+      "price": 179,
+      "contents": [
+        "קופסת פרלינים 16 יח׳",
+        "יין קינוח או פורט 500 מ\"ל",
+        "זוג כוסות קינוח",
+        "קופסת מתנה עם סרט"
+      ],
+      "kosher": false,
+      "kosherNote": "הפרלינים הבלגיים ללא הכשר"
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "name": "הכול"
+    },
+    {
+      "id": "whisky",
+      "name": "וויסקי"
+    },
+    {
+      "id": "cocktail",
+      "name": "קוקטיילים"
+    },
+    {
+      "id": "wine",
+      "name": "יין ומבעבעים"
+    },
+    {
+      "id": "spa",
+      "name": "פינוק וספא"
+    },
+    {
+      "id": "sweet",
+      "name": "מתוק וגורמה"
+    },
+    {
+      "id": "gift",
+      "name": "ימי הולדת"
+    },
+    {
+      "id": "engrave",
+      "name": "עם חריטה"
+    }
+  ],
+  "occasions": [
+    {
+      "id": "birthday",
+      "name": "יום הולדת",
+      "icon": "cake"
+    },
+    {
+      "id": "thanks",
+      "name": "תודה",
+      "icon": "heart"
+    },
+    {
+      "id": "holiday",
+      "name": "חג",
+      "icon": "sparkling"
+    },
+    {
+      "id": "couple",
+      "name": "לזוג",
+      "icon": "cheers"
+    },
+    {
+      "id": "host",
+      "name": "למארחים",
+      "icon": "home"
+    },
+    {
+      "id": "work",
+      "name": "לעבודה",
+      "icon": "briefcase"
+    }
+  ],
+  "build": {
+    "bases": [
+      {
+        "id": "b-malt",
+        "name": "סינגל מאלט",
+        "price": 220,
+        "icon": "rocks"
+      },
+      {
+        "id": "b-bourb",
+        "name": "בורבון",
+        "price": 150,
+        "icon": "rocks"
+      },
+      {
+        "id": "b-gin",
+        "name": "ג׳ין פרימיום",
+        "price": 140,
+        "icon": "bottle"
+      },
+      {
+        "id": "b-vodka",
+        "name": "וודקה פרימיום",
+        "price": 130,
+        "icon": "bottle"
+      },
+      {
+        "id": "b-red",
+        "name": "יין אדום גלילי",
+        "price": 90,
+        "icon": "wine"
+      },
+      {
+        "id": "b-white",
+        "name": "יין לבן",
+        "price": 85,
+        "icon": "wine"
+      },
+      {
+        "id": "b-bubbly",
+        "name": "מבעבע",
+        "price": 80,
+        "icon": "sparkling"
+      },
+      {
+        "id": "b-liq",
+        "name": "ליקר",
+        "price": 110,
+        "icon": "liqueur"
+      }
+    ],
+    "addons": [
+      {
+        "id": "a-rocks",
+        "name": "זוג כוסות רוקס",
+        "price": 60,
+        "icon": "rocks",
+        "img": "assets/builder/a-rocks.webp"
+      },
+      {
+        "id": "a-flask",
+        "name": "פלאסק נירוסטה חרוט",
+        "price": 90,
+        "icon": "flask",
+        "img": "assets/builder/a-flask.webp"
+      },
+      {
+        "id": "a-shaker",
+        "name": "שייקר בוסטון",
+        "price": 70,
+        "icon": "shaker",
+        "img": "assets/builder/a-shaker.webp"
+      },
+      {
+        "id": "a-jigger",
+        "name": "ג׳יגר וכפית בר",
+        "price": 45,
+        "icon": "jigger",
+        "img": "assets/builder/a-jigger.webp"
+      },
+      {
+        "id": "a-bitters",
+        "name": "ביטרס תפוז",
+        "price": 55,
+        "icon": "citrus",
+        "img": "assets/builder/a-bitters.webp"
+      },
+      {
+        "id": "a-tonic",
+        "name": "4 טוניק פרימיום",
+        "price": 40,
+        "icon": "bubbles",
+        "img": "assets/builder/a-tonic.webp"
+      },
+      {
+        "id": "a-choc",
+        "name": "פרלינים 12 יח׳",
+        "price": 45,
+        "icon": "chocolate",
+        "kosher": false,
+        "img": "assets/builder/a-choc.webp"
+      },
+      {
+        "id": "a-honey",
+        "name": "דבש גלילי",
+        "price": 38,
+        "icon": "honey",
+        "img": "assets/builder/a-honey.webp"
+      },
+      {
+        "id": "a-snacks",
+        "name": "חטיפי אגוזים",
+        "price": 30,
+        "icon": "nuts",
+        "img": "assets/builder/a-snacks.webp"
+      },
+      {
+        "id": "a-candle",
+        "name": "נר סויה ריחני",
+        "price": 40,
+        "icon": "candle",
+        "img": "assets/builder/a-candle.webp"
+      },
+      {
+        "id": "a-soap",
+        "name": "סבון טבעי",
+        "price": 25,
+        "icon": "soap",
+        "img": "assets/builder/a-soap.webp"
+      },
+      {
+        "id": "a-diff",
+        "name": "מפיץ ריח",
+        "price": 55,
+        "icon": "leaf",
+        "img": "assets/builder/a-diff.webp"
+      },
+      {
+        "id": "a-book",
+        "name": "ספר קוקטיילים",
+        "price": 80,
+        "icon": "book",
+        "img": "assets/builder/a-book.webp"
+      }
+    ],
+    "packs": [
+      {
+        "id": "p-bag",
+        "name": "שקית מתנה וסרט",
+        "price": 0,
+        "icon": "bag",
+        "img": "assets/builder/p-bag.webp"
+      },
+      {
+        "id": "p-black",
+        "name": "קופסת מתנה שחורה",
+        "price": 30,
+        "icon": "box",
+        "img": "assets/builder/p-black.webp"
+      },
+      {
+        "id": "p-wood",
+        "name": "קופסת עץ עם קש",
+        "price": 60,
+        "icon": "crate",
+        "img": "assets/builder/p-wood.webp"
+      }
+    ],
+    "maxAddons": 5
+  },
+  "roles": [
+    {
+      "id": "product",
+      "name": "ראשית"
+    },
+    {
+      "id": "mood",
+      "name": "אווירה"
+    },
+    {
+      "id": "inside",
+      "name": "מבפנים"
+    },
+    {
+      "id": "packaging",
+      "name": "אריזה"
+    },
+    {
+      "id": "use",
+      "name": "שימוש"
+    },
+    {
+      "id": "scale",
+      "name": "גודל"
+    }
+  ],
+  "source": {
+    "path": "north/js/products.js",
+    "sha256": "117a03c9ecac6138b68c44aa5d630d8dbfcf8547c7b635aab35a7f9391b11792",
+    "status": "מחירי הצעה מהקטלוג; הרכב ומחיר סופי דורשים אישור."
+  }
+}

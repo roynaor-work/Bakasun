@@ -1,0 +1,117 @@
+{
+  "started": "2026-11-04T22:29:21.237Z",
+  "checks": [
+    {
+      "name": "long greeting has no horizontal modal overflow 390",
+      "pass": true,
+      "boxes": [
+        {
+          "selector": "cart-dialog",
+          "width": 362,
+          "scrollWidth": 362,
+          "overflow": false
+        },
+        {
+          "selector": "cart-body",
+          "width": 362,
+          "scrollWidth": 362,
+          "overflow": false
+        },
+        {
+          "selector": "cart-item",
+          "width": 322,
+          "scrollWidth": 322,
+          "overflow": false
+        },
+        {
+          "selector": "",
+          "width": 188,
+          "scrollWidth": 188,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "long greeting has no horizontal modal overflow 844",
+      "pass": true,
+      "boxes": [
+        {
+          "selector": "cart-dialog",
+          "width": 440,
+          "scrollWidth": 440,
+          "overflow": false
+        },
+        {
+          "selector": "cart-body",
+          "width": 440,
+          "scrollWidth": 440,
+          "overflow": false
+        },
+        {
+          "selector": "cart-item",
+          "width": 400,
+          "scrollWidth": 400,
+          "overflow": false
+        },
+        {
+          "selector": "",
+          "width": 266,
+          "scrollWidth": 266,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "menu expanded",
+      "pass": true
+    },
+    {
+      "name": "menu closes at desktop breakpoint",
+      "pass": true
+    },
+    {
+      "name": "empty gallery state is visible",
+      "pass": true
+    },
+    {
+      "name": "empty gallery has clear control",
+      "pass": true
+    },
+    {
+      "name": "empty state reset restores all 72",
+      "pass": true
+    },
+    {
+      "name": "reset restores search focus",
+      "pass": true
+    },
+    {
+      "name": "mockup sticker opens local full image",
+      "pass": true
+    },
+    {
+      "name": "mockup greeting opens local full image",
+      "pass": true
+    },
+    {
+      "name": "mockup bag opens local full image",
+      "pass": true
+    },
+    {
+      "name": "mockup wrapping opens local full image",
+      "pass": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "stress-cart-390x844.webp",
+      "bytes": 20468
+    },
+    {
+      "file": "stress-cart-844x390.webp",
+      "bytes": 18548
+    }
+  ],
+  "finished": "2026-11-04T22:29:30.447Z",
+  "passed": true
+}
