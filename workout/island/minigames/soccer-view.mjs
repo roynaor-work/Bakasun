@@ -5,7 +5,7 @@ import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261104-1
 import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261104-1';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {loadDesignCharacters,soccerDesignCharacterError} from './soccer-design-character.mjs';
+import {loadDesignCharacters,soccerDesignCharacterError,soccerV5FallbackReason} from './soccer-design-character.mjs';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {createSoccerDesignScene} from './soccer-design-scene.mjs';
@@ -128,7 +128,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     if(data.design){
       designCharacters=data.design;
       if(disposed){designCharacters.dispose();return;}
-      characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;loadReport.characters='design-glb-v2';
+      characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;loadReport.characters='design-glb-v2';loadReport.characterSet=designCharacters.metrics.characterSet;loadReport.v5Fallback=soccerV5FallbackReason();
       if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(quality>=3?2:1);
       warm();assetStatus='ready';onAsset('ready');return;
     }

@@ -5,6 +5,7 @@ import {loadSoccerRestartMotion} from './soccer-athlete-motion.mjs';
 import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
 import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
+import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -275,13 +276,56 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
-let designSources=null,lastDesignError=null;
+let designSources=null,lastDesignError=null,lastV5Error=null;
 /** Why the authored characters last failed to prepare (for the load report). */
 export function soccerDesignCharacterError(){return lastDesignError;}
-/** Decode, retarget, floor-bake and LOD the two authored characters once per
+/** Why the v5 set was skipped in favour of v4 (null when v5 loaded or was not asked for). */
+export function soccerV5FallbackReason(){return lastV5Error;}
+const fetchJson=url=>retrying(async()=>{const response=await fetch(url);if(!response.ok)throw Error(`HTTP ${response.status}`);return response.json();},`Soccer asset ${url}`);
+/** Shared CPU pipeline for both character sets: retarget the motion library,
+ * validate the bind pose, bake the floor, label recolour regions and build LODs. */
+function finishSources({scenes,rig,map,data,assign,set,outfield,keeper}){
+  globalThis.performance?.mark?.('soccer:prepare-cpu-start');
+  const active=new Set([...ACTIVE_CLIPS,...Object.keys(data.slideSequences||{})]);
+  const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map);
+  for(const source of scenes)validateBind(source,rig);
+  const clipSets=scenes.map(source=>bakeSoccerDesignFloor(source,compiled));
+  const sourceHeights=scenes.map(source=>{
+    source.updateMatrixWorld(true);source.traverse(o=>{if(o.isSkinnedMesh){o.skeleton.update();o.computeBoundingBox();}});
+    const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;
+  });
+  const lodGeometry=new Map();
+  scenes.forEach((source,sourceIndex)=>source.traverse(o=>{
+    if(!o.isMesh)return;
+    assign(o.geometry,sourceIndex);
+    // Keep the medium mesh; a separate 28-cell mobile mesh offsets the larger
+    // squad. Both retain source colour/skin boundaries and the same height.
+    lodGeometry.set(o.geometry,[createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40),createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/28)]);
+  }));
+  globalThis.performance?.mark?.('soccer:prepare-cpu-end');
+  return {sources:scenes,clipSets,sourceHeights,lodGeometry,data,map,clips:compiled.map(c=>c.name),set,outfield,keeper};
+}
+async function prepareV4(loader){
+  const [player,keeper,rig,map,data,regionMap]=await Promise.all([
+    retrying(()=>loader.loadAsync(asset('characters2/soccer-player.glb')),'characters2/soccer-player.glb'),retrying(()=>loader.loadAsync(asset('characters2/goalkeeper.glb')),'characters2/goalkeeper.glb'),
+    json('characters/rig.json'),json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),json('characters2/regions.json'),
+  ]);
+  return finishSources({scenes:[player.scene,keeper.scene],rig,map,data,set:'v4',outfield:[0],keeper:1,
+    assign:(geometry,index)=>assignRegions(geometry,regionMap.models[index?'goalkeeper':'soccer-player'],regionMap)});
+}
+async function prepareV5(loader){
+  const files=[...SOCCER_V5_FILES.outfield,SOCCER_V5_FILES.keeper];
+  const [rig,map,data,...glbs]=await Promise.all([fetchJson(SOCCER_V5_RIG_URL),json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),
+    ...files.map(file=>retrying(()=>loader.loadAsync(soccerV5Url(file)),'soccer-v5/'+file))]);
+  return finishSources({scenes:glbs.map(g=>g.scene),rig,map:soccerV5Map(map),data,set:'v5',outfield:SOCCER_V5_FILES.outfield.map((_,i)=>i),keeper:files.length-1,
+    assign:(geometry,index)=>assignSoccerV5Regions(geometry,SOCCER_V5_REGIONS[files[index]])});
+}
+/** Decode, retarget, floor-bake and LOD the authored characters once per
  * page. Every match clones rigs from these shared sources, so a reopened game
  * (or one opened after the soccer menu warmed the cache) skips the whole CPU
  * pipeline. The shared sources are never disposed; sessions own only their clones.
+ * The v5 cartoon set is tried first (see soccer-v5.mjs); if any of it fails the
+ * v4 set loads instead, silently for the player and recorded for the load report.
  * A failed preparation is forgotten so the next opening retries it. */
 export function prepareSoccerDesignSources(){
   if(designSources)return designSources;
@@ -289,29 +333,12 @@ export function prepareSoccerDesignSources(){
   designSources=(async()=>{
     try{
       globalThis.performance?.mark?.('soccer:prepare-fetch-start');
-      const [player,keeper,rig,map,data,regionMap]=await Promise.all([
-        retrying(()=>loader.loadAsync(asset('characters2/soccer-player.glb')),'characters2/soccer-player.glb'),retrying(()=>loader.loadAsync(asset('characters2/goalkeeper.glb')),'characters2/goalkeeper.glb'),
-        json('characters/rig.json'),json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),json('characters2/regions.json'),
-      ]);
-      globalThis.performance?.mark?.('soccer:prepare-cpu-start');
-      const active=new Set([...ACTIVE_CLIPS,...Object.keys(data.slideSequences||{})]);
-      const compiled=compileSoccerDesignClips({...data,states:Object.fromEntries(Object.entries(data.states).filter(([name])=>active.has(name)))},rig,map),sources=[player.scene,keeper.scene];
-      for(const source of sources)validateBind(source,rig);
-      const clipSets=sources.map(source=>bakeSoccerDesignFloor(source,compiled));
-      const sourceHeights=sources.map(source=>{
-        source.updateMatrixWorld(true);source.traverse(o=>{if(o.isSkinnedMesh){o.skeleton.update();o.computeBoundingBox();}});
-        const bounds=new T.Box3().setFromObject(source);return bounds.max.y-bounds.min.y;
-      });
-      const lodGeometry=new Map();
-      sources.forEach((source,sourceIndex)=>source.traverse(o=>{
-        if(!o.isMesh)return;
-        const spec=regionMap.models[sourceIndex?'goalkeeper':'soccer-player'];assignRegions(o.geometry,spec,regionMap);
-        // Keep the medium mesh; a separate 28-cell mobile mesh offsets the larger
-        // squad. Both retain source colour/skin boundaries and the same height.
-        lodGeometry.set(o.geometry,[createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/40),createSoccerCharacterLod(o.geometry,sourceHeights[sourceIndex]/28)]);
-      }));
-      globalThis.performance?.mark?.('soccer:prepare-cpu-end');
-      return {sources,clipSets,sourceHeights,lodGeometry,data,map,clips:compiled.map(c=>c.name)};
+      lastV5Error=null;
+      if(soccerCharacterSet()==='v5'){
+        try{return await prepareV5(loader);}
+        catch(error){lastV5Error=String(error?.message||error);}
+      }
+      return await prepareV4(loader);
     }catch(error){designSources=null;lastDesignError=String(error?.message||error);throw error;}
     finally{loader.dispose();}
   })();
@@ -328,12 +355,12 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
     for(const r of resources)r.dispose?.();resources.clear();
   };
   try {
-    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips}=await prepareSoccerDesignSources();
+    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource}=await prepareSoccerDesignSources();
     globalThis.performance?.mark?.('soccer:characters-instance-start');
     const height=config.view.animation.characterHeight||1.8;
     let triangles=0,lowTriangles=0,mobileTriangles=0;
     for(let id=0;id<roster.length;id++) {
-      const slot=roster[id],isKeeper=slot.role==='keeper',index=isKeeper?1:0,source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
+      const slot=roster[id],isKeeper=slot.role==='keeper',index=isKeeper?keeperSource:outfield[roster.slice(0,id).filter(other=>other.role!=='keeper').length%outfield.length],source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
       root.scale.setScalar(soccerMetreScale(sourceHeights[index],height));pivot.add(root);scene.add(pivot);
       const team=slot.team===0?config.team:config.opponent;
       const appearance=config.view.appearance||{},pick=(name,fallback)=>appearance[name]?.[id%(appearance[name]?.length||1)]||fallback;
@@ -363,12 +390,12 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           pivot.position.set(p.x,Math.max(0,animation.height||0),p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
-        metrics:()=>({kind:'design-glb-v2',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide}),
+        metrics:()=>({kind:'design-glb-v2',set,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide}),
         dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(root);root.traverse(o=>o.skeleton?.dispose());pivot.removeFromParent();},
       };
       mixer.update(0);characters.push(character);
     }
     globalThis.performance?.mark?.('soccer:characters-instance-end');
-    return {characters,metrics:{kind:'design-glb-v2',source:'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:3,independentSkeletons:true,clips:[...clips],retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
+    return {characters,metrics:{kind:'design-glb-v2',characterSet:set,source:set==='v5'?'assets/soccer-v5':'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:3,independentSkeletons:true,clips:[...clips],retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
   }catch(error){dispose();throw error;}
 }
