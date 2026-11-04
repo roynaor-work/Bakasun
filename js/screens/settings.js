@@ -24,6 +24,8 @@ export const noLive = true;
 const LANDINGS = ['today', 'dashboard', 'calendar', 'board', 'tasks'];
 const WIDGET_LABEL = { now: 'dbNow', events: 'dbOpenEvents', tasksOverdue: 'dbTasksOverdue', tasksToday: 'dbTasksToday', tasksWeek: 'dbTasksWeek', calls: 'dbCalls', money: 'dbUnpaid', quotes: 'dbQuotes', suppliers: 'dbSuppliers', leads: 'dbLeads', next14: 'dbNext14', moneyByEvent: 'dbMoneyByEvent' };
 import { applyPersonal } from '../personal.js';
+/* What she sees when the cloud fails: a Hebrew sentence for "no connection", the server's short reason otherwise (never the internal address). */
+const why = err => (err && (err.status === 0 || /network|failed to fetch/i.test(String(err.message || '')))) ? t('noConnection') : String((err && err.message) || '').replace(/^\/\S+\s*/, '').slice(0, 120);
 
 function personalSection(s) {
   const on = widgetsOn(s.dashWidgets);
@@ -137,18 +139,18 @@ export function render({ root }) {
   const cf = root.querySelector('#cf'); if (cf) cf.onsubmit = async e => {
     e.preventDefault(); const o = {}; new FormData(e.target).forEach((v, k) => { o[k] = String(v).trim(); });
     toast(t('syncing'));
-    try { await cloud.login(o.url, o.key, o.email, o.password); toast(t('synced')); render({ root }); } catch (err) { toast(t('syncError') + ' ' + (err.message || ''), 5000); }
+    try { await cloud.login(o.url, o.key, o.email, o.password); toast(t('synced')); render({ root }); } catch (err) { toast(t('syncError') + ' ' + why(err), 5000); }
   };
   const cl = root.querySelector('#cl'); if (cl) {
     cl.onsubmit = async e => {
       e.preventDefault(); const email = pickEmail(cl.querySelector('[name=email]').value, s.bizEmail || DEFAULTS.bizEmail);
-      try { await cloud.sendLink(CLOUD.url, CLOUD.key, email); toast(t('linkSent', { email }), 6000); } catch (err) { toast(t('syncError') + ' ' + (err.message || ''), 5000); }
+      try { await cloud.sendLink(CLOUD.url, CLOUD.key, email); toast(t('linkSent', { email }), 6000); } catch (err) { toast(t('syncError') + ' ' + why(err), 5000); }
     };
     cl.querySelector('#useLink').onclick = async () => {
       const link = parseMailLink(cl.querySelector('[name=link]').value) || parseUrlHash(cl.querySelector('[name=link]').value.trim());
       if (!link) { toast(t('noLinkFound'), 4000); return; }
       toast(t('syncing'));
-      try { await cloud.loginWithLink(CLOUD.url, CLOUD.key, link); toast(t('synced')); render({ root }); } catch (err) { toast((err.message === 'no-org' ? t('noOrg') : t('cloudLinkFailed')) + ' ' + (err.message || ''), 6000); }
+      try { await cloud.loginWithLink(CLOUD.url, CLOUD.key, link); toast(t('synced')); render({ root }); } catch (err) { toast((err.message === 'no-org' ? t('noOrg') : t('cloudLinkFailed')) + ' ' + why(err), 6000); }
     };
   }
   const lo = root.querySelector('#logout'); if (lo) lo.onclick = () => { if (cloud.status.queued && !confirm(t('cloudQueuedWarn', { n: cloud.status.queued }))) return; cloud.logout(); render({ root }); };

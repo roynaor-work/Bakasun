@@ -14,11 +14,11 @@ import { startHistory } from './logic/history.js'; startHistory();
 /* Only "today" (the usual landing) ships with the first load. Every other screen is a module fetched on demand:
    [loader, stylesheets it needs, extra modules that must be loaded with it]. Deep links, back and forward all go through route(). */
 const S = n => () => import('./screens/' + n + '.js');
-/* loaded one after the other, in this order: the order the modules register their tabs is the order of the tabs on the case */
+/* the modules that add tabs to the event card (their order on screen is fixed in js/caseTabs.js) */
 const CASE_TABS_LOAD = ['workgroup', 'calendar', 'participants', 'contracts', 'budget', 'runsheet', 'casefiles'];
 const CASE_TABS_CSS = ['participants', 'contracts', 'budget', 'runsheet', 'casefiles', 'calendar', 'templates'];
 const LAZY = {
-  lead: [S('lead')], cases: [S('cases'), CASE_TABS_CSS, CASE_TABS_LOAD], 'case': [S('cases'), CASE_TABS_CSS, CASE_TABS_LOAD],
+  lead: [S('lead')], cases: [S('cases')], 'case': [S('cases'), CASE_TABS_CSS, CASE_TABS_LOAD],
   clients: [S('clients')], client: [S('clients')], calls: [S('calls')], tasks: [S('tasks'), ['tasks2']],
   search: [S('search')], settings: [S('settings'), ['rules']], more: [S('more')],
   suppliers: [S('suppliers')], supplier: [S('suppliers')], quotes: [S('quotes')], quote: [S('quotes')],
@@ -132,7 +132,7 @@ async function loadScreen(name) {
   const spec = LAZY[name];
   if (!spec) return today;
   const [load, css = [], extra = []] = spec;
-  const [mod] = await Promise.all([load(), ensureCss(css), (async () => { for (const n of extra) await import('./screens/' + n + '.js'); })()]);
+  const [mod] = await Promise.all([load(), ensureCss(css), ...extra.map(n => import('./screens/' + n + '.js'))]);
   return mod;
 }
 async function route() {
@@ -176,7 +176,7 @@ import { CLOUD } from './data/cloudcfg.js';
 const linkSession = parseUrlHash(location.hash);
 if (linkSession && CLOUD.url) {
   history.replaceState(null, '', location.pathname + '#/settings');
-  loginWithLink(CLOUD.url, CLOUD.key, linkSession).then(() => route()).catch(e => { console.error(e); alert(t('cloudLinkFailed') + ' ' + (e.message || e)); route(); });
+  loginWithLink(CLOUD.url, CLOUD.key, linkSession).then(() => route()).catch(e => { console.error(e); alert(t('cloudLinkFailed') + ' ' + (e && (e.status === 0 || /network|failed to fetch/i.test(String(e.message))) ? t('noConnection') : '')); route(); });
 }
 window.addEventListener('hashchange', route);
 route();

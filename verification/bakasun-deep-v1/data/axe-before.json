@@ -1,0 +1,3207 @@
+[
+ {
+  "scheme": "light",
+  "key": "today",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 7,
+    "ex": [
+     ".wa :: <button class=\"btn wa sm\" data-paidmsg=\"\">הודעה לספק: שולם</button>",
+     ".tap > .sub :: <div class=\"sub\">ספטמבר 2026</div>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 18,
+    "ex": [
+     "input :: <input name=\"q\" class=\"grow\" placeholder=\"מה לעשות?\" autocomplete=\"off\">",
+     ".between.row > b :: <b>אייקון על מסך הבית</b>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "lead",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי את ההודעה של הלקוח, או לחצי על המיקרופון וספרי מה הוא ביקש.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי את ההודעה של הלקוח, או לחצי על המיקרופון וספרי מה הוא ביקש.</p>",
+     "#msg :: <textarea id=\"msg\" rows=\"6\" placeholder=\"ההודעה מהלקוח...\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "cases",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "a[href$=\"#/case/ej1s77z\"] > .row.between > .badge.ok :: <span class=\"badge ok\">נסגר</span>",
+     "a[href$=\"#/case/e6ts84w\"] > .row.between > .badge.ok :: <span class=\"badge ok\">נסגר</span>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".ok :: <span class=\"badge ok\">נסגר</span>",
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row:nth-child(1) :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-details",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".ok :: <span class=\"badge ok\">נסגר</span>",
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row:nth-child(1) :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-suppliers",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "#body > p :: <p class=\"hint\">טיוטות: 0 · ממתינים לתשובה: 0 · התקבלו תשובות: 1</p>",
+     ".badge.ok :: <span class=\"badge ok\">אושר</span>"
+    ]
+   },
+   {
+    "id": "empty-table-header",
+    "impact": "minor",
+    "help": "Table header text should not be empty",
+    "n": 1,
+    "ex": [
+     "th:nth-child(13) :: <th></th>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 16,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row > .btn:nth-child(2) :: <a class=\"btn\" href=\"#/assist/supplier-quote/ej1s77z\">הצעת ספק ← ללקוח</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-plan",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".hint :: <p class=\"hint\">אין לו\"ז עדיין. אפשר להתחיל מתבנית לפי סוג האירוע.</p>",
+     ".empty :: <p class=\"empty\">אין צוות לאירוע הזה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "section:nth-child(1) > .sec-h :: <div class=\"sec-h\"><h2>לו\"ז</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-money",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "section:nth-child(1) > .list > p :: <p class=\"empty\">אין הצעות עדיין.</p>",
+     "section:nth-child(2) > .list > p :: <p class=\"empty\">אין בקשות אישור.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "section:nth-child(1) > .sec-h :: <div class=\"sec-h\"><h2>הצעות מחיר</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-lists",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "#thanks :: <button class=\"btn wa sm\" id=\"thanks\">תודה ללקוח</button>",
+     "#review :: <button class=\"btn wa sm\" id=\"review\">בקשת המלצה</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".card :: <div class=\"card row between\"><span class=\"title\">סידור קבוצות</span><a class=\"btn sm primary\" href="
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-workgroup",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">אין עדיין קבוצת עבודה לאירוע. במסך \"תגידי לי מה לעשות\": \"פתחי קבוצת עבודה עם ערן ומש"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body :: <div class=\"stack sec\" id=\"body\"><p class=\"hint\">אין עדיין קבוצת עבודה לאירוע. במסך \"תגידי לי מה לעש"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-history",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".hint :: <p class=\"hint\">כל שינוי נרשם לבד. כאן רק מסתכלים: אי אפשר לערוך או למחוק.</p>",
+     ".empty :: <p class=\"empty\">עוד לא נרשמו שינויים בתיק הזה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body :: <div class=\"stack sec cal-body\" id=\"body\"><p class=\"hint\">כל שינוי נרשם לבד. כאן רק מסתכלים: אי אפשר"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-participants",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".hint :: <p class=\"hint\">חסרים ברשימה: 100</p>",
+     ".empty :: <p class=\"empty\">עדיין אין משתתפים. הוסיפי אחד או הדביקי רשימה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".between :: <div class=\"row between\"><span class=\"sub\"><b>מתוכנן</b> <span class=\"pt-count\">100</span> · <b>ברשי"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-contract",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">אין עדיין חוזה לאירוע הזה. \"חוזה חדש\" בונה אותו מהתיק, מכרטיס הלקוח ומהצעת המחיר.</"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".list :: <div class=\"list\"><p class=\"empty\">אין עדיין חוזה לאירוע הזה. \"חוזה חדש\" בונה אותו מהתיק, מכרטיס הלק"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-checklist",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">אין עדיין רשימת תיוג לאירוע הזה. הרשימה נבנית לפי סוג האירוע עם תאריכי יעד מתאריך הא"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "p :: <p class=\"hint\">אין עדיין רשימת תיוג לאירוע הזה. הרשימה נבנית לפי סוג האירוע עם תאריכי יעד מתאריך הא"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-budget",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 5,
+    "ex": [
+     "#body > p :: <p class=\"hint\">כל הסכומים לפני מע״מ. מע״מ 18%: 0 ₪ · סה״כ ללקוח כולל מע״מ: 0 ₪</p>",
+     "#bgAsk :: <button class=\"btn sm wa\" id=\"bgAsk\">בקשת חשבונית מרועי</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 10,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".bg-stats :: <div class=\"bg-stats\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-runsheet",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">עדיין אין לו״ז ליום האירוע. התחילי מתבנית, ייבאי את הלו״ז הקיים או הוסיפי בלוק.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 4,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "case-tab-files",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "#cfDrop :: <div class=\"cf-drop\" id=\"cfDrop\">אפשר גם לגרור קבצים לכאן.</div>",
+     ".hint :: <p class=\"hint\">לא מחוברת לענן: הקבצים נשמרים במכשיר הזה ויעלו כשתתחברי.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "clients",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "a[href$=\"#/client/cl5sx13\"] > .between.row:nth-child(3) > .badge :: <span class=\"badge\">אירוע פעיל אחד</span>",
+     "a[href$=\"#/client/ckk9rx8\"] > .between.row:nth-child(3) > .badge :: <span class=\"badge\">אירוע פעיל אחד</span>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 7,
+    "ex": [
+     "a[href$=\"#/client/cl5sx13\"] > .between.row:nth-child(1) :: <div class=\"row between\"><span class=\"title\">ארגון שוב״ל</span><span class=\"row\"><span class=\"badge ",
+     "a[href$=\"#/client/cl5sx13\"] > .sub :: <div class=\"sub\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "client/cl5sx13",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>",
+     "p :: <p class=\"empty\">אין הערות עדיין.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 8,
+    "ex": [
+     ".card > .title :: <div class=\"title\">ענת כהן</div>",
+     ".ltr :: <div class=\"sub ltr\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "calls",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">אין שיחות בתור.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\"><p class=\"empty\">אין שיחות בתור.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "tasks",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 10,
+    "ex": [
+     "div[data-id=\"tqcsf2z\"] > .between.row > .row > .badge.late :: <span class=\"badge late\">30/09/2026</span>",
+     "div[data-id=\"tqcsf2z\"] > .row:nth-child(4) > .wa.btn[data-send=\"\"] :: <button class=\"btn wa\" data-send=\"\">שליחה בוואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 17,
+    "ex": [
+     "#tkq :: <input id=\"tkq\" class=\"tk-search\" type=\"search\" placeholder=\"חיפוש: #מספר, מה לעשות, מי מבצע...\" val",
+     ".grp :: <div class=\"sub grp late\"><b>באיחור</b> · 5</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "search",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#srHint :: <p class=\"hint\" id=\"srHint\">Enter פותח את התוצאה הראשונה. מכל מסך: המקש / פותח חיפוש.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#srHint :: <p class=\"hint\" id=\"srHint\">Enter פותח את התוצאה הראשונה. מכל מסך: המקש / פותח חיפוש.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "settings",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 14,
+    "ex": [
+     "#f > p :: <p class=\"hint\">הודעות שחוזרות על עצמן. שומרים מהודעה פתוחה (\"שמרי כתבנית סיור\"), ושולחים ב\"שלחי לדנ",
+     ".list > p :: <p class=\"hint\">אין עדיין תבניות.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 51,
+    "ex": [
+     "#f > .grid2:nth-child(1) :: <div class=\"grid2\">",
+     "#f > .f:nth-child(2) :: <label class=\"f\"><span>חתימה בהודעות</span><textarea name=\"signer\" rows=\"2\">וירג׳יני מנדל נאור\nבאקה "
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "more",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 16,
+    "ex": [
+     ".card.tap[href$=\"#/dashboard\"] > .title.grow :: <span class=\"title grow\">לוח בקרה</span>",
+     ".card.tap[href$=\"#/calendar\"] > .title.grow :: <span class=\"title grow\">יומן</span>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "suppliers",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "supplier/sw9rud7",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>",
+     "p :: <p class=\"empty\">אין הערות עדיין.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".stack > .card > .between.row :: <div class=\"row between\"><span class=\"title\">מלונות</span><span class=\"badge ok\">★★★☆☆</span></div>",
+     ".stack > .card > .sub :: <div class=\"sub\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "quotes",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">אין הצעות עדיין.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list\"><p class=\"empty\">אין הצעות עדיין.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "groups",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">לא נמצא כלום.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#app :: <div id=\"app\" tabindex=\"-1\"><p class=\"empty\">לא נמצא כלום.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "money",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">אין תנועות בחודש הזה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 12,
+    "ex": [
+     "#app > .stat :: <div class=\"stat\"><div class=\"card\"><b class=\"ltr\">25,000 ₪</b><span>פתוח</span></div><div class=\"ca",
+     "section:nth-child(3) > .sec-h :: <div class=\"sec-h\"><h2>תשלומי לקוחות</h2></div>"
+    ]
+   },
+   {
+    "id": "select-name",
+    "impact": "critical",
+    "help": "Select element must have an accessible name",
+    "n": 1,
+    "ex": [
+     "select :: <select data-status=\"\" class=\"grow\"><option value=\"לגבות\">לגבות</option><option value=\"ביקשנו חשבוני"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "notes",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">אין הערות עדיין.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\"><p class=\"empty\">אין הערות עדיין.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "assist",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">כתבי או הקליטי מה לעשות, במילים שלך. בסוף ההקלטה להגיד \"סיימתי\". דוגמאות למטה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     "p :: <p class=\"hint\">כתבי או הקליטי מה לעשות, במילים שלך. בסוף ההקלטה להגיד \"סיימתי\". דוגמאות למטה.</p>",
+     "#txt :: <textarea id=\"txt\" rows=\"5\" placeholder=\"מה לשלוח ולמי?\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "receipts",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     ".empty :: <p class=\"empty\">אין עדיין צילומים בחודש הזה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     ".warnbox :: <p class=\"warnbox\">לא מחוברת לענן: הצילומים נשמרים במכשיר בלבד ויעלו כשתתחברי.</p>",
+     ".row:nth-child(4) :: <div class=\"row\"><select id=\"month\" class=\"grow\" aria-label=\"חודש\"><option value=\"2026-11\" selected="
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "help",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">כל מה שהאפליקציה מבינה, במילים שלך. מדברים חופשי, ובסוף \"סיימתי\". אפשר גם לשאול בהקל"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 28,
+    "ex": [
+     "p :: <p class=\"hint\">כל מה שהאפליקציה מבינה, במילים שלך. מדברים חופשי, ובסוף \"סיימתי\". אפשר גם לשאול בהקל",
+     ".stack > .row :: <div class=\"row\"><a class=\"btn primary\" href=\"#/assist\">תגידי לי מה לעשות</a><a class=\"btn\" href=\"#/"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "share",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".empty :: <p class=\"empty\">אין כרגע פריטים ששותפו לאפליקציה.</p>",
+     ".hint :: <p class=\"hint\">מכל אפליקציה בטלפון: \"שיתוף\" → \"באקה סאן\". איש קשר מוואטסאפ נכנס לאנשי הקשר, צילום ל"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".stack :: <div class=\"stack sec\"><p class=\"empty\">אין כרגע פריטים ששותפו לאפליקציה.</p>\n    <p class=\"hint\">מכ"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "dashboard",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 8,
+    "ex": [
+     ".dash-date :: <span class=\"hint dash-date\">04/11/2026</span>",
+     "#app > p :: <p class=\"hint\">מבט אחד על כל מה שפתוח</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 13,
+    "ex": [
+     "#app > p :: <p class=\"hint\">מבט אחד על כל מה שפתוח</p>",
+     "section:nth-child(3) :: <section class=\"sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "calendar",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 14,
+    "ex": [
+     ".cal-dn:nth-child(1) :: <div class=\"cal-dn\">א׳</div>",
+     ".cal-dn:nth-child(2) :: <div class=\"cal-dn\">ב׳</div>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 11,
+    "ex": [
+     ".cal-nav > h2 :: <h2>נובמבר 2026</h2>",
+     ".cal-dn:nth-child(1) :: <div class=\"cal-dn\">א׳</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "participants/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".hint :: <p class=\"hint\">חסרים ברשימה: 100</p>",
+     ".empty :: <p class=\"empty\">עדיין אין משתתפים. הוסיפי אחד או הדביקי רשימה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     ".between :: <div class=\"row between\"><span class=\"sub\"><b>מתוכנן</b> <span class=\"pt-count\">100</span> · <b>ברשי"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "contracts",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">אין עדיין חוזים. פותחים אירוע ← לשונית \"חוזה\".</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list ct-body\"><p class=\"empty\">אין עדיין חוזים. פותחים אירוע ← לשונית \"חוזה\".</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "contract/x",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">לא נמצא כלום.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">לא נמצא כלום.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "budget/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 5,
+    "ex": [
+     "#bgBody > p :: <p class=\"hint\">כל הסכומים לפני מע״מ. מע״מ 18%: 0 ₪ · סה״כ ללקוח כולל מע״מ: 0 ₪</p>",
+     "#bgAsk :: <button class=\"btn sm wa\" id=\"bgAsk\">בקשת חשבונית מרועי</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 10,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     ".bg-stats :: <div class=\"bg-stats\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "runsheet/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">עדיין אין לו״ז ליום האירוע. התחילי מתבנית, ייבאי את הלו״ז הקיים או הוסיפי בלוק.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 4,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "runsheet/ej1s77z/live",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     ".rs-hint :: <p class=\"rs-hint\">המסך נשאר דולק. מתעדכן כל 30 שניות.</p>"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".rs-empty :: <p class=\"rs-empty\">עדיין אין לו״ז ליום האירוע. התחילי מתבנית, ייבאי את הלו״ז הקיים או הוסיפי בלוק.<",
+     ".rs-hint :: <p class=\"rs-hint\">המסך נשאר דולק. מתעדכן כל 30 שניות.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "files/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "#cfDrop :: <div class=\"cf-drop\" id=\"cfDrop\">אפשר גם לגרור קבצים לכאן.</div>",
+     ".hint :: <p class=\"hint\">לא מחוברת לענן: הקבצים נשמרים במכשיר הזה ויעלו כשתתחברי.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     ".sub :: <div class=\"sub\">ארגון שוב״ל · כנס · 19/10/2026 · שפיים</div>",
+     "#cfbody > .row :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "notifications",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 12,
+    "ex": [
+     ".info > .between.row > .nf-tags > .badge :: <span class=\"badge\">חדש</span>",
+     "div[data-key=\"task-late:tgkdzcd\"] > .between.row > .nf-tags > .badge:nth-child(1) :: <span class=\"badge\">חדש</span>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 20,
+    "ex": [
+     ".nf-sub > .sub :: <span class=\"sub\">מה שהאפליקציה שמה לב אליו במקומך</span>",
+     ".grp :: <div class=\"sub grp\"><b>היום</b> · 6</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "notifications/settings",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 3,
+    "ex": [
+     "section:nth-child(1) > p :: <p class=\"hint\">כל כלל אפשר לכבות או לכוון. השינוי נשמר מיד.</p>",
+     "section:nth-child(2) > p :: <p class=\"hint\">רק לפריטים דחופים, רק כשהאפליקציה פתוחה, ולא בשעות השקט. הדפדפן ישאל פעם אחת.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     "section:nth-child(1) :: <section class=\"sec\">",
+     "section:nth-child(2) > .sec-h :: <div class=\"sec-h\"><h2>התראות של הדפדפן</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "board",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "section[data-status=\"פנייה\"] > .bd-cards > p :: <p class=\"empty bd-empty\">אין כאן כלום</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 24,
+    "ex": [
+     "#bq :: <input id=\"bq\" type=\"search\" class=\"bd-search\" placeholder=\"חיפוש: לקוח, מקום, טלפון...\" value=\"\" ar",
+     "section[data-status=\"פנייה\"] > .bd-col-h > h2 :: <h2>פנייה</h2>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "board/stats",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 31,
+    "ex": [
+     "#app > p :: <p class=\"hint\">כל מספר פותח את הלוח מסונן.</p>",
+     ".bd-funnel > p :: <p class=\"hint\">המרה: <span class=\"count\">100%</span> · נסגרו מתוך נסגרו + ירדו</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 79,
+    "ex": [
+     "#app > p :: <p class=\"hint\">כל מספר פותח את הלוח מסונן.</p>",
+     ".bd-stats-a :: <div class=\"bd-stats-a\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "templates",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     ".stack > p :: <p class=\"hint\">שום דבר לא נשלח מהאפליקציה: וואטסאפ או המייל נפתחים עם הטקסט, ואת לוחצת שליחה.</p>",
+     "#groups > p :: <p class=\"hint\">תבנית משלך נשמרת מכל הודעה פתוחה בכפתור \"שמירה כתבנית שלי\".</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".stack :: <div class=\"stack mt-body\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "templates/x/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">התבנית לא נמצאה.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">התבנית לא נמצאה.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "import",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי כאן מייל או הודעת וואטסאפ מלקוח, כמו שהם (גם עם הציטוטים והחתימה). האפליקציה "
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי כאן מייל או הודעת וואטסאפ מלקוח, כמו שהם (גם עם הציטוטים והחתימה). האפליקציה ",
+     "#mail :: <textarea id=\"mail\" class=\"im-box\" rows=\"9\" dir=\"auto\" placeholder=\"הדבקה של המייל כאן…\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "light",
+  "key": "portal",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">לא נמצא כלום.</p>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#app :: <div id=\"app\" tabindex=\"-1\"><p class=\"empty\">לא נמצא כלום.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "today",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "button[data-paid=\"\"] :: <button class=\"btn sm ok\" data-paid=\"\">שולם</button>",
+     ".wa :: <button class=\"btn wa sm\" data-paidmsg=\"\">הודעה לספק: שולם</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 18,
+    "ex": [
+     "input :: <input name=\"q\" class=\"grow\" placeholder=\"מה לעשות?\" autocomplete=\"off\">",
+     ".between.row > b :: <b>אייקון על מסך הבית</b>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "lead",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי את ההודעה של הלקוח, או לחצי על המיקרופון וספרי מה הוא ביקש.</p>",
+     "#msg :: <textarea id=\"msg\" rows=\"6\" placeholder=\"ההודעה מהלקוח...\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "cases",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row:nth-child(1) :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-details",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row:nth-child(1) :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-suppliers",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 15,
+    "ex": [
+     "div[data-l=\"lllcjk5\"] > .row:nth-child(3) > .ok.sm[data-offer=\"\"] :: <button class=\"btn sm ok\" data-offer=\"\">הצעה התקבלה</button>",
+     "div[data-l=\"l3evdh2\"] > .row:nth-child(3) > .ok.sm[data-offer=\"\"] :: <button class=\"btn sm ok\" data-offer=\"\">הצעה התקבלה</button>"
+    ]
+   },
+   {
+    "id": "empty-table-header",
+    "impact": "minor",
+    "help": "Table header text should not be empty",
+    "n": 1,
+    "ex": [
+     "th:nth-child(13) :: <th></th>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 16,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row > .btn:nth-child(2) :: <a class=\"btn\" href=\"#/assist/supplier-quote/ej1s77z\">הצעת ספק ← ללקוח</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-plan",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "section:nth-child(1) > .sec-h :: <div class=\"sec-h\"><h2>לו\"ז</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-money",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "section:nth-child(1) > .sec-h :: <div class=\"sec-h\"><h2>הצעות מחיר</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-lists",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 2,
+    "ex": [
+     "#thanks :: <button class=\"btn wa sm\" id=\"thanks\">תודה ללקוח</button>",
+     "#review :: <button class=\"btn wa sm\" id=\"review\">בקשת המלצה</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".card :: <div class=\"card row between\"><span class=\"title\">סידור קבוצות</span><a class=\"btn sm primary\" href="
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-workgroup",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body :: <div class=\"stack sec\" id=\"body\"><p class=\"hint\">אין עדיין קבוצת עבודה לאירוע. במסך \"תגידי לי מה לעש"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-history",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body :: <div class=\"stack sec cal-body\" id=\"body\"><p class=\"hint\">כל שינוי נרשם לבד. כאן רק מסתכלים: אי אפשר"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-participants",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".between :: <div class=\"row between\"><span class=\"sub\"><b>מתוכנן</b> <span class=\"pt-count\">100</span> · <b>ברשי"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-contract",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".list :: <div class=\"list\"><p class=\"empty\">אין עדיין חוזה לאירוע הזה. \"חוזה חדש\" בונה אותו מהתיק, מכרטיס הלק"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-checklist",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "p :: <p class=\"hint\">אין עדיין רשימת תיוג לאירוע הזה. הרשימה נבנית לפי סוג האירוע עם תאריכי יעד מתאריך הא"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-budget",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#bgAsk :: <button class=\"btn sm wa\" id=\"bgAsk\">בקשת חשבונית מרועי</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 10,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     ".bg-stats :: <div class=\"bg-stats\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-runsheet",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 4,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "case-tab-files",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · 19/10/2026 · שפיים</div>",
+     "#body > .row :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "clients",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 7,
+    "ex": [
+     "a[href$=\"#/client/cl5sx13\"] > .between.row:nth-child(1) :: <div class=\"row between\"><span class=\"title\">ארגון שוב״ל</span><span class=\"row\"><span class=\"badge ",
+     "a[href$=\"#/client/cl5sx13\"] > .sub :: <div class=\"sub\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "client/cl5sx13",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 8,
+    "ex": [
+     ".card > .title :: <div class=\"title\">ענת כהן</div>",
+     ".ltr :: <div class=\"sub ltr\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "calls",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\"><p class=\"empty\">אין שיחות בתור.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "tasks",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 10,
+    "ex": [
+     "div[data-id=\"tqcsf2z\"] > .row:nth-child(4) > .wa.btn[data-send=\"\"] :: <button class=\"btn wa\" data-send=\"\">שליחה בוואטסאפ</button>",
+     "div[data-id=\"tqcsf2z\"] > .row:nth-child(4) > .ok.sm[data-done=\"\"] :: <button class=\"btn sm ok\" data-done=\"\">בוצע</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 17,
+    "ex": [
+     "#tkq :: <input id=\"tkq\" class=\"tk-search\" type=\"search\" placeholder=\"חיפוש: #מספר, מה לעשות, מי מבצע...\" val",
+     ".grp :: <div class=\"sub grp late\"><b>באיחור</b> · 5</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "search",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#srHint :: <p class=\"hint\" id=\"srHint\">Enter פותח את התוצאה הראשונה. מכל מסך: המקש / פותח חיפוש.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "settings",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 51,
+    "ex": [
+     "#f > .grid2:nth-child(1) :: <div class=\"grid2\">",
+     "#f > .f:nth-child(2) :: <label class=\"f\"><span>חתימה בהודעות</span><textarea name=\"signer\" rows=\"2\">וירג׳יני מנדל נאור\nבאקה "
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "more",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 16,
+    "ex": [
+     ".card.tap[href$=\"#/dashboard\"] > .title.grow :: <span class=\"title grow\">לוח בקרה</span>",
+     ".card.tap[href$=\"#/calendar\"] > .title.grow :: <span class=\"title grow\">יומן</span>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "suppliers",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "supplier/sw9rud7",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#wa :: <button class=\"btn wa\" id=\"wa\">וואטסאפ</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     ".stack > .card > .between.row :: <div class=\"row between\"><span class=\"title\">מלונות</span><span class=\"badge ok\">★★★☆☆</span></div>",
+     ".stack > .card > .sub :: <div class=\"sub\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "quotes",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list\"><p class=\"empty\">אין הצעות עדיין.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "groups",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#app :: <div id=\"app\" tabindex=\"-1\"><p class=\"empty\">לא נמצא כלום.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "money",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 12,
+    "ex": [
+     "#app > .stat :: <div class=\"stat\"><div class=\"card\"><b class=\"ltr\">25,000 ₪</b><span>פתוח</span></div><div class=\"ca",
+     "section:nth-child(3) > .sec-h :: <div class=\"sec-h\"><h2>תשלומי לקוחות</h2></div>"
+    ]
+   },
+   {
+    "id": "select-name",
+    "impact": "critical",
+    "help": "Select element must have an accessible name",
+    "n": 1,
+    "ex": [
+     "select :: <select data-status=\"\" class=\"grow\"><option value=\"לגבות\">לגבות</option><option value=\"ביקשנו חשבוני"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "notes",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list sec\"><p class=\"empty\">אין הערות עדיין.</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "assist",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     "p :: <p class=\"hint\">כתבי או הקליטי מה לעשות, במילים שלך. בסוף ההקלטה להגיד \"סיימתי\". דוגמאות למטה.</p>",
+     "#txt :: <textarea id=\"txt\" rows=\"5\" placeholder=\"מה לשלוח ולמי?\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "receipts",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 3,
+    "ex": [
+     ".warnbox :: <p class=\"warnbox\">לא מחוברת לענן: הצילומים נשמרים במכשיר בלבד ויעלו כשתתחברי.</p>",
+     ".row:nth-child(4) :: <div class=\"row\"><select id=\"month\" class=\"grow\" aria-label=\"חודש\"><option value=\"2026-11\" selected="
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "help",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 28,
+    "ex": [
+     "p :: <p class=\"hint\">כל מה שהאפליקציה מבינה, במילים שלך. מדברים חופשי, ובסוף \"סיימתי\". אפשר גם לשאול בהקל",
+     ".stack > .row :: <div class=\"row\"><a class=\"btn primary\" href=\"#/assist\">תגידי לי מה לעשות</a><a class=\"btn\" href=\"#/"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "share",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".stack :: <div class=\"stack sec\"><p class=\"empty\">אין כרגע פריטים ששותפו לאפליקציה.</p>\n    <p class=\"hint\">מכ"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "dashboard",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 4,
+    "ex": [
+     "thead > tr > th:nth-child(1) :: <th>אירוע</th>",
+     "thead > tr > th:nth-child(2) :: <th>תוכנן</th>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 13,
+    "ex": [
+     "#app > p :: <p class=\"hint\">מבט אחד על כל מה שפתוח</p>",
+     "section:nth-child(3) :: <section class=\"sec\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "calendar",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 11,
+    "ex": [
+     ".cal-nav > h2 :: <h2>נובמבר 2026</h2>",
+     ".cal-dn:nth-child(1) :: <div class=\"cal-dn\">א׳</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "participants/ej1s77z",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 6,
+    "ex": [
+     "#app > .sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     ".between :: <div class=\"row between\"><span class=\"sub\"><b>מתוכנן</b> <span class=\"pt-count\">100</span> · <b>ברשי"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "contracts",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".list :: <div class=\"list ct-body\"><p class=\"empty\">אין עדיין חוזים. פותחים אירוע ← לשונית \"חוזה\".</p></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "contract/x",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">לא נמצא כלום.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "budget/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#bgAsk :: <button class=\"btn sm wa\" id=\"bgAsk\">בקשת חשבונית מרועי</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 10,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     ".bg-stats :: <div class=\"bg-stats\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "runsheet/ej1s77z",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 4,
+    "ex": [
+     ".sub :: <div class=\"sub\">כנס · 19/10/2026 · שפיים</div>",
+     "#rsLive :: <a class=\"btn sm ok\" id=\"rsLive\" href=\"#/runsheet/ej1s77z/live\">מצב יום האירוע</a>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "runsheet/ej1s77z/live",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 1,
+    "ex": [
+     ".rs-hint :: <p class=\"rs-hint\">המסך נשאר דולק. מתעדכן כל 30 שניות.</p>"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     ".rs-empty :: <p class=\"rs-empty\">עדיין אין לו״ז ליום האירוע. התחילי מתבנית, ייבאי את הלו״ז הקיים או הוסיפי בלוק.<",
+     ".rs-hint :: <p class=\"rs-hint\">המסך נשאר דולק. מתעדכן כל 30 שניות.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "files/ej1s77z",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 9,
+    "ex": [
+     ".sub :: <div class=\"sub\">ארגון שוב״ל · כנס · 19/10/2026 · שפיים</div>",
+     "#cfbody > .row :: <div class=\"row\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "notifications",
+  "v": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "n": 6,
+    "ex": [
+     ".info > .nf-actions.row > .ok[data-act=\"1\"] :: <button class=\"btn sm ok\" data-act=\"1\">טופל</button>",
+     "div[data-key=\"task-late:tgkdzcd\"] > .nf-actions.row > .ok[data-act=\"1\"] :: <button class=\"btn sm ok\" data-act=\"1\">טופל</button>"
+    ]
+   },
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 20,
+    "ex": [
+     ".nf-sub > .sub :: <span class=\"sub\">מה שהאפליקציה שמה לב אליו במקומך</span>",
+     ".grp :: <div class=\"sub grp\"><b>היום</b> · 6</div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "notifications/settings",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 5,
+    "ex": [
+     "section:nth-child(1) :: <section class=\"sec\">",
+     "section:nth-child(2) > .sec-h :: <div class=\"sec-h\"><h2>התראות של הדפדפן</h2></div>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "board",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 24,
+    "ex": [
+     "#bq :: <input id=\"bq\" type=\"search\" class=\"bd-search\" placeholder=\"חיפוש: לקוח, מקום, טלפון...\" value=\"\" ar",
+     "section[data-status=\"פנייה\"] > .bd-col-h > h2 :: <h2>פנייה</h2>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "board/stats",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 79,
+    "ex": [
+     "#app > p :: <p class=\"hint\">כל מספר פותח את הלוח מסונן.</p>",
+     ".bd-stats-a :: <div class=\"bd-stats-a\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "templates",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     ".stack :: <div class=\"stack mt-body\">"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "templates/x/ej1s77z",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "p :: <p class=\"empty\">התבנית לא נמצאה.</p>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "import",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 2,
+    "ex": [
+     "p :: <p class=\"hint\">הדביקי כאן מייל או הודעת וואטסאפ מלקוח, כמו שהם (גם עם הציטוטים והחתימה). האפליקציה ",
+     "#mail :: <textarea id=\"mail\" class=\"im-box\" rows=\"9\" dir=\"auto\" placeholder=\"הדבקה של המייל כאן…\"></textarea>"
+    ]
+   }
+  ]
+ },
+ {
+  "scheme": "dark",
+  "key": "portal",
+  "v": [
+   {
+    "id": "landmark-one-main",
+    "impact": "moderate",
+    "help": "Document should have one main landmark",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "n": 1,
+    "ex": [
+     "html :: <html dir=\"rtl\" lang=\"he\">"
+    ]
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "n": 1,
+    "ex": [
+     "#app :: <div id=\"app\" tabindex=\"-1\"><p class=\"empty\">לא נמצא כלום.</p></div>"
+    ]
+   }
+  ]
+ }
+]
