@@ -1,0 +1,171 @@
+{
+  "units": "metres",
+  "up": "+Y",
+  "pitch": {
+    "width": 68,
+    "length": 105
+  },
+  "files": [
+    {
+      "path": "assets/stadium-shell.glb",
+      "bytes": 226984,
+      "MB": 0.226984,
+      "triangles": 7916,
+      "sha256": "cae769d7f2fb2fd3ae11bc4105a5fb639961def9d227d992621a3d8274de1b26"
+    },
+    {
+      "path": "assets/pitch.glb",
+      "bytes": 812108,
+      "MB": 0.812108,
+      "triangles": 4312,
+      "sha256": "4036d2b01f0ac89ad7fb6c6d664b039a72265981d6952a99ef208752026e0252"
+    },
+    {
+      "path": "assets/goals.glb",
+      "bytes": 11624,
+      "MB": 0.011624,
+      "triangles": 3480,
+      "sha256": "fdd9487bfd4ad08e7edb3b2b1beff6178609b5d62ebc7a09e7d6c0b7b2aa8be7"
+    },
+    {
+      "path": "assets/crowd-six.glb",
+      "bytes": 49276,
+      "MB": 0.049276,
+      "triangles": 3036,
+      "sha256": "6ae877e16836fa597863b32ffcb7f42669e45718bc9d238363611d677d7e9a9e"
+    },
+    {
+      "path": "assets/scale-athlete-lod0.glb",
+      "bytes": 139000,
+      "MB": 0.139,
+      "triangles": 7414,
+      "sha256": "7f80b45e3512059688d775141b24ba0f711b98cc068a49e19a43cec98a6deb6a"
+    },
+    {
+      "path": "assets/scale-athlete-lod1.glb",
+      "bytes": 116784,
+      "MB": 0.116784,
+      "triangles": 2531,
+      "sha256": "075d7b239aaf7eab6a92eff1ac7927e41acc9a4c61dd95ef61b34700370472b9"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "bowl_concrete",
+      "triangles": 4056
+    },
+    {
+      "name": "roof_trusses",
+      "triangles": 1092
+    },
+    {
+      "name": "canopy",
+      "triangles": 104
+    },
+    {
+      "name": "seat_rows",
+      "triangles": 1728
+    },
+    {
+      "name": "balustrades",
+      "triangles": 676
+    },
+    {
+      "name": "advertising",
+      "triangles": 104
+    },
+    {
+      "name": "floodlight_panels",
+      "triangles": 156
+    },
+    {
+      "name": "pitch_surface",
+      "triangles": 3808
+    },
+    {
+      "name": "runoff",
+      "triangles": 2
+    },
+    {
+      "name": "regulation_field_lines",
+      "triangles": 502
+    },
+    {
+      "name": "goal_frames",
+      "triangles": 264
+    },
+    {
+      "name": "woven_net",
+      "triangles": 3216
+    },
+    {
+      "name": "spectator_0",
+      "triangles": 506
+    },
+    {
+      "name": "spectator_1",
+      "triangles": 506
+    },
+    {
+      "name": "spectator_2",
+      "triangles": 506
+    },
+    {
+      "name": "spectator_3",
+      "triangles": 506
+    },
+    {
+      "name": "spectator_4",
+      "triangles": 506
+    },
+    {
+      "name": "spectator_5",
+      "triangles": 506
+    }
+  ],
+  "sources": [
+    {
+      "path": "../../soccer-v4/soccer-player.glb",
+      "sha256": "ef4dcd3343933031023057d5a954eb9e6e08b3294a47a26aa433608c2527cb74",
+      "license": "CC0-1.0"
+    }
+  ],
+  "crowd": {
+    "count": 6530,
+    "near": 154,
+    "far": 6376,
+    "variants": 6,
+    "nearTriangles": [
+      506,
+      506,
+      506,
+      506,
+      506,
+      506
+    ],
+    "farTrianglesPerInstance": 2
+  },
+  "lighting": {
+    "day": {
+      "sun": [
+        -50,
+        85,
+        -35
+      ],
+      "intensity": 3.4,
+      "ambient": 1.1
+    },
+    "evening": {
+      "sun": [
+        -18,
+        60,
+        12
+      ],
+      "intensity": 1.1,
+      "ambient": 0.42,
+      "floodlights": 4,
+      "candelaPerFloodlight": 2100
+    },
+    "shadowMap": 1024
+  }
+}
