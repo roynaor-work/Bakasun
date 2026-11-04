@@ -54,7 +54,7 @@
 ## משימות Codex שהושלמו (04/11/2026)
 | נושא | תג | תוצאה |
 |---|---|---|
-| האי: ערכת ממשק ואייקונים | `island-ui-kit-v2` | [ערכת מסירה](../workout/island/design/ui-kit-v2/index.html): 75 SVG לכל תשעת המשחקים ולתפריט, פתיחות, כפתורים, תוצאות וכוכבים, הנפשות, manifest; 6 צילומי WebP. כל נכס עד 100KB; 54 מסלולי תצוגה ב־6 מידות עברו. [דוח](../workout/island/design/ui-kit-v2/VALIDATION.md). מוכן לשילוב בידי Claude |
+| האי: ערכת ממשק ואייקונים | `island-ui-kit-v2` | [ערכת מסירה](../workout/island/design/ui-kit-v2/index.html): 75 SVG לכל תשעת המשחקים ולתפריט, פתיחות, כפתורים, תוצאות וכוכבים, הנפשות, manifest; 6 צילומי WebP. כל נכס עד 100KB; 54 מסלולי תצוגה ב־6 מידות עברו. [דוח](../workout/island/design/ui-kit-v2/VALIDATION.md). מוכן לשילוב בידי Claude; [PR #255](https://github.com/roynaor-work/Bakasun/pull/255) נפתח כטיוטה מול main בענף `codex/island-ui-kit-v2-20261104`, ללא מיזוג |
 
 ## PR פתוחים
 | PR | מצב | פעולה |
