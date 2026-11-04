@@ -11,6 +11,7 @@ import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel
 import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261104-1';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
+import {v5Enabled} from './hoops-v5.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -39,7 +40,12 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
  const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
  let models=null;
- if(v4ArenaEnabled(config.assets,quality,params)){
+ // v5 (04/11): the new arena with the animated crowd, the lacquered maple and the leather ball; the quality tier picks the
+ // crowd density and the frame-time governor thins it further on a slow device (hoops-v5.mjs)
+ if(v5Enabled(config.assets,quality,params)){
+  try{const {replaceArenaAssetsV5}=await import('./hoops-v5-venue.mjs');models=await replaceArenaAssetsV5(arena,dyn,court,{...arenaOptions,v5:config.assets.v5,params,looks});}catch(error){models=null;onFallback('v5 arena',error);}
+ }
+ if(!models&&v4ArenaEnabled(config.assets,quality,params)){
   try{models=await replaceArenaAssets(arena,dyn,court,{...arenaOptions,venue:config.assets.v4.arena});}catch(error){onFallback('arena',error);}
  }
  if(!models)models=await replaceArenaAssets(arena,dyn,court,arenaOptions);
@@ -238,7 +244,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
   dyn.led.offset.x=(dyn.led.offset.x+dt*0.03)%1;
   drawDisplays(dyn,s,looks.map(l=>l.primary));
-  if(crowd)crowd.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
+  if(crowd)crowd.update(dt,state.cheer||0);else models.crowdV5?.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
   if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else cameraFor(s,dt);
   if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
   const feedback=feel.update(presentationDt,s);
@@ -300,7 +306,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||0,crowdLevel:models.crowdV5?.level??null,v5:!!models.v5,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

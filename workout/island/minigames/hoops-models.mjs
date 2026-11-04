@@ -11,15 +11,15 @@ import {imagePixels,transferBasketballBake,planarCourtUV,frontLoadCourtSurface,l
 const MODEL='design/models/',ENV='design/environment/textures/';
 const materialsOf=o=>o.material?(Array.isArray(o.material)?o.material:[o.material]):[];
 
-function resources(root){
+export function resources(root){
  const geometries=new Set(),materials=new Set(),textures=new Set();
  root.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of materialsOf(o)){materials.add(m);for(const v of Object.values(m))if(v?.isTexture)textures.add(v);}});
  return {geometries,materials,textures};
 }
-function release(owned,retained){
+export function release(owned,retained){
  for(const kind of ['geometries','materials','textures'])for(const item of owned[kind])if(!retained?.[kind].has(item))item.dispose();
 }
-function mergeResources(a,b){for(const k of ['geometries','materials','textures'])for(const v of b[k])a[k].add(v);}
+export function mergeResources(a,b){for(const k of ['geometries','materials','textures'])for(const v of b[k])a[k].add(v);}
 function anchor(root,name){
  const node=root.getObjectByName(name);if(!node)throw Error('Basketball asset missing '+name);
  root.updateMatrixWorld(true);return root.worldToLocal(node.getWorldPosition(new THREE.Vector3()));
