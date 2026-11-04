@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261104-2';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261104-2';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261104-2';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261104-3';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261104-3';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261104-3';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
@@ -583,7 +583,8 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function humanInput(p,inp){
   const m=inp.move||{x:0,z:0},ml=hyp(m.x,m.z);
-  p.intent.x=ml>0.05?m.x/Math.max(1,ml):0;p.intent.z=ml>0.05?m.z/Math.max(1,ml):0;p.intent.speed=Math.min(1,ml);
+  // unit direction x tilt: speed follows the stick linearly (the old m/max(1,ml) x ml squared a half tilt to 25% speed)
+  p.intent.x=ml>0.05?m.x/ml:0;p.intent.z=ml>0.05?m.z/ml:0;p.intent.speed=Math.min(1,ml);
   p.intent.sprint=!!inp.sprint;p.intent.face=null;
   const offense=S.possession===p.team&&S.ball.state!=='loose';
   const hasBall=S.ball.owner===p.id&&S.ball.state==='held';
@@ -595,7 +596,15 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    p.jumpQueue=null;
    if(inp.fakePress)startFake(p);
    else if(inp.shootDown&&!inp.shootCancel)startShot(p,true);
-   if(inp.passPress)startPass(p,choosePassTarget(p,inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null),!!inp.passLong),inp.passLong?'long':null);
+   // Input buffer: a pass pressed while a move or fake is finishing is kept for C.player.bufferTicks
+   // steps (about 100 ms) and thrown the moment the player is free, instead of being swallowed.
+   const BUF=C.player.bufferTicks??6;
+   if(p.buf&&(S.tick>p.buf.until||p.buf.kind!=='pass'))p.buf=null;
+   if(inp.passPress){
+    const dir=inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null);
+    if(startPass(p,choosePassTarget(p,dir,!!inp.passLong),inp.passLong?'long':null))p.buf=null;
+    else if(p.act&&p.act!=='shoot'&&p.act!=='pass')p.buf={kind:'pass',until:S.tick+BUF,dir,long:!!inp.passLong};
+   }else if(p.buf&&!p.act&&startPass(p,choosePassTarget(p,p.buf.dir,p.buf.long),p.buf.long?'long':null))p.buf=null;
    if(inp.spinPress)startMove(p,'spin');
    else if(inp.movePress||inp.altPress)startMove(p,'cross');
   } else if(!offense||S.ball.state==='loose'||S.ball.state==='shot'){
@@ -646,7 +655,17 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     // in the air the body keeps its run-up and steers only a little
     const k=Math.min(1,C.jump.airDrag*dt),ac=C.jump.airControl;p.vx+=(wantVx*ac-p.vx)*k;p.vz+=(wantVz*ac-p.vz)*k;
    } else {
-    const acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    let acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    if(user){
+     // Response for the child's player only (the AI keeps its own curve): a standing player leaves at
+     // userKick m/s on the very first step (first visible motion in one step instead of three), and a
+     // stick pushed against the run direction brakes userBrake times harder (a turn took 18 steps).
+     const wl=hyp(wantVx,wantVz),sp0=hyp(p.vx,p.vz);
+     if(wl>0.3){
+      if(sp0<(C.player.userKickBelow??0.4)){const k=Math.min(wl,C.player.userKick??1.1)/wl;p.vx=wantVx*k;p.vz=wantVz*k;}
+      else if(p.vx*wantVx+p.vz*wantVz<0)acc*=C.player.userBrake??1.5;
+     }
+    }
     const dvx=wantVx-p.vx,dvz=wantVz-p.vz,dl=hyp(dvx,dvz),step=acc*dt;
     if(dl<=step){p.vx=wantVx;p.vz=wantVz;}else{p.vx+=dvx/dl*step;p.vz+=dvz/dl*step;}
    }

@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-04",
+  "command": "npm test",
+  "initialRun": {
+    "testFiles": 266,
+    "passed": 262,
+    "failed": 4,
+    "durationMs": 133810.448005,
+    "cause": "Sandbox EPERM blocked child processes and localhost listeners; browser check additionally needed an installed Chromium selector. No assertion failure attributed to the new arena/hud files."
+  },
+  "reruns": [
+    {"file": "tests/cam-lab-keyframes.test.mjs", "passed": 10, "failed": 0, "skipped": 0},
+    {"file": "tests/workout-dad-test.test.mjs", "passed": 4, "failed": 0, "skipped": 0},
+    {"file": "tests/island-browser-csp.test.mjs", "passed": 1, "failed": 0, "skipped": 1, "note": "Existing explicitly opt-in browser case skipped by its own condition."},
+    {"file": "tests/workout-royiki.test.mjs", "passed": 5, "failed": 0, "skipped": 0, "note": "Supported ISLAND_PLAYWRIGHT adapter selected /usr/bin/chromium; no repository test modifications."}
+  ],
+  "existingTrackedFilesEdited": false
+}

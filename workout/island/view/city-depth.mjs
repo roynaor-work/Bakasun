@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {GROUND} from './environment.mjs?v=island-v2-20261104-2';
+import {GROUND} from './environment.mjs?v=island-v2-20261104-3';
 
 /** Geometry only: the report supplies every status, assignment and radius. */
 export class CityDepthView {

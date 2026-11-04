@@ -1,0 +1,665 @@
+{
+  "date": "2026-11-04",
+  "renderer": "Chromium SwiftShader software WebGL; no physical phone benchmark",
+  "assets": [
+    {
+      "file": "arena-shell.glb",
+      "bytes": 181496,
+      "MB": 0.181496,
+      "triangles": 9400,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "validator": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 41,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/5/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/6/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/9/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/10/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/11/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/12/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/13/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/14/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/15/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/16/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/17/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/18/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/19/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/20/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/7"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/8"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/9"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/10"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/11"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/12"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/13"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/14"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/15"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/16"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/17"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/18"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/19"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/20"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/21"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/22"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/23"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/24"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "file": "actors/actor-lod0.glb",
+      "bytes": 658408,
+      "MB": 0.658408,
+      "triangles": 5260,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "validator": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "file": "actors/actor-lod1.glb",
+      "bytes": 630708,
+      "MB": 0.630708,
+      "triangles": 2361,
+      "images": [
+        {
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "validator": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          }
+        ],
+        "truncated": false
+      }
+    }
+  ],
+  "captures": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "screenshot": "arena-390x844.png",
+      "live": {
+        "ready": true,
+        "viewport": [
+          390,
+          844
+        ],
+        "three": "160",
+        "quality": "mobile",
+        "players": 12,
+        "playerTriangles": [
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361
+        ],
+        "sceneTriangles": 67796,
+        "arena": {
+          "triangles": 31308,
+          "meshDraws": 28,
+          "static": {
+            "triangles": 9400,
+            "meshDraws": 21
+          },
+          "dynamic": {
+            "triangles": 21908,
+            "meshDraws": 7
+          },
+          "crowdSpectators": 1368,
+          "crowdDrawCalls": 1,
+          "seatDrawCalls": 1,
+          "textureMaxDimension": 1024,
+          "courtMetres": [
+            28,
+            15
+          ],
+          "rimHeightMetres": 3.05,
+          "reflection": "PBR ceiling probe + normal/roughness; no second scene render",
+          "jumbotronCanvas": [
+            768,
+            384
+          ],
+          "jumbotronUpdatesHz": 6
+        },
+        "photographers": {
+          "count": 4,
+          "triangles": 9444,
+          "drawCalls": 1,
+          "textureAtlas": [
+            1024,
+            1024
+          ],
+          "pose": "frozen crouch derived from source idle"
+        },
+        "render": {
+          "frame": 35,
+          "calls": 44,
+          "triangles": 67822,
+          "points": 0,
+          "lines": 0
+        },
+        "textures": 27,
+        "drawFrames": 12,
+        "medianFrameMs": 383.3000000000002,
+        "p95FrameMs": 1333.3000000000002,
+        "errors": []
+      },
+      "high": {
+        "triangles": 102584,
+        "playerTriangles": [
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260
+        ]
+      },
+      "controls": {
+        "camera": true,
+        "heat": true,
+        "stats": true,
+        "pause": true,
+        "high": true
+      },
+      "layout": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "buttons": [
+          {
+            "name": "Switch rendering quality",
+            "x": 321.6875,
+            "y": 145,
+            "w": 51.3125,
+            "h": 44
+          },
+          {
+            "name": "Switch camera",
+            "x": 21,
+            "y": 755,
+            "w": 87.25,
+            "h": 50
+          },
+          {
+            "name": "Toggle on fire effect",
+            "x": 108.25,
+            "y": 755,
+            "w": 87.25,
+            "h": 50
+          },
+          {
+            "name": "Show or hide player card",
+            "x": 195.5,
+            "y": 755,
+            "w": 87.25,
+            "h": 50
+          },
+          {
+            "name": "Resume animation",
+            "x": 282.75,
+            "y": 755,
+            "w": 86.25,
+            "h": 50
+          }
+        ]
+      },
+      "requestCount": 27,
+      "externalRequests": [],
+      "failures": [],
+      "consoleErrors": []
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "screenshot": "arena-844x390.png",
+      "live": {
+        "ready": true,
+        "viewport": [
+          844,
+          390
+        ],
+        "three": "160",
+        "quality": "mobile",
+        "players": 12,
+        "playerTriangles": [
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361,
+          2361
+        ],
+        "sceneTriangles": 67796,
+        "arena": {
+          "triangles": 31308,
+          "meshDraws": 28,
+          "static": {
+            "triangles": 9400,
+            "meshDraws": 21
+          },
+          "dynamic": {
+            "triangles": 21908,
+            "meshDraws": 7
+          },
+          "crowdSpectators": 1368,
+          "crowdDrawCalls": 1,
+          "seatDrawCalls": 1,
+          "textureMaxDimension": 1024,
+          "courtMetres": [
+            28,
+            15
+          ],
+          "rimHeightMetres": 3.05,
+          "reflection": "PBR ceiling probe + normal/roughness; no second scene render",
+          "jumbotronCanvas": [
+            768,
+            384
+          ],
+          "jumbotronUpdatesHz": 6
+        },
+        "photographers": {
+          "count": 4,
+          "triangles": 9444,
+          "drawCalls": 1,
+          "textureAtlas": [
+            1024,
+            1024
+          ],
+          "pose": "frozen crouch derived from source idle"
+        },
+        "render": {
+          "frame": 34,
+          "calls": 44,
+          "triangles": 67822,
+          "points": 0,
+          "lines": 0
+        },
+        "textures": 27,
+        "drawFrames": 9,
+        "medianFrameMs": 433.2999999999993,
+        "p95FrameMs": 783.3000000000002,
+        "errors": []
+      },
+      "high": {
+        "triangles": 102584,
+        "playerTriangles": [
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260,
+          5260
+        ]
+      },
+      "controls": {
+        "camera": true,
+        "heat": true,
+        "stats": true,
+        "pause": true,
+        "high": true
+      },
+      "layout": {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "scrollHeight": 390,
+        "buttons": [
+          {
+            "name": "Switch rendering quality",
+            "x": 774.6875,
+            "y": 37,
+            "w": 51.3125,
+            "h": 44
+          },
+          {
+            "name": "Switch camera",
+            "x": 481,
+            "y": 331,
+            "w": 85.75,
+            "h": 44
+          },
+          {
+            "name": "Toggle on fire effect",
+            "x": 566.75,
+            "y": 331,
+            "w": 85.75,
+            "h": 44
+          },
+          {
+            "name": "Show or hide player card",
+            "x": 652.5,
+            "y": 331,
+            "w": 85.75,
+            "h": 44
+          },
+          {
+            "name": "Resume animation",
+            "x": 738.25,
+            "y": 331,
+            "w": 84.75,
+            "h": 44
+          }
+        ]
+      },
+      "requestCount": 27,
+      "externalRequests": [],
+      "failures": [],
+      "consoleErrors": []
+    }
+  ]
+}

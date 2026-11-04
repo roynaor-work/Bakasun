@@ -1,0 +1,24 @@
+{
+  "scope": "DOM/SVG soccer broadcast HUD",
+  "addedWebGLTriangles": 0,
+  "addedWebGLDrawCalls": 0,
+  "runtimePlayerMeshes": 0,
+  "runtimeCrowdMeshes": 0,
+  "runtimeGLBFiles": 0,
+  "runtimeDracoFiles": 0,
+  "radarPlayers": {"home": 6, "away": 6},
+  "largestRuntimeImage": {"path": "assets/pitch-backdrop.webp", "width": 1024, "height": 1024},
+  "playerLOD0Budget": 8000,
+  "playerLOD1Budget": 3000,
+  "playerLODApplies": false,
+  "reason": "This task delivers HUD artwork and a DOM overlay. It does not deliver or load player meshes, skin textures, animation clips or GLB files.",
+  "offlineBackdropBake": {
+    "renderedPlayers": 12,
+    "rendererReportedTriangles": 432550,
+    "rendererReportedDrawCalls": 31,
+    "loadedByHUD": false,
+    "note": "Existing high-detail soccer-v4 models were used only for the offline 1024px raster backdrop. The resulting WebP is the sole scene resource at runtime. These source models are not claimed to meet the v6 player LOD budgets."
+  },
+  "svgTessellation": "Browser-managed rasterization; no three.js geometry or WebGL draw calls are added.",
+  "physicalPhone30fpsVerified": false
+}

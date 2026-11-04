@@ -1,0 +1,841 @@
+{
+  "schemaVersion": 1,
+  "kind": "authored-motion-manifest",
+  "license": "CC0-1.0",
+  "capturedMocap": false,
+  "file": "soccer-v6.json",
+  "sha256": "d2ec9090f9734ffa20ba1822e1b91a09b1c850cbfbf904da365edbeabdad0533",
+  "bytes": 731050,
+  "sampleRateHz": 30,
+  "skeletonBoneCount": 18,
+  "clipCount": 20,
+  "totalKeyframes": 670,
+  "sources": [
+    {
+      "path": "workout/island/design/motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+      "license": "CC0-1.0",
+      "type": "original authored repository motion, not captured mocap"
+    },
+    {
+      "path": "workout/island/design/motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "license": "CC0-1.0",
+      "type": "original authored repository motion, not captured mocap"
+    },
+    {
+      "path": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+      "sha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+      "license": "CC0-1.0",
+      "type": "original authored repository motion, not captured mocap"
+    },
+    {
+      "path": "workout/island/design/motion2/soccer/tackles-reactions.json",
+      "sha256": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+      "license": "CC0-1.0",
+      "type": "original authored repository motion, not captured mocap"
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "durationSeconds": 2.4,
+      "loop": true,
+      "keyframeCount": 73,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    },
+    {
+      "id": "run",
+      "durationSeconds": 0.733333333,
+      "loop": true,
+      "keyframeCount": 23,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion/soccer.json",
+        "sourceClip": "run"
+      }
+    },
+    {
+      "id": "sprint",
+      "durationSeconds": 0.566666667,
+      "loop": true,
+      "keyframeCount": 18,
+      "events": [
+        {
+          "name": "presentation_left_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_left_release",
+          "time": 0.24,
+          "atSeconds": 0.136
+        },
+        {
+          "name": "presentation_right_plant",
+          "time": 0.5,
+          "atSeconds": 0.283333333
+        },
+        {
+          "name": "presentation_right_release",
+          "time": 0.74,
+          "atSeconds": 0.419333333
+        }
+      ],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    },
+    {
+      "id": "turn_left",
+      "durationSeconds": 0.5,
+      "loop": false,
+      "keyframeCount": 16,
+      "events": [
+        {
+          "name": "presentation_cut_load",
+          "time": 0.25,
+          "atSeconds": 0.125
+        },
+        {
+          "name": "presentation_cut_push",
+          "time": 0.65,
+          "atSeconds": 0.325
+        }
+      ],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    },
+    {
+      "id": "turn_right",
+      "durationSeconds": 0.5,
+      "loop": false,
+      "keyframeCount": 16,
+      "events": [
+        {
+          "name": "presentation_cut_load",
+          "time": 0.25,
+          "atSeconds": 0.125
+        },
+        {
+          "name": "presentation_cut_push",
+          "time": 0.65,
+          "atSeconds": 0.325
+        }
+      ],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    },
+    {
+      "id": "decelerate",
+      "durationSeconds": 0.433333333,
+      "loop": false,
+      "keyframeCount": 14,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion/soccer.json",
+        "sourceClip": "decelerate",
+        "sourceSha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+        "sourceDurationSeconds": 0.42,
+        "timeScale": 1.031746032,
+        "adaptation": "Natural, restrained arm swings authored for soccer-v6; lower-body source remains canonical."
+      }
+    },
+    {
+      "id": "kick_straight",
+      "durationSeconds": 0.866666667,
+      "loop": false,
+      "keyframeCount": 27,
+      "events": [
+        {
+          "name": "visual_prepare",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 0.08,
+          "atSeconds": 0.069333333
+        },
+        {
+          "name": "visual_backswing",
+          "time": 0.2,
+          "atSeconds": 0.173333333
+        },
+        {
+          "name": "visual_ball_strike",
+          "time": 0.38,
+          "atSeconds": 0.329333333
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.56,
+          "atSeconds": 0.485333333
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0.94,
+          "atSeconds": 0.814666667
+        },
+        {
+          "name": "visual_ready",
+          "time": 1,
+          "atSeconds": 0.866666667
+        },
+        {
+          "name": "visual_ground_release_LeftFoot",
+          "time": 1,
+          "atSeconds": 0.866666667
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 1,
+          "atSeconds": 0.866666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.329333333
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+        "sourceClip": "kick_power",
+        "sourceSha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "sourceDurationSeconds": 0.86,
+        "timeScale": 1.007751938
+      }
+    },
+    {
+      "id": "kick_curve",
+      "durationSeconds": 0.933333333,
+      "loop": false,
+      "keyframeCount": 29,
+      "events": [
+        {
+          "name": "visual_prepare",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 0.08,
+          "atSeconds": 0.074666667
+        },
+        {
+          "name": "visual_backswing",
+          "time": 0.2,
+          "atSeconds": 0.186666667
+        },
+        {
+          "name": "visual_ball_strike",
+          "time": 0.43,
+          "atSeconds": 0.401333333
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.61,
+          "atSeconds": 0.569333333
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0.94,
+          "atSeconds": 0.877333333
+        },
+        {
+          "name": "visual_ready",
+          "time": 1,
+          "atSeconds": 0.933333333
+        },
+        {
+          "name": "visual_ground_release_LeftFoot",
+          "time": 1,
+          "atSeconds": 0.933333333
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 1,
+          "atSeconds": 0.933333333
+        }
+      ],
+      "ballContactSeconds": [
+        0.401333333
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+        "sourceClip": "corner_kick",
+        "sourceSha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "sourceDurationSeconds": 0.92,
+        "timeScale": 1.014492754
+      }
+    },
+    {
+      "id": "pass_short",
+      "durationSeconds": 0.566666667,
+      "loop": false,
+      "keyframeCount": 18,
+      "events": [
+        {
+          "name": "visual_prepare",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 0.08,
+          "atSeconds": 0.045333333
+        },
+        {
+          "name": "visual_backswing",
+          "time": 0.2,
+          "atSeconds": 0.113333333
+        },
+        {
+          "name": "visual_ball_strike",
+          "time": 0.4,
+          "atSeconds": 0.226666667
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.58,
+          "atSeconds": 0.328666667
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0.94,
+          "atSeconds": 0.532666667
+        },
+        {
+          "name": "visual_ready",
+          "time": 1,
+          "atSeconds": 0.566666667
+        },
+        {
+          "name": "visual_ground_release_LeftFoot",
+          "time": 1,
+          "atSeconds": 0.566666667
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 1,
+          "atSeconds": 0.566666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.226666667
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+        "sourceClip": "pass_short",
+        "sourceSha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "sourceDurationSeconds": 0.58,
+        "timeScale": 0.977011494
+      }
+    },
+    {
+      "id": "pass_long",
+      "durationSeconds": 0.9,
+      "loop": false,
+      "keyframeCount": 28,
+      "events": [
+        {
+          "name": "visual_prepare",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_LeftFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 0.08,
+          "atSeconds": 0.072
+        },
+        {
+          "name": "visual_backswing",
+          "time": 0.2,
+          "atSeconds": 0.18
+        },
+        {
+          "name": "visual_ball_strike",
+          "time": 0.45,
+          "atSeconds": 0.405
+        },
+        {
+          "name": "visual_follow_through",
+          "time": 0.63,
+          "atSeconds": 0.567
+        },
+        {
+          "name": "visual_ground_acquire_RightFoot",
+          "time": 0.94,
+          "atSeconds": 0.846
+        },
+        {
+          "name": "visual_ready",
+          "time": 1,
+          "atSeconds": 0.9
+        },
+        {
+          "name": "visual_ground_release_LeftFoot",
+          "time": 1,
+          "atSeconds": 0.9
+        },
+        {
+          "name": "visual_ground_release_RightFoot",
+          "time": 1,
+          "atSeconds": 0.9
+        }
+      ],
+      "ballContactSeconds": [
+        0.405
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer/kicks-locomotion.json",
+        "sourceClip": "pass_long",
+        "sourceSha256": "19f305c46bfdc45fa3650bd84d6bb400fcc157fb3c54f485b85385427295e810",
+        "sourceDurationSeconds": 0.9,
+        "timeScale": 1.0
+      }
+    },
+    {
+      "id": "header",
+      "durationSeconds": 1.266666667,
+      "loop": false,
+      "keyframeCount": 39,
+      "events": [
+        {
+          "time": 0.21,
+          "name": "visual_takeoff",
+          "domain": "presentation",
+          "atSeconds": 0.266
+        },
+        {
+          "time": 0.52,
+          "name": "visual_contact",
+          "domain": "presentation",
+          "atSeconds": 0.658666667
+        },
+        {
+          "time": 0.8,
+          "name": "visual_land",
+          "domain": "presentation",
+          "atSeconds": 1.013333333
+        }
+      ],
+      "ballContactSeconds": [
+        0.658666667
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer.json",
+        "sourceClip": "header",
+        "sourceSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "sourceDurationSeconds": 1.25,
+        "timeScale": 1.013333333
+      }
+    },
+    {
+      "id": "dribble",
+      "durationSeconds": 0.933333333,
+      "loop": true,
+      "keyframeCount": 29,
+      "events": [
+        {
+          "time": 0.32,
+          "name": "visual_left_tap",
+          "domain": "presentation",
+          "atSeconds": 0.298666667
+        },
+        {
+          "time": 0.82,
+          "name": "visual_right_tap",
+          "domain": "presentation",
+          "atSeconds": 0.765333333
+        },
+        {
+          "time": 0,
+          "name": "visual_left_footstrike",
+          "domain": "presentation",
+          "atSeconds": 0
+        },
+        {
+          "time": 0.5,
+          "name": "visual_right_footstrike",
+          "domain": "presentation",
+          "atSeconds": 0.466666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.298666667,
+        0.765333333
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer.json",
+        "sourceClip": "dribble",
+        "sourceSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "sourceDurationSeconds": 0.92,
+        "timeScale": 1.014492754,
+        "adaptation": "Natural, restrained arm swings authored for soccer-v6; lower-body source remains canonical."
+      }
+    },
+    {
+      "id": "slide",
+      "durationSeconds": 1.466666667,
+      "loop": false,
+      "keyframeCount": 45,
+      "events": [
+        {
+          "time": 0.2,
+          "name": "visual_support_release",
+          "domain": "presentation",
+          "atSeconds": 0.293333333
+        },
+        {
+          "time": 0.43,
+          "name": "visual_contact",
+          "domain": "presentation",
+          "atSeconds": 0.630666667
+        },
+        {
+          "time": 0.62,
+          "name": "visual_palm_ground",
+          "domain": "presentation",
+          "atSeconds": 0.909333333
+        },
+        {
+          "time": 1,
+          "name": "visual_slide_settled",
+          "domain": "presentation",
+          "atSeconds": 1.466666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.630666667
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer.json",
+        "sourceClip": "slide_tackle",
+        "sourceSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "sourceDurationSeconds": 1.45,
+        "timeScale": 1.011494253,
+        "adaptation": "Authored support-palm grounding: smooth arm IK raises the left wrist 3cm and flattens fingers parallel to turf; lower-body source remains canonical."
+      }
+    },
+    {
+      "id": "fall",
+      "durationSeconds": 0.866666667,
+      "loop": false,
+      "keyframeCount": 27,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion/soccer.json",
+        "sourceClip": "fall",
+        "sourceSha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+        "sourceDurationSeconds": 0.85,
+        "timeScale": 1.019607843
+      }
+    },
+    {
+      "id": "getup",
+      "durationSeconds": 1.1,
+      "loop": false,
+      "keyframeCount": 34,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion/soccer.json",
+        "sourceClip": "recover",
+        "sourceSha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+        "sourceDurationSeconds": 1.1,
+        "timeScale": 1.0
+      }
+    },
+    {
+      "id": "celebrate",
+      "durationSeconds": 1.8,
+      "loop": false,
+      "keyframeCount": 55,
+      "events": [
+        {
+          "name": "ground_LeftFoot_begin",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "ground_RightFoot_begin",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "presentation_goal_arms_up",
+          "time": 0.18,
+          "atSeconds": 0.324
+        },
+        {
+          "name": "ground_RightFoot_end",
+          "time": 0.2,
+          "atSeconds": 0.36
+        },
+        {
+          "name": "presentation_goal_step",
+          "time": 0.38,
+          "atSeconds": 0.684
+        },
+        {
+          "name": "presentation_goal_hold",
+          "time": 0.62,
+          "atSeconds": 1.116
+        },
+        {
+          "name": "ground_RightFoot_begin",
+          "time": 0.83,
+          "atSeconds": 1.494
+        },
+        {
+          "name": "ground_LeftFoot_end",
+          "time": 1,
+          "atSeconds": 1.8
+        },
+        {
+          "name": "ground_RightFoot_end",
+          "time": 1,
+          "atSeconds": 1.8
+        },
+        {
+          "name": "presentation_celebration_settled",
+          "time": 1,
+          "atSeconds": 1.8
+        }
+      ],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer/tackles-reactions.json",
+        "sourceClip": "goal_celebration",
+        "sourceSha256": "5a9b9143dbd38f438823e30c785c50511a161ced27d707c38cfec0bc5ce54e43",
+        "sourceDurationSeconds": 1.8,
+        "timeScale": 1.0
+      }
+    },
+    {
+      "id": "keeper_dive_left",
+      "durationSeconds": 1.466666667,
+      "loop": false,
+      "keyframeCount": 45,
+      "events": [
+        {
+          "time": 0.18,
+          "name": "visual_push_off",
+          "domain": "presentation",
+          "atSeconds": 0.264
+        },
+        {
+          "time": 0.5,
+          "name": "visual_glove_contact",
+          "domain": "presentation",
+          "atSeconds": 0.733333333
+        },
+        {
+          "time": 0.82,
+          "name": "visual_side_land",
+          "domain": "presentation",
+          "atSeconds": 1.202666667
+        },
+        {
+          "time": 1,
+          "name": "visual_dive_settled",
+          "domain": "presentation",
+          "atSeconds": 1.466666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.733333333
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer.json",
+        "sourceClip": "keeper_dive_side_left",
+        "sourceSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "sourceDurationSeconds": 1.45,
+        "timeScale": 1.011494253
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "durationSeconds": 1.466666667,
+      "loop": false,
+      "keyframeCount": 45,
+      "events": [
+        {
+          "time": 0.18,
+          "name": "visual_push_off",
+          "domain": "presentation",
+          "atSeconds": 0.264
+        },
+        {
+          "time": 0.5,
+          "name": "visual_glove_contact",
+          "domain": "presentation",
+          "atSeconds": 0.733333333
+        },
+        {
+          "time": 0.82,
+          "name": "visual_side_land",
+          "domain": "presentation",
+          "atSeconds": 1.202666667
+        },
+        {
+          "time": 1,
+          "name": "visual_dive_settled",
+          "domain": "presentation",
+          "atSeconds": 1.466666667
+        }
+      ],
+      "ballContactSeconds": [
+        0.733333333
+      ],
+      "source": {
+        "method": "Resampled original CC0 authored repository clip; no captured mocap",
+        "license": "CC0-1.0",
+        "capturedMocap": false,
+        "sourcePath": "workout/island/design/motion2/soccer.json",
+        "sourceClip": "keeper_dive_side_right",
+        "sourceSha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "sourceDurationSeconds": 1.45,
+        "timeScale": 1.011494253
+      }
+    },
+    {
+      "id": "keeper_ready",
+      "durationSeconds": 2.0,
+      "loop": true,
+      "keyframeCount": 61,
+      "events": [],
+      "ballContactSeconds": [],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    },
+    {
+      "id": "keeper_catch",
+      "durationSeconds": 0.9,
+      "loop": false,
+      "keyframeCount": 28,
+      "events": [
+        {
+          "name": "presentation_glove_contact",
+          "time": 0.32,
+          "atSeconds": 0.288
+        },
+        {
+          "name": "presentation_ball_secured",
+          "time": 0.68,
+          "atSeconds": 0.612
+        }
+      ],
+      "ballContactSeconds": [
+        0.288,
+        0.288
+      ],
+      "source": {
+        "method": "Original authored analytic phase curves and two-link IK, sampled at exactly 30 Hz",
+        "license": "CC0-1.0",
+        "capturedMocap": false
+      }
+    }
+  ]
+}

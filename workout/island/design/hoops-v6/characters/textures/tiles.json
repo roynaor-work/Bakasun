@@ -1,0 +1,82 @@
+{
+  "dimensions": [
+    1024,
+    1024
+  ],
+  "pixelOrigin": "top-left",
+  "uvOrigin": "bottom-left",
+  "tiles": {
+    "skin": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "shoes": [
+      512,
+      0,
+      256,
+      256
+    ],
+    "hair": [
+      768,
+      0,
+      256,
+      256
+    ],
+    "eyes": [
+      512,
+      256,
+      128,
+      128
+    ],
+    "eyebrows": [
+      640,
+      256,
+      128,
+      128
+    ],
+    "eyelashes": [
+      768,
+      256,
+      128,
+      128
+    ],
+    "solid": [
+      896,
+      256,
+      128,
+      128
+    ],
+    "jersey": [
+      0,
+      512,
+      512,
+      512
+    ],
+    "shorts": [
+      512,
+      512,
+      512,
+      512
+    ]
+  },
+  "uvTransform": "u=(x+u*w)/1024; v=(1024-y-h+v*h)/1024",
+  "teamMask": "Delivered glTF uv.y > 0.5; preserve near-black number and referee stripes",
+  "maps": {
+    "basecolor": "sRGB RGBA; alpha mask for hair/brows/lashes only",
+    "normal": "linear tangent-space OpenGL +Y",
+    "orm": "linear: R ambient occlusion, G roughness, B metallic"
+  },
+  "cloth": "Neutral white with woven normal, side seam and hem relief. Team tint is applied at runtime.",
+  "numbers": {
+    "pg": "01",
+    "sg": "02",
+    "sf": "03",
+    "pf": "04",
+    "c": "05",
+    "referee": null
+  },
+  "source": "Repository hoops-v4 MakeHuman textures; see parent LICENSES.md",
+  "sourceBlenderMask": "uv.y < 0.5"
+}

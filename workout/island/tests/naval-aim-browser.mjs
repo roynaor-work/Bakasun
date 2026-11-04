@@ -68,9 +68,9 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
  // Exit keeps the save valid and unchanged in shape.
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,18);report.saveVersion=saved.version;
  if(viewport.width===844){
-  // Swapped sides: the aim button and pad move under the left thumb.
+  // A saved 'left' hand is ignored: stick stays on the left, fire and pad on the right.
   await page.evaluate(()=>localStorage.setItem('island.naval.hand','left'));await fresh();const fire=await page.locator('#shoot').boundingBox(),pad=await page.locator('.naval-aim-zone').boundingBox(),stickZone=await page.locator('.naval-stick-zone').boundingBox();
-  assert.ok(fire.x<viewport.width/2&&pad.x<viewport.width/2&&stickZone.x>viewport.width/3,'left-handed layout');await capture('5-left-handed');
+  assert.ok(fire.x>viewport.width/2&&pad.x+pad.width/2>viewport.width/2&&stickZone.x+stickZone.width/2<viewport.width/2,'stick always left');assert.equal(await page.locator('.game-controls.left-handed').count(),0);await capture('5-saved-left-ignored');
   const point={x:fire.x+fire.width/2,y:fire.y+fire.height/2};await touch('touchStart',[point]);await tick(500);await touch('touchEnd');await tick(40);assert.equal((await snap()).fired,1);await exit();await page.evaluate(()=>localStorage.removeItem('island.naval.hand'));report.leftHanded=true;
  }
  return report;

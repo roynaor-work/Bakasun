@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "targetFps": 30,
+  "defaultTier": "balanced",
+  "adaptive": {
+    "warmupSeconds": 6,
+    "sampleWindowSeconds": 3,
+    "downgradeFrameP90Ms": 39,
+    "downgradeWorkP90Ms": 27,
+    "downgradeWindows": 2,
+    "upgradeWorkP90Ms": 16,
+    "upgradeFrameP90Ms": 36,
+    "upgradeWindows": 6,
+    "cooldownSeconds": 12,
+    "ignoreHiddenTabs": true,
+    "ignoreResumeFrames": 3,
+    "emergencyWorkMs": 65
+  },
+  "effects": {
+    "colorGrade": {
+      "soccer": {
+        "exposure": 1.05,
+        "contrast": 1.035,
+        "saturation": 0.94,
+        "warmth": 0.018
+      },
+      "basketball": {
+        "exposure": 1.08,
+        "contrast": 1.05,
+        "saturation": 0.92,
+        "warmth": 0.032
+      }
+    },
+    "vignette": {
+      "strength": 0.16,
+      "innerRadius": 0.36
+    },
+    "bloom": {
+      "threshold": 0.78,
+      "softKnee": 0.18,
+      "strength": 0.13,
+      "radiusQuarterPixels": 1.6
+    },
+    "simulatedDof": {
+      "maxRadiusCssPixels": 1.2,
+      "depthEdgeGuardMetres": 2.5,
+      "samples": 5,
+      "focus": "smoothed camera target distance",
+      "hudExcluded": true
+    },
+    "motionBlur": {
+      "maxRadiusCssPixels": 0.65,
+      "samples": 3,
+      "model": "projected camera-target drift only; no object velocity or temporal accumulation",
+      "cutReset": true,
+      "hudExcluded": true
+    }
+  },
+  "tiers": {
+    "economy": {
+      "label": "חסכונית",
+      "renderScale": 0.75,
+      "maxDpr": 1,
+      "bloom": false,
+      "dof": false,
+      "motionBlur": false,
+      "shadowMap": 512,
+      "crowdCount": 96,
+      "lod0Distance": 0,
+      "textureMax": 1024,
+      "maxDrawCalls": 55,
+      "maxSceneTriangles": 80000,
+      "postDrawCalls": 1,
+      "postSamples": 1,
+      "antialias": false
+    },
+    "balanced": {
+      "label": "מאוזנת",
+      "renderScale": 0.9,
+      "maxDpr": 1.25,
+      "bloom": true,
+      "dof": true,
+      "motionBlur": true,
+      "shadowMap": 1024,
+      "crowdCount": 192,
+      "lod0Distance": 0,
+      "textureMax": 1024,
+      "maxDrawCalls": 60,
+      "maxSceneTriangles": 110000,
+      "postDrawCalls": 2,
+      "postSamples": 26,
+      "antialias": true
+    },
+    "high": {
+      "label": "גבוהה",
+      "renderScale": 1,
+      "maxDpr": 1.5,
+      "bloom": true,
+      "dof": true,
+      "motionBlur": true,
+      "shadowMap": 1024,
+      "crowdCount": 288,
+      "lod0Distance": 9,
+      "textureMax": 1024,
+      "maxDrawCalls": 65,
+      "maxSceneTriangles": 150000,
+      "postDrawCalls": 2,
+      "postSamples": 26,
+      "antialias": true
+    }
+  },
+  "fallback": {
+    "noDepthTexture": "disable simulated DOF",
+    "noWebGL2": "economy with WebGL1 depth extension only if available",
+    "contextLoss": "pause; rebuild resources on restoration",
+    "reducedMotion": "disable motion blur and crowd sway; keep camera interpolation",
+    "historyReset": "sport switch or context restoration"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-04",
+  "unit": "MB = 1,000,000 bytes",
+  "scope": "Only new files under hoops-v6/arena and hoops-v6/hud",
+  "excludes": "This inventory file to avoid a circular hash",
+  "fileCountExcludingInventory": 32,
+  "totalBytesExcludingInventory": 4026394,
+  "files": [
+    {
+      "path": "arena/README.md",
+      "bytes": 2730,
+      "MB": 0.00273,
+      "sha256": "1f97d5243ebeb35e5b862348ba8a36fdef9ea478e9ff9ced276683fc8ef9d1a2"
+    },
+    {
+      "path": "arena/REPORT.md",
+      "bytes": 5932,
+      "MB": 0.005932,
+      "sha256": "0ed825541e3547025834ac018eab143e19c822048387a7b304f52f4d7983e636"
+    },
+    {
+      "path": "arena/actors/README.md",
+      "bytes": 3847,
+      "MB": 0.003847,
+      "sha256": "ed8c477ea9bf9b756169985f62d3ae5789cada0c7e017e92a0d796f9e6f2f241"
+    },
+    {
+      "path": "arena/actors/actor-lod0.glb",
+      "bytes": 658408,
+      "MB": 0.658408,
+      "sha256": "925ea37d426b4acc00ab5e5b6da4b82d858150fbbd59351b1648cc8729721323"
+    },
+    {
+      "path": "arena/actors/actor-lod1.glb",
+      "bytes": 630708,
+      "MB": 0.630708,
+      "sha256": "be15f1306775fd681b25f294c41ee1f8debfd1701f8329f470bb50881772d01e"
+    },
+    {
+      "path": "arena/actors/actor-manifest.json",
+      "bytes": 3585,
+      "MB": 0.003585,
+      "sha256": "421b3102fa414fd86e95f06423c9f1887c815df4325abf88cb432ec564bcd0c5"
+    },
+    {
+      "path": "arena/actors/atlas-ember.png",
+      "bytes": 450476,
+      "MB": 0.450476,
+      "sha256": "6224e94a9176b01bd63ca3a872dcc30fec6c4e867d4c517f0ee0496e0c4b7a72"
+    },
+    {
+      "path": "arena/actors/atlas-neutral.png",
+      "bytes": 450713,
+      "MB": 0.450713,
+      "sha256": "b6f67fd806ed2a13b63b06b03b41a6540cdc235c068417e80b3ced800095bbaf"
+    },
+    {
+      "path": "arena/actors/atlas-normal.png",
+      "bytes": 17890,
+      "MB": 0.01789,
+      "sha256": "c9c300b87ae0be35bd0d5eeffa6ec6333de7aa871bd80f2d8277c6a1b8552052"
+    },
+    {
+      "path": "arena/actors/atlas-tide.png",
+      "bytes": 450450,
+      "MB": 0.45045,
+      "sha256": "96ce2a027a6583bca1ca6362e4455168760ecf3d1d9768b094a443061f779d06"
+    },
+    {
+      "path": "arena/actors/photographers.js",
+      "bytes": 4998,
+      "MB": 0.004998,
+      "sha256": "ee928a790817edecfbb4e7f3e99990ff1636ad813533b1b380cb1fb32f79ecb1"
+    },
+    {
+      "path": "arena/actors/source/build-actors.mjs",
+      "bytes": 11047,
+      "MB": 0.011047,
+      "sha256": "2092065b59779bf384eae8b950116a062fd8acd81e9c8eadaf0a94732e13709b"
+    },
+    {
+      "path": "arena/actors/validation.json",
+      "bytes": 1466,
+      "MB": 0.001466,
+      "sha256": "bb0247896b9a2533ede08c24393cc8da2d9650c21ac1a66943100af807f895ab"
+    },
+    {
+      "path": "arena/arena-provenance.json",
+      "bytes": 3016,
+      "MB": 0.003016,
+      "sha256": "0c5b4692ea81db862a6580b8b7b56da723920d2423e6ff5718ed531f2a9038d2"
+    },
+    {
+      "path": "arena/arena-scene.js",
+      "bytes": 19217,
+      "MB": 0.019217,
+      "sha256": "c4320656b13ed05e7cdf555e53fcd2721bcaa54361e317b1b0efb064ce3209d3"
+    },
+    {
+      "path": "arena/arena-shell.glb",
+      "bytes": 181496,
+      "MB": 0.181496,
+      "sha256": "7e8b858fd6eeba8365ecc417828f9a8f0d36f5173e25057e217fbc8085539c65"
+    },
+    {
+      "path": "arena/crowd-atlas.webp",
+      "bytes": 185384,
+      "MB": 0.185384,
+      "sha256": "72fb298e41723c548c5856af5ff37490a0634e832aac6da891e18c737a83545e"
+    },
+    {
+      "path": "arena/parquet-albedo.webp",
+      "bytes": 88698,
+      "MB": 0.088698,
+      "sha256": "0094a14dccf5e6a53fdf18d652aa313bb105782fd284ff268e640e12289e02ea"
+    },
+    {
+      "path": "arena/parquet-normal.webp",
+      "bytes": 7514,
+      "MB": 0.007514,
+      "sha256": "068559ca22eca0d9f9e4cf8b68044a12f66dc8abf90161c8fe3312b96ebbb3da"
+    },
+    {
+      "path": "arena/parquet-roughness.webp",
+      "bytes": 46442,
+      "MB": 0.046442,
+      "sha256": "d8993d37cca1246079b0477d7d91bc533bf859be98690e564ee72d514d6cb8ad"
+    },
+    {
+      "path": "arena/preview.css",
+      "bytes": 1448,
+      "MB": 0.001448,
+      "sha256": "3e438cf2295cb6ed20d9ea40731eee90cbd2bc31a5732e936a8a3e71fae10ba3"
+    },
+    {
+      "path": "arena/preview.html",
+      "bytes": 1236,
+      "MB": 0.001236,
+      "sha256": "ec7c988e9208a8a54528b916d6b6e242ec53dca5d4b95e99681e0020ee7f84ad"
+    },
+    {
+      "path": "arena/preview.js",
+      "bytes": 9905,
+      "MB": 0.009905,
+      "sha256": "1e40c669881efba50a8f0486e3095afa6c85787c3ab11abe4a0a79218436fe17"
+    },
+    {
+      "path": "arena/source/create-textures.py",
+      "bytes": 4767,
+      "MB": 0.004767,
+      "sha256": "61faabc31ad979810e25395764b4eec97a839f13738a24dae812ba8bdee4fb13"
+    },
+    {
+      "path": "arena/source/export-shell.mjs",
+      "bytes": 3282,
+      "MB": 0.003282,
+      "sha256": "0d872dab1ab1db78b4a4c2619912d46c087fc0abb98328458051e45efcb6cccd"
+    },
+    {
+      "path": "arena/verification/arena-390x844.png",
+      "bytes": 390403,
+      "MB": 0.390403,
+      "sha256": "8b15bc10b6338c7b33dad7adc109d63217bbfc2cb4a7d52e9ead509f368d31d8"
+    },
+    {
+      "path": "arena/verification/arena-844x390.png",
+      "bytes": 353924,
+      "MB": 0.353924,
+      "sha256": "5bec62a57d2f07f9a37d2c2212025c7a2920ccaf3cf16045c23234450fd7a0b0"
+    },
+    {
+      "path": "arena/verification/repository-checks.json",
+      "bytes": 975,
+      "MB": 0.000975,
+      "sha256": "9cde1bfcc6c1a4bf10bbb6d698e6ec0b5824d29dbe05237ecffa759f47695081"
+    },
+    {
+      "path": "arena/verification/shell-decode.json",
+      "bytes": 414,
+      "MB": 0.000414,
+      "sha256": "f3b62c993c598c69d8151a2d26b2210eead88ce2524984c23598d869c8426222"
+    },
+    {
+      "path": "arena/verification/validation.json",
+      "bytes": 17376,
+      "MB": 0.017376,
+      "sha256": "4adacd62c46560d16501231a80babf11b9fd037145e87d1a62177d790b07ff4e"
+    },
+    {
+      "path": "hud/broadcast-hud.css",
+      "bytes": 11071,
+      "MB": 0.011071,
+      "sha256": "82487743ec9890a59dc98c326e5c89503147fc2b68965dd1bd296de3746777ba"
+    },
+    {
+      "path": "hud/broadcast-hud.js",
+      "bytes": 7576,
+      "MB": 0.007576,
+      "sha256": "f0780e5922f452d7cbc0e8bcbcdd38895d6183408de081d12e3e9f38be1a43aa"
+    }
+  ]
+}

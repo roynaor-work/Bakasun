@@ -1,0 +1,258 @@
+[
+ {
+  "renderer": "render stubbed (input+sim path at 60 Hz rAF)",
+  "viewport": "844x390",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 274,
+    "w": 104,
+    "h": 104
+   },
+   "ring": {
+    "x": 12,
+    "y": 274,
+    "w": 104,
+    "h": 104
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 680,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 608,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 680,
+     "y": 242,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 752,
+     "y": 226,
+     "w": 80,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1.1,
+   "eventToRender2cm": 35.8,
+   "eventToRender5cm": 67,
+   "frameMedian": 16.7,
+   "frameP95": 22.9
+  },
+  "errors": []
+ },
+ {
+  "renderer": "render stubbed (input+sim path at 60 Hz rAF)",
+  "viewport": "390x844",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 736,
+    "w": 96,
+    "h": 96
+   },
+   "ring": {
+    "x": 12,
+    "y": 736,
+    "w": 96,
+    "h": 96
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 250,
+     "y": 696,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 250,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 186,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 314,
+     "y": 768,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "trials": 8,
+  "median": {
+   "eventToConsume": 0.4,
+   "eventToRender2cm": 41.4,
+   "eventToRender5cm": 79.8,
+   "frameMedian": 16.8,
+   "frameP95": 25.5
+  },
+  "errors": []
+ },
+ {
+  "renderer": "full SwiftShader render (software GL, slow frames)",
+  "viewport": "844x390",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 274,
+    "w": 104,
+    "h": 104
+   },
+   "ring": {
+    "x": 12,
+    "y": 274,
+    "w": 104,
+    "h": 104
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 680,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 608,
+     "y": 314,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 680,
+     "y": 242,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 752,
+     "y": 226,
+     "w": 80,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1.1,
+   "eventToRender2cm": 9.5,
+   "eventToRender5cm": 9.5,
+   "frameMedian": 285.3,
+   "frameP95": 313.9
+  },
+  "errors": []
+ },
+ {
+  "renderer": "full SwiftShader render (software GL, slow frames)",
+  "viewport": "390x844",
+  "geometry": {
+   "zone": {
+    "x": 12,
+    "y": 736,
+    "w": 96,
+    "h": 96
+   },
+   "ring": {
+    "x": 12,
+    "y": 736,
+    "w": 96,
+    "h": 96
+   },
+   "actions": [
+    {
+     "key": "pass",
+     "x": 250,
+     "y": 696,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "move",
+     "x": 250,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "fake",
+     "x": 186,
+     "y": 768,
+     "w": 56,
+     "h": 64
+    },
+    {
+     "key": "sprint",
+     "x": 314,
+     "y": 768,
+     "w": 64,
+     "h": 64
+    },
+    {
+     "key": "timeout",
+     "x": 72,
+     "y": 12,
+     "w": 48,
+     "h": 48
+    }
+   ]
+  },
+  "trials": 8,
+  "median": {
+   "eventToConsume": 1.2,
+   "eventToRender2cm": 9.2,
+   "eventToRender5cm": 9.2,
+   "frameMedian": 285.1,
+   "frameP95": 305
+  },
+  "errors": []
+ }
+]

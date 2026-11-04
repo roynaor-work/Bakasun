@@ -16,7 +16,7 @@ await verify(before?'naval-honest-before':'naval-honest',sizes,async({page,conte
  await page.evaluate(left=>{const {engine,data,games}=window.__island;engine.tick=()=>({ok:true});data.featureFlags.events=false;games.now=()=>0;engine.state.minigameProgress.navalDuel.stage=3;data.config.minigames.navalDuel.render.fallbackFrameMs=10000;localStorage.setItem('island.naval.hand',left?'left':'right');},left);
  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(1200);
  const drive=input=>page.evaluate(input=>window.__island.games.current.session.debug.drive(.02,input),input);
- const b=await page.locator('#shoot').boundingBox(),pad={x:b.x+b.width/2+(left?1:-1)*viewport.width*.27,y:b.y+b.height/2-40};
+ const b=await page.locator('#shoot').boundingBox(),pad={x:b.x+b.width/2+-viewport.width*.27,y:b.y+b.height/2-40};
  const hold=async()=>{if(phone)await touch('touchStart',[pad]);else{await page.mouse.move(pad.x,pad.y);await page.mouse.down();}};
  const release=async()=>{if(phone)await touch('touchEnd');else await page.mouse.up();};
  // Turret settings (yaw + reach, what the drag sets) that land on a water point `ahead` seconds from now.

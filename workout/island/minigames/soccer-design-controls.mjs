@@ -31,6 +31,15 @@ export function soccerDesignLayout(contract,width,height,rightHanded=true){
   }));
 }
 
+/** The floating-stick pad: always the lower-left, never wider than the gap before the first action
+ * button (8 px clear), so the pad and the action buttons can never intersect. */
+export function soccerPadRect(layout,width,height,geometry={widthPct:46,heightPct:60}){
+  const actions=['primary','secondary','sprint','trick'].map(name=>layout[name]).filter(Boolean),firstAction=Math.min(width,...actions.map(slot=>slot.x));
+  const stick=layout.stick,minWidth=stick?stick.x+stick.width:0;
+  const w=Math.max(minWidth,Math.min(width*geometry.widthPct/100,firstAction-8)),h=Math.max(stick?stick.height+(stick.offset_y||0):0,height*geometry.heightPct/100);
+  return {left:0,top:height-h,width:w,height:h,right:w,bottom:height};
+}
+
 export function applySoccerDesignLayout({root,nodes,contract,width,height,rightHanded=true}){
   const layout=soccerDesignLayout(contract,width,height,rightHanded);root.dataset.designControls='true';
   for(const [slot,node]of Object.entries(nodes)){
@@ -45,7 +54,17 @@ export function applySoccerDesignLayout({root,nodes,contract,width,height,rightH
 
 /** Pure recognizer, independent of DOM clocks. Cancellation clears an unfinished
  * charge through onCancel; it never invents a release that could shoot. */
-export function createSoccerGestureRecognizer({thresholds,onCancel=()=>{}}){
+/** Stick response: dead zone, then a curve that reaches full speed at `saturation` of the travel
+ * with finer control at small tilts (`expo`). Without `feel` it is the contract's linear stick. */
+export function shapeStick(raw,thresholds,feel){
+  const m=Math.min(1,Math.max(0,raw));
+  if(!feel)return m<thresholds.stick_dead_zone?0:m;
+  const dead=feel.deadZone??thresholds.stick_dead_zone,sat=Math.max(dead+.05,Math.min(1,feel.saturation??1));
+  if(m<dead)return 0;
+  return Math.min(1,(m-dead)/(sat-dead))**(feel.expo??1);
+}
+
+export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=>{}}){
   let enabled=false,key='',allowed=new Set(),stick=null,movement={x:0,z:0},sprintSince=null,autoSprint=false,switchPulse=false;
   const actions=new Map(),arrows=new Set();
   const reset=()=>{stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;switchPulse=false;actions.clear();arrows.clear();onCancel();};
@@ -64,9 +83,11 @@ export function createSoccerGestureRecognizer({thresholds,onCancel=()=>{}}){
   const updateStick=(x,y,time,zones=[])=>{
     if(!stick)return;
     if(stick.mode==='action'){const action=actionByPointer(stick.pointer);if(action)moveAction(action,x,y);return;}
-    const dx=x-(stick.rect.left+stick.rect.width/2),dz=y-(stick.rect.top+stick.rect.height/2),radius=Math.min(stick.rect.width,stick.rect.height)/2,length=Math.hypot(dx,dz),factor=length>radius?radius/length:1;
-    movement=length/radius<thresholds.stick_dead_zone?{x:0,z:0}:{x:dx*factor/radius,z:dz*factor/radius};
-    const magnitude=Math.hypot(movement.x,movement.z);
+    const dx=x-(stick.rect.left+stick.rect.width/2),dz=y-(stick.rect.top+stick.rect.height/2),radius=Math.min(stick.rect.width,stick.rect.height)/2,length=Math.hypot(dx,dz);
+    const shaped=shapeStick(length/radius,thresholds,feel);
+    movement=shaped===0?{x:0,z:0}:{x:dx/length*shaped,z:dz/length*shaped};
+    // One-finger sprint keeps the contract's geometry: it reads the physical tilt, not the curve.
+    const magnitude=Math.min(1,length/radius);
     if(magnitude>=thresholds.one_finger_sprint_on){if(sprintSince===null)sprintSince=time;}
     else if(!autoSprint||magnitude<thresholds.one_finger_sprint_off){sprintSince=null;if(magnitude<thresholds.one_finger_sprint_off)autoSprint=false;}
     const hit=zones.find(zone=>allowed.has(zone.action)&&x>=zone.rect.left&&x<=zone.rect.right&&y>=zone.rect.top&&y<=zone.rect.bottom);
@@ -114,18 +135,31 @@ export function createSoccerGestureRecognizer({thresholds,onCancel=()=>{}}){
 
 /** Soccer owns this recognizer; other games keep the shared controls module. */
 export function createSoccerDesignInput({root,nodes,config,interaction,onGesture=()=>{},onCancel=()=>{},autoAim,now=()=>performance.now()}){
-  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,onCancel}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
+  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,feel:config.stick||null,onCancel}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
   const window=root.ownerDocument.defaultView,document=root.ownerDocument,stick=root.querySelector('#joystick'),knob=root.querySelector('#knob');
   let allowed=new Set(),enabled=false,viewportWidth=window.innerWidth,viewportHeight=window.innerHeight;
   const point=event=>[event.clientX??0,event.clientY??0];
   const capture=(node,id)=>{try{node.setPointerCapture(id);captures.set(id,node);}catch{}};
   const release=id=>{const node=captures.get(id);captures.delete(id);try{if(node?.hasPointerCapture(id))node.releasePointerCapture(id);}catch{}};
-  function reset(){recognizer.reset();keys.clear();for(const id of [...captures.keys()])release(id);for(const node of Object.values(nodes))node?.classList?.remove('held');if(knob)knob.style.transform='translate(0px,0px)';}
+  function reset(){recognizer.reset();keys.clear();for(const id of [...captures.keys()])release(id);for(const node of Object.values(nodes))node?.classList?.remove('held');if(knob)knob.style.transform='translate(0px,0px)';if(floating)home();}
   const zones=()=>Object.entries(channels).filter(([slot,name])=>allowed.has(name)&&nodes[slot]&&!nodes[slot].hidden&&!nodes[slot].disabled).map(([slot,action])=>({action,rect:nodes[slot].getBoundingClientRect()}));
-  const zone=nodes.stick;
-  zone.addEventListener('pointerdown',event=>{if(recognizer.beginStick(event.pointerId,...point(event),stick.getBoundingClientRect(),now())){event.preventDefault();onGesture();capture(zone,event.pointerId);}},options);
-  zone.addEventListener('pointermove',event=>{recognizer.move(event.pointerId,...point(event),now(),zones());},options);
-  zone.addEventListener('pointerup',event=>{recognizer.end(event.pointerId,...point(event),now());release(event.pointerId);},options);
+  const zone=nodes.stick,pad=nodes.pad||zone,floating=pad!==zone;
+  // Floating stick: any touch inside the left pad puts the stick under the thumb (kept inside the
+  // pad); a release returns it to its home slot. `translate` leaves the layout's own transform alone.
+  function home(){zone.style.translate='';}
+  function floatRect(x,y){
+    home();const base=stick.getBoundingClientRect(),area=pad.getBoundingClientRect(),w=base.width,h=base.height;
+    const cx=Math.min(Math.max(x,area.left+w/2),Math.max(area.left+w/2,area.right-w/2)),cy=Math.min(Math.max(y,area.top+h/2),Math.max(area.top+h/2,area.bottom-h/2));
+    zone.style.translate=`${cx-(base.left+w/2)}px ${cy-(base.top+h/2)}px`;
+    return {left:cx-w/2,top:cy-h/2,width:w,height:h,right:cx+w/2,bottom:cy+h/2};
+  }
+  if(floating)zone.style.pointerEvents='none';
+  pad.addEventListener('pointerdown',event=>{
+    const [x,y]=point(event),rect=floating?floatRect(x,y):stick.getBoundingClientRect();
+    if(recognizer.beginStick(event.pointerId,x,y,rect,now())){event.preventDefault();onGesture();capture(pad,event.pointerId);}else if(floating)home();
+  },options);
+  pad.addEventListener('pointermove',event=>{recognizer.move(event.pointerId,...point(event),now(),zones());},options);
+  pad.addEventListener('pointerup',event=>{recognizer.end(event.pointerId,...point(event),now());release(event.pointerId);if(floating)home();},options);
   for(const [slot,channel]of Object.entries(channels)){
     const node=nodes[slot];if(!node)continue;
     node.addEventListener('pointerdown',event=>{if(!node.disabled&&!node.hidden&&recognizer.begin(channel,event.pointerId,...point(event),node.getBoundingClientRect(),now())){event.preventDefault();onGesture();suppressed.set(node,now()+600);capture(node,event.pointerId);}},options);
@@ -134,7 +168,7 @@ export function createSoccerDesignInput({root,nodes,config,interaction,onGesture
     node.addEventListener('click',event=>{if(event.detail!==0||event.pointerType||!enabled||node.hidden||node.disabled||now()<(suppressed.get(node)||0))return;const rect=node.getBoundingClientRect(),x=rect.left+rect.width/2,y=rect.top+rect.height/2,id=`assistive:${channel}`;if(recognizer.begin(channel,id,x,y,rect,now())){onGesture();recognizer.end(id,x,y,now());}},options);
     node.addEventListener('blur',()=>{if([...keys.values()].some(key=>key.node===node))reset();},options);
   }
-  for(const node of [zone,...Object.keys(channels).map(slot=>nodes[slot])].filter(Boolean))for(const type of ['pointercancel','lostpointercapture'])node.addEventListener(type,event=>{recognizer.cancelPointer(event.pointerId);release(event.pointerId);},options);
+  for(const node of [pad,...Object.keys(channels).map(slot=>nodes[slot])].filter(Boolean))for(const type of ['pointercancel','lostpointercapture'])node.addEventListener(type,event=>{recognizer.cancelPointer(event.pointerId);release(event.pointerId);if(node===pad&&floating)home();},options);
   function keyboardAction(event){
     if(event.target?.matches?.('input,select,textarea,[contenteditable=true]'))return null;
     if(event.target?.matches?.('button')){
