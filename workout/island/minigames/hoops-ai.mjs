@@ -260,10 +260,13 @@ function handlerMove(api,p,t){
  // backward passes without one of those are not thrown, and never straight back to the man who
  // just gave me the ball.
  const hold=S.ball.dribbleT||0,pressure=passPressure(api,p,t);
- for(const q of api.onCourt(t)){
+ // a short chain only: two passes (three under pressure) before somebody must shoot or attack
+ const chain=T.ai.chain||0;
+ if(chain<(pressure>=1?2:1))for(const q of api.onCourt(t)){
   if(q===p)continue;
   if(S.frontcourtSet&&!api.court.frontcourt(s,q.x))continue;
   if(!laneClear(api,t,p,q,0.7))continue;
+  if(d-api.court.distToRim(s,q.x,q.z)<1&&pressure<2&&clock>=5)continue;
   const qOpen=openness(api,t,q),three=api.court.points(s,q.x,q.z)===3;
   const qShot=shotValue(api,q,t,rolePreference(q));
   const v=(qShot*0.92+(q.role==='cut'||q.role==='roll'?0.35:0)+receiverBonus(q,qOpen,three))*pref.pass;
