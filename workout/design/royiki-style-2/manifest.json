@@ -1,0 +1,883 @@
+{
+  "version": 1,
+  "title": "האימון שלי — 38 ההדגמות הנוספות",
+  "source": "workout/js/exercises.js",
+  "reference": "workout/design/royiki-style/manifest.json",
+  "referencePr": 244,
+  "selection": "Catalog order, excluding the 12 IDs in the PR 244 manifest. Two batches of 19.",
+  "format": "Self-contained SVG with native SMIL; static SVG posters; no scripts, fonts, bitmaps or external requests.",
+  "speed": 0.6,
+  "maxBytes": 60000,
+  "catalogCount": 50,
+  "previousCount": 12,
+  "exercises": [
+    {
+      "id": "jog",
+      "name": "ריצה קלה במקום",
+      "category": "warm",
+      "categoryName": "חימום",
+      "batch": 1,
+      "src": "animations/jog.svg",
+      "poster": "posters/jog.svg",
+      "bytes": 28423,
+      "posterBytes": 6474,
+      "durationMs": 1000,
+      "sourceCycleMs": 600,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "arm-circles",
+      "name": "סיבובי ידיים",
+      "category": "warm",
+      "categoryName": "חימום",
+      "batch": 1,
+      "src": "animations/arm-circles.svg",
+      "poster": "posters/arm-circles.svg",
+      "bytes": 27436,
+      "posterBytes": 6532,
+      "durationMs": 2133,
+      "sourceCycleMs": 1280,
+      "segments": 64,
+      "view": "front",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "ankle-hops",
+      "name": "קפיצות קפיץ",
+      "category": "warm",
+      "categoryName": "חימום",
+      "batch": 1,
+      "src": "animations/ankle-hops.svg",
+      "poster": "posters/ankle-hops.svg",
+      "bytes": 24647,
+      "posterBytes": 6575,
+      "durationMs": 767,
+      "sourceCycleMs": 460,
+      "segments": 40,
+      "view": "front",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "tuck-jumps",
+      "name": "קפיצות ברכיים לחזה",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/tuck-jumps.svg",
+      "poster": "posters/tuck-jumps.svg",
+      "bytes": 32819,
+      "posterBytes": 6477,
+      "durationMs": 1933,
+      "sourceCycleMs": 1160,
+      "segments": 58,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "star-jumps",
+      "name": "קפיצות כוכב",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/star-jumps.svg",
+      "poster": "posters/star-jumps.svg",
+      "bytes": 28003,
+      "posterBytes": 6537,
+      "durationMs": 1533,
+      "sourceCycleMs": 920,
+      "segments": 46,
+      "view": "front",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "broad-jump",
+      "name": "קפיצה לרוחק",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/broad-jump.svg",
+      "poster": "posters/broad-jump.svg",
+      "bytes": 53558,
+      "posterBytes": 6699,
+      "durationMs": 3267,
+      "sourceCycleMs": 1960,
+      "segments": 96,
+      "view": "side",
+      "prop": {
+        "type": "marks",
+        "from": -48,
+        "to": 58
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "single-leg-hops",
+      "name": "קפיצות על רגל אחת (כל רגל)",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/single-leg-hops.svg",
+      "poster": "posters/single-leg-hops.svg",
+      "bytes": 24633,
+      "posterBytes": 6495,
+      "durationMs": 1000,
+      "sourceCycleMs": 600,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "step-jumps",
+      "name": "קפיצה על מדרגה",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/step-jumps.svg",
+      "poster": "posters/step-jumps.svg",
+      "bytes": 50121,
+      "posterBytes": 6643,
+      "durationMs": 3133,
+      "sourceCycleMs": 1880,
+      "segments": 94,
+      "view": "side",
+      "prop": {
+        "type": "box",
+        "x": 118,
+        "y": 148,
+        "w": 60,
+        "h": 34
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "hall-sprint",
+      "name": "ריצה מהירה במסדרון",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/hall-sprint.svg",
+      "poster": "posters/hall-sprint.svg",
+      "bytes": 28942,
+      "posterBytes": 6575,
+      "durationMs": 867,
+      "sourceCycleMs": 520,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "run-jump",
+      "name": "ריצה וקפיצה לרוחק",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/run-jump.svg",
+      "poster": "posters/run-jump.svg",
+      "bytes": 54406,
+      "posterBytes": 6570,
+      "durationMs": 3633,
+      "sourceCycleMs": 2180,
+      "segments": 96,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "run-vertical",
+      "name": "ריצה וקפיצה לגובה",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/run-vertical.svg",
+      "poster": "posters/run-vertical.svg",
+      "bytes": 38762,
+      "posterBytes": 6574,
+      "durationMs": 2133,
+      "sourceCycleMs": 1280,
+      "segments": 64,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "bounding",
+      "name": "צעדי ענק במסדרון",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "batch": 1,
+      "src": "animations/bounding.svg",
+      "poster": "posters/bounding.svg",
+      "bytes": 31510,
+      "posterBytes": 6548,
+      "durationMs": 1533,
+      "sourceCycleMs": 920,
+      "segments": 46,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "shuttle-run",
+      "name": "ריצה מקיר לקיר",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/shuttle-run.svg",
+      "poster": "posters/shuttle-run.svg",
+      "bytes": 42137,
+      "posterBytes": 6811,
+      "durationMs": 2200,
+      "sourceCycleMs": 1320,
+      "segments": 66,
+      "view": "side",
+      "prop": {
+        "type": "walls"
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "reaction-sprint",
+      "name": "ריצה בצפצוף",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/reaction-sprint.svg",
+      "poster": "posters/reaction-sprint.svg",
+      "bytes": 51664,
+      "posterBytes": 6792,
+      "durationMs": 3900,
+      "sourceCycleMs": 2340,
+      "segments": 96,
+      "view": "side",
+      "prop": {
+        "type": "walls"
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "side-shuffle",
+      "name": "צעדי צד מקיר לקיר",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/side-shuffle.svg",
+      "poster": "posters/side-shuffle.svg",
+      "bytes": 27983,
+      "posterBytes": 6792,
+      "durationMs": 1800,
+      "sourceCycleMs": 1080,
+      "segments": 54,
+      "view": "front",
+      "prop": {
+        "type": "walls"
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "carioca",
+      "name": "צעדי צד עם הצלבה",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/carioca.svg",
+      "poster": "posters/carioca.svg",
+      "bytes": 26717,
+      "posterBytes": 6790,
+      "durationMs": 1533,
+      "sourceCycleMs": 920,
+      "segments": 46,
+      "view": "front",
+      "prop": {
+        "type": "walls"
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "skipping",
+      "name": "דילוגים במסדרון",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/skipping.svg",
+      "poster": "posters/skipping.svg",
+      "bytes": 27669,
+      "posterBytes": 6508,
+      "durationMs": 1400,
+      "sourceCycleMs": 840,
+      "segments": 42,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "floor-wall-run",
+      "name": "רצפה וקיר",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/floor-wall-run.svg",
+      "poster": "posters/floor-wall-run.svg",
+      "bytes": 57064,
+      "posterBytes": 6812,
+      "durationMs": 3200,
+      "sourceCycleMs": 1920,
+      "segments": 96,
+      "view": "side",
+      "prop": {
+        "type": "walls"
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "back-run",
+      "name": "ריצה לאחור",
+      "category": "speed",
+      "categoryName": "מהירות וזריזות",
+      "batch": 1,
+      "src": "animations/back-run.svg",
+      "poster": "posters/back-run.svg",
+      "bytes": 24956,
+      "posterBytes": 6518,
+      "durationMs": 733,
+      "sourceCycleMs": 440,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "v-ups",
+      "name": "סגירת ספר",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/v-ups.svg",
+      "poster": "posters/v-ups.svg",
+      "bytes": 36515,
+      "posterBytes": 6515,
+      "durationMs": 1833,
+      "sourceCycleMs": 1100,
+      "segments": 55,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "side-plank",
+      "name": "קרש על הצד (כל צד)",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/side-plank.svg",
+      "poster": "posters/side-plank.svg",
+      "bytes": 39721,
+      "posterBytes": 6625,
+      "durationMs": 4000,
+      "sourceCycleMs": 2400,
+      "segments": 96,
+      "view": "front",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "hollow-hold",
+      "name": "סירה",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/hollow-hold.svg",
+      "poster": "posters/hollow-hold.svg",
+      "bytes": 41940,
+      "posterBytes": 6552,
+      "durationMs": 4000,
+      "sourceCycleMs": 2400,
+      "segments": 96,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "flutter-kicks",
+      "name": "מספריים",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/flutter-kicks.svg",
+      "poster": "posters/flutter-kicks.svg",
+      "bytes": 21372,
+      "posterBytes": 6530,
+      "durationMs": 800,
+      "sourceCycleMs": 480,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "russian-twists",
+      "name": "סיבובים בישיבה",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/russian-twists.svg",
+      "poster": "posters/russian-twists.svg",
+      "bytes": 29982,
+      "posterBytes": 6631,
+      "durationMs": 1667,
+      "sourceCycleMs": 1000,
+      "segments": 51,
+      "view": "front",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "superman",
+      "name": "סופרמן",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/superman.svg",
+      "poster": "posters/superman.svg",
+      "bytes": 42582,
+      "posterBytes": 6526,
+      "durationMs": 2500,
+      "sourceCycleMs": 1500,
+      "segments": 75,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "plank-jacks",
+      "name": "פתח-סגור על הידיים",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/plank-jacks.svg",
+      "poster": "posters/plank-jacks.svg",
+      "bytes": 22396,
+      "posterBytes": 6554,
+      "durationMs": 1267,
+      "sourceCycleMs": 760,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "crab-kicks",
+      "name": "בעיטות סרטן",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/crab-kicks.svg",
+      "poster": "posters/crab-kicks.svg",
+      "bytes": 35243,
+      "posterBytes": 6517,
+      "durationMs": 2600,
+      "sourceCycleMs": 1560,
+      "segments": 78,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "mountain-climbers",
+      "name": "מטפסי הרים",
+      "category": "core",
+      "categoryName": "בטן",
+      "batch": 2,
+      "src": "animations/mountain-climbers.svg",
+      "poster": "posters/mountain-climbers.svg",
+      "bytes": 22125,
+      "posterBytes": 6554,
+      "durationMs": 1200,
+      "sourceCycleMs": 720,
+      "segments": 40,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "lunges",
+      "name": "ירידה לברך (כל רגל)",
+      "category": "legs",
+      "categoryName": "כוח רגליים",
+      "batch": 2,
+      "src": "animations/lunges.svg",
+      "poster": "posters/lunges.svg",
+      "bytes": 29157,
+      "posterBytes": 6467,
+      "durationMs": 1833,
+      "sourceCycleMs": 1100,
+      "segments": 55,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "calf-raises",
+      "name": "הרמות עקבים",
+      "category": "legs",
+      "categoryName": "כוח רגליים",
+      "batch": 2,
+      "src": "animations/calf-raises.svg",
+      "poster": "posters/calf-raises.svg",
+      "bytes": 33198,
+      "posterBytes": 6451,
+      "durationMs": 2000,
+      "sourceCycleMs": 1200,
+      "segments": 60,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "glute-bridge",
+      "name": "גשר ישבן",
+      "category": "legs",
+      "categoryName": "כוח רגליים",
+      "batch": 2,
+      "src": "animations/glute-bridge.svg",
+      "poster": "posters/glute-bridge.svg",
+      "bytes": 28142,
+      "posterBytes": 6488,
+      "durationMs": 2000,
+      "sourceCycleMs": 1200,
+      "segments": 60,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "wall-sit",
+      "name": "כיסא נעלם",
+      "category": "legs",
+      "categoryName": "כוח רגליים",
+      "batch": 2,
+      "src": "animations/wall-sit.svg",
+      "poster": "posters/wall-sit.svg",
+      "bytes": 34086,
+      "posterBytes": 6596,
+      "durationMs": 4000,
+      "sourceCycleMs": 2400,
+      "segments": 96,
+      "view": "side",
+      "prop": {
+        "type": "wall",
+        "x": 56
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "knee-push-ups",
+      "name": "שכיבות סמיכה על הברכיים",
+      "category": "upper",
+      "categoryName": "כוח עליון",
+      "batch": 2,
+      "src": "animations/knee-push-ups.svg",
+      "poster": "posters/knee-push-ups.svg",
+      "bytes": 32318,
+      "posterBytes": 6585,
+      "durationMs": 2000,
+      "sourceCycleMs": 1200,
+      "segments": 60,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "chair-dips",
+      "name": "דחיפות על כיסא",
+      "category": "upper",
+      "categoryName": "כוח עליון",
+      "batch": 2,
+      "src": "animations/chair-dips.svg",
+      "poster": "posters/chair-dips.svg",
+      "bytes": 26215,
+      "posterBytes": 6717,
+      "durationMs": 1667,
+      "sourceCycleMs": 1000,
+      "segments": 51,
+      "view": "side",
+      "prop": {
+        "type": "box",
+        "x": 50,
+        "y": 148,
+        "w": 48,
+        "h": 34
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "pike-push-ups",
+      "name": "שכיבות סמיכה באוהל",
+      "category": "upper",
+      "categoryName": "כוח עליון",
+      "batch": 2,
+      "src": "animations/pike-push-ups.svg",
+      "poster": "posters/pike-push-ups.svg",
+      "bytes": 31913,
+      "posterBytes": 6567,
+      "durationMs": 2000,
+      "sourceCycleMs": 1200,
+      "segments": 60,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -4,
+        58,
+        208,
+        142
+      ]
+    },
+    {
+      "id": "quad-stretch",
+      "name": "מתיחה: עקב לטוסיק (כל רגל)",
+      "category": "stretch",
+      "categoryName": "מתיחות",
+      "batch": 2,
+      "src": "animations/quad-stretch.svg",
+      "poster": "posters/quad-stretch.svg",
+      "bytes": 32330,
+      "posterBytes": 6491,
+      "durationMs": 5000,
+      "sourceCycleMs": 3000,
+      "segments": 96,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "hamstring-stretch",
+      "name": "מתיחה: ידיים לרצפה",
+      "category": "stretch",
+      "categoryName": "מתיחות",
+      "batch": 2,
+      "src": "animations/hamstring-stretch.svg",
+      "poster": "posters/hamstring-stretch.svg",
+      "bytes": 36803,
+      "posterBytes": 6504,
+      "durationMs": 5000,
+      "sourceCycleMs": 3000,
+      "segments": 96,
+      "view": "side",
+      "prop": null,
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    },
+    {
+      "id": "calf-stretch",
+      "name": "מתיחה: דוחפים את הקיר (כל רגל)",
+      "category": "stretch",
+      "categoryName": "מתיחות",
+      "batch": 2,
+      "src": "animations/calf-stretch.svg",
+      "poster": "posters/calf-stretch.svg",
+      "bytes": 36529,
+      "posterBytes": 6700,
+      "durationMs": 5000,
+      "sourceCycleMs": 3000,
+      "segments": 96,
+      "view": "side",
+      "prop": {
+        "type": "wall",
+        "x": 152
+      },
+      "viewBox": [
+        -16,
+        -24,
+        232,
+        224
+      ]
+    }
+  ]
+}

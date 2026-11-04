@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "id": "route-and-snow",
+  "environmentIds": [
+    "sunset",
+    "fog",
+    "night-floodlit"
+  ],
+  "image": "route-and-snow.png",
+  "width": 512,
+  "height": 512,
+  "columns": 4,
+  "rows": 4,
+  "cellSize": 128,
+  "paddingPixels": 10,
+  "frames": [
+    {
+      "id": "downhill-arrow",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "uv": [
+        0.0009765625,
+        0.7509765625,
+        0.2490234375,
+        0.9990234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "double-chevron",
+      "rect": [
+        128,
+        0,
+        128,
+        128
+      ],
+      "uv": [
+        0.2509765625,
+        0.7509765625,
+        0.4990234375,
+        0.9990234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "turn-left",
+      "rect": [
+        256,
+        0,
+        128,
+        128
+      ],
+      "uv": [
+        0.5009765625,
+        0.7509765625,
+        0.7490234375,
+        0.9990234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "turn-right",
+      "rect": [
+        384,
+        0,
+        128,
+        128
+      ],
+      "uv": [
+        0.7509765625,
+        0.7509765625,
+        0.9990234375,
+        0.9990234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "caution-diamond",
+      "rect": [
+        0,
+        128,
+        128,
+        128
+      ],
+      "uv": [
+        0.0009765625,
+        0.5009765625,
+        0.2490234375,
+        0.7490234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "boundary-dashes",
+      "rect": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "uv": [
+        0.2509765625,
+        0.5009765625,
+        0.4990234375,
+        0.7490234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "landing-ring",
+      "rect": [
+        256,
+        128,
+        128,
+        128
+      ],
+      "uv": [
+        0.5009765625,
+        0.5009765625,
+        0.7490234375,
+        0.7490234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "finish-checks",
+      "rect": [
+        384,
+        128,
+        128,
+        128
+      ],
+      "uv": [
+        0.7509765625,
+        0.5009765625,
+        0.9990234375,
+        0.7490234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "ski-grooves",
+      "rect": [
+        0,
+        256,
+        128,
+        128
+      ],
+      "uv": [
+        0.0009765625,
+        0.2509765625,
+        0.2490234375,
+        0.4990234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        0.7,
+        1.6
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "carve-left",
+      "rect": [
+        128,
+        256,
+        128,
+        128
+      ],
+      "uv": [
+        0.2509765625,
+        0.2509765625,
+        0.4990234375,
+        0.4990234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "carve-right",
+      "rect": [
+        256,
+        256,
+        128,
+        128
+      ],
+      "uv": [
+        0.5009765625,
+        0.2509765625,
+        0.7490234375,
+        0.4990234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "contact-scuff",
+      "rect": [
+        384,
+        256,
+        128,
+        128
+      ],
+      "uv": [
+        0.7509765625,
+        0.2509765625,
+        0.9990234375,
+        0.4990234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "powder-drift",
+      "rect": [
+        0,
+        384,
+        128,
+        128
+      ],
+      "uv": [
+        0.0009765625,
+        0.0009765625,
+        0.2490234375,
+        0.2490234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "ice-crack",
+      "rect": [
+        128,
+        384,
+        128,
+        128
+      ],
+      "uv": [
+        0.2509765625,
+        0.0009765625,
+        0.4990234375,
+        0.2490234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "pole-contacts",
+      "rect": [
+        256,
+        384,
+        128,
+        128
+      ],
+      "uv": [
+        0.5009765625,
+        0.0009765625,
+        0.7490234375,
+        0.2490234375
+      ],
+      "category": "snow-impression",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    },
+    {
+      "id": "route-dot",
+      "rect": [
+        384,
+        384,
+        128,
+        128
+      ],
+      "uv": [
+        0.7509765625,
+        0.0009765625,
+        0.9990234375,
+        0.2490234375
+      ],
+      "category": "route-marking",
+      "physicalSizeMeters": [
+        2,
+        2
+      ],
+      "rotationRadians": 0,
+      "heading": "image top is downhill +Z"
+    }
+  ],
+  "alphaMode": "straight",
+  "imageOrigin": "top-left",
+  "uvOrigin": "bottom-left",
+  "colorSpace": "srgb",
+  "depthWrite": false,
+  "depthTest": true,
+  "polygonOffsetFactor": -1,
+  "polygonOffsetUnits": -1,
+  "wrap": "clamp-to-edge",
+  "mipmaps": false,
+  "filter": "linear",
+  "usage": "Project on local snow surface; do not use a single horizontal plane over slopes.",
+  "defaultOpacity": 0.72,
+  "nightOpacity": 0.9,
+  "notCollision": true
+}
