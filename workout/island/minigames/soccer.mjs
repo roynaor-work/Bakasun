@@ -5,7 +5,7 @@ import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-
 import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance} from './soccer-tactics.mjs?v=island-v2-20261101-1';
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261101-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261101-1';
-import {assistedPassDestination,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261101-1';
+import {assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261101-1';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -119,7 +119,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         destination={distance:Math.hypot(tx-s.ball.x,tz-s.ball.z),kind:'ground'};
         s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:'ground'}:null;
       }
-      if(manual||forceLoft)s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:destination.kind}:null;
+      if(manual||forceLoft)s.passTarget=target?{player:target.id,x:tx,z:tz,startX:s.ball.x,startZ:s.ball.z,distance:destination.distance,time:config.passing.runSeconds,kind:destination.kind,stick:s.moving?{x:s.aim.x,z:s.aim.z}:null}:null;
       event(destination?.kind==='loft'?'loft':'pass',{team:p.team,player:p.id,target:target?.id??null,x:tx,z:tz,distance:destination?.distance??null,power});
     } else {
       const goalX=d*hx,gx=goalX-s.ball.x,gz=-s.ball.z;
@@ -132,10 +132,17 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       }else {tx=s.ball.x+aim.x;tz=s.ball.z+aim.z;}
       event('shot',{team:p.team,player:p.id,power,assisted});
     }
-    const dx=tx-s.ball.x,dz=tz-s.ball.z,len=Math.hypot(dx,dz)||1;
+    let dx=tx-s.ball.x,dz=tz-s.ball.z;const len=Math.hypot(dx,dz)||1;
     const handRelease=p.hands;
+    // Execution error grows with defender pressure and running speed. The seed and tick
+    // make it repeatable without touching the shared RNG sequence.
+    if(pass&&manual&&!handRelease&&!forceLoft&&destination?.kind==='ground'&&!s.passAim?.manual){
+      const noise=((Math.imul(tickCount^seed,2654435761)>>>0)%2001)/1000-1,angle=passExecutionError({...s,controlled:p.id},config,noise);
+      if(angle){const cos=Math.cos(angle),sin=Math.sin(angle);[dx,dz]=[dx*cos-dz*sin,dx*sin+dz*cos];}
+    }
     p.fx=dx/len;p.fz=dz/len;p.hands=false;p.hold=0;s.actionAim={x:p.fx,z:p.fz};
-    const passSpeed=pass?Math.hypot(tx-s.ball.x,tz-s.ball.z)*ph.friction/(1-Math.exp(-ph.friction*(destination?.kind==='ground'?config.passing.groundTravelSeconds:config.passing.travelSeconds))):ph.passSpeed;
+    const humanGround=pass&&manual&&!handRelease&&!forceLoft&&destination?.kind==='ground',groundSeconds=humanGround?groundPassSeconds(Math.hypot(tx-s.ball.x,tz-s.ball.z),config):config.passing.groundTravelSeconds;
+    const passSpeed=pass?Math.hypot(tx-s.ball.x,tz-s.ball.z)*ph.friction/(1-Math.exp(-ph.friction*(destination?.kind==='ground'?groundSeconds:config.passing.travelSeconds))):ph.passSpeed;
     // A keeper's throw is an underarm roll to a team-mate, not a shot: bounded by
     // goalkeeping.throwMin/MaxSpeed (measured 29/10/2026 at 22 m/s for a 10 m pass).
     const gk=config.goalkeeping,throwSpeed=handRelease&&pass&&Number.isFinite(gk.throwMaxSpeed)?clamp(Math.hypot(tx-s.ball.x,tz-s.ball.z)*ph.friction/(1-Math.exp(-ph.friction*(gk.throwTravelSeconds||config.passing.travelSeconds))),gk.throwMinSpeed||0,gk.throwMaxSpeed):null;
@@ -313,6 +320,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function selectPlayer(id){
     if(s.controlled!==id){s.controlled=id;s.selectionTime=.35;s.switchCooldown=config.tactics.switchCooldownSeconds;}
     s.defenseIdle=0;s.autoSwitchCandidate=null;s.charging=false;s.charge=0;s.chargeKind=null;
+  }
+  /** The kicker's stick is still pushed the way it was at release: it is a leftover, not a new order
+   * to the receiver, so he keeps running onto the ball. Any clear change of direction is his. */
+  function staleStick(target,mx,mz,length){
+    if(!target.stick||length<=aiConfig.idleThreshold)return false;
+    const cosine=(mx*target.stick.x+mz*target.stick.z)/length;
+    return cosine>Math.cos((config.assistance?.contact?.staleStickDegrees??30)*Math.PI/180);
   }
   function rememberAction(kind,p,aim){
     s.bufferedAction={kind,player:p.id,remaining:config.assistance?.contact?.inputBufferSeconds??.18,released:false,aim:aim?{...aim}:null};
@@ -628,7 +642,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         moveControlledKeeper(member,mx,mz,step);
         if(member.hold+1e-8>=k.maxHoldSeconds-keeperThrowLead){member.cooldown=0;kick(member,0,true);}
       }else if(member.id===s.controlled&&role==='keeper')moveControlledKeeper(member,mx,mz,step);
-      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&length<=aiConfig.idleThreshold&&distance(member,s.passTarget)<(config.assistance?.contact?.receiveRunDistance??3.2))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,.82);
+      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(config.assistance?.contact?.receiveRunDistance??3.2))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,.82);
       else if(member.id===s.controlled && !(opponent.help && difficulty==='easy' && s.idle>aiConfig.idleHelpSeconds && !s.charging))move(member,mx,mz,step,(s.sprint.active?config.sprint.multiplier:1)*(s.charging?config.chargeSpeedMultiplier:1));
       else ai(member,step);
     }

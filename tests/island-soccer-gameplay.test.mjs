@@ -140,7 +140,7 @@ test('gameplay manual switching chooses a useful field player and excludes the n
 });
 
 test('gameplay field: an allowed back pass to the nearby keeper does not transfer human selection',()=>{
- const f=fixture(),keeper=f.s.players[2];Object.assign(f.p,{x:-7,z:0,fx:-1,fz:0});Object.assign(keeper,{x:-14,z:0,cooldown:0});
+ const f=fixture(),keeper=f.s.players[2];Object.assign(f.p,{x:-7,z:0,fx:-1,fz:0});Object.assign(keeper,{x:-14,z:0,cooldown:0});Object.assign(f.s.players[10],{z:9});
  Object.assign(f.s.ball,{owner:f.p.id,x:f.p.x-config.physics.dribbleOffset,z:0,lastTeam:0,lastPlayer:f.p.id});
  const aim={x:-1,z:0,manual:false};f.tick({passHeld:true,passAim:aim});f.tick({passAim:aim});
  const pass=f.events.find(e=>e.type==='pass'&&e.player===f.p.id);

@@ -9688,12 +9688,19 @@
    },
    "assistance": {
     "passing": {
-     "coneDegrees": 28,
-     "maxCorrectionDegrees": 18,
-     "maxAssistDistance": 10,
+     "coneDegrees": 38,
+     "maxCorrectionDegrees": 38,
+     "maxAssistDistance": 20,
      "minAssistDistance": 1.3,
      "receiverZone": 0.85,
-     "maxLeadDistance": 0.85
+     "maxLeadDistance": 1.6,
+     "laneWeight": 0.35,
+     "laneClearance": 1.5,
+     "mateInLane": 1.1,
+     "travelBaseSeconds": 0.42,
+     "travelPerMetre": 0.014,
+     "baseErrorDegrees": 0.4,
+     "pressureErrorDegrees": 1.8
     },
     "selection": {
      "predictionSeconds": 0.38,
@@ -9707,7 +9714,8 @@
      "momentumRetention": 0.97,
      "incomingTransfer": 0.035,
      "maxImpulse": 0.42,
-     "receiveRunDistance": 3.2
+     "receiveRunDistance": 3.2,
+     "staleStickDegrees": 30
     },
     "dribble": {
      "releaseDistance": 1.3,
