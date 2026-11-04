@@ -1,0 +1,21 @@
+{
+  "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/tennis-v7-browser-cache npm test",
+  "exitCode": 0,
+  "summary": {
+    "tests": 3278,
+    "suites": 0,
+    "pass": 3227,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 51,
+    "todo": 0,
+    "duration_ms": 212140.14254
+  },
+  "browser": "System /usr/bin/chromium selected through a temporary Playwright cache symlink; no test edits",
+  "initialRun": {
+    "pass": 265,
+    "fail": 4,
+    "cause": "Restricted local IPC and missing default Playwright browser; see repository-initial.json"
+  },
+  "logFile": "/tmp/tennis-v7-repository-final.txt"
+}

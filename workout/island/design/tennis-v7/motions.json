@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "rig": "rig.json",
+  "source": "Original keyframing and two-bone IK in source/motions.mjs",
+  "rootMotion": false,
+  "interpolation": "Linear baked at 30 Hz; smoothstep between authored poses",
+  "clips": [
+    {
+      "id": "idle",
+      "label": "עמידת מוצא",
+      "duration": 2.4,
+      "loop": true,
+      "events": [],
+      "contactSweetSpot": null,
+      "maxReachError": 4.0418684730288697e-16
+    },
+    {
+      "id": "run",
+      "label": "ריצה",
+      "duration": 0.72,
+      "loop": true,
+      "events": [
+        {
+          "name": "left_plant",
+          "time": 0,
+          "atSeconds": 0
+        },
+        {
+          "name": "right_plant",
+          "time": 0.5,
+          "atSeconds": 0.36
+        }
+      ],
+      "contactSweetSpot": null,
+      "maxReachError": 5.4672143489065705e-16
+    },
+    {
+      "id": "serve",
+      "label": "שירות",
+      "duration": 3.2,
+      "loop": false,
+      "events": [
+        {
+          "name": "prepare",
+          "time": 0,
+          "label": "הכנה",
+          "atSeconds": 0
+        },
+        {
+          "name": "toss",
+          "time": 0.28,
+          "label": "זריקה",
+          "atSeconds": 0.8960000000000001
+        },
+        {
+          "name": "load",
+          "time": 0.48,
+          "label": "העמסה",
+          "atSeconds": 1.536
+        },
+        {
+          "name": "contact",
+          "time": 0.64,
+          "label": "פגיעה ומעקב",
+          "atSeconds": 2.048
+        }
+      ],
+      "contactSweetSpot": [
+        -0.20274666238607095,
+        2.361751724667119,
+        0.2626096432907623
+      ],
+      "maxReachError": 4.871083751574258e-16
+    },
+    {
+      "id": "forehand",
+      "label": "פורהנד",
+      "duration": 1.2,
+      "loop": false,
+      "events": [
+        {
+          "name": "contact",
+          "time": 0.52,
+          "atSeconds": 0.624
+        }
+      ],
+      "contactSweetSpot": [
+        -0.5931775024660532,
+        1.2689385734140686,
+        0.848027941099727
+      ],
+      "maxReachError": 4.775249788392736e-16
+    },
+    {
+      "id": "backhand",
+      "label": "בקהנד",
+      "duration": 1.35,
+      "loop": false,
+      "events": [
+        {
+          "name": "contact",
+          "time": 0.52,
+          "atSeconds": 0.7020000000000001
+        }
+      ],
+      "contactSweetSpot": [
+        0.3574783593957461,
+        1.400988458344398,
+        0.7113157015331583
+      ],
+      "maxReachError": 7.108895957933346e-16
+    },
+    {
+      "id": "volley",
+      "label": "וולה",
+      "duration": 0.78,
+      "loop": false,
+      "events": [
+        {
+          "name": "contact",
+          "time": 0.45,
+          "atSeconds": 0.35100000000000003
+        }
+      ],
+      "contactSweetSpot": [
+        -0.588868839244504,
+        1.7175108475147813,
+        0.5801455678463334
+      ],
+      "maxReachError": 4.484050470211362e-16
+    },
+    {
+      "id": "smash",
+      "label": "שמאש",
+      "duration": 1.15,
+      "loop": false,
+      "events": [
+        {
+          "name": "takeoff",
+          "time": 0.34,
+          "atSeconds": 0.391
+        },
+        {
+          "name": "contact",
+          "time": 0.52,
+          "atSeconds": 0.598
+        },
+        {
+          "name": "land",
+          "time": 0.82,
+          "atSeconds": 0.9429999999999998
+        }
+      ],
+      "contactSweetSpot": [
+        -0.1961203075314925,
+        2.439999276277666,
+        0.34028135166996837
+      ],
+      "maxReachError": 4.817411735555328e-16
+    },
+    {
+      "id": "slide",
+      "label": "החלקה",
+      "duration": 1.45,
+      "loop": false,
+      "events": [
+        {
+          "name": "brake",
+          "time": 0.35,
+          "atSeconds": 0.5075
+        },
+        {
+          "name": "contact",
+          "time": 0.58,
+          "atSeconds": 0.841
+        },
+        {
+          "name": "recover",
+          "time": 0.85,
+          "atSeconds": 1.2325
+        }
+      ],
+      "contactSweetSpot": [
+        -0.785473973478876,
+        0.8710675092943562,
+        0.6430670897001542
+      ],
+      "maxReachError": 5.026748538604307e-16
+    },
+    {
+      "id": "celebrate",
+      "label": "חגיגה",
+      "duration": 2.1,
+      "loop": false,
+      "events": [
+        {
+          "name": "fist_pump",
+          "time": 0.3,
+          "atSeconds": 0.63
+        },
+        {
+          "name": "settle",
+          "time": 0.85,
+          "atSeconds": 1.785
+        }
+      ],
+      "contactSweetSpot": null,
+      "maxReachError": 4.1910000110727263e-16
+    }
+  ]
+}

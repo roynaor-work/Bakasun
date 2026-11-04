@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#ECE8DB">
+ <title>טניס · קו המגרש</title>
+ <link rel="icon" type="image/svg+xml" href="icon.svg">
+ <link rel="stylesheet" href="preview.css">
+ <script src="vendor/three-r160-loaders.js" defer></script>
+ <script src="vendor/draco-source.js" defer></script>
+ <script src="offline/index.js" defer></script>
+ <script src="preview.js" defer></script>
+</head>
+<body>
+ <header class="masthead">
+  <div class="identity"><svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="18" cy="12" rx="8" ry="10" transform="rotate(32 18 12)"/><path d="m13 20-6 9M13 7l12 8M11 11l12 8M17 3 9 17M21 5l-9 15"/></svg><div><h1>קו המגרש</h1><span lang="en" dir="ltr">TENNIS / MOTION STUDY</span></div></div>
+  <div class="edition"><span class="status-dot"></span> מגרש פתוח <i>07</i></div>
+ </header>
+ <main>
+  <section class="stage" aria-label="סצנת טניס תלת־ממדית, גררו לסיבוב וצבטו לקירוב">
+   <canvas id="court" tabindex="0" aria-label="מגרש טניס אינטראקטיבי"></canvas>
+   <div class="scorebug" aria-label="לוח תוצאות לדוגמה">
+    <div class="score-caption"><span class="live-dot"></span> נקודת משחק <span lang="en">COURT 01</span></div>
+    <div class="score-row"><span class="player-dot ivory"></span><span id="player-name">שחקן 01</span><b>6</b><b>4</b><strong>40</strong></div>
+    <div class="score-row"><span class="player-dot rust"></span><span>שחקנית 01</span><b>4</b><b>3</b><strong>30</strong></div>
+   </div>
+   <div class="scene-meta"><span id="surface-label">קשיח</span><span class="meta-divider"></span><span id="light-label">אור יום</span><span class="meta-divider"></span><span id="view-label">שידור</span></div>
+   <div class="view-caption"><span id="view-kicker" lang="en" dir="ltr">01 / CENTRE COURT</span><p id="view-title">הנקודה הבאה.</p></div>
+   <div id="phase" class="phase" hidden aria-label="ארבעת שלבי השירות"></div>
+   <div id="focus-switch" class="focus-switch" hidden aria-label="מיקוד תקריב"><button data-focus="body" class="active" aria-pressed="true">גוף</button><button data-focus="face" aria-pressed="false">פנים</button><button data-focus="grip" aria-pressed="false">אחיזה</button></div>
+   <div id="loading" class="loading"><div class="loading-ball"></div><p>מכינים את המגרש</p></div>
+   <div id="error" class="error" role="alert" hidden></div>
+   <button id="reset-camera" class="reset-camera icon-btn" aria-label="איפוס מצלמה" title="איפוס מצלמה">↺</button>
+   <div id="line-call" class="line-call" hidden><span class="live-dot"></span> על הקו <small>נקודת נחיתה</small></div>
+  </section>
+  <aside class="dock" aria-label="אפשרויות תצוגה">
+   <div class="dock-header"><span>המשחק, מקרוב</span><span id="quality-label">איכות מאוזנת</span></div>
+   <div class="surface-row"><div class="segmented" id="surfaces" aria-label="סוג משטח"><button data-surface="hard" class="active" aria-pressed="true">קשיח</button><button data-surface="clay" aria-pressed="false">חימר</button><button data-surface="grass" aria-pressed="false">דשא</button></div><button id="lighting" class="icon-btn lighting" aria-label="החלפה לתאורת ערב" title="יום / ערב"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></button><button id="quality" class="icon-btn lighting" aria-label="איכות מאוזנת, לחץ לחסכון" title="מאוזנת / חסכונית"><span class="quality-bars">▥</span></button></div>
+   <nav id="views" class="views" aria-label="מצלמה">
+    <button data-view="wide" class="active" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="m4 5 16 3-1 12L3 17ZM4 11l16 3M11 7l-1 12"/></svg>שידור</button>
+    <button data-view="close" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M6 21v-5a6 6 0 0 1 12 0v5M2 4V2h4M18 2h4v4"/></svg>תקריב</button>
+    <button data-view="roster" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21v-5a6 6 0 0 1 12 0v5M15 15a5 5 0 0 1 7 4v2"/></svg>סגל</button>
+    <button data-view="line" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M2 18h20M17 2v20"/><circle cx="11" cy="13" r="3"/></svg>על הקו</button>
+   </nav>
+   <div id="roster-select" class="roster-select" hidden aria-label="בחירת דמות"><button data-actor="0" class="active" aria-pressed="true">שחקן א׳</button><button data-actor="1" aria-pressed="false">שחקן ב׳</button><button data-actor="2" aria-pressed="false">שחקנית א׳</button><button data-actor="3" aria-pressed="false">שחקנית ב׳</button></div>
+   <div class="motion-row"><button id="play" class="play icon-btn" aria-label="השהיית תנועה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button><label for="motion">תנועה</label><select id="motion"><option value="idle">עמידת מוצא</option><option value="run">ריצה</option><option value="serve" selected>שירות · ארבעה שלבים</option><option value="forehand">פורהנד</option><option value="backhand">בקהנד</option><option value="volley">וולה</option><option value="smash">שמאש</option><option value="slide">החלקה</option><option value="celebrate">חגיגה</option></select></div>
+   <div class="timeline"><input id="time" type="range" min="0" max="1" step=".001" value="0" aria-label="זמן בתנועה"><output id="time-label" dir="ltr">0.00 / 3.20</output></div>
+   <p class="gesture-hint">גרירה לסיבוב <span>·</span> צביטה לקירוב</p>
+  </aside>
+ </main>
+</body>
+</html>

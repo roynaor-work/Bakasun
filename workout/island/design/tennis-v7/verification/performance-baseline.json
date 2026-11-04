@@ -1,0 +1,1403 @@
+{
+  "started": "2026-11-04T21:38:07.900342+00:00",
+  "updated": "2026-11-04T21:52:40.364260+00:00",
+  "environment": "Chromium headless, ANGLE SwiftShader software GPU, not a physical phone",
+  "cpuAffinityCount": 5,
+  "deviceScaleFactor": 2,
+  "secondsPerCase": 60.0,
+  "targetFPS": 30,
+  "consoleErrors": [],
+  "externalRequests": [],
+  "cases": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.16009999999963,
+        "simulatedSecondsAdvanced": 60.98089999999997,
+        "approximateCycles": 19.05653124999999,
+        "frames": 241,
+        "fps": 4.005970724831417,
+        "frameMs": {
+          "p50": 251.79999999981374,
+          "p95": 294,
+          "max": 498.70000000018626
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 0.8808999999999938,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 38,
+            "triangles": 83840,
+            "main": {
+              "calls": 38,
+              "triangles": 83840
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 36
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -2.520420752296364,
+            1.5850174698496295,
+            9.808584379858699
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 248
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 433,
+        "JSHeapUsedSize": 7744388,
+        "JSHeapTotalSize": 8990720
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.0935,
+        "simulatedSecondsAdvanced": 60.13099999999914,
+        "approximateCycles": 18.790937499999732,
+        "frames": 621,
+        "fps": 10.33387914852836,
+        "frameMs": {
+          "p50": 96.79999999981374,
+          "p95": 106.40000000037253,
+          "max": 191.59999999962747
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.4642000000000095,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 36,
+            "triangles": 61358,
+            "main": {
+              "calls": 36,
+              "triangles": 61358
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 37
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 1,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -2.3361504743335337,
+            2.720480792443483,
+            9.818442014481066
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 881
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 407,
+        "JSHeapUsedSize": 8234984,
+        "JSHeapTotalSize": 10039296
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.20259999999963,
+        "simulatedSecondsAdvanced": 60.447500000000076,
+        "approximateCycles": 18.889843750000022,
+        "frames": 241,
+        "fps": 4.003142716190458,
+        "frameMs": {
+          "p50": 251.90000000037253,
+          "p95": 273.79999999981374,
+          "max": 501.09999999962747
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 1.0973999999999908,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 41,
+            "triangles": 83846,
+            "main": {
+              "calls": 41,
+              "triangles": 83846
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 37
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -2.4548340470446606,
+            2.1164476501080056,
+            9.806536821042743
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 1129
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 443,
+        "JSHeapUsedSize": 8183296,
+        "JSHeapTotalSize": 9777152
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.20470000000019,
+        "simulatedSecondsAdvanced": 60.26429999999769,
+        "approximateCycles": 18.832593749999276,
+        "frames": 519,
+        "fps": 8.620589422420482,
+        "frameMs": {
+          "p50": 98.40000000037253,
+          "p95": 212.20000000018626,
+          "max": 1208
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.447600000000012,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 39,
+            "triangles": 61364,
+            "main": {
+              "calls": 39,
+              "triangles": 61364
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 37
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 1,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -2.3415216501977767,
+            2.7078699714222543,
+            9.817903229827097
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 1665
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 1000,
+        "JSHeapUsedSize": 7764800,
+        "JSHeapTotalSize": 9252864
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "close",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.48469999999926,
+        "simulatedSecondsAdvanced": 60.53090000000023,
+        "approximateCycles": 18.91590625000007,
+        "frames": 239,
+        "fps": 3.9514125059726335,
+        "frameMs": {
+          "p50": 253.3999999994412,
+          "p95": 300.1000000005588,
+          "max": 728.0999999996275
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "close",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 2.047500000000027,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 494
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 34,
+            "triangles": 114518,
+            "main": {
+              "calls": 22,
+              "triangles": 83502
+            },
+            "shadow": {
+              "calls": 12,
+              "triangles": 31016
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 1,
+            "bodyAndRacketTriangles": 15798,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -0.20258487998053007,
+            2.362439416522727,
+            3.762625871744194
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 1911
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 338,
+        "JSHeapUsedSize": 7767224,
+        "JSHeapTotalSize": 9748480
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "close",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.06439999999944,
+        "simulatedSecondsAdvanced": 60.06430000001296,
+        "approximateCycles": 18.77009375000405,
+        "frames": 713,
+        "fps": 11.8705922310055,
+        "frameMs": {
+          "p50": 86.29999999981374,
+          "p95": 94.69999999925494,
+          "max": 180.5
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "close",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.3141999999999532,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 494
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 21,
+            "triangles": 49184,
+            "main": {
+              "calls": 21,
+              "triangles": 49184
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 1,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 1,
+            "bodyAndRacketTriangles": 3960,
+            "canonicalBones": 18
+          },
+          "ball": [
+            0.03468519599840511,
+            2.551782195385099,
+            3.7864265215487833
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 2644
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 1092,
+        "JSHeapUsedSize": 7346528,
+        "JSHeapTotalSize": 9224192
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "close",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.176,
+        "simulatedSecondsAdvanced": 60.19770000000011,
+        "approximateCycles": 18.811781250000035,
+        "frames": 240,
+        "fps": 3.9883009837809094,
+        "frameMs": {
+          "p50": 253,
+          "p95": 269.19999999925494,
+          "max": 488.8999999994412
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "close",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 1.0642000000000098,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 494
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 35,
+            "triangles": 114520,
+            "main": {
+              "calls": 23,
+              "triangles": 83504
+            },
+            "shadow": {
+              "calls": 12,
+              "triangles": 31016
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 1,
+            "bodyAndRacketTriangles": 15798,
+            "canonicalBones": 18
+          },
+          "ball": [
+            0.11557639877314174,
+            2.034764455643206,
+            3.794540748265196
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 2892
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 536,
+        "JSHeapUsedSize": 7923604,
+        "JSHeapTotalSize": 10534912
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "close",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.27759999999963,
+        "simulatedSecondsAdvanced": 60.297600000009766,
+        "approximateCycles": 18.84300000000305,
+        "frames": 631,
+        "fps": 10.468233639030151,
+        "frameMs": {
+          "p50": 86.80000000074506,
+          "p95": 156.5,
+          "max": 1391.2000000001863
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "close",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.5141000000000364,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 494
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 22,
+            "triangles": 49186,
+            "main": {
+              "calls": 22,
+              "triangles": 49186
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 1,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 1,
+            "bodyAndRacketTriangles": 3960,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -0.029995409740315948,
+            2.7491420676571803,
+            3.779938385866336
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 3543
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 1208,
+        "JSHeapUsedSize": 7845372,
+        "JSHeapTotalSize": 10534912
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "line",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.001299999999816,
+        "simulatedSecondsAdvanced": 60.09760000000017,
+        "approximateCycles": 18.780500000000053,
+        "frames": 391,
+        "fps": 6.516525475281389,
+        "frameMs": {
+          "p50": 157.40000000037253,
+          "p95": 169.1000000005588,
+          "max": 304
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "line",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 0.9809000000000114,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 12,
+            "triangles": 4564,
+            "main": {
+              "calls": 12,
+              "triangles": 4564
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 0,
+            "instancedDraws": 0,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 0,
+            "bodyAndRacketTriangles": 0,
+            "canonicalBones": 18
+          },
+          "ball": [
+            4.115,
+            0.36702503424639654,
+            -6.4
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 3945
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 696,
+        "JSHeapUsedSize": 8072808,
+        "JSHeapTotalSize": 10797056
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "line",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.01270000000019,
+        "simulatedSecondsAdvanced": 60.03099999998358,
+        "approximateCycles": 18.759687499994868,
+        "frames": 1320,
+        "fps": 21.99534431878579,
+        "frameMs": {
+          "p50": 39,
+          "p95": 59.200000000186265,
+          "max": 89.19999999925494
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "line",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.0308999999998842,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 12,
+            "triangles": 4564,
+            "main": {
+              "calls": 12,
+              "triangles": 4564
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 0,
+            "instancedDraws": 0,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 0,
+            "bodyAndRacketTriangles": 0,
+            "canonicalBones": 18
+          },
+          "ball": [
+            4.115,
+            0.35467221785561914,
+            -6.4
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 5299
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 673,
+        "JSHeapUsedSize": 8083296,
+        "JSHeapTotalSize": 9748480
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "line",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.04380000000074,
+        "simulatedSecondsAdvanced": 60.18090000000484,
+        "approximateCycles": 18.806531250001512,
+        "frames": 392,
+        "fps": 6.528567479073529,
+        "frameMs": {
+          "p50": 154.20000000018626,
+          "p95": 294.59999999962747,
+          "max": 309.29999999981374
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "line",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 0.8808000000000353,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 12,
+            "triangles": 4564,
+            "main": {
+              "calls": 12,
+              "triangles": 4564
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 0,
+            "instancedDraws": 0,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 0,
+            "bodyAndRacketTriangles": 0,
+            "canonicalBones": 18
+          },
+          "ball": [
+            4.115,
+            0.38298124656054716,
+            -6.4
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 5702
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 711,
+        "JSHeapUsedSize": 7796528,
+        "JSHeapTotalSize": 9748480
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "line",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "surface": "hard",
+        "quality": "economy",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.03340000000037,
+        "simulatedSecondsAdvanced": 60.097499999987576,
+        "approximateCycles": 18.780468749996118,
+        "frames": 1323,
+        "fps": 22.037732329003386,
+        "frameMs": {
+          "p50": 38.30000000074506,
+          "p95": 61.09999999962747,
+          "max": 121.59999999962747
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "line",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "economy",
+            "autoQuality": false,
+            "time": 1.0974999999999777,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1,
+          "render": {
+            "calls": 12,
+            "triangles": 4564,
+            "main": {
+              "calls": 12,
+              "triangles": 4564
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 0,
+            "instancedDraws": 0,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 0,
+            "bodyAndRacketTriangles": 0,
+            "canonicalBones": 18
+          },
+          "ball": [
+            4.115,
+            0.33393975454327574,
+            -6.4
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 7060
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 673,
+        "JSHeapUsedSize": 8048324,
+        "JSHeapTotalSize": 9748480
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "evening",
+        "quality": "balanced",
+        "autoQuality": true,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.14659999999963,
+        "simulatedSecondsAdvanced": 60.23089999999786,
+        "approximateCycles": 18.82215624999933,
+        "frames": 176,
+        "fps": 2.926183691181232,
+        "frameMs": {
+          "p50": 265,
+          "p95": 908,
+          "max": 1942.2999999998137
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "evening",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": true,
+            "time": 2.664300000000047,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "width": 390,
+            "height": 544
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 41,
+            "triangles": 83846,
+            "main": {
+              "calls": 41,
+              "triangles": 83846
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            1.8729828415233207,
+            1.42986624245914,
+            -0.5866759733331257
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 7239
+        }
+      },
+      "automaticQualityCase": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "wide",
+        "focus": "body",
+        "actor": 0,
+        "motion": "serve",
+        "light": "day",
+        "surface": "hard",
+        "quality": "balanced",
+        "autoQuality": false,
+        "playing": true
+      },
+      "measurement": {
+        "seconds": 60.07060000000056,
+        "simulatedSecondsAdvanced": 61.94750000000306,
+        "approximateCycles": 19.358593750000956,
+        "frames": 236,
+        "fps": 3.928710550585441,
+        "frameMs": {
+          "p50": 226,
+          "p95": 432.59999999962747,
+          "max": 1062.2999999998137
+        },
+        "diagnostics": {
+          "state": {
+            "surface": "hard",
+            "light": "day",
+            "view": "wide",
+            "actor": 0,
+            "motion": "serve",
+            "focus": "body",
+            "playing": true,
+            "quality": "balanced",
+            "autoQuality": false,
+            "time": 2.130799999999922,
+            "orbit": 0,
+            "zoom": 1,
+            "ready": true
+          },
+          "threeRevision": "160",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "stage": {
+            "width": 564,
+            "height": 344
+          },
+          "pixelRatio": 1.4,
+          "render": {
+            "calls": 38,
+            "triangles": 83840,
+            "main": {
+              "calls": 38,
+              "triangles": 83840
+            },
+            "shadow": {
+              "calls": 0,
+              "triangles": 0
+            },
+            "textures": 14,
+            "geometries": 38
+          },
+          "crowd": {
+            "total": 480,
+            "visible": 480,
+            "instancedDraws": 3,
+            "seatDraws": 2
+          },
+          "actors": {
+            "visible": 4,
+            "bodyAndRacketTriangles": 15846,
+            "canonicalBones": 18
+          },
+          "ball": [
+            -1.6071339872452377,
+            2.3244246766527588,
+            8.436915438444387
+          ],
+          "landing": [
+            4.115,
+            0.035,
+            -6.4
+          ],
+          "errors": [],
+          "renderCount": 7480
+        }
+      },
+      "heapAndDOM": {
+        "Documents": 1,
+        "Nodes": 535,
+        "JSHeapUsedSize": 7782056,
+        "JSHeapTotalSize": 9748480
+      }
+    }
+  ],
+  "completed": false,
+  "variant": "pre-lod2-reference",
+  "plannedCases": 26,
+  "sourceHashesAtLoad": {
+    "preview.js": "e1813df57b5e4ca9b0aa1b7e31b6253af3097f88019525f4bb69f2c3c78e1903",
+    "preview.css": "be5f900f01be01482462b64dfc83ed4c4c5fca108b19d52692e6470105d09fee",
+    "manifest.json": "a3ec1d896fa188102bd33b2f7075010fc823a058f001d440187886bc6e74ac9c",
+    "source/motions.mjs": "c8ae8316652ec9ec47122e533941fb43dedb5a7450cb1d42af574fb09868737b"
+  },
+  "stopReason": "After 14 completed 60-second cases, automatic quality stayed balanced despite low presented FPS. Fix the cadence detector and add lighter distant body/racket/seat LODs before measuring the final version."
+}

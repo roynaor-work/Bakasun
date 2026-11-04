@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "rootMotionInGLB": false,
+  "axes": {"up": "+Y", "forward": "+Z", "units": "metres"},
+  "slidePreviewTrajectory": {
+    "normalizedTime": "u = time / duration",
+    "xMeters": "-0.85 * sin(pi * u)^2",
+    "yMeters": 0,
+    "zMeters": 0,
+    "purpose": "Presentation-only lateral slide and recovery. The exported clip is in place; gameplay owns movement and must not apply this reference path twice."
+  },
+  "shadows": {
+    "venue": "Cached directional shadow map; refresh on lighting, camera mode and quality changes",
+    "playersWide": "Soft contact shadows for mobile broadcast framing",
+    "playerClose": "Dynamic directional shadow in balanced body view",
+    "net": "Actual cords plus a soft directional ground projection",
+    "ball": "Height-dependent soft contact ellipse"
+  },
+  "ball": {"physicalDiameterMeters": 0.067,"broadcastDisplayScale": 1.55,"broadcastHaloPixels": 5,"landingCenterMeters": [4.115,0.035,-6.4]},
+  "quality": {"targetFPS":30,"maxDPR":1.4,"economyDPR":1,"automaticMinimumDPR":0.7,"automaticSlowCPUSubmissionMs":28,"automaticSlowPresentedFrameMs":38.5,"slowFramesBeforeReduction":18,"economyBodyLOD":2,"racketLODs":2,"economySeatsTrianglesPerInstance":4}
+}
