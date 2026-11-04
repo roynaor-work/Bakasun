@@ -59,3 +59,11 @@
 - בלי מדידת fps בטלפון (swiftshader בלבד).
 - מדד "טריק באוויר": לא הצלחתי למדוד במעבדה; מכוסה בבדיקות הקיימות של טריקים.
 - גרפיקה: לא בסשן הזה.
+
+## הרצה מלאה (`npm test`, ISLAND_CSP_BROWSER=1, ISLAND_PLAYWRIGHT ו-CHROMIUM_PATH לפי ההוראות)
+| תוצאה | פירוט |
+|---|---|
+| 3,261 בדיקות, 3,219 עברו, 39 דולגו | 3 כשלים בהרצה הראשונה |
+| `offline manifest: ... shell list ... up to date` | נכשלה בגללי: `alpine-steer.mjs` לא היה ברשימת הקבצים. תוקן עם `node workout/island/tools/offline-shell.mjs` ועוברת. זו הבדיקה שנכשלה גם ב-CI. |
+| `exercise screen shows the royiki animation ... rep count 3` | בדיקת אימון שלא קשורה לסקי, תזמון. עוברת בהרצה חוזרת (5/5). |
+| `automatic download fills the device cache after open` | נכשלת גם על `main` נקי באותה סביבה (timeout של 120 שנ' בדפדפן). לא קשורה לשינוי הזה. |
