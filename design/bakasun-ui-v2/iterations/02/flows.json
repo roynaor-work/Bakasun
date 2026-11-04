@@ -1,0 +1,90 @@
+{
+  "started_at": "2026-11-04T20:35:33.805393+00:00",
+  "checks": [
+    {
+      "name": "system color-scheme fallback",
+      "pass": true
+    },
+    {
+      "name": "complete mobile menu, focus containment and Escape return",
+      "pass": true
+    },
+    {
+      "name": "global screen search and no-results state",
+      "pass": true
+    },
+    {
+      "name": "invoice statuses, ID search and accurate detail sheet",
+      "pass": true
+    },
+    {
+      "name": "clients, suppliers and proposals filters and empty recovery",
+      "pass": true
+    },
+    {
+      "name": "all 13 case tabs, mobile selector, direct hash and RTL keyboard",
+      "pass": true
+    },
+    {
+      "name": "task completion and actual undo",
+      "pass": true
+    },
+    {
+      "name": "six creation forms, validation, escaped input and undo",
+      "pass": true
+    },
+    {
+      "name": "event edit preview and undo",
+      "pass": true
+    },
+    {
+      "name": "contract required fields, typed signature, ink signature and clear",
+      "pass": true
+    },
+    {
+      "name": "calendar day, empty day, next/previous and return to demo date",
+      "pass": true
+    },
+    {
+      "name": "settings actual text enlargement and persistence",
+      "pass": true
+    },
+    {
+      "name": "CSV download with actual chart data",
+      "pass": true
+    },
+    {
+      "name": "component error recovery and keyboard tabs",
+      "pass": true
+    },
+    {
+      "name": "all static screen links and navigation state",
+      "pass": true
+    },
+    {
+      "name": "print media hides navigation and preserves contract",
+      "pass": true
+    }
+  ],
+  "failures": [
+    {
+      "name": "theme toggle and local navigation persistence",
+      "error": "Locator expected to have attribute 'dark'\nActual value: light \nCall log:\n  - Expect \"to_have_attribute\" with timeout 5000ms\n  - waiting for locator(\"html\")\n    13 × locator resolved to <html lang=\"he\" dir=\"rtl\" data-theme=\"light\">…</html>\n       - unexpected value \"light\"\n\nAria snapshot:\n- document:\n  - link \"דילוג לתוכן הראשי\":\n    - /url: \"#main\"\n  - banner\n  - main\n  - navigation \"ניווט בנייד\"",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/Bakasun/design/bakasun-ui-v2/source/flows.py\", line 27, in check\n    try:fn();report['checks'].append({'name':name,'pass':True});print('PASS '+name,flush=True)\n        ^^^^\n  File \"/workspace/Bakasun/design/bakasun-ui-v2/source/flows.py\", line 31, in theme_flow\n    goto();page.locator('[data-theme-toggle]').click();expect(page.locator('html')).to_have_attribute('data-theme','dark');page.locator('.bottom-nav a').nth(1).click();expect(page.locator('html')).to_have_attribute('data-theme','dark');expect(page.locator('body')).to_have_attribute('data-page','events')\n                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 22107, in to_have_attribute\n    self._sync(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_assertions.py\", line 349, in to_have_attribute\n    await self._expect_impl(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_assertions.py\", line 128, in _expect_impl\n    _record_soft_or_raise(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_assertions.py\", line 60, in _record_soft_or_raise\n    raise error\nAssertionError: Locator expected to have attribute 'dark'\nActual value: light \nCall log:\n  - Expect \"to_have_attribute\" with timeout 5000ms\n  - waiting for locator(\"html\")\n    13 × locator resolved to <html lang=\"he\" dir=\"rtl\" data-theme=\"light\">…</html>\n       - unexpected value \"light\"\n\nAria snapshot:\n- document:\n  - link \"דילוג לתוכן הראשי\":\n    - /url: \"#main\"\n  - banner\n  - main\n  - navigation \"ניווט בנייד\"\n"
+    },
+    {
+      "name": "event board combined status, kind, text and reset",
+      "error": "Locator.select_option: Error: strict mode violation: locator(\"[data-kind]\") resolved to 7 elements:\n    1) <select data-kind=\"\" class=\"select\" id=\"kind-filter\">…</select> aka get_by_label(\"סוג\")\n    2) <a hidden=\"\" data-item=\"\" data-kind=\"סדנה\" data-state=\"lead\" class=\"board-card\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"סדנהמפגש דמה 05לקוח דמה ה׳₪9,\")\n    3) <a data-item=\"\" data-kind=\"ערב\" class=\"board-card\" data-state=\"quoted\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_role(\"link\", name=\"ערב ערב דמה 02 לקוח דמה ב׳ ₪\")\n    4) <a data-item=\"\" data-kind=\"כנס\" class=\"board-card\" data-state=\"quoted\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_role(\"link\", name=\"כנס כנס דמה 04 לקוח דמה ד׳ ₪\")\n    5) <a hidden=\"\" data-item=\"\" data-kind=\"כנס\" class=\"board-card\" data-state=\"production\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"כנסמפגש צוות 01לקוח דמה א׳₪24\")\n    6) <a hidden=\"\" data-item=\"\" data-kind=\"סדנה\" class=\"board-card\" data-state=\"production\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"סדנהסדנת דמה 03לקוח דמה ג׳₪12\")\n    7) <a hidden=\"\" data-item=\"\" data-kind=\"ערב\" class=\"board-card\" data-state=\"closed\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"ערבערב דמה 06לקוח דמה ו׳₪14,\")\n\nCall log:\n  - waiting for locator(\"[data-kind]\")\n",
+      "trace": "Traceback (most recent call last):\n  File \"/workspace/Bakasun/design/bakasun-ui-v2/source/flows.py\", line 27, in check\n    try:fn();report['checks'].append({'name':name,'pass':True});print('PASS '+name,flush=True)\n        ^^^^\n  File \"/workspace/Bakasun/design/bakasun-ui-v2/source/flows.py\", line 43, in filter_flow\n    goto('events');expect(page.locator('[data-item]:visible')).to_have_count(6);page.locator('[data-filter=\"quoted\"]').click();expect(page.locator('[data-column]:visible')).to_have_count(1);expect(page.locator('[data-item]:visible')).to_have_count(2);page.locator('[data-kind]').select_option('כנס');expect(page.locator('[data-item]:visible')).to_have_count(1);page.locator('[data-search]').fill('איןכזה');expect(page.locator('[data-empty]')).to_be_visible();page.locator('[data-reset-filter]').click();expect(page.locator('[data-item]:visible')).to_have_count(6);expect(page.locator('[data-search]')).to_be_focused()\n                                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 20069, in select_option\n    self._sync(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_locator.py\", line 633, in select_option\n    return await self._frame.select_option(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_frame.py\", line 814, in select_option\n    return await self._channel.send(\"selectOption\", self._timeout, params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 76, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 632, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.Error: Locator.select_option: Error: strict mode violation: locator(\"[data-kind]\") resolved to 7 elements:\n    1) <select data-kind=\"\" class=\"select\" id=\"kind-filter\">…</select> aka get_by_label(\"סוג\")\n    2) <a hidden=\"\" data-item=\"\" data-kind=\"סדנה\" data-state=\"lead\" class=\"board-card\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"סדנהמפגש דמה 05לקוח דמה ה׳₪9,\")\n    3) <a data-item=\"\" data-kind=\"ערב\" class=\"board-card\" data-state=\"quoted\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_role(\"link\", name=\"ערב ערב דמה 02 לקוח דמה ב׳ ₪\")\n    4) <a data-item=\"\" data-kind=\"כנס\" class=\"board-card\" data-state=\"quoted\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_role(\"link\", name=\"כנס כנס דמה 04 לקוח דמה ד׳ ₪\")\n    5) <a hidden=\"\" data-item=\"\" data-kind=\"כנס\" class=\"board-card\" data-state=\"production\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"כנסמפגש צוות 01לקוח דמה א׳₪24\")\n    6) <a hidden=\"\" data-item=\"\" data-kind=\"סדנה\" class=\"board-card\" data-state=\"production\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"סדנהסדנת דמה 03לקוח דמה ג׳₪12\")\n    7) <a hidden=\"\" data-item=\"\" data-kind=\"ערב\" class=\"board-card\" data-state=\"closed\" href=\"http://127.0.0.1:8765/event.html?theme=light\">…</a> aka get_by_text(\"ערבערב דמה 06לקוח דמה ו׳₪14,\")\n\nCall log:\n  - waiting for locator(\"[data-kind]\")\n\n"
+    }
+  ],
+  "console_errors": [],
+  "external_requests": [],
+  "finished_at": "2026-11-04T20:35:50.087175+00:00",
+  "summary": {
+    "passed": 16,
+    "failed": 2,
+    "console_errors": 0,
+    "external_requests": 0
+  }
+}
