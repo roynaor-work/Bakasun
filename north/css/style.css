@@ -167,6 +167,7 @@ section.blk{padding:72px 0}
 .step .hint{color:var(--dim);font-size:14px;margin-inline-start:auto;font-family:var(--b);font-weight:400}
 .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .opt{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:12px;display:grid;gap:4px;text-align:right;transition:.15s;position:relative}
+.opt .ph{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:#15110d}
 .opt:hover{border-color:rgba(232,207,148,.4)}
 .opt.on{border-color:var(--gold);background:var(--card2);box-shadow:inset 0 0 0 1px var(--gold)}
 .opt .i{font-size:24px}
