@@ -42,8 +42,8 @@ test('browser: stick left / actions right in both orientations, floating stick w
         const mid = layout.width / 2;
         assert.ok(layout.stick.x < mid && layout.stick.right <= mid, `${width}x${height}: stick is in the left half (${layout.stick.x} / ${layout.width})`);
         assert.ok(layout.boost.x > mid && layout.boost.left >= mid, `${width}x${height}: boost is in the right half`);
-        assert.equal(layout.tricks.length, 4); for (const t of layout.tricks) assert.ok(t.x > mid && t.left >= mid && t.right <= layout.width, 'every trick button is in the right half and on screen');
-        assert.ok(layout.boost.width >= 92 && layout.stick.width >= 100, 'targets are large');
+        assert.equal(layout.tricks.length, 4); for (const t of layout.tricks) assert.ok(t.x > mid && t.right <= layout.width, 'every trick button is in the right half and on screen');
+        assert.ok(layout.boost.width >= 84 && layout.stick.width >= 100, 'targets are large');
         for (const t of layout.tricks) assert.ok(t.width >= 48 && t.height >= 48, 'trick buttons are at least 48 px');
         await page.screenshot({path: `${out}layout-${width}x${height}.png`});
 

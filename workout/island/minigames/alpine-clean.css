@@ -94,9 +94,11 @@
 .game-screen[data-game=alpineRush] .alpine-joystick{order:0!important;margin:0!important;transition:transform .14s ease-out}
 .game-screen[data-game=alpineRush] .alpine-joystick[data-floating=true]{transition:none}
 .game-screen[data-game=alpineRush] .alpine-actions{order:2!important;margin-left:auto!important;transform:scale(1.14);transform-origin:100% 100%}
-/* Larger touch targets: boost 66 -> 92 px in landscape, 76 -> 95 px in portrait; trick buttons 48 -> 67 / 60 px; stick 100 -> 116 / 112 -> 124 px. */
+/* Larger touch targets: boost 66 -> 92 px in landscape, 76 -> 84 px in portrait; trick buttons 48 -> 67 px in landscape; stick 100 -> 116 / 112 -> 124 px. */
 @media(max-width:700px){
- .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(1.25)}
+ /* Portrait is only 390 px wide: the trick arc must stay right of the middle, so the cluster keeps its size and only the boost grows. */
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:none}
+ .game-screen[data-game=alpineRush] .alpine-actions .alpine-boost{width:84px;min-width:84px;height:84px;min-height:84px}
  .game-screen[data-game=alpineRush] .alpine-joystick{width:124px!important;height:124px!important}
  .game-screen[data-game=alpineRush] .alpine-center{bottom:136px!important}
 }
