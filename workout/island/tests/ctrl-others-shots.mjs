@@ -7,7 +7,7 @@ const GAMES=[['tennis','island.tennis.hand'],['navalDuel','island.naval.hand'],[
 const rows=[];
 await verify('ctrl-others-'+label,[{width:844,height:390},{width:390,height:844}],async({page,viewport,start,exit,tick})=>{
  for(const [id,key] of GAMES){
-  if(key)await page.evaluate(k=>localStorage.setItem(k,'left'),key);
+  try{if(key)await page.evaluate(k=>localStorage.setItem(k,'left'),key);}catch{}
   try{
    await start(id);await tick(600);
    const r=await page.evaluate(({w,h})=>{
@@ -19,7 +19,8 @@ await verify('ctrl-others-'+label,[{width:844,height:390},{width:390,height:844}
    rows.push({id,viewport:`${viewport.width}x${viewport.height}`,...r});
   }catch(e){rows.push({id,viewport:`${viewport.width}x${viewport.height}`,error:String(e.message).slice(0,160)});}
   try{await exit();}catch{}
-  if(key)await page.evaluate(k=>localStorage.removeItem(k),key);
+  try{if(key)await page.evaluate(k=>localStorage.removeItem(k),key);}catch{}
+  await writeFile(`${out}/${label}.json`,JSON.stringify(rows,null,1));console.log(JSON.stringify(rows.at(-1)));
  }
  return {};
 });
