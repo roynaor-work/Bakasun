@@ -17,7 +17,7 @@ await verify('naval-shots',clip?[{width:844,height:390}]:sizes,async({page,conte
  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
  // The hold starts on the aim pad beside the Fire button and above the weapon dock, so a
  // straight upward drag never crosses the cancel chip. Left-handed mirrors it.
- const b=await page.locator('#shoot').boundingBox(),fire={x:b.x+b.width/2+(left?1:-1)*viewport.width*.27,y:b.y+b.height/2-40};
+ const b=await page.locator('#shoot').boundingBox(),fire={x:b.x+b.width/2+-viewport.width*.27,y:b.y+b.height/2-40};
  const down=async()=>{if(phone)await touch('touchStart',[fire]);else{await page.mouse.move(fire.x,fire.y);await page.mouse.down();}};
  const move=async(dx,dy)=>{if(phone)await touch('touchMove',[{x:fire.x+dx,y:fire.y+dy}]);else await page.mouse.move(fire.x+dx,fire.y+dy);};
  const up=async()=>{if(phone)await touch('touchEnd');else await page.mouse.up();};

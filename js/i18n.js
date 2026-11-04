@@ -31,7 +31,7 @@ const D = {
     noClients: 'אין לקוחות עדיין.', events: 'אירועים', won: 'נסגרו', lost: 'ירדו', totalNet: 'סה"כ לפני מע"מ', lastEvent: 'האירוע האחרון', newClient: 'לקוח חדש',
     // calls
     callQueue: 'תור חיוג', toCall: 'להתקשר', callbacks: 'לחזור אליהם', callsDone: 'נעשו', why: 'מה צריך ממנו', noCalls: 'אין שיחות בתור.',
-    noAnswer: 'לא ענה', answered: 'ענה', callBack: 'לחזור', attempts: 'ניסיונות', newCall: 'שיחה חדשה', whoToCall: 'למי', callbackWhen: 'מתי לחזור',
+    noAnswer: 'לא ענה', answered: 'ענה', callBack: 'לחזור', attempts: 'ניסיונות', monthLbl: 'חודש', dictLangLbl: 'שפת ההכתבה', dialogClose: 'סגירה', pageLoaded: 'נפתח המסך', newCall: 'שיחה חדשה', whoToCall: 'למי', callbackWhen: 'מתי לחזור',
     sendMsg: 'לשלוח הודעה', noAnswerMsg: 'ניסיתי להתקשר, לא הצלחתי לתפוס. מתי נוח לך שאחזור?',
     // tasks
     taskTitle: 'מה לעשות', taskDetails: 'בדיוק מה צריך', taskWho: 'מי מבצע', taskDue: 'עד מתי', taskSend: 'שליחה בוואטסאפ', taskDone: 'בוצע', taskOpen: 'פתוח', taskSent: 'נשלח',
@@ -69,7 +69,7 @@ const D = {
     followupMsg: 'Message de relance', questionsMsg: 'Questions complémentaires', noPhone: 'Pas de téléphone dans le dossier',
     noClients: 'Pas encore de client.', events: 'événements', won: 'confirmés', lost: 'annulés', totalNet: 'Total HT', lastEvent: 'Dernier événement', newClient: 'Nouveau client',
     callQueue: 'File d’appels', toCall: 'À appeler', callbacks: 'À rappeler', callsDone: 'Faits', why: 'Ce qu’il faut obtenir', noCalls: 'Aucun appel en attente.',
-    noAnswer: 'Pas de réponse', answered: 'A répondu', callBack: 'Rappeler', attempts: 'essais', newCall: 'Nouvel appel', whoToCall: 'Qui', callbackWhen: 'Quand rappeler',
+    noAnswer: 'Pas de réponse', answered: 'A répondu', callBack: 'Rappeler', attempts: 'essais', monthLbl: 'Mois', dictLangLbl: 'Langue de dictée', dialogClose: 'Fermer', pageLoaded: 'Écran ouvert', newCall: 'Nouvel appel', whoToCall: 'Qui', callbackWhen: 'Quand rappeler',
     sendMsg: 'Envoyer un message', noAnswerMsg: 'J’ai essayé de vous appeler sans succès. Quand puis-je vous rappeler ?',
     taskTitle: 'Quoi faire', taskDetails: 'Exactement ce qu’il faut', taskWho: 'Qui s’en charge', taskDue: 'Pour quand', taskSend: 'Envoyer par WhatsApp', taskDone: 'Fait', taskOpen: 'Ouverte', taskSent: 'Envoyée',
     noTasks: 'Aucune tâche ouverte.', newTask: 'Nouvelle tâche', forCase: 'Dossier', doneTasks: 'Faites', reopen: 'Rouvrir',
@@ -103,7 +103,7 @@ const D = {
     followupMsg: 'Follow-up message', questionsMsg: 'Follow-up questions', noPhone: 'No phone on the case',
     noClients: 'No clients yet.', events: 'events', won: 'confirmed', lost: 'dropped', totalNet: 'Total before VAT', lastEvent: 'Last event', newClient: 'New client',
     callQueue: 'Call queue', toCall: 'To call', callbacks: 'Call back', callsDone: 'Done', why: 'What we need from them', noCalls: 'No calls in the queue.',
-    noAnswer: 'No answer', answered: 'Answered', callBack: 'Call back', attempts: 'attempts', newCall: 'New call', whoToCall: 'Who', callbackWhen: 'When to call back',
+    noAnswer: 'No answer', answered: 'Answered', callBack: 'Call back', attempts: 'attempts', monthLbl: 'Month', dictLangLbl: 'Dictation language', dialogClose: 'Close', pageLoaded: 'Screen opened', newCall: 'New call', whoToCall: 'Who', callbackWhen: 'When to call back',
     sendMsg: 'Send a message', noAnswerMsg: 'I tried calling but could not reach you. When is a good time to call back?',
     taskTitle: 'What to do', taskDetails: 'Exactly what is needed', taskWho: 'Who does it', taskDue: 'By when', taskSend: 'Send on WhatsApp', taskDone: 'Done', taskOpen: 'Open', taskSent: 'Sent',
     noTasks: 'No open tasks.', newTask: 'New task', forCase: 'Case', doneTasks: 'Done', reopen: 'Reopen',

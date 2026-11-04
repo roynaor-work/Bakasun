@@ -11,7 +11,7 @@ test('island server sends the exact shipped CSP on index, tools and viewer HTML'
     const original=source.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"/i)?.[1];
     assert.ok(original,'The production index must declare its policy');
     assert.equal(await readIslandCsp(),original);
-    for(const page of ['', 'tools/perf-alpine.html', 'design/viewer/viewer.html']){
+    for(const page of ['', 'tools/perf-alpine.html', 'tools/perf-hoops.html', 'design/viewer/viewer.html']){
       const response=await fetch(server.url+page);
       assert.equal(response.status,200,page);
       assert.equal(response.headers.get('content-security-policy'),original,page);
@@ -23,7 +23,7 @@ test('island server sends the exact shipped CSP on index, tools and viewer HTML'
 // Opt-in browser integration, run separately from Node-only CI/unit tests:
 // ISLAND_CSP_BROWSER=1 node --test tests/island-browser-csp.test.mjs
 test('actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco',
-  {skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:120000},async()=>{
+  {skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:420000},async()=>{
   const server=await serveIsland(),chromium=await islandChromium();
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const reports=[];
@@ -131,13 +131,77 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await alpine.page.waitForFunction(()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase),null,{timeout:20000});
       const phase=await alpine.page.evaluate(()=>window.__perfSession.snapshot.phase);
       assert.ok(['countdown','racing'].includes(phase));assert.equal(loaded.metrics.mode,'model');
-      // 12 authored clips + 'getup' (the get-up clip from design/motion2/alpine, baked with the rest and played in place of 'recover')
-      assert.equal(loaded.metrics.character.clips,13);assert.equal(loaded.metrics.character.trianglesPerRider,1920);
+      // The GPT/Codex skier3 asset: its 5 embedded clips become 10 game states (idle/glide/tuck/air/pole_push/fall/recover/getup/land/celebrate).
+      assert.equal(loaded.metrics.character.mode,'skier3');assert.equal(loaded.metrics.character.bones,18);
+      assert.equal(loaded.metrics.character.clips,10);assert.equal(loaded.metrics.character.trianglesPerRider,24918);
       await alpine.csp.assertClean();
       reports.push({name:'alpine-session-start-result',phase,...loaded});
       await alpine.page.evaluate(()=>window.__perfSession.dispose());
       await alpine.csp.assertClean();
     }finally{await alpine.close();await alpine.csp.assertClean();}
+
+    // Basketball v4 (02/11, GPT/Codex hoops-v4 package): the real perf page, the whole game session and the
+    // production CSP. First the five position bodies and the 3D-crowd venue must load from the static Draco worker
+    // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
+    // bodies and the v3 venue (sprite crowd) and still start.
+    // v5 (04/11) is the default venue now, so the v4 checks pin it off with ?hoopsV5=0 and v5 has its own checks below
+    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
+    const hoops=await fixture('hoops-v4-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];hoops.page.on('request',r=>requests.push(r.url()));
+      await hoops.page.goto(server.url+hoopsUrl,{waitUntil:'load'});
+      const live=await hoopsReady(hoops.page);
+      assert.equal(live.error,null);assert.equal(live.m.characterVersion,4);assert.deepEqual(live.m.v4Fallbacks,[]);assert.equal(live.m.crowd3d,true);assert.ok(live.m.arenaSource.endsWith('lod-v4/hoops-v4-arena-lod.glb'));
+      assert.ok(requests.every(u=>u.startsWith(server.url)||/^(data|blob):/.test(u)),'no request leaves the island origin');
+      for(const role of ['pg','sg','sf','pf','c'])assert.ok(requests.some(u=>u.includes(`lod-v4/hoops-v4-${role}-lod.glb`)),role+' body requested');
+      assert.ok(requests.some(u=>u.includes('lod-v4/hoops-v4-arena-lod.glb')));
+      assert.ok(!requests.some(u=>/design\/hoops\/lod\/hoops-(guard|wing|forward|big)-lod/.test(u)),'the v3 bodies are not downloaded when v4 loads');
+      await hoops.csp.assertClean();reports.push({name:'hoops-v4-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await hoops.close();await hoops.csp.assertClean();}
+    const fallback=await fixture('hoops-v4-fallback',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await fallback.page.route(/design\/hoops\/lod-v4\//,route=>route.abort());
+      await fallback.page.goto(server.url+hoopsUrl,{waitUntil:'load'});
+      const live=await hoopsReady(fallback.page);
+      assert.equal(live.error,null,'a missing v4 asset never stops the game');assert.equal(live.m.characterVersion,1);assert.deepEqual([...live.m.v4Fallbacks].sort(),['arena','players']);
+      assert.equal(live.m.crowd3d,false);assert.ok(live.m.crowd>0,'the v3 sprite crowd is back');assert.ok(live.m.arenaSource.endsWith('models2/basketball-arena.glb'));
+      await fallback.csp.assertClean();reports.push({name:'hoops-v4-fallback-result',...live.m,loadTimes:undefined});
+    }finally{await fallback.close();await fallback.csp.assertClean();}
+
+    // Basketball v5 (04/11, GPT/Codex hoops-v5 package): the new arena with the animated crowd under the production CSP;
+    // then v5 files blocked (falls back to the v4 venue, bodies untouched) and v5 + v4 blocked (all the way to v3).
+    const v5=await fixture('hoops-v5-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];v5.page.on('request',r=>requests.push(r.url()));
+      await v5.page.goto(server.url+hoopsBase,{waitUntil:'load'});
+      const live=await hoopsReady(v5.page);
+      assert.equal(live.error,null);assert.equal(live.m.v5,true);assert.deepEqual(live.m.v4Fallbacks,[]);assert.equal(live.m.crowd3d,true);assert.equal(live.m.crowd,2762,'every spectator at quality 2');assert.equal(live.m.crowdLevel,2);
+      assert.ok(live.m.arenaSource.endsWith('design/hoops-v5/models/'));assert.equal(live.m.characterVersion,4,'the v4 bodies still play on the v5 floor');
+      assert.ok(requests.every(u=>u.startsWith(server.url)||/^(data|blob):/.test(u)),'no request leaves the island origin');
+      for(const file of ['arena','court','hoops','crowd','ball'])assert.ok(requests.some(u=>u.includes(`design/hoops-v5/models/${file}.glb`)),file+' requested');
+      assert.ok(!requests.some(u=>u.includes('design/hoops-v5/models/uniforms.glb')),'the preview-only jerseys are not downloaded');
+      assert.ok(!requests.some(u=>u.includes('lod-v4/hoops-v4-arena-lod.glb')),'the v4 venue is not downloaded when v5 loads');
+      await v5.csp.assertClean();reports.push({name:'hoops-v5-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await v5.close();await v5.csp.assertClean();}
+    const v5fallback=await fixture('hoops-v5-fallback-v4',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await v5fallback.page.route(/design\/hoops-v5\/models\//,route=>route.abort());
+      await v5fallback.page.goto(server.url+hoopsBase,{waitUntil:'load'});
+      const live=await hoopsReady(v5fallback.page);
+      assert.equal(live.error,null,'a missing v5 asset never stops the game');assert.equal(live.m.v5,false);assert.deepEqual(live.m.v4Fallbacks,['v5 arena']);
+      assert.equal(live.m.characterVersion,4);assert.equal(live.m.crowd3d,true);assert.ok(live.m.arenaSource.endsWith('lod-v4/hoops-v4-arena-lod.glb'),'the v4 venue is back');
+      await v5fallback.csp.assertClean();reports.push({name:'hoops-v5-fallback-v4-result',...live.m,loadTimes:undefined});
+    }finally{await v5fallback.close();await v5fallback.csp.assertClean();}
+    const v5v3=await fixture('hoops-v5-fallback-v3',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await v5v3.page.route(/design\/hoops-v5\/models\/|design\/hoops\/lod-v4\//,route=>route.abort());
+      await v5v3.page.goto(server.url+hoopsBase,{waitUntil:'load'});
+      const live=await hoopsReady(v5v3.page);
+      assert.equal(live.error,null);assert.equal(live.m.characterVersion,1);assert.deepEqual([...live.m.v4Fallbacks].sort(),['arena','players','v5 arena']);
+      assert.equal(live.m.crowd3d,false);assert.ok(live.m.crowd>0,'the v3 sprite crowd is back');assert.ok(live.m.arenaSource.endsWith('models2/basketball-arena.glb'));
+      await v5v3.csp.assertClean();reports.push({name:'hoops-v5-fallback-v3-result',...live.m,loadTimes:undefined});
+    }finally{await v5v3.close();await v5v3.csp.assertClean();}
   }finally{
     await browser.close();await server.close();
     if(process.env.ISLAND_CSP_AUDIT_DIR){await mkdir(process.env.ISLAND_CSP_AUDIT_DIR,{recursive:true});await writeFile(path.join(process.env.ISLAND_CSP_AUDIT_DIR,'csp-negative-fixtures.json'),JSON.stringify(reports,null,2)+'\n');}

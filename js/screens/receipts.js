@@ -23,17 +23,19 @@ export function render(ctx) {
   const pending = all.filter(r => !r.cloudPath && r.localId).length;
   root.innerHTML = `<header class="top"><a class="icon" href="#/more" aria-label="${esc(t('back'))}"><svg class="mirror" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><h1>${esc(t('receipts'))}</h1></header>
     <div class="card row">
-      <label class="btn primary grow" id="snapBtn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-5px"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> ${esc(t('snapReceipt'))}<input type="file" id="snap" accept="image/*,application/pdf" capture="environment" hidden></label>
-      <label class="btn" id="pickBtn">${esc(t('fromGallery'))}<input type="file" id="pick" accept="image/*,application/pdf" multiple hidden></label>
+      <button type="button" class="btn primary grow" id="snapBtn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-5px"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> ${esc(t('snapReceipt'))}</button><input type="file" id="snap" accept="image/*,application/pdf" capture="environment" hidden>
+      <button type="button" class="btn" id="pickBtn">${esc(t('fromGallery'))}</button><input type="file" id="pick" accept="image/*,application/pdf" multiple hidden>
     </div>
     ${!cloud.isOn() ? `<p class="warnbox">${esc(t('receiptsLocal'))}</p>` : pending ? `<p class="warnbox">${esc(t('receiptsPending', { n: pending }))}${cloud.status.fileError ? ' · ' + esc(cloud.status.fileError) : ''} <button class="btn sm" id="retry">${esc(t('retry'))}</button></p>` : ''}
-    <div class="row"><select id="month" class="grow">${months.map(m => `<option value="${esc(m)}"${m === month ? ' selected' : ''}>${esc(monthLabel(m, uiLang()))}</option>`).join('')}</select><span class="badge muted"><span class="count">${list.length}</span> · ${esc(Office.money(receiptsTotal(list)))}</span></div>
+    <div class="row"><select id="month" class="grow" aria-label="${esc(t('monthLbl'))}">${months.map(m => `<option value="${esc(m)}"${m === month ? ' selected' : ''}>${esc(monthLabel(m, uiLang()))}</option>`).join('')}</select><span class="badge muted"><span class="count">${list.length}</span> · ${esc(Office.money(receiptsTotal(list)))}</span></div>
     ${section(monthLabel(month, uiLang()), `<div class="list">${list.length ? list.map(r => `<div class="card" data-r="${esc(r.id)}"><div class="row between"><span class="title">${esc(r.supplier || t('receipt'))}</span><span class="ltr big">${r.amount ? esc(Office.money(r.amount)) : ''}</span></div>
       <div class="sub">${[r.date ? Office.fmt(r.date) : '', r.note, r.caseId ? (db.get('cases', r.caseId) || {}).client : '', r.cloudPath ? '☁' : (r.localId ? t('onDevice') : '')].filter(Boolean).map(esc).join(' · ')}</div>
       <div class="row"><button class="btn sm" data-view>${esc(t('open'))}</button><button class="btn sm ghost" data-edit>${esc(t('edit'))}</button><button class="btn sm ghost" data-del>✕</button></div></div>`).join('') : empty(t('noReceipts'))}</div>
       <div class="row"><a class="btn" href="#/money">${esc(t('monthForAccountant'))}</a></div>`)}`;
 
   root.querySelector('#month').onchange = e => { month = e.target.value; render(ctx); };
+  root.querySelector('#snapBtn').onclick = () => root.querySelector('#snap').click();
+  root.querySelector('#pickBtn').onclick = () => root.querySelector('#pick').click();
   root.querySelector('#snap').onchange = e => addFiles([...e.target.files], ctx);
   root.querySelector('#pick').onchange = e => addFiles([...e.target.files], ctx);
   const rt = root.querySelector('#retry'); if (rt) rt.onclick = () => syncPending().then(() => render(ctx));

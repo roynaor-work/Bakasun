@@ -1,0 +1,127 @@
+{
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium / ANGLE SwiftShader software renderer; no physical phone FPS claim",
+  "screenshots": "Native PNG at viewport dimensions (fullPage=true); no post-processing.",
+  "checks": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "horizontalOverflow": false,
+      "verticalOverflow": false,
+      "canvas": [
+        390,
+        480
+      ],
+      "ready": true
+    },
+    {
+      "interaction": "LOD1 / teal / shoot_jump / timeline",
+      "state": {
+        "selected": "pg",
+        "lod": 1,
+        "team": "teal",
+        "mode": "solo",
+        "clip": "shoot_jump",
+        "playing": false,
+        "speed": 1,
+        "camera": "portrait",
+        "ready": true,
+        "loading": false
+      },
+      "time": 0.800000011920929
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "horizontalOverflow": false,
+      "verticalOverflow": false,
+      "canvas": [
+        606,
+        273
+      ],
+      "ready": true
+    },
+    {
+      "interaction": "LOD1 / teal / shoot_jump / timeline",
+      "state": {
+        "selected": "pg",
+        "lod": 1,
+        "team": "teal",
+        "mode": "solo",
+        "clip": "shoot_jump",
+        "playing": false,
+        "speed": 1,
+        "camera": "portrait",
+        "ready": true,
+        "loading": false
+      },
+      "time": 0.800000011920929
+    },
+    {
+      "profile": "pg",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18683,
+      "calls": 11
+    },
+    {
+      "profile": "sg",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18683,
+      "calls": 11
+    },
+    {
+      "profile": "sf",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18682,
+      "calls": 11
+    },
+    {
+      "profile": "pf",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18682,
+      "calls": 11
+    },
+    {
+      "profile": "c",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18683,
+      "calls": 11
+    },
+    {
+      "profile": "referee",
+      "actorCount": 1,
+      "clipCount": 17,
+      "triangles": 18683,
+      "calls": 11
+    },
+    {
+      "mode": "six-v-six",
+      "actorCount": 13,
+      "triangles": 47236,
+      "calls": 24,
+      "instancedCrowd": [
+        180,
+        180
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "pass": true,
+  "finalRefreshErrors": [],
+  "sourceSha256": {
+    "preview.js": "e7ac9589ac510460fdf06441367444de775b7276f3fb5a35e50fc3ffcb740e4b",
+    "preview.html": "d523abd72dc367817a6fa4c975df460587e92f8bd1bf1b837ef20e4eb1d80784",
+    "preview.css": "516674f13e907ecd079fd3cd28a8d76266a5cd9ff90114fef4e0df97fb475545",
+    "asset-metadata.json": "c0ed82a5c2f9db14fa72e80afe3d050c09b9b361e6ff71f4866adb617c9dd1b4"
+  }
+}

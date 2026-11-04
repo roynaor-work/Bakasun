@@ -103,6 +103,20 @@ export function go(hash) { location.hash = hash; }
 
 document.addEventListener('click', e => { const b = e.target.closest('[data-quicknote]'); if (b) { e.preventDefault(); quickNote(); } });
 
+/* After every navigation: the tab title carries the screen name, focus moves to the screen's heading (so a keyboard / screen-reader
+   user starts at the top of the new screen, not on <body>), and a polite live region says which screen opened. */
+function announceScreen() {
+  const h = app.querySelector('h1');
+  const name = h ? h.textContent.trim() : '';
+  document.title = name ? name + ' · ' + t('app') : t('app');
+  const target = h || app;
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  try { target.focus({ preventScroll: true }); } catch (e) { /* */ }
+  let live = document.getElementById('route-live');
+  if (!live) { live = document.createElement('div'); live.id = 'route-live'; live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite'); live.className = 'sr-only'; document.body.appendChild(live); }
+  live.textContent = name ? t('pageLoaded') + ': ' + name : '';
+}
+
 function route() {
   applyLang();
   document.querySelectorAll('.modal').forEach(m => m.remove());
@@ -116,6 +130,7 @@ function route() {
   draw();
   unsub = db.subscribe(() => { if (!screen.noLive) draw(); });
   window.scrollTo(0, 0);
+  announceScreen();
 }
 
 // "Add to home screen": the browser offers it once; we keep the offer and show our own button until she installs.

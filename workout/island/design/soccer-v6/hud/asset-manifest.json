@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-04",
+  "branch": "codex/soccer-hud-v6-20261104",
+  "base": "26b18cd4331b5ca0ab394b9bc281963aea3914f9",
+  "units": {
+    "KB": 1000,
+    "MB": 1000000
+  },
+  "assetLimitBytes": 100000,
+  "runtimeFiles": [
+    "preview.html",
+    "preview.js",
+    "hud.js",
+    "hud.css",
+    "assets/hud-symbols.svg",
+    "assets/pitch-backdrop.webp",
+    "assets/radar.svg"
+  ],
+  "previewRuntimeBytes": 134398,
+  "reusableHUDBytes": 43389,
+  "assets": [
+    {
+      "path": "assets/action-buttons.svg",
+      "bytes": 1640,
+      "mb": 0.00164,
+      "sha256": "524ca300da9919d12f0761b12873e83694bd230bfe826703852df12ba25c320a"
+    },
+    {
+      "path": "assets/goal.svg",
+      "bytes": 1347,
+      "mb": 0.001347,
+      "sha256": "3daa067da2aa3ed7ff4a2c11e2a9e5b3e7daa771157c27bb7f8d73f80aaf848e"
+    },
+    {
+      "path": "assets/hud-symbols.svg",
+      "bytes": 1697,
+      "mb": 0.001697,
+      "sha256": "965b83f15e72db984d88c76526a6be9766a4abaa3556d6352e1b22c41d92a4f9"
+    },
+    {
+      "path": "assets/pitch-backdrop.webp",
+      "bytes": 83398,
+      "mb": 0.083398,
+      "sha256": "d878b2677a059d00f620ab4dd626d843cb305f4d2f706cb0ab96f9a00ccaa364",
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "assets/quick-replay.svg",
+      "bytes": 1338,
+      "mb": 0.001338,
+      "sha256": "f68870ff7647601e69a16cdbd55aa741d72cf6c0799d205ec6ea89e8431c0333"
+    },
+    {
+      "path": "assets/radar.svg",
+      "bytes": 1386,
+      "mb": 0.001386,
+      "sha256": "4a45db2573ea9bc552c274c9eb4354c855242cbb0e4e2d401a77d55ea14c8cfe"
+    },
+    {
+      "path": "assets/scoreboard.svg",
+      "bytes": 1477,
+      "mb": 0.001477,
+      "sha256": "19a3e416370fa0a3a5c56669ab27f8cc0adffddeaedb5e1e408100c5fe200f43"
+    },
+    {
+      "path": "assets/sprint-meter.svg",
+      "bytes": 689,
+      "mb": 0.000689,
+      "sha256": "c9f328cd284db874da50ab0475d2fbc7358637eea8a9dd3b66f76d2a618f63bf"
+    },
+    {
+      "path": "assets/substitution.svg",
+      "bytes": 1766,
+      "mb": 0.001766,
+      "sha256": "60735af4d5e0807529887bbb52da9955a2b7a5d39afedabcd35d67f5ba0afe6d"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "previews/dusk-390x844.webp",
+      "bytes": 39314,
+      "dimensions": [
+        390,
+        844
+      ],
+      "sha256": "a07a81b5c74757ea0e3a8aea117faecf9307df878af9262aee3ef6f75ccb95b7"
+    },
+    {
+      "path": "previews/dusk-844x390.webp",
+      "bytes": 36168,
+      "dimensions": [
+        844,
+        390
+      ],
+      "sha256": "d06306cd9f5fd2423c5b14256c5a7786173a2a60fac408628fb1ab2c05cbaccb"
+    },
+    {
+      "path": "previews/goal-390x844.webp",
+      "bytes": 31278,
+      "dimensions": [
+        390,
+        844
+      ],
+      "sha256": "254540bc719179ed5aaa699470f36076db2ac77d9ee445d3c53bb99ad69fdab9"
+    },
+    {
+      "path": "previews/goal-844x390.webp",
+      "bytes": 32746,
+      "dimensions": [
+        844,
+        390
+      ],
+      "sha256": "c97557c929f9541675a360972fcb6d6c608df4475784bea61a2b267188dbf57e"
+    },
+    {
+      "path": "previews/live-390x844.webp",
+      "bytes": 39112,
+      "dimensions": [
+        390,
+        844
+      ],
+      "sha256": "0f8490bd436ff29cf459f5015ce5629949a42fe543f85e5bf2552833303db618"
+    },
+    {
+      "path": "previews/live-844x390.webp",
+      "bytes": 35950,
+      "dimensions": [
+        844,
+        390
+      ],
+      "sha256": "52b9f4b674bab11b062b6d4dbd5cab93721a9b59d142d0ff9ab998bf05b5ee3e"
+    },
+    {
+      "path": "previews/replay-390x844.webp",
+      "bytes": 34532,
+      "dimensions": [
+        390,
+        844
+      ],
+      "sha256": "b59266d19a2058e96a6f6a22bfdb63cac39497f03777b10afefbb5ff3a230e44"
+    },
+    {
+      "path": "previews/replay-844x390.webp",
+      "bytes": 29832,
+      "dimensions": [
+        844,
+        390
+      ],
+      "sha256": "0113ff49254aa2f66a51115b100800a33e84f93c93923aae45b7c57a405fd746"
+    },
+    {
+      "path": "previews/substitution-390x844.webp",
+      "bytes": 32662,
+      "dimensions": [
+        390,
+        844
+      ],
+      "sha256": "5c148457c56005c716a3535af654f31b118c3bc731f0e16fc768d92609fb2708"
+    },
+    {
+      "path": "previews/substitution-844x390.webp",
+      "bytes": 36096,
+      "dimensions": [
+        844,
+        390
+      ],
+      "sha256": "a15b9d35a2e47f795eeca85ce3e041d3c07e7f7b41726135d9f1e96ea77248fb"
+    }
+  ],
+  "captureDeviceScaleFactor": 1,
+  "externalRuntimeRequests": 0
+}

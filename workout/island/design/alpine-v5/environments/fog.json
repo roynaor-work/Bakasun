@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "fog",
+  "environmentIds": [
+    "fog"
+  ],
+  "units": "meters",
+  "up": "+Y",
+  "downhill": "+Z",
+  "label": "ערפל",
+  "backgroundColor": "#b7c9db",
+  "snowTint": "#f1f6fa",
+  "fog": {
+    "type": "linear",
+    "color": "#bdd0e1",
+    "nearMeters": 26,
+    "farMeters": 100
+  },
+  "hemisphere": {
+    "sky": "#dceaf5",
+    "ground": "#8b9fb3",
+    "intensity": 2.6
+  },
+  "sun": {
+    "color": "#f1f7ff",
+    "intensity": 1.1,
+    "position": [
+      -20,
+      35,
+      -10
+    ]
+  },
+  "exposure": 1.0,
+  "powderTint": "#eff8ff",
+  "ambientSnowRate": 12,
+  "backgrounds": {
+    "landscape": "fog-landscape",
+    "portrait": "fog-portrait",
+    "projection": "camera-backplate",
+    "objectFit": "cover",
+    "mipmaps": false,
+    "parallax": false,
+    "repeat": false,
+    "notes": "Baked distant lighting; foreground uses the live lights below. Not an HDR environment map."
+  },
+  "assets": [
+    "fog-landscape",
+    "fog-portrait",
+    "snow-albedo",
+    "snow-normal",
+    "snow-roughness",
+    "powder-spray",
+    "landing-cloud",
+    "snow-flecks",
+    "route-and-snow",
+    "safety-fence-fog",
+    "route-marker-fog",
+    "fog-ribbon"
+  ],
+  "surface": {
+    "albedo": "snow-albedo",
+    "normal": "snow-normal",
+    "roughness": "snow-roughness",
+    "normalScale": 0.22,
+    "roughnessChannel": "R",
+    "metalness": 0,
+    "repeatMeters": [
+      4,
+      4
+    ]
+  },
+  "effects": {
+    "powder": "powder-spray",
+    "landing": "landing-cloud",
+    "flakes": "snow-flecks",
+    "maxConcurrentLanding": 2,
+    "maxConcurrentPowder": 3,
+    "maxAmbientParticles": 48,
+    "maxTransparentScreenFraction": 0.12,
+    "reducedMotion": "Disable drifting fog, cones and ambient snow; show brief static contact cue."
+  },
+  "previewCamera": {
+    "position": [
+      0,
+      3.1,
+      -8
+    ],
+    "target": [
+      0,
+      0.2,
+      20
+    ],
+    "fovLandscape": 59,
+    "fovPortrait": 66,
+    "near": 0.1,
+    "far": 300
+  },
+  "loadPolicy": {
+    "oneEnvironmentAtATime": true,
+    "oneBackgroundOrientationAtATime": true,
+    "discardOldBackgroundOnRotate": true,
+    "shadowCastingLightsMax": 1,
+    "postprocessing": false,
+    "realtimeSpotLightsMax": 0
+  },
+  "fogOverlay": {
+    "asset": "fog-ribbon",
+    "maxLayers": 2,
+    "opacity": 0.28,
+    "driftMetersPerSecond": 0.15,
+    "nearestMeters": 35,
+    "reducedMotion": "static or disabled"
+  }
+}

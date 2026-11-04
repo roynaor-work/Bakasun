@@ -7754,6 +7754,7 @@
     "maxTurnLean": 0.2,
     "lowSpeedTurnBoost": 2.5,
     "keeperMotion": {"acceleration": 19, "deceleration": 14, "turnRate": 18, "lowSpeedTurnBoost": 1.5},
+    "controlled": {"acceleration": 22, "deceleration": 17, "turnRate": 18},
     "turnDrive": 0.4
    },
    "team": {
@@ -8120,6 +8121,9 @@
      "safeY": 0.72,
      "playerHeight": 2.5,
      "edgeInset": 28,
+     "portraitFollowRange": 14,
+     "portraitElevationDegrees": 40,
+     "portraitNearDistance": 21,
      "nearPlane": 0.1,
      "farPlane": 240
     },
@@ -8432,6 +8436,8 @@
     "switchKey": "KeyC",
     "floating": true,
     "handednessKey": "island.soccer.handed",
+    "stick": {"deadZone": 0.06, "saturation": 0.8, "expo": 1.25, "padLandscape": {"widthPct": 46, "heightPct": 66}, "padPortrait": {"widthPct": 58, "heightPct": 42}},
+    "vibrate": {"kick": 12, "pass": 8, "switch": 6},
     "aimDragThreshold": 14,
     "aimHeightPixels": 90
    },
@@ -8502,6 +8508,8 @@
     "passSelectionAdvanceWeight": 0.3,
     "keeperStealRate": 12,
     "sprintFromStage": 6,
+      "catchUpDistance": 8,
+      "catchUpBoost": 0.45,
     "sprintSeconds": 0.65,
     "sprintRestSeconds": 3.8,
     "sprintMultiplier": 1.1,
@@ -9300,10 +9308,10 @@
    "sprint": {
     "capacity": 100,
     "multiplier": 1.45,
-    "drainPerSecond": 25,
-    "regenPerSecond": 12,
-    "regenDelaySeconds": 0.6,
-    "minToStart": 20
+    "drainPerSecond": 28.6,
+    "regenPerSecond": 16.7,
+    "regenDelaySeconds": 1,
+    "minToStart": 30
    },
    "slide": {
     "seconds": 0.35,
@@ -9312,7 +9320,17 @@
     "baseChance": 0.55,
     "recoverSeconds": 0.6,
     "cooldownSeconds": 1.2,
-    "distance": 1.5
+    "distance": 1.5,
+    "activeShare": 0.82,
+    "lateShare": 0.58,
+    "fastSpeedRatio": 1.15,
+    "fastAngleDegrees": 35,
+    "lateralAngleDegrees": 55,
+    "variants": {
+     "straight": {"seconds": 0.35, "distance": 1.5, "reach": 1, "recoverSeconds": 0.6},
+     "lateral": {"seconds": 0.4, "distance": 1.3, "reach": 1.15, "recoverSeconds": 0.7},
+     "fast": {"seconds": 0.3, "distance": 2.1, "reach": 1, "recoverSeconds": 0.75}
+    }
    },
    "steal": {
     "reach": 1.2,
@@ -9557,12 +9575,16 @@
     "catchSeconds": 0.7,
     "holdHeight": 1.05,
     "maxHoldSeconds": 3,
+    "carryForward": 2.5,
+    "carryForwardSeconds": 0.5,
+    "throwReachScale": 1.7,
+    "puntPower": 0.6,
     "carrySpeedMultiplier": 0.65,
     "holdForward": 0.34,
     "areaInset": 0.6,
     "throwMinSpeed": 6,
     "throwMaxSpeed": 9.5,
-    "throwTravelSeconds": 1.05
+    "throwTravelSeconds": 1.05, "puntMinDistance": 14, "puntMaxDistance": 30, "puntSpeed": 13
    },
    "restarts": {
     "walkSeconds": 0.4,
@@ -9580,7 +9602,8 @@
     "defaultCornerPower": 0.65,
     "inwardMinimum": 0.18,
     "goalKickDepth": 1.2,
-    "idleReleaseSeconds": 0.9
+    "idleReleaseSeconds": 0.9,
+    "throwHoldSeconds": 0.35
    },
    "tactics": {
     "lanes": [
@@ -11663,12 +11686,17 @@
     "decel": 15,
     "turnRate": 9,
     "userAccel": 1.6,
+    "userKick": 1.1,
+    "userKickBelow": 0.4,
+    "userBrake": 1.5,
+    "bufferTicks": 6,
     "userTurn": 18,
     "autoSwitch": true,
     "defenseAssist": true,
     "assistGapBall": 1.0,
     "assistGapOff": 1.8
    },
+   "sprintReserve": { "drain": 3.5, "delay": 1.0, "refill": 6.0, "unlock": 0.3 },
    "fatigue": {
     "drain": 0.0105,
     "sprint": 2.2,
@@ -12101,8 +12129,8 @@
     "portraitFov": 52,
     "portraitBack": 9.5,
     "portraitHeight": 6.0,
-    "exposure": 1.05,
-    "envIntensity": 0.5,
+    "exposure": 1.0,
+    "envIntensity": 0.55,
     "dprCap": 2,
     "mobileDprCap": 1.6,
     "dribblePeriod": 0.52,
@@ -12131,18 +12159,22 @@
     "bLeadMax": 4,
     "bEdge": 1.2,
     "bRate": 2.4,
-    "bSpan": 8.6,
+    "bSpan": 8.2,
     "bFovMin": 16,
     "bFovMax": 40,
-    "bHeight": 7,
+    "bHeight": 6.4,
     "bDist": 7,
-    "bLookY": 1.7,
+    "bLookY": 1.45,
     "bLookZ": 0,
     "bFollowZ": 0.75,
-    "bNearZ": 3
+    "bNearZ": 3,
+    "reflStrength": 0.52,
+    "reflScale": 0.36,
+    "reflMaxWidth": 640
    },
    "assets": {
-    "characterModel": "design/hoops/lod/hoops-player-v2-lod.glb",
+    "characterVersion": 1,
+      "characterModel": "design/hoops/lod/hoops-player-v2-lod.glb",
     "motionManifest": "design/motion2/hoops/manifest.json",
     "models": {
      "guard": "assets/models/hoops-guard.glb",
@@ -12167,6 +12199,30 @@
      "wing": 198,
      "forward": 203,
      "big": 209
+    },
+    "v5": {
+     "enabled": true,
+     "minQuality": 1,
+     "base": "design/hoops-v5/models/"
+    },
+    "v4": {
+     "enabled": true,
+     "players": {
+      "PG": "design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "SG": "design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "SF": "design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "PF": "design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "C": "design/hoops/lod-v4/hoops-v4-c-lod.glb"
+     },
+     "baseHeights": {
+      "PG": 178,
+      "SG": 188,
+      "SF": 199,
+      "PF": 209,
+      "C": 220
+     },
+     "arena": "design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+     "arenaMinQuality": 2
     }
    },
    "league": {
@@ -12211,10 +12267,13 @@
     "acceleration": 6.5,
     "deceleration": 5,
     "lateralSpeed": 8.5,
-    "lateralResponse": 9,
-    "steerExpo": 1.25,
-    "steerAttack": 12,
-    "steerRelease": 16,
+    "lateralResponse": 12,
+    "steerExpo": 1.15,
+    "steerAttack": 24,
+    "steerRelease": 26,
+    "steerBoostExpo": 0,
+    "steerBoostSoften": 0.3,
+    "lateralBoostDamp": 0.05,
     "airControl": 0.4,
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
@@ -12261,7 +12320,7 @@
     "pathRunout": 340,
     "wallGravity": 9,
     "wallSpeedFactor": 0.95,
-    "turnPush": 2.5,
+    "turnPush": 3.3333,
     "lipLaunchSpeed": 2.5,
     "lipLaunchFactor": 1.0,
     "lipKick": 2.6,
@@ -12385,7 +12444,7 @@
       0.17
      ],
      "wallCoins": 0.45,
-     "visual": {
+     "visual": {"environment": "sunset",
       "sky": "#a9dcf2",
       "fog": "#c5e4ef",
       "fogNear": 65,
@@ -12461,7 +12520,7 @@
       0.2
      ],
      "wallCoins": 0.5,
-     "visual": {
+     "visual": {"environment": "fog",
       "sky": "#9fcde3",
       "fog": "#bfdbe7",
       "fogNear": 50,
@@ -12536,7 +12595,7 @@
       0.24
      ],
      "wallCoins": 0.55,
-     "visual": {
+     "visual": {"environment": "night-floodlit",
       "sky": "#4d5f80",
       "fog": "#a3949f",
       "horizon": "#e7a47f",

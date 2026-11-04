@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>כדורגל 04 · על הדשא</title>
+<link rel="stylesheet" href="preview.css">
+<body>
+<header><div class="identity"><span class="mark" aria-hidden="true">04</span><div><span class="eyebrow">האי שלי / כדורגל</span><h1>על הדשא</h1></div></div><span class="edition">דמויות, דשא ויציעים</span><span id="status" role="status">טוען את המגרש…</span></header>
+<main>
+  <section class="viewport" aria-label="תצוגת תלת ממד של המגרש והדמויות">
+    <div id="stage"></div>
+    <div class="view-label"><span class="live-dot"></span><span id="viewLabel">המצלמה הראשית</span></div>
+    <div class="caption"><span>צבע. תנועה. משחק.</span><strong>כל הדרך אל השער.</strong></div>
+    <div class="camera-nav" role="group" aria-label="זווית צפייה">
+      <button data-view="main" aria-pressed="true">מגרש</button><button data-view="stadium" aria-pressed="false">יציעים</button><button data-view="player" aria-pressed="false">שחקן</button><button data-view="keeper" aria-pressed="false">שוער</button><button data-view="turf" aria-pressed="false">דשא</button>
+    </div>
+  </section>
+  <aside>
+    <div class="section-no">01 / תנועה</div>
+    <h2>לכל מהלך,<br>תנועה משלו.</h2>
+    <label for="clip">בחירת פעולה</label><select id="clip"><option value="idle">עמידה</option></select>
+    <div class="playback"><button id="play" aria-label="ניגון או השהיה">ניגון <span>▶</span></button><output id="time">0.00 / 1.80</output></div>
+    <label class="sr-only" for="scrub">זמן התנועה</label><input id="scrub" type="range" min="0" max="1" step="0.001" value="0">
+    <div class="divider"></div>
+    <div class="section-no">02 / צבעי הקבוצה</div>
+    <div class="swatches" role="group" aria-label="תלבושת בצבע אחיד"><button data-kit="home" aria-pressed="true"><i style="--swatch:#2198af"></i>בית</button><button data-kit="away" aria-pressed="false"><i style="--swatch:#e57750"></i>חוץ</button></div>
+    <p>תלבושות נקיות בצבעים אחידים.<br>בלי סמלים ובלי מספרים.</p>
+    <div class="divider"></div>
+    <div class="section-no">03 / מקרוב</div>
+    <p>גרירה מסובבת את המבט.<br>גלילה מקרבת ומרחיקה.</p>
+    <button id="reset" class="quiet">איפוס המבט <span>↗</span></button>
+  </aside>
+</main>
+<footer><span>כדורגל / אוסף 04</span><span>דשא חי. יציע מלא.</span></footer>
+<script type="module" src="preview.js"></script>
+</body></html>

@@ -39,8 +39,9 @@ export function createUltraSoccerEffects(scene,config,track){
       geometry.attributes.position.needsUpdate=geometry.attributes.color.needsUpdate=true;
     }
     let count=0;
-    for(const p of s.players){const running=hypot2(p.vx,p.vz)>3.8||p.slideTime>0;if(!running)continue;for(let k=0;k<3;k++){
-      const u=((s.elapsed*4+p.id*.21+k/3)%1),spread=p.slideTime>0?.25:.13;
+    for(const p of s.players){const sliding=p.slideTime>0||p.recover>0&&p.slideKind,running=hypot2(p.vx,p.vz)>3.8||sliding;if(!running)continue;for(let k=0;k<3;k++){
+      // Turf is torn along the slide and still settles while the tackler gets up.
+      const u=((s.elapsed*4+p.id*.21+k/3)%1),spread=sliding?.25:.13;
       dummy.position.set(p.x-p.fx*u*.65+Math.sin(k*5)*spread,.028,p.z-p.fz*u*.65+Math.cos(k*5)*spread);dummy.rotation.set(-Math.PI/2,0,Math.atan2(p.fx,p.fz));dummy.scale.setScalar(1-u);dummy.updateMatrix();scuffs.setMatrixAt(count++,dummy.matrix);
     }}scuffs.count=quality<2?count:0;scuffs.instanceMatrix.needsUpdate=true;
   },metrics:()=>({impactCues:visibleCues,flightRibbon:ribbon.visible,scuffs:scuffs.count})};

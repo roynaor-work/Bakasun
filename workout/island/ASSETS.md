@@ -168,6 +168,17 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 
 בדיקה: כל GLB עד 2,000,000 בתים, סך הדמויות והאנימציות 4,096,520 בתים, מתחת ל־`ui.downloadBudget.gameAdditional` (6,000,000). הגיבובים ב־`assets/models/manifest.json`. הבדיקה האוטומטית: `tests/island-hoops.test.mjs`.
 
+### כדורסל v4: חמישייה ואולם (02/11/2026)
+
+חבילת Codex ב־`design/hoops-v4/` (תיעוד: `README.md`, `VALIDATION.md`, `LICENSES.md` שם). הגופים של MakeHuman (CC0, אותו מקור כמו `hoops-*.glb`), האולם והקהל התלת־ממדי מקוריים לריפו (בלי הענקת CC0 כללית). המשחק משתמש בהם כך:
+
+| קובץ | בייטים | מה זה |
+|---|---:|---|
+| `design/hoops/lod-v4/hoops-v4-{pg,sg,sf,pf,c}-lod.glb` | 235,528 עד 264,488 | חמשת הגופים (1.78 / 1.88 / 1.99 / 2.09 / 2.20 מ׳) אחרי הקטנה ל־5.2K עד 5.8K משולשים (במקור 27K עד 29K), Draco, אותו שלד של 52 עצמות. נבנו מהקבצים של Codex בלי לשנות אותם: `tools/hoops-build-v4-lod.mjs`, הגיבובים ב־`hoops-v4-lod-provenance.json` |
+| `design/hoops/lod-v4/hoops-v4-arena-lod.glb` | 601,672 | האולם של Codex עם 489 הצופים התלת־ממדיים, הקהל מופחת מ־189K ל־85K משולשים (סה״כ 109K במקום 213K), רשת סטטית אחת שנחתכת בטעינה ל־8 חלקים לצורך חיתוך מהמצלמה. המקור `design/hoops-v4/assets/arena.glb` לא שונה |
+
+הקליפים נשארים ה־24 של `hoops-anim.glb` ושל הזריקות; מסלול ירכי הקליפים מוגדל לפי גובה הירך של כל גוף (`hipScaledClips`), כדי שכפות הרגליים יישארו על הפרקט בכל חמש העמדות. הגוף לפי `card.pos`, הגובה בפועל לפי `ratings.height` (הפיזיקה לא משתנה). המדים: חולצה עם מספר ושם (UV מישורי), מכנסיים בצבע הקבוצה, בלי סמל. כל כשל בטעינה חוזר לגופים ולאולם של v3 (`?hoopsV4=0` מכריח v3, `?hoopsV4=1` מכריח v4; האולם התלת־ממדי מאיכות 2 ומעלה). בדיקה: `tests/island-hoops-v4.test.mjs`, ובדיקת הדפדפן תחת CSP ב־`tests/island-browser-csp.test.mjs`.
+
 הצלילים ממוחזרים מהמשחקים הקיימים באי (ראו G3h, G4e, G6d): כדרור, רשת, טבעת, מסירה, שריקה, קהל.
 
 שימו לב: הצהרת CC0 של MakeHuman חלה על נכסי הליבה של הפרויקט. לא נבדקה תעודת רישיון נפרדת לכל אחד מהבגדים, השיער והנעליים ששימשו; לפני פרסום מסחרי מחוץ לאי כדאי לאמת מול `makehuman.org/license` ומול קובצי הרישיון של כל חבילה.
@@ -207,3 +218,4 @@ textures recursively. `kid-full.glb` remains the existing load-failure fallback.
 The turf and audio attributions below remain applicable. No EA/club assets or
 real-player likenesses are included. Codex graphics v3 is excluded from this
 integration; it requires separate visual approval.
+- חיבור נכסי GPT/Codex לסקי (02.11.2026, PR 238, ענף `claude/ski-assets-v5`): הסקיאר `design/skier3/skier.glb` (18 עצמות, חמישה קליפים מוטמעים: glide, crouch, boost, fall, get_up) נטען דרך `alpine-character.mjs` (`bakeEmbeddedSkier` דוגם את הקליפים למבנה האפוי הקיים, ומכונת המצבים ושכבת הרכיבה נשארות). עולם: `design/alpine-world/models/*` דרך `alpine-design-world.mjs` (סלעים קטן וגדול, שלטים, מוגולים, קיר קרח, שער זינוק וסיום, אבקת שלג מונפשת ברגע נחיתה ונפילה). כל קובץ אופציונלי: כשל טעינה חוזר בשקט לסקיאר ולעולם הקודמים (`metrics().character.fallbackReason`). בלי שינוי בפיזיקה, בכיול ובגרסת השמירה.

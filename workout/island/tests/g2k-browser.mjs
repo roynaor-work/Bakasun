@@ -1,14 +1,14 @@
 import {verify} from './night-browser.mjs';
 await verify('g2k',[{width:844,height:390},{width:740,height:360},{width:1440,height:1000}],async({page,context,viewport,tick,snap,tap,start,exit,shot,assert,nav,ready})=>{
  await page.evaluate(()=>{window.__island.games.stages('alienDefense');Object.assign(window.__island.engine.state.hangar,{damage:2,coins:10,credits:1});});
- await page.locator('[data-alien-hand]').waitFor();await tap('[data-action=open-hangar]');
+ await page.locator('.modal[data-alien-presentation=true]').first().waitFor();await tap('[data-action=open-hangar]');
  await page.waitForFunction(()=>document.querySelector('.hangar-preview')?.dataset.mode==='three');
  await page.locator('[data-alien-icon]').first().waitFor();await tick(32);await shot('hangar');
  for(const node of await page.locator('[data-hangar=true] button').all())if(await node.isVisible()){const box=await node.boundingBox();assert.ok(box.y>=0&&box.y+box.height<=viewport.height,JSON.stringify(box));}
  await tap('[data-action=hangar-repair]');assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.damage),0);
  await tap('[data-action=hangar-upgrade]');await tap('[data-action=hangar-rapid]');assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.rapid),1);
  const paintBefore=await page.evaluate(()=>window.__island.engine.state.hangar.paint);await tap('[data-action=hangar-paint]');assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.paint),(paintBefore+1)%3);
- await tap('[data-alien-hand] button');assert.equal(await page.evaluate(()=>localStorage.getItem('island.aliens.hand')),'left');await tap('[data-action=hangar-play]');await tap('[data-action=stage-play][data-stage="1"]');
+ assert.equal(await page.locator('[data-alien-hand]').count(),0);await tap('[data-action=hangar-play]');await tap('[data-action=stage-play][data-stage="1"]');
  if(await page.locator('[data-action=game-understood]').count()){await page.clock.runFor(32);await tap('[data-action=game-understood]');}await ready();await nav();await tick(32);
  await page.waitForFunction(()=>{const s=window.__island.games.current.session.snapshot;return s.renderMetrics?.playerLoaded&&s.artModels?.loaded===6;});
  await tick(32);await shot('wave-entry');
@@ -41,12 +41,12 @@ await verify('g2k',[{width:844,height:390},{width:740,height:360},{width:1440,he
  // Exercise the actual slow-frame detector, then the complete Canvas fallback.
  await page.evaluate(()=>{const r=window.__island.data.config.minigames.alienDefense.render;r.fallbackSampleFrames=2;r.fallbackFrameMs=1;});await tick(100);assert.equal((await snap()).renderMode,'canvas');await shot('fallback');await textCheck();
  await tap('#shoot');await tick(32);assert.ok((await snap()).shots.length>0);await exit();
- await page.evaluate(()=>window.__island.games.stages('alienDefense'));await page.locator('[data-alien-hand]').waitFor();await tap('[data-alien-hand] button');
+ await page.evaluate(()=>window.__island.games.stages('alienDefense'));await page.locator('.modal[data-alien-presentation=true]').waitFor();
  await page.evaluate(()=>{const b=window.__island.data.config.minigames.alienDefense;b.render.fallbackFrameMs=10000;b.levels[9].waves=1;window.__island.engine.state.minigameProgress.alienDefense.stage=10;});
  await start('alienDefense',10);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.artModels?.loaded===6);await tick(1800);const boss=await snap();assert.ok(boss.aliens.some(a=>a.boss));metrics.push(boss.renderMetrics);
  assert.equal(boss.renderMode,'three');assert.equal(await page.locator('.alien-controls').getAttribute('data-movement-side'),'left');for(const m of metrics)assert.ok(m.triangles<=90000&&m.drawCalls<=70,JSON.stringify(m));await exit();
  await page.evaluate(()=>{window.__island.engine.state.minigameProgress.alienDefense.stage=1;});
- const saved=await page.evaluate(()=>{const e=window.__island.engine;e.save();return JSON.parse(e.exportJSON()).hangar;});assert.equal(saved.rapid,1);assert.equal(saved.paint,(paintBefore+1)%3);assert.equal(await page.evaluate(()=>localStorage.getItem('island.aliens.hand')),'right');
+ const saved=await page.evaluate(()=>{const e=window.__island.engine;e.save();return JSON.parse(e.exportJSON()).hangar;});assert.equal(saved.rapid,1);assert.equal(saved.paint,(paintBefore+1)%3);assert.equal(await page.evaluate(()=>localStorage.getItem('island.aliens.hand')),null);
  await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.engine);assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.paint),saved.paint);assert.equal(await page.evaluate(()=>window.__island.engine.state.hangar.rapid),1);
  return {metrics,peakTriangles:Math.max(...metrics.map(m=>m.triangles)),peakDrawCalls:Math.max(...metrics.map(m=>m.drawCalls)),nova:{before:beforeNova.novaCharges,after:rocket.novaCharges,flight:rocket.nova.flight,charge},movement:{before:beforeMove,after:afterMove},checks:{iconOnly:true,twoButtons:true,handedness:true,manualFire:true,shipClear:true,earlyEnemyFire:true,novaTouch:true,chargeRing:true,hangarSaved:true,slowFallback:true,bossBudget:true}};
 });

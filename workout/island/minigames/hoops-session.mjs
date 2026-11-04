@@ -2,17 +2,18 @@
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261101-1';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261101-1';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261101-1';
+import {gameContext} from './context.mjs?v=island-v2-20261104-3';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261104-3';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261104-3';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261101-1';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261101-1';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261101-1';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261101-1';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261101-1';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261101-1';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261104-3';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261104-3';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261104-3';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261104-3';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261104-3';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261104-3';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261104-3';
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
@@ -43,12 +44,13 @@ export function startHoops(ctx){
   setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
   dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
+  get ready(){return Boolean(view)&&!error;},get loadFailed(){return error;},
   get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying};},
  };
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261101-1',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261104-3',import.meta.url).href;screenEl.append(css);
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -66,7 +68,7 @@ export function startHoops(ctx){
  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
  const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה'));
- const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת · החזקת ספרינט צורכת אנרגיה');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
+ const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
  const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
  stageEl.append(bug,meter,grade,toast,replayBtn,benchPanel,loading,stamina);
  roleLabels=createHoopsRoleLabels(stageEl);
@@ -79,8 +81,9 @@ export function startHoops(ctx){
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;
 
+ let loadStart=0,loadTimer=null;
  function fail(reason){
-  if(disposed)return;error=reason;loading.hidden=false;loading.replaceChildren();loading.classList.add('failed');loading.setAttribute('role','alert');
+  if(disposed)return;clearTimeout(loadTimer);saveGameReport('hoops',{status:'failed',ms:loadStart?performance.now()-loadStart:undefined,lines:['failed: '+reason]});error=reason;loading.hidden=false;loading.replaceChildren();loading.classList.add('failed');loading.setAttribute('role','alert');
   // icons only on the game screen: the reason is read out by screen readers, not printed
   loading.setAttribute('aria-label',t('hoops.unavailable'));loading.append(hoopsIcon('warning',doc));
   const retry=node('button','hoops-retry');retry.type='button';retry.dataset.action='hoops-retry';retry.setAttribute('aria-label',t('hoops.retry'));retry.append(hoopsIcon('retry',doc));
@@ -90,15 +93,19 @@ export function startHoops(ctx){
  }
  const dev=params.get('dev')==='1';
  function load(){
+  loadStart=performance.now();clearTimeout(loadTimer);
+  // A stalled connection ends in the retry/back screen after 45 s instead of waiting forever;
+  // files already downloaded stay in the device cache, so retry continues where it stopped.
+  loadTimer=setTimeout(()=>{if(!view&&!disposed&&!error)fail('timeout 45 s');},45000);
   const forceFail=dev&&params.get('hoopsFail')==='1';
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
-  const quality=Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261101-1');
-  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;return m.createHoopsView(canvas,{...balance,view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
+  const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261104-3');
+  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}
-   view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
+   clearTimeout(loadTimer);saveGameReport('hoops',{status:'ready',ms:performance.now()-loadStart,lines:['characters v'+(Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1))]});view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
    if(frame===undefined)frame=requestAnimationFrame(tick);
   }).catch(e=>fail(String(e?.message||e)));
  }
@@ -145,7 +152,7 @@ export function startHoops(ctx){
   // the spoken board changes with the score, the clock and the quarter only
   const bk=`${s.score[0]}|${s.score[1]}|${c}|${s.quarter}`;if(bk!==boardKey){boardKey=bk;setAttr(bug,'aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));}
   let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
-  if(me){const value=Math.round(me.energy*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
+  if(me){const value=Math.round((me.boost??me.energy)*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.boostLocked||!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
   controls.setMode(controlMode(s));
   // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
   const shooting=!!(me&&me.act==='shoot'&&me.hasBall&&me.shotHeld);

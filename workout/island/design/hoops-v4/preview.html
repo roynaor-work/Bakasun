@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b2a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23f5a536'/%3E%3Cpath d='M2 24h44M24 2v44M8 8c22 2 22 30 32 32M40 8C18 10 18 38 8 40' fill='none' stroke='%23132a3d' stroke-width='2'/%3E%3C/svg%3E">
+  <title>האי שלי · כדורסל 04</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="preview.html" aria-label="כדורסל 04 — עמוד ראשי"><span class="brand-ball" aria-hidden="true">◉</span><strong>האי שלי <span>/ כדורסל</span></strong></a>
+    <div class="edition" dir="ltr">DESIGN STUDY <span>04</span></div>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">חמש עמדות. חמישה מבנים.</p><h1>כל אחד מביא משהו למגרש.</h1></div><p class="intro-copy">חמישייה שלמה, שתי קבוצות צבעוניות ואולם מלא חיים.<br>מסובבים, משווים ומגלים את התנועה.</p></section>
+    <div class="workspace">
+      <aside class="panel" aria-label="אפשרויות תצוגה">
+        <section class="panel-section modes"><h2>מה רואים?</h2><div class="segmented" role="group" aria-label="מצב תצוגה"><button data-mode="lineup" aria-pressed="true">החמישייה</button><button data-mode="individual" aria-pressed="false">שחקן</button><button data-mode="arena" aria-pressed="false">האולם</button><button data-mode="props" aria-pressed="false">אביזרים</button></div></section>
+        <section id="props-controls" class="panel-section props-controls" hidden><h2>אביזר</h2><div class="prop-buttons" role="group" aria-label="בחירת אביזר"><button data-prop="hoop" aria-pressed="true">סל</button><button data-prop="ball" aria-pressed="false">כדור</button></div></section>
+        <section class="panel-section player-controls"><div class="section-title"><h2>עמדה</h2><span id="selected-height" dir="ltr">1.78 m</span></div><div class="roles" role="group" aria-label="בחירת עמדה"><button data-role="pg" aria-pressed="true">PG</button><button data-role="sg" aria-pressed="false">SG</button><button data-role="sf" aria-pressed="false">SF</button><button data-role="pf" aria-pressed="false">PF</button><button data-role="c" aria-pressed="false">C</button></div><p id="role-description" class="role-description">רכז · נמוך וזריז</p></section>
+        <section class="panel-section player-controls"><h2>תלבושת</h2><div class="teams" role="group" aria-label="צבעי קבוצה"><button data-team="home" aria-pressed="true"><i class="swatch home" aria-hidden="true"></i>כתום</button><button data-team="away" aria-pressed="false"><i class="swatch away" aria-hidden="true"></i>תכלת</button></div><p class="muted">אותה תלבושת, שני שילובי צבעים.</p></section>
+        <section class="panel-section player-controls animation-section"><h2>תנועה</h2><label class="sr-only" for="clip">בחירת קליפ</label><select id="clip"><option value="idle">עמידת תצוגה</option><option value="dribble">כדרור</option><option value="shoot">קליעה</option><option value="steal">חטיפה</option><option value="block">חסימה</option><option value="run">ריצה</option></select><div class="playback"><button id="play" aria-label="ניגון האנימציה" aria-pressed="false"><span aria-hidden="true">▶</span> ניגון</button><label for="speed" class="sr-only">מהירות ניגון</label><select id="speed" aria-label="מהירות ניגון"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></div><div class="timeline"><label for="time" class="sr-only">זמן בקליפ</label><input id="time" type="range" min="0" max="1" step="0.001" value="0" aria-label="זמן בקליפ"><output id="time-output" dir="ltr">0.00 / 1.00 s</output></div></section>
+        <p class="panel-note">גוררים כדי לסובב · גוללים כדי להתקרב</p>
+      </aside>
+      <section id="stage" class="stage" aria-label="במת תצוגה תלת ממדית">
+        <canvas id="canvas" aria-label="חמש דמויות הכדורסל על קו רצפה משותף"></canvas>
+        <div class="stage-heading"><p class="eyebrow" id="stage-kicker">THE STARTING FIVE</p><h2 id="stage-title">החמישייה</h2><p id="stage-caption">אותו קו רצפה · גובה במטרים</p></div>
+        <div class="stage-topline"><span class="live-dot"></span><span id="status" role="status" aria-live="polite">טוען את החמישייה…</span></div>
+        <div class="view-controls" role="group" aria-label="זווית מצלמה"><button data-view="front" aria-pressed="true">חזית</button><button data-view="three-quarter" aria-pressed="false">¾</button><button data-view="back" aria-pressed="false">גב</button><button id="reset-view" aria-label="איפוס המצלמה">↺</button></div>
+        <div id="labels" class="labels" aria-hidden="true"></div>
+        <div class="stage-bottom"><span id="stage-counter" dir="ltr">PG / SG / SF / PF / C</span><span id="stage-footer">גובה שונה. אופי שונה.</span></div>
+        <div id="error" class="error" role="alert" hidden></div>
+      </section>
+    </div>
+    <footer class="page-footer"><span>חבילת נכסים · כדורסל 04</span><a href="README.md">על החבילה והבדיקות ↗</a></footer>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

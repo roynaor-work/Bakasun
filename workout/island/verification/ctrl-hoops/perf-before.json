@@ -1,0 +1,226 @@
+[
+ {
+  "seconds": 19.93,
+  "frames": 69,
+  "fps": 3.46,
+  "frameMs": {
+   "avg": 282.6,
+   "p50": 283.3,
+   "p95": 366.7,
+   "p99": 516.7,
+   "max": 749.9
+  },
+  "over33": 68,
+  "over50": 67,
+  "tickMs": {
+   "avg": 7.9,
+   "p50": 6.9,
+   "p95": 14.6,
+   "max": 24.2
+  },
+  "renderMs": {
+   "avg": 5.96,
+   "p95": 11.8
+  },
+  "allocMBps": 1.75,
+  "gcs": 5,
+  "longTasks": 0,
+  "longTaskMs": 0,
+  "replays": 0,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 1,
+   "landscape": true
+  },
+  "render": {
+   "calls": 42,
+   "triangles": 97181,
+   "frameMs": 4.5,
+   "players": 10,
+   "avatars": 10,
+   "pending": 14,
+   "crowd": 2762,
+   "crowdLevel": 2,
+   "v5": true,
+   "quality": 2,
+   "textures": 41,
+   "geometries": 58,
+   "landscape": true,
+   "dpr": 1,
+   "bufferWidth": 844,
+   "bufferHeight": 390,
+   "style": "v2-broadcast",
+   "characterVersion": 4,
+   "arenaSource": "design/hoops-v5/models/",
+   "crowd3d": true,
+   "v4Fallbacks": [],
+   "clipCount": 25,
+   "loadTimes": {
+    "arena": 175,
+    "models": 264,
+    "environment": 1741,
+    "crowd": 0,
+    "playerAssets": 359,
+    "avatars": 506,
+    "vfx": 48,
+    "feel": 4,
+    "total": 3096,
+    "firstFrame": 6386
+   },
+   "arenaVersion": 3,
+   "baked": [],
+   "reflection": {
+    "width": 304,
+    "height": 140,
+    "calls": 21,
+    "triangles": 56630
+   },
+   "feel": {
+    "authored": true,
+    "queued": 0,
+    "fov": 1.443,
+    "seen": 0
+   },
+   "vfx": {
+    "missingAtlases": [],
+    "sprites": 0,
+    "residentAtlases": 0,
+    "loadedAtlases": 5,
+    "reducedMotion": false
+   },
+   "motion": [
+    "idle",
+    "idle",
+    "idle",
+    "run",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "jog",
+    "idle"
+   ]
+  },
+  "steps": 581,
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "quality": 2,
+  "profile": "quick",
+  "loadMs": 12530,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "viewportLabel": "844x390"
+ },
+ {
+  "seconds": 19.76,
+  "frames": 73,
+  "fps": 3.69,
+  "frameMs": {
+   "avg": 267.57,
+   "p50": 249.9,
+   "p95": 466.6,
+   "p99": 799.9,
+   "max": 866.7
+  },
+  "over33": 69,
+  "over50": 69,
+  "tickMs": {
+   "avg": 18.93,
+   "p50": 6.5,
+   "p95": 13.5,
+   "max": 857.6
+  },
+  "renderMs": {
+   "avg": 17.09,
+   "p95": 10.6
+  },
+  "allocMBps": 1.86,
+  "gcs": 4,
+  "longTasks": 1,
+  "longTaskMs": 859,
+  "replays": 0,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 1,
+   "landscape": false
+  },
+  "render": {
+   "calls": 37,
+   "triangles": 97020,
+   "frameMs": 3.4,
+   "players": 10,
+   "avatars": 10,
+   "pending": 14,
+   "crowd": 2762,
+   "crowdLevel": 2,
+   "v5": true,
+   "quality": 2,
+   "textures": 42,
+   "geometries": 59,
+   "landscape": false,
+   "dpr": 1,
+   "bufferWidth": 390,
+   "bufferHeight": 844,
+   "style": "v2-broadcast",
+   "characterVersion": 4,
+   "arenaSource": "design/hoops-v5/models/",
+   "crowd3d": true,
+   "v4Fallbacks": [],
+   "clipCount": 25,
+   "loadTimes": {
+    "arena": 645,
+    "models": 296,
+    "environment": 40,
+    "crowd": 0,
+    "playerAssets": 247,
+    "avatars": 444,
+    "vfx": 53,
+    "feel": 15,
+    "total": 1739,
+    "firstFrame": 1135
+   },
+   "arenaVersion": 3,
+   "baked": [],
+   "reflection": {
+    "width": 140,
+    "height": 303,
+    "calls": 21,
+    "triangles": 56630
+   },
+   "feel": {
+    "authored": true,
+    "queued": 0,
+    "fov": 1.444,
+    "seen": 0
+   },
+   "vfx": {
+    "missingAtlases": [],
+    "sprites": 0,
+    "residentAtlases": 0,
+    "loadedAtlases": 5,
+    "reducedMotion": false
+   },
+   "motion": [
+    "idle",
+    "idle",
+    "idle",
+    "run",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "jog",
+    "idle"
+   ]
+  },
+  "steps": 597,
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "quality": 2,
+  "profile": "quick",
+  "loadMs": 10163,
+  "errors": [],
+  "viewportLabel": "390x844"
+ }
+]

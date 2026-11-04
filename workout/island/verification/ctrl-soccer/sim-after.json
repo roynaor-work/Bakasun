@@ -1,0 +1,340 @@
+{
+ "measuredAt": "headless",
+ "frameMs": 16.67,
+ "tilt": {
+  "sampledInputX": 1,
+  "speedByFrame": [
+   1.63,
+   2.77,
+   3.55,
+   4.1,
+   4.47,
+   4.74,
+   4.92,
+   5.04,
+   5.13,
+   5.19
+  ],
+  "steadySpeed": 7.66,
+  "firstModelMotionFrames": 1,
+  "firstRenderedMotionFrames": 2,
+  "renderedMoved2cmFrames": 2,
+  "renderedMoved5cmFrames": 3,
+  "reach63Frames": 3,
+  "reach90Frames": 7,
+  "firstRenderedMotionMs": 33.3,
+  "renderedMoved5cmMs": 50,
+  "reach63Ms": 50,
+  "reach90Ms": 116.7
+ },
+ "release": {
+  "speedByFrame": [
+   5.77,
+   4.35,
+   3.27,
+   2.47,
+   1.86,
+   1.4,
+   1.05,
+   0.79,
+   0.6,
+   0.45
+  ],
+  "slideDistanceM": 0.39,
+  "framesToBelow10pct": 10,
+  "framesToBelow5pct": 12,
+  "below10Ms": 166.7
+ },
+ "curve": [
+  {
+   "px": 2,
+   "input": 0,
+   "speed": 0
+  },
+  {
+   "px": 4,
+   "input": 0.009,
+   "speed": 0.05
+  },
+  {
+   "px": 5,
+   "input": 0.023,
+   "speed": 0.12
+  },
+  {
+   "px": 6,
+   "input": 0.039,
+   "speed": 0.21
+  },
+  {
+   "px": 8,
+   "input": 0.076,
+   "speed": 0.4
+  },
+  {
+   "px": 10,
+   "input": 0.116,
+   "speed": 0.62
+  },
+  {
+   "px": 13,
+   "input": 0.183,
+   "speed": 0.97
+  },
+  {
+   "px": 16,
+   "input": 0.255,
+   "speed": 1.36
+  },
+  {
+   "px": 20,
+   "input": 0.357,
+   "speed": 1.9
+  },
+  {
+   "px": 26,
+   "input": 0.522,
+   "speed": 2.78
+  },
+  {
+   "px": 32,
+   "input": 0.699,
+   "speed": 3.72
+  },
+  {
+   "px": 39,
+   "input": 0.916,
+   "speed": 4.88
+  },
+  {
+   "px": 46,
+   "input": 1,
+   "speed": 5.33
+  },
+  {
+   "px": 52,
+   "input": 1,
+   "speed": 7.72
+  },
+  {
+   "px": 60,
+   "input": 1,
+   "speed": 7.72
+  }
+ ],
+ "reversal": {
+  "framesToVxNegative": 3,
+  "framesToFullLeft": 6,
+  "vxByFrame": [
+   4.4,
+   1.65,
+   -1.04,
+   -3.06,
+   -4.49,
+   -5.48,
+   -6.17,
+   -6.64,
+   -6.98,
+   -7.2,
+   -7.36,
+   -7.47
+  ],
+  "toNegativeMs": 50
+ },
+ "multiTouch": {
+  "accepted": [
+   true,
+   true,
+   true
+  ],
+  "sample": {
+   "moveX": 0.95,
+   "sprintHeld": true,
+   "kickHeld": true
+  },
+  "sprintHeldAfter20": true,
+  "kickHeldAfter20": true,
+  "charging": true
+ },
+ "kick": {
+  "tap1": {
+   "holdFrames": 1,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 33.3,
+   "event": "shot",
+   "power": 0.02
+  },
+  "tap3": {
+   "holdFrames": 3,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 66.7,
+   "event": "shot",
+   "power": 0.05
+  },
+  "charged30": {
+   "holdFrames": 30,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 516.7,
+   "event": "shot",
+   "power": 0.45
+  }
+ },
+ "pass": {
+  "tap1": {
+   "holdFrames": 1,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 33.3,
+   "event": "pass",
+   "power": 0.02
+  },
+  "tap3": {
+   "holdFrames": 3,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 66.7,
+   "event": "pass",
+   "power": 0.06
+  },
+  "charged30": {
+   "holdFrames": 30,
+   "releaseToBallFrames": 1,
+   "releaseToBallMs": 16.7,
+   "pressToBallMs": 516.7,
+   "event": "loft",
+   "power": 0.56
+  }
+ },
+ "buffer": [
+  {
+   "pressedFramesBeforeBall": 0,
+   "pressedMsBeforeBall": 0,
+   "shotFiredAfterBallFrames": 2
+  },
+  {
+   "pressedFramesBeforeBall": 3,
+   "pressedMsBeforeBall": 50,
+   "shotFiredAfterBallFrames": 2
+  },
+  {
+   "pressedFramesBeforeBall": 6,
+   "pressedMsBeforeBall": 100,
+   "shotFiredAfterBallFrames": 2
+  },
+  {
+   "pressedFramesBeforeBall": 9,
+   "pressedMsBeforeBall": 150,
+   "shotFiredAfterBallFrames": null
+  },
+  {
+   "pressedFramesBeforeBall": 12,
+   "pressedMsBeforeBall": 200,
+   "shotFiredAfterBallFrames": null
+  },
+  {
+   "pressedFramesBeforeBall": 15,
+   "pressedMsBeforeBall": 250,
+   "shotFiredAfterBallFrames": null
+  },
+  {
+   "pressedFramesBeforeBall": 18,
+   "pressedMsBeforeBall": 300,
+   "shotFiredAfterBallFrames": null
+  },
+  {
+   "pressedFramesBeforeBall": 24,
+   "pressedMsBeforeBall": 400,
+   "shotFiredAfterBallFrames": null
+  }
+ ],
+ "cooldownTap": [
+  {
+   "action": "kick",
+   "cooldownLeftMs": 50,
+   "firedAfterFrames": 3,
+   "firedAfterMs": 50
+  },
+  {
+   "action": "kick",
+   "cooldownLeftMs": 100,
+   "firedAfterFrames": 6,
+   "firedAfterMs": 100
+  },
+  {
+   "action": "kick",
+   "cooldownLeftMs": 150,
+   "firedAfterFrames": 9,
+   "firedAfterMs": 150
+  },
+  {
+   "action": "kick",
+   "cooldownLeftMs": 250,
+   "firedAfterFrames": null,
+   "firedAfterMs": null
+  },
+  {
+   "action": "pass",
+   "cooldownLeftMs": 50,
+   "firedAfterFrames": 3,
+   "firedAfterMs": 50
+  },
+  {
+   "action": "pass",
+   "cooldownLeftMs": 100,
+   "firedAfterFrames": 6,
+   "firedAfterMs": 100
+  },
+  {
+   "action": "pass",
+   "cooldownLeftMs": 150,
+   "firedAfterFrames": 9,
+   "firedAfterMs": 150
+  },
+  {
+   "action": "pass",
+   "cooldownLeftMs": 250,
+   "firedAfterFrames": null,
+   "firedAfterMs": null
+  }
+ ],
+ "autoSwitch": {
+  "framesWhileMoving": 16,
+  "ms": 266.7,
+  "autoSwitchSeconds": 0.5,
+  "candidateNearerByM": 10.2
+ },
+ "manualSwitch": {
+  "framesAfterPress": 2,
+  "ms": 33.3
+ },
+ "aim": {
+  "manualWhileHeld": true,
+  "xz": [
+   0.71,
+   -0.71
+  ],
+  "afterReleaseManual": true,
+  "afterReleaseXZ": [
+   0.71,
+   -0.71
+  ],
+  "assistDegrees": 25,
+  "passConeDegrees": 35
+ },
+ "transferDwellMs": 120,
+ "deadzone": 0.1,
+ "accel": {
+  "acceleration": 12,
+  "deceleration": 10,
+  "turnRate": 14,
+  "fixedStepMs": 16.67
+ },
+ "sprintGate": {
+  "on": 0.9,
+  "off": 0.75,
+  "holdMs": 320
+ }
+}

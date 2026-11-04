@@ -1,0 +1,172 @@
+{
+  "source": "../../../hoops/lod-v4/hoops-v4-pg-lod.glb",
+  "sourceSha256": "e47e9289215e6c81671b61e4a78a2a4acdbf42667b9328efd5a6e72992e88f49",
+  "toolVersions": {
+    "gltfTransform": "4.5.1",
+    "meshoptimizer": "1.3.0",
+    "draco3dgltf": "1.5.7"
+  },
+  "atlasSize": [
+    1024,
+    1024
+  ],
+  "tilesTopOrigin": {
+    "body": [
+      0,
+      0,
+      512
+    ],
+    "eyes": [
+      512,
+      0,
+      256
+    ],
+    "brow": [
+      768,
+      0,
+      256
+    ],
+    "lashes": [
+      512,
+      256,
+      256
+    ],
+    "shoes": [
+      768,
+      256,
+      256
+    ],
+    "hair": [
+      0,
+      512,
+      256
+    ],
+    "jersey": [
+      256,
+      512,
+      256
+    ],
+    "shorts": [
+      512,
+      512,
+      256
+    ],
+    "trim": [
+      768,
+      512,
+      256
+    ]
+  },
+  "assets": [
+    {
+      "file": "actor-lod0.glb",
+      "lod": 0,
+      "bytes": 658408,
+      "MB": 0.658408,
+      "triangles": 5260,
+      "vertices": 3536,
+      "meshes": 1,
+      "materials": 1,
+      "bones": 52,
+      "restBounds": {
+        "min": [
+          -0.5688928365707397,
+          0,
+          -0.11416345089673996
+        ],
+        "max": [
+          0.5696271657943726,
+          1.7795217037200928,
+          0.3728712797164917
+        ],
+        "height": 1.7795217037200928,
+        "units": "metres"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "duration": 1
+        },
+        {
+          "name": "dribble",
+          "duration": 1.1666666269302368
+        },
+        {
+          "name": "shoot",
+          "duration": 1.600000023841858
+        },
+        {
+          "name": "run",
+          "duration": 0.7333333492279053
+        },
+        {
+          "name": "steal",
+          "duration": 1
+        },
+        {
+          "name": "block",
+          "duration": 1.1333333253860474
+        }
+      ],
+      "sha256": "925ea37d426b4acc00ab5e5b6da4b82d858150fbbd59351b1648cc8729721323"
+    },
+    {
+      "file": "actor-lod1.glb",
+      "lod": 1,
+      "bytes": 630708,
+      "MB": 0.630708,
+      "triangles": 2361,
+      "vertices": 1761,
+      "meshes": 1,
+      "materials": 1,
+      "bones": 52,
+      "restBounds": {
+        "min": [
+          -0.5688928365707397,
+          0.002921236678957939,
+          -0.11181703954935074
+        ],
+        "max": [
+          0.5665183067321777,
+          1.7795217037200928,
+          0.3728712797164917
+        ],
+        "height": 1.7766004670411348,
+        "units": "metres"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "duration": 1
+        },
+        {
+          "name": "dribble",
+          "duration": 1.1666666269302368
+        },
+        {
+          "name": "shoot",
+          "duration": 1.600000023841858
+        },
+        {
+          "name": "run",
+          "duration": 0.7333333492279053
+        },
+        {
+          "name": "steal",
+          "duration": 1
+        },
+        {
+          "name": "block",
+          "duration": 1.1333333253860474
+        }
+      ],
+      "sha256": "be15f1306775fd681b25f294c41ee1f8debfd1701f8329f470bb50881772d01e"
+    }
+  ],
+  "notes": [
+    "One skinned mesh and one double-sided MASK material per actor, shared 1024 atlas UV layout.",
+    "Neutral palette embedded in GLB. Ember and Tide PNG palettes replace baseColor map only; skin, eyes, hair and shoes stay unchanged.",
+    "BaseColor atlas plus one normal atlas. Normal atlas is flat outside cloth tiles; cloth receives a subtle woven normal.",
+    "52 source bones and six embedded source mocap-derived clips retained; sources untouched."
+  ]
+}

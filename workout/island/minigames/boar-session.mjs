@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261101-1';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261104-3';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */

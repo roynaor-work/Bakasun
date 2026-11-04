@@ -6,7 +6,7 @@ import {GLTFLoader} from '../workout/island/vendor/GLTFLoader.js';
 import * as THREE from '../workout/island/vendor/three.module.js';
 import {clone} from '../workout/island/vendor/SkeletonUtils.js';
 import {bakeV2Motion,createV2MotionPlayer,chooseV2Motion,actionClipTime,V2_ACTION_CLIPS} from '../workout/island/minigames/hoops-motion-v2.mjs';
-import {prepareV2Geometry,createAvatar} from '../workout/island/minigames/hoops-players.mjs';
+import {prepareV2Geometry,createAvatarV2 as createAvatar} from '../workout/island/minigames/hoops-players.mjs';
 const base=new URL('../workout/island/',import.meta.url),json=async p=>JSON.parse(await readFile(new URL(p,base),'utf8'));
 let shared;
 async function fixture(){
@@ -31,7 +31,8 @@ test('every authored action has a natural presentation selection without changin
  for(const shotType of ['dunk','ft','layup'])seen.add(pick({act:'shoot',shotType}));seen.add(pick({act:'shoot',shotType:'layup',z:-1}));
  seen.add(pick({act:'pass'}));seen.add(pick({act:'pass'},{passKind:'lob'}));
  for(const [vx,vz] of [[2,0],[-2,0],[0,2]])seen.add(pick({vx,vz},{defending:true}));
- for(const [vx,vz,sprinting] of [[0,0,false],[0,3,false],[0,6,true],[0,-1,false]])seen.add(pick({hasBall:true,vx,vz,sprinting}));seen.add(pick({vz:6,sprinting:true}));
+ for(const [vx,vz,sprinting] of [[0,0,false],[0,.6,false],[0,3,false],[0,6,true],[0,-1,false]])seen.add(pick({hasBall:true,vx,vz,sprinting}));
+ assert.equal(pick({hasBall:true,vz:3}),'sprint_ball','running with the ball uses the strided clip, never the in-place dribble');assert.equal(pick({hasBall:true,vz:.6}),'dribble_fast');assert.equal(pick({vz:4},{defending:true}),'sprint','a defender running back at speed uses a strided run, not the stance shuffle');assert.equal(pick({vz:2.5}),'run');seen.add(pick({vz:6,sprinting:true}));
  assert.deepEqual([...seen].filter(n=>V2_ACTION_CLIPS.includes(n)).sort(),[...V2_ACTION_CLIPS].sort());const frozen=Object.freeze({...p,act:'shoot',shotType:'dunk',hasBall:true});chooseV2Motion(frozen);assert.equal(frozen.hasBall,true);
 });
 test('engine release and pause control the new clips; interruption preserves the displayed pose and world transform',async()=>{
@@ -47,7 +48,7 @@ test('v2 kits retain indexed sculpted features, skin variety and owned-resource 
  const previous=mesh.geometry;mesh.geometry=prepared.geometry;
  try{
   const assets={...baked,character:gltf,height:1.275,regions:prepared.regions},look={primary:'#4821aa',secondary:'#181e3e',trim:'#ffbb66'},a=createAvatar(assets,{id:'a',number:7,ratings:{height:200},look:{skin:0}},look),b=createAvatar(assets,{id:'b',number:8,ratings:{height:198},look:{skin:3}},look);
-  assert.equal(a.kind,'characters2');assert.ok(a.hands.r&&a.hands.l);let am,bm;a.root.traverse(o=>{if(o.isMesh)am=o;});b.root.traverse(o=>{if(o.isMesh)bm=o;});const skin=prepared.regions.indexOf('skin');assert.notDeepEqual(Array.from(am.geometry.attributes.color.array.slice(skin*3,skin*3+3)),Array.from(bm.geometry.attributes.color.array.slice(skin*3,skin*3+3)));assert.equal(am.material.side,0);assert.ok(!am.material.aoMap);assert.equal(am.material.isMeshPhongMaterial,true);assert.equal(am.material.shininess,18);assert.equal(am.material.specular.getHex(),0x151a22);assert.equal(am.material.userData.hoopsSparseSkinning,true);assert.equal(am.customDepthMaterial.userData.hoopsSparseSkinning,true);const texture=am.material.map,version=texture.version;a.applyKit({base:'#e43a52',accent:'#f0eee8',pattern:'stripes'});assert.equal(am.material.map,texture);assert.ok(texture.version>version);let disposals=0;texture.addEventListener('dispose',()=>disposals++);a.dispose();a.dispose();assert.equal(disposals,1);b.dispose();
+  assert.equal(a.kind,'characters2');assert.ok(a.hands.r&&a.hands.l);let am,bm;a.root.traverse(o=>{if(o.isMesh)am=o;});b.root.traverse(o=>{if(o.isMesh)bm=o;});const skin=prepared.regions.indexOf('skin');assert.notDeepEqual(Array.from(am.geometry.attributes.color.array.slice(skin*3,skin*3+3)),Array.from(bm.geometry.attributes.color.array.slice(skin*3,skin*3+3)));assert.equal(am.material.side,0);assert.ok(!am.material.aoMap);assert.equal(am.material.isMeshPhongMaterial,true);assert.equal(am.material.shininess,36);assert.equal(am.material.specular.getHex(),0x8f98a8);assert.equal(am.material.userData.hoopsSparseSkinning,true);assert.ok(am.material.userData.hoopsRegionGloss,'per-region gloss and rim light are installed on the one athlete material');const gloss=am.geometry.attributes.gloss;assert.equal(gloss.count,am.geometry.attributes.position.count);assert.ok(gloss.getX(skin)>gloss.getX(prepared.regions.indexOf('shirt')),'skin is glossier than the jersey');assert.equal(am.customDepthMaterial.userData.hoopsSparseSkinning,true);const texture=am.material.map,version=texture.version;a.applyKit({base:'#e43a52',accent:'#f0eee8',pattern:'stripes'});assert.equal(am.material.map,texture);assert.ok(texture.version>version);let disposals=0;texture.addEventListener('dispose',()=>disposals++);a.dispose();a.dispose();assert.equal(disposals,1);b.dispose();
  }finally{mesh.geometry=previous;prepared.geometry.dispose();globalThis.OffscreenCanvas=oldCanvas;}
 });
 

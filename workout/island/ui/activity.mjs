@@ -1,23 +1,31 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261101-1';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261101-1';
-import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261101-1';
-import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261101-1';
-import {createSound} from '../minigames/sound.mjs?v=island-v2-20261101-1';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261101-1';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261101-1';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261101-1';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261101-1';
-import {gameContext} from '../minigames/context.mjs?v=island-v2-20261101-1';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261101-1';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261101-1';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261101-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261101-1';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261101-1';
-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261101-1';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261104-3';
+import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261104-3';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261104-3';
+import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261104-3';
+import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261104-3';
+import {createSound} from '../minigames/sound.mjs?v=island-v2-20261104-3';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261104-3';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261104-3';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261104-3';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261104-3';
+import {gameContext} from '../minigames/context.mjs?v=island-v2-20261104-3';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261104-3';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261104-3';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261104-3';
+import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261104-3';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261104-3';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261104-3';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261104-3';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261104-3';
+import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261104-3';
+import {noteManualRestart} from './load-report.mjs?v=island-v2-20261104-3';
+import {clearGameAssets} from './offline.mjs?v=island-v2-20261104-3';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+// Today's-task lock: the kit's lock icon in place of the emoji pair; the label text stays in the button.
+const TASK_LOCK='משימת היום';
+const lockedTaskButton=(action,fn,cls)=>{const n=button(TASK_LOCK,action,fn,cls);n.prepend(kitIcon('lock',20,'ik-icon ik-lock'));return n;};
 
 export class ActivityInterface {
   constructor({ui,engine,activity,data,t,now=Date.now}) {
@@ -40,7 +48,7 @@ export class ActivityInterface {
     this.unsubscribeEngine=engine.subscribe(()=>this.render());this.render();
   }
   cleanup(eventId) {
-    this.closing=true;const current=this.current;this.current=null;current?.cancel();
+    this.closing=true;this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();
     this.shell?.dispose();this.shell=null;
     if(eventId)this.activity.cancel(eventId);
     if(!this.switching)this.navigation.leave();
@@ -63,7 +71,7 @@ export class ActivityInterface {
   availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
   requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
   requireBuilding(id){if(this.requireDaily(id))return true;const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
-  playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked;return button(locked?'🔒 📚 משימת היום':this.t(available.ok?'minigame.play':available.reason),action,()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);},'primary-button');}
+  playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked,run=()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);};return locked?lockedTaskButton(action,run,'primary-button'):button(this.t(available.ok?'minigame.play':available.reason),action,run,'primary-button');}
   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}
   team(){
     const dialog=this.modal('minigame.soccer.teamCard','minigame.soccer.stagesHint');dialog.dataset.team='soccer';
@@ -108,15 +116,18 @@ export class ActivityInterface {
       card.append(gameEmblem(game.id),el('p','adventure-game-category',gameArtwork(game.id).category),el('h3','',this.t(game.title)));
       const enter=button('כניסה','game-enter',()=>this.gameHome(game.id),'adventure-enter');enter.dataset.gameId=game.id;enter.setAttribute('aria-label','כניסה · '+this.t(game.title));card.append(enter);cards.append(card);
     }
-    dialog.append(cards);
+    dialog.append(cards,offlinePanel());
   }
   gameHome(id){
     if(this.data?.config?.minigames?.[id]?.embeddedCampaign)return this.launch(id,undefined,1);
     const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
     const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
-    const hero=el('div','adventure-game-hero');hero.append(gameEmblem(id),el('p','adventure-game-category',art.category));dialog.append(hero);
+    const hero=el('div','adventure-game-hero'),opening=kitIntro(id);
+    // The kit's opening card leads the game's home screen; the captured frame stays as the fallback and in the library.
+    if(opening){const card=el('div','island-kit ik-opening ik-enter');card.dataset.scene=id;opening.onerror=()=>{card.replaceWith(gameEmblem(id));};card.append(opening);hero.append(card);}else hero.append(gameEmblem(id));
+    hero.append(el('p','adventure-game-category',art.category));dialog.append(hero);
     const actions=el('div','adventure-home-actions');
-    actions.append(this.playButton(id,'game-play',()=>this.stages(id)),button('איך לשחק','game-help',()=>this.intro(id)),button('שדרוגים','equipment-shop',()=>this.gameUpgrades(id)));
+    actions.append(kitPrimary(this.playButton(id,'game-play',()=>this.stages(id))),button('איך לשחק','game-help',()=>this.intro(id)),button('שדרוגים','equipment-shop',()=>this.gameUpgrades(id)));
     dialog.append(actions,button('כל המשחקים','game-library-back',()=>this.menu(),'adventure-back'));
   }
   gameUpgrades(id){
@@ -143,7 +154,7 @@ export class ActivityInterface {
     }
     dialog.append(list,this.playButton(id,'equipment-play',()=>this.stages(id)));
   }
-  certificateCard(c,stage){const card=el('article','fire-certificate');card.dataset.certificate=String(stage);card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),el('strong','certificate-stars','★'.repeat(c.stars)+'☆'.repeat(3-c.stars)));for(const key of ['fast','rescue','careful'])card.append(el('p',c[key]?'earned':'',this.t('fire.'+key)));return card;}
+  certificateCard(c,stage){const card=el('article','fire-certificate');card.dataset.certificate=String(stage);card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),(()=>{const st=el('strong','certificate-stars');st.append(kitRating(c.stars,{label:this.t('minigame.stageStars',{stage,stars:c.stars}),size:28}));return st;})());for(const key of ['fast','rescue','careful'])card.append(el('p',c[key]?'earned':'',this.t('fire.'+key)));return card;}
   certificates(){const dialog=this.modal('fire.certificates','minigame.progressHint');let count=0;for(const [i,c]of this.engine.state.fireCertificates.entries())if(c){dialog.append(this.certificateCard(c,i+1));count++;}if(!count)dialog.append(el('p','',this.t('fire.noCertificates')));dialog.append(this.playButton('fireRescue','certificate-play',()=>this.stages('fireRescue')));}
   hangar(){
     const dialog=this.modal('hangar.title','hangar.hint'),h=this.engine.state.hangar,c=this.data.config.minigames.alienDefense,canvas=el('canvas','hangar-preview');dialog.dataset.hangar='true';canvas.width=canvas.height=c.hangar.previewSize;
@@ -160,11 +171,11 @@ export class ActivityInterface {
     const box=el('section','soccer-league');box.dataset.league=String(shown+1);
     const chips=el('div','soccer-league-chips');chips.setAttribute('role','tablist');
     L.leagues.forEach((row,i)=>{const done=p.stars.slice(i*per,i*per+per).every(n=>n>0),locked=i>current;
-      const chip=button(`${this.t(row.nameId)} ${locked?'🔒':done?'✓':''}`.trim(),'soccer-league-chip',()=>{this.soccerLeagueShown=i;this.stages(id);});
+      const chip=kitStageLabel(button('','soccer-league-chip',()=>{this.soccerLeagueShown=i;this.stages(id);}),this.t(row.nameId),{locked,done:!locked&&done,stars:null});
       chip.classList.add('soccer-league-chip');chip.dataset.league=String(i+1);chip.disabled=locked;chip.setAttribute('role','tab');chip.setAttribute('aria-selected',String(i===shown));chips.append(chip);});
     const matches=el('div','stage-map soccer-league-matches');
     for(let m=1;m<=per;m++){const stage=shown*per+m,stars=p.stars[stage-1]||0,locked=stage>open;
-      const node=button(`${this.t('soccer.league.match',{match:m})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
+      const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('soccer.league.match',{match:m}),{locked,stars});
       node.dataset.stage=String(stage);node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));matches.append(node);}
     box.append(chips,matches);
     if(p.stars.slice(0,total).every(n=>n>0))box.append(el('p','soccer-league-champion',this.t('soccer.league.champion')));
@@ -185,17 +196,17 @@ export class ActivityInterface {
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
     if(id==='streetSlam'&&this.engine.hoops)dialog.append(hoopsClubPanel({engine:this.engine,t:this.t,refresh:()=>this.stages(id),result:r=>this.ui.result(r)}));
     if(id==='navalDuel')dialog.append(navalUpgradePanel({engine:this.engine,activity:this.activity,data:this.data,t:this.t,refresh:()=>this.stages(id)}));
-    if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices,this.soccerHandedness('tennis'));}
+    if(id==='tennis'){const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));for(const key of Object.keys(this.data.config.minigames.tennis.difficulties)){const choose=button(this.t('soccer.difficulty.'+key),'tennis-difficulty',()=>{const r=this.engine.setTennisDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.tennisDifficulty===key));choices.append(choose);}dialog.append(choices);}
     if(id==='soccer'){
       dialog.append(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t));
       const choices=el('fieldset','soccer-difficulties');choices.append(el('legend','',this.t('soccer.difficulty')));
       // League ladder (29/10/2026): no difficulty or keeper choice; the league is the difficulty.
       const league=this.data.config.minigames.soccer.league;
-      if(league?.leagues?.length){dialog.append(this.soccerLeague(id,p),this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));}
+      if(league?.leagues?.length){dialog.append(this.soccerLeague(id,p),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));}
       else{
       for(const key of Object.keys(this.data.config.minigames.soccer.difficulties)){
         const choose=button(this.t(`soccer.difficulty.${key}`),'soccer-difficulty',()=>{const r=this.engine.setSoccerDifficulty(key);if(r.ok)this.stages(id);else this.ui.result(r);});choose.dataset.difficulty=key;choose.setAttribute('aria-pressed',String(this.engine.state.soccerCard.difficulty===key));choices.append(choose);
-      }dialog.append(choices,this.soccerHandedness(),button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
+      }dialog.append(choices,button(this.t('soccer.training'),'soccer-training',()=>this.training()),button(this.t('soccer.rosters'),'soccer-rosters',()=>this.rosters()));
       const roles=el('fieldset','soccer-role-choice');roles.append(el('legend','',this.t('soccer.chooseRole')));for(const role of ['field','keeper']){const choice=button(this.t('soccer.playRole.'+role),'soccer-role',()=>{this.engine.setSoccerRole(role);this.stages(id);});choice.dataset.role=role;choice.setAttribute('aria-pressed',String(this.engine.state.soccerRoster.role===role));roles.append(choice);}dialog.append(roles);
       }
     }
@@ -204,7 +215,7 @@ export class ActivityInterface {
     const map=el('div','stage-map');
     p.stars.forEach((stars,i)=>{
       const stage=i+1,locked=stage>p.stage;
-      const node=button(`${this.t('minigame.stage',{stage})} ${locked?'🔒':'★'.repeat(stars)+'☆'.repeat(3-stars)}`,'stage-play',()=>this.start(id,undefined,stage));
+      const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
       node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
     });dialog.append(map);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
@@ -228,7 +239,7 @@ export class ActivityInterface {
     if(id==='navalDuel')ensureNavalTheme();
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
     dialog.dataset.intro=id;
-    if(['soccer','tennis'].includes(id))dialog.append(this.soccerHandedness(id));
+    {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
     dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
@@ -236,7 +247,7 @@ export class ActivityInterface {
     if(this.requireBuilding(id))return;
     if(!this.engine.state.instructionsSeen.includes(id))this.intro(id,eventId,stage);else this.launch(id,eventId,stage);
   }
-  launch(id,eventId,stageNumber,drill) {
+  launch(id,eventId,stageNumber,drill,rescue={attempts:0,lite:false}) {
     if(id==='navalDuel')ensureNavalTheme();
     if(this.requireBuilding(id))return;
     // Switching from instructions must retain the event's playing state.
@@ -274,6 +285,7 @@ export class ActivityInterface {
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
+    if(rescue.lite)context.lite=true;
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
@@ -287,8 +299,23 @@ export class ActivityInterface {
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
     this.current=response;if(id==='navalDuel')this.lastNavalFleet=response.session.snapshot.composition;
     this.shell.bind(response.session);
+    if(RESCUE_GAMES[id]){this.rescueWatch?.stop();this.rescueWatch=watchLoading({session:response.session,dialog,t:this.t,attempts:rescue.attempts,
+      onRestart:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'restart'),onLite:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'lite'),onClear:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'clear'),
+      onBack:()=>{this.ui.closeModal();this.menu();}});}
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
     canvas.focus();
+  }
+  /** "Stuck? Restart the game": a clean cancel of the current session (dispose frees WebGL and workers)
+   * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
+   * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
+  async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
+    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite'};
+    this.closing=true;
+    try{this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
+    let count=0;
+    if(kind==='clear'){try{count=await clearGameAssets(key);}catch{}this.ui.toast('rescue.cleared',{count});}
+    noteManualRestart(key,this.t('rescue.report.'+kind,{n:next.attempts,count}));
+    this.launch(id,eventId,stageNumber,drill,next);
   }
   outdoorPrompt(dialog){
     const phrases=this.data.config.minigames.soccer.training.outdoorMessages,index=this.engine.state.soccerRoster.training.completed+(this.engine.state.minigameWins.soccer||0);
@@ -306,18 +333,19 @@ export class ActivityInterface {
     if(id==='islandRacing'&&racingSummary)for(const [key,value]of [['rank',racingSummary.rank],['time',`${Number(racingSummary.durationSeconds).toFixed(1)} שנ׳`],['laps',racingSummary.laps]]){const row=el('p','result-row');row.dataset.racingSummary=key;row.append(el('span','',this.t(`racing.result.${key}`)),el('bdi','',String(value)));summary.append(row);}
     if(id==='alpineRush'&&alpineSummary)this.alpineResult(dialog,summary,alpineSummary);
     if(id==='fireRescue'&&result.certificate)dialog.append(this.certificateCard(result.certificate,result.stage));
-    dialog.append(el('h3','',this.t(game.title)),summary,
-      button(this.t('minigame.again'),'game-again',()=>{
+    const stars=Number(result.stars)||0,panel=kitResultPanel({win:result.outcome==='win',stars,ratingLabel:this.t('minigame.stageStars',{stage:result.stage,stars})},summary);
+    dialog.append(el('h3','',this.t(game.title)),panel,
+      kitPrimary(button(this.t('minigame.again'),'game-again',()=>{
         const active=this.engine.state.events.active;
         if(eventId&&active?.id===eventId){
           this.ui.modalCleanup=null;this.ui.closeModal();
           const choice=this.activity.choose('play');if(!choice.ok){this.ui.view.paused=false;this.ui.result(choice);return;}
         }
         this.start(id,active?.id===eventId?eventId:undefined,result.stage);
-      },'primary-button'),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
+      },'primary-button')),button(this.t('minigame.exit'),'game-exit',()=>this.ui.closeModal()));
     if(id==='soccer')this.outdoorPrompt(dialog);
-    if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),summary);
-    if(id==='soccer'&&result.penalties){const line=el('p','soccer-penalty-result',this.t('soccer.penalties.result',{hits:result.penalties.hits,attempts:result.penalties.attempts,money:result.penalties.money}));line.dataset.penalties=`${result.penalties.hits}/${result.penalties.attempts}`;dialog.insertBefore(line,summary);}
+    if(id==='soccer')dialog.insertBefore(playerCard(this.engine.state,this.data.config.minigames.soccer,this.t,{starsAdded:result.trainingStars}),panel);
+    if(id==='soccer'&&result.penalties){const line=el('p','soccer-penalty-result',this.t('soccer.penalties.result',{hits:result.penalties.hits,attempts:result.penalties.attempts,money:result.penalties.money}));line.dataset.penalties=`${result.penalties.hits}/${result.penalties.attempts}`;dialog.insertBefore(line,panel);}
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage&&!(id==='soccer'&&this.data.config.minigames.soccer.league&&result.stage>=this.data.config.minigames.soccer.league.leagues.length*this.data.config.minigames.soccer.league.matchesPerLeague))dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
@@ -327,7 +355,7 @@ export class ActivityInterface {
   alpineResult(dialog,summary,a){
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
-    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261101-1',import.meta.url).href;dialog.append(css);
+    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261104-3',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
     const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);
@@ -352,18 +380,19 @@ export class ActivityInterface {
     }));
     for(const action of this.data.config.events.actions){
       const available=this.availability(type.gameId);
-      const b=button(action.id==='play'&&this.engine.learningStatus().locked?'🔒 📚 משימת היום':this.t(action.id==='play'&&!available.ok?available.reason:action.labelId),`event-${action.id}`,()=>{
+      const taskLocked=action.id==='play'&&this.engine.learningStatus().locked,b=button(taskLocked?TASK_LOCK:this.t(action.id==='play'&&!available.ok?available.reason:action.labelId),`event-${action.id}`,()=>{
         if(action.id==='play'&&this.requireDaily(type.gameId))return;
         if(action.id==='play'&&!available.ok){this.requireBuilding(type.gameId);return;}
         const result=this.activity.choose(action.id);if(!result.ok){this.ui.result(result);return;}
         if(result.gameId){this.eventOpen=false;this.start(result.gameId,result.eventId);}
         else this.ui.toast(result.deferred?'event.deferred':'event.handled');this.render();
       });
+      if(taskLocked)b.prepend(kitIcon('lock',20,'ik-icon ik-lock'));
       b.disabled=event.phase==='playing'||(action.id==='defer'?event.deferred:event.phase!=='ready');this.details.append(b);
     }
   }
   decorateInfo(instance,actions) {
-    for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(button(this.engine.learningStatus().locked?'🔒 📚 משימת היום':this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
+    for(const game of this.enabledGames())if(this.data.config.minigames[game.id].requiresBuilding===instance.typeId)actions.append(this.engine.learningStatus().locked?lockedTaskButton(`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'):button(this.t('minigame.soccer.play'),`${instance.typeId}-building-play`,()=>this.stages(game.id),'primary-button'));
     if(instance.typeId==='soccer')actions.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
     if(instance.typeId==='cityHall'){
       const metrics=el('div','city-hall-metrics');

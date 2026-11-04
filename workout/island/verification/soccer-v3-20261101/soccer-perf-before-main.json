@@ -1,0 +1,90 @@
+{
+ "label": "main",
+ "runs": [
+  {
+   "viewport": "844x390",
+   "error": null,
+   "assetReadyMs": 11692,
+   "warmup": {
+    "programs": 55,
+    "ms": 124
+   },
+   "fps": 10.8,
+   "frameP95": 166.6,
+   "frameMean": 92.79,
+   "tickP95": 3.9,
+   "renderP95": 7.7,
+   "glP95": 6.1,
+   "quality": 3,
+   "triangles": 48781,
+   "drawCalls": 30,
+   "assetStatus": "ready",
+   "programsCompiled": 0,
+   "longTasks": 4,
+   "match": {
+    "score": [
+     3,
+     0
+    ],
+    "elapsed": 25,
+    "phase": "playing",
+    "events": {
+     "goal": 3,
+     "shot": 3,
+     "pass": 5,
+     "loft": 0,
+     "header": 0,
+     "steal": 0,
+     "save": 0
+    }
+   },
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "missing": []
+  },
+  {
+   "viewport": "390x844",
+   "error": null,
+   "assetReadyMs": 10059,
+   "warmup": {
+    "programs": 57,
+    "ms": 82
+   },
+   "fps": 14.2,
+   "frameP95": 116.7,
+   "frameMean": 70.54,
+   "tickP95": 2,
+   "renderP95": 7.3,
+   "glP95": 6.1,
+   "quality": 3,
+   "triangles": 48781,
+   "drawCalls": 30,
+   "assetStatus": "ready",
+   "programsCompiled": 0,
+   "longTasks": 3,
+   "match": {
+    "score": [
+     2,
+     0
+    ],
+    "elapsed": 29.1,
+    "phase": "playing",
+    "events": {
+     "goal": 2,
+     "shot": 2,
+     "pass": 9,
+     "loft": 0,
+     "header": 0,
+     "steal": 0,
+     "save": 0
+    }
+   },
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "missing": []
+  }
+ ]
+}

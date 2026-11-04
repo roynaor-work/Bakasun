@@ -2,6 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {AlpineDracoLoader as DRACOLoader} from './alpine-draco.mjs';
 import {Retargeter} from '../design/viewer/retarget.js';
+import {bodyTarget, followBody} from './alpine-steer.mjs';
 
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const smooth = x => (x = clamp(x)) * x * (3 - 2 * x);
@@ -91,7 +92,7 @@ export function createAlpineMotionPlayer(baked, bones) {
   // applied as model-space rotations on the already posed bones, and fades out in falls, menus and results.
   const boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
   const order = ['Hips', 'Spine', 'Chest', 'Neck', 'Head', 'LeftArm', 'RightArm', 'LeftForeArm', 'RightForeArm', 'LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'].filter(n => boneByName[n]);
-  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0};
+  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0, rate: 0, prevLean: 0};
   const frameBone = bones[0], qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
   const AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), AZ = new T.Vector3(0, 0, 1);
   function rideTargets() {
@@ -102,19 +103,21 @@ export function createAlpineMotionPlayer(baked, bones) {
     const bump = (Math.sin(t * 5.2) * .035 * sp + Math.sin(t * 8.7 + 1.3) * .02 * sp) * (1 - .6 * b); // terrain absorption
     const swing = Math.sin(t * (2.2 + 1.8 * sp)) * (.16 + .1 * sp) * (1 - b);        // pole swing stops in the tuck
     const hipsPitch = crouch * .35 + bump * .5, torso = hipsPitch + crouch * (.4 + .3); // forward pitch of the pelvis and of the chest, rad
-    return {crouch, knee, bump, swing, lean, a, b, hipsPitch, torso};
+    const turn = Math.max(-1, Math.min(1, ride.rate * .12)); // 1 = swinging hard from one side to the other
+    const sway = Math.sin(t * 1.7) * (.02 + .03 * sp);       // slow weight shift while going straight
+    return {crouch, knee, bump, swing, lean, a, b, hipsPitch, torso, turn, sway};
   }
   function applyRide() {
     if ((ride.w < .01 && ride.arms < .01) || !frameBone?.parent) return;
     const k = rideTargets(), w = ride.w, armW = ride.arms;
     frameBone.parent.updateWorldMatrix(true, false); frameBone.parent.getWorldQuaternion(qFrame);
     const delta = {
-      Hips: [k.crouch * .35 + k.bump * .5, -k.lean * .2, k.lean * .14],
-      Spine: [k.crouch * .4, k.lean * .14, k.lean * .3],
-      Chest: [k.crouch * .3, k.lean * .18, k.lean * .22],
+      Hips: [k.crouch * .35 + k.bump * .5, -k.lean * .2 - k.turn * .16, k.lean * .14 + k.sway],
+      Spine: [k.crouch * .4, k.lean * .14 + k.turn * .12, k.lean * .3 - k.sway * .6],
+      Chest: [k.crouch * .3, k.lean * .18 + k.turn * .18, k.lean * .22 - k.sway],
       Neck: [-k.crouch * (.3 + .35 * k.b), -k.lean * .22, -k.lean * .12],
-      Head: [-k.crouch * .15, 0, -k.lean * .1],
-      LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, -.52 + k.a * .1], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, .52 - k.a * .1],
+      Head: [-k.crouch * .15, k.turn * .1, -k.lean * .1 + k.sway * .6],
+      LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, -.52 + k.a * .1 + k.turn * .18 + k.lean * .12], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, .52 - k.a * .1 + k.turn * .18 + k.lean * .12],
       LeftForeArm: [-.6 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.6 + k.swing * .5 - .55 * k.b, 0, 0],
       LeftUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
       LeftLeg: [(k.knee + k.bump) * 2, 0, 0], RightLeg: [(k.knee + k.bump) * 2, 0, 0],
@@ -166,7 +169,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     state = baked.initialState || 'idle'; time = 0; fadeTime = 1; fadeDuration = 0;
     sample(state, 0, outgoing); shown.set(outgoing); target.set(outgoing);
     lastTime = null; lastPhase = null; lastS = null; lastSpeed = 0;
-    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = ride.arms = 0;
+    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = ride.arms = ride.rate = ride.prevLean = 0;
     lastCrash = lastAir = lastBoost = resultSeen = clipFinished = false;
     carveHeld = false; carveStrength = 0;
     display(0);
@@ -180,15 +183,16 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (restarted) reset();
     const speed = context.speedKmh ?? (lastS !== null && dt > 0 ? Math.max(0, ((frame.s ?? lastS) - lastS) / dt * 3.6) : 0);
     const moving = phase === 'menu' && !!context.previewRun || (phase === 'racing' || phase === 'finished') && (speed > .5 || phase === 'racing');
-    const lean = clamp(Number(frame.lean) || 0, -1, 1);
+    const lean = bodyTarget(frame);
     carveHeld = moving && !frame.airborne && !frame.crashed && Math.abs(lean) > .2;
     carveStrength += ((carveHeld ? Math.abs(lean) : 0) - carveStrength) * (1 - Math.exp(-12 * dt));
     time += dt * (state === 'recover' ? 1.9 : state === 'fall' ? 1.15 : 1);
     // Riding layer targets: full on the ground in glide/carve, partial in the air and pole push, off elsewhere.
-    const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : (state === 'air' || state === 'pole_push') ? .55 : 0;
+    const rideWeight = (!moving || frame.crashed) ? 0 : (state === 'glide' || isCarve(state)) ? 1 : state === 'tuck' ? .45 : (state === 'air' || state === 'pole_push') ? .55 : 0;
     const speed01 = clamp((Number(speed) || 0) / 60);
     const follow = 1 - Math.exp(-8 * dt);
-    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean += (lean - ride.lean) * (1 - Math.exp(-7 * dt));
+    ride.w += (rideWeight - ride.w) * follow; ride.speed += (speed01 - ride.speed) * follow; ride.lean = followBody(ride.lean, lean, dt);
+    if (dt > 0) ride.rate += (((ride.lean - ride.prevLean) / dt) - ride.rate) * (1 - Math.exp(-9 * dt)); ride.prevLean = ride.lean;
     ride.arms += (((state === 'fall' || state === 'recover' || state === 'celebrate') ? 0 : 1) - ride.arms) * (1 - Math.exp(-7 * dt));
     ride.boost += ((frame.boosting && rideWeight > 0 && !frame.airborne ? 1 : 0) - ride.boost) * (1 - Math.exp(-9 * dt));
     ride.phase += dt;
@@ -206,6 +210,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     }
     if (!frame.airborne && lastAir || frame.landing && state === 'glide') events.push('ground_contact', 'receive');
     if (frame.boosting && !lastBoost) events.push('boost_confirmed', 'action');
+    // Embedded skier3 clips: the authored crouch takes over at speed (hysteresis so it never flickers).
+    if (moving && !frame.airborne && !frame.crashed) { if (speed01 > .72) events.push('fast'); else if (speed01 < .5) events.push('slow'); }
     if (moving) { if (!(phase === 'menu' && context.previewRun)) events.push('moving'); }
     else events.push('stopped');
     if ((moving && speed < lastSpeed - .8 || !moving) && !frame.hit) events.push('slowing');
@@ -227,7 +233,70 @@ export function createAlpineMotionPlayer(baked, bones) {
   return {update, event, reset, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length, carveHeld, carveStrength})};
 }
 
-export async function loadAlpineCharacters({modelUrl = asset('../design/characters/skier.glb'), isDisposed = () => false} = {}) {
+
+const SKIER3_URL = asset('../design/skier3/skier.glb');
+const edge = (source, target, on, priority = 10, blend = .12) => ({source, target, on, priority, visualBlendSeconds: blend, crossfadeSeconds: blend});
+/** State graph for the five clips embedded in design/skier3/skier.glb. Same events as the authored graph,
+ * minus the left/right carve clips: leaning into turns is the procedural riding layer's job. */
+const SKIER3_TRANSITIONS = [
+  edge('idle', 'glide', 'moving'), edge('glide', 'idle', 'stopped'), edge('tuck', 'idle', 'stopped'), edge('pole_push', 'idle', 'clip_finished_and_stopped'),
+  edge('glide', 'tuck', 'fast', 12), edge('tuck', 'glide', 'slow', 12),
+  edge('glide', 'pole_push', 'boost_confirmed', 40), edge('tuck', 'pole_push', 'boost_confirmed', 40),
+  edge('pole_push', 'glide', 'clip_finished_and_moving'),
+  edge('glide', 'air', 'takeoff', 50), edge('tuck', 'air', 'takeoff', 50), edge('pole_push', 'air', 'takeoff', 50),
+  edge('air', 'land', 'ground_contact', 60), edge('glide', 'land', 'receive', 40), edge('land', 'glide', 'clip_finished_and_moving'), edge('land', 'idle', 'clip_finished_and_stopped'),
+  edge('*', 'fall', 'fall_confirmed', 100, .12), edge('fall', 'recover', 'recovery_allowed', 90, .18), edge('recover', 'idle', 'clip_finished', 90, .18),
+  edge('*', 'celebrate', 'result_success', 80, .2), edge('celebrate', 'idle', 'clip_finished'),
+  edge('*', 'idle', 'reset', 110, 0)
+];
+
+/** Samples the clips embedded in the GLB into the same baked format the authored data produces, so the
+ * existing state machine and riding layer drive them unchanged. Local transforms only: no retargeting. */
+export function bakeEmbeddedSkier(gltf, isDisposed = () => false) {
+  const bones = []; gltf.scene.traverse(o => { if (o.isBone) bones.push(o); });
+  if (bones.length !== 18) throw Error(`alpine.skier3.bones:${bones.length}`);
+  const names = bones.map(b => b.name), stride = names.length * 7, FPS = 30;
+  const byName = Object.fromEntries(gltf.animations.map(a => [a.name, a]));
+  for (const need of ['glide', 'crouch', 'boost', 'fall', 'get_up']) if (!byName[need]) throw Error(`alpine.skier3.clip:${need}`);
+  const sampleClip = (clip, {loop, from = 0, to = clip.duration}) => {
+    const interp = {};
+    for (const track of clip.tracks) { const [node, prop] = track.name.split('.'); (interp[node] ||= {})[prop] = track.createInterpolant(); }
+    const frames = Math.max(2, Math.round((to - from) * FPS) + 1), times = new Float32Array(frames), values = new Float32Array(frames * stride);
+    for (let k = 0; k < frames; k++) {
+      if (isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true});
+      const t = Math.min(to, from + k / FPS); times[k] = t - from;
+      for (let b = 0; b < names.length; b++) {
+        const i = interp[names[b]] || {}, o = k * stride + b * 7;
+        (i.position ? i.position.evaluate(t) : bones[b].position.toArray()).forEach((v, n) => { values[o + n] = v; });
+        (i.quaternion ? i.quaternion.evaluate(t) : bones[b].quaternion.toArray()).forEach((v, n) => { values[o + 3 + n] = v; });
+      }
+    }
+    return {times, values, duration: to - from, loop};
+  };
+  const glide = sampleClip(byName.glide, {loop: true}), crouch = sampleClip(byName.crouch, {loop: true});
+  const boost = sampleClip(byName.boost, {loop: false}), fall = sampleClip(byName.fall, {loop: false}), getUp = sampleClip(byName.get_up, {loop: false});
+  const clips = {
+    idle: glide, glide, tuck: crouch, air: crouch, pole_push: boost, fall, recover: getUp, getup: getUp,
+    // Landing absorbs through the first half second of the authored crouch; celebrating is two pole pumps.
+    land: sampleClip(byName.crouch, {loop: false, to: .5}), celebrate: boost
+  };
+  return {names, stride, clips, transitions: SKIER3_TRANSITIONS, initialState: 'idle', motionScale: 1, embedded: true,
+    bindProof: {source: 'embedded', clips: gltf.animations.map(a => a.name)}};
+}
+
+const LEGACY_URL = asset('../design/characters/skier.glb');
+/** Prefers the GPT/Codex skier3 asset (embedded clips); a failed load falls back silently to the earlier
+ * retargeted skier, and the view falls back again to its procedural rider if both fail. */
+export async function loadAlpineCharacters({modelUrl = SKIER3_URL, isDisposed = () => false} = {}) {
+  if (modelUrl === SKIER3_URL) {
+    try { return await loadCharacters({modelUrl, embedded: true, isDisposed}); }
+    catch (error) { if (error?.disposed || isDisposed()) throw error; skier3Failure = String(error?.message || error); modelUrl = LEGACY_URL; }
+  }
+  return loadCharacters({modelUrl, embedded: false, isDisposed});
+}
+let skier3Failure = null;
+
+async function loadCharacters({modelUrl, embedded, isDisposed}) {
   const loadStarted = performance.now();
   const draco = new DRACOLoader();
   draco.setDecoderPath(asset('../vendor/draco/')); draco.setDecoderConfig({type: 'wasm'}); draco.setWorkerLimit(1);
@@ -244,7 +313,7 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
   }
   try {
     const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
-    const results = await Promise.allSettled([
+    const results = await Promise.allSettled(embedded ? [loader.loadAsync(modelUrl)] : [
       loader.loadAsync(modelUrl), json('../design/characters/rig.json'), json('../design/motion/alpine.json'), json('../design/viewer/retarget-map.json'),
       json('../design/motion2/alpine/alpine.json').catch(() => null) // optional: the richer get-up clip
     ]);
@@ -252,12 +321,16 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
     gltf?.scene.traverse(o => { if (o.geometry) ownedGeometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) ownedMaterials.add(m); });
     const failed = results.find(result => result.status === 'rejected');
     if (failed) throw failed.reason;
-    const [, rig, motion, map, motion2] = results.map(result => result.value);
-    // 'getup' plays in place of the short authored 'recover': the rider climbs back onto the skis from lying on the side.
-    if (motion2?.states?.recover_side) motion.states = {...motion.states, getup: motion2.states.recover_side};
     if (isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true});
     const bakeStarted = performance.now();
-    const baked = bakeAlpineMotion(gltf.scene, rig, motion, map, isDisposed);
+    let baked;
+    if (embedded) baked = bakeEmbeddedSkier(gltf, isDisposed);
+    else {
+      const [, rig, motion, map, motion2] = results.map(result => result.value);
+      // 'getup' plays in place of the short authored 'recover': the rider climbs back onto the skis from lying on the side.
+      if (motion2?.states?.recover_side) motion.states = {...motion.states, getup: motion2.states.recover_side};
+      baked = bakeAlpineMotion(gltf.scene, rig, motion, map, isDisposed);
+    }
     const bakeMs = performance.now() - bakeStarted, loadMs = performance.now() - loadStarted;
     // All Draco work has completed; workers never survive into the race.
     draco.dispose();
@@ -295,7 +368,7 @@ export async function loadAlpineCharacters({modelUrl = asset('../design/characte
         actors.add(actor); return actor;
       },
       dispose,
-      metrics() { return {mode: 'design-skier', clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
+      metrics() { return {mode: embedded ? 'skier3' : 'design-skier', fallbackReason: embedded ? null : skier3Failure, clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: embedded ? 24918 : 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
     };
   } catch (error) { dispose(); throw error; }
 }

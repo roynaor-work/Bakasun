@@ -108,3 +108,11 @@
   .soccer-player-card .soccer-card-attributes { gap:3px 9px; font-size:11px; }
   .modal[data-stage-map=soccer] .stage-map { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+/* Device cache of the match assets and the last load report (soccer menu). */
+.soccer-assets-panel{margin-top:10px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.06);font-size:13px;line-height:1.4}
+.soccer-assets-panel .soccer-assets-status{margin:0 0 6px}
+.soccer-assets-panel .secondary-button{min-height:40px}
+.soccer-load-report{margin-top:8px}
+.soccer-load-report summary{cursor:pointer;min-height:40px;display:flex;align-items:center}
+.soccer-load-report pre{direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-all;font-size:11px;max-height:160px;overflow:auto;background:rgba(0,0,0,.25);padding:6px;border-radius:8px}
+.soccer-load-note{position:absolute;top:92px;inset-inline:12px;z-index:5;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.65);color:#fff;font-size:13px;text-align:center;pointer-events:none}

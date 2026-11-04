@@ -1,0 +1,319 @@
+{
+  "checks": [
+    "38 remaining catalog exercises; exact disjoint union with PR 244",
+    "60,000-byte raw limit",
+    "reproducible generated files",
+    "no scripts or external resources",
+    "static reduced-motion posters",
+    "exact attribute closure (rotation modulo full turns)",
+    "shared durations and sampling",
+    "C1 keyframe and seam velocities",
+    "interpolated soles stay above floor"
+  ],
+  "exercises": [
+    {
+      "id": "jog",
+      "bytes": 28423,
+      "animations": 26,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000007321489192690933
+    },
+    {
+      "id": "arm-circles",
+      "bytes": 27436,
+      "animations": 15,
+      "segments": 64,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000014200622899807058
+    },
+    {
+      "id": "ankle-hops",
+      "bytes": 24647,
+      "animations": 20,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000008335177881235722
+    },
+    {
+      "id": "tuck-jumps",
+      "bytes": 32819,
+      "animations": 24,
+      "segments": 58,
+      "exactLoop": true,
+      "maxVelocityError": 0.000006018495923854061
+    },
+    {
+      "id": "star-jumps",
+      "bytes": 28003,
+      "animations": 23,
+      "segments": 46,
+      "exactLoop": true,
+      "maxVelocityError": 0.000006354892612137064
+    },
+    {
+      "id": "broad-jump",
+      "bytes": 53558,
+      "animations": 26,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000035280010024507646
+    },
+    {
+      "id": "single-leg-hops",
+      "bytes": 24633,
+      "animations": 21,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000014897395317348128
+    },
+    {
+      "id": "step-jumps",
+      "bytes": 50121,
+      "animations": 26,
+      "segments": 94,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000030629649927504943
+    },
+    {
+      "id": "hall-sprint",
+      "bytes": 28942,
+      "animations": 25,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000011622148576861946
+    },
+    {
+      "id": "run-jump",
+      "bytes": 54406,
+      "animations": 26,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 0.000005560469418242064
+    },
+    {
+      "id": "run-vertical",
+      "bytes": 38762,
+      "animations": 26,
+      "segments": 64,
+      "exactLoop": true,
+      "maxVelocityError": 0.000006952895148515381
+    },
+    {
+      "id": "bounding",
+      "bytes": 31510,
+      "animations": 26,
+      "segments": 46,
+      "exactLoop": true,
+      "maxVelocityError": 0.00000958703338937994
+    },
+    {
+      "id": "shuttle-run",
+      "bytes": 42137,
+      "animations": 29,
+      "segments": 66,
+      "exactLoop": true,
+      "maxVelocityError": 0.000010285170048973669
+    },
+    {
+      "id": "reaction-sprint",
+      "bytes": 51664,
+      "animations": 26,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 0.00000977774305965795
+    },
+    {
+      "id": "side-shuffle",
+      "bytes": 27983,
+      "animations": 18,
+      "segments": 54,
+      "exactLoop": true,
+      "maxVelocityError": 0.00001037808061710166
+    },
+    {
+      "id": "carioca",
+      "bytes": 26717,
+      "animations": 20,
+      "segments": 46,
+      "exactLoop": true,
+      "maxVelocityError": 0.00000573016478710997
+    },
+    {
+      "id": "skipping",
+      "bytes": 27669,
+      "animations": 23,
+      "segments": 42,
+      "exactLoop": true,
+      "maxVelocityError": 0.000015050975576968995
+    },
+    {
+      "id": "floor-wall-run",
+      "bytes": 57064,
+      "animations": 29,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 0.000012311090813454939
+    },
+    {
+      "id": "back-run",
+      "bytes": 24956,
+      "animations": 20,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000029751845431746915
+    },
+    {
+      "id": "v-ups",
+      "bytes": 36515,
+      "animations": 25,
+      "segments": 55,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000022366695162645556
+    },
+    {
+      "id": "side-plank",
+      "bytes": 39721,
+      "animations": 13,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 8.355982572538778e-9
+    },
+    {
+      "id": "hollow-hold",
+      "bytes": 41940,
+      "animations": 15,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 8.355982572538778e-9
+    },
+    {
+      "id": "flutter-kicks",
+      "bytes": 21372,
+      "animations": 15,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000029166358217480592
+    },
+    {
+      "id": "russian-twists",
+      "bytes": 29982,
+      "animations": 20,
+      "segments": 51,
+      "exactLoop": true,
+      "maxVelocityError": 0.000011455398407633766
+    },
+    {
+      "id": "superman",
+      "bytes": 42582,
+      "animations": 24,
+      "segments": 75,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000012693419648712734
+    },
+    {
+      "id": "plank-jacks",
+      "bytes": 22396,
+      "animations": 14,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 5.81721337766794e-7
+    },
+    {
+      "id": "crab-kicks",
+      "bytes": 35243,
+      "animations": 16,
+      "segments": 78,
+      "exactLoop": true,
+      "maxVelocityError": 0.000002891155759243702
+    },
+    {
+      "id": "mountain-climbers",
+      "bytes": 22125,
+      "animations": 14,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000021351354462240124
+    },
+    {
+      "id": "lunges",
+      "bytes": 29157,
+      "animations": 18,
+      "segments": 55,
+      "exactLoop": true,
+      "maxVelocityError": 5.693436833098531e-7
+    },
+    {
+      "id": "calf-raises",
+      "bytes": 33198,
+      "animations": 21,
+      "segments": 60,
+      "exactLoop": true,
+      "maxVelocityError": 1.4497913980449084e-7
+    },
+    {
+      "id": "glute-bridge",
+      "bytes": 28142,
+      "animations": 15,
+      "segments": 60,
+      "exactLoop": true,
+      "maxVelocityError": 6.886580194986891e-7
+    },
+    {
+      "id": "wall-sit",
+      "bytes": 34086,
+      "animations": 14,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 4.177991286269389e-9
+    },
+    {
+      "id": "knee-push-ups",
+      "bytes": 32318,
+      "animations": 17,
+      "segments": 60,
+      "exactLoop": true,
+      "maxVelocityError": 4.999947122996673e-7
+    },
+    {
+      "id": "chair-dips",
+      "bytes": 26215,
+      "animations": 15,
+      "segments": 51,
+      "exactLoop": true,
+      "maxVelocityError": 4.799858288606629e-7
+    },
+    {
+      "id": "pike-push-ups",
+      "bytes": 31913,
+      "animations": 17,
+      "segments": 60,
+      "exactLoop": true,
+      "maxVelocityError": 2.333422344236169e-7
+    },
+    {
+      "id": "quad-stretch",
+      "bytes": 32330,
+      "animations": 12,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 2.6716406864579767e-9
+    },
+    {
+      "id": "hamstring-stretch",
+      "bytes": 36803,
+      "animations": 15,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 8.01492205937393e-9
+    },
+    {
+      "id": "calf-stretch",
+      "bytes": 36529,
+      "animations": 13,
+      "segments": 96,
+      "exactLoop": true,
+      "maxVelocityError": 2.6716406864579767e-9
+    }
+  ]
+}

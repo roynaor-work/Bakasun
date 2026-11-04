@@ -4,14 +4,9 @@ import { readFileSync, existsSync } from 'node:fs';
 
 const smoke = readFileSync(new URL('./e2e/smoke_all_screens.py', import.meta.url), 'utf8');
 const shell = readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
-test('B3-Q01 current (static): the multilingual smoke test changes a setting the app does not read', () => {
-  assert.match(smoke, /s\.settings\.uiLang=/);
-  assert.match(shell, /db\.setting\('lang'\)/);
-  assert.doesNotMatch(shell, /db\.setting\('uiLang'\)/);
-});
-test('B3-Q01 fix (static): the smoke test sets the actual UI language and checks the resulting document language',
-  { skip: 'B3-Q01: smoke_all_screens.py writes uiLang rather than lang and has no language assertion; the B3 browser check set lang explicitly.' }, () => {
-    assert.match(smoke, /settings\.lang\s*=|db\.setting\(['"]lang['"]/);
+test('B3-Q01 fix (static): the smoke test sets the actual UI language and checks the resulting document language', () => {
+    assert.match(shell, /db\.setting\('lang'\)/); assert.doesNotMatch(smoke, /uiLang/);
+    assert.match(smoke, /settings\.lang\s*=|s\.settings\.lang=|db\.setting\(['"]lang['"]/);
     assert.match(smoke, /document\.documentElement\.lang/);
   });
 

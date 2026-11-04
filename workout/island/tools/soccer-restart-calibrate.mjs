@@ -46,7 +46,10 @@ export async function calibrateSoccerRestartPoses(){
  const paths={},heightMetres=1.8,radius=.11;let puntDrop=null;
  for(const role of ['soccer-player','goalkeeper']){
   const gltf=await loadCharacter(bytes['design/characters2/'+role+'.glb']),source=gltf.scene,kinds=role==='soccer-player'?['throwIn']:['keeperThrow','keeperPunt'];
-  const clips=bakeSoccerDesignFloor(source,compileSoccerDesignClips({...data,states:Object.fromEntries(kinds.map(kind=>[kind,data.states[kind]]))},rig,map));
+  // The checked-in physics calibration uses the exhaustive bake (every vertex); the
+  // view's hull-candidate bake differs by a few millimetres and attaches the ball
+  // to the rendered hands anyway.
+  const clips=bakeSoccerDesignFloor(source,compileSoccerDesignClips({...data,states:Object.fromEntries(kinds.map(kind=>[kind,data.states[kind]]))},rig,map),{exhaustive:true});
   source.updateMatrixWorld(true);source.traverse(mesh=>{if(mesh.isSkinnedMesh){mesh.skeleton.update();mesh.computeBoundingBox();}});const bounds=new T.Box3().setFromObject(source),scale=heightMetres/(bounds.max.y-bounds.min.y);source.scale.setScalar(scale);
   const pivot=new T.Group();pivot.add(source);const character={root:source,pivot,restartContactMap:map},bones=[];source.traverse(b=>{if(b.isBone)bones.push({bone:b,q:b.quaternion.clone(),p:b.position.clone()});});
   const restore=()=>{for(const p of bones){p.bone.quaternion.copy(p.q);p.bone.position.copy(p.p);}},mixer=new T.AnimationMixer(source),point=new T.Vector3();

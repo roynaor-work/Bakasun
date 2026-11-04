@@ -1,0 +1,80 @@
+{
+  "id": "hoops-arena-v6",
+  "date": "2026-11-04",
+  "coordinates": {
+    "unit": "metre",
+    "up": "+Y",
+    "courtLongAxis": "X",
+    "courtSize": [
+      28,
+      15
+    ],
+    "rimHeight": 3.05
+  },
+  "originalWork": [
+    "arena-scene.js",
+    "parquet-albedo.webp",
+    "parquet-normal.webp",
+    "parquet-roughness.webp",
+    "source/create-textures.py"
+  ],
+  "license": "Original scene and maps created for this repository; repository terms apply. No additional blanket CC0 grant.",
+  "crowd": {
+    "file": "crowd-atlas.webp",
+    "source": "../../../assets/textures/hoops-crowd.webp",
+    "sourceSha256": "e1d1cfde0a57d2b1ce59bc1c0e0a7e9a9e377494b2a26b208835fe572e44d95d",
+    "sourceLicenseRecord": "../../../ASSETS.md:163",
+    "sourceStatement": "Repository render of fictional MakeHuman CC0 bodies and clothes. No real-player likeness, club emblem, brand, or live spectator photograph.",
+    "transformation": "Deterministic Lanczos resample 1024x1152 -> 896x1008; RGBA alpha retained.",
+    "cells": [
+      8,
+      6
+    ],
+    "animation": "Adjacent atlas cells switch between sitting/clapping and cheering; instanced per-person phase and slight sway."
+  },
+  "runtime": {
+    "module": "arena-scene.js",
+    "requires": "local three.js r160 only",
+    "construction": "Merged static geometry per PBR material, one InstancedMesh for seats and one for fictional crowd.",
+    "videoCube": "Four faces share one 768x384 canvas updated 6Hz",
+    "lighting": "One 1024px directional shadow; one hemisphere, one directional fill, two unshadowed spots; roof fixtures emissive.",
+    "reflections": "PBR ceiling-light environment with clearcoat, wood normal and worn-lane roughness plus one subtle baked lacquer sheen plane; no extra scene render.",
+    "roof": "roofGroup may be hidden by broadcast camera to prevent foreground rafter occlusion.",
+    "readyPromise": "await arena.ready before displaying/exporting"
+  },
+  "export": {
+    "group": "staticGroup",
+    "excluded": "Runtime instanced crowd/seats, animated video faces and lights. These are recreated by the module.",
+    "staticMaterials": "Conventional PBR with local floor maps; see GLB report for compressed output."
+  },
+  "textures": [
+    {
+      "file": "crowd-atlas.webp",
+      "width": 896,
+      "height": 1008,
+      "bytes": 185384,
+      "sha256": "72fb298e41723c548c5856af5ff37490a0634e832aac6da891e18c737a83545e"
+    },
+    {
+      "file": "parquet-albedo.webp",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 88698,
+      "sha256": "0094a14dccf5e6a53fdf18d652aa313bb105782fd284ff268e640e12289e02ea"
+    },
+    {
+      "file": "parquet-normal.webp",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 7514,
+      "sha256": "068559ca22eca0d9f9e4cf8b68044a12f66dc8abf90161c8fe3312b96ebbb3da"
+    },
+    {
+      "file": "parquet-roughness.webp",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 46442,
+      "sha256": "d8993d37cca1246079b0477d7d91bc533bf859be98690e564ee72d514d6cb8ad"
+    }
+  ]
+}

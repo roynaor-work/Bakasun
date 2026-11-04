@@ -35,7 +35,7 @@ await verify('g4f',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  // The source buffer is decoded by Chromium and passed through the runtime filter.
  await pause(false);await tap('#pass');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.audioMetrics.loaded.length===4);
  await page.clock.resume();const audioEvidence=await page.evaluate(async()=>{
-  const {createTennisAudio}=await import('../island/minigames/g4e-audio.mjs?v=island-v2-20261101-1');
+  const {createTennisAudio}=await import('../island/minigames/g4e-audio.mjs?v=island-v2-20261104-3');
   let context,recorder,chunks=[];
   class RecordingContext extends AudioContext{constructor(){super();context=this;const destination=this.createMediaStreamDestination(),masterConnect=AudioNode.prototype.connect;const actual=this.destination;AudioNode.prototype.connect=function(target,...args){if(target===actual)masterConnect.call(this,destination);return masterConnect.call(this,target,...args);};recorder=new MediaRecorder(destination.stream);recorder.ondataavailable=e=>chunks.push(e.data);}}
   const a=createTennisAudio({config:window.__island.data.config.minigames.tennis.audio,storage:localStorage,AudioContext:RecordingContext});a.unlock();await context.resume();
@@ -47,6 +47,6 @@ await verify('g4f',[{width:844,height:390}],async({page,context,tick,snap,tap,st
  // Cancellation cannot turn a paused hold into a delayed strike on resume.
  await fixture();await touch('touchStart',[hit]);await tick(300);await tap('[data-action=game-pause]');assert.equal((await snap()).charge,0);await touch('touchEnd',[]);await tap('[data-action=game-resume]');await tick(32);assert.equal((await snap()).shot.side,1);
  // Mirror all four icons for a left-handed player and keep their touch targets.
- await page.evaluate(()=>localStorage.setItem('island.tennis.hand','left'));await exit();await start('tennis');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.characterLoaded);await tick(32);assert.ok(await page.locator('.soccer-controls.left-handed').count());const leftDrop=await page.locator('#drop').boundingBox();assert.ok(leftDrop.x>=0&&leftDrop.x+leftDrop.width<=844);await exit();
+ await page.evaluate(()=>localStorage.setItem('island.tennis.hand','left'));await exit();await start('tennis');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.characterLoaded);await tick(32);assert.equal(await page.locator('.soccer-controls.left-handed').count(),0);const leftDrop=await page.locator('#drop').boundingBox();assert.ok(leftDrop.x>=0&&leftDrop.x+leftDrop.width<=844);await exit();
  return {captures,charged:charged.charge,directed:directed.shot,drop:{shot:shortShot.shot,landing:short.ball,apex:shortApex},out:{shot:heavyShot.shot,ball:out.ball},perfect:perfect.shot,computer:{shot:ai.shot,ball:ai.ball,faults:ai.faults},computerNet:aiNet.faultMark,audio:audioEvidence.metrics,checks:{realMultitouch:true,releaseStickAim:true,dropLowBounce:true,overpowerOut:true,descendingPerfectServe:true,computerServeIn:true,audioRendered:true,holdPauseCancel:true,leftHanded:true}};
 });

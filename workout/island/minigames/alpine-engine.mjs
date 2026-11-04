@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261101-1';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261104-3';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -285,8 +285,10 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       if (r.crashTime > 0) boostRequest = false;
       else {
         // Fine control near the centre (expo) and a rate limit so a thumb flick cannot snap the board sideways.
-        const shaped = Math.sign(steerInput) * Math.pow(Math.abs(steerInput), physics.steerExpo ?? 1);
-        const rate = (Math.sign(shaped) !== Math.sign(r.steerOut) || Math.abs(shaped) > Math.abs(r.steerOut) ? physics.steerAttack : physics.steerRelease) ?? 1e9;
+        // Less twitchy at speed: the expo grows and the attack slows with the boost share, so a boosted board never snaps sideways.
+        const boostShare = clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1);
+        const shaped = Math.sign(steerInput) * Math.pow(Math.abs(steerInput), (physics.steerExpo ?? 1) + (physics.steerBoostExpo ?? 0) * boostShare);
+        const rate = ((Math.sign(shaped) !== Math.sign(r.steerOut) || Math.abs(shaped) > Math.abs(r.steerOut) ? physics.steerAttack : physics.steerRelease) ?? 1e9) * (1 - (physics.steerBoostSoften ?? 0) * boostShare);
         r.steerOut += clamp(shaped - r.steerOut, -rate * dt, rate * dt);
         r.steer = r.steerOut;
         if (boostRequest) { boostRequest = false; startBoost(r); }
@@ -311,7 +313,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     // toward the outer wall, and airborne riders have reduced (pipe air: no) control.
     if (r.airKind !== 'pipe') {
       const control = r.airborne ? physics.airControl : Math.cos(angle);
-      r.vx += (r.steer * physics.lateralSpeed - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
+      r.vx += (r.steer * physics.lateralSpeed * (1 - (physics.lateralBoostDamp ?? 0) * clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1)) - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
       if (!r.airborne) {
         if (onWall) r.vx -= Math.sign(r.x) * physics.wallGravity * Math.sin(angle) * dt;
         r.vx -= curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush * dt;
@@ -422,6 +424,8 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     return {
       id: r.id, x: r.x, z: p.s - r.s, s: r.s, height: heightOf(r),
       lean: clamp(r.vx / physics.lateralSpeed, -1, 1),
+      // What the player is asking for right now (stick after expo and rate limit): the body leans on this before the track position moves.
+      intent: r.ai ? clamp(r.steer, -1, 1) : r.steerOut,
       boosting: r.boostTime > 0 || r.padTime > 0, hit: r.hitTime > physics.recoverySeconds - physics.hitFlashSeconds || r.crashTime > 0,
       crashed: r.crashTime > 0, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind,
       trick: r.trick ? { id: r.trick.id, progress: Math.min(1, r.trick.t / r.trick.duration) } : null,

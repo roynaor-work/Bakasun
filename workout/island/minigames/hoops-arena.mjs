@@ -4,7 +4,7 @@
  * scoreboard and the light rig. Built once from the court geometry; nothing here decides play. */
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261101-1';
+import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261104-3';
 
 const LINE=0.05;
 
@@ -169,15 +169,19 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  root.add(cube);
 
  // ---------- lights ----------
+ // Broadcast balance (01/11): one warm key from the rig casts the only shadow and carries most
+ // of the light, a cool low fill keeps the shadow side readable without flattening it, and a
+ // white back light from the far sideline rims the players against the floor. The fill used to
+ // match the key and washed the shadows out completely.
  const lights=new THREE.Group();
- lights.add(new THREE.HemisphereLight(0xe8eefb,0x182238,0.55));
- const key=new THREE.DirectionalLight(0xfff8ec,2.15);key.position.set(4,22,6);key.target.position.set(0,0,0);
+ lights.add(new THREE.HemisphereLight(0xffe9d2,0x0e1626,0.32));
+ const key=new THREE.DirectionalLight(0xfff1dc,3.1);key.position.set(5,24,7);key.target.position.set(0,0,0);
  key.castShadow=true;// A 1K filtered court shadow funds adult silhouettes without lowering screen resolution.
- key.shadow.mapSize.set(1024,1024);
- Object.assign(key.shadow.camera,{left:-hx-2,right:hx+2,top:hz+2,bottom:-hz-2,near:5,far:40});key.shadow.bias=-0.0004;key.shadow.normalBias=0.02;
+ key.shadow.mapSize.set(quality>=3?2048:1024,quality>=3?2048:1024);
+ Object.assign(key.shadow.camera,{left:-hx-1.5,right:hx+1.5,top:hz+1.5,bottom:-hz-1.5,near:8,far:40});key.shadow.bias=-0.00025;key.shadow.normalBias=0.025;
  lights.add(key,key.target);
- const fill=new THREE.DirectionalLight(0xcfe2ff,1);fill.position.set(-8,14,-10);lights.add(fill);
- const back=new THREE.DirectionalLight(0xffffff,0.9);back.position.set(10,12,12);lights.add(back);
+ const fill=new THREE.DirectionalLight(0xbfd0ff,0.42);fill.position.set(-8,14,-10);lights.add(fill);
+ const back=new THREE.DirectionalLight(0xf4f7ff,1.05);back.position.set(8,11,14);lights.add(back);
  root.add(lights);
  dyn.key=key;
 

@@ -175,9 +175,6 @@ button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offse
 .game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{background:#4d8ccc66}
 .game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{background:#9f6dc966}
 .game-screen[data-game=soccer] .soccer-controls .held{background:#ffe4a5a1!important;color:#173d54!important;text-shadow:none}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
-.game-screen[data-game=soccer] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
 .soccer-action-icon{width:25px;height:25px;flex:none}
 .soccer-sprint[data-exhausted=true]{opacity:.65}
 .soccer-goal-banner{position:absolute;top:26%;left:50%;transform:translateX(-50%) rotate(-5deg);font-size:clamp(48px,10vw,110px);font-weight:900;color:#fff0a5;text-shadow:0 4px 0 #9e6835,0 8px 24px #10293f;pointer-events:none;z-index:1}
@@ -366,3 +363,18 @@ button[data-pressed=true]{scale:.95;filter:brightness(.82)}
 .game-screen.boar-game-screen .boar-game-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#102731}
 .game-screen.boar-game-screen .game-status,.game-screen.boar-game-screen .game-controls{display:none}
 .game-screen.boar-game-screen .game-stage>.game-warning{position:absolute;z-index:2;top:12px;inset-inline:12px;background:#102731;color:#fff;padding:12px;border-radius:8px}
+
+/* Island download panel (ui/offline-panel.mjs) and last load reports (ui/load-report.mjs) */
+.offline-panel{margin-top:16px;padding:14px;border-radius:16px;background:rgba(255,255,255,.7);display:grid;gap:10px}
+.offline-panel h3{margin:0;font-size:1.05rem}
+.offline-status{margin:0;font-weight:600}
+.offline-progress{width:100%;height:12px}
+.offline-games{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 16px}
+.offline-games li[data-complete="true"]::before{content:"✔ "}
+.offline-panel button{min-height:48px}
+.load-report summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+.load-report pre{white-space:pre-wrap;word-break:break-all;font-size:.8rem;text-align:left}
+.load-rescue{position:fixed;inset-inline:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:grid;gap:8px;padding:12px 14px;border-radius:14px;background:#0f1f2ef2;color:#fff4dc;border:1px solid #fff4dc44;box-shadow:0 8px 28px #0008;max-width:560px;margin-inline:auto}
+.load-rescue-hint{margin:0;font-size:.95rem;line-height:1.4}
+.load-rescue-row{display:flex;flex-wrap:wrap;gap:8px}
+.load-rescue-row button{min-height:44px;min-width:44px;padding:8px 16px;font-size:1rem;flex:1 1 auto}

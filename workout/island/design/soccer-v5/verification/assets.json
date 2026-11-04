@@ -1,0 +1,1456 @@
+{
+  "schemaVersion": 1,
+  "allPassed": true,
+  "limits": {
+    "bytesPerGLB": 1500000,
+    "textureDimension": 1024,
+    "floorPenetrationMeters": 0.005
+  },
+  "canonicalSource": "../motion2/soccer.json / skeleton.bones",
+  "assets": [
+    {
+      "id": "teal-quiff",
+      "file": "models/teal-quiff.glb",
+      "bytes": 453528,
+      "sha256": "9e17179a87f7d2a690c3e076cf19033b4a742aae901e85638f932ddf6119ea79",
+      "triangles": 12564,
+      "vertices": 6775,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 138,
+          "maxDisplacementMeters": 0.007269795734485584
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 45,
+          "maxDisplacementMeters": 0.005238225571532096
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847799953136,
+          "maximumLowestVertexY": 0.015957436407448105
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.00029313442290640175,
+          "maximumLowestVertexY": 0.01314761432707465
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.00003736757914967175,
+          "maximumLowestVertexY": 6.371841750106924e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968550764328146,
+          "maximumLowestVertexY": 0.000043586076722239644
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.0000758741010828956,
+          "maximumLowestVertexY": 0.00003068326948280076
+        }
+      ]
+    },
+    {
+      "id": "teal-curls",
+      "file": "models/teal-curls.glb",
+      "bytes": 493248,
+      "sha256": "7983b94552cd6a5a0bb221c330a074945e412ac4e4b83e7642af04e641a22324",
+      "triangles": 14297,
+      "vertices": 7717,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 148,
+          "maxDisplacementMeters": 0.009157362066151569
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 49,
+          "maxDisplacementMeters": 0.005058650339334019
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847062613597,
+          "maximumLowestVertexY": 0.015957436334810057
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.0002931340225451329,
+          "maximumLowestVertexY": 0.01314732092158253
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.000037366567085825395,
+          "maximumLowestVertexY": 6.370446108778724e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968552146571208,
+          "maximumLowestVertexY": 0.00004358606236791202
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.0000671650241521049,
+          "maximumLowestVertexY": 0.00003939715971640334
+        }
+      ]
+    },
+    {
+      "id": "teal-knot",
+      "file": "models/teal-knot.glb",
+      "bytes": 457692,
+      "sha256": "1f43e52e49a51ad1f4f5235d91698d5a3e72b143f32f052bdd4ac296e35b584d",
+      "triangles": 12757,
+      "vertices": 6876,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 147,
+          "maxDisplacementMeters": 0.006187814981728054
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 50,
+          "maxDisplacementMeters": 0.005274203975495767
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847565094787,
+          "maximumLowestVertexY": 0.01595743629248399
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.0002931342646207923,
+          "maximumLowestVertexY": 0.013147054345784615
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.00003736909529997341,
+          "maximumLowestVertexY": 6.371956568461401e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968550626980678,
+          "maximumLowestVertexY": 0.00004358607721130416
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.00007704098553995564,
+          "maximumLowestVertexY": 0.000029517021921998676
+        }
+      ]
+    },
+    {
+      "id": "coral-quiff",
+      "file": "models/coral-quiff.glb",
+      "bytes": 453536,
+      "sha256": "a2f36c6f3fb4c874681da28a6d66ebdc5a5a6308116072004161fc794ea30ce2",
+      "triangles": 12564,
+      "vertices": 6775,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 138,
+          "maxDisplacementMeters": 0.007269795734485584
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 45,
+          "maxDisplacementMeters": 0.005238225571532096
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847799953136,
+          "maximumLowestVertexY": 0.015957436407448105
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.00029313442290640175,
+          "maximumLowestVertexY": 0.01314761432707465
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.00003736757914967175,
+          "maximumLowestVertexY": 6.371841750106924e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968550764328146,
+          "maximumLowestVertexY": 0.000043586076722239644
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.0000758741010828956,
+          "maximumLowestVertexY": 0.00003068326948280076
+        }
+      ]
+    },
+    {
+      "id": "coral-curls",
+      "file": "models/coral-curls.glb",
+      "bytes": 493272,
+      "sha256": "7582ba60cc29ca5238ceea0cf0448b8eb1525fd20758060bec383142841fecec",
+      "triangles": 14297,
+      "vertices": 7717,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 148,
+          "maxDisplacementMeters": 0.009157362066151569
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 49,
+          "maxDisplacementMeters": 0.005058650339334019
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847062613597,
+          "maximumLowestVertexY": 0.015957436334810057
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.0002931340225451329,
+          "maximumLowestVertexY": 0.01314732092158253
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.000037366567085825395,
+          "maximumLowestVertexY": 6.370446108778724e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968552146571208,
+          "maximumLowestVertexY": 0.00004358606236791202
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.0000671650241521049,
+          "maximumLowestVertexY": 0.00003939715971640334
+        }
+      ]
+    },
+    {
+      "id": "coral-knot",
+      "file": "models/coral-knot.glb",
+      "bytes": 457704,
+      "sha256": "a321a9f6712dacc1d3a05f46139cb447b80a3d045b1529c1525b76b0d45c0307",
+      "triangles": 12757,
+      "vertices": 6876,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 147,
+          "maxDisplacementMeters": 0.006187814981728054
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 50,
+          "maxDisplacementMeters": 0.005274203975495767
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807847565094787,
+          "maximumLowestVertexY": 0.01595743629248399
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.0002931342646207923,
+          "maximumLowestVertexY": 0.013147054345784615
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.00003736909529997341,
+          "maximumLowestVertexY": 6.371956568461401e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968550626980678,
+          "maximumLowestVertexY": 0.00004358607721130416
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -0.00007704098553995564,
+          "maximumLowestVertexY": 0.000029517021921998676
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "file": "models/goalkeeper.glb",
+      "bytes": 454500,
+      "sha256": "b5b4b267cc15531367807cdab17bd1786b1fb7ba736a93b5dccaed3b059fa575",
+      "triangles": 12616,
+      "vertices": 6787,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_MESH_WEIGHTS",
+            "message": "The static morph target weights are always overridden.",
+            "severity": 2,
+            "pointer": "/meshes/0/weights"
+          }
+        ]
+      },
+      "skin": {
+        "joints": 18,
+        "names": [
+          "Root",
+          "Hips",
+          "Spine",
+          "Chest",
+          "Neck",
+          "Head",
+          "LeftArm",
+          "LeftForeArm",
+          "LeftHand",
+          "RightArm",
+          "RightForeArm",
+          "RightHand",
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "canonicalHierarchy": true,
+        "maxBindError": 0.0000051492737322966775,
+        "maxWeightError": 0
+      },
+      "clips": [
+        {
+          "name": "run",
+          "durationSeconds": 0.7200000286102295,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "sprint",
+          "durationSeconds": 0.5,
+          "channels": 36,
+          "movingJoints": 13,
+          "loop": true,
+          "loopSeamError": 0
+        },
+        {
+          "name": "kick",
+          "durationSeconds": 0.6800000071525574,
+          "channels": 36,
+          "movingJoints": 8,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "pass",
+          "durationSeconds": 0.8600000143051147,
+          "channels": 36,
+          "movingJoints": 10,
+          "loop": false,
+          "loopSeamError": 0
+        },
+        {
+          "name": "slide",
+          "durationSeconds": 1.4500000476837158,
+          "channels": 36,
+          "movingJoints": 11,
+          "loop": false,
+          "loopSeamError": 0.990552687086165
+        }
+      ],
+      "expressions": [
+        {
+          "name": "smile",
+          "affectedVertices": 132,
+          "maxDisplacementMeters": 0.007095977097917304
+        },
+        {
+          "name": "focus",
+          "affectedVertices": 43,
+          "maxDisplacementMeters": 0.0050307027391669834
+        }
+      ],
+      "floor": [
+        {
+          "clip": "run",
+          "independentSamples": 49,
+          "minimumY": -0.0005807846959097027,
+          "maximumLowestVertexY": 0.015957436386263284
+        },
+        {
+          "clip": "sprint",
+          "independentSamples": 49,
+          "minimumY": -0.0002931345239294814,
+          "maximumLowestVertexY": 0.013146565615491853
+        },
+        {
+          "clip": "kick",
+          "independentSamples": 49,
+          "minimumY": -0.00003736920856559165,
+          "maximumLowestVertexY": 6.370325615363132e-8
+        },
+        {
+          "clip": "pass",
+          "independentSamples": 49,
+          "minimumY": -0.00006968552236375804,
+          "maximumLowestVertexY": 0.00004358606026401077
+        },
+        {
+          "clip": "slide",
+          "independentSamples": 49,
+          "minimumY": -7.546407681212342e-8,
+          "maximumLowestVertexY": 0.00013319844198422803
+        }
+      ]
+    },
+    {
+      "id": "stadium",
+      "file": "models/stadium-evening.glb",
+      "bytes": 159528,
+      "sha256": "1fad3de3be0a2975f1241ab5fbf268293a512797726b1963435aa3730bf86d84",
+      "triangles": 9464,
+      "vertices": 18290,
+      "textures": [
+        {
+          "name": "Original full-field mowing / 1024px",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 105106
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/7"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/8"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/9"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/10"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/11"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/12"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/13"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/14"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/15"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "crowd",
+      "file": "models/crowd.glb",
+      "bytes": 692764,
+      "sha256": "0fb9dfb1646843479d5b23758ade102b81e4d9073394adcecc66e82f571c9169",
+      "triangles": 169904,
+      "vertices": 134008,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flags",
+      "file": "models/flags.glb",
+      "bytes": 23244,
+      "sha256": "ee0db2dca5330065e27590d961b297a8518766467bde694e87989c3a0e0374c8",
+      "triangles": 896,
+      "vertices": 744,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/1"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/5"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/7"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/8"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/9"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/10"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/11"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/12"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/13"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/14"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/15"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ball",
+      "file": "models/ball.glb",
+      "bytes": 2712,
+      "sha256": "e7b33a6e92dc30c7597fe480a5686491d5d80d9f1c7091576cafda4ddf6ef30b",
+      "triangles": 116,
+      "vertices": 180,
+      "textures": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "messages": [
+          {
+            "code": "UNSUPPORTED_EXTENSION",
+            "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+            "severity": 2,
+            "pointer": "/extensionsUsed/0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/0"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/1"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/bufferViews/0"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceHashes": [
+    {
+      "file": "source/characters.py",
+      "sha256": "18c0d8ab241227cc6f010c09f49259ae098248c3cc2b19e6d87a3dc1878fa4cb",
+      "match": true
+    },
+    {
+      "file": "source/build.mjs",
+      "sha256": "ad7f6b6ad412a4a2399e8d56ce50de584d4fc2aba0450232aae3f9d3d53dd89e",
+      "match": true
+    },
+    {
+      "file": "source/common.mjs",
+      "sha256": "2ac97cd7805bea4303be3fe68fedf88daec930a2320cbfa9e42ea253a07f0e5a",
+      "match": true
+    },
+    {
+      "file": "../characters2/source/mesh.py",
+      "sha256": "8c55edd1aafd81c23aafa53b2083ce9f1eb6aeee9860641fe225f6b83701d180",
+      "match": true
+    },
+    {
+      "file": "../characters2/source/body.py",
+      "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71",
+      "match": true
+    },
+    {
+      "file": "../characters2/source/head_hands.py",
+      "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2",
+      "match": true
+    },
+    {
+      "file": "../characters2/source/gear.py",
+      "sha256": "64c637018e3d209ad2e0e81df4bf2e62164ca03926e5cebcb4a26fe5018f010f",
+      "match": true
+    },
+    {
+      "file": "../characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+      "match": true
+    },
+    {
+      "file": "../viewer/retarget-map.json",
+      "sha256": "a87288dfb0cef766d6c6d15c9a32befae557a7f8e8cc86f716bdf1e21c647d78",
+      "match": true
+    },
+    {
+      "file": "../viewer/retarget.js",
+      "sha256": "15b4bb548f78aa9cb539a85edc9bf1596f7aa41912cf439a2bbf2c6963edb17a",
+      "match": true
+    },
+    {
+      "file": "../viewer/animation.js",
+      "sha256": "da040341fbe4edc85ed3424865c84f8d8364bc721e39c9c80ce8665d902d6ebe",
+      "match": true
+    },
+    {
+      "file": "../motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b",
+      "match": true
+    },
+    {
+      "file": "../motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "match": true
+    },
+    {
+      "file": "source/environment.mjs",
+      "sha256": "2ef266a5cab2660bd004e08c52aaa82a2bb45042eba7fc26a290e944f68390da",
+      "match": true
+    },
+    {
+      "file": "source/turf.py",
+      "sha256": "9a70425d543ad34eafc6f2f27daf42f2db41803148fcda02417ea5f6d4053aaa",
+      "match": true
+    },
+    {
+      "file": "textures/turf.jpg",
+      "sha256": "74d123c7e823aa48af46493211d47c376e9bb4f95fb4bb292bf3bc5ab2002e03",
+      "match": true
+    },
+    {
+      "file": "../models2/soccer-stadium.glb",
+      "sha256": "777ddbc6a38df64b282a96b070923907486c54799f4b47d3ce7b7b3334a3f8f6",
+      "match": true
+    },
+    {
+      "file": "../models/soccer-ball.glb",
+      "sha256": "a1fefe6f0cb4d75a6914ea945f157d07e9563f47331594e86c7f1ac90ad46b3d",
+      "match": true
+    },
+    {
+      "file": "../characters/soccer-player.glb",
+      "sha256": "45575520ef68f69164a207caa518f7d3797629376a1c67da80f6707d9a0649a5",
+      "match": true
+    },
+    {
+      "file": "../variants/regions.json",
+      "sha256": "c64884671e7c0ce0ad7ce5405560f05f71fc6a4dddade304c6baa1d8c6e08719",
+      "match": true
+    }
+  ],
+  "errors": [],
+  "totals": {
+    "files": 11,
+    "bytes": 4141728,
+    "triangles": 272232
+  }
+}

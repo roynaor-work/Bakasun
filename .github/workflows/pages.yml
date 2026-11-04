@@ -24,7 +24,9 @@ jobs:
           cp index.html manifest.json sw.js _site/
           cp -r css js icons _site/
           [ -d workout ] && cp -r workout _site/workout || true
+          [ -d north ] && cp -r north _site/north || true
           rm -rf _site/workout/docs _site/workout/tests 2>/dev/null || true
+          find _site/workout/island/design -type d -name source -prune -exec rm -rf {} + 2>/dev/null || true
           find _site -name '*.md' -o -name '*.csv' -o -name '*.xlsx' -o -name '*.sql' -o -name '*.bundle' | xargs -r rm -f
           ls _site
       - uses: actions/configure-pages@v5

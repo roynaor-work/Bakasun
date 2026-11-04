@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261101-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261104-3';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
@@ -18,6 +18,14 @@ export function playerAnimation(player,state,config){
     lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,
     roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode};
 }
+/** Landing point of a charging ground pass (the loft shows its arc instead). */
+export function passLanding(state,config){
+  if(!state.charging||state.chargeKind!=='pass'||state.ball.owner!==state.controlled||state.ball.owner==null)return null;
+  const power=state.charge/config.passing.chargeSeconds;
+  if(state.charge>=config.passing.loftThresholdSeconds)return null;
+  const destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
+  return {x:destination.x,z:destination.z,target:destination.target??null,distance:destination.distance};
+}
 export function passReceiver(state,config){
   return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds).target:null;
 }
@@ -32,9 +40,14 @@ export function crossArc(state,config){
  const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
  return createLoftFlight(state.ball,destination,config,power).flight;
 }
+/** Camera elevation for the display: portrait looks down more steeply so the
+ * pitch fills the tall frame instead of a strip between two bands of sky. */
+export function soccerElevationDegrees(aspect,config){
+  const c=config.view.camera;return aspect<1&&Number.isFinite(c.portraitElevationDegrees)?c.portraitElevationDegrees:c.elevationDegrees;
+}
 /** Analytic perspective projection matching the side camera, useful without WebGL. */
 export function projectSoccerPoint(point,camera,aspect,config){
-  const c=config.view.camera,angle=c.elevationDegrees*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360),dx=point.x-camera.x,dz=(point.z-camera.z)*camera.direction,y=point.y||0;
+  const c=config.view.camera,angle=soccerElevationDegrees(aspect,config)*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360),dx=point.x-camera.x,dz=(point.z-camera.z)*camera.direction,y=point.y||0;
   const depth=camera.distance-y*sin-dz*cos;
   return {x:dx*camera.direction/(depth*tan*aspect),y:(y*cos-dz*sin)/(depth*tan),depth};
 }
@@ -42,11 +55,21 @@ export function projectSoccerPoint(point,camera,aspect,config){
  * The fit is solved after smoothing, including the player's head and airborne ball. */
 export function soccerCamera(state,aspect,config,previous,dt=0){
   const c=config.view.camera,b=state.ball,p=state.players[state.controlled],speed=hypot2(b.vx,b.vz),lead=Math.min(c.maxLead,speed*c.leadSeconds),length=speed||1;
-  const wanted={x:(b.x+p.x)/2+b.vx/length*lead,z:(b.z+p.z)/2+b.vz/length*lead,distance:c.nearDistance+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom,direction:state.attackDir};
+  // A narrow portrait frame starts further back than landscape (portraitNearDistance):
+  // the landscape near distance showed only five metres of pitch width.
+  const near=aspect<1&&Number.isFinite(c.portraitNearDistance)?c.portraitNearDistance:c.nearDistance;
+  // Portrait is narrow: fitting a far-away player as well pushed the camera tens of
+  // metres back into the fog (goal phase, long balls). The ball is always framed and
+  // centred; the player is followed only within portraitFollowRange, beyond that the
+  // edge arrow points at it.
+  const followPlayer=aspect>=1||Math.hypot(p.x-b.x,p.z-b.z)<=(c.portraitFollowRange??14);
+  // A ball in the net keeps the centre at the goal line, not in the stands behind it.
+  const edge=config.pitch.length/2-(c.portraitGoalInset??3);
+  const wanted={x:followPlayer?(b.x+p.x)/2+b.vx/length*lead:clamp(b.x+b.vx/length*lead,-edge,edge),z:(followPlayer?(b.z+p.z)/2:b.z)+b.vz/length*lead,distance:near+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom,direction:state.attackDir};
   const blend=previous?1-Math.exp(-c.smoothing*dt):1;
   const next={x:previous?previous.x+(wanted.x-previous.x)*blend:wanted.x,z:previous?previous.z+(wanted.z-previous.z)*blend:wanted.z,distance:previous?previous.distance+(wanted.distance-previous.distance)*blend:wanted.distance,direction:wanted.direction};
-  const angle=c.elevationDegrees*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360);
-  const arc=crossArc(state,config),points=[b,{x:p.x,z:p.z,y:0},{x:p.x,z:p.z,y:c.playerHeight}];
+  const angle=soccerElevationDegrees(aspect,config)*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360);
+  const arc=crossArc(state,config),points=followPlayer?[b,{x:p.x,z:p.z,y:0},{x:p.x,z:p.z,y:c.playerHeight}]:[b,{x:b.x,z:b.z,y:c.playerHeight}];
   if(arc)points.push({x:arc.x,z:arc.z,y:0},{x:(arc.fromX+arc.x)/2,z:(arc.fromZ+arc.z)/2,y:arc.height});
   for(const point of points){
     const dx=point.x-next.x,dz=(point.z-next.z)*next.direction,y=point.y||0;

@@ -86,9 +86,15 @@ export function chooseV2Motion(p,ctx={},hint=null){
  if(hint&&(V2_ACTION_CLIPS.includes(hint)||BASE_CLIPS.includes(hint)))return hint;
  if(ctx.catching)return 'receive';
  if((ctx.screen||p.role==='screen')&&speed<.7)return 'screen';
- if(p.hasBall){if(ctx.dribbling===false)return 'receive';if(fwd<-.5&&speed<3)return 'step_back';if(p.sprinting||speed>5.4)return 'sprint_ball';return speed>2.3?'dribble_fast':'dribble_slow';}
- if(ctx.defending&&speed>.45){if(Math.abs(lat)>Math.abs(fwd)*.8)return lat>0?'defensive_slide':'defensive_slide_right';return 'defensive_run';}
- if(speed>4.7||p.sprinting)return 'sprint';return speed>.4?'run':'idle';
+ // with the ball only sprint_ball has a stride: anything faster than a shuffle uses it (its cycle
+ // follows the engine's distance, so it slows down to a jog), dribble_fast covers short bursts in
+ // place and dribble_slow the standing dribble; dribble_fast at running speed was a moonwalk
+ if(p.hasBall){if(ctx.dribbling===false)return 'receive';if(fwd<-.5&&speed<3)return 'step_back';if(p.sprinting||speed>.9)return 'sprint_ball';return speed>.35?'dribble_fast':'dribble_slow';}
+ // a defender covers ground in a stance up to a jog; faster than that he is simply running
+ if(ctx.defending&&speed>.45&&speed<3.2){if(Math.abs(lat)>Math.abs(fwd)*.8)return lat>0?'defensive_slide':'defensive_slide_right';return 'defensive_run';}
+ // the run cycle's planted foot slows at the ends of its window: driven at twice its 2.2 m/s
+ // reference it slips, so anything above a jog uses the sprint cycle (uniform foot speed)
+ if(speed>3||p.sprinting)return 'sprint';return speed>.4?'run':'idle';
 }
 
 /** Engine time is mapped around the matching visual release. A held charge
@@ -101,19 +107,28 @@ export function actionClipTime(state,name,p,ctx,engineAnim,releaseAt){
   const engineRelease=meta.release*(p.shotType==='dunk'?.92:1);
   return p.hasBall?Math.min(contact-.012,t/Math.max(.01,engineRelease)*contact):Math.min(duration,contact+Math.max(0,t-(releaseAt??engineRelease))*(duration-contact)/Math.max(.1,meta.duration-engineRelease));
  }
- if(p.act==='pass'){const marker=state.events.find(e=>/pass_release/.test(e.name));return Math.min(duration,t*(marker?.atSeconds||duration*.47)/.16);}
+ if(p.act==='pass'){
+  // wind-up follows the engine up to its throw (0.16 s), the follow-through fills the rest of the act
+  const release=(state.events||[]).find(e=>/pass_release/.test(e.name))?.atSeconds||duration*.47,windup=.16,tail=.25;
+  return t<=windup?t*release/windup:Math.min(duration,release+(t-windup)*(duration-release)/tail);
+ }
  if(p.act==='fake')return Math.min(duration,t*duration/.52);
  if(p.act==='cross'||p.act==='spin')return Math.min(duration,t*duration/(p.act==='spin'?.75:.55));
  if(p.act==='steal')return Math.min(duration,t*duration/.4);
- if(p.act==='block'||p.act==='rebound')return Math.min(duration,t*duration/.9);
+ if(p.act==='block'||p.act==='rebound'){
+  // the engine leaves the floor at once (no wind-up): the clip's takeoff..land window follows the
+  // flight (about 0.7 s), and the landing recovery plays out at natural speed afterwards
+  const events=state.events||[],takeoff=events.find(e=>/visual_takeoff/.test(e.name))?.atSeconds??duration*.26,land=events.find(e=>/visual_land/.test(e.name))?.atSeconds??duration*.8,flight=.7;
+  return p.air?takeoff+clamp(t/flight,0,.98)*(land-takeoff):Math.min(duration,land+Math.max(0,t-flight));
+ }
  return null;
 }
 
-function solvePlantedFoot(root,bones,sole,name,anchor,weight){
+function solvePlantedFoot(root,bones,sole,name,anchor,weight,driftRelease=.06){
  const side=name.startsWith('Left')?'Left':'Right',upper=bones[side+'UpLeg'],lower=bones[side+'Leg'],foot=bones[name];
  root.updateMatrixWorld(true);
  const hip=upper.getWorldPosition(new THREE.Vector3()),knee=lower.getWorldPosition(new THREE.Vector3()),ankle=foot.getWorldPosition(new THREE.Vector3()),orientation=foot.getWorldQuaternion(new THREE.Quaternion());
- const point=foot.localToWorld(new THREE.Vector3().fromArray(sole)),drift=point.distanceTo(anchor),release=1-smooth((drift-.06)/.18);weight*=release;
+ const point=foot.localToWorld(new THREE.Vector3().fromArray(sole)),drift=point.distanceTo(anchor),release=1-smooth((drift-driftRelease)/.18);weight*=release;
  if(weight<=.001)return false;
  const goal=point.lerp(anchor,weight).sub(new THREE.Vector3().fromArray(sole).multiply(root.scale).applyQuaternion(orientation));
  const l1=hip.distanceTo(knee),l2=knee.distanceTo(ankle),dir=goal.clone().sub(hip),dist=dir.length();
@@ -134,23 +149,62 @@ export function createV2MotionPlayer(root,assets){
  const mixer=new THREE.AnimationMixer(root),actions=Object.fromEntries([...assets.clips].map(([n,c])=>[n,mixer.clipAction(c)]));
  let state='idle',time=0,elapsed=1,fadeSeconds=.18,hint=null,hintTime=0,lastAct='',lastActT=0,releaseAt=null,previousDt=1/60,sourceDt=1/60,wasBall=false,lastSpeed=0,lastFace=null,lastStumble=false;
  const lastWorldPosition=root.position.clone();let positioned=false;
+ // pivot: the engine turns a player about his centre; a real player turns about the planted foot.
+ // The sweep the yaw change would give the support foot is taken off the root as a bounded,
+ // decaying presentation offset, so the foot stays put and the body swings around it.
+ const pivot=new THREE.Vector2(),footWorld=new THREE.Vector3();let lastSupport=null;
  const identity=new THREE.Quaternion(),current=names.map(n=>({q:bones[n].quaternion.clone(),p:bones[n].position.clone()})),previous=current.map(p=>({q:p.q.clone(),p:p.p.clone()})),source=current.map(p=>({q:p.q.clone(),p:p.p.clone(),delta:new THREE.Quaternion(),velocity:new THREE.Vector3(),workQ:new THREE.Quaternion(),targetQ:new THREE.Quaternion(),targetP:new THREE.Vector3()})),held=new Map();
  function event(e){
   const type=typeof e==='string'?e:e?.type;
   const target=({result_success:'celebration',score:'celebrate',steal:'steal_success',stealMiss:'steal_fail',catch:'receive',interception:'catch',control:'defensive_switch',switch:'defensive_switch',screen:'screen',step_back:'step_back'})[type]||(assets.states[type]?type:null);
-  if(type==='pass'||type==='passStart'){hint=e.kind==='lob'||e.kind==='overhead'?'pass_overhead':'pass_chest';hintTime=.85;return;}
+  if(type==='pass'||type==='passStart'){hint=e.kind==='lob'||e.kind==='overhead'?'pass_overhead':'pass_chest';hintTime=.45;return;}
   if(target){hint=target;hintTime=assets.states[target].durationSeconds;}
  }
+ // cyclic clips with a reference stride share the same foot-strike phases (0 and 0.5): the stride
+ // continues where it was instead of restarting, and the ball keeps its bounce phase between
+ // dribble speeds (phaseMatch recommendation of the motion2 package)
+ const cyclic=s=>!!(s?.loop&&s.referenceLocomotion);
+ // entering a stride from a standing clip: start at the phase whose planted foot is where the
+ // current planted foot already is (root-local), so the blend has no foot to drag across the floor
+ const FOOT_SAMPLES=24,footLocal=new THREE.Vector3();
+ function footTable(name){
+  const cache=assets.footTables||(assets.footTables=new Map());if(cache.has(name))return cache.get(name);
+  const clip=assets.clips.get(name),saved=names.map(n=>({q:bones[n].quaternion.clone(),p:bones[n].position.clone()})),table=[];
+  for(let i=0;i<FOOT_SAMPLES;i++){const t=clip.duration*i/FOOT_SAMPLES;
+   for(const track of tracks.get(name)){const values=track.interpolant.evaluate(t);if(track.property==='quaternion')track.bone.quaternion.fromArray(values);else track.bone.position.fromArray(values);}
+   root.updateMatrixWorld(true);const row={phase:i/FOOT_SAMPLES};
+   for(const side of ['Left','Right']){const sole=assets.sole[side+'Foot'];if(!sole)continue;bones[side+'Foot'].localToWorld(footLocal.fromArray(sole));root.worldToLocal(footLocal);row[side[0]]=[footLocal.x,footLocal.y,footLocal.z];}
+   table.push(row);}
+  for(let i=0;i<names.length;i++){bones[names[i]].quaternion.copy(saved[i].q);bones[names[i]].position.copy(saved[i].p);}
+  cache.set(name,table);return table;
+ }
+ function matchedPhase(next){
+  const table=footTable(next);if(!table.length||!table[0].L||!table[0].R)return 0;
+  root.updateMatrixWorld(true);const now={};
+  for(const side of ['Left','Right']){bones[side+'Foot'].localToWorld(footLocal.fromArray(assets.sole[side+'Foot']));root.worldToLocal(footLocal);now[side[0]]=[footLocal.x,footLocal.y,footLocal.z];}
+  const k=now.L[1]<=now.R[1]?'L':'R';let best=0,bestD=Infinity;
+  for(const row of table){if(row[k][1]>row[k==='L'?'R':'L'][1]+1e-4)continue;const d=Math.hypot(row[k][0]-now[k][0],row[k][2]-now[k][2]);if(d<bestD){bestD=d;best=row.phase;}}
+  return best;
+ }
  function transition(next){
-  const outgoing=assets.states[state];held.clear();
-  if(outgoing)for(const c of supportWindows(outgoing,time))if(c.weight>.05&&assets.sole[c.bone])held.set(c.bone,{anchor:bones[c.bone].localToWorld(new THREE.Vector3().fromArray(assets.sole[c.bone])),key:null,weight:c.weight});
+  const outgoing=assets.states[state],incoming=assets.states[next];
+  const phase=cyclic(outgoing)&&cyclic(incoming)?(time/outgoing.durationSeconds)%1:cyclic(incoming)&&assets.sole?.LeftFoot&&assets.sole?.RightFoot?matchedPhase(next):0;held.clear();
+  // outgoing plants are carried across the blend so the pose mix does not drag a planted foot
+  // (measured 5-8 cm per tick without it). Into a strided clip the lock only fades with the blend:
+  // that clip already moves its support foot back at the engine's speed, and holding the old
+  // world spot for the whole authored window stretched the leg until the drift release snapped it
+  if(outgoing)for(const c of supportWindows(outgoing,time))if(c.weight>.05&&assets.sole[c.bone])held.set(c.bone,{anchor:bones[c.bone].localToWorld(new THREE.Vector3().fromArray(assets.sole[c.bone])),key:null,weight:c.weight,fadeOnly:cyclic(incoming)});
   for(let i=0;i<names.length;i++){source[i].q.copy(current[i].q);source[i].p.copy(current[i].p);source[i].delta.copy(previous[i].q).invert().multiply(current[i].q);if(source[i].delta.w<0)source[i].delta.set(-source[i].delta.x,-source[i].delta.y,-source[i].delta.z,-source[i].delta.w);source[i].velocity.copy(current[i].p).sub(previous[i].p).divideScalar(Math.max(.004,previousDt));}
-  sourceDt=previousDt;state=next;time=0;elapsed=0;fadeSeconds=assets.states[state].transitionRecommendations?.entry?.visualBlendSeconds||.18;releaseAt=null;
+  sourceDt=previousDt;state=next;time=phase*incoming.durationSeconds;elapsed=0;fadeSeconds=incoming.transitionRecommendations?.entry?.visualBlendSeconds||(cyclic(outgoing)&&cyclic(incoming)?.12:.18);releaseAt=null;
  }
  function step(p,ctx={},dt){
   if(!(dt>0))return;dt=Math.min(.05,dt);hintTime-=dt;if(hintTime<=0)hint=null;
   const speed=Math.hypot(p.vx||0,p.vz||0),turn=lastFace==null?0:((p.face-lastFace+Math.PI*3)%(Math.PI*2))-Math.PI;
-  if(!p.act&&!hint){const natural=lastStumble&&!p.stumble?'recover':!p.hasBall&&lastSpeed>1.5&&speed<.45?'decelerate':!p.hasBall&&!ctx.defending&&speed>.7&&Math.abs(turn)>.1?(turn>0?'turn_left':'turn_right'):null;if(natural){hint=natural;hintTime=assets.states[natural].durationSeconds;}}
+  // a finished one-shot clip never holds its last frame: the hint that chose it is dropped
+  const playing=assets.states[state];if(hint&&playing&&!playing.loop&&time>=playing.durationSeconds-.001){hint=null;hintTime=0;}
+  // an in-place turn that started from a walk is abandoned once the player is really running
+  if((hint==='turn_left'||hint==='turn_right')&&speed>1.5){hint=null;hintTime=0;}
+  if(!p.act&&!hint){const natural=lastStumble&&!p.stumble?'recover':!p.hasBall&&lastSpeed>2&&speed<.45?'decelerate':!p.hasBall&&!ctx.defending&&speed>.5&&speed<1.2&&Math.abs(turn)>.14?(turn>0?'turn_left':'turn_right'):null;if(natural){hint=natural;hintTime=assets.states[natural].durationSeconds;}}
   let next=chooseV2Motion(p,ctx,hint);if(!tracks.has(next))next='idle';
   if(next!==state||p.act&&p.act===lastAct&&(p.actT||0)<lastActT-.02)transition(next);
   const data=assets.states[state],stride=data.referenceLocomotion?.speedMetersPerSecond*assets.motionScale*root.scale.y,rate=stride?clamp(speed/stride,.2,4):1;
@@ -169,9 +223,15 @@ export function createV2MotionPlayer(root,assets){
   // Carry outgoing world plants after mixing. Release on the authored stance
   // end; the analytic solver adjusts only the leg, never engine world motion.
   const contacts=held.size?supportWindows(data,time):[];
-  for(const [name,lock] of held){const c=contacts.find(c=>c.bone===name);if(c&&lock.key==null)lock.key=c.contactKey;const matching=c&&c.contactKey===lock.key,weight=matching?c.weight:(1-blend)*lock.weight;let valid=true;if(weight>.001&&!p.air)valid=solvePlantedFoot(root,bones,assets.sole[name],name,lock.anchor,weight);if(!valid||weight<=.001||!matching&&blend===1)held.delete(name);}
+  for(const [name,lock] of held){const c=contacts.find(c=>c.bone===name);if(c&&lock.key==null)lock.key=c.contactKey;const matching=!lock.fadeOnly&&c&&c.contactKey===lock.key,weight=matching?c.weight:(1-blend)*lock.weight;let valid=true;if(weight>.001&&!p.air)valid=solvePlantedFoot(root,bones,assets.sole[name],name,lock.anchor,weight,lock.fadeOnly?.3:.06);lock.last=valid?+weight.toFixed(2):'x';if(!valid||weight<=.001||!matching&&blend===1)held.delete(name);}
   for(let i=0;i<names.length;i++){current[i].q.copy(bones[names[i]].quaternion);current[i].p.copy(bones[names[i]].position);}
+  let support=null;
+  if(!p.air&&Math.abs(turn)>1e-4){root.updateMatrixWorld(true);let lowest=Infinity;for(const c of (held.size?contacts:supportWindows(data,time))){if(c.weight<.6||!assets.sole[c.bone])continue;bones[c.bone].localToWorld(footWorld.fromArray(assets.sole[c.bone]));if(footWorld.y<lowest){lowest=footWorld.y;support={x:footWorld.x-root.position.x,z:footWorld.z-root.position.z};}}}
+  lastSupport=support?[+support.x.toFixed(3),+support.z.toFixed(3),+turn.toFixed(3)]:null;
+  if(support){const c=Math.cos(-turn),sn=Math.sin(-turn),bx=support.x*c-support.z*sn,bz=support.x*sn+support.z*c;pivot.x-=support.x-bx;pivot.y-=support.z-bz;}
+  pivot.multiplyScalar(Math.max(0,1-dt*(support?1.5:8)));if(pivot.length()>.3)pivot.setLength(.3);
+  root.position.x+=pivot.x;root.position.z+=pivot.y;
   elapsed+=dt;previousDt=dt;lastAct=p.act;lastActT=p.actT||0;wasBall=p.hasBall;lastSpeed=speed;lastFace=p.face;lastStumble=p.stumble;
  }
- return {step,event,mixer,actions,get state(){return state;},get time(){return time;},get phase(){return time/assets.states[state].durationSeconds%1;},dispose(){held.clear();mixer.stopAllAction();mixer.uncacheRoot(root);}};
+ return {step,event,mixer,actions,get state(){return state;},get time(){return time;},get phase(){return time/assets.states[state].durationSeconds%1;},get contacts(){return assets.states[state].supportContacts||[];},get pivot(){return [pivot.x,pivot.y,lastSupport,[...held.entries()].map(([n,l])=>n[0]+':'+(l.last??'?')),+(elapsed/fadeSeconds).toFixed(2)];},dispose(){held.clear();mixer.stopAllAction();mixer.uncacheRoot(root);}};
 }

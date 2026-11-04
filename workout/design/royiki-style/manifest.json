@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "title": "האימון שלי — ספריית תנועה דו־ממדית",
+  "source": "workout/js/exercises.js",
+  "rankingSource": "workout/js/programs.js",
+  "selection": "Program presence, excluding warm-up and stretch blocks; catalog order breaks ties. Not measured user popularity.",
+  "format": "SVG with native SMIL; no JavaScript, fonts, embedded bitmaps, or external requests.",
+  "speed": 0.6,
+  "maxBytes": 300000,
+  "viewBox": [
+    -10,
+    -12,
+    220,
+    210
+  ],
+  "exercises": [
+    {
+      "id": "push-ups",
+      "name": "שכיבות סמיכה",
+      "category": "upper",
+      "categoryName": "כוח עליון",
+      "programCount": 10,
+      "src": "animations/push-ups.svg",
+      "poster": "posters/push-ups.svg",
+      "bytes": 32202,
+      "posterBytes": 6541,
+      "durationMs": 2000,
+      "segments": 60,
+      "sourceCycleMs": 1200,
+      "view": "side",
+      "viewBox": [
+        6,
+        76,
+        188,
+        122
+      ]
+    },
+    {
+      "id": "crunches",
+      "name": "כפיפות בטן",
+      "category": "core",
+      "categoryName": "בטן",
+      "programCount": 6,
+      "src": "animations/crunches.svg",
+      "poster": "posters/crunches.svg",
+      "bytes": 31283,
+      "posterBytes": 6542,
+      "durationMs": 1667,
+      "segments": 51,
+      "sourceCycleMs": 1000,
+      "view": "side",
+      "viewBox": [
+        6,
+        76,
+        188,
+        122
+      ]
+    },
+    {
+      "id": "plank",
+      "name": "קרש",
+      "category": "core",
+      "categoryName": "בטן",
+      "programCount": 5,
+      "src": "animations/plank.svg",
+      "poster": "posters/plank.svg",
+      "bytes": 47766,
+      "posterBytes": 6522,
+      "durationMs": 4000,
+      "segments": 120,
+      "sourceCycleMs": 2400,
+      "view": "side",
+      "viewBox": [
+        6,
+        76,
+        188,
+        122
+      ]
+    },
+    {
+      "id": "bicycle",
+      "name": "אופניים",
+      "category": "core",
+      "categoryName": "בטן",
+      "programCount": 4,
+      "src": "animations/bicycle.svg",
+      "poster": "posters/bicycle.svg",
+      "bytes": 23681,
+      "posterBytes": 6586,
+      "durationMs": 1267,
+      "segments": 40,
+      "sourceCycleMs": 760,
+      "view": "side",
+      "viewBox": [
+        6,
+        76,
+        188,
+        122
+      ]
+    },
+    {
+      "id": "jumping-jacks",
+      "name": "פתח-סגור",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 3,
+      "src": "animations/jumping-jacks.svg",
+      "poster": "posters/jumping-jacks.svg",
+      "bytes": 25740,
+      "posterBytes": 6526,
+      "durationMs": 1300,
+      "segments": 40,
+      "sourceCycleMs": 780,
+      "view": "front",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "squat-jumps",
+      "name": "קפיצות סקוואט",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 3,
+      "src": "animations/squat-jumps.svg",
+      "poster": "posters/squat-jumps.svg",
+      "bytes": 30586,
+      "posterBytes": 6531,
+      "durationMs": 1533,
+      "segments": 46,
+      "sourceCycleMs": 920,
+      "view": "side",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "high-knees",
+      "name": "ברכיים גבוהות",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 3,
+      "src": "animations/high-knees.svg",
+      "poster": "posters/high-knees.svg",
+      "bytes": 26990,
+      "posterBytes": 6514,
+      "durationMs": 1267,
+      "segments": 40,
+      "sourceCycleMs": 760,
+      "view": "side",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "side-hops",
+      "name": "קפיצות לצדדים",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 3,
+      "src": "animations/side-hops.svg",
+      "poster": "posters/side-hops.svg",
+      "bytes": 27517,
+      "posterBytes": 6513,
+      "durationMs": 1200,
+      "segments": 40,
+      "sourceCycleMs": 720,
+      "view": "front",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "leg-raises",
+      "name": "הרמות רגליים",
+      "category": "core",
+      "categoryName": "בטן",
+      "programCount": 3,
+      "src": "animations/leg-raises.svg",
+      "poster": "posters/leg-raises.svg",
+      "bytes": 31253,
+      "posterBytes": 6541,
+      "durationMs": 2167,
+      "segments": 66,
+      "sourceCycleMs": 1300,
+      "view": "side",
+      "viewBox": [
+        6,
+        76,
+        188,
+        122
+      ]
+    },
+    {
+      "id": "squats",
+      "name": "סקוואט",
+      "category": "legs",
+      "categoryName": "כוח רגליים",
+      "programCount": 3,
+      "src": "animations/squats.svg",
+      "poster": "posters/squats.svg",
+      "bytes": 33928,
+      "posterBytes": 6446,
+      "durationMs": 1833,
+      "segments": 55,
+      "sourceCycleMs": 1100,
+      "view": "side",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "jump-rope",
+      "name": "קפיצה בחבל דמיוני",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 2,
+      "src": "animations/jump-rope.svg",
+      "poster": "posters/jump-rope.svg",
+      "bytes": 26994,
+      "posterBytes": 6657,
+      "durationMs": 800,
+      "segments": 40,
+      "sourceCycleMs": 480,
+      "view": "front",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    },
+    {
+      "id": "burpees",
+      "name": "ברפי",
+      "category": "jump",
+      "categoryName": "קפיצות",
+      "programCount": 2,
+      "src": "animations/burpees.svg",
+      "poster": "posters/burpees.svg",
+      "bytes": 45913,
+      "posterBytes": 6443,
+      "durationMs": 2567,
+      "segments": 78,
+      "sourceCycleMs": 1540,
+      "view": "side",
+      "viewBox": [
+        -10,
+        -12,
+        220,
+        210
+      ]
+    }
+  ]
+}

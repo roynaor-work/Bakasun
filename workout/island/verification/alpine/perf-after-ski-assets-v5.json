@@ -1,0 +1,1146 @@
+{
+ "seconds": 12,
+ "date": "2026-11-02T19:51:06.929Z",
+ "results": [
+  {
+   "width": 844,
+   "height": 390,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": false,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 12,
+   "loadMs": 6502,
+   "frames": 8,
+   "allFrames": 10,
+   "avgFps": 0.7,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 8.8,
+     "render": 6.4,
+     "step": 0.5
+    },
+    {
+     "frameMs": 8.5,
+     "render": 7.2,
+     "step": 0.4
+    },
+    {
+     "frameMs": 8,
+     "render": 6.9,
+     "step": 0.4
+    },
+    {
+     "frameMs": 6.6,
+     "render": 4.8,
+     "step": 1
+    }
+   ],
+   "frameMs": {
+    "p50": 1266.6,
+    "p95": 4183.2,
+    "p99": 4183.2,
+    "max": 4183.2
+   },
+   "over33": 6,
+   "over50": 6,
+   "tickMs": {
+    "avg": 5.425,
+    "p95": 8,
+    "max": 8
+   },
+   "parts": {
+    "step": 0.575,
+    "snapshot": 0.012,
+    "presentation": 0.013,
+    "render": 4.212,
+    "other": 0.75
+   },
+   "allocKB": {
+    "median": 851,
+    "p90": 889.1
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 22,
+      "tris": 46080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 12,
+      "tris": 70080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 5256,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 2,
+      "tris": 324,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 13664,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 138,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 2688,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 2304,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 4,
+      "tris": 24920,
+      "shadowTris": 24918,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 240,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 11,
+      "tris": 466,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 512,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "auditHigh": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 44960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 11,
+      "tris": 64240,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesNear": {
+      "objects": 6,
+      "tris": 5877,
+      "shadowTris": 1857,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4254,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 3,
+      "tris": 12216,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 4,
+      "tris": 702,
+      "shadowTris": 108,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 26352,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 207,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "iceWall": {
+      "objects": 1,
+      "tris": 177408,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 1920,
+      "shadowTris": 1920,
+      "points": 0
+     },
+     "finish": {
+      "objects": 1,
+      "tris": 256,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 24,
+      "tris": 149520,
+      "shadowTris": 149508,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 72,
+      "shadowTris": 0,
+      "points": 210
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 9,
+      "tris": 358,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "switchMetrics": {
+    "quality": "low",
+    "pixelRatioMs": 4160.9,
+    "shadowMs": 0.2,
+    "resizeMs": 6.4,
+    "totalMs": 4167.5
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 4167.6,
+     "frameIndex": 5,
+     "atSecond": 10.5,
+     "frameMs": 783.3,
+     "over50Around": 6,
+     "maxAround": 4183.2
+    }
+   ],
+   "render": {
+    "calls": 67,
+    "triangles": 166410,
+    "trees": 57,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 77,
+    "textures": 17
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "full",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "width": 844,
+   "height": 390,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": true,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 12.1,
+   "loadMs": 5586,
+   "frames": 22,
+   "allFrames": 25,
+   "avgFps": 2.2,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 6.7,
+     "render": 4.5,
+     "step": 0.7
+    },
+    {
+     "frameMs": 5.2,
+     "render": 3.5,
+     "step": 0.8
+    },
+    {
+     "frameMs": 11.3,
+     "render": 10.8,
+     "step": 0.2
+    },
+    {
+     "frameMs": 7,
+     "render": 3.3,
+     "step": 2.4
+    }
+   ],
+   "frameMs": {
+    "p50": 316.7,
+    "p95": 1033.3,
+    "p99": 2033.3,
+    "max": 2033.3
+   },
+   "over33": 17,
+   "over50": 14,
+   "tickMs": {
+    "avg": 4.918,
+    "p95": 11.5,
+    "max": 16.4
+   },
+   "parts": {
+    "step": 0.541,
+    "snapshot": 0.023,
+    "presentation": 0.005,
+    "render": 3.382,
+    "other": 0.96
+   },
+   "allocKB": {
+    "median": 460.5,
+    "p90": 825.7
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 22,
+      "tris": 46080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 12,
+      "tris": 70080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 5073,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 2,
+      "tris": 324,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 13664,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 69,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 2304,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 4,
+      "tris": 24920,
+      "shadowTris": 24918,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 552,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 13,
+      "tris": 574,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 512,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "auditHigh": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 44960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 11,
+      "tris": 64240,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesNear": {
+      "objects": 6,
+      "tris": 5868,
+      "shadowTris": 1857,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4167,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 3,
+      "tris": 12216,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 4,
+      "tris": 702,
+      "shadowTris": 108,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 26352,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 207,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "iceWall": {
+      "objects": 1,
+      "tris": 181104,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 1920,
+      "shadowTris": 1920,
+      "points": 0
+     },
+     "finish": {
+      "objects": 1,
+      "tris": 256,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 24,
+      "tris": 149520,
+      "shadowTris": 149508,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 96,
+      "shadowTris": 0,
+      "points": 210
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 9,
+      "tris": 358,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "switchMetrics": {
+    "quality": "low",
+    "pixelRatioMs": 2010.3,
+    "shadowMs": 0.1,
+    "resizeMs": 0.8,
+    "totalMs": 2011.2
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 2011.2,
+     "frameIndex": 9,
+     "atSecond": 8.1,
+     "frameMs": 16.6,
+     "over50Around": 13,
+     "maxAround": 2033.3
+    }
+   ],
+   "render": {
+    "calls": 69,
+    "triangles": 168042,
+    "trees": 55,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 79,
+    "textures": 17
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "small",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": false,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 12.1,
+   "loadMs": 5980,
+   "frames": 13,
+   "allFrames": 16,
+   "avgFps": 1.4,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 10.7,
+     "render": 8.1,
+     "step": 1
+    },
+    {
+     "frameMs": 9.2,
+     "render": 7.9,
+     "step": 0.8
+    },
+    {
+     "frameMs": 5.7,
+     "render": 3.9,
+     "step": 1
+    },
+    {
+     "frameMs": 5.8,
+     "render": 4,
+     "step": 0.6
+    }
+   ],
+   "frameMs": {
+    "p50": 516.7,
+    "p95": 3633.1,
+    "p99": 3633.1,
+    "max": 3633.1
+   },
+   "over33": 8,
+   "over50": 8,
+   "tickMs": {
+    "avg": 5.162,
+    "p95": 12.3,
+    "max": 12.3
+   },
+   "parts": {
+    "step": 0.585,
+    "snapshot": 0.023,
+    "presentation": 0.054,
+    "render": 3.723,
+    "other": 0.794
+   },
+   "allocKB": {
+    "median": 673.1,
+    "p90": 874.7
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 22,
+      "tris": 46080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 12,
+      "tris": 70080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4881,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 2,
+      "tris": 378,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 14640,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 138,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 2304,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 4,
+      "tris": 24920,
+      "shadowTris": 24918,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 356,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 11,
+      "tris": 466,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 512,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "auditHigh": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 44960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 11,
+      "tris": 64240,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesNear": {
+      "objects": 6,
+      "tris": 5877,
+      "shadowTris": 1857,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4254,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 3,
+      "tris": 12216,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 4,
+      "tris": 702,
+      "shadowTris": 108,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 26352,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 207,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "iceWall": {
+      "objects": 1,
+      "tris": 177408,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 1920,
+      "shadowTris": 1920,
+      "points": 0
+     },
+     "finish": {
+      "objects": 1,
+      "tris": 256,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 22,
+      "tris": 149516,
+      "shadowTris": 149508,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 72,
+      "shadowTris": 0,
+      "points": 210
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 9,
+      "tris": 358,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "switchMetrics": {
+    "quality": "low",
+    "pixelRatioMs": 3592,
+    "shadowMs": 0.1,
+    "resizeMs": 11.6,
+    "totalMs": 3603.8
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 3603.8,
+     "frameIndex": 9,
+     "atSecond": 10.5,
+     "frameMs": 66.7,
+     "over50Around": 8,
+     "maxAround": 3633.1
+    }
+   ],
+   "render": {
+    "calls": 67,
+    "triangles": 168449,
+    "trees": 53,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 77,
+    "textures": 17
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "full",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "pixelRatio": 1,
+   "mobileProfile": true,
+   "small": true,
+   "stage": 1,
+   "seed": 7,
+   "seconds": 12.1,
+   "loadMs": 5570,
+   "frames": 22,
+   "allFrames": 25,
+   "avgFps": 2.2,
+   "warmupMs": 2000,
+   "firstRacingFrames": [
+    {
+     "frameMs": 9.5,
+     "render": 7.4,
+     "step": 0.5
+    },
+    {
+     "frameMs": 7.3,
+     "render": 5.5,
+     "step": 1
+    },
+    {
+     "frameMs": 7.9,
+     "render": 6.9,
+     "step": 0.1
+    },
+    {
+     "frameMs": 9.7,
+     "render": 5.5,
+     "step": 0.8
+    }
+   ],
+   "frameMs": {
+    "p50": 350,
+    "p95": 816.6,
+    "p99": 1133.4,
+    "max": 1133.4
+   },
+   "over33": 20,
+   "over50": 19,
+   "tickMs": {
+    "avg": 5.227,
+    "p95": 9.7,
+    "max": 10.6
+   },
+   "parts": {
+    "step": 0.427,
+    "snapshot": 0.045,
+    "presentation": 0,
+    "render": 4.036,
+    "other": 0.764
+   },
+   "allocKB": {
+    "median": 474.3,
+    "p90": 680.4
+   },
+   "audit": {
+    "categories": {
+     "track": {
+      "objects": 23,
+      "tris": 49344,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 12,
+      "tris": 70080,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4995,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 2,
+      "tris": 324,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 13664,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 138,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 2304,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 5760,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "finish": {
+      "objects": 0,
+      "tris": 0,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "riders": {
+      "objects": 4,
+      "tris": 24920,
+      "shadowTris": 24918,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 560,
+      "shadowTris": 0,
+      "points": 151
+     },
+     "other": {
+      "objects": 3,
+      "tris": 6,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 13,
+      "tris": 574,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 512,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "auditHigh": {
+    "categories": {
+     "track": {
+      "objects": 21,
+      "tris": 44960,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "flags": {
+      "objects": 11,
+      "tris": 64240,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesNear": {
+      "objects": 6,
+      "tris": 5973,
+      "shadowTris": 1857,
+      "points": 0
+     },
+     "treesFar": {
+      "objects": 3,
+      "tris": 4149,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "treesDistant": {
+      "objects": 3,
+      "tris": 12042,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "rocks": {
+      "objects": 4,
+      "tris": 702,
+      "shadowTris": 108,
+      "points": 0
+     },
+     "fence": {
+      "objects": 1,
+      "tris": 26352,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "signs": {
+      "objects": 1,
+      "tris": 207,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "moguls": {
+      "objects": 1,
+      "tris": 3840,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "iceWall": {
+      "objects": 1,
+      "tris": 184800,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "coins": {
+      "objects": 1,
+      "tris": 1920,
+      "shadowTris": 1920,
+      "points": 0
+     },
+     "finish": {
+      "objects": 1,
+      "tris": 256,
+      "shadowTris": 256,
+      "points": 0
+     },
+     "riders": {
+      "objects": 24,
+      "tris": 149520,
+      "shadowTris": 149508,
+      "points": 0
+     },
+     "effects": {
+      "objects": 3,
+      "tris": 96,
+      "shadowTris": 0,
+      "points": 210
+     },
+     "other": {
+      "objects": 2,
+      "tris": 4,
+      "shadowTris": 0,
+      "points": 0
+     },
+     "props": {
+      "objects": 9,
+      "tris": 358,
+      "shadowTris": 0,
+      "points": 0
+     }
+    },
+    "shadowMapSize": 1024,
+    "shadowsEnabled": true,
+    "programs": 25
+   },
+   "switchMetrics": {
+    "quality": "low",
+    "pixelRatioMs": 1133.6,
+    "shadowMs": 0.1,
+    "resizeMs": 0.7,
+    "totalMs": 1134.4
+   },
+   "qualitySwitches": [
+    {
+     "to": "low",
+     "costMs": 1134.4,
+     "frameIndex": 9,
+     "atSecond": 7.5,
+     "frameMs": 300.1,
+     "over50Around": 17,
+     "maxAround": 1133.4
+    }
+   ],
+   "render": {
+    "calls": 72,
+    "triangles": 173237,
+    "trees": 54,
+    "chunks": 51,
+    "visibleChunks": 12,
+    "quality": "low",
+    "mode": "model",
+    "geometries": 81,
+    "textures": 17
+   },
+   "finalPhase": "racing",
+   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+   "mode": "small",
+   "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  }
+ ]
+}

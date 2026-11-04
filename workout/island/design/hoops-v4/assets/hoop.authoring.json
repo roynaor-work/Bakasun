@@ -1,0 +1,50 @@
+{
+  "id": "hoop",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "details": {
+    "rimHeightM": 3.05,
+    "rimInnerDiameterM": 0.45,
+    "backboardSizeM": [
+      1.8,
+      1.05
+    ],
+    "facing": "+Z",
+    "rimCenter": [
+      0,
+      3.05,
+      0
+    ]
+  },
+  "bounds": [
+    [
+      -0.8999999761581421,
+      0.0,
+      -4.125
+    ],
+    [
+      0.8999999761581421,
+      4.297510623931885,
+      0.2630000114440918
+    ]
+  ],
+  "triangles": 1344,
+  "meshes": 1,
+  "textures": 0,
+  "anchors": {
+    "anchor_rim_center": [
+      0.0,
+      3.05,
+      -0.0
+    ],
+    "anchor_mount": [
+      0.0,
+      0.0,
+      -3.275
+    ]
+  },
+  "objects": [
+    "hoop_frame"
+  ]
+}

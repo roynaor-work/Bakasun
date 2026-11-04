@@ -1,0 +1,36 @@
+{
+  "id": "ball",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "details": {
+    "radiusM": 0.12,
+    "diameterM": 0.24,
+    "surface": "panelled orange basketball; seams are geometry; no image dependency"
+  },
+  "bounds": [
+    [
+      -0.11999999731779099,
+      -0.11999999731779099,
+      -0.11999999731779099
+    ],
+    [
+      0.11999999731779099,
+      0.11999999731779099,
+      0.11999999731779099
+    ]
+  ],
+  "triangles": 2064,
+  "meshes": 1,
+  "textures": 0,
+  "anchors": {
+    "anchor_ball_center": [
+      0.0,
+      0.0,
+      -0.0
+    ]
+  },
+  "objects": [
+    "basketball"
+  ]
+}

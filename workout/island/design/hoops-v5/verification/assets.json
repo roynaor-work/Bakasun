@@ -1,0 +1,201 @@
+{
+  "allPassed": true,
+  "maxFileBytes": 1500000,
+  "maxTextureDimension": 1024,
+  "validator": "2.0.0-dev.3.10",
+  "assets": [
+    {
+      "file": "models/arena.glb",
+      "bytes": 198352,
+      "sha256": "73a75426a5f6ecfdecbefff8cf76ec3d9ed5258e95ebc65f29b7fa9295536b93",
+      "triangles": 30738,
+      "vertices": 59896,
+      "drawCalls": 30,
+      "textures": [
+        {
+          "name": "ribbon",
+          "mimeType": "image/png",
+          "size": [
+            1024,
+            128
+          ],
+          "bytes": 3502
+        },
+        {
+          "name": "scoreboard",
+          "mimeType": "image/png",
+          "size": [
+            1024,
+            512
+          ],
+          "bytes": 23506
+        }
+      ],
+      "animations": [],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    },
+    {
+      "file": "models/court.glb",
+      "bytes": 296216,
+      "sha256": "9a7e06fb21abd562266f829549de3cd46f98ccf5f7f4e0bbeea82c8d047df4a3",
+      "triangles": 1094,
+      "vertices": 2188,
+      "drawCalls": 6,
+      "textures": [
+        {
+          "name": "maple-normal",
+          "mimeType": "image/png",
+          "size": [
+            512,
+            512
+          ],
+          "bytes": 18487
+        },
+        {
+          "name": "maple-color",
+          "mimeType": "image/jpeg",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 143676
+        },
+        {
+          "name": "maple-roughness",
+          "mimeType": "image/png",
+          "size": [
+            512,
+            512
+          ],
+          "bytes": 119618
+        }
+      ],
+      "animations": [],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    },
+    {
+      "file": "models/hoops.glb",
+      "bytes": 33832,
+      "sha256": "7eb7cd8612adf1b19cc20fbcda530323e69ea51fc453c1fbe767f940579a631f",
+      "triangles": 6156,
+      "vertices": 11708,
+      "drawCalls": 10,
+      "textures": [
+        {
+          "name": "shot-clock",
+          "mimeType": "image/png",
+          "size": [
+            256,
+            128
+          ],
+          "bytes": 2661
+        }
+      ],
+      "animations": [],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    },
+    {
+      "file": "models/crowd.glb",
+      "bytes": 1029776,
+      "sha256": "c42ab8d422f8124a0967fd649a3ef32df5261f5d226126cf9e8db50869853f08",
+      "triangles": 5524,
+      "vertices": 11048,
+      "drawCalls": 1,
+      "textures": [
+        {
+          "name": "crowd-atlas",
+          "mimeType": "image/png",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 683028
+        }
+      ],
+      "animations": [
+        "Crowd_Sway_4s"
+      ],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    },
+    {
+      "file": "models/ball.glb",
+      "bytes": 209800,
+      "sha256": "09fc0c8789d8ed361f7a37a2b9df7f69eb589f1a4be794756fff8663d2f86d30",
+      "triangles": 1840,
+      "vertices": 1023,
+      "drawCalls": 1,
+      "textures": [
+        {
+          "name": "leather-normal",
+          "mimeType": "image/png",
+          "size": [
+            1024,
+            512
+          ],
+          "bytes": 46217
+        },
+        {
+          "name": "leather-color",
+          "mimeType": "image/jpeg",
+          "size": [
+            1024,
+            512
+          ],
+          "bytes": 153745
+        }
+      ],
+      "animations": [],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    },
+    {
+      "file": "models/uniforms.glb",
+      "bytes": 558852,
+      "sha256": "9344f4aeab0f70dd58ba609b299fcc94e7a5c815f7feff364850315e7c0c4b57",
+      "triangles": 5628,
+      "vertices": 3220,
+      "drawCalls": 2,
+      "textures": [
+        {
+          "name": "jersey-deep-teal",
+          "mimeType": "image/jpeg",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 264470
+        },
+        {
+          "name": "jersey-warm-ivory",
+          "mimeType": "image/jpeg",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 263170
+        }
+      ],
+      "animations": [],
+      "compressedErrors": 0,
+      "decodedErrors": 0,
+      "compressedWarnings": 0,
+      "decodedWarnings": 0
+    }
+  ],
+  "totalModelBytes": 2326828,
+  "totalTriangles": 50980
+}

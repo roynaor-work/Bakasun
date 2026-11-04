@@ -1,0 +1,3379 @@
+{
+  "schemaVersion": 1,
+  "players": [
+    {
+      "id": "pg",
+      "role": "PG",
+      "source": "workout/island/assets/models/hoops-guard.glb",
+      "heightMeters": 1.83,
+      "widthScale": 0.94,
+      "number": "01",
+      "hair": "close textured crop",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/pg-lod0.glb",
+        "lod1": "models/pg-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7513,
+        "lod1": 2775
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": -0.00039721414214000106,
+            "minAfterMeters": 0.008000007830560207,
+            "maximumRootLiftMeters": 0.008397214142140001,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.008397214142140001,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": -0.0011463321279734373,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.009146441644057632,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": -0.0025871857069432735,
+            "minAfterMeters": 0.007999971508979797,
+            "maximumRootLiftMeters": 0.010587214197963477,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.02598116174340248,
+            "minAfterMeters": 0.00799993984401226,
+            "maximumRootLiftMeters": 0.03398122189939022,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.032314071983098984,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.024007439613342285,
+            "minAfterMeters": 0.008000008761882782,
+            "maximumRootLiftMeters": 0.032007439613342285,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.030181248292326927,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.04319637268781662,
+            "minAfterMeters": 0.007999934256076813,
+            "maximumRootLiftMeters": 0.05119643843173981,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.03567221388220787,
+            "minAfterMeters": 0.007999967783689499,
+            "maximumRootLiftMeters": 0.04367224609851837,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.025270165875554085,
+            "minAfterMeters": 0.007999956607818604,
+            "maximumRootLiftMeters": 0.03327020926773548,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.032253023236989975,
+            "minAfterMeters": 0.008000015281140804,
+            "maximumRootLiftMeters": 0.040253023236989975,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.02391066960990429,
+            "minAfterMeters": 0.00799998827278614,
+            "maximumRootLiftMeters": 0.03191068133711815,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.023924242705106735,
+            "minAfterMeters": 0.007999913766980171,
+            "maximumRootLiftMeters": 0.031924328938126564,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.026619136333465576,
+            "minAfterMeters": 0.007999947294592857,
+            "maximumRootLiftMeters": 0.03461918903887272,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.008466666067950428,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.02460556849837303,
+            "minAfterMeters": 0.007999920286238194,
+            "maximumRootLiftMeters": 0.03260564821213484,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.028009703934192658,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.028810817748308182,
+            "minAfterMeters": 0.007999974302947521,
+            "maximumRootLiftMeters": 2.5697052478956817e-8,
+            "constantBaselineDropMeters": 0.02081081774830818,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.02081081774830818,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.01419384777545929,
+            "minAfterMeters": 0.007999950088560581,
+            "maximumRootLiftMeters": 0.02219389768689871,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.07119777798652649,
+            "minAfterMeters": 0.008000031113624573,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.13739851248264312,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": -0.013441314920783043,
+            "minAfterMeters": 0.0080000264570117,
+            "maximumRootLiftMeters": 0.021441314920783043,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.008535240629687905,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "18aef27df33f6860e87e2b2b8c06f0beaed77b5134b8691ec8dca98e6ea01502",
+      "bytes": {
+        "lod0": 545368,
+        "lod1": 510036
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2367125911712646,
+            "waistbandVertices": 83,
+            "tuckedVertices": 168
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.243267671585083,
+            "waistbandVertices": 44,
+            "tuckedVertices": 82
+          }
+        ]
+      }
+    },
+    {
+      "id": "sg",
+      "role": "SG",
+      "source": "workout/island/assets/models/hoops-wing.glb",
+      "heightMeters": 1.93,
+      "widthScale": 0.97,
+      "number": "02",
+      "hair": "side-swept short cards",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/sg-lod0.glb",
+        "lod1": "models/sg-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7513,
+        "lod1": 2774
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": 0.00858452171087265,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.00058452171087265,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.00058452171087265,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": 0.006855460815131664,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.0011446691900491718,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": 0.0056768860667943954,
+            "minAfterMeters": 0.007999961264431477,
+            "maximumRootLiftMeters": 0.0023231526687741283,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.01516768243163824,
+            "minAfterMeters": 0.007999968715012074,
+            "maximumRootLiftMeters": 0.023167713716626168,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.020931381352245808,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.014838367700576782,
+            "minAfterMeters": 0.007999987341463566,
+            "maximumRootLiftMeters": 0.022838380359113217,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.02057903315126896,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.03535337373614311,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.04335349163413048,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.028051622211933136,
+            "minAfterMeters": 0.007999973371624947,
+            "maximumRootLiftMeters": 0.03605164884030819,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.02120448835194111,
+            "minAfterMeters": 0.00799995195120573,
+            "maximumRootLiftMeters": 0.02920453640073538,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.02582964301109314,
+            "minAfterMeters": 0.007999991998076439,
+            "maximumRootLiftMeters": 0.0338296510130167,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.014733811840415001,
+            "minAfterMeters": 0.007999993860721588,
+            "maximumRootLiftMeters": 0.022733817979693413,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.014750758185982704,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.022750870496034623,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.018651172518730164,
+            "minAfterMeters": 0.007999959401786327,
+            "maximumRootLiftMeters": 0.026651213116943837,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.015462802723050117,
+            "minAfterMeters": 0.007999910973012447,
+            "maximumRootLiftMeters": 0.02346289175003767,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.016179090917110443,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.03533318638801575,
+            "minAfterMeters": 0.008000046014785767,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.027333186388015747,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.027333186388015747,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.008373990654945374,
+            "minAfterMeters": 0.00799994170665741,
+            "maximumRootLiftMeters": 0.016374048948287964,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.0725642591714859,
+            "minAfterMeters": 0.007999992929399014,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.13940732312202453,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": -0.0024779466912150383,
+            "minAfterMeters": 0.007999954745173454,
+            "maximumRootLiftMeters": 0.010477991946041584,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "42bce07c8dee04a4094aee42ffe790c8330557509755c01cfeac39895c3041ac",
+      "bytes": {
+        "lod0": 533612,
+        "lod1": 499736
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2348961992263794,
+            "waistbandVertices": 81,
+            "tuckedVertices": 167
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.2402260465621948,
+            "waistbandVertices": 46,
+            "tuckedVertices": 89
+          }
+        ]
+      }
+    },
+    {
+      "id": "sf",
+      "role": "SF",
+      "source": "workout/island/assets/models/hoops-forward.glb",
+      "heightMeters": 2.01,
+      "widthScale": 1.01,
+      "number": "03",
+      "hair": "compact forward crop",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/sf-lod0.glb",
+        "lod1": "models/sf-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7512,
+        "lod1": 2773
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": 0.011890389025211334,
+            "minAfterMeters": 0.007999993860721588,
+            "maximumRootLiftMeters": 6.139278412031768e-9,
+            "constantBaselineDropMeters": 0.003890389025211334,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.003890389025211334,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": 0.01077146828174591,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 1.4863163232819998e-7,
+            "constantBaselineDropMeters": 0.0027714682817459105,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.0027714682817459105,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": 0.009881336241960526,
+            "minAfterMeters": 0.007999975234270096,
+            "maximumRootLiftMeters": 2.4765729904341338e-8,
+            "constantBaselineDropMeters": 0.0018813362419605253,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.0018813362419605253,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.010431848466396332,
+            "minAfterMeters": 0.007999945431947708,
+            "maximumRootLiftMeters": 0.018431903034448624,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.01627437825500965,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.0077940598130226135,
+            "minAfterMeters": 0.007999969646334648,
+            "maximumRootLiftMeters": 0.015794090166687966,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.013515633150935173,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.027962511405348778,
+            "minAfterMeters": 0.00799994170665741,
+            "maximumRootLiftMeters": 0.03596256969869137,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.021155117079615593,
+            "minAfterMeters": 0.007999993860721588,
+            "maximumRootLiftMeters": 0.029155123218894005,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.019150137901306152,
+            "minAfterMeters": 0.008000016212463379,
+            "maximumRootLiftMeters": 0.027150137901306153,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.02125447988510132,
+            "minAfterMeters": 0.007999955676496029,
+            "maximumRootLiftMeters": 0.02925452420860529,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.0076844822615385056,
+            "minAfterMeters": 0.008000003173947334,
+            "maximumRootLiftMeters": 0.015684482261538506,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.007701655849814415,
+            "minAfterMeters": 0.007999980822205544,
+            "maximumRootLiftMeters": 0.015701675027608872,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.010940084233880043,
+            "minAfterMeters": 0.008000005036592484,
+            "maximumRootLiftMeters": 0.018940084233880043,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.008534537628293037,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.01653464062511921,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.011273777663707733,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.036230701953172684,
+            "minAfterMeters": 0.008000034838914871,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.028230701953172684,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.028230701953172684,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.00590259674936533,
+            "minAfterMeters": 0.007999967783689499,
+            "maximumRootLiftMeters": 0.013902628965675831,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.07450122386217117,
+            "minAfterMeters": 0.007999952882528305,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.1414193449616432,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": 0.0046914564445614815,
+            "minAfterMeters": 0.007999991998076439,
+            "maximumRootLiftMeters": 0.00330855155736208,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "0acfdc3d45a71efe8d29a2fbf9377ff9d14fd5f27f14b54c35c784c8af0c8eb6",
+      "bytes": {
+        "lod0": 557316,
+        "lod1": 520916
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2359230680465698,
+            "waistbandVertices": 73,
+            "tuckedVertices": 173
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.2359230680465698,
+            "waistbandVertices": 48,
+            "tuckedVertices": 87
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf",
+      "role": "PF",
+      "source": "workout/island/assets/models/hoops-big.glb",
+      "heightMeters": 2.08,
+      "widthScale": 1.1,
+      "number": "04",
+      "hair": "full coiled afro cards",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/pf-lod0.glb",
+        "lod1": "models/pf-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7512,
+        "lod1": 2772
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": 0.005825362168252468,
+            "minAfterMeters": 0.007999978959560394,
+            "maximumRootLiftMeters": 0.002174658872187138,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.002174637831747532,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": 0.004360824357718229,
+            "minAfterMeters": 0.008000018075108528,
+            "maximumRootLiftMeters": 0.003639175642281771,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": 0.003668094053864479,
+            "minAfterMeters": 0.008000005036592484,
+            "maximumRootLiftMeters": 0.004331905946135521,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.01991911418735981,
+            "minAfterMeters": 0.008000009693205357,
+            "maximumRootLiftMeters": 0.02791911418735981,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.025984027042984963,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.017811046913266182,
+            "minAfterMeters": 0.007999982684850693,
+            "maximumRootLiftMeters": 0.02581106422841549,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.023906592831015587,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.03731876239180565,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.04531893989443779,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.030067265033721924,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.038067368030548096,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.02136969566345215,
+            "minAfterMeters": 0.007999961264431477,
+            "maximumRootLiftMeters": 0.029369734399020672,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.027790574356913567,
+            "minAfterMeters": 0.007999943569302559,
+            "maximumRootLiftMeters": 0.03579063078761101,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.017704462632536888,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0.02570446263253689,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.01771891675889492,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.025719036519527436,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.02083514630794525,
+            "minAfterMeters": 0.008000022731721401,
+            "maximumRootLiftMeters": 0.02883514630794525,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.0022441247403621675,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.01844562403857708,
+            "minAfterMeters": 0.007999916560947895,
+            "maximumRootLiftMeters": 0.026445707477629185,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.021178197667002678,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.034029386937618256,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.026029386937618255,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.026029386937618255,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.011325289495289326,
+            "minAfterMeters": 0.007999954745173454,
+            "maximumRootLiftMeters": 0.019325334750115872,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.07275344431400299,
+            "minAfterMeters": 0.00799999013543129,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.1424087783396244,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": -0.006743900012224913,
+            "minAfterMeters": 0.008000023663043976,
+            "maximumRootLiftMeters": 0.014743900012224913,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.0023127003498375417,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "1bf6c29da21adcd81fbbfa6ecd460bf64b4a83dd2a91af7531988e8e477f817d",
+      "bytes": {
+        "lod0": 559904,
+        "lod1": 521232
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2357806129455566,
+            "waistbandVertices": 68,
+            "tuckedVertices": 184
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.2392820281982422,
+            "waistbandVertices": 46,
+            "tuckedVertices": 103
+          }
+        ]
+      }
+    },
+    {
+      "id": "c",
+      "role": "C",
+      "source": "workout/island/assets/models/hoops-big.glb",
+      "heightMeters": 2.16,
+      "widthScale": 1.02,
+      "number": "05",
+      "hair": "short flat coiled cards",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/c-lod0.glb",
+        "lod1": "models/c-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7513,
+        "lod1": 2771
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": 0.005825362168252468,
+            "minAfterMeters": 0.007999978959560394,
+            "maximumRootLiftMeters": 0.002174658872187138,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.002174637831747532,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": 0.004360824357718229,
+            "minAfterMeters": 0.008000018075108528,
+            "maximumRootLiftMeters": 0.003639175642281771,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": 0.003668094053864479,
+            "minAfterMeters": 0.008000005036592484,
+            "maximumRootLiftMeters": 0.004331905946135521,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.01991911418735981,
+            "minAfterMeters": 0.008000009693205357,
+            "maximumRootLiftMeters": 0.02791911418735981,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.025984027042984963,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.017811046913266182,
+            "minAfterMeters": 0.007999982684850693,
+            "maximumRootLiftMeters": 0.02581106422841549,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.023906592831015587,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.03731876239180565,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.04531893989443779,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.030067265033721924,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.038067368030548096,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.02136969566345215,
+            "minAfterMeters": 0.007999961264431477,
+            "maximumRootLiftMeters": 0.029369734399020672,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.027790574356913567,
+            "minAfterMeters": 0.007999943569302559,
+            "maximumRootLiftMeters": 0.03579063078761101,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.017704462632536888,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0.02570446263253689,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.01771891675889492,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.025719036519527436,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.02083514630794525,
+            "minAfterMeters": 0.008000022731721401,
+            "maximumRootLiftMeters": 0.02883514630794525,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.0022441247403621675,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.01844562403857708,
+            "minAfterMeters": 0.007999916560947895,
+            "maximumRootLiftMeters": 0.026445707477629185,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.021178197667002678,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.034029386937618256,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.026029386937618255,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.026029386937618255,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.011325289495289326,
+            "minAfterMeters": 0.007999954745173454,
+            "maximumRootLiftMeters": 0.019325334750115872,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.07275344431400299,
+            "minAfterMeters": 0.00799999013543129,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.1424087783396244,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": -0.006743900012224913,
+            "minAfterMeters": 0.008000023663043976,
+            "maximumRootLiftMeters": 0.014743900012224913,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.0023127003498375417,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "1bf6c29da21adcd81fbbfa6ecd460bf64b4a83dd2a91af7531988e8e477f817d",
+      "bytes": {
+        "lod0": 562644,
+        "lod1": 522492
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2357806129455566,
+            "waistbandVertices": 68,
+            "tuckedVertices": 184
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.2392820281982422,
+            "waistbandVertices": 46,
+            "tuckedVertices": 103
+          }
+        ]
+      }
+    },
+    {
+      "id": "referee",
+      "role": "REF",
+      "source": "workout/island/assets/models/hoops-wing.glb",
+      "heightMeters": 1.86,
+      "widthScale": 0.93,
+      "number": null,
+      "hair": "short tapered crop",
+      "normalizedHeightMeters": 1.95,
+      "models": {
+        "lod0": "models/referee-lod0.glb",
+        "lod1": "models/referee-lod1.glb"
+      },
+      "triangles": {
+        "lod0": 7513,
+        "lod1": 2775
+      },
+      "clips": {
+        "idle": {
+          "durationSeconds": 2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 121,
+            "minBeforeMeters": 0.00858452171087265,
+            "minAfterMeters": 0.00800003856420517,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.00058452171087265,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.00058452171087265,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_stationary": {
+          "durationSeconds": 1,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "dribble_stand",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.5,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_stationary",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 61,
+            "minBeforeMeters": 0.006855460815131664,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.0011446691900491718,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_crossover": {
+          "durationSeconds": 0.8,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "crossover",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.4,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_crossover",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 49,
+            "minBeforeMeters": 0.0056768860667943954,
+            "minAfterMeters": 0.007999961264431477,
+            "maximumRootLiftMeters": 0.0023231526687741283,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_between_legs": {
+          "durationSeconds": 1.2,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.6,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_between_legs",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 73,
+            "minBeforeMeters": -0.01516768243163824,
+            "minAfterMeters": 0.007999968715012074,
+            "maximumRootLiftMeters": 0.023167713716626168,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.020931381352245808,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dribble_behind_back": {
+          "durationSeconds": 1.3,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_bounce",
+              "atSeconds": 0.65,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "dribble_behind_back",
+            "radiusMeters": 0.12,
+            "bouncePhase": 0.5
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 79,
+            "minBeforeMeters": -0.014838367700576782,
+            "minAfterMeters": 0.007999987341463566,
+            "maximumRootLiftMeters": 0.022838380359113217,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.02057903315126896,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_set": {
+          "durationSeconds": 2.1666666666666665,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "freethrow",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.2349999999999999,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.57,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 131,
+            "minBeforeMeters": -0.03535337373614311,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.04335349163413048,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_jump": {
+          "durationSeconds": 1.6,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "jumpshot",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.752,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.47,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 97,
+            "minBeforeMeters": -0.028051622211933136,
+            "minAfterMeters": 0.007999973371624947,
+            "maximumRootLiftMeters": 0.03605164884030819,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "shoot_fadeaway": {
+          "durationSeconds": 1.4333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "pullup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 0.7166666666666667,
+              "bone": "RightHand",
+              "presentationOnly": true
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.5,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 87,
+            "minBeforeMeters": -0.02120448835194111,
+            "minAfterMeters": 0.00799995195120573,
+            "maximumRootLiftMeters": 0.02920453640073538,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "layup": {
+          "durationSeconds": 1.8666666666666667,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "layup",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.008,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.4666666666666667,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.54,
+            "radiusMeters": 0.12
+          },
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 113,
+            "minBeforeMeters": -0.02582964301109314,
+            "minAfterMeters": 0.007999991998076439,
+            "maximumRootLiftMeters": 0.0338296510130167,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "dunk": {
+          "durationSeconds": 1.9,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "ball_release",
+              "atSeconds": 1.007,
+              "bone": "RightHand",
+              "presentationOnly": true
+            },
+            {
+              "name": "takeoff",
+              "atSeconds": 0.475,
+              "bone": "Root"
+            }
+          ],
+          "ball": {
+            "mode": "release",
+            "releasePhase": 0.53,
+            "radiusMeters": 0.12
+          },
+          "minimumPresentationRimMeters": 3.05,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 115,
+            "minBeforeMeters": -0.014733811840415001,
+            "minAfterMeters": 0.007999993860721588,
+            "maximumRootLiftMeters": 0.022733817979693413,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "block": {
+          "durationSeconds": 1.5,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "events": [
+            {
+              "name": "takeoff",
+              "atSeconds": 0.375,
+              "bone": "Root"
+            }
+          ],
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 91,
+            "minBeforeMeters": -0.014750758185982704,
+            "minAfterMeters": 0.008,
+            "maximumRootLiftMeters": 0.022750870496034623,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "steal": {
+          "durationSeconds": 1.1,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 67,
+            "minBeforeMeters": -0.018651172518730164,
+            "minAfterMeters": 0.007999959401786327,
+            "maximumRootLiftMeters": 0.026651213116943837,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "eurostep": {
+          "durationSeconds": 1.8,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 109,
+            "minBeforeMeters": -0.015462802723050117,
+            "minAfterMeters": 0.007999910973012447,
+            "maximumRootLiftMeters": 0.02346289175003767,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0.016179090917110443,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "run": {
+          "durationSeconds": 0.7333333333333333,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "run",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 4.5,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 45,
+            "minBeforeMeters": 0.03533318638801575,
+            "minAfterMeters": 0.008000046014785767,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0.027333186388015747,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": -0.027333186388015747,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "decelerate": {
+          "durationSeconds": 1.3333333333333333,
+          "loop": false,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "stop",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 81,
+            "minBeforeMeters": -0.008373990654945374,
+            "minAfterMeters": 0.00799994170665741,
+            "maximumRootLiftMeters": 0.016374048948287964,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "defensive_slide": {
+          "durationSeconds": 0.5,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": "slide_l",
+          "method": "CMU recorded base; rest-aware world-rotation retarget to canonical18",
+          "transitionSeconds": 0.18,
+          "referenceSpeedMetersPerSecond": 1.8,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 31,
+            "minBeforeMeters": 0.0725642591714859,
+            "minAfterMeters": 0.007999992929399014,
+            "maximumRootLiftMeters": 0,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": true,
+            "minimumRootCorrectionMeters": -0.13940732312202453,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        },
+        "celebration": {
+          "durationSeconds": 2.4,
+          "loop": true,
+          "sampleRateHz": 30,
+          "rootMotion": "in-place; horizontal recorded drift removed",
+          "sourceAction": null,
+          "method": "Original analytic-IK mocap-style animation with weight shift, anticipation and recovery; not captured motion",
+          "transitionSeconds": 0.18,
+          "floorBake": {
+            "sampleRateHz": 60,
+            "sampleCount": 145,
+            "minBeforeMeters": -0.0024779466912150383,
+            "minAfterMeters": 0.007999954745173454,
+            "maximumRootLiftMeters": 0.010477991946041584,
+            "constantBaselineDropMeters": 0,
+            "contactLocked": false,
+            "minimumRootCorrectionMeters": 0,
+            "clearanceMarginMeters": 0.008,
+            "method": "Full deformed mesh at frame and half-frame; conservative neighboring-key lift."
+          }
+        }
+      },
+      "sourceSha256": "42bce07c8dee04a4094aee42ffe790c8330557509755c01cfeac39895c3041ac",
+      "bytes": {
+        "lod0": 528476,
+        "lod1": 494728
+      },
+      "drawCalls": 1,
+      "animationNames": [
+        "idle",
+        "dribble_stationary",
+        "dribble_crossover",
+        "dribble_between_legs",
+        "dribble_behind_back",
+        "shoot_set",
+        "shoot_jump",
+        "shoot_fadeaway",
+        "layup",
+        "dunk",
+        "block",
+        "steal",
+        "eurostep",
+        "run",
+        "decelerate",
+        "defensive_slide",
+        "celebration"
+      ],
+      "garmentFit": {
+        "lod0": [
+          {
+            "waistMeters": 1.2348961992263794,
+            "waistbandVertices": 81,
+            "tuckedVertices": 167
+          }
+        ],
+        "lod1": [
+          {
+            "waistMeters": 1.2402260465621948,
+            "waistbandVertices": 46,
+            "tuckedVertices": 89
+          }
+        ]
+      }
+    }
+  ],
+  "rig": {
+    "jointNames": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "normalizedHeightMeters": 1.95,
+    "up": "+Y",
+    "front": "+Z",
+    "units": "metres"
+  },
+  "atlas": {
+    "kitMask": "uv.y > 0.5",
+    "jerseyRect": [
+      0,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "shortsRect": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "sourceBlenderKitMask": "uv.y < 0.5",
+    "uvConvention": "Delivered glTF UV origin top-left; Blender source UV origin bottom-left",
+    "resolution": 1024
+  }
+}

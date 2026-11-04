@@ -122,6 +122,56 @@ function reboundMove(api,p,t){
  if(d<1.6&&b.vy<0&&b.y<reach+1.3&&b.y>reach-0.2&&(b.touchedRim||b.y<rim.y-0.1))api.startJump(p,'rebound');
 }
 
+/** How a player's position and abilities tilt the man with the ball (pure; the difficulty
+ * numbers and shot chances stay untouched, only the choice between shot, drive and pass):
+ * bigs rarely launch threes and like to drive, shooters take an open three a little earlier,
+ * point guards look for the pass first. `pace` (team tactics, 0..1) makes a team shoot earlier
+ * or wait for a better look. */
+export function rolePreference(p,pace=0.5){
+ const a=p.abilities||{},pos=p.pos,shooting=(a.shooting??50)/100,dunk=(a.dunk??50)/100,passing=(a.passing??50)/100;
+ return {
+  three:pos==='C'?0.6:pos==='PF'?0.85:clamp(0.9+0.3*(shooting-0.5),0.8,1.03),
+  drive:clamp(0.95+0.5*(dunk-0.5)+(pos==='C'||pos==='PF'?0.1:0),0.8,1.2),
+  pass:clamp(0.92+0.25*(passing-0.5)+(pos==='PG'?0.05:0),0.85,1.1),
+  patience:clamp(1.15-0.3*pace,0.95,1.15),
+ };
+}
+/** Off-ball defence by the man's abilities: stay home on a shooter, sag further off a non-shooter
+ * to clog the lane. A multiplier on the help-side gap, bounded to a fifth either way. */
+export function offBallSag(q){
+ const shooting=((q.abilities?.shooting??50)-50)/50;   // -0.6..1
+ return clamp(1-0.2*shooting,0.8,1.2);
+}
+/** Who on the floor deserves the ball: an open shooter behind the arc, a rolling big at the rim. */
+export function receiverBonus(q,open,threePoint){
+ const a=q.abilities||{};let bonus=0;
+ if(threePoint&&open>2.2&&(a.shooting??50)>=68)bonus+=0.1*((a.shooting-60)/30);
+ if(!threePoint&&(q.role==='roll'||q.role==='cut')&&(a.dunk??50)>=65)bonus+=0.1;
+ return clamp(bonus,0,0.2);
+}
+
+/** How much the man with the ball is bothered: 0 free, 1 a defender on him, 2 two defenders
+ * within reach (a trap). Read only from positions. */
+function passPressure(api,p,t){
+ let close=0,near=0;for(const o of api.onCourt(1-t)){const d=api.dist(o,p);if(d<1.1)close++;if(d<1.9)near++;}
+ return close>=1&&near>=2?2:close>=1?1:0;
+}
+/** Why the handler may pass (pure; null = keep the ball). `progress` is how much closer to the
+ * rim the receiver stands than the passer (metres). Sideways or backward passes (progress < 1,
+ * receiver not cutting or rolling) go only under pressure, with the clock dying, when the
+ * receiver's look is clearly better than mine and open, or after a long fruitless probe; and
+ * a pass never bounces straight back to the man who just delivered the ball unless I am pressured. */
+export function passReason({progress=0,role=null,receiverOpen=0,receiverShot=0,myShot=0,worth=1,pressure=0,hold=0,clock=24,backToPasser=false}){
+ const advancing=progress>=1||role==='cut'||role==='roll'||role==='giveGo';
+ if(backToPasser&&pressure<1&&clock>=5)return null;
+ if(advancing)return 'advance';
+ if(clock<5&&receiverOpen>1.4)return 'clock';
+ if(pressure>=2||pressure>=1&&hold>=0.6)return 'pressure';
+ if(receiverOpen>2.2&&receiverShot>myShot+0.25&&receiverShot>worth&&hold>=0.5)return 'look';
+ if(hold>=3.2&&receiverOpen>1.2)return 'stuck';
+ return null;
+}
+
 function openness(api,t,pt){let m=9;for(const o of api.onCourt(1-t))m=Math.min(m,hyp(o.x-pt.x,o.z-pt.z));return m;}
 
 function laneClear(api,t,from,to,r){
@@ -133,13 +183,13 @@ function laneClear(api,t,from,to,r){
  return true;
 }
 
-function shotValue(api,p,t){
+function shotValue(api,p,t,pref){
  const S=api.S,s=api.side(t),d=api.court.distToRim(s,p.x,p.z),pts=api.court.points(s,p.x,p.z);
  const open=openness(api,t,p);
  const skill=pts===3?api.eff(p,'three'):d<3?api.eff(p,'inside'):api.eff(p,'mid');
  const base=pts===3?0.33:d<3?0.6:0.42;
  const contest=clamp((1.8-open)/1.5,0,1);
- return pts*base*(0.55+0.65*skill)*(1-0.45*contest);
+ return pts*base*(0.55+0.65*skill)*(1-0.45*contest)*(pts===3&&pref?pref.three:1);
 }
 
 function offenseMove(api,p,t){
@@ -188,24 +238,35 @@ function handlerMove(api,p,t){
  const hurry=clock<4.5;
  // someone asked for the ball (the child's teammate pressed pass)
  if(p.intent.wantPass){const q=api.byId(p.intent.wantPass);p.intent.wantPass=null;if(q){api.startPass(p,q,null);return;}}
- const myShot=shotValue(api,p,t);
+ const pref=rolePreference(p,T.tactics.pace??0.5),myShot=shotValue(api,p,t,pref);
  // options
  // what the rest of the possession is worth: a good team waits for a shot better than that,
- // early in the clock it needs a really good look, late it takes what is there
- const worth=clock>16?1.08:0.62+clamp((clock-4.5)/11.5,0,1)*0.46;
+ // early in the clock it needs a really good look, late it takes what is there; a fast-paced
+ // team is happier with an early look, a patient point guard waits for a better one
+ const worth=(clock>16?1.08:0.62+clamp((clock-4.5)/11.5,0,1)*0.46)*pref.patience;
  const settled=24-clock>3.5||open>2.6;
  let best={kind:'hold',v:0.55+(1-clamp(clock/24,0,1))*-0.2};
  if(myShot>worth&&settled||hurry&&myShot>0.3)best={kind:'shoot',v:myShot+(hurry?0.4:0)};
  if(d<2.4&&open>0.8)best={kind:'shoot',v:1.5};
  // drive when the lane is clear
- if(d>2.2&&laneClear(api,t,p,rim,1.1)&&api.eff(p,'handle')>0.55){const v=0.9+api.eff(p,'inside')*0.6;if(v>best.v)best={kind:'drive',v};}
- // passes
+ if(d>2.2&&laneClear(api,t,p,rim,1.1)&&api.eff(p,'handle')>0.55){const v=(0.9+api.eff(p,'inside')*0.6)*pref.drive;if(v>best.v)best={kind:'drive',v};}
+ // passes: the receiver's own look, plus who he is (an open shooter, a big rolling to the rim).
+ // v4: a pass needs a reason (passReason): a man advancing to the rim down an open line, a look
+ // clearly better than mine, pressure on me, a dying clock, or a stuck probe. Sideways and
+ // backward passes without one of those are not thrown, and never straight back to the man who
+ // just gave me the ball.
+ const hold=S.ball.dribbleT||0,pressure=passPressure(api,p,t);
  for(const q of api.onCourt(t)){
   if(q===p)continue;
   if(S.frontcourtSet&&!api.court.frontcourt(s,q.x))continue;
   if(!laneClear(api,t,p,q,0.7))continue;
-  const v=shotValue(api,q,t)*0.92+(q.role==='cut'||q.role==='roll'?0.35:0);
-  if(v>best.v+0.08)best={kind:'pass',v,q};
+  const qOpen=openness(api,t,q),three=api.court.points(s,q.x,q.z)===3;
+  const qShot=shotValue(api,q,t,rolePreference(q));
+  const v=(qShot*0.92+(q.role==='cut'||q.role==='roll'?0.35:0)+receiverBonus(q,qOpen,three))*pref.pass;
+  const reason=passReason({progress:d-api.court.distToRim(s,q.x,q.z),role:q.role,receiverOpen:qOpen,receiverShot:qShot,myShot,worth,pressure,hold,clock,backToPasser:!!(S.lastPasser&&S.lastPasser.id===q.id&&S.tick-S.lastPasser.tick<150)});
+  if(!reason)continue;
+  const margin=reason==='advance'||reason==='pressure'||reason==='clock'?0.08:0.2;
+  if(v>best.v+margin||reason==='pressure'&&v>best.v-0.1||reason==='stuck'&&v>best.v-0.05)best={kind:'pass',v,q,reason};
  }
  // play call: pick and roll if the defender is close
  if(best.kind==='hold'&&(T.tactics.offense==='pnr'||T.call==='pnr')&&!T.ai.plan){T.ai.plan='pnr';T.ai.planT=0;}
@@ -233,7 +294,7 @@ function defenseMove(api,p,t){
  let gap=onBall?clamp(0.9+(api.court.points(s,o.x,o.z)===3&&api.eff(o,'three')>0.75?-0.2:0.3),0.7,1.4):1.6;
  if(!onBall&&h){
   // help side: sag towards the ball and the paint
-  const ballD=api.dist(o,h);gap=clamp(1.2+ballD*0.22,1.2,3.6);
+  const ballD=api.dist(o,h);gap=clamp((1.2+ballD*0.22)*offBallSag(o),1.0,3.8);
  }
  const k=Math.min(gap/dRim,0.85);
  let pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};

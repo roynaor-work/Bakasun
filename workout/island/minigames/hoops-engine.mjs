@@ -2,14 +2,15 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261101-1';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261101-1';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261101-1';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261104-3';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261104-3';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261104-3';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
 export const HOOPS_DT=1/60;
 export const HOOPS_SPRINT_MIN_ENERGY=0.08;
+export const SPRINT_RESERVE=Object.freeze({drain:3.5,delay:1,refill:6,unlock:0.3});
 export const HOOPS_ATTACK=Object.freeze({moveCost:0.012,spinCost:0.018,moveRange:2,moveResolve:0.18,spinResolve:0.27,moveStun:0.42,spinStun:0.5,moveRecovery:0.16,fakeCost:0.006,fakeDuration:0.52,fakeResolve:0.16,fakeCooldown:0.9,fakeRange:1.8});
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
@@ -31,7 +32,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function makePlayer(card,team,slot){
   const ratings=runtimeRatings(card);
   return {id:card.id,team,slot,pos:card.pos,positionName:positionName(card.pos),abilities:playerAbilities({pos:card.pos,r:ratings}),name:card.name,number:card.number,look:card.look||{},r:ratings,
-   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,fouls:0,onCourt:true,
+   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,boost:1,boostRest:0,boostLock:false,fouls:0,onCourt:true,
    act:null,actT:0,act2:null,shot:null,move:null,fake:null,air:-1,airDur:0,jumpH:0,stumble:0,cd:{steal:0,jump:0,move:0,fake:0,pickup:0},
    intent:{x:0,z:0,speed:0,face:null,sprint:false},think:0,paintT:0,role:null,
    stats:{pts:0,fgm:0,fga:0,tpm:0,tpa:0,ftm:0,fta:0,reb:0,oreb:0,ast:0,stl:0,blk:0,tov:0,pf:0,sec:0}};
@@ -569,7 +570,9 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   * player keeps facing the ball handler so he slides instead of turning his back. */
  function defendAssist(p,ml,sprintRequested=false){
   const h=holder();if(!h)return;
-  if(ml>=0.05){if(dist(p,h)<7)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
+  // steering on defence: face the ball handler only when close to him (a real defensive stance);
+  // further away the player turns and runs where the stick points instead of side-shuffling
+  if(ml>=0.05){if(dist(p,h)<3.5)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
   const T=team(p.team),o=byId(T.ai?.assign?.[p.id])||h,rim=court.rim(side(o.team));
   const onBall=o.id===h.id,gap=onBall?C.player.assistGapBall??1.0:C.player.assistGapOff??1.8;
   const k=Math.min(gap/Math.max(0.6,dist(o,rim)),0.85),pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};
@@ -580,16 +583,28 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function humanInput(p,inp){
   const m=inp.move||{x:0,z:0},ml=hyp(m.x,m.z);
-  p.intent.x=ml>0.05?m.x/Math.max(1,ml):0;p.intent.z=ml>0.05?m.z/Math.max(1,ml):0;p.intent.speed=Math.min(1,ml);
+  // unit direction x tilt: speed follows the stick linearly (the old m/max(1,ml) x ml squared a half tilt to 25% speed)
+  p.intent.x=ml>0.05?m.x/ml:0;p.intent.z=ml>0.05?m.z/ml:0;p.intent.speed=Math.min(1,ml);
   p.intent.sprint=!!inp.sprint;p.intent.face=null;
   const offense=S.possession===p.team&&S.ball.state!=='loose';
   const hasBall=S.ball.owner===p.id&&S.ball.state==='held';
+  // triple threat: with the ball and the stick released in the frontcourt the player squares up to
+  // the basket, so a shot or a drive starts facing it instead of snapping round on release
+  if(hasBall&&ml<0.05&&!p.act&&court.frontcourt(side(p.team),p.x)){const rim=court.rim(side(p.team));p.intent.face=Math.atan2(rim.x-p.x,rim.z-p.z);}
   if(inp.shootCancel&&p.act==='shoot'&&p.shot?.held&&!p.shot.released){p.act=null;p.shot=null;emit({type:'shotCancel',playerId:p.id});}
   if(hasBall){
    p.jumpQueue=null;
    if(inp.fakePress)startFake(p);
    else if(inp.shootDown&&!inp.shootCancel)startShot(p,true);
-   if(inp.passPress)startPass(p,choosePassTarget(p,inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null),!!inp.passLong),inp.passLong?'long':null);
+   // Input buffer: a pass pressed while a move or fake is finishing is kept for C.player.bufferTicks
+   // steps (about 100 ms) and thrown the moment the player is free, instead of being swallowed.
+   const BUF=C.player.bufferTicks??6;
+   if(p.buf&&(S.tick>p.buf.until||p.buf.kind!=='pass'))p.buf=null;
+   if(inp.passPress){
+    const dir=inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null);
+    if(startPass(p,choosePassTarget(p,dir,!!inp.passLong),inp.passLong?'long':null))p.buf=null;
+    else if(p.act&&p.act!=='shoot'&&p.act!=='pass')p.buf={kind:'pass',until:S.tick+BUF,dir,long:!!inp.passLong};
+   }else if(p.buf&&!p.act&&startPass(p,choosePassTarget(p,p.buf.dir,p.buf.long),p.buf.long?'long':null))p.buf=null;
    if(inp.spinPress)startMove(p,'spin');
    else if(inp.movePress||inp.altPress)startMove(p,'cross');
   } else if(!offense||S.ball.state==='loose'||S.ball.state==='shot'){
@@ -616,7 +631,14 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    const it=p.intent;let tx=it.x*it.speed,tz=it.z*it.speed;
    // Charge the sprint multiplier only while it can actually accelerate a moving
    // player. Holding sprint at rest or with an empty reserve is not extra drain.
-   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot';
+   // v4: a short sprint reserve on top of match energy. It only drains while the button is
+   // held and the player really moves (about 3.5 s full to empty), waits about a second after
+   // the sprint stops, then refills slowly (about 6 s); once emptied it stays locked until it
+   // is back to 30%, so a tap cannot give a burst from an empty tank.
+   const B=C.sprintReserve||SPRINT_RESERVE;
+   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot'&&p.boost>0&&!p.boostLock;
+   if(p.sprinting){p.boost=Math.max(0,p.boost-dt/B.drain);p.boostRest=0;if(p.boost<=1e-6){p.boost=0;p.boostLock=true;}}
+   else{p.boostRest+=dt;if(p.boostRest>=B.delay)p.boost=Math.min(1,p.boost+dt/B.refill);if(p.boostLock&&p.boost>=B.unlock)p.boostLock=false;}
    const maxS=speedCap(p,p.sprinting);
    if(p.act==='shoot'){
     const sh=p.shot;
@@ -633,7 +655,17 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     // in the air the body keeps its run-up and steers only a little
     const k=Math.min(1,C.jump.airDrag*dt),ac=C.jump.airControl;p.vx+=(wantVx*ac-p.vx)*k;p.vz+=(wantVz*ac-p.vz)*k;
    } else {
-    const acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    let acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    if(user){
+     // Response for the child's player only (the AI keeps its own curve): a standing player leaves at
+     // userKick m/s on the very first step (first visible motion in one step instead of three), and a
+     // stick pushed against the run direction brakes userBrake times harder (a turn took 18 steps).
+     const wl=hyp(wantVx,wantVz),sp0=hyp(p.vx,p.vz);
+     if(wl>0.3){
+      if(sp0<(C.player.userKickBelow??0.4)){const k=Math.min(wl,C.player.userKick??1.1)/wl;p.vx=wantVx*k;p.vz=wantVz*k;}
+      else if(p.vx*wantVx+p.vz*wantVz<0)acc*=C.player.userBrake??1.5;
+     }
+    }
     const dvx=wantVx-p.vx,dvz=wantVz-p.vz,dl=hyp(dvx,dvz),step=acc*dt;
     if(dl<=step){p.vx=wantVx;p.vz=wantVz;}else{p.vx+=dvx/dl*step;p.vz+=dvz/dl*step;}
    }
@@ -998,7 +1030,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,positionName:p.positionName,abilities:p.abilities,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
-   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
+   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,boost:+p.boost.toFixed(3),boostLocked:p.boostLock,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
    hasBall:S.ball.owner===p.id&&S.ball.state==='held',controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null}));
  }
 

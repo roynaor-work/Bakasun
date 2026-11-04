@@ -1,0 +1,111 @@
+{
+  "checks": [
+    "12 catalog exercises ranked by program presence",
+    "300,000-byte raw limit",
+    "reproducible generated files",
+    "no scripts or external resources",
+    "static reduced-motion posters",
+    "exact attribute closure (rotation modulo full turns)",
+    "shared durations and sampling",
+    "C1 keyframe and seam velocities",
+    "interpolated soles stay above floor"
+  ],
+  "exercises": [
+    {
+      "id": "push-ups",
+      "bytes": 32202,
+      "animations": 17,
+      "segments": 60,
+      "exactLoop": true,
+      "maxVelocityError": 5.333333774615312e-7
+    },
+    {
+      "id": "crunches",
+      "bytes": 31283,
+      "animations": 21,
+      "segments": 51,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000014400001191461342
+    },
+    {
+      "id": "plank",
+      "bytes": 47766,
+      "animations": 13,
+      "segments": 120,
+      "exactLoop": true,
+      "maxVelocityError": 8.355982572538778e-9
+    },
+    {
+      "id": "bicycle",
+      "bytes": 23681,
+      "animations": 15,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000002326885351067176
+    },
+    {
+      "id": "jumping-jacks",
+      "bytes": 25740,
+      "animations": 22,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.00000664066135414032
+    },
+    {
+      "id": "squat-jumps",
+      "bytes": 30586,
+      "animations": 26,
+      "segments": 46,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000046182719870557776
+    },
+    {
+      "id": "high-knees",
+      "bytes": 26990,
+      "animations": 23,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000007630632126165438
+    },
+    {
+      "id": "side-hops",
+      "bytes": 27517,
+      "animations": 23,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.000010762448710011085
+    },
+    {
+      "id": "leg-raises",
+      "bytes": 31253,
+      "animations": 16,
+      "segments": 66,
+      "exactLoop": true,
+      "maxVelocityError": 0.000003831104322671308
+    },
+    {
+      "id": "squats",
+      "bytes": 33928,
+      "animations": 23,
+      "segments": 55,
+      "exactLoop": true,
+      "maxVelocityError": 8.946727803049725e-7
+    },
+    {
+      "id": "jump-rope",
+      "bytes": 26994,
+      "animations": 23,
+      "segments": 40,
+      "exactLoop": true,
+      "maxVelocityError": 0.00000569441738207388
+    },
+    {
+      "id": "burpees",
+      "bytes": 45913,
+      "animations": 26,
+      "segments": 78,
+      "exactLoop": true,
+      "maxVelocityError": 0.0000051700403957966046
+    }
+  ]
+}

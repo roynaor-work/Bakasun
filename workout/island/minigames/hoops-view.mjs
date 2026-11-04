@@ -2,12 +2,16 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261101-1';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261101-1';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261104-3';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261104-3';
+import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261101-1';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261104-3';
+import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
+import {v4ArenaEnabled} from './hoops-v4.mjs';
+import {v5Enabled} from './hoops-v5.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -19,6 +23,8 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
 export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress,onFeelAudio}){
  const V=config.view,mobile=/Android|iPhone|iPad|Mobile/i.test(globalThis.navigator?.userAgent||'');
+ // load-time breakdown (ms) for the perf page and the phone: where a slow start actually goes
+ const loadTimes={},tStart=performance.now();let tMark=tStart;const mark=name=>{const now=performance.now();loadTimes[name]=Math.round(now-tMark);tMark=now;};
  const renderer=new THREE.WebGLRenderer({canvas,antialias:quality>=2,powerPreference:'high-performance',preserveDrawingBuffer:!!V.preserve});
  let loadingScene,loadingModels,loadingAssets,loadingVfx,loadingPm,loadingEnv,loadingFeel;
  try{
@@ -28,48 +34,75 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const camera=new THREE.PerspectiveCamera(V.fov,1,0.1,200);
  const looks=teams.map(t=>t.look);
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
- scene.add(arena);
- const models=await replaceArenaAssets(arena,dyn,court,{assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
- loadingModels=models;
+ scene.add(arena);mark('arena');
+ // v4 assets (02/11) are an upgrade, never a requirement: any load failure falls back to the v3 venue and bodies
+ const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[];
+ const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
+ const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
+ let models=null;
+ // v5 (04/11): the new arena with the animated crowd, the lacquered maple and the leather ball; the quality tier picks the
+ // crowd density and the frame-time governor thins it further on a slow device (hoops-v5.mjs)
+ if(v5Enabled(config.assets,quality,params)){
+  try{const {replaceArenaAssetsV5}=await import('./hoops-v5-venue.mjs');models=await replaceArenaAssetsV5(arena,dyn,court,{...arenaOptions,v5:config.assets.v5,params,looks});}catch(error){models=null;onFallback('v5 arena',error);}
+ }
+ if(!models&&v4ArenaEnabled(config.assets,quality,params)){
+  try{models=await replaceArenaAssets(arena,dyn,court,{...arenaOptions,venue:config.assets.v4.arena});}catch(error){onFallback('arena',error);}
+ }
+ if(!models)models=await replaceArenaAssets(arena,dyn,court,arenaOptions);
+ loadingModels=models;mark('models');
+ // lacquered floor: the players, the ball and the baskets mirrored into a small target that the
+ // parquet mixes in (quality 2 only; one extra pass over the reflection layer, shadow map reused)
+ const reflectable=o=>o.traverse(c=>c.layers.enable(REFLECTION_LAYER));
+ let reflection=null;
+ const floorMesh=arena.getObjectByName('court_surface');
+ if(quality>=2&&floorMesh){reflection=createFloorReflection(renderer,scene,floorMesh,{planeY:0.008,scale:V.reflScale??0.4,maxWidth:V.reflMaxWidth??640,strength:V.reflStrength??0.42});renderer.shadowMap.autoUpdate=false;}
  // environment reflections from a dim copy of the arena lights
  const pm=new THREE.PMREMGenerator(renderer);loadingPm=pm;
  const envScene=new THREE.Scene();envScene.background=new THREE.Color(0x0b0d14);
  const lamp=new THREE.Mesh(new THREE.BoxGeometry(30,0.5,18),new THREE.MeshBasicMaterial({color:0xfff2dd}));lamp.position.y=12;envScene.add(lamp);
+ // the overhead rig: a ring of bright fixtures that reads as specular pools on the lacquered floor
+ for(let i=0;i<8;i++){const a=i/8*Math.PI*2,fx=new THREE.Mesh(new THREE.BoxGeometry(3,0.4,1.6),new THREE.MeshBasicMaterial({color:0xffffff}));fx.position.set(Math.cos(a)*14,10.5,Math.sin(a)*9);fx.rotation.y=-a;envScene.add(fx);}
  for(const s of [1,-1]){const strip=new THREE.Mesh(new THREE.BoxGeometry(40,3,0.5),new THREE.MeshBasicMaterial({color:new THREE.Color(looks[0].primary).multiplyScalar(0.6)}));strip.position.set(0,3,s*16);envScene.add(strip);}
- const envTarget=pm.fromScene(envScene,0.02);loadingEnv=envTarget;releaseScene(envScene);scene.environment=envTarget.texture;scene.environmentIntensity=V.envIntensity;
+ const envTarget=pm.fromScene(envScene,0.02);loadingEnv=envTarget;releaseScene(envScene);scene.environment=envTarget.texture;scene.environmentIntensity=V.envIntensity;mark('environment');
 
  // crowd: instanced sprites from the spectator atlas (or plain silhouettes if it fails)
  let crowd=null;
- try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
-
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress);assets.engineAnim=config.anim;loadingAssets=assets;
+ if(!models.crowd3d)try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
+ mark('crowd');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
  for(const t of teams)for(const card of t.players){cards.set(card.id,{card,look:t.look});pending.push(card.id);}
  function ensureAvatar(id){
   let av=avatars.get(id);if(av||!cards.has(id))return av;
-  const {card,look}=cards.get(id);av=createAvatar(assets,card,look,{baseHeights:config.assets.baseHeights});av.root.visible=false;scene.add(av.root);avatars.set(id,av);for(let i=0;i<teams.length;i++)if(kits.has(i)&&teams[i].players.some(p=>p.id===id))av.applyKit(kits.get(i));
+  const {card,look}=cards.get(id);av=createAvatar(assets,card,look,{baseHeights:config.assets.baseHeights});av.root.visible=false;scene.add(av.root);avatars.set(id,av);if(reflection)reflectable(av.root);for(let i=0;i<teams.length;i++)if(kits.has(i)&&teams[i].players.some(p=>p.id===id))av.applyKit(kits.get(i));
   const i=pending.indexOf(id);if(i>=0)pending.splice(i,1);
   return av;
  }
- for(const t of teams)for(const id of (t.lineup||t.players.slice(0,5).map(c=>c.id)))ensureAvatar(id);
+ for(const t of teams)for(const id of (t.lineup||t.players.slice(0,5).map(c=>c.id)))ensureAvatar(id);mark('avatars');
  const interp=createInterpPool();
 
  // the ball
- const ball=models.ball;scene.add(ball);
- const ballShadow=new THREE.Mesh(new THREE.CircleGeometry(court.ballR*1.2,24),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.35,depthWrite:false}));ballShadow.rotation.x=-Math.PI/2;scene.add(ballShadow);
+ const ball=models.ball;scene.add(ball);if(reflection)reflectable(ball);
+ // soft contact shadows: one radial-gradient disc under the ball and an instanced set under the
+ // players (the key light's shadow map gives the long shadow; this grounds the feet on every
+ // device, including quality 0 without shadow maps). The venue floor top is at y = 0.008.
+ const FLOOR_Y=0.014,blobTex=blobTexture();
+ const ballShadow=new THREE.Mesh(new THREE.CircleGeometry(court.ballR*1.6,24),new THREE.MeshBasicMaterial({map:blobTex,color:0x000000,transparent:true,opacity:0.5,depthWrite:false}));ballShadow.rotation.x=-Math.PI/2;ballShadow.renderOrder=-1;scene.add(ballShadow);
+ const blobs=new THREE.InstancedMesh(new THREE.PlaneGeometry(1.15,1.15).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({map:blobTex,color:0x000000,transparent:true,opacity:0.36,depthWrite:false}),32);blobs.renderOrder=-1;blobs.frustumCulled=false;blobs.count=0;scene.add(blobs);
+ const blobM=new THREE.Matrix4();
  // controlled-player ring and pass target marker
  const ringMat=new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.9,depthWrite:false});
- const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.68,48),ringMat);ring.rotation.x=-Math.PI/2;ring.position.y=0.012;scene.add(ring);
- const glow=new THREE.Mesh(new THREE.CircleGeometry(0.5,40),new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.22,depthWrite:false}));glow.rotation.x=-Math.PI/2;glow.position.y=0.011;scene.add(glow);
+ const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.68,48),ringMat);ring.rotation.x=-Math.PI/2;ring.position.y=0.018;scene.add(ring);
+ const glow=new THREE.Mesh(new THREE.CircleGeometry(0.5,40),new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.22,depthWrite:false}));glow.rotation.x=-Math.PI/2;glow.position.y=0.017;scene.add(glow);
  const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.16,0.34,3),ringMat);arrow.rotation.x=Math.PI;scene.add(arrow);
 
  const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
- const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;
+ const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;mark('vfx');
  const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
- const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();
+ const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();mark('feel');loadTimes.total=Math.round(performance.now()-tStart);
 
  function resize(w,h,dpr){
   state.w=w;state.h=h;state.landscape=w>=h*1.05;
@@ -77,6 +110,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const name of ['hanging_scoreboard','live-hanging-scoreboard']){const board=arena.getObjectByName(name);if(board)board.visible=state.landscape;}
   const cap=mobile?V.mobileDprCap:V.dprCap;
   renderer.setPixelRatio(Math.min(dpr||1,cap));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  reflection?.resize(canvas.width,canvas.height);
  }
 
  function cameraFor(s,dt){
@@ -162,9 +196,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right'},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
+  // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
+  let bi=0;
+  for(const av of avatars.values()){if(!av.root.visible||bi>=32)continue;const h=av.root.position.y,k=Math.max(0.35,1-h*0.9);blobM.makeScale(k,1,k);blobM.setPosition(av.root.position.x,FLOOR_Y,av.root.position.z);blobs.setMatrixAt(bi++,blobM);}
+  blobs.count=bi;blobs.instanceMatrix.needsUpdate=true;
   // ball: the engine position, but held/dribbled balls follow the hands of the clip
   const b=s.ball,pb=p0?.ball;
   let bx=pb&&!state.replay?lerp(pb.x,b.x,alpha):b.x,by=pb&&!state.replay?lerp(pb.y,b.y,alpha):b.y,bz=pb&&!state.replay?lerp(pb.z,b.z,alpha):b.z;
@@ -177,13 +215,19 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    } else if(handler.act==='pass'){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);bx=v.x;by=v.y;bz=v.z;
    } else {
-    // dribble: the ball travels hand -> floor -> hand in rhythm with the dribbling hand
-    r.getWorldPosition(v);
-    if(handler.act==='cross'){l.getWorldPosition(v2);v.lerp(v2,Math.sin(clamp(handler.actT/.55,0,1)*Math.PI));}
-    const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,Math.hypot(handler.vx,handler.vz)/2.2+0.7));
-    const u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),h=Math.max(court.ballR,v.y-0.05);
+    // dribble (v4): a real bounce from the hand to the floor and back (quick push down, slower
+    // rise), the hand pumping with it, a faster and lower dribble at speed, and a crossover
+    // that bounces the ball low across the body to the other hand and back
+    r.getWorldPosition(v);const speed=Math.hypot(handler.vx,handler.vz),fast=clamp((speed-0.6)/4.5,0,1);
+    const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,speed/2.2+0.7)),pump=av.dribblePump||0;
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);
-    bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+(h-court.ballR)*Math.pow(Math.abs(1-2*u),0.85);
+    let u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),top=Math.max(court.ballR+0.1,v.y+pump-0.05-0.14*fast);
+    if(handler.act==='cross'){
+     const c=clamp(handler.actT/.55,0,1),swing=c<.5?c/.5:1-(c-.5)/.5;l.getWorldPosition(v2);v.lerp(v2,swing*swing*(3-2*swing));
+     u=(c*2)%1;top=Math.max(court.ballR+0.1,v.y-0.05)*0.7;
+    }
+    const drop=top-court.ballR;av.dribbleCtx={u,drop:Math.min(0.28,drop*0.3)};
+    bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+drop*dribbleHeight(u);
    }
   }
   // smooth the hand-off when the engine takes over (release, pass)
@@ -192,7 +236,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   ball.position.set(bx,by,bz);ball.rotation.x+=dt*(b.state==='shot'?-12:b.state==='pass'?-9:0);
   state.ballVis={x:bx,y:by,z:bz,state:b.state};
   ball.visible=b.state!=='dead'||!!handler||s.phase==='inbound'||s.phase==='freethrow';
-  ballShadow.position.set(bx,0.006,bz);ballShadow.material.opacity=clamp(0.42-by*0.08,0.08,0.42);ballShadow.visible=ball.visible;
+  ballShadow.position.set(bx,FLOOR_Y,bz);ballShadow.material.opacity=clamp(0.55-by*0.1,0.1,0.55);const bs=1+by*0.25;ballShadow.scale.set(bs,bs,1);ballShadow.visible=ball.visible;
   // controlled player marker
   if(me&&!state.replay){const mi=interp.get(me,alpha);ring.visible=true;ring.position.x=mi.x;ring.position.z=mi.z;glow.visible=true;glow.position.x=mi.x;glow.position.z=mi.z;const pulse=1+Math.sin(performance.now()*0.008)*0.06;ring.scale.setScalar(pulse);arrow.visible=true;arrow.position.set(mi.x,me.hasBall?2.75:2.6,mi.z);arrow.rotation.y+=dt*2;}
   else {ring.visible=false;glow.visible=false;arrow.visible=false;}
@@ -200,15 +244,20 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
   dyn.led.offset.x=(dyn.led.offset.x+dt*0.03)%1;
   drawDisplays(dyn,s,looks.map(l=>l.primary));
-  if(crowd)crowd.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
+  if(crowd)crowd.update(dt,state.cheer||0);else models.crowdV5?.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
   if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else cameraFor(s,dt);
   if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
   const feedback=feel.update(presentationDt,s);
   if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
   vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
+  // metrics: `calls`/`triangles` stay the main pass (comparable with earlier measurements; three.js
+  // resets its counters after the shadow pass); the reflection pass is counted separately
+  // the mirrored pass runs every V.reflEvery-th frame (default 2): the picture is soft anyway, and
+  // the skinned players are the whole cost of the pass; the shadow map refreshes with it
+  if(reflection){renderer.shadowMap.needsUpdate=true;if(state.frames%(V.reflEvery??2)===0){renderer.info.reset();reflection.update(camera);state.reflCalls=renderer.info.render.calls;state.reflTris=renderer.info.render.triangles;}}
   renderer.render(scene,camera);
   if(state.replay?.complete){const done=state.replay.done;state.replay=null;done?.();}
-  state.lastFrameMs=performance.now()-t0;state.frames++;
+  state.lastFrameMs=performance.now()-t0;if(!state.frames)loadTimes.firstFrame=Math.round(state.lastFrameMs);state.frames++;
  }
 
  function replayFrame(dt){
@@ -257,7 +306,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||0,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:1,clipCount:assets.clips.size,arenaVersion:models.version,baked:models.baked,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||0,crowdLevel:models.crowdV5?.level??null,v5:!!models.v5,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
@@ -265,11 +314,11 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   state.replay={frames,t:0,elapsed:0,speed,done,dunk:!!shooter&&!vfx.reducedMotion,contact,first:Math.max(start,contact-90),side,entry:{position:camera.position.clone(),quaternion:camera.quaternion.clone(),fov:camera.fov}};return true;
  }
  function dispose(){
-  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();
+  for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();reflection?.dispose();
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
+ return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
  }catch(error){
   loadingFeel?.dispose();loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
  }
@@ -280,14 +329,16 @@ async function buildCrowd(spots,url,grid,quality){
  const [cols,rows]=grid,people=cols*rows/2;
  const pick=quality>=2?spots:spots.filter((_,i)=>i%2===0);
  const geo=new THREE.PlaneGeometry(0.62,0.93);geo.translate(0,0.43,0);
- const mat=new THREE.MeshBasicMaterial({map:tex,color:'#9eaabd',transparent:false,alphaTest:0.5,side:THREE.DoubleSide});
- const cell=new Float32Array(pick.length*2);
- geo.setAttribute('cell',new THREE.InstancedBufferAttribute(cell,2));
+ // spectators sit in the dark beyond the court light: a cooler, dimmer tint than the players,
+ // and each row further back is darker again (stadium falloff), with a little per-seat variation
+ const mat=new THREE.MeshBasicMaterial({map:tex,color:'#7c86a0',transparent:false,alphaTest:0.5,side:THREE.DoubleSide});
+ const cell=new Float32Array(pick.length*2),shade=new Float32Array(pick.length);
+ geo.setAttribute('cell',new THREE.InstancedBufferAttribute(cell,2));geo.setAttribute('shade',new THREE.InstancedBufferAttribute(shade,1));
  mat.onBeforeCompile=sh=>{
   sh.uniforms.uGrid={value:new THREE.Vector2(cols,rows)};sh.uniforms.uCheer={value:0};mat.userData.sh=sh;
-  sh.vertexShader=sh.vertexShader.replace('#include <uv_pars_vertex>','#include <uv_pars_vertex>\nattribute vec2 cell;uniform vec2 uGrid;uniform float uCheer;varying vec2 vCellUv;')
-   .replace('#include <uv_vertex>','#include <uv_vertex>\nfloat cheering=step(fract(cell.y*7.31),uCheer);float idx=cell.x*2.0+cheering;float col=mod(idx,uGrid.x);float row=floor(idx/uGrid.x);vCellUv=vec2((col+uv.x)/uGrid.x,1.0-(row+1.0-uv.y)/uGrid.y);');
-  sh.fragmentShader=sh.fragmentShader.replace('#include <map_pars_fragment>','#include <map_pars_fragment>\nvarying vec2 vCellUv;').replace('#include <map_fragment>','vec4 sampledDiffuseColor=texture2D(map,vCellUv);diffuseColor*=sampledDiffuseColor;');
+  sh.vertexShader=sh.vertexShader.replace('#include <uv_pars_vertex>','#include <uv_pars_vertex>\nattribute vec2 cell;attribute float shade;uniform vec2 uGrid;uniform float uCheer;varying vec2 vCellUv;varying float vShade;')
+   .replace('#include <uv_vertex>','#include <uv_vertex>\nfloat cheering=step(fract(cell.y*7.31),uCheer);float idx=cell.x*2.0+cheering;float col=mod(idx,uGrid.x);float row=floor(idx/uGrid.x);vCellUv=vec2((col+uv.x)/uGrid.x,1.0-(row+1.0-uv.y)/uGrid.y);vShade=shade;');
+  sh.fragmentShader=sh.fragmentShader.replace('#include <map_pars_fragment>','#include <map_pars_fragment>\nvarying vec2 vCellUv;varying float vShade;').replace('#include <map_fragment>','vec4 sampledDiffuseColor=texture2D(map,vCellUv);diffuseColor*=sampledDiffuseColor;diffuseColor.rgb*=vShade;');
  };
  const mesh=new THREE.InstancedMesh(geo,mat,pick.length);
  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler(),sc=new THREE.Vector3();
@@ -295,8 +346,14 @@ async function buildCrowd(spots,url,grid,quality){
  pick.forEach((s,i)=>{
   e.set(0,s.face,0);q.setFromEuler(e);const k=0.92+r()*0.16;sc.set(k,k,k);
   m.compose(new THREE.Vector3(s.x+(r()-0.5)*0.08,s.y,s.z),q,sc);mesh.setMatrixAt(i,m);
-  cell[i*2]=Math.floor(r()*people);cell[i*2+1]=r();
+  cell[i*2]=Math.floor(r()*people);cell[i*2+1]=r();shade[i]=(1-Math.min(0.45,(s.row||0)*0.07))*(0.82+r()*0.18);
  });
  mesh.receiveShadow=false;mesh.castShadow=false;
  return {mesh,count:pick.length,update(dt,cheer){const sh=mat.userData.sh;if(sh)sh.uniforms.uCheer.value=cheer*0.85;}};
+}
+
+function blobTexture(size=128){
+ const c=typeof OffscreenCanvas!=='undefined'?new OffscreenCanvas(size,size):Object.assign(document.createElement('canvas'),{width:size,height:size}),g=c.getContext('2d');
+ const gr=g.createRadialGradient(size/2,size/2,0,size/2,size/2,size/2);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(0.45,'rgba(255,255,255,0.75)');gr.addColorStop(1,'rgba(255,255,255,0)');
+ g.fillStyle=gr;g.fillRect(0,0,size,size);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;
 }

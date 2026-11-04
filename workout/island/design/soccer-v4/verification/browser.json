@@ -1,0 +1,349 @@
+{
+  "pass": true,
+  "sourceSha256": {
+    "goalkeeper.glb": "4cc52a5abb692add49979b67668a2876b0c668f013c5627984fddfdf000d5316",
+    "soccer-player.glb": "ef4dcd3343933031023057d5a954eb9e6e08b3294a47a26aa433608c2527cb74",
+    "soccer-stadium.glb": "f969b395d59b4002940102a3627a9d5fef95dcae86cdcb56a53f28c3fc567ae9"
+  },
+  "clips": [
+    {
+      "model": "player",
+      "clip": "idle",
+      "duration": 1.7999999523162842,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -5.849297065457783e-08
+    },
+    {
+      "model": "player",
+      "clip": "run",
+      "duration": 0.7200000286102295,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.000945640036332199
+    },
+    {
+      "model": "player",
+      "clip": "sprint",
+      "duration": 0.5600000023841858,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.0012607460231753716
+    },
+    {
+      "model": "player",
+      "clip": "kick",
+      "duration": 0.6800000071525574,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -2.162373956904329e-05
+    },
+    {
+      "model": "player",
+      "clip": "pass",
+      "duration": 0.8600000143051147,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.0003073010252857417
+    },
+    {
+      "model": "player",
+      "clip": "throw_in",
+      "duration": 1.8200000524520874,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": 3.224520584571567e-08
+    },
+    {
+      "model": "keeper",
+      "clip": "idle",
+      "duration": 1.7999999523162842,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -7.636437882041491e-08
+    },
+    {
+      "model": "keeper",
+      "clip": "run",
+      "duration": 0.7200000286102295,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.0009456884196630891
+    },
+    {
+      "model": "keeper",
+      "clip": "sprint",
+      "duration": 0.5600000023841858,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.0012608282220648095
+    },
+    {
+      "model": "keeper",
+      "clip": "kick",
+      "duration": 0.6800000071525574,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -2.1632623024230024e-05
+    },
+    {
+      "model": "keeper",
+      "clip": "pass",
+      "duration": 0.8600000143051147,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.00030744517415812883
+    },
+    {
+      "model": "keeper",
+      "clip": "throw_in",
+      "duration": 1.8200000524520874,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": 3.8383331249502994e-08
+    },
+    {
+      "model": "keeper",
+      "clip": "keeper_throw",
+      "duration": 1.1799999475479126,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -1.641521713005578e-05
+    },
+    {
+      "model": "keeper",
+      "clip": "keeper_punt",
+      "duration": 1.649999976158142,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.00010639541594451712
+    },
+    {
+      "model": "keeper",
+      "clip": "keeper_dive_left",
+      "duration": 1.4500000476837158,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.000168972275041257
+    },
+    {
+      "model": "keeper",
+      "clip": "keeper_dive_right",
+      "duration": 1.4500000476837158,
+      "finite": true,
+      "skinned": true,
+      "minLocalY": -0.00010393809984642066
+    }
+  ],
+  "layouts": [
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "width": 844,
+      "canvas": {
+        "x": 14,
+        "y": 77,
+        "width": 597,
+        "height": 266,
+        "top": 77,
+        "right": 611,
+        "bottom": 343,
+        "left": 14
+      },
+      "buttons": [
+        {
+          "text": "\u05de\u05d2\u05e8\u05e9",
+          "width": 108.1875,
+          "height": 44
+        },
+        {
+          "text": "\u05d9\u05e6\u05d9\u05e2\u05d9\u05dd",
+          "width": 108.203125,
+          "height": 44
+        },
+        {
+          "text": "\u05e9\u05d7\u05e7\u05df",
+          "width": 108.203125,
+          "height": 44
+        },
+        {
+          "text": "\u05e9\u05d5\u05e2\u05e8",
+          "width": 108.203125,
+          "height": 44
+        },
+        {
+          "text": "\u05d3\u05e9\u05d0",
+          "width": 108.203125,
+          "height": 44
+        },
+        {
+          "text": "\u05e0\u05d9\u05d2\u05d5\u05df \u25b6",
+          "width": 143,
+          "height": 44
+        },
+        {
+          "text": "\u05d1\u05d9\u05ea",
+          "width": 98,
+          "height": 44
+        },
+        {
+          "text": "\u05d7\u05d5\u05e5",
+          "width": 98,
+          "height": 44
+        },
+        {
+          "text": "\u05d0\u05d9\u05e4\u05d5\u05e1 \u05d4\u05de\u05d1\u05d8 \u2197",
+          "width": 205,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "width": 390,
+      "canvas": {
+        "x": 14,
+        "y": 93,
+        "width": 362,
+        "height": 438.875,
+        "top": 93,
+        "right": 376,
+        "bottom": 531.875,
+        "left": 14
+      },
+      "buttons": [
+        {
+          "text": "\u05de\u05d2\u05e8\u05e9",
+          "width": 66,
+          "height": 44
+        },
+        {
+          "text": "\u05d9\u05e6\u05d9\u05e2\u05d9\u05dd",
+          "width": 66,
+          "height": 44
+        },
+        {
+          "text": "\u05e9\u05d7\u05e7\u05df",
+          "width": 66,
+          "height": 44
+        },
+        {
+          "text": "\u05e9\u05d5\u05e2\u05e8",
+          "width": 66,
+          "height": 44
+        },
+        {
+          "text": "\u05d3\u05e9\u05d0",
+          "width": 66,
+          "height": 44
+        },
+        {
+          "text": "\u05e0\u05d9\u05d2\u05d5\u05df \u25b6",
+          "width": 168,
+          "height": 44
+        },
+        {
+          "text": "\u05d1\u05d9\u05ea",
+          "width": 172.5,
+          "height": 44
+        },
+        {
+          "text": "\u05d7\u05d5\u05e5",
+          "width": 172.5,
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "path": "previews/main.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "71d92fb686d5f8247f6ed70a12ac4e6f693bd7d1b7c3d1fc6f34c857aa543a9c"
+    },
+    {
+      "path": "previews/stadium.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "4ee46aaf1f97c8b342a5d286f987447184789eeb24f56eb7d06655a55d0f108e"
+    },
+    {
+      "path": "previews/turf.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "4d4da26a003e2f7438ad0a59292b991b8d60c7cb37fb0c25309b4ab873938b06"
+    },
+    {
+      "path": "previews/player.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "c508b527797807e69715958dd6453bccbf9341a15f844b155ce8954a521f24f2"
+    },
+    {
+      "path": "previews/keeper.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "76d533b3c5f0f26646ebe5b8f600d99802b91298cab8ab0fe069707f8249d06d"
+    },
+    {
+      "path": "previews/away-kit.webp",
+      "size": [
+        936,
+        676
+      ],
+      "sha256": "54563c46b9a7ea8365136178994460884c36010b9de4b68c74e298cca48ffb2e"
+    },
+    {
+      "path": "previews/main-844x390.webp",
+      "size": [
+        597,
+        266
+      ],
+      "sha256": "1df963f4a42d0d9e1294b7144a514a3f22d25081ffeaa4c29954a6816d4e1d5c"
+    },
+    {
+      "path": "previews/main-390x844.webp",
+      "size": [
+        362,
+        439
+      ],
+      "sha256": "e9b2b97a56a8e230f77cc684fc51f11c64d338ba7c95eda66f268722b4f726fc"
+    }
+  ],
+  "renderSnapshot": {
+    "calls": 28,
+    "triangles": 327590,
+    "textures": 10,
+    "actors": 8,
+    "errors": []
+  },
+  "kitChange": true,
+  "recolour": {
+    "regions": 5211,
+    "preserved": 8509,
+    "wrong": 0
+  },
+  "pauseResumeScrub": true,
+  "errors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "limits": "Software Chromium; no physical-phone FPS claim. Main camera is the package camera, not a live-game integration."
+}

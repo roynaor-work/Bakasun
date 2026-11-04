@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium SwiftShader (software WebGL; not a phone benchmark)",
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'",
+  "checks": [
+    "three environments at 844x390 and 390x844",
+    "final GLBs loaded by GLTFLoader",
+    "local PNG/WebP images decoded",
+    "landing/powder instances expire",
+    "manual atlas frame selection",
+    "rapid switching and orientation change",
+    "reduced motion",
+    "no horizontal overflow",
+    "no console/page errors",
+    "no failed responses",
+    "no external requests"
+  ],
+  "captures": [
+    {
+      "environment": "sunset",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "output": "previews/sunset-844x390.webp",
+      "loadedModels": [
+        "safety-fence-sunset",
+        "route-marker-sunset"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 32434
+    },
+    {
+      "environment": "fog",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "output": "previews/fog-844x390.webp",
+      "loadedModels": [
+        "safety-fence-fog",
+        "route-marker-fog"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 27968
+    },
+    {
+      "environment": "night-floodlit",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "output": "previews/night-floodlit-844x390.webp",
+      "loadedModels": [
+        "safety-fence-night-floodlit",
+        "route-marker-night-floodlit",
+        "floodlight-tower"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 28226
+    },
+    {
+      "environment": "sunset",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "output": "previews/sunset-390x844.webp",
+      "loadedModels": [
+        "safety-fence-sunset",
+        "route-marker-sunset"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 30286
+    },
+    {
+      "environment": "fog",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "output": "previews/fog-390x844.webp",
+      "loadedModels": [
+        "safety-fence-fog",
+        "route-marker-fog"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 25884
+    },
+    {
+      "environment": "night-floodlit",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "output": "previews/night-floodlit-390x844.webp",
+      "loadedModels": [
+        "safety-fence-night-floodlit",
+        "route-marker-night-floodlit",
+        "floodlight-tower"
+      ],
+      "noHorizontalOverflow": true,
+      "screenshotBytes": 27132
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "externalRequests": []
+}

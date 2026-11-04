@@ -1,14 +1,37 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-v2-20261101-1';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261101-1';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-v2-20261104-3';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261104-3';
 import {installSoccerDesignScreens} from '../minigames/soccer-design-screens.mjs';
+import {registerOfflineWorker,downloadGames} from './offline.mjs?v=island-v2-20261104-3';
+import {reportPanel} from './load-report.mjs?v=island-v2-20261104-3';
 installSoccerDesignScreens();
 // Menu presentation is ready on first entry, before a match creates its renderer.
 if(typeof document!=='undefined'&&!document.querySelector('link[data-ultra-soccer-ui]')){
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-v2-20261101-1',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-v2-20261104-3',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
 }
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
+/** The soccer menu warms the match assets while the child reads the card: the
+ * authored motion library, the control/tactics contracts, the decoded and
+ * floor-baked characters (shared by every match on this page) and the stadium
+ * files in the HTTP cache. Kickoff then waits only for the renderer. Failures
+ * are ignored here; the match itself reports them. Runs once per page. */
+let warmed=false;
+/** Kept for callers of the old soccer-only download: now the shared island download. */
+export const registerSoccerAssetWorker=registerOfflineWorker;
+export const downloadSoccerAssets=async onProgress=>{const r=await downloadGames({games:['soccer'],onProgress:p=>onProgress?.(p.done,p.total)});return {total:r.total,failed:r.failed.map(f=>f.href),version:r.version};};
+export function warmSoccerAssets(){
+  if(warmed||typeof document==='undefined')return;warmed=true;
+  registerSoccerAssetWorker();
+  const start=()=>{
+    import('../minigames/soccer-design-character.mjs').then(m=>m.prepareSoccerDesignSources()).catch(()=>{});
+    import('../minigames/soccer-design-contracts.mjs').then(m=>m.loadSoccerDesignContracts()).catch(()=>{});
+    const design=new URL('../design/',import.meta.url);
+    for(const path of ['models2/soccer-stadium.glb','models/soccer-goal.glb','models/soccer-ball.glb','environment/textures/grass-mown.webp','environment/textures/stand-concrete.webp','environment/textures/crowd-dots.webp','environment/backgrounds/stadium-day-landscape.webp','environment/backgrounds/stadium-day-portrait.webp','vfx/atlases/goal-burst.json','vfx/atlases/confetti.json','vfx/atlases/landing-dust.json'])fetch(new URL(path,design),{credentials:'same-origin'}).catch(()=>{});
+  };
+  (globalThis.requestIdleCallback||(fn=>setTimeout(fn,250)))(start);
+}
 /** Local SVG portrait uses only the validated avatar palette; names remain text. */
 export function playerCard(state,balance,t,{starsAdded}={}) {
+  warmSoccerAssets();
   const card=state.soccerCard,identity=state.soccerRoster?.players[0],rating=cardRating(card,balance),root=node('article',`soccer-player-card ${rating.tier}`);
   if(identity){rating.overall=Math.round(['pace','shot','pass','defense'].reduce((sum,key)=>sum+identity.attributes[key],0)/4);rating.tier=rating.overall>=balance.card.goldRating?'gold':rating.overall>=balance.card.silverRating?'silver':'bronze';root.className=`soccer-player-card ${rating.tier}`;}
   root.dataset.playerCard=rating.tier;root.setAttribute('aria-label',t('soccer.card'));
@@ -28,6 +51,7 @@ export function playerCard(state,balance,t,{starsAdded}={}) {
   const profile=identity?rosterCards(balance,{players:state.players.map((p,i)=>({...p,card:state.soccerRoster.players[i]}))},card)[0]:null;
   for(const key of attributes){const row=node('div',''),value=profile?.[{power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key]]??card.attributes[key];row.append(node('dt','',t(`soccer.attribute.${key}`)),node('dd','',String(value)));list.append(row);}root.append(list);
   root.append(node('p','soccer-wallet',t('soccer.wallet',{stars:card.stars})));
+  const savedReport=reportPanel('soccer');if(savedReport)root.append(savedReport);
   if(starsAdded!==undefined)root.append(node('p','soccer-stars-added',t('soccer.starsAdded',{stars:starsAdded})));
   return root;
 }

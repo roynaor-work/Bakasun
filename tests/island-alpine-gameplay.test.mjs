@@ -89,16 +89,59 @@ test('Alpine opposing keyboard directions stay neutral while the analog stick is
 });
 
 test('Alpine changing steering surface releases the previous pointer and cannot resume its stale target', () => {
-  for (const first of ['canvas', 'joystick']) {
-    const c = controls(), second = first === 'canvas' ? 'joystick' : 'canvas';
-    fire(c[first], 'pointerdown', {pointerId: 1, clientX: first === 'canvas' ? 200 : 110, pointerType: 'touch'});
-    if (first === 'canvas') fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 300});
-    assert.ok(c.input.sample({x: 0, lean: 0}).steer > .9);
-    fire(c[second], 'pointerdown', {pointerId: 2, clientX: second === 'canvas' ? 200 : 10, pointerType: 'touch'});
-    assert.equal(c.captures.has(1), false, 'the previous surface releases its pointer capture');
-    fire(c[second], 'pointerup', {pointerId: 2}); assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0, first);
-    assert.equal(c.input.dragging, false); c.input.dispose();
-  }
+  // A slope drag (right half) is replaced when the stick is pressed: one steering source at a time.
+  const c = controls();
+  fire(c.canvas, 'pointerdown', {pointerId: 1, clientX: 300, pointerType: 'touch'}); fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 380});
+  assert.ok(c.input.sample({x: 0, lean: 0}).steer > .9);
+  fire(c.joystick, 'pointerdown', {pointerId: 2, clientX: 10, pointerType: 'touch'});
+  assert.equal(c.captures.has(1), false, 'the previous surface releases its pointer capture');
+  fire(c.joystick, 'pointerup', {pointerId: 2}); assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0);
+  assert.equal(c.input.dragging, false); c.input.dispose();
+  // ctrl-ski: a second finger on the slope never takes the stick away from the first.
+  const d = controls();
+  fire(d.joystick, 'pointerdown', {pointerId: 1, clientX: 110, pointerType: 'touch'});
+  assert.ok(d.input.sample({x: 0, lean: 0}).steer > .9);
+  fire(d.canvas, 'pointerdown', {pointerId: 2, clientX: 300, pointerType: 'touch'}); fire(d.canvas, 'pointermove', {pointerId: 2, clientX: 100});
+  assert.equal(d.captures.has(1), true, 'the stick keeps its pointer'); assert.ok(d.input.sample({x: 0, lean: 0}).steer > .9, 'and its value');
+  fire(d.canvas, 'pointerup', {pointerId: 2}); assert.ok(d.input.sample({x: 0, lean: 0}).steer > .9);
+  fire(d.joystick, 'pointerup', {pointerId: 1}); assert.equal(d.input.sample({x: 0, lean: 0}).steer, 0); d.input.dispose();
+});
+
+test('Alpine floating stick: the left half of the slope puts the stick under the thumb, a thumb drift drags its origin, release goes home', () => {
+  const R = 52, c = controls(); c.canvas.getBoundingClientRect = () => ({left: 0, top: 0, width: 400, height: 300});
+  c.joystick.getBoundingClientRect = () => ({left: 10, top: 180, width: 120, height: 120});
+  // Radius = (120/2 - 8) * .62 = R px: full lock at 32 px from where the thumb landed.
+  fire(c.canvas, 'pointerdown', {pointerId: 1, clientX: 150, clientY: 200, pointerType: 'touch'});
+  assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0, 'landing alone does not steer');
+  assert.equal(c.joystick.dataset.floating, 'true'); assert.match(c.joystick.style.transform, /translate\(/);
+  fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 150 + (R / 2)});
+  assert.ok(Math.abs(c.input.sample({x: 0, lean: 0}).steer - .5) < .01, 'half the reach is half steer from the landing point');
+  fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 150 + R * 3}); assert.equal(c.input.sample({x: 0, lean: 0}).steer, 1);
+  // The origin followed the thumb to within 1.25 reach: 1.25 reach back is centre, 2.25 reach back is full left.
+  fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 150 + R * 3 - R * 1.25});
+  assert.ok(Math.abs(c.input.sample({x: 0, lean: 0}).steer) < .01, 'the dragged origin is the new centre');
+  fire(c.canvas, 'pointermove', {pointerId: 1, clientX: 0}); assert.equal(c.input.sample({x: 0, lean: 0}).steer, -1);
+  fire(c.canvas, 'pointerup', {pointerId: 1});
+  assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0); assert.equal(c.joystick.style.transform, ''); assert.equal(c.joystick.dataset.floating, undefined);
+  assert.equal(c.captures.has(1), false); assert.equal(c.input.dragging, false);
+  // Every release path clears it.
+  for (const end of ['pointercancel', 'lostpointercapture']) { fire(c.canvas, 'pointerdown', {pointerId: 3, clientX: 100, clientY: 200, pointerType: 'touch'}); fire(c.canvas, 'pointermove', {pointerId: 3, clientX: 170}); assert.ok(c.input.sample({x: 0, lean: 0}).steer > .9); fire(c.canvas, end, {pointerId: 3}); assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0, end); }
+  fire(c.canvas, 'pointerdown', {pointerId: 4, clientX: 100, clientY: 200, pointerType: 'touch'}); fire(c.canvas, 'pointermove', {pointerId: 4, clientX: 140}); fire(c.win, 'blur'); assert.equal(c.input.sample({x: 0, lean: 0}).steer, 0, 'blur'); assert.equal(c.joystick.style.transform, '');
+  c.input.dispose();
+});
+
+test('Alpine multi-touch: steering with the left thumb while boost and tricks are pressed with the right', () => {
+  const doc = new EventTarget(), win = new EventTarget(); doc.defaultView = win; doc.hidden = false;
+  const caps = new Set(), canvas = Object.assign(new EventTarget(), {ownerDocument: doc, dataset: {}, style: {}, getBoundingClientRect: () => ({left: 0, top: 0, width: 800, height: 380}), setPointerCapture: id => caps.add(id), hasPointerCapture: id => caps.has(id), releasePointerCapture: id => caps.delete(id)});
+  const joystick = Object.assign(new EventTarget(), {dataset: {}, style: {}, setAttribute() {}, querySelector: () => ({style: {}}), getBoundingClientRect: () => ({left: 20, top: 250, width: 112, height: 112})});
+  const boost = Object.assign(new EventTarget(), {disabled: false}), grab = Object.assign(new EventTarget(), {disabled: false, dataset: {trick: 'grab'}});
+  const input = createAlpineControls({canvas, boostButton: boost, joystick, trickButtons: [grab], config: {trackHalfWidth: 10}});
+  fire(canvas, 'pointerdown', {pointerId: 1, clientX: 120, clientY: 300, pointerType: 'touch'}); fire(canvas, 'pointermove', {pointerId: 1, clientX: 160});
+  fire(boost, 'pointerdown', {pointerId: 2, pointerType: 'touch'});
+  let sample = input.sample({x: 0, lean: 0}); assert.equal(sample.boost, true); assert.ok(sample.steer > .9, 'the boost tap leaves the stick alone');
+  fire(grab, 'pointerdown', {pointerId: 3, pointerType: 'touch'}); sample = input.sample({x: 0, lean: 0}); assert.equal(sample.trick, 'grab'); assert.ok(sample.steer > .9);
+  fire(canvas, 'pointerdown', {pointerId: 4, clientX: 700, clientY: 200, pointerType: 'touch'}); assert.ok(input.sample({x: 0, lean: 0}).steer > .9, 'a stray right-hand touch on the slope does not steal the stick');
+  input.dispose();
 });
 
 function motionPlayer() {
@@ -141,4 +184,48 @@ test('Alpine joystick reaches full lock at 62% of its travel by default', () => 
   assert.ok(Math.abs(input.sample({x: 0, lean: 0}).steer - 1) < .01, 'full lock at 62% of the radius');
   fire(joystick, 'pointermove', {pointerId: 1, clientX: 60 + 52 * .31, pointerType: 'touch'});
   assert.ok(Math.abs(input.sample({x: 0, lean: 0}).steer - .5) < .01, 'half the reach is half steer'); input.dispose();
+});
+
+// ---------- ctrl-ski (04/11): body-first response and the left-stick layout ----------
+const steerModule = await import('../workout/island/minigames/alpine-steer.mjs');
+const MS = 1000 / 60;
+function benchEngine() {
+  const b = structuredClone(base); b.physics.grid = [{s: 0, x: 0}, ...Array.from({length: 5}, (_, i) => ({s: -200 - i * 5, x: i * 2 - 4}))];
+  const e = createAlpineEngine({balance: b, stage: 1, seed: 9, course: {id: 'bench', length: 2400, objects: [], rows: [], path: null, coins: 0}}); e.command({type: 'start'});
+  while (e.phase === 'countdown') e.step(1 / 60);
+  for (let i = 0; i < 480; i++) { e.command({type: 'steer', value: 0}); e.step(1 / 60); } return e;
+}
+test('Alpine ctrl-ski: the displayed body leans within 100 ms of the stick (worst case with one frame to sample and one to show), on foot and in boost', () => {
+  for (const boosting of [false, true]) {
+    const e = benchEngine(); if (boosting) { e.command({type: 'boost'}); for (let i = 0; i < 120; i++) e.step(1 / 60); }
+    let tilt = 0, frames = null;
+    for (let n = 1; n <= 20 && frames === null; n++) { e.command({type: 'steer', value: 1}); e.step(1 / 60); tilt = steerModule.followBody(tilt, steerModule.bodyTarget(e.snapshot().player), 1 / 60); if (Math.abs(tilt) >= .2) frames = n; }
+    assert.ok(frames !== null && frames * MS + 2 * MS <= 100, `${boosting ? 'boost' : 'cruise'}: visible after ${frames} ticks`);
+    // And the engine did not need to be changed to move the track: the real lean (lateral speed) is still the slower signal.
+    assert.ok(e.snapshot().player.intent >= e.snapshot().player.lean - 1e-9, 'intent leads lean');
+  }
+});
+
+test('Alpine ctrl-ski: intent is exported for the body, the body falls back to lean without it, and release returns upright', () => {
+  assert.equal(steerModule.bodyTarget({lean: .7}), .7); assert.equal(steerModule.bodyTarget({lean: .1, intent: .9}), .9); assert.equal(steerModule.bodyTarget({lean: .3, intent: 0}), .3, 'released stick: the real drift is shown');
+  let t = 0; for (let i = 0; i < 12; i++) t = steerModule.followBody(t, 1, 1 / 60); assert.ok(t > .85, `leans in fast: ${t}`);
+  for (let i = 0; i < 18; i++) t = steerModule.followBody(t, 0, 1 / 60); assert.ok(Math.abs(t) < .15, `comes up in 300 ms: ${t}`);
+  let r = 1; r = steerModule.followBody(r, -1, 1 / 60); assert.ok(r < 1 - .3, 'reversal uses the fast rate');
+  const pose = steerModule.carvePose(1, 1), slow = steerModule.carvePose(1, 0); assert.ok(pose.roll < slow.roll && slow.roll < 0, 'banks into a right turn, more at speed'); assert.ok(Math.abs(pose.yaw - .24) < 1e-9);
+});
+
+test('Alpine ctrl-ski: shaping at speed softens the attack only, never the ceiling; speed caps and calibration rails hold', () => {
+  const P = base.physics; assert.ok(P.steerBoostSoften > 0 && P.steerBoostSoften < .5 && P.lateralBoostDamp <= .1);
+  const e = benchEngine(); for (let i = 0; i < 400; i++) { e.command({type: 'steer', value: 0}); e.step(1 / 60); assert.ok(e.debug()[0].speed <= P.baseSpeed + 1e-9); }
+  const top = benchEngine(); top.command({type: 'boost'}); for (let i = 0; i < 300; i++) { top.command({type: 'steer', value: 1}); top.step(1 / 60); assert.ok(top.debug()[0].speed <= P.boostSpeed + 1e-9); }
+  assert.ok(P.lateralResponse >= 9 && P.steerExpo <= 1.3 && P.steerAttack >= 18, 'response never drops below the previous tuning');
+});
+
+test('Alpine ctrl-ski: the stick is always on the left, the actions always on the right: no mirror switch, no saved side, no direction dependence', async () => {
+  const css = (await Promise.all(['alpine.css', 'alpine-screen.css', 'alpine-clean.css', 'alpine-polish.css', 'alpine-feel.css'].map(f => readFile(new URL(`../workout/island/minigames/${f}`, import.meta.url), 'utf8')))).join('\n');
+  assert.doesNotMatch(css, /left-handed|movement-side|data-movement-side|data-action-side|row-reverse|data-hand/i);
+  assert.match(css, /\.alpine-footer\{direction:ltr!important;flex-direction:row!important/);
+  const source = (await Promise.all(['alpine-session.mjs', 'alpine-controls.mjs', 'alpine-screen.mjs'].map(f => readFile(new URL(`../workout/island/minigames/${f}`, import.meta.url), 'utf8')))).join('\n');
+  assert.doesNotMatch(source, /handed|handedness|controlSides|setHanded|island\.alpine\.(hand|side)/i, 'no handedness or side setting is read');
+  assert.ok(source.indexOf("footer.append(joystick, center, actions)") > 0, 'DOM order: stick first, actions last');
 });

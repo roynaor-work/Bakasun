@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as C from '../north/js/cart.js';
 import { PRODUCTS, BUILD, byId } from '../north/js/products.js';
 import { SHIPPING } from '../north/js/config.js';
+import { existsSync } from 'node:fs';
 
 const p = byId('single-malt');
 const item = { id: p.id, name: p.name, price: p.price, img: p.img };
@@ -64,7 +65,7 @@ test('מספר הזמנה ותקציר', () => {
 test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי ערבית', () => {
   const ids = new Set(PRODUCTS.map(p => p.id)); assert.equal(ids.size, PRODUCTS.length);
   for (const p of PRODUCTS) {
-    assert.ok(p.img.startsWith('https://')); assert.ok(p.contents.length >= 3); assert.ok(p.price > 0);
+    for (const f of [p.img, p.img2]) { assert.ok(f.startsWith('img/v2/'), p.id + ' תמונה מקומית'); assert.ok(existsSync(new URL('../north/' + f, import.meta.url)), p.id + ' הקובץ ' + f + ' קיים'); } assert.ok(p.contents.length >= 3); assert.ok(p.price > 0);
     if (p.kosher === false) {
       assert.ok(p.kosherNote, p.id + ' לא כשר בלי פירוט');
       // הפריט שבגללו המארז לא כשר חייב להופיע בתכולה (שורש של 4 אותיות משותף)
@@ -72,6 +73,7 @@ test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי �
       assert.ok(p.contents.some(c => stems.some(st => c.includes(st))), `${p.id}: הערת הכשרות "${p.kosherNote}" לא תואמת לתכולה`);
     }
   }
+  for (const o of [...BUILD.addons, ...BUILD.packs]) assert.ok(o.img && existsSync(new URL('../north/' + o.img, import.meta.url)), o.id + ' תמונה קיימת');
   const all = JSON.stringify(PRODUCTS) + JSON.stringify(BUILD);
   assert.ok(!/[؀-ۿ]/.test(all));
 });
