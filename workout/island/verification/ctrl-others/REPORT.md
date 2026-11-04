@@ -35,3 +35,5 @@
 
 ## בדיקות
 עודכנו: `tests/island-naval-aim.test.mjs` (navalHanded תמיד true), `naval-aim-browser`, `naval-feel/honest/shots-browser` (גאומטריה קבועה), `g2k-browser` (אין מתג חייזרים), `g4f-browser` (טניס בלי left-handed). חדש: `workout/island/tests/ctrl-others-shots.mjs`.
+
+`npm test` (ISLAND_CSP_BROWSER=1, כולל דפדפן): 3,215 עברו, 0 נכשלו, 39 דולגו.
