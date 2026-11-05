@@ -131,9 +131,10 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await alpine.page.waitForFunction(()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase),null,{timeout:20000});
       const phase=await alpine.page.evaluate(()=>window.__perfSession.snapshot.phase);
       assert.ok(['countdown','racing'].includes(phase));assert.equal(loaded.metrics.mode,'model');
-      // The GPT/Codex skier3 asset: its 5 embedded clips become 10 game states (idle/glide/tuck/air/pole_push/fall/recover/getup/land/celebrate).
-      assert.equal(loaded.metrics.character.mode,'skier3');assert.equal(loaded.metrics.character.bones,18);
-      assert.equal(loaded.metrics.character.clips,10);assert.equal(loaded.metrics.character.trianglesPerRider,24918);
+      // alpine-v7 is the default rider (05/11): LOD0 for the player under the production CSP; skier3 (the ?alpineV7=0 fallback) is checked in island-alpine-v7.test.mjs.
+      // Either asset's clips become 10 game states (idle/glide/tuck/air/pole_push/fall/recover/getup/land/celebrate).
+      assert.equal(loaded.metrics.character.mode,'v7');assert.equal(loaded.metrics.character.bones,18);
+      assert.equal(loaded.metrics.character.clips,10);assert.equal(loaded.metrics.character.trianglesPerRider,19916);
       await alpine.csp.assertClean();
       reports.push({name:'alpine-session-start-result',phase,...loaded});
       await alpine.page.evaluate(()=>window.__perfSession.dispose());
