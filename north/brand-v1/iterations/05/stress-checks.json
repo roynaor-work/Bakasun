@@ -1,0 +1,93 @@
+{
+  "started": "2026-11-04T21:55:22.020Z",
+  "checks": [
+    {
+      "name": "long greeting has no horizontal modal overflow 390",
+      "pass": false,
+      "boxes": [
+        {
+          "selector": "cart-dialog",
+          "width": 364,
+          "scrollWidth": 1740,
+          "overflow": true
+        },
+        {
+          "selector": "cart-body",
+          "width": 364,
+          "scrollWidth": 1740,
+          "overflow": true
+        },
+        {
+          "selector": "cart-item",
+          "width": 1656,
+          "scrollWidth": 1720,
+          "overflow": true
+        },
+        {
+          "selector": "",
+          "width": 1588,
+          "scrollWidth": 1588,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "long greeting has no horizontal modal overflow 844",
+      "pass": false,
+      "boxes": [
+        {
+          "selector": "cart-dialog",
+          "width": 818,
+          "scrollWidth": 1740,
+          "overflow": true
+        },
+        {
+          "selector": "cart-body",
+          "width": 818,
+          "scrollWidth": 1740,
+          "overflow": true
+        },
+        {
+          "selector": "cart-item",
+          "width": 1656,
+          "scrollWidth": 1720,
+          "overflow": true
+        },
+        {
+          "selector": "",
+          "width": 1588,
+          "scrollWidth": 1588,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "menu expanded",
+      "pass": true
+    },
+    {
+      "name": "menu closes at desktop breakpoint",
+      "pass": false
+    },
+    {
+      "name": "empty gallery state is visible",
+      "pass": true
+    },
+    {
+      "name": "empty gallery has clear control",
+      "pass": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "stress-cart-390x844.webp",
+      "bytes": 14492
+    },
+    {
+      "file": "stress-cart-844x390.webp",
+      "bytes": 14904
+    }
+  ],
+  "finished": "2026-11-04T21:55:28.344Z",
+  "passed": false
+}

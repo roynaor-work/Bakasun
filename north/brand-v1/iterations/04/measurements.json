@@ -1,0 +1,5077 @@
+{
+  "started": "2026-11-04T21:36:17.210Z",
+  "method": {
+    "cpuThrottle": 4,
+    "scrollDurationMs": 3000,
+    "viewportDpr": 1,
+    "network": "offline; local file fulfillment",
+    "fps": "requestAnimationFrame intervals while the harness scrolls a fully local static page; this is desktop CPU-throttled evidence, not a physical-phone benchmark",
+    "contrast": "All visible text is made transparent for a second render. Every second background pixel in each original text run rectangle is compared with its original computed foreground color. This is a conservative rectangle test; photo backgrounds flagged by it require visual review."
+  },
+  "performance": [
+    {
+      "page": "home",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": 180,
+      "elapsedMs": 3013.9000000003725,
+      "meanFrameMs": 16.665555555555557,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999727,
+      "p99FrameMs": 16.800000000000182,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 541828,
+      "externalRequests": 0
+    },
+    {
+      "page": "product",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": 180,
+      "elapsedMs": 3011.899999999441,
+      "meanFrameMs": 16.66611111111111,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 16.800000000000182,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 434587,
+      "externalRequests": 0
+    },
+    {
+      "page": "builder",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": 180,
+      "elapsedMs": 3010.7999999998137,
+      "meanFrameMs": 16.66611111111111,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 16.80000000000001,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 175181,
+      "externalRequests": 0
+    },
+    {
+      "page": "index",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": 167,
+      "elapsedMs": 3016,
+      "meanFrameMs": 17.963473053892212,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 49.899999999999636,
+      "over33ms": 3,
+      "maxFrameMs": 183.4000000000001,
+      "estimatedAverageFps": 55.7,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 1630183,
+      "externalRequests": 0
+    },
+    {
+      "page": "home",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "frames": 180,
+      "elapsedMs": 3001.899999999441,
+      "meanFrameMs": 16.66611111111111,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 16.800000000000182,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 476776,
+      "externalRequests": 0
+    },
+    {
+      "page": "product",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "frames": 180,
+      "elapsedMs": 3003.2999999998137,
+      "meanFrameMs": 16.66611111111111,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.700000000000273,
+      "p99FrameMs": 16.799999999999983,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 434587,
+      "externalRequests": 0
+    },
+    {
+      "page": "builder",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "frames": 180,
+      "elapsedMs": 3015.800000000745,
+      "meanFrameMs": 16.665555555555557,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 16.800000000000182,
+      "over33ms": 0,
+      "maxFrameMs": 16.800000000000182,
+      "estimatedAverageFps": 60,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 175181,
+      "externalRequests": 0
+    },
+    {
+      "page": "index",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "frames": 168,
+      "elapsedMs": 3015.600000000559,
+      "meanFrameMs": 17.856547619047618,
+      "medianFrameMs": 16.699999999999818,
+      "p95FrameMs": 16.799999999999955,
+      "p99FrameMs": 83.30000000000018,
+      "over33ms": 2,
+      "maxFrameMs": 150,
+      "estimatedAverageFps": 56,
+      "aboveThirtyFps": true,
+      "rawRequestedBytes": 1630183,
+      "externalRequests": 0
+    }
+  ],
+  "contrast": [
+    {
+      "view": "home 390x844 opening",
+      "runs": 14,
+      "failures": [
+        {
+          "text": "לכל סיבה טובה",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 252.28125,
+            "right": 370,
+            "top": 385.78125,
+            "bottom": 406.78125
+          },
+          "minimumRatio": 1.803,
+          "threshold": 4.5,
+          "pass": false,
+          "samples": 590
+        }
+      ],
+      "minimumRatio": 1.803,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 254.640625,
+            "right": 370,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 464
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 208
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 204.828125,
+            "right": 322,
+            "top": 43.84375,
+            "bottom": 73.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 885
+        },
+        {
+          "text": "מארזים · אלכוהול · פינוק",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 10,
+          "fontWeight": 400,
+          "rect": {
+            "left": 203.796875,
+            "right": 322,
+            "top": 77.140625,
+            "bottom": 90.140625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 354
+        },
+        {
+          "text": "לכל סיבה טובה",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 252.28125,
+            "right": 370,
+            "top": 385.78125,
+            "bottom": 406.78125
+          },
+          "minimumRatio": 1.803,
+          "threshold": 4.5,
+          "pass": false,
+          "samples": 590
+        },
+        {
+          "text": "יש רגעים",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 42.9,
+          "fontWeight": 500,
+          "rect": {
+            "left": 238.0625,
+            "right": 370,
+            "top": 415.78125,
+            "bottom": 470.78125
+          },
+          "minimumRatio": 3.423,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1782
+        },
+        {
+          "text": "שכדאי",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 42.9,
+          "fontWeight": 500,
+          "rect": {
+            "left": 265.5625,
+            "right": 370,
+            "top": 460.390625,
+            "bottom": 515.390625
+          },
+          "minimumRatio": 6.003,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1404
+        },
+        {
+          "text": "לעטוף.",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 42.9,
+          "fontWeight": 500,
+          "rect": {
+            "left": 159.875,
+            "right": 265.5625,
+            "top": 460.390625,
+            "bottom": 515.390625
+          },
+          "minimumRatio": 4.302,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1431
+        },
+        {
+          "text": "יין, וויסקי ופינוקים. בוחרים מארז,",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 182.328125,
+            "right": 370,
+            "top": 528,
+            "bottom": 549
+          },
+          "minimumRatio": 7.963,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1034
+        },
+        {
+          "text": "או מרכיבים אחד משלכם.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 223.625,
+            "right": 370,
+            "top": 552,
+            "bottom": 573
+          },
+          "minimumRatio": 7.913,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 803
+        },
+        {
+          "text": "גלו את המארזים",
+          "tag": "A",
+          "className": "btn primary",
+          "color": [
+            14,
+            12,
+            10
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 252.703125,
+            "right": 351.296875,
+            "top": 611,
+            "bottom": 632
+          },
+          "minimumRatio": 8.287,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 539
+        },
+        {
+          "text": "להרכבה אישית",
+          "tag": "A",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 59.953125,
+            "right": 150.046875,
+            "top": 611,
+            "bottom": 632
+          },
+          "minimumRatio": 14.104,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 495
+        },
+        {
+          "text": "הסיבה שלכם",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 600,
+          "rect": {
+            "left": 277.375,
+            "right": 370,
+            "top": 733,
+            "bottom": 752
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 460
+        },
+        {
+          "text": "למי מרימים כוס?",
+          "tag": "H2",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 34,
+          "fontWeight": 500,
+          "rect": {
+            "left": 158.953125,
+            "right": 370,
+            "top": 758.5,
+            "bottom": 802.5
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 2332
+        }
+      ]
+    },
+    {
+      "view": "home 390x844 catalog",
+      "runs": 28,
+      "failures": [],
+      "minimumRatio": 9.169,
+      "measurements": [
+        {
+          "text": "שייקר וג׳ין",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 281.46875,
+            "right": 370,
+            "top": 55.125,
+            "bottom": 85.125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 660
+        },
+        {
+          "text": "שייקר בוסטון, ג׳יגר, ג׳ין וארבע טוניק",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 203.78125,
+            "right": 370,
+            "top": 89.5625,
+            "bottom": 106.5625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 664
+        },
+        {
+          "text": "‏289 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 305.359375,
+            "right": 327.3125,
+            "top": 145.5625,
+            "bottom": 177.5625
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏289 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 327.3125,
+            "right": 370,
+            "top": 145.5625,
+            "bottom": 177.5625
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 323.765625,
+            "right": 370,
+            "top": 180.5625,
+            "bottom": 194.5625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 219,
+            "right": 251.171875,
+            "top": 161.8125,
+            "bottom": 178.8125
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "אולד פאשן",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 99.125,
+            "right": 189,
+            "top": 55.125,
+            "bottom": 85.125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 675
+        },
+        {
+          "text": "בורבון, ביטרס, סוכר ושתי כוסות רוקס",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 42.34375,
+            "right": 189,
+            "top": 89.5625,
+            "bottom": 106.5625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 584
+        },
+        {
+          "text": "בורבון, ביטרס, סוכר ושתי כוסות רוקס",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 165.46875,
+            "right": 189,
+            "top": 108.40625,
+            "bottom": 125.40625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 96
+        },
+        {
+          "text": "‏329 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 124.359375,
+            "right": 146.3125,
+            "top": 145.5625,
+            "bottom": 177.5625
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏329 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 146.3125,
+            "right": 189,
+            "top": 145.5625,
+            "bottom": 177.5625
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 142.765625,
+            "right": 189,
+            "top": 180.5625,
+            "bottom": 194.5625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 38,
+            "right": 70.171875,
+            "top": 161.8125,
+            "bottom": 178.8125
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "יום הולדת שמח",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 241.71875,
+            "right": 370,
+            "top": 439.8125,
+            "bottom": 469.8125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 960
+        },
+        {
+          "text": "מבעבע, פרלינים, נר ריחני וכרטיס",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 212.84375,
+            "right": 370,
+            "top": 474.25,
+            "bottom": 491.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 632
+        },
+        {
+          "text": "‏199 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 305.359375,
+            "right": 327.3125,
+            "top": 530.25,
+            "bottom": 562.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏199 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 327.3125,
+            "right": 370,
+            "top": 530.25,
+            "bottom": 562.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 323.765625,
+            "right": 370,
+            "top": 565.25,
+            "bottom": 579.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 219,
+            "right": 251.171875,
+            "top": 546.5,
+            "bottom": 563.5
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "ערב של פינוק",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 74.953125,
+            "right": 189,
+            "top": 439.8125,
+            "bottom": 469.8125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 855
+        },
+        {
+          "text": "נר, סבון טבעי, שמפו, מפיץ ריח ורוזה",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 45.546875,
+            "right": 189,
+            "top": 474.25,
+            "bottom": 491.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 576
+        },
+        {
+          "text": "נר, סבון טבעי, שמפו, מפיץ ריח ורוזה",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 165.234375,
+            "right": 189,
+            "top": 493.09375,
+            "bottom": 510.09375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 96
+        },
+        {
+          "text": "‏249 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 124.359375,
+            "right": 146.3125,
+            "top": 530.25,
+            "bottom": 562.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏249 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 146.3125,
+            "right": 189,
+            "top": 530.25,
+            "bottom": 562.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 142.765625,
+            "right": 189,
+            "top": 565.25,
+            "bottom": 579.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 38,
+            "right": 70.171875,
+            "top": 546.5,
+            "bottom": 563.5
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "מהצפון בדבש",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 258.6875,
+            "right": 370,
+            "top": 824.5,
+            "bottom": 844
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 560
+        },
+        {
+          "text": "יין וגבינות",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 102.3125,
+            "right": 189,
+            "top": 824.5,
+            "bottom": 844
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 430
+        }
+      ]
+    },
+    {
+      "view": "product 390x844 opening",
+      "runs": 21,
+      "failures": [
+        {
+          "text": "תכולת המארז בהדמיה. הבקבוקים מוצגים ללא מותג.",
+          "tag": "P",
+          "className": "gallery-caption",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 140.140625,
+            "right": 370,
+            "top": 801.640625,
+            "bottom": 816.640625
+          },
+          "minimumRatio": 1.158,
+          "threshold": 4.5,
+          "pass": false,
+          "samples": 805
+        }
+      ],
+      "minimumRatio": 1.158,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 254.640625,
+            "right": 370,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 464
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 208
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 204.828125,
+            "right": 322,
+            "top": 43.84375,
+            "bottom": 73.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 885
+        },
+        {
+          "text": "מארזים · אלכוהול · פינוק",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 10,
+          "fontWeight": 400,
+          "rect": {
+            "left": 203.796875,
+            "right": 322,
+            "top": 77.140625,
+            "bottom": 90.140625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 354
+        },
+        {
+          "text": "בית",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 352.375,
+            "right": 370,
+            "top": 125.25,
+            "bottom": 142.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 72
+        },
+        {
+          "text": "מארזים",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 293.359375,
+            "right": 329.796875,
+            "top": 125.25,
+            "bottom": 142.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 144
+        },
+        {
+          "text": "הסינגל מאלט",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 206.875,
+            "right": 270.78125,
+            "top": 125.25,
+            "bottom": 142.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 256
+        },
+        {
+          "text": "פותחים משהו טוב",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 232.8125,
+            "right": 370,
+            "top": 161,
+            "bottom": 182
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 759
+        },
+        {
+          "text": "הסינגל מאלט",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 39,
+          "fontWeight": 500,
+          "rect": {
+            "left": 182.171875,
+            "right": 370,
+            "top": 189,
+            "bottom": 239
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 2350
+        },
+        {
+          "text": "וויסקי סקוטי, שתי כוסות, קופסת עץ",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 167.984375,
+            "right": 370,
+            "top": 245.84375,
+            "bottom": 266.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1010
+        },
+        {
+          "text": "ראשית",
+          "tag": "SPAN",
+          "className": "gallery-main-label",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 316.453125,
+            "right": 346,
+            "top": 304.84375,
+            "bottom": 319.84375
+          },
+          "minimumRatio": 15.189,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 105
+        },
+        {
+          "text": "ראשית",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 329.796875,
+            "right": 356.875,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 91
+        },
+        {
+          "text": "אווירה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 271.625,
+            "right": 296.375,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 84
+        },
+        {
+          "text": "מבפנים",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 209.03125,
+            "right": 240.328125,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 105
+        },
+        {
+          "text": "אריזה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 153.4375,
+            "right": 177.234375,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 84
+        },
+        {
+          "text": "שימוש",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 93.28125,
+            "right": 118.734375,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 84
+        },
+        {
+          "text": "גודל",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 37.828125,
+            "right": 55.515625,
+            "top": 768.34375,
+            "bottom": 782.34375
+          },
+          "minimumRatio": 5.21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 63
+        },
+        {
+          "text": "תכולת המארז בהדמיה. הבקבוקים מוצגים ללא מותג.",
+          "tag": "P",
+          "className": "gallery-caption",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 140.140625,
+            "right": 370,
+            "top": 801.640625,
+            "bottom": 816.640625
+          },
+          "minimumRatio": 1.158,
+          "threshold": 4.5,
+          "pass": false,
+          "samples": 805
+        },
+        {
+          "text": "‏349 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 27,
+          "fontWeight": 500,
+          "rect": {
+            "left": 300.1875,
+            "right": 323.90625,
+            "top": 788.796875,
+            "bottom": 823.796875
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 187
+        },
+        {
+          "text": "‏349 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 27,
+          "fontWeight": 500,
+          "rect": {
+            "left": 323.90625,
+            "right": 370,
+            "top": 788.796875,
+            "bottom": 823.796875
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 391
+        },
+        {
+          "text": "הוספה לבחירות +",
+          "tag": "BUTTON",
+          "className": "btn primary",
+          "color": [
+            14,
+            12,
+            10
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 98.546875,
+            "right": 203.65625,
+            "top": 796,
+            "bottom": 817
+          },
+          "minimumRatio": 8.287,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 572
+        }
+      ]
+    },
+    {
+      "view": "builder 390x844 opening",
+      "runs": 34,
+      "failures": [],
+      "minimumRatio": 7.921,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 254.640625,
+            "right": 370,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 464
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 7,
+            "bottom": 22
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 208
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 204.828125,
+            "right": 322,
+            "top": 43.84375,
+            "bottom": 73.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 885
+        },
+        {
+          "text": "מארזים · אלכוהול · פינוק",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 10,
+          "fontWeight": 400,
+          "rect": {
+            "left": 203.796875,
+            "right": 322,
+            "top": 77.140625,
+            "bottom": 90.140625
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 354
+        },
+        {
+          "text": "קצת מכם, בתוך הקופסה",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 180.84375,
+            "right": 370,
+            "top": 133,
+            "bottom": 154
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1045
+        },
+        {
+          "text": "בואו נרכיב מארז.",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 39,
+          "fontWeight": 500,
+          "rect": {
+            "left": 127.765625,
+            "right": 370,
+            "top": 162,
+            "bottom": 212
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 3025
+        },
+        {
+          "text": "משקה אחד, עד חמישה פינוקים, אריזה וברכה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 103.4375,
+            "right": 370,
+            "top": 222.84375,
+            "bottom": 243.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1330
+        },
+        {
+          "text": "אתם בוחרים מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 201.140625,
+            "right": 370,
+            "top": 246.84375,
+            "bottom": 267.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 840
+        },
+        {
+          "text": "1",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            21,
+            18,
+            15
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 315.296875,
+            "right": 320.71875,
+            "top": 314.84375,
+            "bottom": 329.84375
+          },
+          "minimumRatio": 7.921,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 14
+        },
+        {
+          "text": "בסיס",
+          "tag": "LI",
+          "className": "active",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 274.546875,
+            "right": 299,
+            "top": 314.09375,
+            "bottom": 331.09375
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 96
+        },
+        {
+          "text": "2",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 211.203125,
+            "right": 217.109375,
+            "top": 314.84375,
+            "bottom": 329.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 21
+        },
+        {
+          "text": "תוספות",
+          "tag": "LI",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 159.21875,
+            "right": 195.15625,
+            "top": 314.09375,
+            "bottom": 331.09375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 144
+        },
+        {
+          "text": "3",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 95.875,
+            "right": 101.78125,
+            "top": 314.84375,
+            "bottom": 329.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 21
+        },
+        {
+          "text": "אריזה וברכה",
+          "tag": "LI",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 79.828125,
+            "top": 314.09375,
+            "bottom": 331.09375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 240
+        },
+        {
+          "text": "מתחילים במשקה",
+          "tag": "LEGEND",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 28,
+          "fontWeight": 500,
+          "rect": {
+            "left": 199.15625,
+            "right": 370,
+            "top": 392.84375,
+            "bottom": 428.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1530
+        },
+        {
+          "text": "בוחרים בסיס אחד למארז.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 237.796875,
+            "right": 370,
+            "top": 435.84375,
+            "bottom": 453.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 594
+        },
+        {
+          "text": "סינגל מאלט",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 283.8125,
+            "right": 356,
+            "top": 537.84375,
+            "bottom": 558.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 360
+        },
+        {
+          "text": "‏220 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 322.25,
+            "right": 335.328125,
+            "top": 565.34375,
+            "bottom": 583.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏220 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 335.328125,
+            "right": 356,
+            "top": 565.34375,
+            "bottom": 583.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 90
+        },
+        {
+          "text": "בורבון",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 140.1875,
+            "right": 176,
+            "top": 537.84375,
+            "bottom": 558.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 180
+        },
+        {
+          "text": "‏150 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 142.828125,
+            "right": 155.90625,
+            "top": 565.34375,
+            "bottom": 583.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏150 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 155.90625,
+            "right": 176,
+            "top": 565.34375,
+            "bottom": 583.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 90
+        },
+        {
+          "text": "ג׳ין פרימיום",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 287.703125,
+            "right": 356,
+            "top": 676.84375,
+            "bottom": 697.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 340
+        },
+        {
+          "text": "‏140 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 322.828125,
+            "right": 335.90625,
+            "top": 704.34375,
+            "bottom": 722.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏140 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 335.90625,
+            "right": 356,
+            "top": 704.34375,
+            "bottom": 722.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 90
+        },
+        {
+          "text": "וודקה פרימיום",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 91.21875,
+            "right": 176,
+            "top": 676.84375,
+            "bottom": 697.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 420
+        },
+        {
+          "text": "‏130 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 142.828125,
+            "right": 155.90625,
+            "top": 704.34375,
+            "bottom": 722.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏130 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 155.90625,
+            "right": 176,
+            "top": 704.34375,
+            "bottom": 722.34375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 90
+        },
+        {
+          "text": "יין אדום גלילי",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 277.3125,
+            "right": 356,
+            "top": 815.84375,
+            "bottom": 836.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 390
+        },
+        {
+          "text": "‏90 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 329.140625,
+            "right": 342.21875,
+            "top": 843.34375,
+            "bottom": 844
+          },
+          "minimumRatio": 21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 0
+        },
+        {
+          "text": "‏90 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 342.21875,
+            "right": 356,
+            "top": 843.34375,
+            "bottom": 844
+          },
+          "minimumRatio": 21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 0
+        },
+        {
+          "text": "יין לבן",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 141.109375,
+            "right": 176,
+            "top": 815.84375,
+            "bottom": 836.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 170
+        },
+        {
+          "text": "‏85 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 149.140625,
+            "right": 162.21875,
+            "top": 843.34375,
+            "bottom": 844
+          },
+          "minimumRatio": 21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 0
+        },
+        {
+          "text": "‏85 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 162.21875,
+            "right": 176,
+            "top": 843.34375,
+            "bottom": 844
+          },
+          "minimumRatio": 21,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 0
+        }
+      ]
+    },
+    {
+      "view": "builder 390x844 greeting",
+      "runs": 13,
+      "failures": [],
+      "minimumRatio": 7.701,
+      "measurements": [
+        {
+          "text": "שקית מתנה וסרט",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 17,
+          "fontWeight": 700,
+          "rect": {
+            "left": 140.484375,
+            "right": 255,
+            "top": 8.34375,
+            "bottom": 30.34375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 627
+        },
+        {
+          "text": "ללא תוספת מחיר",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 166.5625,
+            "right": 255,
+            "top": 36.84375,
+            "bottom": 54.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 396
+        },
+        {
+          "text": "קופסת מתנה שחורה",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 17,
+          "fontWeight": 700,
+          "rect": {
+            "left": 121.203125,
+            "right": 255,
+            "top": 150.34375,
+            "bottom": 172.34375
+          },
+          "minimumRatio": 12.654,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 737
+        },
+        {
+          "text": "‏30 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 228.140625,
+            "right": 241.21875,
+            "top": 178.84375,
+            "bottom": 196.84375
+          },
+          "minimumRatio": 7.701,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏30 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 241.21875,
+            "right": 255,
+            "top": 178.84375,
+            "bottom": 196.84375
+          },
+          "minimumRatio": 7.701,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 63
+        },
+        {
+          "text": "קופסת עץ עם קש",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 17,
+          "fontWeight": 700,
+          "rect": {
+            "left": 139.546875,
+            "right": 255,
+            "top": 292.34375,
+            "bottom": 314.34375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 638
+        },
+        {
+          "text": "‏60 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 228.140625,
+            "right": 241.21875,
+            "top": 320.84375,
+            "bottom": 338.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "‏60 ‏₪",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 241.21875,
+            "right": 255,
+            "top": 320.84375,
+            "bottom": 338.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 63
+        },
+        {
+          "text": "כמה מילים משלכם",
+          "tag": "LABEL",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 17,
+          "fontWeight": 400,
+          "rect": {
+            "left": 249.40625,
+            "right": 370,
+            "top": 408.84375,
+            "bottom": 430.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 660
+        },
+        {
+          "text": "(לא חובה)",
+          "tag": "SPAN",
+          "className": "muted",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 17,
+          "fontWeight": 400,
+          "rect": {
+            "left": 186.6875,
+            "right": 249.40625,
+            "top": 408.84375,
+            "bottom": 430.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 341
+        },
+        {
+          "text": "20 / 180",
+          "tag": "SPAN",
+          "className": "greeting-count",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 58.0625,
+            "top": 585.84375,
+            "bottom": 600.84375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 133
+        },
+        {
+          "text": "לרגעים הקטנים שבדרך.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            21,
+            18,
+            15
+          ],
+          "fontSize": 22,
+          "fontWeight": 500,
+          "rect": {
+            "left": 161.296875,
+            "right": 348,
+            "top": 679.84375,
+            "bottom": 707.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1302
+        },
+        {
+          "text": "→ חזרה",
+          "tag": "BUTTON",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 296.0625,
+            "right": 347,
+            "top": 786.84375,
+            "bottom": 807.84375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 250
+        }
+      ]
+    },
+    {
+      "view": "index 390x844 opening",
+      "runs": 17,
+      "failures": [],
+      "minimumRatio": 8.287,
+      "measurements": [
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 212.828125,
+            "right": 330,
+            "top": 20,
+            "bottom": 50
+          },
+          "minimumRatio": 15.762,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 885
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 34.21875,
+            "top": 27,
+            "bottom": 42
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 56
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 34.21875,
+            "right": 80.6875,
+            "top": 27,
+            "bottom": 42
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 184
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 80.6875,
+            "right": 94.40625,
+            "top": 27,
+            "bottom": 42
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 56
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 94.40625,
+            "right": 124.484375,
+            "top": 27,
+            "bottom": 42
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 120
+        },
+        {
+          "text": "המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 337.0625,
+            "right": 370,
+            "top": 85.5,
+            "bottom": 103.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 144
+        },
+        {
+          "text": "האריזה",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 273.125,
+            "right": 311.0625,
+            "top": 85.5,
+            "bottom": 103.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 171
+        },
+        {
+          "text": "הצילום",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 211.1875,
+            "right": 247.125,
+            "top": 85.5,
+            "bottom": 103.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 162
+        },
+        {
+          "text": "הדפים",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 151.21875,
+            "right": 185.1875,
+            "top": 85.5,
+            "bottom": 103.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 153
+        },
+        {
+          "text": "התהליך",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 84.609375,
+            "right": 125.21875,
+            "top": 85.5,
+            "bottom": 103.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 180
+        },
+        {
+          "text": "אותו צפון. מבט חדש.",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 204.546875,
+            "right": 370,
+            "top": 165,
+            "bottom": 186
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 913
+        },
+        {
+          "text": "מחשבה קטנה.",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 44,
+          "fontWeight": 500,
+          "rect": {
+            "left": 157.515625,
+            "right": 370,
+            "top": 196,
+            "bottom": 253
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 3074
+        },
+        {
+          "text": "נוכחות שלמה.",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 44,
+          "fontWeight": 500,
+          "rect": {
+            "left": 154.125,
+            "right": 370,
+            "top": 242.1875,
+            "bottom": 299.1875
+          },
+          "minimumRatio": 11.947,
+          "threshold": 3,
+          "pass": true,
+          "samples": 3024
+        },
+        {
+          "text": "שפה כהה וחמה למארזים: כוכב צפוני, זהב מאופק וצילום שמאפשר לראות מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 45.171875,
+            "right": 370,
+            "top": 315.375,
+            "bottom": 336.375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1620
+        },
+        {
+          "text": "שפה כהה וחמה למארזים: כוכב צפוני, זהב מאופק וצילום שמאפשר לראות מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 178.09375,
+            "right": 370,
+            "top": 339.375,
+            "bottom": 360.375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 960
+        },
+        {
+          "text": "לצפייה בעיצוב הבית",
+          "tag": "A",
+          "className": "btn primary",
+          "color": [
+            14,
+            12,
+            10
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 225.5,
+            "right": 347,
+            "top": 400.375,
+            "bottom": 421.375
+          },
+          "minimumRatio": 8.287,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 610
+        },
+        {
+          "text": "לגלריית הצילום",
+          "tag": "A",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 48.859375,
+            "right": 141.5,
+            "top": 400.375,
+            "bottom": 421.375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 460
+        }
+      ]
+    },
+    {
+      "view": "home 844x390 opening",
+      "runs": 11,
+      "failures": [],
+      "minimumRatio": 8.287,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 708.640625,
+            "right": 824,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 406
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 182
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 21,
+          "fontWeight": 500,
+          "rect": {
+            "left": 677.015625,
+            "right": 784,
+            "top": 41.453125,
+            "bottom": 68.453125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 689
+        },
+        {
+          "text": "לכל סיבה טובה",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 600,
+          "rect": {
+            "left": 713.640625,
+            "right": 824,
+            "top": 121.03125,
+            "bottom": 140.03125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 495
+        },
+        {
+          "text": "יש רגעים",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 43,
+          "fontWeight": 500,
+          "rect": {
+            "left": 691.71875,
+            "right": 824,
+            "top": 143.53125,
+            "bottom": 198.53125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1782
+        },
+        {
+          "text": "שכדאי",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 43,
+          "fontWeight": 500,
+          "rect": {
+            "left": 719.28125,
+            "right": 824,
+            "top": 188.25,
+            "bottom": 243.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1404
+        },
+        {
+          "text": "לעטוף.",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 43,
+          "fontWeight": 500,
+          "rect": {
+            "left": 613.328125,
+            "right": 719.28125,
+            "top": 188.25,
+            "bottom": 243.25
+          },
+          "minimumRatio": 11.947,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1431
+        },
+        {
+          "text": "יין, וויסקי ופינוקים. בוחרים מארז,",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 648.0625,
+            "right": 824,
+            "top": 249.96875,
+            "bottom": 268.96875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 792
+        },
+        {
+          "text": "או מרכיבים אחד משלכם.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 686.765625,
+            "right": 824,
+            "top": 272.46875,
+            "bottom": 291.46875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 621
+        },
+        {
+          "text": "גלו את המארזים",
+          "tag": "A",
+          "className": "btn primary",
+          "color": [
+            14,
+            12,
+            10
+          ],
+          "fontSize": 14,
+          "fontWeight": 600,
+          "rect": {
+            "left": 714.71875,
+            "right": 801,
+            "top": 322.46875,
+            "bottom": 340.46875
+          },
+          "minimumRatio": 8.287,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 387
+        },
+        {
+          "text": "להרכבה אישית",
+          "tag": "A",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 14,
+          "fontWeight": 600,
+          "rect": {
+            "left": 545.890625,
+            "right": 624.71875,
+            "top": 322.46875,
+            "bottom": 340.46875
+          },
+          "minimumRatio": 14.662,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 351
+        }
+      ]
+    },
+    {
+      "view": "home 844x390 catalog",
+      "runs": 18,
+      "failures": [],
+      "minimumRatio": 9.169,
+      "measurements": [
+        {
+          "text": "אולד פאשן",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 734.125,
+            "right": 824,
+            "top": 213.34375,
+            "bottom": 243.34375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 675
+        },
+        {
+          "text": "בורבון, ביטרס, סוכר ושתי כוסות רוקס",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 651.203125,
+            "right": 824,
+            "top": 247.78125,
+            "bottom": 264.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 688
+        },
+        {
+          "text": "‏329 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 759.359375,
+            "right": 781.3125,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏329 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 781.3125,
+            "right": 824,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 777.765625,
+            "right": 824,
+            "top": 338.78125,
+            "bottom": 352.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 588.671875,
+            "right": 620.84375,
+            "top": 320.03125,
+            "bottom": 337.03125
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "יום הולדת שמח",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 420.390625,
+            "right": 548.671875,
+            "top": 213.34375,
+            "bottom": 243.34375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 960
+        },
+        {
+          "text": "מבעבע, פרלינים, נר ריחני וכרטיס",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 391.515625,
+            "right": 548.671875,
+            "top": 247.78125,
+            "bottom": 264.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 624
+        },
+        {
+          "text": "‏199 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 484.03125,
+            "right": 505.984375,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 160
+        },
+        {
+          "text": "‏199 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 505.984375,
+            "right": 548.671875,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 502.4375,
+            "right": 548.671875,
+            "top": 338.78125,
+            "bottom": 352.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 313.34375,
+            "right": 345.515625,
+            "top": 320.03125,
+            "bottom": 337.03125
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        },
+        {
+          "text": "ערב של פינוק",
+          "tag": "A",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 159.296875,
+            "right": 273.34375,
+            "top": 213.34375,
+            "bottom": 243.34375
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 855
+        },
+        {
+          "text": "נר, סבון טבעי, שמפו, מפיץ ריח ורוזה",
+          "tag": "P",
+          "className": "sub",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 103.546875,
+            "right": 273.34375,
+            "top": 247.78125,
+            "bottom": 264.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 680
+        },
+        {
+          "text": "‏249 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 208.703125,
+            "right": 230.65625,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 176
+        },
+        {
+          "text": "‏249 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 25,
+          "fontWeight": 500,
+          "rect": {
+            "left": 230.65625,
+            "right": 273.34375,
+            "top": 303.78125,
+            "bottom": 335.78125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 336
+        },
+        {
+          "text": "מחיר הצעה",
+          "tag": "SMALL",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 11,
+          "fontWeight": 400,
+          "rect": {
+            "left": 227.109375,
+            "right": 273.34375,
+            "top": 338.78125,
+            "bottom": 352.78125
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 161
+        },
+        {
+          "text": "למארז",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 38.015625,
+            "right": 70.1875,
+            "top": 320.03125,
+            "bottom": 337.03125
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 128
+        }
+      ]
+    },
+    {
+      "view": "product 844x390 opening",
+      "runs": 13,
+      "failures": [],
+      "minimumRatio": 5.763,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 708.640625,
+            "right": 824,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 406
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 182
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 21,
+          "fontWeight": 500,
+          "rect": {
+            "left": 677.015625,
+            "right": 784,
+            "top": 41.453125,
+            "bottom": 68.453125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 689
+        },
+        {
+          "text": "בית",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 806.375,
+            "right": 824,
+            "top": 110.25,
+            "bottom": 127.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 72
+        },
+        {
+          "text": "מארזים",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 747.359375,
+            "right": 783.796875,
+            "top": 110.25,
+            "bottom": 127.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 144
+        },
+        {
+          "text": "הסינגל מאלט",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 660.875,
+            "right": 724.78125,
+            "top": 110.25,
+            "bottom": 127.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 256
+        },
+        {
+          "text": "פותחים משהו טוב",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 686.8125,
+            "right": 824,
+            "top": 154,
+            "bottom": 175
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 759
+        },
+        {
+          "text": "הסינגל מאלט",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 35,
+          "fontWeight": 500,
+          "rect": {
+            "left": 655.4375,
+            "right": 824,
+            "top": 182,
+            "bottom": 227
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1932
+        },
+        {
+          "text": "וויסקי סקוטי, שתי כוסות, קופסת עץ",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 621.984375,
+            "right": 824,
+            "top": 234.25,
+            "bottom": 255.25
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1010
+        },
+        {
+          "text": "ראשית",
+          "tag": "SPAN",
+          "className": "gallery-main-label",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 770.453125,
+            "right": 800,
+            "top": 299.25,
+            "bottom": 314.25
+          },
+          "minimumRatio": 15.271,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 105
+        },
+        {
+          "text": "‏349 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 38,
+          "fontWeight": 500,
+          "rect": {
+            "left": 289.375,
+            "right": 322.75,
+            "top": 283.25,
+            "bottom": 332.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 384
+        },
+        {
+          "text": "‏349 ‏₪",
+          "tag": "SPAN",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 38,
+          "fontWeight": 500,
+          "rect": {
+            "left": 322.75,
+            "right": 387.625,
+            "top": 283.25,
+            "bottom": 332.25
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 768
+        },
+        {
+          "text": "מחיר הצעה מהקטלוג, לפני אישור סופי.",
+          "tag": "P",
+          "className": "product-note",
+          "color": [
+            155,
+            141,
+            122
+          ],
+          "fontSize": 13,
+          "fontWeight": 400,
+          "rect": {
+            "left": 204.515625,
+            "right": 387.625,
+            "top": 343.84375,
+            "bottom": 360.84375
+          },
+          "minimumRatio": 5.763,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 728
+        }
+      ]
+    },
+    {
+      "view": "builder 844x390 opening",
+      "runs": 13,
+      "failures": [],
+      "minimumRatio": 7.921,
+      "measurements": [
+        {
+          "text": "תצוגת עיצוב · מחירי הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 708.640625,
+            "right": 824,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 406
+        },
+        {
+          "text": "לקיט המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 72.25,
+            "top": 4.5,
+            "bottom": 19.5
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 182
+        },
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 21,
+          "fontWeight": 500,
+          "rect": {
+            "left": 677.015625,
+            "right": 784,
+            "top": 41.453125,
+            "bottom": 68.453125
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 689
+        },
+        {
+          "text": "קצת מכם, בתוך הקופסה",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 634.84375,
+            "right": 824,
+            "top": 118,
+            "bottom": 139
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1045
+        },
+        {
+          "text": "בואו נרכיב מארז.",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 48,
+          "fontWeight": 500,
+          "rect": {
+            "left": 525.859375,
+            "right": 824,
+            "top": 146,
+            "bottom": 208
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 4619
+        },
+        {
+          "text": "משקה אחד, עד חמישה פינוקים, אריזה וברכה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 557.4375,
+            "right": 824,
+            "top": 218.1875,
+            "bottom": 239.1875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1330
+        },
+        {
+          "text": "אתם בוחרים מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "rect": {
+            "left": 655.140625,
+            "right": 824,
+            "top": 242.1875,
+            "bottom": 263.1875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 840
+        },
+        {
+          "text": "1",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            21,
+            18,
+            15
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 766.296875,
+            "right": 771.71875,
+            "top": 313.1875,
+            "bottom": 328.1875
+          },
+          "minimumRatio": 7.921,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 14
+        },
+        {
+          "text": "בסיס",
+          "tag": "LI",
+          "className": "active",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 718.796875,
+            "right": 747,
+            "top": 310.9375,
+            "bottom": 329.9375
+          },
+          "minimumRatio": 11.947,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 126
+        },
+        {
+          "text": "2",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 565.6875,
+            "right": 571.59375,
+            "top": 313.1875,
+            "bottom": 328.1875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 21
+        },
+        {
+          "text": "תוספות",
+          "tag": "LI",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 505.171875,
+            "right": 546.640625,
+            "top": 310.9375,
+            "bottom": 329.9375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 180
+        },
+        {
+          "text": "3",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 352.078125,
+            "right": 357.984375,
+            "top": 313.1875,
+            "bottom": 328.1875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 14
+        },
+        {
+          "text": "אריזה וברכה",
+          "tag": "LI",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 264,
+            "right": 333.03125,
+            "top": 310.9375,
+            "bottom": 329.9375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 315
+        }
+      ]
+    },
+    {
+      "view": "builder 844x390 greeting",
+      "runs": 17,
+      "failures": [],
+      "minimumRatio": 6.029,
+      "measurements": [
+        {
+          "text": "20 / 180",
+          "tag": "SPAN",
+          "className": "greeting-count",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 358.40625,
+            "right": 396.46875,
+            "top": 152.1875,
+            "bottom": 167.1875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 133
+        },
+        {
+          "text": "לרגעים הקטנים שבדרך.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            21,
+            18,
+            15
+          ],
+          "fontSize": 22,
+          "fontWeight": 500,
+          "rect": {
+            "left": 615.296875,
+            "right": 802,
+            "top": 246.1875,
+            "bottom": 274.1875
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1302
+        },
+        {
+          "text": "→ חזרה",
+          "tag": "BUTTON",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 750.0625,
+            "right": 801,
+            "top": 353.1875,
+            "bottom": 374.1875
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 250
+        },
+        {
+          "text": "המארז שלכם",
+          "tag": "H2",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 26,
+          "fontWeight": 500,
+          "rect": {
+            "left": 190.734375,
+            "right": 311.40625,
+            "top": 28,
+            "bottom": 62
+          },
+          "minimumRatio": 15.762,
+          "threshold": 3,
+          "pass": true,
+          "samples": 1020
+        },
+        {
+          "text": "2 בחירות",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 39,
+            "right": 72.78125,
+            "top": 37.9375,
+            "bottom": 52.9375
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 119
+        },
+        {
+          "text": "2 בחירות",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 72.78125,
+            "right": 78.6875,
+            "top": 37.9375,
+            "bottom": 52.9375
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 21
+        },
+        {
+          "text": "יין אדום גלילי",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 245,
+            "right": 311.40625,
+            "top": 191.890625,
+            "bottom": 209.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 297
+        },
+        {
+          "text": "‏90 ‏₪",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 39,
+            "right": 52.078125,
+            "top": 191.890625,
+            "bottom": 209.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 63
+        },
+        {
+          "text": "‏90 ‏₪",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 52.078125,
+            "right": 65.859375,
+            "top": 191.890625,
+            "bottom": 209.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "קופסת מתנה שחורה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 207.203125,
+            "right": 311.40625,
+            "top": 218.890625,
+            "bottom": 236.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 468
+        },
+        {
+          "text": "‏30 ‏₪",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 39,
+            "right": 52.078125,
+            "top": 218.890625,
+            "bottom": 236.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 63
+        },
+        {
+          "text": "‏30 ‏₪",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 52.078125,
+            "right": 65.859375,
+            "top": 218.890625,
+            "bottom": 236.890625
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 54
+        },
+        {
+          "text": "סכום הצעה",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 17,
+          "fontWeight": 400,
+          "rect": {
+            "left": 240.359375,
+            "right": 311.40625,
+            "top": 270.734375,
+            "bottom": 292.734375
+          },
+          "minimumRatio": 15.762,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 385
+        },
+        {
+          "text": "‏120 ‏₪",
+          "tag": "STRONG",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 31,
+          "fontWeight": 500,
+          "rect": {
+            "left": 39,
+            "right": 66.21875,
+            "top": 261.890625,
+            "bottom": 301.890625
+          },
+          "minimumRatio": 15.762,
+          "threshold": 3,
+          "pass": true,
+          "samples": 280
+        },
+        {
+          "text": "‏120 ‏₪",
+          "tag": "STRONG",
+          "className": "price",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 31,
+          "fontWeight": 500,
+          "rect": {
+            "left": 66.21875,
+            "right": 119.140625,
+            "top": 261.890625,
+            "bottom": 301.890625
+          },
+          "minimumRatio": 15.762,
+          "threshold": 3,
+          "pass": true,
+          "samples": 520
+        },
+        {
+          "text": "מחירי הצעה מהקטלוג. ההרכב, הזמינות והמחיר הסופי דורשים אישור. הבחירות בתצוגה נשמרות בזיכרון הדף בלבד",
+          "tag": "P",
+          "className": "summary-disclaimer",
+          "color": [
+            155,
+            141,
+            122
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 43.453125,
+            "right": 311.40625,
+            "top": 312.078125,
+            "bottom": 327.078125
+          },
+          "minimumRatio": 6.029,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 938
+        },
+        {
+          "text": "מחירי הצעה מהקטלוג. ההרכב, הזמינות והמחיר הסופי דורשים אישור. הבחירות בתצוגה נשמרות בזיכרון הדף בלבד",
+          "tag": "P",
+          "className": "summary-disclaimer",
+          "color": [
+            155,
+            141,
+            122
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 85.3125,
+            "right": 311.40625,
+            "top": 330.078125,
+            "bottom": 345.078125
+          },
+          "minimumRatio": 6.029,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 791
+        }
+      ]
+    },
+    {
+      "view": "index 844x390 opening",
+      "runs": 17,
+      "failures": [],
+      "minimumRatio": 8.287,
+      "measurements": [
+        {
+          "text": "הרוח הצפונית",
+          "tag": "STRONG",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 23,
+          "fontWeight": 500,
+          "rect": {
+            "left": 666.828125,
+            "right": 784,
+            "top": 12,
+            "bottom": 42
+          },
+          "minimumRatio": 15.762,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 885
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 20,
+            "right": 34.21875,
+            "top": 19,
+            "bottom": 34
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 56
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 34.21875,
+            "right": 80.6875,
+            "top": 19,
+            "bottom": 34
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 184
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 80.6875,
+            "right": 94.40625,
+            "top": 19,
+            "bottom": 34
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 56
+        },
+        {
+          "text": "מותג 01 / צילום 04",
+          "tag": "SPAN",
+          "className": "kit-version",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 12,
+          "fontWeight": 400,
+          "rect": {
+            "left": 94.40625,
+            "right": 124.484375,
+            "top": 19,
+            "bottom": 34
+          },
+          "minimumRatio": 12.498,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 120
+        },
+        {
+          "text": "המותג",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 791.0625,
+            "right": 824,
+            "top": 69.5,
+            "bottom": 87.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 144
+        },
+        {
+          "text": "האריזה",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 727.125,
+            "right": 765.0625,
+            "top": 69.5,
+            "bottom": 87.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 171
+        },
+        {
+          "text": "הצילום",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 665.1875,
+            "right": 701.125,
+            "top": 69.5,
+            "bottom": 87.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 162
+        },
+        {
+          "text": "הדפים",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 605.21875,
+            "right": 639.1875,
+            "top": 69.5,
+            "bottom": 87.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 153
+        },
+        {
+          "text": "התהליך",
+          "tag": "A",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "rect": {
+            "left": 538.609375,
+            "right": 579.21875,
+            "top": 69.5,
+            "bottom": 87.5
+          },
+          "minimumRatio": 9.592,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 180
+        },
+        {
+          "text": "אותו צפון. מבט חדש.",
+          "tag": "P",
+          "className": "eyebrow",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 600,
+          "rect": {
+            "left": 668.890625,
+            "right": 824,
+            "top": 135,
+            "bottom": 154
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 780
+        },
+        {
+          "text": "מחשבה קטנה.",
+          "tag": "H1",
+          "className": "",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 44,
+          "fontWeight": 500,
+          "rect": {
+            "left": 611.515625,
+            "right": 824,
+            "top": 158.5,
+            "bottom": 215.5
+          },
+          "minimumRatio": 15.066,
+          "threshold": 3,
+          "pass": true,
+          "samples": 2968
+        },
+        {
+          "text": "נוכחות שלמה.",
+          "tag": "SPAN",
+          "className": "",
+          "color": [
+            228,
+            204,
+            160
+          ],
+          "fontSize": 44,
+          "fontWeight": 500,
+          "rect": {
+            "left": 608.125,
+            "right": 824,
+            "top": 204.6875,
+            "bottom": 261.6875
+          },
+          "minimumRatio": 11.947,
+          "threshold": 3,
+          "pass": true,
+          "samples": 3024
+        },
+        {
+          "text": "שפה כהה וחמה למארזים: כוכב צפוני, זהב מאופק וצילום שמאפשר לראות מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 406.578125,
+            "right": 824,
+            "top": 269.875,
+            "bottom": 288.875
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 1881
+        },
+        {
+          "text": "שפה כהה וחמה למארזים: כוכב צפוני, זהב מאופק וצילום שמאפשר לראות מה נכנס פנימה.",
+          "tag": "P",
+          "className": "",
+          "color": [
+            193,
+            180,
+            162
+          ],
+          "fontSize": 15,
+          "fontWeight": 400,
+          "rect": {
+            "left": 756.96875,
+            "right": 824,
+            "top": 292.375,
+            "bottom": 311.375
+          },
+          "minimumRatio": 9.169,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 306
+        },
+        {
+          "text": "לצפייה בעיצוב הבית",
+          "tag": "A",
+          "className": "btn primary",
+          "color": [
+            14,
+            12,
+            10
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 679.5,
+            "right": 801,
+            "top": 343.875,
+            "bottom": 364.875
+          },
+          "minimumRatio": 8.287,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 610
+        },
+        {
+          "text": "לגלריית הצילום",
+          "tag": "A",
+          "className": "btn secondary",
+          "color": [
+            240,
+            230,
+            210
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "rect": {
+            "left": 502.859375,
+            "right": 595.5,
+            "top": 343.875,
+            "bottom": 364.875
+          },
+          "minimumRatio": 15.066,
+          "threshold": 4.5,
+          "pass": true,
+          "samples": 460
+        }
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "tokens.css": "94121894054133c519dea5f868474ea86c8eccd4c1cb34de4bd997f911d8c06f",
+    "site.css": "014cdba01b2f7e4cd8456545db706c3a96a0ce31184ab6aed040d025cadb560f",
+    "site.js": "ba64469de784c95da76138c77d0cb597b0e552dad88caa59cf3c2994fe4f4860",
+    "preview.css": "439b758e4bb206d12ce5c475e8089218a788181dcd99336cd0cb7d7afc7043eb",
+    "preview.js": "d56dd3c2f16f55d08857c92b7293c6e32168fb7e0ce41bf443ed4200d007396c",
+    "assets.js": "d1549c8effac6a0cc8baddf6dde6c754aa6f6e19082c1b8eaa8b1db2c9f17f92"
+  },
+  "finished": "2026-11-04T21:36:49.319Z",
+  "summary": {
+    "performanceScenarios": 8,
+    "allAverageFpsAtLeast30": true,
+    "contrastViews": 12,
+    "contrastTextRuns": 216,
+    "contrastFlags": 2
+  }
+}

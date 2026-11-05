@@ -1,0 +1,88 @@
+{
+  "started": "2026-11-04T23:14:01.776Z",
+  "checks": [
+    {
+      "name": "delivery paths were absent at task base",
+      "pass": true,
+      "baseline": "5d1fca7d"
+    },
+    {
+      "name": "all tracked changes within approved directories",
+      "pass": true,
+      "count": 508
+    },
+    {
+      "name": "all untracked repository files within approved directories",
+      "pass": true,
+      "count": 1
+    },
+    {
+      "name": "catalog unchanged from snapshot",
+      "pass": true
+    },
+    {
+      "name": "78 distinct delivered photographs",
+      "pass": true
+    },
+    {
+      "name": "all 82 visual reviews match delivered image bytes",
+      "pass": true,
+      "wrong": []
+    },
+    {
+      "name": "every WebP including review images is within 200KB and 1024px",
+      "pass": true,
+      "count": 394,
+      "wrong": []
+    },
+    {
+      "name": "delivered WebP files contain no EXIF/IPTC/XMP metadata",
+      "pass": true,
+      "wrong": []
+    },
+    {
+      "name": "canonical logo reused in print artwork",
+      "pass": true
+    },
+    {
+      "name": "SVG files self-contained with titles and no executable/external media",
+      "pass": true,
+      "wrong": []
+    },
+    {
+      "name": "all local HTML/CSS/document references resolve in delivery folders",
+      "pass": true,
+      "references": 121,
+      "missing": []
+    },
+    {
+      "name": "runtime has no network APIs or external resource URLs",
+      "pass": true,
+      "wrong": []
+    },
+    {
+      "name": "no private-key or access-token markers in delivered text",
+      "pass": true,
+      "wrong": [],
+      "note": "Pattern scan supplements manual source and image review; it is not a universal data-loss detector."
+    },
+    {
+      "name": "all nine rounds have required far/near captures and critiques",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "name": "all delivered JavaScript parses",
+      "pass": true,
+      "wrong": []
+    }
+  ],
+  "finished": "2026-11-04T23:14:02.567Z",
+  "passed": true,
+  "summary": {
+    "checks": 15,
+    "passed": 15,
+    "failed": 0,
+    "files": 509
+  }
+}
