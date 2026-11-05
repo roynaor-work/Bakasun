@@ -11573,7 +11573,24 @@
      "assets/models/adult-man-512.glb",
      "assets/models/adult-woman-512.glb",
      "assets/models/palm-tree-512.glb"
-    ]
+    ],
+    "v7": {
+     "enabled": true,
+     "minQuality": 0,
+     "base": "assets/tennis-v7/",
+     "surfaces": [
+      "clay",
+      "hard",
+      "grass"
+     ],
+     "stagesPerSurface": 10,
+     "crowdLevels": [
+      2,
+      1,
+      -1
+     ],
+     "crewMaxQuality": 0
+    }
    }
   },
   "streetSlam": {
