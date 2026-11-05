@@ -50,4 +50,12 @@ export const CLOUD = {
 
 /* תמונות מקומיות v2 (north/img/v2), ללא תלות ברשת חיצונית */
 export const LOCAL = (name, v = 'v2') => `img/${v}/${name}.webp`;
+/* עותקים קטנים (north/img/s/<גרסה>/<שם>-<רוחב>.webp), נוצרים ב-verification/deep-v1/make-variants.py.
+   srcsetOf מחזיר srcset לפי הרוחבים הקיימים; נתיב שאינו מקומי חוזר כפי שהוא. */
+const VAR_RE = /^img\/(v2|v3)\/([^/]+)\.webp$/;
+export const PORTRAIT_W = [240, 480, 800];
+export const WIDE_W = [640, 1024];
+export const HERO_W = [640, 1024, 1440];
+export function smallSrc(path, w = 480) { const m = VAR_RE.exec(path || ''); return m ? `img/s/${m[1]}/${m[2]}-${w}.webp` : path; }
+export function srcsetOf(path, widths = PORTRAIT_W) { const m = VAR_RE.exec(path || ''); return m ? widths.map(w => `img/s/${m[1]}/${m[2]}-${w}.webp ${w}w`).join(', ') : ''; }
 export const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?w=${w}&q=78&auto=format&fit=crop`;

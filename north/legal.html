@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>תקנון ומדיניות · הרוח הצפונית</title>
   <meta name="description" content="תקנון האתר, מדיניות משלוחים וביטולים, מדיניות פרטיות והצהרת נגישות של חנות המארזים של הרוח הצפונית.">
+  <meta name="robots" content="noindex"><!-- כמו index.html: עד שרועי מאשר את הפרסום (STORE.preview) -->
   <meta name="theme-color" content="#0c0a09">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .lg{max-width:860px;margin:0 auto;padding:28px 16px 90px}
@@ -62,7 +60,7 @@
       </ol>
       <h3>3. המוצרים והמחירים</h3>
       <ol>
-        <li>המארזים נארזים בחנות. הרכב כל מארז מתואר בעמוד המוצר. הבקבוק המדויק (יצרן, שנתון, מהדורה) עשוי להשתנות בהתאם למלאי, במוצר שווה ערך או טוב יותר. אם השינוי מהותי, ניצור קשר לפני האריזה.</li>
+        <li>המארזים נארזים בחנות. הרכב כל מארז מתואר בעמוד המוצר. הבקבוק המדויק (יצרן, שנתון, מהדורה) עשוי להשתנות לפי המלאי, במוצר שווה ערך או טוב יותר. אם השינוי מהותי, ניצור קשר לפני האריזה.</li>
         <li>התמונות באתר להמחשה בלבד. אריזות, צבעים ועיצוב עשויים להשתנות.</li>
         <li>כשרות: מארז שכולל מוצר ללא הכשר מסומן "לא כשר" בכרטיס המוצר ובעמוד המוצר, עם פירוט הפריט. בקופה הלקוח מאשר שידוע לו שההזמנה כוללת מוצר ללא הכשר. מוצר שאינו מסומן נמכר על פי הכשר היצרן או היבואן המופיע על האריזה, והחברה אינה נותנת הכשר משלה.</li>
         <li>המחירים בשקלים חדשים וכוללים מע"מ. המחיר אינו כולל דמי משלוח, המוצגים בנפרד בקופה לפני התשלום.</li>
@@ -128,9 +126,9 @@
       <h3>טופס ביטול עסקה</h3>
       <p>ממלאים ושולחים. אפשר גם להתקשר או לכתוב לנו ישירות עם מספר ההזמנה.</p>
       <form class="cform" id="cancelform">
-        <div class="row"><div class="field"><label>שם מלא</label><input name="name" required></div><div class="field"><label>טלפון</label><input name="phone" type="tel" inputmode="tel" required></div></div>
-        <div class="row"><div class="field"><label>מספר הזמנה</label><input name="order" placeholder="RC-…" class="ltr" style="direction:ltr;text-align:left"></div><div class="field"><label>תאריך קבלת המארז</label><input name="date" type="date"></div></div>
-        <div class="field"><label>סיבת הביטול (לא חובה)</label><textarea name="reason"></textarea></div>
+        <div class="row"><div class="field"><label for="lg-name">שם מלא</label><input id="lg-name" name="name" required></div><div class="field"><label for="lg-phone">טלפון</label><input id="lg-phone" name="phone" type="tel" inputmode="tel" required></div></div>
+        <div class="row"><div class="field"><label for="lg-order">מספר הזמנה</label><input id="lg-order" name="order" placeholder="RC-…" class="ltr" style="direction:ltr;text-align:left"></div><div class="field"><label for="lg-date">תאריך קבלת המארז</label><input id="lg-date" name="date" type="date"></div></div>
+        <div class="field"><label for="lg-reason">סיבת הביטול (לא חובה)</label><textarea id="lg-reason" name="reason"></textarea></div>
         <button class="btn gold" type="submit">שליחת בקשת ביטול</button>
         <div id="cancelout" class="note hide"></div>
       </form>
