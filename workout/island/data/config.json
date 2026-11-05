@@ -12252,6 +12252,19 @@
    "maximumScore": 6,
    "maximumSeconds": 240,
    "riders": 6,
+   "assets": {
+    "v7": {
+     "enabled": true,
+     "base": "assets/alpine-v7/characters/",
+     "lod": {
+      "player": {"high": 0, "low": 1},
+      "rival": {"high": 1, "low": 2},
+      "farDistance": 22,
+      "hysteresis": 2
+     },
+     "scale": 1.125
+    }
+   },
    "aiCaps": {
     "maxSpeed": 1.0,
     "minReaction": 0.12,

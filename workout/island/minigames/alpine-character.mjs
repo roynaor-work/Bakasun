@@ -3,6 +3,8 @@ import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {AlpineDracoLoader as DRACOLoader} from './alpine-draco.mjs';
 import {Retargeter} from '../design/viewer/retarget.js';
 import {bodyTarget, followBody} from './alpine-steer.mjs';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {V7_CLIPS, V7_TRIANGLES, v7Config, v7Enabled, wantedLod, pickAvailable, lodPlan, levelUseful, v7Path} from './alpine-v7.mjs';
 
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const smooth = x => (x = clamp(x)) * x * (3 - 2 * x);
@@ -50,6 +52,7 @@ export function bakeAlpineMotion(scene, rig, motion, map, isDisposed = () => fal
 /** Presentation-only state machine. The engine remains the sole authority for
  * speed, falls, landings, tricks and results; motion markers never feed it. */
 export function createAlpineMotionPlayer(baked, bones) {
+  bones = [...bones];                                    // rebind() swaps the rig in place (LOD change) without a new player
   const count = baked.names.length, stride = baked.stride;
   const shown = new Float32Array(stride), outgoing = new Float32Array(stride);
   const target = new Float32Array(stride);
@@ -90,10 +93,10 @@ export function createAlpineMotionPlayer(baked, bones) {
   // so on their own the rider looks frozen. This adds a speed-dependent crouch, a lean into the turn,
   // counter-rotating shoulders, knee absorption and alternating pole swings. It is presentation only,
   // applied as model-space rotations on the already posed bones, and fades out in falls, menus and results.
-  const boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
+  let boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
   const order = ['Hips', 'Spine', 'Chest', 'Neck', 'Head', 'LeftArm', 'RightArm', 'LeftForeArm', 'RightForeArm', 'LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'].filter(n => boneByName[n]);
   const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0, rate: 0, prevLean: 0};
-  const frameBone = bones[0], qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
+  let frameBone = bones[0]; const qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
   const AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), AZ = new T.Vector3(0, 0, 1);
   function rideTargets() {
     const t = ride.phase, sp = ride.speed, lean = ride.lean, a = Math.abs(lean);
@@ -229,8 +232,14 @@ export function createAlpineMotionPlayer(baked, bones) {
     lastTime = now; lastPhase = phase; lastS = frame.s ?? lastS; lastSpeed = speed;
     lastCrash = !!frame.crashed; lastAir = !!frame.airborne; lastBoost = !!frame.boosting;
   }
+  /** Moves the player onto another skeleton with the same bone names (a different LOD of the rider) and shows the current pose on it. */
+  function rebind(next) {
+    for (let i = 0; i < bones.length; i++) bones[i] = next[i];
+    boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]])); frameBone = bones[0];
+    display(0);
+  }
   reset();
-  return {update, event, reset, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length, carveHeld, carveStrength})};
+  return {update, event, reset, rebind, metrics: () => ({state, clipTime: time, sampledFrames, bakedClips: Object.keys(baked.clips).length, carveHeld, carveStrength})};
 }
 
 
@@ -252,12 +261,15 @@ const SKIER3_TRANSITIONS = [
 
 /** Samples the clips embedded in the GLB into the same baked format the authored data produces, so the
  * existing state machine and riding layer drive them unchanged. Local transforms only: no retargeting. */
-export function bakeEmbeddedSkier(gltf, isDisposed = () => false) {
+const SKIER3_CLIPS = Object.freeze({glide: 'glide', crouch: 'crouch', boost: 'boost', fall: 'fall', getUp: 'get_up', celebrate: null});
+export function bakeEmbeddedSkier(gltf, isDisposed = () => false, clipNames = SKIER3_CLIPS, seconds = {}, tag = 'skier3') {
   const bones = []; gltf.scene.traverse(o => { if (o.isBone) bones.push(o); });
-  if (bones.length !== 18) throw Error(`alpine.skier3.bones:${bones.length}`);
+  if (bones.length !== 18) throw Error(`alpine.${tag}.bones:${bones.length}`);
   const names = bones.map(b => b.name), stride = names.length * 7, FPS = 30;
   const byName = Object.fromEntries(gltf.animations.map(a => [a.name, a]));
-  for (const need of ['glide', 'crouch', 'boost', 'fall', 'get_up']) if (!byName[need]) throw Error(`alpine.skier3.clip:${need}`);
+  for (const key of ['glide', 'crouch', 'boost', 'fall', 'getUp']) if (!byName[clipNames[key]]) throw Error(`alpine.${tag}.clip:${clipNames[key]}`);
+  // v7 clips are authored slower than the engine's timing (fall 4 s against a 1 s recovery): fit them to the skier3 durations.
+  const fit = (clip, secs) => { if (secs > 0 && clip.duration > 0) { const k = secs / clip.duration; for (let i = 0; i < clip.times.length; i++) clip.times[i] *= k; clip.duration = secs; } return clip; };
   const sampleClip = (clip, {loop, from = 0, to = clip.duration}) => {
     const interp = {};
     for (const track of clip.tracks) { const [node, prop] = track.name.split('.'); (interp[node] ||= {})[prop] = track.createInterpolant(); }
@@ -273,27 +285,36 @@ export function bakeEmbeddedSkier(gltf, isDisposed = () => false) {
     }
     return {times, values, duration: to - from, loop};
   };
-  const glide = sampleClip(byName.glide, {loop: true}), crouch = sampleClip(byName.crouch, {loop: true});
-  const boost = sampleClip(byName.boost, {loop: false}), fall = sampleClip(byName.fall, {loop: false}), getUp = sampleClip(byName.get_up, {loop: false});
+  const glide = sampleClip(byName[clipNames.glide], {loop: true}), crouch = sampleClip(byName[clipNames.crouch], {loop: true});
+  const boost = fit(sampleClip(byName[clipNames.boost], {loop: false}), seconds.boost), fall = fit(sampleClip(byName[clipNames.fall], {loop: false}), seconds.fall), getUp = fit(sampleClip(byName[clipNames.getUp], {loop: false}), seconds.getUp);
+  // A dedicated celebrate clip (v7) plays once; skier3 has none and reuses the two pole pumps of its boost.
+  const celebrate = clipNames.celebrate && byName[clipNames.celebrate] ? sampleClip(byName[clipNames.celebrate], {loop: false}) : boost;
   const clips = {
     idle: glide, glide, tuck: crouch, air: crouch, pole_push: boost, fall, recover: getUp, getup: getUp,
     // Landing absorbs through the first half second of the authored crouch; celebrating is two pole pumps.
-    land: sampleClip(byName.crouch, {loop: false, to: .5}), celebrate: boost
+    land: sampleClip(byName[clipNames.crouch], {loop: false, to: .5}), celebrate
   };
   return {names, stride, clips, transitions: SKIER3_TRANSITIONS, initialState: 'idle', motionScale: 1, embedded: true,
-    bindProof: {source: 'embedded', clips: gltf.animations.map(a => a.name)}};
+    bindProof: {source: 'embedded', tag, clips: gltf.animations.map(a => a.name)}};
 }
 
 const LEGACY_URL = asset('../design/characters/skier.glb');
-/** Prefers the GPT/Codex skier3 asset (embedded clips); a failed load falls back silently to the earlier
- * retargeted skier, and the view falls back again to its procedural rider if both fail. */
-export async function loadAlpineCharacters({modelUrl = SKIER3_URL, isDisposed = () => false} = {}) {
+/** Prefers the alpine-v7 rider (LODs, assets/alpine-v7) when the config switch is on and `?alpineV7=0` is absent; a failed
+ * load falls back silently to the GPT/Codex skier3 asset (embedded clips), then to the earlier retargeted skier, and the
+ * view falls back again to its procedural rider if all fail. */
+export async function loadAlpineCharacters({modelUrl = SKIER3_URL, isDisposed = () => false, v7 = null, quality = 'high', params = new URLSearchParams(globalThis.location?.search || '')} = {}) {
   if (modelUrl === SKIER3_URL) {
+    const config = v7 ? v7Config(v7) : null;
+    if (config && v7Enabled(config, params)) {
+      try { return await loadV7Characters({config, quality, isDisposed}); }
+      catch (error) { if (error?.disposed || isDisposed()) throw error; v7Failure = String(error?.message || error); }
+    }
     try { return await loadCharacters({modelUrl, embedded: true, isDisposed}); }
     catch (error) { if (error?.disposed || isDisposed()) throw error; skier3Failure = String(error?.message || error); modelUrl = LEGACY_URL; }
   }
   return loadCharacters({modelUrl, embedded: false, isDisposed});
 }
+let v7Failure = null;
 let skier3Failure = null;
 
 async function loadCharacters({modelUrl, embedded, isDisposed}) {
@@ -368,7 +389,175 @@ async function loadCharacters({modelUrl, embedded, isDisposed}) {
         actors.add(actor); return actor;
       },
       dispose,
-      metrics() { return {mode: embedded ? 'skier3' : 'design-skier', fallbackReason: embedded ? null : skier3Failure, clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: embedded ? 24918 : 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
+      metrics() { return {mode: embedded ? 'skier3' : 'design-skier', fallbackReason: embedded ? v7Failure : skier3Failure, clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: embedded ? 24918 : 1920, motionScale: baked.motionScale, bakeMs, loadMs, actors: actors.size}; }
     };
   } catch (error) { dispose(); throw error; }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// alpine-v7 rider. One GLB per LOD (19.9K / 9.9K / 4.1K triangles against skier3's 24.9K), each with the 18 canonical bones,
+// 14 embedded clips and an embedded 1024 atlas. Only the levels the quality tier needs are fetched; a rival level nobody
+// asks for is never downloaded. The same clips, state graph and riding layer drive every level (rebind on a LOD change).
+
+const V7_JACKET = new T.Color('#356d72');        // the shell block of the v7 atlas; rivals recolour pixels near it
+/** The nine source primitives (shell, face, helmet, goggles, buckles, boots, ...) are 8 draw calls per rider and per shadow
+ * pass. They share one atlas, so they merge: 'gloss' (mirror goggles, metal buckles) stays apart on the player's close LOD0,
+ * everything else becomes one skinned mesh; rival levels merge into one. Poles stay two small meshes on the hands. */
+function mergeRiderMeshes(scene, splitGloss, own) {
+  const skinned = []; scene.traverse(o => { if (o.isSkinnedMesh) skinned.push(o); });
+  const buckets = new Map();
+  for (const mesh of skinned) {
+    const key = splitGloss && [].concat(mesh.material)[0].metalness >= .5 ? 'gloss' : 'body';
+    if (!buckets.has(key)) buckets.set(key, []); buckets.get(key).push(mesh);
+  }
+  for (const [key, list] of buckets) {
+    const first = list[0];
+    if (list.length < 2 || !list.every(m => m.skeleton === first.skeleton && m.matrix.equals(first.matrix) && m.parent === first.parent)) continue;
+    const geometries = list.map(m => {
+      const g = m.geometry.clone();
+      // Draco may decode the skin indices as Uint8 in one primitive and Uint16 in another; merging needs one type.
+      const idx = g.attributes.skinIndex; if (idx && !(idx.array instanceof Uint16Array)) g.setAttribute('skinIndex', new T.BufferAttribute(Uint16Array.from(idx.array), idx.itemSize));
+      for (const name of Object.keys(g.attributes)) if (!['position', 'normal', 'uv', 'skinIndex', 'skinWeight'].includes(name)) g.deleteAttribute(name);
+      return g;
+    });
+    const merged = mergeGeometries(geometries, false); for (const g of geometries) g.dispose();
+    if (!merged) continue;
+    merged.computeBoundingBox(); merged.computeBoundingSphere();
+    const material = (key === 'body' && list.find(m => /^Technical shell/.test(m.material.name))?.material) || first.material;
+    const mesh = new T.SkinnedMesh(merged, material); mesh.name = 'rider-' + key; mesh.matrix.copy(first.matrix); mesh.matrixAutoUpdate = first.matrixAutoUpdate;
+    first.parent.add(mesh); mesh.bind(first.skeleton, first.bindMatrix);
+    for (const m of list) { m.removeFromParent(); m.geometry.dispose(); if (m.material !== material) own.materials.add(m.material); }
+    own.geometries.add(merged);
+  }
+}
+/** Paints the jacket block of the atlas in the rival's colour (pixels near the shell colour, keeping the cloth shading). */
+function tintJacket(material, color) {
+  const tint = new T.Color(color);
+  material.onBeforeCompile = shader => {
+    shader.uniforms.uJacketRef = {value: V7_JACKET}; shader.uniforms.uJacketTint = {value: tint};
+    shader.fragmentShader = 'uniform vec3 uJacketRef;uniform vec3 uJacketTint;\n' + shader.fragmentShader.replace('#include <map_fragment>',
+      `#include <map_fragment>
+      { float jd = distance(diffuseColor.rgb, uJacketRef), jm = 1.0 - smoothstep(.05, .12, jd);
+        float jl = clamp(dot(diffuseColor.rgb, vec3(.2126,.7152,.0722)) / dot(uJacketRef, vec3(.2126,.7152,.0722)), .6, 1.4);
+        diffuseColor.rgb = mix(diffuseColor.rgb, uJacketTint * jl, jm); }`);
+  };
+  material.customProgramCacheKey = () => 'alpine-v7-jacket';
+  material.needsUpdate = true;
+}
+
+async function loadV7Characters({config, quality: startQuality, isDisposed}) {
+  const loadStarted = performance.now();
+  let quality = startQuality === 'low' ? 'low' : 'high';
+  const plan = lodPlan(quality, config);
+  const levels = new Map(), pending = new Map(), actors = new Set();
+  const own = {geometries: new Set(), materials: new Set()};
+  let disposed = false, baked = null, deferredFailure = null;
+  const free = entry => { entry.scene.traverse(o => { if (o.isSkinnedMesh) o.skeleton.dispose(); }); entry.textures.forEach(t => t.dispose()); };
+  function dispose() {
+    if (disposed) return; disposed = true;
+    for (const actor of actors) { actor.root.removeFromParent(); actor.shadow.removeFromParent(); actor.disposeVariants(); }
+    for (const g of own.geometries) g.dispose(); for (const m of own.materials) m.dispose();
+    for (const entry of levels.values()) free(entry);
+    actors.clear(); levels.clear();
+  }
+  const checkAlive = () => { if (disposed || isDisposed()) throw Object.assign(Error('alpine.disposed'), {disposed: true}); };
+  /** Fetches the listed levels with one Draco worker, which never outlives the call (workers do not survive into the race). */
+  async function fetchLevels(list) {
+    const draco = new DRACOLoader();
+    draco.setDecoderPath(asset('../vendor/draco/')); draco.setDecoderConfig({type: 'wasm'}); draco.setWorkerLimit(1);
+    try {
+      const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
+      const results = await Promise.allSettled(list.map(level => loader.loadAsync(asset('../' + v7Path(level, config)))));
+      const entries = results.map((result, i) => {
+        if (result.status !== 'fulfilled') return null;
+        const gltf = result.value, textures = new Set();
+        gltf.scene.traverse(o => { if (o.material) for (const m of [].concat(o.material)) if (m.map) textures.add(m.map); });
+        return {level: list[i], gltf, scene: gltf.scene, textures};
+      });
+      const failed = results.find(r => r.status === 'rejected');
+      if (failed || disposed || isDisposed()) { for (const e of entries) if (e) free(e); if (failed) throw failed.reason; checkAlive(); }
+      return entries;
+    } finally { draco.dispose(); }
+  }
+  function register(entry) {
+    // LOD0 is the player's close level and keeps the mirrored goggles apart; every other level merges into one mesh.
+    mergeRiderMeshes(entry.scene, entry.level === 0, own);
+    entry.scene.traverse(o => { if (o.isMesh) for (const m of [].concat(o.material)) own.materials.add(m); });
+    levels.set(entry.level, entry);
+    if (!baked) baked = bakeEmbeddedSkier(entry.gltf, isDisposed, V7_CLIPS, config.clipSeconds, 'v7');
+  }
+  // The levels this tier needs now are awaited (a failure here means "no v7": the caller falls back to skier3).
+  try {
+    for (const entry of await fetchLevels(plan.now)) register(entry);
+    checkAlive();
+  } catch (error) { dispose(); throw error; }
+  const loadMs = performance.now() - loadStarted;
+  function ensure(level) {
+    if (levels.has(level) || pending.has(level) || disposed || deferredFailure) return;
+    const task = fetchLevels([level]).then(([entry]) => { if (disposed) { free(entry); return; } register(entry); for (const a of actors) a.refresh(); })
+      .catch(error => { if (!error?.disposed) deferredFailure = String(error?.message || error); }).finally(() => pending.delete(level));
+    pending.set(level, task);
+  }
+
+  return {
+    createRider(id, color, scene, kit) {
+      if (disposed) throw Error('alpine.disposed');
+      const role = id === 'player' ? 'player' : 'rival';
+      const root = new T.Group(), holder = new T.Group(); root.add(holder);
+      // Course local -Z is downhill; the delivered character faces +Z.
+      holder.rotation.y = Math.PI; holder.scale.setScalar(config.scale); holder.position.y = .025;
+      const variants = new Map();
+      function variant(level) {
+        let v = variants.get(level); if (v) return v;
+        const body = kit.cloneSkinned(levels.get(level).scene), found = {};
+        body.traverse(o => {
+          if (o.isBone) found[o.name] = o;
+          if (!o.isMesh) return;
+          o.castShadow = o.receiveShadow = true; o.frustumCulled = false;
+          const material = o.material.clone(); material.envMapIntensity = .25;
+          if (role === 'rival' && material.map && /^Technical shell/.test(material.name)) tintJacket(material, color);
+          o.material = material; own.materials.add(material);
+        });
+        v = {body, bones: baked.names.map(name => found[name])}; variants.set(level, v); return v;
+      }
+      const shadowGeometry = new T.PlaneGeometry(1.2, 2.2);
+      const shadowMaterial = new T.MeshBasicMaterial({map: kit.contactTex, transparent: true, depthWrite: false, opacity: .5});
+      own.geometries.add(shadowGeometry); own.materials.add(shadowMaterial);
+      const shadow = new T.Mesh(shadowGeometry, shadowMaterial); shadow.castShadow = shadow.receiveShadow = false;
+      shadow.rotation.x = -Math.PI / 2; scene.add(root, shadow);
+      let shown = null, level = null, distance = 0, player = null;
+      function show(next) {
+        if (next === level) return;
+        const v = variant(next);
+        if (shown) holder.remove(shown.body);
+        holder.add(v.body); shown = v; level = next;
+        if (player) player.rebind(v.bones);
+      }
+      const choose = () => {
+        const want = wantedLod({role, quality, distance, current: level, config});
+        if (!levels.has(want) && levelUseful(want, role, quality, config)) ensure(want);
+        show(pickAvailable(want, levels.keys()));
+      };
+      choose();
+      player = createAlpineMotionPlayer(baked, shown.bones);
+      const actor = {id, root, body: holder, shadow, update: player.update, reset: player.reset, event: player.event,
+        metrics: () => ({...player.metrics(), lod: level}),
+        /** Called by the view each frame with the camera-to-rider distance; swaps the level when the policy says so. */
+        setDistance(d) { distance = d; choose(); },
+        refresh: choose,
+        get lod() { return level; },
+        disposeVariants() { for (const v of variants.values()) v.body.traverse(o => { if (o.isSkinnedMesh) o.skeleton.dispose(); }); variants.clear(); },
+        pose(time, lean = 0, air = 0, impact = 0) { player.update({lean, airborne: air > .5, landing: impact > .2}, {time, phase: 'racing'}); }};
+      actors.add(actor); return actor;
+    },
+    dispose,
+    /** The quality governor dropped a preset: every rider re-evaluates its level (the player to LOD1, rivals to LOD2). */
+    setQuality(next) { quality = next === 'low' ? 'low' : 'high'; for (const a of actors) a.refresh(); },
+    metrics() {
+      const lods = {}; for (const a of actors) lods[a.id] = a.lod;
+      return {mode: 'v7', fallbackReason: null, clips: Object.keys(baked.clips).length, bones: baked.names.length, trianglesPerRider: V7_TRIANGLES[plan.player], lods,
+        loaded: [...levels.keys()].sort(), pending: [...pending.keys()], deferredFailure, plan: {player: plan.player, rival: plan.rival, now: plan.now}, quality,
+        motionScale: baked.motionScale, loadMs, actors: actors.size};
+    }
+  };
 }
