@@ -116,12 +116,36 @@ const fragments={
   `
 };
 
+// Fire v7 atlas mode (optional): the same six instanced batches sample the 4x4 / 16-frame particle atlases of
+// assets/fire-v7 instead of running several noise octaves per pixel. Flames and embers add; smoke, steam and drops blend.
+const atlasHead=`
+  uniform sampler2D uAtlas;uniform sampler2D uAtlas2;
+  varying vec2 vUv;varying vec4 vEffect;
+  vec4 cell(sampler2D a,float t){float f=floor(clamp(t,0.,.999)*16.);return texture2D(a,(vec2(mod(f,4.),3.-floor(f/4.))+vUv)/4.);}
+`;
+const atlasOut=`
+#include <colorspace_fragment>
+`;
+const atlasFragments={
+  flames:`${atlasHead}void main(){vec4 t=cell(uAtlas,fract(vEffect.y*.999+vEffect.x));float a=t.a*vEffect.z;if(a<.01)discard;gl_FragColor=vec4(t.rgb*1.15,a);${atlasOut}}`,
+  smoke:`${atlasHead}void main(){vec4 t=cell(uAtlas,vEffect.y);if(vEffect.w>.02)t=mix(t,cell(uAtlas2,vEffect.y),vEffect.w);float a=t.a*vEffect.z;if(a<.01)discard;gl_FragColor=vec4(t.rgb,a);${atlasOut}}`,
+  embers:`${atlasHead}void main(){vec4 t=cell(uAtlas,fract(vEffect.y*3.+vEffect.x));float a=t.a*vEffect.z;if(a<.01)discard;gl_FragColor=vec4(t.rgb*1.4,a);${atlasOut}}`,
+  drops:`${atlasHead}void main(){vec4 t=cell(uAtlas,fract(vEffect.y*2.+vEffect.x));float a=t.a*vEffect.z;if(a<.015)discard;gl_FragColor=vec4(t.rgb,a);${atlasOut}}`,
+  mist:`${atlasHead}void main(){vec4 t=cell(uAtlas,vEffect.y);float a=t.a*vEffect.z;if(a<.01)discard;gl_FragColor=vec4(t.rgb,a);${atlasOut}}`
+};
+/** Instances drawn per level (capacities stay as allocated). Level 2 = full, 0 = lightest. Procedural look keeps its original counts at level 2. */
+const LEVELS={
+  proc:[{flames:3,smoke:4,embers:3,drops:24,mist:10,stream:30},{flames:5,smoke:6,embers:6,drops:40,mist:18,stream:36},{...COUNTS}],
+  atlas:[{flames:3,smoke:3,embers:0,drops:16,mist:6,stream:24},{flames:4,smoke:4,embers:3,drops:32,mist:12,stream:30},{flames:5,smoke:6,embers:6,drops:48,mist:20,stream:36}]
+};
+
 /** Procedural rendering only: never mutates flames, rescue or water state.
  * Existing tube geometry can remain as the hydraulic stream's solid body.
  * Call after the original view has computed its real nozzle and impact. */
 export function createUltraFireEffects({scene,model,balance}){
   const root=new T.Group();root.name='ultra-fire-effects';scene.add(root);
   const uniforms={uTime:{value:model.time||0}},batches=[],resources=[];
+  let atlasMode=false,level=2;const n={...LEVELS.proc[2]};
   const siteCount=model.flames.length,rescueCount=model.rescues?.length||0;
   const capacities={flames:siteCount*COUNTS.flames,smoke:siteCount*COUNTS.smoke+rescueCount*3,embers:siteCount*COUNTS.embers,drops:COUNTS.drops,mist:COUNTS.mist,stream:COUNTS.stream};
   function batch(kind){
@@ -166,22 +190,22 @@ export function createUltraFireEffects({scene,model,balance}){
       if(heat>0){fireCount++;if(brightest<0||heat>siteHeat[brightest]){second=brightest;brightest=i;}else if(second<0||heat>siteHeat[second])second=i;}
       const size=.56+heat*.90,phase=f.phase||i*1.7;
       if(heat>0){
-        for(let j=0;j<COUNTS.flames;j++){
-          const seed=noise(i*37+j*2.73),age=fract(time*(.68+seed*.43)+j/COUNTS.flames+phase*.17),rise=age*(1.3+heat*.6),envelope=Math.sin(age*Math.PI);
+        for(let j=0;j<n.flames;j++){
+          const seed=noise(i*37+j*2.73),age=fract(time*(.68+seed*.43)+j/n.flames+phase*.17),rise=age*(1.3+heat*.6),envelope=Math.sin(age*Math.PI);
           const height=(1.48+seed*1.28)*size*(.82+envelope*.25),width=(.50+seed*.54)*size;
           const sway=Math.sin(time*(3+seed)+phase+j*2.6)*(.045+age*.15);
           put(flames,site.x+(seed-.5)*.82*size+sway,site.y-.28+height*.47+rise*.18,site.z+.25+(noise(j+i*17)-.5)*.18,width,height,seed,age,(.76+heat*.22)*(.65+envelope*.35),0,(seed-.5)*.20,true);
         }
-        for(let j=0;j<COUNTS.embers;j++){
-          const seed=noise(i*53+j*1.43),age=fract(time*(.22+seed*.22)+j/COUNTS.embers+phase),life=Math.sin(age*Math.PI),wind=age*age;
+        for(let j=0;j<n.embers;j++){
+          const seed=noise(i*53+j*1.43),age=fract(time*(.22+seed*.22)+j/n.embers+phase),life=Math.sin(age*Math.PI),wind=age*age;
           const x=site.x+Math.sin(j*4.9+age*3.6)*(.18+age*.49)+wind*.57,z=site.z+.32+Math.cos(j*3.3+age*4.1)*age*.22;
           put(embers,x,site.y+age*(2.3+seed*2.2),z,(.025+seed*.028)*life,(.06+seed*.07)*life,seed,age,life*heat*.86,0,(seed-.5)*.7);
         }
       }
       const soot=lastHeat[i];
       if(soot>.008||steamHeat[i]>.008){
-        for(let j=0;j<COUNTS.smoke;j++){
-          const seed=noise(i*23+j*1.91),age=fract(time*(.09+seed*.035)+j/COUNTS.smoke+phase*.09),life=Math.sin(age*Math.PI),plume=1.12+age*3.05;
+        for(let j=0;j<n.smoke;j++){
+          const seed=noise(i*23+j*1.91),age=fract(time*(.09+seed*.035)+j/n.smoke+phase*.09),life=Math.sin(age*Math.PI),plume=1.12+age*3.05;
           const height=plume*(.82+seed*.3),x=site.x+Math.sin(age*3.8+phase+seed*5)*age*.57+age*age*.8,z=site.z+.24+height*cardDepth+Math.cos(age*4+seed*7)*age*.10;
           const alpha=soot*(.42+heat*.20)*life*(1-age*.42),steam=steamHeat[i];
           put(smoke,x,site.y+.65+age*(4.8+heat*1.5),z,plume*(.9+seed*.3),height,seed,age,alpha+steam*.11,clamp(steam*.83),Math.sin(seed*TAU)*.4);
@@ -204,33 +228,51 @@ export function createUltraFireEffects({scene,model,balance}){
       source.copy((handHose&&hoseStart)||nozzle||hoseStart);streamDirection.copy(end).sub(source);
       camera.getWorldDirection(relative);right.crossVectors(streamDirection,relative).normalize();screenRight.set(1,0,0).applyQuaternion(cameraQuaternion);screenUp.set(0,1,0).applyQuaternion(cameraQuaternion);
       const length=streamDirection.length(),rise=balance.render.streamRise||3,charge=1+(model.charge||0)*.25;
-      for(let j=0;j<COUNTS.stream;j++){
-        const seed=noise(j*9.17),age=fract(time*(1.35+pressure*.7)+j/COUNTS.stream),arc=4*(1-age)*age*rise;
+      for(let j=0;j<n.stream;j++){
+        const seed=noise(j*9.17),age=fract(time*(1.35+pressure*.7)+j/n.stream),arc=4*(1-age)*age*rise;
         const spread=.015+age*.115,wave=Math.sin(age*39-time*23+seed*TAU)*spread;
         const x=source.x+streamDirection.x*age+right.x*wave,y=source.y+streamDirection.y*age+arc+Math.cos(age*37-time*26)*spread*.36,z=source.z+streamDirection.z*age+right.z*wave;
         const projectedX=streamDirection.dot(screenRight);
         const projectedY=streamDirection.dot(screenUp)+(4-8*age)*rise,angle=-Math.atan2(projectedX,projectedY);
-        put(stream,x,y,z,(.048+seed*.048)*pressure*charge,Math.min(.70,length/COUNTS.stream*1.5),seed,age,.34+pressure*.35,0,angle);
+        put(stream,x,y,z,(.048+seed*.048)*pressure*charge,Math.min(.70,length/n.stream*1.5),seed,age,.34+pressure*.35,0,angle);
       }
     }
     if(sprayTail>0){
-      for(let j=0;j<COUNTS.drops;j++){
-        const seed=noise(j*3.83),age=fract(time*(1.27+seed*.72)+j/COUNTS.drops),angle=j*2.399963,reach=(.25+seed*.9)*age*pressure;
+      for(let j=0;j<n.drops;j++){
+        const seed=noise(j*3.83),age=fract(time*(1.27+seed*.72)+j/n.drops),angle=j*2.399963,reach=(.25+seed*.9)*age*pressure;
         const x=end.x+Math.cos(angle)*reach,z=end.z+Math.sin(angle)*reach*.77,y=end.y+Math.sin(age*Math.PI)*(.38+seed*.52)-age*age*.28;
         const life=Math.sin(age*Math.PI)*sprayTail;
         put(drops,x,y+.05,z+.13,(.036+seed*.039)*life,(.08+seed*.16)*life,seed,age,life*(.49+pressure*.30),0,(seed-.5)*1.4);
       }
-      for(let j=0;j<COUNTS.mist;j++){
-        const seed=noise(j*5.97),age=fract(time*(.48+seed*.24)+j/COUNTS.mist),angle=j*2.399963,spread=age*(.6+seed*.75)*pressure;
+      for(let j=0;j<n.mist;j++){
+        const seed=noise(j*5.97),age=fract(time*(.48+seed*.24)+j/n.mist),angle=j*2.399963,spread=age*(.6+seed*.75)*pressure;
         const height=.28+age*.90;
         put(mist,end.x+Math.cos(angle)*spread+age*.25,end.y+.10+age*(.5+seed*.7),end.z+.22+height*cardDepth+Math.sin(angle)*spread*.50,.28+age*1.0,height,seed,age,Math.sin(age*Math.PI)*(.27+pressure*.08)*sprayTail,0,seed*TAU);
       }
     }
     for(const entry of batches){entry.mesh.count=entry.used;entry.mesh.visible=entry.used>0;entry.mesh.instanceMatrix.needsUpdate=true;entry.effect.needsUpdate=true;}
   }
+  const BATCH={flames:flames,smoke:smoke,embers:embers,drops:drops,mist:mist};
+  function setQuality(next){
+    level=Math.max(0,Math.min(2,next|0));Object.assign(n,LEVELS[atlasMode?'atlas':'proc'][level]);
+    // Fewer live point lights is the larger saving on lit surfaces; toggling visibility recompiles once per change.
+    lights[0].visible=level>0;lights[1].visible=level>1;
+  }
+  /** Swap the five noise-shader batches to the v7 atlases. Safe to call once, after the textures loaded. */
+  function setAtlas(textures){
+    if(disposed||!textures||atlasMode)return false;
+    for(const kind of Object.keys(atlasFragments)){if(!textures[kind]||(kind==='smoke'&&!textures.mist))return false;}
+    for(const [kind,entry] of Object.entries(BATCH)){
+      const m=entry.mesh.material;
+      m.fragmentShader=atlasFragments[kind];
+      m.uniforms={uTime:uniforms.uTime,uAtlas:{value:textures[kind]},uAtlas2:{value:kind==='smoke'?textures.mist:textures[kind]}};
+      m.blending=kind==='flames'||kind==='embers'?T.AdditiveBlending:T.NormalBlending;m.toneMapped=false;m.needsUpdate=true;
+    }
+    atlasMode=true;setQuality(level);return true;
+  }
   function metrics(){
-    return {disposed,drawCalls:disposed?0:batches.filter(b=>b.used>0).length,triangles:disposed?0:batches.reduce((n,b)=>n+b.used*2,0),maxTriangles:Object.values(capacities).reduce((n,count)=>n+count*2,0),capacity:{...capacities},active:disposed?{}:Object.fromEntries(batches.map(b=>[b.kind,b.used])),fires:fireCount,lights:disposed?0:lights.filter(l=>l.intensity>0).length,textures:0};
+    return {disposed,drawCalls:disposed?0:batches.filter(b=>b.used>0).length,triangles:disposed?0:batches.reduce((n,b)=>n+b.used*2,0),maxTriangles:Object.values(capacities).reduce((n,count)=>n+count*2,0),capacity:{...capacities},active:disposed?{}:Object.fromEntries(batches.map(b=>[b.kind,b.used])),fires:fireCount,atlas:atlasMode,level,perFrame:{...n},lights:disposed?0:lights.filter(l=>l.intensity>0).length,textures:0};
   }
   function dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const resource of resources)resource.dispose();for(const light of lights)light.dispose();root.clear();resources.length=0;}
-  return {update,dispose,metrics};
+  return {update,dispose,metrics,setAtlas,setQuality,get level(){return level;},get atlas(){return atlasMode;}};
 }

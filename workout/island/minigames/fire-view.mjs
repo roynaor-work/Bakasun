@@ -9,13 +9,14 @@ import {loadFireTruck} from './fire-truck.mjs?v=island-v2-20261105-1';
 import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-v2-20261105-1';
 import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-v2-20261105-1';
 import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261105-1';
+import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 
 /** Own everything in this round. Static colored parts share a material and are
  * merged at setup; particles, stream vertices and scratch vectors are fixed. */
 export function createFireScene(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render,colors=config.visuals.palette;
   const scene=new T.Scene(),geometries=new Set(),materials=new Set(),textures=new Set();
-  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null;const cityVisuals=[],citizenVisuals=[];
+  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false;const cityVisuals=[],citizenVisuals=[];
   const models=new LocalModels(adapters),loader=models.loader;
   models.loader={async loadAsync(url){const asset=await loader.loadAsync(url);asset.scene.animations=asset.animations||[];return asset;}};
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
@@ -120,7 +121,8 @@ export function createFireScene(ctx,model,adapters={}) {
     camera.position.set(focus.x,city.cameraHeight*.82,focus.z+city.cameraBack*1.3);point.set(focus.x,0,focus.z-2.4);camera.lookAt(point);camera.updateMatrixWorld();
     truckBase.position.set(model.truck.x,0,model.truck.z);truckBase.rotation.y=Math.PI/2+model.truck.yaw;
     firefighter.position.set(model.firefighter.x,0,model.firefighter.z);firefighter.visible=model.firefighter.visible&&!crewVisual;firefighter.rotation.y=Math.atan2(model.aim.x-model.nozzle.x,model.aim.y-model.nozzle.y);firefighter.rotation.x=model.spraying?balance.crew.sprayLean:0;
-    if(crewVisual){crewVisual.visible=model.firefighter.visible;crewVisual.position.copy(firefighter.position);crewVisual.rotation.copy(firefighter.rotation);crewVisual.scale.y=1;crewRig?.update(elapsed,model.firefighter.state==='exiting');}
+    if(crewVisual){crewVisual.visible=model.firefighter.visible;crewVisual.position.copy(firefighter.position);crewVisual.rotation.copy(firefighter.rotation);if(v7Crew)crewVisual.rotation.x=0;crewVisual.scale.y=1;crewRig?.update(elapsed,model.firefighter.state==='exiting',model.spraying);}
+    if(v7){v7.update(focus);for(let i=0;i<model.rescues.length;i++)if(citizenVisuals[i]&&v7.citizens[i]?.visual===citizenVisuals[i])v7.citizenDetail(i,Math.hypot(rescuePoints[i].x-focus.x,rescuePoints[i].z-focus.z));}
     beacons.visible=model.truck.driving||model.spraying||model.refilling||model.ladder.extension>0;beacons.position.set(model.truck.x,0,model.truck.z);beacons.rotation.y=model.truck.yaw;for(let i=0;i<beacons.children.length;i++){const pulse=Math.max(0,Math.sin(model.time*7+i*Math.PI));if(beacons.children[i].isLight)beacons.children[i].intensity=beacons.visible?pulse*5:0;else beacons.children[i].scale.setScalar(.7+pulse*.5);}
     attackHose.visible=model.hose.connected;
     const hs=model.hose.start;let he=model.hose.end;
@@ -158,13 +160,14 @@ export function createFireScene(ctx,model,adapters={}) {
     ultraEffects.update({camera,nozzle,impact,handHose,hoseStart});
   }
 
-  function dispose(){if(disposed)return;disposed=true;ultraEffects.dispose();cityArt.dispose();scenery.dispose();sun.shadow.map?.dispose();truckVisual?.dispose();crewRig?.dispose();const skeletons=new Set();scene.traverse(o=>{if(o.skeleton)skeletons.add(o.skeleton);});for(const skeleton of skeletons)skeleton.dispose();models.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures){t.dispose();if(t.image?.getContext)t.image.width=t.image.height=0;}scene.clear();geometries.clear();materials.clear();textures.clear();}
+  function dispose(){if(disposed)return;disposed=true;v7?.dispose();ultraEffects.dispose();cityArt.dispose();scenery.dispose();sun.shadow.map?.dispose();truckVisual?.dispose();crewRig?.dispose();const skeletons=new Set();scene.traverse(o=>{if(o.skeleton)skeletons.add(o.skeleton);});for(const skeleton of skeletons)skeleton.dispose();models.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const g of geometries)g.dispose();for(const m of materials)m.dispose();for(const t of textures){t.dispose();if(t.image?.getContext)t.image.width=t.image.height=0;}scene.clear();geometries.clear();materials.clear();textures.clear();}
   function metrics(){let triangles=0,drawCalls=0;scene.traverseVisible(o=>{if(o.isLine||o.isPoints){drawCalls++;return;}if(!o.isMesh)return;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);drawCalls+=Array.isArray(o.material)?o.material.length:1;});return {triangles,drawCalls,geometries:geometries.size+cityArt.metrics().geometries,materials:materials.size+cityArt.metrics().materials,textures:textures.size+cityArt.metrics().textures,disposed};}
   animate();
   return {scene,camera,firefighter,truckBase,cannon,nozzle,
     resize(w,h){const half=city.extent/2;camera.left=-half;camera.right=half;camera.top=half/(w/h);camera.bottom=-camera.top;camera.updateProjectionMatrix();},
-    async loadCity(){
+    async loadCity(skip=null){
       for(const [i,key]of [...city.modelLots.map(i=>[i,city.buildings[i].style]),[-1,'firefighter'],...(model.rescues.length?[[-2,'citizen']]:[])]){
+        if(skip&&(i>=0?skip.lots?.has(i):i===-1?skip.crew:skip.citizens))continue;
         const spec=city.models[key];if(disposed||!await models.load(spec)||disposed)continue;
         if(i>=0){const lot=city.buildings[i],visual=models.create(spec,{width:lot.width});if(!visual)continue;const bounds=new T.Box3().setFromObject(visual),size=bounds.getSize(new T.Vector3()),factor=Math.min(1,lot.depth/size.z,lot.height/size.y);visual.scale.multiplyScalar(factor);visual.position.set(lot.x,.16,lot.z);visual.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}lotBases[i].visible=false;cityVisuals.push(visual);}
         else if(i===-1){const source=models.assets.get(spec.path),visual=source&&fitModel(cloneFireCharacter(source),spec,{height:city.crewHeight});if(!visual)continue;scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visual.traverse(o=>{if(o.isMesh)o.castShadow=true;});crewVisual=visual;crewRig=createFireCrewRig(visual,source.animations,city.grip);firefighter.visible=false;}
@@ -172,6 +175,25 @@ export function createFireScene(ctx,model,adapters={}) {
       }
       await scenery.load();
     },
+    /** Fire v7 art. Resolves with what was placed; anything missing is loaded from the earlier art by the caller. */
+    async loadV7(){
+      const rep={truck:false,hydrant:false,crew:false,citizens:false,lots:new Set(),atlas:false};
+      for(const l of beaconLights)l.visible=false; // idle point lights still cost every lit pixel; the lamp meshes keep pulsing
+      v7=createFireV7({scene,balance,model,adapters,canAdd:m=>m.triangles<=r.maxTriangles&&m.drawCalls<=r.maxDrawCalls,lotBases,metricsOf:metrics});
+      const guard=p=>p.catch(()=>null);
+      await Promise.all([
+        guard((async()=>{const visual=await v7.loadTruck();if(visual&&!disposed)rep.truck=this.setTruck(visual);})()),
+        guard((async()=>{await v7.loadBuildings(focus);for(const l of v7.metrics().lots)if(l.file)rep.lots.add(l.index);})()),
+        guard((async()=>{const n=await v7.loadHydrants(balance.hydrant);if(!disposed&&n===city.hydrants.length&&n>0){hydrantBase.visible=false;hydrantVisual=v7.hydrants[0];rep.hydrant=true;}})()),
+        guard((async()=>{const c=await v7.loadCrew();if(c&&!disposed){crewVisual=c.visual;crewRig=c.rig;v7Crew=true;firefighter.visible=false;rep.crew=true;}})()),
+        guard((async()=>{if(!model.rescues.length){rep.citizens=true;return;}const list=await v7.loadCitizens(model.rescues.length);if(!disposed&&list.length===model.rescues.length){for(let j=0;j<list.length;j++){citizens[j].visible=false;citizenVisuals[j]=list[j].visual;}rep.citizens=true;}})()),
+        guard((async()=>{const textures=await v7.loadAtlases();if(textures&&!disposed)rep.atlas=ultraEffects.setAtlas(textures);})())
+      ]);
+      return rep;
+    },
+    setQuality(level){ultraEffects.setQuality(level);sun.castShadow=level>0;},
+    v7Metrics(){return v7?v7.metrics():null;},
+    effectsMetrics(){return ultraEffects.metrics();},
     cityMetrics(){return {buildings:cityVisuals.length,firefighterLoaded:Boolean(crewVisual),crewRigged:Boolean(crewRig),citizens:citizenVisuals.length,roads:city.roadsX.length+city.roadsZ.length,intersections:model.roads.nodes.length,crewVisible:crewVisual?.visible||firefighter.visible,hoseConnected:attackHose.visible,camera:{x:focus.x,z:focus.z},models:models.metrics(),scenery:scenery.metrics()};},
     setHoseStart(v){handHose=Boolean(v);if(v)hoseStart.copy(v);},
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visuals=[];for(const p of city.hydrants){const visual=models.create(spec,{height:spec.height});if(!visual)continue;visual.position.fromArray(p);scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visuals.push(visual);}hydrantVisual=visuals[0];if(visuals.length===city.hydrants.length)hydrantBase.visible=false;return Boolean(hydrantVisual);},
@@ -187,20 +209,36 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   try{renderer=createRenderer({canvas,antialias:true,alpha:false,powerPreference:'low-power'});}catch{return null;}
   const surface=renderer.domElement||canvas;
   let world,disposed=false,low=false,failed=false;
+  const gov={level:2,pinned:/^[012]$/.test(new URLSearchParams(globalThis.location?.search||'').get('fireLevel')||'x'),ema:0,slow:0,gap:0,last:0,changes:0};
+  if(gov.pinned)gov.level=Number(new URLSearchParams(globalThis.location.search).get('fireLevel'));
   const onLost=event=>{event.preventDefault();failed=true;dispose();};
   function dispose(){if(disposed)return;disposed=true;surface.removeEventListener('webglcontextlost',onLost);world?.dispose();renderer.dispose();renderer.forceContextLoss();surface.width=surface.height=0;}
   try{
     renderer.setPixelRatio(r.dpr);renderer.setSize(r.width,r.height,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;}
-    world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);
+    world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);if(gov.level!==2)world.setQuality(gov.level);
     if(globalThis.document){
-      void loadFireTruck(ctx.balance).then(visual=>{if(visual)world.setTruck(visual);}).catch(()=>{});
-      void world.loadHydrant();
-      void world.loadCity();
+      const earlier=(skip=null)=>{
+        if(!skip?.truck)void loadFireTruck(ctx.balance).then(visual=>{if(visual)world.setTruck(visual);}).catch(()=>{});
+        if(!skip?.hydrant)void world.loadHydrant();
+        void world.loadCity(skip);
+      };
+      // Fire v7 first; each piece it could not place (blocked file, budget, no Draco) loads from the earlier art instead.
+      if(fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7)){
+        world.loadV7().then(earlier,()=>earlier());
+      }else earlier();
     }
   }catch{failed=true;dispose();return null;}
+  /** Frame-time governor: ~25 fps or worse for 60 frames steps the effects down one level (fewer particles, lights, shadow); never back up. */
+  function governor(){
+    if(gov.pinned||!globalThis.performance)return;
+    const now=performance.now(),dt=gov.last?now-gov.last:0;gov.last=now;gov.gap++;
+    if(!dt||dt>250)return;
+    gov.ema+=(dt-(gov.ema||dt))*.08+(gov.ema?0:dt);gov.slow=gov.ema>40?gov.slow+1:0;
+    if(gov.slow>=60&&gov.gap>=150&&gov.level>0){gov.level--;gov.slow=0;gov.gap=0;gov.changes++;world.setQuality(gov.level);if(gov.level===0&&!low)view.degrade(false);}
+  }
   const pointer=new T.Vector2(),ray=new T.Raycaster(),ground=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3(),point=new T.Vector3(),screen={x:0,y:0};
   const view={get mode(){return failed?'canvas':'three';},
-    metrics(){return {...world.metrics(),low,avatarLoaded:world.cityMetrics().firefighterLoaded,avatarPosition:model.firefighter.visible?{x:model.firefighter.x,y:0,z:model.firefighter.z}:null,ladder:{stowed:model.ladder.extension===0,extension:model.ladder.extension,sway:model.ladder.sway,mode:model.ladder.mode},city:world.cityMetrics(),rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
+    metrics(){return {...world.metrics(),low,avatarLoaded:world.cityMetrics().firefighterLoaded,avatarPosition:model.firefighter.visible?{x:model.firefighter.x,y:0,z:model.firefighter.z}:null,ladder:{stowed:model.ladder.extension===0,extension:model.ladder.extension,sway:model.ladder.sway,mode:model.ladder.mode},city:world.cityMetrics(),fireV7:{enabled:fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7),level:gov.level,pinned:gov.pinned,governorSteps:gov.changes,...(world.v7Metrics()||{}),effects:world.effectsMetrics()},rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
     capturePreview({hero=false}={}){if(disposed)return null;world.animate();const camera=hero?world.camera.clone():world.camera;if(hero){camera.position.x+=3;camera.position.z-=1;camera.zoom*=1.85;camera.updateProjectionMatrix();camera.updateMatrixWorld();}renderer.render(world.scene,camera);return surface.toDataURL('image/png');},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);}},dispose,
     resize(w=ctx.config.width,h=ctx.config.height){if(disposed)return;renderer.setSize(w*(low?r.resolutionScale:1),h*(low?r.resolutionScale:1),false);world.resize(w,h);},
@@ -223,6 +261,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     draw(p){
       if(disposed||failed)return false;
       try{
+        governor();
         world.animate();
         renderer.render(world.scene,world.camera);p.drawImage(surface,0,0,ctx.config.width,ctx.config.height);
         const {palette:colors}=ctx.config.visuals;p.font=r.markerFont;p.textAlign='center';
