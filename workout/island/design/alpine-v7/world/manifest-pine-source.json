@@ -1,0 +1,269 @@
+{
+  "source": "../../../assets/alpine-rush/snow-fir.webp",
+  "tool": "../tools/world-pine.py",
+  "toolSha256": "815dc98ad992885c0ff8ef66f4be69526274d16d302597a08225af912c212152",
+  "sourceSha256": "79bef6694c0326527cb1f64ac853f88f2385034abdb4e382e71f3de2073ba235",
+  "sourceDimensions": [
+    1024,
+    1536
+  ],
+  "sourceDocumentation": "../../../ASSETS.md:189",
+  "sourceMethod": "Existing repository ImageGen artwork; no new generation",
+  "license": "Existing repository AI-assisted artwork under repository terms; no CC0 claim",
+  "derivation": "Full-tree Lanczos resize to 683x1024 at atlas left; three trunk-free polygon bough crops in right 341px column; indexed RGBA PNG with 256 colors",
+  "file": "textures/pine-atlas.png",
+  "sha256": "ccee63267068498f23a4cae64252a9c77dc6ac127d95a50dcdaf155c5e256144",
+  "bytes": 336368,
+  "width": 1024,
+  "height": 1024,
+  "colorSpace": "sRGB",
+  "alpha": "Original cutout alpha, MASK cutoff 0.58 at runtime",
+  "fullTreeRectPixels": [
+    0,
+    0,
+    683,
+    1024
+  ],
+  "branches": [
+    {
+      "name": "low_left_snow_bough",
+      "sourceBoxOn683x1024": [
+        40,
+        500,
+        320,
+        660
+      ],
+      "sourcePolygonOn683x1024": [
+        [
+          318,
+          500
+        ],
+        [
+          280,
+          510
+        ],
+        [
+          235,
+          525
+        ],
+        [
+          180,
+          540
+        ],
+        [
+          125,
+          550
+        ],
+        [
+          76,
+          568
+        ],
+        [
+          42,
+          589
+        ],
+        [
+          44,
+          618
+        ],
+        [
+          82,
+          641
+        ],
+        [
+          137,
+          654
+        ],
+        [
+          197,
+          641
+        ],
+        [
+          236,
+          607
+        ],
+        [
+          273,
+          555
+        ],
+        [
+          317,
+          532
+        ]
+      ],
+      "mirrored": true,
+      "sourceAspect": 1.75,
+      "atlasRectPixels": [
+        685,
+        2,
+        337,
+        337
+      ],
+      "uv": [
+        0.66943359375,
+        0.00244140625,
+        0.99755859375,
+        0.33056640625
+      ]
+    },
+    {
+      "name": "low_right_snow_bough",
+      "sourceBoxOn683x1024": [
+        362,
+        510,
+        663,
+        727
+      ],
+      "sourcePolygonOn683x1024": [
+        [
+          364,
+          510
+        ],
+        [
+          405,
+          525
+        ],
+        [
+          445,
+          548
+        ],
+        [
+          492,
+          568
+        ],
+        [
+          545,
+          595
+        ],
+        [
+          600,
+          631
+        ],
+        [
+          655,
+          666
+        ],
+        [
+          661,
+          700
+        ],
+        [
+          620,
+          726
+        ],
+        [
+          570,
+          710
+        ],
+        [
+          520,
+          682
+        ],
+        [
+          470,
+          640
+        ],
+        [
+          420,
+          603
+        ],
+        [
+          385,
+          554
+        ]
+      ],
+      "mirrored": false,
+      "sourceAspect": 1.3870967741935485,
+      "atlasRectPixels": [
+        685,
+        343,
+        337,
+        337
+      ],
+      "uv": [
+        0.66943359375,
+        0.33544921875,
+        0.99755859375,
+        0.66357421875
+      ]
+    },
+    {
+      "name": "upper_left_needle_bough",
+      "sourceBoxOn683x1024": [
+        110,
+        340,
+        320,
+        483
+      ],
+      "sourcePolygonOn683x1024": [
+        [
+          318,
+          340
+        ],
+        [
+          280,
+          350
+        ],
+        [
+          240,
+          366
+        ],
+        [
+          198,
+          383
+        ],
+        [
+          160,
+          401
+        ],
+        [
+          125,
+          430
+        ],
+        [
+          111,
+          450
+        ],
+        [
+          145,
+          479
+        ],
+        [
+          210,
+          474
+        ],
+        [
+          248,
+          434
+        ],
+        [
+          280,
+          398
+        ],
+        [
+          315,
+          380
+        ]
+      ],
+      "mirrored": true,
+      "sourceAspect": 1.4685314685314685,
+      "atlasRectPixels": [
+        685,
+        684,
+        337,
+        337
+      ],
+      "uv": [
+        0.66943359375,
+        0.66845703125,
+        0.99755859375,
+        0.99658203125
+      ]
+    }
+  ],
+  "lods": {
+    "near": "12 tiers with 7 irregular drooping radial boughs each; 168 crossed short bough cards, 8 inner-crown foliage triads, woody branch cores and full-height tapered trunk; 1920 triangles",
+    "mid": "2 crossed full-tree cards with explicit reverse faces",
+    "far": "1 camera-facing full-tree card with explicit reverse face"
+  }
+}

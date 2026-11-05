@@ -1,0 +1,994 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-04T21:03:35.273Z",
+  "allPassed": true,
+  "allLODs": false,
+  "method": "Decoded Draco GLB; ordinary Three AnimationMixer; actual SkinnedMesh.getVertexPosition; 120Hz plus Float32 key times +/-1e-7 and +/-1e-6 seconds and event boundaries",
+  "limitations": [
+    "Full-body vertices are sampled for fall_roll and get_up; every clip includes all dominant foot vertices, rigid board and rigid pole vertices.",
+    "Board-relative joint drift checks attachment stability, not the visual fit of a boot or binding.",
+    "The virtual desktop renderer is separate from physical phone performance."
+  ],
+  "characters": [
+    {
+      "id": "motion-probe",
+      "file": "motion/debug-snowboard.glb",
+      "bytes": 795420,
+      "sha256": "59d5c73cc55fbb2eb73577b1f267195c5e02dc6c10f6f7510608a60240effcaf",
+      "sport": "snowboard",
+      "lod": 0,
+      "geometryVertices": {
+        "LeftFoot": 1129,
+        "RightFoot": 1130,
+        "LeftPole": 0,
+        "RightPole": 0,
+        "Snowboard": 155,
+        "Body": 11177
+      },
+      "clips": [
+        {
+          "name": "glide",
+          "durationSeconds": 2.4000001,
+          "samples": 610,
+          "distinctSourceKeyTimes": 66,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01977872,
+              "max": 0.0199207,
+              "minTime": 0.53333346,
+              "maxTime": 1.9666657
+            },
+            "RightFoot": {
+              "min": 0.01977869,
+              "max": 0.01992068,
+              "minTime": 0.53333336,
+              "maxTime": 1.9666667
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.008,
+              "minTime": 0,
+              "maxTime": 0
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 3e-8,
+            "maxAngularJumpRadians": 0.00064913,
+            "worstTime": 1.23333325
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.0001343,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019779m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019779m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "carve_left",
+          "durationSeconds": 3.20000005,
+          "samples": 742,
+          "distinctSourceKeyTimes": 73,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.00698566,
+              "max": 0.01986331,
+              "minTime": 0.93333334,
+              "maxTime": 1e-7
+            },
+            "RightFoot": {
+              "min": 0.00694968,
+              "max": 0.01986333,
+              "minTime": 0.93333333,
+              "maxTime": 3.19999905
+            },
+            "Snowboard": {
+              "min": 0.00390436,
+              "max": 0.00802085,
+              "minTime": 2.4666667,
+              "maxTime": 3.0999999
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 6.3e-7,
+            "maxAngularJumpRadians": 0.00084395,
+            "worstTime": 0.56666656
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00010562,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.006986m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.006950m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.003904m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "carve_right",
+          "durationSeconds": 3.20000005,
+          "samples": 737,
+          "distinctSourceKeyTimes": 72,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.00187101,
+              "max": 0.01986332,
+              "minTime": 0.93333334,
+              "maxTime": 3.19999905
+            },
+            "RightFoot": {
+              "min": 0.00187566,
+              "max": 0.01986333,
+              "minTime": 0.93333334,
+              "maxTime": 3.2
+            },
+            "Snowboard": {
+              "min": 0.00390439,
+              "max": 0.00802039,
+              "minTime": 2.4666667,
+              "maxTime": 3.0999999
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 9.6e-7,
+            "maxAngularJumpRadians": 0.00091609,
+            "worstTime": 0.4999999
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00012797,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.001871m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.001876m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.003904m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "crouch",
+          "durationSeconds": 2.4000001,
+          "samples": 419,
+          "distinctSourceKeyTimes": 27,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01986281,
+              "max": 0.01991169,
+              "minTime": 0.1,
+              "maxTime": 1.33333337
+            },
+            "RightFoot": {
+              "min": 0.01986285,
+              "max": 0.01991173,
+              "minTime": 0.1,
+              "maxTime": 1.33333337
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.008,
+              "minTime": 0,
+              "maxTime": 0
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 1e-8,
+            "maxAngularJumpRadians": 0.00078349,
+            "worstTime": 2.20000105
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00008485,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019863m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019863m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "accelerate",
+          "durationSeconds": 2.5999999,
+          "samples": 613,
+          "distinctSourceKeyTimes": 62,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.0197431,
+              "max": 0.01994288,
+              "minTime": 1.13333333,
+              "maxTime": 1.66666663
+            },
+            "RightFoot": {
+              "min": 0.01974321,
+              "max": 0.01994289,
+              "minTime": 1.13333333,
+              "maxTime": 1.66666663
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.008,
+              "minTime": 0,
+              "maxTime": 0
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 8.3e-7,
+            "maxAngularJumpRadians": 0.00082528,
+            "worstTime": 0.23333433
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00016939,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019743m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019743m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "ramp_jump",
+          "durationSeconds": 3.20000005,
+          "samples": 899,
+          "distinctSourceKeyTimes": 101,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.019328,
+              "max": 1.0498146,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "RightFoot": {
+              "min": 0.019328,
+              "max": 1.04981461,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 1.03800002,
+              "minTime": 0,
+              "maxTime": 1.60000002
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000309,
+            "maxAngularJumpRadians": 0.00084552,
+            "worstTime": 2.13333333
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00069757,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.736
+            },
+            {
+              "name": "grab-start",
+              "time": 1.216
+            },
+            {
+              "name": "grab-release",
+              "time": 2.048
+            },
+            {
+              "name": "landing",
+              "time": 2.464
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "trick_180",
+          "durationSeconds": 3.20000005,
+          "samples": 879,
+          "distinctSourceKeyTimes": 99,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.019328,
+              "max": 0.97986332,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "RightFoot": {
+              "min": 0.019328,
+              "max": 0.97986335,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.96800002,
+              "minTime": 0,
+              "maxTime": 1.60000002
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000235,
+            "maxAngularJumpRadians": 0.00084425,
+            "worstTime": 0.83333321
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00069757,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.736
+            },
+            {
+              "name": "landing",
+              "time": 2.464
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "trick_360",
+          "durationSeconds": 3.5999999,
+          "samples": 985,
+          "distinctSourceKeyTimes": 111,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01941335,
+              "max": 0.97987587,
+              "minTime": 2.85,
+              "maxTime": 1.79999995
+            },
+            "RightFoot": {
+              "min": 0.01941332,
+              "max": 0.97986465,
+              "minTime": 2.85,
+              "maxTime": 1.79999995
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.96800002,
+              "minTime": 0,
+              "maxTime": 1.79999995
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000209,
+            "maxAngularJumpRadians": 0.00085241,
+            "worstTime": 0.93333324
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00060698,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.828
+            },
+            {
+              "name": "landing",
+              "time": 2.772
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019413m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019413m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "trick_shifty",
+          "durationSeconds": 3.20000005,
+          "samples": 879,
+          "distinctSourceKeyTimes": 99,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.019328,
+              "max": 0.97986332,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "RightFoot": {
+              "min": 0.019328,
+              "max": 0.97986334,
+              "minTime": 2.55,
+              "maxTime": 1.60000002
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.96800002,
+              "minTime": 0,
+              "maxTime": 1.60000002
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000238,
+            "maxAngularJumpRadians": 0.00086075,
+            "worstTime": 0.83333321
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00087713,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.736
+            },
+            {
+              "name": "landing",
+              "time": 2.464
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019328m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "trick_tail_grab",
+          "durationSeconds": 3.4000001,
+          "samples": 953,
+          "distinctSourceKeyTimes": 107,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01935944,
+              "max": 1.04986336,
+              "minTime": 2.68333333,
+              "maxTime": 1.70000005
+            },
+            "RightFoot": {
+              "min": 0.0193594,
+              "max": 1.04986337,
+              "minTime": 2.68333333,
+              "maxTime": 1.70000005
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 1.03800002,
+              "minTime": 0,
+              "maxTime": 1.70000005
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000295,
+            "maxAngularJumpRadians": 0.00093291,
+            "worstTime": 2.26666655
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.0006039,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.782
+            },
+            {
+              "name": "grab-start",
+              "time": 1.292
+            },
+            {
+              "name": "grab-release",
+              "time": 2.176
+            },
+            {
+              "name": "landing",
+              "time": 2.618
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019359m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019359m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "trick_backflip",
+          "durationSeconds": 3.79999995,
+          "samples": 1039,
+          "distinctSourceKeyTimes": 117,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01944494,
+              "max": 1.50268806,
+              "minTime": 3.01666667,
+              "maxTime": 1.93333328
+            },
+            "RightFoot": {
+              "min": 0.01944492,
+              "max": 1.50277544,
+              "minTime": 3.01666667,
+              "maxTime": 1.93333328
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 1.63197713,
+              "minTime": 3.79999895,
+              "maxTime": 1.89999998
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000271,
+            "maxAngularJumpRadians": 0.00089103,
+            "worstTime": 0.9999999
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00082811,
+          "events": [
+            {
+              "name": "takeoff",
+              "time": 0.874
+            },
+            {
+              "name": "landing",
+              "time": 2.926
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019445m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019445m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "fall_roll",
+          "durationSeconds": 4,
+          "samples": 1040,
+          "distinctSourceKeyTimes": 111,
+          "fullSkinnedBodySampled": true,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.00393187,
+              "max": 0.82523577,
+              "minTime": 2.31666667,
+              "maxTime": 1.4666667
+            },
+            "RightFoot": {
+              "min": 0.00398553,
+              "max": 0.82520023,
+              "minTime": 2.31666667,
+              "maxTime": 1.4666667
+            },
+            "Snowboard": {
+              "min": 0.00390933,
+              "max": 0.93452242,
+              "minTime": 0.56666666,
+              "maxTime": 1.5
+            },
+            "Body": {
+              "min": -0.00031584,
+              "max": 0.13017397,
+              "minTime": 1.51666667,
+              "maxTime": 2.05833333
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000319,
+            "maxAngularJumpRadians": 0.00065222,
+            "worstTime": 1.33333437
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00011255,
+          "events": [
+            {
+              "name": "balance-lost",
+              "time": 0.32
+            },
+            {
+              "name": "shoulder-contact",
+              "time": 1.15
+            },
+            {
+              "name": "roll-contact",
+              "time": 2.15
+            },
+            {
+              "name": "settled",
+              "time": 3.8
+            }
+          ],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.003932m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.003986m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.003909m)"
+            },
+            {
+              "passed": true,
+              "message": "Body must not penetrate snow by more than 5mm (minimum -0.000316m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "get_up",
+          "durationSeconds": 3.79999995,
+          "samples": 900,
+          "distinctSourceKeyTimes": 91,
+          "fullSkinnedBodySampled": true,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.0041895,
+              "max": 0.34169624,
+              "minTime": 1.63333333,
+              "maxTime": 0.43333334
+            },
+            "RightFoot": {
+              "min": 0.00415109,
+              "max": 0.34162897,
+              "minTime": 1.63333333,
+              "maxTime": 0.43333334
+            },
+            "Snowboard": {
+              "min": 0.00394006,
+              "max": 0.36500898,
+              "minTime": 1.76666665,
+              "maxTime": 0.43333334
+            },
+            "Body": {
+              "min": 0.00399993,
+              "max": 0.04571931,
+              "minTime": 0.89999998,
+              "maxTime": 1.24166667
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 0.00000109,
+            "maxAngularJumpRadians": 0.00087643,
+            "worstTime": 1.0333332
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00014786,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.004190m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.004151m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.003940m)"
+            },
+            {
+              "passed": true,
+              "message": "Body must not penetrate snow by more than 5mm (minimum 0.004000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        },
+        {
+          "name": "celebrate",
+          "durationSeconds": 3,
+          "samples": 795,
+          "distinctSourceKeyTimes": 89,
+          "fullSkinnedBodySampled": false,
+          "contacts": {
+            "LeftFoot": {
+              "min": 0.01975552,
+              "max": 0.0199453,
+              "minTime": 0.13333334,
+              "maxTime": 1.26666665
+            },
+            "RightFoot": {
+              "min": 0.01975635,
+              "max": 0.01996839,
+              "minTime": 1.70000005,
+              "maxTime": 0.96666664
+            },
+            "Snowboard": {
+              "min": 0.008,
+              "max": 0.008,
+              "minTime": 0,
+              "maxTime": 0
+            }
+          },
+          "boundaries": {
+            "maxPositionJumpMeters": 7e-8,
+            "maxAngularJumpRadians": 0.00056582,
+            "worstTime": 1.5333332
+          },
+          "maxQuaternionNormError": 4e-8,
+          "boardRelativeFootDriftMeters": 0.00013383,
+          "events": [],
+          "gates": [
+            {
+              "passed": true,
+              "message": "LeftFoot must not penetrate snow by more than 5mm (minimum 0.019756m)"
+            },
+            {
+              "passed": true,
+              "message": "RightFoot must not penetrate snow by more than 5mm (minimum 0.019756m)"
+            },
+            {
+              "passed": true,
+              "message": "Snowboard must not penetrate snow by more than 5mm (minimum 0.008000m)"
+            },
+            {
+              "passed": true,
+              "message": "No joint jump greater than 0.5mm across a two-microsecond key boundary"
+            },
+            {
+              "passed": true,
+              "message": "Interpolated local quaternion norms remain within 1e-5"
+            },
+            {
+              "passed": true,
+              "message": "Board-relative boot joints drift less than 2mm"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

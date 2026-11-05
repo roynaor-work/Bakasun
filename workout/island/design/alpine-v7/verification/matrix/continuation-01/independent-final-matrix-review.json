@@ -1,0 +1,92 @@
+{
+  "status": "in progress",
+  "startedAt": "2026-11-05T00:06:32.807Z",
+  "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+  "sourceHTMLSHA256": "7ca632790d23dffa8bda9e4d054a625317fad296a4541c1ac6426a9b96fec6e5",
+  "execution": {
+    "node": "v24.19.0",
+    "cpuAffinity": "0-2",
+    "cpuQuota": "400000 100000"
+  },
+  "method": "Independent viewing of images already saved by the sole rendering browser; no additional browser or GPU session.",
+  "reviews": [
+    {
+      "reviewedAt": "2026-11-05T00:10:44.740Z",
+      "images": [
+        {
+          "file": "verification/matrix/012-390x844-sunset-0-close-fall_roll.webp",
+          "sha256": "7059ce6a13365b1ebb01fe3ba56b5cdcffb282730801b38d5ba7d63b88e055cf"
+        }
+      ],
+      "notes": "Male skier portrait close fall end: complete equipment and hands visible above athlete controls, no clipping or shader dropout. This is the fresh CPU-affinity0-2 run."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:17:37.525Z",
+      "images": [
+        {
+          "file": "verification/matrix/040-390x844-sunset-1-close-fall_roll.webp",
+          "sha256": "ab7c2e81bae45a875a86a9deb5d54f44e2e1f5a0dcaa07db92af69ad9cd1da15"
+        }
+      ],
+      "notes": "Board rider close portrait fall end in the fresh CPU0-2 run: palm/forearm remain fully visible above athlete panel; no frame clipping or material dropout. Independent51-case checkpoint passes all source, viewport, trace and resource gates."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:24:59.516Z",
+      "images": [
+        {
+          "file": "verification/matrix/086-390x844-fog-0-close-carve_left.webp",
+          "sha256": "cdf2adf1d4d5083f8719e2660b4773812a1ec0929f3a95084c89fbbb5ba683a0"
+        }
+      ],
+      "notes": "First fog group: coherent cool background/fog, readable skier carving and equipment; no shader/material dropout or UI occlusion. Independent88-case checkpoint passes; geometry76-79 and textures24-25 reflect the additional environment texture."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:32:53.275Z",
+      "images": [
+        {
+          "file": "verification/matrix/114-390x844-fog-1-close-carve_left.webp",
+          "sha256": "ab54a695c6cabf7969c5928f2e0d41c04ceb19be9d55b45a0b177bb773b30875"
+        },
+        {
+          "file": "verification/matrix/124-390x844-fog-1-close-fall_roll.webp",
+          "sha256": "762dcd18a60fd0fab52ce39ccdce7c4c069dae1cbf9974745f43192a7664465f"
+        }
+      ],
+      "notes": "Quarter-run126-case checkpoint: all independent gates pass, geometry76-79/textures24-25. Fog snowboard carve reads as toe/heel loading with connected boots/board; assisted-end fall hand remains clear of controls. No material/shader dropout."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:42:24.191Z",
+      "images": [
+        {
+          "file": "verification/matrix/170-390x844-night-floodlit-0-close-carve_left.webp",
+          "sha256": "87e64c7554012dc057b5fe410f9620a5a5e30601885f3af0e6d2aea20315e2ee"
+        }
+      ],
+      "notes": "First night group: cool mountain backdrop and actual spotlight pool remain coherent; skier silhouette, helmet, skis and pole tips are readable without shader dropout. Independent174-case checkpoint passes; geometry76-82/textures24-26 after night resources load."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:49:46.444Z",
+      "images": [
+        {
+          "file": "verification/matrix/184-390x844-night-floodlit-0-wide-carve_left.webp",
+          "sha256": "2f57656a2c821fd0f81849a1be126a22ede6141865fdaf82258e1012ce001fbc"
+        },
+        {
+          "file": "verification/matrix/208-390x844-night-floodlit-1-close-fall_roll.webp",
+          "sha256": "7e65e4be1814b0bfb9a1404b7a90a9eb76f2be6b7dc88ad665609367537c5304"
+        }
+      ],
+      "notes": "Night wide skier and close board fall: coherent light pool, readable silhouettes and contact shadow; hands clear of athlete controls and full gear retained. Independent210-case checkpoint passes; GPU resource counts remain bounded at82 geometries/26 textures."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:59:31.304Z",
+      "images": [
+        {
+          "file": "verification/matrix/254-844x390-sunset-0-close-carve_left.webp",
+          "sha256": "2e2ed2ee8fd9b0eca809987eb0cfe34514a71107c4bea6605daa51ba62a35992"
+        }
+      ],
+      "notes": "Half-run252portrait cases completed and first4landscape cases pass. Both baselines match source10/DPR1.5; landscape actual viewport844x390 and drawing buffer1266x585 independently verified. Landscape carve image has clear separated controls, full body and equipment, coherent world."
+    }
+  ]
+}

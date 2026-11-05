@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "method": "Actual browser scene camera moved around15m boundary; target instance identified in each LOD InstancedMesh by its world x/z matrix translation. Captures inspected for comparable height/footprint.",
+  "threeRevision": "160",
+  "worldModuleSha256": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1",
+  "pineModels": [
+    {
+      "id": "pine-lod0",
+      "bytes": 353068,
+      "triangles": 1920,
+      "sha256": "2cec59f04d8a25b10bcf33b535fd0d52c3af773eb1530aa6a39d3e2efceaa05d"
+    },
+    {
+      "id": "pine-lod1",
+      "bytes": 338220,
+      "triangles": 8,
+      "sha256": "6ec704af41d148d0350ae8f0ef719d3501a85b5820fba073649a1c8ba5257d7c"
+    },
+    {
+      "id": "pine-lod2",
+      "bytes": 338124,
+      "triangles": 4,
+      "sha256": "efacbdc1b5cb50f43186cd13c0b9fb806cb839818583117963d37e748ac44405"
+    }
+  ],
+  "boundaryMeasurements": [
+    {
+      "distancePreset": 14.8,
+      "targetLOD": 0,
+      "treeLOD": [
+        1,
+        4,
+        2
+      ]
+    },
+    {
+      "distancePreset": 15.2,
+      "targetLOD": 1,
+      "treeLOD": [
+        0,
+        5,
+        2
+      ]
+    }
+  ],
+  "pass": true,
+  "passMeaning": "Functional bucketing: target instance is in LOD0 before the15m threshold and LOD1 after it. This does not claim invisible cross-fading.",
+  "visualObservations": [
+    "Final near model is a portable radial branch mesh with short foliage cards; no full-height photo card or preview-only seam shader.",
+    "Height and overall footprint remain comparable across the boundary.",
+    "A visible change in individual bough silhouette remains when the near geometry switches to the medium full-tree impostor. The asset uses a discrete LOD transition, not a cross-fade."
+  ],
+  "evidence": [
+    {
+      "measurementIndex": 0,
+      "distancePresetMeters": 14.8,
+      "targetLOD": 0,
+      "path": "../verification/pine-lod/pine-lod0-14.8m-390x844.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 297176,
+      "sha256": "706fa61a4e5f4afc38ad33309b2d9e9d16c81f6bc31a0243bcdc7964e9b44b73",
+      "sourcePngSha256": "771608ad435f996bcc385896c840e2f5fdebe71699eaa71ddd90c501d492303e",
+      "derivation": "Lossless WebP export of actual browser PNG capture; identical decoded RGBA pixels, no crop or retouch"
+    },
+    {
+      "measurementIndex": 1,
+      "distancePresetMeters": 15.2,
+      "targetLOD": 1,
+      "path": "../verification/pine-lod/pine-lod1-15.2m-390x844.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 281682,
+      "sha256": "10312a93ebdd0381bcdf23465b81f39eda8e7007fd3670081bd3c3e13ecbd76f",
+      "sourcePngSha256": "eafd0bba546d410a7d6f68d518fdbc053292047cb32d1284040656e656fbc1d9",
+      "derivation": "Lossless WebP export of actual browser PNG capture; identical decoded RGBA pixels, no crop or retouch"
+    }
+  ]
+}

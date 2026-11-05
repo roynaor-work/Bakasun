@@ -1,0 +1,434 @@
+{
+  "schemaVersion": 1,
+  "method": "Actual browser scene with decoded GLB attributes and InstancedMesh transforms. For each rock, find its transformed lowest vertex and cast a downward THREE.Raycaster onto the rendered powder_terrain triangles at that vertex x/z. No analytic elevation substitute.",
+  "units": "meters",
+  "threeRevision": "160",
+  "before": {
+    "measuredAt": "2026-11-04T21:11:51.448Z",
+    "method": "Decoded mesh instance transforms and downward Raycaster intersection with rendered terrain triangles",
+    "rocks": [
+      {
+        "mesh": "rock-small_instanced",
+        "index": 0,
+        "lowestVertex": [
+          19.93267361608039,
+          1.5949133529721715,
+          -10.364508036037789
+        ],
+        "renderedTerrainY": 1.8882770675852711,
+        "supportGapMeters": -0.2933637146130996
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 1,
+        "lowestVertex": [
+          -8.944313214502078,
+          -0.1327119599144364,
+          41.05967040561814
+        ],
+        "renderedTerrainY": 0.2591025698175571,
+        "supportGapMeters": -0.3918145297319935
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 2,
+        "lowestVertex": [
+          21.790900987978095,
+          1.7440582959706372,
+          -37.90607229759134
+        ],
+        "renderedTerrainY": 2.146423814253886,
+        "supportGapMeters": -0.40236551828324885
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 3,
+        "lowestVertex": [
+          -11.82687356172376,
+          0.4819541671522991,
+          6.0608930333285
+        ],
+        "renderedTerrainY": 0.8295856420184364,
+        "supportGapMeters": -0.3476314748661373
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 4,
+        "lowestVertex": [
+          8.370125018096335,
+          -0.12546943445319236,
+          -28.95617141187833
+        ],
+        "renderedTerrainY": 0.1896726810148337,
+        "supportGapMeters": -0.31514211546802606
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 5,
+        "lowestVertex": [
+          -22.04105677108956,
+          1.9680451288100622,
+          -23.08283739313743
+        ],
+        "renderedTerrainY": 2.2353081318047288,
+        "supportGapMeters": -0.26726300299466654
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 6,
+        "lowestVertex": [
+          9.003029997406095,
+          -0.1802975611500468,
+          -35.57819742801206
+        ],
+        "renderedTerrainY": 0.22992259249110703,
+        "supportGapMeters": -0.41022015364115383
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 7,
+        "lowestVertex": [
+          -17.150721783965707,
+          1.05131524012514,
+          -27.854209515057192
+        ],
+        "renderedTerrainY": 1.4673193028651426,
+        "supportGapMeters": -0.41600406274000257
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 8,
+        "lowestVertex": [
+          11.044435548434477,
+          0.17922152542073633,
+          41.02036681342166
+        ],
+        "renderedTerrainY": 0.49738531576817024,
+        "supportGapMeters": -0.3181637903474339
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 9,
+        "lowestVertex": [
+          -16.13535955894406,
+          0.8403851760018117,
+          44.68880883848519
+        ],
+        "renderedTerrainY": 1.180673411052176,
+        "supportGapMeters": -0.3402882350503642
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 0,
+        "lowestVertex": [
+          11.580461538794625,
+          0.31396187271110776,
+          -42.13986366168908
+        ],
+        "renderedTerrainY": 0.703907038037535,
+        "supportGapMeters": -0.3899451653264272
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 1,
+        "lowestVertex": [
+          -9.69280088008612,
+          -0.1083643282868465,
+          -41.495577778800836
+        ],
+        "renderedTerrainY": 0.3710999451403012,
+        "supportGapMeters": -0.4794642734271477
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 2,
+        "lowestVertex": [
+          13.824681835173223,
+          0.45954119135075544,
+          -26.499142650972388
+        ],
+        "renderedTerrainY": 0.8799172663925319,
+        "supportGapMeters": -0.42037607504177643
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 3,
+        "lowestVertex": [
+          -15.2299432233153,
+          0.5438246491685312,
+          11.097057523264588
+        ],
+        "renderedTerrainY": 1.188947537961191,
+        "supportGapMeters": -0.6451228887926597
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 4,
+        "lowestVertex": [
+          13.202496799687776,
+          0.43301338290483393,
+          -12.71061562021566
+        ],
+        "renderedTerrainY": 0.7942044004750386,
+        "supportGapMeters": -0.36119101757020466
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 5,
+        "lowestVertex": [
+          -16.539386975475203,
+          0.7714702841563863,
+          -38.01639592714112
+        ],
+        "renderedTerrainY": 1.335659150632985,
+        "supportGapMeters": -0.5641888664765986
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 6,
+        "lowestVertex": [
+          18.12213532317642,
+          0.8832401904517333,
+          14.545225171845104
+        ],
+        "renderedTerrainY": 1.485890460162004,
+        "supportGapMeters": -0.6026502697102707
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 7,
+        "lowestVertex": [
+          -13.166080514918882,
+          0.4924117733291933,
+          -37.901933343450686
+        ],
+        "renderedTerrainY": 0.8557724081510969,
+        "supportGapMeters": -0.3633606348219036
+      }
+    ],
+    "summary": {
+      "count": 18,
+      "positiveSupportGaps": 0,
+      "minimumGapMeters": -0.6451228887926597,
+      "maximumGapMeters": -0.26726300299466654
+    },
+    "worldModuleSha256FromFrozen05": "b5fda7b3f0bc645a55671f2f8d0450951ca2c99fc294e812da4640175b46afcc"
+  },
+  "after": {
+    "measuredAt": "2026-11-04T22:19:24.175Z",
+    "method": "Decoded mesh instance transforms and downward Raycaster intersection with rendered terrain triangles",
+    "rocks": [
+      {
+        "mesh": "rock-small_instanced",
+        "index": 0,
+        "lowestVertex": [
+          19.93267361608039,
+          1.4749133482038,
+          -10.364508036037789
+        ],
+        "renderedTerrainY": 1.8897635643638466,
+        "supportGapMeters": -0.4148502161600467
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 1,
+        "lowestVertex": [
+          -8.944313214502078,
+          -0.2527119579307193,
+          41.05967040561814
+        ],
+        "renderedTerrainY": 0.25881928782503394,
+        "supportGapMeters": -0.5115312457557533
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 2,
+        "lowestVertex": [
+          21.790900987978095,
+          1.6240582912022656,
+          -37.90607229759134
+        ],
+        "renderedTerrainY": 2.147938237532159,
+        "supportGapMeters": -0.5238799463298935
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 3,
+        "lowestVertex": [
+          -11.82687356172376,
+          0.3619541623839275,
+          6.0608930333285
+        ],
+        "renderedTerrainY": 0.8331611447272564,
+        "supportGapMeters": -0.4712069823433289
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 4,
+        "lowestVertex": [
+          8.370125018096335,
+          -0.24546943549627365,
+          -28.95617141187833
+        ],
+        "renderedTerrainY": 0.18748629665090988,
+        "supportGapMeters": -0.4329557321471835
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 5,
+        "lowestVertex": [
+          -22.04105677108956,
+          1.8480451240416906,
+          -23.08283739313743
+        ],
+        "renderedTerrainY": 2.233460759493397,
+        "supportGapMeters": -0.38541563545170643
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 6,
+        "lowestVertex": [
+          9.003029997406095,
+          -0.3002975584678378,
+          -35.57819742801206
+        ],
+        "renderedTerrainY": 0.2291352994137128,
+        "supportGapMeters": -0.5294328578815506
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 7,
+        "lowestVertex": [
+          -17.150721783965707,
+          0.9313152353567684,
+          -27.854209515057192
+        ],
+        "renderedTerrainY": 1.4642033714626095,
+        "supportGapMeters": -0.5328881361058411
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 8,
+        "lowestVertex": [
+          11.044435548434477,
+          0.059221520652364745,
+          41.02036681342166
+        ],
+        "renderedTerrainY": 0.500245920694006,
+        "supportGapMeters": -0.44102440004164123
+      },
+      {
+        "mesh": "rock-small_instanced",
+        "index": 9,
+        "lowestVertex": [
+          -16.13535955894406,
+          0.7203851712334401,
+          44.68880883848519
+        ],
+        "renderedTerrainY": 1.1786107949124514,
+        "supportGapMeters": -0.4582256236790112
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 0,
+        "lowestVertex": [
+          11.580461538794625,
+          0.013961890592501192,
+          -42.13986366168908
+        ],
+        "renderedTerrainY": 0.7007450790846477,
+        "supportGapMeters": -0.6867831884921465
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 1,
+        "lowestVertex": [
+          -9.69280088008612,
+          -0.40836432530661426,
+          -41.495577778800836
+        ],
+        "renderedTerrainY": 0.37321186943297135,
+        "supportGapMeters": -0.7815761947395856
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 2,
+        "lowestVertex": [
+          13.824681835173223,
+          0.15954120923214887,
+          -26.499142650972388
+        ],
+        "renderedTerrainY": 0.8807598296146679,
+        "supportGapMeters": -0.721218620382519
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 3,
+        "lowestVertex": [
+          -15.2299432233153,
+          0.24382463724760228,
+          11.097057523264588
+        ],
+        "renderedTerrainY": 1.1895232495551156,
+        "supportGapMeters": -0.9456986123075133
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 4,
+        "lowestVertex": [
+          13.202496799687776,
+          0.13301340078622736,
+          -12.71061562021566
+        ],
+        "renderedTerrainY": 0.7904604139791829,
+        "supportGapMeters": -0.6574470131929555
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 5,
+        "lowestVertex": [
+          -16.539386975475203,
+          0.47147027223545734,
+          -38.01639592714112
+        ],
+        "renderedTerrainY": 1.335821660316448,
+        "supportGapMeters": -0.8643513880809905
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 6,
+        "lowestVertex": [
+          18.12213532317642,
+          0.5832401189261596,
+          14.545225171845104
+        ],
+        "renderedTerrainY": 1.4861682962051646,
+        "supportGapMeters": -0.902928177279005
+      },
+      {
+        "mesh": "rock-large_instanced",
+        "index": 7,
+        "lowestVertex": [
+          -13.166080514918882,
+          0.19241176140826433,
+          -37.901933343450686
+        ],
+        "renderedTerrainY": 0.8560849308742817,
+        "supportGapMeters": -0.6636731694660174
+      }
+    ],
+    "summary": {
+      "count": 18,
+      "positiveSupportGaps": 0,
+      "minimumGapMeters": -0.9456986123075133,
+      "maximumGapMeters": -0.38541563545170643
+    },
+    "worldModuleSha256": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1"
+  },
+  "modelSha256": {
+    "rock-small": "f3efe4dafaa8891040796feff88c81cf3adda2e2a4adb1eb55f3c3208b7f839a",
+    "rock-large": "34dba523f1302e2d1a06ec229ec623e20c1b41c6768337d14e24912f2d33283d"
+  },
+  "interpretation": "Lowest support vertices intersect the rendered ground in both versions. Apparent levitation was a visual snow-transition problem. Final version additionally buries small/large rocks by .12/.30m and adds terrain-conforming powder skirts with subtle contact shading.",
+  "pass": true
+}

@@ -1,0 +1,2071 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-04T21:09:23.040Z",
+  "allPassed": true,
+  "method": "Two ordinary Three r160 AnimationMixers; JSON createClipsFromJSON versus independently reconstructed ordinary GLB channels on identical decoded Draco geometry;240 uniform intervals plus all retained GLB/JSON keys and event boundaries; recommended scene scale and placement yaw applied to both.",
+  "seekHandling": "Each independent seek explicitly unpauses its LoopOnce action before AnimationMixer.setTime; this preserves clamped endpoints when JSON and Float32 duration timestamps differ slightly.",
+  "limits": {
+    "worldJointPositionMeters": 0.0001,
+    "worldFootVertexPositionMeters": 0.0001,
+    "worldJointOrientationRadians": 0.0001
+  },
+  "inputs": {
+    "characters/manifest.json": {
+      "bytes": 11282,
+      "sha256": "e62a3d9f0fb25d9d32a056306825e651fa8005861bfc8c900affa0a5396efab1"
+    },
+    "characters/ski-male.glb": {
+      "bytes": 794424,
+      "sha256": "06aa595b4c285c9fe91f5f26c597beaf1b573502b22916b189f28fccbf901d05"
+    },
+    "motion/ski.json": {
+      "bytes": 649883,
+      "sha256": "0cd2dd0dd9e1ceabc63b23e0d450d3b1e7f3af643e9f703f4c8b3d8e0a65d554"
+    },
+    "characters/ski-female.glb": {
+      "bytes": 795192,
+      "sha256": "1d02e2c317835fa95190fb737637e0273e4eb1d0602809b07132d4927037ba19"
+    },
+    "characters/snowboard-female.glb": {
+      "bytes": 798344,
+      "sha256": "f1b220d8498b350a620f8b203825fcc696ea287636c5994ba7bbff7deeaf3cee"
+    },
+    "motion/snowboard.json": {
+      "bytes": 606347,
+      "sha256": "25c8389d57b35888b18ff951ad2cec78e484bb3b1f07337db8f238a32c20b5f8"
+    }
+  },
+  "characters": [
+    {
+      "id": "ski-male-lod0",
+      "file": "characters/ski-male.glb",
+      "jsonFile": "motion/ski.json",
+      "sport": "ski",
+      "worldScale": 1.35,
+      "worldYawRadians": 0,
+      "glbSha256": "06aa595b4c285c9fe91f5f26c597beaf1b573502b22916b189f28fccbf901d05",
+      "jsonSha256": "0cd2dd0dd9e1ceabc63b23e0d450d3b1e7f3af643e9f703f4c8b3d8e0a65d554",
+      "footCandidateCounts": {
+        "LeftFoot": 891,
+        "RightFoot": 883
+      },
+      "representativeFootVertices": 69,
+      "clips": [
+        {
+          "name": "glide",
+          "samples": 344,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.0000015170225211532949,
+            "worldFootVertexPositionMeters": 0.000003277312298119152,
+            "worldJointOrientationRadians": 0.00000438175226349748
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9000000357627869,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 2.266666889190674,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 0.4666669964790344,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000015170225211532949,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000003277312298119152,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.00000438175226349748,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_left",
+          "samples": 355,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002574213339044616,
+            "worldFootVertexPositionMeters": 0.0000041717054165350525,
+            "worldJointOrientationRadians": 0.000004956781175740678
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.4000000059604645,
+              "joint": "RightArm"
+            },
+            "position": {
+              "time": 1.6666666915019352,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 2.9666666984558105,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 26
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002574213339044616,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000041717054165350525,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004956781175740678,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_right",
+          "samples": 353,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000024017828508768047,
+            "worldFootVertexPositionMeters": 0.000004468952275656775,
+            "worldJointOrientationRadians": 0.000004821717361488719
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.400000035762787,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 2.8666670322418213,
+              "joint": "RightFoot"
+            },
+            "footVertex": {
+              "time": 0.2666670083999634,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000024017828508768047,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004468952275656775,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004821717361488719,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "crouch",
+          "samples": 286,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.000001768890995110921,
+            "worldFootVertexPositionMeters": 0.000004846224536162274,
+            "worldJointOrientationRadians": 0.000005047162099183343
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.3333333730697632,
+              "joint": "LeftFoot"
+            },
+            "position": {
+              "time": 1.3333330154418945,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 1.3333333730697632,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000001768890995110921,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004846224536162274,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005047162099183343,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "accelerate",
+          "samples": 342,
+          "glbDurationSeconds": 2.5999999046325684,
+          "jsonDurationSeconds": 2.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000018066588983713077,
+            "worldFootVertexPositionMeters": 0.0000039447443964355285,
+            "worldJointOrientationRadians": 0.000004885036108414638
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0333333015441895,
+              "joint": "RightForeArm"
+            },
+            "position": {
+              "time": 0.4000000059604645,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 2.5891666666666664,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000018066588983713077,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000039447443964355285,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004885036108414638,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "ramp_jump",
+          "samples": 413,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000027463108040530875,
+            "worldFootVertexPositionMeters": 0.000005469816285993166,
+            "worldJointOrientationRadians": 0.000019961728128113874
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.2666670083999634,
+              "joint": "LeftLeg"
+            },
+            "position": {
+              "time": 2.066666603088379,
+              "joint": "LeftLeg"
+            },
+            "footVertex": {
+              "time": 1.3333330154418945,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000027463108040530875,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000005469816285993166,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000019961728128113874,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_180",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002483501857245644,
+            "worldFootVertexPositionMeters": 0.00000467273344627532,
+            "worldJointOrientationRadians": 0.000006525823999145195
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.566667079925537,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 1.0333333015441895,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 2.2333333492279053,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002483501857245644,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.00000467273344627532,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000006525823999145195,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_360",
+          "samples": 427,
+          "glbDurationSeconds": 3.5999999046325684,
+          "jsonDurationSeconds": 3.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000027817504387377888,
+            "worldFootVertexPositionMeters": 0.000004894976086211024,
+            "worldJointOrientationRadians": 0.000005946291523991069
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.933332920074463,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.433332920074463,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 1.5333333015441895,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000027817504387377888,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004894976086211024,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005946291523991069,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_shifty",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000025226042124916105,
+            "worldFootVertexPositionMeters": 0.000004969763810551836,
+            "worldJointOrientationRadians": 0.000006389384389996526
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0666667222976685,
+              "joint": "LeftHand"
+            },
+            "position": {
+              "time": 2.133333444595337,
+              "joint": "RightFoot"
+            },
+            "footVertex": {
+              "time": 2.233333110809326,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 0
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000025226042124916105,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004969763810551836,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000006389384389996526,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_tail_grab",
+          "samples": 426,
+          "glbDurationSeconds": 3.4000000953674316,
+          "jsonDurationSeconds": 3.4,
+          "max": {
+            "worldJointPositionMeters": 0.000003041610960631853,
+            "worldFootVertexPositionMeters": 0.000007211766922810393,
+            "worldJointOrientationRadians": 0.000027664630811712356
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.133333444595337,
+              "joint": "LeftLeg"
+            },
+            "position": {
+              "time": 2.1333329677581787,
+              "joint": "RightForeArm"
+            },
+            "footVertex": {
+              "time": 2.133333444595337,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003041610960631853,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000007211766922810393,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000027664630811712356,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_backflip",
+          "samples": 439,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.0000031826561781953873,
+            "worldFootVertexPositionMeters": 0.000005969037731433898,
+            "worldJointOrientationRadians": 0.000005240041588102625
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9333333373069763,
+              "joint": "RightFoot"
+            },
+            "position": {
+              "time": 2.8666670322418213,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 2.8666670322418213,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000031826561781953873,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000005969037731433898,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005240041588102625,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "fall_roll",
+          "samples": 425,
+          "glbDurationSeconds": 4,
+          "jsonDurationSeconds": 4,
+          "max": {
+            "worldJointPositionMeters": 0.0000036806497290678323,
+            "worldFootVertexPositionMeters": 0.000004782085277029077,
+            "worldJointOrientationRadians": 0.000005240550058492265
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.2666670083999634,
+              "joint": "RightLeg"
+            },
+            "position": {
+              "time": 0.6333333253860474,
+              "joint": "RightForeArm"
+            },
+            "footVertex": {
+              "time": 0.1666666716337204,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000036806497290678323,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004782085277029077,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005240550058492265,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "get_up",
+          "samples": 390,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.000003596506724644848,
+            "worldFootVertexPositionMeters": 0.000004365463627520495,
+            "worldJointOrientationRadians": 0.0000041081828502572415
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9333333373069763,
+              "joint": "LeftHand"
+            },
+            "position": {
+              "time": 0.5,
+              "joint": "LeftForeArm"
+            },
+            "footVertex": {
+              "time": 3.066667079925537,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003596506724644848,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004365463627520495,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.0000041081828502572415,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "celebrate",
+          "samples": 383,
+          "glbDurationSeconds": 3,
+          "jsonDurationSeconds": 3,
+          "max": {
+            "worldJointPositionMeters": 0.000002006962660308357,
+            "worldFootVertexPositionMeters": 0.000003992112463961914,
+            "worldJointOrientationRadians": 0.000004296705322906599
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.1333329677581787,
+              "joint": "RightArm"
+            },
+            "position": {
+              "time": 2.1333329677581787,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 1.1666666269302368,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002006962660308357,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000003992112463961914,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004296705322906599,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ski-female-lod0",
+      "file": "characters/ski-female.glb",
+      "jsonFile": "motion/ski.json",
+      "sport": "ski",
+      "worldScale": 1.35,
+      "worldYawRadians": 0,
+      "glbSha256": "1d02e2c317835fa95190fb737637e0273e4eb1d0602809b07132d4927037ba19",
+      "jsonSha256": "0cd2dd0dd9e1ceabc63b23e0d450d3b1e7f3af643e9f703f4c8b3d8e0a65d554",
+      "footCandidateCounts": {
+        "LeftFoot": 883,
+        "RightFoot": 883
+      },
+      "representativeFootVertices": 69,
+      "clips": [
+        {
+          "name": "glide",
+          "samples": 344,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.0000015170225211532949,
+            "worldFootVertexPositionMeters": 0.000003277312298119152,
+            "worldJointOrientationRadians": 0.00000438175226349748
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9000000357627869,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 2.266666889190674,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 0.4666669964790344,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000015170225211532949,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000003277312298119152,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.00000438175226349748,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_left",
+          "samples": 355,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002574213339044616,
+            "worldFootVertexPositionMeters": 0.0000041717054165350525,
+            "worldJointOrientationRadians": 0.000004956781175740678
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.4000000059604645,
+              "joint": "RightArm"
+            },
+            "position": {
+              "time": 1.6666666915019352,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 2.9666666984558105,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 26
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002574213339044616,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000041717054165350525,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004956781175740678,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_right",
+          "samples": 353,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000024017828508768047,
+            "worldFootVertexPositionMeters": 0.000004468952275656775,
+            "worldJointOrientationRadians": 0.000004821717361488719
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.400000035762787,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 2.8666670322418213,
+              "joint": "RightFoot"
+            },
+            "footVertex": {
+              "time": 0.2666670083999634,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000024017828508768047,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004468952275656775,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004821717361488719,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "crouch",
+          "samples": 286,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.000001768890995110921,
+            "worldFootVertexPositionMeters": 0.000004846224536162274,
+            "worldJointOrientationRadians": 0.000005047162099183343
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.3333333730697632,
+              "joint": "LeftFoot"
+            },
+            "position": {
+              "time": 1.3333330154418945,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 1.3333333730697632,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000001768890995110921,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004846224536162274,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005047162099183343,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "accelerate",
+          "samples": 342,
+          "glbDurationSeconds": 2.5999999046325684,
+          "jsonDurationSeconds": 2.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000018066588983713077,
+            "worldFootVertexPositionMeters": 0.0000039447443964355285,
+            "worldJointOrientationRadians": 0.000004885036108414638
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0333333015441895,
+              "joint": "RightForeArm"
+            },
+            "position": {
+              "time": 0.4000000059604645,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 2.5891666666666664,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000018066588983713077,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000039447443964355285,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004885036108414638,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "ramp_jump",
+          "samples": 413,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000027463108040530875,
+            "worldFootVertexPositionMeters": 0.000005469816285993166,
+            "worldJointOrientationRadians": 0.000019961728128113874
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.2666670083999634,
+              "joint": "LeftLeg"
+            },
+            "position": {
+              "time": 2.066666603088379,
+              "joint": "LeftLeg"
+            },
+            "footVertex": {
+              "time": 1.3333330154418945,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000027463108040530875,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000005469816285993166,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000019961728128113874,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_180",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002483501857245644,
+            "worldFootVertexPositionMeters": 0.00000467273344627532,
+            "worldJointOrientationRadians": 0.000006525823999145195
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.566667079925537,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 1.0333333015441895,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 2.2333333492279053,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002483501857245644,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.00000467273344627532,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000006525823999145195,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_360",
+          "samples": 427,
+          "glbDurationSeconds": 3.5999999046325684,
+          "jsonDurationSeconds": 3.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000027817504387377888,
+            "worldFootVertexPositionMeters": 0.000004894976086211024,
+            "worldJointOrientationRadians": 0.000005946291523991069
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.933332920074463,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.433332920074463,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 1.5333333015441895,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 29
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000027817504387377888,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004894976086211024,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005946291523991069,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_shifty",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000025226042124916105,
+            "worldFootVertexPositionMeters": 0.000004969763810551836,
+            "worldJointOrientationRadians": 0.000006389384389996526
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0666667222976685,
+              "joint": "LeftHand"
+            },
+            "position": {
+              "time": 2.133333444595337,
+              "joint": "RightFoot"
+            },
+            "footVertex": {
+              "time": 2.233333110809326,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 0
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000025226042124916105,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004969763810551836,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000006389384389996526,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_tail_grab",
+          "samples": 426,
+          "glbDurationSeconds": 3.4000000953674316,
+          "jsonDurationSeconds": 3.4,
+          "max": {
+            "worldJointPositionMeters": 0.000003041610960631853,
+            "worldFootVertexPositionMeters": 0.000007211766922810393,
+            "worldJointOrientationRadians": 0.000027664630811712356
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.133333444595337,
+              "joint": "LeftLeg"
+            },
+            "position": {
+              "time": 2.1333329677581787,
+              "joint": "RightForeArm"
+            },
+            "footVertex": {
+              "time": 2.133333444595337,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 3
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003041610960631853,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000007211766922810393,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000027664630811712356,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_backflip",
+          "samples": 439,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.0000031826561781953873,
+            "worldFootVertexPositionMeters": 0.000005969037731433898,
+            "worldJointOrientationRadians": 0.000005240041588102625
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9333333373069763,
+              "joint": "RightFoot"
+            },
+            "position": {
+              "time": 2.8666670322418213,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 2.8666670322418213,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000031826561781953873,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000005969037731433898,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005240041588102625,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "fall_roll",
+          "samples": 425,
+          "glbDurationSeconds": 4,
+          "jsonDurationSeconds": 4,
+          "max": {
+            "worldJointPositionMeters": 0.0000036806497290678323,
+            "worldFootVertexPositionMeters": 0.000004782085277029077,
+            "worldJointOrientationRadians": 0.000005240550058492265
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.2666670083999634,
+              "joint": "RightLeg"
+            },
+            "position": {
+              "time": 0.6333333253860474,
+              "joint": "RightForeArm"
+            },
+            "footVertex": {
+              "time": 0.1666666716337204,
+              "side": "LeftFoot",
+              "meshIndex": 5,
+              "index": 27
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000036806497290678323,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004782085277029077,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005240550058492265,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "get_up",
+          "samples": 390,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.000003596506724644848,
+            "worldFootVertexPositionMeters": 0.000004365463627520495,
+            "worldJointOrientationRadians": 0.0000041081828502572415
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9333333373069763,
+              "joint": "LeftHand"
+            },
+            "position": {
+              "time": 0.5,
+              "joint": "LeftForeArm"
+            },
+            "footVertex": {
+              "time": 3.066667079925537,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003596506724644848,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000004365463627520495,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.0000041081828502572415,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "celebrate",
+          "samples": 383,
+          "glbDurationSeconds": 3,
+          "jsonDurationSeconds": 3,
+          "max": {
+            "worldJointPositionMeters": 0.000002006962660308357,
+            "worldFootVertexPositionMeters": 0.000003992112463961914,
+            "worldJointOrientationRadians": 0.000004296705322906599
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.1333329677581787,
+              "joint": "RightArm"
+            },
+            "position": {
+              "time": 2.1333329677581787,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 1.1666666269302368,
+              "side": "RightFoot",
+              "meshIndex": 5,
+              "index": 33
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002006962660308357,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000003992112463961914,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004296705322906599,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snowboard-female-lod0",
+      "file": "characters/snowboard-female.glb",
+      "jsonFile": "motion/snowboard.json",
+      "sport": "snowboard",
+      "worldScale": 1.35,
+      "worldYawRadians": 1.5707963267948966,
+      "glbSha256": "f1b220d8498b350a620f8b203825fcc696ea287636c5994ba7bbff7deeaf3cee",
+      "jsonSha256": "25c8389d57b35888b18ff951ad2cec78e484bb3b1f07337db8f238a32c20b5f8",
+      "footCandidateCounts": {
+        "LeftFoot": 1129,
+        "RightFoot": 1130
+      },
+      "representativeFootVertices": 74,
+      "clips": [
+        {
+          "name": "glide",
+          "samples": 344,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.0000015219914645627007,
+            "worldFootVertexPositionMeters": 0.0000018117810746489824,
+            "worldJointOrientationRadians": 0.000004560923894103655
+          },
+          "worst": {
+            "orientation": {
+              "time": 0.9000000357627869,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 1.8333330154418945,
+              "joint": "RightFoot"
+            },
+            "footVertex": {
+              "time": 1.8333330154418945,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1376
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000015219914645627007,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000018117810746489824,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004560923894103655,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_left",
+          "samples": 357,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002433705378165174,
+            "worldFootVertexPositionMeters": 0.000002592825080586504,
+            "worldJointOrientationRadians": 0.000005092535878797318
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.400000035762787,
+              "joint": "RightHand"
+            },
+            "position": {
+              "time": 2.5333333015441895,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 0.6666669845581055,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1375
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002433705378165174,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000002592825080586504,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005092535878797318,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "carve_right",
+          "samples": 354,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.000002919883572436136,
+            "worldFootVertexPositionMeters": 0.0000027948196752803406,
+            "worldJointOrientationRadians": 0.000005853558496779194
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.633333444595337,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.633333444595337,
+              "joint": "RightForeArm"
+            },
+            "footVertex": {
+              "time": 2.733333110809326,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 1219
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002919883572436136,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000027948196752803406,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005853558496779194,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "crouch",
+          "samples": 285,
+          "glbDurationSeconds": 2.4000000953674316,
+          "jsonDurationSeconds": 2.4,
+          "max": {
+            "worldJointPositionMeters": 0.0000015353125331461623,
+            "worldFootVertexPositionMeters": 0.0000021784643485659754,
+            "worldJointOrientationRadians": 0.000003770553270296564
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0333329439163208,
+              "joint": "LeftFoot"
+            },
+            "position": {
+              "time": 1.8666670322418213,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 1.0333333015441895,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 284
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000015353125331461623,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000021784643485659754,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000003770553270296564,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "accelerate",
+          "samples": 342,
+          "glbDurationSeconds": 2.5999999046325684,
+          "jsonDurationSeconds": 2.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000017259380512413306,
+            "worldFootVertexPositionMeters": 0.000001978136164535377,
+            "worldJointOrientationRadians": 0.000004696206803323715
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.0333333015441895,
+              "joint": "RightForeArm"
+            },
+            "position": {
+              "time": 1.9333330392837524,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 0.7666666507720947,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1372
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000017259380512413306,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000001978136164535377,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004696206803323715,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "ramp_jump",
+          "samples": 413,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000032829715254529954,
+            "worldFootVertexPositionMeters": 0.000002753773818465046,
+            "worldJointOrientationRadians": 0.000007017292066393194
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.566667079925537,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.066667079925537,
+              "joint": "Head"
+            },
+            "footVertex": {
+              "time": 2.2333333492279053,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 1218
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000032829715254529954,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000002753773818465046,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000007017292066393194,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_180",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.0000026744440081077995,
+            "worldFootVertexPositionMeters": 0.0000030657440721021394,
+            "worldJointOrientationRadians": 0.000006478355876773575
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.566667079925537,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.2333333492279053,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 2.2333333492279053,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 1219
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000026744440081077995,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000030657440721021394,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000006478355876773575,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_360",
+          "samples": 427,
+          "glbDurationSeconds": 3.5999999046325684,
+          "jsonDurationSeconds": 3.6,
+          "max": {
+            "worldJointPositionMeters": 0.0000027817504387690638,
+            "worldFootVertexPositionMeters": 0.0000029752084836454436,
+            "worldJointOrientationRadians": 0.000005911311492916564
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.933332920074463,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.433332920074463,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 0.9666666388511658,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1372
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000027817504387690638,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000029752084836454436,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005911311492916564,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_shifty",
+          "samples": 405,
+          "glbDurationSeconds": 3.200000047683716,
+          "jsonDurationSeconds": 3.2,
+          "max": {
+            "worldJointPositionMeters": 0.00000236330937209443,
+            "worldFootVertexPositionMeters": 0.0000025797627371612383,
+            "worldJointOrientationRadians": 0.000005262536584641059
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.566667079925537,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 2.2333333492279053,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 2.2333333492279053,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1375
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.00000236330937209443,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000025797627371612383,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005262536584641059,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_tail_grab",
+          "samples": 426,
+          "glbDurationSeconds": 3.4000000953674316,
+          "jsonDurationSeconds": 3.4,
+          "max": {
+            "worldJointPositionMeters": 0.0000024661722606325887,
+            "worldFootVertexPositionMeters": 0.0000026758347985221417,
+            "worldJointOrientationRadians": 0.0000081744787849888
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.133333444595337,
+              "joint": "LeftForeArm"
+            },
+            "position": {
+              "time": 1.1666669845581055,
+              "joint": "Head"
+            },
+            "footVertex": {
+              "time": 0.8333333134651184,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1375
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.0000024661722606325887,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000026758347985221417,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.0000081744787849888,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "trick_backflip",
+          "samples": 439,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.000003011866108620889,
+            "worldFootVertexPositionMeters": 0.000003384513576815677,
+            "worldJointOrientationRadians": 0.000005545554776768195
+          },
+          "worst": {
+            "orientation": {
+              "time": 1.6333333253860474,
+              "joint": "LeftFoot"
+            },
+            "position": {
+              "time": 2.866666555404663,
+              "joint": "LeftFoot"
+            },
+            "footVertex": {
+              "time": 0.9666666388511658,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 284
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003011866108620889,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.000003384513576815677,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005545554776768195,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "fall_roll",
+          "samples": 423,
+          "glbDurationSeconds": 4,
+          "jsonDurationSeconds": 4,
+          "max": {
+            "worldJointPositionMeters": 0.000003353548204951736,
+            "worldFootVertexPositionMeters": 0.0000031213234136144955,
+            "worldJointOrientationRadians": 0.000008825664803821166
+          },
+          "worst": {
+            "orientation": {
+              "time": 3.366666555404663,
+              "joint": "RightForeArm"
+            },
+            "position": {
+              "time": 1.4666666984558105,
+              "joint": "Head"
+            },
+            "footVertex": {
+              "time": 1.6666669845581055,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 1292
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000003353548204951736,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000031213234136144955,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000008825664803821166,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "get_up",
+          "samples": 391,
+          "glbDurationSeconds": 3.799999952316284,
+          "jsonDurationSeconds": 3.8,
+          "max": {
+            "worldJointPositionMeters": 0.000002553943153551986,
+            "worldFootVertexPositionMeters": 0.0000024989053756209997,
+            "worldJointOrientationRadians": 0.000004871198482993716
+          },
+          "worst": {
+            "position": {
+              "time": 0.800000011920929,
+              "joint": "RightHand"
+            },
+            "orientation": {
+              "time": 1.9,
+              "joint": "RightHand"
+            },
+            "footVertex": {
+              "time": 3.066667079925537,
+              "side": "RightFoot",
+              "meshIndex": 2,
+              "index": 1372
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002553943153551986,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000024989053756209997,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000004871198482993716,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "name": "celebrate",
+          "samples": 381,
+          "glbDurationSeconds": 3,
+          "jsonDurationSeconds": 3,
+          "max": {
+            "worldJointPositionMeters": 0.000002006962660293641,
+            "worldFootVertexPositionMeters": 0.0000024692083732095803,
+            "worldJointOrientationRadians": 0.000005204154547275782
+          },
+          "worst": {
+            "orientation": {
+              "time": 2.1333329677581787,
+              "joint": "LeftHand"
+            },
+            "position": {
+              "time": 2.1333329677581787,
+              "joint": "LeftHand"
+            },
+            "footVertex": {
+              "time": 2.5,
+              "side": "LeftFoot",
+              "meshIndex": 2,
+              "index": 1219
+            }
+          },
+          "gates": [
+            {
+              "measurement": "worldJointPositionMeters",
+              "value": 0.000002006962660293641,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldFootVertexPositionMeters",
+              "value": 0.0000024692083732095803,
+              "limit": 0.0001,
+              "passed": true
+            },
+            {
+              "measurement": "worldJointOrientationRadians",
+              "value": 0.000005204154547275782,
+              "limit": 0.0001,
+              "passed": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Representative actual foot vertices include26 directional extrema plus uniform dominant-foot samples; this is a playback equivalence audit, not a full collision audit.",
+    "The JSON rounds values/timestamps to six decimal places, so bit-for-bit equality is not expected.",
+    "Shared ski JSON is verified on both male and female base geometry. LOD playback structure and floor contact are covered by the separate dense all-LOD audit."
+  ]
+}
