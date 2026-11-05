@@ -1,0 +1,161 @@
+{
+  "startedAt": "2026-11-04T21:47:56.141Z",
+  "requestedMinutes": 0.6,
+  "sourceSha256": "6fc9ad07b7c8dd72d79799080a9dd59495373615cd953c8b6cd2cabd76c49736",
+  "offline": true,
+  "rendererMode": "Chromium/SwiftShader software; not a physical phone",
+  "cycles": [
+    {
+      "cycle": 0,
+      "startedAt": "2026-11-04T21:47:56.713Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "ship": "corvette",
+      "fleet": "tide",
+      "weather": "storm",
+      "coldLoadMs": 2557,
+      "contextLoss": {
+        "supported": true,
+        "events": [
+          "lost",
+          "restored"
+        ],
+        "before": 3.7164,
+        "after": 4.083200000000002,
+        "triangles": 15996
+      },
+      "lifecycleFreeze": true,
+      "beforeDispose": {
+        "three": "160",
+        "state": {
+          "ship": "corvette",
+          "fleet": "tide",
+          "weather": "storm",
+          "view": "far",
+          "quality": "balanced",
+          "adaptiveScale": 0.64,
+          "paused": false,
+          "reduced": false,
+          "crew": true,
+          "time": 30.615300000000065,
+          "frozen": false,
+          "theta": 0.58,
+          "elevation": 0.3,
+          "zoom": 1,
+          "storm": 1,
+          "loading": false
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 0.64,
+          "bufferWidth": 249,
+          "bufferHeight": 540
+        },
+        "triangles": 15996,
+        "drawCalls": 16,
+        "geometries": 18,
+        "textures": 10,
+        "programs": 13,
+        "cpuFrame": {
+          "samples": 600,
+          "meanMs": 39.08166666666666,
+          "p95Ms": 66.70000000000073,
+          "fps": 25.587445093607407
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 583
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 839
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 2,
+            "triangles": 975
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 2,
+            "triangles": 831
+          }
+        ],
+        "crewInstances": 0,
+        "effects": {
+          "capacity": 96,
+          "allocatedCapacity": 320,
+          "active": 90,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "contextLost": false,
+        "contextRestores": 1,
+        "adaptationEvents": [
+          {
+            "simulationTime": 2.450000000000001,
+            "averageMs": 99.53333333333335,
+            "scale": 0.88
+          },
+          {
+            "simulationTime": 3.9665000000000017,
+            "averageMs": 81.48333333333335,
+            "scale": 0.76
+          },
+          {
+            "simulationTime": 6.232900000000005,
+            "averageMs": 51.85000000000001,
+            "scale": 0.64
+          }
+        ],
+        "reducedMotion": false,
+        "offline": true
+      },
+      "afterDispose": {
+        "geometries": 0,
+        "textures": 0,
+        "programMetadataCount": 1
+      },
+      "completedAt": "2026-11-04T21:48:35.461Z"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "pass": true,
+  "completedAt": "2026-11-04T21:48:35.480Z",
+  "actualMinutes": 0.6461166666666667,
+  "summary": {
+    "cycles": 1,
+    "contextLosses": 1,
+    "recoveries": 1,
+    "lifecycleFreezes": 1,
+    "allDisposalsClear": true,
+    "coldLoadMeanMs": 2557
+  }
+}

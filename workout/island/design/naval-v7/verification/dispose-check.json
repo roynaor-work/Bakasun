@@ -1,0 +1,14 @@
+{
+  "before": {
+    "geometries": 18,
+    "textures": 8,
+    "programs": 10
+  },
+  "after": {
+    "geometries": 0,
+    "textures": 0,
+    "programs": 1
+  },
+  "pass": true,
+  "note": "No application change was required. Renderer counters reach zero for geometries and textures; program-array metadata is reported without claiming zero live GL programs."
+}

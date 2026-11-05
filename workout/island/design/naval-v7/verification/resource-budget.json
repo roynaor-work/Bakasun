@@ -1,0 +1,175 @@
+{
+  "at": "2026-11-04T22:52:29.225105+00:00",
+  "sourceSha256": "3fb26ea164c2d51cf5b376019c928f4da19cb99f026e1e43c2b512bcc66510bd",
+  "kind": "Static payload estimate; not GPU allocation, JS heap or physical phone measurement",
+  "geometry": [
+    {
+      "file": "assets/crew/deck-crew.glb",
+      "compressedBytes": 9256,
+      "decodedAttributeAndIndexPayloadBytes": 80712,
+      "uniqueAccessors": 7
+    },
+    {
+      "file": "assets/environment/island.glb",
+      "compressedBytes": 37568,
+      "decodedAttributeAndIndexPayloadBytes": 243648,
+      "uniqueAccessors": 7
+    },
+    {
+      "file": "assets/environment/rock.glb",
+      "compressedBytes": 3456,
+      "decodedAttributeAndIndexPayloadBytes": 8160,
+      "uniqueAccessors": 4
+    },
+    {
+      "file": "assets/ships/carrier-lod0.glb",
+      "compressedBytes": 70916,
+      "decodedAttributeAndIndexPayloadBytes": 694182,
+      "uniqueAccessors": 23
+    },
+    {
+      "file": "assets/ships/carrier-lod1.glb",
+      "compressedBytes": 43384,
+      "decodedAttributeAndIndexPayloadBytes": 328832,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/carrier-lod2.glb",
+      "compressedBytes": 10036,
+      "decodedAttributeAndIndexPayloadBytes": 71666,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/corvette-lod0.glb",
+      "compressedBytes": 62924,
+      "decodedAttributeAndIndexPayloadBytes": 580174,
+      "uniqueAccessors": 17
+    },
+    {
+      "file": "assets/ships/corvette-lod1.glb",
+      "compressedBytes": 43104,
+      "decodedAttributeAndIndexPayloadBytes": 289222,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/corvette-lod2.glb",
+      "compressedBytes": 7796,
+      "decodedAttributeAndIndexPayloadBytes": 38794,
+      "uniqueAccessors": 4
+    },
+    {
+      "file": "assets/ships/cruiser-lod0.glb",
+      "compressedBytes": 138584,
+      "decodedAttributeAndIndexPayloadBytes": 734910,
+      "uniqueAccessors": 21
+    },
+    {
+      "file": "assets/ships/cruiser-lod1.glb",
+      "compressedBytes": 56860,
+      "decodedAttributeAndIndexPayloadBytes": 430046,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/cruiser-lod2.glb",
+      "compressedBytes": 11272,
+      "decodedAttributeAndIndexPayloadBytes": 80210,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/destroyer-lod0.glb",
+      "compressedBytes": 73468,
+      "decodedAttributeAndIndexPayloadBytes": 659118,
+      "uniqueAccessors": 21
+    },
+    {
+      "file": "assets/ships/destroyer-lod1.glb",
+      "compressedBytes": 48120,
+      "decodedAttributeAndIndexPayloadBytes": 345290,
+      "uniqueAccessors": 5
+    },
+    {
+      "file": "assets/ships/destroyer-lod2.glb",
+      "compressedBytes": 10272,
+      "decodedAttributeAndIndexPayloadBytes": 69794,
+      "uniqueAccessors": 5
+    }
+  ],
+  "textures": [
+    {
+      "file": "assets/textures/basalt-512.png",
+      "width": 512,
+      "height": 512,
+      "fileBytes": 167175,
+      "assumedFormat": "RGBA8",
+      "mipmaps": true,
+      "runtimeCopies": 2,
+      "estimatedResidentPayloadBytes": 2796200
+    },
+    {
+      "file": "assets/textures/crew-256.png",
+      "width": 256,
+      "height": 256,
+      "fileBytes": 696,
+      "assumedFormat": "RGBA8",
+      "mipmaps": true,
+      "runtimeCopies": 1,
+      "estimatedResidentPayloadBytes": 349524
+    },
+    {
+      "file": "assets/textures/fleet-ember-1024.png",
+      "width": 1024,
+      "height": 1024,
+      "fileBytes": 552505,
+      "assumedFormat": "RGBA8",
+      "mipmaps": true,
+      "runtimeCopies": 1,
+      "estimatedResidentPayloadBytes": 5592404
+    },
+    {
+      "file": "assets/textures/fleet-tide-1024.png",
+      "width": 1024,
+      "height": 1024,
+      "fileBytes": 552955,
+      "assumedFormat": "RGBA8",
+      "mipmaps": true,
+      "runtimeCopies": 1,
+      "estimatedResidentPayloadBytes": 5592404
+    },
+    {
+      "file": "assets/textures/noise-128.png",
+      "width": 128,
+      "height": 128,
+      "fileBytes": 16580,
+      "assumedFormat": "RGBA8",
+      "mipmaps": false,
+      "runtimeCopies": 1,
+      "estimatedResidentPayloadBytes": 65536
+    },
+    {
+      "file": "assets/textures/ocean-normal-256.png",
+      "width": 256,
+      "height": 256,
+      "fileBytes": 66886,
+      "assumedFormat": "RGBA8",
+      "mipmaps": true,
+      "runtimeCopies": 1,
+      "estimatedResidentPayloadBytes": 349524
+    }
+  ],
+  "totals": {
+    "glbBytes": 627016,
+    "decodedAttributeAndIndexPayloadBytes": 4654758,
+    "pngBytes": 1356797,
+    "estimatedResidentRgba8ImageBytes": 14745592,
+    "twoPmremRgba16fTargetsBytes": 1376256,
+    "estimated1024ShadowColorAndDepthBytes": 8388608
+  },
+  "assumptions": [
+    "All three ship LODs, island, rock and crew are decoded; shared turret geometry is counted once in stored buffers.",
+    "Accessor component types/counts describe decoded attribute and index payload, before driver alignment or duplicate uploads.",
+    "Images are estimated as RGBA8 with full mip chains except the non-mipped noise LUT.",
+    "The two separate glTF scenery materials retain two basalt texture objects; crew/fleet images are shared.",
+    "The shadow estimate assumes RGBA8 color plus a depth attachment padded to four bytes; it is disabled in low/adapted profiles.",
+    "Excludes driver overhead, framebuffer/swapchain, JS strings, decoded CPU image copies, shader binaries and browser process memory."
+  ]
+}

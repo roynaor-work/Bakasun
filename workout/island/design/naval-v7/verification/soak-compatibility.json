@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-04T23:09:07.195623+00:00",
+  "pass": true,
+  "burnInSourceSha256": "6fc9ad07b7c8dd72d79799080a9dd59495373615cd953c8b6cd2cabd76c49736",
+  "finalSourceSha256": "3fb26ea164c2d51cf5b376019c928f4da19cb99f026e1e43c2b512bcc66510bd",
+  "reconstructedWholeHtmlSha256": "6fc9ad07b7c8dd72d79799080a9dd59495373615cd953c8b6cd2cabd76c49736",
+  "exactlyOneCameraLineChanged": true,
+  "oldLine": "target.set(0,CONFIG[state.ship].deck+3,0);",
+  "newLine": "target.set(0,CONFIG[state.ship].deck+(camera.aspect>1?1.5:3),0);",
+  "scope": "Only the near landscape camera target height changed. Every other byte of the HTML, modules and embedded binary assets reconstructs to the burn-in candidate hash.",
+  "finalSourceChecks": "Fresh final-source renders, all-type orientation matrix, context recovery, 15-minute cold reload cycles and functional browser checks are required separately."
+}

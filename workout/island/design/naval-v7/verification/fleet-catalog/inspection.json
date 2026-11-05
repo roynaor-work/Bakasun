@@ -1,0 +1,860 @@
+{
+  "startedAt": "2026-11-04T21:21:53.823Z",
+  "sourceSha256": "5e39991a06ed7aee54e86171bd900a1ba3294b584d276a1bc4dbdbfac111515c",
+  "offlineContext": true,
+  "inspectionOverlay": "Heading, console and camera controls hidden only by capture harness; vessel caption retained",
+  "images": [
+    {
+      "file": "corvette-tide-844x390.png",
+      "options": {
+        "ship": "corvette",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "corvette",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 31972,
+        "drawCalls": 14,
+        "geometries": 22,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 6921
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 20,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "corvette-ember-844x390.png",
+      "options": {
+        "ship": "corvette",
+        "fleet": "ember",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "corvette",
+          "fleet": "ember",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 31972,
+        "drawCalls": 14,
+        "geometries": 22,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 6921
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 20,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "destroyer-tide-844x390.png",
+      "options": {
+        "ship": "destroyer",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "destroyer",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 32470,
+        "drawCalls": 16,
+        "geometries": 27,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 7961
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 20,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "destroyer-ember-844x390.png",
+      "options": {
+        "ship": "destroyer",
+        "fleet": "ember",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "destroyer",
+          "fleet": "ember",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 32470,
+        "drawCalls": 16,
+        "geometries": 27,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 7961
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 20,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "cruiser-tide-844x390.png",
+      "options": {
+        "ship": "cruiser",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 30910,
+        "drawCalls": 16,
+        "geometries": 27,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "cruiser-ember-844x390.png",
+      "options": {
+        "ship": "cruiser",
+        "fleet": "ember",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "cruiser",
+          "fleet": "ember",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 30910,
+        "drawCalls": 16,
+        "geometries": 27,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "carrier-tide-844x390.png",
+      "options": {
+        "ship": "carrier",
+        "fleet": "tide",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "carrier",
+          "fleet": "tide",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 36539,
+        "drawCalls": 17,
+        "geometries": 31,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    },
+    {
+      "file": "carrier-ember-844x390.png",
+      "options": {
+        "ship": "carrier",
+        "fleet": "ember",
+        "view": "near",
+        "weather": "sunset",
+        "time": 12,
+        "angle": 1.13,
+        "elevation": 0.36,
+        "zoom": 0.88,
+        "quality": "high"
+      },
+      "metrics": {
+        "three": "160",
+        "state": {
+          "ship": "carrier",
+          "fleet": "ember",
+          "weather": "sunset",
+          "view": "near",
+          "quality": "high",
+          "adaptiveScale": 1,
+          "paused": true,
+          "reduced": false,
+          "crew": true,
+          "time": 12,
+          "frozen": true,
+          "theta": 1.13,
+          "elevation": 0.36,
+          "zoom": 0.88,
+          "storm": 0,
+          "loading": false
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "triangles": 36539,
+        "drawCalls": 17,
+        "geometries": 31,
+        "textures": 8,
+        "programs": 10,
+        "cpuFrame": {
+          "samples": 0,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "fps": 0
+        },
+        "lod": [
+          {
+            "type": "corvette",
+            "fleet": "tide",
+            "lod": 1,
+            "triangles": 2637
+          },
+          {
+            "type": "destroyer",
+            "fleet": "ember",
+            "lod": 1,
+            "triangles": 3235
+          },
+          {
+            "type": "cruiser",
+            "fleet": "tide",
+            "lod": 0,
+            "triangles": 9889
+          },
+          {
+            "type": "carrier",
+            "fleet": "ember",
+            "lod": 0,
+            "triangles": 8093
+          }
+        ],
+        "crewInstances": 14,
+        "effects": {
+          "capacity": 320,
+          "allocatedCapacity": 320,
+          "active": 0,
+          "waterColumnCapacity": 3
+        },
+        "dracoWorkers": 2,
+        "renderer": "WebKit WebGL",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "environmentProbes": [
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          },
+          {
+            "width": 336,
+            "height": 256,
+            "format": "RGBA16F",
+            "bytes": 688128
+          }
+        ],
+        "adaptationEvents": [],
+        "reducedMotion": false,
+        "offline": true
+      }
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "completedAt": "2026-11-04T21:22:10.571Z",
+  "pass": true
+}

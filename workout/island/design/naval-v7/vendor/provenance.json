@@ -1,0 +1,55 @@
+{
+  "threeRevision": "160",
+  "dracoDecoderVersion": "1.5.9",
+  "dracoEncoderVersion": "1.5.7",
+  "source": "Existing repository local three r160 and design/viewer Draco; no runtime CDN",
+  "modifications": [
+    "All copies are new files inside naval-v7",
+    "DRACOLoader relative Three import",
+    "Classic Blob worker for local opaque origin",
+    "Worker error propagation",
+    "EmbeddedDraco subclass obtains decoder bytes from embedded HTML"
+  ],
+  "files": [
+    {
+      "file": "BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "file": "GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "draco/DRACOLoader.js",
+      "bytes": 14615,
+      "sha256": "e17202379af833ea8e893e2d08f52288cd6415bab6b7ab738a4e19dc63816970"
+    },
+    {
+      "file": "draco/LICENSE.draco",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "draco/draco_decoder.wasm",
+      "bytes": 183697,
+      "sha256": "39b78cec9398af525d76f7eecf336ccf829891cec9524905e55fe686499834bf"
+    },
+    {
+      "file": "draco/draco_wasm_wrapper.js",
+      "bytes": 54804,
+      "sha256": "9927d2886d34906aec5258d091a162f3d9f59ab7e84fd6a81961987bca3c363f"
+    },
+    {
+      "file": "three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ]
+}
