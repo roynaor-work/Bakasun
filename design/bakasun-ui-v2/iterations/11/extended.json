@@ -1,0 +1,334 @@
+{
+  "started_at": "2026-11-04T23:23:06.731464+00:00",
+  "checks": [
+    {
+      "name": "keyboard-only skip, sequential focus and mobile bar occlusion across 42 layouts",
+      "pass": true
+    },
+    {
+      "name": "WCAG text spacing overrides and reflow across 56 layouts",
+      "pass": true
+    },
+    {
+      "name": "actual large-text preference in 56 layouts",
+      "pass": true
+    },
+    {
+      "name": "forced-colors rendering retains navigation and controls",
+      "pass": true
+    },
+    {
+      "name": "system and in-app reduced-motion stop loading animation",
+      "pass": true
+    },
+    {
+      "name": "interactive preview dimensions, tabs, theme, scale and evidence paths",
+      "pass": true
+    },
+    {
+      "name": "budget rows reconcile and case finance stays event-specific",
+      "pass": true
+    },
+    {
+      "name": "signature drawn with actual Chromium touch events",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "console_errors": [],
+  "external_requests": [],
+  "focus_obscured": [],
+  "text_spacing_overflow": [],
+  "large_text": [
+    {
+      "page": "index",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "events",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "event",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "clients",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "suppliers",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "invoices",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "finance",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "proposals",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "runsheet",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "calendar",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "budget",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "contract",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "system",
+      "viewport": "320x740",
+      "overflow": false
+    },
+    {
+      "page": "index",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "events",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "event",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "clients",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "suppliers",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "invoices",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "finance",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "proposals",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "runsheet",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "calendar",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "budget",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "contract",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "system",
+      "viewport": "390x844",
+      "overflow": false
+    },
+    {
+      "page": "index",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "events",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "event",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "clients",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "suppliers",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "invoices",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "finance",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "proposals",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "runsheet",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "calendar",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "budget",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "contract",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "system",
+      "viewport": "844x390",
+      "overflow": false
+    },
+    {
+      "page": "index",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "events",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "event",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "clients",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "suppliers",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "invoices",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "finance",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "proposals",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "runsheet",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "calendar",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "budget",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "contract",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "viewport": "1440x1000",
+      "overflow": false
+    },
+    {
+      "page": "system",
+      "viewport": "1440x1000",
+      "overflow": false
+    }
+  ],
+  "finished_at": "2026-11-04T23:23:37.298385+00:00",
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "obscured_focus": 0,
+    "text_spacing_issues": 0,
+    "large_text_layouts": 56,
+    "console_errors": 0,
+    "external_requests": 0
+  }
+}

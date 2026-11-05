@@ -1,0 +1,21 @@
+{
+  "attempts": [
+    {
+      "file": "endurance-attempt-01.json",
+      "reason_stopped": "Review runner selected a hidden detail button on the event page. Changed runner to select visible detail buttons. No product console error was found."
+    },
+    {
+      "file": "endurance-attempt-02.json",
+      "reason_stopped": "Runtime version changed for the documented iteration 07 target-size correction. This is an interrupted audit, not completion of the requested 95 minutes."
+    },
+    {
+      "file": "endurance-attempt-03.json",
+      "reason_stopped": "Runtime changed for the iteration 09 mobile table accessibility correction discovered through the real AX tree. Not a completed 95-minute audit."
+    },
+    {
+      "file": "endurance-attempt-04.json",
+      "reason_stopped": "Runtime changed for iteration 10 font data-URI packaging, removing separate file-font requests. Not a completed 95-minute audit."
+    }
+  ],
+  "final_required": "endurance.json must show at least 5700 elapsed seconds, runtime_changed false, and no errors."
+}

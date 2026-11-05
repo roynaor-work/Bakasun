@@ -1,0 +1,1244 @@
+{
+  "started_at": "2026-11-04T23:01:20.400886+00:00",
+  "requested_minutes": 20.0,
+  "runtime_sha256": {
+    "suppliers.html": "64c2a098e987006799f664292a654d3ce4e4b2c9d9099f51bec5a2a3e2c30aa7",
+    "runsheet.html": "ddecb4fba9047a211056e71b6eb91f68c9d4838f47f22c69c8a365e61cf34124",
+    "preview.html": "24c6ce831299f525328d1aa1b6613cbc2441416b277f1771f9a26b3c13e96220",
+    "contract.html": "cba97f0deab42df1179df7573a8795c88e7785d83815d2150515a83f3dadde49",
+    "system.html": "5270fe6c52939848f50c25cbdaf038d01dfd00ad09ad77b13b0ac27aa786eb1f",
+    "settings.html": "afdb35bee1f67589683abe7ef591cb84703899aad7dd04da935f999df2561763",
+    "finance.html": "b79ef91d3929044b4f15b837ff0aedf70f159f0435e6eda485a7d2699852eed3",
+    "events.html": "2cf2a561dd397005a7ce3c4498e17f63f7a3dd20b964cd99efcfbc0a09c65f2a",
+    "invoices.html": "4f042e1217c9c9b6585a86b689038a8a72af567a1dad8e3d0b758ddf793ce2ee",
+    "clients.html": "7d837247170d8f8dce588aa1045ebe32f707b1e1837c03dfbcb5567ccef93ad5",
+    "budget.html": "3f058be01664b5fab16a110e6a3adc6251c20c1e436f0b42f64f99705a402693",
+    "index.html": "e04263e1a28c2a40c76f1729464a665c5dd3d35306a3684f21d9d8b66b74629e",
+    "proposals.html": "da0cafaa1c2ca29f2597d87db0648877e7b103aefa33742397266d4a5ea4183a",
+    "calendar.html": "65a5521e0781913b9bb084f032232df62ac55a7c5f03c370fc8ed9e363d94277",
+    "event.html": "b520da0feffbd7b22fcc08ce5c423286fa02e07c0c9dc8d6c48baf7774ba5626",
+    "assets/tokens.css": "286f30249de9593fa8c149d3b4923085ae594e98467ea026a129339164a52d3c",
+    "assets/preview.css": "2bf8368a4a86f8ef66b609d4d9754522fae0f8949242df384c12a7445186684e",
+    "assets/ui.css": "f4fd06ee31ea411467a05b3c9e3bfcd6321a1640b7d4ddcb5c540db8f12ef90c",
+    "assets/ui.js": "0b1e63fd4dee43f4ac1a52ac89e43e70b871233b2354f54bd5fbeecf853fd6cb",
+    "assets/preview.js": "7336a1a73091744cd1d0bf28bc22ecc6fa39923aa7c0df6fcb935c2b43e9f63d"
+  },
+  "cpu_throttle": 4,
+  "DPR": 2,
+  "physical_phone": false,
+  "checkpoints": [
+    {
+      "cycle": 100,
+      "at": "2026-11-04T23:01:32.176672+00:00",
+      "elapsed_seconds": 11.78,
+      "document_elements": 427,
+      "heap_used_bytes": 1829056,
+      "documents": 2,
+      "nodes": 604,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 200,
+      "at": "2026-11-04T23:01:42.867802+00:00",
+      "elapsed_seconds": 22.47,
+      "document_elements": 427,
+      "heap_used_bytes": 1850644,
+      "documents": 2,
+      "nodes": 604,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 300,
+      "at": "2026-11-04T23:01:51.830904+00:00",
+      "elapsed_seconds": 31.43,
+      "document_elements": 427,
+      "heap_used_bytes": 1880640,
+      "documents": 2,
+      "nodes": 604,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 400,
+      "at": "2026-11-04T23:02:01.295389+00:00",
+      "elapsed_seconds": 40.89,
+      "document_elements": 427,
+      "heap_used_bytes": 1880676,
+      "documents": 2,
+      "nodes": 604,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 500,
+      "at": "2026-11-04T23:02:10.130465+00:00",
+      "elapsed_seconds": 49.73,
+      "document_elements": 427,
+      "heap_used_bytes": 1891728,
+      "documents": 2,
+      "nodes": 604,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 600,
+      "at": "2026-11-04T23:02:19.261409+00:00",
+      "elapsed_seconds": 58.86,
+      "document_elements": 427,
+      "heap_used_bytes": 1912556,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 700,
+      "at": "2026-11-04T23:02:28.098872+00:00",
+      "elapsed_seconds": 67.7,
+      "document_elements": 427,
+      "heap_used_bytes": 1914516,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 800,
+      "at": "2026-11-04T23:02:37.999781+00:00",
+      "elapsed_seconds": 77.6,
+      "document_elements": 427,
+      "heap_used_bytes": 1923420,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 900,
+      "at": "2026-11-04T23:02:46.602458+00:00",
+      "elapsed_seconds": 86.2,
+      "document_elements": 427,
+      "heap_used_bytes": 1923908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1000,
+      "at": "2026-11-04T23:02:55.615808+00:00",
+      "elapsed_seconds": 95.21,
+      "document_elements": 427,
+      "heap_used_bytes": 1924112,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1100,
+      "at": "2026-11-04T23:03:04.988216+00:00",
+      "elapsed_seconds": 104.59,
+      "document_elements": 427,
+      "heap_used_bytes": 1920800,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1200,
+      "at": "2026-11-04T23:03:14.962094+00:00",
+      "elapsed_seconds": 114.56,
+      "document_elements": 427,
+      "heap_used_bytes": 1921420,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1300,
+      "at": "2026-11-04T23:03:23.930755+00:00",
+      "elapsed_seconds": 123.53,
+      "document_elements": 427,
+      "heap_used_bytes": 1938776,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1400,
+      "at": "2026-11-04T23:03:33.064643+00:00",
+      "elapsed_seconds": 132.66,
+      "document_elements": 427,
+      "heap_used_bytes": 1938504,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1500,
+      "at": "2026-11-04T23:03:42.650072+00:00",
+      "elapsed_seconds": 142.25,
+      "document_elements": 427,
+      "heap_used_bytes": 1938776,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1600,
+      "at": "2026-11-04T23:03:51.936959+00:00",
+      "elapsed_seconds": 151.54,
+      "document_elements": 427,
+      "heap_used_bytes": 1938812,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1700,
+      "at": "2026-11-04T23:04:04.785805+00:00",
+      "elapsed_seconds": 164.38,
+      "document_elements": 427,
+      "heap_used_bytes": 1939336,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1800,
+      "at": "2026-11-04T23:04:15.358767+00:00",
+      "elapsed_seconds": 174.96,
+      "document_elements": 427,
+      "heap_used_bytes": 1939336,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 1900,
+      "at": "2026-11-04T23:04:27.340009+00:00",
+      "elapsed_seconds": 186.94,
+      "document_elements": 427,
+      "heap_used_bytes": 1940624,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2000,
+      "at": "2026-11-04T23:04:37.922279+00:00",
+      "elapsed_seconds": 197.52,
+      "document_elements": 427,
+      "heap_used_bytes": 1940624,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2100,
+      "at": "2026-11-04T23:04:47.524853+00:00",
+      "elapsed_seconds": 207.12,
+      "document_elements": 427,
+      "heap_used_bytes": 1931652,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2200,
+      "at": "2026-11-04T23:04:57.202498+00:00",
+      "elapsed_seconds": 216.8,
+      "document_elements": 427,
+      "heap_used_bytes": 1934120,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2300,
+      "at": "2026-11-04T23:05:08.140884+00:00",
+      "elapsed_seconds": 227.74,
+      "document_elements": 427,
+      "heap_used_bytes": 1934156,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2400,
+      "at": "2026-11-04T23:05:19.715596+00:00",
+      "elapsed_seconds": 239.31,
+      "document_elements": 427,
+      "heap_used_bytes": 1934888,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2500,
+      "at": "2026-11-04T23:05:29.844052+00:00",
+      "elapsed_seconds": 249.44,
+      "document_elements": 427,
+      "heap_used_bytes": 1943964,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2600,
+      "at": "2026-11-04T23:05:39.732538+00:00",
+      "elapsed_seconds": 259.33,
+      "document_elements": 427,
+      "heap_used_bytes": 1943964,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2700,
+      "at": "2026-11-04T23:05:48.843291+00:00",
+      "elapsed_seconds": 268.44,
+      "document_elements": 427,
+      "heap_used_bytes": 1944272,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2800,
+      "at": "2026-11-04T23:05:58.397219+00:00",
+      "elapsed_seconds": 278.0,
+      "document_elements": 427,
+      "heap_used_bytes": 1932212,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 2900,
+      "at": "2026-11-04T23:06:07.592018+00:00",
+      "elapsed_seconds": 287.19,
+      "document_elements": 427,
+      "heap_used_bytes": 1926736,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3000,
+      "at": "2026-11-04T23:06:17.148076+00:00",
+      "elapsed_seconds": 296.75,
+      "document_elements": 427,
+      "heap_used_bytes": 1926736,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3100,
+      "at": "2026-11-04T23:06:28.244230+00:00",
+      "elapsed_seconds": 307.84,
+      "document_elements": 427,
+      "heap_used_bytes": 1926736,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3200,
+      "at": "2026-11-04T23:06:37.712393+00:00",
+      "elapsed_seconds": 317.31,
+      "document_elements": 427,
+      "heap_used_bytes": 1926736,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3300,
+      "at": "2026-11-04T23:06:46.649516+00:00",
+      "elapsed_seconds": 326.25,
+      "document_elements": 427,
+      "heap_used_bytes": 1931512,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3400,
+      "at": "2026-11-04T23:06:56.594671+00:00",
+      "elapsed_seconds": 336.19,
+      "document_elements": 427,
+      "heap_used_bytes": 1938204,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3500,
+      "at": "2026-11-04T23:07:06.349812+00:00",
+      "elapsed_seconds": 345.95,
+      "document_elements": 427,
+      "heap_used_bytes": 1937516,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3600,
+      "at": "2026-11-04T23:07:15.414242+00:00",
+      "elapsed_seconds": 355.01,
+      "document_elements": 427,
+      "heap_used_bytes": 1936576,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3700,
+      "at": "2026-11-04T23:07:26.005926+00:00",
+      "elapsed_seconds": 365.61,
+      "document_elements": 427,
+      "heap_used_bytes": 1936648,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3800,
+      "at": "2026-11-04T23:07:35.711743+00:00",
+      "elapsed_seconds": 375.31,
+      "document_elements": 427,
+      "heap_used_bytes": 1936648,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 3900,
+      "at": "2026-11-04T23:07:46.228808+00:00",
+      "elapsed_seconds": 385.83,
+      "document_elements": 427,
+      "heap_used_bytes": 1936648,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4000,
+      "at": "2026-11-04T23:07:57.716568+00:00",
+      "elapsed_seconds": 397.32,
+      "document_elements": 427,
+      "heap_used_bytes": 1936648,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4100,
+      "at": "2026-11-04T23:08:09.724121+00:00",
+      "elapsed_seconds": 409.32,
+      "document_elements": 427,
+      "heap_used_bytes": 1940752,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4200,
+      "at": "2026-11-04T23:08:21.108259+00:00",
+      "elapsed_seconds": 420.71,
+      "document_elements": 427,
+      "heap_used_bytes": 1940776,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4300,
+      "at": "2026-11-04T23:08:32.741996+00:00",
+      "elapsed_seconds": 432.34,
+      "document_elements": 427,
+      "heap_used_bytes": 1940872,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4400,
+      "at": "2026-11-04T23:08:42.047690+00:00",
+      "elapsed_seconds": 441.65,
+      "document_elements": 427,
+      "heap_used_bytes": 1940872,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4500,
+      "at": "2026-11-04T23:08:52.107081+00:00",
+      "elapsed_seconds": 451.71,
+      "document_elements": 427,
+      "heap_used_bytes": 1940872,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4600,
+      "at": "2026-11-04T23:09:02.464425+00:00",
+      "elapsed_seconds": 462.06,
+      "document_elements": 427,
+      "heap_used_bytes": 1942868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4700,
+      "at": "2026-11-04T23:09:12.474196+00:00",
+      "elapsed_seconds": 472.07,
+      "document_elements": 427,
+      "heap_used_bytes": 1942868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4800,
+      "at": "2026-11-04T23:09:21.693363+00:00",
+      "elapsed_seconds": 481.29,
+      "document_elements": 427,
+      "heap_used_bytes": 1942908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 4900,
+      "at": "2026-11-04T23:09:30.983880+00:00",
+      "elapsed_seconds": 490.58,
+      "document_elements": 427,
+      "heap_used_bytes": 1942908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5000,
+      "at": "2026-11-04T23:09:41.447083+00:00",
+      "elapsed_seconds": 501.05,
+      "document_elements": 427,
+      "heap_used_bytes": 1942908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5100,
+      "at": "2026-11-04T23:09:54.071148+00:00",
+      "elapsed_seconds": 513.67,
+      "document_elements": 427,
+      "heap_used_bytes": 1943048,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5200,
+      "at": "2026-11-04T23:10:03.686290+00:00",
+      "elapsed_seconds": 523.29,
+      "document_elements": 427,
+      "heap_used_bytes": 1946988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5300,
+      "at": "2026-11-04T23:10:13.025838+00:00",
+      "elapsed_seconds": 532.62,
+      "document_elements": 427,
+      "heap_used_bytes": 1946988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5400,
+      "at": "2026-11-04T23:10:22.032658+00:00",
+      "elapsed_seconds": 541.63,
+      "document_elements": 427,
+      "heap_used_bytes": 1946988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5500,
+      "at": "2026-11-04T23:10:30.797015+00:00",
+      "elapsed_seconds": 550.4,
+      "document_elements": 427,
+      "heap_used_bytes": 1952580,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5600,
+      "at": "2026-11-04T23:10:40.696243+00:00",
+      "elapsed_seconds": 560.3,
+      "document_elements": 427,
+      "heap_used_bytes": 1952912,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5700,
+      "at": "2026-11-04T23:10:50.780494+00:00",
+      "elapsed_seconds": 570.38,
+      "document_elements": 427,
+      "heap_used_bytes": 1952912,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5800,
+      "at": "2026-11-04T23:11:00.353100+00:00",
+      "elapsed_seconds": 579.95,
+      "document_elements": 427,
+      "heap_used_bytes": 1952912,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 5900,
+      "at": "2026-11-04T23:11:09.924528+00:00",
+      "elapsed_seconds": 589.52,
+      "document_elements": 427,
+      "heap_used_bytes": 1952912,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6000,
+      "at": "2026-11-04T23:11:20.362485+00:00",
+      "elapsed_seconds": 599.96,
+      "document_elements": 427,
+      "heap_used_bytes": 1958716,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6100,
+      "at": "2026-11-04T23:11:30.660402+00:00",
+      "elapsed_seconds": 610.26,
+      "document_elements": 427,
+      "heap_used_bytes": 1958716,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6200,
+      "at": "2026-11-04T23:11:39.998823+00:00",
+      "elapsed_seconds": 619.6,
+      "document_elements": 427,
+      "heap_used_bytes": 1958716,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6300,
+      "at": "2026-11-04T23:11:49.449291+00:00",
+      "elapsed_seconds": 629.05,
+      "document_elements": 427,
+      "heap_used_bytes": 1959688,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6400,
+      "at": "2026-11-04T23:11:59.540256+00:00",
+      "elapsed_seconds": 639.14,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6500,
+      "at": "2026-11-04T23:12:09.630951+00:00",
+      "elapsed_seconds": 649.23,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6600,
+      "at": "2026-11-04T23:12:19.190514+00:00",
+      "elapsed_seconds": 658.79,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6700,
+      "at": "2026-11-04T23:12:29.245836+00:00",
+      "elapsed_seconds": 668.84,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6800,
+      "at": "2026-11-04T23:12:38.633978+00:00",
+      "elapsed_seconds": 678.23,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 6900,
+      "at": "2026-11-04T23:12:49.317834+00:00",
+      "elapsed_seconds": 688.92,
+      "document_elements": 427,
+      "heap_used_bytes": 1959724,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7000,
+      "at": "2026-11-04T23:12:58.989248+00:00",
+      "elapsed_seconds": 698.59,
+      "document_elements": 427,
+      "heap_used_bytes": 1960560,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7100,
+      "at": "2026-11-04T23:13:08.473109+00:00",
+      "elapsed_seconds": 708.07,
+      "document_elements": 427,
+      "heap_used_bytes": 1960880,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7200,
+      "at": "2026-11-04T23:13:19.217983+00:00",
+      "elapsed_seconds": 718.82,
+      "document_elements": 427,
+      "heap_used_bytes": 1960880,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7300,
+      "at": "2026-11-04T23:13:29.706550+00:00",
+      "elapsed_seconds": 729.31,
+      "document_elements": 427,
+      "heap_used_bytes": 1959504,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7400,
+      "at": "2026-11-04T23:13:40.695215+00:00",
+      "elapsed_seconds": 740.29,
+      "document_elements": 427,
+      "heap_used_bytes": 1959504,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7500,
+      "at": "2026-11-04T23:13:50.022051+00:00",
+      "elapsed_seconds": 749.62,
+      "document_elements": 427,
+      "heap_used_bytes": 1959504,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7600,
+      "at": "2026-11-04T23:13:59.081953+00:00",
+      "elapsed_seconds": 758.68,
+      "document_elements": 427,
+      "heap_used_bytes": 1959504,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7700,
+      "at": "2026-11-04T23:14:08.848863+00:00",
+      "elapsed_seconds": 768.45,
+      "document_elements": 427,
+      "heap_used_bytes": 1959588,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7800,
+      "at": "2026-11-04T23:14:17.226976+00:00",
+      "elapsed_seconds": 776.83,
+      "document_elements": 427,
+      "heap_used_bytes": 1955868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 7900,
+      "at": "2026-11-04T23:14:26.764166+00:00",
+      "elapsed_seconds": 786.36,
+      "document_elements": 427,
+      "heap_used_bytes": 1955868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8000,
+      "at": "2026-11-04T23:14:39.620438+00:00",
+      "elapsed_seconds": 799.22,
+      "document_elements": 427,
+      "heap_used_bytes": 1955868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8100,
+      "at": "2026-11-04T23:14:51.537215+00:00",
+      "elapsed_seconds": 811.14,
+      "document_elements": 427,
+      "heap_used_bytes": 1955868,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8200,
+      "at": "2026-11-04T23:15:00.985700+00:00",
+      "elapsed_seconds": 820.58,
+      "document_elements": 427,
+      "heap_used_bytes": 1955892,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8300,
+      "at": "2026-11-04T23:15:10.557154+00:00",
+      "elapsed_seconds": 830.16,
+      "document_elements": 427,
+      "heap_used_bytes": 1950300,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8400,
+      "at": "2026-11-04T23:15:20.192810+00:00",
+      "elapsed_seconds": 839.79,
+      "document_elements": 427,
+      "heap_used_bytes": 1950320,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8500,
+      "at": "2026-11-04T23:15:31.427911+00:00",
+      "elapsed_seconds": 851.03,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8600,
+      "at": "2026-11-04T23:15:42.322744+00:00",
+      "elapsed_seconds": 861.92,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8700,
+      "at": "2026-11-04T23:15:51.597227+00:00",
+      "elapsed_seconds": 871.2,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8800,
+      "at": "2026-11-04T23:16:01.900043+00:00",
+      "elapsed_seconds": 881.5,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 8900,
+      "at": "2026-11-04T23:16:11.283384+00:00",
+      "elapsed_seconds": 890.88,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9000,
+      "at": "2026-11-04T23:16:19.751878+00:00",
+      "elapsed_seconds": 899.35,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9100,
+      "at": "2026-11-04T23:16:28.759572+00:00",
+      "elapsed_seconds": 908.36,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9200,
+      "at": "2026-11-04T23:16:40.598577+00:00",
+      "elapsed_seconds": 920.2,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9300,
+      "at": "2026-11-04T23:16:50.612370+00:00",
+      "elapsed_seconds": 930.21,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9400,
+      "at": "2026-11-04T23:17:00.805214+00:00",
+      "elapsed_seconds": 940.4,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9500,
+      "at": "2026-11-04T23:17:12.029589+00:00",
+      "elapsed_seconds": 951.63,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9600,
+      "at": "2026-11-04T23:17:21.627087+00:00",
+      "elapsed_seconds": 961.23,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9700,
+      "at": "2026-11-04T23:17:31.700936+00:00",
+      "elapsed_seconds": 971.3,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9800,
+      "at": "2026-11-04T23:17:42.527709+00:00",
+      "elapsed_seconds": 982.13,
+      "document_elements": 427,
+      "heap_used_bytes": 1944988,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 9900,
+      "at": "2026-11-04T23:17:54.580886+00:00",
+      "elapsed_seconds": 994.18,
+      "document_elements": 427,
+      "heap_used_bytes": 1943440,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10000,
+      "at": "2026-11-04T23:18:05.805343+00:00",
+      "elapsed_seconds": 1005.4,
+      "document_elements": 427,
+      "heap_used_bytes": 1943440,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10100,
+      "at": "2026-11-04T23:18:16.565087+00:00",
+      "elapsed_seconds": 1016.16,
+      "document_elements": 427,
+      "heap_used_bytes": 1943440,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10200,
+      "at": "2026-11-04T23:18:26.075610+00:00",
+      "elapsed_seconds": 1025.67,
+      "document_elements": 427,
+      "heap_used_bytes": 1943440,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10300,
+      "at": "2026-11-04T23:18:36.271312+00:00",
+      "elapsed_seconds": 1035.87,
+      "document_elements": 427,
+      "heap_used_bytes": 1947292,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10400,
+      "at": "2026-11-04T23:18:45.988756+00:00",
+      "elapsed_seconds": 1045.59,
+      "document_elements": 427,
+      "heap_used_bytes": 1947292,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10500,
+      "at": "2026-11-04T23:18:56.535801+00:00",
+      "elapsed_seconds": 1056.13,
+      "document_elements": 427,
+      "heap_used_bytes": 1946516,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10600,
+      "at": "2026-11-04T23:19:06.755989+00:00",
+      "elapsed_seconds": 1066.36,
+      "document_elements": 427,
+      "heap_used_bytes": 1946516,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10700,
+      "at": "2026-11-04T23:19:16.281582+00:00",
+      "elapsed_seconds": 1075.88,
+      "document_elements": 427,
+      "heap_used_bytes": 1948316,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10800,
+      "at": "2026-11-04T23:19:26.437985+00:00",
+      "elapsed_seconds": 1086.04,
+      "document_elements": 427,
+      "heap_used_bytes": 1948316,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 10900,
+      "at": "2026-11-04T23:19:37.902404+00:00",
+      "elapsed_seconds": 1097.5,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11000,
+      "at": "2026-11-04T23:19:47.390323+00:00",
+      "elapsed_seconds": 1106.99,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11100,
+      "at": "2026-11-04T23:19:55.977162+00:00",
+      "elapsed_seconds": 1115.58,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11200,
+      "at": "2026-11-04T23:20:04.752629+00:00",
+      "elapsed_seconds": 1124.35,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11300,
+      "at": "2026-11-04T23:20:13.804381+00:00",
+      "elapsed_seconds": 1133.4,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11400,
+      "at": "2026-11-04T23:20:23.353501+00:00",
+      "elapsed_seconds": 1142.95,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11500,
+      "at": "2026-11-04T23:20:33.623528+00:00",
+      "elapsed_seconds": 1153.22,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11600,
+      "at": "2026-11-04T23:20:43.557683+00:00",
+      "elapsed_seconds": 1163.16,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11700,
+      "at": "2026-11-04T23:20:53.429846+00:00",
+      "elapsed_seconds": 1173.03,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11800,
+      "at": "2026-11-04T23:21:02.455892+00:00",
+      "elapsed_seconds": 1182.06,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    },
+    {
+      "cycle": 11900,
+      "at": "2026-11-04T23:21:12.195093+00:00",
+      "elapsed_seconds": 1191.79,
+      "document_elements": 427,
+      "heap_used_bytes": 1953908,
+      "documents": 2,
+      "nodes": 609,
+      "jsEventListeners": 24
+    }
+  ],
+  "errors": [],
+  "external_requests": [],
+  "cycles": 11998,
+  "runtime_changed": false,
+  "updated_at": "2026-11-04T23:21:20.687744+00:00",
+  "elapsed_seconds": 1200.29,
+  "summary": {
+    "cycles": 11998,
+    "actions": 23996,
+    "checkpoints": 119,
+    "errors": 0,
+    "external_requests": 0,
+    "open_close_median_ms": 88.41
+  },
+  "stability": {
+    "DOM_element_range": 0,
+    "listener_range": 0,
+    "heap_first_bytes": 1829056,
+    "heap_last_bytes": 1953908,
+    "heap_delta_bytes": 124852,
+    "pass": true
+  },
+  "finished_at": "2026-11-04T23:21:20.687728+00:00"
+}

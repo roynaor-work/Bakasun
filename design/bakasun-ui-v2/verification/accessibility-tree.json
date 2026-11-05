@@ -1,0 +1,1945 @@
+{
+  "method": "CDP Accessibility.getFullAXTree; match visible-table th names against actual columnheader nodes",
+  "checks": [
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "320x740",
+      "theme": "light",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "320x740",
+      "theme": "dark",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "390x844",
+      "theme": "light",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "390x844",
+      "theme": "dark",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "844x390",
+      "theme": "light",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "844x390",
+      "theme": "dark",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "1440x1000",
+      "theme": "light",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    },
+    {
+      "page": "clients",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "actual_headers": [
+        "לקוח",
+        "אירועים",
+        "היקף אחרון",
+        "מצב",
+        "כרטיס"
+      ],
+      "cell_count": 30,
+      "pass": true
+    },
+    {
+      "page": "suppliers",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "invoices",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "חשבונית ולקוח",
+        "סכום",
+        "מועד תשלום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 20,
+      "pass": true
+    },
+    {
+      "page": "finance",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "actual_headers": [
+        "תקופה",
+        "הכנסה צפויה",
+        "הוצאה צפויה",
+        "יתרה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "proposals",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "הצעה ואירוע",
+        "סכום",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "budget",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "system",
+      "tab": null,
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "רכיב",
+        "מצב",
+        "פעולה"
+      ],
+      "cell_count": 6,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "suppliers",
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "actual_headers": [
+        "ספק ותחום",
+        "עלות לאירוע",
+        "מצב",
+        "פרטים"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "money",
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "actual_headers": [
+        "שלב תשלום",
+        "סכום",
+        "מועד",
+        "מצב"
+      ],
+      "cell_count": 8,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "participants",
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "actual_headers": [
+        "רשומה בדויה",
+        "קבוצה",
+        "הגעה",
+        "תזונה"
+      ],
+      "cell_count": 16,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "budget",
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "actual_headers": [
+        "קטגוריה",
+        "עלות",
+        "מחיר ללקוח",
+        "מצב"
+      ],
+      "cell_count": 24,
+      "pass": true
+    },
+    {
+      "page": "event",
+      "tab": "files",
+      "viewport": "1440x1000",
+      "theme": "dark",
+      "expected_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "actual_headers": [
+        "מסמך",
+        "סוג",
+        "עודכן",
+        "פעולה"
+      ],
+      "cell_count": 12,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "checks": 96,
+    "failures": 0
+  }
+}

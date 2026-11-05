@@ -1,0 +1,20 @@
+{
+  "explanation": "The sustained audit helper uses a shared checkpoint directory. The original 95-minute sample-42 image was preserved before the final six-minute audit and restored; the final audit image is stored separately. No runtime files changed.",
+  "images": [
+    {
+      "file": "endurance-shots/checkpoint-0042.webp",
+      "audit": "95-minute audit; sample 42",
+      "sha256": "560d1e5d91f616e986a60e40f919bef5a3c2e22659d937280a28dfea938fdfd7"
+    },
+    {
+      "file": "endurance-shots/95-minute-checkpoint-0042.webp",
+      "audit": "preserved identical copy of 95-minute sample 42",
+      "sha256": "560d1e5d91f616e986a60e40f919bef5a3c2e22659d937280a28dfea938fdfd7"
+    },
+    {
+      "file": "final-performance-shots/checkpoint-0042.webp",
+      "audit": "final six-minute audit; sample 42",
+      "sha256": "f3312feadd4374c0a6c4584cf8b46425bf3051134ad21f6c530330f514c2c67f"
+    }
+  ]
+}
