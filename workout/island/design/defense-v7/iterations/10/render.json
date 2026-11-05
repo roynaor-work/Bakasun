@@ -1,0 +1,2366 @@
+{
+  "iteration": "10",
+  "startedUTC": "2026-11-04T22:43:48.302951+00:00",
+  "renderer": "Chromium / ANGLE SwiftShader (software, not physical phone)",
+  "sourceHashes": {
+    "theme.css": "f670477dc8d24d2b884b288164e5d7f6c82121ce84a374fbe5f5ef0923a159de",
+    "app.mjs": "c1dcd1fed7ae69523c0d21cb219e9a5678f82a54b26fea66c36b79b3513a3072",
+    "catalog.mjs": "050e75336c0e08592373723f188e6d0ad4af8c4f9064d1b849207bb8c9082581",
+    "effects.mjs": "ae0be47d37706b36bd12b6594cfef72734b01582361e24b75065f90e97caad58",
+    "farm-layout.json": "5a2d28d4af10e15178f0cdcc7e501b42443cf678be6629d60d614d4c61c0e118",
+    "preview.html": "20bcccf60f2632121f472eb84359ed14a516ad12c9d06f39efbb3a82a95a4b88",
+    "source/browser-audit.py": "5c7be142d1422096ca9e01d57d1a5e743abe7b3a7fceb2a417380b2865a2171a",
+    "source/build-assets.mjs": "717f4570612ffc0903ce086922589f56e6fedeb629ca17d663e0eb2b8e94d5a1",
+    "source/offline.mjs": "87119e64837a04eceb4d8d7138be3b27ee13bc9c803e7ac720020159c02a2134",
+    "source/guard-lod.mjs": "41f407861173d70f021c58b20ee2f0a9978ac401ca0ae189004ff67691012f37",
+    "source/inventory.py": "97519a9f78be7891078f1d1c4bbdec063f0dd09d0ed97de031afd7a07ea92105",
+    "source/tuning.py": "a6baa61148b61a66096bf277311402bbb26630d6cf3482c012376b258bd98f46",
+    "source/studio.py": "09c3f455b99e2a653af3b9ecb8751216faa9ac2d53ee5c1bc8b87072cd1bec88",
+    "source/performance.py": "c5e901e376d9d1ae734a19a61a964f67c84712bb4e72443c07a4fd5fbc2838c5",
+    "source/soak.py": "e2e61e86c80241f872db14c2c4bcd5a1fb87dbcfc6198b8754df50355f8ff705",
+    "source/README.md": "aba24d74e7fb665ee62ef782e7faeafa2ec8679fb9ecd30e7dc7f93be9e96506",
+    "source/water-map.py": "7e39d39703a69245c72cf6d5961a9302e7e4275aa621ea020729f65bd01293cd",
+    "source/package.json": "33b98e472fe73e9ff4a97c5ae5f3055bf854ed0c47de108e4bf3db56abf0277e",
+    "source/manifest.mjs": "319df9eafc7417facce4e9eba371dea1595b5fea7c9ce071f10921bfc1d3b36d",
+    "source/effect-atlas.py": "6d1362bc9935bbc2d7c4136c55f19fe531914cc5226f446bc8d8fa4802fdc6a1",
+    "source/transform-audit.py": "367b4f70cef736522a2e4bf52c9beb432eeb6818f93713c2cd29abc8ec309e6d",
+    "source/guard-static-lod.mjs": "5f1d5d96bf325bfce6374ea354f3afdb67496911d7bfc2ff880ae23a11404cbb",
+    "source/build-environment.mjs": "90bb120c419e99ddfce23c5223df1296c181a0b744a39e255e475ec2e01e24e4",
+    "source/boar-static-lod.mjs": "a57fff3382fbc9a71f6e93152cc5f6b847c3d67123af8f5c795c1009eab651be",
+    "source/mesh.mjs": "f4813cb15c99292aa010bbd91ec8eb40d03d0da00b0495be7889690d190c567b",
+    "source/pack-studio.py": "20760080a4f8589f331b17efd892dad98461e41b884a609f600ba99289a03a09",
+    "source/pose.mjs": "1121b2d457e65b8986521e8773410aa7e8c6fd70cb7c4ad2114f8248213e0e02",
+    "source/inspector-audit.py": "950aaf32e8ee8aa8dbe0d4b8499f56ce1e90a09704ac21fcc76589d9e896cb4d",
+    "source/animation-audit.mjs": "0be23729dbe1b03da43d288f747a29a29b5461c72a69cc52fcffc97faea0cded",
+    "source/render-cost.py": "448ca1465b69a61e01a060b41393547b8e45e49c7d371238deb13efef716e3c4",
+    "source/shadow-filter.py": "af4deb4be39877833a6c40a3ac395d0c90ce473ead74dd2fc28ca24adc047ce1",
+    "source/audit.mjs": "995387799d95c42fa51c43980900f84207b310c96e8336f25f4312471e2d29ec",
+    "source/build-guards.mjs": "d6853b8bec92816d34f1760646c42195cbc113d8c7c98dd784e7a1da56b46754",
+    "source/studio-input.mjs": "e9bca2e9ffedfa499dfc9feeea06c5772e84fcb2acb1f3dac431a05beac9e8a8",
+    "source/serve.py": "d6fbae5e5b9214e69bbf0a5df07d79aece90fca3b66cf6b1065a69d844305150",
+    "source/capture.py": "8bdcd4f658e2336e160296a40fea9f66037d26ca43bde0817a40ef174a9942a0",
+    "source/farm-shadow.py": "8bc274f96c339d766123b83e9edc9e56f88f83bedb05523c93952be5425e8df8",
+    "textures/boar-ash-atlas.png": "d61680d0a551f418673ef617b22ffd1a0202ed62964aaaee38f7e969c0ac5649",
+    "textures/guard-keeper-atlas.png": "c48a46ae53044b044740939295e2b6b525d937abb6b4ce3a7aa9a007bf188a01",
+    "textures/guard-lookout-atlas.png": "9951c913ad0b3876918aea9d3150a4f1d26f97cae56585262f96efeb81328216",
+    "textures/farm-shadow.png": "4233707e5c785afd0d954df19c4394f58edd6ea7181b7bba51d2ba253f867462",
+    "textures/water-wave.png": "d3b8b61d82f3751532a71961c3e67ec3b8205f87801f790d2ae1197037be827f",
+    "textures/boar-amber-atlas.png": "02ac61e0f3eb0b712a016dfcf242a01150842971b8cdbfcada984e2727317a6c",
+    "textures/effects-atlas.png": "3f83a8ee72a427f24be85af6b667236a64fbada74b598d8e11d76ad783d56ee8",
+    "textures/guard-ranger-atlas.png": "36f6d42d1ca69c73bc5201df577f917a81bb7352a2eecedff208d271cf4b45e5",
+    "textures/boar-striped-atlas.png": "5332b77754def3eb0442b998557499d92ed14d15905e9ac29e73169c32fb3ede",
+    "models/planet-ring.glb": "e3415587cb63420193f21968c78663c61cbce6b3123da8181bc3c5ac5b330eda",
+    "models/guard-ranger-lod2.glb": "6ad4f3c8858cb560d16063a66471999373aa230bc0df3a14a14a00e63f37721b",
+    "models/boar-striped.glb": "f2548b0bd417d4554732ca6a62b9c5c5631b1a46c8d0b16e2be7160b64cc546e",
+    "models/defender-plane.glb": "5dc8d34722abe4928b939334fca8c1b65e0f47ee67d147dc30ca9e9df3527896",
+    "models/alien-scout.glb": "b435fee973e480195ff27bb9050da7ce5866fa148e07e2cff7aa8e009539a354",
+    "models/farm-trough.glb": "c4191669dce10e8b0d0ee569afac8ecac30b5185f7b6f28655211a81f73a0208",
+    "models/alien-carrier.glb": "c18d42f23fe4dfeea75e00129fb5a99d415ee2b2b2fbf99bb0e3808cf434aa89",
+    "models/island-palm-lod1.glb": "e349fa09e503c53e4f0afbf951a0d9e738fb4f3ea47c3b32070f9d83688fd600",
+    "models/hay-bale.glb": "8d04e4eeaa8afae73a3bf5e544208b3f3d51d1a6e0c1ee3a5ddbac29e4a04523",
+    "models/farm-gate-lod1.glb": "aae64ddb3af8a579cd337f8838411745ca7f7e05a70e69426234fb5d68937bfc",
+    "models/boar-ash.glb": "679da2234920e0708c984f99577413450fb341fc16cd7d8cb7cbdba9f4140db0",
+    "models/farm-fence.glb": "7bbccd5ea2812c9a6d5f6d9eef37bd8327ceb8ee1a43bb018ac73f1962d43050",
+    "models/guard-crowd.glb": "af1c37050961ecb57ebc891dfb20fade6694d4eb6ff7b44ac899fe97a782d432",
+    "models/island-palm.glb": "95ee02f2a4d03b155ebe6a5eaaecb1626662698b122e06b8a321060b7852dcbc",
+    "models/hay-bale-lod1.glb": "081120c8d27e07ac2f4c50a24afc886e2a923a31e150a460995d0cf9b5ce5627",
+    "models/island-cloud-lod1.glb": "257c2f93dfc2aa14efd02ffb040afa52ac6f28b710ccfe57e975d3ea97d5edbd",
+    "models/guard-lookout.glb": "2bb115d68391817a32306081725bba02dada58c6d53424914d020665be259412",
+    "models/boar-amber-lod1.glb": "cb3b304649d893b92ce7555ca0c957e309124113cd8d6ff81802a74dfdf052e5",
+    "models/island-cloud.glb": "40c5d7c48c7bef1245a9a62ebf62512a3f220431eb32f4a66bf1f291ae9a9c26",
+    "models/boar-amber.glb": "1dbd41f698cef03ca1991b1b46ff54c7457676c7c0ff3d40368dd51a4da87677",
+    "models/boar-amber-lod2.glb": "544f168f0ac205290e43230756dd362df4a76fb0f8a4ce5a601c830c65adbd5b",
+    "models/farm-fence-lod1.glb": "ba5933a90146fd6330b014389cddc4231a2f7f27e0dcdfd5eb8bb53815f0a014",
+    "models/alien-boss.glb": "44a8681b0c6d5f1caf87b7319baa46a0db222e32d933fb629191a8d1d2e7fc81",
+    "models/alien-harvester-lod1.glb": "54bf3416479bb1ff1b079c96d452c6dddfe4f60c357f3422f3a3401bdae1a1c9",
+    "models/alien-boss-lod1.glb": "884a5f58665d4a354cd6da2aa5e58519f44aff25f170cc959c67a2e4e79337a7",
+    "models/crop-patch.glb": "ffd32090ba73fe1e84d5db1441952ee3ad0dafdfb462b4791f97a22a08a46f34",
+    "models/farm-shelter-lod1.glb": "0e1ecf45d4b3d043f0d3a3301b613c8d2398e352cf459e2d6199654274d534ad",
+    "models/farm-island.glb": "0edce000f4691bd0a4c69df18d2a6ffdb7bbed9098afedac7da49f7dced5c702",
+    "models/alien-manta.glb": "e74161d85eb83c353bfa500ab60292a097a5dae0305eff91a728e6d0a46b5695",
+    "models/boar-striped-lod1.glb": "b6034968d291dedfc87fe412419e7a019d173833a222a5a228a0ecfafc635e63",
+    "models/guard-keeper.glb": "098b1a084ace96dd694bb337a5cb506af6c60add3857553d77134a76de32a49a",
+    "models/farm-trough-lod1.glb": "abb8c6a1c103d40ab0c163e883e12f774602c970827c435bd117601677eae3d0",
+    "models/farm-shelter.glb": "a2a4182a976f82d9a700be0531c101e486075c6551908c30c3d8936ac51998b4",
+    "models/boar-striped-lod2.glb": "e3eeecfafe6a15841d71d5418528097541381e190258bc03fb02b0a66c3aba39",
+    "models/guard-ranger-lod1.glb": "3d90ab690f86a1f1fc7f0e0be525f8634bbcccba07ad0e28d74da4d92d52cfc7",
+    "models/alien-carrier-lod1.glb": "5da2432f1e3cc589102db1c497089ed9abf381a7491ba3013d39501702e55620",
+    "models/crop-patch-lod1.glb": "2e05e03fe97ec85b43ef05a873c958e701acc82febb7a613e3644d24035c6276",
+    "models/alien-beetle-lod1.glb": "bd9b29523327f5433fc933a833208d5f30aeb3b01ba6ce2a6341dc6e8baac201",
+    "models/guard-keeper-lod2.glb": "42c6bbaa4079d160295cb896cda193f1a2c2c84257b24c505dc6bdb0cea86db6",
+    "models/guard-lookout-lod1.glb": "a5bf2667f820425fe90471e8a129c968dbe01bc731595cffb1b7f05189435c20",
+    "models/alien-scout-lod1.glb": "7b30a7142b6a790fbbcae01692851bd117728f503e7433d3152cfa42585ddf41",
+    "models/alarm-bell.glb": "2c23a4777675b7c2788b64698fd72b51ef328f0761b192312bbdae9eb8bd2f03",
+    "models/planet-moon.glb": "9c30b336b6db96ebc836a4c63e1e39d8007fcf60e02243f710ae43c1f92f05e7",
+    "models/boar-ash-lod2.glb": "65f6ed7033dd9f308b675afb19cfa191cf772235d7eb2c53a3081a1c4e9809bb",
+    "models/alien-manta-lod1.glb": "f05b59156d37782c45cd5c201a4c730313ff385688b6fd6e3490f9f4dd05b013",
+    "models/boar-ash-lod1.glb": "016a647c661f5167aac750c646d1045ae26f206109b5738090fca09fe3c3344b",
+    "models/guard-station.glb": "2c975ba0f5fab30f43d0efd9feacbd11fdd9f25e0b7ecc9bb9d95d9e9e97f877",
+    "models/alien-harvester.glb": "2042c88a2aad2bfdb1df98111476f9f0cedcb7e524f954bceeb6969ba0ed88bd",
+    "models/defender-plane-lod1.glb": "d6b616a4c01b27032e2ee6b5cb6ed0ec5abd8a0032025cf20b96c53365141133",
+    "models/alarm-bell-lod1.glb": "373999abb988434219cd75ca21260718269748add62c8d63efe13b0877d16e53",
+    "models/guard-keeper-lod1.glb": "42a48a338aaba7238af195cb54dbbff8353b28866d4901c99d214f860af1b709",
+    "models/guard-ranger.glb": "1bcab816222897ef12623e58b0635b44fe3886b1da7588bb340f9fb14e43e1c5",
+    "models/guard-lookout-lod2.glb": "2b71ae24ae1c9db6716b61cfb9aba4c273d264f24f40a463c09a8abfa6e38d9d",
+    "models/planet-moon-lod1.glb": "46dcfb2910f3e95c9433c605531e9517b5d8a3c7792e693ca03b6cdb564d0528",
+    "models/planet-ring-lod1.glb": "c84de0742252db4ba2c0da37b9ca9c4422b62193b8f428f2ba1482fd816b02fc",
+    "models/alien-beetle.glb": "846841aa9f3a34274f872f68c29b551ff17a81c1ef4f1f2b9a27e49f141cdfcb",
+    "models/farm-gate.glb": "62ea7c4a392054a43194d6179ebacbb32f712f91a7a1efb6b25b4673a917a59a",
+    "models/guard-station-lod1.glb": "7c3a46c6d64c5bc5f0b733bdd2b1833a20f23b4d7ee4b045149c3b3f8a1e82cf"
+  },
+  "views": [
+    {
+      "name": "space-390x844-far-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 2,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30252,
+      "calls": 20,
+      "dpr": 1,
+      "geometries": 18,
+      "textures": 0,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 218.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 174.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 71.90625,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-far-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 3,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30252,
+      "calls": 20,
+      "dpr": 1,
+      "geometries": 18,
+      "textures": 0,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 218.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 174.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 71.90625,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-close-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 4,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 32300,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 20,
+      "textures": 0,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 218.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 174.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 71.90625,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-close-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 5,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 32300,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 20,
+      "textures": 0,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 218.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 174.09375,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 71.90625,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-far-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 6,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25591,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 43,
+      "textures": 8,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 215.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 171.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.3125,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-far-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 7,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25591,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 43,
+      "textures": 8,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 215.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 171.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.3125,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-close-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 8,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 28389,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 44,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 215.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 171.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.3125,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-close-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 9,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 28389,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 44,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 72.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 326,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 282,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 215.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 171.6875,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.3125,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-far-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 10,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 470.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 410.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-far-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 11,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 470.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 410.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-close-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 12,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 470.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 410.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-close-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 13,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 470.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 410.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-far-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 14,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25591,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 478.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 418.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-far-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 15,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25591,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 45,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 478.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 418.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-close-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 16,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 31671,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 52,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 478.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 418.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-close-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 17,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 31671,
+      "calls": 25,
+      "dpr": 1,
+      "geometries": 52,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 72.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 758.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 714.203125,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 628.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 584.75,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 478.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 418.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "mobileProfiles": [
+    {
+      "name": "space-390x844-mobile-profile",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.42,
+      "frame": 19,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 29772,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 52,
+      "textures": 9,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728,
+        16.600000000000364,
+        16.799999999999272,
+        133.20000000000073
+      ]
+    },
+    {
+      "name": "farm-390x844-mobile-profile",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.42,
+      "frame": 20,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25593,
+      "calls": 26,
+      "dpr": 1,
+      "geometries": 53,
+      "textures": 10,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728,
+        16.600000000000364,
+        16.799999999999272,
+        133.20000000000073,
+        16.600000000000364
+      ]
+    },
+    {
+      "name": "space-844x390-mobile-profile",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.42,
+      "frame": 22,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 31364,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 53,
+      "textures": 10,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728,
+        16.600000000000364,
+        16.799999999999272,
+        133.20000000000073,
+        16.600000000000364,
+        16.599999999998545,
+        116.70000000000073
+      ]
+    },
+    {
+      "name": "farm-844x390-mobile-profile",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.42,
+      "frame": 23,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 25593,
+      "calls": 26,
+      "dpr": 1,
+      "geometries": 53,
+      "textures": 10,
+      "instancedMeshes": 13,
+      "samples": [
+        1301.3999999996277,
+        33.40000000000009,
+        16.59999999999991,
+        16.700000000000728,
+        16.800000000000182,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        16.699999999999818,
+        116.69999999999982,
+        16.700000000000728,
+        16.700000000000728,
+        16.600000000000364,
+        16.600000000000364,
+        16.600000000000364,
+        16.700000000000728,
+        16.600000000000364,
+        16.799999999999272,
+        133.20000000000073,
+        16.600000000000364,
+        16.599999999998545,
+        116.70000000000073,
+        16.599999999998545
+      ]
+    }
+  ],
+  "finishedUTC": "2026-11-04T22:44:05.089255+00:00"
+}

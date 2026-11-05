@@ -1,0 +1,471 @@
+{
+  "generatedUTC": "2026-11-04T22:43:51.126Z",
+  "method": "Decoded GLB: triangle cross product against mean vertex normal. Ignore collapsed triangles; opposed if dot < -0.15. This detects reversed tube winding missed by file-format validation.",
+  "rows": [
+    {
+      "filename": "alarm-bell-lod1.glb",
+      "testedTriangles": 800,
+      "opposedTriangles": 48,
+      "opposedRatio": 0.06,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 24
+    },
+    {
+      "filename": "alarm-bell.glb",
+      "testedTriangles": 1792,
+      "opposedTriangles": 48,
+      "opposedRatio": 0.026785714285714284,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 24
+    },
+    {
+      "filename": "alien-beetle-lod1.glb",
+      "testedTriangles": 2860,
+      "opposedTriangles": 112,
+      "opposedRatio": 0.039160839160839164,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 44
+    },
+    {
+      "filename": "alien-beetle.glb",
+      "testedTriangles": 5484,
+      "opposedTriangles": 112,
+      "opposedRatio": 0.020423048869438368,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 44
+    },
+    {
+      "filename": "alien-boss-lod1.glb",
+      "testedTriangles": 10528,
+      "opposedTriangles": 288,
+      "opposedRatio": 0.02735562310030395,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 120
+    },
+    {
+      "filename": "alien-boss.glb",
+      "testedTriangles": 19112,
+      "opposedTriangles": 288,
+      "opposedRatio": 0.01506906655504395,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 120
+    },
+    {
+      "filename": "alien-carrier-lod1.glb",
+      "testedTriangles": 3016,
+      "opposedTriangles": 120,
+      "opposedRatio": 0.03978779840848806,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 96
+    },
+    {
+      "filename": "alien-carrier.glb",
+      "testedTriangles": 6408,
+      "opposedTriangles": 120,
+      "opposedRatio": 0.018726591760299626,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 96
+    },
+    {
+      "filename": "alien-harvester-lod1.glb",
+      "testedTriangles": 3068,
+      "opposedTriangles": 288,
+      "opposedRatio": 0.0938722294654498,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 84
+    },
+    {
+      "filename": "alien-harvester.glb",
+      "testedTriangles": 4748,
+      "opposedTriangles": 504,
+      "opposedRatio": 0.10614995787700084,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 156
+    },
+    {
+      "filename": "alien-manta-lod1.glb",
+      "testedTriangles": 2064,
+      "opposedTriangles": 96,
+      "opposedRatio": 0.046511627906976744,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 48
+    },
+    {
+      "filename": "alien-manta.glb",
+      "testedTriangles": 3504,
+      "opposedTriangles": 96,
+      "opposedRatio": 0.0273972602739726,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 48
+    },
+    {
+      "filename": "alien-scout-lod1.glb",
+      "testedTriangles": 2268,
+      "opposedTriangles": 16,
+      "opposedRatio": 0.007054673721340388,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 12
+    },
+    {
+      "filename": "alien-scout.glb",
+      "testedTriangles": 6724,
+      "opposedTriangles": 112,
+      "opposedRatio": 0.01665675193337299,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 76
+    },
+    {
+      "filename": "boar-amber-lod1.glb",
+      "testedTriangles": 2512,
+      "opposedTriangles": 597,
+      "opposedRatio": 0.2376592356687898,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 227
+    },
+    {
+      "filename": "boar-amber-lod2.glb",
+      "testedTriangles": 702,
+      "opposedTriangles": 209,
+      "opposedRatio": 0.29772079772079774,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 98
+    },
+    {
+      "filename": "boar-amber.glb",
+      "testedTriangles": 4448,
+      "opposedTriangles": 645,
+      "opposedRatio": 0.14500899280575538,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 259
+    },
+    {
+      "filename": "boar-ash-lod1.glb",
+      "testedTriangles": 2636,
+      "opposedTriangles": 665,
+      "opposedRatio": 0.2522761760242792,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 283
+    },
+    {
+      "filename": "boar-ash-lod2.glb",
+      "testedTriangles": 738,
+      "opposedTriangles": 223,
+      "opposedRatio": 0.3021680216802168,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 106
+    },
+    {
+      "filename": "boar-ash.glb",
+      "testedTriangles": 4572,
+      "opposedTriangles": 713,
+      "opposedRatio": 0.15594925634295714,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 315
+    },
+    {
+      "filename": "boar-striped-lod1.glb",
+      "testedTriangles": 2492,
+      "opposedTriangles": 585,
+      "opposedRatio": 0.23475120385232745,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 219
+    },
+    {
+      "filename": "boar-striped-lod2.glb",
+      "testedTriangles": 696,
+      "opposedTriangles": 205,
+      "opposedRatio": 0.29454022988505746,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 84
+    },
+    {
+      "filename": "boar-striped.glb",
+      "testedTriangles": 4428,
+      "opposedTriangles": 633,
+      "opposedRatio": 0.1429539295392954,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 251
+    },
+    {
+      "filename": "crop-patch-lod1.glb",
+      "testedTriangles": 712,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "crop-patch.glb",
+      "testedTriangles": 3904,
+      "opposedTriangles": 480,
+      "opposedRatio": 0.12295081967213115,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 320
+    },
+    {
+      "filename": "defender-plane-lod1.glb",
+      "testedTriangles": 3272,
+      "opposedTriangles": 72,
+      "opposedRatio": 0.022004889975550123,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 40
+    },
+    {
+      "filename": "defender-plane.glb",
+      "testedTriangles": 5800,
+      "opposedTriangles": 72,
+      "opposedRatio": 0.012413793103448275,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 40
+    },
+    {
+      "filename": "farm-fence-lod1.glb",
+      "testedTriangles": 72,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "farm-fence.glb",
+      "testedTriangles": 1320,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "farm-gate-lod1.glb",
+      "testedTriangles": 132,
+      "opposedTriangles": 20,
+      "opposedRatio": 0.15151515151515152,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 16
+    },
+    {
+      "filename": "farm-gate.glb",
+      "testedTriangles": 1540,
+      "opposedTriangles": 20,
+      "opposedRatio": 0.012987012987012988,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 16
+    },
+    {
+      "filename": "farm-island.glb",
+      "testedTriangles": 4192,
+      "opposedTriangles": 72,
+      "opposedRatio": 0.01717557251908397,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 69
+    },
+    {
+      "filename": "farm-shelter-lod1.glb",
+      "testedTriangles": 228,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "farm-shelter.glb",
+      "testedTriangles": 3580,
+      "opposedTriangles": 216,
+      "opposedRatio": 0.060335195530726256,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 144
+    },
+    {
+      "filename": "farm-trough-lod1.glb",
+      "testedTriangles": 24,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "farm-trough.glb",
+      "testedTriangles": 352,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "guard-crowd.glb",
+      "testedTriangles": 180,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "guard-keeper-lod1.glb",
+      "testedTriangles": 4441,
+      "opposedTriangles": 54,
+      "opposedRatio": 0.012159423553253772,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 40
+    },
+    {
+      "filename": "guard-keeper-lod2.glb",
+      "testedTriangles": 2054,
+      "opposedTriangles": 24,
+      "opposedRatio": 0.011684518013631937,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 20
+    },
+    {
+      "filename": "guard-keeper.glb",
+      "testedTriangles": 14825,
+      "opposedTriangles": 175,
+      "opposedRatio": 0.011804384485666104,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 155
+    },
+    {
+      "filename": "guard-lookout-lod1.glb",
+      "testedTriangles": 4905,
+      "opposedTriangles": 78,
+      "opposedRatio": 0.015902140672782873,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 128
+    },
+    {
+      "filename": "guard-lookout-lod2.glb",
+      "testedTriangles": 2107,
+      "opposedTriangles": 44,
+      "opposedRatio": 0.0208827717133365,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 17
+    },
+    {
+      "filename": "guard-lookout.glb",
+      "testedTriangles": 16365,
+      "opposedTriangles": 206,
+      "opposedRatio": 0.01258783990223037,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 146
+    },
+    {
+      "filename": "guard-ranger-lod1.glb",
+      "testedTriangles": 4381,
+      "opposedTriangles": 44,
+      "opposedRatio": 0.010043369093814198,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 50
+    },
+    {
+      "filename": "guard-ranger-lod2.glb",
+      "testedTriangles": 2044,
+      "opposedTriangles": 16,
+      "opposedRatio": 0.007827788649706457,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 19
+    },
+    {
+      "filename": "guard-ranger.glb",
+      "testedTriangles": 14632,
+      "opposedTriangles": 163,
+      "opposedRatio": 0.011139967195188628,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 143
+    },
+    {
+      "filename": "guard-station-lod1.glb",
+      "testedTriangles": 440,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "guard-station.glb",
+      "testedTriangles": 2552,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "hay-bale-lod1.glb",
+      "testedTriangles": 36,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "hay-bale.glb",
+      "testedTriangles": 564,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "island-cloud-lod1.glb",
+      "testedTriangles": 480,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "island-cloud.glb",
+      "testedTriangles": 1440,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "island-palm-lod1.glb",
+      "testedTriangles": 588,
+      "opposedTriangles": 192,
+      "opposedRatio": 0.32653061224489793,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 36
+    },
+    {
+      "filename": "island-palm.glb",
+      "testedTriangles": 2244,
+      "opposedTriangles": 360,
+      "opposedRatio": 0.16042780748663102,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 84
+    },
+    {
+      "filename": "planet-moon-lod1.glb",
+      "testedTriangles": 1112,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "planet-moon.glb",
+      "testedTriangles": 2960,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "planet-ring-lod1.glb",
+      "testedTriangles": 1208,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    },
+    {
+      "filename": "planet-ring.glb",
+      "testedTriangles": 3376,
+      "opposedTriangles": 0,
+      "opposedRatio": 0,
+      "degenerateTriangles": 0,
+      "perpendicularTriangles": 0
+    }
+  ],
+  "pass": false
+}

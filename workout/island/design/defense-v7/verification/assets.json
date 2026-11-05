@@ -1,0 +1,5621 @@
+{
+  "generatedUTC": "2026-11-04T23:28:09.005Z",
+  "limits": {
+    "perGLBBytes": 1500000,
+    "textureSide": 1024,
+    "characterAtlases": 1
+  },
+  "rows": [
+    {
+      "filename": "alarm-bell-lod1.glb",
+      "bytes": 6884,
+      "MB": 0.006884,
+      "triangles": 800,
+      "vertices": 546,
+      "materials": 1,
+      "meshes": 3,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.5400000214576721,
+          1.4305114426349519e-8,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.6399999856948853,
+          2.319999933242798,
+          0.29001376032829285
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_clapper": [
+          0,
+          1.55,
+          0
+        ],
+        "anchor_light": [
+          0.55,
+          1.47,
+          0.02
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            }
+          ]
+        }
+      },
+      "sha256": "c7bd44b94763c5df7a4c0730d5372e5207c32624ac506ec0592c1fee068923d7"
+    },
+    {
+      "filename": "alarm-bell.glb",
+      "bytes": 10696,
+      "MB": 0.010696,
+      "triangles": 1792,
+      "vertices": 2494,
+      "materials": 1,
+      "meshes": 3,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.5400000214576721,
+          1.4305114426349519e-8,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.6399999856948853,
+          2.319999933242798,
+          0.29001376032829285
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_clapper": [
+          0,
+          1.55,
+          0
+        ],
+        "anchor_light": [
+          0.55,
+          1.47,
+          0.02
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            }
+          ]
+        }
+      },
+      "sha256": "c19572c2e056236203631c5d25c0174f7d0d03edfcbe6ff06b33eacffbae30cc"
+    },
+    {
+      "filename": "alien-beetle-lod1.glb",
+      "bytes": 15204,
+      "MB": 0.015204,
+      "triangles": 2860,
+      "vertices": 1859,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.2139033079147339,
+          -0.4449999928474426,
+          -1.1089999675750732
+        ],
+        "max": [
+          1.2139033079147339,
+          0.5778115391731262,
+          1.2000694274902344
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_bomb": [
+          0,
+          -0.5,
+          0.1
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "953ec12e7352057dc79e065aeb99e55b99698a6175242ab310071002466036b5"
+    },
+    {
+      "filename": "alien-beetle.glb",
+      "bytes": 24600,
+      "MB": 0.0246,
+      "triangles": 5484,
+      "vertices": 4034,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.2139033079147339,
+          -0.4449999928474426,
+          -1.1089999675750732
+        ],
+        "max": [
+          1.2139033079147339,
+          0.5778115391731262,
+          1.2000694274902344
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_bomb": [
+          0,
+          -0.5,
+          0.1
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "8bf15cb04d2d9c657bac1c0ba6506f8c18eda31c0f8b7e0e4767bec6a39bff4f"
+    },
+    {
+      "filename": "alien-boss-lod1.glb",
+      "bytes": 36132,
+      "MB": 0.036132,
+      "triangles": 10528,
+      "vertices": 6349,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.7899999618530273,
+          -0.6346409916877747,
+          -1.7899999618530273
+        ],
+        "max": [
+          1.7899999618530273,
+          1.000101089477539,
+          1.7899999618530273
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_beam": [
+          0,
+          -0.65,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "34485f2d059cde3b3cbead07b2a854b4a9311dc6c617efdd399dfe883d9952fd"
+    },
+    {
+      "filename": "alien-boss.glb",
+      "bytes": 57800,
+      "MB": 0.0578,
+      "triangles": 19112,
+      "vertices": 11195,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.7899999618530273,
+          -0.6346409916877747,
+          -1.7899999618530273
+        ],
+        "max": [
+          1.7899999618530273,
+          1.000101089477539,
+          1.7899999618530273
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_beam": [
+          0,
+          -0.65,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "4ffa3568c1092dcce72f1da92a712762aee0398fecd1fb768ea2b467298f84aa"
+    },
+    {
+      "filename": "alien-carrier-lod1.glb",
+      "bytes": 13724,
+      "MB": 0.013724,
+      "triangles": 3016,
+      "vertices": 1841,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.3200000524520874,
+          -0.36500000953674316,
+          -1.3604508638381958
+        ],
+        "max": [
+          1.3200000524520874,
+          0.6100742220878601,
+          1.3604508638381958
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_deploy": [
+          0,
+          -0.45,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.3,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "8f3baa4487a0bbe5532330376b3cb1f58ba727fa6faccee512cfb8828f23f7ee"
+    },
+    {
+      "filename": "alien-carrier.glb",
+      "bytes": 22620,
+      "MB": 0.02262,
+      "triangles": 6408,
+      "vertices": 3803,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.3200000524520874,
+          -0.36500000953674316,
+          -1.3700000047683716
+        ],
+        "max": [
+          1.3200000524520874,
+          0.6100742220878601,
+          1.3700000047683716
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_deploy": [
+          0,
+          -0.45,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.3,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "8c173d64138dcf0ccad7b5275370eb37e8dfd0e069c227e092d3e033258e20e4"
+    },
+    {
+      "filename": "alien-harvester-lod1.glb",
+      "bytes": 14684,
+      "MB": 0.014684,
+      "triangles": 3068,
+      "vertices": 1875,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1805702447891235,
+          -0.6050000190734863,
+          -0.7450000047683716
+        ],
+        "max": [
+          1.1805702447891235,
+          0.6300657391548157,
+          1.3400038480758667
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_tractor": [
+          0,
+          -0.5,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.22,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "024d3868c1e1b88621debd5a2c79184c877ea95290f562a986756b121ac79ca7"
+    },
+    {
+      "filename": "alien-harvester.glb",
+      "bytes": 19900,
+      "MB": 0.0199,
+      "triangles": 4748,
+      "vertices": 2787,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1805702447891235,
+          -0.6050000190734863,
+          -0.7450000047683716
+        ],
+        "max": [
+          1.1805702447891235,
+          0.6300657391548157,
+          1.3400038480758667
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_tractor": [
+          0,
+          -0.5,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.22,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "5507c21049e9e67f5a9373df9be824791942020976cd0ea6959d6f606dcbd564"
+    },
+    {
+      "filename": "alien-manta-lod1.glb",
+      "bytes": 12160,
+      "MB": 0.01216,
+      "triangles": 2064,
+      "vertices": 1636,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.773423671722412,
+          -0.2199999988079071,
+          -1.059999942779541
+        ],
+        "max": [
+          1.773423671722412,
+          0.43001821637153625,
+          1.3147401809692383
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire_left": [
+          0.34,
+          0.07,
+          1.35
+        ],
+        "anchor_fire_right": [
+          -0.34,
+          0.07,
+          1.35
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0.2
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            }
+          ]
+        }
+      },
+      "sha256": "40c739b6d8e78257d0bfdbad98ce2f9967bfcbe70790a6a206755958310fee8a"
+    },
+    {
+      "filename": "alien-manta.glb",
+      "bytes": 17148,
+      "MB": 0.017148,
+      "triangles": 3504,
+      "vertices": 2474,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.773423671722412,
+          -0.2199999988079071,
+          -1.059999942779541
+        ],
+        "max": [
+          1.773423671722412,
+          0.4300466477870941,
+          1.3147401809692383
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire_left": [
+          0.34,
+          0.07,
+          1.35
+        ],
+        "anchor_fire_right": [
+          -0.34,
+          0.07,
+          1.35
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0.2
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            }
+          ]
+        }
+      },
+      "sha256": "b26929ec8ae32651d248a11dab30e0b2deb4f7fb6b04ed23919565906853e003"
+    },
+    {
+      "filename": "alien-scout-lod1.glb",
+      "bytes": 11744,
+      "MB": 0.011744,
+      "triangles": 2268,
+      "vertices": 1473,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1151056289672852,
+          -0.4300000071525574,
+          -1.1104508638381958
+        ],
+        "max": [
+          1.1151056289672852,
+          1.0299896001815796,
+          1.1105035543441772
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire": [
+          0,
+          -0.42,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "b51d026abd2bc4d02981bb18993363a885143a345de67859e4953013a9b7a102"
+    },
+    {
+      "filename": "alien-scout.glb",
+      "bytes": 24768,
+      "MB": 0.024768,
+      "triangles": 6724,
+      "vertices": 3958,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1200000047683716,
+          -0.4300000071525574,
+          -1.1200000047683716
+        ],
+        "max": [
+          1.1200000047683716,
+          1.0299896001815796,
+          1.1200000047683716
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire": [
+          0,
+          -0.42,
+          0
+        ],
+        "anchor_hit": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "13b57ecba32469b94b2da7e7cdb57db8678f3a9fcd5ddbfc070bcbcdd092207e"
+    },
+    {
+      "filename": "boar-amber-lod1.glb",
+      "bytes": 19448,
+      "MB": 0.019448,
+      "triangles": 2512,
+      "vertices": 1556,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-amber-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "02ac61e0f3eb0b712a016dfcf242a01150842971b8cdbfcada984e2727317a6c"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.39539796113967896,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.39538151025772095,
+          1.238064169883728,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "19fdc8db41aee7e20fa2fc943d6c5c882d6179a9eb157d868803bbf370297922"
+    },
+    {
+      "filename": "boar-amber-lod2.glb",
+      "bytes": 6820,
+      "MB": 0.00682,
+      "triangles": 702,
+      "vertices": 504,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "boar-amber-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "02ac61e0f3eb0b712a016dfcf242a01150842971b8cdbfcada984e2727317a6c"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.3900689482688904,
+          0,
+          -0.8197149038314819
+        ],
+        "max": [
+          0.3953530788421631,
+          1.2341692447662354,
+          1.0557507276535034
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "d83202b0534647fc1c10224348a486ddbab00a207b8e3261a997604f2e2e9490"
+    },
+    {
+      "filename": "boar-amber.glb",
+      "bytes": 26844,
+      "MB": 0.026844,
+      "triangles": 4448,
+      "vertices": 3986,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-amber single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "02ac61e0f3eb0b712a016dfcf242a01150842971b8cdbfcada984e2727317a6c"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.39539796113967896,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.39538151025772095,
+          1.238064169883728,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "d2266f39cca86f117690c4d64cde68a7e2420082251699245a1a4a258dca112d"
+    },
+    {
+      "filename": "boar-ash-lod1.glb",
+      "bytes": 19940,
+      "MB": 0.01994,
+      "triangles": 2636,
+      "vertices": 1624,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-ash-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "d61680d0a551f418673ef617b22ffd1a0202ed62964aaaee38f7e969c0ac5649"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.42559999227523804,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.4256522059440613,
+          1.2505697011947632,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "bbfddb7a0938705956cb8d1566bd8621c83c9b28588d4809dac72a49c0afe1d2"
+    },
+    {
+      "filename": "boar-ash-lod2.glb",
+      "bytes": 6988,
+      "MB": 0.006988,
+      "triangles": 738,
+      "vertices": 528,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "boar-ash-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "d61680d0a551f418673ef617b22ffd1a0202ed62964aaaee38f7e969c0ac5649"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.42559999227523804,
+          0,
+          -0.8197149038314819
+        ],
+        "max": [
+          0.42564594745635986,
+          1.2503104209899902,
+          1.0557507276535034
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "4470fb7a871ec8c15be99e810e38c09d02fa5a3c1494bef67d0815901e23d398"
+    },
+    {
+      "filename": "boar-ash.glb",
+      "bytes": 27324,
+      "MB": 0.027324,
+      "triangles": 4572,
+      "vertices": 4054,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-ash single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1576,
+          "sha256": "d61680d0a551f418673ef617b22ffd1a0202ed62964aaaee38f7e969c0ac5649"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.42559999227523804,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.4256522059440613,
+          1.2505697011947632,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "94af628c0bafd2f8e7923363e26414a809eddb69a1dd4e29539415a1814afa17"
+    },
+    {
+      "filename": "boar-striped-lod1.glb",
+      "bytes": 19408,
+      "MB": 0.019408,
+      "triangles": 2492,
+      "vertices": 1544,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-striped-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1569,
+          "sha256": "5332b77754def3eb0442b998557499d92ed14d15905e9ac29e73169c32fb3ede"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.39539796113967896,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.39538151025772095,
+          1.238064169883728,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "a57a3480ede4b93acb505e61391041967064e08cc911f2c911920c4d07563fbd"
+    },
+    {
+      "filename": "boar-striped-lod2.glb",
+      "bytes": 6848,
+      "MB": 0.006848,
+      "triangles": 696,
+      "vertices": 514,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "boar-striped-lod1 single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1569,
+          "sha256": "5332b77754def3eb0442b998557499d92ed14d15905e9ac29e73169c32fb3ede"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.39099574089050293,
+          0,
+          -0.8197149038314819
+        ],
+        "max": [
+          0.3953421115875244,
+          1.2341692447662354,
+          1.0557507276535034
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/1"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "1495ce90d4991f79b527cced1edfa35cf8d1f6be3f6a02fbad34e07ab95b147b"
+    },
+    {
+      "filename": "boar-striped.glb",
+      "bytes": 26832,
+      "MB": 0.026832,
+      "triangles": 4428,
+      "vertices": 3974,
+      "materials": 1,
+      "meshes": 5,
+      "textures": [
+        {
+          "name": "boar-striped single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1569,
+          "sha256": "5332b77754def3eb0442b998557499d92ed14d15905e9ac29e73169c32fb3ede"
+        }
+      ],
+      "skins": [],
+      "animations": [
+        {
+          "name": "trot",
+          "channels": 8
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.39539796113967896,
+          1.6689300497141346e-8,
+          -0.8279401063919067
+        ],
+        "max": [
+          0.39538151025772095,
+          1.238064169883728,
+          1.0700000524520874
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hit": [
+          0,
+          0.7,
+          0.1
+        ],
+        "anchor_ground": [
+          0,
+          0,
+          0
+        ],
+        "anchor_nose": [
+          0,
+          0.66,
+          1.05
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/2"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/5"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/6"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/8"
+            }
+          ]
+        }
+      },
+      "sha256": "d548c59a97d4845eba6319d968ee747d1f8cc63d32247eb2ece72d246408170d"
+    },
+    {
+      "filename": "crop-patch-lod1.glb",
+      "bytes": 3908,
+      "MB": 0.003908,
+      "triangles": 712,
+      "vertices": 908,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.100000023841858,
+          1.3411045607369942e-9,
+          -0.8999999761581421
+        ],
+        "max": [
+          1.100000023841858,
+          0.47993651032447815,
+          0.89996337890625
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "2e05e03fe97ec85b43ef05a873c958e701acc82febb7a613e3644d24035c6276"
+    },
+    {
+      "filename": "crop-patch.glb",
+      "bytes": 16000,
+      "MB": 0.016,
+      "triangles": 3904,
+      "vertices": 4588,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.100000023841858,
+          1.3411045607369942e-9,
+          -0.8999999761581421
+        ],
+        "max": [
+          1.100000023841858,
+          0.4812793731689453,
+          0.89996337890625
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "fef76f93a369fe85ed0605d478b269610abc45c7ed4359160a010dcd19673702"
+    },
+    {
+      "filename": "defender-plane-lod1.glb",
+      "bytes": 17228,
+      "MB": 0.017228,
+      "triangles": 3272,
+      "vertices": 2489,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.4770171642303467,
+          -0.27000001072883606,
+          -1.1699999570846558
+        ],
+        "max": [
+          1.4770171642303467,
+          0.5947712659835815,
+          1.2699676752090454
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire_left": [
+          0.54,
+          -0.03,
+          0.74
+        ],
+        "anchor_fire_right": [
+          -0.54,
+          -0.03,
+          0.74
+        ],
+        "anchor_engine_left": [
+          0.43,
+          -0.1,
+          -0.99
+        ],
+        "anchor_engine_right": [
+          -0.43,
+          -0.1,
+          -0.99
+        ],
+        "anchor_hit": [
+          0,
+          0.12,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            }
+          ]
+        }
+      },
+      "sha256": "a8b5b08adea416a7fcefba7074c01a041a0bfd8a07da10e1b791228d87e762ac"
+    },
+    {
+      "filename": "defender-plane.glb",
+      "bytes": 24928,
+      "MB": 0.024928,
+      "triangles": 5800,
+      "vertices": 4593,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.4770171642303467,
+          -0.27000001072883606,
+          -1.1699999570846558
+        ],
+        "max": [
+          1.4770171642303467,
+          0.5947712659835815,
+          1.2699676752090454
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_fire_left": [
+          0.54,
+          -0.03,
+          0.74
+        ],
+        "anchor_fire_right": [
+          -0.54,
+          -0.03,
+          0.74
+        ],
+        "anchor_engine_left": [
+          0.43,
+          -0.1,
+          -0.99
+        ],
+        "anchor_engine_right": [
+          -0.43,
+          -0.1,
+          -0.99
+        ],
+        "anchor_hit": [
+          0,
+          0.12,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/7"
+            }
+          ]
+        }
+      },
+      "sha256": "74281e05ccb91afecf16cef5af7e5403eb6fdefa34013000c161a739eae836a5"
+    },
+    {
+      "filename": "farm-fence-lod1.glb",
+      "bytes": 1876,
+      "MB": 0.001876,
+      "triangles": 72,
+      "vertices": 144,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1050000190734863,
+          1.4305114426349519e-8,
+          -0.11999999731779099
+        ],
+        "max": [
+          1.1050000190734863,
+          1.3299390077590942,
+          0.1199798658490181
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_left": [
+          -1,
+          0,
+          0
+        ],
+        "anchor_right": [
+          1,
+          0,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "ba5933a90146fd6330b014389cddc4231a2f7f27e0dcdfd5eb8bb53815f0a014"
+    },
+    {
+      "filename": "farm-fence.glb",
+      "bytes": 7080,
+      "MB": 0.00708,
+      "triangles": 1320,
+      "vertices": 2920,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.1050000190734863,
+          1.4305114426349519e-8,
+          -0.11999999731779099
+        ],
+        "max": [
+          1.1050000190734863,
+          1.3299390077590942,
+          0.1199798658490181
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_left": [
+          -1,
+          0,
+          0
+        ],
+        "anchor_right": [
+          1,
+          0,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "7bbccd5ea2812c9a6d5f6d9eef37bd8327ceb8ee1a43bb018ac73f1962d43050"
+    },
+    {
+      "filename": "farm-gate-lod1.glb",
+      "bytes": 2224,
+      "MB": 0.002224,
+      "triangles": 132,
+      "vertices": 212,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.340000033378601,
+          2.8610228852699038e-8,
+          -0.15000000596046448
+        ],
+        "max": [
+          1.340000033378601,
+          1.6299530267715454,
+          0.1599920690059662
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hinge": [
+          -1.2,
+          0,
+          0
+        ],
+        "anchor_latch": [
+          1.2,
+          0.77,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "8cd0db52384287ceeb4f20448d72f30874384c6ac237d9d1309747f75a8f8886"
+    },
+    {
+      "filename": "farm-gate.glb",
+      "bytes": 7876,
+      "MB": 0.007876,
+      "triangles": 1540,
+      "vertices": 3780,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.340000033378601,
+          2.8610228852699038e-8,
+          -0.15000000596046448
+        ],
+        "max": [
+          1.340000033378601,
+          1.6299530267715454,
+          0.1599920690059662
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_hinge": [
+          -1.2,
+          0,
+          0
+        ],
+        "anchor_latch": [
+          1.2,
+          0.77,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "c4ba870b6d606ad77a28fa13131ff18f7084c96df3aaba0098ebc6182c368bc9"
+    },
+    {
+      "filename": "farm-island.glb",
+      "bytes": 17304,
+      "MB": 0.017304,
+      "triangles": 4192,
+      "vertices": 6559,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -8.532466888427734,
+          -0.44999998807907104,
+          -7.508601665496826
+        ],
+        "max": [
+          9.032291412353516,
+          0.6746677756309509,
+          8.41472053527832
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_ground": [
+          0,
+          0.23,
+          0
+        ],
+        "anchor_gate": [
+          0,
+          0.23,
+          3.3
+        ],
+        "anchor_shelter": [
+          -3.6,
+          0.23,
+          -2.2
+        ],
+        "anchor_station": [
+          3.6,
+          0.23,
+          1.5
+        ],
+        "anchor_bell": [
+          1.4,
+          0.23,
+          3.2
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/5"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/6"
+            }
+          ]
+        }
+      },
+      "sha256": "9d2db8d0a37706584bdf39719b0dcf7ce27af9652fa9fd45ab2bd3ceb18b54b0"
+    },
+    {
+      "filename": "farm-shelter-lod1.glb",
+      "bytes": 2560,
+      "MB": 0.00256,
+      "triangles": 228,
+      "vertices": 456,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.8506975173950195,
+          -4.76837147544984e-9,
+          -1.2799999713897705
+        ],
+        "max": [
+          1.8506975173950195,
+          2.689910888671875,
+          1.2800016403198242
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_door": [
+          0,
+          0,
+          1.2
+        ],
+        "anchor_roof": [
+          0,
+          2.7,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "0e1ecf45d4b3d043f0d3a3301b613c8d2398e352cf459e2d6199654274d534ad"
+    },
+    {
+      "filename": "farm-shelter.glb",
+      "bytes": 15280,
+      "MB": 0.01528,
+      "triangles": 3580,
+      "vertices": 8140,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.8506975173950195,
+          -4.76837147544984e-9,
+          -1.2799999713897705
+        ],
+        "max": [
+          1.8506975173950195,
+          2.689910888671875,
+          1.2800016403198242
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_door": [
+          0,
+          0,
+          1.2
+        ],
+        "anchor_roof": [
+          0,
+          2.7,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/2"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            }
+          ]
+        }
+      },
+      "sha256": "1d99c8d3ec7db8d5279d0763779cbea37bcb0cf1fe78663588d2ed2e2bb40cc1"
+    },
+    {
+      "filename": "farm-trough-lod1.glb",
+      "bytes": 2368,
+      "MB": 0.002368,
+      "triangles": 24,
+      "vertices": 48,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.44999998807907104,
+          -1.7881393032936899e-9,
+          -0.22499999403953552
+        ],
+        "max": [
+          0.44999998807907104,
+          0.35752105712890625,
+          0.22502747178077698
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "abb8c6a1c103d40ab0c163e883e12f774602c970827c435bd117601677eae3d0"
+    },
+    {
+      "filename": "farm-trough.glb",
+      "bytes": 4080,
+      "MB": 0.00408,
+      "triangles": 352,
+      "vertices": 896,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.44999998807907104,
+          -1.7881393032936899e-9,
+          -0.22499999403953552
+        ],
+        "max": [
+          0.44999998807907104,
+          0.35752105712890625,
+          0.22502747178077698
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "c4191669dce10e8b0d0ee569afac8ecac30b5185f7b6f28655211a81f73a0208"
+    },
+    {
+      "filename": "guard-crowd.glb",
+      "bytes": 2356,
+      "MB": 0.002356,
+      "triangles": 180,
+      "vertices": 251,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.24500000476837158,
+          -1.7881393032936899e-9,
+          -0.14000000059604645
+        ],
+        "max": [
+          0.24496766924858093,
+          1.2100000381469727,
+          0.13999207317829132
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "af1c37050961ecb57ebc891dfb20fade6694d4eb6ff7b44ac899fe97a782d432"
+    },
+    {
+      "filename": "guard-keeper-lod1.glb",
+      "bytes": 111200,
+      "MB": 0.1112,
+      "triangles": 4441,
+      "vertices": 5694,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-keeper single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "c48a46ae53044b044740939295e2b6b525d937abb6b4ce3a7aa9a007bf188a01"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6704248785972595,
+          0.003762646112591028,
+          -0.13431350886821747
+        ],
+        "max": [
+          0.6707380414009094,
+          1.359092116355896,
+          0.13999928534030914
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "71bee675808972479216bf2c0cc8553c0c0366760bb54e5b1dd90cf2c36ce708"
+    },
+    {
+      "filename": "guard-keeper-lod2.glb",
+      "bytes": 14028,
+      "MB": 0.014028,
+      "triangles": 2227,
+      "vertices": 4217,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-keeper single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "c48a46ae53044b044740939295e2b6b525d937abb6b4ce3a7aa9a007bf188a01"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.18664108216762543,
+          0.010014429688453674,
+          -0.08825685828924179
+        ],
+        "max": [
+          0.2063015252351761,
+          1.347554087638855,
+          0.2035313844680786
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "1cefd252331569a03beb0a2de18d202e5810f082d1935ac6ef4e64a06d29c2d3"
+    },
+    {
+      "filename": "guard-keeper.glb",
+      "bytes": 154848,
+      "MB": 0.154848,
+      "triangles": 14825,
+      "vertices": 12250,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-keeper single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "c48a46ae53044b044740939295e2b6b525d937abb6b4ce3a7aa9a007bf188a01"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6706322431564331,
+          0.0020000000949949026,
+          -0.13632500171661377
+        ],
+        "max": [
+          0.6707413196563721,
+          1.3609999418258667,
+          0.13999566435813904
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "1d409ad7854eec084eaba198428f240e9e54eeb06875f3ab2e2a8f2ecb34d002"
+    },
+    {
+      "filename": "guard-lookout-lod1.glb",
+      "bytes": 113968,
+      "MB": 0.113968,
+      "triangles": 4902,
+      "vertices": 6045,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-lookout single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1743,
+          "sha256": "9951c913ad0b3876918aea9d3150a4f1d26f97cae56585262f96efeb81328216"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6704221367835999,
+          0.003762646112591028,
+          -0.12300000339746475
+        ],
+        "max": [
+          0.6706374287605286,
+          1.359092116355896,
+          0.14000031352043152
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "9997bfffb6d04f0429ef979f62dcb7c9eb83dca300ae54ec2ba6b35afe74b5d9"
+    },
+    {
+      "filename": "guard-lookout-lod2.glb",
+      "bytes": 14400,
+      "MB": 0.0144,
+      "triangles": 2282,
+      "vertices": 4259,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-lookout single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1743,
+          "sha256": "9951c913ad0b3876918aea9d3150a4f1d26f97cae56585262f96efeb81328216"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.20412638783454895,
+          0.015970613807439804,
+          -0.0794527530670166
+        ],
+        "max": [
+          0.2040535807609558,
+          1.347554087638855,
+          0.2035585343837738
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "4de9211f1d939040b05d422d0550872df3e0de1dc155d9477f9403981c902b94"
+    },
+    {
+      "filename": "guard-lookout.glb",
+      "bytes": 161756,
+      "MB": 0.161756,
+      "triangles": 16365,
+      "vertices": 13213,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-lookout single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1743,
+          "sha256": "9951c913ad0b3876918aea9d3150a4f1d26f97cae56585262f96efeb81328216"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6707332134246826,
+          0.0020000000949949026,
+          -0.12300000339746475
+        ],
+        "max": [
+          0.6708683967590332,
+          1.3609999418258667,
+          0.14000749588012695
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "b25f5e21c42c91c1c16ef5b89be400a59e32f046076ddd736623ec848c63932c"
+    },
+    {
+      "filename": "guard-ranger-lod1.glb",
+      "bytes": 111084,
+      "MB": 0.111084,
+      "triangles": 4385,
+      "vertices": 5660,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-ranger single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "36f6d42d1ca69c73bc5201df577f917a81bb7352a2eecedff208d271cf4b45e5"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6707138419151306,
+          0.003762646112591028,
+          -0.12300000339746475
+        ],
+        "max": [
+          0.6706352829933167,
+          1.359092116355896,
+          0.14000031352043152
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "3e8ea6ddb1eaf54502b061be73caa1ad12217229abf013973ab156cea8f0726f"
+    },
+    {
+      "filename": "guard-ranger-lod2.glb",
+      "bytes": 13872,
+      "MB": 0.013872,
+      "triangles": 2233,
+      "vertices": 4127,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-ranger single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "36f6d42d1ca69c73bc5201df577f917a81bb7352a2eecedff208d271cf4b45e5"
+        }
+      ],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.20604625344276428,
+          0.009993748739361763,
+          -0.08167707175016403
+        ],
+        "max": [
+          0.20323103666305542,
+          1.347554087638855,
+          0.2035025656223297
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "f99a0e0726c31150123293fe596161db7ec9a84cbd032807f7aa54cf9d29da8d"
+    },
+    {
+      "filename": "guard-ranger.glb",
+      "bytes": 153868,
+      "MB": 0.153868,
+      "triangles": 14632,
+      "vertices": 12127,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [
+        {
+          "name": "guard-ranger single color atlas",
+          "size": [
+            512,
+            512
+          ],
+          "mime": "image/png",
+          "bytes": 1748,
+          "sha256": "36f6d42d1ca69c73bc5201df577f917a81bb7352a2eecedff208d271cf4b45e5"
+        }
+      ],
+      "skins": [
+        {
+          "name": "Motion2Canonical18",
+          "joints": 18,
+          "sameCanonicalNames": true,
+          "sameCanonicalParents": true
+        }
+      ],
+      "animations": [
+        {
+          "name": "patrol",
+          "channels": 36
+        },
+        {
+          "name": "idle",
+          "channels": 36
+        },
+        {
+          "name": "alert",
+          "channels": 36
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.6707138419151306,
+          0.0020000000949949026,
+          -0.12300000339746475
+        ],
+        "max": [
+          0.6708670258522034,
+          1.3609999418258667,
+          0.14000749588012695
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 4.470348358154297e-8,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/3"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "020d9b4bc97b2e4878dde9346f7022706e68c0511f0d8b7e9fec1a3bcdd55b07"
+    },
+    {
+      "filename": "guard-station-lod1.glb",
+      "bytes": 4340,
+      "MB": 0.00434,
+      "triangles": 440,
+      "vertices": 500,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.949999988079071,
+          -4.76837147544984e-9,
+          -0.949999988079071
+        ],
+        "max": [
+          0.9499884247779846,
+          2.7100000381469727,
+          0.9499735236167908
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_guard": [
+          0,
+          0,
+          0.9
+        ],
+        "anchor_lamp": [
+          0.85,
+          2.6,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "7c3a46c6d64c5bc5f0b733bdd2b1833a20f23b4d7ee4b045149c3b3f8a1e82cf"
+    },
+    {
+      "filename": "guard-station.glb",
+      "bytes": 13024,
+      "MB": 0.013024,
+      "triangles": 2552,
+      "vertices": 5868,
+      "materials": 1,
+      "meshes": 2,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.949999988079071,
+          -4.76837147544984e-9,
+          -0.949999988079071
+        ],
+        "max": [
+          0.9499884247779846,
+          2.7100000381469727,
+          0.9499735236167908
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {
+        "anchor_guard": [
+          0,
+          0,
+          0.9
+        ],
+        "anchor_lamp": [
+          0.85,
+          2.6,
+          0
+        ]
+      },
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/1"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/3"
+            },
+            {
+              "code": "NODE_EMPTY",
+              "message": "Empty node encountered.",
+              "severity": 2,
+              "pointer": "/nodes/4"
+            }
+          ]
+        }
+      },
+      "sha256": "2c975ba0f5fab30f43d0efd9feacbd11fdd9f25e0b7ecc9bb9d95d9e9e97f877"
+    },
+    {
+      "filename": "hay-bale-lod1.glb",
+      "bytes": 1592,
+      "MB": 0.001592,
+      "triangles": 36,
+      "vertices": 72,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.36000001430511475,
+          -1.1920929132713809e-8,
+          -0.2750000059604645
+        ],
+        "max": [
+          0.36000001430511475,
+          0.6150082349777222,
+          0.2750091850757599
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "081120c8d27e07ac2f4c50a24afc886e2a923a31e150a460995d0cf9b5ce5627"
+    },
+    {
+      "filename": "hay-bale.glb",
+      "bytes": 4032,
+      "MB": 0.004032,
+      "triangles": 564,
+      "vertices": 1408,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -0.36000001430511475,
+          -1.1920929132713809e-8,
+          -0.2750000059604645
+        ],
+        "max": [
+          0.36000001430511475,
+          0.6150082349777222,
+          0.2750091850757599
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "8d04e4eeaa8afae73a3bf5e544208b3f3d51d1a6e0c1ee3a5ddbac29e4a04523"
+    },
+    {
+      "filename": "island-cloud-lod1.glb",
+      "bytes": 3880,
+      "MB": 0.00388,
+      "triangles": 480,
+      "vertices": 312,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.350000023841858,
+          -0.38199999928474426,
+          -0.5040000081062317
+        ],
+        "max": [
+          1.399999976158142,
+          0.6199380159378052,
+          0.5899235606193542
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "257c2f93dfc2aa14efd02ffb040afa52ac6f28b710ccfe57e975d3ea97d5edbd"
+    },
+    {
+      "filename": "island-cloud.glb",
+      "bytes": 7256,
+      "MB": 0.007256,
+      "triangles": 1440,
+      "vertices": 840,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.350000023841858,
+          -0.38199999928474426,
+          -0.5040000081062317
+        ],
+        "max": [
+          1.399999976158142,
+          0.6199380159378052,
+          0.5899235606193542
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "40c5d7c48c7bef1245a9a62ebf62512a3f220431eb32f4a66bf1f291ae9a9c26"
+    },
+    {
+      "filename": "island-palm-lod1.glb",
+      "bytes": 4056,
+      "MB": 0.004056,
+      "triangles": 588,
+      "vertices": 362,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.0430630445480347,
+          -0.011973422020673752,
+          -1.4538077116012573
+        ],
+        "max": [
+          1.562975287437439,
+          3.1777708530426025,
+          1.5538936853408813
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "39fe4996635b4d516ad9052bf0387e2ce204001b7af07605dac4b3d79893ed82"
+    },
+    {
+      "filename": "island-palm.glb",
+      "bytes": 9672,
+      "MB": 0.009672,
+      "triangles": 2244,
+      "vertices": 1384,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.2438076734542847,
+          -0.012359948828816414,
+          -1.4532976150512695
+        ],
+        "max": [
+          1.7638686895370483,
+          3.1777708530426025,
+          1.5532102584838867
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "afcc742b6588f6c07210432076abc1051f1a8876072469e923915ef490a7e49e"
+    },
+    {
+      "filename": "planet-moon-lod1.glb",
+      "bytes": 5916,
+      "MB": 0.005916,
+      "triangles": 1112,
+      "vertices": 668,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1,
+          -1,
+          -1
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "46dcfb2910f3e95c9433c605531e9517b5d8a3c7792e693ca03b6cdb564d0528"
+    },
+    {
+      "filename": "planet-moon.glb",
+      "bytes": 11092,
+      "MB": 0.011092,
+      "triangles": 2960,
+      "vertices": 1656,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1,
+          -1,
+          -1
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "9c30b336b6db96ebc836a4c63e1e39d8007fcf60e02243f710ae43c1f92f05e7"
+    },
+    {
+      "filename": "planet-ring-lod1.glb",
+      "bytes": 6136,
+      "MB": 0.006136,
+      "triangles": 1208,
+      "vertices": 636,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.7099885940551758,
+          -1,
+          -1.5608159303665161
+        ],
+        "max": [
+          1.7099885940551758,
+          1.0000488758087158,
+          1.5608552694320679
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "c84de0742252db4ba2c0da37b9ca9c4422b62193b8f428f2ba1482fd816b02fc"
+    },
+    {
+      "filename": "planet-ring.glb",
+      "bytes": 12236,
+      "MB": 0.012236,
+      "triangles": 3376,
+      "vertices": 1752,
+      "materials": 1,
+      "meshes": 1,
+      "textures": [],
+      "skins": [],
+      "animations": [],
+      "bounds": {
+        "min": [
+          -1.7099885940551758,
+          -1,
+          -1.5608159303665161
+        ],
+        "max": [
+          1.7099885940551758,
+          1.0000488758087158,
+          1.5608552694320679
+        ]
+      },
+      "boundsSpace": "Default node pose / guard bind surface",
+      "anchors": {},
+      "missingAnchors": [],
+      "dracoRequired": true,
+      "everyPrimitiveDraco": true,
+      "nonFinite": 0,
+      "badNormals": 0,
+      "badWeights": 0,
+      "maxWeightError": 0,
+      "validator": {
+        "packed": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            },
+            {
+              "code": "UNUSED_OBJECT",
+              "message": "This object may be unused.",
+              "severity": 2,
+              "pointer": "/bufferViews/0"
+            }
+          ]
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0,
+          "messages": []
+        }
+      },
+      "sha256": "e3415587cb63420193f21968c78663c61cbce6b3123da8181bc3c5ac5b330eda"
+    }
+  ],
+  "failures": []
+}

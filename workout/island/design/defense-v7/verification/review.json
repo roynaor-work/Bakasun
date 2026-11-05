@@ -1,0 +1,568 @@
+{
+  "generatedUTC": "2026-11-04T23:49:54.924070+00:00",
+  "reviewSHA256": "5a507aea33b4cdc62d878185104bab8eee868850365ff80e2651a4fbd54f71a1",
+  "transport": "Local loopback static server; no external origins. Main single-file offline test is recorded separately.",
+  "checks": [
+    {
+      "scene": "space",
+      "viewport": "390x844",
+      "distance": "near",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "390x844",
+      "distance": "near",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "390x844",
+      "distance": "far",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "390x844",
+      "distance": "far",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "844x390",
+      "distance": "near",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "844x390",
+      "distance": "near",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "844x390",
+      "distance": "far",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "space",
+      "viewport": "844x390",
+      "distance": "far",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "390x844",
+      "distance": "near",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "390x844",
+      "distance": "near",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "390x844",
+      "distance": "far",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "390x844",
+      "distance": "far",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "id": "right-image",
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "844x390",
+      "distance": "near",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "844x390",
+      "distance": "near",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "844x390",
+      "distance": "far",
+      "light": "day",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    },
+    {
+      "scene": "farm",
+      "viewport": "844x390",
+      "distance": "far",
+      "light": "night",
+      "images": [
+        {
+          "id": "left-image",
+          "width": 844,
+          "height": 390
+        },
+        {
+          "id": "right-image",
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "studioImages": [
+    {
+      "src": "verification/studio/alarm-bell-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alarm-bell-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alarm-bell-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-beetle-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-beetle-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-beetle-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-boss-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-boss-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-boss-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-carrier-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-carrier-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-carrier-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-harvester-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-harvester-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-harvester-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-manta-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-manta-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-manta-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-scout-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-scout-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/alien-scout-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/defender-plane-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/defender-plane-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/defender-plane-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-keeper-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-keeper-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-keeper-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-lookout-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-lookout-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-lookout-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-ranger-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-ranger-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/guard-ranger-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-amber-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-amber-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-amber-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-ash-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-ash-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-ash-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-striped-front.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-striped-rear.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    },
+    {
+      "src": "verification/studio/boar-striped-side.webp",
+      "width": 768,
+      "height": 768,
+      "pass": true
+    }
+  ],
+  "pass": true
+}
