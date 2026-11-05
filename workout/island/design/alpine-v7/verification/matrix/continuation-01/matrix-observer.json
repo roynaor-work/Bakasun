@@ -1,0 +1,696 @@
+{
+  "observedAt": "2026-11-05T01:08:38.294Z",
+  "startedAt": "2026-11-05T00:06:32.807Z",
+  "execution": {
+    "node": "v24.19.0",
+    "cpuAffinity": "0-2",
+    "cpuQuota": "400000 100000"
+  },
+  "toolSourceSHA256": "6c33eb217a3daabbd5c7aa3def82ccc85f1620b31e9669b1539dfdac7dbbdc9d",
+  "status": "incomplete",
+  "complete": false,
+  "cases": 285,
+  "expectedCases": 504,
+  "unfinishedFinalLine": false,
+  "checks": {
+    "current standalone matches independent package audit": true,
+    "journal source and exact run protocol": true,
+    "journal records CPU execution environment": true,
+    "launch tool source SHA remains current": true,
+    "journal and completed line counts agree within one atomic write": true,
+    "case count does not exceed 504": true,
+    "case identities are unique": true,
+    "ordered exact configuration prefix": true,
+    "every recorded case used at least ten seconds": true,
+    "all observed pixel ratios are 1.5": true,
+    "all cases use final frozen package": true,
+    "every recorded playback assertion passes": true,
+    "every recorded resource assertion passes": true,
+    "independent resource bounds": true,
+    "independent schema2 playback and end protocol": true,
+    "every prescribed image was captured": true,
+    "safe screenshot path 002": true,
+    "screenshot dimensions 002": true,
+    "safe screenshot path 006": true,
+    "screenshot dimensions 006": true,
+    "safe screenshot path 012": true,
+    "screenshot dimensions 012": true,
+    "safe screenshot path 016": true,
+    "screenshot dimensions 016": true,
+    "safe screenshot path 020": true,
+    "screenshot dimensions 020": true,
+    "safe screenshot path 026": true,
+    "screenshot dimensions 026": true,
+    "safe screenshot path 030": true,
+    "screenshot dimensions 030": true,
+    "safe screenshot path 034": true,
+    "screenshot dimensions 034": true,
+    "safe screenshot path 040": true,
+    "screenshot dimensions 040": true,
+    "safe screenshot path 044": true,
+    "screenshot dimensions 044": true,
+    "safe screenshot path 048": true,
+    "screenshot dimensions 048": true,
+    "safe screenshot path 054": true,
+    "screenshot dimensions 054": true,
+    "safe screenshot path 058": true,
+    "screenshot dimensions 058": true,
+    "safe screenshot path 062": true,
+    "screenshot dimensions 062": true,
+    "safe screenshot path 068": true,
+    "screenshot dimensions 068": true,
+    "safe screenshot path 072": true,
+    "screenshot dimensions 072": true,
+    "safe screenshot path 076": true,
+    "screenshot dimensions 076": true,
+    "safe screenshot path 082": true,
+    "screenshot dimensions 082": true,
+    "safe screenshot path 086": true,
+    "screenshot dimensions 086": true,
+    "safe screenshot path 090": true,
+    "screenshot dimensions 090": true,
+    "safe screenshot path 096": true,
+    "screenshot dimensions 096": true,
+    "safe screenshot path 100": true,
+    "screenshot dimensions 100": true,
+    "safe screenshot path 104": true,
+    "screenshot dimensions 104": true,
+    "safe screenshot path 110": true,
+    "screenshot dimensions 110": true,
+    "safe screenshot path 114": true,
+    "screenshot dimensions 114": true,
+    "safe screenshot path 118": true,
+    "screenshot dimensions 118": true,
+    "safe screenshot path 124": true,
+    "screenshot dimensions 124": true,
+    "safe screenshot path 128": true,
+    "screenshot dimensions 128": true,
+    "safe screenshot path 132": true,
+    "screenshot dimensions 132": true,
+    "safe screenshot path 138": true,
+    "screenshot dimensions 138": true,
+    "safe screenshot path 142": true,
+    "screenshot dimensions 142": true,
+    "safe screenshot path 146": true,
+    "screenshot dimensions 146": true,
+    "safe screenshot path 152": true,
+    "screenshot dimensions 152": true,
+    "safe screenshot path 156": true,
+    "screenshot dimensions 156": true,
+    "safe screenshot path 160": true,
+    "screenshot dimensions 160": true,
+    "safe screenshot path 166": true,
+    "screenshot dimensions 166": true,
+    "safe screenshot path 170": true,
+    "screenshot dimensions 170": true,
+    "safe screenshot path 174": true,
+    "screenshot dimensions 174": true,
+    "safe screenshot path 180": true,
+    "screenshot dimensions 180": true,
+    "safe screenshot path 184": true,
+    "screenshot dimensions 184": true,
+    "safe screenshot path 188": true,
+    "screenshot dimensions 188": true,
+    "safe screenshot path 194": true,
+    "screenshot dimensions 194": true,
+    "safe screenshot path 198": true,
+    "screenshot dimensions 198": true,
+    "safe screenshot path 202": true,
+    "screenshot dimensions 202": true,
+    "safe screenshot path 208": true,
+    "screenshot dimensions 208": true,
+    "safe screenshot path 212": true,
+    "screenshot dimensions 212": true,
+    "safe screenshot path 216": true,
+    "screenshot dimensions 216": true,
+    "safe screenshot path 222": true,
+    "screenshot dimensions 222": true,
+    "safe screenshot path 226": true,
+    "screenshot dimensions 226": true,
+    "safe screenshot path 230": true,
+    "screenshot dimensions 230": true,
+    "safe screenshot path 236": true,
+    "screenshot dimensions 236": true,
+    "safe screenshot path 240": true,
+    "screenshot dimensions 240": true,
+    "safe screenshot path 244": true,
+    "screenshot dimensions 244": true,
+    "safe screenshot path 250": true,
+    "screenshot dimensions 250": true,
+    "safe screenshot path 254": true,
+    "screenshot dimensions 254": true,
+    "safe screenshot path 258": true,
+    "screenshot dimensions 258": true,
+    "safe screenshot path 264": true,
+    "screenshot dimensions 264": true,
+    "safe screenshot path 268": true,
+    "screenshot dimensions 268": true,
+    "safe screenshot path 272": true,
+    "screenshot dimensions 272": true,
+    "safe screenshot path 278": true,
+    "screenshot dimensions 278": true,
+    "safe screenshot path 282": true,
+    "screenshot dimensions 282": true
+  },
+  "errors": [],
+  "lastCase": "285",
+  "lastConfiguration": {
+    "athlete": 1,
+    "view": "close",
+    "environment": "sunset",
+    "clip": "accelerate",
+    "time": 0,
+    "playing": true,
+    "detail": "auto"
+  },
+  "playback": {
+    "looping": 104,
+    "naturallyCompletedOneShots": 0,
+    "seekAssistedEndProbes": 181
+  },
+  "ranges": {
+    "geometries": {
+      "minimum": 76,
+      "maximum": 82
+    },
+    "textures": {
+      "minimum": 24,
+      "maximum": 26
+    },
+    "javascriptHeapBytes": {
+      "minimum": 56800000,
+      "maximum": 109000000
+    },
+    "observedFPS": {
+      "minimum": 0.07915901462858707,
+      "maximum": 1.7647577869938438
+    },
+    "cpuSubmissionMedianMilliseconds": {
+      "minimum": 1.200000001117587,
+      "maximum": 33.09999999962747
+    },
+    "elapsedSeconds": {
+      "minimum": 10.026,
+      "maximum": 20.096
+    },
+    "totalElapsedSeconds": {
+      "minimum": 10.029,
+      "maximum": 43.44
+    },
+    "maximumRAFGapMilliseconds": {
+      "minimum": 1150.699999999255,
+      "maximum": 12649.699999999255
+    }
+  },
+  "screenshots": [
+    {
+      "case": "002",
+      "file": "verification/matrix/002-390x844-sunset-0-close-carve_left.webp",
+      "bytes": 39948,
+      "sha256": "f1a5437880143efe79acbaa4fb28c4e003985d4dcea281ad86082a54a50f3938",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "006",
+      "file": "verification/matrix/006-390x844-sunset-0-close-ramp_jump.webp",
+      "bytes": 55674,
+      "sha256": "7d75cf92cf8d94afb58010b503a074fb21779e647f5b614d6fe2db313dd65c88",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "012",
+      "file": "verification/matrix/012-390x844-sunset-0-close-fall_roll.webp",
+      "bytes": 38664,
+      "sha256": "7059ce6a13365b1ebb01fe3ba56b5cdcffb282730801b38d5ba7d63b88e055cf",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "016",
+      "file": "verification/matrix/016-390x844-sunset-0-wide-carve_left.webp",
+      "bytes": 40104,
+      "sha256": "f11c01bcfcc2a2ea93ecfe0ebc06ecd3d177978f2fa2fe4a27740a4dc7f5affa",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "020",
+      "file": "verification/matrix/020-390x844-sunset-0-wide-ramp_jump.webp",
+      "bytes": 49246,
+      "sha256": "88a76e668886e258ce943084a09fd5c0d694bee605e66472978b580c2fdab07e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "026",
+      "file": "verification/matrix/026-390x844-sunset-0-wide-fall_roll.webp",
+      "bytes": 38970,
+      "sha256": "22e3c0833db37291fd5f5bcf4912d641077596aa253a4146189c1dbc8b665cca",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "030",
+      "file": "verification/matrix/030-390x844-sunset-1-close-carve_left.webp",
+      "bytes": 38740,
+      "sha256": "4f6b58f8f1f145e05d4f53c73b1ef301aed57bbb2fe1d99ca031e792b7ea2ebf",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "034",
+      "file": "verification/matrix/034-390x844-sunset-1-close-ramp_jump.webp",
+      "bytes": 56034,
+      "sha256": "e06056b481594832d1912f8895c88065902fdac5a4350ceef86cce80c6706ef8",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "040",
+      "file": "verification/matrix/040-390x844-sunset-1-close-fall_roll.webp",
+      "bytes": 37522,
+      "sha256": "ab7c2e81bae45a875a86a9deb5d54f44e2e1f5a0dcaa07db92af69ad9cd1da15",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "044",
+      "file": "verification/matrix/044-390x844-sunset-1-wide-carve_left.webp",
+      "bytes": 40052,
+      "sha256": "a98fc165a35f993163aa59e4f79902543e614ac6bacbe722588881bf20c019bb",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "048",
+      "file": "verification/matrix/048-390x844-sunset-1-wide-ramp_jump.webp",
+      "bytes": 49112,
+      "sha256": "91efd54f9c4c76081365e9709601416cb5915968b388a281115dae8c8b921663",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "054",
+      "file": "verification/matrix/054-390x844-sunset-1-wide-fall_roll.webp",
+      "bytes": 39424,
+      "sha256": "d906fa8ebdc1c1e082ad80b88ffcf735172e074d4cf33da0aaf67568f74727da",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "058",
+      "file": "verification/matrix/058-390x844-sunset-2-close-carve_left.webp",
+      "bytes": 39072,
+      "sha256": "d336900ed9e14ec8d8e5a1f73b680d18a3d23258aebc6e087c2e0cae86363e01",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "062",
+      "file": "verification/matrix/062-390x844-sunset-2-close-ramp_jump.webp",
+      "bytes": 55284,
+      "sha256": "1c871b95b9dae461a5145de62b90049f0fe2b40d69293746a9a5e574988e1a83",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "068",
+      "file": "verification/matrix/068-390x844-sunset-2-close-fall_roll.webp",
+      "bytes": 37946,
+      "sha256": "e946c5607c9080c39ec05834c04914be92261ee887b846a3945b67f57e472c9b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "072",
+      "file": "verification/matrix/072-390x844-sunset-2-wide-carve_left.webp",
+      "bytes": 39690,
+      "sha256": "2fdb7bfa115de3c82967dd91e49fa886372882954279aa56c37cfc3e29443827",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "076",
+      "file": "verification/matrix/076-390x844-sunset-2-wide-ramp_jump.webp",
+      "bytes": 49020,
+      "sha256": "38821c991244b57f9544c79b6e6d99c2db7e0af4af29b92d78dae07963991efe",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "082",
+      "file": "verification/matrix/082-390x844-sunset-2-wide-fall_roll.webp",
+      "bytes": 38648,
+      "sha256": "0b0817cbc98f361c032459eec554d0fdc7e33c056cbf3bf1ebd5076ab62fd938",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "086",
+      "file": "verification/matrix/086-390x844-fog-0-close-carve_left.webp",
+      "bytes": 36666,
+      "sha256": "cdf2adf1d4d5083f8719e2660b4773812a1ec0929f3a95084c89fbbb5ba683a0",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "090",
+      "file": "verification/matrix/090-390x844-fog-0-close-ramp_jump.webp",
+      "bytes": 52392,
+      "sha256": "d5bcf6a6005b14f0dc1668291dde8a93338e160d62dbd998eb7b1946aba5aa85",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "096",
+      "file": "verification/matrix/096-390x844-fog-0-close-fall_roll.webp",
+      "bytes": 35184,
+      "sha256": "69488a652bae8c03c24930e3f5d9e17728acde2cba80af56e9e0b6b9f048ee29",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "100",
+      "file": "verification/matrix/100-390x844-fog-0-wide-carve_left.webp",
+      "bytes": 31834,
+      "sha256": "5dfd895d9f8ee9c61933dc5a96b127a7db1d1f3661db3065f02e35bad8cea040",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "104",
+      "file": "verification/matrix/104-390x844-fog-0-wide-ramp_jump.webp",
+      "bytes": 39714,
+      "sha256": "f343e598524213d93d1b5fbe75fa1a215bc2f23f8f1fb370daf9e645424e2e29",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "110",
+      "file": "verification/matrix/110-390x844-fog-0-wide-fall_roll.webp",
+      "bytes": 31362,
+      "sha256": "d7cb6b61facfe0c0a11b5c2fe751a7e16f43bb48bc9d9fcc742255cd5c5eb168",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "114",
+      "file": "verification/matrix/114-390x844-fog-1-close-carve_left.webp",
+      "bytes": 35636,
+      "sha256": "ab54a695c6cabf7969c5928f2e0d41c04ceb19be9d55b45a0b177bb773b30875",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "118",
+      "file": "verification/matrix/118-390x844-fog-1-close-ramp_jump.webp",
+      "bytes": 52674,
+      "sha256": "3ba36e4ca08e077742de4a5c7d5acf924accc7e1f80870f94e557bd1c4b6142c",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "124",
+      "file": "verification/matrix/124-390x844-fog-1-close-fall_roll.webp",
+      "bytes": 34502,
+      "sha256": "762dcd18a60fd0fab52ce39ccdce7c4c069dae1cbf9974745f43192a7664465f",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "128",
+      "file": "verification/matrix/128-390x844-fog-1-wide-carve_left.webp",
+      "bytes": 31886,
+      "sha256": "a184c346e432f54ce170029df8122827ca3581b2f257f6d925e10b3bf1a1247a",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "132",
+      "file": "verification/matrix/132-390x844-fog-1-wide-ramp_jump.webp",
+      "bytes": 39548,
+      "sha256": "a99e6035a9c13c31c921bb7e91e8cdd93ae2d00deab160b07ebc4274427ac03b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "138",
+      "file": "verification/matrix/138-390x844-fog-1-wide-fall_roll.webp",
+      "bytes": 31108,
+      "sha256": "10c7f29c9f5cf059b541fc85168577b1209b0cb09371b041297f3038f54cd1c6",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "142",
+      "file": "verification/matrix/142-390x844-fog-2-close-carve_left.webp",
+      "bytes": 35512,
+      "sha256": "2ce5aba20d8a5cd4b9744305ad13c9c33e8d524790ccabc5184e6b7670ac7cf7",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "146",
+      "file": "verification/matrix/146-390x844-fog-2-close-ramp_jump.webp",
+      "bytes": 51626,
+      "sha256": "08f0d1701263e294cd786c7856bc088ed865151ce1f3f5f3524b67453d9c223e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "152",
+      "file": "verification/matrix/152-390x844-fog-2-close-fall_roll.webp",
+      "bytes": 34392,
+      "sha256": "8de1ce2789de601b89d585036fd420f6d51e70b342f00decb9af6c5fde75b9f2",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "156",
+      "file": "verification/matrix/156-390x844-fog-2-wide-carve_left.webp",
+      "bytes": 31754,
+      "sha256": "60edcf66aedc8ba330b801badc154605b3c1c9a694deeb955571d132ed575563",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "160",
+      "file": "verification/matrix/160-390x844-fog-2-wide-ramp_jump.webp",
+      "bytes": 39422,
+      "sha256": "db86bca70b7d3f258e33f5a5b8640bdb112dec6fc0e28126a00f50e278ac5c0c",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "166",
+      "file": "verification/matrix/166-390x844-fog-2-wide-fall_roll.webp",
+      "bytes": 31058,
+      "sha256": "c57aa22287ce3744cb54e1cef18ca693b70db24d70503bbebe27c23bb26e7960",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "170",
+      "file": "verification/matrix/170-390x844-night-floodlit-0-close-carve_left.webp",
+      "bytes": 42018,
+      "sha256": "87e64c7554012dc057b5fe410f9620a5a5e30601885f3af0e6d2aea20315e2ee",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "174",
+      "file": "verification/matrix/174-390x844-night-floodlit-0-close-ramp_jump.webp",
+      "bytes": 53522,
+      "sha256": "b6163417a8584f40a3f761513123e86a4ea1f15f2092dd409a7b9a24ffacce3e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "180",
+      "file": "verification/matrix/180-390x844-night-floodlit-0-close-fall_roll.webp",
+      "bytes": 40178,
+      "sha256": "84c70adca70c186c093f6ad6dbdf07edcc6d85d15ea8d4fdc88a492a7576a41c",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "184",
+      "file": "verification/matrix/184-390x844-night-floodlit-0-wide-carve_left.webp",
+      "bytes": 40320,
+      "sha256": "2f57656a2c821fd0f81849a1be126a22ede6141865fdaf82258e1012ce001fbc",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "188",
+      "file": "verification/matrix/188-390x844-night-floodlit-0-wide-ramp_jump.webp",
+      "bytes": 48958,
+      "sha256": "c90eebe570f68c64631eacb45a19c5046c5d70daa9f128e6c2d1c0a6185313f6",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "194",
+      "file": "verification/matrix/194-390x844-night-floodlit-0-wide-fall_roll.webp",
+      "bytes": 39758,
+      "sha256": "c07f4f4128d9d6720d6a364034288e1315383a7ebe6f4ae75175bd3c11a449f2",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "198",
+      "file": "verification/matrix/198-390x844-night-floodlit-1-close-carve_left.webp",
+      "bytes": 40478,
+      "sha256": "d1c779376d36ae11844229be1efa1fedd2eadaa7f726f39b06cc2e4e38589b3b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "202",
+      "file": "verification/matrix/202-390x844-night-floodlit-1-close-ramp_jump.webp",
+      "bytes": 54088,
+      "sha256": "8013e0a62a833663eeb714d234bb900870fff0dc0b396f591a27759c27c37d46",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "208",
+      "file": "verification/matrix/208-390x844-night-floodlit-1-close-fall_roll.webp",
+      "bytes": 39346,
+      "sha256": "7e65e4be1814b0bfb9a1404b7a90a9eb76f2be6b7dc88ad665609367537c5304",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "212",
+      "file": "verification/matrix/212-390x844-night-floodlit-1-wide-carve_left.webp",
+      "bytes": 40084,
+      "sha256": "7ff663e89031b0be1c60297ff31a6b834eae58e5e18fb7f4ab9daf30de3d3011",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "216",
+      "file": "verification/matrix/216-390x844-night-floodlit-1-wide-ramp_jump.webp",
+      "bytes": 48976,
+      "sha256": "73c4e1f49c06820fced71509e8716d0030ef713d1f82f0a2e7892e44d9e48a76",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "222",
+      "file": "verification/matrix/222-390x844-night-floodlit-1-wide-fall_roll.webp",
+      "bytes": 39542,
+      "sha256": "0651c64cc25e61689446fdae57c7735a42fa69abb159b3e3e8663f694a10ca70",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "226",
+      "file": "verification/matrix/226-390x844-night-floodlit-2-close-carve_left.webp",
+      "bytes": 41670,
+      "sha256": "60aaa46acf510b1a56268280d81df8d51f1fab637a3e57e00283691897c680c9",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "230",
+      "file": "verification/matrix/230-390x844-night-floodlit-2-close-ramp_jump.webp",
+      "bytes": 53702,
+      "sha256": "382512661d63a284980d63b69ecc95ec2c6134a9f58b0b4c4d3e4a5f499bcc47",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "236",
+      "file": "verification/matrix/236-390x844-night-floodlit-2-close-fall_roll.webp",
+      "bytes": 39924,
+      "sha256": "8c3dc3299fcd800b400fc01f3fb99fb7f47a564f30133c29db459b3c8c03a7fd",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "240",
+      "file": "verification/matrix/240-390x844-night-floodlit-2-wide-carve_left.webp",
+      "bytes": 39910,
+      "sha256": "c036b63749caa38ffc8c0413cd023768beed4d3831f602bfedf5d52fb6b84aa8",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "244",
+      "file": "verification/matrix/244-390x844-night-floodlit-2-wide-ramp_jump.webp",
+      "bytes": 48824,
+      "sha256": "839fcfc7d224c2c926ebd60e911e0445a40fe70ce1230a0fcf36446ed4975bc7",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "250",
+      "file": "verification/matrix/250-390x844-night-floodlit-2-wide-fall_roll.webp",
+      "bytes": 39640,
+      "sha256": "cd9bc62a68c5822ec8cd9f6951239f542c1e685ae282b8de1976b38b7399515c",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "254",
+      "file": "verification/matrix/254-844x390-sunset-0-close-carve_left.webp",
+      "bytes": 53360,
+      "sha256": "2e2ed2ee8fd9b0eca809987eb0cfe34514a71107c4bea6605daa51ba62a35992",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "258",
+      "file": "verification/matrix/258-844x390-sunset-0-close-ramp_jump.webp",
+      "bytes": 53098,
+      "sha256": "75fdddeafdb4d31a1376d5d5343fb7d7103c4f4dd4704d11ba07d7e1e09b3247",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "264",
+      "file": "verification/matrix/264-844x390-sunset-0-close-fall_roll.webp",
+      "bytes": 52670,
+      "sha256": "4a2f4a1f00618029dcddf225acda5e37197bf15d7482f11c33d2b0cfadb75cb9",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "268",
+      "file": "verification/matrix/268-844x390-sunset-0-wide-carve_left.webp",
+      "bytes": 46772,
+      "sha256": "5dee5c27a3c7a27cb896aefed99b300e77167a315ae50546197b326b07cab7d7",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "272",
+      "file": "verification/matrix/272-844x390-sunset-0-wide-ramp_jump.webp",
+      "bytes": 56972,
+      "sha256": "086a8fc2531beca212811847a61a3d02ae51361b5c6faa8ba2f8f23580529dae",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "278",
+      "file": "verification/matrix/278-844x390-sunset-0-wide-fall_roll.webp",
+      "bytes": 46614,
+      "sha256": "36a37be5934d3ce1b36cb4b8901e805bcedec2c6f9ae0d87f38bf184bf608efb",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "case": "282",
+      "file": "verification/matrix/282-844x390-sunset-1-close-carve_left.webp",
+      "bytes": 53224,
+      "sha256": "8e809ff72d677b6c98ea4d31ac70dba960fc177fef7a617575fe90f3053ec8ab",
+      "width": 844,
+      "height": 390
+    }
+  ],
+  "limitations": "CPU-only review of persisted observations and image files; no browser launch, GPU work or physical-phone performance claim. Ten-second playback is distinct from optional seek-assisted completion."
+}

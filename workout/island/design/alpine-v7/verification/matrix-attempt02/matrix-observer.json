@@ -1,0 +1,171 @@
+{
+  "observedAt": "2026-11-04T23:12:10.880Z",
+  "status": "incomplete",
+  "complete": false,
+  "cases": 47,
+  "expectedCases": 504,
+  "unfinishedFinalLine": false,
+  "checks": {
+    "current standalone matches independent package audit": true,
+    "case count does not exceed 504": true,
+    "case identities are unique": true,
+    "ordered exact configuration prefix": true,
+    "every recorded case used at least ten seconds": true,
+    "all observed pixel ratios are 1.5": true,
+    "all cases use final frozen package": true,
+    "every recorded playback assertion passes": true,
+    "every recorded resource assertion passes": true,
+    "independent resource bounds": true,
+    "independent schema2 playback and end protocol": true,
+    "every prescribed image was captured": true,
+    "safe screenshot path 002": true,
+    "screenshot dimensions 002": true,
+    "safe screenshot path 006": true,
+    "screenshot dimensions 006": true,
+    "safe screenshot path 012": true,
+    "screenshot dimensions 012": true,
+    "safe screenshot path 016": true,
+    "screenshot dimensions 016": true,
+    "safe screenshot path 020": true,
+    "screenshot dimensions 020": true,
+    "safe screenshot path 026": true,
+    "screenshot dimensions 026": true,
+    "safe screenshot path 030": true,
+    "screenshot dimensions 030": true,
+    "safe screenshot path 034": true,
+    "screenshot dimensions 034": true,
+    "safe screenshot path 040": true,
+    "screenshot dimensions 040": true,
+    "safe screenshot path 044": true,
+    "screenshot dimensions 044": true
+  },
+  "errors": [],
+  "lastCase": "047",
+  "lastConfiguration": {
+    "athlete": 1,
+    "view": "wide",
+    "environment": "sunset",
+    "clip": "accelerate",
+    "time": 0,
+    "playing": true,
+    "detail": "auto"
+  },
+  "playback": {
+    "looping": 19,
+    "naturallyCompletedOneShots": 0,
+    "seekAssistedEndProbes": 28
+  },
+  "ranges": {
+    "geometries": {
+      "minimum": 76,
+      "maximum": 79
+    },
+    "textures": {
+      "minimum": 24,
+      "maximum": 24
+    },
+    "javascriptHeapBytes": {
+      "minimum": 76600000,
+      "maximum": 76600000
+    },
+    "observedFPS": {
+      "minimum": 0.11561228264890853,
+      "maximum": 1.9355463079454394
+    },
+    "cpuSubmissionMedianMilliseconds": {
+      "minimum": 1.5,
+      "maximum": 185
+    },
+    "elapsedSeconds": {
+      "minimum": 10.043,
+      "maximum": 17.687
+    },
+    "totalElapsedSeconds": {
+      "minimum": 10.055,
+      "maximum": 17.691
+    }
+  },
+  "screenshots": [
+    {
+      "case": "002",
+      "file": "verification/matrix/002-390x844-sunset-0-close-carve_left.webp",
+      "bytes": 39638,
+      "sha256": "17b61b79c796b2c6d31b2a94157b3968148a72b23746fe3da7a2ea576c32d347",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "006",
+      "file": "verification/matrix/006-390x844-sunset-0-close-ramp_jump.webp",
+      "bytes": 55674,
+      "sha256": "7d75cf92cf8d94afb58010b503a074fb21779e647f5b614d6fe2db313dd65c88",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "012",
+      "file": "verification/matrix/012-390x844-sunset-0-close-fall_roll.webp",
+      "bytes": 39656,
+      "sha256": "ff70e1d6e8ac39a1f712f7fc2dff9ccbacea1ce9820c9e14734602eae9953796",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "016",
+      "file": "verification/matrix/016-390x844-sunset-0-wide-carve_left.webp",
+      "bytes": 40056,
+      "sha256": "d443deef11030544bc26caf1350cc9e1845f0257b4f8269ec5877ca12b94a7b1",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "020",
+      "file": "verification/matrix/020-390x844-sunset-0-wide-ramp_jump.webp",
+      "bytes": 49246,
+      "sha256": "88a76e668886e258ce943084a09fd5c0d694bee605e66472978b580c2fdab07e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "026",
+      "file": "verification/matrix/026-390x844-sunset-0-wide-fall_roll.webp",
+      "bytes": 38970,
+      "sha256": "22e3c0833db37291fd5f5bcf4912d641077596aa253a4146189c1dbc8b665cca",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "030",
+      "file": "verification/matrix/030-390x844-sunset-1-close-carve_left.webp",
+      "bytes": 38682,
+      "sha256": "7e96f2724529417424887efdf5b964220b5a50323920a702335ec2791e308fa9",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "034",
+      "file": "verification/matrix/034-390x844-sunset-1-close-ramp_jump.webp",
+      "bytes": 56034,
+      "sha256": "e06056b481594832d1912f8895c88065902fdac5a4350ceef86cce80c6706ef8",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "040",
+      "file": "verification/matrix/040-390x844-sunset-1-close-fall_roll.webp",
+      "bytes": 38706,
+      "sha256": "395137f89b9b783f59e4aad466345662220fd00d7fcdbe84d54cb809bf2800ba",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "044",
+      "file": "verification/matrix/044-390x844-sunset-1-wide-carve_left.webp",
+      "bytes": 40032,
+      "sha256": "c35dfc7aa50716bf97fd18599017937d0e5b6862644aa927f0b290201d9f094f",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "limitations": "CPU-only review of persisted observations and image files; no browser launch, GPU work or physical-phone performance claim. Ten-second playback is distinct from optional seek-assisted completion."
+}

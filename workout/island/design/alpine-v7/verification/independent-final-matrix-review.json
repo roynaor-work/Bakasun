@@ -1,0 +1,220 @@
+{
+  "status": "passed",
+  "startedAt": "2026-11-05T00:06:32.807Z",
+  "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+  "sourceHTMLSHA256": "7ca632790d23dffa8bda9e4d054a625317fad296a4541c1ac6426a9b96fec6e5",
+  "execution": {
+    "node": "v24.19.0",
+    "cpuAffinity": "0-2",
+    "cpuQuota": "400000 100000"
+  },
+  "method": "Independent viewing of images already saved by the sole rendering browser; no additional browser or GPU session.",
+  "reviews": [
+    {
+      "reviewedAt": "2026-11-05T00:10:44.740Z",
+      "images": [
+        {
+          "file": "verification/matrix/012-390x844-sunset-0-close-fall_roll.webp",
+          "sha256": "7059ce6a13365b1ebb01fe3ba56b5cdcffb282730801b38d5ba7d63b88e055cf"
+        }
+      ],
+      "notes": "Male skier portrait close fall end: complete equipment and hands visible above athlete controls, no clipping or shader dropout. This is the fresh CPU-affinity0-2 run."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:17:37.525Z",
+      "images": [
+        {
+          "file": "verification/matrix/040-390x844-sunset-1-close-fall_roll.webp",
+          "sha256": "ab7c2e81bae45a875a86a9deb5d54f44e2e1f5a0dcaa07db92af69ad9cd1da15"
+        }
+      ],
+      "notes": "Board rider close portrait fall end in the fresh CPU0-2 run: palm/forearm remain fully visible above athlete panel; no frame clipping or material dropout. Independent51-case checkpoint passes all source, viewport, trace and resource gates."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:24:59.516Z",
+      "images": [
+        {
+          "file": "verification/matrix/086-390x844-fog-0-close-carve_left.webp",
+          "sha256": "cdf2adf1d4d5083f8719e2660b4773812a1ec0929f3a95084c89fbbb5ba683a0"
+        }
+      ],
+      "notes": "First fog group: coherent cool background/fog, readable skier carving and equipment; no shader/material dropout or UI occlusion. Independent88-case checkpoint passes; geometry76-79 and textures24-25 reflect the additional environment texture."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:32:53.275Z",
+      "images": [
+        {
+          "file": "verification/matrix/114-390x844-fog-1-close-carve_left.webp",
+          "sha256": "ab54a695c6cabf7969c5928f2e0d41c04ceb19be9d55b45a0b177bb773b30875"
+        },
+        {
+          "file": "verification/matrix/124-390x844-fog-1-close-fall_roll.webp",
+          "sha256": "762dcd18a60fd0fab52ce39ccdce7c4c069dae1cbf9974745f43192a7664465f"
+        }
+      ],
+      "notes": "Quarter-run126-case checkpoint: all independent gates pass, geometry76-79/textures24-25. Fog snowboard carve reads as toe/heel loading with connected boots/board; assisted-end fall hand remains clear of controls. No material/shader dropout."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:42:24.191Z",
+      "images": [
+        {
+          "file": "verification/matrix/170-390x844-night-floodlit-0-close-carve_left.webp",
+          "sha256": "87e64c7554012dc057b5fe410f9620a5a5e30601885f3af0e6d2aea20315e2ee"
+        }
+      ],
+      "notes": "First night group: cool mountain backdrop and actual spotlight pool remain coherent; skier silhouette, helmet, skis and pole tips are readable without shader dropout. Independent174-case checkpoint passes; geometry76-82/textures24-26 after night resources load."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:49:46.444Z",
+      "images": [
+        {
+          "file": "verification/matrix/184-390x844-night-floodlit-0-wide-carve_left.webp",
+          "sha256": "2f57656a2c821fd0f81849a1be126a22ede6141865fdaf82258e1012ce001fbc"
+        },
+        {
+          "file": "verification/matrix/208-390x844-night-floodlit-1-close-fall_roll.webp",
+          "sha256": "7e65e4be1814b0bfb9a1404b7a90a9eb76f2be6b7dc88ad665609367537c5304"
+        }
+      ],
+      "notes": "Night wide skier and close board fall: coherent light pool, readable silhouettes and contact shadow; hands clear of athlete controls and full gear retained. Independent210-case checkpoint passes; GPU resource counts remain bounded at82 geometries/26 textures."
+    },
+    {
+      "reviewedAt": "2026-11-05T00:59:31.304Z",
+      "images": [
+        {
+          "file": "verification/matrix/254-844x390-sunset-0-close-carve_left.webp",
+          "sha256": "2e2ed2ee8fd9b0eca809987eb0cfe34514a71107c4bea6605daa51ba62a35992"
+        }
+      ],
+      "notes": "Half-run252portrait cases completed and first4landscape cases pass. Both baselines match source10/DPR1.5; landscape actual viewport844x390 and drawing buffer1266x585 independently verified. Landscape carve image has clear separated controls, full body and equipment, coherent world."
+    },
+    {
+      "reviewedAt": "2026-11-05T01:24:20.561Z",
+      "images": [
+        {
+          "file": "verification/matrix/286-844x390-sunset-1-close-ramp_jump.webp",
+          "sha256": "26b8f6f2f9e3778d7bbf3fe711709a7622712cf9bef3cf81ed0fd1fc5c7d9eec"
+        },
+        {
+          "file": "verification/matrix/292-844x390-sunset-1-close-fall_roll.webp",
+          "sha256": "f90eead0402de7f48e3a02b5b3801b4ea593343ce881e30dac0eefea65fde2da"
+        }
+      ],
+      "notes": "Continuation images286 landing and292 fall: full board rider/equipment, clear athlete controls and consistent sunset scene. These are fresh captures after full replay; original285 records and61 images remain unchanged. Main296 plus33replay currently passes."
+    },
+    {
+      "reviewedAt": "2026-11-05T01:34:36.346Z",
+      "images": [
+        {
+          "file": "verification/matrix/338-844x390-fog-0-close-carve_left.webp",
+          "sha256": "6fc62510929401468feab9b61526b49c950d6422a5076ac2cf846b46c81ed968"
+        }
+      ],
+      "notes": "Landscape fog group: skier, skis and poles remain separated from controls and readable against coherent fog/mountains. Main345 plus33replay passes independent source/segment/prefix/image/protocol checks; resource maximum remains82 geometries/26 textures."
+    },
+    {
+      "reviewedAt": "2026-11-05T01:46:22.893Z",
+      "images": [
+        {
+          "file": "verification/matrix/376-844x390-fog-1-close-fall_roll.webp",
+          "sha256": "ecc81f95d104321260b6eed235fe6d43ca811c3c010d532ab8ca7de54e3a2312"
+        }
+      ],
+      "notes": "Three-quarter checkpoint379main+33replay independently passes. Fog board fall remains fully visible to the right of controls, with connected gear and coherent materials. Severe software delays are recorded (maximum observed RAF gap32.06s); no phone-performance inference is made. No continuation capture retry has failed so far."
+    },
+    {
+      "reviewedAt": "2026-11-05T01:56:53.170Z",
+      "images": [
+        {
+          "file": "verification/matrix/422-844x390-night-floodlit-0-close-carve_left.webp",
+          "sha256": "d0c8552a891f193fd575bb6467970636dee68ca6db0f958f8e706c254f8ff165"
+        }
+      ],
+      "notes": "Landscape night group: spotlight pool and cool forest/background are coherent; full skier/gear remain visible and separated from controls/headline. Main429 plus33replay passes independent continuation and protocol gates; maximum85 geometries/26 textures remains bounded."
+    },
+    {
+      "reviewedAt": "2026-11-05T02:05:31.145Z",
+      "images": [
+        {
+          "file": "verification/matrix/460-844x390-night-floodlit-1-close-fall_roll.webp",
+          "sha256": "20687b2646b2377d30a5ca3f596f69b65cafc05ab7e5464e213605aaa9aafa09"
+        }
+      ],
+      "notes": "Late landscape night board fall: full body/board and visible palm clear of controls; coherent spotlight/contact shadow and no shader dropout. Current controller remains unchanged."
+    },
+    {
+      "reviewedAt": "2026-11-05T02:09:29.300Z",
+      "images": [
+        {
+          "file": "verification/matrix/488-844x390-night-floodlit-2-close-fall_roll.webp",
+          "sha256": "28b37f73c04a6717ef6531b8591e1931a27ccb76a14a286c35496ec56c10e648"
+        }
+      ],
+      "notes": "Final athlete landscape close night fall: ivory coat/green trousers and tan skis stay readable, hands/poles fully inside frame and clear of controls; no material/shader dropout."
+    },
+    {
+      "reviewedAt": "2026-11-05T02:14:58.305Z",
+      "images": [
+        {
+          "file": "verification/matrix/502-844x390-night-floodlit-2-wide-fall_roll.webp",
+          "sha256": "33e4d8617093ef362cda84f913cd703d426f1c245d32c8453840452fdca7983f"
+        }
+      ],
+      "notes": "Final far landscape night fall: full skier/equipment remain inside the scene, coherent spotlights and forest, no shader or material dropout."
+    }
+  ],
+  "continuation": {
+    "resumedAt": "2026-11-05T01:14:23.420Z",
+    "completedPrefix": 285,
+    "replayCases": 33,
+    "sourceSegments": [
+      {
+        "index": 1,
+        "firstCase": 1,
+        "lastCase": 285,
+        "startedAt": "2026-11-05T00:06:32.807Z",
+        "lastCheckpointAt": "2026-11-05T01:05:28.907Z",
+        "sourceFile": "verification/matrix/continuation-01/controller.mjs",
+        "toolSourceSHA256": "6c33eb217a3daabbd5c7aa3def82ccc85f1620b31e9669b1539dfdac7dbbdc9d"
+      },
+      {
+        "index": 2,
+        "firstCase": 286,
+        "lastCase": 504,
+        "startedAt": "2026-11-05T01:14:23.420Z",
+        "sourceFile": "verification/matrix/controller-02.mjs",
+        "toolSourceSHA256": "5dfce9b27d0f714302a725d84b5714bf94beddc05cff42bb9814532ec9200842"
+      }
+    ],
+    "preservedOriginalImages": 61,
+    "reason": "Original30s screenshot timeout retained in continuation-01; full33-case replay and source/prefix/image checks passed before new cases resumed."
+  },
+  "completedAt": "2026-11-05T02:14:58.334Z",
+  "matrixCompletedAt": "2026-11-05T02:12:39.303Z",
+  "summary": {
+    "mainCases": 504,
+    "replayCases": 33,
+    "mainImages": 108,
+    "replayImages": 7,
+    "selectedImagesVisuallyReviewed": 17,
+    "mainLoopCases": 180,
+    "mainSeekAssistedEndProbes": 324,
+    "naturalMainOneShotEnds": 0,
+    "originalCaptureTimeoutsPreserved": 1,
+    "laterCaptureAttemptsFailed": 0,
+    "browserErrors": 0,
+    "externalRequests": 0,
+    "maxGeometries": 85,
+    "maxTextures": 26,
+    "campaignMinutes": 126.10826666666667,
+    "recordedObservationMinutes": 92.77773499999975,
+    "physicalPhone30FPSVerified": false
+  },
+  "finalChecks": {
+    "independentObserverPassed": true,
+    "controllerAndReplayEvidencePassed": true,
+    "allSelectedImageHashesMatch": true,
+    "galleryCompleteAndSourceHashMatches": true,
+    "galleryInlineScriptSyntaxValid": true
+  }
+}

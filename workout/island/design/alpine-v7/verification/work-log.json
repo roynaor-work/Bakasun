@@ -1,0 +1,118 @@
+{
+  "startedAt": "2026-11-04T20:09:27.000Z",
+  "completedAt": "2026-11-05T02:15:15.854255Z",
+  "minimumDurationMinutes": 120,
+  "scope": "New files only under workout/island/design/alpine-v7",
+  "branch": "codex/alpine-v7-20261105",
+  "acceptance": "At least six render/critique/correct rounds, all six visual categories scored honestly, measured GLB/texture/skeleton/offline checks, draft PR only",
+  "note": "Timestamps are actual UTC tool-clock/environment observations. The requested20261105 branch suffix is preserved. completedAt records asset/QA preparation completion before the Git delivery steps.",
+  "rounds": [
+    {
+      "id": "01",
+      "startedAt": "2026-11-04T20:22:29.885Z",
+      "finishedAt": "2026-11-04T20:23:51.238Z",
+      "captures": 4,
+      "bundleBuiltAt": null
+    },
+    {
+      "id": "02",
+      "startedAt": "2026-11-04T20:25:40.492Z",
+      "finishedAt": "2026-11-04T20:26:12.371Z",
+      "captures": 4,
+      "bundleBuiltAt": "2026-11-04T20:25:37.688Z"
+    },
+    {
+      "id": "03",
+      "startedAt": "2026-11-04T20:29:47.681Z",
+      "finishedAt": "2026-11-04T20:30:22.829Z",
+      "captures": 4,
+      "bundleBuiltAt": "2026-11-04T20:29:44.055Z"
+    },
+    {
+      "id": "04",
+      "startedAt": "2026-11-04T20:43:35.323Z",
+      "finishedAt": "2026-11-04T20:44:17.724Z",
+      "captures": 4,
+      "bundleBuiltAt": "2026-11-04T20:43:30.912Z"
+    },
+    {
+      "id": "05",
+      "startedAt": "2026-11-04T21:06:15.277Z",
+      "finishedAt": "2026-11-04T21:07:00.767Z",
+      "captures": 4,
+      "bundleBuiltAt": "2026-11-04T21:06:11.676Z"
+    },
+    {
+      "id": "06",
+      "startedAt": "2026-11-04T21:28:36.186Z",
+      "finishedAt": "2026-11-04T21:29:19.630Z",
+      "captures": 4,
+      "bundleBuiltAt": "2026-11-04T21:28:15.233Z"
+    },
+    {
+      "id": "07",
+      "startedAt": "2026-11-04T21:38:58.073Z",
+      "finishedAt": "2026-11-04T21:41:33.653Z",
+      "captures": 28,
+      "bundleBuiltAt": "2026-11-04T21:38:54.970Z"
+    },
+    {
+      "id": "08",
+      "startedAt": "2026-11-04T22:25:41.105Z",
+      "finishedAt": "2026-11-04T22:26:58.321Z",
+      "captures": 28,
+      "bundleBuiltAt": "2026-11-04T22:25:36.729Z"
+    },
+    {
+      "id": "09",
+      "startedAt": "2026-11-04T23:17:12.424Z",
+      "finishedAt": "2026-11-04T23:18:00.077Z",
+      "captures": 28,
+      "bundleBuiltAt": "2026-11-04T23:17:09.242Z"
+    },
+    {
+      "id": "10",
+      "startedAt": "2026-11-04T23:25:44.977Z",
+      "finishedAt": "2026-11-04T23:27:16.820Z",
+      "captures": 34,
+      "bundleBuiltAt": "2026-11-04T23:25:42.006Z"
+    }
+  ],
+  "matrixAttempts": [
+    {
+      "directory": "verification/matrix-attempt01",
+      "stoppedAt": "2026-11-04T23:00:43.195599Z",
+      "status": "stopped partial attempt, not final proof",
+      "cases": 10
+    },
+    {
+      "directory": "verification/matrix-attempt02",
+      "stoppedAt": "2026-11-04T23:15:12.820274Z",
+      "status": "stopped partial attempt; functional checks pass but visual issue found",
+      "cases": 59
+    },
+    {
+      "directory": "verification/matrix-attempt03",
+      "stoppedAt": "2026-11-04T23:44:40.426295Z",
+      "status": "incomplete after execution-tool connection reset; not final proof",
+      "cases": 48
+    },
+    {
+      "directory": "verification/matrix-attempt04",
+      "stoppedAt": "2026-11-05T00:05:44.765966Z",
+      "status": "failed functional observation under severe software frame delay; preserved",
+      "cases": 69
+    }
+  ],
+  "timeZone": "Etc/UTC",
+  "finalMatrix": {
+    "report": "verification/matrix-soak.json",
+    "startedAt": "2026-11-05T00:06:32.807Z",
+    "completedAt": "2026-11-05T02:12:39.303Z",
+    "cases": 504,
+    "replays": 33,
+    "continuedAt": "2026-11-05T01:14:23.420Z",
+    "interruptionEvidence": "verification/matrix/continuation-01/interruption.json",
+    "pass": true
+  }
+}

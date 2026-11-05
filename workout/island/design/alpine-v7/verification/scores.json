@@ -1,0 +1,77 @@
+{
+  "reviewedAt": "2026-11-04T23:30:28.374708Z",
+  "basis": "Final10 camera/transition review plus08 unchanged asset/material evidence, root self-review and independent visual reviews. Runtime/matrix checks are separate gates.",
+  "criteria": [
+    {
+      "id": "character",
+      "label": "דמות",
+      "score": 8,
+      "evidence": [
+        "iterations/08/athlete-0-carve_left-390x844.webp",
+        "iterations/08/athlete-1-carve_right-844x390.webp",
+        "iterations/08/athlete-2-carve_left-390x844.webp"
+      ],
+      "notes": "פרופורציות וציוד מובחנים, מעילים רציפים ומשקף מחזיר אור; הפנים והכפפות עדיין מפושטים למובייל."
+    },
+    {
+      "id": "carving",
+      "label": "תנועת גוף בפנייה",
+      "score": 8,
+      "evidence": [
+        "iterations/08/athlete-0-carve_left-844x390.webp",
+        "iterations/08/athlete-0-carve_right-844x390.webp",
+        "iterations/08/athlete-1-carve_left-390x844.webp",
+        "iterations/08/athlete-1-carve_right-390x844.webp",
+        "motion/verification/dense-boundaries.json"
+      ],
+      "notes": "קנט, נטיית אגן וברכיים וטעינת רגל חיצונית בסקי; אצבעות/עקבים בסנובורד. מגע הציוד נמדד בכל LOD; אין סימולציית כוחות."
+    },
+    {
+      "id": "snow",
+      "label": "שלג",
+      "score": 8,
+      "evidence": [
+        "iterations/08/detail-powder-390x844.webp",
+        "iterations/08/detail-ice-844x390.webp",
+        "iterations/08/detail-churned-390x844.webp"
+      ],
+      "notes": "אבקה, קרח ושלג מרוסק מובחנים בחספוס ובאור. הקרח כולל שברים והחזר פיזי; אין עובי שלג או קרח נפחי."
+    },
+    {
+      "id": "trees",
+      "label": "עצים",
+      "score": 8,
+      "evidence": [
+        "iterations/08/forest-angle--0.7-390x844.webp",
+        "iterations/08/forest-angle-0.9-844x390.webp",
+        "world/verification-pine-lod.json"
+      ],
+      "notes": "אורן קרוב עם ענפים רדיאליים ו־1,920 משולשים. שינוי צללית נראה ומוגבל נשאר במעבר ל־LOD בינוני סביב15מ׳; עלווה משתמשת בכרטיסים קצרים."
+    },
+    {
+      "id": "background",
+      "label": "רקע",
+      "score": 8.5,
+      "evidence": [
+        "iterations/08/far-390x844.webp",
+        "iterations/08/far-844x390.webp",
+        "iterations/08/athlete-2-carve_right-844x390.webp"
+      ],
+      "notes": "נגזרות alpine-v5 ממוסגרות ללא מתיחה, עם שכבות הרים ושלוש שעות אור. רקעים מצולמים מישוריים ואינם רכסי3D מלאים."
+    },
+    {
+      "id": "consistency",
+      "label": "עקביות",
+      "score": 8,
+      "evidence": [
+        "iterations/10/near-390x844.webp",
+        "iterations/10/near-844x390.webp",
+        "iterations/10/recovery-1-fall_roll-4-390x844.webp",
+        "iterations/10/recovery-2-get_up-0-844x390.webp",
+        "iterations/10/critique.md",
+        "verification/camera-recovery-audit.json"
+      ],
+      "notes": "מסגור נמוך לפי ראש/אגן בנפילה וקימה ואיפוס זווית ביציאה מטריק משאירים ידיים וציוד גלויים. סולם וצירי תנועה משותפים; בדיקות המסגור והמטריצה הן שערים נפרדים מהציון החזותי."
+    }
+  ]
+}

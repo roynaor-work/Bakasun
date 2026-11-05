@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "kind": "alpine-v7-fictional-athletes",
+  "units": "metres",
+  "recommendedWorldScale": 1.35,
+  "worldScaleMeaning": "Apply uniformly to the complete actor group, preserving the calibrated skin; actor height approximately 1.74 m; board 1.485 m × 0.27 m.",
+  "canonicalRig": "characters/rig.json",
+  "characters": [
+    {
+      "id": "ski-male",
+      "label": "גולש · אורן",
+      "sex": "male",
+      "sport": "ski",
+      "worldYawRadians": 0,
+      "localTravelAxis": "+Z",
+      "model": "characters/ski-male.glb",
+      "lods": [
+        {
+          "path": "characters/ski-male-lod1.glb",
+          "distance": 10
+        },
+        {
+          "path": "characters/ski-male-lod2.glb",
+          "distance": 22
+        }
+      ],
+      "atlas": "characters/ski-male-atlas.png"
+    },
+    {
+      "id": "ski-female",
+      "label": "גולשת · ניב",
+      "sex": "female",
+      "sport": "ski",
+      "worldYawRadians": 0,
+      "localTravelAxis": "+Z",
+      "model": "characters/ski-female.glb",
+      "lods": [
+        {
+          "path": "characters/ski-female-lod1.glb",
+          "distance": 10
+        },
+        {
+          "path": "characters/ski-female-lod2.glb",
+          "distance": 22
+        }
+      ],
+      "atlas": "characters/ski-female-atlas.png"
+    },
+    {
+      "id": "snowboard-female",
+      "label": "סנובורד · שחר",
+      "sex": "female",
+      "sport": "snowboard",
+      "worldYawRadians": 1.5707963267948966,
+      "localTravelAxis": "-X",
+      "model": "characters/snowboard-female.glb",
+      "lods": [
+        {
+          "path": "characters/snowboard-female-lod1.glb",
+          "distance": 10
+        },
+        {
+          "path": "characters/snowboard-female-lod2.glb",
+          "distance": 22
+        }
+      ],
+      "atlas": "characters/snowboard-female-atlas.png"
+    }
+  ],
+  "assets": [
+    {
+      "id": "ski-male-lod0",
+      "file": "characters/ski-male.glb",
+      "lod": 0,
+      "sex": "male",
+      "sport": "ski",
+      "triangles": 19916,
+      "vertices": 10596,
+      "bytes": 794424,
+      "sha256": "06aa595b4c285c9fe91f5f26c597beaf1b573502b22916b189f28fccbf901d05",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-male-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "ski-male-lod1",
+      "file": "characters/ski-male-lod1.glb",
+      "lod": 1,
+      "sex": "male",
+      "sport": "ski",
+      "triangles": 9890,
+      "vertices": 5841,
+      "bytes": 753016,
+      "sha256": "97817d7d4f87b6304b95480a2d41bc25b6606e85ff408b5403936653dbf18574",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-male-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "ski-male-lod2",
+      "file": "characters/ski-male-lod2.glb",
+      "lod": 2,
+      "sex": "male",
+      "sport": "ski",
+      "triangles": 4129,
+      "vertices": 2833,
+      "bytes": 722028,
+      "sha256": "ee89d65709b86e1ea2c6eb7e27e0b3b23ebcd9f4a9e07f9bdcc517861fcde4e6",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-male-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "ski-female-lod0",
+      "file": "characters/ski-female.glb",
+      "lod": 0,
+      "sex": "female",
+      "sport": "ski",
+      "triangles": 19964,
+      "vertices": 10627,
+      "bytes": 795192,
+      "sha256": "1d02e2c317835fa95190fb737637e0273e4eb1d0602809b07132d4927037ba19",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "ski-female-lod1",
+      "file": "characters/ski-female-lod1.glb",
+      "lod": 1,
+      "sex": "female",
+      "sport": "ski",
+      "triangles": 9922,
+      "vertices": 5853,
+      "bytes": 753560,
+      "sha256": "397d8e9b517aa414e07b1b0922d17371b745a75189dc741179ab146fa30c75e5",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "ski-female-lod2",
+      "file": "characters/ski-female-lod2.glb",
+      "lod": 2,
+      "sex": "female",
+      "sport": "ski",
+      "triangles": 4134,
+      "vertices": 2838,
+      "bytes": 722388,
+      "sha256": "a5dd5a58755b6896cc56ea759a7f4934be7d78bead7ed1bdf6e6434e27a8457e",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/ski-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "snowboard-female-lod0",
+      "file": "characters/snowboard-female.glb",
+      "lod": 0,
+      "sex": "female",
+      "sport": "snowboard",
+      "triangles": 21508,
+      "vertices": 11334,
+      "bytes": 798344,
+      "sha256": "f1b220d8498b350a620f8b203825fcc696ea287636c5994ba7bbff7deeaf3cee",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/snowboard-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "snowboard-female-lod1",
+      "file": "characters/snowboard-female-lod1.glb",
+      "lod": 1,
+      "sex": "female",
+      "sport": "snowboard",
+      "triangles": 10709,
+      "vertices": 6260,
+      "bytes": 756232,
+      "sha256": "ffd6aab52c18df7413a4e3b1c836bb6db48af2a82735baae1aeb9390c33349f9",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/snowboard-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    },
+    {
+      "id": "snowboard-female-lod2",
+      "file": "characters/snowboard-female-lod2.glb",
+      "lod": 2,
+      "sex": "female",
+      "sport": "snowboard",
+      "triangles": 4221,
+      "vertices": 2912,
+      "bytes": 720180,
+      "sha256": "5e401f34499af0e0079a4606a4ab889ee0568323995efdc93626e9c809abe49f",
+      "skinBones": 18,
+      "clips": [
+        "glide",
+        "carve_left",
+        "carve_right",
+        "crouch",
+        "accelerate",
+        "ramp_jump",
+        "trick_180",
+        "trick_360",
+        "trick_shifty",
+        "trick_tail_grab",
+        "trick_backflip",
+        "fall_roll",
+        "get_up",
+        "celebrate"
+      ],
+      "texture": {
+        "file": "characters/snowboard-female-atlas.png",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "workout/island/design/skier3/skier.glb",
+      "sha256": "515a24f5e5a8d0c9a40a41b6bddb4a8bc3924550f35a6a0197f0c2d0f34e4268",
+      "license": "CC0-1.0",
+      "role": "Exact canonical18 calibration and pole geometry, read-only."
+    },
+    {
+      "path": "workout/island/design/skier3/rig.json",
+      "sha256": "f4a09f6e46ef8e728ad1a7ba4687786c17a183c708082344e0987441f0285fd7",
+      "license": "CC0-1.0",
+      "role": "Exact canonical18 calibration and pole geometry, read-only."
+    },
+    {
+      "path": "workout/island/design/characters/rig.json",
+      "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+      "license": "CC0-1.0",
+      "role": "Exact canonical18 calibration and pole geometry, read-only."
+    },
+    {
+      "path": "workout/island/design/characters2/source/body.py",
+      "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71",
+      "license": "CC0-1.0",
+      "role": "Detailed source anatomy, connected pants and equipment read-only; v7 replaces coat, goggles, helmet and grip."
+    },
+    {
+      "path": "workout/island/design/characters2/source/mesh.py",
+      "sha256": "8c55edd1aafd81c23aafa53b2083ce9f1eb6aeee9860641fe225f6b83701d180",
+      "license": "CC0-1.0",
+      "role": "Detailed source anatomy, connected pants and equipment read-only; v7 replaces coat, goggles, helmet and grip."
+    },
+    {
+      "path": "workout/island/design/characters2/source/head_hands.py",
+      "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2",
+      "license": "CC0-1.0",
+      "role": "Detailed source anatomy, connected pants and equipment read-only; v7 replaces coat, goggles, helmet and grip."
+    },
+    {
+      "path": "workout/island/design/characters2/source/gear.py",
+      "sha256": "64c637018e3d209ad2e0e81df4bf2e62164ca03926e5cebcb4a26fe5018f010f",
+      "license": "CC0-1.0",
+      "role": "Detailed source anatomy, connected pants and equipment read-only; v7 replaces coat, goggles, helmet and grip."
+    }
+  ]
+}

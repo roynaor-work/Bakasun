@@ -1,0 +1,6 @@
+{
+  "status": "stopped by author before results",
+  "stoppedAt": "2026-11-04T22:43:50.736035Z",
+  "reason": "The all-vertex framing sweep redundantly rasterized the full scene for each of1680 geometry poses. Test-only optimization retains camera, animation, matrix, skinning and vertex projection checks while skipping rasterization in that sweep only. UI/shader checks and the full504-case GPU matrix remain real renders. No pass is claimed from this stopped attempt.",
+  "runtimePackageChanged": false
+}

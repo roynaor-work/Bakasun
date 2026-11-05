@@ -1,0 +1,65 @@
+{
+  "changedAt": "2026-11-05T00:03:25.916561Z",
+  "afterCase": 64,
+  "reason": "CPU-only execution diagnosis after original062 timeout, retained as failed. Limit this owned browser/process tree to3cores under the4core cgroup quota. No runtime/package change. This attempt is not a passing final matrix.",
+  "cpuAffinity": [
+    0,
+    1,
+    2
+  ],
+  "ownedProcesses": 10,
+  "threadsChanged": 119,
+  "measurement": {
+    "startedAt": "2026-11-05T00:04:07.058615+00:00",
+    "endedAt": "2026-11-05T00:04:21.921805+00:00",
+    "cpuStatDelta": {
+      "usage_usec": 42649403,
+      "user_usec": 40982812,
+      "system_usec": 1666592,
+      "nice_usec": 0,
+      "nr_periods": 149,
+      "nr_throttled": 24,
+      "throttled_usec": 2036189,
+      "nr_bursts": 0,
+      "burst_usec": 0
+    },
+    "cases": [
+      {
+        "id": "065",
+        "clip": "trick_shifty",
+        "elapsed": 10.138,
+        "frames": 3,
+        "fps": 0.8219628472792401,
+        "probe": true,
+        "pass": true
+      },
+      {
+        "id": "066",
+        "clip": "trick_tail_grab",
+        "elapsed": 10.057,
+        "frames": 4,
+        "fps": 0.5454942177613056,
+        "probe": true,
+        "pass": true
+      },
+      {
+        "id": "067",
+        "clip": "trick_backflip",
+        "elapsed": 10.044,
+        "frames": 4,
+        "fps": 0.638325035107839,
+        "probe": true,
+        "pass": true
+      },
+      {
+        "id": "068",
+        "clip": "fall_roll",
+        "elapsed": 10.618,
+        "frames": 2,
+        "fps": 0.10811278325549376,
+        "probe": true,
+        "pass": true
+      }
+    ]
+  }
+}

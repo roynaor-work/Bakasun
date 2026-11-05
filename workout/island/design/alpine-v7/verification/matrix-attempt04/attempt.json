@@ -1,0 +1,10 @@
+{
+  "status": "failed functional observation under severe software frame delay; preserved",
+  "stoppedAt": "2026-11-05T00:05:44.765966Z",
+  "cases": 69,
+  "failures": [
+    "062"
+  ],
+  "reason": "062 produced1 frame/time change in28.726s and did not advance its15.44s end probe. No console/network or resource failure. Subsequent owned-process3core-affinity diagnosis is recorded separately; it does not turn062 into a pass. Fresh consistent run will use3core affinity and45s bounded observation/end waits with unchanged conditions and explicit scheduling diagnostics.",
+  "runtimePackageChanged": false
+}

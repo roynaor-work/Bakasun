@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "units": "meters",
+  "up": "+Y",
+  "forward": "+Z",
+  "models": [
+    {
+      "id": "pine-lod0",
+      "file": "models/pine-lod0.glb",
+      "bytes": 353068,
+      "MB": 0.353068,
+      "triangles": 1920,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "snow_fir_atlas",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 336368,
+          "embedded": true
+        }
+      ],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "2cec59f04d8a25b10bcf33b535fd0d52c3af773eb1530aa6a39d3e2efceaa05d",
+      "lod": 0,
+      "source": "../../../assets/alpine-rush/snow-fir.webp",
+      "sourceSha256": "79bef6694c0326527cb1f64ac853f88f2385034abdb4e382e71f3de2073ba235",
+      "license": "Existing repository ImageGen artwork; repository terms; ../../../ASSETS.md:189",
+      "visual": "84 drooping woody boughs with 168 short branch-wing cards, 8 inner-crown foliage triads and a full-height tapered bark trunk"
+    },
+    {
+      "id": "pine-lod1",
+      "file": "models/pine-lod1.glb",
+      "bytes": 338220,
+      "MB": 0.33822,
+      "triangles": 8,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "snow_fir_atlas",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 336368,
+          "embedded": true
+        }
+      ],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "6ec704af41d148d0350ae8f0ef719d3501a85b5820fba073649a1c8ba5257d7c",
+      "lod": 1,
+      "source": "../../../assets/alpine-rush/snow-fir.webp",
+      "sourceSha256": "79bef6694c0326527cb1f64ac853f88f2385034abdb4e382e71f3de2073ba235",
+      "license": "Existing repository ImageGen artwork; repository terms; ../../../ASSETS.md:189",
+      "visual": "2 crossed full-tree photo cards with explicit reverse faces"
+    },
+    {
+      "id": "pine-lod2",
+      "file": "models/pine-lod2.glb",
+      "bytes": 338124,
+      "MB": 0.338124,
+      "triangles": 4,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "snow_fir_atlas",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 336368,
+          "embedded": true
+        }
+      ],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "efacbdc1b5cb50f43186cd13c0b9fb806cb839818583117963d37e748ac44405",
+      "lod": 2,
+      "source": "../../../assets/alpine-rush/snow-fir.webp",
+      "sourceSha256": "79bef6694c0326527cb1f64ac853f88f2385034abdb4e382e71f3de2073ba235",
+      "license": "Existing repository ImageGen artwork; repository terms; ../../../ASSETS.md:189",
+      "visual": "single camera-facing full-tree photo card with explicit reverse face"
+    },
+    {
+      "id": "rock-small",
+      "file": "models/rock-small.glb",
+      "bytes": 2576,
+      "MB": 0.002576,
+      "triangles": 144,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "f3efe4dafaa8891040796feff88c81cf3adda2e2a4adb1eb55f3c3208b7f839a"
+    },
+    {
+      "id": "rock-large",
+      "file": "models/rock-large.glb",
+      "bytes": 2568,
+      "MB": 0.002568,
+      "triangles": 144,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "34dba523f1302e2d1a06ec229ec623e20c1b41c6768337d14e24912f2d33283d"
+    },
+    {
+      "id": "slalom-gate",
+      "file": "models/slalom-gate.glb",
+      "bytes": 2248,
+      "MB": 0.002248,
+      "triangles": 116,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "e9cd9c065b2dabbe60bd459ca5aa939a1ccd0c6252b530924ec6cdc0a2b7cd3d"
+    },
+    {
+      "id": "snow-ramp",
+      "file": "models/snow-ramp.glb",
+      "bytes": 2468,
+      "MB": 0.002468,
+      "triangles": 248,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "776c6a11ca16d9980467b7c1c5a50566adcc3e1dba45e9e980c03d6160650422",
+      "surfaceMaterial": "powder",
+      "takeoffHeight": 1.32,
+      "takeoffLocalZ": 1.5,
+      "roundedRunoutMeters": 2.4
+    },
+    {
+      "id": "route-marker",
+      "file": "models/route-marker.glb",
+      "bytes": 1732,
+      "MB": 0.001732,
+      "triangles": 50,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "ee9529ddb372a05e19c921562a58e9485dc05ba3707bd7fc31aaab199aa68493"
+    },
+    {
+      "id": "safety-fence",
+      "file": "models/safety-fence.glb",
+      "bytes": 3036,
+      "MB": 0.003036,
+      "triangles": 282,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "a14bb6086edc6bc7906ffe1684bf387028900363fd263167f0c1dad599153823"
+    },
+    {
+      "id": "direction-sign",
+      "file": "models/direction-sign.glb",
+      "bytes": 1784,
+      "MB": 0.001784,
+      "triangles": 61,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "ade8f2a46e1a211b3fd3572db47cd02c96248800c9ad41014e741e2e0bf599fb"
+    },
+    {
+      "id": "floodlight",
+      "file": "models/floodlight.glb",
+      "bytes": 2124,
+      "MB": 0.002124,
+      "triangles": 124,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "9cfeff91e473d2d363e484ac51c2d86acfcacb0037af3e41808680b0acd1dc0f"
+    },
+    {
+      "id": "crowd-person",
+      "file": "models/crowd-person.glb",
+      "bytes": 2428,
+      "MB": 0.002428,
+      "triangles": 118,
+      "materials": 1,
+      "textures": [],
+      "compression": "KHR_draco_mesh_compression",
+      "sha256": "44f5540456c6d486ef7be517a1917e330f82bca57c4068955262050f09d40ae9"
+    }
+  ],
+  "source": {
+    "path": "../tools/world-build.mjs",
+    "sha256": "187d19a12b5c2e0c913b72168178acc0ba19321b9a62583f73b26149ed8eb37a",
+    "license": "Original contribution under repository terms",
+    "method": "Original deterministic course and snow geometry; pine cutout reused from existing repository ImageGen artwork as documented per asset"
+  }
+}
