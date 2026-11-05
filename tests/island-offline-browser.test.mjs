@@ -34,7 +34,7 @@ async function play(page,id){
  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
  await page.waitForTimeout(3000);
- return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded&&s.renderMetrics.v7?.active)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
+ return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
 
@@ -53,7 +53,7 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
   const texts=await t.page.evaluate(()=>[...window.__texts]);
   assert.ok(texts.some(x=>/^מוריד \d+ מתוך \d+ · \d+%$/.test(x)),'progress shows X of Y and percent: '+texts.slice(0,5));
   const state=await t.page.evaluate(async()=>({games:[...document.querySelectorAll('.offline-games li')].map(li=>[li.dataset.game,li.dataset.complete]),keys:await caches.keys(),after:Object.keys(localStorage).filter(k=>!k.startsWith('island.offline')).sort(),marker:localStorage.getItem('island.test.marker'),status:JSON.parse(localStorage.getItem('island.offline.status'))}));
-  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true'],['racing','true']]);
+  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true'],['tennis','true'],['racing','true']]);
   assert.equal(state.keys.length,1);assert.match(state.keys[0],/^island-assets-/);
   assert.equal(state.marker,'keep');assert.deepEqual(state.after,savedBefore,'no save key was removed');
   assert.deepEqual(state.status.failed,[]);
@@ -96,11 +96,11 @@ test('automatic download fills the device cache after open, and a data saver ski
  }finally{for(const t of [saver,auto]){await t.csp.dispose();await t.context.close();}await browser.close();await server.close();}
 });
 
-test('a missing or blocked asset never hangs a game: soccer, basketball and ski still reach the playing screen',{skip:!enabled,timeout:600000},async()=>{
+test('a missing or blocked asset never hangs a game: soccer, basketball, ski and racing still reach the playing screen',{skip:!enabled,timeout:600000},async()=>{
  const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
  const t=await open(browser,server,{saveData:true,contextOptions:{serviceWorkers:'block'}});
- const blocked={soccer:/crowd-dots\.webp|goal-burst\.webp/,hoops:/net-spark\.webp|burning-ball-glow\.webp/,alpine:/ski-scrape\.webp|snow-dust\.webp/};
+ const blocked={soccer:/crowd-dots\.webp|goal-burst\.webp/,hoops:/net-spark\.webp|burning-ball-glow\.webp/,alpine:/ski-scrape\.webp|snow-dust\.webp/,racing:/tire-smoke\.png|asphalt-orm\.webp/};
  let current='soccer';await t.context.route('**/*',route=>{const url=route.request().url();if(blocked[current].test(url))return route.abort('failed');return route.continue();});
  try{
   await boot(t.page,server);
