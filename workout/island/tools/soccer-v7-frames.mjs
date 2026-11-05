@@ -67,3 +67,5 @@ function sheet(clip,group='field'){
 }
 window.__frames={sheet,measure,footSlide,clips:()=>({field:Object.keys(sets.field.characters[0].motion.actions),keeper:Object.keys(sets.keeper.characters[0].motion.actions)})};
 window.__ready=true;
+/** World position of a bone (pivot at the origin) at a clip time; used to compare character sets at a restart contact. */
+window.__frames.boneAt=(clip,t,names=['LeftHand','RightHand','Head','Hips'],group='field')=>{const c=sets[group].characters[0];c.pivot.position.set(0,0,0);pose(c,clip,t);return {scale:c.root.scale.y,...Object.fromEntries(names.map(n=>[n,bone(c,n).getWorldPosition(new T.Vector3()).toArray().map(v=>+v.toFixed(3))]))};};

@@ -22,7 +22,7 @@ import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261105-1';
 import {passDestination} from './soccer.mjs?v=island-v2-20261105-1';
 import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261105-1';
 import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261105-1';
-import {soccerRestartBallAttachment,alignSoccerRestartStrike} from './soccer-restart-motion.mjs';
+import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
 import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261105-1';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
@@ -357,6 +357,13 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     ballRoot.position.set(s.ball.x+ballDrift.x,s.ball.y,s.ball.z+ballDrift.z);{ballRoot.rotation.z-=(s.ball.vx+ballDrift.vx)*dt/config.ball.spinRadius;ballRoot.rotation.x+=(s.ball.vz+ballDrift.vz)*dt/config.ball.spinRadius;}
     const holder=s.ball.owner==null?null:s.players[s.ball.owner],character=holder&&characters[holder.id];
     restartAttachment=character&&soccerRestartBallAttachment(T,character,holder.restartMotion,config.physics.ballRadius,ballRoot.position)?character.restartContactMetrics:null;
+    if(restartAttachment&&character.v7){
+      // The v7 body is shorter-armed than the rig the restart ball heights were calibrated on (hands ~17 cm lower at
+      // the overhead throw), so the attached ball is eased onto the simulation ball over the last half of the motion
+      // instead of snapping at the release edge.
+      const m=holder.restartMotion,u=Math.min(1,Math.max(0,(m.elapsed/(m.kind==='keeperPunt'?SOCCER_RESTART_SEQUENCES.keeperPunt.drop:m.contact)-.5)/.5)),w=u*u*(3-2*u);
+      if(w>0)ballRoot.position.set(ballRoot.position.x+(s.ball.x+ballDrift.x-ballRoot.position.x)*w,ballRoot.position.y+(s.ball.y-ballRoot.position.y)*w,ballRoot.position.z+(s.ball.z+ballDrift.z-ballRoot.position.z)*w);
+    }
     trail.count=0; // The height-correct tapered ribbon owns the flight cue.
     for(let i=0;i<trail.count;i++){dummy.position.set(s.ball.x-s.ball.vx*trailConfig.spacingSeconds*(i+1),s.ball.y,s.ball.z-s.ball.vz*trailConfig.spacingSeconds*(i+1));dummy.rotation.set(0,0,0);dummy.scale.setScalar(1-i/trailConfig.count);dummy.updateMatrix();trail.setMatrixAt(i,dummy.matrix);}trail.instanceMatrix.needsUpdate=true;
     dummy.position.set(s.ball.x,.032,s.ball.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.setScalar(config.view.ballShadowScale+Math.min(s.ball.y,config.pitch.goalHeight)*config.view.ballShadowHeightScale);dummy.updateMatrix();shadows.setMatrixAt(roster.length,dummy.matrix);shadows.instanceMatrix.needsUpdate=true;
