@@ -1,0 +1,40 @@
+--- source/locomotion-space.js
++++ source/locomotion-space.js
+@@ -34,13 +34,16 @@
+   reset({speed=0,phase=0,distance=0,feet=null,idleSeconds=0,sourceClip=null}={}){
+     this.clock=0;this.phase=phase;this.distance=distance;this.speed=speed;this.targetSpeed=speed;this.idleSeconds=idleSeconds;
+     this.seedSourceClip=sourceClip&&this.byId.get(sourceClip);this.seedCommitUntil=null;this.seedPhase=phase;this._fkPhase=null;
++    const inheritedGait=!!this.seedSourceClip&&(LocomotionSpace.accepts(this.seedSourceClip.id)&&this.seedSourceClip.id!=='idle'||this.seedSourceClip.id==='dribble');
+     this.requestedClip=speed===0?'idle':this.bracket(speed).a.id;this.heelRecords=[];this.phaseReseeds=[];this.requests=[];this.requestID=0;this.nextHeelID=0;
+     for(const [name,x,offset]of [['LeftFoot',.1,0],['RightFoot',-.1,.5]]){
+       const initial=feet?.[name],position=initial?.position?.slice()||[x,0,distance];
+       const local=((phase-offset)%1+1)%1,cycle=Math.floor(phase-offset),heel=cycle+offset;
+       this.feet[name]={name,x,offset,position,orientation:initial?.orientation?.slice()||[0,0,0,1],mode:'plant',anchor:position.slice(),heelPhase:heel,stanceEndPhase:speed?heel+this.stanceFraction(speed):Infinity,record:null};
+-      if(speed>0&&local>=this.stanceFraction(speed)){const f=this.feet[name];this.takeoff(f,'seed-swing');if(this.seedSourceClip&&this.skeleton){f.mode='inherited';f.heelPhase=Math.floor(phase-f.offset)+1+f.offset;f.inheritedClip=this.seedSourceClip.id;f.inheritedStartPhase=phase;const source=this.sourceFK(phase)[name],expected=source.position.slice();expected[2]+=this.distance;f.inheritedCorrection=position.map((x,i)=>x-expected[i]);f.inheritedOrientation=new this.THREE.Quaternion().fromArray(source.orientation).invert().multiply(new this.THREE.Quaternion().fromArray(f.orientation)).toArray();this.seedCommitUntil=Math.max(this.seedCommitUntil??phase,f.heelPhase);}}
+-      else if(speed>0)this.recordHeel(this.feet[name],heel,'seed');
++      const sourceSeconds=this.seedSourceClip?(this.seedSourceClip.loop?((phase%1)+1)%1:this.clamp(phase,0,1))*this.seedSourceClip.duration:null,sourceContact=this.seedSourceClip?.contacts.find(c=>c.bone===name&&c.mode==='plant'&&sourceSeconds>=c.start-1e-8&&sourceSeconds<=c.end+1e-8);
++      if(!inheritedGait)this.feet[name].sourceSupport={sourceClip:this.seedSourceClip?.id||null,sourceSeconds,phase,soleHeight:position[1],grounded:position[1]<=.003,authoredPlant:!!sourceContact,contactStart:sourceContact?.start??null,contactEnd:sourceContact?.end??null};
++      if(speed>0&&(inheritedGait?local>=this.stanceFraction(speed):!(position[1]<=.003&&sourceContact))){const f=this.feet[name];this.takeoff(f,'seed-swing');if(inheritedGait&&this.skeleton){f.mode='inherited';f.heelPhase=Math.floor(phase-f.offset)+1+f.offset;f.inheritedClip=this.seedSourceClip.id;f.inheritedStartPhase=phase;const source=this.sourceFK(phase)[name],expected=source.position.slice();expected[2]+=this.distance;f.inheritedCorrection=position.map((x,i)=>x-expected[i]);f.inheritedOrientation=new this.THREE.Quaternion().fromArray(source.orientation).invert().multiply(new this.THREE.Quaternion().fromArray(f.orientation)).toArray();this.seedCommitUntil=Math.max(this.seedCommitUntil??phase,f.heelPhase);}}
++      else if(speed>0){const f=this.feet[name];if(inheritedGait)this.recordHeel(f,heel,'seed');else{f.heelPhase=this.phase;this.recordHeel(f,this.phase,'nongait-inherited-support');f.record.sourceSupport={...f.sourceSupport};}}
+     }
+     if(speed<=.01){const clip=sourceClip&&this.byId.get(sourceClip),time=clip?(clip.loop?((phase%1)+1)%1:Math.min(1,Math.max(0,phase)))*clip.duration:null;for(const f of Object.values(this.feet)){const grounded=f.position[1]<=.003;f.sourceSupport={sourceClip:sourceClip||null,sourceSeconds:time,phase,soleHeight:f.position[1],grounded,authoredPlant:clip?clip.contacts.some(c=>c.bone===f.name&&c.mode==='plant'&&time>=c.start-1e-8&&time<=c.end+1e-8):null};if(!grounded)f.mode='free';}}
+     if(speed<=.01)this.settleFeet();
+@@ -209,3 +212,18 @@
+     const {a,b,weight}=this.bracket(),gaitWeight=this.speed<1.6?this.smooth(this.speed/1.6):1;const contributors=[...(gaitWeight<1?[{clip:'idle',weight:1-gaitWeight,time:(this.idleSeconds||0)+this.clock}]:[]),{clip:a.id,weight:(1-weight)*gaitWeight,time:((this.phase%1)+1)%1*a.duration},...(weight>0?[{clip:b.id,weight:weight*gaitWeight,time:((this.phase%1)+1)%1*b.duration}]:[])].filter(c=>c.weight>1e-12);return{kind:'continuous-phase-locomotion',clock:this.clock,actualSpeed:this.speed,targetSpeed:this.targetSpeed,requestedClip:this.requestedClip,inheritedSourceClip:this.seedCommitUntil!==null&&this.phase<this.seedCommitUntil?this.seedSourceClip?.id||null:null,seedCommitUntil:this.seedCommitUntil,requestID:this.requestID,unwrappedPhase:this.phase,rootDistance:this.distance,frequency:this.frequency(),contributors,stanceFraction:this.stanceFraction(),feet:Object.fromEntries(Object.entries(this.feet).map(([k,f])=>[k,{mode:f.mode,position:f.position.slice(),orientation:f.orientation.slice(),anchor:f.anchor?.slice(),heelPhase:f.heelPhase,stanceEndPhase:f.stanceEndPhase,flightStartPhase:f.startPhase,flightStartTime:f.startTime,flightProgress:f.mode==='flight'?this.clamp((this.phase-f.startPhase)/(f.heelPhase-f.startPhase),0,1):null,target:f.target?.slice(),targetFrozen:f.targetFrozen,sourceSupport:f.sourceSupport&&{...f.sourceSupport},neutralStep:f.mode==='settle'?{from:f.from.slice(),target:f.target.slice(),startTime:f.startTime,duration:f.duration,verticalOnly:f.settleVerticalOnly}:null}])),lastPhaseReseed:this.phaseReseeds?.length?structuredClone(this.phaseReseeds.at(-1)):null,phaseReseeds:includeHistory?structuredClone(this.phaseReseeds||[]):[],historyIncluded:includeHistory,heelRecords:includeHistory?structuredClone(this.heelRecords):[],requests:includeHistory?this.requests.map(r=>({...r})):[]};
+   }
+ }
++
++/** Minimal vertical correction of an unplanted world-space sole goal.
++ * Vertices are the bound exact Foot-local rigid-boot hull; padding is applied
++ * after rotation. This function never changes phase, orientation, XZ or plants.
++ */
++export function airborneFootGoalClearance({mode,position,orientation,vertices,paddingMeters=.0005,minimumY=.001}){
++  const before=position.slice();
++  if(mode==='plant')return{mode,position:before,liftMeters:0,minimumBefore:null,minimumAfter:null,minimumY,excludedPlant:true};
++  if(!vertices?.length)throw Error('A bound Foot-local boot hull is required');
++  const norm=Math.hypot(...orientation);if(!Number.isFinite(norm)||norm<1e-12)throw Error('Invalid foot orientation');
++  const[x,y,z,w]=orientation.map(v=>v/norm),r0=2*(x*y+z*w),r1=1-2*(x*x+z*z),r2=2*(y*z-x*w),ankleY=before[1]+r1*.08;
++  let bound=Infinity;for(const p of vertices)bound=Math.min(bound,ankleY+r0*p[0]+r1*p[1]+r2*p[2]-paddingMeters);
++  const lift=Math.max(0,minimumY-bound),after=before.slice();after[1]+=lift;
++  return{mode,position:after,liftMeters:lift,minimumBefore:bound,minimumAfter:bound+lift,minimumY,excludedPlant:false};
++}

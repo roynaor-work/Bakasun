@@ -1,0 +1,7 @@
+# Round 29 · shorter overlapping crown locks
+
+This is an isolated authoring comparison, not a promoted runtime release. The baseline is `preflight/baseline26/`; the candidate is `preflight/crown29/`. Both contain actual full-phone frontal and three-quarter face renders at 390×844 and 844×390. `preflight/core/` supplies actual near/far full-body renders of the same immutable candidate. The capture JSON records its compressed model hashes and the frozen local viewer runtime; stale model-bound floor/boot proofs are disabled for these diagnostic overrides.
+
+The long crown ribbons were split into overlapping curved locks no longer than 22mm. The filled undercoat and original fine fringe retain their exact geometry, UVs and skin weights. Crown normals combine 80% projected undercoat normals and 20% card normals; no extra shine, atlas or material was added. Authoring invariants are in `source/character-hair29-authoring-proof.json`.
+
+Self-critique: crown streaks are shorter and less ruled, while the preserved fringe avoids round28's larger pointed teeth. The underlying continuous cap silhouette remains visible, especially on the ginger quiff; this is a modest improvement, not evidence of an 8/10 hair result. Root accepted this crown direction for later consolidation, with a separate silhouette experiment required. These frames do not prove standard glTF motion contact correction or physical-phone performance.

@@ -1,0 +1,152 @@
+{
+  "kind": "read-only-face-shading-pixel-comparison",
+  "scope": "Descriptive same-camera RGB deltas, not a perceptual quality score or a physical phone performance claim.",
+  "rows": [
+    {
+      "id": "player-04",
+      "mode": "skin-no-receive-shadow",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.22635416666666666,
+      "p99AbsoluteChannelDifference": 6.0,
+      "maximumAbsoluteChannelDifference": 17.0,
+      "changedPixelFraction": 0.10130208333333333
+    },
+    {
+      "id": "player-04",
+      "mode": "skin-normal-scale-zero",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.13452876984126985,
+      "p99AbsoluteChannelDifference": 1.0,
+      "maximumAbsoluteChannelDifference": 6.0,
+      "changedPixelFraction": 0.3248214285714286
+    },
+    {
+      "id": "player-04",
+      "mode": "skin-welded-smooth-normals",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.5810416666666667,
+      "p99AbsoluteChannelDifference": 5.0,
+      "maximumAbsoluteChannelDifference": 41.0,
+      "changedPixelFraction": 0.5850967261904761
+    },
+    {
+      "id": "player-02",
+      "mode": "skin-no-receive-shadow",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.1086954365079365,
+      "p99AbsoluteChannelDifference": 3.0,
+      "maximumAbsoluteChannelDifference": 11.0,
+      "changedPixelFraction": 0.07696428571428572
+    },
+    {
+      "id": "player-02",
+      "mode": "skin-normal-scale-zero",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.13577380952380952,
+      "p99AbsoluteChannelDifference": 1.0,
+      "maximumAbsoluteChannelDifference": 3.0,
+      "changedPixelFraction": 0.3237276785714286
+    },
+    {
+      "id": "player-02",
+      "mode": "skin-welded-smooth-normals",
+      "faceRegionCssPixels": [
+        30,
+        260,
+        350,
+        680
+      ],
+      "meanAbsoluteChannelDifference": 0.6597867063492063,
+      "p99AbsoluteChannelDifference": 4.0,
+      "maximumAbsoluteChannelDifference": 19.0,
+      "changedPixelFraction": 0.6644791666666666
+    }
+  ],
+  "images": [
+    {
+      "file": "player-02-baseline-390x844.png",
+      "bytes": 242158,
+      "sha256": "d8bc420e0f6cf37eefc24b44b7d9c0f8f513cefdfbda5aa1772876113c710ca6"
+    },
+    {
+      "file": "player-02-skin-neutral-albedo-390x844.png",
+      "bytes": 207076,
+      "sha256": "c5b28619451b4450f2a2b43b2489e0a0216bd9c54dd8fe205981b0ec00f11a3b"
+    },
+    {
+      "file": "player-02-skin-neutral-diffuse-only-390x844.png",
+      "bytes": 212289,
+      "sha256": "c3d2350c8935f7fc1cb9a939d1f30c483f7bb527c71e699199cb37bf9075760f"
+    },
+    {
+      "file": "player-02-skin-no-receive-shadow-390x844.png",
+      "bytes": 242946,
+      "sha256": "9a9614b7c12c5dfd445b74117a276f08dd269083de4e0cebf19c4d152f6721d9"
+    },
+    {
+      "file": "player-02-skin-normal-scale-zero-390x844.png",
+      "bytes": 241741,
+      "sha256": "e62beb4f07b75ea80286565759b80fe73cd8d4e9395bc18c7bb1d2da551ab914"
+    },
+    {
+      "file": "player-02-skin-welded-smooth-normals-390x844.png",
+      "bytes": 242266,
+      "sha256": "9c68fd9513da9b9ac70965409bfe766b5bf2e53e59aef2ca8f4db1c7fbaea046"
+    },
+    {
+      "file": "player-04-baseline-390x844.png",
+      "bytes": 276710,
+      "sha256": "b8d071e37d8abd24de31967b6de9e3e461239d6b9d4e7750c728443568d0cd0f"
+    },
+    {
+      "file": "player-04-skin-neutral-albedo-390x844.png",
+      "bytes": 225418,
+      "sha256": "1fa5f0d4c0b84a550d3bea10923b4a016033b2dd8fd96207e9c74afad34ee675"
+    },
+    {
+      "file": "player-04-skin-neutral-diffuse-only-390x844.png",
+      "bytes": 228155,
+      "sha256": "60f3761e3753c0c3470a014a6fe7d288fb165e2d2b6f5d2ee2b6c3aaab50f49a"
+    },
+    {
+      "file": "player-04-skin-no-receive-shadow-390x844.png",
+      "bytes": 276408,
+      "sha256": "7a9c9def9498a7d801374c592b600e01bcbb8c0eae20e8ca84dd804baf76bae1"
+    },
+    {
+      "file": "player-04-skin-normal-scale-zero-390x844.png",
+      "bytes": 276272,
+      "sha256": "36c598381cc0913ec488e6da6327821800fbd06a5865240022cc48b515b624cf"
+    },
+    {
+      "file": "player-04-skin-welded-smooth-normals-390x844.png",
+      "bytes": 276460,
+      "sha256": "31ea224a670af5f80c9e8cf661dbac01594bb64568e03de6d5eb6fbad78a04bf"
+    }
+  ]
+}

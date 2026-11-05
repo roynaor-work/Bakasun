@@ -1,0 +1,2028 @@
+{
+  "declaredPackageHashes": {
+    "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "4d0f95fe85df65fa0acbf5a88e6efe9ce1d77bd1949824e7c50132545327ea47",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+      "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+      "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+      "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+      "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+      "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+      "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+      "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+      "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+      "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+      "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+      "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+      "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+      "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+      "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+      "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+    },
+    "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+  },
+  "kind": "actual-bundled-viewer-transition-audit",
+  "extended": true,
+  "gaitsOnly": false,
+  "extendedGaits": false,
+  "updateRateHz": 120,
+  "characterID": "player-01",
+  "testedLOD": 0,
+  "logicalRootWeightedVertexCount": 0,
+  "logicalRootPresentInEverySkin": true,
+  "method": "Actual classic-script bundle loaded from local HTTP; synchronous api.step updates and real post-IK skeleton/mesh sampled at 120Hz. GPU renderer temporarily suppressed, requestAnimationFrame disabled to prevent races. No source/mesh/IK code replaced. All mesh vertices evaluated after each update.",
+  "limitations": [
+    "Single player-01 LOD0 in this run; other identities and LODs require separate runs.",
+    "Bone sole marker is (0,-0.08,0); palm marker is an approximate (0,-0.07,0) from the wrist, not a measured hand surface. Actual mesh floor min separately scans every vertex and is the geometric penetration gate.",
+    "The stateful solver was integrated at 120Hz; other integration rates can follow different paths and require a separate run.",
+    "Logical Root orientation is recorded separately because heading handoff counter-rotates Hips; its actual decoded skin weights must be zero. Hips and all descendant world orientations, and every bone position including Root, remain gated.",
+    "First-step root velocity is descriptive. Separate broad engineering pop guards limit visible joint world angular speed to 30 rad/s and bone speed relative to authoritative root travel to 25 m/s; they catch abrupt advancing-pose jumps but do not establish natural motion, acceleration quality or physical collision.",
+    "Rigid boot pivots are classified only when the same decoded vertex with at least 99.99% Foot weight is within 8mm of the floor in both frames and moves at most 3mm in XZ; raw sole-marker travel and the exact vertex witness remain in the report. Authored slide/fall body travel outside expected plants is reported separately; all actual expected supports, recovery transfers, anchor drift and dynamic pop guards remain gated.",
+    "Requests are followed through the actual contributor/recovery/motor descriptor and bounded ledger drain; UI clip labels are never substituted for active clocks. Unsupported actual semantics force incomplete verification.",
+    "No physical phone GPU or FPS evidence."
+  ],
+  "results": [
+    {
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          1.3371354166666674
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.10000000000065482,
+            1.2614423394730068e-11,
+            1.3174802083622958
+          ],
+          "RightFoot": [
+            -0.09999999999949659,
+            0.13600000000573426,
+            1.457878400753192
+          ]
+        },
+        "motor": {
+          "clock": 0.899999999999998,
+          "actualSpeed": 2.4,
+          "targetSpeed": 2.4,
+          "phase": 2.1902370876736152,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                1.3174802083333361
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                1.3174802083333361
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": 2.36,
+              "flightStartPhase": 1.4217822265624998,
+              "flightStartTime": 0.22500000000000028,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                1.3174802083333361
+              ],
+              "targetFrozen": true,
+              "sourceSupport": {
+                "sourceClip": "kick",
+                "sourceSeconds": 0.38333350000000016,
+                "phase": 0.574999962500019,
+                "soleHeight": 3.043731655605342e-10,
+                "grounded": true,
+                "authoredPlant": true
+              },
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "flight",
+              "position": [
+                -0.1,
+                0.136,
+                1.457878400741731
+              ],
+              "orientation": [
+                0.12465306769557957,
+                0,
+                0,
+                0.9922003893942399
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                0.40490649350243724
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": 1.92,
+              "flightStartPhase": 1.8730132679880398,
+              "flightStartTime": 0.6458333333333323,
+              "flightProgress": 0.5059498127936848,
+              "target": [
+                -0.1,
+                0,
+                2.2774802083333094
+              ],
+              "targetFrozen": false,
+              "sourceSupport": {
+                "sourceClip": "kick",
+                "sourceSeconds": 0.38333350000000016,
+                "phase": 0.574999962500019,
+                "soleHeight": 0.196767949056192,
+                "grounded": false,
+                "authoredPlant": false
+              },
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 1,
+            "clip": "run_2",
+            "at": 0,
+            "deadline": 4.5,
+            "targetSpeed": 2.4,
+            "startedAt": 0.008333333333333333,
+            "completedAt": 0.6916666666666654,
+            "superseded": false
+          }
+        }
+      },
+      "actionObservation": {
+        "supported": true,
+        "unsupported": [],
+        "errors": [],
+        "timeline": [
+          {
+            "clock": 0,
+            "actualClock": 0,
+            "activeBaseClip": "kick",
+            "baseSeconds": 0.3333335,
+            "contributors": [
+              {
+                "clipID": "kick",
+                "sampleSeconds": 0.3333335,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              }
+            ],
+            "phase": "standalone",
+            "requestedClip": null,
+            "requestID": null,
+            "requestStatus": null,
+            "motor": null
+          },
+          {
+            "clock": 0.049999999999999996,
+            "actualClock": 0.049999999999999996,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 0,
+              "targetSpeed": 2.4,
+              "phase": 1.25
+            }
+          },
+          {
+            "clock": 0.10833333333333332,
+            "actualClock": 0.10833333333333332,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.05833333333333333,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0.05833333333333333,
+                "playbackRate": 1,
+                "weight": 0.9553070421572085,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.26066954210069443,
+                "playbackRate": 1,
+                "weight": 0.04469295784279153,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 0.2041666666666667,
+              "targetSpeed": 2.4,
+              "phase": 1.289632824556327
+            }
+          },
+          {
+            "clock": 0.20833333333333331,
+            "actualClock": 0.20833333333333331,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.15833333333333333,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0.1583333333333334,
+                "playbackRate": 1,
+                "weight": 0.7232145026878076,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.3290041775173611,
+                "playbackRate": 1,
+                "weight": 0.27678549731219243,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 0.5541666666666666,
+              "targetSpeed": 2.4,
+              "phase": 1.3655601972415123
+            }
+          },
+          {
+            "clock": 0.3000000000000001,
+            "actualClock": 0.3000000000000001,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.24999999999999997,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0.25000000000000033,
+                "playbackRate": 1,
+                "weight": 0.42989349365234486,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.39961914062500015,
+                "playbackRate": 1,
+                "weight": 0.5701065063476551,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 0.8749999999999988,
+              "targetSpeed": 2.4,
+              "phase": 1.4440212673611112
+            }
+          },
+          {
+            "clock": 0.4000000000000004,
+            "actualClock": 0.4000000000000004,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.35000000000000026,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0.35,
+                "playbackRate": 1,
+                "weight": 0.13904571533203192,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.4853535156250001,
+                "playbackRate": 1,
+                "weight": 0.8609542846679681,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 1.2249999999999992,
+              "targetSpeed": 2.4,
+              "phase": 1.5392816840277779
+            }
+          },
+          {
+            "clock": 0.5000000000000007,
+            "actualClock": 0.5000000000000007,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.45000000000000057,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 0.4499999999999996,
+                "playbackRate": 1,
+                "weight": 0.00072479248046875,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.5801660156249999,
+                "playbackRate": 1,
+                "weight": 0.9992752075195312,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 1.5750000000000006,
+              "targetSpeed": 2.4,
+              "phase": 1.64462890625
+            }
+          },
+          {
+            "clock": 0.6000000000000003,
+            "actualClock": 0.6000000000000003,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.5500000000000005,
+            "contributors": [
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.6825008138020835,
+                "playbackRate": 1,
+                "weight": 0.5937499999999974,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.6066673900462964,
+                "playbackRate": 1,
+                "weight": 0.40625000000000255,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 1.925000000000002,
+              "targetSpeed": 2.4,
+              "phase": 1.7583342375578705
+            }
+          },
+          {
+            "clock": 0.7,
+            "actualClock": 0.7,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.6500000000000001,
+            "contributors": [
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.790313313802083,
+                "playbackRate": 1,
+                "weight": 0.15624999999999556,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              },
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.7025007233796293,
+                "playbackRate": 1,
+                "weight": 0.8437500000000044,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "active",
+            "motor": {
+              "actualSpeed": 2.2750000000000035,
+              "targetSpeed": 2.4,
+              "phase": 1.8781259042245366
+            }
+          },
+          {
+            "clock": 0.7416666666666665,
+            "actualClock": 0.7416666666666665,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.6916666666666667,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.7438563368055553,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "completed",
+            "motor": {
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "phase": 1.929820421006944
+            }
+          },
+          {
+            "clock": 0.8083333333333329,
+            "actualClock": 0.8083333333333329,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.7583333333333331,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.010523003472221504,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "completed",
+            "motor": {
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "phase": 2.013153754340277
+            }
+          },
+          {
+            "clock": 0.9083333333333325,
+            "actualClock": 0.9083333333333325,
+            "activeBaseClip": "run_2",
+            "baseSeconds": 0.8583333333333327,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.11052300347222435,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "phase": "requested-locomotion",
+            "requestedClip": "run_2",
+            "requestID": 1,
+            "requestStatus": "completed",
+            "motor": {
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "phase": 2.1381537543402804
+            }
+          }
+        ],
+        "witnesses": [
+          {
+            "requestID": 1,
+            "clock": 0.7416666666666665,
+            "actualClock": 0.7416666666666665,
+            "samplingToleranceSeconds": 0.008334333333333303,
+            "scope": "locomotion",
+            "observedSpeed": 2.3979166666666836,
+            "targetSpeed": 2.4,
+            "physicalTargetClip": "run_2",
+            "motorRequestID": 1,
+            "actualSoles": {
+              "LeftFoot": [
+                0.09999999999609237,
+                0.13599999998643747,
+                1.3140597173724837
+              ],
+              "RightFoot": [
+                -0.10000000000096963,
+                0.11596290355240481,
+                0.4236842297311225
+              ]
+            }
+          }
+        ],
+        "requests": [
+          {
+            "id": 1,
+            "clipID": "run_2",
+            "requestedAt": 0.049999999999999996,
+            "status": "completed",
+            "progress": 1,
+            "activatedAt": 0.049999999999999996,
+            "completedAt": 0.7416666666666665,
+            "entrySeconds": 0,
+            "scope": "locomotion",
+            "mirrored": false,
+            "playbackRate": 1,
+            "completionDeadline": 4.55,
+            "sampleSeconds": 1.929820421006944,
+            "motorRequestID": 1,
+            "motorClockOffset": 0.049999999999999996,
+            "motorInitialSpeed": 0,
+            "motorInitialDistance": 0,
+            "physicalTargetClip": "run_2",
+            "actualSpeed": 2.4,
+            "targetSpeed": 2.4,
+            "physicalContributors": [
+              {
+                "clip": "run_2",
+                "weight": 1,
+                "time": 0.7438563368055553
+              }
+            ],
+            "firstProgressAt": 0.05833333333333333
+          }
+        ],
+        "acceptedRequestIDs": [
+          1
+        ],
+        "finalRequestID": 1,
+        "outstanding": [],
+        "rejected": [],
+        "unobservedCompletions": [],
+        "maximumBallAttachmentError": 0,
+        "maximumCatchPalmDistance": 0,
+        "catchContactSamples": 0,
+        "catchEpisodes": [],
+        "firstProgressWitnesses": {
+          "1": {
+            "clock": 0.05833333333333333,
+            "samplingToleranceSeconds": 0.00833433333333333
+          }
+        },
+        "finalFulfilled": true,
+        "finalStableSeconds": 0.2083333333333326,
+        "pass": true
+      },
+      "drainSamples": 36,
+      "maxVirtualPalmSupportError": 0,
+      "diveBodyControlSamples": 0,
+      "missingDiveBodyControls": 0,
+      "maximumDiveBodyPositionDeviation": 0,
+      "maximumDiveBodyOrientationDegrees": 0,
+      "maximumDiveRootDeviation": 0,
+      "maximumDiveClockErrorSeconds": 0,
+      "name": "action recovery kick @ 0.5",
+      "start": "kick",
+      "sampleRateHz": 120,
+      "sampleCount": 116,
+      "minVertexY": 0.00151615,
+      "maxMinimumVertexY": 0.12453432,
+      "maxPlantAnchorDistanceMeters": 0,
+      "maxPlantSoleDisplacementDuringLockMeters": 0,
+      "maxPlantOrientationStepDegrees": 0,
+      "maxPlantOrientationTotalDegrees": 0,
+      "worstPlantOrientationStep": null,
+      "maxReachResidualMeters": 0,
+      "maxLandingResidualMeters": 0,
+      "worstLandingResidual": null,
+      "maximumLandingLifetimeSeconds": 0,
+      "maximumLandingObjectElapsedSeconds": 0,
+      "maximumLandingDurationSeconds": 0,
+      "maximumContinuousFootConstraintLifetimeSeconds": 0,
+      "invalidLandingLifetimeSamples": 0,
+      "overdueLandingSamples": 0,
+      "recoverySamples": 0,
+      "recoveryModes": [],
+      "maximumRecoveryLifetimeSeconds": 0,
+      "maximumRecoveryDurationSeconds": 0,
+      "invalidRecoveryLifetimeSamples": 0,
+      "recoveryRetainedStaticAnchorSamples": 0,
+      "maximumLandingProjectionMeters": 0,
+      "worstLandingProjection": null,
+      "maximumLandingKinematicDeviationMeters": 0,
+      "worstLandingKinematicDeviation": null,
+      "maximumLandingReleaseSoleStepMeters": 0,
+      "worstLandingRelease": null,
+      "expiredContactLandingSamples": 0,
+      "worstExpiredContactLanding": null,
+      "authoredHandSupportSamples": 0,
+      "maxAuthoredHandSupportResidualMeters": 0,
+      "maxSettledAuthoredHandSupportResidualMeters": 0,
+      "worstAuthoredHandSupport": null,
+      "minimumWristY": 0.79571173,
+      "minimumPalmMarkerY": 0.74491775,
+      "palmMarkerOffsetMeters": [
+        0,
+        -0.07,
+        0
+      ],
+      "lowestPalmSample": {
+        "clock": 0.275,
+        "sampleSeconds": 1.13742578125,
+        "clip": "run_2",
+        "bone": "RightHand",
+        "wrist": [
+          -0.2637872545729613,
+          0.8031996221860389,
+          0.16551548201084001
+        ],
+        "palmMarker": [
+          -0.2721085497578368,
+          0.7449177506193683,
+          0.20338340370100244
+        ],
+        "meshMinimumY": 0.0020000021875072175
+      },
+      "maxFloorLiftMeters": 0,
+      "maximumJointAngularSpeedRadiansPerSecond": 29.507256443298417,
+      "maximumRootRelativeBoneSpeedMps": 10.90407090381514,
+      "worstRootRelativeBoneSpeed": {
+        "clock": 0.05833333333333333,
+        "clip": "run_1",
+        "sampleSeconds": 1.0043613522376542,
+        "secondsSincePreviousSample": 0.008333333333333331,
+        "bone": "LeftLeg",
+        "metersPerSecond": 10.90407090381514,
+        "previousPosition": [
+          0.08726935848591269,
+          0.4193584649029537,
+          0.146880096420722
+        ],
+        "position": [
+          0.09859112362904748,
+          0.44500629861275715,
+          0.06056745993813843
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.00012152777777777777
+        ],
+        "previousLift": 0,
+        "lift": 0,
+        "fadeElapsed": null
+      },
+      "advancingByClip": {
+        "kick": {
+          "samples": 6,
+          "maximumJointAngularSpeedRadiansPerSecond": 2.0346746403448677,
+          "angularBone": "RightLeg",
+          "maximumRootRelativeBoneSpeedMps": 0.9328340948195905,
+          "velocityBone": "RightFoot"
+        },
+        "run_1": {
+          "samples": 82,
+          "maximumJointAngularSpeedRadiansPerSecond": 29.507256443298417,
+          "angularBone": "LeftLeg",
+          "maximumRootRelativeBoneSpeedMps": 10.90407090381514,
+          "velocityBone": "LeftLeg"
+        },
+        "run_2": {
+          "samples": 26,
+          "maximumJointAngularSpeedRadiansPerSecond": 13.137046793598191,
+          "angularBone": "LeftUpLeg",
+          "maximumRootRelativeBoneSpeedMps": 5.276377564337632,
+          "velocityBone": "LeftLeg"
+        }
+      },
+      "maximumBoneTravelPerSampleMeters": 0.09075167,
+      "worstBoneStep": {
+        "clock": 0.05833333333333333,
+        "clip": "run_2",
+        "sampleSeconds": 1.0043613522376542,
+        "secondsSincePreviousSample": 0.008333333333333331,
+        "bone": "LeftLeg",
+        "meters": 0.09075167,
+        "previousPosition": [
+          0.08726935848591269,
+          0.4193584649029537,
+          0.146880096420722
+        ],
+        "position": [
+          0.09859112362904748,
+          0.44500629861275715,
+          0.06056745993813843
+        ],
+        "previousModelPosition": [
+          0,
+          0,
+          0
+        ],
+        "modelPosition": [
+          0,
+          0,
+          0.00012152777777777777
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.00012152777777777777
+        ],
+        "previousLift": 0,
+        "lift": 0,
+        "fadeElapsed": null,
+        "phaseRate": 0.5267245370370371,
+        "locks": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:1",
+            "anchor": [
+              0.09999999849910304,
+              3.043731655605342e-10,
+              -5.23825500753361e-10
+            ],
+            "release": 0.30825267163271736
+          }
+        ],
+        "landings": []
+      },
+      "maximumBoneRotationPerSampleDegrees": 14.08867716,
+      "worstBoneRotationStep": {
+        "clock": 0.05833333333333333,
+        "clip": "run_2",
+        "sampleSeconds": 1.0043613522376542,
+        "secondsSincePreviousSample": 0.008333333333333331,
+        "bone": "LeftLeg",
+        "degrees": 14.08867716,
+        "previousHipsPosition": [
+          -0.023489999999999994,
+          0.79,
+          0
+        ],
+        "hipsPosition": [
+          0.000008836009001960035,
+          0.8449150909915343,
+          0.00012071243495772258
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.00012152777777777777
+        ],
+        "previousWorldQuaternion": [
+          0.20272822025297738,
+          2.1872102292687077e-7,
+          0.01757124960092385,
+          0.9790773819777856
+        ],
+        "worldQuaternion": [
+          0.08212347631712466,
+          0.0010278015019817906,
+          0.001995035538922348,
+          0.9966196356157457
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 1690.6412592000004,
+        "fade": null
+      },
+      "maximumRootTravelPerSampleMeters": 0.02,
+      "supportCoverage": {
+        "kick": {
+          "samples": 7,
+          "expectedFootSamples": 7,
+          "admittedFootSamples": 7,
+          "actualLockSamples": 7,
+          "maximumConsecutiveUnadmittedFrames": 0,
+          "postBlendExpectedFootSamples": 7,
+          "postBlendAdmittedFootSamples": 7,
+          "postBlendActiveLandingFootSamples": 0,
+          "settledExpectedFootSamples": 7,
+          "settledAdmittedFootSamples": 7,
+          "nearGroundUnadmittedSamples": 0,
+          "nearGroundRecoverySamples": 0,
+          "maximumNearGroundUnadmittedXZStepMeters": 0,
+          "totalNearGroundUnadmittedXZTravelMeters": 0,
+          "worstNearGroundUnadmitted": null,
+          "nearGroundEntryCrossings": 0,
+          "maximumNearGroundEntryXZStepMeters": 0,
+          "worstNearGroundEntry": null,
+          "rigidBootPivotSamples": 0,
+          "maximumRawNearGroundXZStepMeters": 0,
+          "intentionalGroundTravelSamples": 0,
+          "maximumIntentionalGroundXZStepMeters": 0,
+          "worstIntentionalGroundTravel": null
+        },
+        "motor/run_2": {
+          "samples": 109,
+          "expectedFootSamples": 86,
+          "admittedFootSamples": 86,
+          "actualLockSamples": 86,
+          "maximumConsecutiveUnadmittedFrames": 0,
+          "postBlendExpectedFootSamples": 86,
+          "postBlendAdmittedFootSamples": 86,
+          "postBlendActiveLandingFootSamples": 0,
+          "settledExpectedFootSamples": 86,
+          "settledAdmittedFootSamples": 86,
+          "nearGroundUnadmittedSamples": 3,
+          "nearGroundRecoverySamples": 0,
+          "maximumNearGroundUnadmittedXZStepMeters": 7.048112475352871e-11,
+          "totalNearGroundUnadmittedXZTravelMeters": 7.048139009676383e-11,
+          "worstNearGroundUnadmitted": {
+            "clock": 0.7,
+            "playbackTime": 1.690313313802083,
+            "bone": "RightFoot",
+            "sole": [
+              -0.10000000000082093,
+              0.0018125210825855609,
+              0.4049064935582282
+            ],
+            "previousSole": [
+              -0.09999999999977031,
+              -6.59815257986196e-12,
+              0.4049064934877549
+            ],
+            "fadeElapsed": null,
+            "xzStepMeters": 7.048112475352871e-11,
+            "rawXZStepMeters": 7.048112475352871e-11,
+            "rigidPivot": null,
+            "landingResidual": 0,
+            "landing": null
+          },
+          "nearGroundEntryCrossings": 2,
+          "maximumNearGroundEntryXZStepMeters": 4.6271118988257044e-14,
+          "worstNearGroundEntry": {
+            "clock": 0.7916666666666663,
+            "playbackTime": 1.5938563368055547,
+            "bone": "LeftFoot",
+            "sole": [
+              0.10000000000000016,
+              0.005042757348180632,
+              1.3174802083333381
+            ],
+            "previousSole": [
+              0.10000000000000298,
+              0.02482552715760969,
+              1.317480208333292
+            ],
+            "fadeElapsed": null,
+            "xzStepMeters": 4.6271118988257044e-14,
+            "rawXZStepMeters": 4.6271118988257044e-14,
+            "rigidPivot": null,
+            "landingResidual": 0,
+            "landing": null
+          },
+          "rigidBootPivotSamples": 0,
+          "maximumRawNearGroundXZStepMeters": 7.048112475352871e-11,
+          "intentionalGroundTravelSamples": 0,
+          "maximumIntentionalGroundXZStepMeters": 0,
+          "worstIntentionalGroundTravel": null
+        }
+      },
+      "boundaries": [
+        {
+          "clock": 0,
+          "to": "kick",
+          "coldMotorEntry": true,
+          "jump": {
+            "modelPositionMeters": 0,
+            "rootPathMeters": 0,
+            "maximumBoneRotationDegrees": 0.00000171,
+            "rotationSpace": "world, all bones except unweighted logical Root",
+            "rotationBone": "Chest",
+            "logicalRootWorldRotationDegrees": 0,
+            "maximumLocalBoneRotationDegrees": 0.00000171,
+            "localRotationBone": "Hips",
+            "maximumBonePositionMeters": 0,
+            "soleJumpMeters": {
+              "LeftFoot": 0,
+              "RightFoot": 0
+            }
+          },
+          "floorAfter": 0.0020000021764544143
+        },
+        {
+          "clock": 0.05,
+          "to": "run_2",
+          "velocityBeforeMetersPerSecond": [
+            0,
+            0,
+            0
+          ],
+          "speedBeforeMps": 0,
+          "jump": {
+            "modelPositionMeters": 0,
+            "rootPathMeters": 0,
+            "maximumBoneRotationDegrees": 0.00000241,
+            "rotationSpace": "world, all bones except unweighted logical Root",
+            "rotationBone": "RightArm",
+            "logicalRootWorldRotationDegrees": 0,
+            "maximumLocalBoneRotationDegrees": 0.00000171,
+            "localRotationBone": "Hips",
+            "maximumBonePositionMeters": 0,
+            "soleJumpMeters": {
+              "LeftFoot": 0,
+              "RightFoot": 0
+            }
+          },
+          "floorAfter": 0.002,
+          "locks": [
+            {
+              "bone": "LeftFoot",
+              "key": "motor:LeftFoot:1",
+              "release": 17.049999999999994,
+              "anchor": [
+                0.09999999849910304,
+                3.043731655605342e-10,
+                -5.23825500753361e-10
+              ]
+            }
+          ],
+          "firstStep": {
+            "sampleSeconds": 1.0043613522376542,
+            "seconds": 0.008333333333333333,
+            "velocityMetersPerSecond": [
+              0,
+              0,
+              0.014583333333333334
+            ],
+            "speedMps": 0.014583333333333334,
+            "velocityJumpMps": 0.014583333333333334,
+            "speedJumpMps": 0.014583333333333334
+          }
+        }
+      ],
+      "maxAnchorSample": {
+        "clock": 0.03333333,
+        "clip": "kick",
+        "localPlaybackTime": 0.36666683333333344,
+        "bone": "LeftFoot",
+        "key": "kick/LeftFoot/0/0",
+        "error": 3.755175169678462e-9,
+        "sole": [
+          0.0999999965415575,
+          6.560838122782187e-10,
+          -1.3076964588965012e-9
+        ],
+        "anchor": [
+          0.1,
+          0,
+          0
+        ],
+        "release": 0.3333334999999999,
+        "actorClock": 0.03333333333333333,
+        "actorSampleSeconds": 0.36666683333333344,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "rootWorld": [
+          0,
+          0,
+          0
+        ],
+        "modelPosition": [
+          0,
+          0,
+          0
+        ],
+        "hipWorld": [
+          -0.0243790031049379,
+          0.79,
+          0
+        ],
+        "fadeElapsed": null,
+        "rootBlend": null
+      },
+      "violationCount": 0,
+      "worst": []
+    }
+  ],
+  "state": {
+    "recovery": {
+      "clock": 0.9499999999999991,
+      "phase": "standalone",
+      "transitionSerial": 6,
+      "activeBaseClip": "idle",
+      "baseSeconds": 0,
+      "overlayClip": null,
+      "overlaySeconds": 0,
+      "contributors": [
+        {
+          "clipID": "idle",
+          "sampleSeconds": 0,
+          "playbackRate": 1,
+          "weight": 1,
+          "scope": "body",
+          "transform": "identity"
+        }
+      ],
+      "request": null,
+      "pendingRequestID": null,
+      "episode": null,
+      "bridgePlan": null,
+      "risePlan": null,
+      "matchedEntrySeconds": null,
+      "locomotionAllowed": false,
+      "motorAction": "idle",
+      "presentation": null,
+      "constraints": null,
+      "measured": {
+        "minimumY": 0.002000001845184812,
+        "rootSpeedMps": 2.400000000000002,
+        "rigidBootMinimumY": {
+          "LeftFoot": 0.002000001845184812,
+          "RightFoot": 0.09590165718220867
+        },
+        "chestPosition": [
+          -0.0013303488363899207,
+          1.1229042938382992,
+          1.3420556153780976
+        ],
+        "pelvisHeight": 0.7437818341692541,
+        "hipsUpDot": 0.9994589210526026,
+        "soles": {
+          "LeftFoot": [
+            0.09999999999828507,
+            -3.450335850363473e-11,
+            1.3174802082579018
+          ],
+          "RightFoot": [
+            -0.10000000000143554,
+            0.13599999997730305,
+            1.4038790220817592
+          ]
+        },
+        "footQuaternions": {
+          "LeftFoot": [
+            -9.256480640447548e-15,
+            -4.952704911552736e-13,
+            -4.50696336093757e-14,
+            1
+          ],
+          "RightFoot": [
+            0.12460513759517226,
+            -4.110080401498792e-13,
+            -4.6068050289097526e-14,
+            0.9922064098184855
+          ]
+        },
+        "kneePoles": {
+          "LeftFoot": [
+            -0.0002742308283714383,
+            -0.02352675648030304,
+            0.9997231699460453
+          ],
+          "RightFoot": [
+            0.0030941366940346535,
+            0.19457143024612608,
+            0.9808834715959359
+          ]
+        },
+        "hands": {
+          "LeftHand": {
+            "position": [
+              0.23713711071957413,
+              0.7979031520267303,
+              1.4724023659928442
+            ],
+            "orientation": [
+              -0.48449969415374766,
+              0.06775437684694405,
+              0.041776811821022726,
+              0.8711624927515408
+            ],
+            "pole": [
+              0.016873236582918515,
+              -0.33005250128792113,
+              -0.9438117610417893
+            ]
+          },
+          "RightHand": {
+            "position": [
+              -0.20733924827700873,
+              0.845416809210682,
+              1.651914144309056
+            ],
+            "orientation": [
+              -0.5828255546589177,
+              -0.010851168738286673,
+              0.0016426674906478572,
+              0.8125231852796899
+            ],
+            "pole": [
+              -0.15599292501241752,
+              -0.6270458141598614,
+              -0.7632036126032599
+            ]
+          }
+        }
+      },
+      "events": [
+        {
+          "type": "base-changed",
+          "clock": 0,
+          "from": {
+            "clipID": "idle",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "kick",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 1
+        },
+        {
+          "type": "base-changed",
+          "clock": 0,
+          "from": {
+            "clipID": "kick",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "kick",
+            "seconds": 0.3333335,
+            "entrySeconds": 0.3333335,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 2
+        },
+        {
+          "type": "base-changed",
+          "clock": 0.049999999999999996,
+          "from": {
+            "clipID": "kick",
+            "seconds": 0.3333335,
+            "entrySeconds": 0.3333335,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "kick",
+            "seconds": 0.38333350000000016,
+            "entrySeconds": 0.38333350000000016,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 3
+        },
+        {
+          "type": "request-received",
+          "clock": 0.049999999999999996,
+          "requestID": 1,
+          "clipID": "run_2"
+        },
+        {
+          "type": "base-changed",
+          "clock": 0.049999999999999996,
+          "from": {
+            "clipID": "kick",
+            "seconds": 0.38333350000000016,
+            "entrySeconds": 0.38333350000000016,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "run_2",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 4
+        },
+        {
+          "type": "action-activated",
+          "clock": 0.049999999999999996,
+          "requestID": 1,
+          "clipID": "run_2",
+          "scope": "locomotion",
+          "entrySeconds": 0,
+          "mirrored": false,
+          "completionDeadline": 4.55
+        },
+        {
+          "type": "motor-request-bound",
+          "clock": 0.049999999999999996,
+          "requestID": 1,
+          "motorRequestID": 1,
+          "physicalTargetClip": "run_2"
+        },
+        {
+          "type": "action-progress",
+          "clock": 0.05833333333333333,
+          "requestID": 1,
+          "motorRequestID": 1,
+          "actualSpeed": 0.029166666666666667,
+          "contributors": [
+            {
+              "clip": "idle",
+              "weight": 0.9990152076438621,
+              "time": 0.008333333333333333
+            },
+            {
+              "clip": "run_1",
+              "weight": 0.0009847923561378759,
+              "time": 0.22990652126736105
+            }
+          ]
+        },
+        {
+          "type": "action-completed",
+          "clock": 0.7416666666666665,
+          "requestID": 1,
+          "motorRequestID": 1,
+          "actualSpeed": 2.4,
+          "semantic": "physicalSpeedAndNeutralSupport"
+        },
+        {
+          "type": "base-changed",
+          "clock": 0.9499999999999991,
+          "from": {
+            "clipID": "run_2",
+            "seconds": 0.8999999999999992,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "idle",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 5
+        },
+        {
+          "type": "base-changed",
+          "clock": 0.9499999999999991,
+          "from": {
+            "clipID": "idle",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "to": {
+            "clipID": "idle",
+            "seconds": 0,
+            "entrySeconds": 0,
+            "rate": 1,
+            "mirror": false
+          },
+          "transitionSerial": 6
+        }
+      ],
+      "requests": [
+        {
+          "id": 1,
+          "clipID": "run_2",
+          "requestedAt": 0.049999999999999996,
+          "status": "completed",
+          "progress": 1,
+          "activatedAt": 0.049999999999999996,
+          "completedAt": 0.7416666666666665,
+          "entrySeconds": 0,
+          "scope": "locomotion",
+          "mirrored": false,
+          "playbackRate": 1,
+          "completionDeadline": 4.55,
+          "sampleSeconds": 1.929820421006944,
+          "motorRequestID": 1,
+          "motorClockOffset": 0.049999999999999996,
+          "motorInitialSpeed": 0,
+          "motorInitialDistance": 0,
+          "physicalTargetClip": "run_2",
+          "actualSpeed": 2.4,
+          "targetSpeed": 2.4,
+          "physicalContributors": [
+            {
+              "clip": "run_2",
+              "weight": 1,
+              "time": 0.7438563368055553
+            }
+          ],
+          "firstProgressAt": 0.05833333333333333
+        }
+      ]
+    },
+    "characterID": "player-01",
+    "view": "body",
+    "lod": "0",
+    "lighting": "studio",
+    "clipID": "idle",
+    "time": 0,
+    "playing": false,
+    "fps": 0,
+    "threeRevision": "160",
+    "errors": [],
+    "draws": 9,
+    "triangles": 28407,
+    "models": [
+      {
+        "id": "player-01",
+        "path": "models/player-01-lod0.glb",
+        "triangles": 28389,
+        "lift": 0,
+        "minimumY": 0.002000001883134201,
+        "world": [
+          0,
+          0,
+          0
+        ],
+        "requestedAction": "idle",
+        "recovery": {
+          "clock": 0.9499999999999991,
+          "phase": "standalone",
+          "transitionSerial": 6,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": {
+            "minimumY": 0.002000001845184812,
+            "rootSpeedMps": 2.400000000000002,
+            "rigidBootMinimumY": {
+              "LeftFoot": 0.002000001845184812,
+              "RightFoot": 0.09590165718220867
+            },
+            "chestPosition": [
+              -0.0013303488363899207,
+              1.1229042938382992,
+              1.3420556153780976
+            ],
+            "pelvisHeight": 0.7437818341692541,
+            "hipsUpDot": 0.9994589210526026,
+            "soles": {
+              "LeftFoot": [
+                0.09999999999828507,
+                -3.450335850363473e-11,
+                1.3174802082579018
+              ],
+              "RightFoot": [
+                -0.10000000000143554,
+                0.13599999997730305,
+                1.4038790220817592
+              ]
+            },
+            "footQuaternions": {
+              "LeftFoot": [
+                -9.256480640447548e-15,
+                -4.952704911552736e-13,
+                -4.50696336093757e-14,
+                1
+              ],
+              "RightFoot": [
+                0.12460513759517226,
+                -4.110080401498792e-13,
+                -4.6068050289097526e-14,
+                0.9922064098184855
+              ]
+            },
+            "kneePoles": {
+              "LeftFoot": [
+                -0.0002742308283714383,
+                -0.02352675648030304,
+                0.9997231699460453
+              ],
+              "RightFoot": [
+                0.0030941366940346535,
+                0.19457143024612608,
+                0.9808834715959359
+              ]
+            },
+            "hands": {
+              "LeftHand": {
+                "position": [
+                  0.23713711071957413,
+                  0.7979031520267303,
+                  1.4724023659928442
+                ],
+                "orientation": [
+                  -0.48449969415374766,
+                  0.06775437684694405,
+                  0.041776811821022726,
+                  0.8711624927515408
+                ],
+                "pole": [
+                  0.016873236582918515,
+                  -0.33005250128792113,
+                  -0.9438117610417893
+                ]
+              },
+              "RightHand": {
+                "position": [
+                  -0.20733924827700873,
+                  0.845416809210682,
+                  1.651914144309056
+                ],
+                "orientation": [
+                  -0.5828255546589177,
+                  -0.010851168738286673,
+                  0.0016426674906478572,
+                  0.8125231852796899
+                ],
+                "pole": [
+                  -0.15599292501241752,
+                  -0.6270458141598614,
+                  -0.7632036126032599
+                ]
+              }
+            }
+          },
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "kick",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "kick",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "kick",
+                "seconds": 0.3333335,
+                "entrySeconds": 0.3333335,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0.049999999999999996,
+              "from": {
+                "clipID": "kick",
+                "seconds": 0.3333335,
+                "entrySeconds": 0.3333335,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "kick",
+                "seconds": 0.38333350000000016,
+                "entrySeconds": 0.38333350000000016,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "request-received",
+              "clock": 0.049999999999999996,
+              "requestID": 1,
+              "clipID": "run_2"
+            },
+            {
+              "type": "base-changed",
+              "clock": 0.049999999999999996,
+              "from": {
+                "clipID": "kick",
+                "seconds": 0.38333350000000016,
+                "entrySeconds": 0.38333350000000016,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "run_2",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            },
+            {
+              "type": "action-activated",
+              "clock": 0.049999999999999996,
+              "requestID": 1,
+              "clipID": "run_2",
+              "scope": "locomotion",
+              "entrySeconds": 0,
+              "mirrored": false,
+              "completionDeadline": 4.55
+            },
+            {
+              "type": "motor-request-bound",
+              "clock": 0.049999999999999996,
+              "requestID": 1,
+              "motorRequestID": 1,
+              "physicalTargetClip": "run_2"
+            },
+            {
+              "type": "action-progress",
+              "clock": 0.05833333333333333,
+              "requestID": 1,
+              "motorRequestID": 1,
+              "actualSpeed": 0.029166666666666667,
+              "contributors": [
+                {
+                  "clip": "idle",
+                  "weight": 0.9990152076438621,
+                  "time": 0.008333333333333333
+                },
+                {
+                  "clip": "run_1",
+                  "weight": 0.0009847923561378759,
+                  "time": 0.22990652126736105
+                }
+              ]
+            },
+            {
+              "type": "action-completed",
+              "clock": 0.7416666666666665,
+              "requestID": 1,
+              "motorRequestID": 1,
+              "actualSpeed": 2.4,
+              "semantic": "physicalSpeedAndNeutralSupport"
+            },
+            {
+              "type": "base-changed",
+              "clock": 0.9499999999999991,
+              "from": {
+                "clipID": "run_2",
+                "seconds": 0.8999999999999992,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 5
+            },
+            {
+              "type": "base-changed",
+              "clock": 0.9499999999999991,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 6
+            }
+          ],
+          "requests": [
+            {
+              "id": 1,
+              "clipID": "run_2",
+              "requestedAt": 0.049999999999999996,
+              "status": "completed",
+              "progress": 1,
+              "activatedAt": 0.049999999999999996,
+              "completedAt": 0.7416666666666665,
+              "entrySeconds": 0,
+              "scope": "locomotion",
+              "mirrored": false,
+              "playbackRate": 1,
+              "completionDeadline": 4.55,
+              "sampleSeconds": 1.929820421006944,
+              "motorRequestID": 1,
+              "motorClockOffset": 0.049999999999999996,
+              "motorInitialSpeed": 0,
+              "motorInitialDistance": 0,
+              "physicalTargetClip": "run_2",
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "physicalContributors": [
+                {
+                  "clip": "run_2",
+                  "weight": 1,
+                  "time": 0.7438563368055553
+                }
+              ],
+              "firstProgressAt": 0.05833333333333333
+            }
+          ]
+        },
+        "activeBaseClip": "idle",
+        "activeBaseSeconds": 0,
+        "physicalMotorTargetClip": null,
+        "locomotion": null,
+        "motorPresentation": null,
+        "sampleSeconds": 0,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "LeftFoot",
+            "key": "idle/LeftFoot/0/0",
+            "anchor": [
+              0.1,
+              0,
+              0
+            ],
+            "release": 2.749999999999999
+          },
+          {
+            "bone": "RightFoot",
+            "key": "idle/RightFoot/0/0",
+            "anchor": [
+              -0.1,
+              0,
+              0
+            ],
+            "release": 2.749999999999999
+          }
+        ]
+      }
+    ],
+    "environment": {
+      "generatedTextureSizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "crowdInstances": 360,
+      "crowdDrawCalls": 2,
+      "seatInstances": 360,
+      "environmentTriangles": 19580,
+      "shadowMapHero": 1024,
+      "shadowMapPitch": 512,
+      "environmentGeneratedLocally": true,
+      "reflectionSettings": {
+        "frontStrength": 8,
+        "sigma": 0
+      }
+    }
+  },
+  "loadedModels": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "bytes": 1214572,
+      "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7"
+    }
+  ],
+  "servedResources": {
+    "preview.html": {
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.html"
+    },
+    "preview.css": {
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.css"
+    },
+    "vendor/data.js": {
+      "bytes": 1934122,
+      "sha256": "cb8cf3b2adc67ae1df100f7ff9e6b82f11506ab080407bce11728eae053b92cc",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/vendor/data.js"
+    },
+    "vendor/viewer-runtime.js": {
+      "bytes": 846946,
+      "sha256": "13c943fac921460356c0ec64c597010657a4dd05756e7db06fe0e7856ff91f13",
+      "source": "/tmp/soccer-v7-recovery-combined15a/runtime.js"
+    },
+    "offline/player-01-lod0.js": {
+      "bytes": 1619531,
+      "sha256": "0198e0cdd1ad16c104fe2a1528c4ac3659165f74ee580c9d3ad9430bc484d1ba",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-01-lod0.js"
+    }
+  },
+  "generatedAt": "2026-11-05T04:25:43.271Z",
+  "auditSource": {
+    "file": "source/audit-transitions.cjs",
+    "sha256": "5fa82c27fc2f4f6d4327d55de49098d8a951d6da217e7ec3a26de7fbaccd6760"
+  },
+  "observerSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+  },
+  "errors": [],
+  "remoteRequests": [],
+  "inputs": {
+    "vendor/viewer-runtime.js": {
+      "bytes": 846970,
+      "sha256": "a79018f6d16eda8aef175c2c59364666db4c3e4ba3612b28fcd624b74ac34a40"
+    },
+    "vendor/data.js": {
+      "bytes": 1934122,
+      "sha256": "cb8cf3b2adc67ae1df100f7ff9e6b82f11506ab080407bce11728eae053b92cc"
+    },
+    "preview.js": {
+      "bytes": 87072,
+      "sha256": "4d0f95fe85df65fa0acbf5a88e6efe9ce1d77bd1949824e7c50132545327ea47"
+    },
+    "source/motion-runtime.js": {
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    },
+    "asset-manifest.json": {
+      "bytes": 393766,
+      "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c"
+    },
+    "animations.json": {
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "source/audit-transitions.cjs": {
+      "bytes": 61767,
+      "sha256": "5fa82c27fc2f4f6d4327d55de49098d8a951d6da217e7ec3a26de7fbaccd6760"
+    },
+    "source/audit-action-observer.cjs": {
+      "bytes": 28799,
+      "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+    },
+    "source/locomotion-space.js": {
+      "bytes": 22346,
+      "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+    },
+    "source/locomotion-curve.js": {
+      "bytes": 4551,
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+    },
+    "source/recovery-state.js": {
+      "bytes": 35502,
+      "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+    }
+  },
+  "initialInputs": {
+    "vendor/viewer-runtime.js": {
+      "bytes": 846970,
+      "sha256": "a79018f6d16eda8aef175c2c59364666db4c3e4ba3612b28fcd624b74ac34a40"
+    },
+    "vendor/data.js": {
+      "bytes": 1934122,
+      "sha256": "cb8cf3b2adc67ae1df100f7ff9e6b82f11506ab080407bce11728eae053b92cc"
+    },
+    "preview.js": {
+      "bytes": 87072,
+      "sha256": "4d0f95fe85df65fa0acbf5a88e6efe9ce1d77bd1949824e7c50132545327ea47"
+    },
+    "source/motion-runtime.js": {
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    },
+    "asset-manifest.json": {
+      "bytes": 393766,
+      "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c"
+    },
+    "animations.json": {
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "source/audit-transitions.cjs": {
+      "bytes": 61767,
+      "sha256": "5fa82c27fc2f4f6d4327d55de49098d8a951d6da217e7ec3a26de7fbaccd6760"
+    },
+    "source/audit-action-observer.cjs": {
+      "bytes": 28799,
+      "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+    },
+    "source/locomotion-space.js": {
+      "bytes": 22346,
+      "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+    },
+    "source/locomotion-curve.js": {
+      "bytes": 4551,
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+    },
+    "source/recovery-state.js": {
+      "bytes": 35502,
+      "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+    }
+  },
+  "diagnostic": {
+    "enabled": true,
+    "runtimePath": "/tmp/soccer-v7-recovery-combined15a/runtime.js",
+    "snapshotRoot": null,
+    "inputs": {
+      "/tmp/soccer-v7-recovery-combined15a/runtime.js": {
+        "bytes": 846946,
+        "sha256": "13c943fac921460356c0ec64c597010657a4dd05756e7db06fe0e7856ff91f13"
+      },
+      "/tmp/soccer-v7-recovery-combined15a/frozen-recovery-state.js": {
+        "bytes": 35502,
+        "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+      }
+    },
+    "unchanged": [
+      {
+        "file": "/tmp/soccer-v7-recovery-combined15a/runtime.js",
+        "pass": true
+      },
+      {
+        "file": "/tmp/soccer-v7-recovery-combined15a/frozen-recovery-state.js",
+        "pass": true
+      }
+    ]
+  },
+  "thresholds": {
+    "minimumVertexY": -0.001,
+    "maximumPlantAnchorDistanceMeters": 0.003,
+    "maximumImmediateBoneJumpMeters": 0.003,
+    "maximumImmediateBoneRotationDegrees": 1,
+    "maximumImmediateRootJumpMeters": 0.0005,
+    "minimumSettledContactAdmissionRatio": 0.98,
+    "maximumValidLandingDurationSeconds": 0.3,
+    "maximumRecoveryDurationSeconds": 0.08,
+    "maximumExpectedUnadmittedNearGroundXZStepMeters": 0.003,
+    "maximumAdvancingJointAngularSpeedRadiansPerSecond": 30,
+    "maximumRootRelativeBoneSpeedMps": 25
+  },
+  "loadedModelsMatchDisk": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "pass": true,
+      "diskSha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7"
+    }
+  ],
+  "servedResourcesMatchDisk": [
+    {
+      "path": "preview.html",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.html",
+      "pass": true,
+      "diskSha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "path": "preview.css",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.css",
+      "pass": true,
+      "diskSha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "path": "vendor/data.js",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/vendor/data.js",
+      "pass": true,
+      "diskSha256": "cb8cf3b2adc67ae1df100f7ff9e6b82f11506ab080407bce11728eae053b92cc"
+    },
+    {
+      "path": "vendor/viewer-runtime.js",
+      "source": "/tmp/soccer-v7-recovery-combined15a/runtime.js",
+      "pass": true,
+      "diskSha256": "13c943fac921460356c0ec64c597010657a4dd05756e7db06fe0e7856ff91f13"
+    },
+    {
+      "path": "offline/player-01-lod0.js",
+      "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-01-lod0.js",
+      "pass": true,
+      "diskSha256": "0198e0cdd1ad16c104fe2a1528c4ac3659165f74ee580c9d3ad9430bc484d1ba"
+    }
+  ],
+  "checks": {
+    "sourceInputsUnchangedDuringAudit": true,
+    "diagnosticInputsUnchangedDuringAudit": true,
+    "actualDescriptorSupported": true,
+    "actualLedgerAndFulfillment": true,
+    "virtualPalmSupport": true,
+    "settledAuthoredPalmSupport": true,
+    "catchDiveBodyContinuation": true,
+    "observerUnchangedDuringAudit": true,
+    "noPageErrors": true,
+    "noRemoteRequests": true,
+    "auditorUnchangedDuringAudit": true,
+    "requestedIdentityAndLODLoaded": true,
+    "decodedModelsMatchDisk": true,
+    "decodedModelsMatchDeclaredData": true,
+    "declaredMotionMatchesCurrentSource": true,
+    "declaredManifestMatchesCurrentSource": true,
+    "declaredMotionRuntimeMatchesCurrentSource": true,
+    "logicalRootHasNoSkinWeights": true,
+    "servedPackageUnchangedDuringAudit": true,
+    "fullMeshAboveFloor": true,
+    "activePlantAnchors": true,
+    "boundedActiveLandings": true,
+    "boundedRecovery": true,
+    "noExpiredContactLandings": true,
+    "settledSupportCoverage": true,
+    "unadmittedNearGroundDrift": true,
+    "immediateBonePositionContinuity": true,
+    "immediateBoneRotationContinuity": true,
+    "immediateRootContinuity": true,
+    "advancingJointAngularVelocity": true,
+    "advancingRootRelativeBoneVelocity": true
+  },
+  "complete": false,
+  "pass": true
+}

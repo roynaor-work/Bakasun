@@ -1,0 +1,1196 @@
+{
+  "schemaVersion": 2,
+  "workerCount": 2,
+  "outputDirectory": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/verification",
+  "statePath": "/tmp/soccer-v7-transition-matrix-210c9787722ba336.json",
+  "snapshotSha256": "b7bd70d4aa5a77c0c679c49c55f743d7225be0877a3b290d4e128f0e887ad2e1",
+  "inputs": {
+    "animations.json": {
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "asset-manifest.json": {
+      "bytes": 466491,
+      "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a"
+    },
+    "models/goalkeeper-lod0.glb": {
+      "bytes": 1352292,
+      "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+    },
+    "models/goalkeeper-lod1.glb": {
+      "bytes": 896884,
+      "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+    },
+    "models/player-01-lod0.glb": {
+      "bytes": 1336564,
+      "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+    },
+    "models/player-01-lod1.glb": {
+      "bytes": 889984,
+      "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+    },
+    "models/player-02-lod0.glb": {
+      "bytes": 1309188,
+      "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+    },
+    "models/player-02-lod1.glb": {
+      "bytes": 869612,
+      "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+    },
+    "models/player-03-lod0.glb": {
+      "bytes": 1361628,
+      "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+    },
+    "models/player-03-lod1.glb": {
+      "bytes": 911836,
+      "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+    },
+    "models/player-04-lod0.glb": {
+      "bytes": 1378168,
+      "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+    },
+    "models/player-04-lod1.glb": {
+      "bytes": 929072,
+      "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+    },
+    "models/player-05-lod0.glb": {
+      "bytes": 1273936,
+      "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+    },
+    "models/player-05-lod1.glb": {
+      "bytes": 875864,
+      "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+    },
+    "models/player-06-lod0.glb": {
+      "bytes": 1359124,
+      "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+    },
+    "models/player-06-lod1.glb": {
+      "bytes": 904828,
+      "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+    },
+    "models/referee-lod0.glb": {
+      "bytes": 1360752,
+      "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+    },
+    "models/referee-lod1.glb": {
+      "bytes": 912812,
+      "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+    },
+    "motion-manifest.json": {
+      "bytes": 6908,
+      "sha256": "bad6154ccfffe597de27a41eb23aced8ca3354c77243e388015092a044b522d8"
+    },
+    "offline/goalkeeper-lod0.js": {
+      "bytes": 1803156,
+      "sha256": "4a276986668e7c82ec6ac14ea92baebbdde8d61aea0399ce8c22d47dd7a56c63"
+    },
+    "offline/goalkeeper-lod1.js": {
+      "bytes": 1195948,
+      "sha256": "617a19c0903247af2ee23dff0e16602fb85b074a4080f9a0d401c9ee31a9ca3a"
+    },
+    "offline/player-01-lod0.js": {
+      "bytes": 1782187,
+      "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+    },
+    "offline/player-01-lod1.js": {
+      "bytes": 1186747,
+      "sha256": "858e866b666d36915416a457111a15125689d0670f137f4f332fc09cf1df1625"
+    },
+    "offline/player-02-lod0.js": {
+      "bytes": 1745683,
+      "sha256": "3292833d99803be0fa5de9abc7e776d06f82e8b61a9c257bf9fbb18c2170fa6a"
+    },
+    "offline/player-02-lod1.js": {
+      "bytes": 1159583,
+      "sha256": "14a3cb32ff5eaefb3956281fd8fae697ff9c7336702ce47a452ea80201e257e3"
+    },
+    "offline/player-03-lod0.js": {
+      "bytes": 1815603,
+      "sha256": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389"
+    },
+    "offline/player-03-lod1.js": {
+      "bytes": 1215883,
+      "sha256": "2add2f17da166928b5396196f3dc84b6f6f36033c182c6fea2876a32939eb147"
+    },
+    "offline/player-04-lod0.js": {
+      "bytes": 1837659,
+      "sha256": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891"
+    },
+    "offline/player-04-lod1.js": {
+      "bytes": 1238863,
+      "sha256": "0310600c2b928d6ecabe119b7a9813352bc1da158a66e64d1d13dcd2ebf7b1d5"
+    },
+    "offline/player-05-lod0.js": {
+      "bytes": 1698683,
+      "sha256": "3c915824779811f8f3b8e2e7e60b2b9ae23c2722c90934aaed86cbe7e245bdf7"
+    },
+    "offline/player-05-lod1.js": {
+      "bytes": 1167919,
+      "sha256": "805bd9f178e0da57a19656ea8604d542d32625394f4350c9710195a78115cb08"
+    },
+    "offline/player-06-lod0.js": {
+      "bytes": 1812267,
+      "sha256": "5d96349547f84a0f17210a4670194a40b31a6fc6b34f4eac1f17eef09ff51f0d"
+    },
+    "offline/player-06-lod1.js": {
+      "bytes": 1206539,
+      "sha256": "5f49b4804b02527b29034aecdf5bd8314205120260f14f972bace9d2345bdc83"
+    },
+    "offline/referee-lod0.js": {
+      "bytes": 1814433,
+      "sha256": "9ff2965361bddfe5397e7e843af749d43e502bc9a6ca9379801677e4da72a663"
+    },
+    "offline/referee-lod1.js": {
+      "bytes": 1217181,
+      "sha256": "c1d6e5c9c35ff8358335ccedeee43c99d54f92ec61188415e720dddd7051a46e"
+    },
+    "preview.css": {
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    "preview.html": {
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    "preview.js": {
+      "bytes": 88190,
+      "sha256": "12c09ce33eeb6c751a9b1790562e74f2605b6737e4bd7c32084263dc9e24f2a8"
+    },
+    "rig.json": {
+      "bytes": 3038,
+      "sha256": "b577cdd2fce0b82bb94b35e6cf353979b7c6336b341afc2111cc1fb0a6eaa834"
+    },
+    "source/audit-action-observer.cjs": {
+      "bytes": 32959,
+      "sha256": "e6cfdcb7a0254bcb9654271cf6e476d8f1ef07de0ee67ae588bb2a49d886aa21"
+    },
+    "source/audit-cpu.mjs": {
+      "bytes": 24631,
+      "sha256": "931c1aa1c1451329d4940a4d9f06399c7d4e58f2dce8257c5492b8afd30d2caa"
+    },
+    "source/audit-equivariance.cjs": {
+      "bytes": 14891,
+      "sha256": "4401457ae02ee0e68ca0b6eefb9a73f9f62c7525b8aade971e3ef85a4a5c0c80"
+    },
+    "source/audit-eye-visibility.mjs": {
+      "bytes": 7711,
+      "sha256": "11481ed25c64b4c916b22f68aafb37c4307a844bbc162fb5b62e461a40f9e256"
+    },
+    "source/audit-locomotion-curve.cjs": {
+      "bytes": 8686,
+      "sha256": "f7566f4236b15e04f157d0d1c8e9f3be2029ba68130821afec9f63b91c0d839d"
+    },
+    "source/audit-locomotion.cjs": {
+      "bytes": 22584,
+      "sha256": "b343d7e8315331aa8cef2254932401fcf014af3f22de305555b018e718bdc9ce"
+    },
+    "source/audit-native-flat-boot.mjs": {
+      "bytes": 7272,
+      "sha256": "5c74f451e25092ae0d3adbe0e5520ff39fa600dbef8bcd1782930de17ce027d9"
+    },
+    "source/audit-pitch.cjs": {
+      "bytes": 16791,
+      "sha256": "56572e070c7be7a434230210183af017f42ba12f49e959d90de6b2d794006710"
+    },
+    "source/audit-skinning.mjs": {
+      "bytes": 31942,
+      "sha256": "6b6950a7490270a6ca51234b87b101242ab9b63dcd5796fbf36730e4e46ffed7"
+    },
+    "source/audit-transition-matrix.cjs": {
+      "bytes": 25168,
+      "sha256": "01c7a8159c8b7eebb83a5c8549782539e2a5de1e550d501e6910923584465b71"
+    },
+    "source/audit-transitions.cjs": {
+      "bytes": 61767,
+      "sha256": "5fa82c27fc2f4f6d4327d55de49098d8a951d6da217e7ec3a26de7fbaccd6760"
+    },
+    "source/audit-viewer-session.cjs": {
+      "bytes": 8086,
+      "sha256": "ab460898a2543a643cb2aa71dcd8adb1427836161183fd619f8750101c24bc54"
+    },
+    "source/audit.mjs": {
+      "bytes": 46154,
+      "sha256": "01efb468e7453e30cd09c14d911b776dd2bf389a7b994cf1712938781ecd39bb"
+    },
+    "source/boot-bounds.mjs": {
+      "bytes": 14445,
+      "sha256": "d706c65af2d646ffaf4f3f91b0602f74cfc9041eea62c4c96683ba7d1e9f5d78"
+    },
+    "source/browser-session.mjs": {
+      "bytes": 2315,
+      "sha256": "f412f05cf01c298838bc1ac84542cb20cadc05ea55d8cdb1ccd93d36890e89c7"
+    },
+    "source/build-gallery.mjs": {
+      "bytes": 8772,
+      "sha256": "0b9922f1cd2fc691ed150229faf7a495236ba57e0bb0432d22165ea0e09debc5"
+    },
+    "source/capture-motion-candidate.mjs": {
+      "bytes": 3440,
+      "sha256": "8fc15fa2f377ae8ecb6a40559ba9da3bb8dc40f9c9cc9a52060599edb763061b"
+    },
+    "source/capture-motion-film.mjs": {
+      "bytes": 14109,
+      "sha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96"
+    },
+    "source/capture-preflight.mjs": {
+      "bytes": 3732,
+      "sha256": "014c83541956a1043fd93b5ab4603b5c3b58424c42fb7edf0bcc4bff1ec710f6"
+    },
+    "source/capture-roster.mjs": {
+      "bytes": 4402,
+      "sha256": "9800b3bf1ad6d90566629bb1f4d8be72cd72b80659554efaab625cfc3f7fd190"
+    },
+    "source/capture.mjs": {
+      "bytes": 5874,
+      "sha256": "7861e711e58fa6e21826c9d684b908277c46df3cfae48266d5c55ba665aa00de"
+    },
+    "source/character-candidates16/asset-manifest-player-01.json": {
+      "bytes": 6728,
+      "sha256": "6c800500c461a3c29688716b9d3045b8eb5fd301d09b636eeef2b1288d141597"
+    },
+    "source/character-candidates16b/asset-manifest-player-01.json": {
+      "bytes": 6728,
+      "sha256": "42293aeb46b597b60a598ad004070c8c13d5627515e45f364539416aa74bcad7"
+    },
+    "source/character-candidates16c/asset-manifest-player-01.json": {
+      "bytes": 6754,
+      "sha256": "b07cd67e9fbc92548802416cf2cb70cc10bfe8a3b1699fa570781d0e2ea9e57b"
+    },
+    "source/character-candidates17-baseline/asset-manifest-player-06.json": {
+      "bytes": 4664,
+      "sha256": "106ce5f08ad87ded91ca4bd2a09f890940abb83ad8316947c3f1c3fa970f2325"
+    },
+    "source/character-candidates17/asset-manifest-player-01.json": {
+      "bytes": 7232,
+      "sha256": "f9f438d89ce31be275888cbfaf1923c6aef2b7c0fa5be66c542d9bb1af0b0de9"
+    },
+    "source/character-candidates18/asset-manifest-player-01.json": {
+      "bytes": 7171,
+      "sha256": "37cd7d49ba17d45292dc8f349aafc7f35e2e983527f4fafcdc935063a5245054"
+    },
+    "source/character-candidates19/asset-manifest-player-01.json": {
+      "bytes": 7186,
+      "sha256": "6d55fc493f9d9994e858c44e13ee2d5e435b1159f7e1e2d2ec8e1ce28fae6262"
+    },
+    "source/character-candidates20/asset-manifest-player-01.json": {
+      "bytes": 6821,
+      "sha256": "e2616a22b485e48b9b3517bafcfc424a6e358cb5700a3a590e09fc24269a954b"
+    },
+    "source/character-candidates20/patch-proof.json": {
+      "bytes": 1475,
+      "sha256": "0d1ba741e0624e49835dce0af51410d8c26f80797761cdb236f0c1533b29400e"
+    },
+    "source/character-candidates21/asset-manifest-player-01.json": {
+      "bytes": 9395,
+      "sha256": "5516e313d2883d239b9e1f378f9d36671d1fda5a9285bf689759571f87d19d0b"
+    },
+    "source/character-candidates22/asset-manifest.json": {
+      "bytes": 391264,
+      "sha256": "fa86c538a14d377e4485634ee57a3d10d0afb0b4864ae7e5a51116d6b1464e81"
+    },
+    "source/character-candidates23-final/asset-manifest.json": {
+      "bytes": 391758,
+      "sha256": "956b01de9f65970b686e894bf0991b9fb6ad0dde77d6113bfd9206aac0e20e60"
+    },
+    "source/character-candidates23/asset-manifest-player-01.json": {
+      "bytes": 100083,
+      "sha256": "ee04fc141d451aa345db92ed21c898d7bbbfa3dd358fb9184c6f2606c1c4f9c9"
+    },
+    "source/character-candidates24-final/asset-manifest.json": {
+      "bytes": 391902,
+      "sha256": "45ede6c8126360edcca8a31f0c0f85d9896e7a84d836079601f97bed06f9c583"
+    },
+    "source/character-candidates24-final/material-proof.json": {
+      "bytes": 9076,
+      "sha256": "6c6edba90cdfad9107b83ec7f15b277ec5b5ae868632e55754506ab7a1d50a10"
+    },
+    "source/character-candidates25/asset-manifest-player-02.json": {
+      "bytes": 100124,
+      "sha256": "e486a17f9a2b0ebc402ea8ed16b30c44e4c52a8672db5259a192f055fe27b939"
+    },
+    "source/character-candidates26-final/asset-manifest.json": {
+      "bytes": 398127,
+      "sha256": "d49ec66db2e82b801592007d3aabcbe57c1ce802f36ae26d590d462985fb9395"
+    },
+    "source/character-candidates27/asset-manifest-player-02.json": {
+      "bytes": 101655,
+      "sha256": "c5eea4325e03e42c8cbdc7820f5eca8195e17bee31d89bb2e4a315129ed3664f"
+    },
+    "source/character-candidates28/asset-manifest-player-03.json": {
+      "bytes": 110735,
+      "sha256": "28f4f92727f0fc510c2df041698435e58d62210dc3eda67989d2ae1bf1a576cb"
+    },
+    "source/character-candidates29/asset-manifest-player-03.json": {
+      "bytes": 108209,
+      "sha256": "b267ea3cd56b605ac536ac783f45fc5522e9f39116c00dd77806d179f570d6fb"
+    },
+    "source/character-candidates30/asset-manifest-player-02.json": {
+      "bytes": 103059,
+      "sha256": "57feee5ce97f7ae57b14edd30258df59823d80939011768d534d2ef117732401"
+    },
+    "source/character-candidates31-baseline/asset-manifest-player-02.json": {
+      "bytes": 160760,
+      "sha256": "f4ee598c612c1b009846fce4d9e086ca0bcbb3273faa8f5d8b3f836e218c7a4c"
+    },
+    "source/character-candidates31-cloth-base/asset-manifest-player-01.json": {
+      "bytes": 111218,
+      "sha256": "65258cf634c140e30f91846aa13b9bbd9073c6098fbb702fd90b276d16101b3b"
+    },
+    "source/character-candidates31-cloth-finish/asset-manifest-player-01.json": {
+      "bytes": 118585,
+      "sha256": "52b615f6ebba2521767590500e3aab9064a40e700bcf2b5524d8344abf214f35"
+    },
+    "source/character-candidates31-lids/asset-manifest-player-02.json": {
+      "bytes": 107422,
+      "sha256": "32319224ae4e5d68dabac8e155f094df5af7200f5e6651de08c124771c604def"
+    },
+    "source/character-candidates31-projected/asset-manifest-player-04.json": {
+      "bytes": 60973,
+      "sha256": "9a8061c899a565a6cf45b00abd5b0f125564a4c5877332b244facad462a690b7"
+    },
+    "source/character-candidates31-shape/asset-manifest-player-03.json": {
+      "bytes": 119053,
+      "sha256": "b850da60ba0bb18d8019d687e93b5577765758f93b70b69d21a8291f31675438"
+    },
+    "source/character-candidates31-wisps/asset-manifest-player-03.json": {
+      "bytes": 109454,
+      "sha256": "56edfe65a29e8f8fcd2ae1715b29d96b2fbca3886cfa5419945816d51ba718ea"
+    },
+    "source/character-candidates32-far/asset-manifest-player-02.json": {
+      "bytes": 106440,
+      "sha256": "da3c29185e7ac769ed53b58e6b6b416f2cceef1ba549bab29df20e62fc3eef57"
+    },
+    "source/character-candidates32-final/asset-manifest.json": {
+      "bytes": 464627,
+      "sha256": "fa336a742407b53736164b19a98076e797b2c13af4820c09a3c9e2c6786b02fb"
+    },
+    "source/character-cloth-finish31-decoded-proof.json": {
+      "bytes": 17152,
+      "sha256": "68fb65139951e8bc3504e5aaaf6dd7309dd5abbf03470cd667a6176366fd128a"
+    },
+    "source/character-cloth-finish31-proof.json": {
+      "bytes": 33137,
+      "sha256": "89698c5fde0700b14dfc160d5e37e6019a54d235210f224961c6b6bb11f0965d"
+    },
+    "source/character-collar32-decoded-proof.json": {
+      "bytes": 33765,
+      "sha256": "333a8d2eae5ae6a72bff961bbaaf8ca96922397b3f598bd8d4d64f77c392581b"
+    },
+    "source/character-eye19-actual-alignment-proof.json": {
+      "bytes": 36911,
+      "sha256": "a01031a5db2b09febd90f679b3e0c5d93f30686b47db5ff507bcce3bff2cf786"
+    },
+    "source/character-eye19-geometry-proof.json": {
+      "bytes": 15815,
+      "sha256": "d0301d69b2165044588c493ebbc6f4b4b1c338eb94cc8fddf18839d7adc45776"
+    },
+    "source/character-face27-authoring-proof.json": {
+      "bytes": 1306,
+      "sha256": "40c09e06d7e5d68dcd07e42697c068f3320e384751d6f20dfc0f568899bbb684"
+    },
+    "source/character-hair-shape31-authoring-proof.json": {
+      "bytes": 3983,
+      "sha256": "f07c1a1c2f063df65fa82a13bba6b4deafa424dac8f8abfa100436babaab3fb6"
+    },
+    "source/character-hair28-authoring-proof.json": {
+      "bytes": 4908,
+      "sha256": "320dec014c6ebba771c9fe0931e63c0a589cf604cf8796bb8ae90ffa561ae939"
+    },
+    "source/character-hair29-authoring-proof.json": {
+      "bytes": 3711,
+      "sha256": "842ec5895f734c60fa23da257dfc79b0454c646062ff5a93126d04d65b7b3277"
+    },
+    "source/character-hair31-authoring-proof.json": {
+      "bytes": 3901,
+      "sha256": "c21ad25dde9194a5cd712fa1d7c2e43728efcf98da211b54bdf92c855f487bc1"
+    },
+    "source/character-material-proof.json": {
+      "bytes": 1951,
+      "sha256": "976e9240c4d6348dcf34dbdfa82525f41d57b0105bea599841c6957c0e787200"
+    },
+    "source/character-measure-textures.py": {
+      "bytes": 10122,
+      "sha256": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645"
+    },
+    "source/character-promotion-report.json": {
+      "bytes": 3436,
+      "sha256": "10a2870fd8167a0a3be2f8391af5cdb4df732a2ddc35e18813938dac57777c38"
+    },
+    "source/character-texture-quality.json": {
+      "bytes": 32108,
+      "sha256": "47d96a62de4179c4d470f3a6297a6ffbbcdbb588ec2e199e47e593184c1efd39"
+    },
+    "source/character-uv-proof.json": {
+      "bytes": 9084,
+      "sha256": "07547ffbccfe882c7b3b6d1c40198c29771379e1885b54ee725e00717f7d4d66"
+    },
+    "source/character_atlas.py": {
+      "bytes": 25911,
+      "sha256": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3"
+    },
+    "source/character_build.py": {
+      "bytes": 70501,
+      "sha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af"
+    },
+    "source/character_cloth17.py": {
+      "bytes": 23189,
+      "sha256": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5"
+    },
+    "source/character_cloth_finish.py": {
+      "bytes": 11505,
+      "sha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f"
+    },
+    "source/character_compress.mjs": {
+      "bytes": 4164,
+      "sha256": "c3a458da7af299ffba68943c98735bcae847519dc0cbb99226b7d9868d5fe1de"
+    },
+    "source/character_eye19.py": {
+      "bytes": 13607,
+      "sha256": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31"
+    },
+    "source/character_face27.py": {
+      "bytes": 3089,
+      "sha256": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342"
+    },
+    "source/character_face_helper.py": {
+      "bytes": 6652,
+      "sha256": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d"
+    },
+    "source/character_farcap32.py": {
+      "bytes": 3416,
+      "sha256": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0"
+    },
+    "source/character_fetch_skin.py": {
+      "bytes": 3647,
+      "sha256": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8"
+    },
+    "source/character_groom_atlas.py": {
+      "bytes": 8421,
+      "sha256": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4"
+    },
+    "source/character_hair.py": {
+      "bytes": 13916,
+      "sha256": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c"
+    },
+    "source/character_hair28.py": {
+      "bytes": 10750,
+      "sha256": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a"
+    },
+    "source/character_hair29.py": {
+      "bytes": 11153,
+      "sha256": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b"
+    },
+    "source/character_hair31.py": {
+      "bytes": 7621,
+      "sha256": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5"
+    },
+    "source/character_hair_shape31.py": {
+      "bytes": 9644,
+      "sha256": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d"
+    },
+    "source/character_material24.mjs": {
+      "bytes": 3800,
+      "sha256": "a9430d61d4a110d1344732df7b2af9a2132d82d7a176a98861be5dbd252064f7"
+    },
+    "source/character_normal_field.py": {
+      "bytes": 2148,
+      "sha256": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b"
+    },
+    "source/character_promote.mjs": {
+      "bytes": 3776,
+      "sha256": "7bf4108b4c88628b3f534c24f9d364cbfb5bdba80074ad6b2fa9109f824822ff"
+    },
+    "source/character_seams.py": {
+      "bytes": 13984,
+      "sha256": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03"
+    },
+    "source/character_sock21.py": {
+      "bytes": 2872,
+      "sha256": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703"
+    },
+    "source/evidence/locomotion-c14/focused-summary.json": {
+      "bytes": 110777,
+      "sha256": "c6a9fc7f2225c7bb671074e4e63889fe7739ac8b8bd72d92aa784dbeb52a49a6"
+    },
+    "source/evidence/locomotion-c14/state-proof.json": {
+      "bytes": 7791,
+      "sha256": "82ec9a6fddbf030480295791d4fe09da946dfa01d38dd029af08448485856865"
+    },
+    "source/evidence/motion-entry-c15/physical-height-focused-diagnostic.json": {
+      "bytes": 11248,
+      "sha256": "799937519abfe71900ab77cbda10bf780b301735bfd50e9c1c1ec180570d5a73"
+    },
+    "source/evidence/motion-entry-c15/rotation-only-diagnostic.json": {
+      "bytes": 10479,
+      "sha256": "d9d9a5c64df4ed3c8d4e7ca62837ceb74099a9b94dd306d1a489c39fd79abfd1"
+    },
+    "source/file-inventory.mjs": {
+      "bytes": 3718,
+      "sha256": "52cf4809fd8716f3da9bfe3e3629ae0cce69a8739bfacc0831ba2abec50db84f"
+    },
+    "source/floor-envelope.mjs": {
+      "bytes": 13506,
+      "sha256": "abba43d3a0f95420169d2b9820e6f14994e8cf7b8d1dac2495b725156421b230"
+    },
+    "source/locomotion-curve-check.mjs": {
+      "bytes": 5403,
+      "sha256": "4a35dd52968f93daeda2e6ddfd00c295ebac386f185797b84f3d20bc3fa2c443"
+    },
+    "source/locomotion-curve-proof.json": {
+      "bytes": 2223,
+      "sha256": "79986d44d64808a4d91d7ba6945063e3828ed4037c8993957bebe717bb3c5eef"
+    },
+    "source/locomotion-curve.js": {
+      "bytes": 4551,
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+    },
+    "source/locomotion-dribble.js": {
+      "bytes": 3916,
+      "sha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d"
+    },
+    "source/locomotion-prototype-proof.json": {
+      "bytes": 246771,
+      "sha256": "c70a2605f5b719ace86e6890d17a9a716bbceec1d47cf67752ca8e5106ef830b"
+    },
+    "source/locomotion-seed-check.mjs": {
+      "bytes": 4070,
+      "sha256": "0ffefeb83278776c98943d2ff08636385cff47f071b6ca44240047b23b0933ce"
+    },
+    "source/locomotion-seed-proof.json": {
+      "bytes": 7791,
+      "sha256": "82ec9a6fddbf030480295791d4fe09da946dfa01d38dd029af08448485856865"
+    },
+    "source/locomotion-space.js": {
+      "bytes": 22346,
+      "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+    },
+    "source/locomotion-state-check.mjs": {
+      "bytes": 9400,
+      "sha256": "40a8d012cece2453f19bdc77f64ab3bf8e10e73e7a9c7d3427b0cb218db52996"
+    },
+    "source/locomotion-state-proof.json": {
+      "bytes": 2403,
+      "sha256": "5626f318009cdc86d3e61e6aa43cf761f0dc13739bd791526fae19c901d84c17"
+    },
+    "source/motion-ball-contact-metrics.json": {
+      "bytes": 3269,
+      "sha256": "09a1607d8710b095e6e52f165d1a9f6c4e3b8b6f042e61c5f6680a58c161c0a7"
+    },
+    "source/motion-build.py": {
+      "bytes": 54075,
+      "sha256": "623c31c7f305abfc287df3f31ac8d277807dad37008ea556e5e1605c32ebb717"
+    },
+    "source/motion-capture.mjs": {
+      "bytes": 7662,
+      "sha256": "059f2ed8af318d073b608a2f715b1a2c7b730cc37fcea96124d7a279b2ce489b"
+    },
+    "source/motion-decelerate-fk-diagnostic.json": {
+      "bytes": 147941,
+      "sha256": "bf2e556ef58bb5cac7bacb67d0bec061b6f43dd0495b9ae688cb7dea1a8e67b8"
+    },
+    "source/motion-decelerate-fk-diagnostic.mjs": {
+      "bytes": 4726,
+      "sha256": "b7f6a5cf08eeb849136d532eb5bea687f3217f4fc369fa00bc8c79928b9074fb"
+    },
+    "source/motion-decelerate-scale-metrics.json": {
+      "bytes": 1516,
+      "sha256": "8235d5f416508354a9df746e394dd541688455c3c626ef2b238608208093d56e"
+    },
+    "source/motion-dive-skin-review.json": {
+      "bytes": 28208,
+      "sha256": "72809187b31ade0c9db2e2bed116ade907b35823cd113f569a98314dd6d6dcde"
+    },
+    "source/motion-embed.mjs": {
+      "bytes": 19774,
+      "sha256": "cf4c6bae0726f9f7f1021bcc318f4709548a96f0cf02bfd24f0eedcbdb6a0404"
+    },
+    "source/motion-embedded-preview.json": {
+      "bytes": 152474,
+      "sha256": "60847cb0ddebad9ba011134fd19bc457da4db5be02029571538e36da677146c6"
+    },
+    "source/motion-embedded-report.json": {
+      "bytes": 152548,
+      "sha256": "a93be97762675c2e6a8934a1a0855cff86de6381ff7cc56d3bf90f38a93f2bcc"
+    },
+    "source/motion-eye-diagnostic.mjs": {
+      "bytes": 10083,
+      "sha256": "f00519ad95a93ef635e6320f5fd1786115aa1bb187e442c7ae401d4866899524"
+    },
+    "source/motion-eye-height-review15/diagnostic.json": {
+      "bytes": 42119,
+      "sha256": "aacb8e03fdb41ad9975e69ebf523426100ebb3ed310b867326ebf0953aaa5e3f"
+    },
+    "source/motion-eye-height-review15/pixel-comparison.json": {
+      "bytes": 13994,
+      "sha256": "a4417cfddec4622f967cb539b7a03150ed4d60a7a1e278609e2a5d5674fac577"
+    },
+    "source/motion-eye-height-sweep.mjs": {
+      "bytes": 7843,
+      "sha256": "ac88b73fed88b8428a5b53119160aada48939a052168fc48d19c03bbe50a276a"
+    },
+    "source/motion-eye-review-mask15/diagnostic.json": {
+      "bytes": 72534,
+      "sha256": "49ac20670b4872b6c39a8d3782e089d9ce9ac7720055f792ca4ce680bafee850"
+    },
+    "source/motion-eye-review15/diagnostic.json": {
+      "bytes": 206412,
+      "sha256": "f3464464590908f28093cf8f316fa1dbfbaa66273890b1f786a4f57ad3bdd8a9"
+    },
+    "source/motion-eye-review15/glint-visibility-summary.json": {
+      "bytes": 4122,
+      "sha256": "6265303b56fbfb84593d6911cfb7fc3b6e17a81d8e6a443e3b29e8efa1cd05a3"
+    },
+    "source/motion-fall-global-peak/diagnostic.json": {
+      "bytes": 30064,
+      "sha256": "b9218310bfe0dd53cc25a30968011de0022acf758f23deaf5c80ec890ea9b782"
+    },
+    "source/motion-fall-support-final/diagnostic.json": {
+      "bytes": 30125,
+      "sha256": "21bdd8d783861bf4d0e942b760eb19fa44b81c4e146d904e0f229a43f4b5742d"
+    },
+    "source/motion-fall-support-probe.mjs": {
+      "bytes": 6971,
+      "sha256": "fba59e1bd6418eb96116737bd69965adfbaa10bb7ab6d3b101206bbaa9dee238"
+    },
+    "source/motion-final-review/capture.json": {
+      "bytes": 212351,
+      "sha256": "2384ba164cb8af9b292cef7b50590aade4fff06409811ac10574028790813b97"
+    },
+    "source/motion-floor-diagnostic.mjs": {
+      "bytes": 10569,
+      "sha256": "6d4d1bf4628bb8302add1a2c5485affdb482f26750ef9b7f1014843f97551171"
+    },
+    "source/motion-floor-review12/diagnostic.json": {
+      "bytes": 71962,
+      "sha256": "5ba22a6b28b058d373ccaa4fa443c39715f250ed3b04d41d99579d66bc1e827e"
+    },
+    "source/motion-floor-review14/diagnostic.json": {
+      "bytes": 71887,
+      "sha256": "dcc52a693a6ae39b596325899e32a55b58cb3122c98e5e2f47f0db88f12394e7"
+    },
+    "source/motion-floor-review15/diagnostic.json": {
+      "bytes": 74238,
+      "sha256": "3ee5863204287582432e4bd13e2523465880945cad3da2c99c191c6fd53f1f9c"
+    },
+    "source/motion-ground-events.json": {
+      "bytes": 4647,
+      "sha256": "959302288f0be93efc5cabe83f78e4eb876bf190c6cce077b0a8957f8cdacde0"
+    },
+    "source/motion-ground-events.mjs": {
+      "bytes": 4678,
+      "sha256": "fa60630562a674db27e1cf366535cb6ccfb3949b09da038734685ae12d8c0235"
+    },
+    "source/motion-hand-support-metrics.json": {
+      "bytes": 3468,
+      "sha256": "bb80bcc16fdf477950398c1c38ba1045d7491df49eb3eb00bdfe43b20f3e4e42"
+    },
+    "source/motion-longpass-isolation.mjs": {
+      "bytes": 4286,
+      "sha256": "533de224317bc9792ac1c861d029a9a93674fefc08b6d1d61cfaa1e98310c16c"
+    },
+    "source/motion-measure.mjs": {
+      "bytes": 15415,
+      "sha256": "2d57ae38eb287c6b219ffdcd49c17fe9e3e79e45a53654bc3ffa2d59d55a73b0"
+    },
+    "source/motion-metrics.json": {
+      "bytes": 14234,
+      "sha256": "9bc166630579ae80e79877ff7540a9da826edfbe36cf0dbf4e6da07fb7640935"
+    },
+    "source/motion-native-append-selfcheck.json": {
+      "bytes": 2659,
+      "sha256": "d918f71b74b28d9affc821037718826e233495acf56a659139bba9ceab22e2e3"
+    },
+    "source/motion-recovery-merge.mjs": {
+      "bytes": 24101,
+      "sha256": "d73a2515979efd6e766ce1fab9312dfb37ab2a587529f8e64d0e489a0d025410"
+    },
+    "source/motion-recovery-metrics.json": {
+      "bytes": 465,
+      "sha256": "1298c71d956c490677b629bea88ae23f111654d75f148c306e11288964a91c83"
+    },
+    "source/motion-recovery-probe.mjs": {
+      "bytes": 6245,
+      "sha256": "79e94b3da114d4966c9fbaab8e369efdad2da9e1946a315e10618fbeec49383b"
+    },
+    "source/motion-recovery-prototype.mjs": {
+      "bytes": 11334,
+      "sha256": "33ba98a134074b34c60afd7aea5f712d8678a790fd1bb6b1ca99f4560d525449"
+    },
+    "source/motion-recovery-state-check.json": {
+      "bytes": 5295,
+      "sha256": "6e49bf1ea059d785086bc4f604c1e0bc29ff99a5db4da6e98ce5de76c1ee19a5"
+    },
+    "source/motion-recovery-state-check.mjs": {
+      "bytes": 3829,
+      "sha256": "0be3242ec0d1aea08d88f482eb439cd22808ce52867363faa928884b27d6e0f2"
+    },
+    "source/motion-review-revised-actions/capture.json": {
+      "bytes": 36188,
+      "sha256": "aa73f124576a62080b0bf8ca315f7f2bbc88fae9eebbdc67c22ca0a9b91f1b59"
+    },
+    "source/motion-review-roster09/capture.json": {
+      "bytes": 210048,
+      "sha256": "7ecadb57f2d959f9ad4e365954c8caef61ff249fc1781663a5ed94d68478415a"
+    },
+    "source/motion-review-support09/capture.json": {
+      "bytes": 13953,
+      "sha256": "9babeccd6202ec4346f8aaf7906a06a27bec6b80628501becd9a387af3ac0c41"
+    },
+    "source/motion-review-wide-check/capture.json": {
+      "bytes": 35378,
+      "sha256": "f22a4252e191974e52ceca323ce424e3d491414b9bc02f2d18ce235550cdba01"
+    },
+    "source/motion-review/capture.json": {
+      "bytes": 192082,
+      "sha256": "466f592df4c11b330850bc1aaa6b0feea6b87ed0305e83fa2bf396b82b94d4c5"
+    },
+    "source/motion-revision-evidence/cold31-canonical-120hz.json": {
+      "bytes": 25236,
+      "sha256": "ebf6dc789966277214d23b40a85d4a423cf1d3159aad536ff45395b8cb10e993"
+    },
+    "source/motion-revision-evidence/e60a-motion-build.py": {
+      "bytes": 45391,
+      "sha256": "1bbd6a7f6edb9cf8e8e14ebdf96eee311586c522c1efad9836d74360e358e4b2"
+    },
+    "source/motion-revision-evidence/fall-leap-dive-toeoff.json": {
+      "bytes": 7627,
+      "sha256": "e9b9e16c0dac5d885597f8d515de087cd736b73915c74f2bcd2d137128d331e6"
+    },
+    "source/motion-revision-evidence/kick-pass-punt.json": {
+      "bytes": 4383,
+      "sha256": "7d5532b0a2d01c24472ac4a4218846a80cbd8ff5840a8c92534f3b27c38bc130"
+    },
+    "source/motion-revision-evidence/protected-dive-skin.json": {
+      "bytes": 264450,
+      "sha256": "c83b9d7fffb821a245cbb3b8fdfcb01f1666fb5a09dd82aa983d7c305e549508"
+    },
+    "source/motion-revision-evidence/protected-dive-twist.json": {
+      "bytes": 5337,
+      "sha256": "193e6419b1415229b54cd4e80eaf162abdfc6c4f8918d1f1339fcb6b324532ff"
+    },
+    "source/motion-revision-evidence/revision.json": {
+      "bytes": 1440,
+      "sha256": "70e1206e329abfa4f72c56a396e2cf40d96492b392603be22b583dcc998026ac"
+    },
+    "source/motion-revision-evidence/slide-120hz.json": {
+      "bytes": 1337,
+      "sha256": "847b70014f3a4a6c8ac623a5da1642ea704b98eaaa44aa4a08051b4c59984c50"
+    },
+    "source/motion-revision-evidence/slide-240hz.json": {
+      "bytes": 1337,
+      "sha256": "c1a346319c9450ccdc219d46fbcd1b55a6028bfa73faa353e8f7a0bacebf9f5b"
+    },
+    "source/motion-revision-evidence/slide-30hz.json": {
+      "bytes": 1720,
+      "sha256": "55d7cd86dcc982c8c9c0b122017c63cc8b99a8c4442fd064aeff5e1c24ffe38b"
+    },
+    "source/motion-runtime-metrics.json": {
+      "bytes": 5835,
+      "sha256": "e63d499a8ee752553cb731dcae170d3363e90d6a4878dee17150ef7b1771da17"
+    },
+    "source/motion-runtime.js": {
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    },
+    "source/motion-skin-support-review.json": {
+      "bytes": 14244,
+      "sha256": "395c3cb027d9f5bdd06aa5e1ed983eabe9c61cdd99eb322f32d727ee8623d37d"
+    },
+    "source/motion-skin-support-scan.mjs": {
+      "bytes": 9113,
+      "sha256": "9bc5290ebe36848dec04651f5d327893a6f0bbfc88e85ecfdab82cfb76faf4a5"
+    },
+    "source/motion-slide-hand-envelope-review.json": {
+      "bytes": 12238,
+      "sha256": "19a36d1046a1527dc4103e60d089cba29a6a2b615edbb66963d124c058af0907"
+    },
+    "source/motion-slide-skin-review.json": {
+      "bytes": 22122,
+      "sha256": "1ff259fa00535713ec708bc96478834af0063465907600d503405751ec975f92"
+    },
+    "source/motion-supported-recovery-capture.mjs": {
+      "bytes": 7818,
+      "sha256": "e9125bde398d6234826ba4b8e5d51d6b155f64e85003906ba84adefae3d697f6"
+    },
+    "source/motion-turn-metrics.json": {
+      "bytes": 791,
+      "sha256": "d45d9e1e856db421228532df8c8d5d770d85876f9fa74ee7ec6318a300f59519"
+    },
+    "source/motion-world-inertia-prototype.mjs": {
+      "bytes": 7541,
+      "sha256": "cd645d1330d913ae85004960855c9ce7c9c21915b8efbc747827c1f92e299b2e"
+    },
+    "source/package-viewer.mjs": {
+      "bytes": 5515,
+      "sha256": "42638b60b2b0946808b9f71998c9450d90679ea8180936090d33cdcb22f8f68f"
+    },
+    "source/probe-cloth-close.mjs": {
+      "bytes": 1887,
+      "sha256": "f75f4bfba350ca611e2299253f2aafac677653d261fbfa105d56b6304e2d0512"
+    },
+    "source/probe-corneal-env.mjs": {
+      "bytes": 2969,
+      "sha256": "a9d1a98ed8f344513de7034e48d2ccb7ebb1853bc8072d8f2eb86976a69b78c6"
+    },
+    "source/probe-hair-normal.mjs": {
+      "bytes": 3958,
+      "sha256": "9fed81b4beb4b1e4a31c647433f625abca4248b4543bb67b7dedfed76e048347"
+    },
+    "source/probe-look.mjs": {
+      "bytes": 3416,
+      "sha256": "e3eee0dc4dd6d83f5d191bca07afa4f5fbde74c65e3a6f572fcd2525dc7135bc"
+    },
+    "source/probe-surface-balance.mjs": {
+      "bytes": 2352,
+      "sha256": "cbd6f71ffc9552a2eb17562d75d6ba76644482dc6001c25f9fb827bf874e7363"
+    },
+    "source/props.js": {
+      "bytes": 15767,
+      "sha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae"
+    },
+    "source/recovery-state.js": {
+      "bytes": 35502,
+      "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+    },
+    "source/review-frames.mjs": {
+      "bytes": 2220,
+      "sha256": "99c9b9bffe01b6cbad2f484e8a5110bdab8018c88e664be27e317998fb6bcc50"
+    },
+    "source/scene.js": {
+      "bytes": 16830,
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba"
+    },
+    "source/semantic-uv-surface.mjs": {
+      "bytes": 1758,
+      "sha256": "53f762a92f7570580962c011bcd3cfc92eae774c762a0ac37402240549a73804"
+    },
+    "source/serve.py": {
+      "bytes": 706,
+      "sha256": "ebe8c890adc2dfe6c91d2288e42f57653a40a879c3ad48ce723b0e27cf379a51"
+    },
+    "source/work-session.mjs": {
+      "bytes": 3867,
+      "sha256": "7197ec913b6d632a5395063b9dbbb84e78f1c3e2bf7d50412c1924672ce54628"
+    },
+    "vendor/BufferGeometryUtils.js": {
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    "vendor/DRACOLoader.js": {
+      "bytes": 13640,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    "vendor/GLTFLoader.js": {
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    "vendor/SkeletonUtils.js": {
+      "bytes": 8019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    },
+    "vendor/data.js": {
+      "bytes": 1979015,
+      "sha256": "54d23f421ee2c838b592a9ef917d8896c450d24f96ffcdc1cda87d4f60fa763a"
+    },
+    "vendor/draco_decoder.wasm": {
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    "vendor/draco_wasm_wrapper.js": {
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    "vendor/three.module.js": {
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    "vendor/viewer-runtime.js": {
+      "bytes": 847856,
+      "sha256": "69e0f8039ed9051b72f242618ff72b63d07ef162cf5eeedb826812732a85615f"
+    }
+  },
+  "owner": {
+    "pid": 97212,
+    "startedTicks": "3558880",
+    "state": "R"
+  },
+  "startedAt": "2026-11-05T06:02:14.271Z",
+  "resumedAt": null,
+  "status": "interrupted-or-failed",
+  "activeJob": null,
+  "activeJobs": {
+    "1": {
+      "characterID": "player-02",
+      "lod": 1,
+      "hz": 30,
+      "file": "transitions/player-02-lod1-30hz.json",
+      "workerID": 1,
+      "startedAt": "2026-11-05T06:04:19.375Z",
+      "child": {
+        "pid": 98320,
+        "startedTicks": "3571399",
+        "state": "R"
+      },
+      "ownedProcesses": [
+        {
+          "pid": 98320,
+          "startedTicks": "3571399",
+          "state": "S"
+        },
+        {
+          "pid": 98332,
+          "startedTicks": "3571475",
+          "state": "S"
+        },
+        {
+          "pid": 98349,
+          "startedTicks": "3571490",
+          "state": "S"
+        },
+        {
+          "pid": 98350,
+          "startedTicks": "3571490",
+          "state": "S"
+        },
+        {
+          "pid": 98370,
+          "startedTicks": "3571502",
+          "state": "S"
+        },
+        {
+          "pid": 98385,
+          "startedTicks": "3571592",
+          "state": "S"
+        },
+        {
+          "pid": 98387,
+          "startedTicks": "3571595",
+          "state": "S"
+        },
+        {
+          "pid": 98417,
+          "startedTicks": "3571603",
+          "state": "S"
+        },
+        {
+          "pid": 98426,
+          "startedTicks": "3571606",
+          "state": "S"
+        },
+        {
+          "pid": 98427,
+          "startedTicks": "3571606",
+          "state": "R"
+        }
+      ]
+    },
+    "2": {
+      "characterID": "player-02",
+      "lod": 0,
+      "hz": 30,
+      "file": "transitions/player-02-lod0-30hz.json",
+      "workerID": 2,
+      "startedAt": "2026-11-05T06:03:32.291Z",
+      "child": {
+        "pid": 98165,
+        "startedTicks": "3566690",
+        "state": "R"
+      },
+      "ownedProcesses": [
+        {
+          "pid": 98165,
+          "startedTicks": "3566690",
+          "state": "S"
+        },
+        {
+          "pid": 98177,
+          "startedTicks": "3566796",
+          "state": "S"
+        },
+        {
+          "pid": 98194,
+          "startedTicks": "3566828",
+          "state": "S"
+        },
+        {
+          "pid": 98195,
+          "startedTicks": "3566828",
+          "state": "S"
+        },
+        {
+          "pid": 98216,
+          "startedTicks": "3566839",
+          "state": "S"
+        },
+        {
+          "pid": 98231,
+          "startedTicks": "3566992",
+          "state": "S"
+        },
+        {
+          "pid": 98232,
+          "startedTicks": "3566999",
+          "state": "S"
+        },
+        {
+          "pid": 98262,
+          "startedTicks": "3567013",
+          "state": "S"
+        },
+        {
+          "pid": 98269,
+          "startedTicks": "3567017",
+          "state": "S"
+        },
+        {
+          "pid": 98272,
+          "startedTicks": "3567018",
+          "state": "R"
+        }
+      ]
+    }
+  },
+  "completed": [
+    {
+      "characterID": "player-01",
+      "lod": 1,
+      "hz": 30,
+      "file": "transitions/player-01-lod1-30hz.json",
+      "workerID": 2,
+      "completedAt": "2026-11-05T06:03:32.151Z",
+      "reportPath": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/verification/transitions/player-01-lod1-30hz.json",
+      "reportSha256": "dc7df352b88a9b6adce9322001da85567b11413d19abc5c69aefd6f5b5438f59",
+      "exit": {
+        "exitCode": 1,
+        "signal": null,
+        "stderr": ""
+      }
+    },
+    {
+      "characterID": "player-01",
+      "lod": 0,
+      "hz": 30,
+      "file": "transitions/player-01-lod0-30hz.json",
+      "workerID": 1,
+      "completedAt": "2026-11-05T06:04:19.275Z",
+      "reportPath": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/verification/transitions/player-01-lod0-30hz.json",
+      "reportSha256": "ea7e3ba87f9ec3a031bb1b590c5713131071d7348e4e54395133b0fa2908e021",
+      "exit": {
+        "exitCode": 1,
+        "signal": null,
+        "stderr": ""
+      }
+    }
+  ],
+  "updatedAt": "2026-11-05T06:05:03.105Z",
+  "writeSequence": 673,
+  "maximumConcurrentWorkersObserved": 2,
+  "error": "Error: Received SIGTERM",
+  "cleanup": {
+    "completedAt": "2026-11-05T06:05:03.101Z",
+    "ownedProcesses": [
+      {
+        "pid": 98320,
+        "startedTicks": "3571399",
+        "state": "R"
+      },
+      {
+        "pid": 98332,
+        "startedTicks": "3571475",
+        "state": "S"
+      },
+      {
+        "pid": 98349,
+        "startedTicks": "3571490",
+        "state": "S"
+      },
+      {
+        "pid": 98350,
+        "startedTicks": "3571490",
+        "state": "S"
+      },
+      {
+        "pid": 98370,
+        "startedTicks": "3571502",
+        "state": "S"
+      },
+      {
+        "pid": 98385,
+        "startedTicks": "3571592",
+        "state": "S"
+      },
+      {
+        "pid": 98387,
+        "startedTicks": "3571595",
+        "state": "S"
+      },
+      {
+        "pid": 98417,
+        "startedTicks": "3571603",
+        "state": "S"
+      },
+      {
+        "pid": 98426,
+        "startedTicks": "3571606",
+        "state": "S"
+      },
+      {
+        "pid": 98427,
+        "startedTicks": "3571606",
+        "state": "R"
+      },
+      {
+        "pid": 98165,
+        "startedTicks": "3566690",
+        "state": "R"
+      },
+      {
+        "pid": 98177,
+        "startedTicks": "3566796",
+        "state": "S"
+      },
+      {
+        "pid": 98194,
+        "startedTicks": "3566828",
+        "state": "S"
+      },
+      {
+        "pid": 98195,
+        "startedTicks": "3566828",
+        "state": "S"
+      },
+      {
+        "pid": 98216,
+        "startedTicks": "3566839",
+        "state": "S"
+      },
+      {
+        "pid": 98231,
+        "startedTicks": "3566992",
+        "state": "S"
+      },
+      {
+        "pid": 98232,
+        "startedTicks": "3566999",
+        "state": "S"
+      },
+      {
+        "pid": 98262,
+        "startedTicks": "3567013",
+        "state": "S"
+      },
+      {
+        "pid": 98269,
+        "startedTicks": "3567017",
+        "state": "S"
+      },
+      {
+        "pid": 98272,
+        "startedTicks": "3567018",
+        "state": "R"
+      }
+    ],
+    "stillLive": []
+  }
+}

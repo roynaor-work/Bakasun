@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "kind": "DIAGNOSTIC-ONLY-eye-primitive-visibility",
+  "generatedAt": "2026-11-04T23:18:23.247Z",
+  "auditSource": {
+    "file": "source/audit-eye-visibility.mjs",
+    "sha256": "11481ed25c64b4c916b22f68aafb37c4307a844bbc162fb5b62e461a40f9e256",
+    "bytes": 7711
+  },
+  "method": "Actual current bundled player01/LOD0. Production baseline, then Eyes-only pure magenta MeshBasic in memory. Compare original side/depth, DoubleSide, then depth-disabled overlay. No asset or production-viewer source was changed.",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "dpr": 1
+  },
+  "metadata": {
+    "state": {
+      "characterID": "player-01",
+      "view": "face",
+      "lod": "0",
+      "lighting": "studio",
+      "clipID": "idle",
+      "time": 0.27,
+      "playing": false,
+      "fps": 0,
+      "threeRevision": "160",
+      "errors": [],
+      "draws": 6,
+      "triangles": 23908,
+      "models": [
+        {
+          "id": "player-01",
+          "path": "models/player-01-lod0.glb",
+          "triangles": 23894,
+          "lift": 0,
+          "minimumY": 0.0020000018831341916,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "sampleSeconds": 0.27,
+          "phaseRate": 1,
+          "pathScale": 1,
+          "contactResidual": 0,
+          "contacts": [
+            {
+              "bone": "LeftFoot",
+              "key": "idle/LeftFoot/0/0",
+              "anchor": [
+                0.1,
+                0,
+                0
+              ],
+              "release": 1.53
+            },
+            {
+              "bone": "RightFoot",
+              "key": "idle/RightFoot/0/0",
+              "anchor": [
+                -0.1,
+                0,
+                0
+              ],
+              "release": 1.53
+            }
+          ]
+        }
+      ],
+      "environment": {
+        "generatedTextureSizes": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            256
+          ],
+          [
+            512,
+            256
+          ],
+          [
+            96,
+            96
+          ],
+          [
+            1024,
+            1024
+          ],
+          [
+            512,
+            512
+          ]
+        ],
+        "crowdInstances": 360,
+        "crowdDrawCalls": 2,
+        "seatInstances": 360,
+        "environmentTriangles": 19580,
+        "shadowMapHero": 1024,
+        "shadowMapPitch": 512,
+        "environmentGeneratedLocally": true,
+        "reflectionSettings": {
+          "frontStrength": 8,
+          "sigma": 0
+        }
+      }
+    },
+    "meshes": [
+      {
+        "mesh": "player-01-lod0",
+        "skinned": true,
+        "vertices": 6184,
+        "materials": [
+          {
+            "name": "Skin",
+            "type": "MeshStandardMaterial",
+            "side": 0,
+            "depthTest": true,
+            "depthWrite": true,
+            "visible": true,
+            "transparent": false,
+            "roughness": 1,
+            "map": "player-01-basecolor"
+          }
+        ]
+      },
+      {
+        "mesh": "player-01-lod0_1",
+        "skinned": true,
+        "vertices": 4293,
+        "materials": [
+          {
+            "name": "Cloth",
+            "type": "MeshStandardMaterial",
+            "side": 0,
+            "depthTest": true,
+            "depthWrite": true,
+            "visible": true,
+            "transparent": false,
+            "roughness": 1,
+            "map": "player-01-basecolor"
+          }
+        ]
+      },
+      {
+        "mesh": "player-01-lod0_2",
+        "skinned": true,
+        "vertices": 606,
+        "materials": [
+          {
+            "name": "Eyes",
+            "type": "MeshPhysicalMaterial",
+            "side": 0,
+            "depthTest": true,
+            "depthWrite": true,
+            "visible": true,
+            "transparent": false,
+            "roughness": 1,
+            "map": "player-01-basecolor"
+          }
+        ]
+      },
+      {
+        "mesh": "player-01-lod0_3",
+        "skinned": true,
+        "vertices": 7009,
+        "materials": [
+          {
+            "name": "HairCards",
+            "type": "MeshPhysicalMaterial",
+            "side": 2,
+            "depthTest": true,
+            "depthWrite": true,
+            "visible": true,
+            "transparent": false,
+            "roughness": 1,
+            "map": "player-01-basecolor"
+          }
+        ]
+      }
+    ],
+    "eyeMeshCount": 1,
+    "packageHashes": {
+      "manifest": "ea7f7ad4779e3ce38c216f5bc0c63f34598f5c7b35b4159edaf934cde2b00272",
+      "motion": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+      "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "models": {
+        "models/player-01-lod0.glb": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec",
+        "models/player-01-lod1.glb": "5b88f54a24aac1a94817d4b58e6516a08492574aed7449ebea68ef0a50f15f1b",
+        "models/player-02-lod0.glb": "dfc33b91e31a741d1d63618e3fc320589e55c7181c7c247f879fac00e11965b0",
+        "models/player-02-lod1.glb": "a068fa7d9bcc21fa6fd92e2f73f2103121d6c18175746c0a313b1f8713e4d23c",
+        "models/player-03-lod0.glb": "6e3aaea7f98595dc1f477daf09b09be56bab2a8f86be336af2a6b9660204e7ee",
+        "models/player-03-lod1.glb": "0c956633b16b17f5a3fb7c248aaff01afd558a0ca01e8630bf53068ab71f9a51",
+        "models/player-04-lod0.glb": "e8b54b74caf489cbe80f3cde3f2e526d959628515ff8e169da86cd90d8a35fb5",
+        "models/player-04-lod1.glb": "d0ba70d3d7416a08ac4113121ae41aea6d276cb88a26cbddff65c93dc1a5f1b8",
+        "models/player-05-lod0.glb": "15084d635e9b83a950903c2328a2d95a77d620ae03a6ee5f52247a575dbca8bf",
+        "models/player-05-lod1.glb": "aa6f3dc5938fb6db4416020c06a1f6335f4a8597355bb2279c317565785702ce",
+        "models/player-06-lod0.glb": "60f1eac1822a216549e77f07a1125cb24dacbef8d1b5b4aa2bbeeffe3cd22956",
+        "models/player-06-lod1.glb": "21ce7ab4851b34d7604c8648931f5952d71613990d0b5e808699ae9d66c66acf",
+        "models/goalkeeper-lod0.glb": "2fde47c3ebcb508a404ed25163099ddcf2d47a3b773c26c416738dca69d43fb9",
+        "models/goalkeeper-lod1.glb": "b7a0f45b457d96e2bada2b6d7f82cc164962798b511307e83dd56a04a9890907",
+        "models/referee-lod0.glb": "a0c81e45008a2897f0120e1e45001d662fc5361418eff754b99c0e3b90f9873b",
+        "models/referee-lod1.glb": "4bc484209920380d70c359cb5bcccfba50ccf0a16ae0fd8ce06c116882cdaa23"
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "file": "01-baseline-production.png",
+      "bytes": 208617,
+      "magentaPixels": 0,
+      "magentaBounds": null
+    },
+    {
+      "file": "02-magenta-original-side-and-depth.png",
+      "bytes": 207026,
+      "magentaPixels": 1042,
+      "magentaBounds": {
+        "minX": 111,
+        "minY": 388,
+        "maxX": 278,
+        "maxY": 403
+      }
+    },
+    {
+      "file": "03-magenta-double-sided-normal-depth.png",
+      "bytes": 207029,
+      "magentaPixels": 1042,
+      "magentaBounds": {
+        "minX": 111,
+        "minY": 388,
+        "maxX": 278,
+        "maxY": 403
+      }
+    },
+    {
+      "file": "04-magenta-depth-disabled-overlay.png",
+      "bytes": 203627,
+      "magentaPixels": 3843,
+      "magentaBounds": {
+        "minX": 111,
+        "minY": 370,
+        "maxX": 278,
+        "maxY": 415
+      }
+    }
+  ],
+  "loadedPayloads": {
+    "models/player-01-lod0.glb": {
+      "bytes": 785380,
+      "sha256": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec"
+    }
+  },
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1310688,
+      "sha256": "195d6dc95deaab877c3880e8910159bb9daf00ff384eeecafe5a58213073dd12"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 764950,
+      "sha256": "05e2c9717ddfdc0db70d8ab94ca1cd9cc6fe725d8d3f83bb8f87f9606c22ff05"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1047275,
+      "sha256": "7df2973195b01e9365592d71880137f31fe4dd741196b77cff99b78eecbdc1e4"
+    },
+    {
+      "file": "/vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ],
+  "errors": [],
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported."
+    }
+  ],
+  "remoteRequests": [],
+  "pass": true
+}

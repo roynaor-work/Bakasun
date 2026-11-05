@@ -1,0 +1,1901 @@
+{
+  "kind": "C16-body-lifecycle-source-state-preflight",
+  "complete": false,
+  "diagnosticOverride": true,
+  "cases": [
+    {
+      "character": "player-01",
+      "path": "models/player-01-lod0.glb",
+      "plan": {
+        "startClock": 1.0999999999999985,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200789097213042,
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "clock": 1.0916666666666652,
+          "meshIndex": 1,
+          "meshName": "player-01-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17758691310882568,
+            0.8696184158325195,
+            0.04353831708431244
+          ],
+          "worldPosition": [
+            -0.6156392961422756,
+            0.001520073098835785,
+            0.0435383167599267
+          ],
+          "namedInfluences": {
+            "Hips": 0.98943692445755,
+            "Spine": 0.010563068091869354
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 1.3999999999999975,
+        "startClock": 1.0999999999999985,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200789097213042,
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "clock": 1.0916666666666652,
+          "meshIndex": 1,
+          "meshName": "player-01-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17758691310882568,
+            0.8696184158325195,
+            0.04353831708431244
+          ],
+          "worldPosition": [
+            -0.6156392961422756,
+            0.001520073098835785,
+            0.0435383167599267
+          ],
+          "namedInfluences": {
+            "Hips": 0.98943692445755,
+            "Spine": 0.010563068091869354
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0020000006047158603,
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "clock": 1.3999999999999975,
+          "meshIndex": 1,
+          "meshName": "player-01-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17758691310882568,
+            0.8696184158325195,
+            0.04353831708431244
+          ],
+          "worldPosition": [
+            -0.6156392961422756,
+            0.0019999972782804407,
+            0.0435383167599267
+          ],
+          "namedInfluences": {
+            "Hips": 0.98943692445755,
+            "Spine": 0.010563068091869354
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 1.4083333333333308,
+        "startClock": 1.0999999999999985,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200789097213042,
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "clock": 1.0916666666666652,
+          "meshIndex": 1,
+          "meshName": "player-01-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17758691310882568,
+            0.8696184158325195,
+            0.04353831708431244
+          ],
+          "worldPosition": [
+            -0.6156392961422756,
+            0.001520073098835785,
+            0.0435383167599267
+          ],
+          "namedInfluences": {
+            "Hips": 0.98943692445755,
+            "Spine": 0.010563068091869354
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0020000006047158603,
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "clock": 1.4083333333333308,
+          "meshIndex": 1,
+          "meshName": "player-01-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17758691310882568,
+            0.8696184158325195,
+            0.04353831708431244
+          ],
+          "worldPosition": [
+            -0.6156392961422756,
+            0.0019999972782804407,
+            0.0435383167599267
+          ],
+          "namedInfluences": {
+            "Hips": 0.98943692445755,
+            "Spine": 0.010563068091869354
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.0019999972782804407
+    },
+    {
+      "character": "player-02",
+      "path": "models/player-02-lod0.glb",
+      "plan": {
+        "startClock": 2.508333333333327,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200720293591396,
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "clock": 2.499999999999994,
+          "meshIndex": 1,
+          "meshName": "player-02-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2365,
+          "bindPosition": [
+            -0.18401367962360382,
+            0.8686588406562805,
+            0.032190628349781036
+          ],
+          "worldPosition": [
+            -0.6149060216067253,
+            0.0015200719249882184,
+            0.03219062816990188
+          ],
+          "namedInfluences": {
+            "Hips": 0.9898010492324829,
+            "Spine": 0.010198945179581642
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 2.808333333333326,
+        "startClock": 2.508333333333327,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200720293591396,
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "clock": 2.499999999999994,
+          "meshIndex": 1,
+          "meshName": "player-02-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2365,
+          "bindPosition": [
+            -0.18401367962360382,
+            0.8686588406562805,
+            0.032190628349781036
+          ],
+          "worldPosition": [
+            -0.6149060216067253,
+            0.0015200719249882184,
+            0.03219062816990188
+          ],
+          "namedInfluences": {
+            "Hips": 0.9898010492324829,
+            "Spine": 0.010198945179581642
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0019999937252476196,
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "clock": 2.808333333333326,
+          "meshIndex": 1,
+          "meshName": "player-02-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2365,
+          "bindPosition": [
+            -0.18401367962360382,
+            0.8686588406562805,
+            0.032190628349781036
+          ],
+          "worldPosition": [
+            -0.6149060216067253,
+            0.001999997287285355,
+            0.03219062816990188
+          ],
+          "namedInfluences": {
+            "Hips": 0.9898010492324829,
+            "Spine": 0.010198945179581642
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 2.8166666666666593,
+        "startClock": 2.508333333333327,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200720293591396,
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "clock": 2.499999999999994,
+          "meshIndex": 1,
+          "meshName": "player-02-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2365,
+          "bindPosition": [
+            -0.18401367962360382,
+            0.8686588406562805,
+            0.032190628349781036
+          ],
+          "worldPosition": [
+            -0.6149060216067253,
+            0.0015200719249882184,
+            0.03219062816990188
+          ],
+          "namedInfluences": {
+            "Hips": 0.9898010492324829,
+            "Spine": 0.010198945179581642
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0019999937252476196,
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "clock": 2.8166666666666593,
+          "meshIndex": 1,
+          "meshName": "player-02-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2365,
+          "bindPosition": [
+            -0.18401367962360382,
+            0.8686588406562805,
+            0.032190628349781036
+          ],
+          "worldPosition": [
+            -0.6149060216067253,
+            0.001999997287285355,
+            0.03219062816990188
+          ],
+          "namedInfluences": {
+            "Hips": 0.9898010492324829,
+            "Spine": 0.010198945179581642
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.001999997287285355
+    },
+    {
+      "character": "player-03",
+      "path": "models/player-03-lod0.glb",
+      "plan": {
+        "startClock": 3.9166666666666554,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.00672275480627911,
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "clock": 3.908333333333322,
+          "meshIndex": 1,
+          "meshName": "player-03-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 3718,
+          "bindPosition": [
+            -0.18410919606685638,
+            1.3640998601913452,
+            0.006828427314758301
+          ],
+          "worldPosition": [
+            -1.0714599087933967,
+            0.006722759669031169,
+            0.0004119991753155734
+          ],
+          "namedInfluences": {
+            "Chest": 0.691286027431488,
+            "RightArm": 0.30871400237083435
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0.00522274544057548,
+        "velocityMps": -0.000010412050370431358,
+        "processedClock": 4.216666666666666,
+        "startClock": 3.9166666666666554,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.00672275480627911,
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "clock": 3.908333333333322,
+          "meshIndex": 1,
+          "meshName": "player-03-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 3718,
+          "bindPosition": [
+            -0.18410919606685638,
+            1.3640998601913452,
+            0.006828427314758301
+          ],
+          "worldPosition": [
+            -1.0714599087933967,
+            0.006722759669031169,
+            0.0004119991753155734
+          ],
+          "namedInfluences": {
+            "Chest": 0.691286027431488,
+            "RightArm": 0.30871400237083435
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001500006560510817,
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "clock": 4.216666666666666,
+          "meshIndex": 1,
+          "meshName": "player-03-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 3718,
+          "bindPosition": [
+            -0.18410919606685638,
+            1.3640998601913452,
+            0.006828427314758301
+          ],
+          "worldPosition": [
+            -1.0714599087933967,
+            0.001500014072805768,
+            0.0004119991753155734
+          ],
+          "namedInfluences": {
+            "Chest": 0.691286027431488,
+            "RightArm": 0.30871400237083435
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0.005222752001086297,
+        "velocityMps": -7.872612980269755e-7,
+        "processedClock": 4.225,
+        "startClock": 3.9166666666666554,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.00672275480627911,
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "clock": 3.908333333333322,
+          "meshIndex": 1,
+          "meshName": "player-03-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 3718,
+          "bindPosition": [
+            -0.18410919606685638,
+            1.3640998601913452,
+            0.006828427314758301
+          ],
+          "worldPosition": [
+            -1.0714599087933967,
+            0.006722759669031169,
+            0.0004119991753155734
+          ],
+          "namedInfluences": {
+            "Chest": 0.691286027431488,
+            "RightArm": 0.30871400237083435
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001500006560510817,
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "clock": 4.225,
+          "meshIndex": 1,
+          "meshName": "player-03-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 3718,
+          "bindPosition": [
+            -0.18410919606685638,
+            1.3640998601913452,
+            0.006828427314758301
+          ],
+          "worldPosition": [
+            -1.0714599087933967,
+            0.001500007512294771,
+            0.0004119991753155734
+          ],
+          "namedInfluences": {
+            "Chest": 0.691286027431488,
+            "RightArm": 0.30871400237083435
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.001500007512294771
+    },
+    {
+      "character": "player-04",
+      "path": "models/player-04-lod0.glb",
+      "plan": {
+        "startClock": 5.325000000000054,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200501719952284,
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "clock": 5.316666666666721,
+          "meshIndex": 1,
+          "meshName": "player-04-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17742319405078888,
+            0.869625985622406,
+            0.04382924735546112
+          ],
+          "worldPosition": [
+            -0.6156411068772945,
+            0.0015200569757379725,
+            0.04382924670235444
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894296526908875,
+            "Spine": 0.010570332407951355
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 5.625000000000069,
+        "startClock": 5.325000000000054,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200501719952284,
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "clock": 5.316666666666721,
+          "meshIndex": 1,
+          "meshName": "player-04-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17742319405078888,
+            0.869625985622406,
+            0.04382924735546112
+          ],
+          "worldPosition": [
+            -0.6156411068772945,
+            0.0015200569757379725,
+            0.04382924670235444
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894296526908875,
+            "Spine": 0.010570332407951355
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0020000015082258056,
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "clock": 5.625000000000069,
+          "meshIndex": 1,
+          "meshName": "player-04-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17742319405078888,
+            0.869625985622406,
+            0.04382924735546112
+          ],
+          "worldPosition": [
+            -0.6156411068772945,
+            0.001999997258893067,
+            0.04382924670235444
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894296526908875,
+            "Spine": 0.010570332407951355
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 5.633333333333403,
+        "startClock": 5.325000000000054,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200501719952284,
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "clock": 5.316666666666721,
+          "meshIndex": 1,
+          "meshName": "player-04-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17742319405078888,
+            0.869625985622406,
+            0.04382924735546112
+          ],
+          "worldPosition": [
+            -0.6156411068772945,
+            0.0015200569757379725,
+            0.04382924670235444
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894296526908875,
+            "Spine": 0.010570332407951355
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.0020000015082258056,
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "clock": 5.633333333333403,
+          "meshIndex": 1,
+          "meshName": "player-04-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17742319405078888,
+            0.869625985622406,
+            0.04382924735546112
+          ],
+          "worldPosition": [
+            -0.6156411068772945,
+            0.001999997258893067,
+            0.04382924670235444
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894296526908875,
+            "Spine": 0.010570332407951355
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.001999997258893067
+    },
+    {
+      "character": "player-05",
+      "path": "models/player-05-lod0.glb",
+      "plan": {
+        "startClock": 6.733333333333458,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.001520045288727264,
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "clock": 6.725000000000124,
+          "meshIndex": 1,
+          "meshName": "player-05-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1774582862854004,
+            0.8696417808532715,
+            0.04210803657770157
+          ],
+          "worldPosition": [
+            -0.6156581408524939,
+            0.0015200411608550836,
+            0.04210803704829555
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894253611564636,
+            "Spine": 0.010574650019407272
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 7.033333333333473,
+        "startClock": 6.733333333333458,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.001520045288727264,
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "clock": 6.725000000000124,
+          "meshIndex": 1,
+          "meshName": "player-05-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1774582862854004,
+            0.8696417808532715,
+            0.04210803657770157
+          ],
+          "worldPosition": [
+            -0.6156581408524939,
+            0.0015200411608550836,
+            0.04210803704829555
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894253611564636,
+            "Spine": 0.010574650019407272
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001999996794983779,
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "clock": 7.033333333333473,
+          "meshIndex": 1,
+          "meshName": "player-05-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1774582862854004,
+            0.8696417808532715,
+            0.04210803657770157
+          ],
+          "worldPosition": [
+            -0.6156581408524939,
+            0.001999997328130055,
+            0.04210803704829555
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894253611564636,
+            "Spine": 0.010574650019407272
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 7.041666666666806,
+        "startClock": 6.733333333333458,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.001520045288727264,
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "clock": 6.725000000000124,
+          "meshIndex": 1,
+          "meshName": "player-05-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1774582862854004,
+            0.8696417808532715,
+            0.04210803657770157
+          ],
+          "worldPosition": [
+            -0.6156581408524939,
+            0.0015200411608550836,
+            0.04210803704829555
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894253611564636,
+            "Spine": 0.010574650019407272
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001999996794983779,
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "clock": 7.041666666666806,
+          "meshIndex": 1,
+          "meshName": "player-05-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1774582862854004,
+            0.8696417808532715,
+            0.04210803657770157
+          ],
+          "worldPosition": [
+            -0.6156581408524939,
+            0.001999997328130055,
+            0.04210803704829555
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894253611564636,
+            "Spine": 0.010574650019407272
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.001999997328130055
+    },
+    {
+      "character": "player-06",
+      "path": "models/player-06-lod0.glb",
+      "plan": {
+        "startClock": 8.141666666666845,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200424712352504,
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "clock": 8.133333333333512,
+          "meshIndex": 1,
+          "meshName": "player-06-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1778663992881775,
+            0.869543731212616,
+            0.04336530715227127
+          ],
+          "worldPosition": [
+            -0.61557448918406,
+            0.0015200364946419548,
+            0.04336530796001306
+          ],
+          "namedInfluences": {
+            "Hips": 0.989464521408081,
+            "Spine": 0.010535497218370438
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 8.441666666666828,
+        "startClock": 8.141666666666845,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200424712352504,
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "clock": 8.133333333333512,
+          "meshIndex": 1,
+          "meshName": "player-06-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1778663992881775,
+            0.869543731212616,
+            0.04336530715227127
+          ],
+          "worldPosition": [
+            -0.61557448918406,
+            0.0015200364946419548,
+            0.04336530796001306
+          ],
+          "namedInfluences": {
+            "Hips": 0.989464521408081,
+            "Spine": 0.010535497218370438
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001999993981067683,
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "clock": 8.441666666666828,
+          "meshIndex": 1,
+          "meshName": "player-06-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1778663992881775,
+            0.869543731212616,
+            0.04336530715227127
+          ],
+          "worldPosition": [
+            -0.61557448918406,
+            0.0019999973582146492,
+            0.04336530796001306
+          ],
+          "namedInfluences": {
+            "Hips": 0.989464521408081,
+            "Spine": 0.010535497218370438
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 8.450000000000161,
+        "startClock": 8.141666666666845,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200424712352504,
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "clock": 8.133333333333512,
+          "meshIndex": 1,
+          "meshName": "player-06-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1778663992881775,
+            0.869543731212616,
+            0.04336530715227127
+          ],
+          "worldPosition": [
+            -0.61557448918406,
+            0.0015200364946419548,
+            0.04336530796001306
+          ],
+          "namedInfluences": {
+            "Hips": 0.989464521408081,
+            "Spine": 0.010535497218370438
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.001999993981067683,
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "clock": 8.450000000000161,
+          "meshIndex": 1,
+          "meshName": "player-06-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.1778663992881775,
+            0.869543731212616,
+            0.04336530715227127
+          ],
+          "worldPosition": [
+            -0.61557448918406,
+            0.0019999973582146492,
+            0.04336530796001306
+          ],
+          "namedInfluences": {
+            "Hips": 0.989464521408081,
+            "Spine": 0.010535497218370438
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.0019999973582146492
+    },
+    {
+      "character": "goalkeeper",
+      "path": "models/goalkeeper-lod0.glb",
+      "plan": {
+        "startClock": 9.550000000000098,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200487840952566,
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "clock": 9.541666666666766,
+          "meshIndex": 1,
+          "meshName": "goalkeeper-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2203,
+          "bindPosition": [
+            -0.18179671466350555,
+            0.8743330240249634,
+            0.030854955315589905
+          ],
+          "worldPosition": [
+            -0.6204988538179934,
+            0.0015200458084684513,
+            0.030854955545477236
+          ],
+          "namedInfluences": {
+            "Hips": 0.968234121799469,
+            "Spine": 0.0317658856511116
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 9.850000000000081,
+        "startClock": 9.550000000000098,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200487840952566,
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "clock": 9.541666666666766,
+          "meshIndex": 1,
+          "meshName": "goalkeeper-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2203,
+          "bindPosition": [
+            -0.18179671466350555,
+            0.8743330240249634,
+            0.030854955315589905
+          ],
+          "worldPosition": [
+            -0.6204988538179934,
+            0.0015200458084684513,
+            0.030854955545477236
+          ],
+          "namedInfluences": {
+            "Hips": 0.968234121799469,
+            "Spine": 0.0317658856511116
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.002000000288563813,
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "clock": 9.850000000000081,
+          "meshIndex": 1,
+          "meshName": "goalkeeper-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2203,
+          "bindPosition": [
+            -0.18179671466350555,
+            0.8743330240249634,
+            0.030854955315589905
+          ],
+          "worldPosition": [
+            -0.6204988538179934,
+            0.0019999974214469024,
+            0.030854955545477236
+          ],
+          "namedInfluences": {
+            "Hips": 0.968234121799469,
+            "Spine": 0.0317658856511116
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 9.858333333333414,
+        "startClock": 9.550000000000098,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200487840952566,
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "clock": 9.541666666666766,
+          "meshIndex": 1,
+          "meshName": "goalkeeper-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2203,
+          "bindPosition": [
+            -0.18179671466350555,
+            0.8743330240249634,
+            0.030854955315589905
+          ],
+          "worldPosition": [
+            -0.6204988538179934,
+            0.0015200458084684513,
+            0.030854955545477236
+          ],
+          "namedInfluences": {
+            "Hips": 0.968234121799469,
+            "Spine": 0.0317658856511116
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.002000000288563813,
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "clock": 9.858333333333414,
+          "meshIndex": 1,
+          "meshName": "goalkeeper-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2203,
+          "bindPosition": [
+            -0.18179671466350555,
+            0.8743330240249634,
+            0.030854955315589905
+          ],
+          "worldPosition": [
+            -0.6204988538179934,
+            0.0019999974214469024,
+            0.030854955545477236
+          ],
+          "namedInfluences": {
+            "Hips": 0.968234121799469,
+            "Spine": 0.0317658856511116
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.0019999974214469024
+    },
+    {
+      "character": "referee",
+      "path": "models/referee-lod0.glb",
+      "plan": {
+        "startClock": 10.958333333333352,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialGeometryWitness": {
+          "minimumY": 0.0015200679805091157,
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "clock": 10.950000000000019,
+          "meshIndex": 1,
+          "meshName": "referee-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17793041467666626,
+            0.8695636987686157,
+            0.04409419000148773
+          ],
+          "worldPosition": [
+            -0.6155966955010548,
+            0.0015200618715339284,
+            0.044094191028135596
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894602298736572,
+            "Spine": 0.010539793409407139
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        }
+      },
+      "bodyBefore": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 11.258333333333335,
+        "startClock": 10.958333333333352,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200679805091157,
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "clock": 10.950000000000019,
+          "meshIndex": 1,
+          "meshName": "referee-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17793041467666626,
+            0.8695636987686157,
+            0.04409419000148773
+          ],
+          "worldPosition": [
+            -0.6155966955010548,
+            0.0015200618715339284,
+            0.044094191028135596
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894602298736572,
+            "Spine": 0.010539793409407139
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.002000004591414956,
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "clock": 11.258333333333335,
+          "meshIndex": 1,
+          "meshName": "referee-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17793041467666626,
+            0.8695636987686157,
+            0.04409419000148773
+          ],
+          "worldPosition": [
+            -0.6155966955010548,
+            0.001999997374392672,
+            0.044094191028135596
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894602298736572,
+            "Spine": 0.010539793409407139
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "bodyAdvancing": {
+        "offsetMeters": 0,
+        "velocityMps": 0,
+        "processedClock": 11.266666666666667,
+        "startClock": 10.958333333333352,
+        "boundSeconds": 0.3,
+        "targetClearanceMeters": 0.0015,
+        "maximumRateMps": 0.05,
+        "maximumOffsetMeters": 0.03,
+        "firstFootTransferConcurrent": true,
+        "initialWitness": {
+          "minimumY": 0.0015200679805091157,
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "clock": 10.950000000000019,
+          "meshIndex": 1,
+          "meshName": "referee-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17793041467666626,
+            0.8695636987686157,
+            0.04409419000148773
+          ],
+          "worldPosition": [
+            -0.6155966955010548,
+            0.0015200618715339284,
+            0.044094191028135596
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894602298736572,
+            "Spine": 0.010539793409407139
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "actualWitness": {
+          "minimumY": 0.002000004591414956,
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "clock": 11.266666666666667,
+          "meshIndex": 1,
+          "meshName": "referee-lod0_1",
+          "material": "Cloth",
+          "vertexIndex": 2359,
+          "bindPosition": [
+            -0.17793041467666626,
+            0.8695636987686157,
+            0.04409419000148773
+          ],
+          "worldPosition": [
+            -0.6155966955010548,
+            0.001999997374392672,
+            0.044094191028135596
+          ],
+          "namedInfluences": {
+            "Hips": 0.9894602298736572,
+            "Spine": 0.010539793409407139
+          },
+          "selection": "opaque geometry with combined Hand/Foot influence below .5"
+        },
+        "deadlineMissed": false
+      },
+      "minimumReferenceY": 0.001999997374392672
+    }
+  ],
+  "session": {
+    "packageSnapshot": {
+      "kind": "RAM-pinned-before-browser-open",
+      "sha256": "acc89b11dbc20b50dcc12c0e70785a102a22bbca5fef32267cc72fcadb092075",
+      "atomicConstruction": true,
+      "modelIntegrity": [
+        {
+          "file": "models/player-01-lod0.glb",
+          "offline": "offline/player-01-lod0.js",
+          "expected": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "payloadSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "offline": "offline/player-01-lod1.js",
+          "expected": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "payloadSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "offline": "offline/player-02-lod0.js",
+          "expected": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "payloadSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "offline": "offline/player-02-lod1.js",
+          "expected": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "payloadSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "offline": "offline/player-03-lod0.js",
+          "expected": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "payloadSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "offline": "offline/player-03-lod1.js",
+          "expected": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "payloadSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod0.glb",
+          "offline": "offline/player-04-lod0.js",
+          "expected": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "payloadSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "offline": "offline/player-04-lod1.js",
+          "expected": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "payloadSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "offline": "offline/player-05-lod0.js",
+          "expected": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "payloadSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "offline": "offline/player-05-lod1.js",
+          "expected": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "payloadSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "offline": "offline/player-06-lod0.js",
+          "expected": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "payloadSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "offline": "offline/player-06-lod1.js",
+          "expected": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "payloadSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "offline": "offline/goalkeeper-lod0.js",
+          "expected": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "payloadSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "offline": "offline/goalkeeper-lod1.js",
+          "expected": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "payloadSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "offline": "offline/referee-lod0.js",
+          "expected": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "payloadSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "offline": "offline/referee-lod1.js",
+          "expected": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "payloadSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "pass": true
+        }
+      ],
+      "files": [
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "bytes": 1352292,
+          "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "bytes": 896884,
+          "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+        },
+        {
+          "file": "models/player-01-lod0.glb",
+          "bytes": 1336564,
+          "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "bytes": 889984,
+          "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "bytes": 1309188,
+          "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "bytes": 869612,
+          "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "bytes": 1361628,
+          "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "bytes": 911836,
+          "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+        },
+        {
+          "file": "models/player-04-lod0.glb",
+          "bytes": 1378168,
+          "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "bytes": 929072,
+          "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "bytes": 1273936,
+          "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "bytes": 875864,
+          "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "bytes": 1359124,
+          "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "bytes": 904828,
+          "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "bytes": 1360752,
+          "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "bytes": 912812,
+          "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+        },
+        {
+          "file": "offline/goalkeeper-lod0.js",
+          "bytes": 1803156,
+          "sha256": "4a276986668e7c82ec6ac14ea92baebbdde8d61aea0399ce8c22d47dd7a56c63"
+        },
+        {
+          "file": "offline/goalkeeper-lod1.js",
+          "bytes": 1195948,
+          "sha256": "617a19c0903247af2ee23dff0e16602fb85b074a4080f9a0d401c9ee31a9ca3a"
+        },
+        {
+          "file": "offline/player-01-lod0.js",
+          "bytes": 1782187,
+          "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+        },
+        {
+          "file": "offline/player-01-lod1.js",
+          "bytes": 1186747,
+          "sha256": "858e866b666d36915416a457111a15125689d0670f137f4f332fc09cf1df1625"
+        },
+        {
+          "file": "offline/player-02-lod0.js",
+          "bytes": 1745683,
+          "sha256": "3292833d99803be0fa5de9abc7e776d06f82e8b61a9c257bf9fbb18c2170fa6a"
+        },
+        {
+          "file": "offline/player-02-lod1.js",
+          "bytes": 1159583,
+          "sha256": "14a3cb32ff5eaefb3956281fd8fae697ff9c7336702ce47a452ea80201e257e3"
+        },
+        {
+          "file": "offline/player-03-lod0.js",
+          "bytes": 1815603,
+          "sha256": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389"
+        },
+        {
+          "file": "offline/player-03-lod1.js",
+          "bytes": 1215883,
+          "sha256": "2add2f17da166928b5396196f3dc84b6f6f36033c182c6fea2876a32939eb147"
+        },
+        {
+          "file": "offline/player-04-lod0.js",
+          "bytes": 1837659,
+          "sha256": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891"
+        },
+        {
+          "file": "offline/player-04-lod1.js",
+          "bytes": 1238863,
+          "sha256": "0310600c2b928d6ecabe119b7a9813352bc1da158a66e64d1d13dcd2ebf7b1d5"
+        },
+        {
+          "file": "offline/player-05-lod0.js",
+          "bytes": 1698683,
+          "sha256": "3c915824779811f8f3b8e2e7e60b2b9ae23c2722c90934aaed86cbe7e245bdf7"
+        },
+        {
+          "file": "offline/player-05-lod1.js",
+          "bytes": 1167919,
+          "sha256": "805bd9f178e0da57a19656ea8604d542d32625394f4350c9710195a78115cb08"
+        },
+        {
+          "file": "offline/player-06-lod0.js",
+          "bytes": 1812267,
+          "sha256": "5d96349547f84a0f17210a4670194a40b31a6fc6b34f4eac1f17eef09ff51f0d"
+        },
+        {
+          "file": "offline/player-06-lod1.js",
+          "bytes": 1206539,
+          "sha256": "5f49b4804b02527b29034aecdf5bd8314205120260f14f972bace9d2345bdc83"
+        },
+        {
+          "file": "offline/referee-lod0.js",
+          "bytes": 1814433,
+          "sha256": "9ff2965361bddfe5397e7e843af749d43e502bc9a6ca9379801677e4da72a663"
+        },
+        {
+          "file": "offline/referee-lod1.js",
+          "bytes": 1217181,
+          "sha256": "c1d6e5c9c35ff8358335ccedeee43c99d54f92ec61188415e720dddd7051a46e"
+        },
+        {
+          "file": "preview.css",
+          "bytes": 21078,
+          "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+        },
+        {
+          "file": "preview.html",
+          "bytes": 8029,
+          "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+        },
+        {
+          "file": "vendor/BufferGeometryUtils.js",
+          "bytes": 31918,
+          "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+        },
+        {
+          "file": "vendor/DRACOLoader.js",
+          "bytes": 13640,
+          "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+        },
+        {
+          "file": "vendor/GLTFLoader.js",
+          "bytes": 108527,
+          "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+        },
+        {
+          "file": "vendor/SkeletonUtils.js",
+          "bytes": 8019,
+          "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+        },
+        {
+          "file": "vendor/data.js",
+          "bytes": 1979015,
+          "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+        },
+        {
+          "file": "vendor/draco_decoder.wasm",
+          "bytes": 192420,
+          "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+        },
+        {
+          "file": "vendor/draco_wasm_wrapper.js",
+          "bytes": 58456,
+          "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+        },
+        {
+          "file": "vendor/three.module.js",
+          "bytes": 670681,
+          "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+        },
+        {
+          "file": "vendor/viewer-runtime.js",
+          "bytes": 852381,
+          "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8"
+        }
+      ]
+    },
+    "diagnosticOverride": true,
+    "overrides": {
+      "vendor/viewer-runtime.js": {
+        "source": "/tmp/soccer-v7-c16-body-proof/runtime.js",
+        "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8",
+        "bytes": 852381
+      }
+    },
+    "immutableInputs": {
+      "/tmp/soccer-v7-c16-body-proof/runtime.js": {
+        "bytes": 852381,
+        "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8"
+      },
+      "/tmp/soccer-v7-c16-body-proof/preview.js": {
+        "bytes": 92605,
+        "sha256": "0a1bda21c3306b90d5dc177929a0600acf286524acc936e4525529afe16c9402"
+      },
+      "/tmp/soccer-v7-c16-body-proof/recovery-state.js": {
+        "bytes": 36932,
+        "sha256": "e4f39704d674b1c3eb965716a687ff16f796c9552a7c66aa3fd3082665ba006a"
+      }
+    },
+    "unchanged": [
+      {
+        "file": "/tmp/soccer-v7-c16-body-proof/runtime.js",
+        "expected": {
+          "bytes": 852381,
+          "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8"
+        },
+        "bytes": 852381,
+        "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8",
+        "pass": true
+      },
+      {
+        "file": "/tmp/soccer-v7-c16-body-proof/preview.js",
+        "expected": {
+          "bytes": 92605,
+          "sha256": "0a1bda21c3306b90d5dc177929a0600acf286524acc936e4525529afe16c9402"
+        },
+        "bytes": 92605,
+        "sha256": "0a1bda21c3306b90d5dc177929a0600acf286524acc936e4525529afe16c9402",
+        "pass": true
+      },
+      {
+        "file": "/tmp/soccer-v7-c16-body-proof/recovery-state.js",
+        "expected": {
+          "bytes": 36932,
+          "sha256": "e4f39704d674b1c3eb965716a687ff16f796c9552a7c66aa3fd3082665ba006a"
+        },
+        "bytes": 36932,
+        "sha256": "e4f39704d674b1c3eb965716a687ff16f796c9552a7c66aa3fd3082665ba006a",
+        "pass": true
+      }
+    ],
+    "served": {
+      "preview.html": {
+        "bytes": 8029,
+        "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342",
+        "override": false
+      },
+      "preview.css": {
+        "bytes": 21078,
+        "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29",
+        "override": false
+      },
+      "vendor/data.js": {
+        "bytes": 1979015,
+        "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64",
+        "override": false
+      },
+      "vendor/viewer-runtime.js": {
+        "bytes": 852381,
+        "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8",
+        "override": true
+      },
+      "offline/player-01-lod0.js": {
+        "bytes": 1782187,
+        "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934",
+        "override": false
+      },
+      "offline/player-02-lod0.js": {
+        "bytes": 1745683,
+        "sha256": "3292833d99803be0fa5de9abc7e776d06f82e8b61a9c257bf9fbb18c2170fa6a",
+        "override": false
+      },
+      "offline/player-03-lod0.js": {
+        "bytes": 1815603,
+        "sha256": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389",
+        "override": false
+      },
+      "offline/player-04-lod0.js": {
+        "bytes": 1837659,
+        "sha256": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891",
+        "override": false
+      },
+      "offline/player-05-lod0.js": {
+        "bytes": 1698683,
+        "sha256": "3c915824779811f8f3b8e2e7e60b2b9ae23c2722c90934aaed86cbe7e245bdf7",
+        "override": false
+      },
+      "offline/player-06-lod0.js": {
+        "bytes": 1812267,
+        "sha256": "5d96349547f84a0f17210a4670194a40b31a6fc6b34f4eac1f17eef09ff51f0d",
+        "override": false
+      },
+      "offline/goalkeeper-lod0.js": {
+        "bytes": 1803156,
+        "sha256": "4a276986668e7c82ec6ac14ea92baebbdde8d61aea0399ce8c22d47dd7a56c63",
+        "override": false
+      },
+      "offline/referee-lod0.js": {
+        "bytes": 1814433,
+        "sha256": "9ff2965361bddfe5397e7e843af749d43e502bc9a6ca9379801677e4da72a663",
+        "override": false
+      }
+    },
+    "servedUnchanged": [
+      {
+        "file": "preview.html",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.html",
+        "pass": true,
+        "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+      },
+      {
+        "file": "preview.css",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.css",
+        "pass": true,
+        "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+      },
+      {
+        "file": "vendor/data.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/vendor/data.js",
+        "pass": true,
+        "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+      },
+      {
+        "file": "vendor/viewer-runtime.js",
+        "source": "/tmp/soccer-v7-c16-body-proof/runtime.js",
+        "pass": true,
+        "sha256": "85d2725686101ffb7deb1a7f8c2ca2f52ccc46a4be8ba6551eaf8a4af7aa53b8"
+      },
+      {
+        "file": "offline/player-01-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-01-lod0.js",
+        "pass": true,
+        "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+      },
+      {
+        "file": "offline/player-02-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-02-lod0.js",
+        "pass": true,
+        "sha256": "3292833d99803be0fa5de9abc7e776d06f82e8b61a9c257bf9fbb18c2170fa6a"
+      },
+      {
+        "file": "offline/player-03-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-03-lod0.js",
+        "pass": true,
+        "sha256": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389"
+      },
+      {
+        "file": "offline/player-04-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-04-lod0.js",
+        "pass": true,
+        "sha256": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891"
+      },
+      {
+        "file": "offline/player-05-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-05-lod0.js",
+        "pass": true,
+        "sha256": "3c915824779811f8f3b8e2e7e60b2b9ae23c2722c90934aaed86cbe7e245bdf7"
+      },
+      {
+        "file": "offline/player-06-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-06-lod0.js",
+        "pass": true,
+        "sha256": "5d96349547f84a0f17210a4670194a40b31a6fc6b34f4eac1f17eef09ff51f0d"
+      },
+      {
+        "file": "offline/goalkeeper-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/goalkeeper-lod0.js",
+        "pass": true,
+        "sha256": "4a276986668e7c82ec6ac14ea92baebbdde8d61aea0399ce8c22d47dd7a56c63"
+      },
+      {
+        "file": "offline/referee-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/referee-lod0.js",
+        "pass": true,
+        "sha256": "9ff2965361bddfe5397e7e843af749d43e502bc9a6ca9379801677e4da72a663"
+      }
+    ],
+    "decodedModels": {
+      "models/player-01-lod0.glb": {
+        "bytes": 1336564,
+        "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+      },
+      "models/player-02-lod0.glb": {
+        "bytes": 1309188,
+        "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+      },
+      "models/player-03-lod0.glb": {
+        "bytes": 1361628,
+        "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+      },
+      "models/player-04-lod0.glb": {
+        "bytes": 1378168,
+        "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+      },
+      "models/player-05-lod0.glb": {
+        "bytes": 1273936,
+        "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+      },
+      "models/player-06-lod0.glb": {
+        "bytes": 1359124,
+        "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+      },
+      "models/goalkeeper-lod0.glb": {
+        "bytes": 1352292,
+        "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+      },
+      "models/referee-lod0.glb": {
+        "bytes": 1360752,
+        "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+      }
+    },
+    "modelsMatchDisk": [
+      {
+        "file": "models/player-01-lod0.glb",
+        "bytes": 1336564,
+        "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+        "diskSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+        "pass": true
+      },
+      {
+        "file": "models/player-02-lod0.glb",
+        "bytes": 1309188,
+        "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+        "diskSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+        "pass": true
+      },
+      {
+        "file": "models/player-03-lod0.glb",
+        "bytes": 1361628,
+        "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+        "diskSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+        "pass": true
+      },
+      {
+        "file": "models/player-04-lod0.glb",
+        "bytes": 1378168,
+        "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+        "diskSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+        "pass": true
+      },
+      {
+        "file": "models/player-05-lod0.glb",
+        "bytes": 1273936,
+        "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+        "diskSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+        "pass": true
+      },
+      {
+        "file": "models/player-06-lod0.glb",
+        "bytes": 1359124,
+        "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+        "diskSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+        "pass": true
+      },
+      {
+        "file": "models/goalkeeper-lod0.glb",
+        "bytes": 1352292,
+        "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+        "diskSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+        "pass": true
+      },
+      {
+        "file": "models/referee-lod0.glb",
+        "bytes": 1360752,
+        "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+        "diskSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+        "pass": true
+      }
+    ],
+    "errors": [],
+    "remoteRequests": []
+  }
+}

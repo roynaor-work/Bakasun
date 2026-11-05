@@ -1,0 +1,41 @@
+{
+  "kind": "combined-physical-pelvis-entry-c15c-independent-diagnostic",
+  "previewSha256": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+  "runtimeSha256": "e02e717b28faf7e5554cfe86096ef191f9b58bc51c79c3af0ac3abd976d2700f",
+  "exactSourcePromotedAfterBothRatesPassed": true,
+  "scope": "Native24 player01 LOD0,66 queued action/recovery/motor chains at each rate. Immutable diagnostic runtime overrides packaged runtime only, so these reports deliberately retain complete:false. Final geometry/identity/LOD/package acceptance is separate.",
+  "rows": [
+    {
+      "report": "iterations/24/verification/transitions-c15c-01-lod0-30hz-e02e717b.json",
+      "sha256": "a3387e41c51a2f27ed6af8c6ef3151f54e72c15c83892b29d2e9a71be549a06d",
+      "updateRateHz": 30,
+      "pass": true,
+      "complete": false,
+      "cases": 66,
+      "samples": 4259,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 26.081166544935034,
+      "worstAngularCase": "keeper chain keeper_dive_high @ 0.75",
+      "maximumRootRelativeBoneSpeedMps": 7.336433463752865,
+      "minimumVertexY": 0.00092943,
+      "lowestCase": "keeper chain keeper_dive_left @ 0.75",
+      "maximumPlantAnchorDistanceMeters": 3.2e-07
+    },
+    {
+      "report": "iterations/24/verification/transitions-c15c-01-lod0-120hz-e02e717b.json",
+      "sha256": "1bb5422c4f157c583b0268d672469a4ee776ed5f635b924555fdb5bbb562f999",
+      "updateRateHz": 120,
+      "pass": true,
+      "complete": false,
+      "cases": 66,
+      "samples": 16289,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 27.529380415401302,
+      "worstAngularCase": "keeper chain keeper_dive_high @ 0.75",
+      "maximumRootRelativeBoneSpeedMps": 8.433594058156466,
+      "minimumVertexY": 0.00082832,
+      "lowestCase": "slide recovery run @ 0.15",
+      "maximumPlantAnchorDistanceMeters": 3.2e-07
+    }
+  ]
+}

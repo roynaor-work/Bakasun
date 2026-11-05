@@ -1,0 +1,260 @@
+{
+  "kind": "final-eight-rendered-motion-films",
+  "captureAdapter": {
+    "method": "CDP Page.captureScreenshot",
+    "sha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+    "source": "iterations/35/motion-films/capture-adapter-source.mjs.txt",
+    "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96"
+  },
+  "pass": true,
+  "frozenInputs": {
+    "source/capture-motion-film.mjs": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+    "preview.js": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+    "vendor/viewer-runtime.js": "ef474e25f1c7d68309198f1a769eaf6135bfcd6bc097c4ab91d58573ec954b08",
+    "vendor/data.js": "f4d3878855abdbbc6e04bc57fd5c334ef672c2834ae6d846831f7705bf04844d",
+    "asset-manifest.json": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+    "animations.json": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+  },
+  "rows": [
+    {
+      "sequence": "motor",
+      "size": "390x844",
+      "report": "iterations/35/motion-films/motor-390x844.json",
+      "reportSha256": "ca0ce5464f97b2354e57eba7324f098826da72f04c2df75963954c8cf6a3ce27",
+      "frames": 258,
+      "simulationSeconds": 8.6,
+      "captureWallSeconds": 114.008,
+      "video": {
+        "file": "motor-390x844.webm",
+        "bytes": 695982,
+        "sha256": "2f0391fb8d9b46d040e93c556cae18bdc54223bcfa49ca199ec2bfddad35204b"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          390,
+          844
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "recovery",
+      "size": "390x844",
+      "report": "iterations/35/motion-films/recovery-390x844.json",
+      "reportSha256": "e70714757346adc0e26e4d0af716c292d2e2c579de74dcf0244fea161ed68e7e",
+      "frames": 291,
+      "simulationSeconds": 9.7,
+      "captureWallSeconds": 113.365,
+      "video": {
+        "file": "recovery-390x844.webm",
+        "bytes": 521217,
+        "sha256": "5752759f6bef994403ce06ef95722a4e31056362f9bc32408eb29157e9bd7355"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          390,
+          844
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "keeper",
+      "size": "390x844",
+      "report": "iterations/35/motion-films/keeper-390x844.json",
+      "reportSha256": "12fb12d50648379f8f6bfe77112b4c1eef6bc39f291e4e8bc0002d6995d63d55",
+      "frames": 195,
+      "simulationSeconds": 6.5,
+      "captureWallSeconds": 84.32,
+      "video": {
+        "file": "keeper-390x844.webm",
+        "bytes": 290978,
+        "sha256": "37f4db5eb0f0377df802f6edbc99386e7f8ff1ee93cf97047f52e1a038ec393d"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          390,
+          844
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "pass",
+      "size": "390x844",
+      "report": "iterations/35/motion-films/pass-390x844.json",
+      "reportSha256": "8b56d0d34e11f8815c7661d8bf9fe4a7bd37e0476656218b9a68a4aeca9db950",
+      "frames": 156,
+      "simulationSeconds": 5.2,
+      "captureWallSeconds": 64.206,
+      "video": {
+        "file": "pass-390x844.webm",
+        "bytes": 320826,
+        "sha256": "4997fcc53473890a1064b969893acde5d1ef2e38f5cf568f175d7405314f6c63"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          390,
+          844
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "motor",
+      "size": "844x390",
+      "report": "iterations/35/motion-films/motor-844x390.json",
+      "reportSha256": "584aa2ffee02241fc3f33f201cd8a7ca02c1ad51275c8d554fd40aede9107faa",
+      "frames": 258,
+      "simulationSeconds": 8.6,
+      "captureWallSeconds": 86.747,
+      "video": {
+        "file": "motor-844x390.webm",
+        "bytes": 375272,
+        "sha256": "8ca3fb2d86107db420745c76a05a62bb35d9d3eeeb9b8ed55145cf4a6a413513"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          844,
+          390
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "recovery",
+      "size": "844x390",
+      "report": "iterations/35/motion-films/recovery-844x390.json",
+      "reportSha256": "05fa4f042f82edca26412624657093e481e1efffb24fdc64b337a2b1951fbe33",
+      "frames": 291,
+      "simulationSeconds": 9.7,
+      "captureWallSeconds": 191.007,
+      "video": {
+        "file": "recovery-844x390.webm",
+        "bytes": 321760,
+        "sha256": "9a695369a1008a2014ead8be14e656ac7e94dab370aa9f9e2aa446c73a594a5f"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          844,
+          390
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "keeper",
+      "size": "844x390",
+      "report": "iterations/35/motion-films/keeper-844x390.json",
+      "reportSha256": "f7b2bb60321a2d69fa373141dfb773eebbee24c8925f3d2d4f11a1749fbb7d07",
+      "frames": 195,
+      "simulationSeconds": 6.5,
+      "captureWallSeconds": 73.131,
+      "video": {
+        "file": "keeper-844x390.webm",
+        "bytes": 227688,
+        "sha256": "48ee49a1d713cecc12516d59039403db98705cf5f9623c90afe53d4d99a6426a"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          844,
+          390
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    },
+    {
+      "sequence": "pass",
+      "size": "844x390",
+      "report": "iterations/35/motion-films/pass-844x390.json",
+      "reportSha256": "454bb81ed2507416a208c74bc8c03ffd83aaa381d858a7f43efce585a8fe0d35",
+      "frames": 156,
+      "simulationSeconds": 5.2,
+      "captureWallSeconds": 56.132,
+      "video": {
+        "file": "pass-844x390.webm",
+        "bytes": 183292,
+        "sha256": "da590479f2d1be1cb5565c1b6702597108d7dbf01889d143dd0232fd85dea77c"
+      },
+      "captureAdapter": {
+        "method": "CDP Page.captureScreenshot",
+        "fromSurface": true,
+        "captureBeyondViewport": false,
+        "clipScale": 1,
+        "expectedPngDimensions": [
+          844,
+          390
+        ],
+        "canonicalUtilitySha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+        "adapterSha256": "3edf7170ea81065adbc97cd0ff6589e4f7f634cfcde42311cdba4400cfd8db8e",
+        "sourceArtifact": "capture-adapter-source.mjs.txt",
+        "semanticCodeUnchanged": true
+      },
+      "browserCapturePass": true,
+      "semanticPass": true
+    }
+  ]
+}

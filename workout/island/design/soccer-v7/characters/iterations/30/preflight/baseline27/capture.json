@@ -1,0 +1,2241 @@
+{
+  "kind": "isolated-scalar-only-mouth-comparison",
+  "complete": true,
+  "generatedAt": "2026-11-05T04:27:55.632Z",
+  "comparison": "baseline27",
+  "manifest": "asset-manifest-preflight30-baseline.json",
+  "manifestSha256": "7e162c90c05a8bc7ea4b6ba3837699adf9482be872f01ecb847f3f6a3cec64b7",
+  "captureScriptPath": "/tmp/soccer-v7-capture30-mouth.mjs",
+  "captureScriptSha256": "13fdff4d80f0e58f14cef3093d71295699367f58ba5c0ccfd70434b578f3b7f9",
+  "flags": {
+    "scalarOnlyComparison": true,
+    "changedAuthoringScalar": "authoring.restExpression.mouthCompression",
+    "baselineMouthCompression": 0.4,
+    "candidateMouthCompression": 0.25,
+    "capturedMouthCompression": 0.4,
+    "capturedMouthCompressionLabel": "0.40",
+    "baselineIdentity": "immutable source/character-candidates27; no rebuild",
+    "grayPass": false,
+    "fullPhoneScreenshots": true,
+    "closeMouthDiagnostic": true,
+    "packagedRuntimeMutated": false
+  },
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "fixedFrame": {
+    "clip": "idle",
+    "seekArgument": 0.15,
+    "seekUnits": "normalized clip fraction",
+    "actualSeconds": 0.27
+  },
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates27/models/player-02-lod0.glb",
+      "bytes": 938856,
+      "sha256": "fbba83765a3f57612bcbb6a10f00ba1e4ef4e2e883678e6f1a2be98e7e82ddfe"
+    },
+    {
+      "file": "source/character-candidates27/models/player-02-lod1.glb",
+      "bytes": 500684,
+      "sha256": "44d176da8e0071bfd1fa201088d4ab63ee3acde640343729d9d6948da34907f1"
+    },
+    {
+      "file": "source/character-candidates27/models/player-04-lod0.glb",
+      "bytes": 946412,
+      "sha256": "7f941fb3e51f6e09fe8f6ee90871d6bea4b0cbc4db0fe24e1e6933a654d5dc59"
+    },
+    {
+      "file": "source/character-candidates27/models/player-04-lod1.glb",
+      "bytes": 554912,
+      "sha256": "139395bdd54795c8df5edfd7eac23607e89f59a6be97c76415e03cb2c6fc62a6"
+    }
+  ],
+  "runtimePath": "/tmp/soccer-v7-character-runtime86.mjs",
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "55bcb0155fe2eefc944ea382199ddb3f2ff370eee0dd2236d0adda074faa8f79",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "4d0f95fe85df65fa0acbf5a88e6efe9ce1d77bd1949824e7c50132545327ea47",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "source/character-candidates27/models/player-02-lod0.glb": "fbba83765a3f57612bcbb6a10f00ba1e4ef4e2e883678e6f1a2be98e7e82ddfe",
+      "source/character-candidates27/models/player-02-lod1.glb": "44d176da8e0071bfd1fa201088d4ab63ee3acde640343729d9d6948da34907f1",
+      "source/character-candidates27/models/player-04-lod0.glb": "7f941fb3e51f6e09fe8f6ee90871d6bea4b0cbc4db0fe24e1e6933a654d5dc59",
+      "source/character-candidates27/models/player-04-lod1.glb": "139395bdd54795c8df5edfd7eac23607e89f59a6be97c76415e03cb2c6fc62a6"
+    }
+  },
+  "records": [
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "diagnostic": false,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-pbr-face-front-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.11320512422803987,
+          1.588982490314807,
+          0.8960352991557401
+        ],
+        "target": [
+          3.725290298461914e-7,
+          1.584982490314807,
+          0.030140591914246145
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0022854052885921683,
+          0.06495406848534054,
+          0.0001487609077378694,
+          0.9978856266025985
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "diagnostic": false,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-pbr-face-three-quarter-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          -0.795595820053156,
+          1.588982490314807,
+          0.9747056732285311
+        ],
+        "target": [
+          3.725290298461914e-7,
+          1.584982490314807,
+          0.030140591914246145
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0015212695623715358,
+          -0.34289735780869146,
+          -0.0005553067385838202,
+          0.9393714810346134
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "diagnostic-close-mouth-front",
+      "diagnostic": true,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-pbr-diagnostic-close-mouth-front-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.06959927108831518,
+          1.5149790055079932,
+          0.6552869642956256
+        ],
+        "target": [
+          0,
+          1.5109790055079932,
+          0.12292732780728308
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0037172140543876436,
+          0.06495378817340751,
+          0.00024195976956337156,
+          0.9978813201864578
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": {
+          "method": "in-memory inspect camera reposition; canonical Head-local anchor, fixed span; direct render",
+          "headLocalAnchor": [
+            0,
+            0.056,
+            0.12
+          ],
+          "target": [
+            0,
+            1.5109790055079932,
+            0.12292732780728308
+          ],
+          "verticalSpanMeters": 0.23805128205128206,
+          "distanceMeters": 0.5368899711281865
+        },
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "diagnostic": false,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-pbr-face-front-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.09090954797958499,
+          1.588982490314807,
+          0.7254980983872932
+        ],
+        "target": [
+          3.725290298461914e-7,
+          1.584982490314807,
+          0.030140591914246145
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.002845891144435346,
+          0.06495397468446237,
+          0.0001852438830357999,
+          0.9978841855450901
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "diagnostic": false,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-pbr-face-three-quarter-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          -0.4517733467545849,
+          1.588982490314807,
+          0.5665052501032092
+        ],
+        "target": [
+          3.725290298461914e-7,
+          1.584982490314807,
+          0.030140591914246145
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0026790099009294977,
+          -0.3428964129880959,
+          -0.000977914951772099,
+          0.9393688926871034
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "diagnostic-close-mouth-front",
+      "diagnostic": true,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-pbr-diagnostic-close-mouth-front-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.0467793463583678,
+          1.5149790055079932,
+          0.48073906107820685
+        ],
+        "target": [
+          0,
+          1.5109790055079932,
+          0.12292732780728308
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.005530407623722787,
+          0.06495324129250732,
+          0.00035998361532287845,
+          0.9978729184865726
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": {
+          "method": "in-memory inspect camera reposition; canonical Head-local anchor, fixed span; direct render",
+          "headLocalAnchor": [
+            0,
+            0.056,
+            0.12
+          ],
+          "target": [
+            0,
+            1.5109790055079932,
+            0.12292732780728308
+          ],
+          "verticalSpanMeters": 0.16,
+          "distanceMeters": 0.3608566802929646
+        },
+        "state": {
+          "characterID": "player-02",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33876,
+          "models": [
+            {
+              "id": "player-02",
+              "path": "source/character-candidates27/models/player-02-lod0.glb",
+              "triangles": 33862,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "diagnostic": false,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-pbr-face-front-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.0908059160136677,
+          1.580018579164614,
+          0.728353333195629
+        ],
+        "target": [
+          -0.000004410743713378906,
+          1.576018579164614,
+          0.03375191300829485
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0028489888730232693,
+          0.06495397410909744,
+          0.00018544551944530904,
+          0.9978841767057914
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "diagnostic": false,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-pbr-face-three-quarter-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          -0.8065510295746529,
+          1.580018579164614,
+          0.9913177984447181
+        ],
+        "target": [
+          -0.000004410743713378906,
+          1.576018579164614,
+          0.03375191300829485
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.001500615552611681,
+          -0.34289736993536607,
+          -0.0005477674364889677,
+          0.9393715142557856
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "diagnostic-close-mouth-front",
+      "diagnostic": true,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-pbr-diagnostic-close-mouth-front-390x844.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.06959927108831518,
+          1.5149790055079932,
+          0.6552869642956256
+        ],
+        "target": [
+          0,
+          1.5109790055079932,
+          0.12292732780728308
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0037172140543876436,
+          0.06495378817340751,
+          0.00024195976956337156,
+          0.9978813201864578
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": {
+          "method": "in-memory inspect camera reposition; canonical Head-local anchor, fixed span; direct render",
+          "headLocalAnchor": [
+            0,
+            0.056,
+            0.12
+          ],
+          "target": [
+            0,
+            1.5109790055079932,
+            0.12292732780728308
+          ],
+          "verticalSpanMeters": 0.23805128205128206,
+          "distanceMeters": 0.5368899711281865
+        },
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "diagnostic": false,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-pbr-face-front-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.1173798695068254,
+          1.580018579164614,
+          0.9316155225901762
+        ],
+        "target": [
+          -0.000004410743713378906,
+          1.576018579164614,
+          0.03375191300829485
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0022040334536037615,
+          0.06495408039998118,
+          0.00014346427693999968,
+          0.9978858096465395
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "diagnostic": false,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-pbr-face-three-quarter-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          -0.4512869008247725,
+          1.580018579164614,
+          0.5695333633388215
+        ],
+        "target": [
+          -0.000004410743713378906,
+          1.576018579164614,
+          0.03375191300829485
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.0026819259806866824,
+          -0.34289640995070564,
+          -0.0009789794039766699,
+          0.9393688843661355
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": null,
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "diagnostic-close-mouth-front",
+      "diagnostic": true,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-pbr-diagnostic-close-mouth-front-844x390.png",
+      "fullPhone": true,
+      "camera": {
+        "position": [
+          0.0467793463583678,
+          1.5149790055079932,
+          0.48073906107820685
+        ],
+        "target": [
+          0,
+          1.5109790055079932,
+          0.12292732780728308
+        ],
+        "zoom": 1,
+        "quaternion": [
+          -0.005530407623722787,
+          0.06495324129250732,
+          0.00035998361532287845,
+          0.9978729184865726
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220,
+        "diagnosticCamera": {
+          "method": "in-memory inspect camera reposition; canonical Head-local anchor, fixed span; direct render",
+          "headLocalAnchor": [
+            0,
+            0.056,
+            0.12
+          ],
+          "target": [
+            0,
+            1.5109790055079932,
+            0.12292732780728308
+          ],
+          "verticalSpanMeters": 0.16,
+          "distanceMeters": 0.3608566802929646
+        },
+        "state": {
+          "characterID": "player-04",
+          "view": "face",
+          "lod": "0",
+          "lighting": "studio",
+          "clipID": "idle",
+          "time": 0.27,
+          "playing": false,
+          "fps": 0,
+          "threeRevision": "160",
+          "errors": [],
+          "draws": 7,
+          "triangles": 33459,
+          "models": [
+            {
+              "id": "player-04",
+              "path": "source/character-candidates27/models/player-04-lod0.glb",
+              "triangles": 33445,
+              "lift": 0,
+              "minimumY": 0.0020000018831341916,
+              "world": [
+                0,
+                0,
+                0
+              ],
+              "sampleSeconds": 0.27,
+              "phaseRate": 1,
+              "pathScale": 1,
+              "contactResidual": 0,
+              "contacts": [
+                {
+                  "bone": "LeftFoot",
+                  "key": "idle/LeftFoot/0/0",
+                  "anchor": [
+                    0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                },
+                {
+                  "bone": "RightFoot",
+                  "key": "idle/RightFoot/0/0",
+                  "anchor": [
+                    -0.1,
+                    0,
+                    0
+                  ],
+                  "release": 1.53
+                }
+              ]
+            }
+          ],
+          "environment": {
+            "generatedTextureSizes": [
+              [
+                512,
+                512
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                512,
+                256
+              ],
+              [
+                96,
+                96
+              ],
+              [
+                1024,
+                1024
+              ],
+              [
+                512,
+                512
+              ]
+            ],
+            "crowdInstances": 360,
+            "crowdDrawCalls": 2,
+            "seatInstances": 360,
+            "environmentTriangles": 19580,
+            "shadowMapHero": 1024,
+            "shadowMapPitch": 512,
+            "environmentGeneratedLocally": true,
+            "reflectionSettings": {
+              "frontStrength": 8,
+              "sigma": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "live24": {
+    "before": {
+      "reference": "/tmp/soccer-v7-live24-before-face25.json",
+      "checkedAt": "2026-11-05T04:27:22.213Z",
+      "checked": 41,
+      "pass": true,
+      "records": [
+        {
+          "file": "models/player-04-lod0.glb",
+          "expectedSha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "sha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "expectedSha256": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "sha256": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "expectedSha256": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "sha256": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "expectedSha256": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "sha256": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "expectedSha256": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "sha256": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "expectedSha256": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "sha256": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "expectedSha256": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "sha256": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "expectedSha256": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "sha256": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "expectedSha256": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "sha256": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "expectedSha256": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "sha256": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "expectedSha256": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "sha256": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "expectedSha256": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657",
+          "sha256": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "expectedSha256": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "sha256": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "expectedSha256": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "sha256": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "expectedSha256": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "sha256": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod0.glb",
+          "expectedSha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-normal.png",
+          "expectedSha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-kit-b-basecolor.webp",
+          "expectedSha256": "87cc0eba6bca7de13deeb5a20afbb325cfa15be81c502a552f54dac0427ad01d",
+          "sha256": "87cc0eba6bca7de13deeb5a20afbb325cfa15be81c502a552f54dac0427ad01d",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-orm.png",
+          "expectedSha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-normal.png",
+          "expectedSha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-normal.png",
+          "expectedSha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-kit-a-basecolor.webp",
+          "expectedSha256": "d64341710ccce1dda1b605ad98e668273550d992412ef1402630352e040ceee7",
+          "sha256": "d64341710ccce1dda1b605ad98e668273550d992412ef1402630352e040ceee7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-kit-b-basecolor.webp",
+          "expectedSha256": "3b8045dd6c8cb7ad40746520a8447ef7d84452b9e09bcf9d80e62c82741b325a",
+          "sha256": "3b8045dd6c8cb7ad40746520a8447ef7d84452b9e09bcf9d80e62c82741b325a",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-orm.png",
+          "expectedSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-normal.png",
+          "expectedSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-normal.png",
+          "expectedSha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-orm.png",
+          "expectedSha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-orm.png",
+          "expectedSha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-orm.png",
+          "expectedSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-kit-a-basecolor.webp",
+          "expectedSha256": "5ede972f631e9e48be7826f608ec2b35e4dcd97f336430ff226748980329dba4",
+          "sha256": "5ede972f631e9e48be7826f608ec2b35e4dcd97f336430ff226748980329dba4",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-orm.png",
+          "expectedSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-kit-a-basecolor.webp",
+          "expectedSha256": "4fcb6049eab5b24fe9a8f5bf74579093b32c5ece38ab37718f3768beb694b1d1",
+          "sha256": "4fcb6049eab5b24fe9a8f5bf74579093b32c5ece38ab37718f3768beb694b1d1",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-normal.png",
+          "expectedSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-normal.png",
+          "expectedSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-normal.png",
+          "expectedSha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-orm.png",
+          "expectedSha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-referee-basecolor.webp",
+          "expectedSha256": "4d73325a3e3804fd4ce3023b629fcf3638d5b44da7a6ec8750ec3e76f8fe0b75",
+          "sha256": "4d73325a3e3804fd4ce3023b629fcf3638d5b44da7a6ec8750ec3e76f8fe0b75",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-kit-b-basecolor.webp",
+          "expectedSha256": "30c8e4000366203bffdacda6cad3d9924ece7be78a9083153df7d6d4b0a0ffdf",
+          "sha256": "30c8e4000366203bffdacda6cad3d9924ece7be78a9083153df7d6d4b0a0ffdf",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-keeper-basecolor.webp",
+          "expectedSha256": "bdff513995ed20681d18c1270789a45c11dce62f11b027f43522dd4d3ce8e39c",
+          "sha256": "bdff513995ed20681d18c1270789a45c11dce62f11b027f43522dd4d3ce8e39c",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-orm.png",
+          "expectedSha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "pass": true
+        },
+        {
+          "file": "asset-manifest.json",
+          "expectedSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+          "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+          "pass": true
+        }
+      ]
+    },
+    "after": {
+      "reference": "/tmp/soccer-v7-live24-before-face25.json",
+      "checkedAt": "2026-11-05T04:27:55.632Z",
+      "checked": 41,
+      "pass": true,
+      "records": [
+        {
+          "file": "models/player-04-lod0.glb",
+          "expectedSha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "sha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "expectedSha256": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "sha256": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "expectedSha256": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "sha256": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "expectedSha256": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "sha256": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "expectedSha256": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "sha256": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "expectedSha256": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "sha256": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "expectedSha256": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "sha256": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "expectedSha256": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "sha256": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "expectedSha256": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "sha256": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "expectedSha256": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "sha256": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "expectedSha256": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "sha256": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "expectedSha256": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657",
+          "sha256": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "expectedSha256": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "sha256": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "expectedSha256": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "sha256": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "expectedSha256": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "sha256": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod0.glb",
+          "expectedSha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-normal.png",
+          "expectedSha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-kit-b-basecolor.webp",
+          "expectedSha256": "87cc0eba6bca7de13deeb5a20afbb325cfa15be81c502a552f54dac0427ad01d",
+          "sha256": "87cc0eba6bca7de13deeb5a20afbb325cfa15be81c502a552f54dac0427ad01d",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-orm.png",
+          "expectedSha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-normal.png",
+          "expectedSha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-normal.png",
+          "expectedSha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-kit-a-basecolor.webp",
+          "expectedSha256": "d64341710ccce1dda1b605ad98e668273550d992412ef1402630352e040ceee7",
+          "sha256": "d64341710ccce1dda1b605ad98e668273550d992412ef1402630352e040ceee7",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-kit-b-basecolor.webp",
+          "expectedSha256": "3b8045dd6c8cb7ad40746520a8447ef7d84452b9e09bcf9d80e62c82741b325a",
+          "sha256": "3b8045dd6c8cb7ad40746520a8447ef7d84452b9e09bcf9d80e62c82741b325a",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-orm.png",
+          "expectedSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-normal.png",
+          "expectedSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-normal.png",
+          "expectedSha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-orm.png",
+          "expectedSha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "pass": true
+        },
+        {
+          "file": "textures/player-06-orm.png",
+          "expectedSha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "pass": true
+        },
+        {
+          "file": "textures/player-01-orm.png",
+          "expectedSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-kit-a-basecolor.webp",
+          "expectedSha256": "5ede972f631e9e48be7826f608ec2b35e4dcd97f336430ff226748980329dba4",
+          "sha256": "5ede972f631e9e48be7826f608ec2b35e4dcd97f336430ff226748980329dba4",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-orm.png",
+          "expectedSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-kit-a-basecolor.webp",
+          "expectedSha256": "4fcb6049eab5b24fe9a8f5bf74579093b32c5ece38ab37718f3768beb694b1d1",
+          "sha256": "4fcb6049eab5b24fe9a8f5bf74579093b32c5ece38ab37718f3768beb694b1d1",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-normal.png",
+          "expectedSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "pass": true
+        },
+        {
+          "file": "textures/player-02-normal.png",
+          "expectedSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-normal.png",
+          "expectedSha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "pass": true
+        },
+        {
+          "file": "textures/player-05-orm.png",
+          "expectedSha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "pass": true
+        },
+        {
+          "file": "textures/referee-referee-basecolor.webp",
+          "expectedSha256": "4d73325a3e3804fd4ce3023b629fcf3638d5b44da7a6ec8750ec3e76f8fe0b75",
+          "sha256": "4d73325a3e3804fd4ce3023b629fcf3638d5b44da7a6ec8750ec3e76f8fe0b75",
+          "pass": true
+        },
+        {
+          "file": "textures/player-04-kit-b-basecolor.webp",
+          "expectedSha256": "30c8e4000366203bffdacda6cad3d9924ece7be78a9083153df7d6d4b0a0ffdf",
+          "sha256": "30c8e4000366203bffdacda6cad3d9924ece7be78a9083153df7d6d4b0a0ffdf",
+          "pass": true
+        },
+        {
+          "file": "textures/goalkeeper-keeper-basecolor.webp",
+          "expectedSha256": "bdff513995ed20681d18c1270789a45c11dce62f11b027f43522dd4d3ce8e39c",
+          "sha256": "bdff513995ed20681d18c1270789a45c11dce62f11b027f43522dd4d3ce8e39c",
+          "pass": true
+        },
+        {
+          "file": "textures/player-03-orm.png",
+          "expectedSha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "pass": true
+        },
+        {
+          "file": "asset-manifest.json",
+          "expectedSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+          "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "limits": "PBR only. Standard full-phone face captures use frozen86 setOrbit .13 / -.7, zoom 1. Close-mouth diagnostics remain full-phone screenshots and use in-memory inspect().camera/renderer only, a fixed canonical Head-local anchor and span, identical for .40 baseline and .25 candidate. No packaged viewer/runtime, model, texture, or live24 file is mutated."
+}

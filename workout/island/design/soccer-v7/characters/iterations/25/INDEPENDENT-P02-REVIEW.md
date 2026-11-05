@@ -1,0 +1,9 @@
+# Independent player 02 comparison: 24 versus 25
+
+I inspected the original paired PBR front and three-quarter portrait frames, the PBR three-quarter landscape frames, and the neutral diffuse three-quarter portrait/front landscape controls under `preflight/baseline24/` and `preflight/catmull25/`. Both sets use the same frozen 86 runtime and DPR 1.5; their capture reports record actual model hashes, no packaged-file mutation, zero errors and zero remote requests. Candidate 25 is an isolated geometry export, not the current native-animation package or a final controller test.
+
+The geometric improvement is visible. In neutral diffuse, 25 rounds the ear/lobe silhouette and the lower cheek/jaw transition, and removes some sharp changes on the temple. The PBR comparison preserves those gains, although skin color and lighting make the change subtler. The nose, lid opening, eye direction and mouth placement remain recognizable; I do not see an obvious eye-socket regression in these views. This is a useful correction to retain for the full-roster trial.
+
+The close-up still has visible limitations against the requested reference: a broad planar temple/outer-cheek transition remains in the frontal view, the mouth contour is taut and extremely narrow, the brows resolve as coarse strokes, and bright exposed sclera remains conspicuous. The hairline and cap-like crown are also unchanged by this face-only correction. Smoothing alone should not be reported as repairing those separate details.
+
+My provisional face judgment is **7.5/10**, improved from the rougher 24 surface but not an automatic 8. The actual all-eight 26 front/three-quarter/profile images must show that the remaining planar patches are no longer a repeated phone-frame defect, while preserving the distinct facial forms. The hair category still needs its own evaluation. This review changes no asset, material, runtime or source file.

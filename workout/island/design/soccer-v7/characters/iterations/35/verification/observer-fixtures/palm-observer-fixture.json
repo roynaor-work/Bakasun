@@ -1,0 +1,22 @@
+{
+  "pass": true,
+  "checks": {
+    "actualTriangleRayAccepted": true,
+    "changedModelHashRejects": true,
+    "fingerSelectorSubstitutionRejects": true,
+    "changedNamedWeightsRejects": true,
+    "changedBindPositionRejects": true,
+    "changedBarycentricPointRejects": true,
+    "actualSkinnedPatchAtGround": true,
+    "fullSkinningRetainsForearmContribution": true,
+    "nonFrontmostTriangleRejects": true,
+    "sameActorSharedCacheSamplesLiveMesh": true,
+    "rebuiltActorSameModelUsesNewMeshes": true,
+    "pairedV3RealHeelPadAccepted": true,
+    "pairedV3FingerOutsideDomainRejects": true,
+    "pairedV3WrongPartnerModelRejects": true,
+    "pairedV3WrongCalibrationMotionRejects": true,
+    "pairedV3OptimizerFlagCannotOverrideGeometry": true
+  },
+  "method": "Independent 3D plane-ray/Gram barycentric reconstruction tested against a real local Three r160 SkinnedMesh with known mixed Hand/ForeArm weights. No production calibration helper was called."
+}

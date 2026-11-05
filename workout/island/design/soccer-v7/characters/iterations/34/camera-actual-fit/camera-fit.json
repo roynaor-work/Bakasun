@@ -1,0 +1,1249 @@
+{
+  "kind": "actual-native32-selected-vertex-camera-fit",
+  "pass": true,
+  "sourcePreviewSha256": "18866aff4fb044c31cc3d112fc550f3ee6535c55c84306f079e7de538cb4da72",
+  "runtimeSha256": "d1df08adc4996ab1d517cf3ce6bcc85cd6ba164575bada881b4a907d30240474",
+  "frozenInputs": {
+    "asset-manifest.json": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+    "vendor/data.js": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64",
+    "vendor/viewer-runtime.js": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9",
+    "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+    "offline/player-01-lod0.js": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934",
+    "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+    "offline/player-03-lod0.js": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389",
+    "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+    "offline/player-04-lod0.js": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891"
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-front-390x844.png",
+      "sha256": "508512f5501c4a6f84de3e880f0741aed27cc0e57cc29d857ff3ae6fd2684ddf",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.8167411618728007,
+      "maximumNDCX": 0.9000269896242317,
+      "minimumNDCY": -0.7707742949279743,
+      "maximumNDCY": 0.7286910826882189,
+      "renderedHeadHeightPixels": 632.7743893540336,
+      "marginsPixels": {
+        "top": 114.49236310557161,
+        "bottom": 96.73324754039483,
+        "left": 35.73547343480387,
+        "right": 19.494737023274826
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 0.9666199149687853,
+        "cameraDistanceMeters": 0.9666199149687853,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.12532004203679023,
+          1.5772320281841599,
+          0.9919550220358071
+        ],
+        "quaternion": [
+          -0.0020646829644236035,
+          0.06495409980081909,
+          0.00013439371717205315,
+          0.9978861077004981
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-01",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-three-quarter-390x844.png",
+      "sha256": "7cd67bcf2a16eecfa7567e753f6b1983f88732afd4233342f07836200107c54f",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.7747510404741111,
+      "maximumNDCX": 0.7277172516060324,
+      "minimumNDCY": -0.5916247388348489,
+      "maximumNDCY": 0.5641798077510455,
+      "renderedHeadHeightPixels": 487.7495186592474,
+      "marginsPixels": {
+        "top": 183.9161211290588,
+        "bottom": 172.33436021169376,
+        "left": 43.92354710754833,
+        "right": 53.09513593682368
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 1.0688500634620142,
+        "cameraDistanceMeters": 1.2464261079770618,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.8029566464729698,
+          1.5772320281841599,
+          0.9868108193605989
+        ],
+        "quaternion": [
+          -0.0015073000781239108,
+          -0.34289736602879595,
+          -0.0005502074787753525,
+          0.9393715035536891
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-01",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-side-390x844.png",
+      "sha256": "392ced907b33aeed09f05f6269abab02fdc5e7e50793a739c92fdaaadb81b30a",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.8973047473809741,
+      "maximumNDCX": 0.9001569869332134,
+      "minimumNDCY": -0.5794665159350519,
+      "maximumNDCY": 0.5468399499106019,
+      "renderedHeadHeightPixels": 475.3013285868659,
+      "marginsPixels": {
+        "top": 191.23354113772598,
+        "bottom": 177.4651302754081,
+        "left": 20.02557426071005,
+        "right": 19.469387548023377
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 1.3116333273704857,
+        "cameraDistanceMeters": 1.3116333273704857,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          1.311646425491175,
+          1.5772320281841599,
+          0.03349154864693102
+        ],
+        "quaternion": [
+          -0.0010782042516639288,
+          0.7071059591571773,
+          0.0010782042516639288,
+          0.7071059591571773
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-01",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-front-844x390.png",
+      "sha256": "8aea5db008051e35b138e665d58a4381bd67a28750f8b4a13d58784d7128dedd",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.20106399275881567,
+      "maximumNDCX": 0.22228453963859904,
+      "minimumNDCY": -0.9003205649251251,
+      "maximumNDCY": 0.844225708544584,
+      "renderedHeadHeightPixels": 340.1865233265933,
+      "marginsPixels": {
+        "top": 30.375986833806117,
+        "bottom": 19.437489839600598,
+        "left": 337.1509950557798,
+        "right": 328.1959242725112
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 0.8338010473907583,
+        "cameraDistanceMeters": 0.8338010473907583,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.10810218201459391,
+          1.5772320281841599,
+          0.860256894179085
+        ],
+        "quaternion": [
+          -0.002393567709797134,
+          0.06495405197934122,
+          0.0001558013832464775,
+          0.997885373021878
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-01",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-three-quarter-844x390.png",
+      "sha256": "69475850eb5dc57200f76ae2c310427f42ca3a5481a9d92ce080cbccb296116b",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.24457263374570917,
+      "maximumNDCX": 0.23446022558916085,
+      "minimumNDCY": -0.900330406420695,
+      "maximumNDCY": 0.8421699895653174,
+      "renderedHeadHeightPixels": 339.7875772172724,
+      "marginsPixels": {
+        "top": 30.776852034763106,
+        "bottom": 19.435570747964483,
+        "left": 318.79034855931076,
+        "right": 323.05778480137417
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 0.8341656704349556,
+        "cameraDistanceMeters": 0.8341656704349556,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.5373711808599957,
+          1.5772320281841599,
+          0.6714966445800341
+        ],
+        "quaternion": [
+          -0.0022522255380908063,
+          -0.34289682189512455,
+          -0.0008221264981879301,
+          0.93937001289288
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-01",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-side-844x390.png",
+      "sha256": "e00ec6d1d4d7e516a649f194135f37222571be4d8082adc073b2d5969c9146b7",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18656,
+      "bufferPointCount": 18656,
+      "maximumBufferWorldErrorMeters": 6.652684625407801e-9,
+      "worldBox": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "minimumNDCX": -0.2880113937965007,
+      "maximumNDCX": 0.289320344713513,
+      "minimumNDCY": -0.9013072417541586,
+      "maximumNDCY": 0.8257864982035598,
+      "renderedHeadHeightPixels": 336.78327929175504,
+      "marginsPixels": {
+        "top": 33.971632850305845,
+        "bottom": 19.245087857939083,
+        "left": 300.4591918178767,
+        "right": 299.9068145308975
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18656,
+        "minimumDistanceMeters": 0.8728730881909237,
+        "cameraDistanceMeters": 0.8728730881909237,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.8728861863116131,
+          1.5772320281841599,
+          0.03349154864693099
+        ],
+        "quaternion": [
+          -0.001620169581081158,
+          0.7071049250645397,
+          0.0016201695810811579,
+          0.7071049250645399
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-front-390x844.png",
+      "sha256": "74945514d6e890534aea7a0167f0a55766a7c4e56f5c52a80207c8c5f792b82f",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.8393649346008534,
+      "maximumNDCX": 0.8999991887247982,
+      "minimumNDCY": -0.772597572376976,
+      "maximumNDCY": 0.7452478806924577,
+      "renderedHeadHeightPixels": 640.5307811953011,
+      "marginsPixels": {
+        "top": 107.50539434778284,
+        "bottom": 95.96382445691611,
+        "left": 31.32383775283359,
+        "right": 19.500158198664344
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 0.9795876060530503,
+        "cameraDistanceMeters": 0.9795876060530503,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.12698666577763973,
+          1.578358628593574,
+          0.989918771087021
+        ],
+        "quaternion": [
+          -0.002037351224368931,
+          0.0649541034574503,
+          0.00013261464783985026,
+          0.997886163877114
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-three-quarter-390x844.png",
+      "sha256": "5218ab82c00daee1016e6c9546c701700c08a2587fe89cb3c2faccc9e93b9961",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.7798518881215295,
+      "maximumNDCX": 0.7941224733095911,
+      "minimumNDCY": -0.6002083034219633,
+      "maximumNDCY": 0.581878754330161,
+      "renderedHeadHeightPixels": 498.84073837139647,
+      "marginsPixels": {
+        "top": 176.44716567267204,
+        "bottom": 168.7120959559315,
+        "left": 42.92888181630175,
+        "right": 40.14611770462974
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 1.100386438232454,
+        "cameraDistanceMeters": 1.2428406423710507,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.8006612578872114,
+          1.578358628593574,
+          0.9691739847266558
+        ],
+        "quaternion": [
+          -0.0015116484478822274,
+          -0.34289736347820055,
+          -0.0005517947576431969,
+          0.9393714965663023
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-side-390x844.png",
+      "sha256": "f2f08edf3c61ceb8c84f0aa0848f675c47ba322b3036a1cebff605a82112b9eb",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.8995508895764278,
+      "maximumNDCX": 0.9001303503953137,
+      "minimumNDCY": -0.5881593638601549,
+      "maximumNDCY": 0.5625367078916965,
+      "renderedHeadHeightPixels": 485.59374227928134,
+      "marginsPixels": {
+        "top": 184.60950926970406,
+        "bottom": 173.79674845101465,
+        "left": 19.587576532596575,
+        "right": 19.474581672913818
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 1.2834351894245655,
+        "cameraDistanceMeters": 1.2834351894245655,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          1.2834338557706386,
+          1.578358628593574,
+          0.018597029369522716
+        ],
+        "quaternion": [
+          -0.0011018931245927973,
+          0.7071059226392761,
+          0.0011018931245927973,
+          0.7071059226392762
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-front-844x390.png",
+      "sha256": "9c026fddf58ef2fc936555351e0c8d83b131956db2b557ecea8afc2248bd3175",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.20634192940737472,
+      "maximumNDCX": 0.2219747137557525,
+      "minimumNDCY": -0.9004271641603859,
+      "maximumNDCY": 0.8647210475795976,
+      "renderedHeadHeightPixels": 344.20390128929677,
+      "marginsPixels": {
+        "top": 26.379395721978476,
+        "bottom": 19.416702988724744,
+        "left": 334.92370579008787,
+        "right": 328.32667079507246
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 0.8473812135787125,
+        "cameraDistanceMeters": 0.8473812135787125,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.10984820344038608,
+          1.578358628593574,
+          0.8588279502039662
+        ],
+        "quaternion": [
+          -0.002355208941477053,
+          0.06495405792036534,
+          0.00015330454593561388,
+          0.997885464293491
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-three-quarter-844x390.png",
+      "sha256": "5b5de5b1391f3bd3527ca1de7332b6305ac307b123b553f5af4cf18a96e6e441",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.24299374387089448,
+      "maximumNDCX": 0.2530206892329952,
+      "minimumNDCY": -0.9003208543473733,
+      "maximumNDCY": 0.8637629151808959,
+      "renderedHeadHeightPixels": 343.9963350580125,
+      "marginsPixels": {
+        "top": 26.566231539725305,
+        "bottom": 19.437433402262208,
+        "left": 319.45664008648254,
+        "right": 315.22526914367603
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 0.843331845869858,
+        "cameraDistanceMeters": 0.843331845869858,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.5432906249740996,
+          1.578358628593574,
+          0.66361280297129
+        ],
+        "quaternion": [
+          -0.002227746509733234,
+          -0.3428968432024797,
+          -0.0008131909553116541,
+          0.9393700712646388
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-03",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-side-844x390.png",
+      "sha256": "00f77841e9912b038fddeeb0bb587763396b3b9429b930bbb04ff31372a60c1b",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18646,
+      "bufferPointCount": 18646,
+      "maximumBufferWorldErrorMeters": 5.999608365669928e-9,
+      "worldBox": {
+        "min": [
+          -0.0893620103597641,
+          1.4149890819974797,
+          -0.09968459691852793
+        ],
+        "max": [
+          0.0893593430519104,
+          1.7337281751896683,
+          0.1368786556575732
+        ]
+      },
+      "minimumNDCX": -0.2869916089165325,
+      "maximumNDCX": 0.28791150621236783,
+      "minimumNDCY": -0.9007406584014622,
+      "maximumNDCY": 0.8439883979933843,
+      "renderedHeadHeightPixels": 340.2221659969951,
+      "marginsPixels": {
+        "top": 30.422262391290058,
+        "bottom": 19.355571611714865,
+        "left": 300.8895410372233,
+        "right": 300.5013443783808
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18646,
+        "minimumDistanceMeters": 0.8591779136789992,
+        "cameraDistanceMeters": 0.8591779136789992,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.8591765800250724,
+          1.578358628593574,
+          0.018597029369522688
+        ],
+        "quaternion": [
+          -0.0016459944387011878,
+          0.707104865421182,
+          0.0016459944387011878,
+          0.7071048654211819
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-front-390x844.png",
+      "sha256": "d39b4004277a433090797c0eb221ab808311c3b2e577a9b1eefe258b04b7b805",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.8193321692554862,
+      "maximumNDCX": 0.9000086233478823,
+      "minimumNDCY": -0.7837618182523598,
+      "maximumNDCY": 0.7487663225735348,
+      "renderedHeadHeightPixels": 646.7268754285275,
+      "marginsPixels": {
+        "top": 106.0206118739683,
+        "bottom": 91.25251269750416,
+        "left": 35.23022699518018,
+        "right": 19.498318447162944
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 0.9739641515867394,
+        "cameraDistanceMeters": 0.9739641515867394,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.1262545969895521,
+          1.5800037895875367,
+          0.9995170583958695
+        ],
+        "quaternion": [
+          -0.002049114293173516,
+          0.06495410188967769,
+          0.00013338032594599968,
+          0.9978861397915133
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-three-quarter-390x844.png",
+      "sha256": "816c32e4c212a8ac6467bae160c27064222c6842c3a5147fa8bc84830a86244f",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.7821600811977574,
+      "maximumNDCX": 0.7269140483138702,
+      "minimumNDCY": -0.6020507268631564,
+      "maximumNDCY": 0.5806006894190743,
+      "renderedHeadHeightPixels": 499.0788976711014,
+      "marginsPixels": {
+        "top": 176.98650906515064,
+        "bottom": 167.93459326374798,
+        "left": 42.478784166437315,
+        "right": 53.25176057879531
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 1.0841709822654149,
+        "cameraDistanceMeters": 1.2518668123295613,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.8064791533122839,
+          1.5800037895875367,
+          0.9912518707692071
+        ],
+        "quaternion": [
+          -0.0015007492924619709,
+          -0.34289736985737607,
+          -0.0005478162553452177,
+          0.9393715140421308
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-side-390x844.png",
+      "sha256": "30bd47ddbeb6ad98c226358b1127e3634a21311f6344521e5e79bac7b3ea3929",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.8971591893949289,
+      "maximumNDCX": 0.900139747225948,
+      "minimumNDCY": -0.5897225681811153,
+      "maximumNDCY": 0.5568919895728098,
+      "renderedHeadHeightPixels": 483.87134337215645,
+      "marginsPixels": {
+        "top": 186.99158040027424,
+        "bottom": 173.1370762275693,
+        "left": 20.053958067988866,
+        "right": 19.472749290940136
+      },
+      "canvas": {
+        "width": 390,
+        "height": 844
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 1.3138397802909254,
+        "cameraDistanceMeters": 1.3138397802909254,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          1.313835369547212,
+          1.5800037895875367,
+          0.033771319838205194
+        ],
+        "quaternion": [
+          -0.0010763935359256146,
+          0.7071059619158615,
+          0.0010763935359256146,
+          0.7071059619158615
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "front",
+      "yaw": 0.13,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-front-844x390.png",
+      "sha256": "6bc482b1198f3ea798049891d9f3e5f7cfb05c8fe4ce103a47e239149470d661",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.19863260218066794,
+      "maximumNDCX": 0.21882173684212347,
+      "minimumNDCY": -0.900340131950843,
+      "maximumNDCY": 0.8550278900126167,
+      "renderedHeadHeightPixels": 342.2967642828747,
+      "marginsPixels": {
+        "top": 28.269561447539743,
+        "bottom": 19.433674269585627,
+        "left": 338.1770418797581,
+        "right": 329.6572270526239
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 0.8537550620624704,
+        "cameraDistanceMeters": 0.8537550620624704,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.11067139473397934,
+          1.5800037895875367,
+          0.8803223059454548
+        ],
+        "quaternion": [
+          -0.002337626033285274,
+          0.06495406061153379,
+          0.00015216004460959657,
+          0.9978855056377571
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "three-quarter",
+      "yaw": -0.7,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-three-quarter-844x390.png",
+      "sha256": "599d3121a4048300ba34fd3ba8abb5c8f2efac33704fe4292a0acc70ea530718",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.24311402326817327,
+      "maximumNDCX": 0.23053924848740884,
+      "minimumNDCY": -0.9002840457850245,
+      "maximumNDCY": 0.8552419033639911,
+      "renderedHeadHeightPixels": 342.32756008405806,
+      "marginsPixels": {
+        "top": 28.227828844021737,
+        "bottom": 19.444611071920217,
+        "left": 319.40588218083093,
+        "right": 324.7124371383135
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 0.8515813694816534,
+        "cameraDistanceMeters": 0.8515813694816534,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          -0.5486081910858898,
+          1.5800037895875367,
+          0.685096677123273
+        ],
+        "quaternion": [
+          -0.002206166021355315,
+          -0.3428968617937229,
+          -0.0008053134621213568,
+          0.9393701221955756
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    },
+    {
+      "id": "player-04",
+      "angle": "side",
+      "yaw": 1.5707963267948966,
+      "zoom": 1,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-side-844x390.png",
+      "sha256": "c4d6ade06944f563dd0e8fc86ea2ee8432bf40c3da4ba5dedad58430a1ea8529",
+      "method": "Every actual selected skinned vertex via Three.SkinnedMesh.getVertexPosition; reused fitter buffer independently compared",
+      "selectedVertexCount": 18671,
+      "bufferPointCount": 18671,
+      "maximumBufferWorldErrorMeters": 6.705606292456423e-9,
+      "worldBox": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "minimumNDCX": -0.2834377505873063,
+      "maximumNDCX": 0.2847477235449639,
+      "minimumNDCY": -0.9012432071274364,
+      "maximumNDCY": 0.8272534361360934,
+      "renderedHeadHeightPixels": 337.0568454363883,
+      "marginsPixels": {
+        "top": 33.68557995346179,
+        "bottom": 19.257574610149895,
+        "left": 302.38926925215674,
+        "right": 301.83646066402525
+      },
+      "canvas": {
+        "width": 844,
+        "height": 390
+      },
+      "fit": {
+        "kind": "actualSelectedWorldVertexFrustumFit",
+        "pointCount": 18671,
+        "minimumDistanceMeters": 0.8883268345044049,
+        "cameraDistanceMeters": 0.8883268345044049,
+        "safety": 0.9,
+        "zoom": 1,
+        "verticalOffsetMeters": 0.004
+      },
+      "camera": {
+        "position": [
+          0.8883224237606915,
+          1.5800037895875367,
+          0.033771319838205166
+        ],
+        "quaternion": [
+          -0.0015919847907383481,
+          0.7071049890818377,
+          0.0015919847907383481,
+          0.7071049890818379
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564
+      },
+      "entireRenderedHeadFits": true
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": [
+    "Camera-only runtime override on actual native32 geometry; independent final-package and physics acceptance is separate.",
+    "At zoom1 every actually rendered selected head vertex must fit both projected axes; empty AABB corners are excluded. Intentional tighter user zoom may crop the head."
+  ]
+}

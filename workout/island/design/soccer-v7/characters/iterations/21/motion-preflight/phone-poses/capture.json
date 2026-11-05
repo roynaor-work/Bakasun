@@ -1,0 +1,2522 @@
+{
+  "kind": "cold-motion-source-candidate-phones",
+  "complete": false,
+  "generatedAt": "2026-11-05T02:25:55.941Z",
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "actualDataSha256": "319e06847f9b1253f2a178a76658f299afe62fdf761d06af077bda4892b29fbc",
+  "baseDataSha256": "bf0d07d547941bb4223902de9c402cfb8fb9ba2629caaf03dc85cc23bfc5ccb7",
+  "loadedHashes": {
+    "manifest": "f6ff0484249de6eac83dbf1dd4a26898a4868cdcfae80b17cbbddfef89f2abf9",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "models/player-01-lod0.glb": "189b11be43c63fe660cdc31c81c64834cc8aec8248968ed63b25b2c4915afce4",
+      "models/player-01-lod1.glb": "d5a50e8e9a1dd73e929ccb798dee42119bd95666bb2296673a8988ea28db0371",
+      "models/player-02-lod0.glb": "de8ab8415efdd14e78c91d5dba205b83d1aa00a91f7f973e8b9e58a8717578b4",
+      "models/player-02-lod1.glb": "b65a691b248f6e8b2cbf4fb91eecf4498d0b307a86e38f81c631cc159c581495",
+      "models/player-03-lod0.glb": "21de38dc3beccbdfbf5cbf7168f27e8e519814506e91392bf357b0244b824c09",
+      "models/player-03-lod1.glb": "e362bd6c07e057de7a4d826db7736cd8d99ea043c9559587bc75b699205348fa",
+      "models/player-04-lod0.glb": "c7cb95ac7f304c4fd277500e77fe697223b168930707f7d650e3fe9368d4a7be",
+      "models/player-04-lod1.glb": "298728bf05aefcdf084253b057c215e08de4a160bde94e23d7a5ad65f2a8f4ad",
+      "models/player-05-lod0.glb": "8c9d83f236730c0e03727ed46008f2a99ba1093599c7c9a5f883e471275a6aa9",
+      "models/player-05-lod1.glb": "3e9e011958bc038d82499c3dd775ca47182f8146d43f574266a21efd5daa973a",
+      "models/player-06-lod0.glb": "69640defd4ed3e97ee0e3365f5e43e7be4fd83ff21ef4ee0217273d5d072e655",
+      "models/player-06-lod1.glb": "7d86a11911d8bdbda00bc4d3359b7f740b5db9a08f8d2fd5ddd6fca0b3ba8250",
+      "models/goalkeeper-lod0.glb": "8ac9e08de93ff8adc06d97aba7cbdc602d74b540156b53119880fa71629cf97e",
+      "models/goalkeeper-lod1.glb": "888aa7a7c71f64f3c3003abb6e5ab0574be88d97f66a9a7a50fa010b24e2cba0",
+      "models/referee-lod0.glb": "45e3aac879bb713c6d217292e9efb0b24c0f0a5343481ad04a138eb81d15d8ba",
+      "models/referee-lod1.glb": "52fff59b82a6556efb9b4a18af8d5962116859364fa0330f5dd071de2e295fee"
+    },
+    "bootBounds": "d61b381ece417943c25e6232b86c32786bbf3d3842b356c30b31f3e07868ceeb"
+  },
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "records": [
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.23333333333333334,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "slide_tackle-0-233333-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.2333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.002000527763091196,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.2333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.3,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "slide_tackle-0-300000-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.3,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.05608380407362765,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.3,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.4,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "slide_tackle-0-400000-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.4,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.05608341337290061,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.4,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.5666666666666667,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "slide_tackle-0-566667-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.5666666666666667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.026710502746951418,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.5666666666666667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.23333333333333334,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "slide_tackle-0-233333-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.2333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.002000527763091196,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.2333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.3,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "slide_tackle-0-300000-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.3,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.05608380407362765,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.3,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.4,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "slide_tackle-0-400000-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.4,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.05608341337290061,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.4,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "character": "player-01",
+      "seconds": 0.5666666666666667,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "slide_tackle-0-566667-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "slide_tackle",
+        "time": 0.5666666666666667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 24872,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.026710502746951418,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.5666666666666667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "fall-0-000000-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.0019999207618671393,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "fall/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.066667
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.08333333333333333,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "fall-0-083333-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.08333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.014408759183096923,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.08333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.16666666666666666,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "fall-0-166667-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.16666666666666666,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.019166480184252665,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.16666666666666666,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.23333333333333334,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "fall-0-233333-390x844.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.23333333333333336,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.01111066048791598,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.23333333333333336,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "fall-0-000000-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.0019999207618671393,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "fall/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.066667
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.08333333333333333,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "fall-0-083333-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.08333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.014408759183096923,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.08333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.16666666666666666,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "fall-0-166667-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.16666666666666666,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.019166480184252665,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.16666666666666666,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "fall",
+      "character": "player-01",
+      "seconds": 0.23333333333333334,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "fall-0-233333-844x390.png",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "fall",
+        "time": 0.23333333333333336,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23912,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23894,
+            "lift": 0,
+            "minimumY": 0.01111066048791598,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.23333333333333336,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.3333333333333333,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_right-0-333333-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.3333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.017000221641559142,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.3333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.4,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_right-0-400000-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.4,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.028884017801800436,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.4,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.9,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_right-0-900000-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.9,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.12124729662450849,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.9,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 1.066667,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_right-1-066667-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 1.066667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27908,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.1438829887133693,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.066667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.3333333333333333,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_right-0-333333-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.3333333333333333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.017000221641559142,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.3333333333333333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.4,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_right-0-400000-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.4,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.028884017801800436,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.4,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 0.9,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_right-0-900000-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 0.9,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.12124729662450849,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.9,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "character": "goalkeeper",
+      "seconds": 1.066667,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_right-1-066667-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_right",
+        "time": 1.066667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.1438829887133693,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.066667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 0.9,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_high-0-900000-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 0.9,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.15182238626773678,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.9,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 1.033333,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_high-1-033333-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 1.033333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.1518998711763362,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.033333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 1.066667,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "keeper_dive_high-1-066667-390x844.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 1.066667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.15194513148087285,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.066667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 0.9,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_high-0-900000-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 0.9,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 11,
+        "triangles": 28868,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.15182238626773678,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.9,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 1.033333,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_high-1-033333-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 1.033333,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27908,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.1518998711763362,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.033333,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_dive_high",
+      "character": "goalkeeper",
+      "seconds": 1.066667,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "keeper_dive_high-1-066667-844x390.png",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "keeper_dive_high",
+        "time": 1.066667,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27908,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27890,
+            "lift": 0,
+            "minimumY": 0.15194513148087285,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 1.066667,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "New authored motion is supplied only through an in-memory data response. Native15 meshes and native GLB animation tracks are unchanged; final reembedding/full-roster floor/controller verification remain mandatory. Cold poses do not prove natural continuous recovery, measured FPS, or a transition."
+}

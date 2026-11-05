@@ -1,0 +1,793 @@
+{
+  "declaredPackageHashes": {
+    "manifest": "ea7f7ad4779e3ce38c216f5bc0c63f34598f5c7b35b4159edaf934cde2b00272",
+    "motion": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "models/player-01-lod0.glb": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec",
+      "models/player-01-lod1.glb": "5b88f54a24aac1a94817d4b58e6516a08492574aed7449ebea68ef0a50f15f1b",
+      "models/player-02-lod0.glb": "dfc33b91e31a741d1d63618e3fc320589e55c7181c7c247f879fac00e11965b0",
+      "models/player-02-lod1.glb": "a068fa7d9bcc21fa6fd92e2f73f2103121d6c18175746c0a313b1f8713e4d23c",
+      "models/player-03-lod0.glb": "6e3aaea7f98595dc1f477daf09b09be56bab2a8f86be336af2a6b9660204e7ee",
+      "models/player-03-lod1.glb": "0c956633b16b17f5a3fb7c248aaff01afd558a0ca01e8630bf53068ab71f9a51",
+      "models/player-04-lod0.glb": "e8b54b74caf489cbe80f3cde3f2e526d959628515ff8e169da86cd90d8a35fb5",
+      "models/player-04-lod1.glb": "d0ba70d3d7416a08ac4113121ae41aea6d276cb88a26cbddff65c93dc1a5f1b8",
+      "models/player-05-lod0.glb": "15084d635e9b83a950903c2328a2d95a77d620ae03a6ee5f52247a575dbca8bf",
+      "models/player-05-lod1.glb": "aa6f3dc5938fb6db4416020c06a1f6335f4a8597355bb2279c317565785702ce",
+      "models/player-06-lod0.glb": "60f1eac1822a216549e77f07a1125cb24dacbef8d1b5b4aa2bbeeffe3cd22956",
+      "models/player-06-lod1.glb": "21ce7ab4851b34d7604c8648931f5952d71613990d0b5e808699ae9d66c66acf",
+      "models/goalkeeper-lod0.glb": "2fde47c3ebcb508a404ed25163099ddcf2d47a3b773c26c416738dca69d43fb9",
+      "models/goalkeeper-lod1.glb": "b7a0f45b457d96e2bada2b6d7f82cc164962798b511307e83dd56a04a9890907",
+      "models/referee-lod0.glb": "a0c81e45008a2897f0120e1e45001d662fc5361418eff754b99c0e3b90f9873b",
+      "models/referee-lod1.glb": "4bc484209920380d70c359cb5bcccfba50ccf0a16ae0fd8ce06c116882cdaa23"
+    }
+  },
+  "kind": "actual-bundled-viewer-transition-audit",
+  "extended": true,
+  "gaitsOnly": false,
+  "updateRateHz": 120,
+  "characterID": "player-01",
+  "testedLOD": 0,
+  "logicalRootWeightedVertexCount": 0,
+  "logicalRootPresentInEverySkin": true,
+  "method": "Actual classic-script bundle loaded from local HTTP; synchronous api.step updates and real post-IK skeleton/mesh sampled at 120Hz. GPU renderer temporarily suppressed, requestAnimationFrame disabled to prevent races. No source/mesh/IK code replaced. All mesh vertices evaluated after each update.",
+  "limitations": [
+    "Single player-01 LOD0 in this run; other identities and LODs require separate runs.",
+    "Bone sole marker is (0,-0.08,0); palm marker is an approximate (0,-0.07,0) from the wrist, not a measured hand surface. Actual mesh floor min separately scans every vertex and is the geometric penetration gate.",
+    "The stateful solver was integrated at 120Hz; other integration rates can follow different paths and require a separate run.",
+    "Logical Root orientation is recorded separately because heading handoff counter-rotates Hips; its actual decoded skin weights must be zero. Hips and all descendant world orientations, and every bone position including Root, remain gated.",
+    "First-step root velocity is reported descriptively; the current pass gate measures positional/orientation C0 continuity and contact integrity, not acceleration quality or physical collision.",
+    "No physical phone GPU or FPS evidence."
+  ],
+  "results": [
+    {
+      "name": "entry phase run_5 @ 0.5",
+      "start": "run_5",
+      "sampleRateHz": 120,
+      "sampleCount": 155,
+      "minVertexY": 0.00199992,
+      "maxMinimumVertexY": 0.08364092,
+      "maxPlantAnchorDistanceMeters": 0,
+      "maxPlantSoleDisplacementDuringLockMeters": 0,
+      "maxPlantOrientationStepDegrees": 0,
+      "maxPlantOrientationTotalDegrees": 0,
+      "worstPlantOrientationStep": null,
+      "maxReachResidualMeters": 0,
+      "maxLandingResidualMeters": 0,
+      "worstLandingResidual": null,
+      "maximumLandingLifetimeSeconds": 0.09166667,
+      "maximumLandingObjectElapsedSeconds": 0.09166667,
+      "maximumLandingDurationSeconds": 0.091667,
+      "maximumContinuousFootConstraintLifetimeSeconds": 0.175,
+      "invalidLandingLifetimeSamples": 0,
+      "overdueLandingSamples": 0,
+      "recoverySamples": 10,
+      "recoveryModes": [
+        "release"
+      ],
+      "maximumRecoveryLifetimeSeconds": 0.075,
+      "maximumRecoveryDurationSeconds": 0.08,
+      "invalidRecoveryLifetimeSamples": 0,
+      "recoveryRetainedStaticAnchorSamples": 0,
+      "maximumLandingProjectionMeters": 0,
+      "worstLandingProjection": null,
+      "maximumLandingReleaseSoleStepMeters": 0.04850799,
+      "worstLandingRelease": {
+        "clock": 0.37500000000000033,
+        "clip": "decelerate",
+        "sampleSeconds": 0.2583333333333333,
+        "bone": "LeftFoot",
+        "releasedKey": "release:decelerate/LeftFoot/0/0.066667",
+        "secondsSincePreviousSample": 0.00833333333333336,
+        "previousSole": [
+          0.1002035711318035,
+          0.14085895251579741,
+          2.94777006720119
+        ],
+        "sole": [
+          0.10014902003985036,
+          0.15180424874856732,
+          2.995027049392808
+        ],
+        "soleStepMeters": 0.0485079875000355,
+        "nowLocked": false,
+        "nextLandingKey": null
+      },
+      "expiredContactLandingSamples": 0,
+      "worstExpiredContactLanding": null,
+      "authoredHandSupportSamples": 0,
+      "maxAuthoredHandSupportResidualMeters": 0,
+      "maxSettledAuthoredHandSupportResidualMeters": 0,
+      "worstAuthoredHandSupport": null,
+      "minimumWristY": 0.70981116,
+      "minimumPalmMarkerY": 0.65784297,
+      "palmMarkerOffsetMeters": [
+        0,
+        -0.07,
+        0
+      ],
+      "lowestPalmSample": {
+        "clock": 0.5833333333333337,
+        "sampleSeconds": 0.4666666666666673,
+        "clip": "decelerate",
+        "bone": "LeftHand",
+        "wrist": [
+          0.23843078570211784,
+          0.7098111604649018,
+          3.8136807697225197
+        ],
+        "palmMarker": [
+          0.2458502901634586,
+          0.6578429722789705,
+          3.8599868840807936
+        ],
+        "meshMinimumY": 0.002000025272714995
+      },
+      "maxFloorLiftMeters": 0,
+      "maximumJointAngularSpeedRadiansPerSecond": 18.145564418649037,
+      "maximumRootRelativeBoneSpeedMps": 7.427592988866975,
+      "worstRootRelativeBoneSpeed": {
+        "clock": 0.24999999999999997,
+        "clip": "decelerate",
+        "sampleSeconds": 0.13333333333333333,
+        "secondsSincePreviousSample": 0.008333333333333331,
+        "bone": "RightFoot",
+        "metersPerSecond": 7.427592988866975,
+        "previousPosition": [
+          -0.10092542831148155,
+          0.1554607787544368,
+          2.5230772977882645
+        ],
+        "position": [
+          -0.10045345164870663,
+          0.16166161419949215,
+          2.622074758788298
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          2.7112747227490415
+        ],
+        "rootWorld": [
+          0,
+          0,
+          2.7486887688592017
+        ],
+        "previousLift": 0,
+        "lift": 0,
+        "fadeElapsed": 0.13333333333333333
+      },
+      "advancingByClip": {
+        "run_5": {
+          "samples": 6,
+          "maximumJointAngularSpeedRadiansPerSecond": 18.145564418649037,
+          "angularBone": "RightLeg",
+          "maximumRootRelativeBoneSpeedMps": 6.295730649409435,
+          "velocityBone": "LeftLeg"
+        },
+        "sprint": {
+          "samples": 8,
+          "maximumJointAngularSpeedRadiansPerSecond": 14.073084765989753,
+          "angularBone": "LeftUpLeg",
+          "maximumRootRelativeBoneSpeedMps": 5.7532779780500585,
+          "velocityBone": "RightFoot"
+        },
+        "decelerate": {
+          "samples": 138,
+          "maximumJointAngularSpeedRadiansPerSecond": 16.93290400218973,
+          "angularBone": "RightUpLeg",
+          "maximumRootRelativeBoneSpeedMps": 7.427592988866975,
+          "velocityBone": "RightFoot"
+        }
+      },
+      "maximumBoneTravelPerSampleMeters": 0.09919259,
+      "worstBoneStep": {
+        "clock": 0.24999999999999997,
+        "clip": "decelerate",
+        "sampleSeconds": 0.13333333333333333,
+        "secondsSincePreviousSample": 0.008333333333333331,
+        "bone": "RightFoot",
+        "meters": 0.09919259,
+        "previousPosition": [
+          -0.10092542831148155,
+          0.1554607787544368,
+          2.5230772977882645
+        ],
+        "position": [
+          -0.10045345164870663,
+          0.16166161419949215,
+          2.622074758788298
+        ],
+        "previousModelPosition": [
+          0,
+          0,
+          2.7112747227490415
+        ],
+        "modelPosition": [
+          0,
+          0,
+          2.7486887688592017
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          2.7112747227490415
+        ],
+        "rootWorld": [
+          0,
+          0,
+          2.7486887688592017
+        ],
+        "previousLift": 0,
+        "lift": 0,
+        "fadeElapsed": 0.13333333333333333,
+        "phaseRate": 1,
+        "locks": [],
+        "landings": [
+          {
+            "bone": "LeftFoot",
+            "key": "decelerate/LeftFoot/0/0.066667",
+            "mode": "authored",
+            "elapsed": 0.05833333333333332,
+            "duration": 0.091667,
+            "projectionMeters": 0
+          }
+        ]
+      },
+      "maximumBoneRotationPerSampleDegrees": 8.66386882,
+      "worstBoneRotationStep": {
+        "clock": 0.008333333333333333,
+        "clip": "run_5",
+        "sampleSeconds": 0.27499983333333333,
+        "secondsSincePreviousSample": 0.008333333333333333,
+        "bone": "RightLeg",
+        "degrees": 8.66386882,
+        "previousWorldQuaternion": [
+          -0.09688910674209902,
+          -6.578410345147763e-9,
+          -3.8021582503106376e-8,
+          0.9952951828451281
+        ],
+        "worldQuaternion": [
+          -0.021436207208757746,
+          -0.00007038136328404163,
+          0.0006739116579871448,
+          0.9997699885023776
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 1039.6642583999999,
+        "fade": null
+      },
+      "maximumRootTravelPerSampleMeters": 0.04794398,
+      "supportCoverage": {
+        "run_5": {
+          "samples": 7,
+          "expectedFootSamples": 6,
+          "admittedFootSamples": 6,
+          "actualLockSamples": 6,
+          "maximumConsecutiveUnadmittedFrames": 0,
+          "postBlendExpectedFootSamples": 6,
+          "postBlendAdmittedFootSamples": 6,
+          "postBlendActiveLandingFootSamples": 0,
+          "settledExpectedFootSamples": 6,
+          "settledAdmittedFootSamples": 6,
+          "nearGroundUnadmittedSamples": 0,
+          "nearGroundRecoverySamples": 0,
+          "maximumNearGroundUnadmittedXZStepMeters": 0,
+          "totalNearGroundUnadmittedXZTravelMeters": 0,
+          "worstNearGroundUnadmitted": null,
+          "nearGroundEntryCrossings": 0,
+          "maximumNearGroundEntryXZStepMeters": 0,
+          "worstNearGroundEntry": null
+        },
+        "sprint": {
+          "samples": 9,
+          "expectedFootSamples": 9,
+          "admittedFootSamples": 8,
+          "actualLockSamples": 8,
+          "maximumConsecutiveUnadmittedFrames": 1,
+          "postBlendExpectedFootSamples": 0,
+          "postBlendAdmittedFootSamples": 0,
+          "postBlendActiveLandingFootSamples": 0,
+          "settledExpectedFootSamples": 0,
+          "settledAdmittedFootSamples": 0,
+          "nearGroundUnadmittedSamples": 1,
+          "nearGroundRecoverySamples": 0,
+          "maximumNearGroundUnadmittedXZStepMeters": 2.8006250403863727e-11,
+          "totalNearGroundUnadmittedXZTravelMeters": 2.8006250403863727e-11,
+          "worstNearGroundUnadmitted": {
+            "clock": 0.11666666666666665,
+            "playbackTime": 0.32837798948384456,
+            "bone": "RightFoot",
+            "sole": [
+              -0.09999999999924186,
+              -1.6146473047484733e-11,
+              1.814399999964185
+            ],
+            "previousSole": [
+              -0.09999999999982066,
+              -3.5183522761883523e-12,
+              1.8143999999921854
+            ],
+            "fadeElapsed": 0.06666666666666667,
+            "xzStepMeters": 2.8006250403863727e-11,
+            "landingResidual": 0,
+            "landing": {
+              "bone": "RightFoot",
+              "key": "sprint/RightFoot/0/0.233333",
+              "mode": "authored",
+              "start": 0.11666666666666665,
+              "duration": 0.03333333333333333,
+              "elapsed": 0,
+              "from": [
+                -0.09999999999982066,
+                -3.5183522761883523e-12,
+                1.8143999999921854
+              ],
+              "to": [
+                -0.1,
+                0,
+                1.7645999718749819
+              ],
+              "projectionMeters": 0
+            }
+          },
+          "nearGroundEntryCrossings": 0,
+          "maximumNearGroundEntryXZStepMeters": 0,
+          "worstNearGroundEntry": null
+        },
+        "decelerate": {
+          "samples": 139,
+          "expectedFootSamples": 173,
+          "admittedFootSamples": 161,
+          "actualLockSamples": 161,
+          "maximumConsecutiveUnadmittedFrames": 12,
+          "postBlendExpectedFootSamples": 161,
+          "postBlendAdmittedFootSamples": 161,
+          "postBlendActiveLandingFootSamples": 0,
+          "settledExpectedFootSamples": 161,
+          "settledAdmittedFootSamples": 161,
+          "nearGroundUnadmittedSamples": 1,
+          "nearGroundRecoverySamples": 1,
+          "maximumNearGroundUnadmittedXZStepMeters": 6.918150119534069e-12,
+          "totalNearGroundUnadmittedXZTravelMeters": 6.918150119534069e-12,
+          "worstNearGroundUnadmitted": {
+            "clock": 0.29166666666666674,
+            "playbackTime": 0.175,
+            "bone": "LeftFoot",
+            "sole": [
+              0.09999999999847962,
+              1.894319423545454e-11,
+              2.67758975964511
+            ],
+            "previousSole": [
+              0.10000000000128197,
+              1.6926599011313215e-11,
+              2.6775897596514353
+            ],
+            "fadeElapsed": 0.175,
+            "xzStepMeters": 6.918150119534069e-12,
+            "landingResidual": 0,
+            "landing": {
+              "bone": "LeftFoot",
+              "key": "release:decelerate/LeftFoot/0/0.066667",
+              "mode": "release",
+              "start": 0.29166666666666674,
+              "duration": 0.08,
+              "elapsed": 0,
+              "from": [
+                0.10000000000128197,
+                1.6926599011313215e-11,
+                2.6775897596514353
+              ],
+              "to": null,
+              "projectionMeters": 0
+            }
+          },
+          "nearGroundEntryCrossings": 1,
+          "maximumNearGroundEntryXZStepMeters": 8.619204153197562e-13,
+          "worstNearGroundEntry": {
+            "clock": 0.2833333333333334,
+            "playbackTime": 0.16666666666666666,
+            "bone": "LeftFoot",
+            "sole": [
+              0.10000000000128197,
+              1.6926599011313215e-11,
+              2.6775897596514353
+            ],
+            "previousSole": [
+              0.1000000000011559,
+              0.01090070113717155,
+              2.677589759652288
+            ],
+            "fadeElapsed": 0.16666666666666666,
+            "xzStepMeters": 8.619204153197562e-13,
+            "landingResidual": 0,
+            "landing": {
+              "bone": "LeftFoot",
+              "key": "decelerate/LeftFoot/0/0.066667",
+              "mode": "authored",
+              "start": 0.19166666666666665,
+              "duration": 0.091667,
+              "elapsed": 0.09166666666666673,
+              "from": [
+                0.10164515081867251,
+                0.21239923376923073,
+                2.6722289940019697
+              ],
+              "to": [
+                0.1,
+                0,
+                2.677589759646234
+              ],
+              "projectionMeters": 0
+            }
+          }
+        }
+      },
+      "boundaries": [
+        {
+          "clock": 0.05,
+          "to": "sprint",
+          "velocityBeforeMetersPerSecond": [
+            0,
+            0,
+            5.400003375002136
+          ],
+          "speedBeforeMps": 5.400003375002136,
+          "jump": {
+            "modelPositionMeters": 0,
+            "rootPathMeters": 0,
+            "maximumBoneRotationDegrees": 0.00001593,
+            "rotationSpace": "world, all bones except unweighted logical Root",
+            "rotationBone": "LeftArm",
+            "logicalRootWorldRotationDegrees": 0,
+            "maximumLocalBoneRotationDegrees": 0.00000241,
+            "localRotationBone": "RightLeg",
+            "maximumBonePositionMeters": 1.3e-7,
+            "positionBone": "LeftHand",
+            "soleJumpMeters": {
+              "LeftFoot": 8e-8,
+              "RightFoot": 0
+            }
+          },
+          "floorAfter": 0.002,
+          "locks": [
+            {
+              "bone": "RightFoot",
+              "key": "run_5/RightFoot/0/0.266667",
+              "release": 0.10891644140621326,
+              "anchor": [
+                -0.1,
+                0,
+                1.8144
+              ]
+            }
+          ],
+          "firstStep": {
+            "sampleSeconds": 0.283335776068353,
+            "seconds": 0.008333333333333333,
+            "velocityMetersPerSecond": [
+              0,
+              0,
+              5.401912039516628
+            ],
+            "speedMps": 5.401912039516628,
+            "velocityJumpMps": 0.0019086645144916758,
+            "speedJumpMps": 0.0019086645144916758
+          }
+        },
+        {
+          "clock": 0.11666667,
+          "to": "decelerate",
+          "velocityBeforeMetersPerSecond": [
+            0,
+            0,
+            5.753277974831512
+          ],
+          "speedBeforeMps": 5.753277974831512,
+          "jump": {
+            "modelPositionMeters": 0,
+            "rootPathMeters": 0,
+            "maximumBoneRotationDegrees": 0.00000171,
+            "rotationSpace": "world, all bones except unweighted logical Root",
+            "rotationBone": "LeftLeg",
+            "logicalRootWorldRotationDegrees": 0,
+            "maximumLocalBoneRotationDegrees": 0,
+            "maximumBonePositionMeters": 2e-8,
+            "positionBone": "LeftFoot",
+            "soleJumpMeters": {
+              "LeftFoot": 2e-8,
+              "RightFoot": 0
+            }
+          },
+          "floorAfter": 0.002,
+          "locks": [],
+          "firstStep": {
+            "sampleSeconds": 0.008333333333333333,
+            "seconds": 0.008333333333333333,
+            "velocityMetersPerSecond": [
+              0,
+              0,
+              5.563621166391197
+            ],
+            "speedMps": 5.563621166391197,
+            "velocityJumpMps": 0.18965680844031496,
+            "speedJumpMps": 0.18965680844031496
+          }
+        }
+      ],
+      "maxAnchorSample": {
+        "clock": 0.35,
+        "clip": "decelerate",
+        "localPlaybackTime": 0.2333333333333333,
+        "bone": "RightFoot",
+        "key": "decelerate/RightFoot/0/0.233333",
+        "error": 2.1373519077572257e-10,
+        "sole": [
+          -0.10000000000413313,
+          -8.575538890109868e-11,
+          3.343833732522394
+        ],
+        "anchor": [
+          -0.1,
+          0,
+          3.3438337323266603
+        ],
+        "release": 0.5166666666666669,
+        "actorClock": 0.35000000000000026,
+        "actorSampleSeconds": 0.2333333333333333,
+        "phaseRate": 1,
+        "pathScale": 0.9588796624719187,
+        "rootWorld": [
+          0,
+          0,
+          3.132880206582838
+        ],
+        "modelPosition": [
+          0,
+          0,
+          3.132880206582838
+        ],
+        "hipWorld": [
+          0.008060976160476793,
+          0.715,
+          3.132880206582838
+        ],
+        "fadeElapsed": null,
+        "rootBlend": null
+      },
+      "violationCount": 0,
+      "worst": []
+    }
+  ],
+  "state": {
+    "characterID": "player-01",
+    "view": "body",
+    "lod": "0",
+    "lighting": "studio",
+    "clipID": "idle",
+    "time": 0,
+    "playing": false,
+    "fps": 0,
+    "threeRevision": "160",
+    "errors": [],
+    "draws": 8,
+    "triangles": 23912,
+    "models": [
+      {
+        "id": "player-01",
+        "path": "models/player-01-lod0.glb",
+        "triangles": 23894,
+        "lift": 0,
+        "minimumY": 0.002000001883134201,
+        "world": [
+          0,
+          0,
+          0
+        ],
+        "sampleSeconds": 0,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "LeftFoot",
+            "key": "idle/LeftFoot/0/0",
+            "anchor": [
+              0.1,
+              0,
+              0
+            ],
+            "release": 3.0666666666666647
+          },
+          {
+            "bone": "RightFoot",
+            "key": "idle/RightFoot/0/0",
+            "anchor": [
+              -0.1,
+              0,
+              0
+            ],
+            "release": 3.0666666666666647
+          }
+        ]
+      }
+    ],
+    "environment": {
+      "generatedTextureSizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "crowdInstances": 360,
+      "crowdDrawCalls": 2,
+      "seatInstances": 360,
+      "environmentTriangles": 19580,
+      "shadowMapHero": 1024,
+      "shadowMapPitch": 512,
+      "environmentGeneratedLocally": true,
+      "reflectionSettings": {
+        "frontStrength": 8,
+        "sigma": 0
+      }
+    }
+  },
+  "loadedModels": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "bytes": 785380,
+      "sha256": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec"
+    }
+  ],
+  "servedResources": {
+    "preview.html": {
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    "preview.css": {
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    "vendor/viewer-runtime.js": {
+      "bytes": 763077,
+      "sha256": "a92fff94d4664e861acc7e8497df1a819d9b3b97492c9867705645208451549a"
+    },
+    "vendor/data.js": {
+      "bytes": 1310688,
+      "sha256": "195d6dc95deaab877c3880e8910159bb9daf00ff384eeecafe5a58213073dd12"
+    },
+    "offline/player-01-lod0.js": {
+      "bytes": 1047275,
+      "sha256": "7df2973195b01e9365592d71880137f31fe4dd741196b77cff99b78eecbdc1e4"
+    }
+  },
+  "generatedAt": "2026-11-04T23:03:12.250Z",
+  "auditSource": {
+    "file": "source/audit-transitions.cjs",
+    "sha256": "ec9c9c293e7e1dd61a4f42c6b71e86ea0383d72a7a7788aa8a6fcffe99766327"
+  },
+  "errors": [],
+  "remoteRequests": [],
+  "inputs": {
+    "vendor/viewer-runtime.js": {
+      "bytes": 763077,
+      "sha256": "a92fff94d4664e861acc7e8497df1a819d9b3b97492c9867705645208451549a"
+    },
+    "vendor/data.js": {
+      "bytes": 1310688,
+      "sha256": "195d6dc95deaab877c3880e8910159bb9daf00ff384eeecafe5a58213073dd12"
+    },
+    "preview.js": {
+      "bytes": 41482,
+      "sha256": "88ec7ee337f03479f53eb71ddb1f7a63fefda709d726d9ee6cc30ccdd93b5217"
+    },
+    "source/motion-runtime.js": {
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    },
+    "asset-manifest.json": {
+      "bytes": 19012,
+      "sha256": "ea7f7ad4779e3ce38c216f5bc0c63f34598f5c7b35b4159edaf934cde2b00272"
+    },
+    "animations.json": {
+      "bytes": 991922,
+      "sha256": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612"
+    },
+    "source/audit-transitions.cjs": {
+      "bytes": 45617,
+      "sha256": "ec9c9c293e7e1dd61a4f42c6b71e86ea0383d72a7a7788aa8a6fcffe99766327"
+    }
+  },
+  "thresholds": {
+    "minimumVertexY": -0.001,
+    "maximumPlantAnchorDistanceMeters": 0.003,
+    "maximumImmediateBoneJumpMeters": 0.003,
+    "maximumImmediateBoneRotationDegrees": 1,
+    "maximumImmediateRootJumpMeters": 0.0005,
+    "minimumSettledContactAdmissionRatio": 0.98,
+    "maximumValidLandingDurationSeconds": 0.3,
+    "maximumRecoveryDurationSeconds": 0.08,
+    "maximumExpectedUnadmittedNearGroundXZStepMeters": 0.003
+  },
+  "loadedModelsMatchDisk": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "pass": true,
+      "diskSha256": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec"
+    }
+  ],
+  "servedResourcesMatchDisk": [
+    {
+      "path": "preview.html",
+      "pass": true,
+      "diskSha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "path": "preview.css",
+      "pass": true,
+      "diskSha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "path": "vendor/viewer-runtime.js",
+      "pass": true,
+      "diskSha256": "a92fff94d4664e861acc7e8497df1a819d9b3b97492c9867705645208451549a"
+    },
+    {
+      "path": "vendor/data.js",
+      "pass": true,
+      "diskSha256": "195d6dc95deaab877c3880e8910159bb9daf00ff384eeecafe5a58213073dd12"
+    },
+    {
+      "path": "offline/player-01-lod0.js",
+      "pass": true,
+      "diskSha256": "7df2973195b01e9365592d71880137f31fe4dd741196b77cff99b78eecbdc1e4"
+    }
+  ],
+  "checks": {
+    "noPageErrors": true,
+    "noRemoteRequests": true,
+    "auditorUnchangedDuringAudit": true,
+    "requestedIdentityAndLODLoaded": true,
+    "decodedModelsMatchDisk": true,
+    "decodedModelsMatchDeclaredData": true,
+    "declaredMotionMatchesCurrentSource": true,
+    "declaredManifestMatchesCurrentSource": true,
+    "declaredMotionRuntimeMatchesCurrentSource": true,
+    "logicalRootHasNoSkinWeights": true,
+    "servedPackageUnchangedDuringAudit": true,
+    "fullMeshAboveFloor": true,
+    "activePlantAnchors": true,
+    "boundedActiveLandings": true,
+    "boundedRecovery": true,
+    "noExpiredContactLandings": true,
+    "settledSupportCoverage": true,
+    "unadmittedNearGroundDrift": true,
+    "immediateBonePositionContinuity": true,
+    "immediateBoneRotationContinuity": true,
+    "immediateRootContinuity": true
+  },
+  "pass": true
+}

@@ -1,0 +1,688 @@
+{
+  "kind": "owned-C16-r1-skinning-stop-before-observer-fix",
+  "complete": false,
+  "reason": "Root authorized exact actual-rise cache-key observer correction; strict shared-module input binding requires a fresh run. Controllers/runtime/data unchanged.",
+  "stoppedAt": "2026-11-05T09:38:22.351157+00:00",
+  "runnerPID": 132810,
+  "ownedBrowserPID": 132825,
+  "browserCommand": "/usr/lib/chromium/chromium --show-component-extension-options --enable-gpu-rasterization --no-default-browser-check --disable-pings --media-router=0 --enable-remote-extensions --load-extension= --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --use-gl=angle --use-angle=swiftshader --enable-unsafe-swiftshader --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-F4UjVg --remote-debugging-pipe --no-startup-window ",
+  "journalBefore": {
+    "pid": 132810,
+    "script": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/audit-skinning.mjs",
+    "sourceSha256": "dbb2fa642ea04f48a328c3da29305d513c2217e516a4b714db01c3a9d8dc1260",
+    "output": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/verification/skinning.json",
+    "args": [
+      "--dense-floor",
+      "--sample-hz",
+      "120",
+      "--lod-lifecycle",
+      "--out",
+      "verification/skinning.json"
+    ],
+    "startedAt": "2026-11-05T09:32:18.798Z",
+    "status": "running",
+    "completedModels": [
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "complete": true,
+        "samples": 5091,
+        "maximumAbsoluteErrorMeters": 4.894804506161421e-08
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "complete": true,
+        "samples": 10182,
+        "maximumAbsoluteErrorMeters": 4.894733585114608e-08
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "complete": true,
+        "samples": 15273,
+        "maximumAbsoluteErrorMeters": 4.8998202273331515e-08
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "complete": true,
+        "samples": 20364,
+        "maximumAbsoluteErrorMeters": 4.899824312953882e-08
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "complete": true,
+        "samples": 25455,
+        "maximumAbsoluteErrorMeters": 4.881557313929363e-08
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "complete": true,
+        "samples": 30546,
+        "maximumAbsoluteErrorMeters": 4.88154996425294e-08
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "complete": true,
+        "samples": 35637,
+        "maximumAbsoluteErrorMeters": 4.8932298435389043e-08
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "complete": true,
+        "samples": 40728,
+        "maximumAbsoluteErrorMeters": 4.8933004537232705e-08
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "complete": true,
+        "samples": 45819,
+        "maximumAbsoluteErrorMeters": 4.8987290446333986e-08
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "complete": true,
+        "samples": 50910,
+        "maximumAbsoluteErrorMeters": 4.898759220495208e-08
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "complete": true,
+        "samples": 56001,
+        "maximumAbsoluteErrorMeters": 4.8959435172690746e-08
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "complete": true,
+        "samples": 61092,
+        "maximumAbsoluteErrorMeters": 4.895946070782031e-08
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      }
+    ]
+  },
+  "sourceObserverSha256": "a02f8bd9170ffb108577cd4fa71620180b610a576b545948bc90b643c881c8b8",
+  "runtimeSha256": "ef474e25f1c7d68309198f1a769eaf6135bfcd6bc097c4ab91d58573ec954b08",
+  "dataSha256": "f4d3878855abdbbc6e04bc57fd5c334ef672c2834ae6d846831f7705bf04844d",
+  "journalAfter": {
+    "pid": 132810,
+    "script": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/audit-skinning.mjs",
+    "sourceSha256": "dbb2fa642ea04f48a328c3da29305d513c2217e516a4b714db01c3a9d8dc1260",
+    "output": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/verification/skinning.json",
+    "args": [
+      "--dense-floor",
+      "--sample-hz",
+      "120",
+      "--lod-lifecycle",
+      "--out",
+      "verification/skinning.json"
+    ],
+    "startedAt": "2026-11-05T09:32:18.798Z",
+    "status": "error",
+    "completedModels": [
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 0,
+        "complete": true,
+        "samples": 5091,
+        "maximumAbsoluteErrorMeters": 4.894804506161421e-08
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-01",
+        "lod": 1,
+        "complete": true,
+        "samples": 10182,
+        "maximumAbsoluteErrorMeters": 4.894733585114608e-08
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 0,
+        "complete": true,
+        "samples": 15273,
+        "maximumAbsoluteErrorMeters": 4.8998202273331515e-08
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-02",
+        "lod": 1,
+        "complete": true,
+        "samples": 20364,
+        "maximumAbsoluteErrorMeters": 4.899824312953882e-08
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 0,
+        "complete": true,
+        "samples": 25455,
+        "maximumAbsoluteErrorMeters": 4.881557313929363e-08
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-03",
+        "lod": 1,
+        "complete": true,
+        "samples": 30546,
+        "maximumAbsoluteErrorMeters": 4.88154996425294e-08
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 0,
+        "complete": true,
+        "samples": 35637,
+        "maximumAbsoluteErrorMeters": 4.8932298435389043e-08
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-04",
+        "lod": 1,
+        "complete": true,
+        "samples": 40728,
+        "maximumAbsoluteErrorMeters": 4.8933004537232705e-08
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 0,
+        "complete": true,
+        "samples": 45819,
+        "maximumAbsoluteErrorMeters": 4.8987290446333986e-08
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-05",
+        "lod": 1,
+        "complete": true,
+        "samples": 50910,
+        "maximumAbsoluteErrorMeters": 4.898759220495208e-08
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 0,
+        "complete": true,
+        "samples": 56001,
+        "maximumAbsoluteErrorMeters": 4.8959435172690746e-08
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "clips": 24,
+        "total": 31
+      },
+      {
+        "character": "player-06",
+        "lod": 1,
+        "complete": true,
+        "samples": 61092,
+        "maximumAbsoluteErrorMeters": 4.895946070782031e-08
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 8,
+        "total": 31
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 16,
+        "total": 31
+      },
+      {
+        "character": "goalkeeper",
+        "lod": 0,
+        "clips": 24,
+        "total": 31
+      }
+    ],
+    "endedAt": "2026-11-05T09:38:22.483Z"
+  },
+  "runnerEnded": true,
+  "ownedBrowserEnded": true,
+  "closedAt": "2026-11-05T09:38:49.832175+00:00"
+}

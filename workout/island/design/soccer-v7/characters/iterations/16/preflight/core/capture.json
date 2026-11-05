@@ -1,0 +1,151 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T02:41:38.832Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates16c/models/player-01-lod0.glb",
+      "bytes": 794768,
+      "sha256": "325b79287dcade2d39598dacd2611c0fb11a8b7042f8f48ec141683bc4b0ca42"
+    },
+    {
+      "file": "source/character-candidates16c/models/player-01-lod1.glb",
+      "bytes": 504092,
+      "sha256": "5fca0107519458b9a57e2ca3aa7435ce685a20e6c95d3d11fc4f62d014761052"
+    },
+    {
+      "file": "source/character-candidates16c/models/goalkeeper-lod0.glb",
+      "bytes": 902448,
+      "sha256": "4edd06ea896bb89a446790903294819b662e4f95227eb97857e7960d25ac9b5d"
+    },
+    {
+      "file": "source/character-candidates16c/models/goalkeeper-lod1.glb",
+      "bytes": 515184,
+      "sha256": "387685734a8dfe5121ddf7ba4fe674c26cc974b54dd1c68ffe492fa2024c0d69"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "829ef4b3d566d25e2be06bd30da93894beaa9a6882b4571a60d219ef6caff910",
+    "motion": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "source/character-candidates16c/models/player-01-lod0.glb": "325b79287dcade2d39598dacd2611c0fb11a8b7042f8f48ec141683bc4b0ca42",
+      "source/character-candidates16c/models/player-01-lod1.glb": "5fca0107519458b9a57e2ca3aa7435ce685a20e6c95d3d11fc4f62d014761052",
+      "source/character-candidates16c/models/goalkeeper-lod0.glb": "4edd06ea896bb89a446790903294819b662e4f95227eb97857e7960d25ac9b5d",
+      "source/character-candidates16c/models/goalkeeper-lod1.glb": "387685734a8dfe5121ddf7ba4fe674c26cc974b54dd1c68ffe492fa2024c0d69"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-body-near-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-body-far-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-body-near-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-body-far-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-body-near-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-body-far-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-body-near-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-body-far-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "All eight staged compressed candidates; frozen86visualproofbeforepromotion/nativepackaging. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

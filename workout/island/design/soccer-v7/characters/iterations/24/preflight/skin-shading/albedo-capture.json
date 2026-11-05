@@ -1,0 +1,125 @@
+{
+  "kind": "read-only-final24-albedo-surface-disambiguation",
+  "complete": false,
+  "generatedAt": "2026-11-05T03:17:41.871Z",
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "liveManifestSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "models": [
+    {
+      "file": "models/player-02-lod0.glb",
+      "sha256": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+      "bytes": 1280016,
+      "diskStillMatches": true
+    },
+    {
+      "file": "models/player-02-lod1.glb",
+      "sha256": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+      "bytes": 866384,
+      "diskStillMatches": true
+    },
+    {
+      "file": "models/player-04-lod0.glb",
+      "sha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+      "bytes": 1254676,
+      "diskStillMatches": true
+    },
+    {
+      "file": "models/player-04-lod1.glb",
+      "sha256": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+      "bytes": 920448,
+      "diskStillMatches": true
+    }
+  ],
+  "conditions": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1.5,
+    "screenshotScale": "css",
+    "clip": "idle",
+    "phase": 0.15,
+    "orbit": {
+      "yaw": 0.32,
+      "pitch": 0,
+      "zoom": 0.82
+    },
+    "lighting": "studio",
+    "corneaCastShadow": false,
+    "corneaReceiveShadow": false
+  },
+  "records": [
+    {
+      "id": "player-04",
+      "mode": "skin-neutral-albedo",
+      "file": "player-04-skin-neutral-albedo-390x844.png",
+      "setup": [
+        {
+          "mesh": "player-04-lod0",
+          "vertices": 6175,
+          "receiveShadow": true,
+          "normalScale": [
+            0.5,
+            -0.5
+          ]
+        }
+      ],
+      "details": []
+    },
+    {
+      "id": "player-04",
+      "mode": "skin-neutral-diffuse-only",
+      "file": "player-04-skin-neutral-diffuse-only-390x844.png",
+      "setup": [
+        {
+          "mesh": "player-04-lod0",
+          "vertices": 6175,
+          "receiveShadow": true,
+          "normalScale": [
+            0.5,
+            -0.5
+          ]
+        }
+      ],
+      "details": []
+    },
+    {
+      "id": "player-02",
+      "mode": "skin-neutral-albedo",
+      "file": "player-02-skin-neutral-albedo-390x844.png",
+      "setup": [
+        {
+          "mesh": "player-02-lod0",
+          "vertices": 6183,
+          "receiveShadow": true,
+          "normalScale": [
+            0.5,
+            -0.5
+          ]
+        }
+      ],
+      "details": []
+    },
+    {
+      "id": "player-02",
+      "mode": "skin-neutral-diffuse-only",
+      "file": "player-02-skin-neutral-diffuse-only-390x844.png",
+      "setup": [
+        {
+          "mesh": "player-02-lod0",
+          "vertices": 6183,
+          "receiveShadow": true,
+          "normalScale": [
+            0.5,
+            -0.5
+          ]
+        }
+      ],
+      "details": []
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "scope": "RAM data/payload overrides and cloned geometry/material state only. No source/model/runtime files changed. Weld control area-averages normals across coincident positions within10micrometres. No image retouch or visual acceptance grade."
+}

@@ -1,0 +1,4329 @@
+{
+  "kind": "C16-all-avatar-focused-LOD-C0-first-advancing-frame",
+  "pass": true,
+  "complete": false,
+  "rows": [
+    {
+      "identity": "player-01",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0017057939552079606,
+          "floor": 0.0010770988409585201,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0016654455921515843,
+              "xz": 0.00021542679839013217,
+              "xyz": 0.00100784725404119,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0016654578632583766,
+              "xz": 0.00021544981900650678,
+              "xyz": 0.0010078401874948717,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.001704489268317637,
+          "floor": 0.0015199961115287541,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.00264998140891991,
+              "xz": 2.0028237128856997e-8,
+              "xyz": 2.732688312629806e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002649981413299694,
+              "xz": 2.0023808817499065e-8,
+              "xyz": 2.7320657895185814e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-01",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.0000827265553171892,
+          "persistentExact": true,
+          "angular": 0.009927203386701167,
+          "speed": 0.000005668933442982233,
+          "floor": 0.0012116243856872034,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002439878079735453,
+              "xz": 0.0009402827591667286,
+              "xyz": 0.0009492481881789567,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0022523737136530917,
+              "xz": 0.0008418782432178421,
+              "xyz": 0.0008420851293808125,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0024398784179469387,
+              "xz": 0.0009402828036580307,
+              "xyz": 0.0009492481858764774,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002252373427895517,
+              "xz": 0.0008418783389995806,
+              "xyz": 0.0008420852314730048,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.00008272653921271398,
+          "persistentExact": true,
+          "angular": 0.009927184705525678,
+          "speed": 0.0000013082828533389212,
+          "floor": 0.0012640618369678814,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002569879190185376,
+              "xz": 1.60655197276594e-8,
+              "xyz": 1.5522850374203682e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0022708901109833968,
+              "xz": 2.070214083122724e-8,
+              "xyz": 1.5021011413750676e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002569879190183793,
+              "xz": 1.606552349531164e-8,
+              "xyz": 1.552285057064082e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002270890110981099,
+              "xz": 2.0702140850436703e-8,
+              "xyz": 1.5021011641586934e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-01",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 5.16191365590357e-8,
+          "persistentExact": true,
+          "angular": 24.177311069657254,
+          "speed": 7.166450600976084,
+          "floor": 0.0010722381903314451,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.001516073271085219,
+              "xz": 0.00026699750993332147,
+              "xyz": 0.0011649366922103404,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0015210225828265343,
+              "xz": 0.00027711518494014483,
+              "xyz": 0.0011624899286497411,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 2.9802322387695312e-8,
+          "persistentExact": true,
+          "angular": 24.08054716122961,
+          "speed": 7.40556339655412,
+          "floor": 0.0011763674085662475,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026500000226714936,
+              "xz": 9.731003408104272e-12,
+              "xyz": 2.4671624366308786e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026500000262200756,
+              "xz": 1.1958773714616502e-11,
+              "xyz": 2.881847727928892e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-01",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.495032195371488,
+          "speed": 1.8242275398711019,
+          "floor": 0.001999997377054085,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0019999912579735895,
+              "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+              "clock": 2.062499999999995,
+              "meshIndex": 1,
+              "meshName": "player-01-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1007,
+              "bindPosition": [
+                -0.1772359013557434,
+                0.8752444982528687,
+                0.022732511162757874
+              ],
+              "worldPosition": [
+                -0.6212495950100255,
+                0.001999997377054085,
+                0.022732511501498687
+              ],
+              "namedInfluences": {
+                "Hips": 0.9672895669937134,
+                "Spine": 0.032710447907447815
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 2.062499999999995,
+            "startClock": 1.7541666666666627,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200789097213042,
+              "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+              "clock": 1.7458333333333294,
+              "meshIndex": 1,
+              "meshName": "player-01-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17758691310882568,
+                0.8696184158325195,
+                0.04353831708431244
+              ],
+              "worldPosition": [
+                -0.6156392961422756,
+                0.001520073098835785,
+                0.0435383167599267
+              ],
+              "namedInfluences": {
+                "Hips": 0.98943692445755,
+                "Spine": 0.010563068091869354
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0019999912579735895,
+              "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+              "clock": 2.062499999999995,
+              "meshIndex": 1,
+              "meshName": "player-01-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1007,
+              "bindPosition": [
+                -0.1772359013557434,
+                0.8752444982528687,
+                0.022732511162757874
+              ],
+              "worldPosition": [
+                -0.6212495950100255,
+                0.001999997377054085,
+                0.022732511501498687
+              ],
+              "namedInfluences": {
+                "Hips": 0.9672895669937134,
+                "Spine": 0.032710447907447815
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.275862881238694,
+          "speed": 1.7561540945840843,
+          "floor": 0.0014516146366118012,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0020000006047158603,
+              "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+              "clock": 2.0708333333333284,
+              "meshIndex": 1,
+              "meshName": "player-01-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17758691310882568,
+                0.8696184158325195,
+                0.04353831708431244
+              ],
+              "worldPosition": [
+                -0.6156392961422756,
+                0.0019999972782804407,
+                0.0435383167599267
+              ],
+              "namedInfluences": {
+                "Hips": 0.98943692445755,
+                "Spine": 0.010563068091869354
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 2.0708333333333284,
+            "startClock": 1.7541666666666627,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200789097213042,
+              "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+              "clock": 1.7458333333333294,
+              "meshIndex": 1,
+              "meshName": "player-01-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17758691310882568,
+                0.8696184158325195,
+                0.04353831708431244
+              ],
+              "worldPosition": [
+                -0.6156392961422756,
+                0.001520073098835785,
+                0.0435383167599267
+              ],
+              "namedInfluences": {
+                "Hips": 0.98943692445755,
+                "Spine": 0.010563068091869354
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0020000006047158603,
+              "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+              "clock": 2.0708333333333284,
+              "meshIndex": 1,
+              "meshName": "player-01-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17758691310882568,
+                0.8696184158325195,
+                0.04353831708431244
+              ],
+              "worldPosition": [
+                -0.6156392961422756,
+                0.0019999972782804407,
+                0.0435383167599267
+              ],
+              "namedInfluences": {
+                "Hips": 0.98943692445755,
+                "Spine": 0.010563068091869354
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0006777405604563005,
+          "persistentExact": true,
+          "angular": 0.08135187293270374,
+          "speed": 0.0004337939823459731,
+          "floor": 0.0008979516151922662,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0029095099216472123,
+              "xz": 0.0016180286864408884,
+              "xyz": 0.0019395536348983632,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0029095126611539414,
+              "xz": 0.0016180269350633116,
+              "xyz": 0.0019395536844745904,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0006777305789659295,
+          "persistentExact": true,
+          "angular": 0.08135187301131146,
+          "speed": 0.0004324892703470237,
+          "floor": 0.0008853714297988582,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018399605466142964,
+              "xz": 3.757109753262618e-8,
+              "xyz": 5.4480794903200434e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.001839960547297483,
+              "xz": 3.757018825960293e-8,
+              "xyz": 5.4479673106213816e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00003042479960186293,
+          "persistentExact": true,
+          "angular": 0.003651277207228269,
+          "speed": 0.000011395810864209992,
+          "floor": 0.001158127054471679,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002280505837198653,
+              "xz": 0.001218569251325891,
+              "xyz": 0.0012847594196700692,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0025430390239354057,
+              "xz": 0.001048524263707713,
+              "xyz": 0.0010486943711201084,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002280505570606269,
+              "xz": 0.001218569321810174,
+              "xyz": 0.0012847595709889951,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0025430390368354787,
+              "xz": 0.0010485245402495802,
+              "xyz": 0.0010486946473847768,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.000030425091526270115,
+          "persistentExact": true,
+          "angular": 0.0036510284984908018,
+          "speed": 0.000002629944047002475,
+          "floor": 0.0011463575905677494,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002687410324082944,
+              "xz": 7.558931107537084e-9,
+              "xyz": 1.5312345932167374e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0025617741519795836,
+              "xz": 2.608936196515336e-8,
+              "xyz": 1.549749864022335e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0026874103240804156,
+              "xz": 7.55893684617339e-9,
+              "xyz": 1.5312346213023822e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002561774151978248,
+              "xz": 2.6089373818305305e-8,
+              "xyz": 1.5497498971433376e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 22.504838777716365,
+          "speed": 6.747258740275545,
+          "floor": 0.000804423871376159,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0029821222596943604,
+              "xz": 0.0020671291038795144,
+              "xyz": 0.0023616659349270964,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0029789923753721754,
+              "xz": 0.0020647263310541743,
+              "xyz": 0.002358049713917072,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 22.507943386392917,
+          "speed": 7.004248996030172,
+          "floor": 0.000847002924177402,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0021312111709372167,
+              "xz": 8.958576681746251e-12,
+              "xyz": 0.00029121117093721673,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0021312111723859645,
+              "xz": 1.0673262522034264e-11,
+              "xyz": 0.00029121117238596465,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.455743694306413,
+          "speed": 1.824227538609511,
+          "floor": 0.00199999750749664,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.002000001986363328,
+              "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+              "clock": 4.1333333333333275,
+              "meshIndex": 1,
+              "meshName": "player-02-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 2181,
+              "bindPosition": [
+                -0.18519943952560425,
+                0.9032262563705444,
+                0.0361909344792366
+              ],
+              "worldPosition": [
+                -0.6494937556866106,
+                0.00199999750749664,
+                0.036190933939949654
+              ],
+              "namedInfluences": {
+                "Hips": 0.8487436771392822,
+                "Spine": 0.15125630795955658
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 4.1333333333333275,
+            "startClock": 3.8249999999999886,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200720293591396,
+              "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+              "clock": 3.8166666666666553,
+              "meshIndex": 1,
+              "meshName": "player-02-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2365,
+              "bindPosition": [
+                -0.18401367962360382,
+                0.8686588406562805,
+                0.032190628349781036
+              ],
+              "worldPosition": [
+                -0.6149060216067253,
+                0.0015200719249882184,
+                0.03219062816990188
+              ],
+              "namedInfluences": {
+                "Hips": 0.9898010492324829,
+                "Spine": 0.010198945179581642
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.002000001986363328,
+              "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+              "clock": 4.1333333333333275,
+              "meshIndex": 1,
+              "meshName": "player-02-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 2181,
+              "bindPosition": [
+                -0.18519943952560425,
+                0.9032262563705444,
+                0.0361909344792366
+              ],
+              "worldPosition": [
+                -0.6494937556866106,
+                0.00199999750749664,
+                0.036190933939949654
+              ],
+              "namedInfluences": {
+                "Hips": 0.8487436771392822,
+                "Spine": 0.15125630795955658
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.375352747741743,
+          "speed": 1.7561540950009942,
+          "floor": 0.001971021083226867,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0019999937252476196,
+              "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+              "clock": 4.141666666666661,
+              "meshIndex": 1,
+              "meshName": "player-02-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2365,
+              "bindPosition": [
+                -0.18401367962360382,
+                0.8686588406562805,
+                0.032190628349781036
+              ],
+              "worldPosition": [
+                -0.6149060216067253,
+                0.001999997287285355,
+                0.03219062816990188
+              ],
+              "namedInfluences": {
+                "Hips": 0.9898010492324829,
+                "Spine": 0.010198945179581642
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 4.141666666666661,
+            "startClock": 3.8249999999999886,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200720293591396,
+              "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+              "clock": 3.8166666666666553,
+              "meshIndex": 1,
+              "meshName": "player-02-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2365,
+              "bindPosition": [
+                -0.18401367962360382,
+                0.8686588406562805,
+                0.032190628349781036
+              ],
+              "worldPosition": [
+                -0.6149060216067253,
+                0.0015200719249882184,
+                0.03219062816990188
+              ],
+              "namedInfluences": {
+                "Hips": 0.9898010492324829,
+                "Spine": 0.010198945179581642
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0019999937252476196,
+              "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+              "clock": 4.141666666666661,
+              "meshIndex": 1,
+              "meshName": "player-02-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2365,
+              "bindPosition": [
+                -0.18401367962360382,
+                0.8686588406562805,
+                0.032190628349781036
+              ],
+              "worldPosition": [
+                -0.6149060216067253,
+                0.001999997287285355,
+                0.03219062816990188
+              ],
+              "namedInfluences": {
+                "Hips": 0.9898010492324829,
+                "Spine": 0.010198945179581642
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0000037330482372410703,
+          "floor": 0.0012532027108648341,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002549359337026302,
+              "xz": 0.0013815623355530231,
+              "xyz": 0.0013896124274687747,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0025493593370261502,
+              "xz": 0.001381562335552821,
+              "xyz": 0.0013896124274685574,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0000010181241479191873,
+          "floor": 0.0012506529591099712,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0023999813628165613,
+              "xz": 2.0056667143973964e-8,
+              "xyz": 2.7379088798622786e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0023999813628165613,
+              "xz": 2.0056667143973964e-8,
+              "xyz": 2.7379088798622786e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.000012123795735390102,
+          "persistentExact": true,
+          "angular": 0.0014549346059284788,
+          "speed": 0.000007928492065276633,
+          "floor": 0.0008450148100933867,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002348601186045687,
+              "xz": 0.001953787522280012,
+              "xyz": 0.001954059216916826,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0029403275707288092,
+              "xz": 0.0016101423097300187,
+              "xyz": 0.00161626022056141,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023486019950831817,
+              "xz": 0.0019537877527420785,
+              "xyz": 0.0019540594608378928,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002940327329841907,
+              "xz": 0.0016101427491012317,
+              "xyz": 0.001616260637330199,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.000012123685846235216,
+          "persistentExact": true,
+          "angular": 0.0014548510926938973,
+          "speed": 0.00000182974818140215,
+          "floor": 0.0008445116804719425,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002315867929620314,
+              "xz": 9.245587853109177e-9,
+              "xyz": 1.491757860074071e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002799683398587757,
+              "xz": 3.317067734867066e-8,
+              "xyz": 1.528227272251157e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023158679296173107,
+              "xz": 9.245587022995147e-9,
+              "xyz": 1.4917578895342482e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027996833985860876,
+              "xz": 3.3170684311027194e-8,
+              "xyz": 1.5282273036576094e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 24.569145515160365,
+          "speed": 7.259840264649195,
+          "floor": 0.0010796004878890564,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0024282196670400063,
+              "xz": 0.00122226858220938,
+              "xyz": 0.0012225943058365586,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002441529229864802,
+              "xz": 0.001208429719605672,
+              "xyz": 0.0012091431115295683,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 24.44199981061413,
+          "speed": 7.493274409617718,
+          "floor": 0.001117702239344502,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0024000000589751466,
+              "xz": 3.050107374298074e-11,
+              "xyz": 6.63956583014942e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.00240000006858266,
+              "xz": 3.7422708768243875e-11,
+              "xyz": 7.812835872406597e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0.001856053848133754,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 3.990906904645946,
+          "speed": 1.8377739729468539,
+          "floor": 0.0009999997357249546,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0039040451453112935,
+              "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+              "clock": 6.2041666666667625,
+              "meshIndex": 1,
+              "meshName": "player-03-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1698,
+              "bindPosition": [
+                -0.18430718779563904,
+                1.3640936613082886,
+                0.01924838125705719
+              ],
+              "worldPosition": [
+                -1.0713947392759042,
+                0.003904041199669757,
+                0.012821388774164126
+              ],
+              "namedInfluences": {
+                "Chest": 0.6994169354438782,
+                "RightArm": 0.30058303475379944
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0.00522274544057548,
+            "velocityMps": 0,
+            "processedClock": 6.2041666666667625,
+            "startClock": 5.895833333333414,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.00672275480627911,
+              "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+              "clock": 5.88750000000008,
+              "meshIndex": 1,
+              "meshName": "player-03-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 3718,
+              "bindPosition": [
+                -0.18410919606685638,
+                1.3640998601913452,
+                0.006828427314758301
+              ],
+              "worldPosition": [
+                -1.0714599087933967,
+                0.006722759669031169,
+                0.0004119991753155734
+              ],
+              "namedInfluences": {
+                "Chest": 0.691286027431488,
+                "RightArm": 0.30871400237083435
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0039040451453112935,
+              "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+              "clock": 6.2041666666667625,
+              "meshIndex": 1,
+              "meshName": "player-03-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1698,
+              "bindPosition": [
+                -0.18430718779563904,
+                1.3640936613082886,
+                0.01924838125705719
+              ],
+              "worldPosition": [
+                -1.0713947392759042,
+                0.003904041199669757,
+                0.012821388774164126
+              ],
+              "namedInfluences": {
+                "Chest": 0.6994169354438782,
+                "RightArm": 0.30058303475379944
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.707264566521995,
+          "speed": 1.7561541021894913,
+          "floor": 0.001500007512294771,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.001500006560510817,
+              "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+              "clock": 6.212500000000096,
+              "meshIndex": 1,
+              "meshName": "player-03-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 3718,
+              "bindPosition": [
+                -0.18410919606685638,
+                1.3640998601913452,
+                0.006828427314758301
+              ],
+              "worldPosition": [
+                -1.0714599087933967,
+                0.001500007512294771,
+                0.0004119991753155734
+              ],
+              "namedInfluences": {
+                "Chest": 0.691286027431488,
+                "RightArm": 0.30871400237083435
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0.005222752001086297,
+            "velocityMps": -7.872612980269755e-7,
+            "processedClock": 6.212500000000096,
+            "startClock": 5.895833333333414,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.00672275480627911,
+              "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+              "clock": 5.88750000000008,
+              "meshIndex": 1,
+              "meshName": "player-03-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 3718,
+              "bindPosition": [
+                -0.18410919606685638,
+                1.3640998601913452,
+                0.006828427314758301
+              ],
+              "worldPosition": [
+                -1.0714599087933967,
+                0.006722759669031169,
+                0.0004119991753155734
+              ],
+              "namedInfluences": {
+                "Chest": 0.691286027431488,
+                "RightArm": 0.30871400237083435
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.001500006560510817,
+              "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+              "clock": 6.212500000000096,
+              "meshIndex": 1,
+              "meshName": "player-03-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 3718,
+              "bindPosition": [
+                -0.18410919606685638,
+                1.3640998601913452,
+                0.006828427314758301
+              ],
+              "worldPosition": [
+                -1.0714599087933967,
+                0.001500007512294771,
+                0.0004119991753155734
+              ],
+              "namedInfluences": {
+                "Chest": 0.691286027431488,
+                "RightArm": 0.30871400237083435
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0017777939548352553,
+          "floor": 0.0010583915413712734,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0020844886154827756,
+              "xz": 0.0009676190933380589,
+              "xyz": 0.0011207541370929467,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002084516858516236,
+              "xz": 0.000967623652999874,
+              "xyz": 0.001120743823158159,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0017764892682917885,
+          "floor": 0.0015199343902283502,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002649981563593664,
+              "xz": 1.9870189594642308e-8,
+              "xyz": 2.7105820650091243e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.00264998156813022,
+              "xz": 1.9865574724839958e-8,
+              "xyz": 2.7099352072252105e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.000011555809674093185,
+          "persistentExact": true,
+          "angular": 0.001386789389708668,
+          "speed": 0.0000047707722843271436,
+          "floor": 0.0009691859401511327,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002372223634420742,
+              "xz": 0.0018612501197158037,
+              "xyz": 0.0018612509478247673,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002848464212491756,
+              "xz": 0.00184777105676276,
+              "xyz": 0.001850035503960883,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023722242780580636,
+              "xz": 0.0018612502956228624,
+              "xyz": 0.001861251123124707,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002848463759284376,
+              "xz": 0.0018477712834319936,
+              "xyz": 0.0018500357079361124,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.00001155569438366239,
+          "persistentExact": true,
+          "angular": 0.0013866879376720552,
+          "speed": 0.0000011010040701285161,
+          "floor": 0.0009512368152722586,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023738293968291954,
+              "xz": 1.4325340661302099e-8,
+              "xyz": 1.506640340119905e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027568073102603365,
+              "xz": 1.4104755538201379e-8,
+              "xyz": 1.508001400936483e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023738293968273453,
+              "xz": 1.4325338892645712e-8,
+              "xyz": 1.5066403568552507e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002756807310257927,
+              "xz": 1.4104754684168235e-8,
+              "xyz": 1.5080014241273622e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 5.16191365590357e-8,
+          "persistentExact": true,
+          "angular": 24.440398664649564,
+          "speed": 7.229362791642114,
+          "floor": 0.001048219538994568,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018814482856660901,
+              "xz": 0.0007048331798512251,
+              "xyz": 0.0010428142447362239,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018861564256251098,
+              "xz": 0.0007046316340813553,
+              "xyz": 0.0010392125604812375,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 24.323556856983192,
+          "speed": 7.4647340695003335,
+          "floor": 0.0011848340367796874,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026500000238609735,
+              "xz": 1.024331698956826e-11,
+              "xyz": 2.5966740276736086e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026500000275883734,
+              "xz": 1.2585030269841597e-11,
+              "xyz": 3.032328041599708e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.492510751073798,
+          "speed": 1.8242275398694365,
+          "floor": 0.001999997373930754,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0019999936847379775,
+              "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+              "clock": 8.275000000000167,
+              "meshIndex": 1,
+              "meshName": "player-04-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1015,
+              "bindPosition": [
+                -0.17708536982536316,
+                0.8752480745315552,
+                0.02319585531949997
+              ],
+              "worldPosition": [
+                -0.6212478824303248,
+                0.001999997373930754,
+                0.02319585566514515
+              ],
+              "namedInfluences": {
+                "Hips": 0.9672715663909912,
+                "Spine": 0.03272844851016998
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 8.275000000000167,
+            "startClock": 7.966666666666849,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200501719952284,
+              "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+              "clock": 7.958333333333515,
+              "meshIndex": 1,
+              "meshName": "player-04-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17742319405078888,
+                0.869625985622406,
+                0.04382924735546112
+              ],
+              "worldPosition": [
+                -0.6156411068772945,
+                0.0015200569757379725,
+                0.04382924670235444
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894296526908875,
+                "Spine": 0.010570332407951355
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0019999936847379775,
+              "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+              "clock": 8.275000000000167,
+              "meshIndex": 1,
+              "meshName": "player-04-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1015,
+              "bindPosition": [
+                -0.17708536982536316,
+                0.8752480745315552,
+                0.02319585531949997
+              ],
+              "worldPosition": [
+                -0.6212478824303248,
+                0.001999997373930754,
+                0.02319585566514515
+              ],
+              "namedInfluences": {
+                "Hips": 0.9672715663909912,
+                "Spine": 0.03272844851016998
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.276846409289201,
+          "speed": 1.7561540946320993,
+          "floor": 0.0014649342646911151,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0020000015082258056,
+              "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+              "clock": 8.2833333333335,
+              "meshIndex": 1,
+              "meshName": "player-04-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17742319405078888,
+                0.869625985622406,
+                0.04382924735546112
+              ],
+              "worldPosition": [
+                -0.6156411068772945,
+                0.001999997258893067,
+                0.04382924670235444
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894296526908875,
+                "Spine": 0.010570332407951355
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 8.2833333333335,
+            "startClock": 7.966666666666849,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200501719952284,
+              "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+              "clock": 7.958333333333515,
+              "meshIndex": 1,
+              "meshName": "player-04-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17742319405078888,
+                0.869625985622406,
+                0.04382924735546112
+              ],
+              "worldPosition": [
+                -0.6156411068772945,
+                0.0015200569757379725,
+                0.04382924670235444
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894296526908875,
+                "Spine": 0.010570332407951355
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0020000015082258056,
+              "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+              "clock": 8.2833333333335,
+              "meshIndex": 1,
+              "meshName": "player-04-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17742319405078888,
+                0.869625985622406,
+                0.04382924735546112
+              ],
+              "worldPosition": [
+                -0.6156411068772945,
+                0.001999997258893067,
+                0.04382924670235444
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894296526908875,
+                "Spine": 0.010570332407951355
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.005426706288458147,
+          "floor": 0.0011931427518304177,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002105284003208091,
+              "xz": 0.0007426470223846849,
+              "xyz": 0.0008923387906723827,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002105206368522046,
+              "xz": 0.0007426235979019248,
+              "xyz": 0.0008923623400345519,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.005424737972347152,
+          "floor": 0.0012380621795834877,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002599981052383026,
+              "xz": 2.041606846259285e-8,
+              "xyz": 2.7853689889317298e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002599981038232056,
+              "xz": 2.043017769317359e-8,
+              "xyz": 2.7873657889424486e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.000018023260923906738,
+          "persistentExact": true,
+          "angular": 0.00216282974858628,
+          "speed": 0.000009350346028372487,
+          "floor": 0.0010166351030619224,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0024197277457051894,
+              "xz": 0.0016976433737625816,
+              "xyz": 0.001697752356228998,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027430948762981362,
+              "xz": 0.0010492435157220313,
+              "xyz": 0.0010492600757030807,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002419728347418993,
+              "xz": 0.001697643518949936,
+              "xyz": 0.0016977524945894196,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027430947962068667,
+              "xz": 0.001049243857930119,
+              "xyz": 0.0010492604183557437,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 1.1102230246251565e-16,
+          "c0Angle": 0.000018023408761989002,
+          "persistentExact": true,
+          "angular": 0.0021628090514386805,
+          "speed": 0.000002157887488261628,
+          "floor": 0.0011523510752997454,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002438812282037456,
+              "xz": 1.2053049135327656e-8,
+              "xyz": 1.5232869050628623e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002748840872556783,
+              "xz": 3.7437514295384944e-8,
+              "xyz": 1.5364762601828728e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002438812282035439,
+              "xz": 1.2053047732888502e-8,
+              "xyz": 1.523286924060435e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027488408725535292,
+              "xz": 3.743751545760529e-8,
+              "xyz": 1.5364762945731042e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 23.949826266552463,
+          "speed": 7.111373509711103,
+          "floor": 0.0011100886251846017,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018789307128494492,
+              "xz": 0.0006766659871079829,
+              "xyz": 0.0009888466893207583,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018850271059035598,
+              "xz": 0.0006774951292414447,
+              "xyz": 0.0009849801467230294,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 5.16191365590357e-8,
+          "persistentExact": true,
+          "angular": 23.869396905050216,
+          "speed": 7.353496553721174,
+          "floor": 0.0011979671348650153,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026000000218784876,
+              "xz": 1.0553821748179375e-11,
+              "xyz": 2.4290973202825058e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002600000025433439,
+              "xz": 1.2979505875249495e-11,
+              "xyz": 2.855393848063983e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.521896095974567,
+          "speed": 1.824227540123067,
+          "floor": 0.0019999972560506927,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0020000006071051878,
+              "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+              "clock": 10.345833333333385,
+              "meshIndex": 1,
+              "meshName": "player-05-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1127,
+              "bindPosition": [
+                -0.17661261558532715,
+                0.8669917583465576,
+                0.04151169955730438
+              ],
+              "worldPosition": [
+                -0.6129800412161878,
+                0.0019999972560506927,
+                0.04151169923397338
+              ],
+              "namedInfluences": {
+                "Hips": 0.9999568462371826,
+                "Spine": 0.00004314597390475683
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 10.345833333333385,
+            "startClock": 10.037500000000069,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.001520045288727264,
+              "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+              "clock": 10.029166666666736,
+              "meshIndex": 1,
+              "meshName": "player-05-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1774582862854004,
+                0.8696417808532715,
+                0.04210803657770157
+              ],
+              "worldPosition": [
+                -0.6156581408524939,
+                0.0015200411608550836,
+                0.04210803704829555
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894253611564636,
+                "Spine": 0.010574650019407272
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0020000006071051878,
+              "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+              "clock": 10.345833333333385,
+              "meshIndex": 1,
+              "meshName": "player-05-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1127,
+              "bindPosition": [
+                -0.17661261558532715,
+                0.8669917583465576,
+                0.04151169955730438
+              ],
+              "worldPosition": [
+                -0.6129800412161878,
+                0.0019999972560506927,
+                0.04151169923397338
+              ],
+              "namedInfluences": {
+                "Hips": 0.9999568462371826,
+                "Spine": 0.00004314597390475683
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.247864022245549,
+          "speed": 1.7561540941604965,
+          "floor": 0.001247916956264569,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.001999996794983779,
+              "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+              "clock": 10.354166666666718,
+              "meshIndex": 1,
+              "meshName": "player-05-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1774582862854004,
+                0.8696417808532715,
+                0.04210803657770157
+              ],
+              "worldPosition": [
+                -0.6156581408524939,
+                0.001999997328130055,
+                0.04210803704829555
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894253611564636,
+                "Spine": 0.010574650019407272
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 10.354166666666718,
+            "startClock": 10.037500000000069,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.001520045288727264,
+              "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+              "clock": 10.029166666666736,
+              "meshIndex": 1,
+              "meshName": "player-05-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1774582862854004,
+                0.8696417808532715,
+                0.04210803657770157
+              ],
+              "worldPosition": [
+                -0.6156581408524939,
+                0.0015200411608550836,
+                0.04210803704829555
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894253611564636,
+                "Spine": 0.010574650019407272
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.001999996794983779,
+              "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+              "clock": 10.354166666666718,
+              "meshIndex": 1,
+              "meshName": "player-05-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1774582862854004,
+                0.8696417808532715,
+                0.04210803657770157
+              ],
+              "worldPosition": [
+                -0.6156581408524939,
+                0.001999997328130055,
+                0.04210803704829555
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894253611564636,
+                "Spine": 0.010574650019407272
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0036627065819936047,
+          "floor": 0.0012423759056381764,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.00196741754255429,
+              "xz": 0.0007634495407622861,
+              "xyz": 0.0009308594283075491,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.001967365699597124,
+              "xz": 0.0007634328218458771,
+              "xyz": 0.0009308753791121665,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.00366073799420327,
+          "floor": 0.0012416659318027561,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002499980939392235,
+              "xz": 2.0464745962004124e-8,
+              "xyz": 2.7966276041971626e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002499980929829422,
+              "xz": 2.0474240982253087e-8,
+              "xyz": 2.797974177287554e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.000026428762673910732,
+          "persistentExact": true,
+          "angular": 0.0031715200774042746,
+          "speed": 0.0000060451228111693666,
+          "floor": 0.000939072843744672,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002396188263816721,
+              "xz": 0.0016720232798339801,
+              "xyz": 0.0016721833403032813,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0028187345972459864,
+              "xz": 0.000748397060596956,
+              "xyz": 0.0007486315151288604,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002396188857054278,
+              "xz": 0.001672023421423529,
+              "xyz": 0.0016721834736714589,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002818734455596937,
+              "xz": 0.0007483972618447264,
+              "xyz": 0.0007486317127688337,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.000026428729067381535,
+          "persistentExact": true,
+          "angular": 0.003171451520869288,
+          "speed": 0.0000013951007089457767,
+          "floor": 0.0009170315684463627,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002419172218594695,
+              "xz": 1.1820386691103949e-8,
+              "xyz": 1.5252091863568845e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027998455337920796,
+              "xz": 2.0064939060002376e-8,
+              "xyz": 1.5576395978784507e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002419172218593204,
+              "xz": 1.1820385539675054e-8,
+              "xyz": 1.5252092003296302e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027998455337915566,
+              "xz": 2.006494506766456e-8,
+              "xyz": 1.5576396108039164e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 23.992187017053638,
+          "speed": 7.121676960284418,
+          "floor": 0.0010233289881771306,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.001751914701328531,
+              "xz": 0.0006391050164050549,
+              "xyz": 0.0009839140389701158,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.001758864418806784,
+              "xz": 0.0006370096181071469,
+              "xyz": 0.0009772733513565277,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 23.908786466475167,
+          "speed": 7.3632547706643665,
+          "floor": 0.0010793916193094502,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002500000021490296,
+              "xz": 1.1134441611864376e-11,
+              "xyz": 2.4203483549885737e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0025000000251626394,
+              "xz": 1.3735469064922674e-11,
+              "xyz": 2.866742975311837e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.500740752330838,
+          "speed": 1.8242275398862628,
+          "floor": 0.001999997298480583,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.002000000288432127,
+              "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+              "clock": 12.416666666666602,
+              "meshIndex": 1,
+              "meshName": "player-06-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1036,
+              "bindPosition": [
+                -0.1774817854166031,
+                0.8751577138900757,
+                0.022426441311836243
+              ],
+              "worldPosition": [
+                -0.6211714787873901,
+                0.001999997298480583,
+                0.02242644089411122
+              ],
+              "namedInfluences": {
+                "Hips": 0.9673714637756348,
+                "Spine": 0.03262851759791374
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 12.416666666666602,
+            "startClock": 12.108333333333286,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200424712352504,
+              "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+              "clock": 12.099999999999953,
+              "meshIndex": 1,
+              "meshName": "player-06-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1778663992881775,
+                0.869543731212616,
+                0.04336530715227127
+              ],
+              "worldPosition": [
+                -0.61557448918406,
+                0.0015200364946419548,
+                0.04336530796001306
+              ],
+              "namedInfluences": {
+                "Hips": 0.989464521408081,
+                "Spine": 0.010535497218370438
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.002000000288432127,
+              "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+              "clock": 12.416666666666602,
+              "meshIndex": 1,
+              "meshName": "player-06-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1036,
+              "bindPosition": [
+                -0.1774817854166031,
+                0.8751577138900757,
+                0.022426441311836243
+              ],
+              "worldPosition": [
+                -0.6211714787873901,
+                0.001999997298480583,
+                0.02242644089411122
+              ],
+              "namedInfluences": {
+                "Hips": 0.9673714637756348,
+                "Spine": 0.03262851759791374
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.27280318508513,
+          "speed": 1.756154094478955,
+          "floor": 0.0014184582194173697,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.001999993981067683,
+              "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+              "clock": 12.424999999999935,
+              "meshIndex": 1,
+              "meshName": "player-06-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1778663992881775,
+                0.869543731212616,
+                0.04336530715227127
+              ],
+              "worldPosition": [
+                -0.61557448918406,
+                0.0019999973582146492,
+                0.04336530796001306
+              ],
+              "namedInfluences": {
+                "Hips": 0.989464521408081,
+                "Spine": 0.010535497218370438
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 12.424999999999935,
+            "startClock": 12.108333333333286,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200424712352504,
+              "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+              "clock": 12.099999999999953,
+              "meshIndex": 1,
+              "meshName": "player-06-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1778663992881775,
+                0.869543731212616,
+                0.04336530715227127
+              ],
+              "worldPosition": [
+                -0.61557448918406,
+                0.0015200364946419548,
+                0.04336530796001306
+              ],
+              "namedInfluences": {
+                "Hips": 0.989464521408081,
+                "Spine": 0.010535497218370438
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.001999993981067683,
+              "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+              "clock": 12.424999999999935,
+              "meshIndex": 1,
+              "meshName": "player-06-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.1778663992881775,
+                0.869543731212616,
+                0.04336530715227127
+              ],
+              "worldPosition": [
+                -0.61557448918406,
+                0.0019999973582146492,
+                0.04336530796001306
+              ],
+              "namedInfluences": {
+                "Hips": 0.989464521408081,
+                "Spine": 0.010535497218370438
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "goalkeeper",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.004993793949116389,
+          "floor": 0.0012108094505839872,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002818145047592449,
+              "xz": 0.002386191422476988,
+              "xyz": 0.0024948155673388283,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002818285719388351,
+              "xz": 0.002386072924094582,
+              "xyz": 0.0024947432910346263,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.004992489267865256,
+          "floor": 0.0010221354319467704,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002089981448573039,
+              "xz": 2.029341582403459e-8,
+              "xyz": 2.7495057157553506e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0020899814614701345,
+              "xz": 2.0280362687361883e-8,
+              "xyz": 2.7476721061610307e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "goalkeeper",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 2.9802322387695312e-8,
+          "persistentExact": true,
+          "angular": 0.22725493849493156,
+          "speed": 0.05476758780982286,
+          "floor": 0.0009353720102196405,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002217549360545286,
+              "xz": 0.0004510566251327893,
+              "xyz": 0.00046007262122845394,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002841375904734424,
+              "xz": 0.0015479826062913082,
+              "xyz": 0.0015619945187753898,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0022162088070468073,
+              "xz": 0.00045078525110131535,
+              "xyz": 0.0004600726899795143,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.00284244178249763,
+              "xz": 0.0015484238705803994,
+              "xyz": 0.001562574590600445,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 2.9802322387695312e-8,
+          "persistentExact": true,
+          "angular": 0.2272969582679007,
+          "speed": 0.05477726776356419,
+          "floor": 0.0009978379965540052,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023080358953461336,
+              "xz": 4.259910496491564e-8,
+              "xyz": 1.5463878185176814e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002632479807653883,
+              "xz": 2.1776199691621655e-8,
+              "xyz": 1.4732065379608194e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023080357932520677,
+              "xz": 4.264237781845692e-8,
+              "xyz": 1.5474884689281243e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0026324797266218045,
+              "xz": 2.1851519920966938e-8,
+              "xyz": 1.474119424539436e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "goalkeeper",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 22.983860700737328,
+          "speed": 6.870646624309231,
+          "floor": 0.0015112902899696095,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0027578510174539423,
+              "xz": 0.0018882081062570211,
+              "xyz": 0.0020028366968000643,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0027675833069804017,
+              "xz": 0.0018544115625899085,
+              "xyz": 0.0019743255510086587,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 22.962922291813637,
+          "speed": 7.123454057046235,
+          "floor": 0.0014468701291356111,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0020900000115781038,
+              "xz": 5.3980365382439285e-12,
+              "xyz": 1.2774634594085371e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002090000013462753,
+              "xz": 6.590804129005685e-12,
+              "xyz": 1.4989476931917927e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "goalkeeper",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.55284548011698,
+          "speed": 1.8242275398935306,
+          "floor": 0.0019999973822828945,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.0020000005294180667,
+              "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+              "clock": 14.48749999999982,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1167,
+              "bindPosition": [
+                -0.18102020025253296,
+                0.8764346241950989,
+                0.03071928769350052
+              ],
+              "worldPosition": [
+                -0.6225718820621445,
+                0.0019999973822828945,
+                0.03071928769350052
+              ],
+              "namedInfluences": {
+                "Hips": 0.9603090882301331,
+                "Spine": 0.03969091176986694
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 14.48749999999982,
+            "startClock": 14.179166666666504,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200487840952566,
+              "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+              "clock": 14.17083333333317,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2203,
+              "bindPosition": [
+                -0.18179671466350555,
+                0.8743330240249634,
+                0.030854955315589905
+              ],
+              "worldPosition": [
+                -0.6204988538179934,
+                0.0015200458084684513,
+                0.030854955545477236
+              ],
+              "namedInfluences": {
+                "Hips": 0.968234121799469,
+                "Spine": 0.0317658856511116
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.0020000005294180667,
+              "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+              "clock": 14.48749999999982,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1167,
+              "bindPosition": [
+                -0.18102020025253296,
+                0.8764346241950989,
+                0.03071928769350052
+              ],
+              "worldPosition": [
+                -0.6225718820621445,
+                0.0019999973822828945,
+                0.03071928769350052
+              ],
+              "namedInfluences": {
+                "Hips": 0.9603090882301331,
+                "Spine": 0.03969091176986694
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.255933443684293,
+          "speed": 1.7561540934130577,
+          "floor": 0.0011501540981050593,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.002000000288563813,
+              "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+              "clock": 14.495833333333152,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2203,
+              "bindPosition": [
+                -0.18179671466350555,
+                0.8743330240249634,
+                0.030854955315589905
+              ],
+              "worldPosition": [
+                -0.6204988538179934,
+                0.0019999974214469024,
+                0.030854955545477236
+              ],
+              "namedInfluences": {
+                "Hips": 0.968234121799469,
+                "Spine": 0.0317658856511116
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 14.495833333333152,
+            "startClock": 14.179166666666504,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200487840952566,
+              "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+              "clock": 14.17083333333317,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2203,
+              "bindPosition": [
+                -0.18179671466350555,
+                0.8743330240249634,
+                0.030854955315589905
+              ],
+              "worldPosition": [
+                -0.6204988538179934,
+                0.0015200458084684513,
+                0.030854955545477236
+              ],
+              "namedInfluences": {
+                "Hips": 0.968234121799469,
+                "Spine": 0.0317658856511116
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.002000000288563813,
+              "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+              "clock": 14.495833333333152,
+              "meshIndex": 1,
+              "meshName": "goalkeeper-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2203,
+              "bindPosition": [
+                -0.18179671466350555,
+                0.8743330240249634,
+                0.030854955315589905
+              ],
+              "worldPosition": [
+                -0.6204988538179934,
+                0.0019999974214469024,
+                0.030854955545477236
+              ],
+              "namedInfluences": {
+                "Hips": 0.968234121799469,
+                "Spine": 0.0317658856511116
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "referee",
+      "scenario": "native-slide",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0012377939587132753,
+          "floor": 0.001077787088211875,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002100033583937665,
+              "xz": 0.000944094075656422,
+              "xyz": 0.0010926008797754116,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0021000531482589786,
+              "xz": 0.0009440973051797646,
+              "xyz": 0.0010925938226932982,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.00027354621681027183,
+          "persistentExact": true,
+          "angular": 0.03282554601723262,
+          "speed": 0.0012364892685848882,
+          "floor": 0.00151993818735352,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026499814575446944,
+              "xz": 1.99776818734475e-8,
+              "xyz": 2.7256750022620783e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0026499814607156796,
+              "xz": 1.997446934482149e-8,
+              "xyz": 2.725223823320813e-8,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "referee",
+      "scenario": "native-getup",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.00001982622876023234,
+          "persistentExact": true,
+          "angular": 0.002379185081378398,
+          "speed": 0.000007363771235250912,
+          "floor": 0.0009683278962341062,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023899783762843857,
+              "xz": 0.0018230489161617574,
+              "xyz": 0.001823128880524172,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002787500087410701,
+              "xz": 0.0018414197343746951,
+              "xyz": 0.0018414621597956644,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 1,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.0023899790221424888,
+              "xz": 0.0018230490746862361,
+              "xyz": 0.0018231290450908583,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.002787499703149587,
+              "xz": 0.0018414199994048858,
+              "xyz": 0.0018414624274281674,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 5.551115123125783e-17,
+          "c0Angle": 0.000019826318356334915,
+          "persistentExact": true,
+          "angular": 0.0023791608906356754,
+          "speed": 0.0000016994206482203524,
+          "floor": 0.0009531611420825906,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.00237275051764907,
+              "xz": 1.130895882522554e-8,
+              "xyz": 1.5302357285828423e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027998483247422606,
+              "xz": 1.8624169070562552e-8,
+              "xyz": 1.5281440862651563e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 2,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "get_up:LeftHand:0.5:0.666667",
+              "y": 0.002372750517647529,
+              "xz": 1.1308957842239012e-8,
+              "xyz": 1.530235743227252e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            },
+            {
+              "bone": "RightHand",
+              "key": "get_up:RightHand:0.5:0.666667",
+              "y": 0.0027998483247400332,
+              "xz": 1.8624177204234426e-8,
+              "xyz": 1.5281441182858345e-7,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 8,
+              "count": 3,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "referee",
+      "scenario": "bridge",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 24.262240909726106,
+          "speed": 7.186852353127009,
+          "floor": 0.0010427156150837518,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018886182261453742,
+              "xz": 0.0006812050639656258,
+              "xyz": 0.001021637188404195,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 69,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.0018932098889239796,
+              "xz": 0.000681147447973334,
+              "xyz": 0.0010181812795877958,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 4.2146848510894035e-8,
+          "persistentExact": true,
+          "angular": 24.159136771785906,
+          "speed": 7.424788479681266,
+          "floor": 0.0011792196951838953,
+          "palms": [
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002650000022237799,
+              "xz": 9.539287195477565e-12,
+              "xyz": 2.4197472957576106e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 70,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            },
+            {
+              "bone": "LeftHand",
+              "key": "slide_tackle:LeftHand:1.173333:1.466667",
+              "y": 0.002650000025717192,
+              "xz": 1.1721082994157787e-11,
+              "xyz": 2.8262302493352104e-11,
+              "solver": "nativePalmSurfaceIK",
+              "iterations": 6,
+              "count": 71,
+              "model": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+            }
+          ],
+          "body": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          }
+        }
+      ]
+    },
+    {
+      "identity": "referee",
+      "scenario": "body",
+      "swaps": [
+        {
+          "lod": 1,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.4933827116555305,
+          "speed": 1.8242275398130317,
+          "floor": 0.0019999972677071675,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.30833333333333346,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.001999994206523262,
+              "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+              "clock": 16.55833333333304,
+              "meshIndex": 1,
+              "meshName": "referee-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1009,
+              "bindPosition": [
+                -0.1776028573513031,
+                0.875182569026947,
+                0.023329168558120728
+              ],
+              "worldPosition": [
+                -0.6212005636799491,
+                0.0019999972677071675,
+                0.023329167862857325
+              ],
+              "namedInfluences": {
+                "Hips": 0.9673664569854736,
+                "Spine": 0.03263351321220398
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 16.55833333333304,
+            "startClock": 16.249999999999723,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200679805091157,
+              "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+              "clock": 16.24166666666639,
+              "meshIndex": 1,
+              "meshName": "referee-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17793041467666626,
+                0.8695636987686157,
+                0.04409419000148773
+              ],
+              "worldPosition": [
+                -0.6155966955010548,
+                0.0015200618715339284,
+                0.044094191028135596
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894602298736572,
+                "Spine": 0.010539793409407139
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.001999994206523262,
+              "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+              "clock": 16.55833333333304,
+              "meshIndex": 1,
+              "meshName": "referee-lod1_1",
+              "material": "Cloth",
+              "vertexIndex": 1009,
+              "bindPosition": [
+                -0.1776028573513031,
+                0.875182569026947,
+                0.023329168558120728
+              ],
+              "worldPosition": [
+                -0.6212005636799491,
+                0.0019999972677071675,
+                0.023329167862857325
+              ],
+              "namedInfluences": {
+                "Hips": 0.9673664569854736,
+                "Spine": 0.03263351321220398
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        },
+        {
+          "lod": 0,
+          "c0Position": 0,
+          "c0Angle": 0.0011975750362874038,
+          "persistentExact": true,
+          "angular": 4.280735538690453,
+          "speed": 1.7561540945946525,
+          "floor": 0.0014753079079666844,
+          "palms": [],
+          "body": {
+            "active": true,
+            "phase": "held-body-support",
+            "elapsedSeconds": 0.3166666666666668,
+            "carryWeight": 1,
+            "actualGeometryWitness": {
+              "minimumY": 0.002000004591414956,
+              "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+              "clock": 16.56666666666637,
+              "meshIndex": 1,
+              "meshName": "referee-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17793041467666626,
+                0.8695636987686157,
+                0.04409419000148773
+              ],
+              "worldPosition": [
+                -0.6155966955010548,
+                0.001999997374392672,
+                0.044094191028135596
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894602298736572,
+                "Spine": 0.010539793409407139
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "processedClock": 16.56666666666637,
+            "startClock": 16.249999999999723,
+            "boundSeconds": 0.3,
+            "targetClearanceMeters": 0.0015,
+            "maximumRateMps": 0.05,
+            "maximumOffsetMeters": 0.03,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": {
+              "minimumY": 0.0015200679805091157,
+              "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+              "clock": 16.24166666666639,
+              "meshIndex": 1,
+              "meshName": "referee-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17793041467666626,
+                0.8695636987686157,
+                0.04409419000148773
+              ],
+              "worldPosition": [
+                -0.6155966955010548,
+                0.0015200618715339284,
+                0.044094191028135596
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894602298736572,
+                "Spine": 0.010539793409407139
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "actualWitness": {
+              "minimumY": 0.002000004591414956,
+              "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+              "clock": 16.56666666666637,
+              "meshIndex": 1,
+              "meshName": "referee-lod0_1",
+              "material": "Cloth",
+              "vertexIndex": 2359,
+              "bindPosition": [
+                -0.17793041467666626,
+                0.8695636987686157,
+                0.04409419000148773
+              ],
+              "worldPosition": [
+                -0.6155966955010548,
+                0.001999997374392672,
+                0.044094191028135596
+              ],
+              "namedInfluences": {
+                "Hips": 0.9894602298736572,
+                "Spine": 0.010539793409407139
+              },
+              "selection": "opaque geometry with combined Hand/Foot influence below .5"
+            },
+            "deadlineMissed": false
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "remoteRequests": []
+}

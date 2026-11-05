@@ -1,0 +1,79 @@
+{
+  "kind": "locomotion-state-and-prediction-fidelity",
+  "generatedAt": "2026-11-05T07:25:44.341Z",
+  "pass": true,
+  "method": "Compare structured-cloned export/restore/clone/copyFrom states, Infinity and intra-state heel aliases, cross-instance mutation isolation, callback exclusion/rebinding, optional returned-history omission, and nonmutating body predictions against independently advanced motor clones at six time offsets. No mesh, renderer, asset or straight numerical motion rule is changed.",
+  "source": {
+    "file": "source/locomotion-space.js",
+    "sha256": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a"
+  },
+  "motion": {
+    "file": "animations.json",
+    "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+  },
+  "cases": [
+    {
+      "name": "idle",
+      "footModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "infiniteStanceEnds": 2,
+      "heelRecords": 0,
+      "pass": true
+    },
+    {
+      "name": "inherited-swing",
+      "footModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "infiniteStanceEnds": 0,
+      "heelRecords": 0,
+      "pass": true
+    },
+    {
+      "name": "running",
+      "footModes": {
+        "LeftFoot": "flight",
+        "RightFoot": "flight"
+      },
+      "infiniteStanceEnds": 0,
+      "heelRecords": 2,
+      "pass": true
+    },
+    {
+      "name": "neutral-settle",
+      "footModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "settle"
+      },
+      "infiniteStanceEnds": 0,
+      "heelRecords": 6,
+      "pass": true
+    },
+    {
+      "name": "settled-idle",
+      "footModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "infiniteStanceEnds": 2,
+      "heelRecords": 8,
+      "pass": true
+    }
+  ],
+  "predictionCases": 30,
+  "lightweightSnapshotChecks": 30,
+  "infiniteEndChecks": 4,
+  "linkedRecordChecks": 9,
+  "geometryCloneChecks": 1,
+  "transientCallbackChecks": 6,
+  "curvedCallbackMetricAndRebinding": true,
+  "maximumScalarError": 0,
+  "maximumPredictionComponentError": 0,
+  "limits": [
+    "This verifies state ownership and body-target prediction, not the final integrated viewer, all16 geometry or physical phone FPS.",
+    "The earlier69-case browser proof remains a historical pre-serialization-fix snapshot; final integrated audits must stamp this source."
+  ]
+}

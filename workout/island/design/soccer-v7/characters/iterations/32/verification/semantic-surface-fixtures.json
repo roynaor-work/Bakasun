@@ -1,0 +1,82 @@
+{
+  "kind": "independent-semantic-surface-fixtures",
+  "helperSha256": "53f762a92f7570580962c011bcd3cfc92eae774c762a0ac37402240549a73804",
+  "minimumFractionUnchanged": 0.5,
+  "requiredGridHits": 9,
+  "cases": [
+    {
+      "name": "empty-vertex-window-with-real-covered-front-surface",
+      "pass": true,
+      "sourceVertexCount": 0,
+      "hits": 9,
+      "correct": 9
+    },
+    {
+      "name": "known-center-barycentric-UV",
+      "pass": true,
+      "hit": {
+        "origin": [
+          0,
+          1.65,
+          0.3
+        ],
+        "direction": [
+          0,
+          0,
+          -1
+        ],
+        "hit": {
+          "triangle": 0,
+          "vertexIndices": [
+            0,
+            1,
+            2
+          ],
+          "barycentric": [
+            0.5,
+            1.807003620809179e-15,
+            0.49999999999999817
+          ],
+          "position": [
+            0,
+            1.65,
+            0.08
+          ],
+          "normalZ": 1,
+          "uv": [
+            0.19999999999999998,
+            0.19999999999999962
+          ]
+        }
+      }
+    },
+    {
+      "name": "wrong-UV-region-rejected",
+      "pass": true,
+      "result": {
+        "hits": 9,
+        "correct": 0,
+        "pass": false
+      }
+    },
+    {
+      "name": "partial-physical-coverage-rejected",
+      "pass": true,
+      "result": {
+        "hits": 5,
+        "correct": 5,
+        "pass": false
+      }
+    },
+    {
+      "name": "back-surface-winding-rejected",
+      "pass": true,
+      "result": {
+        "hits": 0,
+        "correct": 0,
+        "pass": false
+      }
+    }
+  ],
+  "pass": true
+}

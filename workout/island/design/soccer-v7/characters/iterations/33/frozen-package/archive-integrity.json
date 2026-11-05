@@ -1,0 +1,28 @@
+{
+  "kind": "immutable-native32-before-full-profile-camera-fix",
+  "generatedAt": "2026-11-05T06:09:12.903439+00:00",
+  "scope": "Exact runtime/data/preview/manifest used by iteration33; native32 models are unchanged and their exact hashes remain bound in the archived manifest. Offline payloads need not be duplicated.",
+  "reason": "Actual90-degree portrait framing clips the nose/back-head; iteration34 will correct the camera.",
+  "files": [
+    {
+      "file": "vendor/viewer-runtime.js",
+      "bytes": 847856,
+      "sha256": "69e0f8039ed9051b72f242618ff72b63d07ef162cf5eeedb826812732a85615f"
+    },
+    {
+      "file": "vendor/data.js",
+      "bytes": 1979015,
+      "sha256": "54d23f421ee2c838b592a9ef917d8896c450d24f96ffcdc1cda87d4f60fa763a"
+    },
+    {
+      "file": "preview.js",
+      "bytes": 88190,
+      "sha256": "12c09ce33eeb6c751a9b1790562e74f2605b6737e4bd7c32084263dc9e24f2a8"
+    },
+    {
+      "file": "asset-manifest.json",
+      "bytes": 466491,
+      "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a"
+    }
+  ]
+}

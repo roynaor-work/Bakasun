@@ -1,0 +1,48 @@
+{
+  "kind": "references-to-existing-final-c16-baseline-no-duplicate-json",
+  "reports": [
+    {
+      "original": "verification/transitions-matrix.json",
+      "archive": "iterations/35/frozen-package/verification/transitions-matrix.json",
+      "bytes": 135973,
+      "sha256": "ab905aa652c64216ff2edfd3e8c32303989a6943953856d6e65c32e46a838150",
+      "pass": true,
+      "complete": true
+    },
+    {
+      "original": "verification/locomotion.json",
+      "archive": "iterations/35/frozen-package/verification/locomotion.json",
+      "bytes": 20450740,
+      "sha256": "e3fe73876953f7685ef398f21bb11dd19bf0765e63761935c38638572543ec91",
+      "pass": true,
+      "complete": true
+    },
+    {
+      "original": "verification/locomotion-30hz.json",
+      "archive": "iterations/35/frozen-package/verification/locomotion-30hz.json",
+      "bytes": 9196027,
+      "sha256": "b341e64076f844bea2ac321ff1a4023c3310e98028675088dd00151bc2c652fa",
+      "pass": true,
+      "complete": true
+    },
+    {
+      "original": "verification/pitch.json",
+      "archive": "iterations/35/frozen-package/verification/pitch.json",
+      "bytes": 194135,
+      "sha256": "0544b4448448689da2781e310084fe7c3ef962a9fa332039a6e8e139845edf40",
+      "pass": true,
+      "complete": true
+    },
+    {
+      "original": "verification/equivariance.json",
+      "archive": "iterations/35/frozen-package/verification/equivariance.json",
+      "bytes": 6144929,
+      "sha256": "0cff8135bc86837f71b8dacb4c97c3d8a50014e69878d7c142df2155e33850fd",
+      "pass": true,
+      "complete": true
+    }
+  ],
+  "integrityManifest": "iterations/35/frozen-package/archive-integrity.json",
+  "matrixJobReportsRemainAt": "verification/c16-r2/",
+  "limits": "Each original canonical receipt was checked byte-for-byte against the existing root-owned frozen-package archive. Temporary duplicate copies were removed; historical receipts remain unchanged."
+}

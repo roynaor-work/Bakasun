@@ -1,0 +1,221 @@
+{
+  "kind": "single-half-closure-candidate-review",
+  "generatedAt": "2026-11-05T08:49:15.651Z",
+  "decision": "reject-uniform-adoption-mixed-small-benefit",
+  "promoted": false,
+  "faceScore": {
+    "baseline": 7.5,
+    "candidate": 7.5,
+    "reference": "REFERENCE.md"
+  },
+  "perIdentity": {
+    "player-01": "Small increase in eye openness, no sufficient depth improvement.",
+    "player-02": "More visible white strengthens stare.",
+    "player-04": "Small reduction in sleepy lid appearance, below reference threshold."
+  },
+  "inspectedComparisonPairs": [
+    "comparison-player-01-front-390x844.png",
+    "comparison-player-01-front-844x390.png",
+    "comparison-player-01-three-quarter-390x844.png",
+    "comparison-player-01-three-quarter-844x390.png",
+    "comparison-player-02-front-390x844.png",
+    "comparison-player-02-front-844x390.png",
+    "comparison-player-02-three-quarter-390x844.png",
+    "comparison-player-02-three-quarter-844x390.png",
+    "comparison-player-04-front-390x844.png",
+    "comparison-player-04-front-844x390.png",
+    "comparison-player-04-three-quarter-390x844.png",
+    "comparison-player-04-three-quarter-844x390.png"
+  ],
+  "evidence": [
+    {
+      "file": "baseline-player-01-front-390x844.png",
+      "bytes": 210102,
+      "sha256": "c1558c168bb444355e22e45e9fdc9dee42d830ea5d9600c921bd0e7be0a6a3f2"
+    },
+    {
+      "file": "baseline-player-01-front-844x390.png",
+      "bytes": 117706,
+      "sha256": "f8ff173464248bd6a7e651366f792f8ccc74e8deb6520f4933b6196ee89cb2cf"
+    },
+    {
+      "file": "baseline-player-01-three-quarter-390x844.png",
+      "bytes": 167073,
+      "sha256": "0d1c4bfb2f81d244bac284ec0311c4cb5ed670e42d8e71ed42d422d1c6e9dbfc"
+    },
+    {
+      "file": "baseline-player-01-three-quarter-844x390.png",
+      "bytes": 131219,
+      "sha256": "17fc5c56ab9a82088442d62823ec568cf0a93e4ba871740021d30b3ee4b405e4"
+    },
+    {
+      "file": "baseline-player-02-front-390x844.png",
+      "bytes": 202238,
+      "sha256": "2d410e7b7f3ffdfbfcb58f660858660129ed6c2c04e259a1971f71d59c64bdbf"
+    },
+    {
+      "file": "baseline-player-02-front-844x390.png",
+      "bytes": 113052,
+      "sha256": "fa6fc519145f4445a76436d22ec51de1f70c5a2f3fac211bffd0957d7c11a636"
+    },
+    {
+      "file": "baseline-player-02-three-quarter-390x844.png",
+      "bytes": 161972,
+      "sha256": "2ba5a09a96215021757936169ce6b3559b4530db11bb384153b2e2abc5d0f04b"
+    },
+    {
+      "file": "baseline-player-02-three-quarter-844x390.png",
+      "bytes": 127804,
+      "sha256": "e5a68ec3e1eb55eaf9f7fc8bdfe28e595d810211da99a5479a6e735cb22c5304"
+    },
+    {
+      "file": "baseline-player-04-front-390x844.png",
+      "bytes": 212112,
+      "sha256": "42db39a6504a7db7f986086ac75a6c09b409c7d82197e87241781dd63650c877"
+    },
+    {
+      "file": "baseline-player-04-front-844x390.png",
+      "bytes": 118051,
+      "sha256": "93bf5fdc3f019fa3045bd491a2e34ec1a379896bd849b8bc65fde2d4f37d6b73"
+    },
+    {
+      "file": "baseline-player-04-three-quarter-390x844.png",
+      "bytes": 163486,
+      "sha256": "dd84795b0c6845217ef04441baf7aa0c49af387c8d06bcec82b797b80c916f90"
+    },
+    {
+      "file": "baseline-player-04-three-quarter-844x390.png",
+      "bytes": 132477,
+      "sha256": "6ffb4811c33e2980c476335c0a593fd1b2ad2e16c7e15f81163b2ff2bfd9dab6"
+    },
+    {
+      "file": "candidate-player-01-front-390x844.png",
+      "bytes": 210280,
+      "sha256": "a8ea4fffe1dc61e6dc60efc12429f580377323e73b4898562024ce64ccc70ac6"
+    },
+    {
+      "file": "candidate-player-01-front-844x390.png",
+      "bytes": 117793,
+      "sha256": "1ddc6f57fb6f9985235a068dedac6e0f8aee4462f6d5795a854da6d6ebcae532"
+    },
+    {
+      "file": "candidate-player-01-three-quarter-390x844.png",
+      "bytes": 167080,
+      "sha256": "b6c5c3239b5c1d36df4f2a044bbedeaae3a7991f9d419d88abcb191a6e11d196"
+    },
+    {
+      "file": "candidate-player-01-three-quarter-844x390.png",
+      "bytes": 131270,
+      "sha256": "cb56cbf344f2dce8833089ed88e1a08d25460ca3c9ab8dd4812e8cfe0bcf756f"
+    },
+    {
+      "file": "candidate-player-02-front-390x844.png",
+      "bytes": 202545,
+      "sha256": "e833db5e639e80ad82aa2f6a86c35753c0a9de8626a0d844f378e52b1b275518"
+    },
+    {
+      "file": "candidate-player-02-front-844x390.png",
+      "bytes": 113152,
+      "sha256": "70f96d8ee49955f4294513a1b9a682d0f1be756af57388a90ad9a28ac3113f0e"
+    },
+    {
+      "file": "candidate-player-02-three-quarter-390x844.png",
+      "bytes": 162080,
+      "sha256": "483555f21df9f0e7539f57bf310ed44f2c0a89b3af0188f4444cb12b5f454599"
+    },
+    {
+      "file": "candidate-player-02-three-quarter-844x390.png",
+      "bytes": 127916,
+      "sha256": "e38e83348608d2064340962fc94b7794c0e0d876b670d166892dbe82458026a4"
+    },
+    {
+      "file": "candidate-player-04-front-390x844.png",
+      "bytes": 212379,
+      "sha256": "db33216e9e7e1c24a2cc92a12e857d8eca40d66563041a8430a17941b8dc47e0"
+    },
+    {
+      "file": "candidate-player-04-front-844x390.png",
+      "bytes": 118111,
+      "sha256": "a0022e8f7b39440ba4e2c040b419ba3d2ab325002419f6092ac630b84a21f428"
+    },
+    {
+      "file": "candidate-player-04-three-quarter-390x844.png",
+      "bytes": 163580,
+      "sha256": "d634cc44334888ce29542dc458f76b0130d70d53e07c5c06193d0b1c0ca7bd9c"
+    },
+    {
+      "file": "candidate-player-04-three-quarter-844x390.png",
+      "bytes": 132544,
+      "sha256": "bc0a741fe1d6708344d19471ac3e52a279057e1c4a3133a6b9584f90da758c7f"
+    },
+    {
+      "file": "comparison-player-01-front-390x844.png",
+      "bytes": 388153,
+      "sha256": "b92ac7f2ad91b1be590d8bfe6757113bfd709d7a3facd3dde33d527c68519358"
+    },
+    {
+      "file": "comparison-player-01-front-844x390.png",
+      "bytes": 184847,
+      "sha256": "5812fb5cd09e7790214617739cfcd000e0031d9af41ba1e260b35aa7ebfb358d"
+    },
+    {
+      "file": "comparison-player-01-three-quarter-390x844.png",
+      "bytes": 270164,
+      "sha256": "a1994c827d1c141e7c9f22a7a84a77dd6f68afa6090646c4895d6d3f5cc03df8"
+    },
+    {
+      "file": "comparison-player-01-three-quarter-844x390.png",
+      "bytes": 190374,
+      "sha256": "eec1cad7fba22a722ca269d666efc6dbb1bb13511b6d8a3adceaedb3938a8ab8"
+    },
+    {
+      "file": "comparison-player-02-front-390x844.png",
+      "bytes": 349504,
+      "sha256": "11c7ead32768bfb696e4526e6c62ae6c47ef1e542fd6cb49caa90fb88ab39bf9"
+    },
+    {
+      "file": "comparison-player-02-front-844x390.png",
+      "bytes": 171663,
+      "sha256": "a1a8b9c34290bff6b47d6e513a40232eb531aaec7988efc7ebae075b30157b55"
+    },
+    {
+      "file": "comparison-player-02-three-quarter-390x844.png",
+      "bytes": 251769,
+      "sha256": "faa4fb76baa81a31d2792c2b55516383af12bc5deee5cd490c31649a65799a30"
+    },
+    {
+      "file": "comparison-player-02-three-quarter-844x390.png",
+      "bytes": 179351,
+      "sha256": "c1ee026377b5b36f7e72e21e6e29b0fd12397218f91e0f851bd2c80bce17e091"
+    },
+    {
+      "file": "comparison-player-04-front-390x844.png",
+      "bytes": 376763,
+      "sha256": "8a4732b3f2eea50675e4d5a77fae96dea3e5bf9fb27b0f85829109fe596ff21a"
+    },
+    {
+      "file": "comparison-player-04-front-844x390.png",
+      "bytes": 179861,
+      "sha256": "d0fc41990efb62b23ed4840c36e0c6fc3b0fac3098229775c8c35e05071964d6"
+    },
+    {
+      "file": "comparison-player-04-three-quarter-390x844.png",
+      "bytes": 253877,
+      "sha256": "f478ece48a563ff71f8554a5e5c3fa326fa0bebf9d2477afb87bdb2ab37847a3"
+    },
+    {
+      "file": "comparison-player-04-three-quarter-844x390.png",
+      "bytes": 188861,
+      "sha256": "a2c6a302e11ea94850f6813a16a2e2eb19b26a55b386a079b44dd08e35f4ea62"
+    }
+  ],
+  "captureSha256": "0cb0965fd3107b9f58661831b8708c3a98fc61c076bd13c57c5ef7a2e3606bf6",
+  "reviewSha256": "9d86851b65dd3764a664cf01009d0b63a83c2b30668edf1d2753bd01346c64bf",
+  "alignmentControlsSha256": "caaaa7c08c182ee83b2faa413ccd137c348eb73ef3ac758cdaf4fc5294804d76",
+  "primaryInputsUnchanged": true,
+  "allMapsIdentical": true,
+  "allMaterialsIdentical": true,
+  "errors": [],
+  "remoteRequests": [],
+  "allOwnedBrowsersAndServersClosed": true
+}

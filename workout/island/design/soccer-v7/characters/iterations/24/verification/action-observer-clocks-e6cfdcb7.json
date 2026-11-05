@@ -1,0 +1,46 @@
+{
+  "pass": true,
+  "checks": {
+    "actualCanonicalClock": true,
+    "mirroredContactDispatch": true,
+    "firstPhaseCapturedSupport": true,
+    "secondPhaseFlatFirst": true,
+    "finalBothIndependentFlat": true,
+    "unsupportedNeverUsesUILabel": true,
+    "bodyHoldIsIndependentOfFirstFootLanding": true,
+    "noUnexpectedFactoryErrors": true,
+    "neverHeldMissingBallRejects": true,
+    "lateFirstVisibleProgressRejects": true,
+    "completedFlagCannotBypassDeadline": true,
+    "actualTerminalHoldsForPoint2Seconds": true,
+    "postCompletionPoseDeviationCannotPass": true,
+    "nativeBodyClockJumpRejects": true,
+    "nativeBodyClockReversalRejects": true,
+    "nativeClockNormalProgressPasses": true,
+    "nativeClockTerminalClampPasses": true,
+    "genuineLoopWrapPasses": true,
+    "capturedPoseRateZeroStaysFrozen": true,
+    "capturedPoseClockDriftRejects": true,
+    "overlayClockJumpRejects": true,
+    "matchedEntryPhasePasses": true,
+    "firstActivationCannotSkipToTerminal": true,
+    "repeatedActionBindsLatestActivation": true,
+    "newEpisodeRetainsSourceClockWitness": true,
+    "newEpisodeAllowsContinuousSourceClock": true,
+    "internalMatchedEntryClockJumpRejects": true,
+    "internalMatchedEntryPhasePasses": true,
+    "initialColdSeekAllowsArbitraryAuthoredPose": true
+  },
+  "method": "Controlled read-only descriptor/clock/contact dispatch fixture with the actual local Three r160 math classes. No browser, controller or animation-quality claim.",
+  "kind": "controlled-auditor-fixture",
+  "complete": true,
+  "auditSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "e6cfdcb7a0254bcb9654271cf6e476d8f1ef07de0ee67ae588bb2a49d886aa21"
+  },
+  "fixtureSource": {
+    "file": "/tmp/soccer-v7-action-observer-fixture-clocks.cjs",
+    "sha256": "603efadfa5c3621ca1dbaf8aa7a9e39d284f2c57f9f412d271ee1546daaddce5"
+  },
+  "limits": "Controlled native-clock, contributor, deadline and contact-dispatch cases using local Three math. Not a production runtime or mobile performance result. Thirteen prior contact/ledger checks plus sixteen clock/history checks. Final32/17 matrix is the authoritative physical proof for this exact source."
+}

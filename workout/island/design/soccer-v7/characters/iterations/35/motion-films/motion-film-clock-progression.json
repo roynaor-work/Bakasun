@@ -1,0 +1,277 @@
+{
+  "kind": "observed-nonloop-film-clock-progression",
+  "pass": true,
+  "rule": "For each actual positive-weight requested body/arm contributor: first sample begins within one real step of declared entry; later source-clock increments are monotonic and bounded by real simulation dt × declared playbackRate. Physical motor phase has separate semantics and is excluded.",
+  "rows": [
+    {
+      "report": "keeper-390x844.json",
+      "sha256": "12fb12d50648379f8f6bfe77112b4c1eef6bc39f291e4e8bc0002d6995d63d55",
+      "clips": [
+        {
+          "clip": "keeper_catch",
+          "requestID": 1,
+          "positiveSamples": 24,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 23,
+            "time": 0.8,
+            "seconds": 0.7999999999999999
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333338,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "get_up",
+          "requestID": 2,
+          "positiveSamples": 78,
+          "first": {
+            "frame": 57,
+            "time": 1.9333333333333333,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 134,
+            "time": 4.5,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "keeper_throw",
+          "requestID": 3,
+          "positiveSamples": 60,
+          "first": {
+            "frame": 135,
+            "time": 4.533333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 194,
+            "time": 6.5,
+            "seconds": 1.166667
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "keeper-844x390.json",
+      "sha256": "f7b2bb60321a2d69fa373141dfb773eebbee24c8925f3d2d4f11a1749fbb7d07",
+      "clips": [
+        {
+          "clip": "keeper_catch",
+          "requestID": 1,
+          "positiveSamples": 24,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 23,
+            "time": 0.8,
+            "seconds": 0.7999999999999999
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333338,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "get_up",
+          "requestID": 2,
+          "positiveSamples": 78,
+          "first": {
+            "frame": 57,
+            "time": 1.9333333333333333,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 134,
+            "time": 4.5,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "keeper_throw",
+          "requestID": 3,
+          "positiveSamples": 60,
+          "first": {
+            "frame": 135,
+            "time": 4.533333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 194,
+            "time": 6.5,
+            "seconds": 1.166667
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "motor-390x844.json",
+      "sha256": "ca0ce5464f97b2354e57eba7324f098826da72f04c2df75963954c8cf6a3ce27",
+      "clips": [],
+      "pass": true
+    },
+    {
+      "report": "motor-844x390.json",
+      "sha256": "584aa2ffee02241fc3f33f201cd8a7ca02c1ad51275c8d554fd40aede9107faa",
+      "clips": [],
+      "pass": true
+    },
+    {
+      "report": "pass-390x844.json",
+      "sha256": "8b56d0d34e11f8815c7661d8bf9fe4a7bd37e0476656218b9a68a4aeca9db950",
+      "clips": [
+        {
+          "clip": "long_pass",
+          "requestID": 1,
+          "positiveSamples": 72,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 71,
+            "time": 2.4,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "pass-844x390.json",
+      "sha256": "454bb81ed2507416a208c74bc8c03ffd83aaa381d858a7f43efce585a8fe0d35",
+      "clips": [
+        {
+          "clip": "long_pass",
+          "requestID": 1,
+          "positiveSamples": 72,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 71,
+            "time": 2.4,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "recovery-390x844.json",
+      "sha256": "e70714757346adc0e26e4d0af716c292d2e2c579de74dcf0244fea161ed68e7e",
+      "clips": [
+        {
+          "clip": "get_up",
+          "requestID": 1,
+          "positiveSamples": 70,
+          "first": {
+            "frame": 41,
+            "time": 1.4,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 110,
+            "time": 3.7,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "long_pass",
+          "requestID": 3,
+          "positiveSamples": 62,
+          "first": {
+            "frame": 229,
+            "time": 7.666666666666667,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 290,
+            "time": 9.7,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "recovery-844x390.json",
+      "sha256": "05fa4f042f82edca26412624657093e481e1efffb24fdc64b337a2b1951fbe33",
+      "clips": [
+        {
+          "clip": "get_up",
+          "requestID": 1,
+          "positiveSamples": 70,
+          "first": {
+            "frame": 41,
+            "time": 1.4,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 110,
+            "time": 3.7,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "long_pass",
+          "requestID": 3,
+          "positiveSamples": 62,
+          "first": {
+            "frame": 229,
+            "time": 7.666666666666667,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 290,
+            "time": 9.7,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

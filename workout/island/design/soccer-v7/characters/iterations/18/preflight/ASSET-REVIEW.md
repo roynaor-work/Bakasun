@@ -1,0 +1,11 @@
+# Isolated cloth 18 authoring review
+
+The candidate changes the 17 piping-like hem into a flat sewn facing, widens the matte rib collar and cuff bands, adds restrained asymmetric 2–4 mm tension folds, preserves them with one gentler relaxation pass, and replaces the old raglan projection across discontinuous surfaces. Back-facing ray hits are rejected, depth jumps split the seam, and ribbon corners project back onto the actual shirt. This removes the visible diagonal underarm slashes without covering a hole with unrelated geometry.
+
+`candidate/` contains 16 actual phone frames: both selected identities, body and cloth views, front and three-quarter, 390×844 and 844×390. `actions/` adds 12 frames at explicitly recorded kick, supported get-up and dive phases. The dive on player-06 is a generic garment deformation probe, not evidence of the goalkeeper identity. Both records use the frozen runtime 86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0; no packaged viewer, model, texture or main manifest was changed.
+
+The static phone silhouettes are cleaner and the cloth no longer reads as a bright hem cord. Collar/cuff bands are visible, and the fine weave stays restrained. Root's independent static review provisionally accepts cloth at 8.0. This is limited to the two selected static identities; full-roster and action acceptance remain separate. In the supported get-up, the torso stays enclosed but the old sock-top rings flare at bent knees. Those rings need inspection before claiming the whole kit passes deep-flexion quality.
+
+Decoded compressed counts: player-01 near 26,076 triangles / 787,412 bytes; player-06 near 26,062 / 806,040. Both far meshes have 5,791 triangles and remain below 0.5 MB. Every retained candidate GLB is Draco-compressed and below 1,500,000 bytes. The normal, basecolor and ORM images use one shared 1024 UV layout. Candidate floor/boot proofs were explicitly disabled in capture data; no stale model-bound proof is claimed.
+
+The live 15 inventory was checked after export and capture: all 41 model, texture and main manifest SHA-256 values agree with the pre-candidate freeze. Candidate 18 is not promoted and has no native clips. Promotion requires all-eight regeneration, native embedding, semantic atlas/rig/codec checks, regenerated boot bounds and renewed actual floor checks.

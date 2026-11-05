@@ -1,0 +1,5702 @@
+{
+  "schemaVersion": 1,
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "dataSha256": "c3225dba26dfc8d5f864341567e369a9ed4b327dc185da2003ed4853354d00a9",
+  "startedAt": "2026-11-04T22:48:39.880Z",
+  "finishedAt": "2026-11-04T22:51:32.667Z",
+  "characters": [
+    "player-01",
+    "player-02",
+    "player-03",
+    "player-04",
+    "player-05",
+    "player-06",
+    "goalkeeper",
+    "referee"
+  ],
+  "records": [
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-face-390x844.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23869,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-body-390x844.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23873,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23873,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-profile-390x844.webp"
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-face-844x390.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23869,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-body-844x390.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23873,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23869,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 23855,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-face-390x844.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 26341,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-body-390x844.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 26345,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 26345,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-profile-390x844.webp"
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-face-844x390.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 26341,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-body-844x390.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 26345,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-02",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 26341,
+        "models": [
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod0.glb",
+            "triangles": 26327,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-face-390x844.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23821,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-body-390x844.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23825,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23825,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-profile-390x844.webp"
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-face-844x390.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23821,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-body-844x390.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23825,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-03",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23821,
+        "models": [
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod0.glb",
+            "triangles": 23807,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-face-390x844.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23990,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-body-390x844.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23994,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23994,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-profile-390x844.webp"
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-face-844x390.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23990,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-body-844x390.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23994,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-04",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23990,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod0.glb",
+            "triangles": 23976,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-face-390x844.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23929,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-body-390x844.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23933,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23933,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-profile-390x844.webp"
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-face-844x390.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23929,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-body-844x390.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23933,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-05",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23929,
+        "models": [
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod0.glb",
+            "triangles": 23915,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-face-390x844.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23861,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-body-390x844.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23865,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-cloth-390x844.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23865,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-profile-390x844.webp"
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-face-844x390.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23861,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-body-844x390.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23865,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-cloth-844x390.webp",
+      "state": {
+        "characterID": "player-06",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23861,
+        "models": [
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod0.glb",
+            "triangles": 23847,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-face-390x844.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 27905,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-body-390x844.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27909,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-cloth-390x844.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27909,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-profile-390x844.webp"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-face-844x390.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 27905,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-body-844x390.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 27909,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-cloth-844x390.webp",
+      "state": {
+        "characterID": "goalkeeper",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 27905,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 27891,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-face-390x844.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23871,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-body-390x844.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23875,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-cloth-390x844.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23875,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "profile",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-profile-390x844.webp"
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-face-844x390.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23871,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-body-844x390.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 8,
+        "triangles": 23875,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-cloth-844x390.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 6,
+        "triangles": 23871,
+        "models": [
+          {
+            "id": "referee",
+            "path": "models/referee-lod0.glb",
+            "triangles": 23857,
+            "lift": 0,
+            "minimumY": 0.002000001883134204,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "pitch",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "pitch-390x844.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "pitch",
+        "lod": "auto",
+        "lighting": "stadium",
+        "clipID": "run_3",
+        "time": 0.175,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 58,
+        "triangles": 81810,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013622086892,
+            "world": [
+              -5.980408019511945,
+              0,
+              -3.4404574706874884
+            ],
+            "sampleSeconds": 0.175,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/0/0",
+                "anchor": [
+                  -5.89207351786361,
+                  0,
+                  -3.646198376719502
+                ],
+                "release": 0.049000000000000016
+              }
+            ]
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5128,
+            "lift": 0,
+            "minimumY": 0.029447546042183283,
+            "world": [
+              -0.96130099271228,
+              0,
+              -3.214069657387843
+            ],
+            "sampleSeconds": 0.246,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5185,
+            "lift": 0,
+            "minimumY": 0.03884753394449443,
+            "world": [
+              4.064226857733224,
+              0,
+              -2.988315941374333
+            ],
+            "sampleSeconds": 0.31699999999999995,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013359048485,
+            "world": [
+              -5.903845098504179,
+              0,
+              -8.763378530490645
+            ],
+            "sampleSeconds": 0.38799999999999996,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  -5.962081464251532,
+                  0,
+                  -8.511625464937609
+                ],
+                "release": 0.186
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.005128013298400425,
+            "world": [
+              -0.8655425321880621,
+              0,
+              -8.539438233301787
+            ],
+            "sampleSeconds": 0.45899999999999996,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  -0.9620814642515314,
+                  0,
+                  -8.511625464937609
+                ],
+                "release": 0.11499999999999999
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.005128013790291695,
+            "world": [
+              4.179103749994868,
+              0,
+              -8.31667535910162
+            ],
+            "sampleSeconds": 0.53,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  4.037918535748468,
+                  0,
+                  -8.511625464937609
+                ],
+                "release": 0.04399999999999993
+              }
+            ]
+          },
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.03552744601805489,
+            "world": [
+              -4.230057473605253,
+              0,
+              2.095270849563535
+            ],
+            "sampleSeconds": 0.601,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5128,
+            "lift": 0,
+            "minimumY": 0.03271302096170266,
+            "world": [
+              0.7127223151460076,
+              0,
+              1.8754025111921062
+            ],
+            "sampleSeconds": 0.6719999999999999,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5185,
+            "lift": 0,
+            "minimumY": 0.005128013357886725,
+            "world": [
+              5.649281556653484,
+              0,
+              1.657246989748844
+            ],
+            "sampleSeconds": 0.7429999999999999,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  5.4869450968265205,
+                  0,
+                  1.4789579303182339
+                ],
+                "release": 0.18100000000000005
+              }
+            ]
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013327932754,
+            "world": [
+              -4.420328280161458,
+              0,
+              7.4409813170905075
+            ],
+            "sampleSeconds": 0.8139999999999998,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  -4.5130549031734795,
+                  0,
+                  7.478957930318234
+                ],
+                "release": 0.1100000000000001
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.005128013374514446,
+            "world": [
+              0.5039489344254647,
+              0,
+              7.226779779834472
+            ],
+            "sampleSeconds": 0.885,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  0.4869450968265209,
+                  0,
+                  7.478957930318234
+                ],
+                "release": 0.038999999999999924
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.04166857323956341,
+            "world": [
+              5.422174066791006,
+              0,
+              7.014814558146335
+            ],
+            "sampleSeconds": 0.956,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "pitch",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "pitch-844x390.webp",
+      "state": {
+        "characterID": "referee",
+        "view": "pitch",
+        "lod": "auto",
+        "lighting": "stadium",
+        "clipID": "run_3",
+        "time": 0.175,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 58,
+        "triangles": 81810,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013622086892,
+            "world": [
+              -5.980408019511945,
+              0,
+              -3.4404574706874884
+            ],
+            "sampleSeconds": 0.175,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/0/0",
+                "anchor": [
+                  -5.89207351786361,
+                  0,
+                  -3.646198376719502
+                ],
+                "release": 0.049000000000000016
+              }
+            ]
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5128,
+            "lift": 0,
+            "minimumY": 0.029447546042183283,
+            "world": [
+              -0.9389991444464827,
+              0,
+              -3.2154854926610623
+            ],
+            "sampleSeconds": 0.246,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5185,
+            "lift": 0,
+            "minimumY": 0.03884753394449443,
+            "world": [
+              4.121556093716273,
+              0,
+              -2.9935936010676274
+            ],
+            "sampleSeconds": 0.31699999999999995,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013359102499,
+            "world": [
+              -5.798961137152955,
+              0,
+              -8.776046651396257
+            ],
+            "sampleSeconds": 0.38799999999999996,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  -5.835562836213394,
+                  0,
+                  -8.520251037796847
+                ],
+                "release": 0.186
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.00512801329822651,
+            "world": [
+              -0.7008459890093406,
+              0,
+              -8.564093887923308
+            ],
+            "sampleSeconds": 0.45899999999999996,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  -0.7936099355432209,
+                  0,
+                  -8.525517137003952
+                ],
+                "release": 0.11499999999999999
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.00512801379154326,
+            "world": [
+              4.415530772293898,
+              0,
+              -8.358965516146988
+            ],
+            "sampleSeconds": 0.53,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "run_3/RightFoot/0/0.35",
+                "anchor": [
+                  4.2481766095247675,
+                  0,
+                  -8.531972431301003
+                ],
+                "release": 0.04399999999999993
+              }
+            ]
+          },
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.03552744601805489,
+            "world": [
+              -4.549723049455663,
+              0,
+              2.161869388051758
+            ],
+            "sampleSeconds": 0.601,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5128,
+            "lift": 0,
+            "minimumY": 0.03271302096170266,
+            "world": [
+              0.29878710331201086,
+              0,
+              1.9739833586117022
+            ],
+            "sampleSeconds": 0.6719999999999999,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5185,
+            "lift": 0,
+            "minimumY": 0.005128013357950874,
+            "world": [
+              5.130588615935903,
+              0,
+              1.7964531003847446
+            ],
+            "sampleSeconds": 0.7429999999999999,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  4.932264371827902,
+                  0,
+                  1.6593122636482236
+                ],
+                "release": 0.18100000000000005
+              }
+            ]
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5200,
+            "lift": 0,
+            "minimumY": 0.005128013327480117,
+            "world": [
+              -5.053659033800396,
+              0,
+              7.630389246506056
+            ],
+            "sampleSeconds": 0.8139999999999998,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  -5.133771656677629,
+                  0,
+                  7.690575768445706
+                ],
+                "release": 0.1100000000000001
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.005128013374731809,
+            "world": [
+              -0.2532302338109278,
+              0,
+              7.476860877744793
+            ],
+            "sampleSeconds": 0.885,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "run_3/LeftFoot/1/0",
+                "anchor": [
+                  -0.1988932092618445,
+                  0,
+                  7.723701793797327
+                ],
+                "release": 0.038999999999999924
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5198,
+            "lift": 0,
+            "minimumY": 0.04166857323956341,
+            "world": [
+              4.53266464456278,
+              0,
+              7.336892438141517
+            ],
+            "sampleSeconds": 0.956,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": []
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    }
+  ],
+  "hashes": {
+    "manifest": "34e9bd24abc641aae12cab1eb862e6297e514cf874ca62fedd9cc4937499e001",
+    "motion": "681636b64163b07e6264746fdcf1b506fcf3860f196c09d3aa512fb3d8e74b25",
+    "motionRuntime": "ffb7962dc52ed7633141485490283d6a6b073bddf062451f1b466c9c7476f02a",
+    "models": {
+      "models/player-01-lod0.glb": "ac2e9fb269f4d2322fb99d5fb0fcac6493ae95d59a31d5c35d4d379e9a936f41",
+      "models/player-01-lod1.glb": "eac92a17fa0fdca0605c50c5216ff5541c6cc4a72f3a008306a8faaf0489bd21",
+      "models/player-02-lod0.glb": "1052d39590f56a8f69aa0be5166b10f081646b6609d32c9cf13e15e54e78711c",
+      "models/player-02-lod1.glb": "5d8696e48e384f218fec84d2656c177fcfd350628efb6aff770d3f584a62b5e5",
+      "models/player-03-lod0.glb": "ae75f268df5eada42b8b39629c916421529da2ee482a60e5ded5e64f959ca6da",
+      "models/player-03-lod1.glb": "565f74389a34268a2c5502c842bbdb8da495c452c2f8061019bfeaa2b4de15cc",
+      "models/player-04-lod0.glb": "77d9b85228df015afa91915d02730a9e59f6f25d8f32cebd2f47c633657f624c",
+      "models/player-04-lod1.glb": "2db4f4f1f636f5c4c7eaa2a1da3e3833c751b197ab47e8e4b0e57c5d3ba5383b",
+      "models/player-05-lod0.glb": "c775e092a80815ba104e174ab3a4055c337b32d0c1b5a21433772601a0c63f05",
+      "models/player-05-lod1.glb": "81cb8e14e6ef9009794e92004c14e6046b6bfbe8bb726267f0f56c702d2e675b",
+      "models/player-06-lod0.glb": "847438f39cb9aeefad23621d95290ab3e549d77b0a7cda7d84b634be3529f4b1",
+      "models/player-06-lod1.glb": "df7a12ccc87905f2d9cac058d68ad9735265e74335dc17a7ca74b856f77ffb36",
+      "models/goalkeeper-lod0.glb": "3dadebee708095d02bebd3f553719aafbe02477432fe002a0ec00d66b13e7ba3",
+      "models/goalkeeper-lod1.glb": "73acb4bd1ac09df61a5a08331453f5955c1bd0a91c137b2a1d87551d65b371d4",
+      "models/referee-lod0.glb": "dce18adce60353d5a82fecaf369d0621dace7b35d225d2b63162d80bc0d181ee",
+      "models/referee-lod1.glb": "4bd415489cb9f55360265d33a4aa54dd76955914b52e64bb482b840d9377e5d9"
+    }
+  },
+  "runtimeSha256": "a5482b48f71a567f478ab4fabf1379a7ffa3724587d73148eb5daf9025a41c25",
+  "errors": [],
+  "remoteRequests": []
+}

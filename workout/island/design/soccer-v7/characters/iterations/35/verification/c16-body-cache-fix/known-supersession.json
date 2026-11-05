@@ -1,0 +1,75 @@
+{
+  "kind": "controlled-body-rise-request-supersession-fixture",
+  "pass": true,
+  "checks": {
+    "actualCurrentFactoryAcceptsKnownSupersession": true,
+    "initialSourceGeometryValidatedBeforeSupersession": true,
+    "currentKeepsOnePhysicalRise": true,
+    "currentRetainsBothRequestEpisodeIDs": true,
+    "zeroDtStateAndPlanRemainUnchanged": true,
+    "priorEpisodeKeyReproducesInitialHistoryFailure": true,
+    "priorEpisodeKeyWronglyCreatesSecondPhysicalRise": true,
+    "immutableFullPlanMutationStillRejected": true,
+    "immutableInitialWitnessMutationStillRejected": true
+  },
+  "coordinates": {
+    "startClock": 5.2,
+    "initializedCaseSeconds": 0.866667,
+    "supersessionCaseSeconds": 2.2,
+    "supersessionActorClock": 6.533333000000001,
+    "requestEpisodeBefore": 2,
+    "requestEpisodeAfter": 3,
+    "sampleDt": 0
+  },
+  "observerSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "c9b6de82bf07fc6d57e417e3fdf33d1d04d57b88412eaa322e0d23ac3f981691"
+  },
+  "fixtureSource": {
+    "sha256": "35b2ff519e4f5e40e2e6c646b448d5b41656336d159571baa37a2ae0b8c7170d"
+  },
+  "fixed": {
+    "witnesses": [
+      {
+        "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/5.2",
+        "initialValidated": true,
+        "modelSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "requestEpisodeIDs": [
+          2,
+          3
+        ]
+      }
+    ],
+    "errors": [],
+    "unsupported": []
+  },
+  "priorEpisodeKey": {
+    "witnesses": [
+      {
+        "key": "2/5.2",
+        "initialValidated": true,
+        "modelSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "requestEpisodeIDs": [
+          2
+        ]
+      },
+      {
+        "key": "3/5.2",
+        "initialValidated": false,
+        "modelSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "requestEpisodeIDs": [
+          3
+        ]
+      }
+    ],
+    "errors": [],
+    "unsupported": [
+      {
+        "kind": "body-settle-geometry-witness-unavailable",
+        "label": "initial",
+        "clock": 2.2
+      }
+    ]
+  },
+  "limitations": "Synthetic actual-Three-r160 geometry/state replay of the real identified cache-identity failure. Negative control changes only the cache-key expression in memory. No runtime/solver, repo file or browser mutation. Existing8mm body and all unrelated plan, clock, source and geometry rules remain unchanged."
+}

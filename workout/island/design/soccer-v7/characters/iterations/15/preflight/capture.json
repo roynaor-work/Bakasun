@@ -1,0 +1,119 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-04T23:11:17.537Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "bytes": 785516,
+      "sha256": "23d21e0dbc1e829065ba5e65d721560ab6ad82ce3adeab921814965e89137556"
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "bytes": 504028,
+      "sha256": "af607a7b6e24399650d0492dfac31050e544ce2ac010470185c0da7c801f05b3"
+    },
+    {
+      "file": "models/goalkeeper-lod0.glb",
+      "bytes": 876660,
+      "sha256": "4e08b25085630b996167dcc632ace1e54e47991e9442af9b996d75a7e413d830"
+    },
+    {
+      "file": "models/goalkeeper-lod1.glb",
+      "bytes": 495820,
+      "sha256": "e0144db8503108d3e2005a8652de02fb31bcbb09033fe01c861ef9eca2ea89b0"
+    }
+  ],
+  "runtimeSha256": "f8e9fb8b4f5ceb0fa48084ee9c0963baccdc08f3e9dfef0b61c762150b8fe571",
+  "loadedHashes": {
+    "manifest": "ce35b643787c168f66ad42a28d565798052c01d94afff6095046c07d8caf7202",
+    "motion": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "models/player-01-lod0.glb": "23d21e0dbc1e829065ba5e65d721560ab6ad82ce3adeab921814965e89137556",
+      "models/player-01-lod1.glb": "af607a7b6e24399650d0492dfac31050e544ce2ac010470185c0da7c801f05b3",
+      "models/goalkeeper-lod0.glb": "4e08b25085630b996167dcc632ace1e54e47991e9442af9b996d75a7e413d830",
+      "models/goalkeeper-lod1.glb": "e0144db8503108d3e2005a8652de02fb31bcbb09033fe01c861ef9eca2ea89b0"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-face-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-cloth-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-face-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-cloth-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-face-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-cloth-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-face-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-cloth-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two selected compressed candidates; not the full roster or final delivery. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

@@ -1,0 +1,3458 @@
+{
+  "kind": "read-only-actual-cold-deceleration-minimum-vertex-locator",
+  "complete": false,
+  "clip": "decelerate",
+  "character": "player-01",
+  "lod": 0,
+  "sampleRateHz": 120,
+  "rows": [
+    {
+      "i": 0,
+      "seconds": 0,
+      "fast": 0.037887712232112264,
+      "reference": 0.03788771233092389,
+      "delta": -9.881162554847833e-11,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.037887712232112264,
+      "motor": null
+    },
+    {
+      "i": 1,
+      "seconds": 0.008333333333333333,
+      "fast": 0.06277812994081067,
+      "reference": 0.06277813151590246,
+      "delta": -1.575091793104555e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812994081067,
+      "motor": {
+        "phase": 0.01612377705480389,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 2,
+      "seconds": 0.016666666666666666,
+      "fast": 0.06277812994018282,
+      "reference": 0.06277813151538629,
+      "delta": -1.5752034676630444e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812994018282,
+      "motor": {
+        "phase": 0.03224755410960778,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 3,
+      "seconds": 0.025,
+      "fast": 0.06277812993746543,
+      "reference": 0.06277813151539126,
+      "delta": -1.57792583166394e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812993746543,
+      "motor": {
+        "phase": 0.04837133116441167,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 4,
+      "seconds": 0.03333333333333333,
+      "fast": 0.06277812993149282,
+      "reference": 0.06277813152097511,
+      "delta": -1.589482295782929e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812993149282,
+      "motor": {
+        "phase": 0.06449510821921556,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 5,
+      "seconds": 0.041666666666666664,
+      "fast": 0.06277812993431456,
+      "reference": 0.0627781315241069,
+      "delta": -1.5897923394403435e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812993431456,
+      "motor": {
+        "phase": 0.08061888527401945,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 6,
+      "seconds": 0.05,
+      "fast": 0.06277812994048337,
+      "reference": 0.06277813151380504,
+      "delta": -1.5733216673918804e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812994048337,
+      "motor": {
+        "phase": 0.09674266232882334,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 7,
+      "seconds": 0.058333333333333334,
+      "fast": 0.06277812992889392,
+      "reference": 0.06277813142406438,
+      "delta": -1.4951704596644078e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812992889392,
+      "motor": {
+        "phase": 0.11286643938362723,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 8,
+      "seconds": 0.06666666666666667,
+      "fast": 0.06277812991903867,
+      "reference": 0.06277813132126159,
+      "delta": -1.402222921109697e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812991903867,
+      "motor": {
+        "phase": 0.12899021643843112,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 9,
+      "seconds": 0.075,
+      "fast": 0.06277812993184353,
+      "reference": 0.06277813142490273,
+      "delta": -1.4930591901718415e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812993184353,
+      "motor": {
+        "phase": 0.145113993493235,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 10,
+      "seconds": 0.08333333333333333,
+      "fast": 0.06277812992662023,
+      "reference": 0.06277813135391805,
+      "delta": -1.427297821599005e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812992662023,
+      "motor": {
+        "phase": 0.1612377705480389,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 11,
+      "seconds": 0.09166666666666666,
+      "fast": 0.06277812991998653,
+      "reference": 0.06277813125248986,
+      "delta": -1.3325033298983158e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812991998653,
+      "motor": {
+        "phase": 0.17736154760284278,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 12,
+      "seconds": 0.1,
+      "fast": 0.06277812991566988,
+      "reference": 0.06277813116728022,
+      "delta": -1.2516103431448045e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06277812991566988,
+      "motor": {
+        "phase": 0.19348532465764667,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 13,
+      "seconds": 0.10833333333333334,
+      "fast": 0.06155965707932618,
+      "reference": 0.0615596588430214,
+      "delta": -1.763695217649186e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06155965707932618,
+      "motor": {
+        "phase": 0.20960910171245056,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 14,
+      "seconds": 0.11666666666666667,
+      "fast": 0.020217206162470868,
+      "reference": 0.020217206491747845,
+      "delta": -3.2927697721230054e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.020217206162470868,
+      "motor": {
+        "phase": 0.22573287876725445,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 15,
+      "seconds": 0.125,
+      "fast": -0.00011609107124954231,
+      "reference": -0.00011609096622265235,
+      "delta": -1.0502688996272269e-10,
+      "modelY": 0.006348273213748627,
+      "worldY": 0,
+      "lift": 0.006348273213748627,
+      "minYStored": -0.00011609107124954231,
+      "motor": {
+        "phase": 0.24185665582205834,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 16,
+      "seconds": 0.13333333333333333,
+      "fast": -0.00012251212314674624,
+      "reference": -0.00012251217878606491,
+      "delta": 5.563931867319516e-11,
+      "modelY": 0.006367536369440239,
+      "worldY": 0,
+      "lift": 0.006367536369440239,
+      "minYStored": -0.00012251212314674624,
+      "motor": {
+        "phase": 0.25798043287686223,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 17,
+      "seconds": 0.14166666666666666,
+      "fast": 0.0005747585892903451,
+      "reference": 0.0005747585367353917,
+      "delta": 5.255495344469452e-11,
+      "modelY": 0.004275724232128965,
+      "worldY": 0,
+      "lift": 0.004275724232128965,
+      "minYStored": 0.0005747585892903451,
+      "motor": {
+        "phase": 0.2741042099316662,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 18,
+      "seconds": 0.15,
+      "fast": 0.0003025770686537611,
+      "reference": 0.00030257700842547565,
+      "delta": 6.022828546656256e-11,
+      "modelY": 0.005092268794038717,
+      "worldY": 0,
+      "lift": 0.005092268794038717,
+      "minYStored": 0.0003025770686537611,
+      "motor": {
+        "phase": 0.2902279869864701,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 19,
+      "seconds": 0.15833333333333333,
+      "fast": 0.0009636427976648975,
+      "reference": 0.0009636427537272545,
+      "delta": 4.3937643020436346e-11,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0009636427976648975,
+      "motor": {
+        "phase": 0.30635176404127407,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 20,
+      "seconds": 0.16666666666666666,
+      "fast": 0.0005192368736509517,
+      "reference": 0.0005192368887522066,
+      "delta": -1.5101254881993986e-11,
+      "modelY": 0.004442289379047145,
+      "worldY": 0,
+      "lift": 0.004442289379047145,
+      "minYStored": 0.0005192368736509517,
+      "motor": {
+        "phase": 0.322475541096078,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 21,
+      "seconds": 0.175,
+      "fast": 0.0012144890128077523,
+      "reference": 0.0012144890097636946,
+      "delta": 3.0440576274937126e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0012144890128077523,
+      "motor": {
+        "phase": 0.33859931815088196,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 22,
+      "seconds": 0.18333333333333332,
+      "fast": 0.0006332063767606247,
+      "reference": 0.0006332063952294202,
+      "delta": -1.8468795503351343e-11,
+      "modelY": 0.004100380869718126,
+      "worldY": 0,
+      "lift": 0.004100380869718126,
+      "minYStored": 0.0006332063767606247,
+      "motor": {
+        "phase": 0.3547230952056859,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 23,
+      "seconds": 0.19166666666666668,
+      "fast": 0.001400158820398695,
+      "reference": 0.0014001588165036896,
+      "delta": 3.8950054119524236e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.001400158820398695,
+      "motor": {
+        "phase": 0.37084687226048985,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 24,
+      "seconds": 0.2,
+      "fast": 0.0006916051360368485,
+      "reference": 0.0006916050504614415,
+      "delta": 8.55754070036574e-11,
+      "modelY": 0.003925184591889454,
+      "worldY": 0,
+      "lift": 0.003925184591889454,
+      "minYStored": 0.0006916051360368485,
+      "motor": {
+        "phase": 0.3869706493152938,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 25,
+      "seconds": 0.20833333333333334,
+      "fast": 0.00561050948400737,
+      "reference": 0.005610509361590794,
+      "delta": 1.2241657600803313e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.00561050948400737,
+      "motor": {
+        "phase": 0.40309442637009774,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 26,
+      "seconds": 0.21666666666666667,
+      "fast": 0.025259748287369682,
+      "reference": 0.025259749123828085,
+      "delta": -8.364584025422062e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.025259748287369682,
+      "motor": {
+        "phase": 0.4192182034249017,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 27,
+      "seconds": 0.225,
+      "fast": 0.045906148665456024,
+      "reference": 0.04590614906180271,
+      "delta": -3.9634668463905953e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.045906148665456024,
+      "motor": {
+        "phase": 0.4353419804797056,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 28,
+      "seconds": 0.23333333333333334,
+      "fast": 0.06545651286024132,
+      "reference": 0.06545651259135447,
+      "delta": 2.6888684334647195e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.06545651286024132,
+      "motor": {
+        "phase": 0.45146575753450957,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 29,
+      "seconds": 0.24166666666666667,
+      "fast": 0.0857026930234418,
+      "reference": 0.08570269290627734,
+      "delta": 1.1716445869058845e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0857026930234418,
+      "motor": {
+        "phase": 0.4675895345893135,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 30,
+      "seconds": 0.25,
+      "fast": 0.09903251117542974,
+      "reference": 0.0990325144340914,
+      "delta": -3.258661659955031e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.09903251117542974,
+      "motor": {
+        "phase": 0.48371331164411746,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 31,
+      "seconds": 0.25833333333333336,
+      "fast": 0.11423969069225196,
+      "reference": 0.11423969279541751,
+      "delta": -2.1031655583758635e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.11423969069225196,
+      "motor": {
+        "phase": 0.4998370886989214,
+        "speed": 5.80221,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "inherited"
+        }
+      }
+    },
+    {
+      "i": 32,
+      "seconds": 0.26666666666666666,
+      "fast": 0.002000001883346237,
+      "reference": 0.0020000018833456986,
+      "delta": 5.381979584218044e-16,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001883346237,
+      "motor": {
+        "phase": 0.5159550529403493,
+        "speed": 5.78346,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 33,
+      "seconds": 0.275,
+      "fast": 0.0020000018872296643,
+      "reference": 0.0020000018872207534,
+      "delta": 8.910840815223864e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018872296643,
+      "motor": {
+        "phase": 0.5320323274881444,
+        "speed": 5.74596,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 34,
+      "seconds": 0.2833333333333333,
+      "fast": 0.002000001907469636,
+      "reference": 0.002000001907422247,
+      "delta": 4.738874223586542e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001907469636,
+      "motor": {
+        "phase": 0.5480630995289308,
+        "speed": 5.7084600000000005,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 35,
+      "seconds": 0.2916666666666667,
+      "fast": 0.0020000019632253605,
+      "reference": 0.0020000019630842477,
+      "delta": 1.4111281587680935e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000019632253605,
+      "motor": {
+        "phase": 0.5640473690627086,
+        "speed": 5.670960000000001,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 36,
+      "seconds": 0.3,
+      "fast": 0.0020000019479242586,
+      "reference": 0.0020000019478203577,
+      "delta": 1.0390082891276187e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000019479242586,
+      "motor": {
+        "phase": 0.5799851360894777,
+        "speed": 5.633460000000001,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 37,
+      "seconds": 0.30833333333333335,
+      "fast": 0.014168050947984047,
+      "reference": 0.014168050921779484,
+      "delta": 2.6204562825205002e-11,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.014168050947984047,
+      "motor": {
+        "phase": 0.5958764006092379,
+        "speed": 5.595960000000002,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 38,
+      "seconds": 0.31666666666666665,
+      "fast": 0.04478948826747234,
+      "reference": 0.04478948728642595,
+      "delta": 9.810463899584398e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.04478948826747234,
+      "motor": {
+        "phase": 0.6117211626219894,
+        "speed": 5.558460000000002,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 39,
+      "seconds": 0.325,
+      "fast": 0.08517074224553876,
+      "reference": 0.08517074574834624,
+      "delta": -3.5028074746312754e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.08517074224553876,
+      "motor": {
+        "phase": 0.6275194221277323,
+        "speed": 5.520960000000002,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 40,
+      "seconds": 0.3333333333333333,
+      "fast": 0.12679149263562028,
+      "reference": 0.1267914920322642,
+      "delta": 6.033560873142108e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.12679149263562028,
+      "motor": {
+        "phase": 0.6432711791264664,
+        "speed": 5.483460000000003,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 41,
+      "seconds": 0.3416666666666667,
+      "fast": 0.14968143304345521,
+      "reference": 0.14968143721373056,
+      "delta": -4.170275347270547e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.14968143304345521,
+      "motor": {
+        "phase": 0.6589764336181917,
+        "speed": 5.445960000000003,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 42,
+      "seconds": 0.35,
+      "fast": 0.15014114886204816,
+      "reference": 0.15014115362510455,
+      "delta": -4.763056393741749e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15014114886204816,
+      "motor": {
+        "phase": 0.6746351856029084,
+        "speed": 5.408460000000003,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 43,
+      "seconds": 0.35833333333333334,
+      "fast": 0.15078658192078276,
+      "reference": 0.15078658812561835,
+      "delta": -6.204835589773694e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15078658192078276,
+      "motor": {
+        "phase": 0.6902453081320215,
+        "speed": 5.370960000000004,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 44,
+      "seconds": 0.36666666666666664,
+      "fast": 0.15161327263446447,
+      "reference": 0.15161327883517894,
+      "delta": -6.200714469661861e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15161327263446447,
+      "motor": {
+        "phase": 0.7058011768837363,
+        "speed": 5.333460000000004,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 45,
+      "seconds": 0.375,
+      "fast": 0.15261624498230258,
+      "reference": 0.15261625021578862,
+      "delta": -5.233486033429102e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15261624498230258,
+      "motor": {
+        "phase": 0.721302791858053,
+        "speed": 5.295960000000004,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 46,
+      "seconds": 0.38333333333333336,
+      "fast": 0.15378989340769025,
+      "reference": 0.15378989763870388,
+      "delta": -4.231013622790769e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15378989340769025,
+      "motor": {
+        "phase": 0.7367501530549715,
+        "speed": 5.258460000000005,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 47,
+      "seconds": 0.39166666666666666,
+      "fast": 0.1551279980059594,
+      "reference": 0.15512800402102825,
+      "delta": -6.015068859666073e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1551279980059594,
+      "motor": {
+        "phase": 0.7521432604744918,
+        "speed": 5.220960000000005,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 48,
+      "seconds": 0.4,
+      "fast": 0.15662374997337664,
+      "reference": 0.15662375603074752,
+      "delta": -6.057370882661672e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15662374997337664,
+      "motor": {
+        "phase": 0.7674821141166138,
+        "speed": 5.1834600000000055,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 49,
+      "seconds": 0.4083333333333333,
+      "fast": 0.1582697573530518,
+      "reference": 0.15826976278094998,
+      "delta": -5.4278981864719356e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1582697573530518,
+      "motor": {
+        "phase": 0.7827667139813377,
+        "speed": 5.145960000000006,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 50,
+      "seconds": 0.4166666666666667,
+      "fast": 0.16005807197783345,
+      "reference": 0.16005807763952157,
+      "delta": -5.6616881183302326e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.16005807197783345,
+      "motor": {
+        "phase": 0.7979970600686633,
+        "speed": 5.108460000000006,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 51,
+      "seconds": 0.425,
+      "fast": 0.1581941981823145,
+      "reference": 0.15819419896249792,
+      "delta": -7.801834178700062e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1581941981823145,
+      "motor": {
+        "phase": 0.8131731523785908,
+        "speed": 5.070960000000007,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 52,
+      "seconds": 0.43333333333333335,
+      "fast": 0.15566618109520006,
+      "reference": 0.1556661814286706,
+      "delta": -3.3347055672372505e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15566618109520006,
+      "motor": {
+        "phase": 0.82829499091112,
+        "speed": 5.033460000000007,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 53,
+      "seconds": 0.44166666666666665,
+      "fast": 0.153599122282873,
+      "reference": 0.1535991224314377,
+      "delta": -1.4856468832924463e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.153599122282873,
+      "motor": {
+        "phase": 0.8433625756662511,
+        "speed": 4.995960000000007,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 54,
+      "seconds": 0.45,
+      "fast": 0.15211170317683498,
+      "reference": 0.1521117030216838,
+      "delta": 1.5515116968956022e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15211170317683498,
+      "motor": {
+        "phase": 0.8583759066439839,
+        "speed": 4.958460000000008,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 55,
+      "seconds": 0.4583333333333333,
+      "fast": 0.15091864562449328,
+      "reference": 0.15091864683740017,
+      "delta": -1.2129068860389225e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15091864562449328,
+      "motor": {
+        "phase": 0.8733349838443185,
+        "speed": 4.920960000000008,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 56,
+      "seconds": 0.4666666666666667,
+      "fast": 0.14982256288419926,
+      "reference": 0.14982256360358429,
+      "delta": -7.193850237730004e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.14982256288419926,
+      "motor": {
+        "phase": 0.888239807267255,
+        "speed": 4.883460000000008,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 57,
+      "seconds": 0.475,
+      "fast": 0.14882494361173415,
+      "reference": 0.14882494373091507,
+      "delta": -1.191809151368517e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.14882494361173415,
+      "motor": {
+        "phase": 0.9030903769127935,
+        "speed": 4.845960000000009,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 58,
+      "seconds": 0.48333333333333334,
+      "fast": 0.1452465655027902,
+      "reference": 0.1452465621698957,
+      "delta": 3.332894488172755e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1452465655027902,
+      "motor": {
+        "phase": 0.9178866927809337,
+        "speed": 4.808460000000009,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 59,
+      "seconds": 0.49166666666666664,
+      "fast": 0.11530337612925337,
+      "reference": 0.11530337612579719,
+      "delta": 3.4561797868093436e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.11530337612925337,
+      "motor": {
+        "phase": 0.9326287548716757,
+        "speed": 4.770960000000009,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 60,
+      "seconds": 0.5,
+      "fast": 0.08164207166881428,
+      "reference": 0.08164207312201871,
+      "delta": -1.4532044317894233e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.08164207166881428,
+      "motor": {
+        "phase": 0.9473165631850196,
+        "speed": 4.73346000000001,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 61,
+      "seconds": 0.5083333333333333,
+      "fast": 0.04893600552326248,
+      "reference": 0.04893600482402339,
+      "delta": 6.992390902404999e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.04893600552326248,
+      "motor": {
+        "phase": 0.9619501177209652,
+        "speed": 4.69596000000001,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 62,
+      "seconds": 0.5166666666666667,
+      "fast": 0.021269993299723608,
+      "reference": 0.02126999378581767,
+      "delta": -4.860940608364395e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.021269993299723608,
+      "motor": {
+        "phase": 0.9765294184795126,
+        "speed": 4.6584600000000105,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 63,
+      "seconds": 0.525,
+      "fast": 0.004667477420506053,
+      "reference": 0.004667477419499004,
+      "delta": 1.007049478529698e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.004667477420506053,
+      "motor": {
+        "phase": 0.9910544654606618,
+        "speed": 4.620960000000011,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 64,
+      "seconds": 0.5333333333333333,
+      "fast": 0.0020000018831338047,
+      "reference": 0.002000001883133787,
+      "delta": 1.7780915628762273e-17,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018831338047,
+      "motor": {
+        "phase": 1.0055252586644128,
+        "speed": 4.583460000000011,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 65,
+      "seconds": 0.5416666666666666,
+      "fast": 0.002000001883112603,
+      "reference": 0.0020000018831119845,
+      "delta": 6.184289191857317e-16,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001883112603,
+      "motor": {
+        "phase": 1.0199417980907655,
+        "speed": 4.5459600000000115,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 66,
+      "seconds": 0.55,
+      "fast": 0.002000001883185697,
+      "reference": 0.002000001883180249,
+      "delta": 5.447899076305163e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001883185697,
+      "motor": {
+        "phase": 1.03430408373972,
+        "speed": 4.508460000000012,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 67,
+      "seconds": 0.5583333333333333,
+      "fast": 0.0020000018843047704,
+      "reference": 0.002000001884282296,
+      "delta": 2.2474209993017524e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018843047704,
+      "motor": {
+        "phase": 1.0486121156112764,
+        "speed": 4.470960000000012,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 68,
+      "seconds": 0.5666666666666667,
+      "fast": 0.0020000018868853034,
+      "reference": 0.0020000018868450986,
+      "delta": 4.020481864097647e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018868853034,
+      "motor": {
+        "phase": 1.0628658937054347,
+        "speed": 4.433460000000013,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 69,
+      "seconds": 0.575,
+      "fast": 0.0020000018875508127,
+      "reference": 0.0020000018875175824,
+      "delta": 3.3230362905811717e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018875508127,
+      "motor": {
+        "phase": 1.0770654180221948,
+        "speed": 4.395960000000013,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 70,
+      "seconds": 0.5833333333333334,
+      "fast": 0.0020000018880884894,
+      "reference": 0.0020000018880595954,
+      "delta": 2.8893987896738693e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018880884894,
+      "motor": {
+        "phase": 1.0912106885615567,
+        "speed": 4.358460000000013,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 71,
+      "seconds": 0.5916666666666667,
+      "fast": 0.002000001894523794,
+      "reference": 0.002000001894469365,
+      "delta": 5.4429117463117294e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001894523794,
+      "motor": {
+        "phase": 1.1053017053235203,
+        "speed": 4.320960000000014,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 72,
+      "seconds": 0.6,
+      "fast": 0.0020000018966819617,
+      "reference": 0.0020000018966269146,
+      "delta": 5.504711270143403e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018966819617,
+      "motor": {
+        "phase": 1.1193384683080858,
+        "speed": 4.283460000000014,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 73,
+      "seconds": 0.6083333333333333,
+      "fast": 0.0020000018850424737,
+      "reference": 0.0020000018850342646,
+      "delta": 8.209145169191245e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018850424737,
+      "motor": {
+        "phase": 1.133320977515253,
+        "speed": 4.245960000000014,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 74,
+      "seconds": 0.6166666666666667,
+      "fast": 0.0020000018530256444,
+      "reference": 0.002000001853090858,
+      "delta": -6.521345963239611e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018530256444,
+      "motor": {
+        "phase": 1.1472492329450221,
+        "speed": 4.208460000000015,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 75,
+      "seconds": 0.625,
+      "fast": 0.002000001861946471,
+      "reference": 0.002000001861985982,
+      "delta": -3.9510929250585747e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001861946471,
+      "motor": {
+        "phase": 1.1611177051672446,
+        "speed": 4.170960000000015,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 76,
+      "seconds": 0.6333333333333333,
+      "fast": 0.002000001658474658,
+      "reference": 0.002000001658903238,
+      "delta": -4.2857991461309197e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001658474658,
+      "motor": {
+        "phase": 1.174911772627562,
+        "speed": 4.1334600000000155,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 77,
+      "seconds": 0.6416666666666667,
+      "fast": 0.0020000013114867625,
+      "reference": 0.0020000013125135757,
+      "delta": -1.0268131830915017e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000013114867625,
+      "motor": {
+        "phase": 1.1886314353259748,
+        "speed": 4.095960000000016,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 78,
+      "seconds": 0.65,
+      "fast": 0.0020000015336670727,
+      "reference": 0.0020000015342573406,
+      "delta": -5.902678519575932e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000015336670727,
+      "motor": {
+        "phase": 1.2022766932624827,
+        "speed": 4.058460000000016,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 79,
+      "seconds": 0.6583333333333333,
+      "fast": 0.002000001917601283,
+      "reference": 0.002000001917532724,
+      "delta": 6.855930753668638e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001917601283,
+      "motor": {
+        "phase": 1.215847546437086,
+        "speed": 4.0209600000000165,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 80,
+      "seconds": 0.6666666666666666,
+      "fast": 0.0020000023012287298,
+      "reference": 0.0020000023004585277,
+      "delta": 7.702020445032876e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000023012287298,
+      "motor": {
+        "phase": 1.2293439948497844,
+        "speed": 3.983460000000017,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 81,
+      "seconds": 0.675,
+      "fast": 0.002000001487776478,
+      "reference": 0.0020000014883451355,
+      "delta": -5.686575342556122e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001487776478,
+      "motor": {
+        "phase": 1.242766038500578,
+        "speed": 3.9459600000000172,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 82,
+      "seconds": 0.6833333333333333,
+      "fast": 0.002000002110170534,
+      "reference": 0.0020000021097989515,
+      "delta": 3.71582539043791e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000002110170534,
+      "motor": {
+        "phase": 1.256113677389467,
+        "speed": 3.9084600000000176,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 83,
+      "seconds": 0.6916666666666667,
+      "fast": 0.0020000017570397485,
+      "reference": 0.0020000017572052086,
+      "delta": -1.6546009354301283e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000017570397485,
+      "motor": {
+        "phase": 1.269386911516451,
+        "speed": 3.870960000000018,
+        "modes": {
+          "LeftFoot": "plant",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 84,
+      "seconds": 0.7,
+      "fast": 0.0051561157315554666,
+      "reference": 0.005156115745533206,
+      "delta": -1.3977739105053288e-11,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0051561157315554666,
+      "motor": {
+        "phase": 1.2825857408815307,
+        "speed": 3.8334600000000183,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 85,
+      "seconds": 0.7083333333333334,
+      "fast": 0.026879573048886163,
+      "reference": 0.026879572787914224,
+      "delta": 2.6097193850382894e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.026879573048886163,
+      "motor": {
+        "phase": 1.2957101654847052,
+        "speed": 3.7959600000000187,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 86,
+      "seconds": 0.7166666666666667,
+      "fast": 0.061482756681681454,
+      "reference": 0.06148275554530455,
+      "delta": 1.1363769022998405e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.061482756681681454,
+      "motor": {
+        "phase": 1.3087601853259752,
+        "speed": 3.758460000000019,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 87,
+      "seconds": 0.725,
+      "fast": 0.10003911188419642,
+      "reference": 0.1000391142051756,
+      "delta": -2.3209791727429874e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.10003911188419642,
+      "motor": {
+        "phase": 1.3217358004053401,
+        "speed": 3.7209600000000194,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 88,
+      "seconds": 0.7333333333333333,
+      "fast": 0.13393308771344056,
+      "reference": 0.13393308071318738,
+      "delta": 7.000253182676275e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.13393308771344056,
+      "motor": {
+        "phase": 1.3346370107228005,
+        "speed": 3.6834600000000197,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 89,
+      "seconds": 0.7416666666666667,
+      "fast": 0.1548553242563147,
+      "reference": 0.15485532103149463,
+      "delta": 3.2248200776408e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1548553242563147,
+      "motor": {
+        "phase": 1.347463816278356,
+        "speed": 3.64596000000002,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 90,
+      "seconds": 0.75,
+      "fast": 0.15754206130760798,
+      "reference": 0.15754206224156658,
+      "delta": -9.339586048984216e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15754206130760798,
+      "motor": {
+        "phase": 1.360216217072007,
+        "speed": 3.6084600000000204,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 91,
+      "seconds": 0.7583333333333333,
+      "fast": 0.15657252287082699,
+      "reference": 0.15657252368441318,
+      "delta": -8.135861984115422e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15657252287082699,
+      "motor": {
+        "phase": 1.3728942131037531,
+        "speed": 3.570960000000021,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 92,
+      "seconds": 0.7666666666666667,
+      "fast": 0.1539751549789395,
+      "reference": 0.1539751559818744,
+      "delta": -1.0029349017948164e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1539751549789395,
+      "motor": {
+        "phase": 1.3854978043735944,
+        "speed": 3.533460000000021,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 93,
+      "seconds": 0.775,
+      "fast": 0.15097009837719938,
+      "reference": 0.15097010000017,
+      "delta": -1.6229706190085125e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.15097009837719938,
+      "motor": {
+        "phase": 1.398026990881531,
+        "speed": 3.4959600000000215,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 94,
+      "seconds": 0.7833333333333333,
+      "fast": 0.14772816335518724,
+      "reference": 0.14772816482756468,
+      "delta": -1.4723774421909752e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.14772816335518724,
+      "motor": {
+        "phase": 1.4104817726275627,
+        "speed": 3.458460000000022,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 95,
+      "seconds": 0.7916666666666666,
+      "fast": 0.1443501653453263,
+      "reference": 0.14435016713278773,
+      "delta": -1.7874614288704294e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1443501653453263,
+      "motor": {
+        "phase": 1.4228621496116898,
+        "speed": 3.420960000000022,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 96,
+      "seconds": 0.8,
+      "fast": 0.1226050406499549,
+      "reference": 0.12260503694280865,
+      "delta": 3.7071462427595847e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.1226050406499549,
+      "motor": {
+        "phase": 1.435168121833912,
+        "speed": 3.3834600000000226,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 97,
+      "seconds": 0.8083333333333333,
+      "fast": 0.09194224953762772,
+      "reference": 0.09194225260285253,
+      "delta": -3.0652248100837554e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.09194224953762772,
+      "motor": {
+        "phase": 1.4473996892942296,
+        "speed": 3.345960000000023,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 98,
+      "seconds": 0.8166666666666667,
+      "fast": 0.060861262129492597,
+      "reference": 0.060861265457817254,
+      "delta": -3.328324657547732e-9,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.060861262129492597,
+      "motor": {
+        "phase": 1.4595568519926423,
+        "speed": 3.3084600000000233,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 99,
+      "seconds": 0.825,
+      "fast": 0.033158548660760206,
+      "reference": 0.03315854926364333,
+      "delta": -6.028831253668265e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.033158548660760206,
+      "motor": {
+        "phase": 1.4716396099291502,
+        "speed": 3.2709600000000236,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 100,
+      "seconds": 0.8333333333333334,
+      "fast": 0.012491478366152827,
+      "reference": 0.012491478723038752,
+      "delta": -3.568859253261225e-10,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.012491478366152827,
+      "motor": {
+        "phase": 1.4836479631037536,
+        "speed": 3.233460000000024,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 101,
+      "seconds": 0.8416666666666667,
+      "fast": 0.0023804722825011017,
+      "reference": 0.0023804722742704074,
+      "delta": 8.230694337890698e-12,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0023804722825011017,
+      "motor": {
+        "phase": 1.495581911516452,
+        "speed": 3.1959600000000243,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "flight"
+        }
+      }
+    },
+    {
+      "i": 102,
+      "seconds": 0.85,
+      "fast": 0.002000001883064166,
+      "reference": 0.002000001883063731,
+      "delta": 4.349819116011844e-16,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001883064166,
+      "motor": {
+        "phase": 1.5074442813081186,
+        "speed": 3.1584600000000247,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 103,
+      "seconds": 0.8583333333333333,
+      "fast": 0.002000001882602136,
+      "reference": 0.002000001882598416,
+      "delta": 3.719680813363269e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001882602136,
+      "motor": {
+        "phase": 1.5192368966354997,
+        "speed": 3.120960000000025,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 104,
+      "seconds": 0.8666666666666667,
+      "fast": 0.0020000018822340297,
+      "reference": 0.0020000018822261215,
+      "delta": 7.90817064610927e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018822340297,
+      "motor": {
+        "phase": 1.530959757498595,
+        "speed": 3.0834600000000254,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 105,
+      "seconds": 0.875,
+      "fast": 0.00200000188218327,
+      "reference": 0.0020000018821718243,
+      "delta": 1.1445705494494973e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.00200000188218327,
+      "motor": {
+        "phase": 1.5426128638974044,
+        "speed": 3.0459600000000258,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 106,
+      "seconds": 0.8833333333333333,
+      "fast": 0.0020000018820224173,
+      "reference": 0.0020000018820011066,
+      "delta": 2.131064422150608e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018820224173,
+      "motor": {
+        "phase": 1.5541962158319282,
+        "speed": 3.008460000000026,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 107,
+      "seconds": 0.8916666666666667,
+      "fast": 0.0020000018820746698,
+      "reference": 0.002000001882029288,
+      "delta": 4.5381667174160256e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018820746698,
+      "motor": {
+        "phase": 1.5657098133021665,
+        "speed": 2.9709600000000265,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 108,
+      "seconds": 0.9,
+      "fast": 0.002000001883379312,
+      "reference": 0.0020000018833194865,
+      "delta": 5.982540851601215e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001883379312,
+      "motor": {
+        "phase": 1.5771536563081188,
+        "speed": 2.933460000000027,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 109,
+      "seconds": 0.9083333333333333,
+      "fast": 0.002000001884271454,
+      "reference": 0.002000001884234873,
+      "delta": 3.658098129966092e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001884271454,
+      "motor": {
+        "phase": 1.5885277448497854,
+        "speed": 2.895960000000027,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 110,
+      "seconds": 0.9166666666666666,
+      "fast": 0.0020000018846878824,
+      "reference": 0.0020000018846604807,
+      "delta": 2.7401692026529645e-14,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018846878824,
+      "motor": {
+        "phase": 1.5998320789271665,
+        "speed": 2.8584600000000275,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 111,
+      "seconds": 0.925,
+      "fast": 0.0020000018302658556,
+      "reference": 0.0020000018304410882,
+      "delta": -1.7523265824492817e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018302658556,
+      "motor": {
+        "phase": 1.6110666585402618,
+        "speed": 2.820960000000028,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 112,
+      "seconds": 0.9333333333333333,
+      "fast": 0.0020000017254654585,
+      "reference": 0.002000001725947045,
+      "delta": -4.815865588259083e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000017254654585,
+      "motor": {
+        "phase": 1.6222314836890712,
+        "speed": 2.7834600000000282,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 113,
+      "seconds": 0.9416666666666667,
+      "fast": 0.0020000017389175135,
+      "reference": 0.002000001739327072,
+      "delta": -4.095586716990063e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000017389175135,
+      "motor": {
+        "phase": 1.633326554373595,
+        "speed": 2.7459600000000286,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 114,
+      "seconds": 0.95,
+      "fast": 0.0020000017924366145,
+      "reference": 0.002000001792677584,
+      "delta": -2.409695706862003e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000017924366145,
+      "motor": {
+        "phase": 1.6443518705938334,
+        "speed": 2.708460000000029,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 115,
+      "seconds": 0.9583333333333334,
+      "fast": 0.002000001817152378,
+      "reference": 0.002000001817317391,
+      "delta": -1.650129685670798e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001817152378,
+      "motor": {
+        "phase": 1.6553074323497856,
+        "speed": 2.6709600000000293,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 116,
+      "seconds": 0.9666666666666667,
+      "fast": 0.002000001790907684,
+      "reference": 0.002000001791126063,
+      "delta": -2.1837913422029231e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001790907684,
+      "motor": {
+        "phase": 1.6661932396414523,
+        "speed": 2.6334600000000297,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 117,
+      "seconds": 0.975,
+      "fast": 0.002000001829873797,
+      "reference": 0.0020000018299935513,
+      "delta": -1.197544667597139e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.002000001829873797,
+      "motor": {
+        "phase": 1.6770092924688333,
+        "speed": 2.59596000000003,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 118,
+      "seconds": 0.9833333333333333,
+      "fast": 0.0020000018833967606,
+      "reference": 0.002000001883394991,
+      "delta": 1.7698516263653374e-15,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000018833967606,
+      "motor": {
+        "phase": 1.6877555908319288,
+        "speed": 2.5584600000000304,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 119,
+      "seconds": 0.9916666666666667,
+      "fast": 0.0020000019191438356,
+      "reference": 0.00200000191900769,
+      "delta": 1.3614543520334976e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000019191438356,
+      "motor": {
+        "phase": 1.6984321347307383,
+        "speed": 2.5209600000000307,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    },
+    {
+      "i": 120,
+      "seconds": 1,
+      "fast": 0.0020000019586790866,
+      "reference": 0.002000001958414448,
+      "delta": 2.6463857147329684e-13,
+      "modelY": 0,
+      "worldY": 0,
+      "lift": 0,
+      "minYStored": 0.0020000019586790866,
+      "motor": {
+        "phase": 1.7090389241652622,
+        "speed": 2.483460000000031,
+        "modes": {
+          "LeftFoot": "flight",
+          "RightFoot": "plant"
+        }
+      }
+    }
+  ],
+  "worst": {
+    "i": 16,
+    "seconds": 0.13333333333333333,
+    "fast": -0.00012251212314674624,
+    "reference": -0.00012251217878606491,
+    "vertexFast": -0.00012251212314674624,
+    "minimum": -0.00012251217878606491,
+    "vertex": {
+      "meshIndex": 1,
+      "meshName": "player-01-lod0_1",
+      "vertex": 147,
+      "material": "Cloth",
+      "rest": [
+        -0.1290055215358734,
+        0.0020000000949949026,
+        0.17000694572925568
+      ],
+      "skinnedLocal": [
+        -0.12906203957950874,
+        -0.006490048548226304,
+        0.3064052953704345
+      ],
+      "world": [
+        -0.12906203957950874,
+        -0.00012251217878606491,
+        1.0800332953704341
+      ],
+      "weights": [
+        {
+          "index": 17,
+          "bone": "RightFoot",
+          "weight": 1
+        },
+        {
+          "index": 0,
+          "bone": "Root",
+          "weight": 0
+        },
+        {
+          "index": 0,
+          "bone": "Root",
+          "weight": 0
+        },
+        {
+          "index": 0,
+          "bone": "Root",
+          "weight": 0
+        }
+      ],
+      "meshMatrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.006367536369440239,
+        0.7736279999999996,
+        1
+      ],
+      "bindMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bindMatrixInverse": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -0.006367536369440239,
+        -0.7736279999999996,
+        1
+      ],
+      "influences": [
+        {
+          "bone": "RightFoot",
+          "weight": 1,
+          "row": [
+            -0.00007604693382745609,
+            1,
+            -0.000002561345809226623,
+            -0.0021318872459232807
+          ],
+          "contributionY": -0.00012251212314674624,
+          "boneWorldMatrix": [
+            0.9999999954987406,
+            -0.00007604693441635134,
+            -0.00004187870883395461,
+            0,
+            0.0000760470633434907,
+            0.9999999969739946,
+            0.0000025575995941107266,
+            0,
+            0.000041878504052302035,
+            -0.0000025613458147222268,
+            0.999999998517803,
+            0,
+            -0.10005770763008084,
+            0.07787571536774957,
+            0.910025334672197,
+            1
+          ],
+          "boneInverseBind": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0.10000000149011612,
+            -0.07999999821186066,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "feet": {
+      "LeftFoot": {
+        "sole": [
+          0.10000000000916201,
+          0.06077812982846553,
+          0.3911334806290789
+        ],
+        "ankle": [
+          0.10000000001016839,
+          0.14077812981797297,
+          0.3911334806066251
+        ],
+        "worldQuaternion": [
+          3.341774610034342e-14,
+          2.1158028686881523e-12,
+          -8.463249619637923e-13,
+          1
+        ],
+        "worldMatrix": [
+          0.9999999992672229,
+          9.194350142349705e-12,
+          -9.310225333736266e-12,
+          0,
+          1.2579649995292375e-11,
+          0.9999999998688429,
+          -2.806717080972021e-10,
+          0,
+          -8.470138652960646e-13,
+          -2.8080537894936697e-10,
+          0.9999999993979867,
+          0,
+          0.10000000001016839,
+          0.14077812981797297,
+          0.3911334806066251,
+          1
+        ],
+        "hullMinimum": 0.06227812990239956,
+        "actualSelectedFootMinimum": 0.06227812990239956,
+        "rigidBootMinimum": 0.06277812992098343,
+        "mode": "flight",
+        "planned": {
+          "mode": "flight",
+          "position": [
+            0.1,
+            0.060778129632834424,
+            0.3911334802078756
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "anchor": [
+            0.1,
+            0.060778129632834424,
+            0.3911334802078756
+          ],
+          "heelPhase": 1,
+          "stanceEndPhase": 0.25106273602698975,
+          "flightStartPhase": 0.25798043287686223,
+          "flightStartTime": 0.13333333333333333,
+          "flightProgress": 0,
+          "target": [
+            0.1,
+            0,
+            3.274852573517006
+          ],
+          "targetFrozen": false,
+          "neutralStep": null
+        }
+      },
+      "RightFoot": {
+        "sole": [
+          -0.10006379139514833,
+          -0.0021242843901699976,
+          0.9100251300642295
+        ],
+        "ankle": [
+          -0.10005770763008084,
+          0.07787571536774957,
+          0.910025334672197
+        ],
+        "worldQuaternion": [
+          0.000001279736353884304,
+          0.000020939303255283448,
+          -0.00003802349949223927,
+          0.9999999990570607
+        ],
+        "worldMatrix": [
+          0.9999999954987406,
+          -0.00007604693441635134,
+          -0.00004187870883395461,
+          0,
+          0.0000760470633434907,
+          0.9999999969739946,
+          0.0000025575995941107266,
+          0,
+          0.000041878504052302035,
+          -0.0000025613458147222268,
+          0.999999998517803,
+          0,
+          -0.10005770763008084,
+          0.07787571536774957,
+          0.910025334672197,
+          1
+        ],
+        "hullMinimum": -0.0006225157723772075,
+        "actualSelectedFootMinimum": -0.0006225157723772075,
+        "rigidBootMinimum": -0.00012251212314674624,
+        "mode": "inherited",
+        "planned": {
+          "mode": "inherited",
+          "position": [
+            -0.10006379139970388,
+            -0.002124284443690102,
+            0.9100251299490196
+          ],
+          "orientation": [
+            0.0000012797363317956475,
+            0.000020939301973881773,
+            -0.000038023500235357896,
+            0.9999999990570608
+          ],
+          "anchor": [
+            -0.1,
+            0.040778661394402754,
+            -0.20886664579224945
+          ],
+          "heelPhase": 0.5,
+          "stanceEndPhase": -0.24893726397301025,
+          "flightStartPhase": 0,
+          "flightStartTime": 0,
+          "flightProgress": null,
+          "target": [
+            -0.1,
+            0,
+            1.8593927860592103
+          ],
+          "targetFrozen": false,
+          "neutralStep": null
+        }
+      }
+    },
+    "state": {
+      "kind": "continuous-phase-locomotion",
+      "clock": 0.13333333333333333,
+      "actualSpeed": 5.80221,
+      "targetSpeed": 0,
+      "requestedClip": "idle",
+      "inheritedSourceClip": "decelerate",
+      "seedCommitUntil": 0.5,
+      "requestID": 1,
+      "unwrappedPhase": 0.25798043287686223,
+      "rootDistance": 0.7736279999999996,
+      "frequency": 1.934853246576467,
+      "contributors": [
+        {
+          "clip": "run_5",
+          "weight": 0.7765500000000004,
+          "time": 0.13758947820751555
+        },
+        {
+          "clip": "sprint",
+          "weight": 0.22344999999999962,
+          "time": 0.12039095466934667
+        }
+      ],
+      "stanceFraction": 0.25106273602698975,
+      "feet": {
+        "LeftFoot": {
+          "mode": "flight",
+          "position": [
+            0.1,
+            0.060778129632834424,
+            0.3911334802078756
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "anchor": [
+            0.1,
+            0.060778129632834424,
+            0.3911334802078756
+          ],
+          "heelPhase": 1,
+          "stanceEndPhase": 0.25106273602698975,
+          "flightStartPhase": 0.25798043287686223,
+          "flightStartTime": 0.13333333333333333,
+          "flightProgress": 0,
+          "target": [
+            0.1,
+            0,
+            3.274852573517006
+          ],
+          "targetFrozen": false,
+          "neutralStep": null
+        },
+        "RightFoot": {
+          "mode": "inherited",
+          "position": [
+            -0.10006379139970388,
+            -0.002124284443690102,
+            0.9100251299490196
+          ],
+          "orientation": [
+            0.0000012797363317956475,
+            0.000020939301973881773,
+            -0.000038023500235357896,
+            0.9999999990570608
+          ],
+          "anchor": [
+            -0.1,
+            0.040778661394402754,
+            -0.20886664579224945
+          ],
+          "heelPhase": 0.5,
+          "stanceEndPhase": -0.24893726397301025,
+          "flightStartPhase": 0,
+          "flightStartTime": 0,
+          "flightProgress": null,
+          "target": [
+            -0.1,
+            0,
+            1.8593927860592103
+          ],
+          "targetFrozen": false,
+          "neutralStep": null
+        }
+      },
+      "lastPhaseReseed": null,
+      "phaseReseeds": [],
+      "historyIncluded": true,
+      "heelRecords": [
+        {
+          "id": "LeftFoot:0.000000:1",
+          "side": "LeftFoot",
+          "heelPhase": 0,
+          "heelSpeed": 5.80221,
+          "stanceFraction": 0.25106273602698975,
+          "stanceEndPhase": 0.25106273602698975,
+          "plannedAnchor": [
+            0.1,
+            0.060778129632834424,
+            0.3911334802078756
+          ],
+          "touchdownPhase": 0,
+          "touchdownTime": 0,
+          "rootDistance": 0,
+          "reason": "seed",
+          "release": {
+            "phase": 0.25798043287686223,
+            "time": 0.13333333333333333,
+            "reason": "authored-toeoff",
+            "releaseSpeed": 5.80221,
+            "rootDistance": 0.7736279999999996,
+            "rearDistance": 0.38249451979212407,
+            "reachPrediction": {
+              "anticipationSeconds": 0.02,
+              "hipHeight": 0.7218503097367908,
+              "hipX": 0.10851488435386418,
+              "hipZ": 0.008860406652550723,
+              "geometryMeasuredAt": 0.12499999999999999,
+              "currentReach": 0.7006254778402232,
+              "currentLimit": 0.76,
+              "isRearward": true,
+              "rootDistance": 0.7736279999999996,
+              "futureRoot": 0.8896721999999997,
+              "ankleHeight": 0.18926820555876034,
+              "predictedReach": 0.7356426268665223,
+              "limit": 0.772
+            }
+          }
+        }
+      ],
+      "requests": [
+        {
+          "id": 1,
+          "clip": "idle",
+          "at": 0,
+          "deadline": 4.5,
+          "targetSpeed": 0,
+          "startedAt": 0.008333333333333333,
+          "completedAt": null,
+          "superseded": false
+        }
+      ]
+    },
+    "locks": [],
+    "landings": [],
+    "projections": [
+      {
+        "bone": "LeftFoot",
+        "foreAftMeters": 0,
+        "preservedSoleY": 0.060778129632834424,
+        "radius": 0.777
+      }
+    ],
+    "modelPosition": [
+      0,
+      0.006367536369440239,
+      0.7736279999999996
+    ],
+    "world": [
+      0,
+      0,
+      0.7736279999999996
+    ],
+    "modelQuaternion": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "sampleSeconds": 0.25798043287686223,
+    "clock": 0.13333333333333333,
+    "phaseRate": 1.934853246576467,
+    "pathScale": 1,
+    "lift": 0.006367536369440239,
+    "minYStored": -0.00012251212314674624,
+    "actualClip": "decelerate",
+    "requestedAction": "decelerate",
+    "recovery": {
+      "clock": 0.13333333333333333,
+      "phase": "standalone",
+      "transitionSerial": 2,
+      "activeBaseClip": "decelerate",
+      "baseSeconds": 0.25798043287686223,
+      "overlayClip": null,
+      "overlaySeconds": 0,
+      "contributors": [
+        {
+          "clipID": "run_5",
+          "sampleSeconds": 0.13758947820751555,
+          "playbackRate": 1,
+          "weight": 0.7765500000000004,
+          "scope": "body",
+          "transform": "physicalLocomotionSpace"
+        },
+        {
+          "clipID": "sprint",
+          "sampleSeconds": 0.12039095466934667,
+          "playbackRate": 1,
+          "weight": 0.22344999999999962,
+          "scope": "body",
+          "transform": "physicalLocomotionSpace"
+        }
+      ],
+      "request": null,
+      "pendingRequestID": null,
+      "episode": null,
+      "bridgePlan": null,
+      "risePlan": null,
+      "matchedEntrySeconds": null,
+      "locomotionAllowed": true,
+      "motorAction": "decelerate",
+      "presentation": null,
+      "constraints": null,
+      "measured": null,
+      "physicalMotor": {
+        "clock": 0.13333333333333333,
+        "actualSpeed": 5.80221,
+        "targetSpeed": 0,
+        "unwrappedPhase": 0.25798043287686223,
+        "rootDistance": 0.7736279999999996,
+        "requestID": 1,
+        "requestedClip": "idle",
+        "lastPhaseReseed": null,
+        "request": {
+          "id": 1,
+          "clip": "idle",
+          "at": 0,
+          "deadline": 4.5,
+          "targetSpeed": 0,
+          "startedAt": 0.008333333333333333,
+          "completedAt": null,
+          "superseded": false
+        }
+      },
+      "modifiers": []
+    },
+    "hipPositions": {
+      "Hips": [
+        0.00888157634295459,
+        0.720650237623887,
+        0.7725266276562557
+      ],
+      "LeftUpLeg": [
+        0.10851615147514415,
+        0.7242664455015879,
+        0.7802644868018972
+      ],
+      "LeftLeg": [
+        0.10260883885143607,
+        0.3195240091474162,
+        0.7150827117878058
+      ],
+      "RightUpLeg": [
+        -0.09075299878923498,
+        0.7170340297461861,
+        0.7647887685106142
+      ],
+      "RightLeg": [
+        -0.09506276263333673,
+        0.4209880770745541,
+        1.0484050935288582
+      ]
+    }
+  },
+  "declaredPackageHashes": {
+    "manifest": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "models/player-01-lod1.glb": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "models/player-02-lod0.glb": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "models/player-02-lod1.glb": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "models/player-04-lod1.glb": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+    },
+    "bootBounds": "86e5c5587468d30ff88b2d409e0ce2dba947eb9f53410b9e3c176a6979b32398"
+  },
+  "sourceBindings": null,
+  "metadata": {
+    "packageSnapshot": {
+      "kind": "RAM-pinned-before-browser-open",
+      "sha256": "a128fd062b5174184a90eb5ecfa22b3b5c31d56f70374bc98b5ea5d8e72c972c",
+      "atomicConstruction": true,
+      "modelIntegrity": [
+        {
+          "file": "models/player-01-lod0.glb",
+          "offline": "offline/player-01-lod0.js",
+          "expected": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "payloadSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "pass": true
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "offline": "offline/player-01-lod1.js",
+          "expected": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "payloadSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "offline": "offline/player-02-lod0.js",
+          "expected": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "payloadSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "pass": true
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "offline": "offline/player-02-lod1.js",
+          "expected": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "payloadSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "offline": "offline/player-03-lod0.js",
+          "expected": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "payloadSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "pass": true
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "offline": "offline/player-03-lod1.js",
+          "expected": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "payloadSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod0.glb",
+          "offline": "offline/player-04-lod0.js",
+          "expected": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "payloadSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "pass": true
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "offline": "offline/player-04-lod1.js",
+          "expected": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "payloadSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "offline": "offline/player-05-lod0.js",
+          "expected": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "payloadSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "pass": true
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "offline": "offline/player-05-lod1.js",
+          "expected": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "payloadSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "offline": "offline/player-06-lod0.js",
+          "expected": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "payloadSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "pass": true
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "offline": "offline/player-06-lod1.js",
+          "expected": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "payloadSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "offline": "offline/goalkeeper-lod0.js",
+          "expected": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "payloadSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "pass": true
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "offline": "offline/goalkeeper-lod1.js",
+          "expected": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "payloadSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "offline": "offline/referee-lod0.js",
+          "expected": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "payloadSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "pass": true
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "offline": "offline/referee-lod1.js",
+          "expected": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "payloadSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "pass": true
+        }
+      ],
+      "files": [
+        {
+          "file": "models/goalkeeper-lod0.glb",
+          "bytes": 1352292,
+          "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b"
+        },
+        {
+          "file": "models/goalkeeper-lod1.glb",
+          "bytes": 896884,
+          "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4"
+        },
+        {
+          "file": "models/player-01-lod0.glb",
+          "bytes": 1336564,
+          "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+        },
+        {
+          "file": "models/player-01-lod1.glb",
+          "bytes": 889984,
+          "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+        },
+        {
+          "file": "models/player-02-lod0.glb",
+          "bytes": 1309188,
+          "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f"
+        },
+        {
+          "file": "models/player-02-lod1.glb",
+          "bytes": 869612,
+          "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64"
+        },
+        {
+          "file": "models/player-03-lod0.glb",
+          "bytes": 1361628,
+          "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1"
+        },
+        {
+          "file": "models/player-03-lod1.glb",
+          "bytes": 911836,
+          "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025"
+        },
+        {
+          "file": "models/player-04-lod0.glb",
+          "bytes": 1378168,
+          "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1"
+        },
+        {
+          "file": "models/player-04-lod1.glb",
+          "bytes": 929072,
+          "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008"
+        },
+        {
+          "file": "models/player-05-lod0.glb",
+          "bytes": 1273936,
+          "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab"
+        },
+        {
+          "file": "models/player-05-lod1.glb",
+          "bytes": 875864,
+          "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d"
+        },
+        {
+          "file": "models/player-06-lod0.glb",
+          "bytes": 1359124,
+          "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41"
+        },
+        {
+          "file": "models/player-06-lod1.glb",
+          "bytes": 904828,
+          "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df"
+        },
+        {
+          "file": "models/referee-lod0.glb",
+          "bytes": 1360752,
+          "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c"
+        },
+        {
+          "file": "models/referee-lod1.glb",
+          "bytes": 912812,
+          "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+        },
+        {
+          "file": "offline/goalkeeper-lod0.js",
+          "bytes": 1803156,
+          "sha256": "4a276986668e7c82ec6ac14ea92baebbdde8d61aea0399ce8c22d47dd7a56c63"
+        },
+        {
+          "file": "offline/goalkeeper-lod1.js",
+          "bytes": 1195948,
+          "sha256": "617a19c0903247af2ee23dff0e16602fb85b074a4080f9a0d401c9ee31a9ca3a"
+        },
+        {
+          "file": "offline/player-01-lod0.js",
+          "bytes": 1782187,
+          "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+        },
+        {
+          "file": "offline/player-01-lod1.js",
+          "bytes": 1186747,
+          "sha256": "858e866b666d36915416a457111a15125689d0670f137f4f332fc09cf1df1625"
+        },
+        {
+          "file": "offline/player-02-lod0.js",
+          "bytes": 1745683,
+          "sha256": "3292833d99803be0fa5de9abc7e776d06f82e8b61a9c257bf9fbb18c2170fa6a"
+        },
+        {
+          "file": "offline/player-02-lod1.js",
+          "bytes": 1159583,
+          "sha256": "14a3cb32ff5eaefb3956281fd8fae697ff9c7336702ce47a452ea80201e257e3"
+        },
+        {
+          "file": "offline/player-03-lod0.js",
+          "bytes": 1815603,
+          "sha256": "5cf49d307fc5a5ddbdcd97e203462b9609f6ec0d73b8b912a8d8d25808700389"
+        },
+        {
+          "file": "offline/player-03-lod1.js",
+          "bytes": 1215883,
+          "sha256": "2add2f17da166928b5396196f3dc84b6f6f36033c182c6fea2876a32939eb147"
+        },
+        {
+          "file": "offline/player-04-lod0.js",
+          "bytes": 1837659,
+          "sha256": "15eed437cc22feeff9b404d18eb432c6d8f37d094067f8d69748e3c10cf72891"
+        },
+        {
+          "file": "offline/player-04-lod1.js",
+          "bytes": 1238863,
+          "sha256": "0310600c2b928d6ecabe119b7a9813352bc1da158a66e64d1d13dcd2ebf7b1d5"
+        },
+        {
+          "file": "offline/player-05-lod0.js",
+          "bytes": 1698683,
+          "sha256": "3c915824779811f8f3b8e2e7e60b2b9ae23c2722c90934aaed86cbe7e245bdf7"
+        },
+        {
+          "file": "offline/player-05-lod1.js",
+          "bytes": 1167919,
+          "sha256": "805bd9f178e0da57a19656ea8604d542d32625394f4350c9710195a78115cb08"
+        },
+        {
+          "file": "offline/player-06-lod0.js",
+          "bytes": 1812267,
+          "sha256": "5d96349547f84a0f17210a4670194a40b31a6fc6b34f4eac1f17eef09ff51f0d"
+        },
+        {
+          "file": "offline/player-06-lod1.js",
+          "bytes": 1206539,
+          "sha256": "5f49b4804b02527b29034aecdf5bd8314205120260f14f972bace9d2345bdc83"
+        },
+        {
+          "file": "offline/referee-lod0.js",
+          "bytes": 1814433,
+          "sha256": "9ff2965361bddfe5397e7e843af749d43e502bc9a6ca9379801677e4da72a663"
+        },
+        {
+          "file": "offline/referee-lod1.js",
+          "bytes": 1217181,
+          "sha256": "c1d6e5c9c35ff8358335ccedeee43c99d54f92ec61188415e720dddd7051a46e"
+        },
+        {
+          "file": "preview.css",
+          "bytes": 21078,
+          "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+        },
+        {
+          "file": "preview.html",
+          "bytes": 8029,
+          "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+        },
+        {
+          "file": "vendor/BufferGeometryUtils.js",
+          "bytes": 31918,
+          "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+        },
+        {
+          "file": "vendor/DRACOLoader.js",
+          "bytes": 13640,
+          "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+        },
+        {
+          "file": "vendor/GLTFLoader.js",
+          "bytes": 108527,
+          "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+        },
+        {
+          "file": "vendor/SkeletonUtils.js",
+          "bytes": 8019,
+          "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+        },
+        {
+          "file": "vendor/data.js",
+          "bytes": 1979015,
+          "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+        },
+        {
+          "file": "vendor/draco_decoder.wasm",
+          "bytes": 192420,
+          "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+        },
+        {
+          "file": "vendor/draco_wasm_wrapper.js",
+          "bytes": 58456,
+          "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+        },
+        {
+          "file": "vendor/three.module.js",
+          "bytes": 670681,
+          "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+        },
+        {
+          "file": "vendor/viewer-runtime.js",
+          "bytes": 847879,
+          "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9"
+        }
+      ]
+    },
+    "diagnosticOverride": false,
+    "overrides": {},
+    "immutableInputs": {
+      "/tmp/soccer-v7-cold-decelerate-locator.cjs": {
+        "bytes": 6718,
+        "sha256": "98ed8e92e2729be5568d2a137a1725cbfcafdf0f2896aed23dc502475b270986"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.js": {
+        "bytes": 88221,
+        "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/locomotion-space.js": {
+        "bytes": 22346,
+        "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/locomotion-curve.js": {
+        "bytes": 4551,
+        "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/recovery-state.js": {
+        "bytes": 35502,
+        "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/motion-runtime.js": {
+        "bytes": 9440,
+        "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/asset-manifest.json": {
+        "bytes": 466491,
+        "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a"
+      },
+      "/workspace/Bakasun/workout/island/design/soccer-v7/characters/animations.json": {
+        "bytes": 992407,
+        "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+      }
+    },
+    "unchanged": [
+      {
+        "file": "/tmp/soccer-v7-cold-decelerate-locator.cjs",
+        "expected": {
+          "bytes": 6718,
+          "sha256": "98ed8e92e2729be5568d2a137a1725cbfcafdf0f2896aed23dc502475b270986"
+        },
+        "bytes": 6718,
+        "sha256": "98ed8e92e2729be5568d2a137a1725cbfcafdf0f2896aed23dc502475b270986",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.js",
+        "expected": {
+          "bytes": 88221,
+          "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd"
+        },
+        "bytes": 88221,
+        "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/locomotion-space.js",
+        "expected": {
+          "bytes": 22346,
+          "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+        },
+        "bytes": 22346,
+        "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/locomotion-curve.js",
+        "expected": {
+          "bytes": 4551,
+          "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+        },
+        "bytes": 4551,
+        "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/recovery-state.js",
+        "expected": {
+          "bytes": 35502,
+          "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+        },
+        "bytes": 35502,
+        "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/motion-runtime.js",
+        "expected": {
+          "bytes": 9440,
+          "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+        },
+        "bytes": 9440,
+        "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/asset-manifest.json",
+        "expected": {
+          "bytes": 466491,
+          "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a"
+        },
+        "bytes": 466491,
+        "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+        "pass": true
+      },
+      {
+        "file": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/animations.json",
+        "expected": {
+          "bytes": 992407,
+          "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+        },
+        "bytes": 992407,
+        "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "pass": true
+      }
+    ],
+    "served": {
+      "preview.html": {
+        "bytes": 8029,
+        "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342",
+        "override": false
+      },
+      "preview.css": {
+        "bytes": 21078,
+        "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29",
+        "override": false
+      },
+      "vendor/data.js": {
+        "bytes": 1979015,
+        "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64",
+        "override": false
+      },
+      "vendor/viewer-runtime.js": {
+        "bytes": 847879,
+        "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9",
+        "override": false
+      },
+      "offline/player-01-lod0.js": {
+        "bytes": 1782187,
+        "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934",
+        "override": false
+      }
+    },
+    "servedUnchanged": [
+      {
+        "file": "preview.html",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.html",
+        "pass": true,
+        "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+      },
+      {
+        "file": "preview.css",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/preview.css",
+        "pass": true,
+        "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+      },
+      {
+        "file": "vendor/data.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/vendor/data.js",
+        "pass": true,
+        "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+      },
+      {
+        "file": "vendor/viewer-runtime.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/vendor/viewer-runtime.js",
+        "pass": true,
+        "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9"
+      },
+      {
+        "file": "offline/player-01-lod0.js",
+        "source": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/offline/player-01-lod0.js",
+        "pass": true,
+        "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+      }
+    ],
+    "decodedModels": {
+      "models/player-01-lod0.glb": {
+        "bytes": 1336564,
+        "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+      }
+    },
+    "modelsMatchDisk": [
+      {
+        "file": "models/player-01-lod0.glb",
+        "bytes": 1336564,
+        "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+        "diskSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+        "pass": true
+      }
+    ],
+    "errors": [],
+    "remoteRequests": []
+  },
+  "generatedAt": "2026-11-05T07:02:12.991Z",
+  "method": "Actual RAM-pinned packagedruntime, no overrides,121 stateful120Hz frames from colddeceleration. Optimized all-vertex floor compared to Three.SkinnedMesh.getVertexPosition+matrixWorld; worst actual vertex includes decoded rest position/named weights/matrices. No pose, controller, solver or target is replaced.",
+  "checks": {
+    "noErrors": true,
+    "noRemote": true,
+    "inputsUnchanged": true,
+    "servedUnchanged": true,
+    "nativeMatchesDisk": true,
+    "runtimeMatchesExpected": true,
+    "dataMatchesExpected": true
+  }
+}

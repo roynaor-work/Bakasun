@@ -1,0 +1,50 @@
+{
+  "kind": "controlled-observer-fixtures-not-actual-package-validation",
+  "observer": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "a02f8bd9170ffb108577cd4fa71620180b610a576b545948bc90b643c881c8b8"
+  },
+  "families": [
+    {
+      "file": "iterations/35/verification/observer-fixtures/action-observer-fixture-clocks.cjs",
+      "sha256": "5e7d17a62855401d2ad8b25d22b1d80b4607873bd462e64db550dd925a311fb4",
+      "pass": true,
+      "count": 39
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/palm-observer-fixture.cjs",
+      "sha256": "d187c50da2f144939caef4719586008734fc7ff28d257d1f0e9fdeb97729ef55",
+      "pass": true,
+      "count": 16
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/palm-lifecycle-fixture.cjs",
+      "sha256": "f0d30b482a1c8cfeddcc704709f24e1e67f5495490871efb266229c88ffd328e",
+      "pass": true,
+      "count": 38
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/body-settling-fixture.cjs",
+      "sha256": "2743d04feef8a7036ab44f03106330a21d05d896d1767cfe4b68c541c9c9144b",
+      "pass": true,
+      "count": 31
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/terminal-palm-exclusion-fixture.cjs",
+      "sha256": "0719253a605cb884f841e393212aa680ad9a623b8aa621328d4779f6e8462bbc",
+      "pass": true,
+      "count": 14
+    }
+  ],
+  "indirectFactoryEvaluation": "palm-lifecycle-fixture-eval.json",
+  "totalDistinctChecks": 138,
+  "pass": true,
+  "limits": "Synthetic local Three r160 geometry/descriptor witnesses; no controller, source-animation, visual-quality or physical-phone FPS claim. All prior39 clock guards retained. Existing8mm opaque-body and3mm physical-hand obligations are unchanged.",
+  "matrixPool": {
+    "file": "matrix-pool.json",
+    "pass": true,
+    "checks": 11,
+    "matrixSourceSha256": "bf3447d98e6a0041e5e884f916f5ec09b309a48772b8a989302a6f188e33488f"
+  },
+  "totalDistinctChecksIncludingMatrixPool": 149
+}

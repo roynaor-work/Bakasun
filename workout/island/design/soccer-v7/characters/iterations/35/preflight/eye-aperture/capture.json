@@ -1,0 +1,4187 @@
+{
+  "kind": "single-weighted-eye-closure-candidate-artistic-comparison",
+  "candidateIsPromoted": false,
+  "complete": false,
+  "generatedAt": "2026-11-05T08:47:28.015Z",
+  "source": {
+    "file": "/tmp/soccer-v7-eye-aperture-capture.mjs",
+    "sha256": "3c44927a6e49df966220ceacaf9be9efc2d820c741b6d15de4e488fe159810dd"
+  },
+  "controlledDelta": {
+    "target": "weighted-anatomical-eye-closure-including-extra",
+    "baselineCoefficient": 0.165,
+    "candidateCoefficient": 0.0825,
+    "multiplier": 0.5,
+    "eyeSlitUnchanged": 0.06,
+    "rectangularHeadCoefficientUnchanged": 0.27
+  },
+  "runtime": {
+    "actualServedRuntimeSha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9",
+    "baselineDataSha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64",
+    "frozenResponseBytes": true
+  },
+  "cameraPolicy": "Baseline camera world pose and projection copied exactly to candidate, no geometry reframing or new lighting/material tuning.",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "comparisonOrder": {
+    "left": "baseline final geometry32",
+    "right": "single half-closure candidate"
+  },
+  "textureChecks": [
+    {
+      "id": "player-01",
+      "channel": "basecolor",
+      "baselineSha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "candidateSha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "bytes": 121600,
+      "identical": true
+    },
+    {
+      "id": "player-01",
+      "channel": "normal",
+      "baselineSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "candidateSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "bytes": 212719,
+      "identical": true
+    },
+    {
+      "id": "player-01",
+      "channel": "orm",
+      "baselineSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "candidateSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "bytes": 30215,
+      "identical": true
+    },
+    {
+      "id": "player-02",
+      "channel": "basecolor",
+      "baselineSha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+      "candidateSha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+      "bytes": 115832,
+      "identical": true
+    },
+    {
+      "id": "player-02",
+      "channel": "normal",
+      "baselineSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+      "candidateSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+      "bytes": 200843,
+      "identical": true
+    },
+    {
+      "id": "player-02",
+      "channel": "orm",
+      "baselineSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+      "candidateSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+      "bytes": 30271,
+      "identical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "basecolor",
+      "baselineSha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "candidateSha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "bytes": 160098,
+      "identical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "normal",
+      "baselineSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "candidateSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "bytes": 212999,
+      "identical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "orm",
+      "baselineSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "candidateSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "bytes": 30128,
+      "identical": true
+    }
+  ],
+  "materialChecks": [
+    {
+      "id": "player-01",
+      "lod": "lod0",
+      "identicalMaterialJSON": true
+    },
+    {
+      "id": "player-01",
+      "lod": "lod1",
+      "identicalMaterialJSON": true
+    },
+    {
+      "id": "player-02",
+      "lod": "lod0",
+      "identicalMaterialJSON": true
+    },
+    {
+      "id": "player-02",
+      "lod": "lod1",
+      "identicalMaterialJSON": true
+    },
+    {
+      "id": "player-04",
+      "lod": "lod0",
+      "identicalMaterialJSON": true
+    },
+    {
+      "id": "player-04",
+      "lod": "lod1",
+      "identicalMaterialJSON": true
+    }
+  ],
+  "models": [
+    {
+      "id": "player-01",
+      "file": "models/player-01-lod0.glb",
+      "lod": "lod0",
+      "baselineBytes": 1336564,
+      "baselineSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "candidateBytes": 968108,
+      "candidateSha256": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+      "candidateHasNativeAnimations": false
+    },
+    {
+      "id": "player-01",
+      "file": "models/player-01-lod1.glb",
+      "lod": "lod1",
+      "baselineBytes": 889984,
+      "baselineSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "candidateBytes": 521692,
+      "candidateSha256": "46336ce98b45f50b0e57c3e7fbc1f8e7c8f4a6cc9fe46efe39baf9b371723599",
+      "candidateHasNativeAnimations": false
+    },
+    {
+      "id": "player-02",
+      "file": "models/player-02-lod0.glb",
+      "lod": "lod0",
+      "baselineBytes": 1309188,
+      "baselineSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "candidateBytes": 940752,
+      "candidateSha256": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+      "candidateHasNativeAnimations": false
+    },
+    {
+      "id": "player-02",
+      "file": "models/player-02-lod1.glb",
+      "lod": "lod1",
+      "baselineBytes": 869612,
+      "baselineSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "candidateBytes": 501320,
+      "candidateSha256": "8282de8402140ee8efd5b3e252375494113cdb3972cfe40f1d8250658bd53f3a",
+      "candidateHasNativeAnimations": false
+    },
+    {
+      "id": "player-04",
+      "file": "models/player-04-lod0.glb",
+      "lod": "lod0",
+      "baselineBytes": 1378168,
+      "baselineSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "candidateBytes": 1009288,
+      "candidateSha256": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+      "candidateHasNativeAnimations": false
+    },
+    {
+      "id": "player-04",
+      "file": "models/player-04-lod1.glb",
+      "lod": "lod1",
+      "baselineBytes": 929072,
+      "baselineSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "candidateBytes": 560752,
+      "candidateSha256": "60179d20e6ba68045b3e4419449cc7159bda4da05cdfbfd3577e251510505029",
+      "candidateHasNativeAnimations": false
+    }
+  ],
+  "authoringProof": {
+    "kind": "isolated-single-weighted-eye-closure-candidate",
+    "candidateIsFinal": false,
+    "sourceFile": "source/character_build.py",
+    "sourceSha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+    "wrapperSha256": "769d300651f44ae72768c50a0f01a1df2a516ac76c637f63d4083ac7542ba3f6",
+    "recipe": {
+      "SOCCER_CHARACTER_OUTPUT": "/tmp/soccer-v7-eye-aperture35",
+      "SOCCER_CHARACTER_CLOTH_VARIANT": "18",
+      "SOCCER_CHARACTER_CLOTH_FINISHING": "31",
+      "SOCCER_CHARACTER_EYE_VARIANT": "19",
+      "SOCCER_CHARACTER_FACE_VARIANT": "27",
+      "SOCCER_CHARACTER_MOUTH_COMPRESSION": ".40",
+      "SOCCER_CHARACTER_EYE_CLOSURE_EXTRA": ".05",
+      "SOCCER_CHARACTER_EYE_COLOR_FACTOR": ".88",
+      "SOCCER_CHARACTER_HAIR_VARIANT": "29",
+      "SOCCER_CHARACTER_HAIR_TEXTURE_VARIANT": "20",
+      "SOCCER_CHARACTER_HAIR_NORMAL_FIELD": "projected",
+      "SOCCER_CHARACTER_CROWN_OWN_NORMAL": ".20",
+      "SOCCER_CHARACTER_CROWN_FLYAWAYS": "1",
+      "SOCCER_CHARACTER_HAIR_MACRO_SHAPE": "31",
+      "SOCCER_CHARACTER_HAIR_MACRO_IDS": "player-03",
+      "SOCCER_CHARACTER_FAR_CAP": "32",
+      "SOCCER_CHARACTER_SOCK_VARIANT": "23",
+      "SOCCER_CHARACTER_HAIR_SIDEDNESS": "front-straight",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "controlledDelta": {
+      "existingTarget": "weighted-anatomical-eye-closure-including-extra",
+      "baseline": 0.165,
+      "candidate": 0.0825,
+      "multiplier": 0.5,
+      "eyeSlitUnchanged": 0.06,
+      "rectangularHeadCoefficientUnchanged": 0.27
+    },
+    "characters": [
+      {
+        "id": "player-01",
+        "sourceTarget": "weighted-anatomical-eye-closure",
+        "baselineCoefficient": 0.165,
+        "candidateCoefficient": 0.0825,
+        "eyeSlitUnchanged": 0.06,
+        "rectangularHeadCoefficientUnchanged": 0.27,
+        "maximumCanonicalRestDisplacementMeters": 0.0016698943576394698,
+        "meanMovedVertexDisplacementMeters": 0.00046846363624652207,
+        "movedVertices": 372,
+        "maximumCanonicalDisplacementBelowHeadMeters": 0,
+        "baselineHeadBounds": {
+          "min": [
+            -0.11582712000000002,
+            1.4400049000000001,
+            -0.09570389466492414
+          ],
+          "max": [
+            0.11582712000000002,
+            1.7544983800000002,
+            0.1516297125682807
+          ]
+        },
+        "candidateHeadBounds": {
+          "min": [
+            -0.11582712000000002,
+            1.4400049000000001,
+            -0.09570389466492414
+          ],
+          "max": [
+            0.11582712000000002,
+            1.7544983800000002,
+            0.1516297125682807
+          ]
+        }
+      },
+      {
+        "id": "player-02",
+        "sourceTarget": "weighted-anatomical-eye-closure",
+        "baselineCoefficient": 0.165,
+        "candidateCoefficient": 0.0825,
+        "eyeSlitUnchanged": 0.06,
+        "rectangularHeadCoefficientUnchanged": 0.27,
+        "maximumCanonicalRestDisplacementMeters": 0.0016689299773925998,
+        "meanMovedVertexDisplacementMeters": 0.0004666128653530253,
+        "movedVertices": 372,
+        "maximumCanonicalDisplacementBelowHeadMeters": 0,
+        "baselineHeadBounds": {
+          "min": [
+            -0.11567412000000002,
+            1.44062167,
+            -0.09900518366058822
+          ],
+          "max": [
+            0.11567412000000002,
+            1.7663896300000002,
+            0.15045770264123925
+          ]
+        },
+        "candidateHeadBounds": {
+          "min": [
+            -0.11567412000000002,
+            1.44062167,
+            -0.09900518366058822
+          ],
+          "max": [
+            0.11567412000000002,
+            1.7663896300000002,
+            0.15045770264123925
+          ]
+        }
+      },
+      {
+        "id": "player-04",
+        "sourceTarget": "weighted-anatomical-eye-closure",
+        "baselineCoefficient": 0.165,
+        "candidateCoefficient": 0.0825,
+        "eyeSlitUnchanged": 0.06,
+        "rectangularHeadCoefficientUnchanged": 0.27,
+        "maximumCanonicalRestDisplacementMeters": 0.0016698279552041686,
+        "meanMovedVertexDisplacementMeters": 0.0004687175582107384,
+        "movedVertices": 372,
+        "maximumCanonicalDisplacementBelowHeadMeters": 0,
+        "baselineHeadBounds": {
+          "min": [
+            -0.11638710000000002,
+            1.440807205,
+            -0.09390730029183982
+          ],
+          "max": [
+            0.11638710000000002,
+            1.7531549049999997,
+            0.15324158453352033
+          ]
+        },
+        "candidateHeadBounds": {
+          "min": [
+            -0.11638710000000002,
+            1.440807205,
+            -0.09390730029183982
+          ],
+          "max": [
+            0.11638710000000002,
+            1.7531549049999997,
+            0.15324158453352033
+          ]
+        }
+      }
+    ],
+    "protectedPrimaryHashes": {
+      "asset-manifest.json": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+      "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "models/player-01-lod1.glb": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "models/player-02-lod0.glb": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "models/player-02-lod1.glb": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "models/player-04-lod1.glb": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "textures/goalkeeper-keeper-basecolor.webp": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8",
+      "textures/goalkeeper-normal.png": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+      "textures/goalkeeper-orm.png": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+      "textures/player-01-kit-a-basecolor.webp": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "textures/player-01-normal.png": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "textures/player-01-orm.png": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "textures/player-02-kit-a-basecolor.webp": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+      "textures/player-02-normal.png": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+      "textures/player-02-orm.png": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+      "textures/player-03-kit-a-basecolor.webp": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11",
+      "textures/player-03-normal.png": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+      "textures/player-03-orm.png": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+      "textures/player-04-kit-b-basecolor.webp": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "textures/player-04-normal.png": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "textures/player-04-orm.png": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "textures/player-05-kit-b-basecolor.webp": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649",
+      "textures/player-05-normal.png": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+      "textures/player-05-orm.png": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+      "textures/player-06-kit-b-basecolor.webp": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7",
+      "textures/player-06-normal.png": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+      "textures/player-06-orm.png": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+      "textures/referee-normal.png": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+      "textures/referee-orm.png": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+      "textures/referee-referee-basecolor.webp": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d",
+      "source/character-measure-textures.py": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645",
+      "source/character_atlas.py": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3",
+      "source/character_build.py": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+      "source/character_cloth17.py": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5",
+      "source/character_cloth_finish.py": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+      "source/character_eye19.py": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31",
+      "source/character_face27.py": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342",
+      "source/character_face_helper.py": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d",
+      "source/character_farcap32.py": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0",
+      "source/character_fetch_skin.py": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8",
+      "source/character_groom_atlas.py": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4",
+      "source/character_hair.py": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c",
+      "source/character_hair28.py": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a",
+      "source/character_hair29.py": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+      "source/character_hair31.py": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+      "source/character_hair_shape31.py": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+      "source/character_normal_field.py": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b",
+      "source/character_seams.py": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03",
+      "source/character_sock21.py": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703"
+    },
+    "protectedPrimaryFilesUnchanged": true
+  },
+  "protectedPrimaryChecks": [
+    {
+      "file": "asset-manifest.json",
+      "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+      "actualSha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+      "unchanged": true
+    },
+    {
+      "file": "models/goalkeeper-lod0.glb",
+      "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "actualSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "unchanged": true
+    },
+    {
+      "file": "models/goalkeeper-lod1.glb",
+      "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "actualSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-01-lod0.glb",
+      "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "actualSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "actualSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-02-lod0.glb",
+      "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "actualSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-02-lod1.glb",
+      "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "actualSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-03-lod0.glb",
+      "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "actualSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-03-lod1.glb",
+      "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "actualSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-04-lod0.glb",
+      "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "actualSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-04-lod1.glb",
+      "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "actualSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-05-lod0.glb",
+      "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "actualSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-05-lod1.glb",
+      "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "actualSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-06-lod0.glb",
+      "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "actualSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "unchanged": true
+    },
+    {
+      "file": "models/player-06-lod1.glb",
+      "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "actualSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "unchanged": true
+    },
+    {
+      "file": "models/referee-lod0.glb",
+      "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "actualSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "unchanged": true
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "actualSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "unchanged": true
+    },
+    {
+      "file": "textures/goalkeeper-keeper-basecolor.webp",
+      "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8",
+      "actualSha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8",
+      "unchanged": true
+    },
+    {
+      "file": "textures/goalkeeper-normal.png",
+      "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+      "actualSha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+      "unchanged": true
+    },
+    {
+      "file": "textures/goalkeeper-orm.png",
+      "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+      "actualSha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-01-kit-a-basecolor.webp",
+      "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "actualSha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-01-normal.png",
+      "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "actualSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-01-orm.png",
+      "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "actualSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-02-kit-a-basecolor.webp",
+      "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+      "actualSha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-02-normal.png",
+      "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+      "actualSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-02-orm.png",
+      "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+      "actualSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-03-kit-a-basecolor.webp",
+      "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11",
+      "actualSha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-03-normal.png",
+      "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+      "actualSha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-03-orm.png",
+      "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+      "actualSha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-04-kit-b-basecolor.webp",
+      "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "actualSha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-04-normal.png",
+      "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "actualSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-04-orm.png",
+      "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "actualSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-05-kit-b-basecolor.webp",
+      "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649",
+      "actualSha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-05-normal.png",
+      "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+      "actualSha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-05-orm.png",
+      "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+      "actualSha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-06-kit-b-basecolor.webp",
+      "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7",
+      "actualSha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-06-normal.png",
+      "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+      "actualSha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+      "unchanged": true
+    },
+    {
+      "file": "textures/player-06-orm.png",
+      "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+      "actualSha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+      "unchanged": true
+    },
+    {
+      "file": "textures/referee-normal.png",
+      "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+      "actualSha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+      "unchanged": true
+    },
+    {
+      "file": "textures/referee-orm.png",
+      "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+      "actualSha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+      "unchanged": true
+    },
+    {
+      "file": "textures/referee-referee-basecolor.webp",
+      "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d",
+      "actualSha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d",
+      "unchanged": true
+    },
+    {
+      "file": "source/character-measure-textures.py",
+      "sha256": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645",
+      "actualSha256": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_atlas.py",
+      "sha256": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3",
+      "actualSha256": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_build.py",
+      "sha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+      "actualSha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_cloth17.py",
+      "sha256": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5",
+      "actualSha256": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_cloth_finish.py",
+      "sha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+      "actualSha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_eye19.py",
+      "sha256": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31",
+      "actualSha256": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_face27.py",
+      "sha256": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342",
+      "actualSha256": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_face_helper.py",
+      "sha256": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d",
+      "actualSha256": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_farcap32.py",
+      "sha256": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0",
+      "actualSha256": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_fetch_skin.py",
+      "sha256": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8",
+      "actualSha256": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_groom_atlas.py",
+      "sha256": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4",
+      "actualSha256": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_hair.py",
+      "sha256": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c",
+      "actualSha256": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_hair28.py",
+      "sha256": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a",
+      "actualSha256": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_hair29.py",
+      "sha256": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+      "actualSha256": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_hair31.py",
+      "sha256": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+      "actualSha256": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_hair_shape31.py",
+      "sha256": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+      "actualSha256": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_normal_field.py",
+      "sha256": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b",
+      "actualSha256": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_seams.py",
+      "sha256": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03",
+      "actualSha256": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03",
+      "unchanged": true
+    },
+    {
+      "file": "source/character_sock21.py",
+      "sha256": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703",
+      "actualSha256": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703",
+      "unchanged": true
+    }
+  ],
+  "sessions": [
+    {
+      "variant": "baseline",
+      "errors": [],
+      "consoleErrors": [],
+      "remoteRequests": [],
+      "loadedHashes": {
+        "manifest": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "models/player-01-lod1.glb": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "models/player-02-lod0.glb": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "models/player-02-lod1.glb": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "models/player-04-lod1.glb": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+        }
+      }
+    },
+    {
+      "variant": "candidate",
+      "errors": [],
+      "consoleErrors": [],
+      "remoteRequests": [],
+      "loadedHashes": {
+        "manifest": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+          "models/player-01-lod1.glb": "46336ce98b45f50b0e57c3e7fbc1f8e7c8f4a6cc9fe46efe39baf9b371723599",
+          "models/player-02-lod0.glb": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+          "models/player-02-lod1.glb": "8282de8402140ee8efd5b3e252375494113cdb3972cfe40f1d8250658bd53f3a",
+          "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "models/player-04-lod0.glb": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+          "models/player-04-lod1.glb": "60179d20e6ba68045b3e4419449cc7159bda4da05cdfbfd3577e251510505029",
+          "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+        }
+      }
+    }
+  ],
+  "records": [
+    {
+      "variant": "baseline",
+      "id": "player-01",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "baseline-player-01-front-390x844.png",
+      "sha256": "c1558c168bb444355e22e45e9fdc9dee42d830ea5d9600c921bd0e7be0a6a3f2",
+      "bytes": 210102,
+      "camera": {
+        "position": [
+          0.00001309812068939209,
+          1.5772320281841599,
+          1.131490272333148
+        ],
+        "quaternion": [
+          -0.0018214866769887524,
+          0,
+          0,
+          0.9999983410917668
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-01",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-01-three-quarter-390x844.png",
+      "sha256": "0d1c4bfb2f81d244bac284ec0311c4cb5ed670e42d8e71ed42d422d1c6e9dbfc",
+      "bytes": 167073,
+      "camera": {
+        "position": [
+          -1.1343378082381725,
+          1.5772320281841599,
+          1.3802403969869856
+        ],
+        "quaternion": [
+          -0.0010669702682668445,
+          -0.3428975862664096,
+          -0.00038947455105426044,
+          0.9393721068973099
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-01",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "baseline-player-01-front-844x390.png",
+      "sha256": "f8ff173464248bd6a7e651366f792f8ccc74e8deb6520f4933b6196ee89cb2cf",
+      "bytes": 117706,
+      "camera": {
+        "position": [
+          0.00001309812068939209,
+          1.5772320281841599,
+          1.028246783914468
+        ],
+        "quaternion": [
+          -0.0020105326439595443,
+          0,
+          0,
+          0.9999979788772013
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-01",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-01-three-quarter-844x390.png",
+      "sha256": "17fc5c56ab9a82088442d62823ec568cf0a93e4ba871740021d30b3ee4b405e4",
+      "bytes": 131219,
+      "camera": {
+        "position": [
+          -0.6590105870727881,
+          1.5772320281841599,
+          0.8159120360709112
+        ],
+        "quaternion": [
+          -0.0018365259413583824,
+          -0.34289715213551425,
+          -0.0006703843000910789,
+          0.939370917590443
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-02",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "baseline-player-02-front-390x844.png",
+      "sha256": "2d410e7b7f3ffdfbfcb58f660858660129ed6c2c04e259a1971f71d59c64bdbf",
+      "bytes": 202238,
+      "camera": {
+        "position": [
+          0.0014791563153266907,
+          1.588982490314807,
+          1.1068882034408882
+        ],
+        "quaternion": [
+          -0.0018574358822540716,
+          0,
+          0,
+          0.9999982749644837
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-02",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-02-three-quarter-390x844.png",
+      "sha256": "2ba5a09a96215021757936169ce6b3559b4530db11bb384153b2e2abc5d0f04b",
+      "bytes": 161972,
+      "camera": {
+        "position": [
+          -1.1303549312127728,
+          1.588982490314807,
+          1.3739013676545355
+        ],
+        "quaternion": [
+          -0.0010693428425377779,
+          -0.3428975852816192,
+          -0.0003903406082692527,
+          0.9393721041994643
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-02",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "baseline-player-02-front-844x390.png",
+      "sha256": "fa6fc519145f4445a76436d22ec51de1f70c5a2f3fac211bffd0957d7c11a636",
+      "bytes": 113052,
+      "camera": {
+        "position": [
+          0.0014791563153266907,
+          1.588982490314807,
+          1.0268051139235488
+        ],
+        "quaternion": [
+          -0.002006681160517145,
+          0,
+          0,
+          0.9999979866133332
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-02",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-02-three-quarter-844x390.png",
+      "sha256": "e5a68ec3e1eb55eaf9f7fc8bdfe28e595d810211da99a5479a6e735cb22c5304",
+      "bytes": 127804,
+      "camera": {
+        "position": [
+          -0.6576215402633853,
+          1.588982490314807,
+          0.8126525104763268
+        ],
+        "quaternion": [
+          -0.0018363113583879695,
+          -0.342897152288643,
+          -0.0006703059711923728,
+          0.939370918009941
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-04",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "baseline-player-04-front-390x844.png",
+      "sha256": "42db39a6504a7db7f986086ac75a6c09b409c7d82197e87241781dd63650c877",
+      "bytes": 212112,
+      "camera": {
+        "position": [
+          -0.000004410743713378906,
+          1.5800037895875367,
+          1.1398032590290876
+        ],
+        "quaternion": [
+          -0.001808257175708406,
+          0,
+          0,
+          0.9999983651016567
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-04",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-04-three-quarter-390x844.png",
+      "sha256": "dd84795b0c6845217ef04441baf7aa0c49af387c8d06bcec82b797b80c916f90",
+      "bytes": 163486,
+      "camera": {
+        "position": [
+          -1.1394032755265195,
+          1.5800037895875367,
+          1.3865133155860025
+        ],
+        "quaternion": [
+          -0.0010622432134901232,
+          -0.34289758822195976,
+          -0.00038774904136413293,
+          0.9393721122545631
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-04",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "baseline-player-04-front-844x390.png",
+      "sha256": "93bf5fdc3f019fa3045bd491a2e34ec1a379896bd849b8bc65fde2d4f37d6b73",
+      "bytes": 118051,
+      "camera": {
+        "position": [
+          -0.000004410743713378906,
+          1.5800037895875367,
+          1.0286990464706114
+        ],
+        "quaternion": [
+          -0.002010184080635646,
+          0,
+          0,
+          0.9999979795779399
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "id": "player-04",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "baseline-player-04-three-quarter-844x390.png",
+      "sha256": "6ffb4811c33e2980c476335c0a593fd1b2ad2e16c7e15f81163b2ff2bfd9dab6",
+      "bytes": 132477,
+      "camera": {
+        "position": [
+          -0.6594062438041416,
+          1.5800037895875367,
+          0.8166407602285588
+        ],
+        "quaternion": [
+          -0.0018354727589497504,
+          -0.34289715288690487,
+          -0.0006699998585016739,
+          0.9393709196488869
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-01",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "candidate-player-01-front-390x844.png",
+      "sha256": "a8ea4fffe1dc61e6dc60efc12429f580377323e73b4898562024ce64ccc70ac6",
+      "bytes": 210280,
+      "camera": {
+        "position": [
+          0.00001309812068939209,
+          1.5772320281841599,
+          1.131490272333148
+        ],
+        "quaternion": [
+          -0.0018214866769887524,
+          0,
+          0,
+          0.9999983410917668
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-01",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-01-three-quarter-390x844.png",
+      "sha256": "b6c5c3239b5c1d36df4f2a044bbedeaae3a7991f9d419d88abcb191a6e11d196",
+      "bytes": 167080,
+      "camera": {
+        "position": [
+          -1.1343378082381725,
+          1.5772320281841599,
+          1.3802403969869856
+        ],
+        "quaternion": [
+          -0.0010669702682668445,
+          -0.3428975862664096,
+          -0.00038947455105426044,
+          0.9393721068973099
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-01",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "candidate-player-01-front-844x390.png",
+      "sha256": "1ddc6f57fb6f9985235a068dedac6e0f8aee4462f6d5795a854da6d6ebcae532",
+      "bytes": 117793,
+      "camera": {
+        "position": [
+          0.00001309812068939209,
+          1.5772320281841599,
+          1.028246783914468
+        ],
+        "quaternion": [
+          -0.0020105326439595443,
+          0,
+          0,
+          0.9999979788772013
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-01",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-01-three-quarter-844x390.png",
+      "sha256": "cb56cbf344f2dce8833089ed88e1a08d25460ca3c9ab8dd4812e8cfe0bcf756f",
+      "bytes": 131270,
+      "camera": {
+        "position": [
+          -0.6590105870727881,
+          1.5772320281841599,
+          0.8159120360709112
+        ],
+        "quaternion": [
+          -0.0018365259413583824,
+          -0.34289715213551425,
+          -0.0006703843000910789,
+          0.939370917590443
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-01-lod0.glb",
+      "loadedModelSha256": "52ba1d46301b08800e72273331df62590bc982f26fe33e5895a8cb7b3460be4b",
+      "headBounds": {
+        "min": [
+          -0.08781899511814117,
+          1.4153709361437166,
+          -0.0870883786108993
+        ],
+        "max": [
+          0.08784519135951996,
+          1.7310931202246034,
+          0.15407147590476117
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-02",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "candidate-player-02-front-390x844.png",
+      "sha256": "e833db5e639e80ad82aa2f6a86c35753c0a9de8626a0d844f378e52b1b275518",
+      "bytes": 202545,
+      "camera": {
+        "position": [
+          0.0014791563153266907,
+          1.588982490314807,
+          1.1068882034408882
+        ],
+        "quaternion": [
+          -0.0018574358822540716,
+          0,
+          0,
+          0.9999982749644837
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-02",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-02-three-quarter-390x844.png",
+      "sha256": "483555f21df9f0e7539f57bf310ed44f2c0a89b3af0188f4444cb12b5f454599",
+      "bytes": 162080,
+      "camera": {
+        "position": [
+          -1.1303549312127728,
+          1.588982490314807,
+          1.3739013676545355
+        ],
+        "quaternion": [
+          -0.0010693428425377779,
+          -0.3428975852816192,
+          -0.0003903406082692527,
+          0.9393721041994643
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-02",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "candidate-player-02-front-844x390.png",
+      "sha256": "70f96d8ee49955f4294513a1b9a682d0f1be756af57388a90ad9a28ac3113f0e",
+      "bytes": 113152,
+      "camera": {
+        "position": [
+          0.0014791563153266907,
+          1.588982490314807,
+          1.0268051139235488
+        ],
+        "quaternion": [
+          -0.002006681160517145,
+          0,
+          0,
+          0.9999979866133332
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-02",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-02-three-quarter-844x390.png",
+      "sha256": "e38e83348608d2064340962fc94b7794c0e0d876b670d166892dbe82458026a4",
+      "bytes": 127916,
+      "camera": {
+        "position": [
+          -0.6576215402633853,
+          1.588982490314807,
+          0.8126525104763268
+        ],
+        "quaternion": [
+          -0.0018363113583879695,
+          -0.342897152288643,
+          -0.0006703059711923728,
+          0.939370918009941
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-02-lod0.glb",
+      "loadedModelSha256": "3121292534a83b6e83d440549823bd43aee9dd7f97a494595758903403584ec2",
+      "headBounds": {
+        "min": [
+          -0.08427171409130096,
+          1.415234866273892,
+          -0.0923486220853498
+        ],
+        "max": [
+          0.08723002672195435,
+          1.754730114355722,
+          0.1526298059138421
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 2,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-04",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "front",
+      "file": "candidate-player-04-front-390x844.png",
+      "sha256": "db33216e9e7e1c24a2cc92a12e857d8eca40d66563041a8430a17941b8dc47e0",
+      "bytes": 212379,
+      "camera": {
+        "position": [
+          -0.000004410743713378906,
+          1.5800037895875367,
+          1.1398032590290876
+        ],
+        "quaternion": [
+          -0.001808257175708406,
+          0,
+          0,
+          0.9999983651016567
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-04",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-04-three-quarter-390x844.png",
+      "sha256": "d634cc44334888ce29542dc458f76b0130d70d53e07c5c06193d0b1c0ca7bd9c",
+      "bytes": 163580,
+      "camera": {
+        "position": [
+          -1.1394032755265195,
+          1.5800037895875367,
+          1.3865133155860025
+        ],
+        "quaternion": [
+          -0.0010622432134901232,
+          -0.34289758822195976,
+          -0.00038774904136413293,
+          0.9393721122545631
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-04",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "front",
+      "file": "candidate-player-04-front-844x390.png",
+      "sha256": "a0022e8f7b39440ba4e2c040b419ba3d2ab325002419f6092ac630b84a21f428",
+      "bytes": 118111,
+      "camera": {
+        "position": [
+          -0.000004410743713378906,
+          1.5800037895875367,
+          1.0286990464706114
+        ],
+        "quaternion": [
+          -0.002010184080635646,
+          0,
+          0,
+          0.9999979795779399
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "id": "player-04",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "three-quarter",
+      "file": "candidate-player-04-three-quarter-844x390.png",
+      "sha256": "bc0a741fe1d6708344d19471ac3e52a279057e1c4a3133a6b9584f90da758c7f",
+      "bytes": 132544,
+      "camera": {
+        "position": [
+          -0.6594062438041416,
+          1.5800037895875367,
+          0.8166407602285588
+        ],
+        "quaternion": [
+          -0.0018354727589497504,
+          -0.34289715288690487,
+          -0.0006699998585016739,
+          0.9393709196488869
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "near": 0.025,
+        "far": 220
+      },
+      "modelPath": "models/player-04-lod0.glb",
+      "loadedModelSha256": "89143eaf2db87048b2072ef2a211cd8eedf060b478b056eb9f446311c13372fc",
+      "headBounds": {
+        "min": [
+          -0.0885428786277771,
+          1.414830475858129,
+          -0.08698109878449439
+        ],
+        "max": [
+          0.08853405714035034,
+          1.7371771033169445,
+          0.1545237384609046
+        ]
+      },
+      "threeRevision": "160",
+      "materialStates": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "side": 0,
+          "alphaTest": 0.25,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "roughness": 1,
+          "metalness": 0,
+          "color": [
+            0.88,
+            0.88,
+            0.88
+          ],
+          "side": 0,
+          "alphaTest": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376
+        }
+      ],
+      "drawingBufferPixels": 740610,
+      "pixelRatio": 1.5,
+      "errors": []
+    }
+  ],
+  "notes": [
+    "Only three identities and near portraits were compared. This is not final asset, animation, floor or phone-performance acceptance.",
+    "Candidate GLBs remain under /tmp and have no native animation embedding; the unchanged viewer JSON motion drives the paused idle pose.",
+    "Packaged floor envelope and boot bounds disabled only in RAM responses because candidate hashes differ.",
+    "Production C16 work can continue separately; the exact bundled runtime bytes used for this artistic comparison are frozen and hashed."
+  ]
+}

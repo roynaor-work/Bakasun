@@ -1,0 +1,215 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T02:37:26.535Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates23/models/player-01-lod0.glb",
+      "bytes": 846172,
+      "sha256": "55e8de44a596e6bb2155ff1e52f88f00d21f8d11760ace193d55bb0c837b6be5"
+    },
+    {
+      "file": "source/character-candidates23/models/player-01-lod1.glb",
+      "bytes": 513852,
+      "sha256": "6c0b8218fc0c5336573e11ca2197dd14b223561f9c96aab13326d6e225829c01"
+    },
+    {
+      "file": "source/character-candidates23/models/goalkeeper-lod0.glb",
+      "bytes": 956128,
+      "sha256": "93b870627e2379d16e21a24ff3bf7238d52360cde28b546078742d35eda14e28"
+    },
+    {
+      "file": "source/character-candidates23/models/goalkeeper-lod1.glb",
+      "bytes": 525016,
+      "sha256": "2f5b7d345b7627174fb9ff87990a6915f5df06ffa9075688d042f86d52783342"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "7e0ae8bd2bed55d27eb6114dc03441e88c6441c4e3e9f490289dac311d1c0bf3",
+    "motion": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "source/character-candidates23/models/player-01-lod0.glb": "55e8de44a596e6bb2155ff1e52f88f00d21f8d11760ace193d55bb0c837b6be5",
+      "source/character-candidates23/models/player-01-lod1.glb": "6c0b8218fc0c5336573e11ca2197dd14b223561f9c96aab13326d6e225829c01",
+      "source/character-candidates23/models/goalkeeper-lod0.glb": "93b870627e2379d16e21a24ff3bf7238d52360cde28b546078742d35eda14e28",
+      "source/character-candidates23/models/goalkeeper-lod1.glb": "2f5b7d345b7627174fb9ff87990a6915f5df06ffa9075688d042f86d52783342"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-kick-strike-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-get-up-supported-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-dive-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-kick-strike-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-get-up-supported-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-dive-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-kick-strike-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-get-up-supported-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-dive-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-kick-strike-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-get-up-supported-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-dive-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two selected compressed candidates; not the full roster or final delivery. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

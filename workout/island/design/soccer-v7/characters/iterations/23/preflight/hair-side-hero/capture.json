@@ -1,0 +1,156 @@
+{
+  "kind": "candidate23-hair-side-culling-diagnostic-in-memory",
+  "generatedAt": "2026-11-05T02:50:13.128Z",
+  "deviceScaleFactor": 1.5,
+  "models": [
+    {
+      "file": "source/character-candidates23-final/models/player-01-lod0.glb",
+      "bytes": 846160,
+      "sha256": "b350603af6dad478f2aad67bd6700a0151cbada9b0e5e824d997474270753f92"
+    },
+    {
+      "file": "source/character-candidates23-final/models/player-01-lod1.glb",
+      "bytes": 513840,
+      "sha256": "ff0e69886cbb1e7f6e7658c8649ba30118d48851dabf71341c5b5788f714396c"
+    },
+    {
+      "file": "source/character-candidates23-final/models/goalkeeper-lod0.glb",
+      "bytes": 956116,
+      "sha256": "f939126f234bc233d299767d2a4799e48b40e2d90df1bd826760f065879dd1cc"
+    },
+    {
+      "file": "source/character-candidates23-final/models/goalkeeper-lod1.glb",
+      "bytes": 525004,
+      "sha256": "6a44c494045a0a4698e606fa08e5b44494b49bb293dc68a6c624d580178a4bfe"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "4a21d52ac9d1d63d514913d7076cf61f24f8c6ec3c4a444345dd3e4485c0d064",
+    "motion": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "source/character-candidates23-final/models/player-01-lod0.glb": "b350603af6dad478f2aad67bd6700a0151cbada9b0e5e824d997474270753f92",
+      "source/character-candidates23-final/models/player-01-lod1.glb": "ff0e69886cbb1e7f6e7658c8649ba30118d48851dabf71341c5b5788f714396c",
+      "source/character-candidates23-final/models/goalkeeper-lod0.glb": "f939126f234bc233d299767d2a4799e48b40e2d90df1bd826760f065879dd1cc",
+      "source/character-candidates23-final/models/goalkeeper-lod1.glb": "6a44c494045a0a4698e606fa08e5b44494b49bb293dc68a6c624d580178a4bfe"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-front-sided-front-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-front-sided-three-quarter-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-front-sided-front-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-front-sided-three-quarter-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-front-sided-front-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-front-sided-three-quarter-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-front-sided-front-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "front-sided",
+        "side": 0
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-front-sided-three-quarter-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "HairCardsFrontSide-onlyheroandgoalkeepercheck.BaselineDoubleSideimagesareintheimmutable23rosterdirectory.Nogeometry,image,opacityorshadowreceivingchanges."
+}

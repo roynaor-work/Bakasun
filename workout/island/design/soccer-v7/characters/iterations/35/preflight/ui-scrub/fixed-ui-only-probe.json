@@ -1,0 +1,2886 @@
+{
+  "kind": "real-ui-controls-browser-smoke",
+  "generatedAt": "2026-11-05T08:42:46.634Z",
+  "complete": false,
+  "pass": true,
+  "stagedUIOnlyRuntimeOverride": {
+    "bytes": 847895,
+    "sha256": "8ca1f8577d6980b577205f35ecaeff3db1a4d3747721f29dbc0edaa82c9886cc",
+    "sourceSHA256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9",
+    "patch": "Capture selected range value before pausing; compiled runtime substitution only; production unchanged."
+  },
+  "method": "Actual DOM selects, range input, buttons, keyboard and pointer events against the packaged local viewer. Paused initial state; external HTTP blocked. Not a physical-touch-device or phone FPS test.",
+  "auditSource": {
+    "file": "source/audit-ui.mjs",
+    "sha256": "f9747c90cba2b5c4d9300bbb897c7531196381bba278c549cd51a4eba53dd9b8"
+  },
+  "inputs": {
+    "preview.html": {
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    "preview.css": {
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    "preview.js": {
+      "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd"
+    },
+    "vendor/viewer-runtime.js": {
+      "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9"
+    },
+    "vendor/data.js": {
+      "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+    }
+  },
+  "steps": [
+    {
+      "name": "select goalkeeper",
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 0,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35444,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 35426,
+            "lift": 0,
+            "minimumY": 0.002000001883134201,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.8
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.8
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "scrub actual range to half",
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "keeper_catch",
+        "time": 0.6,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36404,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 35426,
+            "lift": 0,
+            "minimumY": 0.002000001883134083,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "toggle play/pause",
+      "state": {
+        "recovery": {
+          "clock": 0.033333333333334304,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36404,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 35426,
+            "lift": 0,
+            "minimumY": 0.0020000018831341964,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0.033333333333334304,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "keyboard orbit and zoom",
+      "cameraBefore": [
+        0.16030568181270374,
+        1.5239180868559568,
+        1.075135804716373
+      ],
+      "cameraAfter": [
+        0.2559172824639834,
+        1.5239180868559568,
+        0.9717730247823797
+      ],
+      "state": {
+        "recovery": {
+          "clock": 0.033333333333334304,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0.550509221029452,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 7,
+        "triangles": 35440,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 35426,
+            "lift": 0,
+            "minimumY": 0.0020000018831341964,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0.033333333333334304,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "pointer drag and wheel zoom",
+      "state": {
+        "recovery": {
+          "clock": 0.033333333333334304,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 7,
+        "triangles": 35440,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod0.glb",
+            "triangles": 35426,
+            "lift": 0,
+            "minimumY": 0.0020000018831341964,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0.033333333333334304,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "advanced lighting LOD wireframe skeleton",
+      "state": {
+        "recovery": {
+          "clock": 0.033333333333334304,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "1",
+        "lighting": "stadium",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 15,
+        "triangles": 25589,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod1.glb",
+            "triangles": 5997,
+            "lift": 0,
+            "minimumY": 0.005128013361245344,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0.033333333333334304,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "landscape layout no horizontal overflow",
+      "state": {
+        "recovery": {
+          "clock": 0.033333333333334304,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0.6,
+                "entrySeconds": 0.6,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "face",
+        "lod": "1",
+        "lighting": "stadium",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 15,
+        "triangles": 25589,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod1.glb",
+            "triangles": 5997,
+            "lift": 0,
+            "minimumY": 0.005128013361245344,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0.033333333333334304,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0.6,
+                    "entrySeconds": 0.6,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.6
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "pitch via actual select",
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 0,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0.6333333333333343,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0.6333333333333343,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "pitch",
+        "lod": "1",
+        "lighting": "stadium",
+        "clipID": "keeper_catch",
+        "time": 0.6333333333333343,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 70,
+        "triangles": 88888,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5781,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              -6,
+              0,
+              -4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -5.9,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -6.1,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5778,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              -1,
+              0,
+              -4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -0.9,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -1.1,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5759,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              4,
+              0,
+              -4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  4.1,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  3.9,
+                  0,
+                  -4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod1.glb",
+            "triangles": 5781,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              -6,
+              0,
+              -10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -5.9,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -6.1,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-02",
+            "path": "models/player-02-lod1.glb",
+            "triangles": 5778,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              -1,
+              0,
+              -10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -0.9,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -1.1,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-03",
+            "path": "models/player-03-lod1.glb",
+            "triangles": 5759,
+            "lift": 0,
+            "minimumY": 0.005128013361245352,
+            "world": [
+              4,
+              0,
+              -10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  4.1,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  3.9,
+                  0,
+                  -10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5780,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              -4,
+              0,
+              4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -4.1,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -3.9,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5773,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              1,
+              0,
+              4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.9,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  1.1,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5777,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              6,
+              0,
+              4
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  5.9,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  6.1,
+                  0,
+                  4
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-04",
+            "path": "models/player-04-lod1.glb",
+            "triangles": 5780,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              -4,
+              0,
+              10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  -4.1,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -3.9,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-05",
+            "path": "models/player-05-lod1.glb",
+            "triangles": 5773,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              1,
+              0,
+              10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.9,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  1.1,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          },
+          {
+            "id": "player-06",
+            "path": "models/player-06-lod1.glb",
+            "triangles": 5777,
+            "lift": 0,
+            "minimumY": 0.005128013361245234,
+            "world": [
+              6,
+              0,
+              10
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 0,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0.6333333333333343,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0.6333333333333343,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0.6333333333333343,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.6333333333333343,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  5.9,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  6.1,
+                  0,
+                  10
+                ],
+                "release": 0.5666666666666657
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "return from pitch and reset",
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 1,
+          "activeBaseClip": "keeper_catch",
+          "baseSeconds": 0,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "keeper_catch",
+              "sampleSeconds": 0,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": null,
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "keeper_catch",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            }
+          ],
+          "requests": []
+        },
+        "characterID": "goalkeeper",
+        "view": "body",
+        "lod": "1",
+        "lighting": "stadium",
+        "clipID": "keeper_catch",
+        "time": 0,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 17,
+        "triangles": 25593,
+        "models": [
+          {
+            "id": "goalkeeper",
+            "path": "models/goalkeeper-lod1.glb",
+            "triangles": 5997,
+            "lift": 0,
+            "minimumY": 0.005128013361245351,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "keeper_catch",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 1,
+              "activeBaseClip": "keeper_catch",
+              "baseSeconds": 0,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "keeper_catch",
+                  "sampleSeconds": 0,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": null,
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "keeper_catch",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                }
+              ],
+              "requests": []
+            },
+            "activeBaseClip": "keeper_catch",
+            "activeBaseSeconds": 0,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "keeper_catch/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.2
+              },
+              {
+                "bone": "RightFoot",
+                "key": "keeper_catch/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.2
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "remoteRequests": []
+}

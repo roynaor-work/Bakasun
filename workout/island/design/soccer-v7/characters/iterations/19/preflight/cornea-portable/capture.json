@@ -1,0 +1,356 @@
+{
+  "kind": "candidate19-corneal-layer-diagnostic-in-memory",
+  "generatedAt": "2026-11-05T02:22:39.583Z",
+  "deviceScaleFactor": 1.5,
+  "models": [
+    {
+      "file": "source/character-candidates19/models/player-01-lod0.glb",
+      "bytes": 817064,
+      "sha256": "9f3033bb856f15017e6b58c4c63058fc6d26cfbdc482d860b23eaeb443e19779"
+    },
+    {
+      "file": "source/character-candidates19/models/player-01-lod1.glb",
+      "bytes": 491448,
+      "sha256": "96f5d95fdf6b596caec9d84be10544accd91e7e12fbf0f6ee8f14d6fc792854d"
+    },
+    {
+      "file": "source/character-candidates19/models/goalkeeper-lod0.glb",
+      "bytes": 923204,
+      "sha256": "19947f3dda7cdf800591ea1de0134194b47ed36d457676dfc799498f3417a705"
+    },
+    {
+      "file": "source/character-candidates19/models/goalkeeper-lod1.glb",
+      "bytes": 501188,
+      "sha256": "549ef7b341c04c79b554c57b73a2108be3a8622f569c96f95b82eff874f34978"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "8a888744cb51f5c7595ab6131db97f172598900941073d9747ad3b19ffe81ded",
+    "motion": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "source/character-candidates19/models/player-01-lod0.glb": "9f3033bb856f15017e6b58c4c63058fc6d26cfbdc482d860b23eaeb443e19779",
+      "source/character-candidates19/models/player-01-lod1.glb": "96f5d95fdf6b596caec9d84be10544accd91e7e12fbf0f6ee8f14d6fc792854d",
+      "source/character-candidates19/models/goalkeeper-lod0.glb": "19947f3dda7cdf800591ea1de0134194b47ed36d457676dfc799498f3417a705",
+      "source/character-candidates19/models/goalkeeper-lod1.glb": "549ef7b341c04c79b554c57b73a2108be3a8622f569c96f95b82eff874f34978"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-portable-opaque-atlas-front-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-portable-opaque-atlas-three-quarter-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-dielectric-add-085-front-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "player-01-dielectric-add-085-three-quarter-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-portable-opaque-atlas-front-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-portable-opaque-atlas-three-quarter-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-dielectric-add-085-front-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "player-01-dielectric-add-085-three-quarter-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-portable-opaque-atlas-front-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-portable-opaque-atlas-three-quarter-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-dielectric-add-085-front-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        390,
+        844
+      ],
+      "file": "goalkeeper-dielectric-add-085-three-quarter-390x844.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-portable-opaque-atlas-front-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "portable-opaque-atlas",
+        "color": 16777215,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 1,
+        "opacity": 1,
+        "blending": 1,
+        "atlas": true
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-portable-opaque-atlas-three-quarter-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": 0.13,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-dielectric-add-085-front-844x390.png"
+    },
+    {
+      "id": "goalkeeper",
+      "mode": {
+        "id": "dielectric-add-085",
+        "color": 0,
+        "emissive": 0,
+        "metalness": 0,
+        "roughness": 0.02,
+        "opacity": 0.85,
+        "blending": 2
+      },
+      "orbit": -0.7,
+      "zoom": 1,
+      "size": [
+        844,
+        390
+      ],
+      "file": "goalkeeper-dielectric-add-085-three-quarter-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Corneaonlymaskandmaterialablation.Noimagepaintedhighlights.Notfinalmaterialacceptance."
+}

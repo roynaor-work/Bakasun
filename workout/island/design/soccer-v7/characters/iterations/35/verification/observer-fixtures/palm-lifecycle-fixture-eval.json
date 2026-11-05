@@ -1,0 +1,531 @@
+{
+  "pass": true,
+  "evalFactory": true,
+  "sourceSha256": "a02f8bd9170ffb108577cd4fa71620180b610a576b545948bc90b643c881c8b8",
+  "checks": {
+    "nativePlantAcceptsActualPatchPositiveSolver": true,
+    "nativePositiveDtIncrementsCount": true,
+    "nativeDtZeroKeepsCount": true,
+    "nativeDtZeroCounterIncrementRejects": true,
+    "nativePositiveDtStalledCounterRejects": true,
+    "nativeExpectedStateMissingRejects": true,
+    "nativeMissingCalibrationRejects": true,
+    "missingPublicSupportsArrayRejects": true,
+    "genuineSameClipActivatedBodyRequestRestartAccepts": true,
+    "nativeNeverPositiveCountRejects": true,
+    "nativeWrongPhaseRejects": true,
+    "nativeAnchorMutationRejectsWithinGeometryTolerance": true,
+    "nativeModelCalibrationMismatchRejects": true,
+    "nativeSourceContactMismatchRejects": true,
+    "nativeWeightClockMismatchRejects": true,
+    "nativeMissingAdmissionClockRejects": true,
+    "nativeMissingCreationClockRejects": true,
+    "nativeMissingCreationSourceTimeRejects": true,
+    "nativeWrongCalibrationHelperSourceRejects": true,
+    "nativeStaleSolverClockRejects": true,
+    "nativeReleaseWeightFollowsSourceClock": true,
+    "nativeApproachTravelIsDescriptive": true,
+    "bridgeFullHoldAndReleaseFromPlanAccepts": true,
+    "bridgeMissingExpectedHoldStateRejects": true,
+    "bridgeWrongDurationRejects": true,
+    "bridgeWrongHoldEndRejects": true,
+    "bridgeWrongReleaseEndRejects": true,
+    "bridgeWrongElapsedRejects": true,
+    "bridgeMissingStartClockRejects": true,
+    "bridgeWrongStartClockRejects": true,
+    "bridgeWrongReleaseWeightRejects": true,
+    "bridgeMutatedLifecycleRejects": true,
+    "bridgeMissingLifecycleRejectsEvenMatchingNativeBase": true,
+    "bridgeInheritedPhysicalAnchorMutationRejectsAfterNative": true,
+    "bridgeInheritedPhysicalAnchorSurvivesNativeHandoff": true,
+    "bridgeImmutablePlanMutationRejects": true,
+    "nativeAnchorCannotRekeyByChangingCreationClock": true,
+    "zeroCountCannotReturnValidatedBone": true
+  },
+  "evidence": {
+    "nativePlantAcceptsActualPatchPositiveSolver": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativePositiveDtIncrementsCount": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeDtZeroKeepsCount": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeDtZeroCounterIncrementRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-solver-count-progression"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativePositiveDtStalledCounterRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-solver-count-progression"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeExpectedStateMissingRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-expected-support-missing"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "nativeMissingCalibrationRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "missing-physical-palm-calibration"
+      ],
+      "unsupportedKinds": [
+        "physical-palm-calibration-helper-source-binding"
+      ],
+      "expectedSamples": 1,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "missingPublicSupportsArrayRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [],
+      "unsupportedKinds": [
+        "physical-palm-public-supports-missing"
+      ],
+      "expectedSamples": 0,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "genuineSameClipActivatedBodyRequestRestartAccepts": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeNeverPositiveCountRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "nativeWrongPhaseRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-phase-weight-mismatch",
+        "physical-palm-active-patch-contact"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": []
+    },
+    "nativeAnchorMutationRejectsWithinGeometryTolerance": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-immutable-state-mutated"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeModelCalibrationMismatchRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "palm-calibration-model-or-kind"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "nativeSourceContactMismatchRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-source-contact",
+        "physical-palm-phase-weight-mismatch",
+        "physical-palm-wrong-active-contact"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeWeightClockMismatchRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-phase-weight-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 0,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "nativeMissingAdmissionClockRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-native-timing-schema"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeMissingCreationClockRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-native-timing-schema"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeMissingCreationSourceTimeRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-native-timing-schema"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeWrongCalibrationHelperSourceRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [],
+      "unsupportedKinds": [
+        "physical-palm-calibration-helper-source-binding"
+      ],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeStaleSolverClockRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-solver-execution-missing"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "nativeReleaseWeightFollowsSourceClock": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": []
+    },
+    "nativeApproachTravelIsDescriptive": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 0,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "bridgeFullHoldAndReleaseFromPlanAccepts": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": []
+    },
+    "bridgeMissingExpectedHoldStateRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-expected-support-missing"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "bridgeWrongDurationRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeWrongHoldEndRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeWrongReleaseEndRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeWrongElapsedRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeMissingStartClockRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-timing-schema"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeWrongStartClockRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeWrongReleaseWeightRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-phase-weight-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 0,
+      "observedSamples": 0,
+      "positiveSolverSamples": 0,
+      "validatedBones": []
+    },
+    "bridgeMutatedLifecycleRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-lifecycle-mutated",
+        "physical-palm-bridge-plan-mismatch"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeMissingLifecycleRejectsEvenMatchingNativeBase": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-lifecycle-missing"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 1,
+      "observedSamples": 1,
+      "positiveSolverSamples": 1,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeInheritedPhysicalAnchorMutationRejectsAfterNative": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-immutable-state-mutated"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "bridgeInheritedPhysicalAnchorSurvivesNativeHandoff": {
+      "expectedPass": true,
+      "actualPass": true,
+      "errorKinds": [],
+      "unsupportedKinds": [],
+      "expectedSamples": 4,
+      "observedSamples": 4,
+      "positiveSolverSamples": 4,
+      "validatedBones": []
+    },
+    "bridgeImmutablePlanMutationRejects": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-bridge-plan-mutated"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "nativeAnchorCannotRekeyByChangingCreationClock": {
+      "expectedPass": false,
+      "actualPass": false,
+      "errorKinds": [
+        "physical-palm-continuing-state-rekeyed"
+      ],
+      "unsupportedKinds": [],
+      "expectedSamples": 2,
+      "observedSamples": 2,
+      "positiveSolverSamples": 2,
+      "validatedBones": [
+        "LeftHand"
+      ]
+    },
+    "zeroCountValidatedBones": {
+      "returned": [],
+      "reportPass": false
+    }
+  },
+  "bugs": [],
+  "method": "Independent public createPhysicalPalmObserver.sample lifecycle fixtures with a real local Three r160 mixed Hand/ForeArm SkinnedMesh and actual anatomical triangle patch atY1.5mm. No browser and no production geometry helper."
+}

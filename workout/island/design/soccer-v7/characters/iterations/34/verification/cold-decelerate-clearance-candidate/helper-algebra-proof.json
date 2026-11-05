@@ -1,0 +1,20 @@
+{
+  "kind": "read-only-cold-clearance-algebra-check",
+  "pass": true,
+  "cases": 202,
+  "maximumBoundError": 8.326672684688674e-17,
+  "maximumPostBoundError": 6.245004513516506e-17,
+  "maximumXZError": 0,
+  "checks": [
+    "Exact Three rotated bound of full Foot-local support hull",
+    "Sole→ankle offset rotates with actual foot orientation",
+    "Input immutability",
+    "Plant exclusion",
+    "Vertical-only correction",
+    "Idempotence"
+  ],
+  "limits": [
+    "Algebra proof only; actual post-IK mesh floor and angular/drift continuity require browser proof.",
+    "The hard max/min hull support correction is continuous but has derivative changes at active vertices and at zero lift."
+  ]
+}

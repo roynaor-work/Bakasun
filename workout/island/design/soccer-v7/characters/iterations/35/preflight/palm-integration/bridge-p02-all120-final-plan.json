@@ -1,0 +1,71 @@
+{
+  "kind": "fixedInheritedHeelContactCorrection",
+  "keys": [
+    {
+      "elapsedSeconds": 0,
+      "degrees": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "elapsedSeconds": 0.125,
+      "degrees": [
+        3.0951834798045863,
+        0.1824558652477417,
+        1.7625837513525058,
+        -7.976945741965256,
+        6.2640278765232065
+      ]
+    },
+    {
+      "elapsedSeconds": 0.2,
+      "degrees": [
+        4.527811261885566,
+        1.729764008590982,
+        2.578408230549951,
+        -11.669132056817746,
+        9.163377922228234
+      ]
+    },
+    {
+      "elapsedSeconds": 0.35,
+      "degrees": [
+        1.5645060644374618,
+        5.170552412576722,
+        0.21974923492769038,
+        15.411348418559923,
+        -18.764621713115808
+      ]
+    },
+    {
+      "elapsedSeconds": 0.3625,
+      "degrees": [
+        1.6963548723816715,
+        5.969186336303162,
+        0.15150100010065726,
+        16.19492713601877,
+        -19.572723554416275
+      ]
+    },
+    {
+      "elapsedSeconds": 0.4,
+      "degrees": [
+        1.6083384352804042,
+        7.881809524425935,
+        -0.21703946796532156,
+        20.42625221029654,
+        -23.93647349743879
+      ]
+    }
+  ],
+  "verticalCompliancePeakMeters": 0.00029121116187861944,
+  "verticalComplianceRampSeconds": 0.2,
+  "pairedReferenceBlend": 0,
+  "interpolation": "smoothstep-per-key-no-overshoot",
+  "scope": "bridgeLifecycleOnly",
+  "internalBoundNote": "Late ForeArm/pole continuation20.426/\u221223.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+}

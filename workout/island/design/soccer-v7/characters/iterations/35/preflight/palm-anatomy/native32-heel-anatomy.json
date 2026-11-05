@@ -1,0 +1,2884 @@
+{
+  "kind": "read-only-native32-bounded-proximal-heel-support-anatomy",
+  "domainMeters": {
+    "x": [
+      -0.015,
+      0.015
+    ],
+    "y": [
+      -0.045,
+      -0.02
+    ]
+  },
+  "normalZMaximum": -0.5,
+  "minimumCornerHandInfluence": 0.5,
+  "minimumBaryHandInfluence": 0.8,
+  "pressureDirection": [
+    0.0,
+    0.17364817766693033,
+    -0.984807753012208
+  ],
+  "scope": "Fixed geometric pressure direction and anatomical region; not a dynamic-feasibility or contact pass. No production selector was called.",
+  "rows": [
+    {
+      "id": "player-01",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "point": [
+        0.0036400371789932218,
+        -0.03293398857116703,
+        -0.03162262588739395
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.2361764805870577,
+        -0.015535153848864763,
+        -0.9715859864224078
+      ],
+      "handInfluence": 0.8984745144844055,
+      "triangle": [
+        722,
+        701,
+        723
+      ],
+      "material": "Skin",
+      "supportScore": 0.025423280045823452,
+      "v1": {
+        "point": [
+          -0.0025000000000000005,
+          -0.03,
+          -0.027083465232731738
+        ],
+        "handInfluence": 0.8653896597709974,
+        "heelSupportBelowRayMeters": 0.003960718836200562
+      },
+      "v2": {
+        "point": [
+          6.400864952936541e-19,
+          -0.035,
+          -0.02861781824750421
+        ],
+        "handInfluence": 0.9139452025505551,
+        "heelSupportBelowRayMeters": 0.003317916979729628
+      },
+      "model": "models/player-01-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013471525311470028,
+          -0.05889920234680179,
+          -0.03359732776880264
+        ],
+        [
+          0.00162331402301788,
+          -0.049571909904480016,
+          -0.030866362154483795
+        ],
+        [
+          0.0036400371789932218,
+          -0.03293398857116703,
+          -0.03162262588739395
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17347152531147003,
+          0.7311007976531982,
+          -0.03359732776880264
+        ],
+        [
+          0.16162331402301788,
+          0.74042809009552,
+          -0.030866362154483795
+        ],
+        [
+          0.16364003717899323,
+          0.757066011428833,
+          -0.03162262588739395
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9976595044136047,
+        0.8984745144844055
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-01",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "point": [
+        -0.0038659238815307584,
+        -0.034404554367065465,
+        -0.03212680667638779
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.2270148268957808,
+        0.4684100424181446,
+        -0.8538479375927019
+      ],
+      "handInfluence": 0.9150347113609314,
+      "triangle": [
+        1162,
+        1124,
+        1163
+      ],
+      "material": "Skin",
+      "supportScore": 0.025664440125147313,
+      "v1": {
+        "point": [
+          0.0024999999999999996,
+          -0.03,
+          -0.027057367396076514
+        ],
+        "handInfluence": 0.8612541927531955,
+        "heelSupportBelowRayMeters": 0.0042275802673993335
+      },
+      "v2": {
+        "point": [
+          -8.689911565998878e-19,
+          -0.035,
+          -0.02866323687455469
+        ],
+        "handInfluence": 0.9042760391933685,
+        "heelSupportBelowRayMeters": 0.0035143484430030063
+      },
+      "model": "models/player-01-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.007941361665725705,
+          -0.017724611759185827,
+          -0.024059951305389404
+        ],
+        [
+          0.01054518282413483,
+          -0.02116981983184818,
+          -0.021034881472587585
+        ],
+        [
+          -0.0038659238815307584,
+          -0.034404554367065465,
+          -0.03212680667638779
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.1679413616657257,
+          0.7722753882408142,
+          -0.024059951305389404
+        ],
+        [
+          -0.14945481717586517,
+          0.7688301801681519,
+          -0.021034881472587585
+        ],
+        [
+          -0.16386592388153076,
+          0.7555954456329346,
+          -0.03212680667638779
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.7326555252075195,
+        0.771429181098938,
+        0.9150347113609314
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-01",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "point": [
+        -0.0053592956066131625,
+        -0.032047190666198766,
+        -0.02948325127363205
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.3859314335833377,
+        -0.13624152649941354,
+        -0.9124117354733112
+      ],
+      "handInfluence": 0.8885335326194763,
+      "triangle": [
+        269,
+        259,
+        271
+      ],
+      "material": "Skin",
+      "supportScore": 0.023470398179749826,
+      "v1": {
+        "point": [
+          -0.0024999999999999957,
+          -0.03,
+          -0.02755383389041542
+        ],
+        "handInfluence": 0.860164846851738,
+        "heelSupportBelowRayMeters": 0.0015446142692661022
+      },
+      "v2": {
+        "point": [
+          -4.861254800990095e-19,
+          -0.034999999999999996,
+          -0.027951365208575767
+        ],
+        "handInfluence": 0.8701432513267362,
+        "heelSupportBelowRayMeters": 0.002021363233411278
+      },
+      "model": "models/player-01-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.025585409402847287,
+          -0.09158525705337528,
+          -0.03368198871612549
+        ],
+        [
+          0.006817039251327511,
+          -0.07441244363784794,
+          -0.028307601809501648
+        ],
+        [
+          -0.0053592956066131625,
+          -0.032047190666198766,
+          -0.02948325127363205
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.1855854094028473,
+          0.6984147429466248,
+          -0.03368198871612549
+        ],
+        [
+          0.16681703925132751,
+          0.7155875563621521,
+          -0.028307601809501648
+        ],
+        [
+          0.15464070439338684,
+          0.7579528093338013,
+          -0.02948325127363205
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.8885335326194763
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-01",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "point": [
+        -0.005722846984863278,
+        -0.033096828460693395,
+        -0.03162460774183273
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.6394727568699932,
+        -0.07227991798303121,
+        -0.7654085227363598
+      ],
+      "handInfluence": 0.8978215456008911,
+      "triangle": [
+        417,
+        391,
+        419
+      ],
+      "material": "Skin",
+      "supportScore": 0.02539695494137237,
+      "v1": {
+        "point": [
+          0.0025000000000000014,
+          -0.03,
+          -0.025047142278571514
+        ],
+        "handInfluence": 0.854416512137176,
+        "heelSupportBelowRayMeters": 0.005939780364643189
+      },
+      "v2": {
+        "point": [
+          1.7622194119954157e-18,
+          -0.035,
+          -0.026663641527673816
+        ],
+        "handInfluence": 0.8711648580914679,
+        "heelSupportBelowRayMeters": 0.005216080259723484
+      },
+      "model": "models/player-01-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.011282030344009403,
+          -0.022264161109924352,
+          -0.018440574407577515
+        ],
+        [
+          -0.01647162079811096,
+          -0.0890660667419434,
+          -0.0353194922208786
+        ],
+        [
+          -0.005722846984863278,
+          -0.033096828460693395,
+          -0.03162460774183273
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.1487179696559906,
+          0.7677358388900757,
+          -0.018440574407577515
+        ],
+        [
+          -0.17647162079811096,
+          0.7009339332580566,
+          -0.0353194922208786
+        ],
+        [
+          -0.16572284698486328,
+          0.7569031715393066,
+          -0.03162460774183273
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8041841387748718,
+        1,
+        0.8978215456008911
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-02",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "point": [
+        0.003677379488945004,
+        -0.032836654186248815,
+        -0.031554415822029114
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.2255714954957694,
+        -0.0021106617889906087,
+        -0.9742243301861304
+      ],
+      "handInfluence": 0.9143768548965454,
+      "triangle": [
+        725,
+        703,
+        726
+      ],
+      "material": "Skin",
+      "supportScore": 0.02537300818318407,
+      "v1": {
+        "point": [
+          -0.0025,
+          -0.03,
+          -0.026884738419474905
+        ],
+        "handInfluence": 0.8819838979031656,
+        "heelSupportBelowRayMeters": 0.004106154679987921
+      },
+      "v2": {
+        "point": [
+          7.963765104238537e-19,
+          -0.035,
+          -0.02854597871135042
+        ],
+        "handInfluence": 0.9289374822603561,
+        "heelSupportBelowRayMeters": 0.0033383932492673032
+      },
+      "model": "models/player-02-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013284187912940976,
+          -0.05889407634735111,
+          -0.03372231870889664
+        ],
+        [
+          0.0016369932889938321,
+          -0.05022243499755863,
+          -0.03104431927204132
+        ],
+        [
+          0.003677379488945004,
+          -0.032836654186248815,
+          -0.031554415822029114
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17328418791294098,
+          0.7311059236526489,
+          -0.03372231870889664
+        ],
+        [
+          0.16163699328899384,
+          0.7397775650024414,
+          -0.03104431927204132
+        ],
+        [
+          0.163677379488945,
+          0.7571633458137512,
+          -0.031554415822029114
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.9143768548965454
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-02",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "point": [
+        -0.0038891696929931607,
+        -0.03440944194793705,
+        -0.03210701793432236
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.7096836337462709,
+        -0.04514797738805065,
+        -0.7030724003475437
+      ],
+      "handInfluence": 0.9318255186080933,
+      "triangle": [
+        1161,
+        1128,
+        1162
+      ],
+      "material": "Skin",
+      "supportScore": 0.025644103299027367,
+      "v1": {
+        "point": [
+          0.0024999999999999996,
+          -0.03,
+          -0.02687305448761954
+        ],
+        "handInfluence": 0.8754439196300605,
+        "heelSupportBelowRayMeters": 0.004388756222508044
+      },
+      "v2": {
+        "point": [
+          1.3910954865472685e-19,
+          -0.035,
+          -0.028496740833821647
+        ],
+        "handInfluence": 0.9187318105891854,
+        "heelSupportBelowRayMeters": 0.0036579782086427967
+      },
+      "model": "models/player-02-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.003167155981063846,
+          -0.045291461944580114,
+          -0.02428554743528366
+        ],
+        [
+          -0.005164411067962643,
+          -0.05379311084747318,
+          -0.03214952349662781
+        ],
+        [
+          -0.0038891696929931607,
+          -0.03440944194793705,
+          -0.03210701793432236
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.15683284401893616,
+          0.7447085380554199,
+          -0.02428554743528366
+        ],
+        [
+          -0.16516441106796265,
+          0.7362068891525269,
+          -0.03214952349662781
+        ],
+        [
+          -0.16388916969299316,
+          0.755590558052063,
+          -0.03210701793432236
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.9716616272926331,
+        1,
+        0.9318255186080933
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-02",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "point": [
+        -0.006791729331016544,
+        -0.02926019668579105,
+        -0.025949627161026
+      ],
+      "barycentric": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "normal": [
+        0.20512195667801592,
+        0.23319998196578753,
+        -0.9505486580389972
+      ],
+      "handInfluence": 0.8448663353919983,
+      "triangle": [
+        274,
+        275,
+        288
+      ],
+      "material": "Skin",
+      "supportScore": 0.020474414183291007,
+      "v1": {
+        "point": [
+          -0.0024999999999999988,
+          -0.029999999999999995,
+          -0.02520499847485331
+        ],
+        "handInfluence": 0.8182999401335801,
+        "heelSupportBelowRayMeters": 0.0008617816006025007
+      },
+      "v2": {
+        "point": [
+          3.8708396760465594e-19,
+          -0.03500000000000001,
+          -0.025892175309631508
+        ],
+        "handInfluence": 0.8282664255544743,
+        "heelSupportBelowRayMeters": 0.0010532854143571954
+      },
+      "model": "models/player-02-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.015509288907051083,
+          -0.0857561016082764,
+          -0.034997470676898956
+        ],
+        [
+          -0.006791729331016544,
+          -0.02926019668579105,
+          -0.025949627161026
+        ],
+        [
+          0.01270572483539581,
+          -0.0060671949386597035,
+          -0.01605222374200821
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.1755092889070511,
+          0.7042438983917236,
+          -0.034997470676898956
+        ],
+        [
+          0.15320827066898346,
+          0.760739803314209,
+          -0.025949627161026
+        ],
+        [
+          0.1727057248353958,
+          0.7839328050613403,
+          -0.01605222374200821
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.8448663353919983,
+        0.5763142108917236
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-02",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "point": [
+        0.0062187796831131015,
+        -0.028792955875396764,
+        -0.02951779216527939
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.8121377652212813,
+        -0.28095753502528414,
+        -0.511365929461378
+      ],
+      "handInfluence": 0.8677537441253662,
+      "triangle": [
+        442,
+        414,
+        443
+      ],
+      "material": "Skin",
+      "supportScore": 0.02406950625876317,
+      "v1": {
+        "point": [
+          0.0025000000000000005,
+          -0.03,
+          -0.028142808066155194
+        ],
+        "handInfluence": 0.8502395415814034,
+        "heelSupportBelowRayMeters": 0.0015636960136869403
+      },
+      "v2": {
+        "point": [
+          -8.808065869044004e-19,
+          -0.035,
+          -0.02845864280283775
+        ],
+        "handInfluence": 0.85852002941638,
+        "heelSupportBelowRayMeters": 0.002120900404666042
+      },
+      "model": "models/player-02-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.0062187796831131015,
+          -0.028792955875396764,
+          -0.02951779216527939
+        ],
+        [
+          -0.013958331346511837,
+          -0.08928183555603031,
+          -0.02832840383052826
+        ],
+        [
+          -0.018418546915054318,
+          -0.08864466190338138,
+          -0.03576207906007767
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.1537812203168869,
+          0.7612070441246033,
+          -0.02951779216527939
+        ],
+        [
+          -0.17395833134651184,
+          0.7007181644439697,
+          -0.02832840383052826
+        ],
+        [
+          -0.17841854691505432,
+          0.7013553380966187,
+          -0.03576207906007767
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8677537441253662,
+        1,
+        1
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-03",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "point": [
+        0.003123369216918942,
+        -0.03284851551055912,
+        -0.03192486613988876
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.2811700995955647,
+        -0.023841969493175432,
+        -0.9593617334374489
+      ],
+      "handInfluence": 0.8763645887374878,
+      "triangle": [
+        720,
+        702,
+        721
+      ],
+      "material": "Skin",
+      "supportScore": 0.02573577083096689,
+      "v1": {
+        "point": [
+          -0.0024999999999999996,
+          -0.03,
+          -0.02779037347941876
+        ],
+        "handInfluence": 0.8459438170673083,
+        "heelSupportBelowRayMeters": 0.0035770408993383573
+      },
+      "v2": {
+        "point": [
+          6.42193963234365e-19,
+          -0.035,
+          -0.02934024406766389
+        ],
+        "handInfluence": 0.8941285663755939,
+        "heelSupportBelowRayMeters": 0.0029189572162036104
+      },
+      "model": "models/player-03-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.011855837106704709,
+          -0.05812231540679935,
+          -0.03385607898235321
+        ],
+        [
+          0.001192148923873898,
+          -0.048928060531616246,
+          -0.03095925599336624
+        ],
+        [
+          0.003123369216918942,
+          -0.03284851551055912,
+          -0.03192486613988876
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.1718558371067047,
+          0.7318776845932007,
+          -0.03385607898235321
+        ],
+        [
+          0.1611921489238739,
+          0.7410719394683838,
+          -0.03095925599336624
+        ],
+        [
+          0.16312336921691895,
+          0.7571514844894409,
+          -0.03192486613988876
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9917136430740356,
+        0.8763645887374878
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-03",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "point": [
+        -0.005393114089965817,
+        -0.02944795131683353,
+        -0.03053942322731018
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.3185080466242879,
+        0.3492535795924476,
+        -0.8812346800809886
+      ],
+      "handInfluence": 0.8326886892318726,
+      "triangle": [
+        1166,
+        1130,
+        1167
+      ],
+      "material": "Skin",
+      "supportScore": 0.02496187768458355,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.03,
+          -0.02740438256051632
+        ],
+        "handInfluence": 0.8377004226996164,
+        "heelSupportBelowRayMeters": 0.0031832746024824457
+      },
+      "v2": {
+        "point": [
+          3.8027145113847116e-19,
+          -0.035,
+          -0.0298732502417682
+        ],
+        "handInfluence": 0.8829550525731237,
+        "heelSupportBelowRayMeters": 0.001620155457158972
+      },
+      "model": "models/player-03-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.002286370992660519,
+          -0.00950602531433109,
+          -0.02151309698820114
+        ],
+        [
+          0.011022213697433475,
+          -0.021219291687011754,
+          -0.02134516090154648
+        ],
+        [
+          -0.005393114089965817,
+          -0.02944795131683353,
+          -0.03053942322731018
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.16228637099266052,
+          0.780493974685669,
+          -0.02151309698820114
+        ],
+        [
+          -0.14897778630256653,
+          0.7687807083129883,
+          -0.02134516090154648
+        ],
+        [
+          -0.16539311408996582,
+          0.7605520486831665,
+          -0.03053942322731018
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.6102688312530518,
+        0.7582345604896545,
+        0.8326886892318726
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-03",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "point": [
+        -0.005770075917243961,
+        -0.031947770118713414,
+        -0.029844678938388824
+      ],
+      "barycentric": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "normal": [
+        0.27830653364207397,
+        0.20379600522953017,
+        -0.938622747212435
+      ],
+      "handInfluence": 0.8724174499511719,
+      "triangle": [
+        272,
+        274,
+        288
+      ],
+      "material": "Skin",
+      "supportScore": 0.02384359914304887,
+      "v1": {
+        "point": [
+          -0.002499999999999999,
+          -0.03,
+          -0.028452179911004804
+        ],
+        "handInfluence": 0.8332078164225567,
+        "heelSupportBelowRayMeters": 0.0010331171066010544
+      },
+      "v2": {
+        "point": [
+          2.4366866001236412e-18,
+          -0.03500000000000001,
+          -0.02879652879132159
+        ],
+        "handInfluence": 0.8420471698290217,
+        "heelSupportBelowRayMeters": 0.0015622405478586641
+      },
+      "model": "models/player-03-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.01504756152629852,
+          -0.08260677099227909,
+          -0.034671343863010406
+        ],
+        [
+          -0.005770075917243961,
+          -0.031947770118713414,
+          -0.029844678938388824
+        ],
+        [
+          0.010262858271598813,
+          -0.004162945747375524,
+          -0.019058123230934143
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17504756152629852,
+          0.707393229007721,
+          -0.034671343863010406
+        ],
+        [
+          0.15422992408275604,
+          0.7580522298812866,
+          -0.029844678938388824
+        ],
+        [
+          0.17026285827159882,
+          0.7858370542526245,
+          -0.019058123230934143
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.8724174499511719,
+        0.5710998773574829
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-03",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "point": [
+        0.00704387187957764,
+        -0.028380193710327184,
+        -0.029424965381622314
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        -0.4322407468640801,
+        0.24073280351275003,
+        -0.8690314459576672
+      ],
+      "handInfluence": 0.8348759412765503,
+      "triangle": [
+        418,
+        419,
+        434
+      ],
+      "material": "Skin",
+      "supportScore": 0.024049765120304687,
+      "v1": {
+        "point": [
+          0.002500000000000001,
+          -0.03,
+          -0.027613631542156753
+        ],
+        "handInfluence": 0.821527350067518,
+        "heelSupportBelowRayMeters": 0.0020650920187741707
+      },
+      "v2": {
+        "point": [
+          -7.885206001158953e-19,
+          -0.035,
+          -0.027755239939615765
+        ],
+        "handInfluence": 0.8335184755078258,
+        "heelSupportBelowRayMeters": 0.002793875859399556
+      },
+      "model": "models/player-03-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.00704387187957764,
+          -0.028380193710327184,
+          -0.029424965381622314
+        ],
+        [
+          -0.014823045730590817,
+          -0.08491519927978519,
+          -0.03420966863632202
+        ],
+        [
+          -0.01704750597476959,
+          -0.016334512233734166,
+          -0.014105536043643951
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.15295612812042236,
+          0.7616198062896729,
+          -0.029424965381622314
+        ],
+        [
+          -0.17482304573059082,
+          0.7050848007202148,
+          -0.03420966863632202
+        ],
+        [
+          -0.1770475059747696,
+          0.7736654877662659,
+          -0.014105536043643951
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8348759412765503,
+        1,
+        0.6670026183128357
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-04",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "point": [
+        0.0036435985565185514,
+        -0.032976069450378453,
+        -0.03161916136741638
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.23853329919482918,
+        -0.018462353521402883,
+        -0.9709588079201305
+      ],
+      "handInfluence": 0.897695004940033,
+      "triangle": [
+        725,
+        704,
+        726
+      ],
+      "material": "Skin",
+      "supportScore": 0.025412560891699392,
+      "v1": {
+        "point": [
+          -0.002500000000000001,
+          -0.03,
+          -0.027073233581065614
+        ],
+        "handInfluence": 0.8642667979098954,
+        "heelSupportBelowRayMeters": 0.00396007589196342
+      },
+      "v2": {
+        "point": [
+          -1.0251846374736332e-18,
+          -0.035,
+          -0.02860313548345974
+        ],
+        "handInfluence": 0.9130215145520664,
+        "heelSupportBelowRayMeters": 0.003321657525472213
+      },
+      "model": "models/player-04-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013520892858505246,
+          -0.05890921592712406,
+          -0.033552587032318115
+        ],
+        [
+          0.0016681516170501676,
+          -0.04945222377777103,
+          -0.0308205708861351
+        ],
+        [
+          0.0036435985565185514,
+          -0.032976069450378453,
+          -0.03161916136741638
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17352089285850525,
+          0.731090784072876,
+          -0.033552587032318115
+        ],
+        [
+          0.16166815161705017,
+          0.740547776222229,
+          -0.0308205708861351
+        ],
+        [
+          0.16364359855651855,
+          0.7570239305496216,
+          -0.03161916136741638
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9974600672721863,
+        0.897695004940033
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-04",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "point": [
+        -0.003904607295989987,
+        -0.03444717168807987,
+        -0.03212352842092514
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.22373837780293096,
+        0.46733570761166393,
+        -0.8553002248855184
+      ],
+      "handInfluence": 0.914189338684082,
+      "triangle": [
+        1157,
+        1123,
+        1158
+      ],
+      "material": "Skin",
+      "supportScore": 0.025653811253620144,
+      "v1": {
+        "point": [
+          0.0024999999999999996,
+          -0.03,
+          -0.02711648480835117
+        ],
+        "handInfluence": 0.8606753312084955,
+        "heelSupportBelowRayMeters": 0.004158732109926063
+      },
+      "v2": {
+        "point": [
+          -5.171822181698265e-19,
+          -0.035,
+          -0.028670121045207633
+        ],
+        "handInfluence": 0.9034729176628825,
+        "heelSupportBelowRayMeters": 0.0034969399868437605
+      },
+      "model": "models/player-04-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.007981609702110287,
+          -0.017802872657775914,
+          -0.024095594882965088
+        ],
+        [
+          0.010217849016189579,
+          -0.02166972398757938,
+          -0.02144763618707657
+        ],
+        [
+          -0.003904607295989987,
+          -0.03444717168807987,
+          -0.03212352842092514
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.1679816097021103,
+          0.7721971273422241,
+          -0.024095594882965088
+        ],
+        [
+          -0.14978215098381042,
+          0.7683302760124207,
+          -0.02144763618707657
+        ],
+        [
+          -0.16390460729599,
+          0.7555528283119202,
+          -0.03212352842092514
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.7321266531944275,
+        0.7762453556060791,
+        0.914189338684082
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-04",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "point": [
+        -0.005324024558067325,
+        -0.032002606391906774,
+        -0.029487736523151398
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.7100742253643523,
+        -0.22349741600366008,
+        -0.6677151335059749
+      ],
+      "handInfluence": 0.887406051158905,
+      "triangle": [
+        271,
+        259,
+        272
+      ],
+      "material": "Skin",
+      "supportScore": 0.023482557266234078,
+      "v1": {
+        "point": [
+          -0.0024999999999999966,
+          -0.030000000000000006,
+          -0.028036530056273143
+        ],
+        "handInfluence": 0.8521007493878332,
+        "heelSupportBelowRayMeters": 0.0010814104292643997
+      },
+      "v2": {
+        "point": [
+          1.853796858680037e-18,
+          -0.035,
+          -0.028407062415965908
+        ],
+        "handInfluence": 0.8590846244647536,
+        "heelSupportBelowRayMeters": 0.0015847481770317091
+      },
+      "model": "models/player-04-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.016371410489082333,
+          -0.08460144042968754,
+          -0.03495363891124725
+        ],
+        [
+          0.006869148612022397,
+          -0.07438436985015873,
+          -0.028268419206142426
+        ],
+        [
+          -0.005324024558067325,
+          -0.032002606391906774,
+          -0.029487736523151398
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17637141048908234,
+          0.7053985595703125,
+          -0.03495363891124725
+        ],
+        [
+          0.1668691486120224,
+          0.7156156301498413,
+          -0.028268419206142426
+        ],
+        [
+          0.15467597544193268,
+          0.7579973936080933,
+          -0.029487736523151398
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.887406051158905
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-04",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "point": [
+        0.004675123691558841,
+        -0.027461686134338414,
+        -0.030370689928531647
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        -0.525788188774992,
+        0.2459176859248046,
+        -0.81429188396674
+      ],
+      "handInfluence": 0.8423491716384888,
+      "triangle": [
+        383,
+        384,
+        428
+      ],
+      "material": "Skin",
+      "supportScore": 0.025140619153058673,
+      "v1": {
+        "point": [
+          0.0025000000000000005,
+          -0.03,
+          -0.029732788354931816
+        ],
+        "handInfluence": 0.8430110867744989,
+        "heelSupportBelowRayMeters": 0.0010689839924586352
+      },
+      "v2": {
+        "point": [
+          -4.3000212638633054e-20,
+          -0.035,
+          -0.02962854804014449
+        ],
+        "handInfluence": 0.8523129919457046,
+        "heelSupportBelowRayMeters": 0.002039881550972282
+      },
+      "model": "models/player-04-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.004675123691558841,
+          -0.027461686134338414,
+          -0.030370689928531647
+        ],
+        [
+          -0.016515758037567135,
+          -0.08905819892883304,
+          -0.03529000282287598
+        ],
+        [
+          -0.01832371592521667,
+          -0.016908326148986852,
+          -0.012333206832408905
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.15532487630844116,
+          0.7625383138656616,
+          -0.030370689928531647
+        ],
+        [
+          -0.17651575803756714,
+          0.700941801071167,
+          -0.03529000282287598
+        ],
+        [
+          -0.17832371592521667,
+          0.7730916738510132,
+          -0.012333206832408905
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8423491716384888,
+        1,
+        0.695992112159729
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-05",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "point": [
+        0.0034863764047622647,
+        -0.032858648300170934,
+        -0.03168351203203201
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.23544178399113297,
+        -0.013603054335743204,
+        -0.9717932512956713
+      ],
+      "handInfluence": 0.8995456099510193,
+      "triangle": [
+        719,
+        697,
+        720
+      ],
+      "material": "Skin",
+      "supportScore": 0.025496323893877442,
+      "v1": {
+        "point": [
+          -0.0025000000000000005,
+          -0.030000000000000002,
+          -0.027206930568276742
+        ],
+        "handInfluence": 0.8676152723077221,
+        "heelSupportBelowRayMeters": 0.003912173064581578
+      },
+      "v2": {
+        "point": [
+          -3.5383025913803055e-20,
+          -0.035,
+          -0.028803547193886374
+        ],
+        "handInfluence": 0.915284915021923,
+        "heelSupportBelowRayMeters": 0.0032080535214276742
+      },
+      "model": "models/player-05-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013349395394325253,
+          -0.059033551216125524,
+          -0.03370668739080429
+        ],
+        [
+          0.001505356431007382,
+          -0.0497606182098389,
+          -0.030966967344284058
+        ],
+        [
+          0.0034863764047622647,
+          -0.032858648300170934,
+          -0.03168351203203201
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17334939539432526,
+          0.7309664487838745,
+          -0.03370668739080429
+        ],
+        [
+          0.16150535643100739,
+          0.7402393817901611,
+          -0.030966967344284058
+        ],
+        [
+          0.16348637640476227,
+          0.7571413516998291,
+          -0.03168351203203201
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9979679584503174,
+        0.8995456099510193
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-05",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "point": [
+        -0.00372062265872955,
+        -0.03437606334686283,
+        -0.03218930959701538
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.669268311459393,
+        -0.10301334281998391,
+        -0.7358452136674841
+      ],
+      "handInfluence": 0.9162775874137878,
+      "triangle": [
+        1152,
+        1117,
+        1155
+      ],
+      "material": "Skin",
+      "supportScore": 0.025730940899705332,
+      "v1": {
+        "point": [
+          0.002500000000000001,
+          -0.03,
+          -0.02714412802849162
+        ],
+        "handInfluence": 0.8633742146879991,
+        "heelSupportBelowRayMeters": 0.004208638498498715
+      },
+      "v2": {
+        "point": [
+          -8.785799820971082e-21,
+          -0.035,
+          -0.028717969976550944
+        ],
+        "handInfluence": 0.9066144105009581,
+        "heelSupportBelowRayMeters": 0.003526947634368706
+      },
+      "model": "models/player-05-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.010610226392745975,
+          -0.02105680942535404,
+          -0.021019674837589264
+        ],
+        [
+          0.003191906809806827,
+          -0.04516635179519657,
+          -0.02439163625240326
+        ],
+        [
+          -0.00372062265872955,
+          -0.03437606334686283,
+          -0.03218930959701538
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.14938977360725403,
+          0.768943190574646,
+          -0.021019674837589264
+        ],
+        [
+          -0.15680809319019318,
+          0.7448336482048035,
+          -0.02439163625240326
+        ],
+        [
+          -0.16372062265872955,
+          0.7556239366531372,
+          -0.03218930959701538
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.7724453210830688,
+        0.9636315703392029,
+        0.9162775874137878
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-05",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "point": [
+        -0.005454588532447818,
+        -0.03214088916778568,
+        -0.02958492934703827
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.4254109125565135,
+        -0.09399119505228525,
+        -0.9001062219152125
+      ],
+      "handInfluence": 0.8910170793533325,
+      "triangle": [
+        267,
+        246,
+        268
+      ],
+      "material": "Skin",
+      "supportScore": 0.023554260960700926,
+      "v1": {
+        "point": [
+          -0.002499999999999997,
+          -0.03000000000000001,
+          -0.027975298223301026
+        ],
+        "handInfluence": 0.8525920388255134,
+        "heelSupportBelowRayMeters": 0.0012134157075733391
+      },
+      "v2": {
+        "point": [
+          -5.7731640746427585e-19,
+          -0.035,
+          -0.028444379321144783
+        ],
+        "handInfluence": 0.8603858251739699,
+        "heelSupportBelowRayMeters": 0.0016197018939599801
+      },
+      "model": "models/player-05-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.01974521219730377,
+          -0.08768157005310062,
+          -0.03569524735212326
+        ],
+        [
+          0.013634871840476986,
+          -0.08262477159500126,
+          -0.033335402607917786
+        ],
+        [
+          -0.005454588532447818,
+          -0.03214088916778568,
+          -0.02958492934703827
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17974521219730377,
+          0.7023184299468994,
+          -0.03569524735212326
+        ],
+        [
+          0.173634871840477,
+          0.7073752284049988,
+          -0.033335402607917786
+        ],
+        [
+          0.15454541146755219,
+          0.7578591108322144,
+          -0.02958492934703827
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.8910170793533325
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-05",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "point": [
+        0.006416786313056949,
+        -0.02860108852386478,
+        -0.02958492934703827
+      ],
+      "barycentric": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "normal": [
+        -0.5403326238224486,
+        0.09959308806540997,
+        -0.8355368767701062
+      ],
+      "handInfluence": 0.8554534316062927,
+      "triangle": [
+        424,
+        421,
+        426
+      ],
+      "material": "Skin",
+      "supportScore": 0.024168940891822015,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.030000000000000002,
+          -0.027850833681691365
+        ],
+        "handInfluence": 0.8423536233335536,
+        "heelSupportBelowRayMeters": 0.0019506692842467324
+      },
+      "v2": {
+        "point": [
+          5.241329212024486e-19,
+          -0.035,
+          -0.028006044881286676
+        ],
+        "handInfluence": 0.8526619456394446,
+        "heelSupportBelowRayMeters": 0.002666056979865595
+      },
+      "model": "models/player-05-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.005508866310119626,
+          0.001444778442382777,
+          -0.018291376531124115
+        ],
+        [
+          0.006416786313056949,
+          -0.02860108852386478,
+          -0.02958492934703827
+        ],
+        [
+          -0.017982345223426816,
+          -0.016380467414855993,
+          -0.012349620461463928
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.16550886631011963,
+          0.7914447784423828,
+          -0.018291376531124115
+        ],
+        [
+          -0.15358321368694305,
+          0.7613989114761353,
+          -0.02958492934703827
+        ],
+        [
+          -0.17798234522342682,
+          0.773619532585144,
+          -0.012349620461463928
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.5012258887290955,
+        0.8554534316062927,
+        0.6786858439445496
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-06",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "point": [
+        0.003596093654632565,
+        -0.032949008941650426,
+        -0.031633324921131134
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.23796741017522113,
+        -0.015939275311067872,
+        -0.9711423434270879
+      ],
+      "handInfluence": 0.8993394374847412,
+      "triangle": [
+        718,
+        700,
+        719
+      ],
+      "material": "Skin",
+      "supportScore": 0.025431208277235245,
+      "v1": {
+        "point": [
+          -0.0025000000000000005,
+          -0.03,
+          -0.02709588499414369
+        ],
+        "handInfluence": 0.8663050346976161,
+        "heelSupportBelowRayMeters": 0.003956415990283301
+      },
+      "v2": {
+        "point": [
+          -1.5161068881055306e-18,
+          -0.035,
+          -0.0286542978272889
+        ],
+        "handInfluence": 0.9146907997429298,
+        "heelSupportBelowRayMeters": 0.0032899198381428317
+      },
+      "model": "models/player-06-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013439413309097287,
+          -0.05893031597137455,
+          -0.03361888974905014
+        ],
+        [
+          0.0016105139255523648,
+          -0.04963616371154789,
+          -0.030872896313667297
+        ],
+        [
+          0.003596093654632565,
+          -0.032949008941650426,
+          -0.031633324921131134
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.1734394133090973,
+          0.7310696840286255,
+          -0.03361888974905014
+        ],
+        [
+          0.16161051392555237,
+          0.7403638362884521,
+          -0.030872896313667297
+        ],
+        [
+          0.16359609365463257,
+          0.7570509910583496,
+          -0.031633324921131134
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9978611469268799,
+        0.8993394374847412
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-06",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "point": [
+        -0.0038532280921936,
+        -0.034427561759948766,
+        -0.032140277326107025
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.6578375041829974,
+        -0.08757267910657908,
+        -0.7480513645227721
+      ],
+      "handInfluence": 0.9159477353096008,
+      "triangle": [
+        1125,
+        1076,
+        1126
+      ],
+      "material": "Skin",
+      "supportScore": 0.025673710933581877,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.03,
+          -0.027071563536828235
+        ],
+        "handInfluence": 0.8620743426589974,
+        "heelSupportBelowRayMeters": 0.0042228706063587515
+      },
+      "v2": {
+        "point": [
+          -4.691198359362768e-19,
+          -0.035,
+          -0.028684728651090736
+        ],
+        "handInfluence": 0.904971645961828,
+        "heelSupportBelowRayMeters": 0.003502453983278867
+      },
+      "model": "models/player-06-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.01055269300937653,
+          -0.021120109558105504,
+          -0.021029561758041382
+        ],
+        [
+          0.0012163108587265048,
+          -0.047228136062622106,
+          -0.026183582842350006
+        ],
+        [
+          -0.0038532280921936,
+          -0.034427561759948766,
+          -0.032140277326107025
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.14944730699062347,
+          0.7688798904418945,
+          -0.021029561758041382
+        ],
+        [
+          -0.1587836891412735,
+          0.7427718639373779,
+          -0.026183582842350006
+        ],
+        [
+          -0.1638532280921936,
+          0.7555724382400513,
+          -0.032140277326107025
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.7720238566398621,
+        0.9817482829093933,
+        0.9159477353096008
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-06",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "point": [
+        -0.005368549227714542,
+        -0.03208718538284305,
+        -0.02948441356420517
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.5146504422663059,
+        -0.1752923698489612,
+        -0.8392898827865322
+      ],
+      "handInfluence": 0.8895182013511658,
+      "triangle": [
+        267,
+        256,
+        269
+      ],
+      "material": "Skin",
+      "supportScore": 0.0234645978028559,
+      "v1": {
+        "point": [
+          -0.0024999999999999988,
+          -0.029999999999999995,
+          -0.027935406572466567
+        ],
+        "handInfluence": 0.8537205967435678,
+        "heelSupportBelowRayMeters": 0.0011630381567505413
+      },
+      "v2": {
+        "point": [
+          1.1646199519892653e-18,
+          -0.035,
+          -0.028389300761963887
+        ],
+        "handInfluence": 0.8652797555540229,
+        "heelSupportBelowRayMeters": 0.0015842805282210402
+      },
+      "model": "models/player-06-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.01760975658893585,
+          -0.07871965408325199,
+          -0.033835090696811676
+        ],
+        [
+          0.012498777508735653,
+          -0.0863650226593018,
+          -0.02910425513982773
+        ],
+        [
+          -0.005368549227714542,
+          -0.03208718538284305,
+          -0.02948441356420517
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17760975658893585,
+          0.711280345916748,
+          -0.033835090696811676
+        ],
+        [
+          0.17249877750873566,
+          0.7036349773406982,
+          -0.02910425513982773
+        ],
+        [
+          0.15463145077228546,
+          0.757912814617157,
+          -0.02948441356420517
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.8895182013511658
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "player-06",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "point": [
+        0.006493959426879886,
+        -0.026511588096618688,
+        -0.028977543115615845
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        -0.46996991310981,
+        0.2578139262968829,
+        -0.8441920754063871
+      ],
+      "handInfluence": 0.836513340473175,
+      "triangle": [
+        425,
+        416,
+        434
+      ],
+      "material": "Skin",
+      "supportScore": 0.0239336201634699,
+      "v1": {
+        "point": [
+          0.002500000000000001,
+          -0.030000000000000002,
+          -0.02781941853242465
+        ],
+        "handInfluence": 0.8345571697383609,
+        "heelSupportBelowRayMeters": 0.001746286438454512
+      },
+      "v2": {
+        "point": [
+          -5.45987259219629e-20,
+          -0.03500000000000001,
+          -0.027954630472971413
+        ],
+        "handInfluence": 0.8449048043832483,
+        "heelSupportBelowRayMeters": 0.002481369559438888
+      },
+      "model": "models/player-06-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.006493959426879886,
+          -0.026511588096618688,
+          -0.028977543115615845
+        ],
+        [
+          -0.016442101597785946,
+          -0.08906833171844486,
+          -0.03531347215175629
+        ],
+        [
+          -0.01821615934371948,
+          -0.0169232273101807,
+          -0.012292921543121338
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.15350604057312012,
+          0.7634884119033813,
+          -0.028977543115615845
+        ],
+        [
+          -0.17644210159778595,
+          0.7009316682815552,
+          -0.03531347215175629
+        ],
+        [
+          -0.17821615934371948,
+          0.7730767726898193,
+          -0.012292921543121338
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.836513340473175,
+        1,
+        0.6963378190994263
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "goalkeeper",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "point": [
+        0.002017017602920529,
+        -0.03501609802246097,
+        -0.035658933222293854
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.145033165281685,
+        0.16523721347746217,
+        -0.9755316726024733
+      ],
+      "handInfluence": 0.9443479180335999,
+      "triangle": [
+        751,
+        750,
+        752
+      ],
+      "material": "Skin",
+      "supportScore": 0.029036712290852633,
+      "v1": {
+        "point": [
+          -0.0025,
+          -0.029999999999999995,
+          -0.03141216164474188
+        ],
+        "handInfluence": 0.8835492276615315,
+        "heelSupportBelowRayMeters": 0.0033112172942460286
+      },
+      "v2": {
+        "point": [
+          -6.773870228708473e-20,
+          -0.035,
+          -0.03422297067288522
+        ],
+        "handInfluence": 0.9332059157457007,
+        "heelSupportBelowRayMeters": 0.0014113516594284094
+      },
+      "model": "models/goalkeeper-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.002017017602920529,
+          -0.03501609802246097,
+          -0.035658933222293854
+        ],
+        [
+          0.006650265455245968,
+          -0.02778992891311649,
+          -0.03374612331390381
+        ],
+        [
+          0.012218680381774899,
+          -0.05350665092468265,
+          -0.037274204194545746
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.16201701760292053,
+          0.7549839019775391,
+          -0.035658933222293854
+        ],
+        [
+          0.16665026545524597,
+          0.7622100710868835,
+          -0.03374612331390381
+        ],
+        [
+          0.1722186803817749,
+          0.7364933490753174,
+          -0.037274204194545746
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.9443479180335999,
+        0.8603134155273438,
+        1
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "goalkeeper",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "point": [
+        -0.0012060219049453702,
+        -0.036121287345886266,
+        -0.03557392209768295
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.19596959102307696,
+        -0.018410550186812657,
+        -0.9804371326281286
+      ],
+      "handInfluence": 0.9443479180335999,
+      "triangle": [
+        1503,
+        1477,
+        1504
+      ],
+      "material": "Skin",
+      "supportScore": 0.02876107856425378,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.03,
+          -0.031240622856593347
+        ],
+        "handInfluence": 0.8789036180973429,
+        "heelSupportBelowRayMeters": 0.0032045162961581684
+      },
+      "v2": {
+        "point": [
+          3.673374369139496e-19,
+          -0.035,
+          -0.034561189364059004
+        ],
+        "handInfluence": 0.9323081747974229,
+        "heelSupportBelowRayMeters": 0.0008026375435479724
+      },
+      "model": "models/goalkeeper-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.0031188392639160123,
+          -0.05648211479187015,
+          -0.03557392209768295
+        ],
+        [
+          -0.013107981681823727,
+          -0.06094537019729618,
+          -0.037486739456653595
+        ],
+        [
+          -0.0012060219049453702,
+          -0.036121287345886266,
+          -0.03557392209768295
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.16311883926391602,
+          0.7335178852081299,
+          -0.03557392209768295
+        ],
+        [
+          -0.17310798168182373,
+          0.7290546298027039,
+          -0.037486739456653595
+        ],
+        [
+          -0.16120602190494537,
+          0.7538787126541138,
+          -0.03557392209768295
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.9443479180335999
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "goalkeeper",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "point": [
+        -8.541703224182462e-05,
+        -0.036942818164825475,
+        -0.03606158494949341
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.4629152241583636,
+        0.25388129392962877,
+        -0.849266615283463
+      ],
+      "handInfluence": 0.9362924098968506,
+      "triangle": [
+        259,
+        247,
+        260
+      ],
+      "material": "Skin",
+      "supportScore": 0.029098675391966748,
+      "v1": {
+        "point": [
+          -0.0025,
+          -0.03,
+          -0.03266995407276177
+        ],
+        "handInfluence": 0.8637681180544772,
+        "heelSupportBelowRayMeters": 0.002134496660566105
+      },
+      "v2": {
+        "point": [
+          7.459726972735874e-21,
+          -0.035,
+          -0.03523329992027168
+        ],
+        "handInfluence": 0.9159872440182338,
+        "heelSupportBelowRayMeters": 0.0004783346846213496
+      },
+      "model": "models/goalkeeper-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.012237850427627567,
+          -0.029251971244812047,
+          -0.027138464152812958
+        ],
+        [
+          -0.005609247684478763,
+          0.0015965318679809215,
+          -0.021529652178287506
+        ],
+        [
+          -8.541703224182462e-05,
+          -0.036942818164825475,
+          -0.03606158494949341
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.14776214957237244,
+          0.760748028755188,
+          -0.027138464152812958
+        ],
+        [
+          0.15439075231552124,
+          0.791596531867981,
+          -0.021529652178287506
+        ],
+        [
+          0.15991458296775818,
+          0.7530571818351746,
+          -0.03606158494949341
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8466285467147827,
+        0.5414655804634094,
+        0.9362924098968506
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "goalkeeper",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "point": [
+        0.008115429282188419,
+        -0.025980153083801305,
+        -0.03198244422674179
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.21337616533215903,
+        0.0032201129038997196,
+        -0.9769648115162743
+      ],
+      "handInfluence": 0.8584768176078796,
+      "triangle": [
+        423,
+        418,
+        424
+      ],
+      "material": "Skin",
+      "supportScore": 0.02698515279626587,
+      "v1": {
+        "point": [
+          0.0025000000000000005,
+          -0.03,
+          -0.03119360052965488
+        ],
+        "handInfluence": 0.87529249195399,
+        "heelSupportBelowRayMeters": 0.0014748984803039343
+      },
+      "v2": {
+        "point": [
+          6.55954070469626e-19,
+          -0.035,
+          -0.03177147059539409
+        ],
+        "handInfluence": 0.8872974152991977,
+        "heelSupportBelowRayMeters": 0.0017740484476649401
+      },
+      "model": "models/goalkeeper-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.012195285558700558,
+          -0.0852976226806641,
+          -0.036613963544368744
+        ],
+        [
+          -0.021543305516242978,
+          -0.08466021060943607,
+          -0.03865353763103485
+        ],
+        [
+          0.008115429282188419,
+          -0.025980153083801305,
+          -0.03198244422674179
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.17219528555870056,
+          0.7047023773193359,
+          -0.036613963544368744
+        ],
+        [
+          -0.18154330551624298,
+          0.705339789390564,
+          -0.03865353763103485
+        ],
+        [
+          -0.15188457071781158,
+          0.7640198469161987,
+          -0.03198244422674179
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.8584768176078796
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "referee",
+      "lod": "lod0",
+      "handName": "LeftHand",
+      "sha": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "point": [
+        0.0036613905429840055,
+        -0.03296897649765018,
+        -0.031613774597644806
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.23733540941860753,
+        -0.016022211896648583,
+        -0.971295625523991
+      ],
+      "handInfluence": 0.8990761041641235,
+      "triangle": [
+        716,
+        697,
+        717
+      ],
+      "material": "Skin",
+      "supportScore": 0.025408487637380194,
+      "v1": {
+        "point": [
+          -0.0025000000000000005,
+          -0.029999999999999995,
+          -0.0270612735126466
+        ],
+        "handInfluence": 0.8656189321700258,
+        "heelSupportBelowRayMeters": 0.003967781005749824
+      },
+      "v2": {
+        "point": [
+          5.536005994712067e-19,
+          -0.035,
+          -0.028584985724998943
+        ],
+        "handInfluence": 0.9143059442382793,
+        "heelSupportBelowRayMeters": 0.003335458294000504
+      },
+      "model": "models/referee-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.013490941524505612,
+          -0.058887042999267614,
+          -0.03358808159828186
+        ],
+        [
+          0.0016871058940887418,
+          -0.04956159830093387,
+          -0.03085765242576599
+        ],
+        [
+          0.0036613905429840055,
+          -0.03296897649765018,
+          -0.031613774597644806
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17349094152450562,
+          0.7311129570007324,
+          -0.03358808159828186
+        ],
+        [
+          0.16168710589408875,
+          0.7404384016990662,
+          -0.03085765242576599
+        ],
+        [
+          0.163661390542984,
+          0.7570310235023499,
+          -0.031613774597644806
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        0.9977749586105347,
+        0.8990761041641235
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "referee",
+      "lod": "lod0",
+      "handName": "RightHand",
+      "sha": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "point": [
+        -0.003905769586563107,
+        -0.03443924427032474,
+        -0.032117851078510284
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        0.22191295868877545,
+        0.46793648033620533,
+        -0.8554473035415788
+      ],
+      "handInfluence": 0.915623128414154,
+      "triangle": [
+        1155,
+        1119,
+        1156
+      ],
+      "material": "Skin",
+      "supportScore": 0.02564959674444027,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.03,
+          -0.027107440891269024
+        ],
+        "handInfluence": 0.861932857577232,
+        "heelSupportBelowRayMeters": 0.004163424120406288
+      },
+      "v2": {
+        "point": [
+          -1.2177555388835263e-19,
+          -0.035,
+          -0.02866390561465392
+        ],
+        "handInfluence": 0.9046246940574307,
+        "heelSupportBelowRayMeters": 0.0034988464818614916
+      },
+      "model": "models/referee-lod0.glb",
+      "handLocalTriangleVertices": [
+        [
+          -0.007980402708053586,
+          -0.01776257991790775,
+          -0.024052590131759644
+        ],
+        [
+          0.010208431482315067,
+          -0.021627225875854528,
+          -0.02144818753004074
+        ],
+        [
+          -0.003905769586563107,
+          -0.03443924427032474,
+          -0.032117851078510284
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.1679804027080536,
+          0.7722374200820923,
+          -0.024052590131759644
+        ],
+        [
+          -0.14979156851768494,
+          0.7683727741241455,
+          -0.02144818753004074
+        ],
+        [
+          -0.1639057695865631,
+          0.7555607557296753,
+          -0.032117851078510284
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.7328308820724487,
+        0.7771610617637634,
+        0.915623128414154
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "referee",
+      "lod": "lod1",
+      "handName": "LeftHand",
+      "sha": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "point": [
+        -0.005327362418174747,
+        -0.03204885959625248,
+        -0.02946748584508896
+      ],
+      "barycentric": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "normal": [
+        -0.7117669687288296,
+        -0.22327419659967596,
+        -0.6659852966540195
+      ],
+      "handInfluence": 0.8887434005737305,
+      "triangle": [
+        272,
+        252,
+        273
+      ],
+      "material": "Skin",
+      "supportScore": 0.02345458245682855,
+      "v1": {
+        "point": [
+          -0.0024999999999999974,
+          -0.030000000000000002,
+          -0.028002583621654642
+        ],
+        "handInfluence": 0.8529498423991592,
+        "heelSupportBelowRayMeters": 0.0010868663318582931
+      },
+      "v2": {
+        "point": [
+          1.955024611573474e-18,
+          -0.03500000000000001,
+          -0.028375731334426803
+        ],
+        "handInfluence": 0.8597452226669592,
+        "heelSupportBelowRayMeters": 0.0015876284596361492
+      },
+      "model": "models/referee-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.01631737887859344,
+          -0.08462665319442753,
+          -0.03497323393821716
+        ],
+        [
+          0.00686095297336578,
+          -0.07441369533538822,
+          -0.028290681540966034
+        ],
+        [
+          -0.005327362418174747,
+          -0.03204885959625248,
+          -0.02946748584508896
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          0.17631737887859344,
+          0.7053733468055725,
+          -0.03497323393821716
+        ],
+        [
+          0.16686095297336578,
+          0.7155863046646118,
+          -0.028290681540966034
+        ],
+        [
+          0.15467263758182526,
+          0.7579511404037476,
+          -0.02946748584508896
+        ]
+      ],
+      "cornerHandInfluences": [
+        1,
+        1,
+        0.8887434005737305
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    },
+    {
+      "id": "referee",
+      "lod": "lod1",
+      "handName": "RightHand",
+      "sha": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "point": [
+        0.004669371843338016,
+        -0.02746770620346073,
+        -0.030350081622600555
+      ],
+      "barycentric": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        -0.5254456223433392,
+        0.24601245548044245,
+        -0.8144843581731354
+      ],
+      "handInfluence": 0.8435341119766235,
+      "triangle": [
+        390,
+        391,
+        429
+      ],
+      "material": "Skin",
+      "supportScore": 0.025119278559568768,
+      "v1": {
+        "point": [
+          0.0025,
+          -0.03,
+          -0.029715433310149524
+        ],
+        "handInfluence": 0.8440998691925857,
+        "heelSupportBelowRayMeters": 0.0010647347816242075
+      },
+      "v2": {
+        "point": [
+          -7.444321071311326e-19,
+          -0.034999999999999996,
+          -0.029612850887764466
+        ],
+        "handInfluence": 0.8532692346721862,
+        "heelSupportBelowRayMeters": 0.0020339996348464374
+      },
+      "model": "models/referee-lod1.glb",
+      "handLocalTriangleVertices": [
+        [
+          0.004669371843338016,
+          -0.02746770620346073,
+          -0.030350081622600555
+        ],
+        [
+          -0.016471024751663205,
+          -0.0890396618843079,
+          -0.03530946373939514
+        ],
+        [
+          -0.018320288658142087,
+          -0.016876497268676793,
+          -0.012319795787334442
+        ]
+      ],
+      "bindTriangleVertices": [
+        [
+          -0.155330628156662,
+          0.7625322937965393,
+          -0.030350081622600555
+        ],
+        [
+          -0.1764710247516632,
+          0.7009603381156921,
+          -0.03530946373939514
+        ],
+        [
+          -0.1783202886581421,
+          0.7731235027313232,
+          -0.012319795787334442
+        ]
+      ],
+      "cornerHandInfluences": [
+        0.8435341119766235,
+        1,
+        0.6964004635810852
+      ],
+      "triangleIndexScope": "Indices refer to the unique decoded glTF primitive with the recorded Skin/Cloth material; all three bind vertices and barycentrics are included to disambiguate loader indexing."
+    }
+  ],
+  "generatedAt": "2026-11-05T08:24:27.486326+00:00",
+  "nativeManifestSha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+  "modelSHA256": {
+    "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+    "models/player-01-lod1.glb": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+    "models/player-02-lod0.glb": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+    "models/player-02-lod1.glb": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+    "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+    "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+    "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+    "models/player-04-lod1.glb": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+    "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+    "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+    "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+    "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+    "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+    "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+    "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+    "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+  },
+  "inputMethod": "Read-only NodeIO+Draco decode of all16 final native32 GLBs; no production palm selector called. Independent polygon clipping against x/y/Hand-mass halfspaces, then maximum fixed support projection over clipped polygon vertices.",
+  "canonicalAxesEvidence": {
+    "wristPivotWorldMeters": {
+      "LeftHand": [
+        0.16,
+        0.79,
+        0
+      ],
+      "RightHand": [
+        -0.16,
+        0.79,
+        0
+      ]
+    },
+    "fingerTipsHandLocalYAboutMeters": -0.17,
+    "palmarSide": "negative Z",
+    "thumbExpansionOutsideHeelDomain": "Thumb-side surface reaches |X| above30mm distal to aboutY=-45mm; heel box X\u00b115mm excludes that lateral lobe.",
+    "pressureMath": "Rx(-100deg) * [0,sin(10deg),-cos(10deg)] = [0,-1,0]"
+  },
+  "limitations": [
+    "This validates the anatomical heel domain, actual triangle witnesses and crease-ray bias only. It is not a pass for dynamic support, no-penetration,3mm residuals or interrupted transitions.",
+    "Independent per-LOD support maxima can select different lateral heel pads. A matched paired-LOD selector is a separate production candidate and must be independently validated; the maxima here are not asserted as its final witness.",
+    "Bare hands use Skin; goalkeeper gloves retain anatomical skin topology with a4mm source inflation and use Cloth. Recorded triangles always come from the actual respective material."
+  ]
+}

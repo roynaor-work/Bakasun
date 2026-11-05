@@ -1,0 +1,62 @@
+{
+  "kind": "observed-audit-duration-and-scheduling-estimate",
+  "method": "The driver created a fresh per-job stdout log immediately before spawnSync. File birth time to report generatedAt/log final write measures real wall time including browser/model setup, numeric audit and report output. Browser shutdown adds a small extra tail. This is scheduling evidence, not GPU or phone performance.",
+  "observedNearJobs": [
+    {
+      "hz": 30,
+      "logCreatedAt": "2026-11-05T04:36:23.649Z",
+      "reportGeneratedAt": "2026-11-05T04:37:05.011Z",
+      "logLastWriteAt": "2026-11-05T04:37:05.060Z",
+      "wallToReportSeconds": 41.36201391601563,
+      "wallToLogFinishSeconds": 41.411461181640625,
+      "samples": 4259,
+      "runtimeSha256": "e02e717b28faf7e5554cfe86096ef191f9b58bc51c79c3af0ac3abd976d2700f",
+      "model": {
+        "path": "models/player-01-lod0.glb",
+        "bytes": 1214572,
+        "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7"
+      }
+    },
+    {
+      "hz": 120,
+      "logCreatedAt": "2026-11-05T04:37:05.220Z",
+      "reportGeneratedAt": "2026-11-05T04:39:11.059Z",
+      "logLastWriteAt": "2026-11-05T04:39:11.163Z",
+      "wallToReportSeconds": 125.83855493164063,
+      "wallToLogFinishSeconds": 125.9423134765625,
+      "samples": 16289,
+      "runtimeSha256": "e02e717b28faf7e5554cfe86096ef191f9b58bc51c79c3af0ac3abd976d2700f",
+      "model": {
+        "path": "models/player-01-lod0.glb",
+        "bytes": 1214572,
+        "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7"
+      }
+    }
+  ],
+  "nearFarGeometry": {
+    "nearVertices": 21025,
+    "farVertices": 5715,
+    "farToNearVertexRatio": 0.2718192627824019,
+    "nearTriangles": 28389,
+    "farTriangles": 5668
+  },
+  "unmeasuredFarEstimateSeconds": [
+    24,
+    34
+  ],
+  "seventeenJobEstimate": {
+    "workers": 2,
+    "near30Jobs": 8,
+    "far30Jobs": 8,
+    "near120Jobs": 1,
+    "withoutHeavyAuxiliaryMinutes": [
+      7,
+      9
+    ],
+    "withPhotoOverlapAllowMinutes": [
+      8,
+      10
+    ],
+    "caveat": "Only near geometry was timed directly. Far cost is inferred from its27% vertex count plus unchanged solver/browser/texture setup. The current dispatcher puts the dense job last, leaving roughly a two-minute tail after most30Hz jobs. Concurrent image rendering and geometry/native exports can increase wall time."
+  }
+}

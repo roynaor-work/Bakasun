@@ -1,0 +1,301 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "declaredPackageHashes": {
+    "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+      "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+      "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+      "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+      "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+      "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+      "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+      "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+      "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+      "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+      "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+      "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+      "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+      "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+      "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+      "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+    },
+    "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+  },
+  "runtimeErrors": [],
+  "packagedEnvelope": {
+    "present": true,
+    "complete": true,
+    "pass": true,
+    "motionMatches": true,
+    "helperMatches": true,
+    "allModelHashesMatch": true,
+    "inputsVerified": true
+  },
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 127,
+  "maximumAbsoluteErrorMeters": 5.5387060771128205e-9,
+  "minimumReferenceVertexY": 0.002000001335027697,
+  "denseFloor": false,
+  "denseSampleRateHz": 120,
+  "denseSamples": 0,
+  "clipsEvaluated": [
+    "idle"
+  ],
+  "totalClipCount": 31,
+  "models": [
+    {
+      "file": "models/player-04-lod0.glb",
+      "expectedSha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376,
+          "clearcoat": 1,
+          "transmission": 0
+        }
+      ],
+      "bytes": 1254676,
+      "sha256": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-04",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 5.5387060771128205e-9,
+      "pass": true,
+      "worst": []
+    }
+  ],
+  "decodedMaterialIssues": [],
+  "coldSeekLifecycle": null,
+  "rebuildLifecycle": null,
+  "lodLifecycle": null,
+  "pass": true,
+  "auditSource": {
+    "file": "source/audit-skinning.mjs",
+    "sha256": "8c9bb8c32b7c1b148daee335e4a455ba6a752a93ff38fe7ed9d72c5f0c2f1ea8"
+  },
+  "currentInputs": {
+    "motion": {
+      "file": "animations.json",
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "expectedSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "manifest": {
+      "file": "asset-manifest.json",
+      "bytes": 393766,
+      "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+      "expectedSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c"
+    },
+    "motionRuntime": {
+      "file": "source/motion-runtime.js",
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "expectedSha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    }
+  },
+  "generatedAt": "2026-11-05T03:26:16.685Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1934122,
+      "sha256": "23dd67b68eed8c8682c260adbd5d236c5bc0800936b30d2d453c04dae98ef59f"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 843376,
+      "sha256": "681eac8f907abfa5205fc4e0362630d36c6991e13b9080e252cdf2df549bc284"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1619531,
+      "sha256": "0198e0cdd1ad16c104fe2a1528c4ac3659165f74ee580c9d3ad9430bc484d1ba"
+    },
+    {
+      "file": "/offline/player-04-lod0.js",
+      "bytes": 1673003,
+      "sha256": "4096fc52199e810934abd5def7740c5727d02f7c69147495674c9b9f45f33ee2"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, selected delivered models/LODs and clips×7 deterministic times (defaults: all16 models/all31clips), plus interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor advances each actual displayed clip at the recorded30/60/120Hz, checking reference full-mesh floor, active sole anchors and descriptive authored hand supports. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

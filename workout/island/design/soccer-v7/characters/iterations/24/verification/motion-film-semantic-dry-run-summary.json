@@ -1,0 +1,954 @@
+{
+  "kind": "four-actual-C15-motion-film-plan-dry-runs",
+  "sourceSha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+  "sourceUnchanged": true,
+  "pass": true,
+  "rows": [
+    {
+      "sequence": "motor",
+      "exitCode": 0,
+      "pass": true,
+      "browserCapturePass": true,
+      "semanticPass": true,
+      "report": "iterations/24/verification/motor-390x844-film-semantic-dry-run.json",
+      "sha256": "07e43d0de71ccd0919e99228cb1ef03747efb0336d8e2d445b72c72fa0991b32",
+      "segments": [
+        {
+          "clip": "run_1",
+          "requestID": 1,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 1,
+            "clipID": "run_1",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 0,
+            "activatedAt": 0,
+            "firstProgressAt": 0.03333333333333333,
+            "completedAt": 0.4666666666666666,
+            "entrySeconds": 0,
+            "sampleSeconds": 0.6631199062017746,
+            "progress": 1,
+            "motorRequestID": 1,
+            "motorClockOffset": 0
+          },
+          "finalActualPose": {
+            "activeBaseClip": "run_1",
+            "baseSeconds": 0.7999999999999999,
+            "contributors": [
+              {
+                "clipID": "run_1",
+                "sampleSeconds": 0.030141248914931286,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 0.7999999999999984,
+              "actualSpeed": 1.6,
+              "targetSpeed": 1.6,
+              "requestID": 1,
+              "requestedClip": "run_1",
+              "unwrappedPhase": 1.0334902765721459
+            }
+          },
+          "eventClockWitnesses": []
+        },
+        {
+          "clip": "run_5",
+          "requestID": 2,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 2,
+            "clipID": "run_5",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 0.7999999999999999,
+            "activatedAt": 0.7999999999999999,
+            "firstProgressAt": 0.8333333333333333,
+            "completedAt": 1.9000000000000026,
+            "entrySeconds": 0,
+            "sampleSeconds": 2.685558455712728,
+            "progress": 1,
+            "motorRequestID": 2,
+            "motorClockOffset": 1.5543122344752192e-15
+          },
+          "finalActualPose": {
+            "activeBaseClip": "run_5",
+            "baseSeconds": 1.400000000000001,
+            "contributors": [
+              {
+                "clipID": "run_5",
+                "sampleSeconds": 0.13229794786063373,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 2.200000000000004,
+              "actualSpeed": 5.4,
+              "targetSpeed": 5.4,
+              "requestID": 2,
+              "requestedClip": "run_5",
+              "unwrappedPhase": 3.248058807275443
+            }
+          },
+          "eventClockWitnesses": []
+        },
+        {
+          "clip": "sprint",
+          "requestID": 3,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 3,
+            "clipID": "sprint",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 2.200000000000002,
+            "activatedAt": 2.200000000000002,
+            "firstProgressAt": 2.233333333333335,
+            "completedAt": 2.7333333333333334,
+            "entrySeconds": 0,
+            "sampleSeconds": 4.32203717050888,
+            "progress": 1,
+            "motorRequestID": 3,
+            "motorClockOffset": -2.220446049250313e-15
+          },
+          "finalActualPose": {
+            "activeBaseClip": "sprint",
+            "baseSeconds": 1.700000000000002,
+            "contributors": [
+              {
+                "clipID": "sprint",
+                "sampleSeconds": 0.38361678691649753,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 3.9000000000000887,
+              "actualSpeed": 7.2,
+              "targetSpeed": 7.2,
+              "requestID": 3,
+              "requestedClip": "sprint",
+              "unwrappedPhase": 6.822035384795791
+            }
+          },
+          "eventClockWitnesses": []
+        },
+        {
+          "clip": "decelerate",
+          "requestID": 4,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 4,
+            "clipID": "decelerate",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 3.899999999999996,
+            "activatedAt": 3.899999999999996,
+            "firstProgressAt": 3.933333333333329,
+            "completedAt": 6.133333333333321,
+            "entrySeconds": 0,
+            "sampleSeconds": 9.202803097802041,
+            "progress": 1,
+            "motorRequestID": 4,
+            "motorClockOffset": -9.281464485866309e-14
+          },
+          "finalActualPose": {
+            "activeBaseClip": "decelerate",
+            "baseSeconds": 1,
+            "contributors": [
+              {
+                "clipID": "idle",
+                "sampleSeconds": 7.3699999999999175,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 7.099999999999917,
+              "actualSpeed": 0,
+              "targetSpeed": 0,
+              "requestID": 4,
+              "requestedClip": "idle",
+              "unwrappedPhase": 9.202803097802041
+            }
+          },
+          "eventClockWitnesses": []
+        },
+        {
+          "clip": "run_2",
+          "requestID": 5,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 5,
+            "clipID": "run_2",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 7.0999999999999845,
+            "activatedAt": 7.0999999999999845,
+            "firstProgressAt": 7.133333333333318,
+            "completedAt": 7.799999999999982,
+            "entrySeconds": 0,
+            "sampleSeconds": 9.940237087673614,
+            "progress": 1,
+            "motorRequestID": 5,
+            "motorClockOffset": 6.750155989720952e-14
+          },
+          "finalActualPose": {
+            "activeBaseClip": "run_2",
+            "baseSeconds": 1.5000000000000013,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.7521896701389821,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 8.599999999999833,
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "requestID": 5,
+              "requestedClip": "run_2",
+              "unwrappedPhase": 10.940237087673728
+            }
+          },
+          "eventClockWitnesses": []
+        }
+      ]
+    },
+    {
+      "sequence": "recovery",
+      "exitCode": 0,
+      "pass": true,
+      "browserCapturePass": true,
+      "semanticPass": true,
+      "report": "iterations/24/verification/recovery-390x844-film-semantic-dry-run.json",
+      "sha256": "9606e705c7e58586c085258ab29d3d5e6366a4dbb99045a6d44be82e00eebcad",
+      "segments": [
+        {
+          "clip": "get_up",
+          "requestID": 1,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "displayedTerminalClock": true,
+            "terminalProgress": true
+          },
+          "finalRequest": {
+            "id": 1,
+            "clipID": "get_up",
+            "scope": "body",
+            "status": "completed",
+            "requestedAt": 0,
+            "activatedAt": 1.3666666666666676,
+            "firstProgressAt": 1.400000000000001,
+            "completedAt": 2.966666666666666,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.6,
+            "progress": 1,
+            "activationDeadline": 4.5
+          },
+          "finalActualPose": {
+            "activeBaseClip": "get_up",
+            "baseSeconds": 1.6,
+            "contributors": [
+              {
+                "clipID": "get_up",
+                "sampleSeconds": 1.6,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 55,
+              "simulationSeconds": 1.8666666666666667,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "palms_support_ground",
+              "eventTimeSeconds": 0.5,
+              "previousSampleSeconds": 0.4666666666666681,
+              "actualSampleSeconds": 0.5000000000000016,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 60,
+              "simulationSeconds": 2.033333333333333,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "palms_release_ground",
+              "eventTimeSeconds": 0.666667,
+              "previousSampleSeconds": 0.6333333333333353,
+              "actualSampleSeconds": 0.6666666666666687,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 88,
+              "simulationSeconds": 2.966666666666667,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "recovered_standing",
+              "eventTimeSeconds": 1.6,
+              "previousSampleSeconds": 1.5666666666666669,
+              "actualSampleSeconds": 1.6,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        },
+        {
+          "clip": "run_2",
+          "requestID": 2,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 2,
+            "clipID": "run_2",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 3.6999999999999966,
+            "activatedAt": 3.6999999999999966,
+            "firstProgressAt": 3.73333333333333,
+            "completedAt": 4.399999999999994,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.9402370876736106,
+            "progress": 1,
+            "motorRequestID": 1,
+            "motorClockOffset": 3.6999999999999966
+          },
+          "finalActualPose": {
+            "activeBaseClip": "run_2",
+            "baseSeconds": 2.8,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.4521896701389075,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 2.800000000000034,
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "requestID": 1,
+              "requestedClip": "run_2",
+              "unwrappedPhase": 4.565237087673634
+            }
+          },
+          "eventClockWitnesses": []
+        },
+        {
+          "clip": "long_pass",
+          "requestID": 3,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "displayedTerminalClock": true,
+            "terminalProgress": true
+          },
+          "finalRequest": {
+            "id": 3,
+            "clipID": "long_pass",
+            "scope": "body",
+            "status": "completed",
+            "requestedAt": 6.499999999999987,
+            "activatedAt": 7.666666666666649,
+            "firstProgressAt": 7.699999999999982,
+            "completedAt": 8.966666666666645,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.3,
+            "progress": 1,
+            "activationDeadline": 10.999999999999986
+          },
+          "finalActualPose": {
+            "activeBaseClip": "long_pass",
+            "baseSeconds": 1.3,
+            "contributors": [
+              {
+                "clipID": "long_pass",
+                "sampleSeconds": 1.3,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 238,
+              "simulationSeconds": 7.966666666666667,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_backswing",
+              "eventTimeSeconds": 0.286,
+              "previousSampleSeconds": 0.26666666666666666,
+              "actualSampleSeconds": 0.3,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 246,
+              "simulationSeconds": 8.233333333333333,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_contact",
+              "eventTimeSeconds": 0.559,
+              "previousSampleSeconds": 0.5333333333333333,
+              "actualSampleSeconds": 0.5666666666666667,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 265,
+              "simulationSeconds": 8.866666666666667,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_replant",
+              "eventTimeSeconds": 1.17,
+              "previousSampleSeconds": 1.166666666666667,
+              "actualSampleSeconds": 1.2000000000000004,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequence": "keeper",
+      "exitCode": 0,
+      "pass": true,
+      "browserCapturePass": true,
+      "semanticPass": true,
+      "report": "iterations/24/verification/keeper-390x844-film-semantic-dry-run.json",
+      "sha256": "a7444a24bb771baf498844845d13c3bbcadd3ecf3928de3abd94cc366a54b4ba",
+      "segments": [
+        {
+          "clip": "keeper_catch",
+          "requestID": 1,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "activeCatchEvent": true,
+            "catchOverlayDisplayed": true
+          },
+          "finalRequest": {
+            "id": 1,
+            "clipID": "keeper_catch",
+            "scope": "arms",
+            "status": "active",
+            "requestedAt": 0,
+            "activatedAt": 0,
+            "firstProgressAt": 0.03333333333333333,
+            "entrySeconds": 0,
+            "sampleSeconds": 0.7999999999999999,
+            "progress": 0.6666666666666666,
+            "activationDeadline": 4.5
+          },
+          "finalActualPose": {
+            "activeBaseClip": "keeper_dive_right",
+            "baseSeconds": 1.466667,
+            "contributors": [
+              {
+                "clipID": "keeper_dive_right",
+                "sampleSeconds": 1.466667,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              },
+              {
+                "clipID": "keeper_catch",
+                "sampleSeconds": 0.7999999999999999,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "arms",
+                "transform": "chestTranslationGravityAlignedSixArmIK",
+                "requestID": 1
+              }
+            ],
+            "overlayClip": "keeper_catch",
+            "overlaySeconds": 0.7999999999999999,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 11,
+              "simulationSeconds": 0.4,
+              "clipID": "keeper_catch",
+              "scope": "arms",
+              "weight": 1,
+              "eventName": "glove_ball_catch",
+              "eventTimeSeconds": 0.4,
+              "previousSampleSeconds": 0.36666666666666664,
+              "actualSampleSeconds": 0.39999999999999997,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        },
+        {
+          "clip": "get_up",
+          "requestID": 2,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "displayedTerminalClock": true,
+            "terminalProgress": true
+          },
+          "finalRequest": {
+            "id": 2,
+            "clipID": "get_up",
+            "scope": "body",
+            "status": "completed",
+            "requestedAt": 0.7999999999999999,
+            "activatedAt": 1.9000000000000026,
+            "firstProgressAt": 1.933333333333336,
+            "completedAt": 3.4999999999999973,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.6,
+            "progress": 1,
+            "activationDeadline": 4.5
+          },
+          "finalActualPose": {
+            "activeBaseClip": "get_up",
+            "baseSeconds": 1.6,
+            "contributors": [
+              {
+                "clipID": "get_up",
+                "sampleSeconds": 1.6,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "mirroredX"
+              },
+              {
+                "clipID": "keeper_catch",
+                "sampleSeconds": 1.2,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "arms",
+                "transform": "chestTranslationGravityAlignedSixArmIK",
+                "requestID": 1
+              }
+            ],
+            "overlayClip": "keeper_catch",
+            "overlaySeconds": 1.2,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 71,
+              "simulationSeconds": 2.4,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "palms_support_ground",
+              "eventTimeSeconds": 0.5,
+              "previousSampleSeconds": 0.4666666666666681,
+              "actualSampleSeconds": 0.5000000000000016,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 76,
+              "simulationSeconds": 2.566666666666667,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "palms_release_ground",
+              "eventTimeSeconds": 0.666667,
+              "previousSampleSeconds": 0.6333333333333353,
+              "actualSampleSeconds": 0.6666666666666687,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 104,
+              "simulationSeconds": 3.5,
+              "clipID": "get_up",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "recovered_standing",
+              "eventTimeSeconds": 1.6,
+              "previousSampleSeconds": 1.5666666666666669,
+              "actualSampleSeconds": 1.6,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        },
+        {
+          "clip": "keeper_throw",
+          "requestID": 3,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "displayedTerminalClock": true,
+            "terminalProgress": true
+          },
+          "finalRequest": {
+            "id": 3,
+            "clipID": "keeper_throw",
+            "scope": "body",
+            "status": "completed",
+            "requestedAt": 4.499999999999994,
+            "activatedAt": 4.499999999999994,
+            "firstProgressAt": 4.533333333333327,
+            "completedAt": 5.6999999999999895,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.166667,
+            "progress": 1
+          },
+          "finalActualPose": {
+            "activeBaseClip": "keeper_throw",
+            "baseSeconds": 1.166667,
+            "contributors": [
+              {
+                "clipID": "keeper_throw",
+                "sampleSeconds": 1.166667,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 135,
+              "simulationSeconds": 4.533333333333333,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_keeper_gather",
+              "eventTimeSeconds": 0,
+              "previousSampleSeconds": 0,
+              "actualSampleSeconds": 0.03333333333333333,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 135,
+              "simulationSeconds": 4.533333333333333,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_LeftFoot_plant",
+              "eventTimeSeconds": 0,
+              "previousSampleSeconds": 0,
+              "actualSampleSeconds": 0.03333333333333333,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 135,
+              "simulationSeconds": 4.533333333333333,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_RightFoot_plant",
+              "eventTimeSeconds": 0,
+              "previousSampleSeconds": 0,
+              "actualSampleSeconds": 0.03333333333333333,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 154,
+              "simulationSeconds": 5.166666666666667,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_keeper_throw_release",
+              "eventTimeSeconds": 0.653333,
+              "previousSampleSeconds": 0.6333333333333333,
+              "actualSampleSeconds": 0.6666666666666666,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 161,
+              "simulationSeconds": 5.4,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_keeper_follow",
+              "eventTimeSeconds": 0.875,
+              "previousSampleSeconds": 0.8666666666666666,
+              "actualSampleSeconds": 0.8999999999999999,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 169,
+              "simulationSeconds": 5.666666666666667,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_LeftFoot_release",
+              "eventTimeSeconds": 1.166667,
+              "previousSampleSeconds": 1.1333333333333335,
+              "actualSampleSeconds": 1.166666666666667,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 169,
+              "simulationSeconds": 5.666666666666667,
+              "clipID": "keeper_throw",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "presentation_RightFoot_release",
+              "eventTimeSeconds": 1.166667,
+              "previousSampleSeconds": 1.1333333333333335,
+              "actualSampleSeconds": 1.166666666666667,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequence": "pass",
+      "exitCode": 0,
+      "pass": true,
+      "browserCapturePass": true,
+      "semanticPass": true,
+      "report": "iterations/24/verification/pass-390x844-film-semantic-dry-run.json",
+      "sha256": "109fd17d17a6aa7f6ee5f0896574bc162390f1b97ced2eef03939a8d2288b84f",
+      "segments": [
+        {
+          "clip": "long_pass",
+          "requestID": 1,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "displayedTerminalClock": true,
+            "terminalProgress": true
+          },
+          "finalRequest": {
+            "id": 1,
+            "clipID": "long_pass",
+            "scope": "body",
+            "status": "completed",
+            "requestedAt": 0,
+            "activatedAt": 0.03333333333333333,
+            "firstProgressAt": 0.06666666666666667,
+            "completedAt": 1.3333333333333341,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.3,
+            "progress": 1,
+            "activationDeadline": 4.5
+          },
+          "finalActualPose": {
+            "activeBaseClip": "long_pass",
+            "baseSeconds": 1.3,
+            "contributors": [
+              {
+                "clipID": "long_pass",
+                "sampleSeconds": 1.3,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "identity"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": null
+          },
+          "eventClockWitnesses": [
+            {
+              "frame": 9,
+              "simulationSeconds": 0.3333333333333333,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_backswing",
+              "eventTimeSeconds": 0.286,
+              "previousSampleSeconds": 0.26666666666666666,
+              "actualSampleSeconds": 0.3,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 17,
+              "simulationSeconds": 0.6,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_contact",
+              "eventTimeSeconds": 0.559,
+              "previousSampleSeconds": 0.5333333333333333,
+              "actualSampleSeconds": 0.5666666666666667,
+              "kind": "actualContributingSourceClockCrossing"
+            },
+            {
+              "frame": 36,
+              "simulationSeconds": 1.2333333333333334,
+              "clipID": "long_pass",
+              "scope": "body",
+              "weight": 1,
+              "eventName": "visual_replant",
+              "eventTimeSeconds": 1.17,
+              "previousSampleSeconds": 1.166666666666667,
+              "actualSampleSeconds": 1.2000000000000004,
+              "kind": "actualContributingSourceClockCrossing"
+            }
+          ]
+        },
+        {
+          "clip": "run_2",
+          "requestID": 2,
+          "pass": true,
+          "checks": {
+            "requestIdentity": true,
+            "activated": true,
+            "realProgress": true,
+            "completedLedger": true,
+            "actualTargetSpeed": true,
+            "livePhysicalContributor": true
+          },
+          "finalRequest": {
+            "id": 2,
+            "clipID": "run_2",
+            "scope": "locomotion",
+            "status": "completed",
+            "requestedAt": 2.4000000000000012,
+            "activatedAt": 2.4000000000000012,
+            "firstProgressAt": 2.4333333333333345,
+            "completedAt": 3.0999999999999988,
+            "entrySeconds": 0,
+            "sampleSeconds": 1.9402370876736106,
+            "progress": 1,
+            "motorRequestID": 1,
+            "motorClockOffset": 2.4000000000000012
+          },
+          "finalActualPose": {
+            "activeBaseClip": "run_2",
+            "baseSeconds": 2.8,
+            "contributors": [
+              {
+                "clipID": "run_2",
+                "sampleSeconds": 0.4521896701389075,
+                "playbackRate": 1,
+                "weight": 1,
+                "scope": "body",
+                "transform": "physicalLocomotionSpace"
+              }
+            ],
+            "overlayClip": null,
+            "overlaySeconds": 0,
+            "physicalMotor": {
+              "clock": 2.800000000000034,
+              "actualSpeed": 2.4,
+              "targetSpeed": 2.4,
+              "requestID": 1,
+              "requestedClip": "run_2",
+              "unwrappedPhase": 4.565237087673634
+            }
+          },
+          "eventClockWitnesses": []
+        }
+      ]
+    }
+  ]
+}

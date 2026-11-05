@@ -1,0 +1,1159 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": true,
+  "authoring": {
+    "skinInputs": [
+      {
+        "file": "young_lightskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+      },
+      {
+        "file": "young_darkskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+      }
+    ],
+    "faceSourceUvCrop": [
+      0.78,
+      0.32,
+      0.99,
+      0.65
+    ],
+    "runtimeAtlasDimensions": [
+      1024,
+      1024
+    ],
+    "atlasRegions": {
+      "face": [
+        0.015,
+        0.46,
+        0.6,
+        0.99
+      ],
+      "skin": [
+        0.015,
+        0.015,
+        0.4,
+        0.27
+      ],
+      "scalp": [
+        0.015,
+        0.275,
+        0.4,
+        0.3
+      ],
+      "shirt": [
+        0.62,
+        0.56,
+        0.99,
+        0.99
+      ],
+      "shorts": [
+        0.62,
+        0.36,
+        0.99,
+        0.54
+      ],
+      "socks": [
+        0.42,
+        0.015,
+        0.6,
+        0.2
+      ],
+      "boots": [
+        0.42,
+        0.22,
+        0.6,
+        0.44
+      ],
+      "stitch": [
+        0.42,
+        0.445,
+        0.6,
+        0.455
+      ],
+      "hair": [
+        0.62,
+        0.085,
+        0.99,
+        0.34
+      ],
+      "wisps": [
+        0.62,
+        0.015,
+        0.99,
+        0.075
+      ],
+      "eyes": [
+        0.015,
+        0.31,
+        0.155,
+        0.435
+      ],
+      "brows": [
+        0.015,
+        0.438,
+        0.4,
+        0.455
+      ],
+      "gloves": [
+        0.17,
+        0.31,
+        0.4,
+        0.435
+      ]
+    },
+    "hair": "anatomical scalp undercoat with authored curved alpha cards",
+    "synthetic": true,
+    "generator": "source/character_build.py",
+    "restExpression": {
+      "mouthCompression": 0.4,
+      "eyeSlit": 0.06,
+      "eyeClosureExtra": 0.05,
+      "eyeColorFactor": 0.88
+    },
+    "hairShading": "isotropic",
+    "crownOwnNormalBlend": 0.2,
+    "hairMacroShape": "0",
+    "farCap": "32",
+    "clothFinishing": "31",
+    "crownFlyaways": "1",
+    "hairGeometryVariant": "29",
+    "faceVariant": "27",
+    "hairNormalField": "projected",
+    "eyeVariant": "19",
+    "hairTextureVariant": "20",
+    "sockVariant": "23",
+    "clothVariant": "18"
+  },
+  "captureScriptSha256": "5038bc56bd5718a5b1034e53e876bcb1f76088a38b27e909718c3861aaf697a4",
+  "generatedAt": "2026-11-05T05:38:36.245Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+      "bytes": 967968,
+      "sha256": "40b1e4d2bc5cf45216d758b9575a6fa1ca391c45df6bac257242cba671199a4f"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-01-lod1.glb",
+      "bytes": 521696,
+      "sha256": "0952b8daad63bf67881e102c630d020150227b38b4b96f931a0d07f30a442345"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+      "bytes": 1009448,
+      "sha256": "c0a76d4c9ab2e54dbc9a71b486049ada6e16c7f7856166d80feef5596a9b1253"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-04-lod1.glb",
+      "bytes": 560784,
+      "sha256": "6f836a62524349fa6b3ea6ef65728c2d9a4c2b2f8cf940fc546d3f4b480a42aa"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "05805d793d5c03907f6e8aef768d05cb614964194beb72785c7b4f33524c0c43",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "source/character-candidates31-cloth-finish/models/player-01-lod0.glb": "40b1e4d2bc5cf45216d758b9575a6fa1ca391c45df6bac257242cba671199a4f",
+      "source/character-candidates31-cloth-finish/models/player-01-lod1.glb": "0952b8daad63bf67881e102c630d020150227b38b4b96f931a0d07f30a442345",
+      "source/character-candidates31-cloth-finish/models/player-04-lod0.glb": "c0a76d4c9ab2e54dbc9a71b486049ada6e16c7f7856166d80feef5596a9b1253",
+      "source/character-candidates31-cloth-finish/models/player-04-lod1.glb": "6f836a62524349fa6b3ea6ef65728c2d9a4c2b2f8cf940fc546d3f4b480a42aa"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-kick-strike-390x844.png",
+      "fullPhone": true,
+      "pngSha256": "d397ff4ddfad122b51779a6f3bec5ebafbe953dde613161efb8210f9533e358b",
+      "camera": {
+        "position": [
+          -4.360824129499427,
+          0.8913486775769799,
+          5.481525672043165
+        ],
+        "quaternion": [
+          -0.0037820037591389344,
+          -0.3428950283533427,
+          -0.0013805391396414927,
+          0.939365099463361
+        ],
+        "aspect": 0.46208530805687204,
+        "fov": 30,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "kick",
+        "time": 0.32000016,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36343,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000020116643516,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.32000016,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "kick/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.34666684000000003
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-get-up-supported-390x844.png",
+      "fullPhone": true,
+      "pngSha256": "1d871bbf5df6b7c87d9fdc163bfa2fb47e3e4c8629f35d6e6023443c36f05c18",
+      "camera": {
+        "position": [
+          -2.3632383113040856,
+          0.513682540082539,
+          2.961299522429457
+        ],
+        "quaternion": [
+          -0.007041573747427441,
+          -0.3428881735052618,
+          -0.0025703750662608707,
+          0.9393463205236947
+        ],
+        "aspect": 0.46208530805687204,
+        "fov": 25,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "get_up",
+        "time": 0.8,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35383,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000218517479667,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.8,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "get_up/RightFoot/0/0.5",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              },
+              {
+                "bone": "LeftFoot",
+                "key": "get_up/LeftFoot/0/0.566667",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-kick-strike-844x390.png",
+      "fullPhone": true,
+      "pngSha256": "a6be5ae8e3ef1198cdcd41c236aa7298db6d02baef66c0285db0c43a6099d8a6",
+      "camera": {
+        "position": [
+          -2.3951605018441926,
+          0.8913486775769799,
+          3.14780758540099
+        ],
+        "quaternion": [
+          -0.006835267367456504,
+          -0.34288872976029733,
+          -0.002495067358906165,
+          0.9393478443911284
+        ],
+        "aspect": 2.164102564102564,
+        "fov": 30,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "kick",
+        "time": 0.32000016,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36343,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000020116643516,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.32000016,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "kick/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.34666684000000003
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-get-up-supported-844x390.png",
+      "fullPhone": true,
+      "pngSha256": "43817b3aaf379afadac30520fa59166d0ed2457ed14e6db1f19e555b8867e81c",
+      "camera": {
+        "position": [
+          -0.883263046349497,
+          0.513682540082539,
+          1.204210977362603
+        ],
+        "quaternion": [
+          -0.0188312698758092,
+          -0.34282890071841804,
+          -0.006873950098512147,
+          0.9391839420034334
+        ],
+        "aspect": 2.164102564102564,
+        "fov": 25,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "get_up",
+        "time": 0.8,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35383,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000218517479667,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.8,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "get_up/RightFoot/0/0.5",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              },
+              {
+                "bone": "LeftFoot",
+                "key": "get_up/LeftFoot/0/0.566667",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-kick-strike-390x844.png",
+      "fullPhone": true,
+      "pngSha256": "52585240af544392a520b231e3433f09e925ce60921e79be24b01a5a183db1f9",
+      "camera": {
+        "position": [
+          -4.359834765865269,
+          0.894249115388702,
+          5.480785527016209
+        ],
+        "quaternion": [
+          -0.0037827593646338155,
+          -0.3428950272427552,
+          -0.0013808149571779749,
+          0.9393650964208928
+        ],
+        "aspect": 0.46208530805687204,
+        "fov": 30,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-04",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "kick",
+        "time": 0.32000016,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36305,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+            "triangles": 35327,
+            "lift": 0,
+            "minimumY": 0.0020000020116902047,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.32000016,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "kick/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.34666684000000003
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-get-up-supported-390x844.png",
+      "fullPhone": true,
+      "pngSha256": "eb5258896e187faf3abdc2d0fef6c9e260fe211c32d07ee4e3c914789d686f33",
+      "camera": {
+        "position": [
+          -2.356323324557199,
+          0.5135065471745904,
+          2.9514362521203865
+        ],
+        "quaternion": [
+          -0.00706212730327743,
+          -0.3428881171815678,
+          -0.0025778776998162055,
+          0.93934616622425
+        ],
+        "aspect": 0.46208530805687204,
+        "fov": 25,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-04",
+        "view": "cloth",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "get_up",
+        "time": 0.8,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35345,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+            "triangles": 35327,
+            "lift": 0,
+            "minimumY": 0.0020000218517479667,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.8,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "get_up/RightFoot/0/0.5",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              },
+              {
+                "bone": "LeftFoot",
+                "key": "get_up/LeftFoot/0/0.566667",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-kick-strike-844x390.png",
+      "fullPhone": true,
+      "pngSha256": "31aa65f95d8c9c51565e63b385d6c1c085a73869f6cb9dab7f4b36538f93fd15",
+      "camera": {
+        "position": [
+          -2.4028802698438327,
+          0.894249115388702,
+          3.1574072857711775
+        ],
+        "quaternion": [
+          -0.006813357020939014,
+          -0.3428887878646171,
+          -0.0024870694580956735,
+          0.9393480035686186
+        ],
+        "aspect": 2.164102564102564,
+        "fov": 30,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-04",
+        "view": "body",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "kick",
+        "time": 0.32000016,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 12,
+        "triangles": 36305,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+            "triangles": 35327,
+            "lift": 0,
+            "minimumY": 0.0020000020116902047,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.32000016,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "kick/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.34666684000000003
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-get-up-supported-844x390.png",
+      "fullPhone": true,
+      "pngSha256": "87fb81acccabde0e5043b04e4f1d58ba9d94cc221c50b89f7e4ec9217cca54f4",
+      "camera": {
+        "position": [
+          -0.8825346702592229,
+          0.5135065471745904,
+          1.201692710024144
+        ],
+        "quaternion": [
+          -0.01884602518817062,
+          -0.3428287926809728,
+          -0.00687933620797419,
+          0.9391836460335384
+        ],
+        "aspect": 2.164102564102564,
+        "fov": 25,
+        "near": 0.025,
+        "far": 220
+      },
+      "state": {
+        "characterID": "player-04",
+        "view": "cloth",
+        "lod": "0",
+        "lighting": "studio",
+        "clipID": "get_up",
+        "time": 0.8,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35345,
+        "models": [
+          {
+            "id": "player-04",
+            "path": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+            "triangles": 35327,
+            "lift": 0,
+            "minimumY": 0.0020000218517479667,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "sampleSeconds": 0.8,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "RightFoot",
+                "key": "get_up/RightFoot/0/0.5",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              },
+              {
+                "bone": "LeftFoot",
+                "key": "get_up/LeftFoot/0/0.566667",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 0.8
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two selected immutable cloth-finishing candidates, accepted recipe held fixed; kick/get_up action frames only, no source/live writes. Resize/RAF settles before camera records. This is not full-roster or final delivery acceptance. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "controlled-terminal-palm-source-exclusion-fixture",
+  "pass": true,
+  "checks": {
+    "matchingValidatedLeftArmExceptionAccepted": true,
+    "matchingValidatedLeftForeArmExceptionAccepted": true,
+    "matchingValidatedLeftHandExceptionAccepted": true,
+    "forgedModifierContactKeyRejected": true,
+    "wrongProofContactKeyRejected": true,
+    "wrongProofClipRejected": true,
+    "missingValidatedHandRejected": true,
+    "unrelatedRightArmRemainsStrict": true,
+    "unrelatedChestRemainsStrict": true,
+    "unrelatedSpineRemainsStrict": true,
+    "zeroActualSolveCountRejected": true,
+    "staleCurrentSolveClockRejected": true,
+    "nonplantModifierCannotExemptArm": true,
+    "zeroWeightModifierCannotExemptArm": true
+  },
+  "observerSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "a02f8bd9170ffb108577cd4fa71620180b610a576b545948bc90b643c881c8b8"
+  },
+  "fixtureSource": {
+    "sha256": "0719253a605cb884f841e393212aa680ad9a623b8aa621328d4779f6e8462bbc"
+  },
+  "limitations": "Actual local Three r160 math and actual source-terminal comparison logic; physicalPalmSupports are controlled proof records. This verifies dispatch/exclusion only and does not replace independent decoded anatomical triangle, actual positive solver, browser or production-geometry witnesses."
+}

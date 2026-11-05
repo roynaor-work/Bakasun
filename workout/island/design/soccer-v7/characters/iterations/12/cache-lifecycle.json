@@ -1,0 +1,1140 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "runtimeErrors": [],
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 1016,
+  "maximumAbsoluteErrorMeters": 1.028222473831164e-8,
+  "minimumReferenceVertexY": 0.001999989465714988,
+  "denseFloor": false,
+  "denseSampleRateHz": 120,
+  "denseSamples": 0,
+  "clipsEvaluated": [
+    "idle"
+  ],
+  "totalClipCount": 31,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "expectedSha256": "d4647d0175753a773ec4ad8729ec56d9db26a2802725e73e3fee8dcf6d897578",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 761852,
+      "sha256": "d4647d0175753a773ec4ad8729ec56d9db26a2802725e73e3fee8dcf6d897578"
+    },
+    {
+      "file": "models/player-02-lod0.glb",
+      "expectedSha256": "69c2932abf7e382d214c07739d94c926fe2fb63cacac274d5fafb66e5a76155f",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 829064,
+      "sha256": "69c2932abf7e382d214c07739d94c926fe2fb63cacac274d5fafb66e5a76155f"
+    },
+    {
+      "file": "models/player-03-lod0.glb",
+      "expectedSha256": "c61bd144e90114810f6ae8c23cd359de1dfe04987cb0e3fd416b1bbeca0f991d",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 780392,
+      "sha256": "c61bd144e90114810f6ae8c23cd359de1dfe04987cb0e3fd416b1bbeca0f991d"
+    },
+    {
+      "file": "models/player-04-lod0.glb",
+      "expectedSha256": "cd7591bddad98430fc2789dde3eff2bec6f828da05314a82b6a3e70cba6d2a8d",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 806980,
+      "sha256": "cd7591bddad98430fc2789dde3eff2bec6f828da05314a82b6a3e70cba6d2a8d"
+    },
+    {
+      "file": "models/player-05-lod0.glb",
+      "expectedSha256": "2f42fcbcc9f190561c957ef035084251a9b3440f3eca5df0ae4818bd8a4cdd41",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 756548,
+      "sha256": "2f42fcbcc9f190561c957ef035084251a9b3440f3eca5df0ae4818bd8a4cdd41"
+    },
+    {
+      "file": "models/player-06-lod0.glb",
+      "expectedSha256": "6e98cb35cb228380c1e7cc845bbd3aee21faa1c71f0a26f9c2e053b3f0523362",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 783328,
+      "sha256": "6e98cb35cb228380c1e7cc845bbd3aee21faa1c71f0a26f9c2e053b3f0523362"
+    },
+    {
+      "file": "models/goalkeeper-lod0.glb",
+      "expectedSha256": "3ae49462c9883952ffe7bb6b4f5b5134b0de10c75af66029a4a2929483c64fe1",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 869056,
+      "sha256": "3ae49462c9883952ffe7bb6b4f5b5134b0de10c75af66029a4a2929483c64fe1"
+    },
+    {
+      "file": "models/referee-lod0.glb",
+      "expectedSha256": "9e78c7aca7598d595054705571c3407b69e70108559a765a1c7e0f66f7ba66ad",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Cloth",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "Eyes",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false
+        },
+        {
+          "name": "HairCards",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false
+        }
+      ],
+      "bytes": 785744,
+      "sha256": "9e78c7aca7598d595054705571c3407b69e70108559a765a1c7e0f66f7ba66ad"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-01",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 1.028222473831164e-8,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "player-02",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 8.86566600688532e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "player-03",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 7.290441750296139e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "player-04",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 7.360442838555414e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "player-05",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 7.35685051767021e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "player-06",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 8.684065092023907e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "goalkeeper",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 9.903312586656554e-9,
+      "pass": true,
+      "worst": []
+    },
+    {
+      "character": "referee",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 7.2904551007280105e-9,
+      "pass": true,
+      "worst": []
+    }
+  ],
+  "decodedMaterialIssues": [],
+  "rebuildLifecycle": {
+    "cases": [
+      {
+        "requestedCharacter": "referee",
+        "requestedLOD": 0,
+        "expectedPath": "models/referee-lod0.glb",
+        "actualPath": "models/referee-lod0.glb",
+        "rebuildRequests": 6,
+        "rejected": [],
+        "activeActors": 1,
+        "cachedTemplatePaths": [
+          "models/referee-lod0.glb"
+        ],
+        "visibleSkinnedMeshes": 4,
+        "expectedVisibleSkinnedMeshes": 4,
+        "unexpectedVisibleSkinnedMeshes": 0,
+        "closedImages": [],
+        "minimumReferenceVertexY": 0.021245112331533575,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "lodLifecycle": {
+    "cases": [
+      {
+        "sequence": "run_2→sprint",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "Head",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.042628013353818175,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.025,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.025,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "run_2→sprint",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "Head",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.039500001875588435,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.025,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.025,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.329104726636703,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.049999999999999996,
+            "duration": 0.12
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.049999999999999996,
+            "duration": 0.12
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.3288673358731067,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.049999999999999996,
+            "duration": 0.12
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 0.049999999999999996,
+            "duration": 0.12
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0051280133567546925,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0020000018840785247,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "thresholds": {
+      "maximumWorldBonePositionJumpMeters": 0.003,
+      "maximumWorldBoneRotationJumpDegrees": 1,
+      "maximumClockErrorSeconds": 1e-9,
+      "minimumReferenceVertexY": -0.001
+    }
+  },
+  "pass": true,
+  "auditSource": {
+    "file": "source/audit-skinning.mjs",
+    "sha256": "b0c5dc5861b4a8f7ed407b2444a9b92e7044adfe74fb07dade7fe9d7ef22eb71"
+  },
+  "generatedAt": "2026-11-04T22:34:50.043Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 763056,
+      "sha256": "359e532ec3934f7d89cd25c526412e68dd1ced653f4d8435af55fa4ece155ffc"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1299540,
+      "sha256": "e940e48e3ff23e7866d2c712dca408b678b627115978581eec46b608161d693d"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1015903,
+      "sha256": "67b4967362a57786abc2ac66c109459c76818aeff1d146670bc72ae13e873576"
+    },
+    {
+      "file": "/offline/player-02-lod0.js",
+      "bytes": 1105519,
+      "sha256": "8cc1e749964601e322f393323b4419911056153b793af96d2a30e0f44bbc5039"
+    },
+    {
+      "file": "/offline/player-03-lod0.js",
+      "bytes": 1040623,
+      "sha256": "e6bc6b0206104d3d2fb8ef3924a290526ab117b845c90154e257347ad2d61336"
+    },
+    {
+      "file": "/offline/player-04-lod0.js",
+      "bytes": 1076075,
+      "sha256": "d4d06d5fd5e180aeb389e33cea74ac2ba40e0903ec65fd13ec54b268037ad5bd"
+    },
+    {
+      "file": "/offline/player-05-lod0.js",
+      "bytes": 1008831,
+      "sha256": "e05a4be0c9ff698baa239f0c8b9c35b43db0bd8e1c522ae3e2e806f9f76bd56b"
+    },
+    {
+      "file": "/offline/player-06-lod0.js",
+      "bytes": 1044539,
+      "sha256": "583547672b84e5e1a2e9204f245c0e941ce4f3b485e750228821e3061e6cbc60"
+    },
+    {
+      "file": "/offline/goalkeeper-lod0.js",
+      "bytes": 1158844,
+      "sha256": "649d353d4a2ace3c1e67c026c5f35438de4bfd4028f3bb3990499c3f27122309"
+    },
+    {
+      "file": "/offline/referee-lod0.js",
+      "bytes": 1047757,
+      "sha256": "00e1b69a9025be01d6903084cf635060f6e64eb7efcc19e0cbfe9b8c27dc016b"
+    },
+    {
+      "file": "/offline/player-05-lod1.js",
+      "bytes": 644559,
+      "sha256": "76e37ff52a5acbb95cb933ee83b8129a5e3429ebc7c5d30ba9f9e9119a9e4e28"
+    },
+    {
+      "file": "/offline/referee-lod1.js",
+      "bytes": 684185,
+      "sha256": "a1f683fb6edc6084adafcd1ed3a6132fab20d66d5f62f1fe5f61bfffb05c980e"
+    },
+    {
+      "file": "/offline/player-01-lod1.js",
+      "bytes": 651823,
+      "sha256": "78fe93e2750bb61b38fd11d9389d1e85874887f7adbfbecf01a60f63d9247825"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, selected delivered models/LODs and clips×7 deterministic times (defaults: all16 models/all31clips), plus interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor advances each actual displayed clip at the recorded30/60/120Hz, checking reference full-mesh floor, active sole anchors and descriptive authored hand supports. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

@@ -1,0 +1,320 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 5091,
+  "maximumAbsoluteErrorMeters": 2.9788488564719273e-8,
+  "minimumReferenceVertexY": 0.0010813424095358348,
+  "denseFloor": true,
+  "denseSamples": 4754,
+  "floorToleranceMeters": 0.001,
+  "activeSoleAnchorToleranceMeters": 0.003,
+  "maximumActiveSoleAnchorErrorMeters": 5.4271008923724494e-8,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "expectedSha256": "0e9e41cf907b97fecdc3a37dc07207cfc5b13d3fb25ffe2a7b73a96714bc375a",
+      "bytes": 901416,
+      "sha256": "0e9e41cf907b97fecdc3a37dc07207cfc5b13d3fb25ffe2a7b73a96714bc375a"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-01",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 2.9788488564719273e-8,
+      "pass": true,
+      "worst": [],
+      "denseClips": [
+        {
+          "id": "idle",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134204,
+          "maximumActiveSoleAnchorErrorMeters": 4.548528315244992e-17,
+          "pass": true
+        },
+        {
+          "id": "run_1",
+          "sampleRateHz": 120,
+          "samples": 109,
+          "minimumReferenceVertexY": 0.0020000012858268695,
+          "maximumActiveSoleAnchorErrorMeters": 1.4874333209750303e-9,
+          "pass": true
+        },
+        {
+          "id": "run_2",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0020000016996897796,
+          "maximumActiveSoleAnchorErrorMeters": 8.580542256639865e-10,
+          "pass": true
+        },
+        {
+          "id": "run_3",
+          "sampleRateHz": 120,
+          "samples": 85,
+          "minimumReferenceVertexY": 0.0020000010158460263,
+          "maximumActiveSoleAnchorErrorMeters": 1.9555247687968123e-9,
+          "pass": true
+        },
+        {
+          "id": "run_4",
+          "sampleRateHz": 120,
+          "samples": 73,
+          "minimumReferenceVertexY": 0.0020000009933521397,
+          "maximumActiveSoleAnchorErrorMeters": 2.0090358952471698e-9,
+          "pass": true
+        },
+        {
+          "id": "run_5",
+          "sampleRateHz": 120,
+          "samples": 65,
+          "minimumReferenceVertexY": 0.001999784188880141,
+          "maximumActiveSoleAnchorErrorMeters": 1.199784908605241e-9,
+          "pass": true
+        },
+        {
+          "id": "sprint",
+          "sampleRateHz": 120,
+          "samples": 58,
+          "minimumReferenceVertexY": 0.001999896888061625,
+          "maximumActiveSoleAnchorErrorMeters": 1.225023594230144e-9,
+          "pass": true
+        },
+        {
+          "id": "decelerate",
+          "sampleRateHz": 120,
+          "samples": 121,
+          "minimumReferenceVertexY": 0.0020000017641570145,
+          "maximumActiveSoleAnchorErrorMeters": 2.407177726611471e-10,
+          "pass": true
+        },
+        {
+          "id": "turn_left",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.001999877570523523,
+          "maximumActiveSoleAnchorErrorMeters": 3.915045734848004e-8,
+          "pass": true
+        },
+        {
+          "id": "turn_right",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.001999770399722821,
+          "maximumActiveSoleAnchorErrorMeters": 3.915045734848004e-8,
+          "pass": true
+        },
+        {
+          "id": "kick",
+          "sampleRateHz": 120,
+          "samples": 82,
+          "minimumReferenceVertexY": 0.002000000681465925,
+          "maximumActiveSoleAnchorErrorMeters": 7.739088662279835e-9,
+          "pass": true
+        },
+        {
+          "id": "short_pass",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.002000001883133924,
+          "maximumActiveSoleAnchorErrorMeters": 2.816936310853367e-10,
+          "pass": true
+        },
+        {
+          "id": "long_pass",
+          "sampleRateHz": 120,
+          "samples": 157,
+          "minimumReferenceVertexY": 0.0020000018831339227,
+          "maximumActiveSoleAnchorErrorMeters": 1.6417890066828915e-9,
+          "pass": true
+        },
+        {
+          "id": "header",
+          "sampleRateHz": 120,
+          "samples": 154,
+          "minimumReferenceVertexY": 0.00200000188284863,
+          "maximumActiveSoleAnchorErrorMeters": 2.8638205619689723e-13,
+          "pass": true
+        },
+        {
+          "id": "dribble",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0020000016996897796,
+          "maximumActiveSoleAnchorErrorMeters": 8.580542256639865e-10,
+          "pass": true
+        },
+        {
+          "id": "slide_tackle",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.001667242259004953,
+          "maximumActiveSoleAnchorErrorMeters": 1.8843235551123958e-16,
+          "pass": true
+        },
+        {
+          "id": "fall",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.0019999207537386046,
+          "maximumActiveSoleAnchorErrorMeters": 0,
+          "pass": true
+        },
+        {
+          "id": "get_up",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.001999950379770594,
+          "maximumActiveSoleAnchorErrorMeters": 5.4271008923724494e-8,
+          "handSupport": {
+            "samples": 42,
+            "maximumAuthoredAnchorDistanceMeters": 0.020158914673119543,
+            "maximumVerticalGapMeters": 0.0201588522980302,
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed palm marker against authored support; visual mesh contact requires review."
+          },
+          "pass": true
+        },
+        {
+          "id": "celebrate_arms_up",
+          "sampleRateHz": 120,
+          "samples": 241,
+          "minimumReferenceVertexY": 0.002000001883134095,
+          "maximumActiveSoleAnchorErrorMeters": 1.5265566588595902e-16,
+          "pass": true
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134095,
+          "maximumActiveSoleAnchorErrorMeters": 1.5265566588595902e-16,
+          "pass": true
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883133976,
+          "maximumActiveSoleAnchorErrorMeters": 2.6427564275670133e-16,
+          "pass": true
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.001999994246964505,
+          "maximumActiveSoleAnchorErrorMeters": 7.654207945389986e-9,
+          "pass": true
+        },
+        {
+          "id": "celebrate_applause",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.002000001883134095,
+          "maximumActiveSoleAnchorErrorMeters": 1.5265566588595902e-16,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.001874861812883172,
+          "maximumActiveSoleAnchorErrorMeters": 4.6701717575894946e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.0018750645081151945,
+          "maximumActiveSoleAnchorErrorMeters": 4.6701717575894946e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_high",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.0019594771235492857,
+          "maximumActiveSoleAnchorErrorMeters": 5.955092791094457e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_catch",
+          "sampleRateHz": 120,
+          "samples": 145,
+          "minimumReferenceVertexY": 0.0020000018831339687,
+          "maximumActiveSoleAnchorErrorMeters": 3.101181028300686e-16,
+          "pass": true
+        },
+        {
+          "id": "keeper_throw",
+          "sampleRateHz": 120,
+          "samples": 142,
+          "minimumReferenceVertexY": 0.0020000018831338867,
+          "maximumActiveSoleAnchorErrorMeters": 3.3335590258932494e-16,
+          "pass": true
+        },
+        {
+          "id": "keeper_punt",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.0019999198619856896,
+          "maximumActiveSoleAnchorErrorMeters": 4.990183752568918e-10,
+          "pass": true
+        },
+        {
+          "id": "referee_whistle",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.002000001883134095,
+          "maximumActiveSoleAnchorErrorMeters": 1.5265566588595902e-16,
+          "pass": true
+        },
+        {
+          "id": "referee_signal",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134095,
+          "maximumActiveSoleAnchorErrorMeters": 1.5265566588595902e-16,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "pass": true,
+  "generatedAt": "2026-11-04T21:20:54.773Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 20906,
+      "sha256": "d42996818ed34206437ffc81a994dbe28b9eaf3ab56f486d93d4722cac5efbec"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 758345,
+      "sha256": "6641afdc3e24ba6a62e8ef68795d6aa79ff9fe0be60724594396b1c0bb570862"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1288884,
+      "sha256": "12c0367e08fd62bce65cdbd504f34b4ee0822cda045acd98457ce827ac1531ac"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1201987,
+      "sha256": "8dee4ea29e7cf6abb60f00f43903b07c63dc40689f623c5239144e066468b649"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, all delivered models/LODs,31 clips×7 deterministic times and interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor also advances each actual displayed clip at120Hz, checking reference full-mesh floor and active sole anchors. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

@@ -1,0 +1,399 @@
+{
+  "kind": "bounded-cloth31-static-action-decoded-control",
+  "helperSha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+  "decodedProof": "source/character-cloth-finish31-decoded-proof.json",
+  "helperFixture": "source/character-cloth-finish31-proof.json",
+  "phoneImages": [
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-01-cloth-front-390x844.png",
+      "bytes": 216427,
+      "sha256": "bb6724f1a360f6830aecadae2f73211be9bb86cd2c995545e18a6ff5e3321c88",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-01-cloth-three-quarter-390x844.png",
+      "bytes": 212429,
+      "sha256": "0c342f1642dd9cb725f735a6a5a8d949a2a48604409b700b5ae52138e3c081ab",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-01-cloth-front-844x390.png",
+      "bytes": 160702,
+      "sha256": "b550e2ec711e796dcc8801f46ccfc5d67b59718a517018eed55f426123782db3",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-01-cloth-three-quarter-844x390.png",
+      "bytes": 150365,
+      "sha256": "a7cce42ffd63625a2e50756f8ffde75bb0fcce2dcc06dc232b81f07d69d33dc4",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-04-cloth-front-390x844.png",
+      "bytes": 201424,
+      "sha256": "9ef9a98d7bacb093ff9f3d6c90b9746dfd43d9ea14021e416e7b7d4a2d500e7a",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-04-cloth-three-quarter-390x844.png",
+      "bytes": 199561,
+      "sha256": "0271af9f1805ed13cc19cd111495d85bb3b15d5a9128dfe4a284d86569fe142d",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-04-cloth-front-844x390.png",
+      "bytes": 148350,
+      "sha256": "7cc6d3fe986e281b3e0a18bcb842a81339b803a0a0f6c7700ac23dbd43e04ef2",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-baseline/player-04-cloth-three-quarter-844x390.png",
+      "bytes": 138393,
+      "sha256": "ba9188858da6fda778d086f31a1c88f223007333282f2a8c8e16f79155ba5a4d",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-01-cloth-front-390x844.png",
+      "bytes": 217508,
+      "sha256": "1910ad5ab6e511224bd324c8323a33a76fbfa913e444c2789e20b632241be067",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-01-cloth-three-quarter-390x844.png",
+      "bytes": 212513,
+      "sha256": "00e7908a3d52174983563fd714c5021a3586c3d3fc433a32edcc5c383d483db7",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-01-cloth-front-844x390.png",
+      "bytes": 161425,
+      "sha256": "4a5d2b7c2d3a0cb9d6486750fc19f0e3ab0098abb1754d6479ad71a7a6d60107",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-01-cloth-three-quarter-844x390.png",
+      "bytes": 150452,
+      "sha256": "c9983c016923419d071b1735d01a9c907dcd6980664825628fb1aab0b9cacc7c",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-04-cloth-front-390x844.png",
+      "bytes": 202026,
+      "sha256": "b80bd393f18f87ad75fbf5e11d977bcbe105aec5bbc92a3cb2c4d37dd8c2efcf",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-04-cloth-three-quarter-390x844.png",
+      "bytes": 199791,
+      "sha256": "b6bacd52dbc0aa0785b01700d7c99b10217048d78063accce5381280d07beaf1",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-04-cloth-front-844x390.png",
+      "bytes": 148373,
+      "sha256": "3857761fbe1dfb718dd711a6afc8f395d2d9185b0960d2f1d16d870fe5079733",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-static-finish/player-04-cloth-three-quarter-844x390.png",
+      "bytes": 138471,
+      "sha256": "fe8ce2d21088a57a2b8249834c5ad2c3f0d424b5cfcb7ffce2c2ea3aaaf4d310",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-01-kick-strike-390x844.png",
+      "bytes": 116279,
+      "sha256": "91abaed4d488068865ea79cfbf6a9c4b6ad0d15f85fc99ba46833797a12718ac",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-01-get-up-supported-390x844.png",
+      "bytes": 166477,
+      "sha256": "ab6b2f2722429edabd0b08c2097ad86e51014d705d84cfe51b8e02a7197cbc9e",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-01-kick-strike-844x390.png",
+      "bytes": 119548,
+      "sha256": "b8b7ad6bd5e081986881f09b29fce6ea96f3277e57f252bb5104ac431ebc46b6",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-01-get-up-supported-844x390.png",
+      "bytes": 213777,
+      "sha256": "cf2426fb3f9a2f4ca042212cf468a41b6154112213dafbaedac717a92c9c382d",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-04-kick-strike-390x844.png",
+      "bytes": 116003,
+      "sha256": "c22e01f831aeb45a2a253b074d40efd243bac763db08765c5231861fb73405be",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-04-get-up-supported-390x844.png",
+      "bytes": 169455,
+      "sha256": "8509a82d3b2a7b16e4af2295c22c217f8a71d0627bc5db62e5539290e27ed187",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-04-kick-strike-844x390.png",
+      "bytes": 119070,
+      "sha256": "949ae3784dfb1a4ca99207a31e34cdedeb020b80443f938cd7bafae7cedbf378",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-baseline/player-04-get-up-supported-844x390.png",
+      "bytes": 222546,
+      "sha256": "ba294cdbcab421a6809270977b6fe0aa0a804272c3acde54cc58f5892ac3c401",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-01-kick-strike-390x844.png",
+      "bytes": 116286,
+      "sha256": "d397ff4ddfad122b51779a6f3bec5ebafbe953dde613161efb8210f9533e358b",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-01-get-up-supported-390x844.png",
+      "bytes": 166473,
+      "sha256": "1d871bbf5df6b7c87d9fdc163bfa2fb47e3e4c8629f35d6e6023443c36f05c18",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-01-kick-strike-844x390.png",
+      "bytes": 119522,
+      "sha256": "a6be5ae8e3ef1198cdcd41c236aa7298db6d02baef66c0285db0c43a6099d8a6",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-01-get-up-supported-844x390.png",
+      "bytes": 213737,
+      "sha256": "43817b3aaf379afadac30520fa59166d0ed2457ed14e6db1f19e555b8867e81c",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-04-kick-strike-390x844.png",
+      "bytes": 116062,
+      "sha256": "52585240af544392a520b231e3433f09e925ce60921e79be24b01a5a183db1f9",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-04-get-up-supported-390x844.png",
+      "bytes": 169605,
+      "sha256": "eb5258896e187faf3abdc2d0fef6c9e260fe211c32d07ee4e3c914789d686f33",
+      "dimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-04-kick-strike-844x390.png",
+      "bytes": 118790,
+      "sha256": "31aa65f95d8c9c51565e63b385d6c1c085a73869f6cb9dab7f4b36538f93fd15",
+      "dimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "file": "iterations/31/preflight/cloth-action-finish/player-04-get-up-supported-844x390.png",
+      "bytes": 222578,
+      "sha256": "87fb81acccabde0e5043b04e4f1d58ba9d94cc221c50b89f7e4ec9217cca54f4",
+      "dimensions": [
+        844,
+        390
+      ]
+    }
+  ],
+  "sidecars": {
+    "cloth-static-baseline": {
+      "recordCount": 8,
+      "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+      "originalCompleteField": false,
+      "fullCameraRecords": false
+    },
+    "cloth-static-finish": {
+      "recordCount": 8,
+      "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+      "originalCompleteField": false,
+      "fullCameraRecords": false
+    },
+    "cloth-action-baseline": {
+      "recordCount": 8,
+      "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+      "originalCompleteField": true,
+      "fullCameraRecords": true
+    },
+    "cloth-action-finish": {
+      "recordCount": 8,
+      "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+      "originalCompleteField": true,
+      "fullCameraRecords": true
+    }
+  },
+  "textures": [
+    {
+      "id": "player-01",
+      "channel": "basecolor",
+      "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+      "byteIdentical": true
+    },
+    {
+      "id": "player-01",
+      "channel": "normal",
+      "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+      "byteIdentical": true
+    },
+    {
+      "id": "player-01",
+      "channel": "orm",
+      "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+      "byteIdentical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "basecolor",
+      "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+      "byteIdentical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "normal",
+      "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+      "byteIdentical": true
+    },
+    {
+      "id": "player-04",
+      "channel": "orm",
+      "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+      "byteIdentical": true
+    }
+  ],
+  "materials": [
+    {
+      "id": "player-01",
+      "lod": "lod0",
+      "materialDefinitionsIdentical": true,
+      "baselineTriangles": 35366,
+      "finishTriangles": 35365,
+      "finishBytes": 967968
+    },
+    {
+      "id": "player-01",
+      "lod": "lod1",
+      "materialDefinitionsIdentical": true,
+      "baselineTriangles": 5781,
+      "finishTriangles": 5781,
+      "finishBytes": 521696
+    },
+    {
+      "id": "player-04",
+      "lod": "lod0",
+      "materialDefinitionsIdentical": true,
+      "baselineTriangles": 35326,
+      "finishTriangles": 35327,
+      "finishBytes": 1009448
+    },
+    {
+      "id": "player-04",
+      "lod": "lod1",
+      "materialDefinitionsIdentical": true,
+      "baselineTriangles": 5780,
+      "finishTriangles": 5780,
+      "finishBytes": 560784
+    }
+  ],
+  "live24Checked": 41,
+  "live24AllUnchanged": true,
+  "scope": "P01/P04 only; Face27/Hair29+wisps/Mouth.40/Eyes.88/Extra.05/FarCap32/macro0 fixed. Existing raw shirt topology/UV/weights unchanged; QEM/prune final near counts differ by one triangle without increasing budget. All new photographs are paused actual PBR screenshots.",
+  "correctnessVerdict": "Accept bounded collar correction based on positive decoded collar clearance and attached static/action phone images",
+  "visualQualityLimit": "Independent review remains about7.5 cloth: broad vertical streaks, smooth torso, angular shoulder/back folds during get_up remain. No overall8 claim."
+}

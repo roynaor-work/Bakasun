@@ -1,0 +1,3995 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "declaredPackageHashes": {
+    "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+      "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+      "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+      "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+      "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+      "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+      "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+      "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+      "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+      "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+      "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+      "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+      "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+      "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+      "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+      "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+    },
+    "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+  },
+  "runtimeErrors": [],
+  "packagedEnvelope": {
+    "present": true,
+    "complete": true,
+    "pass": true,
+    "motionMatches": true,
+    "helperMatches": true,
+    "allModelHashesMatch": true,
+    "inputsVerified": true
+  },
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 127,
+  "maximumAbsoluteErrorMeters": 1.415353673150932e-8,
+  "minimumReferenceVertexY": 0.0019968620192041763,
+  "denseFloor": false,
+  "denseSampleRateHz": 120,
+  "denseSamples": 0,
+  "clipsEvaluated": [
+    "header"
+  ],
+  "totalClipCount": 31,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "expectedSha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376,
+          "clearcoat": 1,
+          "transmission": 0
+        }
+      ],
+      "bytes": 1214572,
+      "sha256": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-01",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 1.415353673150932e-8,
+      "pass": true,
+      "worst": []
+    }
+  ],
+  "decodedMaterialIssues": [],
+  "coldSeekLifecycle": {
+    "cases": [
+      {
+        "clip": "run_2",
+        "phase": 0.18,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "header",
+        "phase": 0.5,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "header",
+        "phase": 0.15,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "header",
+        "phase": 0.85,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "turn_left",
+        "phase": 0.5,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "get_up",
+        "phase": 0.05,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "pass": true
+      },
+      {
+        "clip": "get_up",
+        "phase": 0.25,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "slide_tackle",
+        "phase": 0.95,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      },
+      {
+        "clip": "keeper_dive_right",
+        "phase": 0.98,
+        "previousWorldHistoryCleared": true,
+        "localPreviousCleared": true,
+        "fadeCleared": true,
+        "rootBlendCleared": true,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "rebuildLifecycle": {
+    "cases": [
+      {
+        "requestedCharacter": "player-01",
+        "requestedLOD": 0,
+        "expectedPath": "models/player-01-lod0.glb",
+        "actualPath": "models/player-01-lod0.glb",
+        "rebuildRequests": 6,
+        "rejected": [],
+        "activeActors": 1,
+        "cachedTemplatePaths": [
+          "models/player-01-lod0.glb"
+        ],
+        "visibleSkinnedMeshes": 5,
+        "expectedVisibleSkinnedMeshes": 5,
+        "unexpectedVisibleSkinnedMeshes": 0,
+        "closedImages": [],
+        "minimumReferenceVertexY": 0.0020000018831340905,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "lodLifecycle": {
+    "cases": [
+      {
+        "sequence": "run_2→sprint",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.005128013472859656,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.09999999999806594,
+              -3.37726929755533e-11,
+              0.34559999992615403
+            ],
+            "release": 1.143999999999998
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.09999999999806594,
+              -3.37726929755533e-11,
+              0.34559999992615403
+            ],
+            "release": 1.143999999999998
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.11316674750000004,
+          "phaseOffset": 0,
+          "phaseRate": 0.5833337500000013,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.11316674750000004,
+          "phaseOffset": 0,
+          "phaseRate": 0.5833337500000013,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 8.266117693163787,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 3.0484230124070795,
+        "advancingLinearBone": "RightFoot",
+        "advancingMinimumReferenceVertexY": 0.0051280135248394105,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "run_2→sprint",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.002000002114538799,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.09999999999806594,
+              -3.37726929755533e-11,
+              0.34559999992615403
+            ],
+            "release": 1.143999999999998
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.09999999999806594,
+              -3.37726929755533e-11,
+              0.34559999992615403
+            ],
+            "release": 1.143999999999998
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.11802786208333339,
+          "phaseOffset": 0,
+          "phaseRate": 0.5833337500000013,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.11802786208333339,
+          "phaseOffset": 0,
+          "phaseRate": 0.5833337500000013,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 8.040971566122053,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 2.775573682009562,
+        "advancingLinearBone": "RightFoot",
+        "advancingMinimumReferenceVertexY": 0.002000002008723333,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.3363018722306976,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.6833334999999998,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.6833334999999998,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 13.766752693236779,
+        "advancingAngularBone": "Head",
+        "advancingMaximumRootRelativeBoneSpeedMps": 3.120081296652075,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.33342635656977127,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.3302984441392467,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.6916668333333331,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.6916668333333331,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 13.766591126391416,
+        "advancingAngularBone": "Head",
+        "advancingMaximumRootRelativeBoneSpeedMps": 3.1280623136412835,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.32742421369988073,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 0,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "Chest",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.005128013361245679,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.1,
+              1.249000902703301e-16,
+              -7.771561172376095e-17
+            ],
+            "release": 1.3778400875779715
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.1,
+              1.249000902703301e-16,
+              -7.771561172376095e-17
+            ],
+            "release": 1.3778400875779715
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.22700868055555556,
+          "phaseOffset": 0,
+          "phaseRate": 0.5603472222222223,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.22700868055555556,
+          "phaseOffset": 0,
+          "phaseRate": 0.5603472222222223,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7819102960399602,
+            "targetY": 0.842238337236672,
+            "appliedY": 0.7902436293732935,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.05199470786337845
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Neck": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Head": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "LeftArm": [
+                0.0983073014682074,
+                -0.04883902303886012,
+                0.43376430905371083,
+                0.8943147927311755
+              ],
+              "LeftForeArm": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftHand": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightArm": [
+                0.0983073014682074,
+                0.04883902303886012,
+                -0.43376430905371083,
+                0.8943147927311755
+              ],
+              "RightForeArm": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightHand": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "LeftFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "RightFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.049999999999999996,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Neck": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Head": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.27840467602363106,
+                -0.11320278125678634,
+                0.724291465015606
+              ],
+              "LeftForeArm": [
+                0.3090791287273605,
+                -0.09487376168146332,
+                0.7254336050807658
+              ],
+              "LeftHand": [
+                0.35020183081182493,
+                -0.165600525184035,
+                0.7876036286760568
+              ],
+              "RightArm": [
+                0.27840467602363106,
+                0.11320278125678634,
+                -0.724291465015606
+              ],
+              "RightForeArm": [
+                0.3090791287273605,
+                0.09487376168146332,
+                -0.7254336050807658
+              ],
+              "RightHand": [
+                0.35020183081182493,
+                0.165600525184035,
+                -0.7876036286760568
+              ],
+              "LeftUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7819102960399602,
+            "targetY": 0.842238337236672,
+            "appliedY": 0.7902436293732935,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.05199470786337845
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Neck": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Head": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "LeftArm": [
+                0.0983073014682074,
+                -0.04883902303886012,
+                0.43376430905371083,
+                0.8943147927311755
+              ],
+              "LeftForeArm": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftHand": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightArm": [
+                0.0983073014682074,
+                0.04883902303886012,
+                -0.43376430905371083,
+                0.8943147927311755
+              ],
+              "RightForeArm": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightHand": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "LeftFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "RightFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.049999999999999996,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Neck": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Head": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.27840467602363106,
+                -0.11320278125678634,
+                0.724291465015606
+              ],
+              "LeftForeArm": [
+                0.3090791287273605,
+                -0.09487376168146332,
+                0.7254336050807658
+              ],
+              "LeftHand": [
+                0.35020183081182493,
+                -0.165600525184035,
+                0.7876036286760568
+              ],
+              "RightArm": [
+                0.27840467602363106,
+                0.11320278125678634,
+                -0.724291465015606
+              ],
+              "RightForeArm": [
+                0.3090791287273605,
+                0.09487376168146332,
+                -0.7254336050807658
+              ],
+              "RightHand": [
+                0.35020183081182493,
+                0.165600525184035,
+                -0.7876036286760568
+              ],
+              "LeftUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.2933591290048403,
+        "advancingAngularBone": "LeftHand",
+        "advancingMaximumRootRelativeBoneSpeedMps": 2.025460811863202,
+        "advancingLinearBone": "RightFoot",
+        "advancingMinimumReferenceVertexY": 0.005128013361245617,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "RightForeArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0020000018831344683,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.1,
+              1.249000902703301e-16,
+              -7.771561172376095e-17
+            ],
+            "release": 1.3755829676497584
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:0",
+            "anchor": [
+              0.1,
+              1.249000902703301e-16,
+              -7.771561172376095e-17
+            ],
+            "release": 1.3755829676497584
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.23170625964506175,
+          "phaseOffset": 0,
+          "phaseRate": 0.5670717592592592,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.23170625964506175,
+          "phaseOffset": 0,
+          "phaseRate": 0.5670717592592592,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7902436293732935,
+            "targetY": 0.8413223148385846,
+            "appliedY": 0.7985769627066268,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.04274535213195774
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Neck": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Head": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "LeftArm": [
+                0.0983073014682074,
+                -0.04883902303886012,
+                0.43376430905371083,
+                0.8943147927311755
+              ],
+              "LeftForeArm": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftHand": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightArm": [
+                0.0983073014682074,
+                0.04883902303886012,
+                -0.43376430905371083,
+                0.8943147927311755
+              ],
+              "RightForeArm": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightHand": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "LeftFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "RightFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.05833333333333333,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Neck": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Head": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.27840467602363106,
+                -0.11320278125678634,
+                0.724291465015606
+              ],
+              "LeftForeArm": [
+                0.3090791287273605,
+                -0.09487376168146332,
+                0.7254336050807658
+              ],
+              "LeftHand": [
+                0.35020183081182493,
+                -0.165600525184035,
+                0.7876036286760568
+              ],
+              "RightArm": [
+                0.27840467602363106,
+                0.11320278125678634,
+                -0.724291465015606
+              ],
+              "RightForeArm": [
+                0.3090791287273605,
+                0.09487376168146332,
+                -0.7254336050807658
+              ],
+              "RightHand": [
+                0.35020183081182493,
+                0.165600525184035,
+                -0.7876036286760568
+              ],
+              "LeftUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7902436293732935,
+            "targetY": 0.8413223148385846,
+            "appliedY": 0.7985769627066268,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.04274535213195774
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Neck": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "Head": [
+                0.11674647464838353,
+                0,
+                0,
+                0.9931617494935929
+              ],
+              "LeftArm": [
+                0.0983073014682074,
+                -0.04883902303886012,
+                0.43376430905371083,
+                0.8943147927311755
+              ],
+              "LeftForeArm": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftHand": [
+                0.019988284860902174,
+                -0.08645834788350545,
+                0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightArm": [
+                0.0983073014682074,
+                0.04883902303886012,
+                -0.43376430905371083,
+                0.8943147927311755
+              ],
+              "RightForeArm": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "RightHand": [
+                0.019988284860902174,
+                0.08645834788350545,
+                -0.42785707864012557,
+                0.8994797067233433
+              ],
+              "LeftUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "LeftFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.26191262617834526,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.2929482639278294,
+                0,
+                0,
+                0.9561282940388652
+              ],
+              "RightFoot": [
+                1.3877787807814457e-16,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.05833333333333333,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Neck": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "Head": [
+                0.23402663713855343,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.27840467602363106,
+                -0.11320278125678634,
+                0.724291465015606
+              ],
+              "LeftForeArm": [
+                0.3090791287273605,
+                -0.09487376168146332,
+                0.7254336050807658
+              ],
+              "LeftHand": [
+                0.35020183081182493,
+                -0.165600525184035,
+                0.7876036286760568
+              ],
+              "RightArm": [
+                0.27840467602363106,
+                0.11320278125678634,
+                -0.724291465015606
+              ],
+              "RightForeArm": [
+                0.3090791287273605,
+                0.09487376168146332,
+                -0.7254336050807658
+              ],
+              "RightHand": [
+                0.35020183081182493,
+                0.165600525184035,
+                -0.7876036286760568
+              ],
+              "LeftUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.34353098971560225,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335515,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.704743334429407,
+        "advancingAngularBone": "LeftHand",
+        "advancingMaximumRootRelativeBoneSpeedMps": 1.5616683032582117,
+        "advancingLinearBone": "RightLeg",
+        "advancingMinimumReferenceVertexY": 0.0020000018831342003,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.005128013361245462,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:1",
+            "anchor": [
+              0.1,
+              6.938893903907228e-17,
+              2.353672812205332e-16
+            ],
+            "release": 1.444506754244638
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:1",
+            "anchor": [
+              0.1,
+              6.938893903907228e-17,
+              2.353672812205332e-16
+            ],
+            "release": 1.444506754244638
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.0270086805555556,
+          "phaseOffset": 0,
+          "phaseRate": 0.5603472222222223,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.0270086805555556,
+          "phaseOffset": 0,
+          "phaseRate": 0.5603472222222223,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7819102960399602,
+            "targetY": 0.842238337236672,
+            "appliedY": 0.7902436293732935,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.05199470786337845
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Neck": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Head": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "LeftArm": [
+                0.042070519452788516,
+                -0.01326456930228432,
+                0.3004135194574881,
+                0.9527884549685532
+              ],
+              "LeftForeArm": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftHand": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightArm": [
+                0.042070519452788516,
+                0.01326456930228432,
+                -0.3004135194574881,
+                0.9527884549685532
+              ],
+              "RightForeArm": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightHand": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "LeftFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "RightFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.049999999999999996,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Neck": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Head": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.14976632336744475,
+                -0.05940206729177434,
+                0.43565143463980527
+              ],
+              "LeftForeArm": [
+                0.18228301418916634,
+                -0.04592392285938052,
+                0.43513772915524646
+              ],
+              "LeftHand": [
+                0.2146512437812678,
+                -0.11669256983084139,
+                0.5012735390459248
+              ],
+              "RightArm": [
+                0.14976632336744475,
+                0.05940206729177434,
+                -0.43565143463980527
+              ],
+              "RightForeArm": [
+                0.18228301418916634,
+                0.04592392285938052,
+                -0.43513772915524646
+              ],
+              "RightHand": [
+                0.2146512437812678,
+                0.11669256983084139,
+                -0.5012735390459248
+              ],
+              "LeftUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7819102960399602,
+            "targetY": 0.842238337236672,
+            "appliedY": 0.7902436293732935,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.05199470786337845
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Neck": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Head": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "LeftArm": [
+                0.042070519452788516,
+                -0.01326456930228432,
+                0.3004135194574881,
+                0.9527884549685532
+              ],
+              "LeftForeArm": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftHand": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightArm": [
+                0.042070519452788516,
+                0.01326456930228432,
+                -0.3004135194574881,
+                0.9527884549685532
+              ],
+              "RightForeArm": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightHand": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "LeftFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "RightFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.049999999999999996,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Neck": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Head": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.14976632336744475,
+                -0.05940206729177434,
+                0.43565143463980527
+              ],
+              "LeftForeArm": [
+                0.18228301418916634,
+                -0.04592392285938052,
+                0.43513772915524646
+              ],
+              "LeftHand": [
+                0.2146512437812678,
+                -0.11669256983084139,
+                0.5012735390459248
+              ],
+              "RightArm": [
+                0.14976632336744475,
+                0.05940206729177434,
+                -0.43565143463980527
+              ],
+              "RightForeArm": [
+                0.18228301418916634,
+                0.04592392285938052,
+                -0.43513772915524646
+              ],
+              "RightHand": [
+                0.2146512437812678,
+                0.11669256983084139,
+                -0.5012735390459248
+              ],
+              "LeftUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.2808296679843303,
+        "advancingAngularBone": "LeftUpLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 2.0254608118631796,
+        "advancingLinearBone": "RightFoot",
+        "advancingMinimumReferenceVertexY": 0.005128013361245356,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftLeg",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0020000018831342315,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:1",
+            "anchor": [
+              0.1,
+              6.938893903907228e-17,
+              2.353672812205332e-16
+            ],
+            "release": 1.4422496343164248
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "motor:LeftFoot:1",
+            "anchor": [
+              0.1,
+              6.938893903907228e-17,
+              2.353672812205332e-16
+            ],
+            "release": 1.4422496343164248
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.0317062596450617,
+          "phaseOffset": 0,
+          "phaseRate": 0.5670717592592592,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.0317062596450617,
+          "phaseOffset": 0,
+          "phaseRate": 0.5670717592592592,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7902436293732935,
+            "targetY": 0.8413223148385846,
+            "appliedY": 0.7985769627066268,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.04274535213195774
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Neck": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Head": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "LeftArm": [
+                0.042070519452788516,
+                -0.01326456930228432,
+                0.3004135194574881,
+                0.9527884549685532
+              ],
+              "LeftForeArm": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftHand": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightArm": [
+                0.042070519452788516,
+                0.01326456930228432,
+                -0.3004135194574881,
+                0.9527884549685532
+              ],
+              "RightForeArm": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightHand": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "LeftFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "RightFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.05833333333333333,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Neck": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Head": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.14976632336744475,
+                -0.05940206729177434,
+                0.43565143463980527
+              ],
+              "LeftForeArm": [
+                0.18228301418916634,
+                -0.04592392285938052,
+                0.43513772915524646
+              ],
+              "LeftHand": [
+                0.2146512437812678,
+                -0.11669256983084139,
+                0.5012735390459248
+              ],
+              "RightArm": [
+                0.14976632336744475,
+                0.05940206729177434,
+                -0.43565143463980527
+              ],
+              "RightForeArm": [
+                0.18228301418916634,
+                0.04592392285938052,
+                -0.43513772915524646
+              ],
+              "RightHand": [
+                0.2146512437812678,
+                0.11669256983084139,
+                -0.5012735390459248
+              ],
+              "LeftUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": true,
+          "hip": {
+            "mode": "bounded-physical-pelvis-height",
+            "scope": "beforeReachAndFloorCorrection",
+            "previousY": 0.7902436293732935,
+            "targetY": 0.8413223148385846,
+            "appliedY": 0.7985769627066268,
+            "maximumStepMeters": 0.008333333333333333,
+            "maximumDesiredSpeedMps": 1,
+            "remainingMeters": 0.04274535213195774
+          },
+          "orientation": {
+            "sourceWorld": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Neck": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "Head": [
+                0.08764759065789411,
+                0,
+                0,
+                0.9961515446215332
+              ],
+              "LeftArm": [
+                0.042070519452788516,
+                -0.01326456930228432,
+                0.3004135194574881,
+                0.9527884549685532
+              ],
+              "LeftForeArm": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftHand": [
+                -0.041130829703785135,
+                -0.03939694202009345,
+                0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightArm": [
+                0.042070519452788516,
+                0.01326456930228432,
+                -0.3004135194574881,
+                0.9527884549685532
+              ],
+              "RightForeArm": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "RightHand": [
+                -0.041130829703785135,
+                0.03939694202009345,
+                -0.2981142605354772,
+                0.9528294828943579
+              ],
+              "LeftUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "LeftLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "LeftFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ],
+              "RightUpLeg": [
+                -0.2619126261783453,
+                0,
+                0,
+                0.9650915895646188
+              ],
+              "RightLeg": [
+                0.29294826392782913,
+                0,
+                0,
+                0.9561282940388655
+              ],
+              "RightFoot": [
+                -8.326672684688674e-17,
+                0,
+                0,
+                1
+              ]
+            },
+            "previousWorld": null,
+            "dt": 0.008333333333333333,
+            "elapsed": 0.05833333333333333,
+            "bones": [
+              "Hips",
+              "Spine",
+              "Chest",
+              "Neck",
+              "Head",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "LeftUpLeg",
+              "LeftLeg",
+              "RightUpLeg",
+              "RightLeg"
+            ],
+            "offsets": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Neck": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "Head": [
+                0.1755203999459396,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0.14976632336744475,
+                -0.05940206729177434,
+                0.43565143463980527
+              ],
+              "LeftForeArm": [
+                0.18228301418916634,
+                -0.04592392285938052,
+                0.43513772915524646
+              ],
+              "LeftHand": [
+                0.2146512437812678,
+                -0.11669256983084139,
+                0.5012735390459248
+              ],
+              "RightArm": [
+                0.14976632336744475,
+                0.05940206729177434,
+                -0.43565143463980527
+              ],
+              "RightForeArm": [
+                0.18228301418916634,
+                0.04592392285938052,
+                -0.43513772915524646
+              ],
+              "RightHand": [
+                0.2146512437812678,
+                0.11669256983084139,
+                -0.5012735390459248
+              ],
+              "LeftUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                -0.3435309897156025,
+                0,
+                0
+              ],
+              "RightLeg": [
+                0.3877061201335508,
+                0,
+                0
+              ]
+            },
+            "velocities": {
+              "Hips": [
+                0,
+                0,
+                0
+              ],
+              "Spine": [
+                0,
+                0,
+                0
+              ],
+              "Chest": [
+                0,
+                0,
+                0
+              ],
+              "Neck": [
+                0,
+                0,
+                0
+              ],
+              "Head": [
+                0,
+                0,
+                0
+              ],
+              "LeftArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftForeArm": [
+                0,
+                0,
+                0
+              ],
+              "LeftHand": [
+                0,
+                0,
+                0
+              ],
+              "RightArm": [
+                0,
+                0,
+                0
+              ],
+              "RightForeArm": [
+                0,
+                0,
+                0
+              ],
+              "RightHand": [
+                0,
+                0,
+                0
+              ],
+              "LeftUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "LeftLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ],
+              "RightUpLeg": [
+                0,
+                0,
+                0
+              ],
+              "RightLeg": [
+                -1.1102230246251565e-12,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.527053228397639,
+        "advancingAngularBone": "LeftUpLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 1.5616683032582055,
+        "advancingLinearBone": "RightLeg",
+        "advancingMinimumReferenceVertexY": 0.002000001883134386,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.005128013333280828,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "turn_left/LeftFoot/0/0.366667",
+            "anchor": [
+              0.25,
+              0,
+              0.093397
+            ],
+            "release": 1.6666666666666643
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "turn_left/LeftFoot/0/0.366667",
+            "anchor": [
+              0.25,
+              0,
+              0.093397
+            ],
+            "release": 1.6666666666666643
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.4500000000000002,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.4500000000000002,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.7847561642255165,
+        "advancingAngularBone": "RightFoot",
+        "advancingMaximumRootRelativeBoneSpeedMps": 1.4500297340691262,
+        "advancingLinearBone": "RightLeg",
+        "advancingMinimumReferenceVertexY": 0.005128013019861853,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 0,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "Spine",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0020000018194132564,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "turn_left/LeftFoot/0/0.366667",
+            "anchor": [
+              0.25,
+              0,
+              0.093397
+            ],
+            "release": 1.6666666666666643
+          }
+        ],
+        "contactsAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "turn_left/LeftFoot/0/0.366667",
+            "anchor": [
+              0.25,
+              0,
+              0.093397
+            ],
+            "release": 1.6666666666666643
+          }
+        ],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.45833333333333354,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.45833333333333354,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 3.789282378379867,
+        "advancingAngularBone": "RightFoot",
+        "advancingMaximumRootRelativeBoneSpeedMps": 1.4479059162586099,
+        "advancingLinearBone": "RightLeg",
+        "advancingMinimumReferenceVertexY": 0.002000001727036653,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "get_up→null",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "LeftUpLeg",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0015002246327814328,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.13,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.13,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 5.474387044151966,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 2.80139844089306,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.001500977699886219,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 0,
+        "maximumPreviousWorldHistoryAngleRadians": 0,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "get_up→null",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "LeftForeArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.00148087260250368,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.13833333333333334,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.13833333333333334,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 5.86592100611157,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 3.0966714820949126,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.0037662299595747906,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 0,
+        "maximumActualWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "get_up→null",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightHand",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0015273771371970557,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.4500000000000002,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.4500000000000002,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 1.6441279885153406,
+        "advancingAngularBone": "LeftForeArm",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.7157404169815403,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.0018108588547359195,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "get_up→null",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftForeArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0013962927096298355,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 0.45833333333333354,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 0.45833333333333354,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 1.6438726190971498,
+        "advancingAngularBone": "LeftForeArm",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.6235471461316872,
+        "advancingLinearBone": "Head",
+        "advancingMinimumReferenceVertexY": 0.0022234630810947223,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 0,
+        "maximumPreviousWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "slide_tackle→null",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.001527338673632972,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.41833365,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.41833365,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 0.000006194296387084306,
+        "advancingAngularBone": "RightArm",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.0008897234942502654,
+        "advancingLinearBone": "RightHand",
+        "advancingMinimumReferenceVertexY": 0.0015199386736329812,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "slide_tackle→null",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000034150945850063755,
+        "rotationBone": "RightArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0015125847507106993,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.4266669833333332,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.4266669833333332,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 0.000007996802249550096,
+        "advancingAngularBone": "RightArm",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.0008894674449084562,
+        "advancingLinearBone": "LeftFoot",
+        "advancingMinimumReferenceVertexY": 0.00151998475071069,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "maximumActualWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "keeper_dive_right→null",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightUpLeg",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0025447613211337645,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.43733366,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.43733366,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 0.1647815489139416,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.14736034047366245,
+        "advancingLinearBone": "RightHand",
+        "advancingMinimumReferenceVertexY": 0.0015200384852005265,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 0,
+        "maximumActualWorldHistoryAngleRadians": 0,
+        "worldHistoryConsistent": true,
+        "pass": true
+      },
+      {
+        "sequence": "keeper_dive_right→null",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000029575586669421963,
+        "rotationBone": "RightUpLeg",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0009764969271992453,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "contactsBefore": [],
+        "contactsAfter": [],
+        "contactsPreserved": true,
+        "contactTargetsBefore": [],
+        "contactTargetsAfter": [],
+        "contactTargetsPreserved": true,
+        "phaseBefore": {
+          "sampleSeconds": 1.4456669933333333,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phaseAfter": {
+          "sampleSeconds": 1.4456669933333333,
+          "phaseOffset": 0,
+          "phaseRate": 1,
+          "entryPhaseRate": 1,
+          "pathScale": 1
+        },
+        "phasePreserved": true,
+        "rootBlendClockBefore": null,
+        "rootBlendClockAfter": null,
+        "rootBlendClockPreserved": true,
+        "motorEntryBefore": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryAfter": {
+          "pelvisContinuing": false,
+          "hip": null,
+          "orientation": null
+        },
+        "motorEntryStatePreserved": true,
+        "advancingMaximumBoneRadiansPerSecond": 0.16476333177561187,
+        "advancingAngularBone": "RightLeg",
+        "advancingMaximumRootRelativeBoneSpeedMps": 0.13620287435520048,
+        "advancingLinearBone": "Root",
+        "advancingMinimumReferenceVertexY": 0.0015200441256611311,
+        "advancingPhysicalPass": true,
+        "maximumWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumPreviousWorldHistoryAngleRadians": 4.2146848510894035e-8,
+        "maximumActualWorldHistoryAngleRadians": 2.9802322387695312e-8,
+        "worldHistoryConsistent": true,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "thresholds": {
+      "maximumWorldBonePositionJumpMeters": 0.003,
+      "maximumWorldBoneRotationJumpDegrees": 1,
+      "maximumClockErrorSeconds": 1e-9,
+      "maximumAdvancingBoneRadiansPerSecond": 30,
+      "maximumAdvancingRootRelativeBoneSpeedMps": 25,
+      "minimumReferenceVertexY": -0.001
+    }
+  },
+  "pass": true,
+  "auditSource": {
+    "file": "source/audit-skinning.mjs",
+    "sha256": "1c57df14cc9e3673b68bc4130483bd31ae5ec7f986a67c19ef7953a9d8e88f22"
+  },
+  "currentInputs": {
+    "motion": {
+      "file": "animations.json",
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "expectedSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "manifest": {
+      "file": "asset-manifest.json",
+      "bytes": 393766,
+      "sha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+      "expectedSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c"
+    },
+    "motionRuntime": {
+      "file": "source/motion-runtime.js",
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "expectedSha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    }
+  },
+  "generatedAt": "2026-11-05T04:42:26.664Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 847803,
+      "sha256": "e02e717b28faf7e5554cfe86096ef191f9b58bc51c79c3af0ac3abd976d2700f"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1934122,
+      "sha256": "b0b9c9a0d313983446dc1a782640094e172b5e15a53838171e3ce40df9c111df"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1619531,
+      "sha256": "0198e0cdd1ad16c104fe2a1528c4ac3659165f74ee580c9d3ad9430bc484d1ba"
+    },
+    {
+      "file": "/offline/player-01-lod1.js",
+      "bytes": 1176287,
+      "sha256": "a5faefa12ea4e2d774558c418fbd2cf12ddc6d09397136c520f60eef3a502f2d"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, selected delivered models/LODs and clips×7 deterministic times (defaults: all16 models/all31clips), plus interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor advances each actual displayed clip at the recorded30/60/120Hz, checking reference full-mesh floor, active sole anchors and descriptive authored hand supports. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

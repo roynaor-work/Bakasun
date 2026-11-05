@@ -1,0 +1,57 @@
+{
+  "kind": "audit-wall-time-planning-estimate",
+  "physicalPerformanceMeasurement": false,
+  "pilot": {
+    "report": "iterations/34/verification/skinning-reference-timing-player01.json",
+    "reportSha256": "3b0319efdb1cfac004dccc01ee928e5e1f3100b9256ab55c7d75c387c23b6849",
+    "complete": false,
+    "scope": "player01, both explicit LODs, all31 clips, dense120 plus deterministic reference probes; no LOD lifecycle",
+    "actualReferencePoses": 10182,
+    "actualDenseSamples": 9508,
+    "wallSeconds": 34.25,
+    "auditSource": {
+      "file": "source/audit-skinning.mjs",
+      "sha256": "aa7b32bdda9a94abda42c840afaabc6dd4db4ebc1278e1c6bfbab4e706fe3951"
+    },
+    "servedRuntime": {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 847879,
+      "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9"
+    }
+  },
+  "previousFullLibraryPilot": {
+    "report": "iterations/24/verification/skinning-c15-all8-144swaps.json",
+    "referencePoses": 5392,
+    "lodSwaps": 144,
+    "wallSeconds": 133.434
+  },
+  "geometryRatio": {
+    "all16Vertices": 254656,
+    "player01PairVertices": 32184,
+    "ratio": 7.91250310713398,
+    "vertexWeighted120SecondsEstimate": 271.0032314193388,
+    "limitations": "Reference skinning arithmetic scales with vertices, while GLB decode, API updates and new support work have fixed and state-dependent costs. This ratio is planning, not a performance guarantee."
+  },
+  "plannedFinalCoverage": {
+    "identities": 8,
+    "lods": 2,
+    "clips": 31,
+    "denseRatesHz": [
+      120,
+      30
+    ],
+    "lodSequencesPerIdentity": 11,
+    "lodSwaps": 176
+  },
+  "estimatedWallSeconds": {
+    "dense120Plus176LifecycleRange": [
+      420,
+      540
+    ],
+    "dense30Range": [
+      90,
+      150
+    ]
+  },
+  "decision": "Keep the existing complete full-library CLI. No new sharded orchestration is justified by this measurement."
+}

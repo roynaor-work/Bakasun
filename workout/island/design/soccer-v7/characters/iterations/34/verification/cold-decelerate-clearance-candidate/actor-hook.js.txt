@@ -1,0 +1,7 @@
+    this.motorFootClearance=[];
+    for(const f of targetFeet)if(f.state.mode!=='plant'){
+      const hull=data.bootBounds;
+      if(hull?.modelSha256?.[this.path]!==data.hashes.models[this.path])throw Error('Motor foot clearance requires the bound model boot hull');
+      const result=airborneFootGoalClearance({mode:f.state.mode,position:f.target.toArray(),orientation:f.orientation.toArray(),vertices:hull.feet[f.name].vertices,paddingMeters:hull.paddingMeters,minimumY:.001});
+      f.target.y=result.position[1];this.motorFootClearance.push({bone:f.name,worldGoalBefore:[f.target.x,f.target.y-result.liftMeters,f.target.z],orientation:f.orientation.toArray(),...result});
+    }

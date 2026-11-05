@@ -1,0 +1,4800 @@
+{
+  "kind": "actual-bundled-viewer-curved-pitch-contact-audit",
+  "clipID": "run_3",
+  "updateRateHz": 30,
+  "frameUpdates": 180,
+  "observedFrames": 181,
+  "authoredContactYawRadians": [
+    0
+  ],
+  "method": "Twelve actual pitch actors sampled after 180 stateful api.step(1/30) updates. Canonical run_3 has constant authored contact yaw zero. Persistent-lock sole and toe markers plus bone world orientation are measured; every actual skinned mesh vertex is evaluated through Three.js after IK. Autonomous RAF and GPU rendering are suppressed only during sampling.",
+  "limitations": [
+    "One canonical constant-yaw gait, not an orientation oracle for intentionally pivoting clips.",
+    "Sole marker (0,-.08,0) and toe marker (0,-.08,.16) are bone-local diagnostics, not selected geometry vertices.",
+    "No physical-device or GPU frame-rate claim."
+  ],
+  "actors": [
+    {
+      "identity": "player-01",
+      "path": "models/player-01-lod1.glb",
+      "slot": 0,
+      "offset": [
+        -6,
+        0,
+        -4
+      ],
+      "finalSampleSeconds": 5.9999999999999885,
+      "pathScale": 1,
+      "finalRootWorld": [
+        7.899149724329941,
+        0,
+        1.4037054444092316
+      ],
+      "minimumVertexY": 0.005128012,
+      "maximumAnchorErrorMeters": 2e-9,
+      "maximumSoleDriftMeters": 3e-9,
+      "maximumToeMarkerDriftMeters": 2e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0,
+      "worstOrientation": {
+        "frame": 24,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/1/0",
+        "actorSampleSeconds": 0.7999999999999999,
+        "actorClock": 0.7999999999999999,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 0.32,
+        "rootWorld": [
+          -5.593883344659527,
+          0,
+          -1.483467515071058
+        ],
+        "offset": [
+          -6,
+          0,
+          -4
+        ],
+        "sole": [
+          -5.486945096798833,
+          7.52118367586263e-11,
+          -1.4789579301601687
+        ],
+        "toeMarker": [
+          -5.435886016933057,
+          3.7572819855391515e-11,
+          -1.327323599160357
+        ],
+        "anchor": [
+          -5.4869450968265205,
+          0,
+          -1.4789579303182339
+        ],
+        "firstWorldQuaternion": [
+          -6.328271422672083e-17,
+          0.16168709098356163,
+          2.0325177312401658e-17,
+          0.9868420768336105
+        ],
+        "worldQuaternion": [
+          1.4436474887876694e-12,
+          0.16168709098193876,
+          3.804155986446083e-12,
+          0.9868420768338763
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 1.7722300710131077e-10,
+        "toeMarkerDriftMeters": 9.103339937805951e-11
+      },
+      "worstAnchor": {
+        "frame": 143,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/6/0.35",
+        "anchorErrorMeters": 2.497992015146635e-9,
+        "actorSampleSeconds": 4.7666666666666595,
+        "actorClock": 4.7666666666666595,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.9066666249999975,
+        "modelEuler": [
+          0,
+          1.9066666249999975,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8153499137975991,
+          0,
+          0.5789684948857301
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.8153499137975992,
+          0,
+          0.5789684948857301
+        ],
+        "rootWorld": [
+          4.636727710876038,
+          0,
+          3.5529905983456924
+        ],
+        "modelPosition": [
+          4.636727710876038,
+          0,
+          3.5529905983456924
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128012550068891,
+        "contactResidual": 0,
+        "hips": [
+          4.6317831474487186,
+          0.749142923371531,
+          3.5635905738287255
+        ],
+        "legHip": [
+          4.6715274904655955,
+          0.7525541070926347,
+          3.655289816391964
+        ],
+        "sole": [
+          4.347269986475606,
+          -7.348016917152478e-10,
+          3.7524398475047147
+        ],
+        "anchor": [
+          4.347269988761546,
+          0,
+          3.7524398481935597
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/0/0",
+          "firstFrame": 0,
+          "lastFrame": 6,
+          "startSampleSeconds": 0,
+          "endSampleSeconds": 0.19999999999999998,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6728006117711495e-9,
+          "maximumToeMarkerDriftMeters": 1.1662786437163107e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 11,
+          "lastFrame": 17,
+          "startSampleSeconds": 0.36666666666666664,
+          "endSampleSeconds": 0.5666666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.9816636955306512e-9,
+          "maximumToeMarkerDriftMeters": 1.5238065162708123e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 21,
+          "lastFrame": 27,
+          "startSampleSeconds": 0.7,
+          "endSampleSeconds": 0.8999999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.6660991502985636e-9,
+          "maximumToeMarkerDriftMeters": 1.1603914281323903e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 32,
+          "lastFrame": 38,
+          "startSampleSeconds": 1.0666666666666667,
+          "endSampleSeconds": 1.2666666666666673,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.006648254554442e-9,
+          "maximumToeMarkerDriftMeters": 1.552710611718032e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 42,
+          "lastFrame": 48,
+          "startSampleSeconds": 1.400000000000001,
+          "endSampleSeconds": 1.6000000000000016,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6715839197359063e-9,
+          "maximumToeMarkerDriftMeters": 1.1720683154473698e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 53,
+          "lastFrame": 59,
+          "startSampleSeconds": 1.7666666666666688,
+          "endSampleSeconds": 1.9666666666666694,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.0436311963510237e-9,
+          "maximumToeMarkerDriftMeters": 1.5965173682551105e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 63,
+          "lastFrame": 69,
+          "startSampleSeconds": 2.1000000000000023,
+          "endSampleSeconds": 2.3000000000000016,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6916669669092452e-9,
+          "maximumToeMarkerDriftMeters": 1.2045151415360092e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 74,
+          "lastFrame": 80,
+          "startSampleSeconds": 2.4666666666666677,
+          "endSampleSeconds": 2.666666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.0974700550694655e-9,
+          "maximumToeMarkerDriftMeters": 1.6607637718515867e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 84,
+          "lastFrame": 90,
+          "startSampleSeconds": 2.8,
+          "endSampleSeconds": 2.999999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.7314968939562296e-9,
+          "maximumToeMarkerDriftMeters": 1.2640855932930934e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 95,
+          "lastFrame": 101,
+          "startSampleSeconds": 3.166666666666665,
+          "endSampleSeconds": 3.3666666666666645,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.1771890475287153e-9,
+          "maximumToeMarkerDriftMeters": 1.755620034510336e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 106,
+          "lastFrame": 111,
+          "startSampleSeconds": 3.5333333333333306,
+          "endSampleSeconds": 3.6999999999999966,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.7518553036505043e-9,
+          "maximumToeMarkerDriftMeters": 1.3383219223215406e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 116,
+          "lastFrame": 122,
+          "startSampleSeconds": 3.8666666666666627,
+          "endSampleSeconds": 4.066666666666662,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.300250890497552e-9,
+          "maximumToeMarkerDriftMeters": 1.900372223575268e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 127,
+          "lastFrame": 132,
+          "startSampleSeconds": 4.233333333333328,
+          "endSampleSeconds": 4.399999999999994,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.8537980273060637e-9,
+          "maximumToeMarkerDriftMeters": 1.4735619046329503e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 137,
+          "lastFrame": 143,
+          "startSampleSeconds": 4.56666666666666,
+          "endSampleSeconds": 4.7666666666666595,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.503431744780889e-9,
+          "maximumToeMarkerDriftMeters": 2.1345807796396248e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 148,
+          "lastFrame": 153,
+          "startSampleSeconds": 4.933333333333326,
+          "endSampleSeconds": 5.099999999999992,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.0342512727923576e-9,
+          "maximumToeMarkerDriftMeters": 1.6999766644016908e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 158,
+          "lastFrame": 164,
+          "startSampleSeconds": 5.266666666666658,
+          "endSampleSeconds": 5.466666666666657,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.9771523534813123e-9,
+          "maximumToeMarkerDriftMeters": 1.5322614471802028e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 169,
+          "lastFrame": 174,
+          "startSampleSeconds": 5.633333333333323,
+          "endSampleSeconds": 5.799999999999989,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.7441411055622123e-9,
+          "maximumToeMarkerDriftMeters": 1.3029875711879538e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 179,
+          "lastFrame": 180,
+          "startSampleSeconds": 5.966666666666655,
+          "endSampleSeconds": 5.9999999999999885,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.7470785661803844e-11,
+          "maximumToeMarkerDriftMeters": 3.260026668819609e-11
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "slot": 1,
+      "offset": [
+        -1,
+        0,
+        -4
+      ],
+      "finalSampleSeconds": 6.070999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        13.050215291026195,
+        0,
+        1.2340132720726666
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 2e-9,
+      "maximumSoleDriftMeters": 2e-9,
+      "maximumToeMarkerDriftMeters": 2e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0.000002415,
+      "worstOrientation": {
+        "frame": 99,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/4/0.35",
+        "actorSampleSeconds": 3.370999999999998,
+        "actorClock": 3.299999999999998,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.3483999637499995,
+        "rootWorld": [
+          5.235459209374438,
+          0,
+          3.8029735228448978
+        ],
+        "offset": [
+          -1,
+          0,
+          -4
+        ],
+        "sole": [
+          4.870747446126535,
+          -5.711947165254472e-10,
+          3.8151317041597053
+        ],
+        "toeMarker": [
+          5.025120418363717,
+          -4.504483730460862e-10,
+          3.8571910139278613
+        ],
+        "anchor": [
+          4.8707474473343355,
+          0,
+          3.8151317050301046
+        ],
+        "firstWorldQuaternion": [
+          6.822474094045924e-15,
+          0.6070952620823844,
+          1.1259168563598091e-13,
+          0.7946290598493873
+        ],
+        "worldQuaternion": [
+          4.6979058476410235e-11,
+          0.6070952620760678,
+          1.2491469058077614e-11,
+          0.794629059854213
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 1.5980508153682276e-9,
+        "toeMarkerDriftMeters": 1.2916282939992738e-9
+      },
+      "worstAnchor": {
+        "frame": 140,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/6/0.35",
+        "anchorErrorMeters": 1.8379499094814676e-9,
+        "actorSampleSeconds": 4.73766666666666,
+        "actorClock": 4.66666666666666,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.8950666974999977,
+        "modelEuler": [
+          0,
+          1.8950666974999977,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8119782223660899,
+          0,
+          0.583687730214714
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.81197822236609,
+          0,
+          0.583687730214714
+        ],
+        "rootWorld": [
+          9.548938137548724,
+          0,
+          3.5830676095462612
+        ],
+        "modelPosition": [
+          9.548938137548724,
+          0,
+          3.5830676095462612
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013788867007,
+        "contactResidual": 0,
+        "hips": [
+          9.549291878071978,
+          0.7424762467050643,
+          3.5923352866350577
+        ],
+        "legHip": [
+          9.588384261630434,
+          0.7460988420884145,
+          3.6843062728189713
+        ],
+        "sole": [
+          9.347269990415995,
+          5.212870690662896e-10,
+          3.7524398488011106
+        ],
+        "anchor": [
+          9.347269988761546,
+          0,
+          3.7524398481935597
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/0/0",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "startSampleSeconds": 0.071,
+          "endSampleSeconds": 0.2043333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.254191522783977e-9,
+          "maximumToeMarkerDriftMeters": 8.912815543247869e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 9,
+          "lastFrame": 15,
+          "startSampleSeconds": 0.371,
+          "endSampleSeconds": 0.571,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.4584574245880952e-9,
+          "maximumToeMarkerDriftMeters": 1.1264365133863855e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 19,
+          "lastFrame": 25,
+          "startSampleSeconds": 0.7043333333333333,
+          "endSampleSeconds": 0.9043333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2684042445790462e-9,
+          "maximumToeMarkerDriftMeters": 8.927241345817699e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 30,
+          "lastFrame": 36,
+          "startSampleSeconds": 1.071,
+          "endSampleSeconds": 1.2710000000000004,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.47623069452005e-9,
+          "maximumToeMarkerDriftMeters": 1.1469564405918163e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 40,
+          "lastFrame": 46,
+          "startSampleSeconds": 1.404333333333334,
+          "endSampleSeconds": 1.6043333333333347,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2723606134773196e-9,
+          "maximumToeMarkerDriftMeters": 9.009372453350371e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 51,
+          "lastFrame": 57,
+          "startSampleSeconds": 1.771000000000002,
+          "endSampleSeconds": 1.9710000000000025,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.502596075190878e-9,
+          "maximumToeMarkerDriftMeters": 1.1781192094557367e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 61,
+          "lastFrame": 67,
+          "startSampleSeconds": 2.104333333333336,
+          "endSampleSeconds": 2.3043333333333353,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.286939127767072e-9,
+          "maximumToeMarkerDriftMeters": 9.241274130469585e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 72,
+          "lastFrame": 78,
+          "startSampleSeconds": 2.4710000000000014,
+          "endSampleSeconds": 2.6710000000000007,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5410405295453852e-9,
+          "maximumToeMarkerDriftMeters": 1.2239031633582986e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 82,
+          "lastFrame": 88,
+          "startSampleSeconds": 2.8043333333333336,
+          "endSampleSeconds": 3.004333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3159201711189868e-9,
+          "maximumToeMarkerDriftMeters": 9.669803585095951e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 93,
+          "lastFrame": 99,
+          "startSampleSeconds": 3.170999999999999,
+          "endSampleSeconds": 3.370999999999998,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.5980508153682276e-9,
+          "maximumToeMarkerDriftMeters": 1.2916282939992738e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 103,
+          "lastFrame": 109,
+          "startSampleSeconds": 3.504333333333331,
+          "endSampleSeconds": 3.7043333333333304,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.366579266782833e-9,
+          "maximumToeMarkerDriftMeters": 1.0380410902619408e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 114,
+          "lastFrame": 120,
+          "startSampleSeconds": 3.8709999999999964,
+          "endSampleSeconds": 4.070999999999995,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6861975159053798e-9,
+          "maximumToeMarkerDriftMeters": 1.3952017656715532e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 124,
+          "lastFrame": 130,
+          "startSampleSeconds": 4.204333333333328,
+          "endSampleSeconds": 4.404333333333327,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.4530762089391925e-9,
+          "maximumToeMarkerDriftMeters": 1.153088320703627e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 135,
+          "lastFrame": 141,
+          "startSampleSeconds": 4.5709999999999935,
+          "endSampleSeconds": 4.770999999999993,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.83199783010075e-9,
+          "maximumToeMarkerDriftMeters": 1.5631929011454852e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 145,
+          "lastFrame": 151,
+          "startSampleSeconds": 4.904333333333326,
+          "endSampleSeconds": 5.104333333333325,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6047895765221904e-9,
+          "maximumToeMarkerDriftMeters": 1.3433060061527615e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 156,
+          "lastFrame": 162,
+          "startSampleSeconds": 5.270999999999991,
+          "endSampleSeconds": 5.47099999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.4557155090723813e-9,
+          "maximumToeMarkerDriftMeters": 1.1328261722951321e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 166,
+          "lastFrame": 172,
+          "startSampleSeconds": 5.604333333333323,
+          "endSampleSeconds": 5.8043333333333225,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3529290095831323e-9,
+          "maximumToeMarkerDriftMeters": 9.989756802564322e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 177,
+          "lastFrame": 180,
+          "startSampleSeconds": 5.9709999999999885,
+          "endSampleSeconds": 6.070999999999988,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.714773823816062e-10,
+          "maximumToeMarkerDriftMeters": 1.4419808187895922e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "path": "models/player-03-lod1.glb",
+      "slot": 2,
+      "offset": [
+        4,
+        0,
+        -4
+      ],
+      "finalSampleSeconds": 6.141999999999989,
+      "pathScale": 1,
+      "finalRootWorld": [
+        18.19640180457519,
+        0,
+        1.0600992753361416
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 2e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0.000001708,
+      "worstOrientation": {
+        "frame": 7,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/0/0.35",
+        "actorSampleSeconds": 0.3753333333333333,
+        "actorClock": 0.2333333333333333,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 0.15013330249999998,
+        "rootWorld": [
+          4.089990810604516,
+          0,
+          -2.803440505583194
+        ],
+        "offset": [
+          4,
+          0,
+          -4
+        ],
+        "sole": [
+          4.037918535747867,
+          9.995476668578362e-13,
+          -2.51162546493533
+        ],
+        "toeMarker": [
+          4.06731852656305,
+          -1.1578654701693836e-12,
+          -2.3543497816953964
+        ],
+        "anchor": [
+          4.037918535748468,
+          0,
+          -2.5116254649376097
+        ],
+        "firstWorldQuaternion": [
+          -5.5949314697829955e-15,
+          0.09226857461249541,
+          5.885205497978226e-14,
+          0.9957341563585023
+        ],
+        "worldQuaternion": [
+          -5.5949314697829955e-15,
+          0.09226857461249541,
+          5.885205497978226e-14,
+          0.9957341563585023
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 0,
+        "toeMarkerDriftMeters": 0
+      },
+      "worstAnchor": {
+        "frame": 138,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/6/0.35",
+        "anchorErrorMeters": 1.1836071723823259e-9,
+        "actorSampleSeconds": 4.741999999999994,
+        "actorClock": 4.599999999999993,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.896800019999998,
+        "modelEuler": [
+          0,
+          1.896800019999998,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8124837769015406,
+          0,
+          0.5829838010372224
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.8124837769015406,
+          0,
+          0.5829838010372224
+        ],
+        "rootWorld": [
+          14.562078203651078,
+          0,
+          3.578638088626219
+        ],
+        "modelPosition": [
+          14.562078203651078,
+          0,
+          3.578638088626219
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013639748268,
+        "contactResidual": 0,
+        "hips": [
+          14.561638315107038,
+          0.743472416781663,
+          3.588096944569474
+        ],
+        "legHip": [
+          14.600828245804884,
+          0.7470634229471118,
+          3.680027646592175
+        ],
+        "sole": [
+          14.34726998983007,
+          3.3777962371583925e-10,
+          3.7524398485744657
+        ],
+        "anchor": [
+          14.347269988761546,
+          0,
+          3.7524398481935597
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/0/0",
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "startSampleSeconds": 0.142,
+          "endSampleSeconds": 0.20866666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5276057088374878e-9,
+          "maximumToeMarkerDriftMeters": 1.0452212684596022e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 7,
+          "lastFrame": 12,
+          "startSampleSeconds": 0.3753333333333333,
+          "endSampleSeconds": 0.5419999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 8.999619821269441e-10,
+          "maximumToeMarkerDriftMeters": 6.722436127224948e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 17,
+          "lastFrame": 23,
+          "startSampleSeconds": 0.7086666666666667,
+          "endSampleSeconds": 0.9086666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 8.783350232901865e-10,
+          "maximumToeMarkerDriftMeters": 6.244947782255413e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 28,
+          "lastFrame": 33,
+          "startSampleSeconds": 1.0753333333333333,
+          "endSampleSeconds": 1.242,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.133707045218134e-10,
+          "maximumToeMarkerDriftMeters": 6.879885819669079e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 38,
+          "lastFrame": 44,
+          "startSampleSeconds": 1.4086666666666672,
+          "endSampleSeconds": 1.6086666666666678,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.809305466974876e-10,
+          "maximumToeMarkerDriftMeters": 6.297489795680843e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 49,
+          "lastFrame": 54,
+          "startSampleSeconds": 1.775333333333335,
+          "endSampleSeconds": 1.9420000000000022,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.331422983769462e-10,
+          "maximumToeMarkerDriftMeters": 7.11794062187804e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 59,
+          "lastFrame": 65,
+          "startSampleSeconds": 2.1086666666666694,
+          "endSampleSeconds": 2.3086666666666686,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.905554810931512e-10,
+          "maximumToeMarkerDriftMeters": 6.448274998066858e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 70,
+          "lastFrame": 75,
+          "startSampleSeconds": 2.4753333333333347,
+          "endSampleSeconds": 2.642000000000001,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.617879527756343e-10,
+          "maximumToeMarkerDriftMeters": 7.465015118844525e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 80,
+          "lastFrame": 86,
+          "startSampleSeconds": 2.808666666666667,
+          "endSampleSeconds": 3.008666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.097349265076975e-10,
+          "maximumToeMarkerDriftMeters": 6.728679060808366e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 91,
+          "lastFrame": 96,
+          "startSampleSeconds": 3.1753333333333322,
+          "endSampleSeconds": 3.3419999999999983,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.0039506071751578e-9,
+          "maximumToeMarkerDriftMeters": 7.973026501496723e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 101,
+          "lastFrame": 107,
+          "startSampleSeconds": 3.5086666666666644,
+          "endSampleSeconds": 3.7086666666666637,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.433324004653896e-10,
+          "maximumToeMarkerDriftMeters": 7.196210380327922e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 112,
+          "lastFrame": 117,
+          "startSampleSeconds": 3.8753333333333297,
+          "endSampleSeconds": 4.041999999999996,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.0685386044547854e-9,
+          "maximumToeMarkerDriftMeters": 8.739382846574022e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 122,
+          "lastFrame": 128,
+          "startSampleSeconds": 4.208666666666662,
+          "endSampleSeconds": 4.408666666666662,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.000865485861407e-9,
+          "maximumToeMarkerDriftMeters": 7.957647273972276e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 133,
+          "lastFrame": 138,
+          "startSampleSeconds": 4.575333333333328,
+          "endSampleSeconds": 4.741999999999994,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.17409286734866e-9,
+          "maximumToeMarkerDriftMeters": 9.961600238647213e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 143,
+          "lastFrame": 149,
+          "startSampleSeconds": 4.90866666666666,
+          "endSampleSeconds": 5.108666666666659,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.102148029213606e-9,
+          "maximumToeMarkerDriftMeters": 9.224706741821767e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 154,
+          "lastFrame": 159,
+          "startSampleSeconds": 5.275333333333325,
+          "endSampleSeconds": 5.441999999999991,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.974208840389259e-10,
+          "maximumToeMarkerDriftMeters": 6.776969326905507e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 164,
+          "lastFrame": 170,
+          "startSampleSeconds": 5.608666666666657,
+          "endSampleSeconds": 5.808666666666657,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.34305874979268e-10,
+          "maximumToeMarkerDriftMeters": 6.946507316804867e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 175,
+          "lastFrame": 180,
+          "startSampleSeconds": 5.975333333333323,
+          "endSampleSeconds": 6.141999999999989,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.895229140624388e-10,
+          "maximumToeMarkerDriftMeters": 6.649176734458183e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "path": "models/player-04-lod1.glb",
+      "slot": 3,
+      "offset": [
+        -6,
+        0,
+        -10
+      ],
+      "finalSampleSeconds": 6.2129999999999885,
+      "pathScale": 1,
+      "finalRootWorld": [
+        8.337590571471296,
+        0,
+        -5.117895356672683
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 1e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0.000001708,
+      "worstOrientation": {
+        "frame": 131,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/6/0.35",
+        "actorSampleSeconds": 4.579666666666661,
+        "actorClock": 4.366666666666661,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.8318666412499982,
+        "rootWorld": [
+          4.064917964842181,
+          0,
+          -2.271085859030906
+        ],
+        "offset": [
+          -6,
+          0,
+          -10
+        ],
+        "sole": [
+          4.347269988769822,
+          1.5993872892750005e-12,
+          -2.247560151790617
+        ],
+        "toeMarker": [
+          4.500404603049386,
+          -1.1987216774755893e-12,
+          -2.2939259787273656
+        ],
+        "anchor": [
+          4.347269988761546,
+          0,
+          -2.2475601518064403
+        ],
+        "firstWorldQuaternion": [
+          -2.281395653166703e-14,
+          0.803052432399562,
+          2.827825647938278e-13,
+          0.5959083745150312
+        ],
+        "worldQuaternion": [
+          -2.281395653166703e-14,
+          0.803052432399562,
+          2.827825647938278e-13,
+          0.5959083745150312
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 0,
+        "toeMarkerDriftMeters": 0
+      },
+      "worstAnchor": {
+        "frame": 146,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/7/0",
+        "anchorErrorMeters": 6.199983831288187e-10,
+        "actorSampleSeconds": 5.079666666666659,
+        "actorClock": 4.866666666666659,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 2.0318666412499975,
+        "modelEuler": [
+          0,
+          2.0318666412499975,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8499726202753749,
+          0,
+          0.5268268641424935
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.8499726202753751,
+          0,
+          0.5268268641424935
+        ],
+        "rootWorld": [
+          5.559255283484587,
+          0,
+          -2.8353854376535335
+        ],
+        "modelPosition": [
+          5.559255283484587,
+          0,
+          -2.8353854376535335
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013529215479,
+        "contactResidual": 0,
+        "hips": [
+          5.5544558172022365,
+          0.7408377252072504,
+          -2.842935092085721
+        ],
+        "legHip": [
+          5.517069843154788,
+          0.7444600359185214,
+          -2.935612855277487
+        ],
+        "sole": [
+          5.322002562668972,
+          2.2845093872181366e-10,
+          -2.832413308516779
+        ],
+        "anchor": [
+          5.322002562123879,
+          0,
+          -2.832413308704081
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/0/0",
+          "firstFrame": 0,
+          "lastFrame": 0,
+          "startSampleSeconds": 0.21299999999999997,
+          "endSampleSeconds": 0.21299999999999997,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 0,
+          "maximumToeMarkerDriftMeters": 0
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 5,
+          "lastFrame": 10,
+          "startSampleSeconds": 0.3796666666666666,
+          "endSampleSeconds": 0.5463333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.039196602423414e-10,
+          "maximumToeMarkerDriftMeters": 3.0759934585529507e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 15,
+          "lastFrame": 21,
+          "startSampleSeconds": 0.7129999999999999,
+          "endSampleSeconds": 0.9129999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.974512950927844e-10,
+          "maximumToeMarkerDriftMeters": 3.578259621227675e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 26,
+          "lastFrame": 31,
+          "startSampleSeconds": 1.0796666666666666,
+          "endSampleSeconds": 1.2463333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.0957282150923204e-10,
+          "maximumToeMarkerDriftMeters": 3.1415374699931077e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 36,
+          "lastFrame": 42,
+          "startSampleSeconds": 1.4130000000000003,
+          "endSampleSeconds": 1.6130000000000009,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.988149829212632e-10,
+          "maximumToeMarkerDriftMeters": 3.6044950067428876e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 47,
+          "lastFrame": 52,
+          "startSampleSeconds": 1.7796666666666683,
+          "endSampleSeconds": 1.9463333333333352,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.1781984776147697e-10,
+          "maximumToeMarkerDriftMeters": 3.239442020427968e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 57,
+          "lastFrame": 63,
+          "startSampleSeconds": 2.1130000000000027,
+          "endSampleSeconds": 2.3130000000000024,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.039503270009869e-10,
+          "maximumToeMarkerDriftMeters": 3.6836402189610515e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 68,
+          "lastFrame": 73,
+          "startSampleSeconds": 2.4796666666666685,
+          "endSampleSeconds": 2.6463333333333345,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.297052731274333e-10,
+          "maximumToeMarkerDriftMeters": 3.3815420990521715e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 78,
+          "lastFrame": 84,
+          "startSampleSeconds": 2.8130000000000006,
+          "endSampleSeconds": 3.013,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.142253373047632e-10,
+          "maximumToeMarkerDriftMeters": 3.8320145609985486e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 89,
+          "lastFrame": 94,
+          "startSampleSeconds": 3.179666666666666,
+          "endSampleSeconds": 3.346333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.471699110453436e-10,
+          "maximumToeMarkerDriftMeters": 3.58960683757944e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 99,
+          "lastFrame": 105,
+          "startSampleSeconds": 3.512999999999998,
+          "endSampleSeconds": 3.7129999999999974,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.322823369526146e-10,
+          "maximumToeMarkerDriftMeters": 4.081047063830901e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 110,
+          "lastFrame": 115,
+          "startSampleSeconds": 3.8796666666666635,
+          "endSampleSeconds": 4.04633333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.739504225993416e-10,
+          "maximumToeMarkerDriftMeters": 3.90472775321984e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 120,
+          "lastFrame": 126,
+          "startSampleSeconds": 4.212999999999996,
+          "endSampleSeconds": 4.412999999999995,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.633106806845558e-10,
+          "maximumToeMarkerDriftMeters": 4.489408418483236e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 131,
+          "lastFrame": 136,
+          "startSampleSeconds": 4.579666666666661,
+          "endSampleSeconds": 4.746333333333327,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 5.178897107297333e-10,
+          "maximumToeMarkerDriftMeters": 4.4108819890981935e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 141,
+          "lastFrame": 147,
+          "startSampleSeconds": 4.912999999999993,
+          "endSampleSeconds": 5.112999999999992,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.181781251322651e-10,
+          "maximumToeMarkerDriftMeters": 5.174067006252826e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 152,
+          "lastFrame": 157,
+          "startSampleSeconds": 5.2796666666666585,
+          "endSampleSeconds": 5.446333333333325,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.016746009058885e-10,
+          "maximumToeMarkerDriftMeters": 3.0814359870636e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 162,
+          "lastFrame": 168,
+          "startSampleSeconds": 5.612999999999991,
+          "endSampleSeconds": 5.81299999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.27590026334024e-10,
+          "maximumToeMarkerDriftMeters": 3.9539410144498923e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 173,
+          "lastFrame": 178,
+          "startSampleSeconds": 5.979666666666656,
+          "endSampleSeconds": 6.146333333333322,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.9884006983071955e-10,
+          "maximumToeMarkerDriftMeters": 3.0354407313162717e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "path": "models/player-05-lod1.glb",
+      "slot": 4,
+      "offset": [
+        -1,
+        0,
+        -10
+      ],
+      "finalSampleSeconds": 6.283999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        13.473667883471787,
+        0,
+        -5.299827222909151
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 0,
+      "maximumSoleDriftMeters": 0,
+      "maximumToeMarkerDriftMeters": 0,
+      "maximumOrientationDriftDegrees": 0,
+      "maximumOrientationStepDegrees": 0.000001708,
+      "worstOrientation": null,
+      "worstAnchor": {
+        "frame": 145,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/7/0",
+        "anchorErrorMeters": 4.339812371845894e-10,
+        "actorSampleSeconds": 5.117333333333326,
+        "actorClock": 4.833333333333326,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 2.0469333549999975,
+        "modelEuler": [
+          0,
+          2.0469333549999975,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8539172390334554,
+          0,
+          0.5204088285967876
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.8539172390334556,
+          0,
+          0.5204088285967875
+        ],
+        "rootWorld": [
+          10.666794417896309,
+          0,
+          -2.8898228786559432
+        ],
+        "modelPosition": [
+          10.666794417896309,
+          0,
+          -2.8898228786559432
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013177666277,
+        "contactResidual": 0,
+        "hips": [
+          10.655982270317184,
+          0.7491140779707781,
+          -2.893545604038343
+        ],
+        "legHip": [
+          10.616693301331132,
+          0.7524791502510281,
+          -2.985442574697857
+        ],
+        "sole": [
+          10.32200256173433,
+          -1.6762209675835749e-10,
+          -2.8324133087962413
+        ],
+        "anchor": [
+          10.32200256212388,
+          0,
+          -2.832413308704081
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 2,
+          "lastFrame": 8,
+          "startSampleSeconds": 0.3506666666666666,
+          "endSampleSeconds": 0.5506666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5234589522621387e-10,
+          "maximumToeMarkerDriftMeters": 1.6022124317628024e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 13,
+          "lastFrame": 19,
+          "startSampleSeconds": 0.7173333333333333,
+          "endSampleSeconds": 0.9173333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.6644103691724324e-10,
+          "maximumToeMarkerDriftMeters": 2.7771100675750113e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 23,
+          "lastFrame": 29,
+          "startSampleSeconds": 1.0506666666666666,
+          "endSampleSeconds": 1.2506666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.584351159887917e-10,
+          "maximumToeMarkerDriftMeters": 1.6827994450319812e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 34,
+          "lastFrame": 40,
+          "startSampleSeconds": 1.4173333333333336,
+          "endSampleSeconds": 1.6173333333333342,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.6742701167030814e-10,
+          "maximumToeMarkerDriftMeters": 2.7923056027385803e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 44,
+          "lastFrame": 50,
+          "startSampleSeconds": 1.750666666666668,
+          "endSampleSeconds": 1.9506666666666685,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.6782270575692735e-10,
+          "maximumToeMarkerDriftMeters": 1.8098529751737472e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 55,
+          "lastFrame": 61,
+          "startSampleSeconds": 2.1173333333333355,
+          "endSampleSeconds": 2.3173333333333357,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.705716474397758e-10,
+          "maximumToeMarkerDriftMeters": 2.8358520882727106e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 65,
+          "lastFrame": 71,
+          "startSampleSeconds": 2.4506666666666685,
+          "endSampleSeconds": 2.650666666666668,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.815889960251437e-10,
+          "maximumToeMarkerDriftMeters": 1.9936576870790375e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 76,
+          "lastFrame": 82,
+          "startSampleSeconds": 2.817333333333334,
+          "endSampleSeconds": 3.017333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.7669941337619646e-10,
+          "maximumToeMarkerDriftMeters": 2.917942925613116e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 86,
+          "lastFrame": 92,
+          "startSampleSeconds": 3.150666666666666,
+          "endSampleSeconds": 3.3506666666666653,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.017113593623418e-10,
+          "maximumToeMarkerDriftMeters": 2.2538663064973418e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 97,
+          "lastFrame": 103,
+          "startSampleSeconds": 3.5173333333333314,
+          "endSampleSeconds": 3.7173333333333307,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.874285098721594e-10,
+          "maximumToeMarkerDriftMeters": 3.0579490726683265e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 107,
+          "lastFrame": 113,
+          "startSampleSeconds": 3.8506666666666636,
+          "endSampleSeconds": 4.050666666666663,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.318621437373378e-10,
+          "maximumToeMarkerDriftMeters": 2.6273583612224594e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 118,
+          "lastFrame": 124,
+          "startSampleSeconds": 4.217333333333329,
+          "endSampleSeconds": 4.417333333333328,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.0599481776071706e-10,
+          "maximumToeMarkerDriftMeters": 3.293143997776438e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 128,
+          "lastFrame": 134,
+          "startSampleSeconds": 4.550666666666661,
+          "endSampleSeconds": 4.75066666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.793870560312859e-10,
+          "maximumToeMarkerDriftMeters": 3.1879412091352063e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 139,
+          "lastFrame": 145,
+          "startSampleSeconds": 4.9173333333333265,
+          "endSampleSeconds": 5.117333333333326,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.3935796541885506e-10,
+          "maximumToeMarkerDriftMeters": 3.7002572214369757e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 149,
+          "lastFrame": 155,
+          "startSampleSeconds": 5.250666666666659,
+          "endSampleSeconds": 5.450666666666658,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5723630995094636e-10,
+          "maximumToeMarkerDriftMeters": 1.735684043898334e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 160,
+          "lastFrame": 166,
+          "startSampleSeconds": 5.617333333333324,
+          "endSampleSeconds": 5.817333333333323,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.8239832330418185e-10,
+          "maximumToeMarkerDriftMeters": 2.9753291178568596e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 170,
+          "lastFrame": 176,
+          "startSampleSeconds": 5.950666666666656,
+          "endSampleSeconds": 6.150666666666655,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5108267078395006e-10,
+          "maximumToeMarkerDriftMeters": 1.6275234626810757e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "path": "models/player-06-lod1.glb",
+      "slot": 5,
+      "offset": [
+        4,
+        0,
+        -10
+      ],
+      "finalSampleSeconds": 6.354999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        18.604524355677228,
+        0,
+        -5.485550084975324
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 1e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0,
+      "maximumOrientationStepDegrees": 0,
+      "worstOrientation": null,
+      "worstAnchor": {
+        "frame": 131,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/6/0.35",
+        "anchorErrorMeters": 8.254262715261947e-10,
+        "actorSampleSeconds": 4.7216666666666605,
+        "actorClock": 4.366666666666661,
+        "pathScale": 1,
+        "baseYaw": 0,
+        "modelYaw": 1.888666693749998,
+        "modelEuler": [
+          0,
+          1.888666693749998,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8101062663928827,
+          0,
+          0.5862830691321246
+        ],
+        "rootWorldQuaternion": [
+          0,
+          0.8101062663928827,
+          0,
+          0.5862830691321247
+        ],
+        "rootWorld": [
+          14.500354605584262,
+          0,
+          -2.400774589056226
+        ],
+        "modelPosition": [
+          14.500354605584262,
+          0,
+          -2.400774589056226
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013545102496,
+        "contactResidual": 0,
+        "hips": [
+          14.503764216761237,
+          0.739250191411913,
+          -2.3925221725201684
+        ],
+        "legHip": [
+          14.542273127072466,
+          0.7428757715709939,
+          -2.3003054767918543
+        ],
+        "sole": [
+          14.347269989494961,
+          2.294716222595028e-10,
+          -2.2475601515051538
+        ],
+        "anchor": [
+          14.347269988761546,
+          0,
+          -2.2475601518064403
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 0,
+          "lastFrame": 6,
+          "startSampleSeconds": 0.355,
+          "endSampleSeconds": 0.5549999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.053059878235167e-10,
+          "maximumToeMarkerDriftMeters": 4.539362079473606e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 11,
+          "lastFrame": 17,
+          "startSampleSeconds": 0.7216666666666667,
+          "endSampleSeconds": 0.9216666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.355748935361945e-10,
+          "maximumToeMarkerDriftMeters": 2.999225619250765e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 21,
+          "lastFrame": 27,
+          "startSampleSeconds": 1.055,
+          "endSampleSeconds": 1.255,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.159872714521165e-10,
+          "maximumToeMarkerDriftMeters": 4.634920725795358e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 32,
+          "lastFrame": 38,
+          "startSampleSeconds": 1.4216666666666666,
+          "endSampleSeconds": 1.6216666666666673,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.3703947564682573e-10,
+          "maximumToeMarkerDriftMeters": 3.0319433925315394e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 42,
+          "lastFrame": 48,
+          "startSampleSeconds": 1.755000000000001,
+          "endSampleSeconds": 1.9550000000000016,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.319509671611159e-10,
+          "maximumToeMarkerDriftMeters": 4.7799228836214e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 53,
+          "lastFrame": 59,
+          "startSampleSeconds": 2.121666666666669,
+          "endSampleSeconds": 2.3216666666666694,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.4248724319342914e-10,
+          "maximumToeMarkerDriftMeters": 3.121921430863878e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 63,
+          "lastFrame": 69,
+          "startSampleSeconds": 2.4550000000000023,
+          "endSampleSeconds": 2.6550000000000016,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.55180232264097e-10,
+          "maximumToeMarkerDriftMeters": 4.992157041172796e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 74,
+          "lastFrame": 80,
+          "startSampleSeconds": 2.8216666666666677,
+          "endSampleSeconds": 3.021666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.533111703778771e-10,
+          "maximumToeMarkerDriftMeters": 3.2862622795147707e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 84,
+          "lastFrame": 90,
+          "startSampleSeconds": 3.155,
+          "endSampleSeconds": 3.354999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.89307693359363e-10,
+          "maximumToeMarkerDriftMeters": 5.353140040392077e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 95,
+          "lastFrame": 101,
+          "startSampleSeconds": 3.521666666666665,
+          "endSampleSeconds": 3.7216666666666645,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.721699411048702e-10,
+          "maximumToeMarkerDriftMeters": 3.5557167727645627e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 105,
+          "lastFrame": 111,
+          "startSampleSeconds": 3.8549999999999973,
+          "endSampleSeconds": 4.054999999999996,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.412503460765767e-10,
+          "maximumToeMarkerDriftMeters": 5.979258649557599e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 116,
+          "lastFrame": 122,
+          "startSampleSeconds": 4.221666666666662,
+          "endSampleSeconds": 4.4216666666666615,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.042042958411701e-10,
+          "maximumToeMarkerDriftMeters": 4.018017152447086e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 126,
+          "lastFrame": 132,
+          "startSampleSeconds": 4.554999999999994,
+          "endSampleSeconds": 4.754999999999994,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.251671213388179e-10,
+          "maximumToeMarkerDriftMeters": 6.958962311969173e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 137,
+          "lastFrame": 143,
+          "startSampleSeconds": 4.92166666666666,
+          "endSampleSeconds": 5.121666666666659,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.851837305153509e-10,
+          "maximumToeMarkerDriftMeters": 5.039918558586293e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 147,
+          "lastFrame": 153,
+          "startSampleSeconds": 5.254999999999992,
+          "endSampleSeconds": 5.454999999999991,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.064430190406601e-10,
+          "maximumToeMarkerDriftMeters": 4.572916158306863e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 158,
+          "lastFrame": 164,
+          "startSampleSeconds": 5.621666666666657,
+          "endSampleSeconds": 5.8216666666666566,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.67485460670227e-10,
+          "maximumToeMarkerDriftMeters": 3.401814656868617e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 168,
+          "lastFrame": 174,
+          "startSampleSeconds": 5.954999999999989,
+          "endSampleSeconds": 6.154999999999989,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.988006345269699e-10,
+          "maximumToeMarkerDriftMeters": 4.495252529337228e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 179,
+          "lastFrame": 180,
+          "startSampleSeconds": 6.321666666666655,
+          "endSampleSeconds": 6.354999999999988,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.7095367713670496e-11,
+          "maximumToeMarkerDriftMeters": 8.63655217223413e-12
+        }
+      ]
+    },
+    {
+      "identity": "player-01",
+      "path": "models/player-01-lod1.glb",
+      "slot": 6,
+      "offset": [
+        -4,
+        0,
+        4
+      ],
+      "finalSampleSeconds": 6.425999999999989,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -18.730054400128044,
+        0,
+        -0.3250858686640159
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 1e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0.000002415,
+      "worstOrientation": {
+        "frame": 94,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/5/0",
+        "actorSampleSeconds": 3.559333333333332,
+        "actorClock": 3.133333333333332,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.5653259635897925,
+        "rootWorld": [
+          -10.827732095340636,
+          0,
+          -3.913645680702767
+        ],
+        "offset": [
+          -4,
+          0,
+          4
+        ],
+        "sole": [
+          -11.007260526761396,
+          6.82388867634387e-12,
+          -3.8373763682629787
+        ],
+        "toeMarker": [
+          -11.16599220003164,
+          1.9236418014045853e-12,
+          -3.8574824841757724
+        ],
+        "anchor": [
+          -11.007260526741316,
+          0,
+          -3.837376368290225
+        ],
+        "firstWorldQuaternion": [
+          -1.1949442936810352e-12,
+          -0.7502210422479805,
+          4.222321788514291e-13,
+          0.6611871049622443
+        ],
+        "worldQuaternion": [
+          -1.4484782414637668e-12,
+          -0.7502210422480359,
+          1.2991630793925046e-13,
+          0.6611871049621814
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 8.969981294628694e-12,
+        "toeMarkerDriftMeters": 1.0644786060765124e-11
+      },
+      "worstAnchor": {
+        "frame": 67,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/3/0.35",
+        "anchorErrorMeters": 1.3160459316600043e-9,
+        "actorSampleSeconds": 2.6593333333333353,
+        "actorClock": 2.233333333333335,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.205325963589794,
+        "modelEuler": [
+          0,
+          4.205325963589794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8618619115413215,
+          0,
+          -0.5071430226615952
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.8618619115413217,
+          0,
+          0.5071430226615952
+        ],
+        "rootWorld": [
+          -8.11510472694943,
+          0,
+          -2.9933960789754614
+        ],
+        "modelPosition": [
+          -8.11510472694943,
+          0,
+          -2.9933960789754614
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128012850490818,
+        "contactResidual": 0,
+        "hips": [
+          -8.105063152444467,
+          0.7474570970880587,
+          -2.997552039983323
+        ],
+        "legHip": [
+          -8.063146376439175,
+          0.7509217426621109,
+          -3.088276789400456
+        ],
+        "sole": [
+          -7.7939144625850645,
+          -5.188961621493959e-10,
+          -2.922343856346349
+        ],
+        "anchor": [
+          -7.793914463766008,
+          0,
+          -2.922343856085396
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "startSampleSeconds": 0.42599999999999993,
+          "endSampleSeconds": 0.5593333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1664241193160159e-9,
+          "maximumToeMarkerDriftMeters": 7.98928324681624e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 9,
+          "lastFrame": 14,
+          "startSampleSeconds": 0.726,
+          "endSampleSeconds": 0.8926666666666665,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.573303259580905e-10,
+          "maximumToeMarkerDriftMeters": 5.97793033974543e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 19,
+          "lastFrame": 25,
+          "startSampleSeconds": 1.0593333333333332,
+          "endSampleSeconds": 1.2593333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1243146161935933e-9,
+          "maximumToeMarkerDriftMeters": 8.627728162911341e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 30,
+          "lastFrame": 35,
+          "startSampleSeconds": 1.4259999999999997,
+          "endSampleSeconds": 1.592666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.59911509100746e-10,
+          "maximumToeMarkerDriftMeters": 6.03520692079003e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 40,
+          "lastFrame": 46,
+          "startSampleSeconds": 1.759333333333334,
+          "endSampleSeconds": 1.9593333333333347,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1460857399897677e-9,
+          "maximumToeMarkerDriftMeters": 8.886960755179399e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 51,
+          "lastFrame": 56,
+          "startSampleSeconds": 2.126000000000002,
+          "endSampleSeconds": 2.292666666666669,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.699135327429964e-10,
+          "maximumToeMarkerDriftMeters": 6.198096544566349e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 61,
+          "lastFrame": 67,
+          "startSampleSeconds": 2.459333333333336,
+          "endSampleSeconds": 2.6593333333333353,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3156063655306248e-9,
+          "maximumToeMarkerDriftMeters": 1.119720396847113e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 72,
+          "lastFrame": 77,
+          "startSampleSeconds": 2.8260000000000014,
+          "endSampleSeconds": 2.9926666666666675,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2436906452334423e-9,
+          "maximumToeMarkerDriftMeters": 1.0667457874116792e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 82,
+          "lastFrame": 88,
+          "startSampleSeconds": 3.1593333333333335,
+          "endSampleSeconds": 3.359333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2138387889177264e-9,
+          "maximumToeMarkerDriftMeters": 9.939238435987683e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 93,
+          "lastFrame": 98,
+          "startSampleSeconds": 3.525999999999999,
+          "endSampleSeconds": 3.692666666666665,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.0999659795868845e-9,
+          "maximumToeMarkerDriftMeters": 8.993293542734766e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 103,
+          "lastFrame": 109,
+          "startSampleSeconds": 3.859333333333331,
+          "endSampleSeconds": 4.05933333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.157110930845097e-9,
+          "maximumToeMarkerDriftMeters": 9.203706575582204e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 114,
+          "lastFrame": 119,
+          "startSampleSeconds": 4.225999999999996,
+          "endSampleSeconds": 4.3926666666666625,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.0125578056041385e-9,
+          "maximumToeMarkerDriftMeters": 7.933995736050032e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 124,
+          "lastFrame": 130,
+          "startSampleSeconds": 4.559333333333329,
+          "endSampleSeconds": 4.759333333333328,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1249851914378131e-9,
+          "maximumToeMarkerDriftMeters": 8.76774390778763e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 135,
+          "lastFrame": 140,
+          "startSampleSeconds": 4.925999999999994,
+          "endSampleSeconds": 5.09266666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.557897327154575e-10,
+          "maximumToeMarkerDriftMeters": 7.223646513632038e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 145,
+          "lastFrame": 151,
+          "startSampleSeconds": 5.259333333333326,
+          "endSampleSeconds": 5.459333333333325,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1071022222919148e-9,
+          "maximumToeMarkerDriftMeters": 8.512081915981581e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 156,
+          "lastFrame": 161,
+          "startSampleSeconds": 5.6259999999999915,
+          "endSampleSeconds": 5.7926666666666575,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 9.174383843056114e-10,
+          "maximumToeMarkerDriftMeters": 6.732619255135545e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 166,
+          "lastFrame": 172,
+          "startSampleSeconds": 5.959333333333324,
+          "endSampleSeconds": 6.159333333333323,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.098336423654914e-9,
+          "maximumToeMarkerDriftMeters": 8.37514685106375e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 177,
+          "lastFrame": 180,
+          "startSampleSeconds": 6.325999999999989,
+          "endSampleSeconds": 6.425999999999989,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 6.811856818898598e-10,
+          "maximumToeMarkerDriftMeters": 4.2782072066868053e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "slot": 7,
+      "offset": [
+        1,
+        0,
+        4
+      ],
+      "finalSampleSeconds": 6.496999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -13.850156263795284,
+        0,
+        -0.1322341610303548
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 2e-9,
+      "maximumSoleDriftMeters": 2e-9,
+      "maximumToeMarkerDriftMeters": 2e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0,
+      "worstOrientation": {
+        "frame": 83,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/4/0.35",
+        "actorSampleSeconds": 3.2636666666666665,
+        "actorClock": 2.7666666666666666,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.447059286089793,
+        "rootWorld": [
+          -4.902180484793612,
+          0,
+          -3.7200487875154815
+        ],
+        "offset": [
+          1,
+          0,
+          4
+        ],
+        "sole": [
+          -4.870747447155881,
+          -7.442556293479896e-11,
+          -3.815131705165279
+        ],
+        "toeMarker": [
+          -5.025120419172082,
+          -3.900281486668433e-11,
+          -3.8571910148662383
+        ],
+        "anchor": [
+          -4.870747447334335,
+          0,
+          -3.8151317050301055
+        ],
+        "firstWorldQuaternion": [
+          -6.601987319692988e-14,
+          -0.7946290598493956,
+          8.77138106237361e-14,
+          0.6070952620823734
+        ],
+        "worldQuaternion": [
+          -1.1964659172554202e-11,
+          -0.7946290598502165,
+          -5.994936113825843e-13,
+          0.6070952620812989
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 2.400862425156344e-10,
+        "toeMarkerDriftMeters": 1.9918369725769164e-10
+      },
+      "worstAnchor": {
+        "frame": 74,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/4/0",
+        "anchorErrorMeters": 1.940524642807926e-9,
+        "actorSampleSeconds": 2.9636666666666676,
+        "actorClock": 2.4666666666666677,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.327059286089794,
+        "modelEuler": [
+          0,
+          4.327059286089794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8294168663845737,
+          0,
+          -0.5586301654554596
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.8294168663845738,
+          0,
+          0.5586301654554596
+        ],
+        "rootWorld": [
+          -3.993082588108706,
+          0,
+          -3.413396500799413
+        ],
+        "modelPosition": [
+          -3.993082588108706,
+          0,
+          -3.413396500799413
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013660302977,
+        "contactResidual": 0,
+        "hips": [
+          -3.9986251584782413,
+          0.7375390803783926,
+          -3.4060174176111744
+        ],
+        "legHip": [
+          -4.043275365087401,
+          0.7411713954400027,
+          -3.3166129139188407
+        ],
+        "sole": [
+          -3.88001910284082,
+          5.156060717270705e-10,
+          -3.2578040191633404
+        ],
+        "anchor": [
+          -3.880019101099066,
+          0,
+          -3.2578040198460396
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "startSampleSeconds": 0.49699999999999994,
+          "endSampleSeconds": 0.5636666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.2001461844842686e-9,
+          "maximumToeMarkerDriftMeters": 1.5557192663194402e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 7,
+          "lastFrame": 12,
+          "startSampleSeconds": 0.7303333333333333,
+          "endSampleSeconds": 0.8969999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3094033586455742e-9,
+          "maximumToeMarkerDriftMeters": 9.267527379501131e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 17,
+          "lastFrame": 23,
+          "startSampleSeconds": 1.0636666666666665,
+          "endSampleSeconds": 1.2636666666666665,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6446661645027948e-9,
+          "maximumToeMarkerDriftMeters": 1.2685259987507142e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 28,
+          "lastFrame": 33,
+          "startSampleSeconds": 1.4303333333333332,
+          "endSampleSeconds": 1.597,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.312776379092545e-9,
+          "maximumToeMarkerDriftMeters": 9.342409799222108e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 38,
+          "lastFrame": 44,
+          "startSampleSeconds": 1.7636666666666672,
+          "endSampleSeconds": 1.9636666666666678,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.675579191333931e-9,
+          "maximumToeMarkerDriftMeters": 1.3052152958772583e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 49,
+          "lastFrame": 54,
+          "startSampleSeconds": 2.130333333333335,
+          "endSampleSeconds": 2.2970000000000024,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3267229609040578e-9,
+          "maximumToeMarkerDriftMeters": 9.565921835208276e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 59,
+          "lastFrame": 65,
+          "startSampleSeconds": 2.4636666666666693,
+          "endSampleSeconds": 2.6636666666666686,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.9127773510163784e-9,
+          "maximumToeMarkerDriftMeters": 1.627720919454781e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 70,
+          "lastFrame": 75,
+          "startSampleSeconds": 2.8303333333333347,
+          "endSampleSeconds": 2.9970000000000008,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.8676042887072014e-9,
+          "maximumToeMarkerDriftMeters": 1.602227528935833e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 80,
+          "lastFrame": 86,
+          "startSampleSeconds": 3.163666666666667,
+          "endSampleSeconds": 3.363666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.77112015480597e-9,
+          "maximumToeMarkerDriftMeters": 1.452765955596927e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 91,
+          "lastFrame": 96,
+          "startSampleSeconds": 3.530333333333332,
+          "endSampleSeconds": 3.6969999999999983,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6595997818871571e-9,
+          "maximumToeMarkerDriftMeters": 1.3599948718282865e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 101,
+          "lastFrame": 107,
+          "startSampleSeconds": 3.8636666666666644,
+          "endSampleSeconds": 4.063666666666664,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6907608951858228e-9,
+          "maximumToeMarkerDriftMeters": 1.3489167353095613e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 112,
+          "lastFrame": 117,
+          "startSampleSeconds": 4.23033333333333,
+          "endSampleSeconds": 4.396999999999996,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.533446460706641e-9,
+          "maximumToeMarkerDriftMeters": 1.2074593014530665e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 122,
+          "lastFrame": 128,
+          "startSampleSeconds": 4.563666666666662,
+          "endSampleSeconds": 4.763666666666661,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6453132911136349e-9,
+          "maximumToeMarkerDriftMeters": 1.2875378558449792e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 133,
+          "lastFrame": 138,
+          "startSampleSeconds": 4.930333333333327,
+          "endSampleSeconds": 5.096999999999993,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.4516597064074796e-9,
+          "maximumToeMarkerDriftMeters": 1.105588766726164e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 143,
+          "lastFrame": 149,
+          "startSampleSeconds": 5.263666666666659,
+          "endSampleSeconds": 5.463666666666659,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.6200480055467861e-9,
+          "maximumToeMarkerDriftMeters": 1.2516385859024524e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 154,
+          "lastFrame": 159,
+          "startSampleSeconds": 5.630333333333325,
+          "endSampleSeconds": 5.796999999999991,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3964505447846248e-9,
+          "maximumToeMarkerDriftMeters": 1.035374327091788e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 164,
+          "lastFrame": 170,
+          "startSampleSeconds": 5.963666666666657,
+          "endSampleSeconds": 6.163666666666656,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.607690059391933e-9,
+          "maximumToeMarkerDriftMeters": 1.2324792720111752e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 175,
+          "lastFrame": 180,
+          "startSampleSeconds": 6.330333333333322,
+          "endSampleSeconds": 6.496999999999988,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.358580040593625e-9,
+          "maximumToeMarkerDriftMeters": 9.867192185401707e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-03",
+      "path": "models/player-03-lod1.glb",
+      "slot": 8,
+      "offset": [
+        6,
+        0,
+        4
+      ],
+      "finalSampleSeconds": 6.567999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -8.964733450876817,
+        0,
+        0.06395020887215797
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 2e-9,
+      "maximumSoleDriftMeters": 2e-9,
+      "maximumToeMarkerDriftMeters": 2e-9,
+      "maximumOrientationDriftDegrees": 0,
+      "maximumOrientationStepDegrees": 0.000001708,
+      "worstOrientation": null,
+      "worstAnchor": {
+        "frame": 72,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/4/0",
+        "anchorErrorMeters": 2.229876252673133e-9,
+        "actorSampleSeconds": 2.9680000000000013,
+        "actorClock": 2.4000000000000012,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.328792613589794,
+        "modelEuler": [
+          0,
+          4.328792613589794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8289324104411282,
+          0,
+          -0.5593487811019713
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.8289324104411282,
+          0,
+          0.5593487811019713
+        ],
+        "rootWorld": [
+          0.9940630572758264,
+          0,
+          -3.4185973343386244
+        ],
+        "modelPosition": [
+          0.9940630572758264,
+          0,
+          -3.4185973343386244
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013713943581,
+        "contactResidual": 0,
+        "hips": [
+          0.9893075575192752,
+          0.7382676495064954,
+          -3.41084688951655
+        ],
+        "legHip": [
+          0.9447769892060875,
+          0.7419185675795336,
+          -3.3213834935451962
+        ],
+        "sole": [
+          1.1199808968932825,
+          5.987244033889283e-10,
+          -3.2578040190823563
+        ],
+        "anchor": [
+          1.119980898900934,
+          0,
+          -3.2578040198460396
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/0/0.35",
+          "firstFrame": 0,
+          "lastFrame": 0,
+          "startSampleSeconds": 0.568,
+          "endSampleSeconds": 0.568,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 0,
+          "maximumToeMarkerDriftMeters": 0
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 4,
+          "lastFrame": 10,
+          "startSampleSeconds": 0.7013333333333333,
+          "endSampleSeconds": 0.9013333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5430579630073566e-9,
+          "maximumToeMarkerDriftMeters": 1.0782378748894518e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 15,
+          "lastFrame": 21,
+          "startSampleSeconds": 1.0679999999999998,
+          "endSampleSeconds": 1.2679999999999998,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.8360101301576343e-9,
+          "maximumToeMarkerDriftMeters": 1.4225802670772917e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 25,
+          "lastFrame": 31,
+          "startSampleSeconds": 1.401333333333333,
+          "endSampleSeconds": 1.6013333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5480512920098671e-9,
+          "maximumToeMarkerDriftMeters": 1.0887884812905107e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 36,
+          "lastFrame": 42,
+          "startSampleSeconds": 1.7680000000000002,
+          "endSampleSeconds": 1.9680000000000009,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.869512735672369e-9,
+          "maximumToeMarkerDriftMeters": 1.4622358087384136e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 46,
+          "lastFrame": 52,
+          "startSampleSeconds": 2.1013333333333346,
+          "endSampleSeconds": 2.3013333333333352,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5663784500448703e-9,
+          "maximumToeMarkerDriftMeters": 1.1182552091437787e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 57,
+          "lastFrame": 63,
+          "startSampleSeconds": 2.4680000000000026,
+          "endSampleSeconds": 2.6680000000000024,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.1329445390181257e-9,
+          "maximumToeMarkerDriftMeters": 1.8199060532132641e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 67,
+          "lastFrame": 73,
+          "startSampleSeconds": 2.8013333333333352,
+          "endSampleSeconds": 3.0013333333333345,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.229876342102014e-9,
+          "maximumToeMarkerDriftMeters": 1.912944694322039e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 78,
+          "lastFrame": 84,
+          "startSampleSeconds": 3.1680000000000006,
+          "endSampleSeconds": 3.368,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.973437319558705e-9,
+          "maximumToeMarkerDriftMeters": 1.6215434954351232e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 88,
+          "lastFrame": 94,
+          "startSampleSeconds": 3.5013333333333327,
+          "endSampleSeconds": 3.701333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.9739193031784125e-9,
+          "maximumToeMarkerDriftMeters": 1.6145266872515166e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 99,
+          "lastFrame": 105,
+          "startSampleSeconds": 3.867999999999998,
+          "endSampleSeconds": 4.067999999999997,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.8861838496890667e-9,
+          "maximumToeMarkerDriftMeters": 1.5091681426204162e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 109,
+          "lastFrame": 115,
+          "startSampleSeconds": 4.20133333333333,
+          "endSampleSeconds": 4.401333333333329,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.818284776396265e-9,
+          "maximumToeMarkerDriftMeters": 1.4257338371527835e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 120,
+          "lastFrame": 126,
+          "startSampleSeconds": 4.567999999999995,
+          "endSampleSeconds": 4.7679999999999945,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.8368708406819456e-9,
+          "maximumToeMarkerDriftMeters": 1.4428907221264788e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 130,
+          "lastFrame": 136,
+          "startSampleSeconds": 4.901333333333327,
+          "endSampleSeconds": 5.101333333333327,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.717270152870242e-9,
+          "maximumToeMarkerDriftMeters": 1.2991982185150958e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 141,
+          "lastFrame": 147,
+          "startSampleSeconds": 5.267999999999993,
+          "endSampleSeconds": 5.467999999999992,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.809459593753562e-9,
+          "maximumToeMarkerDriftMeters": 1.4041908206052276e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 151,
+          "lastFrame": 157,
+          "startSampleSeconds": 5.601333333333325,
+          "endSampleSeconds": 5.801333333333324,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6490995288080726e-9,
+          "maximumToeMarkerDriftMeters": 1.2118081269673027e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 162,
+          "lastFrame": 168,
+          "startSampleSeconds": 5.96799999999999,
+          "endSampleSeconds": 6.1679999999999895,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.7960407964143606e-9,
+          "maximumToeMarkerDriftMeters": 1.3835660387157963e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 172,
+          "lastFrame": 178,
+          "startSampleSeconds": 6.301333333333322,
+          "endSampleSeconds": 6.501333333333322,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.6024410677947467e-9,
+          "maximumToeMarkerDriftMeters": 1.1512676179742819e-9
+        }
+      ]
+    },
+    {
+      "identity": "player-04",
+      "path": "models/player-04-lod1.glb",
+      "slot": 9,
+      "offset": [
+        -4,
+        0,
+        10
+      ],
+      "finalSampleSeconds": 6.638999999999989,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -19.07369394212541,
+        0,
+        6.263309751512936
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 2e-9,
+      "maximumSoleDriftMeters": 2e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0.000001708,
+      "worstOrientation": {
+        "frame": 80,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/4/0.35",
+        "actorSampleSeconds": 3.3056666666666668,
+        "actorClock": 2.666666666666667,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.463859327339794,
+        "rootWorld": [
+          -10.032167560759458,
+          0,
+          2.245798848941779
+        ],
+        "offset": [
+          -4,
+          0,
+          10
+        ],
+        "sole": [
+          -9.870747446776008,
+          -2.5735050201980414e-10,
+          2.1848682946753386
+        ],
+        "toeMarker": [
+          -10.02512041888692,
+          -1.6761168841750163e-10,
+          2.1428089849462033
+        ],
+        "anchor": [
+          -9.870747447334335,
+          0,
+          2.1848682949698945
+        ],
+        "firstWorldQuaternion": [
+          -6.107136505702852e-14,
+          -0.7946290598493866,
+          1.9463028338603327e-13,
+          0.6070952620823852
+        ],
+        "worldQuaternion": [
+          -3.724383197692257e-11,
+          -0.794629059851677,
+          2.667586289563145e-12,
+          0.6070952620793872
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 6.905093893128925e-10,
+        "toeMarkerDriftMeters": 5.585660289979387e-10
+      },
+      "worstAnchor": {
+        "frame": 70,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/4/0",
+        "anchorErrorMeters": 1.6375152590792673e-9,
+        "actorSampleSeconds": 2.9723333333333346,
+        "actorClock": 2.333333333333335,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.330525952339794,
+        "modelEuler": [
+          0,
+          4.330525952339794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8284473287311919,
+          0,
+          -0.5600669812782687
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.828447328731192,
+          0,
+          0.5600669812782686
+        ],
+        "rootWorld": [
+          -9.01880037629044,
+          0,
+          2.5762240871916138
+        ],
+        "modelPosition": [
+          -9.01880037629044,
+          0,
+          2.5762240871916138
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013626998178,
+        "contactResidual": 0,
+        "hips": [
+          -9.02268871691842,
+          0.7392222490524909,
+          2.5842974361764792
+        ],
+        "legHip": [
+          -9.06704394679446,
+          0.7428625416151957,
+          2.6738483256534606
+        ],
+        "sole": [
+          -8.880019102577343,
+          4.4473766336317055e-10,
+          2.742195980700185
+        ],
+        "anchor": [
+          -8.880019101099066,
+          0,
+          2.7421959801539604
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 2,
+          "lastFrame": 8,
+          "startSampleSeconds": 0.7056666666666666,
+          "endSampleSeconds": 0.9056666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1474891477413787e-9,
+          "maximumToeMarkerDriftMeters": 8.101539867327728e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 13,
+          "lastFrame": 19,
+          "startSampleSeconds": 1.0723333333333331,
+          "endSampleSeconds": 1.272333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3270067485138815e-9,
+          "maximumToeMarkerDriftMeters": 1.0320989297337777e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 23,
+          "lastFrame": 29,
+          "startSampleSeconds": 1.4056666666666664,
+          "endSampleSeconds": 1.6056666666666666,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1510110467297897e-9,
+          "maximumToeMarkerDriftMeters": 8.174081532480528e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 34,
+          "lastFrame": 40,
+          "startSampleSeconds": 1.7723333333333335,
+          "endSampleSeconds": 1.9723333333333342,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.350494064312638e-9,
+          "maximumToeMarkerDriftMeters": 1.0598464554871943e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 44,
+          "lastFrame": 50,
+          "startSampleSeconds": 2.105666666666668,
+          "endSampleSeconds": 2.3056666666666685,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1640117725423026e-9,
+          "maximumToeMarkerDriftMeters": 8.37990195332391e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 55,
+          "lastFrame": 61,
+          "startSampleSeconds": 2.4723333333333355,
+          "endSampleSeconds": 2.6723333333333357,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.5259263480338076e-9,
+          "maximumToeMarkerDriftMeters": 1.3013237908883592e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 65,
+          "lastFrame": 71,
+          "startSampleSeconds": 2.8056666666666685,
+          "endSampleSeconds": 3.005666666666668,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.63744098590656e-9,
+          "maximumToeMarkerDriftMeters": 1.4047955843597093e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 76,
+          "lastFrame": 82,
+          "startSampleSeconds": 3.172333333333334,
+          "endSampleSeconds": 3.372333333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 1.4251562893329352e-9,
+          "maximumToeMarkerDriftMeters": 1.173064413694577e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 86,
+          "lastFrame": 92,
+          "startSampleSeconds": 3.505666666666666,
+          "endSampleSeconds": 3.7056666666666653,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.454448808952766e-9,
+          "maximumToeMarkerDriftMeters": 1.1913690947216314e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 97,
+          "lastFrame": 103,
+          "startSampleSeconds": 3.8723333333333314,
+          "endSampleSeconds": 4.072333333333331,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3633467073907145e-9,
+          "maximumToeMarkerDriftMeters": 1.0937416051769983e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 107,
+          "lastFrame": 113,
+          "startSampleSeconds": 4.205666666666664,
+          "endSampleSeconds": 4.405666666666663,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3433969016518338e-9,
+          "maximumToeMarkerDriftMeters": 1.0567837546052328e-9
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 118,
+          "lastFrame": 124,
+          "startSampleSeconds": 4.572333333333329,
+          "endSampleSeconds": 4.772333333333329,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3283935902248408e-9,
+          "maximumToeMarkerDriftMeters": 1.047003045809969e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 128,
+          "lastFrame": 134,
+          "startSampleSeconds": 4.9056666666666615,
+          "endSampleSeconds": 5.105666666666661,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2714336381554225e-9,
+          "maximumToeMarkerDriftMeters": 9.668517701220425e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 139,
+          "lastFrame": 145,
+          "startSampleSeconds": 5.272333333333327,
+          "endSampleSeconds": 5.472333333333326,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.3089259766058532e-9,
+          "maximumToeMarkerDriftMeters": 1.0197045723794744e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 149,
+          "lastFrame": 155,
+          "startSampleSeconds": 5.605666666666659,
+          "endSampleSeconds": 5.805666666666658,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2229191536639503e-9,
+          "maximumToeMarkerDriftMeters": 9.048906338513429e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 160,
+          "lastFrame": 166,
+          "startSampleSeconds": 5.972333333333324,
+          "endSampleSeconds": 6.172333333333324,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.2993389678061945e-9,
+          "maximumToeMarkerDriftMeters": 1.0051258896946696e-9
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 170,
+          "lastFrame": 176,
+          "startSampleSeconds": 6.3056666666666565,
+          "endSampleSeconds": 6.505666666666656,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.1897389141126576e-9,
+          "maximumToeMarkerDriftMeters": 8.62035340935893e-10
+        }
+      ]
+    },
+    {
+      "identity": "player-05",
+      "path": "models/player-05-lod1.glb",
+      "slot": 10,
+      "offset": [
+        1,
+        0,
+        10
+      ],
+      "finalSampleSeconds": 6.709999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -14.176949139555788,
+        0,
+        6.465682378700318
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 1e-9,
+      "maximumToeMarkerDriftMeters": 1e-9,
+      "maximumOrientationDriftDegrees": 0.000001708,
+      "maximumOrientationStepDegrees": 0,
+      "worstOrientation": {
+        "frame": 13,
+        "bone": "RightFoot",
+        "key": "run_3/RightFoot/1/0.35",
+        "actorSampleSeconds": 1.1433333333333333,
+        "actorClock": 0.4333333333333333,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 3.598926003589793,
+        "rootWorld": [
+          0.17786531535338534,
+          0,
+          6.467543416452672
+        ],
+        "offset": [
+          1,
+          0,
+          10
+        ],
+        "sole": [
+          0.2406809815839814,
+          -8.561218400870985e-11,
+          6.369223372054486
+        ],
+        "toeMarker": [
+          0.16896193703458517,
+          -4.0826217406753074e-11,
+          6.226197574799976
+        ],
+        "anchor": [
+          0.24068098154884332,
+          0,
+          6.369223371861485
+        ],
+        "firstWorldQuaternion": [
+          6.514521359095104e-14,
+          0.9731164453162716,
+          1.7039434835642746e-14,
+          -0.23031366406495246
+        ],
+        "worldQuaternion": [
+          3.106041096628506e-12,
+          0.9731164453167328,
+          -3.027890774336705e-12,
+          -0.23031366406300363
+        ],
+        "authoredYawRadiansFirst": 0,
+        "authoredYawRadiansLast": 0,
+        "orientationDriftDegrees": 0.0000017075472925031877,
+        "soleDriftMeters": 2.1731568760813874e-10,
+        "toeMarkerDriftMeters": 1.1169740697497586e-10
+      },
+      "worstAnchor": {
+        "frame": 68,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/4/0",
+        "anchorErrorMeters": 1.0718067924714405e-9,
+        "actorSampleSeconds": 2.9766666666666683,
+        "actorClock": 2.2666666666666684,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.332259291089794,
+        "modelEuler": [
+          0,
+          4.332259291089794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8279616247614119,
+          0,
+          -0.5607847607794303
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.8279616247614119,
+          0,
+          0.5607847607794304
+        ],
+        "rootWorld": [
+          -4.031672766759088,
+          0,
+          2.5710678131779687
+        ],
+        "modelPosition": [
+          -4.031672766759088,
+          0,
+          2.5710678131779687
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013539510812,
+        "contactResidual": 0,
+        "hips": [
+          -4.034692845707148,
+          0.7401768485984863,
+          2.5794610825065885
+        ],
+        "legHip": [
+          -4.0788725647235395,
+          0.7438065155546989,
+          2.669099120834592
+        ],
+        "sole": [
+          -3.8800191020690717,
+          2.9433282200397315e-10,
+          2.7421959805021365
+        ],
+        "anchor": [
+          -3.880019101099066,
+          0,
+          2.7421959801539604
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 0,
+          "lastFrame": 6,
+          "startSampleSeconds": 0.71,
+          "endSampleSeconds": 0.9099999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.600989004323724e-10,
+          "maximumToeMarkerDriftMeters": 5.421684169563306e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 11,
+          "lastFrame": 16,
+          "startSampleSeconds": 1.0766666666666667,
+          "endSampleSeconds": 1.2433333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0.0000017075472925031877,
+          "maximumSoleDriftMeters": 7.590942062841295e-10,
+          "maximumToeMarkerDriftMeters": 5.740098014497151e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 21,
+          "lastFrame": 27,
+          "startSampleSeconds": 1.41,
+          "endSampleSeconds": 1.6099999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.623025641360011e-10,
+          "maximumToeMarkerDriftMeters": 5.465969871575554e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 32,
+          "lastFrame": 37,
+          "startSampleSeconds": 1.7766666666666666,
+          "endSampleSeconds": 1.9433333333333338,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.752558258223878e-10,
+          "maximumToeMarkerDriftMeters": 5.934123050035084e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 42,
+          "lastFrame": 48,
+          "startSampleSeconds": 2.110000000000001,
+          "endSampleSeconds": 2.3100000000000014,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.705021491645029e-10,
+          "maximumToeMarkerDriftMeters": 5.593803026395725e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 53,
+          "lastFrame": 58,
+          "startSampleSeconds": 2.476666666666669,
+          "endSampleSeconds": 2.643333333333336,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.157658950447509e-10,
+          "maximumToeMarkerDriftMeters": 7.843370253469396e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 63,
+          "lastFrame": 69,
+          "startSampleSeconds": 2.8100000000000023,
+          "endSampleSeconds": 3.0100000000000016,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 1.0710655406768266e-9,
+          "maximumToeMarkerDriftMeters": 9.19025400761631e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 74,
+          "lastFrame": 79,
+          "startSampleSeconds": 3.1766666666666676,
+          "endSampleSeconds": 3.3433333333333337,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.233653877537593e-10,
+          "maximumToeMarkerDriftMeters": 6.705600250296135e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 84,
+          "lastFrame": 90,
+          "startSampleSeconds": 3.51,
+          "endSampleSeconds": 3.709999999999999,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 9.546711651494367e-10,
+          "maximumToeMarkerDriftMeters": 7.832422437377546e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 95,
+          "lastFrame": 100,
+          "startSampleSeconds": 3.876666666666665,
+          "endSampleSeconds": 4.043333333333331,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.820460183435613e-10,
+          "maximumToeMarkerDriftMeters": 6.16345320069724e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 105,
+          "lastFrame": 111,
+          "startSampleSeconds": 4.209999999999997,
+          "endSampleSeconds": 4.409999999999997,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.841788897689894e-10,
+          "maximumToeMarkerDriftMeters": 6.979030307028915e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 116,
+          "lastFrame": 121,
+          "startSampleSeconds": 4.576666666666663,
+          "endSampleSeconds": 4.743333333333329,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.586349808734525e-10,
+          "maximumToeMarkerDriftMeters": 5.840207823779361e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 126,
+          "lastFrame": 132,
+          "startSampleSeconds": 4.909999999999995,
+          "endSampleSeconds": 5.109999999999994,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.385635943780832e-10,
+          "maximumToeMarkerDriftMeters": 6.410421627805709e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 137,
+          "lastFrame": 142,
+          "startSampleSeconds": 5.27666666666666,
+          "endSampleSeconds": 5.443333333333326,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.456403990132439e-10,
+          "maximumToeMarkerDriftMeters": 5.650002031432225e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 147,
+          "lastFrame": 153,
+          "startSampleSeconds": 5.609999999999992,
+          "endSampleSeconds": 5.809999999999992,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 8.078468096475463e-10,
+          "maximumToeMarkerDriftMeters": 6.019610337738727e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 158,
+          "lastFrame": 163,
+          "startSampleSeconds": 5.976666666666658,
+          "endSampleSeconds": 6.143333333333324,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.393370379469482e-10,
+          "maximumToeMarkerDriftMeters": 5.548141085902767e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 168,
+          "lastFrame": 174,
+          "startSampleSeconds": 6.30999999999999,
+          "endSampleSeconds": 6.509999999999989,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 7.868508499412938e-10,
+          "maximumToeMarkerDriftMeters": 5.749690373883778e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/9/0.35",
+          "firstFrame": 179,
+          "lastFrame": 180,
+          "startSampleSeconds": 6.676666666666655,
+          "endSampleSeconds": 6.709999999999988,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.736554948611061e-11,
+          "maximumToeMarkerDriftMeters": 1.0394052782678886e-11
+        }
+      ]
+    },
+    {
+      "identity": "player-06",
+      "path": "models/player-06-lod1.glb",
+      "slot": 11,
+      "offset": [
+        6,
+        0,
+        10
+      ],
+      "finalSampleSeconds": 6.780999999999988,
+      "pathScale": 1,
+      "finalRootWorld": [
+        -9.274416021322182,
+        0,
+        6.67090529592035
+      ],
+      "minimumVertexY": 0.005128013,
+      "maximumAnchorErrorMeters": 1e-9,
+      "maximumSoleDriftMeters": 1e-9,
+      "maximumToeMarkerDriftMeters": 0,
+      "maximumOrientationDriftDegrees": 0,
+      "maximumOrientationStepDegrees": 0,
+      "worstOrientation": null,
+      "worstAnchor": {
+        "frame": 67,
+        "bone": "LeftFoot",
+        "key": "run_3/LeftFoot/4/0",
+        "anchorErrorMeters": 5.590899222404359e-10,
+        "actorSampleSeconds": 3.014333333333335,
+        "actorClock": 2.233333333333335,
+        "pathScale": 1,
+        "baseYaw": 3.141592653589793,
+        "modelYaw": 4.347326004839794,
+        "modelEuler": [
+          0,
+          4.347326004839794,
+          0,
+          "XYZ"
+        ],
+        "modelQuaternion": [
+          0,
+          0.8237135790801059,
+          0,
+          -0.5670061195781242
+        ],
+        "rootWorldQuaternion": [
+          0,
+          -0.823713579080106,
+          0,
+          0.5670061195781242
+        ],
+        "rootWorld": [
+          0.856064965775329,
+          0,
+          2.5271897581116924
+        ],
+        "modelPosition": [
+          0.856064965775329,
+          0,
+          2.5271897581116924
+        ],
+        "floorLift": 0,
+        "finalGeometryMinimumY": 0.005128013199640261,
+        "contactResidual": 0,
+        "hips": [
+          0.8600295329526373,
+          0.7484568913989144,
+          2.5376468452285588
+        ],
+        "legHip": [
+          0.8176451566786718,
+          0.7518578571337473,
+          2.6281565026920406
+        ],
+        "sole": [
+          1.1199808994145966,
+          -1.6796136703689513e-10,
+          2.7421959800107074
+        ],
+        "anchor": [
+          1.119980898900934,
+          0,
+          2.7421959801539604
+        ],
+        "authoredYawRadians": 0
+      },
+      "contacts": [
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/1/0",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "startSampleSeconds": 0.7809999999999999,
+          "endSampleSeconds": 0.9143333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.626308422361783e-10,
+          "maximumToeMarkerDriftMeters": 3.414928198151423e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/1/0.35",
+          "firstFrame": 9,
+          "lastFrame": 14,
+          "startSampleSeconds": 1.081,
+          "endSampleSeconds": 1.2476666666666665,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.531805561256984e-10,
+          "maximumToeMarkerDriftMeters": 1.9722276983373843e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/2/0",
+          "firstFrame": 19,
+          "lastFrame": 25,
+          "startSampleSeconds": 1.4143333333333332,
+          "endSampleSeconds": 1.6143333333333332,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.3463530031114395e-10,
+          "maximumToeMarkerDriftMeters": 3.307502265021885e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/2/0.35",
+          "firstFrame": 30,
+          "lastFrame": 35,
+          "startSampleSeconds": 1.7809999999999997,
+          "endSampleSeconds": 1.9476666666666669,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5799815437730964e-10,
+          "maximumToeMarkerDriftMeters": 2.0287213869876576e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/3/0",
+          "firstFrame": 40,
+          "lastFrame": 46,
+          "startSampleSeconds": 2.114333333333334,
+          "endSampleSeconds": 2.3143333333333347,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.3824424572452074e-10,
+          "maximumToeMarkerDriftMeters": 3.357585039788741e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/3/0.35",
+          "firstFrame": 51,
+          "lastFrame": 56,
+          "startSampleSeconds": 2.4810000000000016,
+          "endSampleSeconds": 2.647666666666669,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 3.0930011935815693e-10,
+          "maximumToeMarkerDriftMeters": 2.7510996637069974e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/4/0",
+          "firstFrame": 61,
+          "lastFrame": 67,
+          "startSampleSeconds": 2.8143333333333356,
+          "endSampleSeconds": 3.014333333333335,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.621138839180524e-10,
+          "maximumToeMarkerDriftMeters": 4.836761512304931e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/4/0.35",
+          "firstFrame": 72,
+          "lastFrame": 77,
+          "startSampleSeconds": 3.181000000000001,
+          "endSampleSeconds": 3.347666666666667,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.827512316440475e-10,
+          "maximumToeMarkerDriftMeters": 2.3329167056605486e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/5/0",
+          "firstFrame": 82,
+          "lastFrame": 88,
+          "startSampleSeconds": 3.514333333333333,
+          "endSampleSeconds": 3.7143333333333324,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 5.130869666629261e-10,
+          "maximumToeMarkerDriftMeters": 4.2640218440801843e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/5/0.35",
+          "firstFrame": 93,
+          "lastFrame": 98,
+          "startSampleSeconds": 3.8809999999999985,
+          "endSampleSeconds": 4.0476666666666645,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5675642810094983e-10,
+          "maximumToeMarkerDriftMeters": 2.0522376125504218e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/6/0",
+          "firstFrame": 103,
+          "lastFrame": 109,
+          "startSampleSeconds": 4.214333333333331,
+          "endSampleSeconds": 4.41433333333333,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.837782847722121e-10,
+          "maximumToeMarkerDriftMeters": 3.911621191230026e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/6/0.35",
+          "firstFrame": 114,
+          "lastFrame": 119,
+          "startSampleSeconds": 4.580999999999996,
+          "endSampleSeconds": 4.747666666666662,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.5085640455787926e-10,
+          "maximumToeMarkerDriftMeters": 1.9715600962648523e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/7/0",
+          "firstFrame": 124,
+          "lastFrame": 130,
+          "startSampleSeconds": 4.914333333333328,
+          "endSampleSeconds": 5.114333333333327,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.65019813995958e-10,
+          "maximumToeMarkerDriftMeters": 3.6812553305445653e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/7/0.35",
+          "firstFrame": 135,
+          "lastFrame": 140,
+          "startSampleSeconds": 5.2809999999999935,
+          "endSampleSeconds": 5.4476666666666596,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.4773055103728914e-10,
+          "maximumToeMarkerDriftMeters": 1.9260959233636883e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/8/0",
+          "firstFrame": 145,
+          "lastFrame": 151,
+          "startSampleSeconds": 5.614333333333326,
+          "endSampleSeconds": 5.814333333333325,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.5250446878413704e-10,
+          "maximumToeMarkerDriftMeters": 3.525352478070172e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/8/0.35",
+          "firstFrame": 156,
+          "lastFrame": 161,
+          "startSampleSeconds": 5.980999999999991,
+          "endSampleSeconds": 6.147666666666657,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.46378821384884e-10,
+          "maximumToeMarkerDriftMeters": 1.903706321743331e-10
+        },
+        {
+          "bone": "LeftFoot",
+          "key": "run_3/LeftFoot/9/0",
+          "firstFrame": 166,
+          "lastFrame": 172,
+          "startSampleSeconds": 6.314333333333323,
+          "endSampleSeconds": 6.514333333333322,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 4.4402584119154457e-10,
+          "maximumToeMarkerDriftMeters": 3.4189314551257844e-10
+        },
+        {
+          "bone": "RightFoot",
+          "key": "run_3/RightFoot/9/0.35",
+          "firstFrame": 177,
+          "lastFrame": 180,
+          "startSampleSeconds": 6.6809999999999885,
+          "endSampleSeconds": 6.780999999999988,
+          "authoredYawRadiansFirst": 0,
+          "authoredYawRadiansLast": 0,
+          "maximumOrientationDriftDegrees": 0,
+          "maximumSoleDriftMeters": 2.1162271930691295e-10,
+          "maximumToeMarkerDriftMeters": 1.2711548989325078e-10
+        }
+      ]
+    }
+  ],
+  "state": {
+    "characterID": "player-01",
+    "view": "pitch",
+    "lod": "1",
+    "lighting": "stadium",
+    "clipID": "run_3",
+    "time": 5.9999999999999885,
+    "playing": false,
+    "fps": 0,
+    "threeRevision": "160",
+    "errors": [],
+    "draws": 8,
+    "triangles": 23383,
+    "models": [
+      {
+        "id": "player-01",
+        "path": "models/player-01-lod1.glb",
+        "triangles": 5019,
+        "lift": 0,
+        "minimumY": 0.005128013356689155,
+        "world": [
+          7.899149724329941,
+          0,
+          1.4037054444092316
+        ],
+        "sampleSeconds": 5.9999999999999885,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "RightFoot",
+            "key": "run_3/RightFoot/8/0.35",
+            "anchor": [
+              8.10672554247891,
+              0,
+              1.321456863382025
+            ],
+            "release": 6.1739999999999995
+          }
+        ]
+      },
+      {
+        "id": "player-02",
+        "path": "models/player-02-lod1.glb",
+        "triangles": 5069,
+        "lift": 0,
+        "minimumY": 0.0051280132795530065,
+        "world": [
+          13.050215291026195,
+          0,
+          1.2340132720726666
+        ],
+        "sampleSeconds": 6.070999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "RightFoot",
+            "key": "run_3/RightFoot/8/0.35",
+            "anchor": [
+              13.10672554247891,
+              0,
+              1.321456863382025
+            ],
+            "release": 6.103
+          }
+        ]
+      },
+      {
+        "id": "player-03",
+        "path": "models/player-03-lod1.glb",
+        "triangles": 5017,
+        "lift": 0,
+        "minimumY": 0.005128013628135022,
+        "world": [
+          18.19640180457519,
+          0,
+          1.0600992753361416
+        ],
+        "sampleSeconds": 6.141999999999989,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "RightFoot",
+            "key": "run_3/RightFoot/8/0.35",
+            "anchor": [
+              18.106725542478912,
+              0,
+              1.321456863382025
+            ],
+            "release": 6.031999999999999
+          }
+        ]
+      },
+      {
+        "id": "player-04",
+        "path": "models/player-04-lod1.glb",
+        "triangles": 5021,
+        "lift": 0,
+        "minimumY": 0.04963233261473834,
+        "world": [
+          8.337590571471296,
+          0,
+          -5.117895356672683
+        ],
+        "sampleSeconds": 6.2129999999999885,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": []
+      },
+      {
+        "id": "player-05",
+        "path": "models/player-05-lod1.glb",
+        "triangles": 5018,
+        "lift": 0,
+        "minimumY": 0.0193907445590397,
+        "world": [
+          13.473667883471787,
+          0,
+          -5.299827222909151
+        ],
+        "sampleSeconds": 6.283999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": []
+      },
+      {
+        "id": "player-06",
+        "path": "models/player-06-lod1.glb",
+        "triangles": 5019,
+        "lift": 0,
+        "minimumY": 0.005128013361112497,
+        "world": [
+          18.604524355677228,
+          0,
+          -5.485550084975324
+        ],
+        "sampleSeconds": 6.354999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_3/LeftFoot/9/0",
+            "anchor": [
+              18.621906772376924,
+              0,
+              -5.691827452625811
+            ],
+            "release": 6.1690000000000005
+          }
+        ]
+      },
+      {
+        "id": "player-01",
+        "path": "models/player-01-lod1.glb",
+        "triangles": 5019,
+        "lift": 0,
+        "minimumY": 0.005128013084438613,
+        "world": [
+          -18.730054400128044,
+          0,
+          -0.3250858686640159
+        ],
+        "sampleSeconds": 6.425999999999989,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_3/LeftFoot/9/0",
+            "anchor": [
+              -18.621906772376924,
+              0,
+              -0.3081725473741912
+            ],
+            "release": 6.098
+          }
+        ]
+      },
+      {
+        "id": "player-02",
+        "path": "models/player-02-lod1.glb",
+        "triangles": 5069,
+        "lift": 0,
+        "minimumY": 0.00512801297595667,
+        "world": [
+          -13.850156263795284,
+          0,
+          -0.1322341610303548
+        ],
+        "sampleSeconds": 6.496999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_3/LeftFoot/9/0",
+            "anchor": [
+              -13.621906772376924,
+              0,
+              -0.3081725473741912
+            ],
+            "release": 6.027
+          }
+        ]
+      },
+      {
+        "id": "player-03",
+        "path": "models/player-03-lod1.glb",
+        "triangles": 5017,
+        "lift": 0,
+        "minimumY": 0.0564494962132453,
+        "world": [
+          -8.964733450876817,
+          0,
+          0.06395020887215797
+        ],
+        "sampleSeconds": 6.567999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": []
+      },
+      {
+        "id": "player-04",
+        "path": "models/player-04-lod1.glb",
+        "triangles": 5021,
+        "lift": 0,
+        "minimumY": 0.015294667067871326,
+        "world": [
+          -19.07369394212541,
+          0,
+          6.263309751512936
+        ],
+        "sampleSeconds": 6.638999999999989,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": []
+      },
+      {
+        "id": "player-05",
+        "path": "models/player-05-lod1.glb",
+        "triangles": 5018,
+        "lift": 0,
+        "minimumY": 0.005128013361517527,
+        "world": [
+          -14.176949139555788,
+          0,
+          6.465682378700318
+        ],
+        "sampleSeconds": 6.709999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "RightFoot",
+            "key": "run_3/RightFoot/9/0.35",
+            "anchor": [
+              -14.339516455656545,
+              0,
+              6.5734130396053265
+            ],
+            "release": 6.164
+          }
+        ]
+      },
+      {
+        "id": "player-06",
+        "path": "models/player-06-lod1.glb",
+        "triangles": 5019,
+        "lift": 0,
+        "minimumY": 0.005128013268012422,
+        "world": [
+          -9.274416021322182,
+          0,
+          6.67090529592035
+        ],
+        "sampleSeconds": 6.780999999999988,
+        "phaseRate": 1,
+        "pathScale": 1,
+        "contactResidual": 0,
+        "contacts": [
+          {
+            "bone": "RightFoot",
+            "key": "run_3/RightFoot/9/0.35",
+            "anchor": [
+              -9.339516455656545,
+              0,
+              6.5734130396053265
+            ],
+            "release": 6.093
+          }
+        ]
+      }
+    ],
+    "environment": {
+      "generatedTextureSizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          512,
+          256
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "crowdInstances": 360,
+      "crowdDrawCalls": 2,
+      "seatInstances": 360,
+      "environmentTriangles": 19580,
+      "shadowMapHero": 1024,
+      "shadowMapPitch": 512,
+      "environmentGeneratedLocally": true,
+      "reflectionSettings": {
+        "frontStrength": 8,
+        "sigma": 0
+      }
+    }
+  },
+  "generatedAt": "2026-11-04T22:34:41.437Z",
+  "auditSource": {
+    "file": "source/audit-pitch.cjs",
+    "sha256": "a8ca9c97a0f929743b42b15a7d4697cee36845da6ce01a8c4ec84d3a00b05035"
+  },
+  "servedResources": {
+    "preview.html": {
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    "preview.css": {
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    "vendor/data.js": {
+      "bytes": 1299540,
+      "sha256": "e940e48e3ff23e7866d2c712dca408b678b627115978581eec46b608161d693d"
+    },
+    "vendor/viewer-runtime.js": {
+      "bytes": 763056,
+      "sha256": "359e532ec3934f7d89cd25c526412e68dd1ced653f4d8435af55fa4ece155ffc"
+    },
+    "offline/player-01-lod0.js": {
+      "bytes": 1015903,
+      "sha256": "67b4967362a57786abc2ac66c109459c76818aeff1d146670bc72ae13e873576"
+    },
+    "offline/player-01-lod1.js": {
+      "bytes": 651823,
+      "sha256": "78fe93e2750bb61b38fd11d9389d1e85874887f7adbfbecf01a60f63d9247825"
+    },
+    "offline/player-02-lod1.js": {
+      "bytes": 618751,
+      "sha256": "2b94ffb36e66fdaafba096a03eaf78a257a5688e17f290eccaf8ef0c8a2d9b6b"
+    },
+    "offline/player-03-lod1.js": {
+      "bytes": 673883,
+      "sha256": "72951b3f19bc2e14552667a79be0246f4e91dfddaa9539e16d9fd3f4e2f27325"
+    },
+    "offline/player-04-lod1.js": {
+      "bytes": 706611,
+      "sha256": "9c6400e2f2c2cb11cf41243f40e7d97504a33b784240c2d7313f54055bd5285b"
+    },
+    "offline/player-05-lod1.js": {
+      "bytes": 644559,
+      "sha256": "76e37ff52a5acbb95cb933ee83b8129a5e3429ebc7c5d30ba9f9e9119a9e4e28"
+    },
+    "offline/player-06-lod1.js": {
+      "bytes": 671067,
+      "sha256": "7b7259d81a13369a84a4b424b6a3b6df934f5fcf7ed4cdd6928f3ef6d8a00e11"
+    }
+  },
+  "loadedModels": [
+    {
+      "path": "models/player-01-lod1.glb",
+      "bytes": 488792,
+      "sha256": "dcd346d2287058f3928093d42392ebddd1390b5a42c8a3a25ed6095c49c05e8f"
+    },
+    {
+      "path": "models/player-02-lod1.glb",
+      "bytes": 463988,
+      "sha256": "cb5039b697da363ec8f05a4243314fbfbc8a5ccfc247540faa46d6dfa403fa8c"
+    },
+    {
+      "path": "models/player-03-lod1.glb",
+      "bytes": 505336,
+      "sha256": "d9f9c3dcab946ea405e69783972f60162f7294323276a8e8d217737e102c053c"
+    },
+    {
+      "path": "models/player-04-lod1.glb",
+      "bytes": 529884,
+      "sha256": "b40b3a0dc37a48dede52bebdf528247eae886eee5e292d0ca024b11eb62e1967"
+    },
+    {
+      "path": "models/player-05-lod1.glb",
+      "bytes": 483344,
+      "sha256": "096bfdbed464b3109e193d0dd0eab5c99a6408569952299b5589668929e7b761"
+    },
+    {
+      "path": "models/player-06-lod1.glb",
+      "bytes": 503224,
+      "sha256": "9ba604a0ebaee41bf0d3a2dbb871ac413038492699b811b0a1d5a7e227347d89"
+    }
+  ],
+  "modelsMatchDisk": [
+    {
+      "path": "models/player-01-lod1.glb",
+      "pass": true
+    },
+    {
+      "path": "models/player-02-lod1.glb",
+      "pass": true
+    },
+    {
+      "path": "models/player-03-lod1.glb",
+      "pass": true
+    },
+    {
+      "path": "models/player-04-lod1.glb",
+      "pass": true
+    },
+    {
+      "path": "models/player-05-lod1.glb",
+      "pass": true
+    },
+    {
+      "path": "models/player-06-lod1.glb",
+      "pass": true
+    }
+  ],
+  "servedResourcesMatchDisk": [
+    {
+      "path": "preview.html",
+      "pass": true
+    },
+    {
+      "path": "preview.css",
+      "pass": true
+    },
+    {
+      "path": "vendor/data.js",
+      "pass": true
+    },
+    {
+      "path": "vendor/viewer-runtime.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-01-lod0.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-01-lod1.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-02-lod1.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-03-lod1.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-04-lod1.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-05-lod1.js",
+      "pass": true
+    },
+    {
+      "path": "offline/player-06-lod1.js",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "thresholds": {
+    "maximumConstantYawPlantOrientationDriftDegrees": 0.5,
+    "maximumToeMarkerDriftMeters": 0.003,
+    "maximumSoleAnchorDistanceMeters": 0.003,
+    "minimumVertexY": -0.001
+  },
+  "checks": {
+    "twelveActors": true,
+    "sixDistinctModels": true,
+    "distinctOffsets": true,
+    "authoredYawIsConstantZero": true,
+    "noPageErrorsOrRemoteRequests": true,
+    "exactPayloadsUnchanged": true,
+    "auditorUnchanged": true,
+    "floor": true,
+    "soleAnchors": true,
+    "constantYawWorldFootOrientation": true,
+    "toeMarkerDrift": true
+  },
+  "pass": true
+}

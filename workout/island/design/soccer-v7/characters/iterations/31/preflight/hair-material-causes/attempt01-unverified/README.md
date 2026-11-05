@@ -1,0 +1,1 @@
+First capture attempt: all12 images rendered, but the final proof guard failed before its JSON was written. These files are retained as unverified and must not be cited as validated isolation evidence. The replay adds explicit map/Source/image identity witnesses and consistent canvas readback. No model/source/shared texture was intentionally modified.

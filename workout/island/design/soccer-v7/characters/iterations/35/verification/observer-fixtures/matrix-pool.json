@@ -1,0 +1,83 @@
+{
+  "kind": "controlled-matrix-pool-fixtures-not-character-validation",
+  "matrixSourceSha256": "bf3447d98e6a0041e5e884f916f5ec09b309a48772b8a989302a6f188e33488f",
+  "fixtureRoot": "/tmp/soccer-v7-matrix-pool-check-ah7ywais",
+  "checks": {
+    "twoWorkersActuallyOverlap": true,
+    "oneKernelOwnerExcludesDuplicate": true,
+    "serializedAtomicJournalIntegrity": true,
+    "allSeventeenAggregateSemantics": true,
+    "exactPartialResumeRunsOnlyMissingJob": true,
+    "changedReportBytesRejected": true,
+    "changedInputSnapshotRejected": true,
+    "liveOrphanWorkerRejected": true,
+    "defaultRemainsOneWorker": true,
+    "input-changeAbortsOwnedWorkersOnly": true,
+    "signalAbortsOwnedWorkersOnly": true
+  },
+  "pass": true,
+  "evidence": {
+    "input-change": {
+      "returnCode": 1,
+      "journalPath": "/tmp/soccer-v7-transition-matrix-91bb73f7db014708.json",
+      "cleanup": {
+        "completedAt": "2026-11-05T09:05:59.101Z",
+        "ownedProcesses": [
+          {
+            "pid": 127185,
+            "startedTicks": "4661234",
+            "state": "R"
+          },
+          {
+            "pid": 127198,
+            "startedTicks": "4661238",
+            "state": "S"
+          },
+          {
+            "pid": 127191,
+            "startedTicks": "4661235",
+            "state": "R"
+          },
+          {
+            "pid": 127205,
+            "startedTicks": "4661239",
+            "state": "S"
+          }
+        ],
+        "stillLive": []
+      },
+      "unrelatedStayedAlive": true
+    },
+    "signal": {
+      "returnCode": 143,
+      "journalPath": "/tmp/soccer-v7-transition-matrix-a4692ed06ff7bb25.json",
+      "cleanup": {
+        "completedAt": "2026-11-05T09:05:59.611Z",
+        "ownedProcesses": [
+          {
+            "pid": 127250,
+            "startedTicks": "4661384",
+            "state": "R"
+          },
+          {
+            "pid": 127263,
+            "startedTicks": "4661388",
+            "state": "S"
+          },
+          {
+            "pid": 127256,
+            "startedTicks": "4661385",
+            "state": "R"
+          },
+          {
+            "pid": 127270,
+            "startedTicks": "4661389",
+            "state": "S"
+          }
+        ],
+        "stillLive": []
+      },
+      "unrelatedStayedAlive": true
+    }
+  }
+}

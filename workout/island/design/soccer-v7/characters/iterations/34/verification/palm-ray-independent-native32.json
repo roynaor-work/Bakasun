@@ -1,0 +1,3459 @@
+{
+  "kind": "independent-all16-native32-anatomical-ray-validation",
+  "observerSha256": "da66bcc3b142771d2dedc667ccb6188baaef092974a63ce9d131e28d465ecb1a",
+  "helperSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+  "pass": true,
+  "modelCount": 16,
+  "calibrations": [
+    {
+      "id": "player-01",
+      "lod": 0,
+      "file": "models/player-01-lod0.glb",
+      "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-01-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1113,
+          "triangleVertexIndices": [
+            724,
+            702,
+            725
+          ],
+          "barycentricWeights": [
+            0.5373708580723907,
+            0.15664691945207243,
+            0.30598222247553686
+          ],
+          "bindPositions": [
+            [
+              0.16364003717899323,
+              0.757066011428833,
+              -0.03162262588739395
+            ],
+            [
+              0.15095154941082,
+              0.7560996413230896,
+              -0.020782791078090668
+            ],
+            [
+              0.1500692218542099,
+              0.7671495676040649,
+              -0.02233733981847763
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.0036400407552719116,
+              -0.03293401002883911,
+              -0.03162262588739395
+            ],
+            [
+              -0.009048447012901306,
+              -0.03390038013458252,
+              -0.020782791078090668
+            ],
+            [
+              -0.009930774569511414,
+              -0.022850453853607178,
+              -0.02233733981847763
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0025000000000000014,
+            -0.03,
+            -0.02708346668945909
+          ],
+          "handLocalNormal": [
+            -0.634532426805025,
+            -0.15713032628906193,
+            -0.7567553500922334
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8984745144844055,
+              "LeftForeArm": 0.10152551531791687
+            },
+            {
+              "LeftHand": 0.9159344434738159,
+              "LeftForeArm": 0.08406553417444229
+            },
+            {
+              "LeftHand": 0.7814083695411682,
+              "LeftForeArm": 0.2185916304588318
+            }
+          ],
+          "barycentricHandInfluence": 0.8653893993680735
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-01-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1758,
+          "triangleVertexIndices": [
+            1124,
+            1125,
+            1163
+          ],
+          "barycentricWeights": [
+            0.41257755302009325,
+            0.08266028750081668,
+            0.5047621594790901
+          ],
+          "bindPositions": [
+            [
+              -0.14945481717586517,
+              0.7688301801681519,
+              -0.021034881472587585
+            ],
+            [
+              -0.15878212451934814,
+              0.7428229451179504,
+              -0.026160694658756256
+            ],
+            [
+              -0.16386592388153076,
+              0.7555954456329346,
+              -0.03212680667638779
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01054517924785614,
+              -0.021169841289520264,
+              -0.021034881472587585
+            ],
+            [
+              0.001217871904373169,
+              -0.04717707633972168,
+              -0.026160694658756256
+            ],
+            [
+              -0.0038659274578094482,
+              -0.03440457582473755,
+              -0.03212680667638779
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.002500000000000001,
+            -0.03,
+            -0.0270573667828825
+          ],
+          "handLocalNormal": [
+            0.6571250077064036,
+            -0.08812780992184745,
+            -0.7486121915686637
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.771429181098938,
+              "RightForeArm": 0.228570818901062
+            },
+            {
+              "RightHand": 0.9811818599700928,
+              "RightForeArm": 0.01881813257932663
+            },
+            {
+              "RightHand": 0.9150347113609314,
+              "RightForeArm": 0.0849653109908104
+            }
+          ],
+          "barycentricHandInfluence": 0.8612540354066778
+        }
+      ]
+    },
+    {
+      "id": "player-01",
+      "lod": 1,
+      "file": "models/player-01-lod1.glb",
+      "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-01-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 368,
+          "triangleVertexIndices": [
+            269,
+            271,
+            283
+          ],
+          "barycentricWeights": [
+            0.0016855389382206302,
+            0.8726441662935632,
+            0.12567029476821612
+          ],
+          "bindPositions": [
+            [
+              0.1855854094028473,
+              0.6984147429466248,
+              -0.03368198871612549
+            ],
+            [
+              0.15464070439338684,
+              0.7579528093338013,
+              -0.02948325127363205
+            ],
+            [
+              0.1769779920578003,
+              0.7750416994094849,
+              -0.014073885977268219
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.025585412979125977,
+              -0.09158527851104736,
+              -0.03368198871612549
+            ],
+            [
+              -0.005359292030334473,
+              -0.03204721212387085,
+              -0.02948325127363205
+            ],
+            [
+              0.01697799563407898,
+              -0.014958322048187256,
+              -0.014073885977268219
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.027553828930097574
+          ],
+          "handLocalNormal": [
+            0.3988543089886883,
+            0.26912503860491854,
+            -0.8766338767108289
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8885335326194763,
+              "LeftForeArm": 0.11146649718284607
+            },
+            {
+              "LeftHand": 0.6612988114356995,
+              "LeftForeArm": 0.33870115876197815
+            }
+          ],
+          "barycentricHandInfluence": 0.8601647592978134
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-01-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 522,
+          "triangleVertexIndices": [
+            417,
+            391,
+            419
+          ],
+          "barycentricWeights": [
+            0.5111135378609983,
+            0.043593107404764964,
+            0.4452933547342367
+          ],
+          "bindPositions": [
+            [
+              -0.1487179696559906,
+              0.7677358388900757,
+              -0.018440574407577515
+            ],
+            [
+              -0.17647162079811096,
+              0.7009339332580566,
+              -0.0353194922208786
+            ],
+            [
+              -0.16572284698486328,
+              0.7569031715393066,
+              -0.03162460774183273
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.011282026767730713,
+              -0.022264182567596436,
+              -0.018440574407577515
+            ],
+            [
+              -0.01647162437438965,
+              -0.08906608819961548,
+              -0.0353194922208786
+            ],
+            [
+              -0.005722850561141968,
+              -0.03309684991836548,
+              -0.03162460774183273
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025,
+            -0.03,
+            -0.025047141317027462
+          ],
+          "handLocalNormal": [
+            0.6394727568699932,
+            -0.07227991798303121,
+            -0.7654085227363598
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8041841387748718,
+              "RightForeArm": 0.19581586122512817
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.8978215456008911,
+              "RightForeArm": 0.1021784245967865
+            }
+          ],
+          "barycentricHandInfluence": 0.854416475658988
+        }
+      ]
+    },
+    {
+      "id": "player-02",
+      "lod": 0,
+      "file": "models/player-02-lod0.glb",
+      "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-02-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1117,
+          "triangleVertexIndices": [
+            705,
+            706,
+            727
+          ],
+          "barycentricWeights": [
+            0.17267892141950816,
+            0.2933792529835647,
+            0.5339418255969272
+          ],
+          "bindPositions": [
+            [
+              0.15079747140407562,
+              0.7561856508255005,
+              -0.02054484188556671
+            ],
+            [
+              0.15020234882831573,
+              0.7674077749252319,
+              -0.02211763709783554
+            ],
+            [
+              0.163677379488945,
+              0.7571633458137512,
+              -0.031554415822029114
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              -0.009202525019645691,
+              -0.03381437063217163,
+              -0.02054484188556671
+            ],
+            [
+              -0.009797647595405579,
+              -0.022592246532440186,
+              -0.02211763709783554
+            ],
+            [
+              0.003677383065223694,
+              -0.0328366756439209,
+              -0.031554415822029114
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0025000000000000014,
+            -0.03,
+            -0.02688473937671735
+          ],
+          "handLocalNormal": [
+            -0.637196002327571,
+            -0.14000881778962498,
+            -0.7578778170384154
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.9337576031684875,
+              "LeftForeArm": 0.06624239683151245
+            },
+            {
+              "LeftHand": 0.7925554513931274,
+              "LeftForeArm": 0.20744451880455017
+            },
+            {
+              "LeftHand": 0.9143768548965454,
+              "LeftForeArm": 0.08562316745519638
+            }
+          ],
+          "barycentricHandInfluence": 0.8819836292472052
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-02-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1798,
+          "triangleVertexIndices": [
+            1161,
+            1162,
+            1177
+          ],
+          "barycentricWeights": [
+            0.09232769209999371,
+            0.5071414693707501,
+            0.4005308385292562
+          ],
+          "bindPositions": [
+            [
+              -0.15683284401893616,
+              0.7447085380554199,
+              -0.02428554743528366
+            ],
+            [
+              -0.16388916969299316,
+              0.755590558052063,
+              -0.03210701793432236
+            ],
+            [
+              -0.1495639830827713,
+              0.7691080570220947,
+              -0.020842403173446655
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.0031671524047851562,
+              -0.0452914834022522,
+              -0.02428554743528366
+            ],
+            [
+              -0.0038891732692718506,
+              -0.03440946340560913,
+              -0.03210701793432236
+            ],
+            [
+              0.010436013340950012,
+              -0.020891964435577393,
+              -0.020842403173446655
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.002500000000000001,
+            -0.03,
+            -0.026873054018435347
+          ],
+          "handLocalNormal": [
+            0.669408991039747,
+            -0.09545902545813365,
+            -0.7367354865714907
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.9716616272926331,
+              "RightForeArm": 0.028338376432657242
+            },
+            {
+              "RightHand": 0.9318255186080933,
+              "RightForeArm": 0.06817446649074554
+            },
+            {
+              "RightHand": 0.7818751931190491,
+              "RightForeArm": 0.21812480688095093
+            }
+          ],
+          "barycentricHandInfluence": 0.8754437649793196
+        }
+      ]
+    },
+    {
+      "id": "player-02",
+      "lod": 1,
+      "file": "models/player-02-lod1.glb",
+      "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-02-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 370,
+          "triangleVertexIndices": [
+            274,
+            275,
+            288
+          ],
+          "barycentricWeights": [
+            0.07040098421132482,
+            0.7900058105100191,
+            0.13959320527865615
+          ],
+          "bindPositions": [
+            [
+              0.1755092889070511,
+              0.7042438983917236,
+              -0.034997470676898956
+            ],
+            [
+              0.15320827066898346,
+              0.760739803314209,
+              -0.025949627161026
+            ],
+            [
+              0.1727057248353958,
+              0.7839328050613403,
+              -0.01605222374200821
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.015509292483329773,
+              -0.08575612306594849,
+              -0.034997470676898956
+            ],
+            [
+              -0.006791725754737854,
+              -0.029260218143463135,
+              -0.025949627161026
+            ],
+            [
+              0.0127057284116745,
+              -0.006067216396331787,
+              -0.01605222374200821
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.002499999999999999,
+            -0.03,
+            -0.025204993982336887
+          ],
+          "handLocalNormal": [
+            0.20512195667801594,
+            0.23319998196578756,
+            -0.9505486580389974
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8448663353919983,
+              "LeftForeArm": 0.1551336646080017
+            },
+            {
+              "LeftHand": 0.5763142108917236,
+              "LeftForeArm": 0.42368578910827637
+            }
+          ],
+          "barycentricHandInfluence": 0.8182998462213251
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-02-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 567,
+          "triangleVertexIndices": [
+            442,
+            443,
+            456
+          ],
+          "barycentricWeights": [
+            0.845175931179692,
+            0.04757023716310042,
+            0.10725383165720755
+          ],
+          "bindPositions": [
+            [
+              -0.1537812203168869,
+              0.7612070441246033,
+              -0.02951779216527939
+            ],
+            [
+              -0.17841854691505432,
+              0.7013553380966187,
+              -0.03576207906007767
+            ],
+            [
+              -0.17752650380134583,
+              0.7764991521835327,
+              -0.013928316533565521
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.006218776106834412,
+              -0.028792977333068848,
+              -0.02951779216527939
+            ],
+            [
+              -0.018418550491333008,
+              -0.08864468336105347,
+              -0.03576207906007767
+            ],
+            [
+              -0.01752650737762451,
+              -0.013500869274139404,
+              -0.013928316533565521
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.002499999999999998,
+            -0.029999999999999995,
+            -0.028142803378751406
+          ],
+          "handLocalNormal": [
+            -0.4078400430645804,
+            0.2592216162083868,
+            -0.8754830969033
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8677537441253662,
+              "RightForeArm": 0.1322462409734726
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.6458011269569397,
+              "RightForeArm": 0.3541988730430603
+            }
+          ],
+          "barycentricHandInfluence": 0.8502394612435955
+        }
+      ]
+    },
+    {
+      "id": "player-03",
+      "lod": 0,
+      "file": "models/player-03-lod0.glb",
+      "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-03-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1121,
+          "triangleVertexIndices": [
+            704,
+            705,
+            722
+          ],
+          "barycentricWeights": [
+            0.12663655935726242,
+            0.2989199333560149,
+            0.5744435072867227
+          ],
+          "bindPositions": [
+            [
+              0.15052849054336548,
+              0.7560598850250244,
+              -0.021177232265472412
+            ],
+            [
+              0.1496468484401703,
+              0.7671433687210083,
+              -0.02264663577079773
+            ],
+            [
+              0.16312336921691895,
+              0.7571514844894409,
+              -0.03192486613988876
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              -0.009471505880355835,
+              -0.033940136432647705,
+              -0.021177232265472412
+            ],
+            [
+              -0.010353147983551025,
+              -0.02285665273666382,
+              -0.02264663577079773
+            ],
+            [
+              0.003123372793197632,
+              -0.0328485369682312,
+              -0.03192486613988876
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.027790374761210667
+          ],
+          "handLocalNormal": [
+            -0.6340737891751485,
+            -0.15098200246038918,
+            -0.7583896523648782
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.894331693649292,
+              "LeftForeArm": 0.10566830635070801
+            },
+            {
+              "LeftHand": 0.7669830918312073,
+              "LeftForeArm": 0.23301692306995392
+            },
+            {
+              "LeftHand": 0.8763645887374878,
+              "LeftForeArm": 0.12363541126251221
+            }
+          ],
+          "barycentricHandInfluence": 0.8459435713195231
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-03-kit-a-lod0",
+          "material": "Skin",
+          "triangleIndex": 1780,
+          "triangleVertexIndices": [
+            1130,
+            1131,
+            1167
+          ],
+          "barycentricWeights": [
+            0.40488506003280295,
+            0.34135311231018733,
+            0.2537618276570098
+          ],
+          "bindPositions": [
+            [
+              -0.14897778630256653,
+              0.7687807083129883,
+              -0.02134516090154648
+            ],
+            [
+              -0.16174060106277466,
+              0.7491747140884399,
+              -0.032260723412036896
+            ],
+            [
+              -0.16539311408996582,
+              0.7605520486831665,
+              -0.03053942322731018
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.011022210121154785,
+              -0.021219313144683838,
+              -0.02134516090154648
+            ],
+            [
+              -0.0017406046390533447,
+              -0.04082530736923218,
+              -0.032260723412036896
+            ],
+            [
+              -0.005393117666244507,
+              -0.029447972774505615,
+              -0.03053942322731018
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.002500000000000001,
+            -0.030000000000000002,
+            -0.02740437494886257
+          ],
+          "handLocalNormal": [
+            0.3723013069311784,
+            0.2545528337364957,
+            -0.8925214796821735
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.7582345604896545,
+              "RightForeArm": 0.24176546931266785
+            },
+            {
+              "RightHand": 0.9356814622879028,
+              "RightForeArm": 0.06431856006383896
+            },
+            {
+              "RightHand": 0.8326886892318726,
+              "RightForeArm": 0.16731129586696625
+            }
+          ],
+          "barycentricHandInfluence": 0.8377002284745223
+        }
+      ]
+    },
+    {
+      "id": "player-03",
+      "lod": 1,
+      "file": "models/player-03-lod1.glb",
+      "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-03-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 379,
+          "triangleVertexIndices": [
+            272,
+            274,
+            288
+          ],
+          "barycentricWeights": [
+            0.04287963553416657,
+            0.8088368621011707,
+            0.1482835023646628
+          ],
+          "bindPositions": [
+            [
+              0.17504756152629852,
+              0.707393229007721,
+              -0.034671343863010406
+            ],
+            [
+              0.15422992408275604,
+              0.7580522298812866,
+              -0.029844678938388824
+            ],
+            [
+              0.17026285827159882,
+              0.7858370542526245,
+              -0.019058123230934143
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01504756510257721,
+              -0.08260679244995117,
+              -0.034671343863010406
+            ],
+            [
+              -0.005770072340965271,
+              -0.0319477915763855,
+              -0.029844678938388824
+            ],
+            [
+              0.010262861847877502,
+              -0.004162967205047607,
+              -0.019058123230934143
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0025,
+            -0.03,
+            -0.028452176312449222
+          ],
+          "handLocalNormal": [
+            0.2783065336420739,
+            0.20379600522953015,
+            -0.9386227472124349
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8724174499511719,
+              "LeftForeArm": 0.12758253514766693
+            },
+            {
+              "LeftHand": 0.5710998773574829,
+              "LeftForeArm": 0.4289001524448395
+            }
+          ],
+          "barycentricHandInfluence": 0.8332077182095745
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-03-kit-a-lod1",
+          "material": "Skin",
+          "triangleIndex": 561,
+          "triangleVertexIndices": [
+            418,
+            419,
+            434
+          ],
+          "barycentricWeights": [
+            0.8060642395174058,
+            0.057682029738759855,
+            0.13625373074383434
+          ],
+          "bindPositions": [
+            [
+              -0.15295612812042236,
+              0.7616198062896729,
+              -0.029424965381622314
+            ],
+            [
+              -0.17482304573059082,
+              0.7050848007202148,
+              -0.03420966863632202
+            ],
+            [
+              -0.1770475059747696,
+              0.7736654877662659,
+              -0.014105536043643951
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.00704386830329895,
+              -0.028380215167999268,
+              -0.029424965381622314
+            ],
+            [
+              -0.014823049306869507,
+              -0.08491522073745728,
+              -0.03420966863632202
+            ],
+            [
+              -0.01704750955104828,
+              -0.01633453369140625,
+              -0.014105536043643951
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000014,
+            -0.030000000000000002,
+            -0.027613627376884945
+          ],
+          "handLocalNormal": [
+            -0.43224074686408015,
+            0.24073280351275003,
+            -0.8690314459576672
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8348759412765503,
+              "RightForeArm": 0.1651240885257721
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.6670026183128357,
+              "RightForeArm": 0.3329974114894867
+            }
+          ],
+          "barycentricHandInfluence": 0.8215272655962503
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "lod": 0,
+      "file": "models/player-04-lod0.glb",
+      "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-04-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1125,
+          "triangleVertexIndices": [
+            727,
+            705,
+            728
+          ],
+          "barycentricWeights": [
+            0.5359248260506019,
+            0.1554351367439099,
+            0.3086400372054882
+          ],
+          "bindPositions": [
+            [
+              0.16364359855651855,
+              0.7570239305496216,
+              -0.03161916136741638
+            ],
+            [
+              0.1509922444820404,
+              0.7560572028160095,
+              -0.020817168056964874
+            ],
+            [
+              0.15010958909988403,
+              0.7671533823013306,
+              -0.02233029156923294
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.003643602132797241,
+              -0.03297609090805054,
+              -0.03161916136741638
+            ],
+            [
+              -0.009007751941680908,
+              -0.0339428186416626,
+              -0.020817168056964874
+            ],
+            [
+              -0.00989040732383728,
+              -0.022846639156341553,
+              -0.02233029156923294
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.027073234939991277
+          ],
+          "handLocalNormal": [
+            -0.6347913775820527,
+            -0.15375442987475918,
+            -0.7572314588297079
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.897695004940033,
+              "LeftForeArm": 0.10230498760938644
+            },
+            {
+              "LeftHand": 0.9148693680763245,
+              "LeftForeArm": 0.08513060212135315
+            },
+            {
+              "LeftHand": 0.7807368636131287,
+              "LeftForeArm": 0.21926313638687134
+            }
+          ],
+          "barycentricHandInfluence": 0.8642665393319915
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-04-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1763,
+          "triangleVertexIndices": [
+            1123,
+            1124,
+            1158
+          ],
+          "barycentricWeights": [
+            0.4254482531715221,
+            0.07791087501528081,
+            0.49664087181319716
+          ],
+          "bindPositions": [
+            [
+              -0.14978215098381042,
+              0.7683302760124207,
+              -0.02144763618707657
+            ],
+            [
+              -0.15881884098052979,
+              0.7428594827651978,
+              -0.02615511417388916
+            ],
+            [
+              -0.16390460729599,
+              0.7555528283119202,
+              -0.03212352842092514
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.010217845439910889,
+              -0.021669745445251465,
+              -0.02144763618707657
+            ],
+            [
+              0.0011811554431915283,
+              -0.047140538692474365,
+              -0.02615511417388916
+            ],
+            [
+              -0.0039046108722686768,
+              -0.03444719314575195,
+              -0.03212352842092514
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000005,
+            -0.030000000000000002,
+            -0.027116484342546605
+          ],
+          "handLocalNormal": [
+            0.6522975481349608,
+            -0.09238502587271682,
+            -0.7523117144452929
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.7762453556060791,
+              "RightForeArm": 0.2237546294927597
+            },
+            {
+              "RightHand": 0.9805967807769775,
+              "RightForeArm": 0.01940324530005455
+            },
+            {
+              "RightHand": 0.914189338684082,
+              "RightForeArm": 0.08581066131591797
+            }
+          ],
+          "barycentricHandInfluence": 0.8606751739690077
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "lod": 1,
+      "file": "models/player-04-lod1.glb",
+      "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-04-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 372,
+          "triangleVertexIndices": [
+            271,
+            272,
+            281
+          ],
+          "barycentricWeights": [
+            0.02532009421256179,
+            0.8473838547006566,
+            0.12729605108678166
+          ],
+          "bindPositions": [
+            [
+              0.17637141048908234,
+              0.7053985595703125,
+              -0.03495363891124725
+            ],
+            [
+              0.15467597544193268,
+              0.7579973936080933,
+              -0.029487736523151398
+            ],
+            [
+              0.17254526913166046,
+              0.7841917276382446,
+              -0.01700025051832199
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.016371414065361023,
+              -0.08460146188735962,
+              -0.03495363891124725
+            ],
+            [
+              -0.005324020981788635,
+              -0.03200262784957886,
+              -0.029487736523151398
+            ],
+            [
+              0.012545272707939148,
+              -0.00580829381942749,
+              -0.01700025051832199
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999983,
+            -0.029999999999999995,
+            -0.028036526030158417
+          ],
+          "handLocalNormal": [
+            0.3140926630871348,
+            0.2253910103805962,
+            -0.9222497988259176
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.887406051158905,
+              "LeftForeArm": 0.11259396374225616
+            },
+            {
+              "LeftHand": 0.587661623954773,
+              "LeftForeArm": 0.41233837604522705
+            }
+          ],
+          "barycentricHandInfluence": 0.8521006586329707
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-04-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 532,
+          "triangleVertexIndices": [
+            383,
+            384,
+            428
+          ],
+          "barycentricWeights": [
+            0.9015269111065357,
+            0.04958448609976025,
+            0.048888602793704036
+          ],
+          "bindPositions": [
+            [
+              -0.15532487630844116,
+              0.7625383138656616,
+              -0.030370689928531647
+            ],
+            [
+              -0.17651575803756714,
+              0.700941801071167,
+              -0.03529000282287598
+            ],
+            [
+              -0.17832371592521667,
+              0.7730916738510132,
+              -0.012333206832408905
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.004675120115280151,
+              -0.027461707592010498,
+              -0.030370689928531647
+            ],
+            [
+              -0.016515761613845825,
+              -0.08905822038650513,
+              -0.03529000282287598
+            ],
+            [
+              -0.01832371950149536,
+              -0.016908347606658936,
+              -0.012333206832408905
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0024999999999999988,
+            -0.03,
+            -0.02973278418387714
+          ],
+          "handLocalNormal": [
+            -0.525788188774992,
+            0.2459176859248046,
+            -0.81429188396674
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8423491716384888,
+              "RightForeArm": 0.15765084326267242
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.695992112159729,
+              "RightForeArm": 0.304007887840271
+            }
+          ],
+          "barycentricHandInfluence": 0.8430110147990842
+        }
+      ]
+    },
+    {
+      "id": "player-05",
+      "lod": 0,
+      "file": "models/player-05-lod0.glb",
+      "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-05-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1110,
+          "triangleVertexIndices": [
+            721,
+            698,
+            722
+          ],
+          "barycentricWeights": [
+            0.5474401464943695,
+            0.15510255401122475,
+            0.2974572994944058
+          ],
+          "bindPositions": [
+            [
+              0.16348637640476227,
+              0.7571413516998291,
+              -0.03168351203203201
+            ],
+            [
+              0.15075723826885223,
+              0.7561718821525574,
+              -0.02076677978038788
+            ],
+            [
+              0.1499985307455063,
+              0.7672572135925293,
+              -0.022326312959194183
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.0034863799810409546,
+              -0.03285866975784302,
+              -0.03168351203203201
+            ],
+            [
+              -0.00924275815486908,
+              -0.033828139305114746,
+              -0.02076677978038788
+            ],
+            [
+              -0.010001465678215027,
+              -0.022742807865142822,
+              -0.022326312959194183
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.0272069318113074
+          ],
+          "handLocalNormal": [
+            -0.6370301771708032,
+            -0.14997265561033524,
+            -0.7561089577190044
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8995456099510193,
+              "LeftForeArm": 0.1004544124007225
+            },
+            {
+              "LeftHand": 0.917941153049469,
+              "LeftForeArm": 0.0820588767528534
+            },
+            {
+              "LeftHand": 0.7826085090637207,
+              "LeftForeArm": 0.21739152073860168
+            }
+          ],
+          "barycentricHandInfluence": 0.8676150114273716
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-05-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1748,
+          "triangleVertexIndices": [
+            1152,
+            1117,
+            1155
+          ],
+          "barycentricWeights": [
+            0.39469272106971515,
+            0.08164079881478042,
+            0.5236664801155044
+          ],
+          "bindPositions": [
+            [
+              -0.14938977360725403,
+              0.768943190574646,
+              -0.021019674837589264
+            ],
+            [
+              -0.15680809319019318,
+              0.7448336482048035,
+              -0.02439163625240326
+            ],
+            [
+              -0.16372062265872955,
+              0.7556239366531372,
+              -0.03218930959701538
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.010610222816467285,
+              -0.021056830883026123,
+              -0.021019674837589264
+            ],
+            [
+              0.003191903233528137,
+              -0.04516637325286865,
+              -0.02439163625240326
+            ],
+            [
+              -0.0037206262350082397,
+              -0.03437608480453491,
+              -0.03218930959701538
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000005,
+            -0.03,
+            -0.027144127779711757
+          ],
+          "handLocalNormal": [
+            0.669268311459393,
+            -0.10301334281998391,
+            -0.7358452136674841
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.7724453210830688,
+              "RightForeArm": 0.22755467891693115
+            },
+            {
+              "RightHand": 0.9636315703392029,
+              "RightForeArm": 0.036368418484926224
+            },
+            {
+              "RightHand": 0.9162775874137878,
+              "RightForeArm": 0.08372241258621216
+            }
+          ],
+          "barycentricHandInfluence": 0.8633740558311848
+        }
+      ]
+    },
+    {
+      "id": "player-05",
+      "lod": 1,
+      "file": "models/player-05-lod1.glb",
+      "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-05-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 370,
+          "triangleVertexIndices": [
+            267,
+            268,
+            280
+          ],
+          "barycentricWeights": [
+            0.02169104819540261,
+            0.8466451957648718,
+            0.13166375603972558
+          ],
+          "bindPositions": [
+            [
+              0.17974521219730377,
+              0.7023184299468994,
+              -0.03569524735212326
+            ],
+            [
+              0.15454541146755219,
+              0.7578591108322144,
+              -0.02958492934703827
+            ],
+            [
+              0.17283423244953156,
+              0.7832696437835693,
+              -0.016352929174900055
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01974521577358246,
+              -0.0876815915107727,
+              -0.03569524735212326
+            ],
+            [
+              -0.005454584956169128,
+              -0.032140910625457764,
+              -0.02958492934703827
+            ],
+            [
+              0.012834236025810242,
+              -0.006730377674102783,
+              -0.016352929174900055
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999988,
+            -0.03,
+            -0.027975293706793792
+          ],
+          "handLocalNormal": [
+            0.3202081989598442,
+            0.24593355352416701,
+            -0.9148679667415777
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8910170793533325,
+              "LeftForeArm": 0.10898291319608688
+            },
+            {
+              "LeftHand": 0.5812196731567383,
+              "LeftForeArm": 0.4187803268432617
+            }
+          ],
+          "barycentricHandInfluence": 0.852591943026347
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-05-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 546,
+          "triangleVertexIndices": [
+            421,
+            405,
+            426
+          ],
+          "barycentricWeights": [
+            0.8344300151840748,
+            0.050316857987148654,
+            0.11525312682877656
+          ],
+          "bindPositions": [
+            [
+              -0.15358321368694305,
+              0.7613989114761353,
+              -0.02958492934703827
+            ],
+            [
+              -0.17553821206092834,
+              0.7056053876876831,
+              -0.034599609673023224
+            ],
+            [
+              -0.17798234522342682,
+              0.773619532585144,
+              -0.012349620461463928
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.006416782736778259,
+              -0.028601109981536865,
+              -0.02958492934703827
+            ],
+            [
+              -0.015538215637207031,
+              -0.08439463376998901,
+              -0.034599609673023224
+            ],
+            [
+              -0.017982348799705505,
+              -0.016380488872528076,
+              -0.012349620461463928
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0024999999999999966,
+            -0.029999999999999995,
+            -0.027850829063929564
+          ],
+          "handLocalNormal": [
+            -0.4669900470340219,
+            0.25973368151867227,
+            -0.8452565945651764
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8554534316062927,
+              "RightForeArm": 0.14454655349254608
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.6786858439445496,
+              "RightForeArm": 0.32131412625312805
+            }
+          ],
+          "barycentricHandInfluence": 0.8423535435606928
+        }
+      ]
+    },
+    {
+      "id": "player-06",
+      "lod": 0,
+      "file": "models/player-06-lod0.glb",
+      "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-06-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1115,
+          "triangleVertexIndices": [
+            720,
+            701,
+            721
+          ],
+          "barycentricWeights": [
+            0.5393420378104884,
+            0.1555437501546007,
+            0.3051142120349109
+          ],
+          "bindPositions": [
+            [
+              0.16359609365463257,
+              0.7570509910583496,
+              -0.031633324921131134
+            ],
+            [
+              0.1509222686290741,
+              0.7561216354370117,
+              -0.020776085555553436
+            ],
+            [
+              0.15007734298706055,
+              0.7671900987625122,
+              -0.02229694277048111
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.003596097230911255,
+              -0.03294903039932251,
+              -0.031633324921131134
+            ],
+            [
+              -0.009077727794647217,
+              -0.0338783860206604,
+              -0.020776085555553436
+            ],
+            [
+              -0.009922653436660767,
+              -0.022809922695159912,
+              -0.02229694277048111
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.002500000000000001,
+            -0.03,
+            -0.027095886310730635
+          ],
+          "handLocalNormal": [
+            -0.636503751843798,
+            -0.15247335208043855,
+            -0.7560521481975454
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8993394374847412,
+              "LeftForeArm": 0.10066059231758118
+            },
+            {
+              "LeftHand": 0.9169780015945435,
+              "LeftForeArm": 0.08302199840545654
+            },
+            {
+              "LeftHand": 0.7820776700973511,
+              "LeftForeArm": 0.21792230010032654
+            }
+          ],
+          "barycentricHandInfluence": 0.8663047741354977
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-06-kit-b-lod0",
+          "material": "Skin",
+          "triangleIndex": 1699,
+          "triangleVertexIndices": [
+            1125,
+            1076,
+            1126
+          ],
+          "barycentricWeights": [
+            0.41200688773913247,
+            0.08243214115615798,
+            0.5055609711047095
+          ],
+          "bindPositions": [
+            [
+              -0.14944730699062347,
+              0.7688798904418945,
+              -0.021029561758041382
+            ],
+            [
+              -0.1587836891412735,
+              0.7427718639373779,
+              -0.026183582842350006
+            ],
+            [
+              -0.1638532280921936,
+              0.7555724382400513,
+              -0.032140277326107025
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01055268943309784,
+              -0.021120131015777588,
+              -0.021029561758041382
+            ],
+            [
+              0.001216307282447815,
+              -0.04722815752029419,
+              -0.026183582842350006
+            ],
+            [
+              -0.00385323166847229,
+              -0.03442758321762085,
+              -0.032140277326107025
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000014,
+            -0.03,
+            -0.027071562903844406
+          ],
+          "handLocalNormal": [
+            0.6578375041829972,
+            -0.08757267910657907,
+            -0.7480513645227719
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.7720238566398621,
+              "RightForeArm": 0.22797611355781555
+            },
+            {
+              "RightHand": 0.9817482829093933,
+              "RightForeArm": 0.018251698464155197
+            },
+            {
+              "RightHand": 0.9159477353096008,
+              "RightForeArm": 0.08405228704214096
+            }
+          ],
+          "barycentricHandInfluence": 0.8620741860154358
+        }
+      ]
+    },
+    {
+      "id": "player-06",
+      "lod": 1,
+      "file": "models/player-06-lod1.glb",
+      "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-06-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 367,
+          "triangleVertexIndices": [
+            267,
+            269,
+            281
+          ],
+          "barycentricWeights": [
+            0.023269561295119607,
+            0.8502940544182546,
+            0.12643638428662585
+          ],
+          "bindPositions": [
+            [
+              0.17760975658893585,
+              0.711280345916748,
+              -0.033835090696811676
+            ],
+            [
+              0.15463145077228546,
+              0.757912814617157,
+              -0.02948441356420517
+            ],
+            [
+              0.1730901449918747,
+              0.7830030918121338,
+              -0.016432397067546844
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01760976016521454,
+              -0.07871967554092407,
+              -0.033835090696811676
+            ],
+            [
+              -0.005368545651435852,
+              -0.03208720684051514,
+              -0.02948441356420517
+            ],
+            [
+              0.013090148568153381,
+              -0.00699692964553833,
+              -0.016432397067546844
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999988,
+            -0.03,
+            -0.02793540213893076
+          ],
+          "handLocalNormal": [
+            0.3184680075397807,
+            0.24242469349105764,
+            -0.9164106045651201
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8895182013511658,
+              "LeftForeArm": 0.11048181354999542
+            },
+            {
+              "LeftHand": 0.5860567092895508,
+              "LeftForeArm": 0.4139432907104492
+            }
+          ],
+          "barycentricHandInfluence": 0.8537204905103246
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "player-06-kit-b-lod1",
+          "material": "Skin",
+          "triangleIndex": 551,
+          "triangleVertexIndices": [
+            425,
+            416,
+            434
+          ],
+          "barycentricWeights": [
+            0.833305580973085,
+            0.07050674772940355,
+            0.0961876712975114
+          ],
+          "bindPositions": [
+            [
+              -0.15350604057312012,
+              0.7634884119033813,
+              -0.028977543115615845
+            ],
+            [
+              -0.17644210159778595,
+              0.7009316682815552,
+              -0.03531347215175629
+            ],
+            [
+              -0.17821615934371948,
+              0.7730767726898193,
+              -0.012292921543121338
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.006493955850601196,
+              -0.02651160955429077,
+              -0.028977543115615845
+            ],
+            [
+              -0.016442105174064636,
+              -0.08906835317611694,
+              -0.03531347215175629
+            ],
+            [
+              -0.01821616291999817,
+              -0.016923248767852783,
+              -0.012292921543121338
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0024999999999999988,
+            -0.03,
+            -0.027819413970259933
+          ],
+          "handLocalNormal": [
+            -0.46996991310981,
+            0.2578139262968829,
+            -0.8441920754063871
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.836513340473175,
+              "RightForeArm": 0.16348665952682495
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.6963378190994263,
+              "RightForeArm": 0.3036622107028961
+            }
+          ],
+          "barycentricHandInfluence": 0.8345570961597004
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "lod": 0,
+      "file": "models/goalkeeper-lod0.glb",
+      "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "goalkeeper-keeper-lod0",
+          "material": "Skin",
+          "triangleIndex": 1307,
+          "triangleVertexIndices": [
+            750,
+            751,
+            796
+          ],
+          "barycentricWeights": [
+            0.21343852082742107,
+            0.3779496799193529,
+            0.408611799253226
+          ],
+          "bindPositions": [
+            [
+              0.16665026545524597,
+              0.7622100710868835,
+              -0.03374612331390381
+            ],
+            [
+              0.16201701760292053,
+              0.7549839019775391,
+              -0.035658933222293854
+            ],
+            [
+              0.14854228496551514,
+              0.763485312461853,
+              -0.026264891028404236
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.006650269031524658,
+              -0.027789950370788574,
+              -0.03374612331390381
+            ],
+            [
+              0.0020170211791992188,
+              -0.03501611948013306,
+              -0.035658933222293854
+            ],
+            [
+              -0.011457711458206177,
+              -0.026514708995819092,
+              -0.026264891028404236
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.03141214942171709
+          ],
+          "handLocalNormal": [
+            -0.31909784476818825,
+            0.42837561844374944,
+            -0.8453820999922061
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8603134155273438,
+              "LeftForeArm": 0.13968659937381744
+            },
+            {
+              "LeftHand": 0.9443479180335999,
+              "LeftForeArm": 0.05565209686756134
+            },
+            {
+              "LeftHand": 0.8394494652748108,
+              "LeftForeArm": 0.1605505347251892
+            }
+          ],
+          "barycentricHandInfluence": 0.883548972599548
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "goalkeeper-keeper-lod0",
+          "material": "Skin",
+          "triangleIndex": 2602,
+          "triangleVertexIndices": [
+            1504,
+            1479,
+            1505
+          ],
+          "barycentricWeights": [
+            0.35387574891722196,
+            0.28948449269960863,
+            0.3566397583831694
+          ],
+          "bindPositions": [
+            [
+              -0.16120602190494537,
+              0.7538787126541138,
+              -0.03557392209768295
+            ],
+            [
+              -0.16605181992053986,
+              0.7618275284767151,
+              -0.03395865857601166
+            ],
+            [
+              -0.14688117802143097,
+              0.7645905017852783,
+              -0.02473464608192444
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              -0.00120602548122406,
+              -0.03612130880355835,
+              -0.03557392209768295
+            ],
+            [
+              -0.0060518234968185425,
+              -0.02817249298095703,
+              -0.03395865857601166
+            ],
+            [
+              0.013118818402290344,
+              -0.0254095196723938,
+              -0.02473464608192444
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000005,
+            -0.03,
+            -0.031240611577227156
+          ],
+          "handLocalNormal": [
+            0.3534765946336645,
+            0.3884165983052933,
+            -0.8509916822197103
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.9443479180335999,
+              "RightForeArm": 0.05565209686756134
+            },
+            {
+              "RightHand": 0.8603134155273438,
+              "RightForeArm": 0.13968659937381744
+            },
+            {
+              "RightHand": 0.8290555477142334,
+              "RightForeArm": 0.1709444671869278
+            }
+          ],
+          "barycentricHandInfluence": 0.8789033896121905
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "lod": 1,
+      "file": "models/goalkeeper-lod1.glb",
+      "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "goalkeeper-keeper-lod1",
+          "material": "Skin",
+          "triangleIndex": 355,
+          "triangleVertexIndices": [
+            259,
+            247,
+            260
+          ],
+          "barycentricWeights": [
+            0.12845775250102862,
+            0.15451455998230665,
+            0.7170276875166647
+          ],
+          "bindPositions": [
+            [
+              0.14776214957237244,
+              0.760748028755188,
+              -0.027138464152812958
+            ],
+            [
+              0.15439075231552124,
+              0.791596531867981,
+              -0.021529652178287506
+            ],
+            [
+              0.15991458296775818,
+              0.7530571818351746,
+              -0.03606158494949341
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              -0.012237846851348877,
+              -0.02925199270248413,
+              -0.027138464152812958
+            ],
+            [
+              -0.005609244108200073,
+              0.0015965104103088379,
+              -0.021529652178287506
+            ],
+            [
+              -8.541345596313477e-05,
+              -0.03694283962249756,
+              -0.03606158494949341
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0024999999999999996,
+            -0.03,
+            -0.032669945708821306
+          ],
+          "handLocalNormal": [
+            -0.4629152241583636,
+            0.25388129392962877,
+            -0.849266615283463
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8466285467147827,
+              "LeftForeArm": 0.15337146818637848
+            },
+            {
+              "LeftHand": 0.5414655804634094,
+              "LeftForeArm": 0.4585343897342682
+            },
+            {
+              "LeftHand": 0.9362924098968506,
+              "LeftForeArm": 0.0637076199054718
+            }
+          ],
+          "barycentricHandInfluence": 0.8637678977328049
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "goalkeeper-keeper-lod1",
+          "material": "Skin",
+          "triangleIndex": 641,
+          "triangleVertexIndices": [
+            424,
+            418,
+            435
+          ],
+          "barycentricWeights": [
+            0.8321183796527438,
+            0.03050397820041782,
+            0.13737764214683837
+          ],
+          "bindPositions": [
+            [
+              -0.15188457071781158,
+              0.7640198469161987,
+              -0.03198244422674179
+            ],
+            [
+              -0.18154330551624298,
+              0.705339789390564,
+              -0.03865353763103485
+            ],
+            [
+              -0.18617483973503113,
+              0.7477883100509644,
+              -0.024758972227573395
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.008115425705909729,
+              -0.02598017454147339,
+              -0.03198244422674179
+            ],
+            [
+              -0.021543309092521667,
+              -0.08466023206710815,
+              -0.03865353763103485
+            ],
+            [
+              -0.026174843311309814,
+              -0.042211711406707764,
+              -0.024758972227573395
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0024999999999999988,
+            -0.03,
+            -0.031193595563159836
+          ],
+          "handLocalNormal": [
+            -0.31674697274315594,
+            0.2636757137101535,
+            -0.9111237420117465
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8584768176078796,
+              "RightForeArm": 0.14152316749095917
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.9494568109512329,
+              "RightForeArm": 0.0505431592464447
+            }
+          ],
+          "barycentricHandInfluence": 0.8752924546464675
+        }
+      ]
+    },
+    {
+      "id": "referee",
+      "lod": 0,
+      "file": "models/referee-lod0.glb",
+      "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "referee-referee-lod0",
+          "material": "Skin",
+          "triangleIndex": 1115,
+          "triangleVertexIndices": [
+            718,
+            698,
+            719
+          ],
+          "barycentricWeights": [
+            0.5357432169585689,
+            0.15608464916460746,
+            0.3081721338768237
+          ],
+          "bindPositions": [
+            [
+              0.163661390542984,
+              0.7570310235023499,
+              -0.031613774597644806
+            ],
+            [
+              0.15097543597221375,
+              0.7560648918151855,
+              -0.02077607810497284
+            ],
+            [
+              0.15009328722953796,
+              0.7671545743942261,
+              -0.02233032137155533
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.0036613941192626953,
+              -0.032968997955322266,
+              -0.031613774597644806
+            ],
+            [
+              -0.009024560451507568,
+              -0.03393512964248657,
+              -0.02077607810497284
+            ],
+            [
+              -0.00990670919418335,
+              -0.022845447063446045,
+              -0.02233032137155533
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.002499999999999999,
+            -0.03,
+            -0.02706127495240393
+          ],
+          "handLocalNormal": [
+            -0.6346193383683477,
+            -0.15654951032220157,
+            -0.7568028449912167
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 0.8990761041641235,
+              "LeftForeArm": 0.10092386603355408
+            },
+            {
+              "LeftHand": 0.9163972735404968,
+              "LeftForeArm": 0.08360272645950317
+            },
+            {
+              "LeftHand": 0.7817358374595642,
+              "LeftForeArm": 0.21826419234275818
+            }
+          ],
+          "barycentricHandInfluence": 0.8656186724293359
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "referee-referee-lod0",
+          "material": "Skin",
+          "triangleIndex": 1757,
+          "triangleVertexIndices": [
+            1119,
+            1120,
+            1156
+          ],
+          "barycentricWeights": [
+            0.42535833288582925,
+            0.0791259202302467,
+            0.4955157468839241
+          ],
+          "bindPositions": [
+            [
+              -0.14979156851768494,
+              0.7683727741241455,
+              -0.02144818753004074
+            ],
+            [
+              -0.15882298350334167,
+              0.7427908182144165,
+              -0.026152923703193665
+            ],
+            [
+              -0.1639057695865631,
+              0.7555607557296753,
+              -0.032117851078510284
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.010208427906036377,
+              -0.02162724733352661,
+              -0.02144818753004074
+            ],
+            [
+              0.0011770129203796387,
+              -0.047209203243255615,
+              -0.026152923703193665
+            ],
+            [
+              -0.003905773162841797,
+              -0.034439265727996826,
+              -0.032117851078510284
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0024999999999999996,
+            -0.03,
+            -0.02710744041140206
+          ],
+          "handLocalNormal": [
+            0.6522129302615035,
+            -0.09187485378103985,
+            -0.7524475429173888
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.7771610617637634,
+              "RightForeArm": 0.22283892333507538
+            },
+            {
+              "RightHand": 0.9814115166664124,
+              "RightForeArm": 0.0185884777456522
+            },
+            {
+              "RightHand": 0.915623128414154,
+              "RightForeArm": 0.08437684923410416
+            }
+          ],
+          "barycentricHandInfluence": 0.8619327013367419
+        }
+      ]
+    },
+    {
+      "id": "referee",
+      "lod": 1,
+      "file": "models/referee-lod1.glb",
+      "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "calibrations": [
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              -0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "LeftHand",
+          "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea:LeftHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "referee-referee-lod1",
+          "material": "Skin",
+          "triangleIndex": 371,
+          "triangleVertexIndices": [
+            272,
+            273,
+            286
+          ],
+          "barycentricWeights": [
+            0.02520699378393549,
+            0.8467491891834199,
+            0.12804381703264456
+          ],
+          "bindPositions": [
+            [
+              0.17631737887859344,
+              0.7053733468055725,
+              -0.03497323393821716
+            ],
+            [
+              0.15467263758182526,
+              0.7579511404037476,
+              -0.02946748584508896
+            ],
+            [
+              0.17249278724193573,
+              0.7843031287193298,
+              -0.01694294810295105
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.01631738245487213,
+              -0.08462667465209961,
+              -0.03497323393821716
+            ],
+            [
+              -0.005327358841896057,
+              -0.03204888105392456,
+              -0.02946748584508896
+            ],
+            [
+              0.012492790818214417,
+              -0.005696892738342285,
+              -0.01694294810295105
+            ]
+          ],
+          "handLocalReferencePoint": [
+            -0.0025000000000000014,
+            -0.029999999999999995,
+            -0.028002579583975593
+          ],
+          "handLocalNormal": [
+            0.31409648631674947,
+            0.22586654367419606,
+            -0.9221321498202656
+          ],
+          "namedInfluences": [
+            {
+              "LeftHand": 1
+            },
+            {
+              "LeftHand": 0.8887434005737305,
+              "LeftForeArm": 0.11125656962394714
+            },
+            {
+              "LeftHand": 0.5872989892959595,
+              "LeftForeArm": 0.41270098090171814
+            }
+          ],
+          "barycentricHandInfluence": 0.8529497519407261
+        },
+        {
+          "kind": "anatomicalHeelPalmRayV1",
+          "selector": {
+            "kind": "fixedHandLocalPalmarRay",
+            "region": "proximalPalmarHeel",
+            "coordinateFrame": "inverseBindHandLocalMeters",
+            "referenceXY": [
+              0.0025,
+              -0.03
+            ],
+            "rayOriginZ": -0.2,
+            "rayDirection": [
+              0,
+              0,
+              1
+            ],
+            "palmarNormalZMaximum": -0.5,
+            "minCornerHandInfluence": 0.5,
+            "minPointHandInfluence": 0.8,
+            "noFallback": true
+          },
+          "handName": "RightHand",
+          "modelSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+          "calibrationSourceSha256": "3487c90f4798754b261a798dbd7497d2415a8772be5f868d4a53d15014bc0f31",
+          "calibrationKey": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea:RightHand:anatomicalHeelPalmRayV1",
+          "meshIndex": 0,
+          "meshName": "referee-referee-lod1",
+          "material": "Skin",
+          "triangleIndex": 534,
+          "triangleVertexIndices": [
+            390,
+            391,
+            429
+          ],
+          "barycentricWeights": [
+            0.901653481776704,
+            0.04952500185398634,
+            0.04882151636930965
+          ],
+          "bindPositions": [
+            [
+              -0.155330628156662,
+              0.7625322937965393,
+              -0.030350081622600555
+            ],
+            [
+              -0.1764710247516632,
+              0.7009603381156921,
+              -0.03530946373939514
+            ],
+            [
+              -0.1783202886581421,
+              0.7731235027313232,
+              -0.012319795787334442
+            ]
+          ],
+          "handLocalBindPositions": [
+            [
+              0.004669368267059326,
+              -0.027467727661132812,
+              -0.030350081622600555
+            ],
+            [
+              -0.016471028327941895,
+              -0.08903968334197998,
+              -0.03530946373939514
+            ],
+            [
+              -0.018320292234420776,
+              -0.016876518726348877,
+              -0.012319795787334442
+            ]
+          ],
+          "handLocalReferencePoint": [
+            0.0025000000000000022,
+            -0.03,
+            -0.029715429136079656
+          ],
+          "handLocalNormal": [
+            -0.5254456223433392,
+            0.24601245548044245,
+            -0.8144843581731354
+          ],
+          "namedInfluences": [
+            {
+              "RightHand": 0.8435341119766235,
+              "RightForeArm": 0.15646590292453766
+            },
+            {
+              "RightHand": 1
+            },
+            {
+              "RightHand": 0.6964004635810852,
+              "RightForeArm": 0.3035995662212372
+            }
+          ],
+          "barycentricHandInfluence": 0.8440997975474478
+        }
+      ]
+    }
+  ],
+  "differences": [
+    {
+      "id": "player-01",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        1.734723475976807e-18,
+        0,
+        -0.0004703622406384833
+      ],
+      "distanceMeters": 0.0004703622406384833
+    },
+    {
+      "id": "player-01",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -8.673617379884035e-19,
+        0,
+        0.0020102254658550395
+      ],
+      "distanceMeters": 0.0020102254658550395
+    },
+    {
+      "id": "player-02",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        2.168404344971009e-18,
+        0,
+        0.0016797453943804622
+      ],
+      "distanceMeters": 0.0016797453943804622
+    },
+    {
+      "id": "player-02",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -3.0357660829594124e-18,
+        3.469446951953614e-18,
+        -0.0012697493603160588
+      ],
+      "distanceMeters": 0.0012697493603160588
+    },
+    {
+      "id": "player-03",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        -4.336808689942018e-19,
+        0,
+        -0.0006618015512385549
+      ],
+      "distanceMeters": 0.0006618015512385549
+    },
+    {
+      "id": "player-03",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        4.336808689942018e-19,
+        0,
+        -0.00020925242802237454
+      ],
+      "distanceMeters": 0.00020925242802237454
+    },
+    {
+      "id": "player-04",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        1.3010426069826053e-18,
+        3.469446951953614e-18,
+        -0.0009632910901671392
+      ],
+      "distanceMeters": 0.0009632910901671392
+    },
+    {
+      "id": "player-04",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -1.734723475976807e-18,
+        3.469446951953614e-18,
+        -0.0026162998413305355
+      ],
+      "distanceMeters": 0.0026162998413305355
+    },
+    {
+      "id": "player-05",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        8.673617379884035e-19,
+        0,
+        -0.000768361895486392
+      ],
+      "distanceMeters": 0.000768361895486392
+    },
+    {
+      "id": "player-05",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -3.903127820947816e-18,
+        3.469446951953614e-18,
+        -0.0007067012842178061
+      ],
+      "distanceMeters": 0.0007067012842178061
+    },
+    {
+      "id": "player-06",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        2.168404344971009e-18,
+        0,
+        -0.0008395158282001255
+      ],
+      "distanceMeters": 0.0008395158282001255
+    },
+    {
+      "id": "player-06",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -2.6020852139652106e-18,
+        0,
+        -0.0007478510664155266
+      ],
+      "distanceMeters": 0.0007478510664155266
+    },
+    {
+      "id": "goalkeeper",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        0,
+        0,
+        -0.001257796287104214
+      ],
+      "distanceMeters": 0.001257796287104214
+    },
+    {
+      "id": "goalkeeper",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        -1.734723475976807e-18,
+        0,
+        4.7016014067320644e-05
+      ],
+      "distanceMeters": 4.7016014067320644e-05
+    },
+    {
+      "id": "referee",
+      "hand": "LeftHand",
+      "pointDifferenceMeters": [
+        -2.168404344971009e-18,
+        3.469446951953614e-18,
+        -0.0009413046315716635
+      ],
+      "distanceMeters": 0.0009413046315716635
+    },
+    {
+      "id": "referee",
+      "hand": "RightHand",
+      "pointDifferenceMeters": [
+        2.6020852139652106e-18,
+        0,
+        -0.0026079887246775943
+      ],
+      "distanceMeters": 0.0026079887246775943
+    }
+  ],
+  "maximumNearFarPointDifferenceMeters": 0.0026162998413305355,
+  "limits": [
+    "Static anatomical triangle calibration, not a full arm-IK or floor proof.",
+    "The actual point is blended Hand/ForeArm skin and must be sampled as the full skinned barycentric triangle after IK.",
+    "Near/far point differences must be carried/verified against the unchanged3mm physical contact gate during LOD transitions."
+  ],
+  "method": "Actual16 native32 GLBs decoded via Draco; fixed anatomical palm rays independently recomputed with3D plane/Gram mathematics using delivered vertex positions, inverse binds and named influences. Production calibration metadata was validated, not used as a geometric oracle. Full live armIK/ground contact remains unproven by this static check."
+}

@@ -1,0 +1,119 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-04T22:58:31.509Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "bytes": 785380,
+      "sha256": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec"
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "bytes": 504052,
+      "sha256": "5b88f54a24aac1a94817d4b58e6516a08492574aed7449ebea68ef0a50f15f1b"
+    },
+    {
+      "file": "models/player-06-lod0.glb",
+      "bytes": 805184,
+      "sha256": "60f1eac1822a216549e77f07a1125cb24dacbef8d1b5b4aa2bbeeffe3cd22956"
+    },
+    {
+      "file": "models/player-06-lod1.glb",
+      "bytes": 515624,
+      "sha256": "21ce7ab4851b34d7604c8648931f5952d71613990d0b5e808699ae9d66c66acf"
+    }
+  ],
+  "runtimeSha256": "7d1a2a639df4c8bc506303fc3f32fc9333d8ea06d668cd67516974ecfb6fc450",
+  "loadedHashes": {
+    "manifest": "618961cf6e61447a60fcd356ec55beaa3c8a5f4a0ddb1b944d3c4c8f5fd137bf",
+    "motion": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "models/player-01-lod0.glb": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec",
+      "models/player-01-lod1.glb": "5b88f54a24aac1a94817d4b58e6516a08492574aed7449ebea68ef0a50f15f1b",
+      "models/player-06-lod0.glb": "60f1eac1822a216549e77f07a1125cb24dacbef8d1b5b4aa2bbeeffe3cd22956",
+      "models/player-06-lod1.glb": "21ce7ab4851b34d7604c8648931f5952d71613990d0b5e808699ae9d66c66acf"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-face-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-cloth-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-face-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-cloth-844x390.png"
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-face-390x844.png"
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-cloth-390x844.png"
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-face-844x390.png"
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-cloth-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two selected compressed candidates; not the full roster or final delivery. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

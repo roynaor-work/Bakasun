@@ -1,0 +1,1917 @@
+{
+  "kind": "fixed-inherited-heel-contact-correction-static-fixtures",
+  "pass": true,
+  "scope": "Three static source fixture times0,.2,.4, both actualLODs with identical carried bones and mandatory unrelated-body floor lift; no dynamic interpolation/C0 claim.",
+  "plans": {
+    "player-03": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            3.873769311844254,
+            -2.7705978273879306,
+            0.42107910620615574,
+            4.6376243552672305,
+            4.681544546341322
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            3.873769311844254,
+            -2.7705978273879306,
+            0.42107910620615574,
+            4.6376243552672305,
+            4.681544546341322
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "player-06": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            3.7702431281817375,
+            1.3221886759594181,
+            -5.869590591497126,
+            7.644957411449247,
+            7.197336352980529
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            3.7702431281817375,
+            1.3221886759594181,
+            -5.869590591497126,
+            7.644957411449247,
+            7.197336352980529
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "player-01": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            3.8319302822203642,
+            3.0248638527622465,
+            -0.6523638444377026,
+            6.537674635222917,
+            -7.400757671391307
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            3.8319302822203642,
+            3.0248638527622465,
+            -0.6523638444377026,
+            6.537674635222917,
+            -7.400757671391307
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "player-04": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            3.8641087550274453,
+            3.0055605153800173,
+            -0.6736700506755774,
+            6.539406206246133,
+            -7.401301478630377
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            3.8641087550274453,
+            3.0055605153800173,
+            -0.6736700506755774,
+            6.539406206246133,
+            -7.401301478630377
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "player-05": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            5.937893286993395,
+            -0.4289417357239457,
+            2.8666274996670933,
+            5.281614094330502,
+            -1.005355678233481
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            5.937893286993395,
+            -0.4289417357239457,
+            2.8666274996670933,
+            5.281614094330502,
+            -1.005355678233481
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "goalkeeper": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            6.2406947485954465,
+            2.680113209307505,
+            -3.287614444888561,
+            3.956005841544778,
+            1.5244250186673014
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            6.2406947485954465,
+            2.680113209307505,
+            -3.287614444888561,
+            3.956005841544778,
+            1.5244250186673014
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "referee": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            4.1104878570726235,
+            2.865031711630058,
+            -0.8321172171189275,
+            6.549002611360514,
+            -7.404778442764049
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            4.1104878570726235,
+            2.865031711630058,
+            -0.8321172171189275,
+            6.549002611360514,
+            -7.404778442764049
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly"
+    },
+    "player-02": {
+      "kind": "fixedInheritedHeelContactCorrection",
+      "keys": [
+        {
+          "elapsedSeconds": 0,
+          "degrees": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsedSeconds": 0.2,
+          "degrees": [
+            4.527811261885566,
+            1.729764008590982,
+            2.578408230549951,
+            -11.669132056817746,
+            9.163377922228234
+          ]
+        },
+        {
+          "elapsedSeconds": 0.4,
+          "degrees": [
+            1.6083384352804042,
+            7.881809524425935,
+            -0.21703946796532156,
+            20.42625221029654,
+            -23.93647349743879
+          ]
+        }
+      ],
+      "verticalCompliancePeakMeters": 0.00029121116187861944,
+      "verticalComplianceRampSeconds": 0.2,
+      "pairedReferenceBlend": 0,
+      "interpolation": "smoothstep-per-key-no-overshoot",
+      "scope": "bridgeLifecycleOnly",
+      "internalBoundNote": "Late ForeArm/pole continuation20.426/\u221223.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+    }
+  },
+  "fixtureSha256": "cf6a76fac9e7e475d85e0e9dab57e69ef17f73e4ae172d43642deff6d4a23e7c",
+  "sourceProofs": {
+    "sevenTargetAxis": "bridge-target-axis-seven-proof.json",
+    "P02early": "bridge-p02-early-fixed-compliance-proof.json",
+    "P02late": "bridge-p02-target-axis-joint24-proof.json"
+  },
+  "results": [
+    {
+      "id": "player-03",
+      "values": [
+        3.873769311844254,
+        -2.7705978273879306,
+        0.42107910620615574,
+        4.6376243552672305,
+        4.681544546341322,
+        0
+      ],
+      "margin": 0.00020305101134750908,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29677948179185065,
+              0.0024000001264975358,
+              0.07382216933762142
+            ],
+            "patchY": 0.0024000001264975358,
+            "minimumVertexY": 0.0012506734494172704,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 721,
+              "bindPosition": [
+                0.16312336921691895,
+                0.7571514844894409,
+                -0.03192486613988876
+              ],
+              "worldPosition": [
+                0.3028651766846142,
+                0.0012506734494172704,
+                0.07875212236934453
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8763645887374878,
+                "LeftForeArm": 0.12363541126251221
+              }
+            },
+            "anchorResidualMeters": 1.292199412200468e-10,
+            "XZResidualMeters": 2.6384969250336166e-11
+          },
+          "far": {
+            "point": [
+              0.29715933562503405,
+              0.002549379267681745,
+              0.07515050646027525
+            ],
+            "patchY": 0.002549379267681745,
+            "minimumVertexY": 0.0012532217734491547,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 273,
+              "bindPosition": [
+                0.15422992408275604,
+                0.7580522298812866,
+                -0.029844678938388824
+              ],
+              "worldPosition": [
+                0.2939526424254627,
+                0.0012532217734491547,
+                0.07768115333093943
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8724174499511719,
+                "LeftForeArm": 0.12758253514766693
+              }
+            },
+            "anchorResidualMeters": 0.001389634010027827,
+            "XZResidualMeters": 0.0013815818890724081
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2967794817726319,
+              0.0023999999157617,
+              0.0738221693041356
+            ],
+            "patchY": 0.0023999999157617,
+            "minimumVertexY": 0.0010030510113475091,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 721,
+              "bindPosition": [
+                0.16312336921691895,
+                0.7571514844894409,
+                -0.03192486613988876
+              ],
+              "worldPosition": [
+                0.3030258610773261,
+                0.0010030510113475091,
+                0.07850294241303638
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8763645887374878,
+                "LeftForeArm": 0.12363541126251221
+              }
+            },
+            "anchorResidualMeters": 8.666121426777769e-11,
+            "XZResidualMeters": 2.0348830025056428e-11
+          },
+          "far": {
+            "point": [
+              0.2972318898234572,
+              0.002349805202985374,
+              0.07514081378461614
+            ],
+            "patchY": 0.002349805202985374,
+            "minimumVertexY": 0.0010033813538707147,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 273,
+              "bindPosition": [
+                0.15422992408275604,
+                0.7580522298812866,
+                -0.029844678938388824
+              ],
+              "worldPosition": [
+                0.29415631542261605,
+                0.0010033813538707147,
+                0.07772692819040462
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8724174499511719,
+                "LeftForeArm": 0.12758253514766693
+              }
+            },
+            "anchorResidualMeters": 0.0013949966996441765,
+            "XZResidualMeters": 0.0013940933521004988
+          },
+          "frameAdjustmentRadians": 0.08329756210295099,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29677948180041,
+              0.002400000104301222,
+              0.07382216924648538
+            ],
+            "patchY": 0.002400000104301222,
+            "minimumVertexY": 0.0011900935144764668,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 721,
+              "bindPosition": [
+                0.16312336921691895,
+                0.7571514844894409,
+                -0.03192486613988876
+              ],
+              "worldPosition": [
+                0.3030797978535117,
+                0.0011900935144764668,
+                0.07868593123376043
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8763645887374878,
+                "LeftForeArm": 0.12363541126251221
+              }
+            },
+            "anchorResidualMeters": 1.230745330629619e-10,
+            "XZResidualMeters": 6.533449121168461e-11
+          },
+          "far": {
+            "point": [
+              0.2972565348370476,
+              0.002491706799838763,
+              0.07487385835214307
+            ],
+            "patchY": 0.002491706799838763,
+            "minimumVertexY": 0.0010166308186255859,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 287,
+              "bindPosition": [
+                0.17026285827159882,
+                0.7858370542526245,
+                -0.019058123230934143
+              ],
+              "worldPosition": [
+                0.3084181542458455,
+                0.0010166308186255859,
+                0.043687402571627273
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.5710998773574829,
+                "LeftForeArm": 0.4289001524448395
+              }
+            },
+            "anchorResidualMeters": 0.0011584643214069689,
+            "XZResidualMeters": 0.0011548287521690138
+          },
+          "frameAdjustmentRadians": 0.08329756210295099,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "player-06",
+      "values": [
+        3.7702431281817375,
+        1.3221886759594181,
+        -5.869590591497126,
+        7.644957411449247,
+        7.197336352980529,
+        0
+      ],
+      "margin": 8.239093636149702e-05,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0.0016273335014939088,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29691271250173135,
+              0.002500000046403097,
+              0.07530171419726253
+            ],
+            "patchY": 0.002500000046403097,
+            "minimumVertexY": 0.0012431138443812445,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 719,
+              "bindPosition": [
+                0.16359609365463257,
+                0.7570509910583496,
+                -0.031633324921131134
+              ],
+              "worldPosition": [
+                0.30362912172085244,
+                0.0012431138443812445,
+                0.08078431690752029
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8993394374847412,
+                "LeftForeArm": 0.10066059231758118
+              }
+            },
+            "anchorResidualMeters": 4.7278724434640325e-11,
+            "XZResidualMeters": 9.057061657291444e-12
+          },
+          "far": {
+            "point": [
+              0.2971313004540909,
+              0.0019682543626711297,
+              0.0760334970625016
+            ],
+            "patchY": 0.0019682543626711297,
+            "minimumVertexY": 0.0012428946192603646,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15463145077228546,
+                0.757912814617157,
+                -0.02948441356420517
+              ],
+              "worldPosition": [
+                0.2945175880863984,
+                0.0012428946192603646,
+                0.07915989430016168
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8895182013511658,
+                "LeftForeArm": 0.11048181354999542
+              }
+            },
+            "anchorResidualMeters": 0.0009306128578037067,
+            "XZResidualMeters": 0.0007637321967098777
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29691271249609286,
+              0.0024999999788004354,
+              0.07530171418621359
+            ],
+            "patchY": 0.0024999999788004354,
+            "minimumVertexY": 0.0008983462933053437,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 719,
+              "bindPosition": [
+                0.16359609365463257,
+                0.7570509910583496,
+                -0.031633324921131134
+              ],
+              "worldPosition": [
+                0.3031572963229142,
+                0.0008983462933053437,
+                0.0811990096327771
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8993394374847412,
+                "LeftForeArm": 0.10066059231758118
+              }
+            },
+            "anchorResidualMeters": 2.1863948730174787e-11,
+            "XZResidualMeters": 5.348898180358522e-12
+          },
+          "far": {
+            "point": [
+              0.2970762616067841,
+              0.0017891543038061537,
+              0.07594046518871697
+            ],
+            "patchY": 0.0017891543038061537,
+            "minimumVertexY": 0.0008832198248664182,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15463145077228546,
+                0.757912814617157,
+                -0.02948441356420517
+              ],
+              "worldPosition": [
+                0.2942786779611135,
+                0.0008832198248664182,
+                0.07883297522987623
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8895182013511658,
+                "LeftForeArm": 0.11048181354999542
+              }
+            },
+            "anchorResidualMeters": 0.0009695631771092487,
+            "XZResidualMeters": 0.000659356618688905
+          },
+          "frameAdjustmentRadians": 0.12327725376572553,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29691271250548035,
+              0.002500000038886922,
+              0.07530171416435394
+            ],
+            "patchY": 0.002500000038886922,
+            "minimumVertexY": 0.0008823909363614971,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 745,
+              "bindPosition": [
+                0.16253992915153503,
+                0.7809200286865234,
+                -0.021198540925979614
+              ],
+              "worldPosition": [
+                0.30353330081181085,
+                0.0008823909363614971,
+                0.04756317291818091
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.6085081696510315,
+                "LeftForeArm": 0.3914918303489685
+              }
+            },
+            "anchorResidualMeters": 4.584739952365497e-11,
+            "XZResidualMeters": 2.428562020336028e-11
+          },
+          "far": {
+            "point": [
+              0.2970749352100019,
+              0.0017878285210166944,
+              0.07590784207654992
+            ],
+            "patchY": 0.0017878285210166944,
+            "minimumVertexY": 0.0010606286150395049,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15463145077228546,
+                0.757912814617157,
+                -0.02948441356420517
+              ],
+              "worldPosition": [
+                0.29432402869659957,
+                0.0010606286150395049,
+                0.07878694701649461
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8895182013511658,
+                "LeftForeArm": 0.11048181354999542
+              }
+            },
+            "anchorResidualMeters": 0.0009491551189218504,
+            "XZResidualMeters": 0.0006274609344798151
+          },
+          "frameAdjustmentRadians": 0.12327725376572553,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "player-01",
+      "values": [
+        3.8319302822203642,
+        3.0248638527622465,
+        -0.6523638444377026,
+        6.537674635222917,
+        -7.400757671391307,
+        0
+      ],
+      "margin": 0.00013253350308393573,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0.0012760529596795838,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29690553336536357,
+              0.0026500000484155524,
+              0.07523174554386752
+            ],
+            "patchY": 0.0026500000484155524,
+            "minimumVertexY": 0.0017638083856923892,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 723,
+              "bindPosition": [
+                0.16364003717899323,
+                0.757066011428833,
+                -0.03162262588739395
+              ],
+              "worldPosition": [
+                0.30383083057758153,
+                0.0017638083856923892,
+                0.08054912904010315
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8984745144844055,
+                "LeftForeArm": 0.10152551531791687
+              }
+            },
+            "anchorResidualMeters": 4.936367906449878e-11,
+            "XZResidualMeters": 9.628452534719118e-12
+          },
+          "far": {
+            "point": [
+              0.2969493755995767,
+              0.0016658946476387887,
+              0.07544350094412847
+            ],
+            "patchY": 0.0016658946476387887,
+            "minimumVertexY": 0.0010775986545299395,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 270,
+              "bindPosition": [
+                0.15464070439338684,
+                0.7579528093338013,
+                -0.02948325127363205
+              ],
+              "worldPosition": [
+                0.2947239958549073,
+                0.0010775986545299395,
+                0.07907728220801725
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8885335326194763,
+                "LeftForeArm": 0.11146649718284607
+              }
+            },
+            "anchorResidualMeters": 0.0010075841601217344,
+            "XZResidualMeters": 0.00021624637611353668
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969055333576439,
+              0.002649999964771181,
+              0.07523174553031398
+            ],
+            "patchY": 0.002649999964771181,
+            "minimumVertexY": 0.001072230940268431,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 723,
+              "bindPosition": [
+                0.16364003717899323,
+                0.757066011428833,
+                -0.03162262588739395
+              ],
+              "worldPosition": [
+                0.3036970472999572,
+                0.001072230940268431,
+                0.08043144607349281
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8984745144844055,
+                "LeftForeArm": 0.10152551531791687
+              }
+            },
+            "anchorResidualMeters": 3.609022130493498e-11,
+            "XZResidualMeters": 7.83800906687067e-12
+          },
+          "far": {
+            "point": [
+              0.29683637241878186,
+              0.001609035192856485,
+              0.07527288769191469
+            ],
+            "patchY": 0.001609035192856485,
+            "minimumVertexY": 0.0009357447212829364,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 270,
+              "bindPosition": [
+                0.15464070439338684,
+                0.7579528093338013,
+                -0.02948325127363205
+              ],
+              "worldPosition": [
+                0.29464129628277974,
+                0.0009357447212829364,
+                0.07890730728049522
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8885335326194763,
+                "LeftForeArm": 0.11146649718284607
+              }
+            },
+            "anchorResidualMeters": 0.001044070707971628,
+            "XZResidualMeters": 8.047306091507539e-05
+          },
+          "frameAdjustmentRadians": 0.08572289037327802,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969055333641397,
+              0.0026500000390477854,
+              0.0752317455134959
+            ],
+            "patchY": 0.0026500000390477854,
+            "minimumVertexY": 0.0009325335030839358,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 747,
+              "bindPosition": [
+                0.16687516868114471,
+                0.781476616859436,
+                -0.02082480490207672
+              ],
+              "worldPosition": [
+                0.3047926950188773,
+                0.0009325335030839358,
+                0.04602746989865556
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.5942782759666443,
+                "LeftForeArm": 0.4057217240333557
+              }
+            },
+            "anchorResidualMeters": 4.4238937122046713e-11,
+            "XZResidualMeters": 2.0793124168838698e-11
+          },
+          "far": {
+            "point": [
+              0.29684643208583916,
+              0.0015469459629741237,
+              0.07554037383527167
+            ],
+            "patchY": 0.0015469459629741237,
+            "minimumVertexY": 0.0011123380295578853,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 270,
+              "bindPosition": [
+                0.15464070439338684,
+                0.7579528093338013,
+                -0.02948325127363205
+              ],
+              "worldPosition": [
+                0.29466769645675733,
+                0.0011123380295578853,
+                0.07886260057693827
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8885335326194763,
+                "LeftForeArm": 0.11146649718284607
+              }
+            },
+            "anchorResidualMeters": 0.0011469405380816658,
+            "XZResidualMeters": 0.00031423619984969497
+          },
+          "frameAdjustmentRadians": 0.08572289037327802,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "values": [
+        3.8641087550274453,
+        3.0055605153800173,
+        -0.6736700506755774,
+        6.539406206246133,
+        -7.401301478630377,
+        0
+      ],
+      "margin": 0.00011163929237248502,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29689763972411093,
+              0.002649999974330867,
+              0.0751550114832506
+            ],
+            "patchY": 0.002649999974330867,
+            "minimumVertexY": 0.001261820981129036,
+            "worst": null,
+            "anchorResidualMeters": 2.619260204303134e-11,
+            "XZResidualMeters": 5.210375241298753e-12
+          },
+          "far": {
+            "point": [
+              0.2972434884928287,
+              0.002084014649317622,
+              0.0760586486336345
+            ],
+            "patchY": 0.002084014649317622,
+            "minimumVertexY": 0.0010581612121112805,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 272,
+              "bindPosition": [
+                0.15467597544193268,
+                0.7579973936080933,
+                -0.029487736523151398
+              ],
+              "worldPosition": [
+                0.2947576637354063,
+                0.0010581612121112805,
+                0.07896200573876543
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.887406051158905,
+                "LeftForeArm": 0.11259396374225616
+              }
+            },
+            "anchorResidualMeters": 0.0011209419600533793,
+            "XZResidualMeters": 0.0009675595385407854
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29689763971739236,
+              0.0026499999619305535,
+              0.07515501148414325
+            ],
+            "patchY": 0.0026499999619305535,
+            "minimumVertexY": 0.001080066328818587,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 726,
+              "bindPosition": [
+                0.16364359855651855,
+                0.7570239305496216,
+                -0.03161916136741638
+              ],
+              "worldPosition": [
+                0.30369090934741627,
+                0.001080066328818587,
+                0.08039685838167739
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.897695004940033,
+                "LeftForeArm": 0.10230498760938644
+              }
+            },
+            "anchorResidualMeters": 3.899787240722454e-11,
+            "XZResidualMeters": 8.458800033403425e-12
+          },
+          "far": {
+            "point": [
+              0.2971857781509075,
+              0.001974673859508415,
+              0.07582185338576543
+            ],
+            "patchY": 0.001974673859508415,
+            "minimumVertexY": 0.000914818089285381,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 272,
+              "bindPosition": [
+                0.15467597544193268,
+                0.7579973936080933,
+                -0.029487736523151398
+              ],
+              "worldPosition": [
+                0.2946748659471058,
+                0.000914818089285381,
+                0.07878958957375519
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.887406051158905,
+                "LeftForeArm": 0.11259396374225616
+              }
+            },
+            "anchorResidualMeters": 0.000991850424580338,
+            "XZResidualMeters": 0.000726430911173896
+          },
+          "frameAdjustmentRadians": 0.0859976385652637,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29689763972440575,
+              0.002650000041057212,
+              0.07515501146656418
+            ],
+            "patchY": 0.002650000041057212,
+            "minimumVertexY": 0.0009116392923724851,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 746,
+              "bindPosition": [
+                0.16692203283309937,
+                0.7813599109649658,
+                -0.020901232957839966
+              ],
+              "worldPosition": [
+                0.30482832198224397,
+                0.0009116392923724851,
+                0.046088531681059794
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.5947068333625793,
+                "LeftForeArm": 0.40529316663742065
+              }
+            },
+            "anchorResidualMeters": 4.651724700739939e-11,
+            "XZResidualMeters": 2.186686126261601e-11
+          },
+          "far": {
+            "point": [
+              0.297173339101243,
+              0.0019094186275071983,
+              0.07580341620151447
+            ],
+            "patchY": 0.0019094186275071983,
+            "minimumVertexY": 0.0010875540018206544,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 272,
+              "bindPosition": [
+                0.15467597544193268,
+                0.7579973936080933,
+                -0.029487736523151398
+              ],
+              "worldPosition": [
+                0.2947005132327254,
+                0.0010875540018206544,
+                0.07874346001809651
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.887406051158905,
+                "LeftForeArm": 0.11259396374225616
+              }
+            },
+            "anchorResidualMeters": 0.0010222033004588403,
+            "XZResidualMeters": 0.0007045841455678833
+          },
+          "frameAdjustmentRadians": 0.0859976385652637,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "player-05",
+      "values": [
+        5.937893286993395,
+        -0.4289417357239457,
+        2.8666274996670933,
+        5.281614094330502,
+        -1.005355678233481,
+        0
+      ],
+      "margin": 0.00016014801179791338,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0.0017106148508868584,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29692388009946635,
+              0.0026000000449100573,
+              0.07539259697959677
+            ],
+            "patchY": 0.0026000000449100573,
+            "minimumVertexY": 0.001267921208754426,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 753,
+              "bindPosition": [
+                0.16850219666957855,
+                0.7987850904464722,
+                0.015313245356082916
+              ],
+              "worldPosition": [
+                0.30239742803250363,
+                0.001267921208754426,
+                0.04749835633877155
+              ],
+              "namedInfluences": {
+                "LeftForeArm": 0.6229832172393799,
+                "LeftHand": 0.3770168125629425
+              }
+            },
+            "anchorResidualMeters": 4.5765904289008493e-11,
+            "XZResidualMeters": 8.809355015661265e-12
+          },
+          "far": {
+            "point": [
+              0.29718191310677344,
+              0.002106131006208368,
+              0.0760892609902535
+            ],
+            "patchY": 0.002106131006208368,
+            "minimumVertexY": 0.001193696310911057,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15454541146755219,
+                0.7578591108322144,
+                -0.02958492934703827
+              ],
+              "worldPosition": [
+                0.2946468908764637,
+                0.001193696310911057,
+                0.07940190663530736
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8910170793533325,
+                "LeftForeArm": 0.10898291319608688
+              }
+            },
+            "anchorResidualMeters": 0.0008920921321740316,
+            "XZResidualMeters": 0.0007429143889157422
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969238800913408,
+              0.0025999999659544124,
+              0.07539259696765566
+            ],
+            "patchY": 0.0025999999659544124,
+            "minimumVertexY": 0.0010489616520683535,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 720,
+              "bindPosition": [
+                0.16348637640476227,
+                0.7571413516998291,
+                -0.03168351203203201
+              ],
+              "worldPosition": [
+                0.30398692232061597,
+                0.0010489616520683535,
+                0.07999871015356183
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8995456099510193,
+                "LeftForeArm": 0.1004544124007225
+              }
+            },
+            "anchorResidualMeters": 3.495958589897473e-11,
+            "XZResidualMeters": 7.94170107617446e-12
+          },
+          "far": {
+            "point": [
+              0.29719539123645233,
+              0.0019475387835932896,
+              0.07600720251323259
+            ],
+            "patchY": 0.0019475387835932896,
+            "minimumVertexY": 0.0009601480117979134,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15454541146755219,
+                0.7578591108322144,
+                -0.02958492934703827
+              ],
+              "worldPosition": [
+                0.2948891274591287,
+                0.0009601480117979134,
+                0.07942820807966905
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8910170793533325,
+                "LeftForeArm": 0.10898291319608688
+              }
+            },
+            "anchorResidualMeters": 0.0009365702908140911,
+            "XZResidualMeters": 0.000671906444916751
+          },
+          "frameAdjustmentRadians": 0.11514560563008837,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29692388010004644,
+              0.0026000000386119113,
+              0.07539259694809883
+            ],
+            "patchY": 0.0026000000386119113,
+            "minimumVertexY": 0.0009603917696506579,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 737,
+              "bindPosition": [
+                0.16234834492206573,
+                0.7809979915618896,
+                -0.021146126091480255
+              ],
+              "worldPosition": [
+                0.2988438855719704,
+                0.0009603917696506579,
+                0.046994372598363414
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.6085329055786133,
+                "LeftForeArm": 0.3914670944213867
+              }
+            },
+            "anchorResidualMeters": 4.482775291694243e-11,
+            "XZResidualMeters": 2.277383869163328e-11
+          },
+          "far": {
+            "point": [
+              0.29718870470251824,
+              0.0019128468112976228,
+              0.07601880101108148
+            ],
+            "patchY": 0.0019128468112976228,
+            "minimumVertexY": 0.0011509833681106925,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 268,
+              "bindPosition": [
+                0.15454541146755219,
+                0.7578591108322144,
+                -0.02958492934703827
+              ],
+              "worldPosition": [
+                0.29492670363218493,
+                0.0011509833681106925,
+                0.0793769352701587
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8910170793533325,
+                "LeftForeArm": 0.10898291319608688
+              }
+            },
+            "anchorResidualMeters": 0.000966665958644825,
+            "XZResidualMeters": 0.0006798996770545443
+          },
+          "frameAdjustmentRadians": 0.11514560563008837,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "values": [
+        6.2406947485954465,
+        2.680113209307505,
+        -3.287614444888561,
+        3.956005841544778,
+        1.5244250186673014,
+        0
+      ],
+      "margin": 0.0001800724675607426,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0.003621198693450787,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2971283241236777,
+              0.0020900000329769595,
+              0.07678375854140865
+            ],
+            "patchY": 0.0020900000329769595,
+            "minimumVertexY": 0.0010170107994669705,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 749,
+              "bindPosition": [
+                0.14951995015144348,
+                0.7713915705680847,
+                -0.025924839079380035
+              ],
+              "worldPosition": [
+                0.28966219341857474,
+                0.0010170107994669705,
+                0.0597309573508
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.7550374269485474,
+                "LeftForeArm": 0.24496258795261383
+              }
+            },
+            "anchorResidualMeters": 3.400828228623314e-11,
+            "XZResidualMeters": 8.311641997857657e-12
+          },
+          "far": {
+            "point": [
+              0.29791631757653747,
+              0.0028199275324392575,
+              0.07903452975657681
+            ],
+            "patchY": 0.0028199275324392575,
+            "minimumVertexY": 0.0012077669433529534,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 259,
+              "bindPosition": [
+                0.14776214957237244,
+                0.760748028755188,
+                -0.027138464152812958
+              ],
+              "worldPosition": [
+                0.28657886752005457,
+                0.0012077669433529534,
+                0.07189497052972917
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8466285467147827,
+                "LeftForeArm": 0.15337146818637848
+              }
+            },
+            "anchorResidualMeters": 0.0024939324342885087,
+            "XZResidualMeters": 0.0023847232091342057
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.29712832411735524,
+              0.0020899999832514676,
+              0.07678375853082806
+            ],
+            "patchY": 0.0020899999832514676,
+            "minimumVertexY": 0.0013703270688776204,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 751,
+              "bindPosition": [
+                0.16201701760292053,
+                0.7549839019775391,
+                -0.035658933222293854
+              ],
+              "worldPosition": [
+                0.30220920258091166,
+                0.0013703270688776204,
+                0.08699269132682401
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.9443479180335999,
+                "LeftForeArm": 0.05565209686756134
+              }
+            },
+            "anchorResidualMeters": 1.750674233866833e-11,
+            "XZResidualMeters": 5.096341318091134e-12
+          },
+          "far": {
+            "point": [
+              0.2980527273224146,
+              0.002582689440028989,
+              0.07892251426813501
+            ],
+            "patchY": 0.002582689440028989,
+            "minimumVertexY": 0.0011115142381275963,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 260,
+              "bindPosition": [
+                0.15991458296775818,
+                0.7530571818351746,
+                -0.03606158494949341
+              ],
+              "worldPosition": [
+                0.29990042073777046,
+                0.0011115142381275963,
+                0.0878829333348795
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.9362924098968506,
+                "LeftForeArm": 0.0637076199054718
+              }
+            },
+            "anchorResidualMeters": 0.0023814995811161136,
+            "XZResidualMeters": 0.002329977976406675
+          },
+          "frameAdjustmentRadians": 0.1305597336452627,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2971283241242554,
+              0.0020900000203466418,
+              0.07678375852224278
+            ],
+            "patchY": 0.0020900000203466418,
+            "minimumVertexY": 0.0011485714859646675,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 749,
+              "bindPosition": [
+                0.14951995015144348,
+                0.7713915705680847,
+                -0.025924839079380035
+              ],
+              "worldPosition": [
+                0.28958081198832,
+                0.0011485714859646675,
+                0.05841792076119044
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.7550374269485474,
+                "LeftForeArm": 0.24496258795261383
+              }
+            },
+            "anchorResidualMeters": 2.3291160259074786e-11,
+            "XZResidualMeters": 1.1335444824160043e-11
+          },
+          "far": {
+            "point": [
+              0.2980719970551889,
+              0.002797435795224819,
+              0.07823194324035718
+            ],
+            "patchY": 0.002797435795224819,
+            "minimumVertexY": 0.0013374199713073278,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 259,
+              "bindPosition": [
+                0.14776214957237244,
+                0.760748028755188,
+                -0.027138464152812958
+              ],
+              "worldPosition": [
+                0.28649668475165385,
+                0.0013374199713073278,
+                0.07164164839904376
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8466285467147827,
+                "LeftForeArm": 0.15337146818637848
+              }
+            },
+            "anchorResidualMeters": 0.0018676784935551932,
+            "XZResidualMeters": 0.0017285131040646535
+          },
+          "frameAdjustmentRadians": 0.1305597336452627,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "referee",
+      "values": [
+        4.1104878570726235,
+        2.865031711630058,
+        -0.8321172171189275,
+        6.549002611360514,
+        -7.404778442764049,
+        0
+      ],
+      "margin": 9.635867859472192e-05,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969076893339967,
+              0.0026499999415182103,
+              0.07525279328289416
+            ],
+            "patchY": 0.0026499999415182103,
+            "minimumVertexY": 0.0009066250931819564,
+            "worst": null,
+            "anchorResidualMeters": 5.967933502172952e-11,
+            "XZResidualMeters": 1.1895515936024811e-11
+          },
+          "far": {
+            "point": [
+              0.2972455879790243,
+              0.0020988867468312517,
+              0.07613416274240141
+            ],
+            "patchY": 0.0020988867468312517,
+            "minimumVertexY": 0.000896358678594722,
+            "worst": null,
+            "anchorResidualMeters": 0.0010930294664593177,
+            "XZResidualMeters": 0.0009439213933003635
+          },
+          "frameAdjustmentRadians": 0,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969076893286786,
+              0.0026499999654888895,
+              0.0752527932908065
+            ],
+            "patchY": 0.0026499999654888895,
+            "minimumVertexY": 0.0010695025533882,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 717,
+              "bindPosition": [
+                0.163661390542984,
+                0.7570310235023499,
+                -0.031613774597644806
+              ],
+              "worldPosition": [
+                0.30372879979891537,
+                0.0010695025533882,
+                0.08050235436511229
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8990761041641235,
+                "LeftForeArm": 0.10092386603355408
+              }
+            },
+            "anchorResidualMeters": 3.5361342689141565e-11,
+            "XZResidualMeters": 7.707645907928738e-12
+          },
+          "far": {
+            "point": [
+              0.2971893719805478,
+              0.001984775474522599,
+              0.07589518832920339
+            ],
+            "patchY": 0.001984775474522599,
+            "minimumVertexY": 0.000908818161841556,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 273,
+              "bindPosition": [
+                0.15467263758182526,
+                0.7579511404037476,
+                -0.02946748584508896
+              ],
+              "worldPosition": [
+                0.29467905982362896,
+                0.000908818161841556,
+                0.07891376201168288
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8887434005737305,
+                "LeftForeArm": 0.11125656962394714
+              }
+            },
+            "anchorResidualMeters": 0.0009667161746101283,
+            "XZResidualMeters": 0.0007014388732856247
+          },
+          "frameAdjustmentRadians": 0.08834527133816862,
+          "reach": 0
+        },
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0,
+          "near": {
+            "point": [
+              0.2969076893351047,
+              0.002650000038287401,
+              0.07525279327434849
+            ],
+            "patchY": 0.002650000038287401,
+            "minimumVertexY": 0.0010552941151922531,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 740,
+              "bindPosition": [
+                0.16689589619636536,
+                0.7814368009567261,
+                -0.020818084478378296
+              ],
+              "worldPosition": [
+                0.30479130425575973,
+                0.0010552941151922531,
+                0.046052812478276826
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.5943275690078735,
+                "LeftForeArm": 0.40567246079444885
+              }
+            },
+            "anchorResidualMeters": 4.336813550826986e-11,
+            "XZResidualMeters": 2.0368360268574e-11
+          },
+          "far": {
+            "point": [
+              0.2971765160362475,
+              0.0019161051600792693,
+              0.07587920157634948
+            ],
+            "patchY": 0.0019161051600792693,
+            "minimumVertexY": 0.0010824889760818913,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 273,
+              "bindPosition": [
+                0.15467263758182526,
+                0.7579511404037476,
+                -0.02946748584508896
+              ],
+              "worldPosition": [
+                0.2947052593538875,
+                0.0010824889760818913,
+                0.07887193831946593
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8887434005737305,
+                "LeftForeArm": 0.11125656962394714
+              }
+            },
+            "anchorResidualMeters": 0.0010016270595848032,
+            "XZResidualMeters": 0.0006816561673088741
+          },
+          "frameAdjustmentRadians": 0.08834527133816862,
+          "reach": 0
+        }
+      ]
+    },
+    {
+      "id": "player-02",
+      "values": [
+        4.527811261885566,
+        1.729764008590982,
+        2.578408230549951,
+        -11.669132056817746,
+        9.163377922228234,
+        0.00029121116187861944
+      ],
+      "margin": 7.708351549615947e-05,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0.19999999999999998,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0.0002912111618786194,
+          "near": {
+            "point": [
+              0.2970253712253149,
+              0.0021312111126980445,
+              0.07642735755262497
+            ],
+            "patchY": 0.0021312111126980445,
+            "minimumVertexY": 0.0008770835155271924,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 726,
+              "bindPosition": [
+                0.163677379488945,
+                0.7571633458137512,
+                -0.031554415822029114
+              ],
+              "worldPosition": [
+                0.30425746881746774,
+                0.0008770835155271924,
+                0.07829847700215803
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.9143768548965454,
+                "LeftForeArm": 0.08562316745519638
+              }
+            },
+            "anchorResidualMeters": 0.00029121111269804706,
+            "XZResidualMeters": 3.905732006409043e-11
+          },
+          "far": {
+            "point": [
+              0.2958748282061936,
+              0.0029191348812899072,
+              0.07549271549925643
+            ],
+            "patchY": 0.0029191348812899072,
+            "minimumVertexY": 0.0008770835154961595,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 275,
+              "bindPosition": [
+                0.15320827066898346,
+                0.760739803314209,
+                -0.025949627161026
+              ],
+              "worldPosition": [
+                0.2934467204279968,
+                0.0008770835154961595,
+                0.07527748184426072
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8448663353919983,
+                "LeftForeArm": 0.1551336646080017
+              }
+            },
+            "anchorResidualMeters": 0.0018335313304043068,
+            "XZResidualMeters": 0.0014823309507520934
+          },
+          "frameAdjustmentRadians": 0.09637042853173289,
+          "reach": 0
+        }
+      ],
+      "maximumFrameAdjustmentDegrees": 5.521618824735426
+    },
+    {
+      "id": "player-02",
+      "values": [
+        1.6083384352804042,
+        7.881809524425935,
+        -0.21703946796532156,
+        20.42625221029654,
+        -23.93647349743879,
+        0.00029121116187861944
+      ],
+      "margin": 1.0300178632695854e-05,
+      "pass": true,
+      "measurements": [
+        {
+          "elapsed": 0.4000000000000004,
+          "mandatoryFloorLift": 0,
+          "targetHeightOffsetMeters": 0.00029121116187861944,
+          "near": {
+            "point": [
+              0.2970253712638552,
+              0.002131211177752553,
+              0.07642735751593477
+            ],
+            "patchY": 0.002131211177752553,
+            "minimumVertexY": 0.0008106352632078857,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 726,
+              "bindPosition": [
+                0.163677379488945,
+                0.7571633458137512,
+                -0.031554415822029114
+              ],
+              "worldPosition": [
+                0.3050779746999077,
+                0.0008106352632078857,
+                0.07933812881357577
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.9143768548965454,
+                "LeftForeArm": 0.08562316745519638
+              }
+            },
+            "anchorResidualMeters": 0.00029121117775255366,
+            "XZResidualMeters": 1.7660431499606935e-11
+          },
+          "far": {
+            "point": [
+              0.29596288783257585,
+              0.002989699821367304,
+              0.07460668836225644
+            ],
+            "patchY": 0.002989699821367304,
+            "minimumVertexY": 0.0008103017710588845,
+            "worst": {
+              "meshIndex": 0,
+              "vertexIndex": 275,
+              "bindPosition": [
+                0.15320827066898346,
+                0.760739803314209,
+                -0.025949627161026
+              ],
+              "worldPosition": [
+                0.29219759142849017,
+                0.0008103017710588845,
+                0.07452051211487945
+              ],
+              "namedInfluences": {
+                "LeftHand": 0.8448663353919983,
+                "LeftForeArm": 0.1551336646080017
+              }
+            },
+            "anchorResidualMeters": 0.0024011490873730667,
+            "XZResidualMeters": 0.0021080102610140446
+          },
+          "frameAdjustmentRadians": 0.14039283095474667,
+          "reach": 0
+        }
+      ],
+      "maximumFrameAdjustmentDegrees": 8.043916687600603
+    }
+  ]
+}

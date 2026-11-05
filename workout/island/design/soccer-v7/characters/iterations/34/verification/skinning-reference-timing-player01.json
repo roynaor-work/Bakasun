@@ -1,0 +1,1101 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "declaredPackageHashes": {
+    "manifest": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "models/player-01-lod1.glb": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "models/player-02-lod0.glb": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "models/player-02-lod1.glb": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "models/player-03-lod0.glb": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "models/player-03-lod1.glb": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "models/player-04-lod0.glb": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "models/player-04-lod1.glb": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "models/player-05-lod0.glb": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "models/player-05-lod1.glb": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "models/player-06-lod0.glb": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "models/player-06-lod1.glb": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "models/goalkeeper-lod0.glb": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "models/goalkeeper-lod1.glb": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "models/referee-lod0.glb": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "models/referee-lod1.glb": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea"
+    },
+    "bootBounds": "86e5c5587468d30ff88b2d409e0ce2dba947eb9f53410b9e3c176a6979b32398"
+  },
+  "runtimeErrors": [],
+  "packagedEnvelope": {
+    "present": true,
+    "complete": true,
+    "pass": true,
+    "motionMatches": true,
+    "helperMatches": true,
+    "allModelHashesMatch": true,
+    "inputsVerified": true
+  },
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 10182,
+  "maximumAbsoluteErrorMeters": 4.894804506161421e-8,
+  "minimumReferenceVertexY": -0.00012251217878606491,
+  "denseFloor": true,
+  "denseSampleRateHz": 120,
+  "denseSamples": 9508,
+  "clipsEvaluated": [
+    "idle",
+    "run_1",
+    "run_2",
+    "run_3",
+    "run_4",
+    "run_5",
+    "sprint",
+    "decelerate",
+    "turn_left",
+    "turn_right",
+    "kick",
+    "short_pass",
+    "long_pass",
+    "header",
+    "dribble",
+    "slide_tackle",
+    "fall",
+    "get_up",
+    "celebrate_arms_up",
+    "celebrate_fist_pump",
+    "celebrate_victory_leap",
+    "celebrate_aeroplane",
+    "celebrate_applause",
+    "keeper_dive_left",
+    "keeper_dive_right",
+    "keeper_dive_high",
+    "keeper_catch",
+    "keeper_throw",
+    "keeper_punt",
+    "referee_whistle",
+    "referee_signal"
+  ],
+  "totalClipCount": 31,
+  "floorToleranceMeters": 0.001,
+  "activeSoleAnchorToleranceMeters": 0.003,
+  "maximumActiveSoleAnchorErrorMeters": 5.2429072008891664e-8,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "expectedSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376,
+          "clearcoat": 1,
+          "transmission": 0
+        }
+      ],
+      "bytes": 1336564,
+      "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab"
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "expectedSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "decodedMaterials": [
+        {
+          "name": "Skin",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.5,
+            -0.5
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Cloth",
+          "type": "MeshStandardMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.8,
+            -0.8
+          ],
+          "ior": null,
+          "clearcoat": null,
+          "transmission": null
+        },
+        {
+          "name": "Eyes",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "HairCards",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0.25,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            1,
+            -1
+          ],
+          "ior": 1.5,
+          "clearcoat": 0,
+          "transmission": 0
+        },
+        {
+          "name": "EyesCornea",
+          "type": "MeshPhysicalMaterial",
+          "maps": {
+            "map": {
+              "width": 1024,
+              "height": 1024
+            },
+            "normalMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "roughnessMap": {
+              "width": 1024,
+              "height": 1024
+            },
+            "metalnessMap": {
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "alphaTest": 0,
+          "transparent": false,
+          "side": 0,
+          "normalScale": [
+            0.3,
+            -0.3
+          ],
+          "ior": 1.376,
+          "clearcoat": 1,
+          "transmission": 0
+        }
+      ],
+      "bytes": 889984,
+      "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-01",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 4.894804506161421e-8,
+      "pass": true,
+      "worst": [],
+      "denseClips": [
+        {
+          "id": "idle",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134201,
+          "maximumActiveSoleAnchorErrorMeters": 9.2148511043888e-17,
+          "pass": true
+        },
+        {
+          "id": "run_1",
+          "sampleRateHz": 120,
+          "samples": 109,
+          "minimumReferenceVertexY": 0.0019998682227288884,
+          "maximumActiveSoleAnchorErrorMeters": 1.4831537538368272e-9,
+          "pass": true
+        },
+        {
+          "id": "run_2",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.002000001700192798,
+          "maximumActiveSoleAnchorErrorMeters": 8.599264389559175e-10,
+          "pass": true
+        },
+        {
+          "id": "run_3",
+          "sampleRateHz": 120,
+          "samples": 85,
+          "minimumReferenceVertexY": 0.0020000010166604963,
+          "maximumActiveSoleAnchorErrorMeters": 1.952639976397744e-9,
+          "pass": true
+        },
+        {
+          "id": "run_4",
+          "sampleRateHz": 120,
+          "samples": 73,
+          "minimumReferenceVertexY": 0.0020000009944989468,
+          "maximumActiveSoleAnchorErrorMeters": 2.008541121384046e-9,
+          "pass": true
+        },
+        {
+          "id": "run_5",
+          "sampleRateHz": 120,
+          "samples": 65,
+          "minimumReferenceVertexY": 0.0020000014532105042,
+          "maximumActiveSoleAnchorErrorMeters": 1.200423488875128e-9,
+          "pass": true
+        },
+        {
+          "id": "sprint",
+          "sampleRateHz": 120,
+          "samples": 58,
+          "minimumReferenceVertexY": 0.0019992592904045166,
+          "maximumActiveSoleAnchorErrorMeters": 1.2248451908188268e-9,
+          "pass": true
+        },
+        {
+          "id": "decelerate",
+          "sampleRateHz": 120,
+          "samples": 121,
+          "minimumReferenceVertexY": -0.00012251217878606491,
+          "maximumActiveSoleAnchorErrorMeters": 1.2601091049178216e-9,
+          "pass": true
+        },
+        {
+          "id": "turn_left",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0019998775716191016,
+          "maximumActiveSoleAnchorErrorMeters": 3.9157628805122855e-8,
+          "pass": true
+        },
+        {
+          "id": "turn_right",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.001999770413910745,
+          "maximumActiveSoleAnchorErrorMeters": 3.5271463442004547e-8,
+          "pass": true
+        },
+        {
+          "id": "kick",
+          "sampleRateHz": 120,
+          "samples": 82,
+          "minimumReferenceVertexY": 0.002000000671003824,
+          "maximumActiveSoleAnchorErrorMeters": 7.745758413837217e-9,
+          "pass": true
+        },
+        {
+          "id": "short_pass",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.0020000018799355567,
+          "maximumActiveSoleAnchorErrorMeters": 2.8145131228935153e-10,
+          "pass": true
+        },
+        {
+          "id": "long_pass",
+          "sampleRateHz": 120,
+          "samples": 157,
+          "minimumReferenceVertexY": 0.002000001880024301,
+          "maximumActiveSoleAnchorErrorMeters": 1.6468371939089714e-9,
+          "pass": true
+        },
+        {
+          "id": "header",
+          "sampleRateHz": 120,
+          "samples": 154,
+          "minimumReferenceVertexY": 0.002000001882848719,
+          "maximumActiveSoleAnchorErrorMeters": 2.8631273339021915e-13,
+          "pass": true
+        },
+        {
+          "id": "dribble",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.002000001700192798,
+          "maximumActiveSoleAnchorErrorMeters": 8.599264389559175e-10,
+          "pass": true
+        },
+        {
+          "id": "slide_tackle",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.001513938141213922,
+          "maximumActiveSoleAnchorErrorMeters": 3.8495132295624996e-16,
+          "handSupport": {
+            "samples": 37,
+            "maximumAuthoredAnchorDistanceMeters": 0.0009949539714846386,
+            "maximumVerticalGapMeters": 0.0009168011345071295,
+            "minimumHandWeightedVertexY": 0.0069583035916571945,
+            "maximumMinimumHandWeightedVertexY": 0.007068358069830638,
+            "maximumNearestHandVertexToAuthoredAnchorDistanceMeters": 0.026287448264292447,
+            "handVertexSelection": "Vertices with at least50% weight on the supporting Hand bone, including palm/fingers/gloves; every selected vertex evaluated with general Three skinning.",
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed hand surface and authored support. Visual palm shape/orientation still requires review."
+          },
+          "pass": true
+        },
+        {
+          "id": "fall",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.00151998020402358,
+          "maximumActiveSoleAnchorErrorMeters": 5.624121213039884e-10,
+          "pass": true
+        },
+        {
+          "id": "get_up",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.0015192830836691096,
+          "maximumActiveSoleAnchorErrorMeters": 5.2429072008891664e-8,
+          "handSupport": {
+            "samples": 42,
+            "maximumAuthoredAnchorDistanceMeters": 0.00016162888646682215,
+            "maximumVerticalGapMeters": 0.0001537578240066867,
+            "minimumHandWeightedVertexY": 0.003044745024763898,
+            "maximumMinimumHandWeightedVertexY": 0.0033570344474510333,
+            "maximumNearestHandVertexToAuthoredAnchorDistanceMeters": 0.015705155622755824,
+            "handVertexSelection": "Vertices with at least50% weight on the supporting Hand bone, including palm/fingers/gloves; every selected vertex evaluated with general Three skinning.",
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed hand surface and authored support. Visual palm shape/orientation still requires review."
+          },
+          "pass": true
+        },
+        {
+          "id": "celebrate_arms_up",
+          "sampleRateHz": 120,
+          "samples": 241,
+          "minimumReferenceVertexY": 0.002000001883134202,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134202,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.0020000018831339682,
+          "maximumActiveSoleAnchorErrorMeters": 3.465496750090997e-16,
+          "pass": true
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.0019999942469647353,
+          "maximumActiveSoleAnchorErrorMeters": 7.654207723354894e-9,
+          "pass": true
+        },
+        {
+          "id": "celebrate_applause",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.002000001883134202,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.0015200487877496485,
+          "maximumActiveSoleAnchorErrorMeters": 5.2151872131938716e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.0015200303784310206,
+          "maximumActiveSoleAnchorErrorMeters": 5.2151872131938716e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_high",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.0015199383403902123,
+          "maximumActiveSoleAnchorErrorMeters": 5.945093673702091e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_catch",
+          "sampleRateHz": 120,
+          "samples": 145,
+          "minimumReferenceVertexY": 0.002000001883134018,
+          "maximumActiveSoleAnchorErrorMeters": 3.010424545858703e-16,
+          "pass": true
+        },
+        {
+          "id": "keeper_throw",
+          "sampleRateHz": 120,
+          "samples": 142,
+          "minimumReferenceVertexY": 0.0020000018825680177,
+          "maximumActiveSoleAnchorErrorMeters": 4.244935041675014e-12,
+          "pass": true
+        },
+        {
+          "id": "keeper_punt",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.001999919884455018,
+          "maximumActiveSoleAnchorErrorMeters": 4.992054673395599e-10,
+          "pass": true
+        },
+        {
+          "id": "referee_whistle",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.002000001883134202,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "referee_signal",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.002000001883134202,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "character": "player-01",
+      "lod": 1,
+      "maximumAbsoluteErrorMeters": 4.894733585114608e-8,
+      "pass": true,
+      "worst": [],
+      "denseClips": [
+        {
+          "id": "idle",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.005128013361245349,
+          "maximumActiveSoleAnchorErrorMeters": 9.2148511043888e-17,
+          "pass": true
+        },
+        {
+          "id": "run_1",
+          "sampleRateHz": 120,
+          "samples": 109,
+          "minimumReferenceVertexY": 0.0051276952400416504,
+          "maximumActiveSoleAnchorErrorMeters": 1.4831537538368272e-9,
+          "pass": true
+        },
+        {
+          "id": "run_2",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0051280131845943926,
+          "maximumActiveSoleAnchorErrorMeters": 8.599264389559175e-10,
+          "pass": true
+        },
+        {
+          "id": "run_3",
+          "sampleRateHz": 120,
+          "samples": 85,
+          "minimumReferenceVertexY": 0.005128012506605449,
+          "maximumActiveSoleAnchorErrorMeters": 1.952639976397744e-9,
+          "pass": true
+        },
+        {
+          "id": "run_4",
+          "sampleRateHz": 120,
+          "samples": 73,
+          "minimumReferenceVertexY": 0.005128012484755383,
+          "maximumActiveSoleAnchorErrorMeters": 2.008541121384046e-9,
+          "pass": true
+        },
+        {
+          "id": "run_5",
+          "sampleRateHz": 120,
+          "samples": 65,
+          "minimumReferenceVertexY": 0.00512801293902955,
+          "maximumActiveSoleAnchorErrorMeters": 1.200423488875128e-9,
+          "pass": true
+        },
+        {
+          "id": "sprint",
+          "sampleRateHz": 120,
+          "samples": 58,
+          "minimumReferenceVertexY": 0.0051272710085859315,
+          "maximumActiveSoleAnchorErrorMeters": 1.2248451908188268e-9,
+          "pass": true
+        },
+        {
+          "id": "decelerate",
+          "sampleRateHz": 120,
+          "samples": 121,
+          "minimumReferenceVertexY": 0.0030054458921068778,
+          "maximumActiveSoleAnchorErrorMeters": 1.2601091049178216e-9,
+          "pass": true
+        },
+        {
+          "id": "turn_left",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0051277673845620516,
+          "maximumActiveSoleAnchorErrorMeters": 3.9157628805122855e-8,
+          "pass": true
+        },
+        {
+          "id": "turn_right",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.005127772383654113,
+          "maximumActiveSoleAnchorErrorMeters": 3.5271463442004547e-8,
+          "pass": true
+        },
+        {
+          "id": "kick",
+          "sampleRateHz": 120,
+          "samples": 82,
+          "minimumReferenceVertexY": 0.00512801231984643,
+          "maximumActiveSoleAnchorErrorMeters": 7.745758413837217e-9,
+          "pass": true
+        },
+        {
+          "id": "short_pass",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.005128013358046704,
+          "maximumActiveSoleAnchorErrorMeters": 2.8145131228935153e-10,
+          "pass": true
+        },
+        {
+          "id": "long_pass",
+          "sampleRateHz": 120,
+          "samples": 157,
+          "minimumReferenceVertexY": 0.00512801335813545,
+          "maximumActiveSoleAnchorErrorMeters": 1.6468371939089714e-9,
+          "pass": true
+        },
+        {
+          "id": "header",
+          "sampleRateHz": 120,
+          "samples": 154,
+          "minimumReferenceVertexY": 0.005128013360961094,
+          "maximumActiveSoleAnchorErrorMeters": 2.8631273339021915e-13,
+          "pass": true
+        },
+        {
+          "id": "dribble",
+          "sampleRateHz": 120,
+          "samples": 97,
+          "minimumReferenceVertexY": 0.0051280131845943926,
+          "maximumActiveSoleAnchorErrorMeters": 8.599264389559175e-10,
+          "pass": true
+        },
+        {
+          "id": "slide_tackle",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.001513907762748734,
+          "maximumActiveSoleAnchorErrorMeters": 3.8495132295624996e-16,
+          "handSupport": {
+            "samples": 37,
+            "maximumAuthoredAnchorDistanceMeters": 0.0010080536680122697,
+            "maximumVerticalGapMeters": 0.0009310011345070937,
+            "minimumHandWeightedVertexY": 0.006901644616328667,
+            "maximumMinimumHandWeightedVertexY": 0.007034753575535013,
+            "maximumNearestHandVertexToAuthoredAnchorDistanceMeters": 0.028594046434087285,
+            "handVertexSelection": "Vertices with at least50% weight on the supporting Hand bone, including palm/fingers/gloves; every selected vertex evaluated with general Three skinning.",
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed hand surface and authored support. Visual palm shape/orientation still requires review."
+          },
+          "pass": true
+        },
+        {
+          "id": "fall",
+          "sampleRateHz": 120,
+          "samples": 106,
+          "minimumReferenceVertexY": 0.0015199635422203858,
+          "maximumActiveSoleAnchorErrorMeters": 5.624121213039884e-10,
+          "pass": true
+        },
+        {
+          "id": "get_up",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.0015192246413797128,
+          "maximumActiveSoleAnchorErrorMeters": 5.2429072008891664e-8,
+          "handSupport": {
+            "samples": 42,
+            "maximumAuthoredAnchorDistanceMeters": 0.00016162888646682215,
+            "maximumVerticalGapMeters": 0.0001537578240066867,
+            "minimumHandWeightedVertexY": 0.0031995667241535093,
+            "maximumMinimumHandWeightedVertexY": 0.004407249706595395,
+            "maximumNearestHandVertexToAuthoredAnchorDistanceMeters": 0.026093154628915132,
+            "handVertexSelection": "Vertices with at least50% weight on the supporting Hand bone, including palm/fingers/gloves; every selected vertex evaluated with general Three skinning.",
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed hand surface and authored support. Visual palm shape/orientation still requires review."
+          },
+          "pass": true
+        },
+        {
+          "id": "celebrate_arms_up",
+          "sampleRateHz": 120,
+          "samples": 241,
+          "minimumReferenceVertexY": 0.005128013361245351,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.005128013361245351,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.00512801336124512,
+          "maximumActiveSoleAnchorErrorMeters": 3.465496750090997e-16,
+          "pass": true
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.005128005753279895,
+          "maximumActiveSoleAnchorErrorMeters": 7.654207723354894e-9,
+          "pass": true
+        },
+        {
+          "id": "celebrate_applause",
+          "sampleRateHz": 120,
+          "samples": 265,
+          "minimumReferenceVertexY": 0.005128013361245351,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_left",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.0015200283222543628,
+          "maximumActiveSoleAnchorErrorMeters": 5.2151872131938716e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_right",
+          "sampleRateHz": 120,
+          "samples": 178,
+          "minimumReferenceVertexY": 0.0015200518781778563,
+          "maximumActiveSoleAnchorErrorMeters": 5.2151872131938716e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_dive_high",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.0015199277144175435,
+          "maximumActiveSoleAnchorErrorMeters": 5.945093673702091e-9,
+          "pass": true
+        },
+        {
+          "id": "keeper_catch",
+          "sampleRateHz": 120,
+          "samples": 145,
+          "minimumReferenceVertexY": 0.005128013361245167,
+          "maximumActiveSoleAnchorErrorMeters": 3.010424545858703e-16,
+          "pass": true
+        },
+        {
+          "id": "keeper_throw",
+          "sampleRateHz": 120,
+          "samples": 142,
+          "minimumReferenceVertexY": 0.005128013360679143,
+          "maximumActiveSoleAnchorErrorMeters": 4.244935041675014e-12,
+          "pass": true
+        },
+        {
+          "id": "keeper_punt",
+          "sampleRateHz": 120,
+          "samples": 202,
+          "minimumReferenceVertexY": 0.005127942881403578,
+          "maximumActiveSoleAnchorErrorMeters": 4.992054673395599e-10,
+          "pass": true
+        },
+        {
+          "id": "referee_whistle",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.005128013361245351,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        },
+        {
+          "id": "referee_signal",
+          "sampleRateHz": 120,
+          "samples": 217,
+          "minimumReferenceVertexY": 0.005128013361245351,
+          "maximumActiveSoleAnchorErrorMeters": 5.5458390564355904e-17,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "decodedMaterialIssues": [],
+  "coldSeekLifecycle": null,
+  "rebuildLifecycle": null,
+  "lodLifecycle": null,
+  "pass": true,
+  "auditSource": {
+    "file": "source/audit-skinning.mjs",
+    "sha256": "aa7b32bdda9a94abda42c840afaabc6dd4db4ebc1278e1c6bfbab4e706fe3951"
+  },
+  "currentInputs": {
+    "manifest": {
+      "file": "asset-manifest.json",
+      "bytes": 466491,
+      "sha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+      "expectedSha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a"
+    },
+    "motion": {
+      "file": "animations.json",
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "expectedSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "preview": {
+      "file": "preview.js",
+      "bytes": 88221,
+      "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+      "expectedSha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd"
+    },
+    "motionRuntime": {
+      "file": "source/motion-runtime.js",
+      "bytes": 9440,
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "expectedSha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13"
+    },
+    "locomotion": {
+      "file": "source/locomotion-space.js",
+      "bytes": 22346,
+      "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+      "expectedSha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+    },
+    "locomotionCurve": {
+      "file": "source/locomotion-curve.js",
+      "bytes": 4551,
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+      "expectedSha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12"
+    },
+    "dribble": {
+      "file": "source/locomotion-dribble.js",
+      "bytes": 3916,
+      "sha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+      "expectedSha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d"
+    },
+    "recovery": {
+      "file": "source/recovery-state.js",
+      "bytes": 35502,
+      "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+      "expectedSha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+    },
+    "scene": {
+      "file": "source/scene.js",
+      "bytes": 16830,
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+      "expectedSha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba"
+    },
+    "props": {
+      "file": "source/props.js",
+      "bytes": 15767,
+      "sha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+      "expectedSha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae"
+    },
+    "bootBounds": {
+      "file": "verification/boot-bounds.json",
+      "bytes": 102832,
+      "sha256": "86e5c5587468d30ff88b2d409e0ce2dba947eb9f53410b9e3c176a6979b32398",
+      "expectedSha256": "86e5c5587468d30ff88b2d409e0ce2dba947eb9f53410b9e3c176a6979b32398"
+    }
+  },
+  "generatedAt": "2026-11-05T06:53:08.559Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 847879,
+      "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1979015,
+      "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1782187,
+      "sha256": "e826151740cabcb1604376ad43f38e8692a5f92ab4078390693f4f27ec77e934"
+    },
+    {
+      "file": "/offline/player-01-lod1.js",
+      "bytes": 1186747,
+      "sha256": "858e866b666d36915416a457111a15125689d0670f137f4f332fc09cf1df1625"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, selected delivered models/LODs and clips×7 deterministic times (defaults: all16 models/all31clips), plus interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor advances each actual displayed clip at the recorded30/60/120Hz, checking reference full-mesh floor, active sole anchors and descriptive authored hand supports. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

@@ -1,0 +1,34 @@
+--- preview.js
++++ preview.js
+@@ -6,7 +6,7 @@
+ import {createScene} from './source/scene.js';
+ import {contactsAt,solveFootIK} from './source/motion-runtime.js';
+ import {createProps} from './source/props.js';
+-import {LocomotionSpace} from './source/locomotion-space.js';
++import {LocomotionSpace,airborneFootGoalClearance} from './source/locomotion-space.js';
+ import {createLocomotionCurve} from './source/locomotion-curve.js';
+ import {RecoveryState,solveRecoveryHand,RECOVERY_ARM_BONES} from './source/recovery-state.js';
+ import {createDribbleFootStyle} from './source/locomotion-dribble.js';
+@@ -514,7 +514,7 @@
+       const sourceClip=clipMap.get(this.lastClipID)||this.motionClip(),seedClip=/^turn_/.test(sourceClip.id)?clipMap.get('idle'):sourceClip,phase=seedClip!==sourceClip?0:this.sampleSeconds/duration(sourceClip),actualSpeed=this.velocity.length();
+       this.locomotion.reset({speed:actualSpeed,phase,distance:0,feet,idleSeconds:sourceClip.id==='idle'?this.sampleSeconds:0,sourceClip:seedClip.id});
+       this.motorStyle={weight:sourceClip.id==='dribble'?1:0,from:sourceClip.id==='dribble'?1:0,to:requestedAction==='dribble'?1:0,elapsed:0};
+-      this.motorEntryFade=!motorClipFor(sourceClip.id)&&this.worldRotations?{sourceWorld:structuredClone(this.worldRotations),previousWorld:this.previousWorldRotations&&structuredClone(this.previousWorldRotations),dt:this.dt,elapsed:0,bones:['Hips',...motorStyleBones,'LeftUpLeg','LeftLeg','RightUpLeg','RightLeg']}:null;
++      this.motorEntryFade=!(LocomotionSpace.accepts(sourceClip.id)||sourceClip.id==='dribble')&&this.worldRotations?{sourceWorld:structuredClone(this.worldRotations),previousWorld:this.previousWorldRotations&&structuredClone(this.previousWorldRotations),dt:this.dt,elapsed:0,bones:['Hips',...motorStyleBones,'LeftUpLeg','LeftLeg','RightUpLeg','RightLeg']}:null;
+       this.motorPelvisEntry=!!this.motorEntryFade;
+       this.fade=null;this.rootBlend=null;this.landings.clear();this.contactTargets.clear();
+       if(this.motorEntryFade)motorArmEntryPose(this,this.motorBodyPose(this.locomotion.pose(),this.locomotion.phase),this.motorHeading(0));
+@@ -540,6 +540,13 @@
+     if(this.motorStyle.weight>0&&!this.disableDribbleFootStyle){
+       if(!nativeDribbleFootStyle)nativeDribbleFootStyle=createDribbleFootStyle(THREE,data.motion.skeleton,clipMap.get('run_2'),clipMap.get('dribble'),sample,data.bootBounds);
+       for(const f of targetFeet)this.dribbleDetail.push(nativeDribbleFootStyle.apply({name:f.name,unwrappedPhase:state.unwrappedPhase,mode:f.state.mode,target:f.target,orientation:f.orientation,heading,styleWeight:this.motorStyle.weight,speed:state.actualSpeed}));
++    }
++    this.motorFootClearance=[];
++    for(const f of targetFeet)if(f.state.mode!=='plant'){
++      const hull=data.bootBounds;
++      if(hull?.modelSha256?.[this.path]!==data.hashes.models[this.path])throw Error('Motor foot clearance requires the bound model boot hull');
++      const result=airborneFootGoalClearance({mode:f.state.mode,position:f.target.toArray(),orientation:f.orientation.toArray(),vertices:hull.feet[f.name].vertices,paddingMeters:hull.paddingMeters,minimumY:.001});
++      f.target.y=result.position[1];this.motorFootClearance.push({bone:f.name,worldGoalBefore:[f.target.x,f.target.y-result.liftMeters,f.target.z],orientation:f.orientation.toArray(),...result});
+     }
+     this.locomotionProjections=[];const inverseYaw=yawQ.clone().invert();
+     for(const f of targetFeet)if(f.state.mode!=='plant'&&f.state.mode!=='inherited'){

@@ -1,0 +1,1982 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T05:47:33.837Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates32-final/models/player-01-lod0.glb",
+      "bytes": 967960,
+      "sha256": "5c92abc94e762bc78b88647b7ea74970c08f87dc9e29d006441498432d9f15ef"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-01-lod1.glb",
+      "bytes": 521684,
+      "sha256": "4bda5c5a8fd259083599930dd6b24e617beaf04342a78ccca3bb8f05497fd528"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-02-lod0.glb",
+      "bytes": 940648,
+      "sha256": "81d8cc54a73116cc3c521c02bdb0a9be19ea5cda00fc3bd6ed02ffa27fcde153"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-02-lod1.glb",
+      "bytes": 501312,
+      "sha256": "a2ea0db88de03830ef0f36ce289a042d53b38472483f7e888a742adbc73e3e4d"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-03-lod0.glb",
+      "bytes": 992940,
+      "sha256": "878c553649e2fcda06ab36a5ac3e823843b5b7867f9aa0c3c999bcfd7c7aa942"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-03-lod1.glb",
+      "bytes": 543536,
+      "sha256": "f0c3188b0476a9c9fa6d6451854f82950ba97b4a9aec1a8b96af044160a8870d"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-04-lod0.glb",
+      "bytes": 1009436,
+      "sha256": "bb10e10670c2601b8d466d77b4e50aeb60ca9e95755c4cf292338f2755e9c427"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-04-lod1.glb",
+      "bytes": 560772,
+      "sha256": "5546c0396032f00fbfdd9fe1a95ee26c24d9710513df2b5c68e974794384a1e8"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-05-lod0.glb",
+      "bytes": 905460,
+      "sha256": "701d3aec8ab2b0bd69e91d2ee186ac3a732180459f44cd44e67690e998b5a258"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-05-lod1.glb",
+      "bytes": 507564,
+      "sha256": "0afa155954f91dbf7edb9771fc9cd5f64753f17c151c10c485201e199ca3bb75"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-06-lod0.glb",
+      "bytes": 990444,
+      "sha256": "78088079bd06b78bdd96de0b39e8734e2cab2384ff2dca970d10d28481f02b94"
+    },
+    {
+      "file": "source/character-candidates32-final/models/player-06-lod1.glb",
+      "bytes": 536528,
+      "sha256": "f6087c88e61ef8e62c804835cd414f389c8e3d3299f771f654ee28c0356c1982"
+    },
+    {
+      "file": "source/character-candidates32-final/models/goalkeeper-lod0.glb",
+      "bytes": 983632,
+      "sha256": "fd6783372f04c8f2483d5fd5da926ed21dce6afa8aeb60eee48cd0a04853c119"
+    },
+    {
+      "file": "source/character-candidates32-final/models/goalkeeper-lod1.glb",
+      "bytes": 528584,
+      "sha256": "8f1410f6793e9b32d3b342dbb443895434d16ffe334083c9962bcc4a5b17ee50"
+    },
+    {
+      "file": "source/character-candidates32-final/models/referee-lod0.glb",
+      "bytes": 992064,
+      "sha256": "884ac69af6a72faf0ccc98c27d1577641714432ac908ceb74c97e22f549f39a5"
+    },
+    {
+      "file": "source/character-candidates32-final/models/referee-lod1.glb",
+      "bytes": 544512,
+      "sha256": "f1e516ea3256ab0a3791f9ab6b40a413fcae917f260a98b8fbff245f98370cde"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "d827aa83c3524746a408aca521d3bc1e2ba0fa1688436a2e2beda899ae834585",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "source/character-candidates32-final/models/player-01-lod0.glb": "5c92abc94e762bc78b88647b7ea74970c08f87dc9e29d006441498432d9f15ef",
+      "source/character-candidates32-final/models/player-01-lod1.glb": "4bda5c5a8fd259083599930dd6b24e617beaf04342a78ccca3bb8f05497fd528",
+      "source/character-candidates32-final/models/player-02-lod0.glb": "81d8cc54a73116cc3c521c02bdb0a9be19ea5cda00fc3bd6ed02ffa27fcde153",
+      "source/character-candidates32-final/models/player-02-lod1.glb": "a2ea0db88de03830ef0f36ce289a042d53b38472483f7e888a742adbc73e3e4d",
+      "source/character-candidates32-final/models/player-03-lod0.glb": "878c553649e2fcda06ab36a5ac3e823843b5b7867f9aa0c3c999bcfd7c7aa942",
+      "source/character-candidates32-final/models/player-03-lod1.glb": "f0c3188b0476a9c9fa6d6451854f82950ba97b4a9aec1a8b96af044160a8870d",
+      "source/character-candidates32-final/models/player-04-lod0.glb": "bb10e10670c2601b8d466d77b4e50aeb60ca9e95755c4cf292338f2755e9c427",
+      "source/character-candidates32-final/models/player-04-lod1.glb": "5546c0396032f00fbfdd9fe1a95ee26c24d9710513df2b5c68e974794384a1e8",
+      "source/character-candidates32-final/models/player-05-lod0.glb": "701d3aec8ab2b0bd69e91d2ee186ac3a732180459f44cd44e67690e998b5a258",
+      "source/character-candidates32-final/models/player-05-lod1.glb": "0afa155954f91dbf7edb9771fc9cd5f64753f17c151c10c485201e199ca3bb75",
+      "source/character-candidates32-final/models/player-06-lod0.glb": "78088079bd06b78bdd96de0b39e8734e2cab2384ff2dca970d10d28481f02b94",
+      "source/character-candidates32-final/models/player-06-lod1.glb": "f6087c88e61ef8e62c804835cd414f389c8e3d3299f771f654ee28c0356c1982",
+      "source/character-candidates32-final/models/goalkeeper-lod0.glb": "fd6783372f04c8f2483d5fd5da926ed21dce6afa8aeb60eee48cd0a04853c119",
+      "source/character-candidates32-final/models/goalkeeper-lod1.glb": "8f1410f6793e9b32d3b342dbb443895434d16ffe334083c9962bcc4a5b17ee50",
+      "source/character-candidates32-final/models/referee-lod0.glb": "884ac69af6a72faf0ccc98c27d1577641714432ac908ceb74c97e22f549f39a5",
+      "source/character-candidates32-final/models/referee-lod1.glb": "f1e516ea3256ab0a3791f9ab6b40a413fcae917f260a98b8fbff245f98370cde"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11661206625922176,
+          1.5772320281841599,
+          0.9253483644227803
+        ],
+        "quaternion": [
+          -0.0022188777408774867,
+          0.06495407825865748,
+          0.00014443051678401502,
+          0.997885776749506
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8029566464729698,
+          1.5772320281841599,
+          0.9868108193605989
+        ],
+        "quaternion": [
+          -0.0015073000781239108,
+          -0.34289736602879595,
+          -0.0005502074787753525,
+          0.9393715035536891
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.49021282375967556,
+          0.9215465610538688,
+          3.8035296450359293
+        ],
+        "quaternion": [
+          -0.007256387886941369,
+          0.06495252147847079,
+          0.00047233059901792736,
+          0.9978618600248375
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.751421354086166,
+          0.9229644337663667,
+          5.798099909580729
+        ],
+        "quaternion": [
+          -0.004736491352069434,
+          0.06495350714054728,
+          0.00030830625821315946,
+          0.9978770026947538
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.10590699883121947,
+          1.5772320281841599,
+          0.8434661016427142
+        ],
+        "quaternion": [
+          -0.0024431855444334823,
+          0.06495404415213625,
+          0.0001590310922864165,
+          0.9978852527729777
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5262273076067377,
+          1.5772320281841599,
+          0.6582661720818487
+        ],
+        "quaternion": [
+          -0.002299918700735753,
+          -0.34289677971263155,
+          -0.0008395358615619176,
+          0.9393698973334274
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.49021282375967556,
+          0.9215465610538688,
+          3.8035296450359293
+        ],
+        "quaternion": [
+          -0.007256387886941369,
+          0.06495252147847079,
+          0.00047233059901792736,
+          0.9978618600248375
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.751421354086166,
+          0.9229644337663667,
+          5.798099909580729
+        ],
+        "quaternion": [
+          -0.004736491352069434,
+          0.06495350714054728,
+          0.00030830625821315946,
+          0.9978770026947538
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.1162492278236012,
+          1.588982490314807,
+          0.9080083136947953
+        ],
+        "quaternion": [
+          -0.0022542357077290024,
+          0.06495407310029357,
+          0.00014673202683601857,
+          0.9978856975018571
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8001172722708347,
+          1.588982490314807,
+          0.9818294044150835
+        ],
+        "quaternion": [
+          -0.0015098824041195349,
+          -0.34289736451498354,
+          -0.0005511501013466966,
+          0.939371499406582
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.4967981317909352,
+          0.933365058119428,
+          3.8530872372412097
+        ],
+        "quaternion": [
+          -0.007160323910744007,
+          0.06495256664864826,
+          0.00046607763182153494,
+          0.9978625539716817
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-02-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7608290324622411,
+          0.9344648499867614,
+          5.8729678652391195
+        ],
+        "quaternion": [
+          -0.004674912462912324,
+          0.06495352604241753,
+          0.0003042979838408952,
+          0.9978772930831015
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.10748295091076085,
+          1.588982490314807,
+          0.8409557150439549
+        ],
+        "quaternion": [
+          -0.002440652745195481,
+          0.06495404455557448,
+          0.00015886622808677383,
+          0.9978852589709757
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5253073677644404,
+          1.588982490314807,
+          0.655563589902354
+        ],
+        "quaternion": [
+          -0.002297534423231344,
+          -0.34289678184240907,
+          -0.000838665532333225,
+          0.939369903167979
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.4967981317909352,
+          0.933365058119428,
+          3.8530872372412097
+        ],
+        "quaternion": [
+          -0.007160323910744007,
+          0.06495256664864826,
+          0.00046607763182153494,
+          0.9978625539716817
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-02",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-02-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7608290324622411,
+          0.9344648499867614,
+          5.8729678652391195
+        ],
+        "quaternion": [
+          -0.004674912462912324,
+          0.06495352604241753,
+          0.0003042979838408952,
+          0.9978772930831015
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11776532663907188,
+          1.578358628593574,
+          0.9193854353928219
+        ],
+        "quaternion": [
+          -0.002196877216605714,
+          0.06495408142715045,
+          0.00014299846533225957,
+          0.9978858254268818
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8006612578872114,
+          1.578358628593574,
+          0.9691739847266558
+        ],
+        "quaternion": [
+          -0.0015116484478822274,
+          -0.34289736347820055,
+          -0.0005517947576431969,
+          0.9393714965663023
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.491202125919398,
+          0.9228640885364012,
+          3.8078188096536913
+        ],
+        "quaternion": [
+          -0.007242083436141812,
+          0.0649525282427037,
+          0.0004713994980459221,
+          0.9978619639433592
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-03-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7540608456016991,
+          0.9253279306318443,
+          5.812650954568287
+        ],
+        "quaternion": [
+          -0.004722678416284602,
+          0.06495351140199908,
+          0.00030740715078738545,
+          0.9978770681631933
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.1057602824621927,
+          1.578358628593574,
+          0.8275597473634129
+        ],
+        "quaternion": [
+          -0.002446241378843527,
+          0.0649540436648291,
+          0.0001592300017328083,
+          0.997885245286506
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5255843502572686,
+          1.578358628593574,
+          0.642591172936341
+        ],
+        "quaternion": [
+          -0.002302795342962957,
+          -0.3428967771401043,
+          -0.0008405859179442795,
+          0.9393698902859579
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.491202125919398,
+          0.9228640885364012,
+          3.8078188096536913
+        ],
+        "quaternion": [
+          -0.007242083436141812,
+          0.0649525282427037,
+          0.0004713994980459221,
+          0.9978619639433592
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-03",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-03-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7540608456016991,
+          0.9253279306318443,
+          5.812650954568287
+        ],
+        "quaternion": [
+          -0.004722678416284602,
+          0.06495351140199908,
+          0.00030740715078738545,
+          0.9978770681631933
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11737606682753085,
+          1.5800037895875367,
+          0.9316058430096217
+        ],
+        "quaternion": [
+          -0.002204104854827259,
+          0.06495408038971581,
+          0.00014346892456677915,
+          0.9978858094888327
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8064791533122839,
+          1.5800037895875367,
+          0.9912518707692071
+        ],
+        "quaternion": [
+          -0.0015007492924619709,
+          -0.34289736985737607,
+          -0.0005478162553452177,
+          0.9393715140421308
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.4918780879148101,
+          0.9245885526000394,
+          3.8165114186953812
+        ],
+        "quaternion": [
+          -0.007232077166346602,
+          0.06495253296649504,
+          0.00047074817296794335,
+          0.9978620365146947
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7552388210210561,
+          0.9275184621042162,
+          5.828020975278807
+        ],
+        "quaternion": [
+          -0.004712252220471566,
+          0.06495351461035934,
+          0.00030672849201244417,
+          0.9978771174530484
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.1058994181487829,
+          1.5800037895875367,
+          0.8438218127577817
+        ],
+        "quaternion": [
+          -0.002442956506873952,
+          0.06495404418863582,
+          0.000159016183843073,
+          0.9978852533337186
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5262941546338767,
+          1.5800037895875367,
+          0.6586045196038436
+        ],
+        "quaternion": [
+          -0.0022997030937927858,
+          -0.3428967799053152,
+          -0.0008394571588840513,
+          0.9393698978612869
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.4918780879148101,
+          0.9245885526000394,
+          3.8165114186953812
+        ],
+        "quaternion": [
+          -0.007232077166346602,
+          0.06495253296649504,
+          0.00047074817296794335,
+          0.9978620365146947
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-04",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7552388210210561,
+          0.9275184621042162,
+          5.828020975278807
+        ],
+        "quaternion": [
+          -0.004712252220471566,
+          0.06495351461035934,
+          0.00030672849201244417,
+          0.9978771174530484
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11387952579748095,
+          1.5766203638818617,
+          0.9003619817407765
+        ],
+        "quaternion": [
+          -0.002271629637277922,
+          0.06495407053277176,
+          0.00014786422722154395,
+          0.9978856580571669
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.7879841807337828,
+          1.5766203638818617,
+          0.9647300706821931
+        ],
+        "quaternion": [
+          -0.0015359879462449912,
+          -0.34289734906587127,
+          -0.0005606793680954842,
+          0.9393714570835507
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.49004633520460866,
+          0.9210554118097287,
+          3.8009043303862953
+        ],
+        "quaternion": [
+          -0.007258797501397846,
+          0.06495252033770808,
+          0.0004724874449111407,
+          0.9978618424993649
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-05-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7514737522768604,
+          0.9229123971100754,
+          5.797237170558553
+        ],
+        "quaternion": [
+          -0.004736122075462532,
+          0.06495350725463533,
+          0.00030828222137228774,
+          0.9978770044474822
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.10579214154965769,
+          1.5766203638818617,
+          0.8385021824786609
+        ],
+        "quaternion": [
+          -0.00244526432071079,
+          0.06495404382070467,
+          0.00015916640336123547,
+          0.997885247681213
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5258047630905305,
+          1.5766203638818617,
+          0.6534596985335122
+        ],
+        "quaternion": [
+          -0.00230187557889661,
+          -0.3428967779629818,
+          -0.0008402501778515417,
+          0.9393698925402406
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.49004633520460866,
+          0.9210554118097287,
+          3.8009043303862953
+        ],
+        "quaternion": [
+          -0.007258797501397846,
+          0.06495252033770808,
+          0.0004724874449111407,
+          0.9978618424993649
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-05",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-05-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7514737522768604,
+          0.9229123971100754,
+          5.797237170558553
+        ],
+        "quaternion": [
+          -0.004736122075462532,
+          0.06495350725463533,
+          0.00030828222137228774,
+          0.9978770044474822
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11924506459353601,
+          1.582049317525541,
+          0.9436336740418518
+        ],
+        "quaternion": [
+          -0.0021699918729250344,
+          0.06495408525628385,
+          0.00014124845269741258,
+          0.9978858842536382
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.813558874655477,
+          1.582049317525541,
+          0.9975987370863747
+        ],
+        "quaternion": [
+          -0.0014876461985818944,
+          -0.34289737746539006,
+          -0.0005430332527085517,
+          0.939371534884378
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.4929189702818125,
+          0.9264478627976801,
+          3.8241264532353383
+        ],
+        "quaternion": [
+          -0.007216381374964283,
+          0.06495254036305541,
+          0.00046972650727680634,
+          0.9978621501476268
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7553029473198353,
+          0.927703164984398,
+          5.829021461443491
+        ],
+        "quaternion": [
+          -0.0047109974958778915,
+          0.06495351499598655,
+          0.0003066468198598297,
+          0.9978771233774165
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.10592371483560835,
+          1.582049317525541,
+          0.8417396627430028
+        ],
+        "quaternion": [
+          -0.002442943007655421,
+          0.06495404419078696,
+          0.00015901530515603557,
+          0.9978852533667665
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5262733513861577,
+          1.582049317525541,
+          0.6565213460966363
+        ],
+        "quaternion": [
+          -0.0022996903861598294,
+          -0.34289677991667117,
+          -0.0008394525202359202,
+          0.9393698978923968
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.4929189702818125,
+          0.9264478627976801,
+          3.8241264532353383
+        ],
+        "quaternion": [
+          -0.007216381374964283,
+          0.06495254036305541,
+          0.00046972650727680634,
+          0.9978621501476268
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7553029473198353,
+          0.927703164984398,
+          5.829021461443491
+        ],
+        "quaternion": [
+          -0.0047109974958778915,
+          0.06495351499598655,
+          0.0003066468198598297,
+          0.9978771233774165
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11715887454321229,
+          1.5888633040632385,
+          0.927819698582385
+        ],
+        "quaternion": [
+          -0.002208305469380999,
+          0.06495407978520584,
+          0.00014374234969500058,
+          0.9978858002017805
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8113486333801433,
+          1.5888633040632385,
+          0.9949620841383943
+        ],
+        "quaternion": [
+          -0.001491731049712172,
+          -0.3428973751007715,
+          -0.0005445243397682434,
+          0.9393715284064764
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.49678213603343235,
+          0.9332194051662216,
+          3.8524919201233363
+        ],
+        "quaternion": [
+          -0.007161610329950269,
+          0.06495256604773877,
+          0.000466161367030257,
+          0.9978625447399436
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "goalkeeper-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7617974878371541,
+          0.9346324121038517,
+          5.874139535280084
+        ],
+        "quaternion": [
+          -0.004674128373177467,
+          0.06495352628150193,
+          0.0003042469461097376,
+          0.9978772967561417
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.1060172391519061,
+          1.5888633040632385,
+          0.8425981599936394
+        ],
+        "quaternion": [
+          -0.0024403819130309787,
+          0.06495404459868936,
+          0.00015884859916168246,
+          0.997885259633347
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5268433074848441,
+          1.5888633040632385,
+          0.6571854597726612
+        ],
+        "quaternion": [
+          -0.0022972794724924117,
+          -0.34289678207001534,
+          -0.0008385724680487368,
+          0.9393699037915094
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.49678213603343235,
+          0.9332194051662216,
+          3.8524919201233363
+        ],
+        "quaternion": [
+          -0.007161610329950269,
+          0.06495256604773877,
+          0.000466161367030257,
+          0.9978625447399436
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "goalkeeper-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7617974878371541,
+          0.9346324121038517,
+          5.874139535280084
+        ],
+        "quaternion": [
+          -0.004674128373177467,
+          0.06495352628150193,
+          0.0003042469461097376,
+          0.9978772967561417
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11676405616299279,
+          1.5760870459392937,
+          0.9276324977761478
+        ],
+        "quaternion": [
+          -0.0022154149091714757,
+          0.0649540787594646,
+          0.000144205115193102,
+          0.9978857844433773
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8013488932835732,
+          1.5760870459392937,
+          0.9857561813774603
+        ],
+        "quaternion": [
+          -0.0015103811550541604,
+          -0.34289736422230704,
+          -0.000551332159649658,
+          0.9393714986047909
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-body-near-390x844.png",
+      "camera": {
+        "position": [
+          0.48964115309451084,
+          0.9205446846137213,
+          3.799416589132845
+        ],
+        "quaternion": [
+          -0.007264884621229721,
+          0.0649525174542491,
+          0.0004728836658686308,
+          0.9978617982009504
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "referee-body-far-390x844.png",
+      "camera": {
+        "position": [
+          0.7507955683687275,
+          0.9222812463243816,
+          5.793744880141708
+        ],
+        "quaternion": [
+          -0.004740309283309664,
+          0.06495350596047547,
+          0.00030855477383522984,
+          0.9978769845653785
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-face-front-844x390.png",
+      "camera": {
+        "position": [
+          0.10583118372992693,
+          1.5760870459392937,
+          0.8440077714933821
+        ],
+        "quaternion": [
+          -0.0024442369274586657,
+          0.06495404398454327,
+          0.0001590995285913411,
+          0.9978852501982562
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1.18,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-face-three-quarter-844x390.png",
+      "camera": {
+        "position": [
+          -0.5260312066647453,
+          1.5760870459392937,
+          0.6588875066992441
+        ],
+        "quaternion": [
+          -0.0023009084313302067,
+          -0.3428967788278968,
+          -0.0008398971414310985,
+          0.9393698949096861
+        ],
+        "fov": 25,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "body-near",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-body-near-844x390.png",
+      "camera": {
+        "position": [
+          0.48964115309451084,
+          0.9205446846137213,
+          3.799416589132845
+        ],
+        "quaternion": [
+          -0.007264884621229721,
+          0.0649525174542491,
+          0.0004728836658686308,
+          0.9978617982009504
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    },
+    {
+      "id": "referee",
+      "view": "body",
+      "orbit": 0.13,
+      "zoom": 1.55,
+      "lod": 1,
+      "label": "body-far",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "referee-body-far-844x390.png",
+      "camera": {
+        "position": [
+          0.7507955683687275,
+          0.9222812463243816,
+          5.793744880141708
+        ],
+        "quaternion": [
+          -0.004740309283309664,
+          0.06495350596047547,
+          0.00030855477383522984,
+          0.9978769845653785
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564,
+        "zoom": 1
+      }
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "All eight staged compressed candidates; frozen86visualproofbeforepromotion/nativepackaging. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

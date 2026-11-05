@@ -1,0 +1,41 @@
+{
+  "pass": true,
+  "checks": {
+    "actualCanonicalClock": true,
+    "mirroredContactDispatch": true,
+    "firstPhaseCapturedSupport": true,
+    "secondPhaseFlatFirst": true,
+    "finalBothIndependentFlat": true,
+    "unsupportedNeverUsesUILabel": true,
+    "bodyHoldIsIndependentOfFirstFootLanding": true,
+    "noUnexpectedFactoryErrors": true,
+    "neverHeldMissingBallRejects": true,
+    "lateFirstVisibleProgressRejects": true,
+    "completedFlagCannotBypassDeadline": true,
+    "actualTerminalHoldsForPoint2Seconds": true,
+    "postCompletionPoseDeviationCannotPass": true,
+    "nativeBodyClockJumpRejects": true,
+    "nativeBodyClockReversalRejects": true,
+    "nativeClockNormalProgressPasses": true,
+    "nativeClockTerminalClampPasses": true,
+    "genuineLoopWrapPasses": true,
+    "capturedPoseRateZeroStaysFrozen": true,
+    "capturedPoseClockDriftRejects": true,
+    "overlayClockJumpRejects": true,
+    "matchedEntryPhasePasses": true,
+    "firstActivationCannotSkipToTerminal": true,
+    "repeatedActionBindsLatestActivation": true
+  },
+  "method": "Controlled read-only descriptor/clock/contact dispatch fixture with the actual local Three r160 math classes. No browser, controller or animation-quality claim.",
+  "kind": "controlled-auditor-fixture",
+  "complete": true,
+  "auditSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "0e65798c0ff3f877da3f8bebf813b3efb183ba74c17e066358807985e3e24cbf"
+  },
+  "fixtureSource": {
+    "file": "/tmp/soccer-v7-action-observer-fixture-clocks.cjs",
+    "sha256": "08ba18c0fc10253c218611c565e7ebfbcd6ed0bc5d452a45a5f241d77f4c2e86"
+  },
+  "limits": "Controlled native-clock, contributor, deadline and contact-dispatch cases using local Three math; this is not a character/runtime or mobile performance pass. Thirteen prior contact/ledger checks plus eleven clock/history checks. The synthetic contact-dispatch fixture now advances its get_up clock by the matching elapsed interval instead of using an unrelated fixed sample time."
+}

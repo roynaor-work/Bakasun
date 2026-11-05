@@ -1,0 +1,663 @@
+{
+  "kind": "read-only-nongait-seed-guard-state-proof",
+  "pass": true,
+  "rows": [
+    {
+      "id": "decelerate",
+      "phase": 0,
+      "speed": 6,
+      "initialModes": {
+        "LeftFoot": "flight",
+        "RightFoot": "flight"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.033333,
+      "speed": 5.6066705333339995,
+      "initialModes": {
+        "LeftFoot": "flight",
+        "RightFoot": "flight"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.1,
+      "speed": 4.86,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "flight"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "LeftFoot",
+          "phase": 0.1,
+          "heelPhase": 0.1,
+          "stanceEndPhase": 0.36900043312527075,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.18,
+      "speed": 4.034400000000001,
+      "initialModes": {
+        "LeftFoot": "flight",
+        "RightFoot": "flight"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.3,
+      "speed": 2.9399999999999995,
+      "initialModes": {
+        "LeftFoot": "flight",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "RightFoot",
+          "phase": 0.3,
+          "heelPhase": 0.3,
+          "stanceEndPhase": 0.633,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.5,
+      "speed": 1.5,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "flight"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "LeftFoot",
+          "phase": 0.5,
+          "heelPhase": 0.5,
+          "stanceEndPhase": 0.9199999999999999,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.7,
+      "speed": 0.5400000000000001,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "LeftFoot",
+          "phase": 0.7,
+          "heelPhase": 0.7,
+          "stanceEndPhase": 1.1199999999999999,
+          "expiredAtSeed": false
+        },
+        {
+          "name": "RightFoot",
+          "phase": 0.7,
+          "heelPhase": 0.7,
+          "stanceEndPhase": 1.1199999999999999,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.85,
+      "speed": 0.13500000000000004,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "LeftFoot",
+          "phase": 0.85,
+          "heelPhase": 0.85,
+          "stanceEndPhase": 1.27,
+          "expiredAtSeed": false
+        },
+        {
+          "name": "RightFoot",
+          "phase": 0.85,
+          "heelPhase": 0.85,
+          "stanceEndPhase": 1.27,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "decelerate",
+      "phase": 0.999,
+      "speed": 0.000006000000000000011,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [
+        {
+          "name": "LeftFoot",
+          "phase": 0.999,
+          "heelPhase": 0.999,
+          "stanceEndPhase": 1.419,
+          "expiredAtSeed": false
+        },
+        {
+          "name": "RightFoot",
+          "phase": 0.999,
+          "heelPhase": 0.999,
+          "stanceEndPhase": 1.419,
+          "expiredAtSeed": false
+        }
+      ],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": null
+    },
+    {
+      "id": "run_1",
+      "phase": 0,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "run_1",
+      "phase": 0.033333,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "run_1",
+      "phase": 0.1,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "run_1",
+      "phase": 0.18,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "run_1",
+      "phase": 0.3,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "run_1",
+      "phase": 0.5,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "run_1",
+      "phase": 0.7,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "run_1",
+      "phase": 0.85,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "run_1",
+      "phase": 0.999,
+      "speed": 1.6,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0.033333,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0.1,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0.18,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0.3,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "sprint",
+      "phase": 0.5,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "sprint",
+      "phase": 0.7,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "sprint",
+      "phase": 0.85,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1.5
+    },
+    {
+      "id": "sprint",
+      "phase": 0.999,
+      "speed": 7.2,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0.033333,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0.1,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0.18,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0.3,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 0.5
+    },
+    {
+      "id": "dribble",
+      "phase": 0.5,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "dribble",
+      "phase": 0.7,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "dribble",
+      "phase": 0.85,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "plant"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1
+    },
+    {
+      "id": "dribble",
+      "phase": 0.999,
+      "speed": 2.4,
+      "initialModes": {
+        "LeftFoot": "inherited",
+        "RightFoot": "inherited"
+      },
+      "groundedSourceSupports": [],
+      "finalSpeed": 0,
+      "finalModes": {
+        "LeftFoot": "plant",
+        "RightFoot": "plant"
+      },
+      "seedCommitUntil": 1.5
+    }
+  ],
+  "cloneCases": 72,
+  "footChecks": 72,
+  "coverageSteps": 12960,
+  "maximumResetFootError": 0,
+  "findings": [
+    "Canonical moving gait and dribble inheritance remains available. Nongait decelerate never enters cyclic inherited FK.",
+    "For positive speed, nongait plant admission requires both a displayed sole at≤3mm and authored source contact.",
+    "Admitted nongait support is explicitly distinguished from cyclic heel crossing; its frozen physical stance begins at admission and source clip/time/contact metadata survives all stepping unchanged."
+  ],
+  "limits": [
+    "CPU state/coverage proof only; no actual mesh or angular/near-ground-drift validation."
+  ]
+}

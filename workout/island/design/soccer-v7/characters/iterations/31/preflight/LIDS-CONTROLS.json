@@ -1,0 +1,130 @@
+{
+  "kind": "eye-closure-extra31-paired-control",
+  "baselineExtra": 0,
+  "lidsExtra": 0.05,
+  "mouthCompression": 0.4,
+  "eyeColorFactor": 0.88,
+  "skinNormalScale": [
+    0.5,
+    -0.5
+  ],
+  "faceVariant": "27",
+  "hairGeometryVariant": "29",
+  "crownFlyaways": false,
+  "matchedCameraPairs": 8,
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "captureScriptSha256": "2598cdb42e279ec84b02abbf164b2bc23e6ed5683f21e0f4f74727b32df92d0b",
+  "rows": [
+    {
+      "id": "player-02",
+      "texturesByteIdentical": {
+        "basecolor": true,
+        "normal": true,
+        "orm": true
+      },
+      "eyes": [
+        {
+          "index": 0,
+          "baselineHeightMm": 7.684119415283686,
+          "lids05HeightMm": 7.08986206054707,
+          "changePercent": -7.733577819660642,
+          "baselineIrisDiameterMm": 12.936,
+          "lids05IrisDiameterMm": 12.936,
+          "opticalCenterChangeMm": [
+            0.0,
+            -0.202063560485799,
+            0.0
+          ],
+          "baselineAlignmentPass": true,
+          "lids05AlignmentPass": true
+        },
+        {
+          "index": 1,
+          "baselineHeightMm": 7.684249877929705,
+          "lids05HeightMm": 7.08994903564486,
+          "changePercent": -7.734012450476968,
+          "baselineIrisDiameterMm": 12.936,
+          "lids05IrisDiameterMm": 12.936,
+          "opticalCenterChangeMm": [
+            0.0,
+            -0.20212879180925292,
+            0.0
+          ],
+          "baselineAlignmentPass": true,
+          "lids05AlignmentPass": true
+        }
+      ],
+      "models": [
+        {
+          "file": "source/character-candidates31-lids/models/player-02-lod0.glb",
+          "bytes": 939340,
+          "triangles": 33862,
+          "sha256": "64cab0da3eb27d031d6f1cfbb4a4021e1e281f8943a95cc4d74aab8476774bee"
+        },
+        {
+          "file": "source/character-candidates31-lids/models/player-02-lod1.glb",
+          "bytes": 501188,
+          "triangles": 5779,
+          "sha256": "325606b175bd3af149720a81d928867001571c24be5866df18d3151485aee0ba"
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "texturesByteIdentical": {
+        "basecolor": true,
+        "normal": true,
+        "orm": true
+      },
+      "eyes": [
+        {
+          "index": 0,
+          "baselineHeightMm": 7.62915115356444,
+          "lids05HeightMm": 7.03463287353534,
+          "changePercent": -7.792718587720371,
+          "baselineIrisDiameterMm": 12.936,
+          "lids05IrisDiameterMm": 12.936,
+          "opticalCenterChangeMm": [
+            0.0,
+            -0.29570446014415275,
+            0.0
+          ],
+          "baselineAlignmentPass": true,
+          "lids05AlignmentPass": true
+        },
+        {
+          "index": 1,
+          "baselineHeightMm": 7.629151153564884,
+          "lids05HeightMm": 7.034676361084458,
+          "changePercent": -7.792148569538371,
+          "baselineIrisDiameterMm": 12.936,
+          "lids05IrisDiameterMm": 12.936,
+          "opticalCenterChangeMm": [
+            0.0,
+            -0.2956501007078671,
+            0.0
+          ],
+          "baselineAlignmentPass": true,
+          "lids05AlignmentPass": true
+        }
+      ],
+      "models": [
+        {
+          "file": "source/character-candidates31-lids/models/player-04-lod0.glb",
+          "bytes": 1001828,
+          "triangles": 35102,
+          "sha256": "5f8d174c4aa6f21b08d3d3165a296c697f1bf72c75519c25ea381e4bd1d72856"
+        },
+        {
+          "file": "source/character-candidates31-lids/models/player-04-lod1.glb",
+          "bytes": 561020,
+          "triangles": 5780,
+          "sha256": "dabda4a48016f6ea4648dfef75fd1c0c2b35740aecfff022b2cfe2d5c93082fa"
+        }
+      ]
+    }
+  ],
+  "live24Checked": 41,
+  "live24AllUnchanged": true,
+  "limits": "Geometry checks plus eight matched pairs of static PBR phone frames. Not an animation, blink, or phone-performance test; no promotion."
+}

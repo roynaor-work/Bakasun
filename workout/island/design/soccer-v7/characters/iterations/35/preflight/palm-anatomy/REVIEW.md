@@ -1,0 +1,9 @@
+# Independent native32 palmar heel anatomy
+
+This is a read-only geometric inspection of all 16 frozen native32 GLBs, both hands per model. `native32-heel-anatomy.json` binds every model SHA and the native manifest; it includes actual decoded triangle indices, all three bind/Hand-local vertices, corner Hand influences, barycentric weights, face normals and fixed support direction. No production palm selector was called, and no source/model was changed.
+
+Canonical Hand bind axes are identity: wrist Y=0, fingers extend down toward Y≈−170mm, and the palmar face points toward −Z. The bounded box X±15mm, Y[−45,−20]mm is proximal heel, above knuckle/finger rows and inside the laterally spreading thumb. FaceNormalZ<−.5 and corner/barycentric Hand mass≥.5/.8 retain actual hand-facing skin. The fixed direction [0,sin10°,−cos10°] maps exactly to worldDown under HandworldRx(−100°), matching the intended get-up support orientation. It is a fixed anatomical objective, not a per-frame lowest-vertex pick.
+
+The old central rays are non-extremal within this same true heel region. For P04 near Right, the real convex heel support is Hand-local[−3.905,−34.447,−32.124]mm, normal[.224,.467,−.855], Hand mass .914. It lies 4.159mm farther along the pressure direction than V1 and 3.497mm farther than V2. Referee near Right is effectively the same. Thus a ray marker at 3mm can coexist with penetrating nearby heel skin; marker success cannot validate the actual palm surface. All 32 bounded real pressure patches exist.
+
+A separate paired-LOD issue remains: independent extrema can choose different lateral pads in near/far meshes, creating tangent displacement even when normal support heights agree. Motion's child is testing one fixed paired calibration in this same anatomical domain. Its finite-pose/interval feasibility and the independent runtime observer remain separate gates. This evidence does not claim dynamic 3mm contact, no penetration or an 8/10 score.

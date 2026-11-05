@@ -1,0 +1,158 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T05:35:53.336Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-01-lod0.glb",
+      "bytes": 967968,
+      "sha256": "40b1e4d2bc5cf45216d758b9575a6fa1ca391c45df6bac257242cba671199a4f"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-01-lod1.glb",
+      "bytes": 521696,
+      "sha256": "0952b8daad63bf67881e102c630d020150227b38b4b96f931a0d07f30a442345"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-04-lod0.glb",
+      "bytes": 1009448,
+      "sha256": "c0a76d4c9ab2e54dbc9a71b486049ada6e16c7f7856166d80feef5596a9b1253"
+    },
+    {
+      "file": "source/character-candidates31-cloth-finish/models/player-04-lod1.glb",
+      "bytes": 560784,
+      "sha256": "6f836a62524349fa6b3ea6ef65728c2d9a4c2b2f8cf940fc546d3f4b480a42aa"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "05805d793d5c03907f6e8aef768d05cb614964194beb72785c7b4f33524c0c43",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "source/character-candidates31-cloth-finish/models/player-01-lod0.glb": "40b1e4d2bc5cf45216d758b9575a6fa1ca391c45df6bac257242cba671199a4f",
+      "source/character-candidates31-cloth-finish/models/player-01-lod1.glb": "0952b8daad63bf67881e102c630d020150227b38b4b96f931a0d07f30a442345",
+      "source/character-candidates31-cloth-finish/models/player-04-lod0.glb": "c0a76d4c9ab2e54dbc9a71b486049ada6e16c7f7856166d80feef5596a9b1253",
+      "source/character-candidates31-cloth-finish/models/player-04-lod1.glb": "6f836a62524349fa6b3ea6ef65728c2d9a4c2b2f8cf940fc546d3f4b480a42aa"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-cloth-front-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-cloth-three-quarter-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-cloth-front-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-cloth-three-quarter-844x390.png"
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-cloth-front-390x844.png"
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-cloth-three-quarter-390x844.png"
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-front",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-cloth-front-844x390.png"
+    },
+    {
+      "id": "player-04",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "cloth-three-quarter",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-04-cloth-three-quarter-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "All eight staged compressed candidates; frozen86visualproofbeforepromotion/nativepackaging. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

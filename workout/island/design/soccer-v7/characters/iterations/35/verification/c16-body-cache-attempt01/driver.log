@@ -1,0 +1,15 @@
+Starting 1/17 on worker 1: player-01 LOD0 30Hz
+Starting 2/17 on worker 2: player-01 LOD1 30Hz
+{"completed":1,"total":17,"workerID":2,"characterID":"player-01","lod":1,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00089386,"failedChecks":["bodySettlingDescriptorSupported","actualBodySettlingGeometryAndState"]}
+Starting 3/17 on worker 2: player-02 LOD0 30Hz
+{"completed":2,"total":17,"workerID":1,"characterID":"player-01","lod":0,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00093253,"failedChecks":["bodySettlingDescriptorSupported","actualBodySettlingGeometryAndState"]}
+Starting 4/17 on worker 1: player-02 LOD1 30Hz
+{"completed":3,"total":17,"workerID":1,"characterID":"player-02","lod":1,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00080854,"failedChecks":["bodySettlingDescriptorSupported","actualBodySettlingGeometryAndState"]}
+Starting 5/17 on worker 1: player-03 LOD0 30Hz
+{"completed":4,"total":17,"workerID":2,"characterID":"player-02","lod":0,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00081064,"failedChecks":["bodySettlingDescriptorSupported","actualBodySettlingGeometryAndState"]}
+Starting 6/17 on worker 2: player-03 LOD1 30Hz
+{"completed":5,"total":17,"workerID":2,"characterID":"player-03","lod":1,"hz":30,"pass":false,"samples":4260,"minimumVertexY":0.00084072,"failedChecks":["bodySettlingDescriptorSupported","actualBodySettlingGeometryAndState"]}
+Starting 7/17 on worker 2: player-04 LOD0 30Hz
+Error: Received SIGTERM
+    at process.<anonymous> (/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/audit-transition-matrix.cjs:224:124)
+    at process.emit (node:events:509:28)

@@ -1,0 +1,45 @@
+{
+  "kind": "controlled-body-settling-observer-fixture",
+  "pass": true,
+  "checks": {
+    "positiveIndependentScan": true,
+    "combinedHandFootExclusion": true,
+    "planMutationRejects": true,
+    "offsetCapRejects": true,
+    "velocityCapRejects": true,
+    "staleProcessedClockRejects": true,
+    "carryWeightMismatchRejects": true,
+    "zeroDtProgressionRejects": true,
+    "postBoundOffsetProgressionDiagnosedWithoutAcceptanceChange": true,
+    "legacyAliasCannotSatisfyPublicSchema": true,
+    "wrongWitness_modelSha256_rejects": true,
+    "wrongWitness_bindPosition_rejects": true,
+    "wrongWitness_worldPosition_rejects": true,
+    "wrongWitness_namedInfluences_rejects": true,
+    "wrongWitness_clock_rejects": true,
+    "wrongWitness_minimumY_rejects": true,
+    "bodyBelow8mmWithUnmetImplementationTargetRemainsAcceptable": true,
+    "deadlineFlagMismatchIsExplicitDiagnostic": true,
+    "normal2mmPadDoesNotContradictFalseDeadlineFlag": true,
+    "lateObservationDoesNotInventLatchedFlagContradiction": true,
+    "latchedFlagRetainsObservedMissHistory": true,
+    "livePostHoldWitnessWithFrozenSolveClockAccepted": true,
+    "postHoldCurrentGeometryStillScanned": true,
+    "historicalLatchedActualWitnessRejected": true,
+    "forgedPostHoldWitnessRejected": true,
+    "postHoldSolveClockProgressionRejected": true,
+    "postHoldActiveFlagRejected": true,
+    "requiredSequentialBodyPlanMissingRejects": true,
+    "body9mmWithExcludedGroundedHandRejects": true,
+    "body7mmWithExcludedGroundedHandAccepted": true,
+    "groundedHandDoesNotPromoteDescriptiveTargetToAcceptance": true
+  },
+  "observerSource": {
+    "file": "source/audit-action-observer.cjs",
+    "sha256": "a02f8bd9170ffb108577cd4fa71620180b610a576b545948bc90b643c881c8b8"
+  },
+  "fixtureSource": {
+    "sha256": "2743d04feef8a7036ab44f03106330a21d05d896d1767cfe4b68c541c9c9144b"
+  },
+  "limits": "Synthetic Three r160 math/geometry checks; no browser, production model or runtime pass. Root resolved existing8mm body acceptance unchanged;1.5mm/.30s implementation misses, deadline-flag contradictions and3mm body comparison are descriptive only. Prior39 clock fixtures untouched."
+}

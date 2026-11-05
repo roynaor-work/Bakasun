@@ -1,0 +1,245 @@
+{
+  "kind": "observed-viewer-full-mesh-skinning-equivalence",
+  "threeRevision": "160",
+  "toleranceMeters": 0.000001,
+  "samples": 320,
+  "maximumAbsoluteErrorMeters": 1.490402921780834e-8,
+  "minimumReferenceVertexY": 0.00138549931954821,
+  "denseFloor": true,
+  "denseSampleRateHz": 120,
+  "denseSamples": 193,
+  "clipsEvaluated": [
+    "get_up"
+  ],
+  "totalClipCount": 31,
+  "floorToleranceMeters": 0.001,
+  "activeSoleAnchorToleranceMeters": 0.003,
+  "maximumActiveSoleAnchorErrorMeters": 5.24290718220368e-8,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "expectedSha256": "7f91bd539f7587b0bb35635f7be7e5ae7a9ac5af20ca841c89c2b66c1de456dc",
+      "bytes": 1084212,
+      "sha256": "7f91bd539f7587b0bb35635f7be7e5ae7a9ac5af20ca841c89c2b66c1de456dc"
+    }
+  ],
+  "rows": [
+    {
+      "character": "player-01",
+      "lod": 0,
+      "maximumAbsoluteErrorMeters": 1.490402921780834e-8,
+      "pass": true,
+      "worst": [],
+      "denseClips": [
+        {
+          "id": "get_up",
+          "sampleRateHz": 120,
+          "samples": 193,
+          "minimumReferenceVertexY": 0.00138549931954821,
+          "maximumActiveSoleAnchorErrorMeters": 5.24290718220368e-8,
+          "handSupport": {
+            "samples": 42,
+            "maximumAuthoredAnchorDistanceMeters": 0.00016162888646682215,
+            "maximumVerticalGapMeters": 0.0001537578240066867,
+            "minimumHandWeightedVertexY": 0.003059286623746288,
+            "maximumMinimumHandWeightedVertexY": 0.003350296998757693,
+            "maximumNearestHandVertexToAuthoredAnchorDistanceMeters": 0.01571069765775733,
+            "handVertexSelection": "Vertices with at least50% weight on the supporting Hand bone, including palm/fingers/gloves; every selected vertex evaluated with general Three skinning.",
+            "guaranteedByRuntimeIK": false,
+            "note": "Descriptive displayed hand surface and authored support. Visual palm shape/orientation still requires review."
+          },
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "lodLifecycle": {
+    "cases": [
+      {
+        "sequence": "run_2→sprint",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.042628013358396596,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6249999999999933,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6249999999999933,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "run_2→sprint",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0,
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.03950000188024601,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6249999999999933,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "sprint/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6249999999999933,
+            "duration": 0.03333333333333333
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.329104726636703,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6499999999999932,
+            "duration": 0.12
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6499999999999932,
+            "duration": 0.12
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "header→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000017075472925031877,
+        "rotationBone": "LeftArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.3288673358731067,
+        "pendingBefore": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6499999999999932,
+            "duration": 0.12
+          }
+        ],
+        "pendingAfter": [
+          {
+            "bone": "LeftFoot",
+            "key": "run_2/LeftFoot/0/0",
+            "mode": "landing",
+            "start": 2.6499999999999932,
+            "duration": 0.12
+          }
+        ],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 1,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0051280133567546925,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "pass": true
+      },
+      {
+        "sequence": "turn_left→run_2",
+        "lod": 0,
+        "maximumWorldBonePositionJumpMeters": 0,
+        "maximumWorldBoneRotationJumpDegrees": 0.0000024148365394514667,
+        "rotationBone": "RightArm",
+        "clockErrorSeconds": 0,
+        "minimumReferenceVertexY": 0.0020000018840785247,
+        "pendingBefore": [],
+        "pendingAfter": [],
+        "pendingPreserved": true,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "thresholds": {
+      "maximumWorldBonePositionJumpMeters": 0.003,
+      "maximumWorldBoneRotationJumpDegrees": 1,
+      "maximumClockErrorSeconds": 1e-9,
+      "minimumReferenceVertexY": -0.001
+    }
+  },
+  "pass": true,
+  "generatedAt": "2026-11-04T22:01:58.587Z",
+  "servedResources": [
+    {
+      "file": "/preview.html",
+      "bytes": 8029,
+      "sha256": "0a1e975bfbd49a8559f3354a08557680b1fcbe86534cb49b681895c093fe8342"
+    },
+    {
+      "file": "/preview.css",
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    {
+      "file": "/vendor/data.js",
+      "bytes": 1296442,
+      "sha256": "9c82ad9395ffa21deac782e3d1fa20035fed35490a83760d61d23d01ed8f34d3"
+    },
+    {
+      "file": "/vendor/viewer-runtime.js",
+      "bytes": 762192,
+      "sha256": "831d0420ddc3e39de4de1bc27f7083e6151665b526f4bbbfe3ec5be872596e5a"
+    },
+    {
+      "file": "/offline/player-01-lod0.js",
+      "bytes": 1445715,
+      "sha256": "39b4037e7f9454068f018ee09baa65e7d2a8257730fa1c5432cf02d9c217c640"
+    },
+    {
+      "file": "/offline/player-01-lod1.js",
+      "bytes": 1090323,
+      "sha256": "28e34b5f3481ac4cab80b22a553a00d1a5cebc29fa989534d1586a5d20f04c9c"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "method": "Actual bundled viewer, selected delivered models/LODs and clips×7 deterministic times (defaults: all16 models/all31clips), plus interrupted transition poses. Compare every decoded vertex using optimized Y-row evaluator against Three.SkinnedMesh.getVertexPosition+matrixWorld. Optional --dense-floor advances each actual displayed clip at the recorded30/60/120Hz, checking reference full-mesh floor, active sole anchors and descriptive authored hand supports. GPU draws suppressed; rendering performance is tested separately.",
+  "complete": false
+}

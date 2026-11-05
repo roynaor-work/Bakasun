@@ -1,0 +1,9 @@
+Starting 1/17 on worker 1: player-01 LOD0 30Hz
+Starting 2/17 on worker 2: player-01 LOD1 30Hz
+{"completed":1,"total":17,"workerID":2,"characterID":"player-01","lod":1,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00089386,"failedChecks":["actualLedgerAndFulfillment"]}
+Starting 3/17 on worker 2: player-02 LOD0 30Hz
+{"completed":2,"total":17,"workerID":1,"characterID":"player-01","lod":0,"hz":30,"pass":false,"samples":4259,"minimumVertexY":0.00092922,"failedChecks":["actualLedgerAndFulfillment"]}
+Starting 4/17 on worker 1: player-02 LOD1 30Hz
+Error: Received SIGTERM
+    at process.<anonymous> (/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/audit-transition-matrix.cjs:217:124)
+    at process.emit (node:events:509:28)

@@ -1,0 +1,142 @@
+{
+  "kind": "observed-nonloop-film-clock-progression",
+  "pass": true,
+  "rule": "For each actual positive-weight requested body/arm contributor: first sample begins within one real step of declared entry; later source-clock increments are monotonic and bounded by real simulation dt × declared playbackRate. Physical motor phase has separate semantics and is excluded.",
+  "rows": [
+    {
+      "report": "keeper-390x844-film-semantic-dry-run.json",
+      "sha256": "a7444a24bb771baf498844845d13c3bbcadd3ecf3928de3abd94cc366a54b4ba",
+      "clips": [
+        {
+          "clip": "keeper_catch",
+          "requestID": 1,
+          "positiveSamples": 24,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 23,
+            "time": 0.8,
+            "seconds": 0.7999999999999999
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333338,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "get_up",
+          "requestID": 2,
+          "positiveSamples": 78,
+          "first": {
+            "frame": 57,
+            "time": 1.9333333333333333,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 134,
+            "time": 4.5,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "keeper_throw",
+          "requestID": 3,
+          "positiveSamples": 60,
+          "first": {
+            "frame": 135,
+            "time": 4.533333333333333,
+            "seconds": 0.03333333333333333
+          },
+          "last": {
+            "frame": 194,
+            "time": 6.5,
+            "seconds": 1.166667
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "motor-390x844-film-semantic-dry-run.json",
+      "sha256": "07e43d0de71ccd0919e99228cb1ef03747efb0336d8e2d445b72c72fa0991b32",
+      "clips": [],
+      "pass": true
+    },
+    {
+      "report": "pass-390x844-film-semantic-dry-run.json",
+      "sha256": "109fd17d17a6aa7f6ee5f0896574bc162390f1b97ced2eef03939a8d2288b84f",
+      "clips": [
+        {
+          "clip": "long_pass",
+          "requestID": 1,
+          "positiveSamples": 72,
+          "first": {
+            "frame": 0,
+            "time": 0.03333333333333333,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 71,
+            "time": 2.4,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "report": "recovery-390x844-film-semantic-dry-run.json",
+      "sha256": "9606e705c7e58586c085258ab29d3d5e6366a4dbb99045a6d44be82e00eebcad",
+      "clips": [
+        {
+          "clip": "get_up",
+          "requestID": 1,
+          "positiveSamples": 70,
+          "first": {
+            "frame": 41,
+            "time": 1.4,
+            "seconds": 0.03333333333333344
+          },
+          "last": {
+            "frame": 110,
+            "time": 3.7,
+            "seconds": 1.6
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        },
+        {
+          "clip": "long_pass",
+          "requestID": 3,
+          "positiveSamples": 62,
+          "first": {
+            "frame": 229,
+            "time": 7.666666666666667,
+            "seconds": 0
+          },
+          "last": {
+            "frame": 290,
+            "time": 9.7,
+            "seconds": 1.3
+          },
+          "maximumSourceClockStepSeconds": 0.03333333333333344,
+          "violations": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

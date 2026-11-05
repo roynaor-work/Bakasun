@@ -1,0 +1,215 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T02:26:10.515Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates21/models/player-01-lod0.glb",
+      "bytes": 789084,
+      "sha256": "ec6028bf37850e66de0aaddd7dd95c1b1371dfd5a3d8791c32ba2c7e4bbec3a5"
+    },
+    {
+      "file": "source/character-candidates21/models/player-01-lod1.glb",
+      "bytes": 487460,
+      "sha256": "bbe9a24e9de58638e7031836b4525d0b8597a3bd02a461b713e8653e6ac21890"
+    },
+    {
+      "file": "source/character-candidates21/models/player-06-lod0.glb",
+      "bytes": 807700,
+      "sha256": "4df575e693440f8b102b3fd25c77045042fc231703adb420ab84cfcd99a67526"
+    },
+    {
+      "file": "source/character-candidates21/models/player-06-lod1.glb",
+      "bytes": 499112,
+      "sha256": "ef92e299f26eac2730f86d99a2af04265e2d8a7b86bc96b106a3619947182602"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "6fdb6767480240ee21be1dd38bc4f517a07e52408ec0b48391272db852e5e354",
+    "motion": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "models": {
+      "source/character-candidates21/models/player-01-lod0.glb": "ec6028bf37850e66de0aaddd7dd95c1b1371dfd5a3d8791c32ba2c7e4bbec3a5",
+      "source/character-candidates21/models/player-01-lod1.glb": "bbe9a24e9de58638e7031836b4525d0b8597a3bd02a461b713e8653e6ac21890",
+      "source/character-candidates21/models/player-06-lod0.glb": "4df575e693440f8b102b3fd25c77045042fc231703adb420ab84cfcd99a67526",
+      "source/character-candidates21/models/player-06-lod1.glb": "ef92e299f26eac2730f86d99a2af04265e2d8a7b86bc96b106a3619947182602"
+    }
+  },
+  "records": [
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-kick-strike-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-get-up-supported-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-01-dive-390x844.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-kick-strike-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-get-up-supported-844x390.png"
+    },
+    {
+      "id": "player-01",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-01-dive-844x390.png"
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-kick-strike-390x844.png"
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-get-up-supported-390x844.png"
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-06-dive-390x844.png"
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "kick-strike",
+      "clip": "kick",
+      "phase": 0.48,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-kick-strike-844x390.png"
+    },
+    {
+      "id": "player-06",
+      "view": "cloth",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "get-up-supported",
+      "clip": "get_up",
+      "phase": 0.5,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-get-up-supported-844x390.png"
+    },
+    {
+      "id": "player-06",
+      "view": "body",
+      "orbit": -0.7,
+      "zoom": 1,
+      "label": "dive",
+      "clip": "keeper_dive_left",
+      "phase": 0.46,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "player-06-dive-844x390.png"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two selected compressed candidates; not the full roster or final delivery. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}

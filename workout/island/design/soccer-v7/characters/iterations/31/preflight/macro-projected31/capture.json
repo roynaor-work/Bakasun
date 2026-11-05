@@ -1,0 +1,140 @@
+{
+  "kind": "candidate-only-in-memory-response-override",
+  "complete": false,
+  "generatedAt": "2026-11-05T05:29:15.218Z",
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "packagedFilesMutated": false,
+  "models": [
+    {
+      "file": "source/character-candidates31-projected/models/player-04-lod0.glb",
+      "bytes": 1008404,
+      "sha256": "4519d9115cf157061f10f89b2a6bbc6f912b55b58baba9784a2e79d1d4551348"
+    },
+    {
+      "file": "source/character-candidates31-projected/models/player-04-lod1.glb",
+      "bytes": 560584,
+      "sha256": "5be6d4a411b4fc6b028e136957a3157a492ee26057a6d4f9500ec6a31d738d96"
+    }
+  ],
+  "runtimeSha256": "86f55eca7b39311011174c7aefd9ee76bc27d573945ffac3de9c7ad58aa128d0",
+  "loadedHashes": {
+    "manifest": "8714b81442d08cf1528f1b4628d1ef35b042cd3f4d749743ce0d765a3577bd29",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "77bc19fa3c384a63cfea4b660b26deb82f399d1c88a514bf0bd5f88e44ed09c7",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "source/character-candidates31-projected/models/player-04-lod0.glb": "4519d9115cf157061f10f89b2a6bbc6f912b55b58baba9784a2e79d1d4551348",
+      "source/character-candidates31-projected/models/player-04-lod1.glb": "5be6d4a411b4fc6b028e136957a3157a492ee26057a6d4f9500ec6a31d738d96"
+    }
+  },
+  "records": [
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": 0.13,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-front",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-pbr-face-front-390x844.png",
+      "camera": {
+        "position": [
+          0.11737606682753085,
+          1.5800037895875367,
+          0.9316058430096217
+        ],
+        "quaternion": [
+          -0.002204104854827259,
+          0.06495408038971581,
+          0.00014346892456677915,
+          0.9978858094888327
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1,
+        "projection": [
+          9.7616358386943,
+          0,
+          0,
+          0,
+          0,
+          4.510708503662058,
+          0,
+          0,
+          0,
+          0,
+          -1.0002272985566543,
+          -1,
+          0,
+          0,
+          -0.05000568246391635,
+          0
+        ]
+      },
+      "cameraReferenceApplied": true
+    },
+    {
+      "id": "player-04",
+      "mode": "pbr",
+      "view": "face",
+      "orbit": -0.7,
+      "zoom": 1,
+      "lod": 0,
+      "label": "face-three-quarter",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "player-04-pbr-face-three-quarter-390x844.png",
+      "camera": {
+        "position": [
+          -0.8064791533122839,
+          1.5800037895875367,
+          0.9912518707692071
+        ],
+        "quaternion": [
+          -0.0015007492924619709,
+          -0.34289736985737607,
+          -0.0005478162553452177,
+          0.9393715140421308
+        ],
+        "fov": 25,
+        "aspect": 0.46208530805687204,
+        "zoom": 1,
+        "projection": [
+          9.7616358386943,
+          0,
+          0,
+          0,
+          0,
+          4.510708503662058,
+          0,
+          0,
+          0,
+          0,
+          -1.0002272985566543,
+          -1,
+          0,
+          0,
+          -0.05000568246391635,
+          0
+        ]
+      },
+      "cameraReferenceApplied": true
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "limits": "Two immutable candidate/baseline identities. PBR and gray diffuse controls share camera/runtime; gray removes Skin albedo, normal, AO, environment response and shadow reception. Data and payload HTTP responses are overridden in memory, with their actual candidate hashes recorded."
+}
