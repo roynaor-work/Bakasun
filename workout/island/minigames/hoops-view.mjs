@@ -69,7 +69,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  let crowd=null;
  if(!models.crowd3d)try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
  mark('crowd');
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
@@ -196,7 +196,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live',airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
@@ -209,7 +209,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(b.state==='held'&&handler){
    const av=avatars.get(handler.id);av.root.updateMatrixWorld(true);
    const r=av.hands.r,l=av.hands.l;
-   if((handler.act==='shoot'||handler.act==='fake')||!s.phase||s.phase!=='live'||Math.hypot(handler.vx,handler.vz)<0.05&&!handler.act&&false){
+   if((handler.act==='shoot'||handler.act==='fake')||handler.dribbling===false||!s.phase||s.phase!=='live'||Math.hypot(handler.vx,handler.vz)<0.05&&!handler.act&&false){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);
     const fx=Math.sin(handler.face),fz=Math.cos(handler.face);bx=v.x+fx*0.1;by=v.y+0.02;bz=v.z+fz*0.1;
    } else if(handler.act==='pass'){
@@ -232,7 +232,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   }
   // smooth the hand-off when the engine takes over (release, pass)
   if(state.ballVis&&b.state!=='held'&&state.ballVis.state==='held'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.18};}
-  if(state.ballOffset&&state.ballOffset.t>0){const k=state.ballOffset.t/0.18;bx+=state.ballOffset.x*k;by+=state.ballOffset.y*k;bz+=state.ballOffset.z*k;state.ballOffset.t-=dt;}
+  // a caught pass glides into the receiver's hands instead of jumping from the flight point to the hold point
+  if(state.ballVis&&b.state==='held'&&state.ballVis.state==='pass'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.14,span:0.14};}
+  if(state.ballOffset&&state.ballOffset.t>0){const k=state.ballOffset.t/(state.ballOffset.span||0.18);bx+=state.ballOffset.x*k;by+=state.ballOffset.y*k;bz+=state.ballOffset.z*k;state.ballOffset.t-=dt;}
   ball.position.set(bx,by,bz);ball.rotation.x+=dt*(b.state==='shot'?-12:b.state==='pass'?-9:0);
   state.ballVis={x:bx,y:by,z:bz,state:b.state};
   ball.visible=b.state!=='dead'||!!handler||s.phase==='inbound'||s.phase==='freethrow';
@@ -306,7 +308,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||0,crowdLevel:models.crowdV5?.level??null,v5:!!models.v5,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||0,crowdLevel:models.crowdV5?.level??null,v5:!!models.v5,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

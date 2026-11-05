@@ -160,6 +160,9 @@ SHA־256 של ה־GLB: `8d4a630b3468ed55027b6b5b0ec3927cc5cded3a502e50aac7895fa2
 | `assets/models/hoops-forward.glb` | 947,776 | שחקן 2.03 מ׳ | כנ״ל |
 | `assets/models/hoops-big.glb` | 900,632 | שחקן 2.09 מ׳ | כנ״ל |
 | `assets/models/hoops-anim.glb` | 475,572 | 24 קליפים: עמידה, הליכה, ריצה, ספרינט, צעדי הגנה, כדרור, הטעיה, זריקה, זריקה מכדרור, עונשין, לייאפ, ניתור, פיבוט, חדירה, ספין | CMU Graphics Lab Motion Capture Database (mocap.cs.cmu.edu), דרך המרת BVH של Shriinivas/cmubvh. תנאי CMU: חופשי לשימוש מחקרי ומסחרי במוצרים, אסור למכור את הנתונים עצמם. ההתאמה לשלד בקוד שלנו (`retarget.py`) |
+| `assets/hoops-v7/{pg,sg,sf,pf,c}.glb` | 970,800 · 989,664 · 997,104 · 975,308 · 972,668 | חמש דמויות לפי עמדה (1.78–2.20 מ׳), שלד 18 עצמות, LOD1 (כ-7.5K משולשים), 27 קליפים מוטבעים. העתק ריצה של `design/hoops-v7/characters/models/<role>-lod1.glb` (GPT, 05/11) | נכסי GPT בתנאי המאגר; גוף ופנים מנכסי MakeHuman/MPFB (CC0) לפי `design/hoops-v7/characters/LICENSES.md` |
+| `assets/hoops-v7/clips.json` | 2,908 | טבלת הקליפים (משך, אירועים, מהירות ייחוס) מ-`motions.json` של החבילה | כנ״ל |
+| `vendor/meshopt_decoder.module.js` | 32,483 | מפענח meshoptimizer 0.25 (דחיסת האנימציה ב-GLB של v7) | MIT, `vendor/LICENSE.meshoptimizer` |
 | `assets/textures/hoops-crowd.webp` | 16,946 | אטלס 8×6 של צופים יושבים ומריעים | רינדור שלנו מאותם גופי MakeHuman עם בגדי MakeHuman (CC0) |
 | `assets/ultra-hub/hoops.webp` | ראו קובץ | כרטיס המשחק | צילום מזמן ריצה של המשחק |
 | `vendor/SkeletonUtils.js` | | שכפול דמות עם שלד | three.js r160, MIT; שונה רק נתיב הייבוא |

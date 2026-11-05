@@ -5,6 +5,9 @@ import {retrying} from './soccer-design-character.mjs';
 
 const modelUrl=name=>new URL('../design/'+(name==='soccer-stadium'?'models2/':'models/')+name+'.glb',import.meta.url).href;
 const environmentUrl=name=>new URL('../design/environment/'+name,import.meta.url).href;
+/** v6 goals (GPT, 04/11): volumetric tube net, runtime copy under assets/ (the review pack is not published). Off with ?soccerV6=0 or config soccer.v6.goals=false; any load or build failure keeps the v5 goals. */
+const v6GoalUrl=new URL('../assets/soccer-v6/goals.glb',import.meta.url).href;
+export const v6GoalsEnabled=(config,search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerV6')!=='0'&&config?.v6?.goals!==false;
 
 /** Presentation-only asset transaction. The caller keeps its fallback scenery
  * visible until onReady, and owns resources registered through track. Pitch,
@@ -15,6 +18,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   root.name='soccer-design-scenery';ball.name='soccer-design-ball';root.visible=ball.visible=false;
   scene.add(root);ballRoot.add(ball);
   let disposed=false,status='loading',failure=null,textureCount=0,residentTriangles=0,lastWidth=0,lastHeight=0,viewDirection=1,renderQuality=0,seatLodStats=null;
+  let goalsV6Used=false;const goalsV6Status=()=>goalsV6Used?'v6':'v5';
   let skyMaterial=null,skyLandscape=null,skyPortrait=null,netRipple=()=>{};
   const loadedTextures=[],loadedModels=[];
   const hx=config.pitch.length/2;
@@ -92,8 +96,10 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const textureLoader=new T.TextureLoader();
   // Settle the entire transaction so a failed texture never strands successful
   // GLB decodes or late image loads after the player has left the game.
+  const useV6=v6GoalsEnabled(config);
   const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>retrying(()=>loader.loadAsync(modelUrl(name)),name+'.glb').then(data=>{loadedModels.push(data.scene);return data.scene;})),
-    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>retrying(()=>textureLoader.loadAsync(environmentUrl(name)),name).then(texture=>{loadedTextures.push(texture);return texture;}))];
+    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>retrying(()=>textureLoader.loadAsync(environmentUrl(name)),name).then(texture=>{loadedTextures.push(texture);return texture;})),
+    useV6?retrying(()=>loader.loadAsync(v6GoalUrl),'soccer-v6/goals.glb').then(data=>{loadedModels.push(data.scene);return data.scene;}).catch(()=>null):Promise.resolve(null)];
   const ready=Promise.allSettled(requests).then(results=>{
     globalThis.performance?.mark?.('soccer:scene-build-start');
     const failure=results.find(result=>result.status==='rejected');
@@ -102,7 +108,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
       loadedModels.length=loadedTextures.length=0;
       if(!disposed){status='fallback';failure=String(failure.reason?.message||failure.reason);reportError(failure.reason);}return false;
     }
-    const [stadiumSource,goalSource,ballSource,grass,concrete,crowd,landscape,portrait]=results.map(result=>result.value);
+    const [stadiumSource,goalSource,ballSource,grass,concrete,crowd,landscape,portrait,v6Source]=results.map(result=>result.value);
     for(const source of loadedModels)source.updateMatrixWorld(true);
     finish(grass,{repeat:[1,1]});finish(concrete,{repeat:[1,1]});finish(crowd,{repeat:[1,1]});
     skyLandscape=finish(landscape);skyPortrait=finish(portrait);textureCount=5;
@@ -164,13 +170,36 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // The goal gets its own material so the net can billow after a goal: vertices
     // behind the goal line (the net, never the posts) are pushed along the pitch
     // axis by a uniform the view drives from the goal pulse.
+    /** v6: both goals live in one tube-net file along Z (goal line at ±52.5, back at ±54.62). Each end is cut by the sign
+     * of z, moved so its goal line is the origin, scaled to the game mouth and depth, turned onto X and placed at the goal line. */
+    let goalsV6=null;
+    if(v6Source){try{
+      const parts=['goal_frames','woven_net'].map(name=>v6Source.getObjectByName(name));
+      if(parts.some(part=>!part?.geometry))throw new Error('v6 goals incomplete');
+      const ends=[];
+      for(const end of [-1,1]){
+        const pieces=parts.map(part=>{
+          const source=part.geometry,position=source.attributes.position,index=source.index,keep=[];
+          for(let i=0;i<index.count;i+=3){const a=index.getX(i),b=index.getX(i+1),c=index.getX(i+2);if((position.getZ(a)+position.getZ(b)+position.getZ(c))*end>0)keep.push(a,b,c);}
+          const piece=source.clone();piece.setIndex(keep);return piece;
+        });
+        const sz=config.pitch.goalDepth/2.12,transform=new T.Matrix4().makeTranslation(end*hx,0,0).multiply(new T.Matrix4().makeRotationY(Math.PI/2))
+          .multiply(new T.Matrix4().makeScale(config.pitch.goalWidth/7.32,config.pitch.goalHeight/2.44,sz)).multiply(new T.Matrix4().makeTranslation(0,0,-end*52.5));
+        const geometry=mergeGeometries(pieces.map(piece=>piece.applyMatrix4(transform)));pieces.forEach(piece=>piece.dispose());
+        if(!geometry)throw new Error('v6 goals not mergeable');ends.push(geometry);
+      }
+      goalsV6=mergeGeometries(ends);ends.forEach(geometry=>geometry.dispose());
+      if(!goalsV6||!goalsV6.attributes.color)throw new Error('v6 goals lack vertex colours');
+    }catch(error){goalsV6=null;}}
+    goalsV6Used=!!goalsV6;
     const goalMaterial=track(palette.clone());goalMaterial.userData.ripple={value:0};goalMaterial.userData.rippleTime={value:0};goalMaterial.userData.rippleSide={value:1};
     goalMaterial.onBeforeCompile=shader=>{
       shader.uniforms.soccerNetRipple=goalMaterial.userData.ripple;shader.uniforms.soccerNetTime=goalMaterial.userData.rippleTime;shader.uniforms.soccerNetSide=goalMaterial.userData.rippleSide;shader.uniforms.soccerNetLine={value:hx+.25};
       shader.vertexShader='uniform float soccerNetRipple;uniform float soccerNetTime;uniform float soccerNetSide;uniform float soccerNetLine;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nif(abs(position.x)>soccerNetLine&&sign(position.x)==soccerNetSide){float depth=clamp((abs(position.x)-soccerNetLine)/1.4,0.,1.);transformed.x+=sign(position.x)*sin(soccerNetTime*22.+position.z*2.3+position.y*2.)*soccerNetRipple*.3*depth;transformed.y-=soccerNetRipple*.05*depth;}');
     };
     goalMaterial.customProgramCacheKey=()=> 'soccer-design-goal-net-ripple-v3';
-    const goalGeometry=mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,goalMaterial);
+    if(goalsV6)goalMaterial.side=T.DoubleSide;
+    const goalGeometry=goalsV6||mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,goalMaterial);
     netRipple=(pulse,side,time)=>{goalMaterial.userData.ripple.value=pulse;goalMaterial.userData.rippleSide.value=side;goalMaterial.userData.rippleTime.value=time;};
     // Asset diameter .22m, anchor_ball_center (0,.11,0). BallRoot already
     // supplies simulation position and spin; imported ground offset is removed.
@@ -195,7 +224,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   });
   return {
     ready,root,ball,
-    metrics:()=>({status,failure,source:'design/models2/soccer-stadium',ballDiameterMetres:config.physics.ballRadius*2,seatDetail:renderQuality>=3?'mobile':'full',seatLod:seatLodStats,models:status==='ready'?3:0,textures:textureCount,
+    metrics:()=>({status,failure,source:'design/models2/soccer-stadium',goals:goalsV6Status(),ballDiameterMetres:config.physics.ballRadius*2,seatDetail:renderQuality>=3?'mobile':'full',seatLod:seatLodStats,models:status==='ready'?3:0,textures:textureCount,
       triangles:status==='ready'?meshes.reduce((sum,mesh)=>sum+(mesh.visible?(mesh.geometry.index?.count||mesh.geometry.attributes.position.count)/3:0),0):0,
       drawCalls:status==='ready'?meshes.filter(mesh=>mesh.visible).length:0,residentTriangles}),
     update(direction,width=lastWidth,height=lastHeight){

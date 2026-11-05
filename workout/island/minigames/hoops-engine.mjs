@@ -426,23 +426,43 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function startPass(p,target,kind){
   if(p.act||S.ball.owner!==p.id||S.ball.state!=='held'||!target)return false;
   const far=dist(p,target);
-  p.act='pass';p.actT=0;p.act2={target:target.id,kind:kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':'chest')};
+  if(kind==='overhead')kind='lob';
+  // chosen by the situation when the player did not ask for a kind: far = overhead lob, a defender
+  // right on the passer = jump pass over him, otherwise a chest pass
+  const pressed=onCourt(1-p.team).some(o=>dist(o,p)<(C.pass.jumpPressure??1.7)&&Math.abs(Math.atan2(o.x-p.x,o.z-p.z)-Math.atan2(target.x-p.x,target.z-p.z))<1.6);
+  const chosen=kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':'chest');
+  p.act='pass';p.actT=0;p.act2={target:target.id,kind:chosen};
   p.face=Math.atan2(target.x-p.x,target.z-p.z);
+  if(chosen==='jump'&&!startJump(p,'pass'))p.act2.kind='chest';
   emit({type:'passStart',playerId:p.id,targetId:target.id,kind:p.act2.kind});
   return true;
  }
 
+ /** Release height and catch height per pass kind: chest from the chest, bounce from the waist into the
+  * floor, overhead from above the head into the receiver's hands high, jump pass from the top of a hop. */
+ const PASS_SHAPE={chest:{y0:1.3,y1:1.3},bounce:{y0:0.95,y1:1.05},lob:{y0:2.1,y1:1.9},jump:{y0:1.85,y1:1.45}};
+ /** Is the passer's body turned to the receiver (within `tol` rad)? The ball is not thrown before that. */
+ function passFacing(p,tol=0.32){
+  const q=byId(p.act2?.target);if(!q)return true;
+  const d=((Math.atan2(q.x-p.x,q.z-p.z)-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;return Math.abs(d)<=tol;
+ }
+
  function throwPass(p){
   const q=byId(p.act2.target);if(!q||!q.onCourt){p.act=null;return;}
-  const kind=p.act2.kind,passSkill=eff(p,'pass'),baseSpeed=kind==='lob'?C.pass.lobSpeed:kind==='bounce'?C.pass.bounceSpeed:C.pass.speed,speed=baseSpeed*(0.78+0.3*passSkill);
+  const kind=p.act2.kind,shape=PASS_SHAPE[kind]||PASS_SHAPE.chest,passSkill=eff(p,'pass'),baseSpeed=kind==='lob'?C.pass.lobSpeed:kind==='bounce'?C.pass.bounceSpeed:kind==='jump'?C.pass.speed*1.08:C.pass.speed,speed=baseSpeed*(0.78+0.3*passSkill);
   const lead=0.35;
   const distance=hyp(q.x-p.x,q.z-p.z),error=(1-passSkill)*Math.min(1.8,0.15+distance*0.12);
-  const to={x:q.x+q.vx*lead+(rand()-.5)*error,y:1.25,z:q.z+q.vz*lead+(rand()-.5)*error};
-  const from={x:p.x+Math.sin(p.face)*0.35,y:1.3,z:p.z+Math.cos(p.face)*0.35};
-  const d=hyp(to.x-from.x,to.z-from.z),time=Math.max(0.22,d/speed)+(kind==='lob'?0.35:0);
+  const to={x:q.x+q.vx*lead+(rand()-.5)*error,y:shape.y1,z:q.z+q.vz*lead+(rand()-.5)*error};
+  const from={x:p.x+Math.sin(p.face)*0.35,y:shape.y0+(kind==='jump'?p.jumpH:0),z:p.z+Math.cos(p.face)*0.35};
+  const d=hyp(to.x-from.x,to.z-from.z),time=Math.max(0.22,d/speed)+(kind==='lob'?0.4:0);
   const v=passVelocity(from,to,time,P.gravity);
   const b=S.ball;b.x=from.x;b.y=from.y;b.z=from.z;b.vx=v.vx;b.vy=v.vy;b.vz=v.vz;b.state='pass';b.owner=null;b.lastTouch=p.team;
-  b.pass={from:p.id,to:q.id,t:0,time,kind,target:to,checked:new Set()};
+  b.pass={from:p.id,to:q.id,t:0,time,kind,target:to,checked:new Set(),bounced:false,bounceVy:0};
+  if(kind==='bounce'){
+   // lands on the floor 58% of the way (constant horizontal speed) and comes up to the receiver's waist
+   const t1=time*0.58,t2=time-t1,g=P.gravity;
+   b.vy=(court.ballR-from.y)/t1+0.5*g*t1;b.pass.bounceVy=(to.y-court.ballR)/t2+0.5*g*t2;
+  }
   q.intent.catchAt={x:to.x,z:to.z};
   emit({type:'pass',playerId:p.id,targetId:q.id,kind,precision:+passSkill.toFixed(3),speed:+speed.toFixed(2)});
  }
@@ -689,9 +709,11 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    // facing: towards movement, or the intent's facing (defence faces the man / ball)
    const sp=hyp(p.vx,p.vz);
    let fx=null;
-   if(it.face!=null&&p.act!=='shoot')fx=it.face;
+   let turnFast=false;
+   if(p.act==='pass'&&p.act2){const pq=byId(p.act2.target);if(pq){fx=Math.atan2(pq.x-p.x,pq.z-p.z);turnFast=true;}}
+   else if(it.face!=null&&p.act!=='shoot')fx=it.face;
    else if(sp>0.6&&p.act!=='shoot')fx=Math.atan2(p.vx,p.vz);
-   if(fx!=null){const tr=user?C.player.userTurn:C.player.turnRate;let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-tr*dt,tr*dt);}
+   if(fx!=null){const tr=turnFast?Math.max(14,C.player.turnRate):user?C.player.userTurn:C.player.turnRate;let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-tr*dt,tr*dt);}
    // fatigue
    const load=(sp/C.player.speed)**2*(p.sprinting?C.fatigue.sprint:1);
    const endurance=0.65+0.7*eff(p,'stamina');
@@ -766,8 +788,8 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     }
     if(p.actT>=sh.duration){p.act=null;p.shot=null;}
    } else if(p.act==='pass'){
-    if(p.actT>=C.pass.windup&&S.ball.owner===p.id&&S.ball.state==='held')throwPass(p);
-    if(p.actT>=C.pass.windup+0.25)p.act=null;
+    if(p.actT>=C.pass.windup&&S.ball.owner===p.id&&S.ball.state==='held'&&(passFacing(p)||p.actT>=C.pass.windup+0.14))throwPass(p);
+    if(p.actT>=C.pass.windup+0.25&&S.ball.owner!==p.id)p.act=null;else if(p.actT>=C.pass.windup+0.45)p.act=null;
    } else if(p.act==='steal'){
     if(p.actT>=C.steal.reachAt&&!p.act2)resolveSteal(p),p.act2=true;
     if(p.actT>=C.steal.duration){p.act=null;p.act2=null;}
@@ -787,21 +809,23 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   const b=S.ball;
   if(b.state==='held'){
    const h=holder();if(!h){b.state='loose';return;}
-   b.dribbleT+=dt;
+   if(!h.dead)b.dribbleT+=dt;
    b.x=h.x+Math.sin(h.face)*0.32;b.z=h.z+Math.cos(h.face)*0.32;b.y=h.act==='shoot'?1.6+h.jumpH:0.9;
    return;
   }
   if(b.state==='pass'){
    const ps=b.pass;ps.t+=dt;
    b.vy-=P.gravity*dt;b.x+=b.vx*dt;b.y+=b.vy*dt;b.z+=b.vz*dt;
-   if(ps.kind==='bounce'&&b.y<court.ballR){b.y=court.ballR;b.vy=Math.abs(b.vy)*0.7;}
+   if(ps.kind==='bounce'&&!ps.bounced&&b.vy<0&&b.y<=court.ballR){b.y=court.ballR;b.vy=ps.bounceVy;ps.bounced=true;emit({type:'bounce',playerId:ps.from});}
+   // the receiver turns to the ball's source while he waits for it (a standing receiver catches facing the passer)
+   {const rq=byId(ps.to),src=byId(ps.from);if(rq&&src&&hyp(rq.vx,rq.vz)<0.6){const want=Math.atan2(src.x-rq.x,src.z-rq.z),dd=((want-rq.face+Math.PI*3)%(Math.PI*2))-Math.PI;rq.face+=clamp(dd,-9*dt,9*dt);}}
    // interception: defenders near the ball's path, ball at reachable height
    for(const d of onCourt(1-b.lastTouch)){
     if(ps.checked.has(d.id))continue;
     const dd=hyp(d.x-b.x,d.z-b.z);
     if(dd<C.pass.interceptRadius&&b.y<2.3+d.jumpH){
      ps.checked.add(d.id);
-     const chance=C.pass.interceptBase*(0.4+eff(d,'steal'))*(ps.kind==='lob'?0.5:1);
+     const chance=C.pass.interceptBase*(0.4+eff(d,'steal'))*(ps.kind==='lob'?0.5:ps.kind==='bounce'?0.7:1);
      if(rand()<chance){const from=byId(ps.from);if(from)from.stats.tov++;d.stats.stl++;emit({type:'interception',playerId:d.id,fromId:ps.from});
       if(rand()<0.55){giveBall(d,'interception');}else{ballLoose(-b.vx*0.25+(rand()-0.5)*2,1.5,-b.vz*0.25+(rand()-0.5)*2,d.team);}return;}
     }

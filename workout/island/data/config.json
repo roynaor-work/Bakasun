@@ -7661,6 +7661,7 @@
     "restartSeconds": 0.9,
     "fixedStep": 0.016666666666666666
    },
+   "v6": {"goals": true},
    "pitch": {
     "length": 48,
     "width": 30,
@@ -12204,6 +12205,25 @@
      "enabled": true,
      "minQuality": 1,
      "base": "design/hoops-v5/models/"
+    },
+    "v7": {
+     "enabled": true,
+     "minQuality": 1,
+     "players": {
+      "PG": "assets/hoops-v7/pg.glb",
+      "SG": "assets/hoops-v7/sg.glb",
+      "SF": "assets/hoops-v7/sf.glb",
+      "PF": "assets/hoops-v7/pf.glb",
+      "C": "assets/hoops-v7/c.glb"
+     },
+     "clips": "assets/hoops-v7/clips.json",
+     "baseHeights": {
+      "PG": 178,
+      "SG": 188,
+      "SF": 199,
+      "PF": 209,
+      "C": 220
+     }
     },
     "v4": {
      "enabled": true,
