@@ -5,6 +5,7 @@ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {seededRandom} from './tennis.mjs?v=island-v2-20261105-1';
 import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261105-1';
 import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261105-1';
+import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261105-1';
 
 export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261105-1',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
@@ -18,15 +19,29 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const keep=x=>(resources.add(x),x);
   const material=(color,extra={})=>keep(new T.MeshStandardMaterial({color,roughness:0.9,...extra}));
   const basic=(color,extra={})=>keep(new T.MeshBasicMaterial({color,...extra}));
-  scene.add(new T.HemisphereLight('#e9f1f1','#5b6850',1.08));
+  const hemi=new T.HemisphereLight('#e9f1f1','#5b6850',1.08);scene.add(hemi);
   const sun=new T.DirectionalLight('#fff1d3',2.55);sun.position.set(-9,18,8);sun.castShadow=true;
   sun.shadow.mapSize.set(r.shadowMapSize,r.shadowMapSize);Object.assign(sun.shadow.camera,{left:-12,right:12,top:15,bottom:-15,near:1,far:50});sun.shadow.bias=-.0003;sun.shadow.normalBias=.025;scene.add(sun);
   const dark=material('#253e38',{roughness:.65,metalness:.15});
-  const courtPresentation=createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
-  const environment=await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
-  const ball=new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);
+  // Tennis v7 (design/tennis-v7, copied to assets/tennis-v7): court surface, net, ball, venue, officials and the instanced crowd.
+  // It is an upgrade, never a requirement: ?tennisV7=0, the config switch or any load failure keeps the previous court and crowd.
+  const params=new URLSearchParams(globalThis.location?.search||''),v7Fallbacks=[];let v7=null;
+  if(v7Enabled(config.environment,0,params)){
+    try{
+      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261105-1');
+      v7=await createTennisV7({scene,config,keep,params,surface:surfaceFor(config.environment.v7,config.stage,params),quality:0,camera});
+      if(disposed){v7.dispose();v7=null;}
+    }catch(error){v7=null;v7Fallbacks.push('tennis v7 venue');}
+  }
+  if(v7){
+    scene.add(v7.root);const look=v7.look;scene.background=new T.Color(look.background);scene.fog.color.set(look.fog);
+    hemi.color.set(look.hemi[0]);hemi.groundColor.set(look.hemi[1]);hemi.intensity=look.hemi[2];sun.color.set(look.sun[0]);sun.intensity=look.sun[1];sun.position.fromArray(look.sun[2]);renderer.toneMappingExposure=look.exposure;
+  }
+  const courtPresentation=v7?{metrics:v7.courtMetrics}:createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
+  const environment=v7||await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
+  const ball=v7?v7.ball:new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);
   // Recessed ivory seams retain the exact physical radius and silhouette.
-  for(const angle of [0,Math.PI]){const pts=[];for(let i=0;i<=48;i++){const t=i/48*Math.PI*2,phi=.55*Math.sin(2*t)+angle;pts.push(new T.Vector3(Math.cos(t)*Math.cos(phi),Math.sin(t),Math.cos(t)*Math.sin(phi)).multiplyScalar(config.ball.radius*1.006));}const seam=new T.Mesh(keep(new T.TubeGeometry(new T.CatmullRomCurve3(pts),48,.005,3,false)),material('#ececc7'));ball.add(seam);}
+  if(!v7)for(const angle of [0,Math.PI]){const pts=[];for(let i=0;i<=48;i++){const t=i/48*Math.PI*2,phi=.55*Math.sin(2*t)+angle;pts.push(new T.Vector3(Math.cos(t)*Math.cos(phi),Math.sin(t),Math.cos(t)*Math.sin(phi)).multiplyScalar(config.ball.radius*1.006));}const seam=new T.Mesh(keep(new T.TubeGeometry(new T.CatmullRomCurve3(pts),48,.005,3,false)),material('#ececc7'));ball.add(seam);}
   // Contact shadows remain at every tier, including devices without shadow maps.
   const shadeCanvas=document.createElement('canvas');shadeCanvas.width=shadeCanvas.height=64;const shadeCtx=shadeCanvas.getContext('2d'),gradient=shadeCtx.createRadialGradient(32,32,0,32,32,32);gradient.addColorStop(0,'rgba(16,28,23,.48)');gradient.addColorStop(.45,'rgba(16,28,23,.22)');gradient.addColorStop(1,'rgba(16,28,23,0)');shadeCtx.fillStyle=gradient;shadeCtx.fillRect(0,0,64,64);const shadeMap=keep(new T.CanvasTexture(shadeCanvas));
   const playerShadows=[0,1].map(()=>{const m=new T.Mesh(keep(new T.PlaneGeometry(1.05,.78)),basic('#ffffff',{map:shadeMap,transparent:true,depthWrite:false}));m.rotation.x=-Math.PI/2;scene.add(m);return m;});
@@ -72,7 +87,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   function positionCamera(){camera.position.copy(cameraBase);camera.position.x+=cameraFollow;camera.lookAt(r.cameraTarget[0]+cameraFollow*.45,r.cameraTarget[1],r.cameraTarget[2]);}
   function resize(){if(disposed)return;const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;camera.aspect=w/h;cameraBase.fromArray(w>h?r.cameraLandscape:r.cameraPortrait);if(!cameraInspected)positionCamera();camera.updateProjectionMatrix();renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio||1,r.pixelRatios[quality]));}
   function setQuality(q){quality=Math.min(r.pixelRatios.length-1,q);renderer.shadowMap.enabled=r.shadowEnabled[quality];sun.castShadow=r.shadowEnabled[quality];environment.setQuality(quality);resize();onQuality(quality);}
-  function observeFrame(milliseconds){if(disposed)return;qualityAge+=milliseconds/1000;if(milliseconds>r.slowFrameMs)slow++;else slow=Math.max(0,slow-1);if(slow>=r.slowSamples&&qualityAge>=r.qualityCooldown&&quality<r.pixelRatios.length-1){slow=0;qualityAge=0;setQuality(quality+1);}}
+  function observeFrame(milliseconds){if(disposed)return;v7?.observe(milliseconds);qualityAge+=milliseconds/1000;if(milliseconds>r.slowFrameMs)slow++;else slow=Math.max(0,slow-1);if(slow>=r.slowSamples&&qualityAge>=r.qualityCooldown&&quality<r.pixelRatios.length-1){slow=0;qualityAge=0;setQuality(quality+1);}}
   function burst(x,z){for(let i=0;i<r.particles;i++){const p=particleData[i];p.life=r.particleSeconds;p.vx=(rand()-.5)*5;p.vy=2+rand()*4;p.vz=(rand()-.5)*5;positions.set([x,.4,z],i*3);}particles.visible=true;}
   function render(state,dt=0){
     if(disposed)return;
@@ -162,10 +177,10 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     const direction=target.sub(origin).normalize().applyQuaternion(parent.invert());
     bone.quaternion.setFromUnitVectors(child.position.clone().normalize(),direction);bone.updateWorldMatrix(false,true);
   }
-  function metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
-  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
+  function metrics(){return {tennisV7:false,v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
+  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();v7?.dispose();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
   setQuality(0);resize();
-  return {render,observeFrame,metrics,dispose,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
+  return {render,observeFrame,metrics,dispose,setQuality,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
 }
 
 /** Keep the same round alive when a GPU context cannot be used. */
