@@ -45,11 +45,11 @@ const leagueStage=difficulty=>1+c.league.matchesPerLeague*c.league.leagues.findI
 function round(e,level=1){let ctx;e.registry.minigames.set('soccer',{...e.registry.minigames.get('soccer'),start:c=>(ctx=c,{dispose(){}})});e.state.minigameProgress.soccer.stage=Math.max(e.state.minigameProgress.soccer.stage,level);const response=e.startMinigame('soccer',{seed:42,level});assert.ok(response.ok);return {ctx,response};}
 
 test('G3c released joystick direction overrides charge direction; short touch shoots weakly',()=>{
- const g=setup();g.update(dt,{kickHeld:true,moveX:1});g.update(dt,{moveZ:1});const s=g.getState();assert.equal(s.event.type,'shot');assert.equal(s.event.assisted,false);near(s.ball.vx,0);assert.ok(s.ball.vz>0);assert.ok(s.event.power<.1);
+ const g=setup();g.update(dt,{kickHeld:true,moveX:1});g.update(dt,{moveZ:1});const s=g.getState();assert.equal(s.event.type,'shot');assert.equal(s.event.assisted,false);const wobble=(c.assistance.passing.baseErrorDegrees+c.assistance.passing.pressureErrorDegrees)*Math.PI/180;assert.ok(Math.abs(s.ball.vx)<=s.ball.vz*Math.sin(wobble)+1e-9,'only the bounded execution error leaves the requested ray');assert.ok(s.ball.vz>0);assert.ok(s.event.power<.1);
  const charged=setup();advance(charged,.8,{kickHeld:true});charged.update(dt,{});assert.ok(Math.hypot(charged.getState().ball.vx,charged.getState().ball.vz)>Math.hypot(s.ball.vx,s.ball.vz));
 });
 test('G3c without joystick shots follow facing; outside cone direction is exact without curl',()=>{
- for(const x of [0,7]){const s=shot({x,fx:0,fz:1}).getState();near(s.ball.vx,0);assert.ok(s.ball.vz>0);assert.equal(s.ball.curve,0);assert.equal(s.event.assisted,false);}
+ for(const x of [0,7]){const s=shot({x,fx:0,fz:1}).getState();const wobble=(c.assistance.passing.baseErrorDegrees+c.assistance.passing.pressureErrorDegrees)*Math.PI/180;assert.ok(Math.abs(s.ball.vx)<=s.ball.vz*Math.sin(wobble)+1e-9,'only the bounded execution error leaves the requested ray');assert.ok(s.ball.vz>0);assert.equal(s.ball.curve,0);assert.equal(s.event.assisted,false);}
 });
 test('G3c assist works only in opposing half and within the goal cone, targeting inside posts',()=>{
  const s=shot({x:7,moveX:1,random:()=>.99}).getState();assert.equal(s.event.assisted,true);const target=s.ball.z+(c.pitch.length/2-s.ball.x)*s.ball.vz/s.ball.vx;assert.ok(Math.abs(target)<c.pitch.goalWidth/2);
@@ -59,7 +59,7 @@ test('G3c assist works only in opposing half and within the goal cone, targeting
 test('G3c a local forward pass uses bounded assistance and selects its real outfield receiver',()=>{
  const g=setup(),s=g.getState();Object.assign(s.players[1],{x:6,z:.4});Object.assign(s.players[2],{x:3,z:1});
  const origin={x:s.ball.x,z:s.ball.z},destination=passDestination({...s,aim:{x:1,z:0}},c);
- assert.equal(destination.target,1);assert.ok(Math.abs(destination.correctionRadians)<=18*Math.PI/180);
+ assert.equal(destination.target,1);assert.ok(Math.abs(destination.correctionRadians)<=c.assistance.passing.maxCorrectionDegrees*Math.PI/180);
  g.update(dt,{passPressed:true,moveX:1});assert.equal(s.event.type,'pass');assert.equal(s.event.target,1);assert.equal(s.controlled,1);assert.equal(s.ball.owner,null);
  near(s.event.x,destination.x);near(s.event.z,destination.z);assert.deepEqual({x:s.passTarget.startX,z:s.passTarget.startZ},origin);
  assert.ok(Math.hypot(s.ball.x-origin.x,s.ball.z-origin.z)<=Math.hypot(s.ball.vx,s.ball.vz)*dt+.02,'release is physical flight from the existing ball');
@@ -72,7 +72,7 @@ test('G3c a local pass may reach the keeper without selecting him in field mode'
 test('G3c pass to open space preserves its ray without assigning a remote receiver',()=>{
  const g=setup(),s=g.getState(),origin={x:s.ball.x,z:s.ball.z};g.update(dt,{passPressed:true,moveZ:1});
  assert.equal(s.event.type,'pass');assert.equal(s.event.target,null);assert.equal(s.controlled,0);assert.equal(s.passTarget,null);assert.equal(s.ball.owner,null);
- near(s.event.x,origin.x);near(s.event.z,origin.z+c.passing.minDistance);near(s.ball.vx,0);assert.ok(s.ball.vz>0);
+ near(s.event.x,origin.x);near(s.event.z,origin.z+c.passing.minDistance);const wobble=(c.assistance.passing.baseErrorDegrees+c.assistance.passing.pressureErrorDegrees)*Math.PI/180;assert.ok(Math.abs(s.ball.vx)<=s.ball.vz*Math.sin(wobble)+1e-9,'only the bounded execution error leaves the requested ray');assert.ok(s.ball.vz>0);
 });
 test('G3c fixed-tick input retains short pass/switch/kick edges at 120Hz',()=>{
  const g=setup(),s=g.getState();g.update(dt/2,{kickHeld:true,moveZ:1});g.update(dt/2,{moveZ:1});assert.equal(s.charging,false);

@@ -1,4 +1,5 @@
 // Pure helpers for human control. Coordinates are metres in the pitch X/Z plane.
+import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261105-1';
 // They never change a player, ball, input, save, RNG or wall clock.
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const finite=(n,fallback=0)=>Number.isFinite(n)?n:fallback;
@@ -9,9 +10,34 @@ const signedAngle=(a,b)=>Math.atan2(a.x*b.z-a.z*b.x,a.x*b.x+a.z*b.z);
 const rotate=(v,a)=>({x:v.x*Math.cos(a)-v.z*Math.sin(a),z:v.x*Math.sin(a)+v.z*Math.cos(a)});
 const setting=(c,section,key,fallback)=>finite(c?.assistance?.[section]?.[key],fallback);
 
-/** Optional config.assistance overrides. Ground assistance is deliberately much
- * narrower and shorter than an unrestricted teammate lock. Manual drags and
- * lofted balls always retain the requested direction. */
+/** Seconds a human ground pass takes. It grows gently with distance, so a short
+ * pass is not a rocket and a long one still arrives before a defender can react.
+ * Opponent passes keep passing.groundTravelSeconds (they never call this). */
+export function groundPassSeconds(range,c){
+  const base=setting(c,'passing','travelBaseSeconds',0),perMetre=setting(c,'passing','travelPerMetre',0);
+  if(!(base>0))return finite(c.passing.groundTravelSeconds,0.55);
+  return clamp(base+perMetre*Math.max(0,finite(range)),0.3,1.2);
+}
+
+/** Error of the kick itself, in radians: a small base wobble that grows with the
+ * nearest defender's pressure and the kicker's running speed. `noise` is a
+ * deterministic value in [-1,1] supplied by the caller (never Math.random). */
+export function passExecutionError(state,c,noise=0){
+  const p=state.players.find(player=>player.id===state.controlled);
+  if(!p)return 0;
+  const base=setting(c,'passing','baseErrorDegrees',0.4),extra=setting(c,'passing','pressureErrorDegrees',1.8);
+  let near=Infinity;
+  for(const o of state.players)if(o.team!==p.team&&o.role!=='keeper')near=Math.min(near,distance(o,p));
+  const pressure=near===Infinity?0:1-clamp((near-1.2)/2.4,0,1);
+  const top=Math.max(1,finite(c.players?.speed,5.3)),run=clamp(Math.hypot(finite(p.vx),finite(p.vz))/top,0,1);
+  const load=clamp(pressure*0.6+run*0.4,0,1);
+  return radians((base+extra*load)*clamp(finite(noise),-1,1));
+}
+
+/** Optional config.assistance overrides. A tap or short pass goes to the team-mate
+ * the stick points at (nearest bearing inside the intent cone), to where they will be,
+ * at whatever distance that is. Open lanes only break near-ties, so intent wins.
+ * Manual drags and lofted balls always retain the requested direction. */
 export function assistedPassDestination(state,c,power=0){
   const p=state.players.find(player=>player.id===state.controlled),b=state.ball;
   if(!p)throw Error('A controlled soccer player is required');
@@ -24,51 +50,64 @@ export function assistedPassDestination(state,c,power=0){
   const minRange=Math.max(0,passing.minDistance),maxRange=Math.max(minRange,passing.maxDistance);
   let range=minRange+(maxRange-minRange)*q,direction=aim,target=null,correction=0;
   const requestedRange=range;
-  const cone=radians(clamp(setting(c,'passing','coneDegrees',28),0,80));
-  const maxCorrection=radians(clamp(setting(c,'passing','maxCorrectionDegrees',18),0,cone*180/Math.PI));
-  const maxAssistRange=clamp(setting(c,'passing','maxAssistDistance',10),0,maxRange);
+  const cone=radians(clamp(setting(c,'passing','coneDegrees',38),0,80));
+  const maxCorrection=radians(clamp(setting(c,'passing','maxCorrectionDegrees',38),0,cone*180/Math.PI));
+  const maxAssistRange=clamp(setting(c,'passing','maxAssistDistance',20),0,maxRange);
   const minAssistRange=Math.max(0,setting(c,'passing','minAssistDistance',1.3));
   const receiverZone=Math.max(0,setting(c,'passing','receiverZone',0.85));
-  const maxLead=Math.max(0,setting(c,'passing','maxLeadDistance',0.85));
+  const maxLead=Math.max(0,setting(c,'passing','maxLeadDistance',1.6));
+  const laneWeight=Math.max(0,setting(c,'passing','laneWeight',0.35)),laneNeed=Math.max(0.1,setting(c,'passing','laneClearance',1.5));
+  const blockerReach=Math.max(0,setting(c,'passing','mateInLane',1.1));
+  const leadSeconds=Math.max(0,finite(passing.leadSeconds));
+  const opponents=state.players.filter(o=>o.team!==p.team&&o.role!=='keeper'&&!(o.recover>0));
+  const candidates=[];
   let best=Infinity;
   if(!manual&&!loft&&maxCorrection>0){
     for(const member of state.players){
       if(member.team!==p.team||member.id===p.id||member.recover>0)continue;
       const actualDistance=distance(member,b);
       if(actualDistance<minAssistRange||actualDistance>maxAssistRange)continue;
-      // First test the actual teammate, then their limited lead. A fast runner
-      // cannot pull assistance into the cone from outside it.
       const actual=unit(member.x-b.x,member.z-b.z);
+      // Intent is judged on where the team-mate is, so a fast runner cannot pull
+      // the choice into the cone from outside it.
       if(Math.abs(signedAngle(aim,actual))>cone+1e-10)continue;
-      let lx=finite(member.vx)*Math.max(0,finite(passing.leadSeconds)),lz=finite(member.vz)*Math.max(0,finite(passing.leadSeconds));
-      const leadLength=Math.hypot(lx,lz),leadScale=leadLength>maxLead?maxLead/leadLength:1;
-      const x=member.x+lx*leadScale,z=member.z+lz*leadScale;
-      const d=Math.hypot(x-b.x,z-b.z),wanted=unit(x-b.x,z-b.z),angle=signedAngle(aim,wanted);
+      const lx=finite(member.vx)*leadSeconds,lz=finite(member.vz)*leadSeconds;
+      const leadLength=Math.hypot(lx,lz),capScale=leadLength>maxLead?maxLead/leadLength:1;
+      // Lead the runner as far as the cone allows; a close team-mate running across
+      // would otherwise swing the point out of the cone and lose the pass.
+      let x=member.x,z=member.z,d=actualDistance,angle=signedAngle(aim,actual);
+      for(const fraction of [1,0.7,0.4,0.15]){
+        const px=member.x+lx*capScale*fraction,pz=member.z+lz*capScale*fraction,pd=Math.hypot(px-b.x,pz-b.z),pa=signedAngle(aim,unit(px-b.x,pz-b.z));
+        if(pd>=minAssistRange&&pd<=maxAssistRange&&Math.abs(pa)<=cone+1e-10){x=px;z=pz;d=pd;angle=pa;break;}
+      }
       if(d<minAssistRange||d>maxAssistRange||Math.abs(angle)>cone+1e-10)continue;
-      const turn=clamp(angle,-maxCorrection,maxCorrection),corrected=rotate(aim,turn);
-      // A capped turn must still enter a local receiving zone. Otherwise retain
-      // the raw pass, without assigning an unrelated teammate to run after it.
-      const miss=d*Math.abs(Math.sin(angle-turn));
+      const turn=clamp(angle,-maxCorrection,maxCorrection),miss=d*Math.abs(Math.sin(angle-turn));
       if(miss>receiverZone)continue;
-      // Prefer an open nearby corridor over a similarly aimed marked receiver.
-      // Prediction reads the defender's observed motion, never their controls;
-      // the correction cone and the manual ray remain exactly the same.
-      // The idle beginner helper keeps the original choice (state.laneAware false).
-      let blocked=0;
-      const travel=Math.max(.1,finite(passing.groundTravelSeconds,.55));
-      if(state.laneAware!==false)for(const defender of state.players){
-        if(defender.team===p.team||defender.recover>0)continue;
-        const rx=defender.x-b.x,rz=defender.z-b.z;
-        const vx=finite(defender.vx)-(x-b.x)/travel,vz=finite(defender.vz)-(z-b.z)/travel,v2=vx*vx+vz*vz;
-        const at=v2>1e-10?clamp(-(rx*vx+rz*vz)/v2,0,travel):0;
-        const clearance=Math.hypot(rx+vx*at,rz+vz*at);
-        blocked=Math.max(blocked,Math.max(0,1-clearance/(c.players.radius+c.physics.ballRadius+.2)));
-      }
-      const score=Math.abs(angle)*4+Math.abs(d-requestedRange)*0.06+d*0.005+blocked*2.6;
-      if(score<best-1e-10||Math.abs(score-best)<=1e-10&&(target===null||member.id<target)){
-        best=score;direction=corrected;range=d;target=member.id;correction=turn;
-      }
+      const point={x,z},seconds=groundPassSeconds(d,c);
+      let lane=Infinity,landing=Infinity;
+      // The idle beginner helper (state.laneAware false) keeps the plain angular choice.
+      if(state.laneAware!==false)for(const o of opponents){lane=Math.min(lane,passInterceptionClearance(o,b,point,seconds));landing=Math.min(landing,distance(o,point));}
+      const laneCost=lane<laneNeed?(laneNeed-lane)/laneNeed:0,landingCost=landing<2?(2-landing)/2*0.5:0;
+      const rangeCost=q>0?Math.abs(d-requestedRange)/Math.max(1,maxRange)*q*0.25:0;
+      const intent=Math.abs(signedAngle(aim,actual));
+      // Intent is the bearing to where the team-mate is, not to his predicted point.
+      const score=intent/Math.max(cone,1e-6)+laneWeight*(laneCost+landingCost)+rangeCost+d*0.0005;
+      candidates.push({member,x,z,d,angle,turn,score});
+      if(score<best-1e-10||Math.abs(score-best)<=1e-10&&(target===null||member.id<target)){best=score;target=member.id;}
     }
+    let chosen=candidates.find(entry=>entry.member.id===target);
+    // A team-mate standing on the line would take the ball first: he is the receiver.
+    if(chosen&&blockerReach>0){
+      let nearer=null;
+      for(const entry of candidates){
+        if(entry===chosen||entry.member.role==='keeper'||entry.d>=chosen.d-0.5)continue;
+        const lane=passLaneClearance(entry.member,b,{x:chosen.x,z:chosen.z});
+        if(lane<=blockerReach&&(nearer===null||entry.d<nearer.d))nearer=entry;
+      }
+      if(nearer)chosen=nearer;
+    }
+    if(chosen){direction=rotate(aim,chosen.turn);range=chosen.d;target=chosen.member.id;correction=chosen.turn;}
+    else target=null;
   }
   // Clip along the chosen ray, rather than clamping axes and changing aim.
   const hx=c.pitch.length/2,hz=c.pitch.width/2,inset=c.physics.ballRadius;

@@ -274,9 +274,10 @@ test('11. audio stays silent before a gesture and honours the island mute key',(
 });
 
 // Lower bound 65 s -> 64 s: the shaped stick (expo + rate limit) trims about 1 s of wall time.
+// 64 s -> 63 s (04/11): the landing glide after a ramp (landGlide) is worth up to ~0.1 s per course for a pilot that jumps; stage 1 seed 11 now ends at 63.9 s.
 test('calibration: scripted pilots finish 70-95 s; harder courses need better placings; AI caps hold',()=>{
   for(const [i,level] of balance.levels.entries())for(const ai of level.ai){assert.ok(ai.speed<=balance.aiCaps.maxSpeed);assert.ok(ai.reaction>=balance.aiCaps.minReaction);assert.ok(ai.lookahead<=balance.aiCaps.maxLookahead);void i;}
-  const times=[];for(const stage of [1,2,3])for(const seed of [11,12]){const r=race(stage,seed).result;times.push(r.elapsedMs);assert.ok(r.elapsedMs>=64000&&r.elapsedMs<=95000,`stage ${stage} ${r.elapsedMs}`);}
+  const times=[];for(const stage of [1,2,3])for(const seed of [11,12]){const r=race(stage,seed).result;times.push(r.elapsedMs);assert.ok(r.elapsedMs>=63000&&r.elapsedMs<=95000,`stage ${stage} ${r.elapsedMs}`);}
   assert.deepEqual(balance.levels.map(l=>l.targetRank),[3,2,1]);
   assert.deepEqual(RIDER_IDS,['player','rival-1','rival-2','rival-3','rival-4','rival-5']);
 });

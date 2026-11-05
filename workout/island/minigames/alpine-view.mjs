@@ -1,16 +1,17 @@
 import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261104-3';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261104-3';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261105-1';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261105-1';
 import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
+import {padChevrons} from './alpine-arrows.mjs';
 import {loadAlpineCharacters} from './alpine-character.mjs';
 import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {bodyTarget,followBody,carvePose} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261104-3';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261105-1';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
@@ -200,7 +201,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
 
   // ---------- Obstacles: bounded pools per type ----------
   const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
-  function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (let i = 0; i < 3; i++) for (const side of [-1, 1]) { const a = box(1.22, .04, .25, boostMat, g, side * .39, .14, i * 1.25 - 1.5); a.rotation.y = side * .6; } return g; }
+  function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (const b of padChevrons()) { const a = box(b.length, .04, .25, boostMat, g, b.x, .14, b.z); a.rotation.y = b.ry; } return g; }
   const kickerGeo = designWorld.trackGeometry?.('kicker'), flagGeo = designWorld.trackGeometry?.('flag-rope');
   let kickerMat = null; if (kickerGeo && trk.groomed) { const map = trk.groomed.clone(); map.needsUpdate = true; map.repeat.set(1, 6 / 4); kickerMat = new THREE.MeshStandardMaterial({map, vertexColors: !!kickerGeo.attributes.color, roughness: .94, envMapIntensity: .16}); trackMats.push(kickerMat); }
   function kickerRamp() {

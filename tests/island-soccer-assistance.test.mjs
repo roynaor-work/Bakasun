@@ -14,11 +14,11 @@ const teammate=(id,d,angle,extra={})=>player(id,Math.cos(degrees(angle))*d,Math.
 test('pass assistance corrects only toward a nearby teammate zone',()=>{
   const s=state(),result=assistedPassDestination(s,base);
   assert.equal(result.target,1);assert.equal(result.kind,'ground');assert.equal(result.assisted,true);
-  assert.ok(Math.hypot(result.x-6,result.z-1)<=0.85);assert.ok(Math.abs(result.correctionRadians)<=degrees(18));
+  assert.ok(Math.hypot(result.x-6,result.z-1)<=0.85);assert.ok(Math.abs(result.correctionRadians)<=degrees(base.assistance.passing.maxCorrectionDegrees));
 });
 
 test('a teammate outside the cone, behind, or beyond assist range cannot steal aim',()=>{
-  for(const [d,angle] of [[6,29],[6,80],[6,180],[10.01,0],[20,0],[0.8,0]]){
+  for(const [d,angle] of [[6,39],[6,80],[6,180],[20.01,0],[30,0],[0.8,0]]){
     const result=assistedPassDestination(state([player(0,0,0),teammate(1,d,angle)]),base);
     assert.equal(result.target,null,`range ${d}, angle ${angle}`);assert.equal(result.assisted,false);near(result.x,base.passing.minDistance);near(result.z,0);
   }
@@ -66,8 +66,8 @@ test('a loft receiver must be near the actual unchanged landing point',()=>{
 test('moving teammate lead is bounded and cannot enter the cone from outside',()=>{
   const s=state([player(0,0,0),player(1,6,0,{vx:0,vz:200})]);
   const result=assistedPassDestination(s,base);
-  assert.equal(result.target,1);assert.ok(result.z<=0.85+1e-9);
-  const outside=state([player(0,0,0),teammate(1,6,35,{vz:-100})]);
+  assert.equal(result.target,1);assert.ok(result.z<=base.assistance.passing.maxLeadDistance+1e-9);
+  const outside=state([player(0,0,0),teammate(1,6,39,{vz:-100})]);
   assert.equal(assistedPassDestination(outside,base).target,null);
 });
 
@@ -92,10 +92,10 @@ test('pass geometry remains bounded across directions, powers and receiver dista
   for(const power of [0,0.1,0.25])for(const range of [1,2,5,9,10.1,16])for(let aim=-180;aim<180;aim+=30)for(let angle=-90;angle<=90;angle+=10){
     const a=degrees(aim),receiver=teammate(1,range,aim+angle),s=state([player(0,0,0),receiver],{aim:{x:Math.cos(a),z:Math.sin(a)}});
     const result=assistedPassDestination(s,base,power);
-    assert.ok(Math.abs(result.correctionRadians)<=degrees(18)+1e-9);
+    assert.ok(Math.abs(result.correctionRadians)<=degrees(base.assistance.passing.maxCorrectionDegrees)+1e-9);
     if(result.assisted){
-      assert.ok(range<=10);assert.ok(range>=1.3);assert.ok(Math.abs(angle)<=28);
-      assert.ok(Math.hypot(result.x-receiver.x,result.z-receiver.z)<=0.86);
+      assert.ok(range<=base.assistance.passing.maxAssistDistance);assert.ok(range>=1.3);assert.ok(Math.abs(angle)<=base.assistance.passing.coneDegrees);
+      if(Math.abs(receiver.x)<base.pitch.length/2-.5&&Math.abs(receiver.z)<base.pitch.width/2-.5)assert.ok(Math.hypot(result.x-receiver.x,result.z-receiver.z)<=0.86);
     }else near((result.x-s.ball.x)*s.aim.z-(result.z-s.ball.z)*s.aim.x,0,1e-8);
   }
 });

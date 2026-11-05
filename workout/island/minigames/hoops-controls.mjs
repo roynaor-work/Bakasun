@@ -19,7 +19,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  const now=()=>win.performance?.now?.()??Date.now(),label=k=>labels[k]&&!labels[k].startsWith('hoops.')?labels[k]:(HE[k]||k);
  const node=(tag,cls)=>{const n=doc.createElement(tag);n.className=cls;return n;};
  const edges=[],keys=new Set(),sprintKeys=new Set(),records=new Map();
- let idle=null,enabled=true,disposed=false,mode='ball',paintedMode=null,stick={x:0,y:0},stickPointer=null,center=null,lockB=null,gestureId=0,shotSource=null,cancelShot=false,sprintTap=false,profileData=null,movementEnabled=true,sprintSince=null,autoSprinting=false,playIndex=0;
+ let dribbleDead=false,idle=null,enabled=true,disposed=false,mode='ball',paintedMode=null,stick={x:0,y:0},stickPointer=null,center=null,lockB=null,gestureId=0,shotSource=null,cancelShot=false,sprintTap=false,profileData=null,movementEnabled=true,sprintSince=null,autoSprinting=false,playIndex=0;
  const zone=node('div','hoops-stick-zone'),ring=node('div','hoops-stick'),knob=node('span','hoops-knob');
  ring.append(knob);zone.append(ring);zone.setAttribute('role','application');zone.setAttribute('aria-label',label('stick'));
  root.classList.add('ih-kit');root.dataset.theme='hoops';
@@ -63,7 +63,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  zone.addEventListener('pointermove',e=>{if(enabled&&e.pointerId===stickPointer)setStick(e.clientX,e.clientY);},on);
  for(const type of ['pointerup','pointercancel','lostpointercapture'])zone.addEventListener(type,e=>{if(e.pointerId===stickPointer)releaseStick();},on);
  const busy=record=>record.pointer!==null||record.keyboard!==null;
- const valid=record=>enabled&&!disposed&&!record.button.hidden&&!record.button.disabled;
+ const valid=record=>enabled&&!disposed&&!record.button.hidden&&!record.button.disabled&&!(record.key==='move'&&dribbleDead&&mode==='ball');
  function press(type,source){edges.push({type,source});}
  function renderRecord(record){
   const holding=busy(record),elapsed=record.at===null?0:Math.max(0,now()-record.at),passHold=holding&&record.role==='pass'&&(mode==='ball'||mode==='inbound');
@@ -71,7 +71,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
   render.label=long?'מסירה רחוקה':record.baseLabel||render.label;
   render.loading=passHold||holding&&record.key==='move'&&mode==='ball';
   render.charge=render.loading?Math.min(1,elapsed/(K.longPass*1000)):0;
-  render.disabled=!enabled||record.unavailable===true;render.visible=!record.host.hidden;
+  render.disabled=!enabled||record.unavailable===true||record.key==='move'&&dribbleDead&&mode==='ball';render.visible=!record.host.hidden;
   record.hud.update(render);const hold=long?'long':passHold?'short':'';if(record.button.dataset.hold!==hold)record.button.dataset.hold=hold;
   const aria=record.ariaLabel||label(record.key);if(record.button.getAttribute('aria-label')!==aria)record.button.setAttribute('aria-label',aria);if(record.button.title!==aria)record.button.title=aria;
  }
@@ -180,7 +180,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
   const record=keyboardRecord(e.code);
   if(record){e.preventDefault();if(e.repeat||busy(record)||!valid(record))return;record.keyboard=e.code;begin(record);return;}
   if(e.repeat)return;
-  if(e.code==='KeyR'&&mode==='ball'){e.preventDefault();press('spinPress','shortcut');}
+  if(e.code==='KeyR'&&mode==='ball'&&!dribbleDead){e.preventDefault();press('spinPress','shortcut');}
   else if(e.code==='KeyF'&&mode==='ball'){e.preventDefault();press('fakePress','shortcut');}
   else if(e.code==='KeyT'){e.preventDefault();press('timeoutPress','shortcut');}
   else if(['Digit1','Digit2','Digit3'].includes(e.code)){e.preventDefault();press('call'+e.code.slice(-1),'shortcut');}
@@ -251,6 +251,8 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
    return frame;
   },
   setMode,
+  /** The dribble is dead (ball held): the dribble button stops working until the ball is released. */
+  setDribbleDead(value){value=!!value;if(value===dribbleDead||disposed)return;dribbleDead=value;const r=records.get('move');if(r){if(value&&busy(r)){r.pointer=null;r.keyboard=null;}renderRecord(r);}},
   setProfile,
   setEnabled(value){if(disposed)return;enabled=!!value;if(!enabled)cancel();for(const record of records.values())renderRecord(record);},
   cancel,

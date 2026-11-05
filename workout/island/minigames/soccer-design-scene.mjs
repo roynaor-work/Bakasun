@@ -124,7 +124,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     if(!mobileSeats)throw new Error('Incompatible soccer mobile seating geometry');
     sightlineMesh(projectedUv(mobileSeats,10),crowdMaterial,'mobile');
     sightlineMesh(merged([get('roof')],stadiumTransform),palette);
-    const pitchMaterial=track(new T.MeshStandardMaterial({color:'#a0b3a0',map:grass,roughness:.96,metalness:0}));
+    const pitchMaterial=track(new T.MeshStandardMaterial({color:'#a6bba0',map:grass,roughness:.96,metalness:0}));
     // The 512px full-field tile has coarse high-contrast grass flecks. Bias
     // toward an existing mip level to soften those flecks while retaining its
     // authored mowing bands, UV scale and one texture sample per fragment.
@@ -134,7 +134,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // the full-field tile, and world-space wear (goal mouths, kick-off spot,
     // penalty spots) grounds the pitch like a used match surface. One extra
     // texture fetch per fragment; no extra draw call or texture.
-    const turfMapFragment=mapFragment.replace(sample,'mix( texture2D( map, vMapUv, 1.25 ), texture2D( map, vMapUv * 7.0 + vec2( .13, .41 ), .5 ), .22 ) * vec4( vec3( 1. - soccerWear( vSoccerTurfWorld ) ), 1. )');
+    const turfMapFragment=mapFragment.replace(sample,'mix( texture2D( map, vMapUv, 1.25 ), texture2D( map, vMapUv * 7.0 + vec2( .13, .41 ), .5 ), .22 ) * vec4( vec3( ( 1. - soccerWear( vSoccerTurfWorld ) ) * mix( .93, 1.06, smoothstep( -.05, .05, sin( ( vSoccerTurfWorld.x + soccerHalfLength ) * 3.14159265 / 3.4 ) ) ) ), 1. )');
     pitchMaterial.onBeforeCompile=shader=>{
       shader.uniforms.soccerHalfLength={value:hx};shader.uniforms.soccerGoalHalf={value:config.pitch.goalWidth/2};shader.uniforms.soccerSpot={value:config.pitch.penaltySpot};
       shader.vertexShader='varying vec2 vSoccerTurfWorld;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSoccerTurfWorld=vec2(position.x,position.z);');
@@ -142,7 +142,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
         'float soccerWear(vec2 w){float mouth=exp(-dot((vec2(abs(w.x)-soccerHalfLength,w.y))/vec2(2.8,soccerGoalHalf*1.25),(vec2(abs(w.x)-soccerHalfLength,w.y))/vec2(2.8,soccerGoalHalf*1.25)));float spot=exp(-dot((vec2(abs(w.x)-(soccerHalfLength-soccerSpot),w.y))/1.1,(vec2(abs(w.x)-(soccerHalfLength-soccerSpot),w.y))/1.1));float centre=exp(-dot(w/2.6,w/2.6));return mouth*.16+spot*.08+centre*.07;}\n'+
         shader.fragmentShader.replace('#include <map_fragment>',turfMapFragment);
     };
-    pitchMaterial.customProgramCacheKey=()=> 'soccer-design-turf-detail-wear-v3';
+    pitchMaterial.customProgramCacheKey=()=> 'soccer-design-turf-detail-wear-stripes-v4';
     // Use the imported texture-ready pitch, lowering its surface to y=0 so the
     // existing .018m lines and every contact shadow retain their depth order.
     const pitchGeometry=merged([get('pitch_surface')],stadiumTransform);pitchGeometry.translate(0,-.04*sy,0);
@@ -176,7 +176,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     // supplies simulation position and spin; imported ground offset is removed.
     const ballGeometry=merged([ballSource.getObjectByName('soccer_ball')],new T.Matrix4());
     normalizeSoccerBallGeometry(ballGeometry,config.physics.ballRadius);
-    const ballMaterial=track(new T.MeshStandardMaterial({vertexColors:true,roughness:.72,metalness:0}));
+    const ballMaterial=track(new T.MeshStandardMaterial({vertexColors:true,roughness:.48,metalness:.04}));
     mesh(ballGeometry,ballMaterial,ball).castShadow=true;
     loadedModels.forEach(releaseSource);loadedModels.length=0;loadedTextures.length=0;
     status='ready';root.visible=ball.visible=true;globalThis.performance?.mark?.('soccer:scene-build-end');

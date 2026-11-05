@@ -221,3 +221,7 @@
 /* Stacking: the actions and the top bar always sit above the (floating) stick touch area. */
 .game-screen[data-game=streetSlam] .hoops-stick-zone{z-index:1}
 .game-screen[data-game=streetSlam] .hoops-actions,.game-screen[data-game=streetSlam] .hoops-topbar{z-index:2}
+.game-screen[data-game=streetSlam] .hoops-steps{position:absolute;z-index:4;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%);padding:4px 12px;border-radius:16px;font-size:15px;font-weight:800;color:#fff;background:var(--h-glass);border:2px solid #7fd47f;pointer-events:none}
+.game-screen[data-game=streetSlam] .hoops-steps[data-n="1"]{border-color:#f2d04a}
+.game-screen[data-game=streetSlam] .hoops-steps[data-n="2"]{border-color:#ff9a3c}
+.game-screen[data-game=streetSlam] .hoops-steps[data-n="3"]{border-color:#ff4d4d}

@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261104-3';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261105-1';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
@@ -93,4 +93,16 @@ export function createQualityMonitor(view){
     if(seconds>=view.qualityWindowSeconds){const slow=frameSum/frameCount>view.slowFrameMs;seconds=frameSum=frameCount=0;if(slow){reset();return true;}}
     return false;
   }};
+}
+
+/** Distance level of detail for the full-quality tiers. The few players nearest the camera focus keep the
+ * detailed mesh, the rest use the economy mesh, so twelve players stay inside the triangle budget at tier 0
+ * (shadows, full pixel ratio, full crowd). Sticky: a member leaves only when it is clearly farther than the
+ * threshold, so a player on the border does not flicker between meshes. Returns the set of detailed ids. */
+export function nearDetailPlayers(players,focus,count,previous=null,hysteresis=1.2){
+  const ranked=players.map(p=>({id:p.id,d:hypot2(p.x-focus.x,p.z-focus.z)})).sort((a,b)=>a.d-b.d);
+  const limit=count>0?ranked[Math.min(ranked.length,count)-1]?.d??0:-1,keep=new Set();
+  if(previous)for(const r of ranked)if(previous.has(r.id)&&r.d<=limit*hysteresis&&keep.size<count)keep.add(r.id);
+  for(const r of ranked){if(keep.size>=count)break;keep.add(r.id);}
+  return keep;
 }
