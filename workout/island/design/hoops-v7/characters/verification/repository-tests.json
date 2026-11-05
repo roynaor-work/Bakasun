@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-11-04T20:49:10.087537+00:00",
+  "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/hoops-v7-pw-browsers npm test",
+  "repositoryBase": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "exitCode": 0,
+  "summary": {
+    "tests": 3278,
+    "pass": 3227,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 51,
+    "todo": 0,
+    "duration_ms": 157345.521286
+  },
+  "pass": true,
+  "browserConfiguration": "Temporary browser registry outside repository points Playwright to installed /usr/bin/chromium. No test files or existing code modified.",
+  "firstAttempt": "Default Playwright browser binary was absent; one browser test left a local server open after launch failure. That test subprocess was stopped; the complete suite was rerun with configured installed Chromium.",
+  "logSHA256": "3eac19de14628627272666f7195174dc355c8e3a0b73d31be728201dc134a0c2",
+  "existingTestFilesModified": false
+}
