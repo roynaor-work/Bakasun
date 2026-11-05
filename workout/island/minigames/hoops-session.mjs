@@ -184,7 +184,7 @@ export function startHoops(ctx){
    loop.advance(dt,()=>{prev=cur;engine.step(consumeHoopsInput(controls,cur));cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
   let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
-  if(holder&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
+  if(holder&&holder.dribbling!==false&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
   const alpha=paused?1:loop.alpha;
   view.render(prev,cur,alpha,paused||doc.hidden?0:dt);hud(cur,now);
   if(cur.phase==='final'&&!finished){
