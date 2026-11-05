@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "task": "hoops-characters-v7",
+  "startedAtUtc": "2026-11-04T20:10:52Z",
+  "clockNote": "Conservative measured start is branch creation at 20:10:52 UTC, after environment and source inspection. Iteration timestamps are taken from the execution clock. No duration is inferred from the branch date suffix.",
+  "baseCommit": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "branch": "codex/hoops-characters-v7-20261105",
+  "iterations": [
+    {
+      "iteration": "01",
+      "startedAtUtc": "2026-11-04T20:20:12.357Z",
+      "finishedAtUtc": "2026-11-04T20:20:44.174Z",
+      "screenshots": 20,
+      "technicalCapturePass": false,
+      "critique": "iterations/01/CRITIQUE.md",
+      "visualAcceptance": false
+    },
+    {
+      "iteration": "02",
+      "startedAtUtc": "2026-11-04T20:23:33.084Z",
+      "finishedAtUtc": "2026-11-04T20:24:05.993Z",
+      "screenshots": 20,
+      "technicalCapturePass": true,
+      "critique": "iterations/02/CRITIQUE.md",
+      "visualAcceptance": false
+    },
+    {
+      "iteration": "03",
+      "startedAtUtc": "2026-11-04T20:28:59.832Z",
+      "finishedAtUtc": "2026-11-04T20:29:29.733Z",
+      "screenshots": 20,
+      "technicalCapturePass": true,
+      "critique": "iterations/03/CRITIQUE.md",
+      "visualAcceptance": false
+    },
+    {
+      "iteration": "04",
+      "startedAtUtc": "2026-11-04T20:44:18.345Z",
+      "finishedAtUtc": "2026-11-04T20:44:43.180Z",
+      "screenshots": 40,
+      "technicalCapturePass": true,
+      "critique": "iterations/04/CRITIQUE.md",
+      "visualAcceptance": false,
+      "motionEvidence": [
+        {
+          "capture": "iterations/04/motion/sg/capture.json",
+          "screenshots": 108,
+          "sheets": 27,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "05",
+      "startedAtUtc": "2026-11-04T21:14:40.931Z",
+      "finishedAtUtc": "2026-11-04T21:15:20.910Z",
+      "screenshots": 56,
+      "technicalCapturePass": true,
+      "critique": "iterations/05/CRITIQUE.md",
+      "visualAcceptance": false
+    },
+    {
+      "iteration": "06",
+      "startedAtUtc": "2026-11-04T21:27:47.660Z",
+      "finishedAtUtc": "2026-11-04T21:28:41.969Z",
+      "screenshots": 56,
+      "technicalCapturePass": true,
+      "critique": "iterations/06/CRITIQUE.md",
+      "visualAcceptance": false,
+      "motionEvidence": [
+        {
+          "capture": "iterations/06/motion/pg/capture.json",
+          "screenshots": 108,
+          "sheets": 27,
+          "pass": true
+        },
+        {
+          "capture": "iterations/06/motion/pg-profile/capture.json",
+          "screenshots": 32,
+          "sheets": 8,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "07",
+      "startedAtUtc": "2026-11-04T21:44:35.485Z",
+      "finishedAtUtc": "2026-11-04T21:45:11.058Z",
+      "screenshots": 56,
+      "technicalCapturePass": true,
+      "critique": "iterations/07/CRITIQUE.md",
+      "visualAcceptance": false,
+      "transitionEvidence": [
+        {
+          "capture": "iterations/07/transition/pg/capture.json",
+          "screenshots": 58,
+          "sheets": 2,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "08",
+      "startedAtUtc": "2026-11-04T21:52:57.382Z",
+      "finishedAtUtc": "2026-11-04T21:53:36.881Z",
+      "screenshots": 56,
+      "technicalCapturePass": true,
+      "critique": "iterations/08/CRITIQUE.md",
+      "visualAcceptance": false,
+      "limitedVisualAcceptance": "Hold/roster criteria reached8 before final garment and movement checks.",
+      "transitionEvidence": [
+        {
+          "capture": "iterations/08/transition/pg/capture.json",
+          "screenshots": 58,
+          "sheets": 2,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "09",
+      "startedAtUtc": "2026-11-04T22:11:17.897Z",
+      "finishedAtUtc": "2026-11-04T22:11:51.378Z",
+      "screenshots": 62,
+      "technicalCapturePass": true,
+      "critique": "iterations/09/CRITIQUE.md",
+      "visualAcceptance": false,
+      "motionEvidence": [
+        {
+          "capture": "iterations/09/motion/referee/capture.json",
+          "screenshots": 4,
+          "sheets": 1,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "10",
+      "startedAtUtc": "2026-11-04T22:20:26.606Z",
+      "finishedAtUtc": "2026-11-04T22:21:43.935Z",
+      "screenshots": 62,
+      "technicalCapturePass": true,
+      "critique": "iterations/10/CRITIQUE.md",
+      "visualAcceptance": false,
+      "motionEvidence": [
+        {
+          "capture": "iterations/10/motion/c/capture.json",
+          "screenshots": 24,
+          "sheets": 6,
+          "pass": true
+        },
+        {
+          "capture": "iterations/10/motion/pf/capture.json",
+          "screenshots": 24,
+          "sheets": 6,
+          "pass": true
+        },
+        {
+          "capture": "iterations/10/motion/pg/capture.json",
+          "screenshots": 108,
+          "sheets": 27,
+          "pass": true
+        },
+        {
+          "capture": "iterations/10/motion/pg-profile/capture.json",
+          "screenshots": 24,
+          "sheets": 6,
+          "pass": true
+        },
+        {
+          "capture": "iterations/10/motion/referee/capture.json",
+          "screenshots": 4,
+          "sheets": 1,
+          "pass": true
+        }
+      ],
+      "transitionEvidence": [
+        {
+          "capture": "iterations/10/transition/pg/capture.json",
+          "screenshots": 58,
+          "sheets": 2,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": "11",
+      "startedAtUtc": "2026-11-04T22:37:18.637Z",
+      "finishedAtUtc": "2026-11-04T22:39:05.029Z",
+      "screenshots": 62,
+      "technicalCapturePass": true,
+      "critique": "iterations/11/CRITIQUE.md",
+      "visualAcceptance": true,
+      "motionEvidence": [
+        {
+          "capture": "iterations/11/motion/pg/capture.json",
+          "screenshots": 108,
+          "sheets": 27,
+          "pass": true
+        },
+        {
+          "capture": "iterations/11/motion/pg-landscape/capture.json",
+          "screenshots": 24,
+          "sheets": 6,
+          "pass": true
+        }
+      ],
+      "transitionEvidence": [
+        {
+          "capture": "iterations/11/transition/pg/capture.json",
+          "screenshots": 58,
+          "sheets": 2,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "qualityAcceptanceNote": "08 hold/roster reached8;09 rejected refereeFALL garment;10 rejected EURO head framing and interrupted its benchmark. Only explicitly reviewed final iterations are marked accepted.",
+  "evidenceCounts": {
+    "coreScreenshots": 510,
+    "motionFrames": 568,
+    "transitionFrames": 232,
+    "contactSheets": 150
+  },
+  "finishedAtUtc": "2026-11-04T22:56:54.445111+00:00",
+  "measuredWorkSeconds": 9962,
+  "measuredWorkHours": 2.767,
+  "allAutomatedChecksPass": true,
+  "physicalPhoneFPSValidated": false
+}

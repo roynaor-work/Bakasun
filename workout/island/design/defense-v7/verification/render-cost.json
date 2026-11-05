@@ -1,0 +1,779 @@
+{
+  "generatedUTC": "2026-11-04T22:35:35.983753+00:00",
+  "offlineSHA256": "88ad1692ca8102a8c81f7bb8a82e260f1b3ea516a0240c730adb6e5a1b5a3d21",
+  "method": "Rejected diagnostic: paused command submission and gl.finish return times, excluding Chromium deferred compositing. These values cannot establish completed render time or FPS.",
+  "rows": [
+    {
+      "variant": "baseline",
+      "samples": [
+        {
+          "totalMS": 4.5,
+          "submissionMS": 4.299999998882413,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.6999999992549419,
+          "submissionMS": 0.599999999627471,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.8000000007450581,
+          "submissionMS": 0.6000000014901161,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.8999999985098839,
+          "submissionMS": 0.6999999992549419,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.599999999627471,
+          "submissionMS": 0.5,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.5,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.40000000037252903,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.6000000014901161,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.7999999988824129,
+          "submissionMS": 0.5,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.40000000037252903,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.599999999627471,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 1.400000000372529,
+          "submissionMS": 1.299999998882413,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.900000000372529,
+          "submissionMS": 0.6000000014901161,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        }
+      ],
+      "triangles": 28391,
+      "calls": 26,
+      "meanTotalMS": 0.8299999999813735,
+      "meanSubmissionMS": 0.6649999999441206,
+      "meanGpuWaitMS": 0.030000000074505807
+    },
+    {
+      "variant": "half-dpr",
+      "samples": [
+        {
+          "totalMS": 0.599999999627471,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.40000000037252903,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 1.199999999254942,
+          "submissionMS": 0.8000000007450581,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.599999999627471,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0.09999999962747097
+        }
+      ],
+      "triangles": 28391,
+      "calls": 26,
+      "meanTotalMS": 0.4650000000372529,
+      "meanSubmissionMS": 0.2500000002793968,
+      "meanGpuWaitMS": 0.029999999888241292
+    },
+    {
+      "variant": "no-water",
+      "samples": [
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.6000000014901161,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.7000000011175871,
+          "submissionMS": 0.599999999627471,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.09999999962747097,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.599999999627471,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        }
+      ],
+      "triangles": 28389,
+      "calls": 25,
+      "meanTotalMS": 0.35,
+      "meanSubmissionMS": 0.21000000024214388,
+      "meanGpuWaitMS": 0.02000000011175871
+    },
+    {
+      "variant": "no-clouds",
+      "samples": [
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 1.099999999627471,
+          "submissionMS": 0.900000000372529,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.09999999962747097,
+          "submissionMS": 0,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.10000000149011612,
+          "submissionMS": 0,
+          "gpuWaitMS": 0.10000000149011612
+        }
+      ],
+      "triangles": 26951,
+      "calls": 25,
+      "meanTotalMS": 0.2500000000931323,
+      "meanSubmissionMS": 0.1499999998137355,
+      "meanGpuWaitMS": 0.030000000074505807
+    },
+    {
+      "variant": "no-crowd",
+      "samples": [
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 1.800000000745058,
+          "submissionMS": 1.700000001117587,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.40000000037252903,
+          "gpuWaitMS": 0
+        }
+      ],
+      "triangles": 25151,
+      "calls": 25,
+      "meanTotalMS": 0.4349999999627471,
+      "meanSubmissionMS": 0.30000000009313227,
+      "meanGpuWaitMS": 0.009999999962747096
+    },
+    {
+      "variant": "no-lights",
+      "samples": [
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 6.900000000372529,
+          "submissionMS": 6.700000001117587,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0.10000000149011612
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2999999988824129,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.3999999985098839,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 2.299999998882413,
+          "submissionMS": 0.3999999985098839,
+          "gpuWaitMS": 1.800000000745058
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.2999999988824129,
+          "gpuWaitMS": 0.09999999962747097
+        },
+        {
+          "totalMS": 0.5,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0.09999999962747097
+        }
+      ],
+      "triangles": 28391,
+      "calls": 26,
+      "meanTotalMS": 0.7849999998696149,
+      "meanSubmissionMS": 0.534999999962747,
+      "meanGpuWaitMS": 0.125
+    },
+    {
+      "variant": "no-css-blur",
+      "samples": [
+        {
+          "totalMS": 0.09999999962747097,
+          "submissionMS": 0,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.6999999992549419,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.30000000074505806,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.10000000149011612,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.40000000037252903,
+          "submissionMS": 0.30000000074505806,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.09999999962747097,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.09999999962747097,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.2000000011175871,
+          "submissionMS": 0.2000000011175871,
+          "gpuWaitMS": 0
+        },
+        {
+          "totalMS": 0.19999999925494194,
+          "submissionMS": 0.19999999925494194,
+          "gpuWaitMS": 0
+        }
+      ],
+      "triangles": 28391,
+      "calls": 26,
+      "meanTotalMS": 0.22999999998137355,
+      "meanSubmissionMS": 0.125,
+      "meanGpuWaitMS": 0.0
+    }
+  ],
+  "errors": [],
+  "validForFPS": false
+}

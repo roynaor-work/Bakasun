@@ -1,0 +1,11 @@
+{
+  "command": "npm test",
+  "configuration": "PLAYWRIGHT_BROWSERS_PATH points to a temporary wrapper for installed /usr/bin/chromium, with --no-sandbox; local socket permissions enabled. Existing tests unchanged.",
+  "exitCode": 0,
+  "tests": 3278,
+  "passed": 3227,
+  "failed": 0,
+  "skipped": 51,
+  "durationMs": 193011,
+  "note": "Initial restricted-environment run failed 4 test files. Configured recheck and the complete configured run passed. The 51 skipped tests are existing conditional/opt-in cases."
+}

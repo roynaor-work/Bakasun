@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "startedAt": "2026-11-04T23:45:33.053Z",
+  "playbackProtocol": "At least10 wall-clock seconds of actual playback with independently observed time changes and rendered frames. Unfinished one-shots then receive a separately recorded seek-assisted near-end probe. This does not claim that every full clip naturally completes in ten seconds under software rendering.",
+  "sourceHTMLSHA256": "7ca632790d23dffa8bda9e4d054a625317fad296a4541c1ac6426a9b96fec6e5",
+  "dwellSeconds": 10,
+  "expectedCases": 504,
+  "devicePixelRatio": 1.5,
+  "renderer": "Chromium / ANGLE SwiftShader, software rendering; not physical phone performance",
+  "errors": [],
+  "externalRequests": [],
+  "baselines": [
+    {
+      "size": [
+        390,
+        844
+      ],
+      "snapshot": {
+        "focus": "athlete",
+        "athlete": 2,
+        "clip": "glide",
+        "environment": "sunset",
+        "view": "close",
+        "playing": false,
+        "time": 0,
+        "speed": 1,
+        "detail": "low",
+        "yaw": 0.55,
+        "elevation": 0.13,
+        "distance": 8.235,
+        "wire": false,
+        "rig": false,
+        "ready": true,
+        "activeLOD": 2,
+        "lastDraw": 9658.200000001118,
+        "viewport": [
+          390,
+          844
+        ],
+        "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+        "bundleSources": {
+          "three": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+          "geometry": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+          "gltf": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+          "draco": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+          "world": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1",
+          "motion": "db9237533fcbb21520823fb97f455c358ae884223af0b5bec0e4b4ecbdc3338c",
+          "preview": "3b634bb1d291eab5aa40128b26eb53555b1c5e537a3e3e45495611ac4d942328"
+        },
+        "threeRevision": "160",
+        "render": {
+          "frame": 27,
+          "calls": 42,
+          "triangles": 55642,
+          "points": 96,
+          "lines": 0
+        },
+        "renderScope": "main and shadow passes; excludes PMREM setup",
+        "memory": {
+          "geometries": 76,
+          "textures": 24
+        },
+        "programs": 20,
+        "actorScale": 1.35,
+        "pixelRatio": 1.5,
+        "drawingBufferSize": [
+          585,
+          1266
+        ],
+        "loadedRecords": 9,
+        "characterRoots": 9,
+        "pendingLoads": 0,
+        "fps": 0,
+        "renderSamples": [],
+        "clips": [
+          {
+            "name": "glide",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "carve_left",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "carve_right",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "crouch",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "accelerate",
+            "duration": 2.5999999046325684
+          },
+          {
+            "name": "ramp_jump",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_180",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_360",
+            "duration": 3.5999999046325684
+          },
+          {
+            "name": "trick_shifty",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_tail_grab",
+            "duration": 3.4000000953674316
+          },
+          {
+            "name": "trick_backflip",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "fall_roll",
+            "duration": 4
+          },
+          {
+            "name": "get_up",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "celebrate",
+            "duration": 3
+          }
+        ],
+        "events": [],
+        "worldStats": {
+          "trees": 2,
+          "treeLOD": [
+            0,
+            0,
+            2
+          ],
+          "crowd": 36,
+          "particleCapacity": 96,
+          "activeParticles": 0,
+          "materialTextureBytesWithMipmaps": 12582912,
+          "pineAtlasBytesWithMipmaps": 5592405,
+          "backgroundTextureBytesAllLoaded": 12116736,
+          "environment": "sunset",
+          "drawCallsStatic": 27,
+          "worldTriangles": 53064,
+          "treeThresholdsMeters": [
+            15,
+            34,
+            100
+          ],
+          "instancing": true
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-11-05T00:04:35.141Z",
+  "caseCount": 69,
+  "lastCompletedId": "069"
+}

@@ -1,0 +1,3005 @@
+{
+  "generatedAt": "2026-11-04T21:57:15.323Z",
+  "limits": {
+    "glbBytes": 1500000,
+    "textureSide": 1024,
+    "joints": 18
+  },
+  "assets": [
+    {
+      "id": "apartment-burning-lod",
+      "bytes": 87852,
+      "triangles": 1160,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-burning",
+      "bytes": 106408,
+      "triangles": 4866,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-intact-lod",
+      "bytes": 84124,
+      "triangles": 984,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-intact",
+      "bytes": 97404,
+      "triangles": 4208,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-ruined-lod",
+      "bytes": 85036,
+      "triangles": 712,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-ruined",
+      "bytes": 90844,
+      "triangles": 1320,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-scorched-lod",
+      "bytes": 86976,
+      "triangles": 1200,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "apartment-scorched",
+      "bytes": 103224,
+      "triangles": 4890,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "bystander-lod",
+      "bytes": 78072,
+      "triangles": 208,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "bystander",
+      "bytes": 80920,
+      "triangles": 556,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-burning-lod",
+      "bytes": 85512,
+      "triangles": 716,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-burning",
+      "bytes": 95420,
+      "triangles": 2402,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-intact-lod",
+      "bytes": 81644,
+      "triangles": 576,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-intact",
+      "bytes": 88056,
+      "triangles": 2012,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-ruined-lod",
+      "bytes": 85044,
+      "triangles": 724,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-ruined",
+      "bytes": 91216,
+      "triangles": 1436,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-scorched-lod",
+      "bytes": 84172,
+      "triangles": 696,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "corner-store-scorched",
+      "bytes": 92248,
+      "triangles": 2342,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-command-lod",
+      "bytes": 152548,
+      "triangles": 2000,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-command atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74190
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-command",
+      "bytes": 173768,
+      "triangles": 4816,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-command atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74190
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-nozzle-lod",
+      "bytes": 152720,
+      "triangles": 2108,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-nozzle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73444
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-nozzle",
+      "bytes": 174676,
+      "triangles": 4916,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-nozzle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73444
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-tool-lod",
+      "bytes": 153156,
+      "triangles": 2056,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-tool atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74323
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "crew-tool",
+      "bytes": 174408,
+      "triangles": 4872,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        }
+      ],
+      "skins": 1,
+      "textures": [
+        {
+          "name": "crew-tool atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74323
+        }
+      ],
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "engine-ladder-lod",
+      "bytes": 90328,
+      "triangles": 2216,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "engine-ladder",
+      "bytes": 145820,
+      "triangles": 12584,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "engine-pumper-lod",
+      "bytes": 91484,
+      "triangles": 2184,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "engine-pumper",
+      "bytes": 133904,
+      "triangles": 9604,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "hydrant",
+      "bytes": 80608,
+      "triangles": 408,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "response-unit-lod",
+      "bytes": 88156,
+      "triangles": 1676,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "response-unit",
+      "bytes": 125880,
+      "triangles": 8524,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "vehicle atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 73945
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-burning-lod",
+      "bytes": 86476,
+      "triangles": 736,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-burning",
+      "bytes": 96496,
+      "triangles": 2458,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-intact-lod",
+      "bytes": 82824,
+      "triangles": 596,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-intact",
+      "bytes": 89016,
+      "triangles": 2012,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-ruined-lod",
+      "bytes": 85056,
+      "triangles": 712,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-ruined",
+      "bytes": 90856,
+      "triangles": 1320,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-scorched-lod",
+      "bytes": 85384,
+      "triangles": 740,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "row-house-scorched",
+      "bytes": 93560,
+      "triangles": 2430,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "street-barrier",
+      "bytes": 79048,
+      "triangles": 292,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "street-block",
+      "bytes": 99716,
+      "triangles": 4168,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "street-lamp",
+      "bytes": 78768,
+      "triangles": 216,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "traffic-cone",
+      "bytes": 77276,
+      "triangles": 132,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-burning-lod",
+      "bytes": 82408,
+      "triangles": 388,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-burning",
+      "bytes": 89184,
+      "triangles": 1422,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-intact-lod",
+      "bytes": 79148,
+      "triangles": 260,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-intact",
+      "bytes": 82752,
+      "triangles": 1124,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-ruined-lod",
+      "bytes": 82044,
+      "triangles": 604,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-ruined",
+      "bytes": 86932,
+      "triangles": 1060,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-scorched-lod",
+      "bytes": 81376,
+      "triangles": 344,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "warehouse-scorched",
+      "bytes": 86252,
+      "triangles": 1322,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-burning-lod",
+      "bytes": 83276,
+      "triangles": 496,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-burning",
+      "bytes": 90244,
+      "triangles": 1562,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-intact-lod",
+      "bytes": 79996,
+      "triangles": 368,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-intact",
+      "bytes": 83888,
+      "triangles": 1264,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-ruined-lod",
+      "bytes": 82980,
+      "triangles": 712,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-ruined",
+      "bytes": 88088,
+      "triangles": 1200,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-scorched-lod",
+      "bytes": 82252,
+      "triangles": 452,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    },
+    {
+      "id": "workshop-scorched",
+      "bytes": 87364,
+      "triangles": 1462,
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "validatorMessages": [
+        {
+          "code": "UNSUPPORTED_EXTENSION",
+          "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+          "severity": 2,
+          "pointer": "/extensionsUsed/0"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/1"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/2"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/3"
+        }
+      ],
+      "skins": 0,
+      "textures": [
+        {
+          "name": "environment atlas",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 74094
+        }
+      ],
+      "animations": [],
+      "dracoRequired": true,
+      "degenerateTriangles": 0,
+      "nonFiniteValues": 0,
+      "invalidWeights": 0
+    }
+  ],
+  "failures": [],
+  "passed": true
+}

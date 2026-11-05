@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-11-04T21:22:23.705536+00:00",
+  "baseCommit": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "fullCommand": "npm test",
+  "fullRun": {
+    "tests": 269,
+    "pass": 265,
+    "fail": 4,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 165793.703243
+  },
+  "failedFiles": [
+    "tests/cam-lab-keyframes.test.mjs",
+    "tests/island-browser-csp.test.mjs",
+    "tests/workout-dad-test.test.mjs",
+    "tests/workout-royiki.test.mjs"
+  ],
+  "baselineComparison": {
+    "command": "node --test --test-reporter=tap <same four files>",
+    "cleanDetachedWorktree": true,
+    "sameFourFileFailuresReproduced": true
+  },
+  "networkDiagnostic": {
+    "command": "node --test --test-force-exit --test-reporter=tap <same four files>",
+    "networkAccess": true,
+    "current": {
+      "tests": 21,
+      "pass": 19,
+      "fail": 1,
+      "skip": 1
+    },
+    "base": {
+      "tests": 21,
+      "pass": 19,
+      "fail": 1,
+      "skip": 1
+    },
+    "remainingFailure": "tests/workout-royiki.test.mjs:91: missing Playwright chromium_headless_shell-1234 executable",
+    "originalNetworkReruns": "Two runs left active handles; interrupted and repeated with --test-force-exit; no claim they completed"
+  },
+  "trackedSourceChanged": false,
+  "existingTestsChanged": false,
+  "rawOutput": "Retained only in /tmp; source/fixture/private values were not copied into the delivery.",
+  "installedChromiumBrowserCheck": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/naval-pw-browser-cache node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "selector": "Temporary wrapper selects existing /usr/bin/chromium with headless sandbox-compatible flags; no test source changed",
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "durationMs": 31294.300299
+  },
+  "adaptedFullRun": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/naval-pw-browser-cache node --test --test-force-exit tests/*.mjs",
+    "summary": {
+      "tests": 3151,
+      "pass": 3100,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 51,
+      "todo": 0,
+      "duration_ms": 230158.875414
+    },
+    "existingTestSourceChanged": false,
+    "browser": "Installed /usr/bin/chromium selected through temporary wrapper under /tmp; no browser binaries added to the repository.",
+    "completedAt": "2026-11-04T22:08:43.940949+00:00"
+  }
+}

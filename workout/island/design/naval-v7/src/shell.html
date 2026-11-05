@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="color-scheme" content="dark">
+ <meta name="description" content="ארבע ספינות בדיוניות, שני ציים וים בתנועה. תצוגת תלת־ממד מקומית ללא חיבור.">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' data: blob: 'wasm-unsafe-eval'; style-src 'unsafe-inline'; img-src data: blob:; worker-src blob: data:; connect-src data: blob:; font-src data:; base-uri 'none'; form-action 'none'">
+ <title>מצר הדמדומים · naval v7</title>
+ <style>/*STYLES*/</style>
+ <!--MODULES-->
+</head>
+<body>
+ <main id="experience" aria-label="תצוגת צי ימי תלת־ממדי">
+  <canvas id="sea" aria-label="ספינות בים. ניתן לסובב בגרירה ולהתקרב בצביטה או בכפתורים." tabindex="0"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <header class="topbar">
+   <a class="identity" href="#" id="home" aria-label="איפוס התצוגה"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 3 24 16 18 30 12 16Z M5 19h26 M18 3v29"/><circle cx="18" cy="18" r="12"/></svg><span>מצר הדמדומים<small>FICTIONAL FLEET / 07</small></span></a>
+   <div class="edition"><span class="live-dot"></span><span id="weather-caption">שקיעה · רוח מערבית</span></div>
+  </header>
+  <section class="scene-heading" aria-labelledby="scene-title">
+   <p class="eyebrow"><span>יומן ים</span><span class="rule"></span><span dir="ltr">18:47</span></p>
+   <h1 id="scene-title">על קו<br>הדמדומים.</h1>
+   <p class="intro">פלדה, מלח ורגע של שקט.</p>
+  </section>
+  <div class="camera-tools" aria-label="כלי תצוגה">
+   <div class="segment view-switch"><button type="button" data-view="near" aria-pressed="true">קרוב</button><button type="button" data-view="far" aria-pressed="false">רחוק</button></div>
+   <button type="button" id="pause" class="icon-button" aria-label="השהיית התנועה" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"/></svg></button>
+   <button type="button" id="settings" class="icon-button" aria-label="פתיחת אפשרויות" aria-expanded="false" aria-controls="options"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg></button>
+  </div>
+  <aside class="bearing" aria-hidden="true"><span>N</span><i></i><span id="bearing">045°</span><b>W</b><em>E</em></aside>
+  <section class="vessel-caption" aria-label="הספינה הנבחרת" aria-live="polite">
+   <div><span class="eyebrow" id="ship-class">סיירת / CRUISER</span><h2 id="ship-name">צור <span dir="ltr">C—07</span></h2></div>
+   <p><span id="ship-length">66</span><small>מטר</small><i></i><span id="fleet-label">צי הגאות</span></p>
+  </section>
+  <div class="horizon-marker" aria-hidden="true"><i></i><span>OPEN WATER</span><i></i></div>
+  <footer class="console">
+   <div class="console-top"><p>בחרו כלי שיט <span dir="ltr">01 — 04</span></p><span id="gesture-hint">גרירה לסיבוב · צביטה לקירוב</span></div>
+   <nav class="vessel-picker" aria-label="בחירת ספינה">
+    <button type="button" data-ship="corvette" aria-pressed="false"><svg viewBox="0 0 72 24" aria-hidden="true"><path d="M3 16h64l-7 6H13Z M23 16V9h18v7M30 9V5h9v4M35 5V1M44 14h10M49 14v-3"/></svg><span>קורבטה</span><small>01</small></button>
+    <button type="button" data-ship="destroyer" aria-pressed="false"><svg viewBox="0 0 72 24" aria-hidden="true"><path d="M3 16h64l-7 6H13Z M22 16V8h15v8M27 8V4h7v4M30 4V0M40 16V8h7v8M12 15v-3h7M52 15v-3h9"/></svg><span>משחתת</span><small>02</small></button>
+    <button type="button" data-ship="cruiser" aria-pressed="true"><svg viewBox="0 0 72 24" aria-hidden="true"><path d="M2 16h67l-9 6H12Z M23 16V8h15v8M28 8V3h6v5M31 3V0M42 16V8h7v8M9 15v-4h9M16 11V8h6M52 15v-4h9M55 11V8h9"/></svg><span>סיירת</span><small>03</small></button>
+    <button type="button" data-ship="carrier" aria-pressed="false"><svg viewBox="0 0 72 24" aria-hidden="true"><path d="M2 13h68v4l-10 5H12Z M45 13V6h12v7M49 6V3h6v3M52 3V0M8 11h29M13 8h10M18 5v6"/></svg><span>נושאת</span><small>04</small></button>
+   </nav>
+   <div class="console-bottom">
+    <div class="fleet-selector" role="group" aria-label="צבע הצי"><button type="button" data-fleet="tide" class="fleet-tide" aria-label="צי הגאות, כחול־ירוק" aria-pressed="true"><span></span></button><button type="button" data-fleet="ember" class="fleet-ember" aria-label="צי הגחלת, אדום" aria-pressed="false"><span></span></button></div>
+    <div class="segment weather-switch"><button type="button" data-weather="sunset" aria-pressed="true">שקיעה</button><button type="button" data-weather="storm" aria-pressed="false">סערה</button></div>
+    <button type="button" id="salvo" class="salvo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg><span>מטח</span><small dir="ltr">FIRE</small></button>
+   </div>
+  </footer>
+  <dialog id="options" aria-labelledby="options-title">
+   <div class="dialog-heading"><h2 id="options-title">תנאי ההפלגה</h2><button type="button" id="close-options" class="icon-button" aria-label="סגירת אפשרויות">×</button></div>
+   <label class="quality-label">איכות התצוגה <select id="quality"><option value="balanced">אוטומטית</option><option value="low">חסכונית</option><option value="high">מלאה</option></select></label>
+   <label class="check-label"><input type="checkbox" id="crew-toggle" checked> צוות על הסיפון</label>
+   <div class="effect-buttons"><button type="button" id="water-impact">פגיעה בים</button><button type="button" id="ship-impact">אש ועשן</button></div>
+   <button type="button" id="reset" class="text-button">חזרה לנקודת ההתחלה ↺</button>
+   <details><summary>נתוני התצוגה</summary><pre id="stats" dir="ltr"></pre><p class="measurement-note">קצב הפריימים כאן נמדד בדפדפן הנוכחי. יעד הטלפון: 30fps.</p></details>
+   <p class="fiction-note">כלי השיט והדגלים בדיוניים. תצוגה מקומית, ללא חיבור לרשת.</p>
+  </dialog>
+  <div id="loading" role="status"><span class="loading-compass">◇</span><h2>יוצאים לים</h2><p id="loading-progress">טוענים את הצי…</p><div class="loading-line"><i id="loading-fill"></i></div></div>
+  <div id="notice" role="status" aria-live="polite"></div>
+ </main>
+ <!--ASSETS-->
+ <script type="module">/*APP*/</script>
+</body>
+</html>

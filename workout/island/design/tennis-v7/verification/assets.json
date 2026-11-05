@@ -1,0 +1,1376 @@
+{
+  "generated": "2026-11-04T21:52:43.316Z",
+  "pass": true,
+  "totalGLBBytes": 2009076,
+  "estimatedAllTextureGPUBytesWithMipmaps": 26563925,
+  "failures": [],
+  "assets": [
+    {
+      "file": "models/man-01.glb",
+      "bytes": 333984,
+      "MB": 0.333984,
+      "sha256": "5e91b9f9c130563530d8163d84d1fa3b0db619397c99c8657b825a27f7fd06bf",
+      "triangles": 19329,
+      "vertices": 11477,
+      "meshes": [
+        {
+          "name": "Body_LOD0",
+          "triangles": 14230
+        },
+        {
+          "name": "Body_LOD1",
+          "triangles": 2392
+        },
+        {
+          "name": "Body_LOD2",
+          "triangles": 883
+        },
+        {
+          "name": "Racket_RightHand",
+          "triangles": 1568
+        },
+        {
+          "name": "Racket_LOD1",
+          "triangles": 256
+        }
+      ],
+      "images": [
+        {
+          "name": "man-01 / one 512 atlas",
+          "mime": "image/png",
+          "bytes": 34189,
+          "width": 512,
+          "height": 512,
+          "sha256": "886d35af10a9faf062ff36a438e6d454aec143f4be5de9c6a1b93115f9e46c6f"
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "channels": 36,
+          "extras": {
+            "label": "עמידת מוצא",
+            "loop": true,
+            "rootMotion": false,
+            "events": [],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "run",
+          "channels": 36,
+          "extras": {
+            "label": "ריצה",
+            "loop": true,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "left_plant",
+                "time": 0,
+                "atSeconds": 0
+              },
+              {
+                "name": "right_plant",
+                "time": 0.5,
+                "atSeconds": 0.36
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "serve",
+          "channels": 36,
+          "extras": {
+            "label": "שירות",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "prepare",
+                "time": 0,
+                "label": "הכנה",
+                "atSeconds": 0
+              },
+              {
+                "name": "toss",
+                "time": 0.28,
+                "label": "זריקה",
+                "atSeconds": 0.8960000000000001
+              },
+              {
+                "name": "load",
+                "time": 0.48,
+                "label": "העמסה",
+                "atSeconds": 1.536
+              },
+              {
+                "name": "contact",
+                "time": 0.64,
+                "label": "פגיעה ומעקב",
+                "atSeconds": 2.048
+              }
+            ],
+            "contactSweetSpot": [
+              -0.20274666238607095,
+              2.361751724667119,
+              0.2626096432907623
+            ]
+          }
+        },
+        {
+          "id": "forehand",
+          "channels": 36,
+          "extras": {
+            "label": "פורהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.624
+              }
+            ],
+            "contactSweetSpot": [
+              -0.5931775024660532,
+              1.2689385734140686,
+              0.848027941099727
+            ]
+          }
+        },
+        {
+          "id": "backhand",
+          "channels": 36,
+          "extras": {
+            "label": "בקהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.7020000000000001
+              }
+            ],
+            "contactSweetSpot": [
+              0.3574783593957461,
+              1.400988458344398,
+              0.7113157015331583
+            ]
+          }
+        },
+        {
+          "id": "volley",
+          "channels": 36,
+          "extras": {
+            "label": "וולה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.45,
+                "atSeconds": 0.35100000000000003
+              }
+            ],
+            "contactSweetSpot": [
+              -0.588868839244504,
+              1.7175108475147813,
+              0.5801455678463334
+            ]
+          }
+        },
+        {
+          "id": "smash",
+          "channels": 36,
+          "extras": {
+            "label": "שמאש",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "takeoff",
+                "time": 0.34,
+                "atSeconds": 0.391
+              },
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.598
+              },
+              {
+                "name": "land",
+                "time": 0.82,
+                "atSeconds": 0.9429999999999998
+              }
+            ],
+            "contactSweetSpot": [
+              -0.1961203075314925,
+              2.439999276277666,
+              0.34028135166996837
+            ]
+          }
+        },
+        {
+          "id": "slide",
+          "channels": 36,
+          "extras": {
+            "label": "החלקה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "brake",
+                "time": 0.35,
+                "atSeconds": 0.5075
+              },
+              {
+                "name": "contact",
+                "time": 0.58,
+                "atSeconds": 0.841
+              },
+              {
+                "name": "recover",
+                "time": 0.85,
+                "atSeconds": 1.2325
+              }
+            ],
+            "contactSweetSpot": [
+              -0.785473973478876,
+              0.8710675092943562,
+              0.6430670897001542
+            ]
+          }
+        },
+        {
+          "id": "celebrate",
+          "channels": 36,
+          "extras": {
+            "label": "חגיגה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "fist_pump",
+                "time": 0.3,
+                "atSeconds": 0.63
+              },
+              {
+                "name": "settle",
+                "time": 0.85,
+                "atSeconds": 1.785
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        }
+      ],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/man-02.glb",
+      "bytes": 356504,
+      "MB": 0.356504,
+      "sha256": "6027578166ee929bee2b4f43456a5bf53a8c5f6f6a331dbc06b3bb405fc48829",
+      "triangles": 23439,
+      "vertices": 13962,
+      "meshes": [
+        {
+          "name": "Body_LOD0",
+          "triangles": 18348
+        },
+        {
+          "name": "Body_LOD1",
+          "triangles": 2390
+        },
+        {
+          "name": "Body_LOD2",
+          "triangles": 877
+        },
+        {
+          "name": "Racket_RightHand",
+          "triangles": 1568
+        },
+        {
+          "name": "Racket_LOD1",
+          "triangles": 256
+        }
+      ],
+      "images": [
+        {
+          "name": "man-02 / one 512 atlas",
+          "mime": "image/png",
+          "bytes": 34203,
+          "width": 512,
+          "height": 512,
+          "sha256": "b688d208d40894291e19950d48862d3d96312bded9f99a21bae913baadfae723"
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "channels": 36,
+          "extras": {
+            "label": "עמידת מוצא",
+            "loop": true,
+            "rootMotion": false,
+            "events": [],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "run",
+          "channels": 36,
+          "extras": {
+            "label": "ריצה",
+            "loop": true,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "left_plant",
+                "time": 0,
+                "atSeconds": 0
+              },
+              {
+                "name": "right_plant",
+                "time": 0.5,
+                "atSeconds": 0.36
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "serve",
+          "channels": 36,
+          "extras": {
+            "label": "שירות",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "prepare",
+                "time": 0,
+                "label": "הכנה",
+                "atSeconds": 0
+              },
+              {
+                "name": "toss",
+                "time": 0.28,
+                "label": "זריקה",
+                "atSeconds": 0.8960000000000001
+              },
+              {
+                "name": "load",
+                "time": 0.48,
+                "label": "העמסה",
+                "atSeconds": 1.536
+              },
+              {
+                "name": "contact",
+                "time": 0.64,
+                "label": "פגיעה ומעקב",
+                "atSeconds": 2.048
+              }
+            ],
+            "contactSweetSpot": [
+              -0.20274666238607095,
+              2.361751724667119,
+              0.2626096432907623
+            ]
+          }
+        },
+        {
+          "id": "forehand",
+          "channels": 36,
+          "extras": {
+            "label": "פורהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.624
+              }
+            ],
+            "contactSweetSpot": [
+              -0.5931775024660532,
+              1.2689385734140686,
+              0.848027941099727
+            ]
+          }
+        },
+        {
+          "id": "backhand",
+          "channels": 36,
+          "extras": {
+            "label": "בקהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.7020000000000001
+              }
+            ],
+            "contactSweetSpot": [
+              0.3574783593957461,
+              1.400988458344398,
+              0.7113157015331583
+            ]
+          }
+        },
+        {
+          "id": "volley",
+          "channels": 36,
+          "extras": {
+            "label": "וולה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.45,
+                "atSeconds": 0.35100000000000003
+              }
+            ],
+            "contactSweetSpot": [
+              -0.588868839244504,
+              1.7175108475147813,
+              0.5801455678463334
+            ]
+          }
+        },
+        {
+          "id": "smash",
+          "channels": 36,
+          "extras": {
+            "label": "שמאש",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "takeoff",
+                "time": 0.34,
+                "atSeconds": 0.391
+              },
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.598
+              },
+              {
+                "name": "land",
+                "time": 0.82,
+                "atSeconds": 0.9429999999999998
+              }
+            ],
+            "contactSweetSpot": [
+              -0.1961203075314925,
+              2.439999276277666,
+              0.34028135166996837
+            ]
+          }
+        },
+        {
+          "id": "slide",
+          "channels": 36,
+          "extras": {
+            "label": "החלקה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "brake",
+                "time": 0.35,
+                "atSeconds": 0.5075
+              },
+              {
+                "name": "contact",
+                "time": 0.58,
+                "atSeconds": 0.841
+              },
+              {
+                "name": "recover",
+                "time": 0.85,
+                "atSeconds": 1.2325
+              }
+            ],
+            "contactSweetSpot": [
+              -0.785473973478876,
+              0.8710675092943562,
+              0.6430670897001542
+            ]
+          }
+        },
+        {
+          "id": "celebrate",
+          "channels": 36,
+          "extras": {
+            "label": "חגיגה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "fist_pump",
+                "time": 0.3,
+                "atSeconds": 0.63
+              },
+              {
+                "name": "settle",
+                "time": 0.85,
+                "atSeconds": 1.785
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        }
+      ],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/woman-01.glb",
+      "bytes": 338428,
+      "MB": 0.338428,
+      "sha256": "adbea280047cbbc2c49d2b19c8c2ac2c51f3ada414bfa08514632ee95fb197d4",
+      "triangles": 19390,
+      "vertices": 11707,
+      "meshes": [
+        {
+          "name": "Body_LOD0",
+          "triangles": 14296
+        },
+        {
+          "name": "Body_LOD1",
+          "triangles": 2396
+        },
+        {
+          "name": "Body_LOD2",
+          "triangles": 874
+        },
+        {
+          "name": "Racket_RightHand",
+          "triangles": 1568
+        },
+        {
+          "name": "Racket_LOD1",
+          "triangles": 256
+        }
+      ],
+      "images": [
+        {
+          "name": "woman-01 / one 512 atlas",
+          "mime": "image/png",
+          "bytes": 35861,
+          "width": 512,
+          "height": 512,
+          "sha256": "afd3b758db50dbda32c1c310a9c4392ad0a371cc98ce3773cc48e8338885cc5b"
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "channels": 36,
+          "extras": {
+            "label": "עמידת מוצא",
+            "loop": true,
+            "rootMotion": false,
+            "events": [],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "run",
+          "channels": 36,
+          "extras": {
+            "label": "ריצה",
+            "loop": true,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "left_plant",
+                "time": 0,
+                "atSeconds": 0
+              },
+              {
+                "name": "right_plant",
+                "time": 0.5,
+                "atSeconds": 0.36
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "serve",
+          "channels": 36,
+          "extras": {
+            "label": "שירות",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "prepare",
+                "time": 0,
+                "label": "הכנה",
+                "atSeconds": 0
+              },
+              {
+                "name": "toss",
+                "time": 0.28,
+                "label": "זריקה",
+                "atSeconds": 0.8960000000000001
+              },
+              {
+                "name": "load",
+                "time": 0.48,
+                "label": "העמסה",
+                "atSeconds": 1.536
+              },
+              {
+                "name": "contact",
+                "time": 0.64,
+                "label": "פגיעה ומעקב",
+                "atSeconds": 2.048
+              }
+            ],
+            "contactSweetSpot": [
+              -0.20274666238607095,
+              2.361751724667119,
+              0.2626096432907623
+            ]
+          }
+        },
+        {
+          "id": "forehand",
+          "channels": 36,
+          "extras": {
+            "label": "פורהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.624
+              }
+            ],
+            "contactSweetSpot": [
+              -0.5931775024660532,
+              1.2689385734140686,
+              0.848027941099727
+            ]
+          }
+        },
+        {
+          "id": "backhand",
+          "channels": 36,
+          "extras": {
+            "label": "בקהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.7020000000000001
+              }
+            ],
+            "contactSweetSpot": [
+              0.3574783593957461,
+              1.400988458344398,
+              0.7113157015331583
+            ]
+          }
+        },
+        {
+          "id": "volley",
+          "channels": 36,
+          "extras": {
+            "label": "וולה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.45,
+                "atSeconds": 0.35100000000000003
+              }
+            ],
+            "contactSweetSpot": [
+              -0.588868839244504,
+              1.7175108475147813,
+              0.5801455678463334
+            ]
+          }
+        },
+        {
+          "id": "smash",
+          "channels": 36,
+          "extras": {
+            "label": "שמאש",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "takeoff",
+                "time": 0.34,
+                "atSeconds": 0.391
+              },
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.598
+              },
+              {
+                "name": "land",
+                "time": 0.82,
+                "atSeconds": 0.9429999999999998
+              }
+            ],
+            "contactSweetSpot": [
+              -0.1961203075314925,
+              2.439999276277666,
+              0.34028135166996837
+            ]
+          }
+        },
+        {
+          "id": "slide",
+          "channels": 36,
+          "extras": {
+            "label": "החלקה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "brake",
+                "time": 0.35,
+                "atSeconds": 0.5075
+              },
+              {
+                "name": "contact",
+                "time": 0.58,
+                "atSeconds": 0.841
+              },
+              {
+                "name": "recover",
+                "time": 0.85,
+                "atSeconds": 1.2325
+              }
+            ],
+            "contactSweetSpot": [
+              -0.785473973478876,
+              0.8710675092943562,
+              0.6430670897001542
+            ]
+          }
+        },
+        {
+          "id": "celebrate",
+          "channels": 36,
+          "extras": {
+            "label": "חגיגה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "fist_pump",
+                "time": 0.3,
+                "atSeconds": 0.63
+              },
+              {
+                "name": "settle",
+                "time": 0.85,
+                "atSeconds": 1.785
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        }
+      ],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/woman-02.glb",
+      "bytes": 338396,
+      "MB": 0.338396,
+      "sha256": "4427bbf716a7aa3e5820f55b38fb857c69d87fabee3a73ec8598e0da4ab46d72",
+      "triangles": 19435,
+      "vertices": 11763,
+      "meshes": [
+        {
+          "name": "Body_LOD0",
+          "triangles": 14336
+        },
+        {
+          "name": "Body_LOD1",
+          "triangles": 2396
+        },
+        {
+          "name": "Body_LOD2",
+          "triangles": 879
+        },
+        {
+          "name": "Racket_RightHand",
+          "triangles": 1568
+        },
+        {
+          "name": "Racket_LOD1",
+          "triangles": 256
+        }
+      ],
+      "images": [
+        {
+          "name": "woman-02 / one 512 atlas",
+          "mime": "image/png",
+          "bytes": 35879,
+          "width": 512,
+          "height": 512,
+          "sha256": "b3dcf755177e4c7e1b655d1e55f12ff945e3144c53f34fa368cecd439a40fcb8"
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "channels": 36,
+          "extras": {
+            "label": "עמידת מוצא",
+            "loop": true,
+            "rootMotion": false,
+            "events": [],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "run",
+          "channels": 36,
+          "extras": {
+            "label": "ריצה",
+            "loop": true,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "left_plant",
+                "time": 0,
+                "atSeconds": 0
+              },
+              {
+                "name": "right_plant",
+                "time": 0.5,
+                "atSeconds": 0.36
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        },
+        {
+          "id": "serve",
+          "channels": 36,
+          "extras": {
+            "label": "שירות",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "prepare",
+                "time": 0,
+                "label": "הכנה",
+                "atSeconds": 0
+              },
+              {
+                "name": "toss",
+                "time": 0.28,
+                "label": "זריקה",
+                "atSeconds": 0.8960000000000001
+              },
+              {
+                "name": "load",
+                "time": 0.48,
+                "label": "העמסה",
+                "atSeconds": 1.536
+              },
+              {
+                "name": "contact",
+                "time": 0.64,
+                "label": "פגיעה ומעקב",
+                "atSeconds": 2.048
+              }
+            ],
+            "contactSweetSpot": [
+              -0.20274666238607095,
+              2.361751724667119,
+              0.2626096432907623
+            ]
+          }
+        },
+        {
+          "id": "forehand",
+          "channels": 36,
+          "extras": {
+            "label": "פורהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.624
+              }
+            ],
+            "contactSweetSpot": [
+              -0.5931775024660532,
+              1.2689385734140686,
+              0.848027941099727
+            ]
+          }
+        },
+        {
+          "id": "backhand",
+          "channels": 36,
+          "extras": {
+            "label": "בקהנד",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.7020000000000001
+              }
+            ],
+            "contactSweetSpot": [
+              0.3574783593957461,
+              1.400988458344398,
+              0.7113157015331583
+            ]
+          }
+        },
+        {
+          "id": "volley",
+          "channels": 36,
+          "extras": {
+            "label": "וולה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "contact",
+                "time": 0.45,
+                "atSeconds": 0.35100000000000003
+              }
+            ],
+            "contactSweetSpot": [
+              -0.588868839244504,
+              1.7175108475147813,
+              0.5801455678463334
+            ]
+          }
+        },
+        {
+          "id": "smash",
+          "channels": 36,
+          "extras": {
+            "label": "שמאש",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "takeoff",
+                "time": 0.34,
+                "atSeconds": 0.391
+              },
+              {
+                "name": "contact",
+                "time": 0.52,
+                "atSeconds": 0.598
+              },
+              {
+                "name": "land",
+                "time": 0.82,
+                "atSeconds": 0.9429999999999998
+              }
+            ],
+            "contactSweetSpot": [
+              -0.1961203075314925,
+              2.439999276277666,
+              0.34028135166996837
+            ]
+          }
+        },
+        {
+          "id": "slide",
+          "channels": 36,
+          "extras": {
+            "label": "החלקה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "brake",
+                "time": 0.35,
+                "atSeconds": 0.5075
+              },
+              {
+                "name": "contact",
+                "time": 0.58,
+                "atSeconds": 0.841
+              },
+              {
+                "name": "recover",
+                "time": 0.85,
+                "atSeconds": 1.2325
+              }
+            ],
+            "contactSweetSpot": [
+              -0.785473973478876,
+              0.8710675092943562,
+              0.6430670897001542
+            ]
+          }
+        },
+        {
+          "id": "celebrate",
+          "channels": 36,
+          "extras": {
+            "label": "חגיגה",
+            "loop": false,
+            "rootMotion": false,
+            "events": [
+              {
+                "name": "fist_pump",
+                "time": 0.3,
+                "atSeconds": 0.63
+              },
+              {
+                "name": "settle",
+                "time": 0.85,
+                "atSeconds": 1.785
+              }
+            ],
+            "contactSweetSpot": null
+          }
+        }
+      ],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/court-hard.glb",
+      "bytes": 132120,
+      "MB": 0.13212,
+      "sha256": "0750effa13be0a81ba9b061fcaed8062cd3d5e7af0a6287c80ee3aa81ee44418",
+      "triangles": 1168,
+      "vertices": 849,
+      "meshes": [
+        {
+          "name": "Court surround",
+          "triangles": 12
+        },
+        {
+          "name": "Court surface",
+          "triangles": 1024
+        },
+        {
+          "name": "Ivory court lines",
+          "triangles": 132
+        }
+      ],
+      "images": [
+        {
+          "name": "hard 1024 grain",
+          "mime": "image/jpeg",
+          "bytes": 121347,
+          "width": 1024,
+          "height": 1024,
+          "sha256": "6ffee8a9b4ca3b236a3106d6999c90a1e84ea1efbf78ce06cd8f852b6f23e183"
+        },
+        {
+          "name": "hard 1024 micro normal",
+          "mime": "image/jpeg",
+          "bytes": 5351,
+          "width": 512,
+          "height": 512,
+          "sha256": "1f785d9b85661d8b9742ad122e0547dd16c982c20374b4475090a84df258238d"
+        }
+      ],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/court-clay.glb",
+      "bytes": 235788,
+      "MB": 0.235788,
+      "sha256": "5345c465c30114e01c983bcfe56511db3296a797fdec341b0422a35566494a1d",
+      "triangles": 1168,
+      "vertices": 849,
+      "meshes": [
+        {
+          "name": "Court surround",
+          "triangles": 12
+        },
+        {
+          "name": "Court surface",
+          "triangles": 1024
+        },
+        {
+          "name": "Ivory court lines",
+          "triangles": 132
+        }
+      ],
+      "images": [
+        {
+          "name": "clay 1024 grain",
+          "mime": "image/jpeg",
+          "bytes": 197736,
+          "width": 1024,
+          "height": 1024,
+          "sha256": "da863a2670b73ecb764b9df72229edcd1f397801290de24acbc61718bf6c28d0"
+        },
+        {
+          "name": "clay 1024 micro normal",
+          "mime": "image/jpeg",
+          "bytes": 31806,
+          "width": 512,
+          "height": 512,
+          "sha256": "dc7881b189fb58e518f3f05ad992394a6fe43c78eebaa0bcb80058b36955bfa8"
+        }
+      ],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/court-grass.glb",
+      "bytes": 207540,
+      "MB": 0.20754,
+      "sha256": "76071edce8a6a6c22b6420caa2f07cef2149fe7d64c898592b7d83042c0471f4",
+      "triangles": 1168,
+      "vertices": 849,
+      "meshes": [
+        {
+          "name": "Court surround",
+          "triangles": 12
+        },
+        {
+          "name": "Court surface",
+          "triangles": 1024
+        },
+        {
+          "name": "Ivory court lines",
+          "triangles": 132
+        }
+      ],
+      "images": [
+        {
+          "name": "grass 1024 grain",
+          "mime": "image/jpeg",
+          "bytes": 163399,
+          "width": 1024,
+          "height": 1024,
+          "sha256": "40b2e7a38a3dda275384181279bb4245b50a0896f79464de16138a112bbff89a"
+        },
+        {
+          "name": "grass 1024 micro normal",
+          "mime": "image/jpeg",
+          "bytes": 38617,
+          "width": 512,
+          "height": 512,
+          "sha256": "5867856965512721a7e41ecaf3217402abc13c3d3d939631932d8047f53d4468"
+        }
+      ],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/venue.glb",
+      "bytes": 20740,
+      "MB": 0.02074,
+      "sha256": "10c6f1490e9a27facc8e2609b94db1be92f08acc903a19c365a39fe7ef7c7dce",
+      "triangles": 6316,
+      "vertices": 6771,
+      "meshes": [
+        {
+          "name": "Floodlight glass",
+          "triangles": 192
+        },
+        {
+          "name": "Venue vertex palette",
+          "triangles": 6124
+        }
+      ],
+      "images": [],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/crowd-prototypes.glb",
+      "bytes": 6380,
+      "MB": 0.00638,
+      "sha256": "0e3d4d1eb700ec4e7d2b9d33cc657d0a0030951fd48a51d934d65585a0a86517",
+      "triangles": 566,
+      "vertices": 650,
+      "meshes": [
+        {
+          "name": "Crowd_LOD0",
+          "triangles": 266
+        },
+        {
+          "name": "Crowd_Cheer",
+          "triangles": 268
+        },
+        {
+          "name": "Crowd_LOD1",
+          "triangles": 32
+        }
+      ],
+      "images": [],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/crew.glb",
+      "bytes": 22616,
+      "MB": 0.022616,
+      "sha256": "237d2fddd42837063228979e281a5d6c6ac3d80a7b567d3bdee0a9d10a5610b1",
+      "triangles": 5336,
+      "vertices": 4729,
+      "meshes": [
+        {
+          "name": "People",
+          "triangles": 5336
+        }
+      ],
+      "images": [],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/net.glb",
+      "bytes": 9320,
+      "MB": 0.00932,
+      "sha256": "6142562a88ce733c6e41cf754001f99d6daedc89b0030cf884f80e8b11b17938",
+      "triangles": 2406,
+      "vertices": 2782,
+      "meshes": [
+        {
+          "name": "Net woven mesh",
+          "triangles": 1786
+        },
+        {
+          "name": "Top tape / center sag",
+          "triangles": 512
+        },
+        {
+          "name": "Net post -6.4",
+          "triangles": 48
+        },
+        {
+          "name": "Net post 6.4",
+          "triangles": 48
+        },
+        {
+          "name": "Center strap / 0.914m",
+          "triangles": 12
+        }
+      ],
+      "images": [],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    },
+    {
+      "file": "models/ball.glb",
+      "bytes": 7260,
+      "MB": 0.00726,
+      "sha256": "8c936c7597214675493560afb53363e46cda28e1d2542426159548afaa8cb802",
+      "triangles": 1160,
+      "vertices": 617,
+      "meshes": [
+        {
+          "name": "Felt ball",
+          "triangles": 520
+        },
+        {
+          "name": "Continuous tennis seam",
+          "triangles": 640
+        }
+      ],
+      "images": [],
+      "clips": [],
+      "validator": {
+        "compressedErrors": 0,
+        "compressedWarnings": 0,
+        "decodedErrors": 0,
+        "decodedWarnings": 0
+      },
+      "problems": []
+    }
+  ]
+}

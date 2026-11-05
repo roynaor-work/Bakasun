@@ -1,0 +1,142 @@
+{
+  "started": "2026-11-04T20:48:17.709Z",
+  "conditions": "Contexts opened sequentially, unlike the original test which creates both before navigation; same source CSP monitor. Diagnostics only, not an exact replay.",
+  "contexts": [
+    {
+      "saver": true,
+      "errors": [],
+      "failed": [],
+      "snapshots": [
+        {
+          "at": 1793825318368,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": false,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825325879,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825330892,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825337207,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825345706,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825353772,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "save-data",
+          "avatarResponse": [],
+          "loadError": false
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 1,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    },
+    {
+      "saver": false,
+      "errors": [],
+      "failed": [],
+      "snapshots": [
+        {
+          "at": 1793825597384,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": false,
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825607187,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": false,
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825679392,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825686065,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825693697,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "avatarResponse": [],
+          "loadError": false
+        },
+        {
+          "at": 1793825701070,
+          "dev": "1",
+          "island": true,
+          "avatarLoaded": true,
+          "avatarResponse": [],
+          "loadError": false
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 1,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    }
+  ],
+  "finished": "2026-11-04T20:55:06.239Z",
+  "originalConditionsLabel": "same two-context order and CSP monitor as existing automatic-download test; diagnostics only",
+  "metadataCorrection": {
+    "at": "2026-11-04T21:59:12.866222+00:00",
+    "reason": "Original label overstated equivalence of context creation order; snapshot measurements are unchanged."
+  }
+}

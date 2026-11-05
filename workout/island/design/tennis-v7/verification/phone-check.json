@@ -1,0 +1,95 @@
+{
+  "pass": true,
+  "environment": "Cloud Chromium SwiftShader; UI functional validation only, not a physical phone",
+  "physicalPhoneMeasured": false,
+  "networkOffline": true,
+  "resources": [
+    "phone-check.html"
+  ],
+  "consoleErrors": [],
+  "copyButtonVisible": true,
+  "measurement": {
+    "source": "tennis-v7 phone-check",
+    "measuredAt": "2026-11-04T22:28:36.764Z",
+    "requestedSeconds": 60,
+    "seconds": 60.037099999999626,
+    "simulatedSecondsAdvanced": 60.08089999999984,
+    "approximateCycles": 18.77528124999995,
+    "frames": 957,
+    "fps": 15.940117127380976,
+    "frameMs": {
+      "p50": 63.200000000186265,
+      "p95": 79.69999999925494,
+      "max": 819.2999999998137
+    },
+    "tailWindow": {
+      "frames": 300,
+      "seconds": 17.405400000000373,
+      "fps": 17.236030197524535
+    },
+    "diagnostics": {
+      "state": {
+        "surface": "hard",
+        "light": "day",
+        "view": "wide",
+        "actor": 0,
+        "motion": "serve",
+        "focus": "body",
+        "playing": true,
+        "quality": "economy",
+        "autoQuality": true,
+        "time": 0.34759999999999786,
+        "orbit": 0,
+        "zoom": 1,
+        "ready": true
+      },
+      "threeRevision": "160",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stage": {
+        "width": 390,
+        "height": 544
+      },
+      "pixelRatio": 0.7,
+      "render": {
+        "calls": 35,
+        "triangles": 40449,
+        "main": {
+          "calls": 35,
+          "triangles": 40449
+        },
+        "shadow": {
+          "calls": 0,
+          "triangles": 0
+        },
+        "textures": 14,
+        "geometries": 44
+      },
+      "crowd": {
+        "total": 480,
+        "visible": 480,
+        "instancedDraws": 1,
+        "seatDraws": 1
+      },
+      "actors": {
+        "visible": 4,
+        "bodyAndRacketTriangles": 4537,
+        "canonicalBones": 18
+      },
+      "ball": [
+        -2.5743623492679717,
+        1.152201274931122,
+        9.738143752985243
+      ],
+      "landing": [
+        4.115,
+        0.035,
+        -6.4
+      ],
+      "errors": [],
+      "renderCount": 982
+    }
+  }
+}

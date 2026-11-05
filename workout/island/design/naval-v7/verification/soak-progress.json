@@ -1,0 +1,150 @@
+{
+  "startedAt": "2026-11-04T21:50:30.405Z",
+  "requestedMinutes": 75,
+  "elapsedMinutes": 75.00516666666667,
+  "phases": 75,
+  "samples": 298,
+  "last": {
+    "at": "2026-11-04T23:05:30.433Z",
+    "elapsedSeconds": 4500.028,
+    "phase": 74,
+    "heapUsedBytes": 8670376,
+    "metrics": {
+      "three": "160",
+      "state": {
+        "ship": "cruiser",
+        "fleet": "tide",
+        "weather": "sunset",
+        "view": "near",
+        "quality": "low",
+        "adaptiveScale": 1,
+        "paused": false,
+        "reduced": false,
+        "crew": true,
+        "time": 4340.290799998925,
+        "frozen": false,
+        "theta": 0.79,
+        "elevation": 0.22,
+        "zoom": 1,
+        "storm": 0,
+        "loading": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 0.78,
+        "bufferWidth": 304,
+        "bufferHeight": 658
+      },
+      "triangles": 17784,
+      "drawCalls": 11,
+      "geometries": 41,
+      "textures": 10,
+      "programs": 20,
+      "cpuFrame": {
+        "samples": 600,
+        "meanMs": 47.081500000000624,
+        "p95Ms": 83.29999999981374,
+        "fps": 21.239765088197842
+      },
+      "lod": [
+        {
+          "type": "corvette",
+          "fleet": "ember",
+          "lod": 2,
+          "triangles": 583
+        },
+        {
+          "type": "destroyer",
+          "fleet": "tide",
+          "lod": 2,
+          "triangles": 839
+        },
+        {
+          "type": "cruiser",
+          "fleet": "tide",
+          "lod": 1,
+          "triangles": 4281
+        },
+        {
+          "type": "carrier",
+          "fleet": "ember",
+          "lod": 1,
+          "triangles": 2992
+        }
+      ],
+      "crewInstances": 0,
+      "effects": {
+        "capacity": 96,
+        "allocatedCapacity": 320,
+        "active": 50,
+        "waterColumnCapacity": 3
+      },
+      "dracoWorkers": 2,
+      "renderer": "WebKit WebGL",
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "environmentProbes": [
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        },
+        {
+          "width": 336,
+          "height": 256,
+          "format": "RGBA16F",
+          "bytes": 688128
+        }
+      ],
+      "contextLost": false,
+      "contextRestores": 0,
+      "adaptationEvents": [
+        {
+          "simulationTime": 3767.9179999986363,
+          "averageMs": 103.23611111111111,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 3770.1512999986357,
+          "averageMs": 81.47777777778295,
+          "scale": 0.64
+        },
+        {
+          "simulationTime": 4059.7062999985937,
+          "averageMs": 79.1611111111318,
+          "scale": 0.88
+        },
+        {
+          "simulationTime": 4061.9891999985907,
+          "averageMs": 63.424999999994824,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 4064.5058999985927,
+          "averageMs": 54.6277777777933,
+          "scale": 0.64
+        },
+        {
+          "simulationTime": 4169.915899998744,
+          "averageMs": 70.83333333333333,
+          "scale": 0.88
+        },
+        {
+          "simulationTime": 4172.348999998751,
+          "averageMs": 52.31111111111628,
+          "scale": 0.76
+        },
+        {
+          "simulationTime": 4174.8989999987525,
+          "averageMs": 40.73888888890441,
+          "scale": 0.64
+        }
+      ],
+      "reducedMotion": false,
+      "offline": true
+    }
+  },
+  "errors": 0,
+  "externalRequests": 0
+}

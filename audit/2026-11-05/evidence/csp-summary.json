@@ -1,0 +1,222 @@
+{
+  "at": "2026-11-04T22:29:20.588920+00:00",
+  "suite": {
+    "tests": 3,
+    "suites": 0,
+    "pass": 3,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "conditions": "Shipped island policy; existing helper additionally attaches it as an HTML response header to tools. Worker fixtures may add their own response policy; see A33. Expected negative-fixture violations are not product violations.",
+  "runtimeResults": [
+    {
+      "name": "alpine-session-start-result",
+      "phase": "countdown",
+      "loaded": true,
+      "error": null,
+      "metrics": {
+        "calls": 91,
+        "triangles": 485851,
+        "geometries": 75,
+        "textures": 20,
+        "props": 4,
+        "chunks": 51,
+        "visibleChunks": 9,
+        "coins": 5,
+        "trees": 210,
+        "nearTrees": 63,
+        "farTrees": 46,
+        "distantTrees": 101,
+        "shadowTrees": 19,
+        "treeVariants": 3,
+        "treeDeckClearance": 0.7,
+        "rocks": 11,
+        "fences": 56,
+        "designWorld": true,
+        "pack": {
+          "signs": 2,
+          "moguls": 10,
+          "iceWalls": 50,
+          "rockVariants": 2
+        },
+        "designModels": 7,
+        "designSurface": "ski-slope",
+        "background": "landscape",
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "snow-flecks",
+            "powder-spray",
+            "landing-cloud"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "designAssets": {
+          "loaded": true,
+          "models": 7,
+          "textures": 4,
+          "pack": [
+            "finish-gate",
+            "ice-wall",
+            "mogul",
+            "rock-large",
+            "rock-small",
+            "snow-sign",
+            "start-gate"
+          ],
+          "powder": true,
+          "powderActive": 0
+        },
+        "quality": "high",
+        "disposed": false,
+        "mode": "model",
+        "grooves": "paired-skis",
+        "grooveCapacity": 4200,
+        "feel": {
+          "source": "design/feel/alpine.json",
+          "speedFraction": 0,
+          "fovAdd": 0,
+          "lineOpacity": 0,
+          "lineVisible": false,
+          "lineTrigger": false,
+          "lineDuration": 0.6,
+          "lineFraction": 0.12,
+          "carve": 0,
+          "lookAhead": 10,
+          "bank": 0,
+          "landingPulse": 0,
+          "landingShakeFraction": 0,
+          "landings": 0
+        },
+        "vfx": {
+          "active": 0,
+          "capacity": 3,
+          "textures": 3,
+          "textureBytes": 3145728,
+          "spawned": 0,
+          "cameraActive": false,
+          "cameraRuns": 0,
+          "cameraDuration": 1.5,
+          "sourceCameraDuration": 5.6,
+          "warmed": true,
+          "disposed": false
+        },
+        "character": {
+          "mode": "skier3",
+          "fallbackReason": null,
+          "clips": 10,
+          "bones": 18,
+          "trianglesPerRider": 24918,
+          "motionScale": 1,
+          "bakeMs": 18,
+          "loadMs": 114.5,
+          "actors": 6
+        },
+        "motion": {
+          "state": "idle",
+          "clipTime": 0,
+          "sampledFrames": 5,
+          "bakedClips": 10,
+          "carveHeld": false,
+          "carveStrength": 0
+        },
+        "rockTexture": "loaded",
+        "mobileProfile": true,
+        "pixelRatio": 1,
+        "fov": 60,
+        "interpolation": true,
+        "lastSwitch": {
+          "quality": "high",
+          "pixelRatioMs": 0,
+          "shadowMs": 0.1,
+          "resizeMs": 0,
+          "totalMs": 0.1
+        }
+      }
+    },
+    {
+      "name": "hoops-v4-session-start-result",
+      "calls": 51,
+      "triangles": 144685,
+      "crowd": 0,
+      "crowdLevel": null,
+      "v5": false,
+      "characterVersion": 4,
+      "arenaSource": "design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+      "crowd3d": true,
+      "v4Fallbacks": []
+    },
+    {
+      "name": "hoops-v4-fallback-result",
+      "calls": 39,
+      "triangles": 58152,
+      "crowd": 986,
+      "crowdLevel": null,
+      "v5": false,
+      "characterVersion": 1,
+      "arenaSource": "design/models2/basketball-arena.glb",
+      "crowd3d": false,
+      "v4Fallbacks": [
+        "arena",
+        "players"
+      ]
+    },
+    {
+      "name": "hoops-v5-session-start-result",
+      "calls": 44,
+      "triangles": 97195,
+      "crowd": 2762,
+      "crowdLevel": 2,
+      "v5": true,
+      "characterVersion": 4,
+      "arenaSource": "design/hoops-v5/models/",
+      "crowd3d": true,
+      "v4Fallbacks": []
+    },
+    {
+      "name": "hoops-v5-fallback-v4-result",
+      "calls": 40,
+      "triangles": 105476,
+      "crowd": 0,
+      "crowdLevel": null,
+      "v5": false,
+      "characterVersion": 4,
+      "arenaSource": "design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+      "crowd3d": true,
+      "v4Fallbacks": [
+        "v5 arena"
+      ]
+    },
+    {
+      "name": "hoops-v5-fallback-v3-result",
+      "calls": 39,
+      "triangles": 58152,
+      "crowd": 986,
+      "crowdLevel": null,
+      "v5": false,
+      "characterVersion": 1,
+      "arenaSource": "design/models2/basketball-arena.glb",
+      "crowd3d": false,
+      "v4Fallbacks": [
+        "v5 arena",
+        "arena",
+        "players"
+      ]
+    }
+  ]
+}

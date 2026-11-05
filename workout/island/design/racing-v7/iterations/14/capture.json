@@ -1,0 +1,5263 @@
+{
+  "iteration": "14",
+  "startedAt": "2026-11-04T22:57:07.905Z",
+  "finishedAt": "2026-11-04T22:58:25.386Z",
+  "sourceSHA256": {
+    "app.mjs": "222edec1f2f3e3637f7cab07bbea6b44c894f83bc15279f8e235481cfb3ab541",
+    "loader.mjs": "1432b77d0bc95d936f4790bc039acb40910d5314f0f43a0dce571cee2e0db93d",
+    "world.mjs": "60c92a011b15d4a9360148588a232ed2bf75c0cf3220e11087fa0048c89cda87",
+    "effects.mjs": "03058b4f4abe576b6b4040e8020d0912e80942b786070ee72dcf2e2d36a398f1",
+    "index.html": "89d96e5bfe8c9494309e62a4fba4c813dc7314fc468ea016d4e8a74947ac2004",
+    "style.css": "108a18fc55ea7cee7b06f5bdc64b2cb4a26202dd427e33e381a6041cd80a438c"
+  },
+  "browser": "151.0.7922.173",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 844,
+      "height": 390
+    }
+  ],
+  "records": [
+    {
+      "filename": "coast-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 2,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 94581,
+        "renderMs": 12.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 62,
+        "textures": 10,
+        "programs": 20,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -129.33538639329615,
+          "right": 513.0569005553652,
+          "top": 363.65640876903285,
+          "bottom": 629.4217968927818
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7350.4616053935215
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 3,
+        "fps": 0,
+        "drawCalls": 93,
+        "triangles": 102995,
+        "renderMs": 23.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 88,
+        "textures": 11,
+        "programs": 21,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 86.40516162315132,
+          "right": 369.9009325112938,
+          "top": 422.57273046540354,
+          "bottom": 577.4105143426469
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 4,
+        "fps": 0,
+        "drawCalls": 102,
+        "triangles": 106840,
+        "renderMs": 876.7000000011176,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 88,
+        "textures": 12,
+        "programs": 27,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -120.23647645134551,
+          "right": 458.9930559177662,
+          "top": 363.8394749609455,
+          "bottom": 628.8053982534037
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7342.223626757453
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 5,
+        "fps": 0,
+        "drawCalls": 108,
+        "triangles": 116663,
+        "renderMs": 38.69999999925494,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 91,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 102.68332762640202,
+          "right": 345.6921847140187,
+          "top": 424.2468271848952,
+          "bottom": 574.0105224964965
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 6,
+        "fps": 0,
+        "drawCalls": 100,
+        "triangles": 98412,
+        "renderMs": 382.30000000074506,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 94,
+        "textures": 12,
+        "programs": 28,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -119.79008196902315,
+          "right": 444.3482263403184,
+          "top": 369.2287034042125,
+          "bottom": 629.9036422945027
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7099.7083468104365
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 7,
+        "fps": 0,
+        "drawCalls": 105,
+        "triangles": 106150,
+        "renderMs": 9.200000001117587,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 98,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 107.1280807850533,
+          "right": 341.14864452682633,
+          "top": 428.7543665404376,
+          "bottom": 580.779032434342
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 8,
+        "fps": 0,
+        "drawCalls": 74,
+        "triangles": 81248,
+        "renderMs": 428.09999999962747,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 94,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -16.423639346799806,
+          "right": 458.75830778546526,
+          "top": 370.75671657992757,
+          "bottom": 571.4575449839652
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 10,
+        "fps": 0,
+        "drawCalls": 74,
+        "triangles": 80852,
+        "renderMs": 10.399999998509884,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 104,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -46.916465242617,
+          "right": 504.0892363464744,
+          "top": 357.3466451662929,
+          "bottom": 580.2505081116526
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 11,
+        "fps": 0,
+        "drawCalls": 74,
+        "triangles": 80830,
+        "renderMs": 3.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 114,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -39.14364301650808,
+          "right": 484.98295422369216,
+          "top": 376.297318530083,
+          "bottom": 578.6077098714995
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 13,
+        "fps": 0,
+        "drawCalls": 76,
+        "triangles": 75742,
+        "renderMs": 8.199999999254942,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 125,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -8.220484187460816,
+          "right": 449.34190075661473,
+          "top": 371.5722702335568,
+          "bottom": 567.8229462450687
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 15,
+        "fps": 0,
+        "drawCalls": 74,
+        "triangles": 83324,
+        "renderMs": 4.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 135,
+        "textures": 12,
+        "programs": 29,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -31.85657620978299,
+          "right": 476.20915938599467,
+          "top": 344.98003311185084,
+          "bottom": 575.545275092825
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 16,
+        "fps": 0,
+        "drawCalls": 77,
+        "triangles": 94598,
+        "renderMs": 6.699999999254942,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 138,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 64.4027812604686,
+          "right": 353.97133786641547,
+          "top": 388.23859464408656,
+          "bottom": 509.3477636910248
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 17,
+        "fps": 0,
+        "drawCalls": 77,
+        "triangles": 94202,
+        "renderMs": 2.400000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 138,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 51.142478493445736,
+          "right": 379.9235202809114,
+          "top": 378.9342017844092,
+          "bottom": 513.4374950799752
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 18,
+        "fps": 0,
+        "drawCalls": 77,
+        "triangles": 94178,
+        "renderMs": 2.400000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 148,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 54.36065734589646,
+          "right": 368.86779745412724,
+          "top": 391.95236383813847,
+          "bottom": 512.6322147818998
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 19,
+        "fps": 0,
+        "drawCalls": 79,
+        "triangles": 92966,
+        "renderMs": 3.299999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 159,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 68.14039924162948,
+          "right": 348.6308122567549,
+          "top": 388.81842525626587,
+          "bottom": 507.5038059396982
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 20,
+        "fps": 0,
+        "drawCalls": 77,
+        "triangles": 96672,
+        "renderMs": 4.200000001117587,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 169,
+        "textures": 12,
+        "programs": 30,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 57.85586304230783,
+          "right": 363.3674945115821,
+          "top": 370.64634518450043,
+          "bottom": 511.1763916270981
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-overview-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 21,
+        "fps": 0,
+        "drawCalls": 153,
+        "triangles": 118646,
+        "renderMs": 685.2999999988824,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 189,
+        "textures": 12,
+        "programs": 45,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 190.9778891201438,
+          "right": 195.88577675881416,
+          "top": 330.0420195536188,
+          "bottom": 333.78891084249597
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-overview-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 22,
+        "fps": 0,
+        "drawCalls": 214,
+        "triangles": 177544,
+        "renderMs": 822.5999999996275,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 177,
+        "textures": 11,
+        "programs": 44,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 186.99728273792442,
+          "right": 191.81470158388672,
+          "top": 327.44798941700896,
+          "bottom": 330.976833577952
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-overview-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 23,
+        "fps": 0,
+        "drawCalls": 181,
+        "triangles": 127604,
+        "renderMs": 476.09999999962747,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 11,
+        "programs": 43,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 188.73250236408296,
+          "right": 193.5117636995454,
+          "top": 330.19801048537846,
+          "bottom": 333.86894112786945
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-vector-near-fx-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "drift": true,
+        "boost": true,
+        "contact": true,
+        "time": 5.8
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 24,
+        "fps": 0,
+        "drawCalls": 102,
+        "triangles": 110050,
+        "renderMs": 934,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 172,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -3.7618859882547273,
+          "right": 404.0875659995103,
+          "top": 357.83302752732016,
+          "bottom": 542.2752963297967
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7612.513761270593
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-rear-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 25,
+        "fps": 0,
+        "drawCalls": 71,
+        "triangles": 111324,
+        "renderMs": 425.2000000011176,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 180,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -55.1070635431527,
+          "right": 412.686349416499,
+          "top": 371.3368932534684,
+          "bottom": 570.696847051086
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-lod2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 26,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 47034,
+        "renderMs": 4.400000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -16.423639346799806,
+          "right": 458.75830778546526,
+          "top": 370.75671657992757,
+          "bottom": 571.4575449839652
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-rear-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 27,
+        "fps": 0,
+        "drawCalls": 71,
+        "triangles": 110928,
+        "renderMs": 2.599999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -91.42176285178118,
+          "right": 454.3570719022524,
+          "top": 358.77418643732585,
+          "bottom": 584.4047424049082
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-lod2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 28,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 47596,
+        "renderMs": 2.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -46.916465242617,
+          "right": 504.0892363464744,
+          "top": 357.3466451662929,
+          "bottom": 580.2505081116526
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-rear-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 29,
+        "fps": 0,
+        "drawCalls": 71,
+        "triangles": 110906,
+        "renderMs": 2.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -80.91830859152925,
+          "right": 435.9853286458466,
+          "top": 376.9352959452654,
+          "bottom": 577.5579028037046
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-lod2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 30,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 47574,
+        "renderMs": 2.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -39.14364301650808,
+          "right": 484.98295422369216,
+          "top": 376.297318530083,
+          "bottom": 578.6077098714995
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-rear-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 31,
+        "fps": 0,
+        "drawCalls": 73,
+        "triangles": 105818,
+        "renderMs": 2.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 183,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -45.7841005024448,
+          "right": 404.4456916003943,
+          "top": 372.15954320732914,
+          "bottom": 567.2107320401927
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-lod2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 32,
+        "fps": 0,
+        "drawCalls": 74,
+        "triangles": 48098,
+        "renderMs": 2.799999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 193,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -8.220484187460816,
+          "right": 449.34190075661473,
+          "top": 371.5722702335568,
+          "bottom": 567.8229462450687
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-rear-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 33,
+        "fps": 0,
+        "drawCalls": 71,
+        "triangles": 113400,
+        "renderMs": 2.799999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -73.0708594058989,
+          "right": 428.49976675739424,
+          "top": 345.48211490984,
+          "bottom": 574.1530490932569
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-lod2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 34,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 48246,
+        "renderMs": 2,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 193,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -31.85657620978299,
+          "right": 476.20915938599467,
+          "top": 344.98003311185084,
+          "bottom": 575.545275092825
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 366,
+            "top": 588,
+            "bottom": 637,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-1-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 35,
+        "fps": 0,
+        "drawCalls": 88,
+        "triangles": 88801,
+        "renderMs": 3.800000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 194,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -89.00598728138162,
+          "right": 544.7585423816167,
+          "top": 363.77834226509697,
+          "bottom": 645.619406468292
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7344.974598070637
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-2-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 36,
+        "fps": 0,
+        "drawCalls": 86,
+        "triangles": 87727,
+        "renderMs": 2.599999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 196,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -124.2078178668981,
+          "right": 514.2366356062746,
+          "top": 358.78525287822316,
+          "bottom": 642.4380050816828
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7569.663620479958
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-3-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 37,
+        "fps": 0,
+        "drawCalls": 91,
+        "triangles": 90721,
+        "renderMs": 2.800000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 197,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -102.90681889792216,
+          "right": 434.89398677693157,
+          "top": 364.8010586491908,
+          "bottom": 613.638212221083
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7298.952360786414
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-1-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 38,
+        "fps": 0,
+        "drawCalls": 90,
+        "triangles": 95449,
+        "renderMs": 683.8000000007451,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -102.72444819619108,
+          "right": 535.4022848867305,
+          "top": 359.6034815360897,
+          "bottom": 649.5452341182328
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7532.843330875963
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-2-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 39,
+        "fps": 0,
+        "drawCalls": 99,
+        "triangles": 103755,
+        "renderMs": 3.799999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -81.47273573500343,
+          "right": 409.41716372466675,
+          "top": 365.94906575271716,
+          "bottom": 624.7366015408256
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7247.292041127728
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-3-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 40,
+        "fps": 0,
+        "drawCalls": 100,
+        "triangles": 103353,
+        "renderMs": 4,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -113.42884945214946,
+          "right": 441.15380308790344,
+          "top": 364.45428459344043,
+          "bottom": 627.89489028639
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7314.557193295181
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-1-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 41,
+        "fps": 0,
+        "drawCalls": 85,
+        "triangles": 88271,
+        "renderMs": 728.0999999996275,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 187,
+        "textures": 13,
+        "programs": 50,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -134.0973997870428,
+          "right": 523.1846051293012,
+          "top": 366.4460366962955,
+          "bottom": 643.1603989729788
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7224.928348666703
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-2-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 42,
+        "fps": 0,
+        "drawCalls": 88,
+        "triangles": 86540,
+        "renderMs": 5.199999999254942,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 13,
+        "programs": 50,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -127.46689236153279,
+          "right": 473.2358303258717,
+          "top": 341.42937297910163,
+          "bottom": 656.3686850971653
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 8350.678215940427
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-3-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 43,
+        "fps": 0,
+        "drawCalls": 94,
+        "triangles": 93469,
+        "renderMs": 5.599999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 199,
+        "textures": 13,
+        "programs": 50,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": -78.4976656227238,
+          "right": 401.20052308051305,
+          "top": 366.58910403762206,
+          "bottom": 619.7434278517709
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 24,
+            "right": 69,
+            "top": 310,
+            "bottom": 527,
+            "conservativeOverlapArea": 7218.490318307007
+          },
+          ".garage": {
+            "left": 22,
+            "right": 368,
+            "top": 657,
+            "bottom": 824,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 45,
+        "fps": 0,
+        "drawCalls": 99,
+        "triangles": 124869,
+        "renderMs": 524.0999999996275,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 191,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 229.5949213751216,
+          "right": 619.4679291815767,
+          "top": 161.54949311049003,
+          "bottom": 367.88685594348414
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 10708.534035047609
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 46,
+        "fps": 0,
+        "drawCalls": 99,
+        "triangles": 104955,
+        "renderMs": 3.699999999254942,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 191,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 373.12866566079083,
+          "right": 499.03817407142304,
+          "top": 194.7067847214036,
+          "bottom": 261.4844729683982
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 47,
+        "fps": 0,
+        "drawCalls": 110,
+        "triangles": 144006,
+        "renderMs": 834.4000000003725,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 186,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 235.96928315917216,
+          "right": 581.0322349848977,
+          "top": 162.11857438243243,
+          "bottom": 360.1096069895174
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 9300.746986688351
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 48,
+        "fps": 0,
+        "drawCalls": 111,
+        "triangles": 117509,
+        "renderMs": 5.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 186,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 380.24458030760843,
+          "right": 488.4825732361419,
+          "top": 195.40142045077417,
+          "bottom": 260.19083991207805
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 49,
+        "fps": 0,
+        "drawCalls": 109,
+        "triangles": 133125,
+        "renderMs": 559.1999999992549,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 192,
+        "textures": 12,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 234.87110029255817,
+          "right": 582.8196265587206,
+          "top": 165.03406814014468,
+          "bottom": 365.59577491594075
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 9897.474879840138
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 50,
+        "fps": 0,
+        "drawCalls": 108,
+        "triangles": 106540,
+        "renderMs": 5.599999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 1,
+        "geometries": 192,
+        "textures": 12,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 382.20024892952665,
+          "right": 486.4363249967645,
+          "top": 197.35376775833612,
+          "bottom": 262.9028880257348
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 51,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 116104,
+        "renderMs": 587.7000000011176,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 163.97961570772748,
+          "right": 715.7559313244018,
+          "top": 119.79799054604486,
+          "bottom": 343.62245760763363
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 14478.215960960715
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 52,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 115708,
+        "renderMs": 2.200000001117587,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 111.55936446041335,
+          "right": 776.1698370564608,
+          "top": 109.4228966439058,
+          "bottom": 361.9361250655577
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 23135.028027555443
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 53,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 115686,
+        "renderMs": 1.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 127.75383475219412,
+          "right": 750.1752347146629,
+          "top": 124.41249561465847,
+          "bottom": 358.7803167534479
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 20741.667053303296
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 54,
+        "fps": 0,
+        "drawCalls": 84,
+        "triangles": 110598,
+        "renderMs": 2,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 177.02247564561327,
+          "right": 703.1644522871554,
+          "top": 120.38999060810295,
+          "bottom": 337.3335031737631
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 12371.44003461938
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 55,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 118180,
+        "renderMs": 3.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 133.2413170995533,
+          "right": 744.6555418853568,
+          "top": 99.06560610798627,
+          "bottom": 352.59418776376003
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 18988.026389727576
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 56,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 116104,
+        "renderMs": 2,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 325.27551157032724,
+          "right": 542.7866358105061,
+          "top": 155.99620074868074,
+          "bottom": 247.72577652960342
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 57,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 115708,
+        "renderMs": 1.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 311.3277325791973,
+          "right": 563.5645321232265,
+          "top": 149.8106709633024,
+          "bottom": 251.69888279226143
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 58,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 115686,
+        "renderMs": 2.299999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 314.9542055006302,
+          "right": 554.7247184694852,
+          "top": 158.54868112740877,
+          "bottom": 250.95602145122217
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 59,
+        "fps": 0,
+        "drawCalls": 84,
+        "triangles": 110598,
+        "renderMs": 1.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 329.01653164108666,
+          "right": 538.4842816583201,
+          "top": 156.37242139909705,
+          "bottom": 246.08007683335765
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 60,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 118180,
+        "renderMs": 2.799999998882413,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 193,
+        "textures": 12,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 318.13559161286844,
+          "right": 550.8790828580126,
+          "top": 144.1061803985749,
+          "bottom": 249.5718156762739
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-overview-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 61,
+        "fps": 0,
+        "drawCalls": 153,
+        "triangles": 118646,
+        "renderMs": 284.8999999985099,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 12,
+        "programs": 60,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 418.5005867615564,
+          "right": 422.76994752192473,
+          "top": 115.16340916274501,
+          "bottom": 118.2067683502951
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-overview-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 62,
+        "fps": 0,
+        "drawCalls": 215,
+        "triangles": 177992,
+        "renderMs": 426.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 188,
+        "textures": 11,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 415.0547720201971,
+          "right": 419.23909980377107,
+          "top": 113.09918963433972,
+          "bottom": 115.9529058360776
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-overview-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "overview",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 63,
+        "fps": 0,
+        "drawCalls": 184,
+        "triangles": 127649,
+        "renderMs": 358.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 214,
+        "textures": 11,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "overview",
+        "far": true,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 416.58235713276565,
+          "right": 420.71526740459973,
+          "top": 115.79055199809208,
+          "bottom": 118.78114125578276
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 0
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-vector-near-fx-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "drift": true,
+        "boost": true,
+        "contact": true,
+        "time": 5.8
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 64,
+        "fps": 0,
+        "drawCalls": 113,
+        "triangles": 116828,
+        "renderMs": 544.1999999992549,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 279.0854216489481,
+          "right": 641.6247491846822,
+          "top": 152.59580881022143,
+          "bottom": 331.01674793492634
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 3390.970420298714
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-rear-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 65,
+        "fps": 0,
+        "drawCalls": 73,
+        "triangles": 111716,
+        "renderMs": 430.09999999962747,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 192,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 134.59004413911788,
+          "right": 686.7506385802553,
+          "top": 120.21823790046324,
+          "bottom": 342.122448563248
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 16889.844107312925
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-lod2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 66,
+        "fps": 0,
+        "drawCalls": 80,
+        "triangles": 81890,
+        "renderMs": 9.100000001490116,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 163.97961570772748,
+          "right": 715.7559313244018,
+          "top": 119.79799054604486,
+          "bottom": 343.62245760763363
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 14478.215960960715
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-rear-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 67,
+        "fps": 0,
+        "drawCalls": 73,
+        "triangles": 111320,
+        "renderMs": 3.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 73.55580947652793,
+          "right": 761.6105460838927,
+          "top": 110.36948224094155,
+          "bottom": 370.93843150068227
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 29549.562336318435
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-lod2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 68,
+        "fps": 0,
+        "drawCalls": 80,
+        "triangles": 82452,
+        "renderMs": 4.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 111.55936446041335,
+          "right": 776.1698370564608,
+          "top": 109.4228966439058,
+          "bottom": 361.9361250655577
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 23135.028027555443
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-rear-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 69,
+        "fps": 0,
+        "drawCalls": 73,
+        "triangles": 111298,
+        "renderMs": 2.600000001490116,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 98.70848711135899,
+          "right": 723.3727609897497,
+          "top": 124.88399899818843,
+          "bottom": 356.57897576385824
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 23351.59771465643
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-lod2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 70,
+        "fps": 0,
+        "drawCalls": 80,
+        "triangles": 82430,
+        "renderMs": 2.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 127.75383475219412,
+          "right": 750.1752347146629,
+          "top": 124.41249561465847,
+          "bottom": 358.7803167534479
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 20741.667053303296
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-rear-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 71,
+        "fps": 0,
+        "drawCalls": 75,
+        "triangles": 106210,
+        "renderMs": 2.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 147.66186623775403,
+          "right": 673.7903890162271,
+          "top": 120.81845391791384,
+          "bottom": 336.1519311157085
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 14670.890623201702
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-lod2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 72,
+        "fps": 0,
+        "drawCalls": 82,
+        "triangles": 82954,
+        "renderMs": 1.800000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 177.02247564561327,
+          "right": 703.1644522871554,
+          "top": 120.38999060810295,
+          "bottom": 337.3335031737631
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 12371.44003461938
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-rear-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "orbit": 2.5,
+        "tag": "rear"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 73,
+        "fps": 0,
+        "drawCalls": 73,
+        "triangles": 113792,
+        "renderMs": 1.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 104.2024846349249,
+          "right": 717.2302097963556,
+          "top": 99.3664893395061,
+          "bottom": 349.74715111668985
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 21289.086647229575
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-lod2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "forceLOD": 2,
+        "tag": "lod2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 74,
+        "fps": 0,
+        "drawCalls": 80,
+        "triangles": 83102,
+        "renderMs": 3,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 2,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 133.2413170995533,
+          "right": 744.6555418853568,
+          "top": 99.06560610798627,
+          "bottom": 352.59418776376003
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 18988.026389727576
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-1-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 75,
+        "fps": 0,
+        "drawCalls": 101,
+        "triangles": 95155,
+        "renderMs": 3.400000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 255.73691267128495,
+          "right": 651.5973987153798,
+          "top": 161.4186028548447,
+          "bottom": 381.04300677291485
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 8150.35974143195
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-2-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 76,
+        "fps": 0,
+        "drawCalls": 93,
+        "triangles": 91849,
+        "renderMs": 3.800000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 233.25799250322996,
+          "right": 620.2442173306971,
+          "top": 158.81409379404755,
+          "bottom": 374.295795429319
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 10852.774394812084
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-path-3-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 77,
+        "fps": 0,
+        "drawCalls": 96,
+        "triangles": 124377,
+        "renderMs": 2.699999999254942,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 200,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 1893,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 247.86639582741338,
+          "right": 575.280986383269,
+          "top": 162.8653322995638,
+          "bottom": 347.5062241970636
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 7080.220620643427
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-1-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 78,
+        "fps": 0,
+        "drawCalls": 106,
+        "triangles": 105143,
+        "renderMs": 554.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 247.3957523378105,
+          "right": 641.4535800040401,
+          "top": 159.12571138046445,
+          "bottom": 380.9323311352098
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 9176.322462449307
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-2-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 79,
+        "fps": 0,
+        "drawCalls": 102,
+        "triangles": 105665,
+        "renderMs": 3.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 182,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 263.1748607392649,
+          "right": 580.4055073447142,
+          "top": 163.7702792811529,
+          "bottom": 351.5745929999605
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 5857.489300053696
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-path-3-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 80,
+        "fps": 0,
+        "drawCalls": 112,
+        "triangles": 139807,
+        "renderMs": 8.300000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 185,
+        "textures": 13,
+        "programs": 52,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2141,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 240.93030703979014,
+          "right": 569.5177853422946,
+          "top": 162.6319327329221,
+          "bottom": 357.5252677856895
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 8554.901058929772
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-1-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.23,
+        "tag": "path-1"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 81,
+        "fps": 0,
+        "drawCalls": 105,
+        "triangles": 93880,
+        "renderMs": 472.90000000037253,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 188,
+        "textures": 13,
+        "programs": 50,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 225.84770080327465,
+          "right": 627.4457615475361,
+          "top": 162.97869877314832,
+          "bottom": 382.59129303038935
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 11826.732801197219
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-2-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.52,
+        "tag": "path-2"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 82,
+        "fps": 0,
+        "drawCalls": 104,
+        "triangles": 93323,
+        "renderMs": 3.599999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 197,
+        "textures": 13,
+        "programs": 50,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 231.57802509529435,
+          "right": 590.4035126696813,
+          "top": 149.34307557553075,
+          "bottom": 375.6587884567654
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 11121.902913278795
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-path-3-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "phase": 0.79,
+        "tag": "path-3"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 83,
+        "fps": 0,
+        "drawCalls": 106,
+        "triangles": 127399,
+        "renderMs": 9.800000000745058,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "lod": 0,
+        "geometries": 209,
+        "textures": 13,
+        "programs": 51,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2237,
+        "three": "160",
+        "physicalPhone": false,
+        "lowBudget": false
+      },
+      "framing": {
+        "car": {
+          "left": 265.6471434780961,
+          "right": 579.6813827940042,
+          "top": 164.22340257087325,
+          "bottom": 347.5490706444734
+        },
+        "overlays": {
+          ".view-tools": {
+            "left": 22,
+            "right": 61,
+            "top": 67,
+            "bottom": 242,
+            "conservativeOverlapArea": 0
+          },
+          ".garage": {
+            "left": 22,
+            "right": 322,
+            "top": 252,
+            "bottom": 375,
+            "conservativeOverlapArea": 5384.463068829268
+          }
+        },
+        "method": "Projected world-space car AABB; conservative for curved silhouettes"
+      }
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "uniqueLocalRequests": 40,
+  "physicalPhone": false
+}

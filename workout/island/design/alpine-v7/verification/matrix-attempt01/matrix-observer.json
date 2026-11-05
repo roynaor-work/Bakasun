@@ -1,0 +1,85 @@
+{
+  "observedAt": "2026-11-04T22:59:30.225Z",
+  "status": "failed",
+  "complete": false,
+  "cases": 10,
+  "expectedCases": 504,
+  "unfinishedFinalLine": false,
+  "checks": {
+    "current standalone matches independent package audit": true,
+    "case count does not exceed 504": true,
+    "case identities are unique": true,
+    "ordered exact configuration prefix": true,
+    "every recorded case used at least ten seconds": true,
+    "all observed pixel ratios are 1.5": true,
+    "all cases use final frozen package": true,
+    "every recorded playback assertion passes": false,
+    "every recorded resource assertion passes": true,
+    "independent resource bounds": true,
+    "independent playback end state": false,
+    "every prescribed image was captured": true,
+    "safe screenshot path 002": true,
+    "screenshot dimensions 002": true,
+    "safe screenshot path 006": true,
+    "screenshot dimensions 006": true
+  },
+  "errors": [
+    "every recorded playback assertion passes",
+    "independent playback end state"
+  ],
+  "lastCase": "010",
+  "lastConfiguration": {
+    "athlete": 0,
+    "view": "close",
+    "environment": "sunset",
+    "clip": "trick_tail_grab",
+    "time": 0,
+    "playing": true,
+    "detail": "auto"
+  },
+  "ranges": {
+    "geometries": {
+      "minimum": 76,
+      "maximum": 77
+    },
+    "textures": {
+      "minimum": 24,
+      "maximum": 24
+    },
+    "javascriptHeapBytes": {
+      "minimum": 91700000,
+      "maximum": 91700000
+    },
+    "observedFPS": {
+      "minimum": 0.26907036189963673,
+      "maximum": 1.1009578333149892
+    },
+    "cpuSubmissionMedianMilliseconds": {
+      "minimum": 2.5,
+      "maximum": 5.5
+    },
+    "elapsedSeconds": {
+      "minimum": 10.097,
+      "maximum": 10.588
+    }
+  },
+  "screenshots": [
+    {
+      "case": "002",
+      "file": "verification/matrix/002-390x844-sunset-0-close-carve_left.webp",
+      "bytes": 39896,
+      "sha256": "aca21462f53ebb79fcbbaf3f380f2dd6b6bb1b83f287a045b7284180858fad99",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "case": "006",
+      "file": "verification/matrix/006-390x844-sunset-0-close-ramp_jump.webp",
+      "bytes": 58394,
+      "sha256": "9852d9617fb41d4e3dc116c1cb825ad55f7abe0db7f8f5786752074ab1419b8e",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "limitations": "CPU-only review of persisted observations and image files; no browser launch, GPU work or physical-phone performance claim."
+}

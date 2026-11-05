@@ -1,0 +1,1752 @@
+{
+  "schemaVersion": 1,
+  "kind": "authored-canonical-basketball-motion",
+  "authorship": {
+    "method": "Original analytic phase poses, measured two-bone IK, actual skinned sole/body probes and independent palmar/finger morph control. No motion capture.",
+    "license": "Repository terms; see LICENSES.md."
+  },
+  "runtime": {
+    "module": "source/motion.mjs",
+    "sourceSha256": "27c37c661a2619d72c254a04ba542bcde2766568b9b35ae452a1d52c68f5f1cc",
+    "exports": [
+      "ACTIONS",
+      "BONE_NAMES",
+      "sampleMotion",
+      "createMotionController"
+    ],
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "skeleton": {
+    "jointCount": 18,
+    "names": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "profileBindFile": "rig.json",
+    "canonicalReference": "workout/island/design/motion2/hoops.json",
+    "sameNamesAndHierarchyAsReference": true
+  },
+  "ball": {
+    "radiusMeters": 0.12,
+    "bakedNode": "MotionBallAnchor",
+    "bakedNodeIsSkinJoint": false,
+    "meaning": "Presentation centre, orientation and visibility only. A game must decide ownership, physics, collisions and scoring independently.",
+    "trajectory": "Each dribble uses a calibrated short hand-push/braking interval and9.81m/s² free flight, with exact upper receive and floor-bounce times. Fast crossovers use greater hand force; a slow protective dribble can dwell briefly at the top. Shot/finish trajectories use9.81m/s² after release and a0.58 first-bounce restitution. This authored presentation trajectory is not a rigid-body collision simulation."
+  },
+  "clips": [
+    {
+      "id": "idle_hold",
+      "label": "החזקת כדור",
+      "labelEn": "Ball hold",
+      "duration": 2.4,
+      "loop": true,
+      "category": "control",
+      "durationSeconds": 2.4,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [],
+      "notes": "Two hands on the ball; slow breathing. No bounce. The finger pads, thumb opposition and palmar markers are separate from gameplay ownership.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "idle",
+      "label": "עמידה ללא כדור",
+      "labelEn": "Ready without ball",
+      "duration": 2.8,
+      "loop": true,
+      "category": "locomotion",
+      "durationSeconds": 2.8,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dribble_right",
+      "label": "כדרור ימין",
+      "labelEn": "Right-hand dribble",
+      "duration": 0.78,
+      "loop": true,
+      "category": "dribble",
+      "durationSeconds": 0.78,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.08,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0.92,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "contactWindowsByProfile": {
+        "pg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "pf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "c": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "referee": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ]
+      },
+      "dribblePhysicsByProfile": {
+        "pg": {
+          "periodSeconds": 0.78,
+          "topMeters": 0.9078,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 11.67472268673356,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sg": {
+          "periodSeconds": 0.78,
+          "topMeters": 0.9588,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 13.9526148057628,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sf": {
+          "periodSeconds": 0.78,
+          "topMeters": 1.0149,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 16.458296136694962,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "pf": {
+          "periodSeconds": 0.78,
+          "topMeters": 1.0658999999999998,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 18.7361882557242,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "c": {
+          "periodSeconds": 0.78,
+          "topMeters": 1.122,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 21.241869586656385,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "referee": {
+          "periodSeconds": 0.78,
+          "topMeters": 0.9486000000000001,
+          "pushDurationSeconds": 0.062400000000000004,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 13.497036381956956,
+          "floorNormalized": [
+            0.5
+          ]
+        }
+      },
+      "events": [
+        {
+          "timeNormalized": 0.5,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Right-hand push, release, concave-down fall, floor bounce and upper receive; the left hand protects space.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dribble_left",
+      "label": "כדרור שמאל",
+      "labelEn": "Left-hand dribble",
+      "duration": 0.82,
+      "loop": true,
+      "category": "dribble",
+      "durationSeconds": 0.82,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.08,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0.92,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "contactWindowsByProfile": {
+        "pg": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sg": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sf": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "pf": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "c": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "referee": [
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0,
+            "endNormalized": 0.07999999999999999,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ]
+      },
+      "dribblePhysicsByProfile": {
+        "pg": {
+          "periodSeconds": 0.82,
+          "topMeters": 0.9078,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 8.325598731345217,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sg": {
+          "periodSeconds": 0.82,
+          "topMeters": 0.9588,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 10.386677799187856,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sf": {
+          "periodSeconds": 0.82,
+          "topMeters": 1.0149,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 12.653864773814757,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "pf": {
+          "periodSeconds": 0.82,
+          "topMeters": 1.0658999999999998,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 14.714943841657394,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "c": {
+          "periodSeconds": 0.82,
+          "topMeters": 1.122,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 16.982130816284315,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "referee": {
+          "periodSeconds": 0.82,
+          "topMeters": 0.9486000000000001,
+          "pushDurationSeconds": 0.06559999999999999,
+          "pushEndNormalizedWithinBounce": 0.07999999999999999,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 9.974461985619332,
+          "floorNormalized": [
+            0.5
+          ]
+        }
+      },
+      "events": [
+        {
+          "timeNormalized": 0.5,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Mirrored hand ownership, with independently authored timing and the right hand protecting space.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dribble_power",
+      "label": "כדרור כוח והגנה",
+      "labelEn": "Protective power dribble",
+      "duration": 0.9,
+      "loop": true,
+      "category": "dribble",
+      "durationSeconds": 0.9,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.08,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0.92,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "contactWindowsByProfile": {
+        "pg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.09695599543719241,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.9030440045628076,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08374600418300619,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.9162539958169938,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "pf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "c": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.92,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "referee": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.08635425162381268,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.9136457483761873,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ]
+      },
+      "dribblePhysicsByProfile": {
+        "pg": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.7654,
+          "pushDurationSeconds": 0.08726039589347317,
+          "pushEndNormalizedWithinBounce": 0.09695599543719241,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 0,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sg": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.8083999999999999,
+          "pushDurationSeconds": 0.07537140376470558,
+          "pushEndNormalizedWithinBounce": 0.08374600418300619,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 3.572524620631522e-15,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "sf": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.8557,
+          "pushDurationSeconds": 0.07200000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 1.1692827428878172,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "pf": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.8986999999999999,
+          "pushDurationSeconds": 0.07200000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 2.6118484970477716,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "c": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.9460000000000001,
+          "pushDurationSeconds": 0.07200000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 4.1986708266237285,
+          "floorNormalized": [
+            0.5
+          ]
+        },
+        "referee": {
+          "periodSeconds": 0.9,
+          "topMeters": 0.7998000000000001,
+          "pushDurationSeconds": 0.07771882646143141,
+          "pushEndNormalizedWithinBounce": 0.08635425162381268,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 0,
+          "floorNormalized": [
+            0.5
+          ]
+        }
+      },
+      "events": [
+        {
+          "timeNormalized": 0.5,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Lower, wider protected bounce on the right side; lowered pelvis and shielding off arm.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dribble_crossover",
+      "label": "כדרור צולב",
+      "labelEn": "Crossover dribble",
+      "duration": 1.18,
+      "loop": true,
+      "category": "dribble",
+      "durationSeconds": 1.18,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.04,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0.46,
+          "endNormalized": 0.54,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0.96,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "contactWindowsByProfile": {
+        "pg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "pf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "c": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "referee": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ]
+      },
+      "dribblePhysicsByProfile": {
+        "pg": {
+          "periodSeconds": 0.59,
+          "topMeters": 0.9078,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 37.98643410501731,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "sg": {
+          "periodSeconds": 0.59,
+          "topMeters": 0.9588,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 41.96767387869553,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "sf": {
+          "periodSeconds": 0.59,
+          "topMeters": 1.0149,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 46.34703762974158,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "pf": {
+          "periodSeconds": 0.59,
+          "topMeters": 1.0658999999999998,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 50.328277403419804,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "c": {
+          "periodSeconds": 0.59,
+          "topMeters": 1.122,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 54.70764115446588,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "referee": {
+          "periodSeconds": 0.59,
+          "topMeters": 0.9486000000000001,
+          "pushDurationSeconds": 0.0472,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 41.171425923959895,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        }
+      },
+      "events": [
+        {
+          "timeNormalized": 0.25,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.75,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Two bounces per cycle, crossing in front of the body, right to left and back.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dribble_between_legs",
+      "label": "כדרור בין הרגליים",
+      "labelEn": "Between-the-legs dribble",
+      "duration": 1.32,
+      "loop": true,
+      "category": "dribble",
+      "durationSeconds": 1.32,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.04,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0.46,
+          "endNormalized": 0.54,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0.96,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "contactWindowsByProfile": {
+        "pg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sg": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "sf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "pf": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "c": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ],
+        "referee": [
+          {
+            "effector": "RightHand",
+            "startNormalized": 0,
+            "endNormalized": 0.04,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "LeftHand",
+            "startNormalized": 0.46,
+            "endNormalized": 0.54,
+            "kind": "full palmar marker contact"
+          },
+          {
+            "effector": "RightHand",
+            "startNormalized": 0.96,
+            "endNormalized": 1,
+            "kind": "full palmar marker contact"
+          }
+        ]
+      },
+      "dribblePhysicsByProfile": {
+        "pg": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.7475999999999999,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 15.639384507126591,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "sg": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.7896,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 18.259458767517057,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "sf": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.8358,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 21.141540453946572,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "pf": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.8777999999999999,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 23.761614714337032,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "c": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.924,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 26.64369640076655,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        },
+        "referee": {
+          "periodSeconds": 0.66,
+          "topMeters": 0.7812,
+          "pushDurationSeconds": 0.05280000000000001,
+          "pushEndNormalizedWithinBounce": 0.08,
+          "freeFlightGravityMetersPerSecondSquared": 9.81,
+          "handPushAccelerationMetersPerSecondSquared": 17.735443915438967,
+          "floorNormalized": [
+            0.25,
+            0.75
+          ]
+        }
+      },
+      "events": [
+        {
+          "timeNormalized": 0.25,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.75,
+          "name": "visual_ball_floor",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Two bounces per cycle, right-front to left-rear through the widened leg gap, then return. Gather waits for the front right-hand catch.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "shot_set",
+      "label": "קליעה מהמקום",
+      "labelEn": "Set shot",
+      "duration": 1.75,
+      "loop": false,
+      "category": "shot",
+      "durationSeconds": 1.75,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.49,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.35,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.49,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Standing shot. Ball rises in front of the face to the shooting shoulder; guide releases before the shooting hand, then high wrist follow-through.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "shot_jump",
+      "label": "קליעה בקפיצה",
+      "labelEn": "Jump shot",
+      "duration": 1.75,
+      "loop": false,
+      "category": "shot",
+      "durationSeconds": 1.75,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.49,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.35,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.49,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Jump shot with load, takeoff, high release, held follow-through and controlled landing.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "shot_fadeaway",
+      "label": "קליעה בנסיגה באוויר",
+      "labelEn": "Fadeaway shot",
+      "duration": 1.9,
+      "loop": false,
+      "category": "shot",
+      "durationSeconds": 1.9,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.49,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.35,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.49,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Backward pelvis travel while airborne; the released ball continues from its release anchor rather than inheriting subsequent body motion.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "shot_stepback",
+      "label": "צעד לאחור וקליעה",
+      "labelEn": "Step-back shot",
+      "duration": 2.1,
+      "loop": false,
+      "category": "shot",
+      "durationSeconds": 2.1,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.49,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.35,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.49,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Separate retreat foot placements precede the loaded shot. No gameplay foul, shot result or score is implied.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "layup",
+      "label": "לייאפ",
+      "labelEn": "Right-hand layup",
+      "duration": 1.7,
+      "loop": false,
+      "category": "finish",
+      "durationSeconds": 1.7,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.58,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.31,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.34,
+          "name": "visual_takeoff",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.58,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.84,
+          "name": "visual_land",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Asymmetric approach, opposite knee lift, palmar support under the ball and a high one-hand release.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dunk_one_hand",
+      "label": "דאנק ביד אחת",
+      "labelEn": "One-hand dunk",
+      "duration": 2.05,
+      "loop": false,
+      "category": "finish",
+      "durationSeconds": 2.05,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.63,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.25,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.29,
+          "name": "visual_takeoff",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.64,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.86,
+          "name": "visual_land",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "One-hand finish, opposite arm balancing, role-measured jump height and a downward free ball after release.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dunk_two_hand",
+      "label": "דאנק בשתי ידיים",
+      "labelEn": "Two-hand dunk",
+      "duration": 1.95,
+      "loop": false,
+      "category": "finish",
+      "durationSeconds": 1.95,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.63,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.63,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.29,
+          "name": "visual_takeoff",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.64,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.86,
+          "name": "visual_land",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Symmetrical two-hand grip above the head, downward finish and bent-leg landing.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "dunk_reverse",
+      "label": "דאנק אחורי",
+      "labelEn": "Reverse dunk",
+      "duration": 2.4,
+      "loop": false,
+      "category": "finish",
+      "durationSeconds": 2.4,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 0.63,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 0.63,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.29,
+          "name": "visual_takeoff",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.64,
+          "name": "visual_ball_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.86,
+          "name": "visual_land",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Whole-body half-turn through Hips, hands and feet turning together, two-hand backward finish; Chest remains within a small relative twist.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "euro_step",
+      "label": "רב-צעד ואיסוף",
+      "labelEn": "Euro-step gather",
+      "duration": 1.75,
+      "loop": false,
+      "category": "control",
+      "durationSeconds": 1.75,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "RightHand",
+          "startNormalized": 0,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.26,
+          "name": "visual_left_plant",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.54,
+          "name": "visual_right_plant",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.65,
+          "name": "visual_gather_lift",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "First lateral plant and weight transfer, opposite second plant, ball gathered across the torso and a small final lift.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "run",
+      "label": "ריצה",
+      "labelEn": "Run",
+      "duration": 0.72,
+      "loop": true,
+      "category": "locomotion",
+      "durationSeconds": 0.72,
+      "rootMotion": false,
+      "contactWindows": [],
+      "locomotion": {
+        "inPlace": true,
+        "stanceFractionPerLeg": 0.4,
+        "flightWindows": [
+          [
+            0.4,
+            0.5
+          ],
+          [
+            0.9,
+            1
+          ]
+        ],
+        "matchingForwardSpeedMetersPerSecond": 2.152777777777778
+      },
+      "events": [
+        {
+          "timeNormalized": 0,
+          "name": "visual_left_heel_plant",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.4,
+          "name": "visual_left_toe_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.5,
+          "name": "visual_right_heel_plant",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 0.9,
+          "name": "visual_right_toe_release",
+          "domain": "presentation"
+        },
+        {
+          "timeNormalized": 1,
+          "name": "visual_left_heel_plant",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "In-place running gait, reciprocal bent elbows, shoulder/pelvis counter-rotation, forward lean, relaxed fists and heel/toe roll. Gameplay must supply forward travel.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "decelerate",
+      "label": "האטה ובלימה",
+      "labelEn": "Deceleration",
+      "duration": 1.35,
+      "loop": false,
+      "category": "locomotion",
+      "durationSeconds": 1.35,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Lead foot plants ahead of the pelvis; knees compress and the trunk brakes before the trailing step settles.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "defense_shuffle",
+      "label": "הגנה בצעדי צד",
+      "labelEn": "Defensive lateral shuffle",
+      "duration": 1.18,
+      "loop": true,
+      "category": "defense",
+      "durationSeconds": 1.18,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Lead foot steps, plants, then the trailing foot catches up; supported foot X/Z remains stationary within each plant window.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "steal",
+      "label": "חטיפה",
+      "labelEn": "Reach-in steal",
+      "duration": 1.15,
+      "loop": false,
+      "category": "defense",
+      "durationSeconds": 1.15,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Right shoulder and trunk commit forward into a low lateral hand sweep, then recover. No hit, possession change or collision is implied.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "block",
+      "label": "חסימה",
+      "labelEn": "Jump block",
+      "duration": 1.45,
+      "loop": false,
+      "category": "defense",
+      "durationSeconds": 1.45,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Loaded two-foot jump, extended right reach and a controlled return. No blocked-shot result is inferred.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "rebound",
+      "label": "ריבאונד ואחיזה",
+      "labelEn": "Rebound and secure",
+      "duration": 1.75,
+      "loop": false,
+      "category": "control",
+      "durationSeconds": 1.75,
+      "rootMotion": false,
+      "contactWindows": [
+        {
+          "effector": "RightHand",
+          "startNormalized": 0.445,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        },
+        {
+          "effector": "LeftHand",
+          "startNormalized": 0.445,
+          "endNormalized": 1,
+          "kind": "full palmar marker contact"
+        }
+      ],
+      "events": [
+        {
+          "timeNormalized": 0.43,
+          "name": "visual_rebound_receive",
+          "domain": "presentation"
+        }
+      ],
+      "notes": "Hands receive above the head and draw the ball to the chest while landing.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "walk",
+      "label": "צעדים ללא כדור",
+      "labelEn": "Walk without ball",
+      "duration": 1.3,
+      "loop": true,
+      "category": "locomotion",
+      "durationSeconds": 1.3,
+      "rootMotion": false,
+      "contactWindows": [],
+      "locomotion": {
+        "inPlace": true,
+        "stanceFractionPerLeg": 0.62,
+        "matchingForwardSpeedMetersPerSecond": 0.5459057071960297
+      },
+      "events": [],
+      "notes": "In-place walking gait with a longer stance phase and lower swing clearance. Gameplay must supply forward travel.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "pivot",
+      "label": "עבודת רגליים ללא כדור",
+      "labelEn": "Pivot footwork",
+      "duration": 1.85,
+      "loop": true,
+      "category": "locomotion",
+      "durationSeconds": 1.85,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Weight over the left forefoot; the right foot follows a visible arc. The left toe marker, rather than the ankle, is the pivot anchor.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "celebrate",
+      "label": "חגיגה",
+      "labelEn": "Restrained victory celebration",
+      "duration": 2.3,
+      "loop": false,
+      "category": "expression",
+      "durationSeconds": 2.3,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "One raised clenched fist, asymmetric free arm and a small weight bounce; no real-person celebration or likeness.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "fall",
+      "label": "נפילה והתאוששות",
+      "labelEn": "Side fall and recovery",
+      "duration": 2.8,
+      "loop": false,
+      "category": "expression",
+      "durationSeconds": 2.8,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "Side brace and ground contact, roll into a kneeling lunge, then a hand-assisted rise into a split stance. A presentation fall, not a safety demonstration.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    },
+    {
+      "id": "referee_signal",
+      "label": "סימון שופט",
+      "labelEn": "Referee signal",
+      "duration": 2.35,
+      "loop": false,
+      "category": "expression",
+      "durationSeconds": 2.35,
+      "rootMotion": false,
+      "contactWindows": [],
+      "events": [],
+      "notes": "An open right-hand signal with a relaxed, partly curled free hand.",
+      "bakedIn": "Every models/<role>.glb and models/<role>-lod1.glb",
+      "runtimeSampler": "sampleMotion(id, normalizedPhase, measuredProfile)"
+    }
+  ],
+  "transitions": {
+    "defaultVisualBlendSeconds": 0.42,
+    "dribbleGatherBlendSeconds": 0.52,
+    "powerGatherBlendSeconds": 0.62,
+    "betweenLegsGatherBlendSeconds": 0.65,
+    "dribbleToHold": "Continue the bounce to its upper receive. Between-legs completes to the front-hand catch. Preserve the displayed pose and actual post-constraint ball velocity; interpolate hand frames on shortest quaternion arcs, route the rear hand around the body, solve contact/ground constraints after blending.",
+    "holdToDribble": "Keep the target first upper-hand pose at phase0 while the two-hand hold transfers to one dribbling hand. Start the free-flight clock only when that transfer completes, so the first floor bounce remains visible and physical.",
+    "interrupt": "Start from the currently displayed pose and measured ball velocity; no restart at the old source pose.",
+    "ballContinuityCheck": "source/motion-checks.mjs: independent second-order finite differences at actual blend begin/end and interruptions."
+  },
+  "verification": [
+    "verification/motion-validation.json",
+    "verification/skin-validation.json",
+    "verification/baked-validation.json"
+  ],
+  "limitations": [
+    "Animation does not infer a gameplay outcome.",
+    "Palmar marker residual is not a continuous triangle/ball collision proof; the independent skin audit samples actual morphed vertices.",
+    "In-place running/walking require matching game translation; no locomotion world-foot lock is claimed in the stationary viewer.",
+    "Physical phone performance is separate from desktop browser measurements."
+  ]
+}

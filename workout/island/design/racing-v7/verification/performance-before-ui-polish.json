@@ -1,0 +1,59 @@
+{
+  "status": "interrupted-for-visual-fix",
+  "recordedAt": "2026-11-04T22:56:16.217984+00:00",
+  "complete": false,
+  "reason": "Repeated visual review found portrait garage toolbar overlap and a capture orbit carried between viewports. Final UI will be corrected and reverified.",
+  "evidence": "Rounded console summaries only; in-memory per-frame samples were not written before interruption. These are not the final twelve-case measurements.",
+  "cases": [
+    {
+      "track": "coast",
+      "viewport": "390x844",
+      "quality": "high",
+      "roundedFPS": 2.0,
+      "trianglesAtEnd": 71657
+    },
+    {
+      "track": "coast",
+      "viewport": "390x844",
+      "quality": "low",
+      "roundedFPS": 3.2,
+      "trianglesAtEnd": 58849
+    },
+    {
+      "track": "neon",
+      "viewport": "390x844",
+      "quality": "high",
+      "roundedFPS": 1.9,
+      "trianglesAtEnd": 81871
+    },
+    {
+      "track": "neon",
+      "viewport": "390x844",
+      "quality": "low",
+      "roundedFPS": 2.9,
+      "trianglesAtEnd": 105945
+    },
+    {
+      "track": "ridge",
+      "viewport": "390x844",
+      "quality": "high",
+      "roundedFPS": 1.7,
+      "trianglesAtEnd": 81968
+    },
+    {
+      "track": "ridge",
+      "viewport": "390x844",
+      "quality": "low",
+      "roundedFPS": 2.9,
+      "trianglesAtEnd": 84471
+    }
+  ],
+  "sourceSHA256": {
+    "app.mjs": "222edec1f2f3e3637f7cab07bbea6b44c894f83bc15279f8e235481cfb3ab541",
+    "world.mjs": "60c92a011b15d4a9360148588a232ed2bf75c0cf3220e11087fa0048c89cda87",
+    "loader.mjs": "1432b77d0bc95d936f4790bc039acb40910d5314f0f43a0dce571cee2e0db93d",
+    "effects.mjs": "03058b4f4abe576b6b4040e8020d0912e80942b786070ee72dcf2e2d36a398f1",
+    "index.html": "89d96e5bfe8c9494309e62a4fba4c813dc7314fc468ea016d4e8a74947ac2004",
+    "style.css": "a052a3e7abcbc6a64ebb6f4944c2f14dca6d5e58943f7894b743a5a86aa11359"
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "started": "2026-11-04T21:38:28.452Z",
+  "foregroundIntervention": false,
+  "conditions": "Original test and local Chromium adapter. Every ten seconds record flags, request paths and readiness; no page content, saves, credentials or contact values.",
+  "pages": [
+    {
+      "index": 0,
+      "errors": [],
+      "failed": [],
+      "samples": [
+        {
+          "at": 1793828320109,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 64,
+          "island": false,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828325916,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 67,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828479455,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 164,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828489460,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 170,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828499460,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 175,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828509490,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 178,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828638690,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 238,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        }
+      ],
+      "timeouts": []
+    },
+    {
+      "index": 1,
+      "errors": [],
+      "failed": [],
+      "samples": [
+        {
+          "at": 1793828472351,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 7,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828485172,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 9,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828491597,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 11,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828501096,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 14,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828636827,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 19,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828638698,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 21,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 3,
+          "resources": 250,
+          "avatarResources": [],
+          "loadError": false
+        }
+      ],
+      "timeouts": [
+        {
+          "at": "2026-11-04T21:43:58.688Z",
+          "predicate": "()=>window.__island?.view?.metrics().avatarLoaded",
+          "error": "TimeoutError"
+        }
+      ]
+    }
+  ],
+  "finished": "2026-11-04T21:44:09.688Z"
+}

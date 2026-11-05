@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-11-04T22:57:17.200Z",
+  "completedAt": "2026-11-04T22:57:41.484Z",
+  "pass": true,
+  "document": {
+    "file": "standalone.html",
+    "bytes": 8219769,
+    "sha256": "f1bc7082970c3244e92e97e46ac6c6d0eeef5a23946a2ce153883a0bc515d0d4"
+  },
+  "reportDownload": {
+    "present": true,
+    "filename": "REPORT.md",
+    "bytes": 15523,
+    "expectedSha256": "8d012be47fd4c80e7feb2d9fb0403d57e35f92caaf76f7c407272e3220e6150a",
+    "downloadedSha256": "8d012be47fd4c80e7feb2d9fb0403d57e35f92caaf76f7c407272e3220e6150a",
+    "pass": true
+  },
+  "method": "The server exposes only the standalone HTML document. Once loaded, the browser network is disabled. Every role, LOD and action is exercised using embedded GLBs and the embedded Draco decoder. Only document/blob/data requests are allowed.",
+  "fileProtocolObservation": "Direct file:// navigation was blocked by managed Chromium with ERR_BLOCKED_BY_ADMINISTRATOR in this environment. The same self-contained markup also executed successfully from about: via setContent. Physical-browser double-click verification remains separate.",
+  "checks": [
+    {
+      "name": "document is the self-contained build",
+      "pass": true
+    },
+    {
+      "name": "play and pause controls update the animation",
+      "pass": true
+    },
+    {
+      "name": "dribble/hold touch control blends when resumed from a paused pose",
+      "pass": true
+    },
+    {
+      "name": "speed control updates playback rate",
+      "pass": true
+    },
+    {
+      "name": "timeline seeks and pauses",
+      "pass": true
+    },
+    {
+      "name": "team controls change uniform colors",
+      "pass": true,
+      "details": {
+        "ivory": {
+          "selected": "ivory",
+          "color": "e6dfca"
+        },
+        "teal": {
+          "selected": "teal",
+          "color": "318b85"
+        }
+      }
+    },
+    {
+      "name": "manual LOD control selects the reduced mesh",
+      "pass": true
+    },
+    {
+      "name": "manual LOD control restores the full mesh",
+      "pass": true
+    },
+    {
+      "name": "automatic LOD follows camera zoom and restores detail on reset",
+      "pass": true,
+      "details": {
+        "zoomedOut": 1,
+        "reset": 0
+      }
+    },
+    {
+      "name": "every authored action is accessible through the action selector",
+      "pass": true,
+      "details": [
+        {
+          "selected": "idle_hold",
+          "action": "idle_hold"
+        },
+        {
+          "selected": "euro_step",
+          "action": "euro_step"
+        },
+        {
+          "selected": "rebound",
+          "action": "rebound"
+        },
+        {
+          "selected": "idle",
+          "action": "idle"
+        },
+        {
+          "selected": "run",
+          "action": "run"
+        },
+        {
+          "selected": "decelerate",
+          "action": "decelerate"
+        },
+        {
+          "selected": "walk",
+          "action": "walk"
+        },
+        {
+          "selected": "pivot",
+          "action": "pivot"
+        },
+        {
+          "selected": "dribble_right",
+          "action": "dribble_right"
+        },
+        {
+          "selected": "dribble_left",
+          "action": "dribble_left"
+        },
+        {
+          "selected": "dribble_power",
+          "action": "dribble_power"
+        },
+        {
+          "selected": "dribble_crossover",
+          "action": "dribble_crossover"
+        },
+        {
+          "selected": "dribble_between_legs",
+          "action": "dribble_between_legs"
+        },
+        {
+          "selected": "shot_set",
+          "action": "shot_set"
+        },
+        {
+          "selected": "shot_jump",
+          "action": "shot_jump"
+        },
+        {
+          "selected": "shot_fadeaway",
+          "action": "shot_fadeaway"
+        },
+        {
+          "selected": "shot_stepback",
+          "action": "shot_stepback"
+        },
+        {
+          "selected": "layup",
+          "action": "layup"
+        },
+        {
+          "selected": "dunk_one_hand",
+          "action": "dunk_one_hand"
+        },
+        {
+          "selected": "dunk_two_hand",
+          "action": "dunk_two_hand"
+        },
+        {
+          "selected": "dunk_reverse",
+          "action": "dunk_reverse"
+        },
+        {
+          "selected": "defense_shuffle",
+          "action": "defense_shuffle"
+        },
+        {
+          "selected": "steal",
+          "action": "steal"
+        },
+        {
+          "selected": "block",
+          "action": "block"
+        },
+        {
+          "selected": "celebrate",
+          "action": "celebrate"
+        },
+        {
+          "selected": "fall",
+          "action": "fall"
+        },
+        {
+          "selected": "referee_signal",
+          "action": "referee_signal"
+        }
+      ]
+    },
+    {
+      "name": "each LOD uses the same 18-bone actor rig",
+      "pass": true,
+      "details": [
+        {
+          "id": "pg",
+          "meshes": 7,
+          "sharedBones": 126,
+          "skinBones": 126,
+          "uniqueControllers": 1
+        },
+        {
+          "id": "sg",
+          "meshes": 7,
+          "sharedBones": 126,
+          "skinBones": 126,
+          "uniqueControllers": 1
+        },
+        {
+          "id": "sf",
+          "meshes": 7,
+          "sharedBones": 126,
+          "skinBones": 126,
+          "uniqueControllers": 1
+        },
+        {
+          "id": "pf",
+          "meshes": 8,
+          "sharedBones": 144,
+          "skinBones": 144,
+          "uniqueControllers": 1
+        },
+        {
+          "id": "c",
+          "meshes": 8,
+          "sharedBones": 144,
+          "skinBones": 144,
+          "uniqueControllers": 1
+        },
+        {
+          "id": "referee",
+          "meshes": 6,
+          "sharedBones": 108,
+          "skinBones": 108,
+          "uniqueControllers": 1
+        }
+      ]
+    },
+    {
+      "name": "one motion solve per actor",
+      "pass": true,
+      "details": [
+        {
+          "id": "pg",
+          "controllers": 1
+        },
+        {
+          "id": "sg",
+          "controllers": 1
+        },
+        {
+          "id": "sf",
+          "controllers": 1
+        },
+        {
+          "id": "pf",
+          "controllers": 1
+        },
+        {
+          "id": "c",
+          "controllers": 1
+        },
+        {
+          "id": "referee",
+          "controllers": 1
+        }
+      ]
+    },
+    {
+      "name": "GPU maps share six role atlases and one cloth normal atlas",
+      "pass": true,
+      "details": {
+        "baseColorAtlases": 6,
+        "normalAtlases": 1
+      }
+    },
+    {
+      "name": "all roles render in both LODs while offline",
+      "pass": true,
+      "details": [
+        {
+          "id": "pg",
+          "lod": "high",
+          "triangles": 33095,
+          "expectedTriangles": 33095,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "pg",
+          "lod": "low",
+          "triangles": 7305,
+          "expectedTriangles": 7305,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "sg",
+          "lod": "high",
+          "triangles": 35306,
+          "expectedTriangles": 35306,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "sg",
+          "lod": "low",
+          "triangles": 7783,
+          "expectedTriangles": 7783,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "sf",
+          "lod": "high",
+          "triangles": 35653,
+          "expectedTriangles": 35653,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "sf",
+          "lod": "low",
+          "triangles": 7860,
+          "expectedTriangles": 7860,
+          "drawCalls": 12,
+          "boneCount": 3
+        },
+        {
+          "id": "pf",
+          "lod": "high",
+          "triangles": 34733,
+          "expectedTriangles": 34733,
+          "drawCalls": 13,
+          "boneCount": 3
+        },
+        {
+          "id": "pf",
+          "lod": "low",
+          "triangles": 7636,
+          "expectedTriangles": 7636,
+          "drawCalls": 13,
+          "boneCount": 3
+        },
+        {
+          "id": "c",
+          "lod": "high",
+          "triangles": 34804,
+          "expectedTriangles": 34804,
+          "drawCalls": 13,
+          "boneCount": 3
+        },
+        {
+          "id": "c",
+          "lod": "low",
+          "triangles": 7653,
+          "expectedTriangles": 7653,
+          "drawCalls": 13,
+          "boneCount": 3
+        },
+        {
+          "id": "referee",
+          "lod": "high",
+          "triangles": 36098,
+          "expectedTriangles": 36098,
+          "drawCalls": 11,
+          "boneCount": 3
+        },
+        {
+          "id": "referee",
+          "lod": "low",
+          "triangles": 8061,
+          "expectedTriangles": 8061,
+          "drawCalls": 11,
+          "boneCount": 3
+        }
+      ]
+    },
+    {
+      "name": "embedded viewer geometry matches the delivered model triangle counts",
+      "pass": true,
+      "details": [
+        {
+          "id": "pg",
+          "lod": "high",
+          "triangles": 33095,
+          "expected": 33095
+        },
+        {
+          "id": "pg",
+          "lod": "low",
+          "triangles": 7305,
+          "expected": 7305
+        },
+        {
+          "id": "sg",
+          "lod": "high",
+          "triangles": 35306,
+          "expected": 35306
+        },
+        {
+          "id": "sg",
+          "lod": "low",
+          "triangles": 7783,
+          "expected": 7783
+        },
+        {
+          "id": "sf",
+          "lod": "high",
+          "triangles": 35653,
+          "expected": 35653
+        },
+        {
+          "id": "sf",
+          "lod": "low",
+          "triangles": 7860,
+          "expected": 7860
+        },
+        {
+          "id": "pf",
+          "lod": "high",
+          "triangles": 34733,
+          "expected": 34733
+        },
+        {
+          "id": "pf",
+          "lod": "low",
+          "triangles": 7636,
+          "expected": 7636
+        },
+        {
+          "id": "c",
+          "lod": "high",
+          "triangles": 34804,
+          "expected": 34804
+        },
+        {
+          "id": "c",
+          "lod": "low",
+          "triangles": 7653,
+          "expected": 7653
+        },
+        {
+          "id": "referee",
+          "lod": "high",
+          "triangles": 36098,
+          "expected": 36098
+        },
+        {
+          "id": "referee",
+          "lod": "low",
+          "triangles": 8061,
+          "expected": 8061
+        }
+      ]
+    },
+    {
+      "name": "all authored actions can be selected and sought offline",
+      "pass": true,
+      "details": [
+        {
+          "id": "idle_hold",
+          "action": "idle_hold",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "idle",
+          "action": "idle",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dribble_right",
+          "action": "dribble_right",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dribble_left",
+          "action": "dribble_left",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dribble_power",
+          "action": "dribble_power",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dribble_crossover",
+          "action": "dribble_crossover",
+          "phase": 0.45999999999999996,
+          "finite": true
+        },
+        {
+          "id": "dribble_between_legs",
+          "action": "dribble_between_legs",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "shot_set",
+          "action": "shot_set",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "shot_jump",
+          "action": "shot_jump",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "shot_fadeaway",
+          "action": "shot_fadeaway",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "shot_stepback",
+          "action": "shot_stepback",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "layup",
+          "action": "layup",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dunk_one_hand",
+          "action": "dunk_one_hand",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dunk_two_hand",
+          "action": "dunk_two_hand",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "dunk_reverse",
+          "action": "dunk_reverse",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "euro_step",
+          "action": "euro_step",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "run",
+          "action": "run",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "decelerate",
+          "action": "decelerate",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "defense_shuffle",
+          "action": "defense_shuffle",
+          "phase": 0.45999999999999996,
+          "finite": true
+        },
+        {
+          "id": "steal",
+          "action": "steal",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "block",
+          "action": "block",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "rebound",
+          "action": "rebound",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "walk",
+          "action": "walk",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "pivot",
+          "action": "pivot",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "celebrate",
+          "action": "celebrate",
+          "phase": 0.4600000000000001,
+          "finite": true
+        },
+        {
+          "id": "fall",
+          "action": "fall",
+          "phase": 0.46,
+          "finite": true
+        },
+        {
+          "id": "referee_signal",
+          "action": "referee_signal",
+          "phase": 0.4600000000000001,
+          "finite": true
+        }
+      ]
+    },
+    {
+      "name": "shared LOD skin palettes follow near-to-lineup placement after aerial motion",
+      "pass": true,
+      "details": [
+        {
+          "id": "pg",
+          "lod": 1,
+          "maxError": 9.536743172944284e-8
+        },
+        {
+          "id": "sg",
+          "lod": 1,
+          "maxError": 5.824390303388327e-8
+        },
+        {
+          "id": "sf",
+          "lod": 1,
+          "maxError": 4.747964332807442e-8
+        },
+        {
+          "id": "pf",
+          "lod": 1,
+          "maxError": 4.473211667743726e-8
+        },
+        {
+          "id": "c",
+          "lod": 1,
+          "maxError": 1.0296954089383803e-7
+        },
+        {
+          "id": "referee",
+          "lod": 1,
+          "maxError": 1.079200115938761e-7
+        }
+      ]
+    },
+    {
+      "name": "landscape document has no page overflow",
+      "pass": true,
+      "details": {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "scrollHeight": 390
+      }
+    },
+    {
+      "name": "no external asset requests",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "no JavaScript or console errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "requests": [
+    "standalone document"
+  ],
+  "rejectedRequests": [],
+  "errors": [],
+  "screenshots": [
+    {
+      "file": "offline-390x844-near.webp",
+      "bytes": 29612,
+      "sha256": "6060f4e819cb07f55c611aadd4bfb21a29dc1acf6244625d13bb3ba617714455"
+    },
+    {
+      "file": "offline-390x844-face.webp",
+      "bytes": 31876,
+      "sha256": "e40a1d14ccd9e1fd6b31dc050f7a6d5c316558e6422bacf4e950c98c864ba11e"
+    },
+    {
+      "file": "offline-844x390-far.webp",
+      "bytes": 39384,
+      "sha256": "bbbb461b1eb49d3cd9e172662d9b4a082c2dff537fb9ba01b00d67902d9a0676"
+    }
+  ],
+  "diagnostics": {
+    "version": "hoops-characters-v7",
+    "threeRevision": "160",
+    "ready": true,
+    "offline": true,
+    "source": "http:",
+    "view": "far",
+    "selectedId": "pg",
+    "team": "teal",
+    "actionId": "idle_hold",
+    "playing": false,
+    "speed": 0.5,
+    "lodMode": "auto",
+    "viewport": {
+      "width": 602,
+      "height": 345,
+      "devicePixelRatio": 1
+    },
+    "renderer": {
+      "triangles": 50632,
+      "calls": 59,
+      "geometries": 102,
+      "textures": 104,
+      "fps": 7.5
+    },
+    "performance": {
+      "readyAtUtc": "2026-11-04T22:57:19.665Z",
+      "renderedFrames": 237,
+      "playbackFrames": 14,
+      "playbackWallSeconds": 3.1799000000018633,
+      "latestRenderCpuMs": 1.400000000372529,
+      "meanRenderCpuMs": 27.213502109671634,
+      "recentRenderCpuP95Ms": 13.900000000372529,
+      "recentFrameGapMeanMs": 227.13571428584737,
+      "longFramesOver50ms": 12,
+      "timingScope": "Renderer CPU submission and actual wall-clock RAF gaps; no GPU timer and no physical-phone measurement."
+    },
+    "crowd": {
+      "enabled": false,
+      "instances": 240,
+      "instancedDraws": 2
+    },
+    "camera": {
+      "position": [
+        0.06730431157051518,
+        1.090965722525971,
+        6.730206807850618
+      ],
+      "target": [
+        0,
+        0.9900000000000001,
+        0
+      ],
+      "yaw": 0.01,
+      "pitch": 0.015,
+      "distance": 6.731300589330414
+    },
+    "actors": [
+      {
+        "id": "pg",
+        "lod": 1,
+        "triangles": 7305,
+        "heightMeters": 1.7799999713897705,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.11874787399915189,
+                1.164749896363317,
+                0.31662470235988127
+              ],
+              "errorMeters": 2.7755575615628914e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.11874787399915185,
+                1.164749896363317,
+                0.3166247023598813
+              ],
+              "errorMeters": 0
+            }
+          ],
+          "handContactErrorMeters": 2.7755575615628914e-17,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.1948851618778355,
+                0.10179947713168651,
+                0
+              ],
+              "position": [
+                0.1948851618778355,
+                0.10179947713168647,
+                -1.3877787807814457e-17
+              ],
+              "errorMeters": 4.3885418357208765e-17
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.1948851618778355,
+                0.10261302838658223,
+                0
+              ],
+              "position": [
+                -0.19488516187783558,
+                0.10261302838658226,
+                -8.326672684688674e-17
+              ],
+              "errorMeters": 1.2098374922832816e-16
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.0012896412029434834,
+            "right": 0.000969246861126624
+          },
+          "groundProbeCount": {
+            "leftFoot": 23,
+            "rightFoot": 22,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 649
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.1599999814033508,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 162,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.1572969991935802,
+              1.1496551232042882,
+              0.2800919236834739
+            ],
+            "right": [
+              -0.15729681193731623,
+              1.149655061160276,
+              0.28009184132474635
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.2005537392234946,
+              1.1518932516123344,
+              0.01491005810823768
+            ],
+            "right": [
+              -0.20055380490644212,
+              1.1518932666814008,
+              0.014910091867481493
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "id": "sg",
+        "lod": 1,
+        "triangles": 7783,
+        "heightMeters": 1.8799999952316284,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.1187478739991519,
+                1.2297499118605244,
+                0.31662470235988127
+              ],
+              "errorMeters": 2.7755575615628914e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.1187478739991518,
+                1.2297499118605246,
+                0.31662470235988127
+              ],
+              "errorMeters": 5.551115123125783e-17
+            }
+          ],
+          "handContactErrorMeters": 5.551115123125783e-17,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.2106877927041585,
+                0.10723816907295075,
+                0
+              ],
+              "position": [
+                0.21068779270415847,
+                0.10723816907295075,
+                2.7755575615628914e-17
+              ],
+              "errorMeters": 3.925231146709438e-17
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.2106877927041585,
+                0.10832845917817295,
+                0
+              ],
+              "position": [
+                -0.21068779270415852,
+                0.10832845917817296,
+                5.551115123125783e-17
+              ],
+              "errorMeters": 6.359601310784502e-17
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.000762701673332312,
+            "right": 0.00032417485535994085
+          },
+          "groundProbeCount": {
+            "leftFoot": 24,
+            "rightFoot": 23,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 653
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.2249999969005585,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 142,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.15591619975757315,
+              1.2186657311474351,
+              0.28227961425616854
+            ],
+            "right": [
+              -0.15591607699124244,
+              1.2186656102572306,
+              0.28227968708613144
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.23006760771774618,
+              1.2057873289034666,
+              0.008578063267254722
+            ],
+            "right": [
+              -0.23006754409286817,
+              1.2057872581165217,
+              0.008578123846660995
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "id": "sf",
+        "lod": 1,
+        "triangles": 7860,
+        "heightMeters": 1.9900000095367432,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.11874787399915193,
+                1.3012499211588489,
+                0.3166247023598812
+              ],
+              "errorMeters": 5.551115123125783e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.11874787399915165,
+                1.301249921158849,
+                0.3166247023598812
+              ],
+              "errorMeters": 2.0816681711721685e-16
+            }
+          ],
+          "handContactErrorMeters": 2.0816681711721685e-16,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.22560475660837154,
+                0.11267196265848044,
+                0
+              ],
+              "position": [
+                0.2256047566083715,
+                0.11267196265848084,
+                2.7755575615628914e-17
+              ],
+              "errorMeters": 4.0436549343196473e-16
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.22560475660837154,
+                0.11391407509341162,
+                0
+              ],
+              "position": [
+                -0.22560475660837154,
+                0.1139140750934114,
+                -8.326672684688674e-17
+              ],
+              "errorMeters": 2.3714374201337736e-16
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.0005818513400270989,
+            "right": 0.00008779307521892144
+          },
+          "groundProbeCount": {
+            "leftFoot": 24,
+            "rightFoot": 23,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 644
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.296500006198883,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 142,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.15848187799021574,
+              1.2885869251196385,
+              0.2789917718706979
+            ],
+            "right": [
+              -0.15848184498363424,
+              1.2885865998888533,
+              0.27899188611773096
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.253691230758631,
+              1.267991698369086,
+              -0.013604885794123799
+            ],
+            "right": [
+              -0.2536912388411222,
+              1.2679913051246865,
+              -0.013604733771023649
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "id": "pf",
+        "lod": 1,
+        "triangles": 7636,
+        "heightMeters": 2.0899999141693115,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.11874787399915188,
+                1.3662498591700185,
+                0.3166247023598813
+              ],
+              "errorMeters": 2.7755575615628914e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.11874787399915177,
+                1.3662498591700183,
+                0.3166247023598812
+              ],
+              "errorMeters": 1.1102230246251565e-16
+            }
+          ],
+          "handContactErrorMeters": 1.1102230246251565e-16,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.2633750939368463,
+                0.11665619910672087,
+                0
+              ],
+              "position": [
+                0.2633750939368463,
+                0.11665619910672098,
+                -2.7755575615628914e-17
+              ],
+              "errorMeters": 1.1443916996305594e-16
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.2633750939368463,
+                0.11756215854549218,
+                0
+              ],
+              "position": [
+                -0.26337509393684627,
+                0.11756215854549201,
+                -1.942890293094024e-16
+              ],
+              "errorMeters": 2.618455766672135e-16
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.0005820961279968838,
+            "right": 0.00015846582965803064
+          },
+          "groundProbeCount": {
+            "leftFoot": 23,
+            "rightFoot": 23,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 656
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.3614999442100524,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 142,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.16109393682476988,
+              1.350162897524651,
+              0.2750327197704622
+            ],
+            "right": [
+              -0.1610937582502286,
+              1.3501624713790705,
+              0.2750326718690731
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.304135423438926,
+              1.3239097174848304,
+              -0.05074428346507477
+            ],
+            "right": [
+              -0.3041356821350788,
+              1.323909560268887,
+              -0.050744118259931456
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "id": "c",
+        "lod": 1,
+        "triangles": 7653,
+        "heightMeters": 2.200000047683716,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.11874787399915175,
+                1.4377499459543817,
+                0.3166247023598815
+              ],
+              "errorMeters": 6.938893903907228e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.11874787399915182,
+                1.4377499459543817,
+                0.3166247023598813
+              ],
+              "errorMeters": 2.7755575615628914e-17
+            }
+          ],
+          "handContactErrorMeters": 6.938893903907228e-17,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.23045320719474055,
+                0.12354672509028754,
+                0
+              ],
+              "position": [
+                0.2304532071947405,
+                0.12354672509028763,
+                5.551115123125783e-17
+              ],
+              "errorMeters": 1.249000902703301e-16
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.23045320719474055,
+                0.12441720420192692,
+                0
+              ],
+              "position": [
+                -0.23045320719474055,
+                0.12441720420192715,
+                5.551115123125783e-17
+              ],
+              "errorMeters": 2.2887833992611187e-16
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.000911057691563885,
+            "right": 0.000532570513545624
+          },
+          "groundProbeCount": {
+            "leftFoot": 23,
+            "rightFoot": 23,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 652
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.4330000309944153,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 142,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.16490308915478713,
+              1.4199548433165816,
+              0.27037964949398285
+            ],
+            "right": [
+              -0.1649029003346536,
+              1.4199543945082589,
+              0.27037964339598186
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.25685397617544753,
+              1.4432459603932144,
+              -0.04607916343338278
+            ],
+            "right": [
+              -0.256854237007045,
+              1.4432457741363816,
+              -0.046079005754056865
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "id": "referee",
+        "lod": 1,
+        "triangles": 8061,
+        "heightMeters": 1.8600000143051147,
+        "motion": {
+          "action": "idle_hold",
+          "time": 0.6,
+          "phase": 0.25,
+          "transition": null,
+          "contact": [
+            {
+              "effector": "LeftHand",
+              "palm": [
+                0.11874787399915182,
+                1.2167499242582906,
+                0.31662470235988127
+              ],
+              "errorMeters": 4.163336342344337e-17
+            },
+            {
+              "effector": "RightHand",
+              "palm": [
+                -0.11874787399915179,
+                1.2167499242582904,
+                0.31662470235988127
+              ],
+              "errorMeters": 8.326672684688674e-17
+            }
+          ],
+          "handContactErrorMeters": 8.326672684688674e-17,
+          "footErrors": {
+            "left": {
+              "support": true,
+              "target": [
+                0.20370138218037429,
+                0.10589526669382954,
+                0
+              ],
+              "position": [
+                0.20370138218037429,
+                0.10589526669382954,
+                -5.551115123125783e-17
+              ],
+              "errorMeters": 5.551115123125783e-17
+            },
+            "right": {
+              "support": true,
+              "target": [
+                -0.20370138218037429,
+                0.1071241567012722,
+                0
+              ],
+              "position": [
+                -0.20370138218037429,
+                0.10712415670127223,
+                1.1102230246251565e-16
+              ],
+              "errorMeters": 1.1443916996305594e-16
+            }
+          },
+          "soleProbeHeights": {
+            "left": 0.000748215519116348,
+            "right": 0.00027768626475393673
+          },
+          "groundProbeCount": {
+            "leftFoot": 42,
+            "rightFoot": 41,
+            "leftHand": 22,
+            "rightHand": 22,
+            "body": 4023
+          },
+          "maxReach": {
+            "left": 0,
+            "right": 0,
+            "leftLeg": 0,
+            "rightLeg": 0
+          },
+          "ballPosition": [
+            0,
+            1.2120000092983245,
+            0.3
+          ],
+          "ballVisible": true,
+          "frame": 142,
+          "rootMotion": false,
+          "handTargets": {
+            "left": [
+              0.15546736580943823,
+              1.2059920984604937,
+              0.28205226602690747
+            ],
+            "right": [
+              -0.1554673357718122,
+              1.2059917988486488,
+              0.28205237119837795
+            ]
+          },
+          "elbows": {
+            "left": [
+              0.22131815604752875,
+              1.1859759611424558,
+              0.007712243607997653
+            ],
+            "right": [
+              -0.22131816922074418,
+              1.1859756082857134,
+              0.007712382698908005
+            ]
+          },
+          "ballVelocityMetersPerSecond": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "error": null
+  }
+}

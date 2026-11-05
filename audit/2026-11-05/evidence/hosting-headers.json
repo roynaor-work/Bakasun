@@ -1,0 +1,49 @@
+{
+  "started": "2026-11-04T22:03:58.869677+00:00",
+  "finished": "2026-11-04T22:03:58.915507+00:00",
+  "conditions": "Read-only GET of seven public static files. No JavaScript execution, cookies, form submissions, database/Storage data or response bodies saved. Only whitelisted headers, hashes and equality with frozen files retained.",
+  "responses": [
+    {
+      "path": "index.html",
+      "at": "2026-11-04T22:03:58.869677+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "workout/index.html",
+      "at": "2026-11-04T22:03:58.870717+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "workout/island/index.html",
+      "at": "2026-11-04T22:03:58.871338+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "north/index.html",
+      "at": "2026-11-04T22:03:58.872142+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "workout/island/minigames/hoops-draco-worker.mjs",
+      "at": "2026-11-04T22:03:58.894785+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "workout/island/minigames/alpine-draco-worker.mjs",
+      "at": "2026-11-04T22:03:58.898540+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "path": "workout/island/tools/perf-alpine.html",
+      "at": "2026-11-04T22:03:58.902249+00:00",
+      "error": "URLError",
+      "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}

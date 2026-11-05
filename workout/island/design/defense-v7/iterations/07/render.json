@@ -1,0 +1,4820 @@
+{
+  "iteration": "07",
+  "startedUTC": "2026-11-04T21:31:50.641447+00:00",
+  "renderer": "Chromium / ANGLE SwiftShader (software, not physical phone)",
+  "sourceHashes": {
+    "theme.css": "052a2441ba6aa497689cdbffe504ad092b39088f5ec3e11c160b87bbd07da16b",
+    "app.mjs": "a81b14c136ea869f7dc54481685a4f589109819e4e3b9fc8e1f843f40a8a166b",
+    "catalog.mjs": "050e75336c0e08592373723f188e6d0ad4af8c4f9064d1b849207bb8c9082581",
+    "effects.mjs": "ae0be47d37706b36bd12b6594cfef72734b01582361e24b75065f90e97caad58",
+    "farm-layout.json": "5a2d28d4af10e15178f0cdcc7e501b42443cf678be6629d60d614d4c61c0e118",
+    "preview.html": "823e73dfd81a64f545bfb0c21aa8d0ac1b586945d230ddf0668593036cd67229",
+    "source/browser-audit.py": "2298dd754e50f363ecf0c0761b780c0aa19fc9bd3bc8173b5023049acfae9a99",
+    "source/build-assets.mjs": "717f4570612ffc0903ce086922589f56e6fedeb629ca17d663e0eb2b8e94d5a1",
+    "source/offline.mjs": "740e68eb7707ab69e32172acd7838c1349f2e2a223648061daa81e95771c56c1",
+    "source/guard-lod.mjs": "41f407861173d70f021c58b20ee2f0a9978ac401ca0ae189004ff67691012f37",
+    "source/studio.py": "09c3f455b99e2a653af3b9ecb8751216faa9ac2d53ee5c1bc8b87072cd1bec88",
+    "source/performance.py": "c5e901e376d9d1ae734a19a61a964f67c84712bb4e72443c07a4fd5fbc2838c5",
+    "source/soak.py": "e2e61e86c80241f872db14c2c4bcd5a1fb87dbcfc6198b8754df50355f8ff705",
+    "source/README.md": "83f4249ae62a4bc61807c44da2efa46420064200971a4fe05f310fe0a0fb0428",
+    "source/package.json": "33b98e472fe73e9ff4a97c5ae5f3055bf854ed0c47de108e4bf3db56abf0277e",
+    "source/manifest.mjs": "bec66ee0ebecdd0146031ece115bd5020f74e7aabc10ba223f464a032c5f0a4f",
+    "source/effect-atlas.py": "6d1362bc9935bbc2d7c4136c55f19fe531914cc5226f446bc8d8fa4802fdc6a1",
+    "source/guard-static-lod.mjs": "5f1d5d96bf325bfce6374ea354f3afdb67496911d7bfc2ff880ae23a11404cbb",
+    "source/build-environment.mjs": "0b89bf0a0f9013ccb264daff733a07a84ff143a091293bd05e0ba94593a7ccef",
+    "source/boar-static-lod.mjs": "a57fff3382fbc9a71f6e93152cc5f6b847c3d67123af8f5c795c1009eab651be",
+    "source/mesh.mjs": "19bab12d59d304b3d5f534e1f578c3569048f62127d6323b282788e09d945aad",
+    "source/pose.mjs": "1121b2d457e65b8986521e8773410aa7e8c6fd70cb7c4ad2114f8248213e0e02",
+    "source/animation-audit.mjs": "0be23729dbe1b03da43d288f747a29a29b5461c72a69cc52fcffc97faea0cded",
+    "source/audit.mjs": "995387799d95c42fa51c43980900f84207b310c96e8336f25f4312471e2d29ec",
+    "source/build-guards.mjs": "d6853b8bec92816d34f1760646c42195cbc113d8c7c98dd784e7a1da56b46754",
+    "source/studio-input.mjs": "e9bca2e9ffedfa499dfc9feeea06c5772e84fcb2acb1f3dac431a05beac9e8a8",
+    "source/serve.py": "d6fbae5e5b9214e69bbf0a5df07d79aece90fca3b66cf6b1065a69d844305150",
+    "source/capture.py": "8bdcd4f658e2336e160296a40fea9f66037d26ca43bde0817a40ef174a9942a0",
+    "source/farm-shadow.py": "39a3180a61e4b3c0df104581a2767f345326434f35791d643ef8db8e26fc56ba",
+    "textures/boar-ash-atlas.png": "d61680d0a551f418673ef617b22ffd1a0202ed62964aaaee38f7e969c0ac5649",
+    "textures/guard-keeper-atlas.png": "c48a46ae53044b044740939295e2b6b525d937abb6b4ce3a7aa9a007bf188a01",
+    "textures/guard-lookout-atlas.png": "9951c913ad0b3876918aea9d3150a4f1d26f97cae56585262f96efeb81328216",
+    "textures/boar-amber-atlas.png": "02ac61e0f3eb0b712a016dfcf242a01150842971b8cdbfcada984e2727317a6c",
+    "textures/effects-atlas.png": "3f83a8ee72a427f24be85af6b667236a64fbada74b598d8e11d76ad783d56ee8",
+    "textures/guard-ranger-atlas.png": "36f6d42d1ca69c73bc5201df577f917a81bb7352a2eecedff208d271cf4b45e5",
+    "textures/boar-striped-atlas.png": "5332b77754def3eb0442b998557499d92ed14d15905e9ac29e73169c32fb3ede",
+    "models/planet-ring.glb": "e3415587cb63420193f21968c78663c61cbce6b3123da8181bc3c5ac5b330eda",
+    "models/guard-ranger-lod2.glb": "6ad4f3c8858cb560d16063a66471999373aa230bc0df3a14a14a00e63f37721b",
+    "models/boar-striped.glb": "f2548b0bd417d4554732ca6a62b9c5c5631b1a46c8d0b16e2be7160b64cc546e",
+    "models/defender-plane.glb": "5dc8d34722abe4928b939334fca8c1b65e0f47ee67d147dc30ca9e9df3527896",
+    "models/alien-scout.glb": "b435fee973e480195ff27bb9050da7ce5866fa148e07e2cff7aa8e009539a354",
+    "models/farm-trough.glb": "c4191669dce10e8b0d0ee569afac8ecac30b5185f7b6f28655211a81f73a0208",
+    "models/alien-carrier.glb": "c18d42f23fe4dfeea75e00129fb5a99d415ee2b2b2fbf99bb0e3808cf434aa89",
+    "models/island-palm-lod1.glb": "e349fa09e503c53e4f0afbf951a0d9e738fb4f3ea47c3b32070f9d83688fd600",
+    "models/hay-bale.glb": "8d04e4eeaa8afae73a3bf5e544208b3f3d51d1a6e0c1ee3a5ddbac29e4a04523",
+    "models/farm-gate-lod1.glb": "aae64ddb3af8a579cd337f8838411745ca7f7e05a70e69426234fb5d68937bfc",
+    "models/boar-ash.glb": "679da2234920e0708c984f99577413450fb341fc16cd7d8cb7cbdba9f4140db0",
+    "models/farm-fence.glb": "7bbccd5ea2812c9a6d5f6d9eef37bd8327ceb8ee1a43bb018ac73f1962d43050",
+    "models/guard-crowd.glb": "af1c37050961ecb57ebc891dfb20fade6694d4eb6ff7b44ac899fe97a782d432",
+    "models/island-palm.glb": "95ee02f2a4d03b155ebe6a5eaaecb1626662698b122e06b8a321060b7852dcbc",
+    "models/hay-bale-lod1.glb": "081120c8d27e07ac2f4c50a24afc886e2a923a31e150a460995d0cf9b5ce5627",
+    "models/island-cloud-lod1.glb": "257c2f93dfc2aa14efd02ffb040afa52ac6f28b710ccfe57e975d3ea97d5edbd",
+    "models/guard-lookout.glb": "2bb115d68391817a32306081725bba02dada58c6d53424914d020665be259412",
+    "models/boar-amber-lod1.glb": "cb3b304649d893b92ce7555ca0c957e309124113cd8d6ff81802a74dfdf052e5",
+    "models/island-cloud.glb": "40c5d7c48c7bef1245a9a62ebf62512a3f220431eb32f4a66bf1f291ae9a9c26",
+    "models/boar-amber.glb": "1dbd41f698cef03ca1991b1b46ff54c7457676c7c0ff3d40368dd51a4da87677",
+    "models/boar-amber-lod2.glb": "544f168f0ac205290e43230756dd362df4a76fb0f8a4ce5a601c830c65adbd5b",
+    "models/farm-fence-lod1.glb": "ba5933a90146fd6330b014389cddc4231a2f7f27e0dcdfd5eb8bb53815f0a014",
+    "models/alien-boss.glb": "44a8681b0c6d5f1caf87b7319baa46a0db222e32d933fb629191a8d1d2e7fc81",
+    "models/alien-harvester-lod1.glb": "54bf3416479bb1ff1b079c96d452c6dddfe4f60c357f3422f3a3401bdae1a1c9",
+    "models/alien-boss-lod1.glb": "884a5f58665d4a354cd6da2aa5e58519f44aff25f170cc959c67a2e4e79337a7",
+    "models/crop-patch.glb": "ffd32090ba73fe1e84d5db1441952ee3ad0dafdfb462b4791f97a22a08a46f34",
+    "models/farm-shelter-lod1.glb": "0e1ecf45d4b3d043f0d3a3301b613c8d2398e352cf459e2d6199654274d534ad",
+    "models/farm-island.glb": "4aa1e1bbe3be6f4dc633bec3d871fa3abf99da5ca95a8c7b22572fcba7c412e4",
+    "models/alien-manta.glb": "e74161d85eb83c353bfa500ab60292a097a5dae0305eff91a728e6d0a46b5695",
+    "models/boar-striped-lod1.glb": "b6034968d291dedfc87fe412419e7a019d173833a222a5a228a0ecfafc635e63",
+    "models/guard-keeper.glb": "098b1a084ace96dd694bb337a5cb506af6c60add3857553d77134a76de32a49a",
+    "models/farm-trough-lod1.glb": "abb8c6a1c103d40ab0c163e883e12f774602c970827c435bd117601677eae3d0",
+    "models/farm-shelter.glb": "a2a4182a976f82d9a700be0531c101e486075c6551908c30c3d8936ac51998b4",
+    "models/boar-striped-lod2.glb": "e3eeecfafe6a15841d71d5418528097541381e190258bc03fb02b0a66c3aba39",
+    "models/guard-ranger-lod1.glb": "3d90ab690f86a1f1fc7f0e0be525f8634bbcccba07ad0e28d74da4d92d52cfc7",
+    "models/alien-carrier-lod1.glb": "5da2432f1e3cc589102db1c497089ed9abf381a7491ba3013d39501702e55620",
+    "models/crop-patch-lod1.glb": "2e05e03fe97ec85b43ef05a873c958e701acc82febb7a613e3644d24035c6276",
+    "models/alien-beetle-lod1.glb": "bd9b29523327f5433fc933a833208d5f30aeb3b01ba6ce2a6341dc6e8baac201",
+    "models/guard-keeper-lod2.glb": "42c6bbaa4079d160295cb896cda193f1a2c2c84257b24c505dc6bdb0cea86db6",
+    "models/guard-lookout-lod1.glb": "a5bf2667f820425fe90471e8a129c968dbe01bc731595cffb1b7f05189435c20",
+    "models/alien-scout-lod1.glb": "7b30a7142b6a790fbbcae01692851bd117728f503e7433d3152cfa42585ddf41",
+    "models/alarm-bell.glb": "2c23a4777675b7c2788b64698fd72b51ef328f0761b192312bbdae9eb8bd2f03",
+    "models/planet-moon.glb": "9c30b336b6db96ebc836a4c63e1e39d8007fcf60e02243f710ae43c1f92f05e7",
+    "models/boar-ash-lod2.glb": "65f6ed7033dd9f308b675afb19cfa191cf772235d7eb2c53a3081a1c4e9809bb",
+    "models/alien-manta-lod1.glb": "f05b59156d37782c45cd5c201a4c730313ff385688b6fd6e3490f9f4dd05b013",
+    "models/boar-ash-lod1.glb": "016a647c661f5167aac750c646d1045ae26f206109b5738090fca09fe3c3344b",
+    "models/guard-station.glb": "2c975ba0f5fab30f43d0efd9feacbd11fdd9f25e0b7ecc9bb9d95d9e9e97f877",
+    "models/alien-harvester.glb": "2042c88a2aad2bfdb1df98111476f9f0cedcb7e524f954bceeb6969ba0ed88bd",
+    "models/defender-plane-lod1.glb": "d6b616a4c01b27032e2ee6b5cb6ed0ec5abd8a0032025cf20b96c53365141133",
+    "models/alarm-bell-lod1.glb": "373999abb988434219cd75ca21260718269748add62c8d63efe13b0877d16e53",
+    "models/guard-keeper-lod1.glb": "42a48a338aaba7238af195cb54dbbff8353b28866d4901c99d214f860af1b709",
+    "models/guard-ranger.glb": "1bcab816222897ef12623e58b0635b44fe3886b1da7588bb340f9fb14e43e1c5",
+    "models/guard-lookout-lod2.glb": "2b71ae24ae1c9db6716b61cfb9aba4c273d264f24f40a463c09a8abfa6e38d9d",
+    "models/planet-moon-lod1.glb": "46dcfb2910f3e95c9433c605531e9517b5d8a3c7792e693ca03b6cdb564d0528",
+    "models/planet-ring-lod1.glb": "c84de0742252db4ba2c0da37b9ca9c4422b62193b8f428f2ba1482fd816b02fc",
+    "models/alien-beetle.glb": "846841aa9f3a34274f872f68c29b551ff17a81c1ef4f1f2b9a27e49f141cdfcb",
+    "models/farm-gate.glb": "62ea7c4a392054a43194d6179ebacbb32f712f91a7a1efb6b25b4673a917a59a",
+    "models/guard-station-lod1.glb": "7c3a46c6d64c5bc5f0b733bdd2b1833a20f23b4d7ee4b045149c3b3f8a1e82cf"
+  },
+  "views": [
+    {
+      "name": "space-390x844-far-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 2,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30252,
+      "calls": 20,
+      "dpr": 1,
+      "geometries": 18,
+      "textures": 0,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 221.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 179.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.578125,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-far-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 3,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30252,
+      "calls": 20,
+      "dpr": 1,
+      "geometries": 18,
+      "textures": 0,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 221.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 179.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.578125,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-close-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 4,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 32300,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 20,
+      "textures": 0,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 221.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 179.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.578125,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-390x844-close-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 5,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 32300,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 20,
+      "textures": 0,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 221.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 179.421875,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 74.578125,
+            "y": 759,
+            "width": 86.265625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-far-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 6,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24967,
+      "calls": 35,
+      "dpr": 1,
+      "geometries": 52,
+      "textures": 7,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 219.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 177.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 76.984375,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-far-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 7,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24967,
+      "calls": 35,
+      "dpr": 1,
+      "geometries": 52,
+      "textures": 7,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 219.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 177.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 76.984375,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-close-day",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 8,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 27285,
+      "calls": 34,
+      "dpr": 1,
+      "geometries": 53,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 219.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 177.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 76.984375,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-390x844-close-night",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 9,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 27285,
+      "calls": 34,
+      "dpr": 1,
+      "geometries": 53,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 20,
+            "y": 17,
+            "width": 70.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 273.640625,
+            "y": 73,
+            "width": 95.359375,
+            "height": 46
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 158.453125,
+            "y": 73,
+            "width": 93.1875,
+            "height": 46
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 328,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 286,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 219.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 177.015625,
+            "y": 759,
+            "width": 42,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 76.984375,
+            "y": 759,
+            "width": 79.046875,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 16,
+            "y": 759,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 18,
+            "y": 815,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-far-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 10,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 458.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 398.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-far-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 11,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 458.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 398.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-close-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 12,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 458.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 398.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "space-844x390-close-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 13,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 458.234375,
+            "y": 336,
+            "width": 97.515625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 398.234375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-far-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 14,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24967,
+      "calls": 35,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 466.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 406.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-far-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": false,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 15,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24967,
+      "calls": 35,
+      "dpr": 1,
+      "geometries": 54,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 466.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 406.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-close-day",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 16,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30087,
+      "calls": 33,
+      "dpr": 1,
+      "geometries": 61,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 466.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 406.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "farm-844x390-close-night",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.42,
+      "frame": 17,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 30087,
+      "calls": 33,
+      "dpr": 1,
+      "geometries": 61,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545
+      ],
+      "controls": [
+        {
+          "id": "library-open",
+          "rect": {
+            "x": 22,
+            "y": 8.5,
+            "width": 70.671875,
+            "height": 32
+          }
+        },
+        {
+          "id": "משמר השמיים",
+          "rect": {
+            "x": 731.25,
+            "y": 47,
+            "width": 88.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "החווה השקטה",
+          "rect": {
+            "x": 620.5,
+            "y": 47,
+            "width": 86.75,
+            "height": 36
+          }
+        },
+        {
+          "id": "day",
+          "rect": {
+            "x": 755.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "night",
+          "rect": {
+            "x": 708.203125,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "far",
+          "rect": {
+            "x": 619.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "close",
+          "rect": {
+            "x": 572.75,
+            "y": 336,
+            "width": 47,
+            "height": 44
+          }
+        },
+        {
+          "id": "effect",
+          "rect": {
+            "x": 466.109375,
+            "y": 336,
+            "width": 89.640625,
+            "height": 44
+          }
+        },
+        {
+          "id": "play",
+          "rect": {
+            "x": 406.109375,
+            "y": 336,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "metrics-toggle",
+          "rect": {
+            "x": 24,
+            "y": 347,
+            "width": 34.421875,
+            "height": 24
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "assets": [
+    {
+      "name": "asset-alien-scout",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-scout",
+        "projectedCorners": [
+          [
+            -0.024451285679823468,
+            -0.06061745257183312,
+            0.9802988314766641
+          ],
+          [
+            -0.1859918182284221,
+            -0.3556516048594878,
+            0.9756475484906566
+          ],
+          [
+            -0.026009020478030977,
+            0.42224823594860317,
+            0.9789927291021098
+          ],
+          [
+            -0.20074239774393055,
+            0.22205412814161046,
+            0.9736527405383134
+          ],
+          [
+            0.1749653384280508,
+            -0.26106526447886386,
+            0.9771387244521845
+          ],
+          [
+            0.035877342152928385,
+            -0.6683039577218146,
+            0.9707185104178511
+          ],
+          [
+            0.18795770580538837,
+            0.2868717718979916,
+            0.9753816899074178
+          ],
+          [
+            0.03933399832055265,
+            0.0033956925895028286,
+            0.9678202334879482
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-scout",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 19,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 7252,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 63,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-alien-manta",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-manta",
+        "projectedCorners": [
+          [
+            -0.07805332023668751,
+            0.11324980775217379,
+            0.9656005434046162
+          ],
+          [
+            -0.2847449189860055,
+            -0.19088042727148313,
+            0.9560978548824995
+          ],
+          [
+            -0.08037743991229514,
+            0.3441113348403565,
+            0.9645524330434958
+          ],
+          [
+            -0.295599669020489,
+            0.0930876354056176,
+            0.9543937539352603
+          ],
+          [
+            0.2909219292627503,
+            -0.22193349215714292,
+            0.9551275876440496
+          ],
+          [
+            0.1398459418594772,
+            -0.7786807642682069,
+            0.9377317640686721
+          ],
+          [
+            0.3022622493858226,
+            0.06722788896195804,
+            0.9533472357517857
+          ],
+          [
+            0.14748695425809835,
+            -0.40378595060950934,
+            0.9342857747721283
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-manta",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 20,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 4032,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 65,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-alien-beetle",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-beetle",
+        "projectedCorners": [
+          [
+            -0.03264075914107603,
+            0.017382656825100356,
+            0.9765213507684569
+          ],
+          [
+            -0.2221130334129666,
+            -0.3042104152361074,
+            0.9701340825177741
+          ],
+          [
+            -0.03420908239284919,
+            0.3853051765582799,
+            0.9753547948065943
+          ],
+          [
+            -0.23576528436272448,
+            0.1466870619850315,
+            0.9682491720957819
+          ],
+          [
+            0.20888378505449573,
+            -0.21228294270804082,
+            0.9719598849919403
+          ],
+          [
+            0.05151326325929211,
+            -0.6896627714016903,
+            0.9624784835308073
+          ],
+          [
+            0.22091445615144265,
+            0.21551745962318797,
+            0.9702988188190687
+          ],
+          [
+            0.055531640719720186,
+            -0.14748924979488723,
+            0.9594891251659632
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-beetle",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 22,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 6012,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 67,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183
+      ]
+    },
+    {
+      "name": "asset-alien-carrier",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-carrier",
+        "projectedCorners": [
+          [
+            -0.0259908855947919,
+            0.04924867779929396,
+            0.9757116109215641
+          ],
+          [
+            -0.2346983874136954,
+            -0.29897340916619614,
+            0.968373501613487
+          ],
+          [
+            -0.027074327150575995,
+            0.36977891527150636,
+            0.9746657769873507
+          ],
+          [
+            -0.24749951394140474,
+            0.10142800394555015,
+            0.9666048494669158
+          ],
+          [
+            0.2155261018889796,
+            -0.17327196688710703,
+            0.9710224172284185
+          ],
+          [
+            0.04217723456847984,
+            -0.6921951888127102,
+            0.9600871105160472
+          ],
+          [
+            0.2262733432426527,
+            0.19905815157857448,
+            0.9695375376399896
+          ],
+          [
+            0.04510639355735257,
+            -0.20967752825474192,
+            0.9572596263265082
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-carrier",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 23,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 6936,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 69,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-alien-harvester",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-harvester",
+        "projectedCorners": [
+          [
+            -0.03670482982437809,
+            -0.03319364099168895,
+            0.9772007469508965
+          ],
+          [
+            -0.20436259206489038,
+            -0.3278715240632895,
+            0.9717378466687919
+          ],
+          [
+            -0.038854627214160775,
+            0.4123367888891932,
+            0.9758185228387299
+          ],
+          [
+            -0.21930541185713356,
+            0.20678601188385157,
+            0.9696128232032416
+          ],
+          [
+            0.19609506405629093,
+            -0.2644529553892103,
+            0.972913534891773
+          ],
+          [
+            0.05575725120546318,
+            -0.6939838018955227,
+            0.9649506563815392
+          ],
+          [
+            0.209812753673423,
+            0.2514990013599777,
+            0.9709627348237965
+          ],
+          [
+            0.060873658718897876,
+            -0.05660102308076109,
+            0.9616610127032514
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-harvester",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 24,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 5276,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 71,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-alien-boss",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alien-boss",
+        "projectedCorners": [
+          [
+            -0.027483719710366408,
+            0.008874527881028813,
+            0.9777562489443044
+          ],
+          [
+            -0.21511098087937147,
+            -0.31411624978521696,
+            0.9717095922116767
+          ],
+          [
+            -0.028844114722801396,
+            0.38748075073461175,
+            0.9766156086003138
+          ],
+          [
+            -0.22872934971777256,
+            0.14967575309455788,
+            0.9698678997935434
+          ],
+          [
+            0.2004972211268236,
+            -0.20854910422382728,
+            0.9736858972197183
+          ],
+          [
+            0.04280771233892589,
+            -0.6774514528602379,
+            0.9649076541880954
+          ],
+          [
+            0.21227742438175004,
+            0.22808610129812384,
+            0.972092790785599
+          ],
+          [
+            0.0462017170571863,
+            -0.12542560000332303,
+            0.9620619081555427
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alien-boss",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 26,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 19640,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 73,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545
+      ]
+    },
+    {
+      "name": "asset-defender-plane",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "defender-plane",
+        "projectedCorners": [
+          [
+            -0.05005683250184342,
+            0.06408706064977326,
+            0.9719033512404364
+          ],
+          [
+            -0.2524288980761689,
+            -0.2584773075039191,
+            0.9639753260522173
+          ],
+          [
+            -0.05202957627606641,
+            0.3677062276335148,
+            0.9707645193843685
+          ],
+          [
+            -0.2652450632908131,
+            0.11629345372661316,
+            0.9621056700354098
+          ],
+          [
+            0.24402160569902323,
+            -0.20856176006343957,
+            0.9652021562804193
+          ],
+          [
+            0.08392575079922851,
+            -0.7313383964008059,
+            0.9523532902868873
+          ],
+          [
+            0.2559779454859007,
+            0.15555741664769115,
+            0.9634579511247652
+          ],
+          [
+            0.08962285318649339,
+            -0.2623593112836153,
+            0.9490645775052253
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "defender-plane",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 27,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 6328,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 73,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-boar-amber",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "boar-amber",
+        "projectedCorners": [
+          [
+            0.03376596764776704,
+            -0.13694847909698865,
+            0.9750631455549166
+          ],
+          [
+            -0.1639004805851587,
+            -0.5531855106964018,
+            0.9672819745315897
+          ],
+          [
+            0.036513563036744086,
+            0.47358883484410547,
+            0.9729688669925454
+          ],
+          [
+            -0.1817075860086237,
+            0.21676872570637976,
+            0.9636403457119223
+          ],
+          [
+            0.13530127861767074,
+            -0.24034661725095552,
+            0.9731302118287223
+          ],
+          [
+            -0.04837826534358794,
+            -0.7326303150153407,
+            0.9639274178591868
+          ],
+          [
+            0.14721061859075232,
+            0.41097858537559545,
+            0.9706946640630586
+          ],
+          [
+            -0.05422396185958914,
+            0.10201015289412098,
+            0.9594719502065725
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "boar-amber",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 29,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 4976,
+      "calls": 6,
+      "dpr": 1,
+      "geometries": 78,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-boar-ash",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "boar-ash",
+        "projectedCorners": [
+          [
+            0.029741089414251878,
+            -0.1342503007133193,
+            0.9754953324829998
+          ],
+          [
+            -0.16481476375649826,
+            -0.5406325543953323,
+            0.9680112905743511
+          ],
+          [
+            0.0321432283357572,
+            0.471977751724785,
+            0.9734514902120017
+          ],
+          [
+            -0.18248571523334461,
+            0.22054192888008609,
+            0.9644957478097944
+          ],
+          [
+            0.13735768096613532,
+            -0.24395310764838687,
+            0.9734750168881146
+          ],
+          [
+            -0.042611682481951726,
+            -0.7292754374490754,
+            0.964537193883979
+          ],
+          [
+            0.1494153302134871,
+            0.4052940645172163,
+            0.9710763237846256
+          ],
+          [
+            -0.0477225072604912,
+            0.09959501438006298,
+            0.9601878118985575
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "boar-ash",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 30,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 5100,
+      "calls": 6,
+      "dpr": 1,
+      "geometries": 83,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545
+      ]
+    },
+    {
+      "name": "asset-boar-striped",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "boar-striped",
+        "projectedCorners": [
+          [
+            0.03376596764776704,
+            -0.13694847909698865,
+            0.9750631455549166
+          ],
+          [
+            -0.1639004805851587,
+            -0.5531855106964018,
+            0.9672819745315897
+          ],
+          [
+            0.036513563036744086,
+            0.47358883484410547,
+            0.9729688669925454
+          ],
+          [
+            -0.1817075860086237,
+            0.21676872570637976,
+            0.9636403457119223
+          ],
+          [
+            0.13530127861767074,
+            -0.24034661725095552,
+            0.9731302118287223
+          ],
+          [
+            -0.04837826534358794,
+            -0.7326303150153407,
+            0.9639274178591868
+          ],
+          [
+            0.14721061859075232,
+            0.41097858537559545,
+            0.9706946640630586
+          ],
+          [
+            -0.05422396185958914,
+            0.10201015289412098,
+            0.9594719502065725
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "boar-striped",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 31,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 4956,
+      "calls": 6,
+      "dpr": 1,
+      "geometries": 88,
+      "textures": 8,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5
+      ]
+    },
+    {
+      "name": "asset-guard-ranger",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "guard-ranger",
+        "projectedCorners": [
+          [
+            -0.03370228949007259,
+            -0.5156161608866635,
+            0.9692701558446264
+          ],
+          [
+            -0.0811201919967633,
+            -0.6310208922372089,
+            0.9671973044261685
+          ],
+          [
+            -0.0392759475110477,
+            0.6626108243196293,
+            0.9640557221749867
+          ],
+          [
+            -0.0955749077694943,
+            0.6179033795994933,
+            0.9612096208529256
+          ],
+          [
+            0.06710909053790216,
+            -0.6533887758452674,
+            0.9667955418751684
+          ],
+          [
+            0.022889161484919138,
+            -0.7883154032527453,
+            0.9643720463413518
+          ],
+          [
+            0.07923599239096356,
+            0.6091241782390601,
+            0.9606507319082546
+          ],
+          [
+            0.027377922646437826,
+            0.5553611810094301,
+            0.957228148970422
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "guard-ranger",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 33,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 15160,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 89,
+      "textures": 9,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146
+      ]
+    },
+    {
+      "name": "asset-guard-lookout",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "guard-lookout",
+        "projectedCorners": [
+          [
+            -0.03303544109786638,
+            -0.514181654319032,
+            0.9692874145888231
+          ],
+          [
+            -0.08103334547645527,
+            -0.6310105350520132,
+            0.9671884165480028
+          ],
+          [
+            -0.038495331491881,
+            0.6635308952649183,
+            0.9640791593174188
+          ],
+          [
+            -0.09547708599397879,
+            0.6183047962363969,
+            0.9611972827652902
+          ],
+          [
+            0.06776873039586642,
+            -0.6517604150492492,
+            0.9668156152578752
+          ],
+          [
+            0.023013130597020124,
+            -0.7883492701032965,
+            0.964361600999093
+          ],
+          [
+            0.08000629757605665,
+            0.6101667271450308,
+            0.9606787124928636
+          ],
+          [
+            0.027527751084717816,
+            0.5557815319087551,
+            0.9572132042509184
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "guard-lookout",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 16893,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 90,
+      "textures": 10,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927
+      ]
+    },
+    {
+      "name": "asset-guard-keeper",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "guard-keeper",
+        "projectedCorners": [
+          [
+            -0.029635658561595942,
+            -0.5039964301437585,
+            0.969567449108667
+          ],
+          [
+            -0.081922023081875,
+            -0.6311243547965312,
+            0.9672904886562398
+          ],
+          [
+            -0.034483011163426724,
+            0.6632050468774463,
+            0.9644588486608723
+          ],
+          [
+            -0.09647195040531405,
+            0.6137034026219949,
+            0.9613389069668051
+          ],
+          [
+            0.07046631845155865,
+            -0.6394651131716571,
+            0.9671410991573136
+          ],
+          [
+            0.0217065273638076,
+            -0.7879532922877962,
+            0.9644815598592106
+          ],
+          [
+            0.08304738786718366,
+            0.6104138411814906,
+            0.961131575674122
+          ],
+          [
+            0.025948067209571952,
+            0.5509656537387714,
+            0.9573847328888172
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "guard-keeper",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 36,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 15353,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 91,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-farm-shelter",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "farm-shelter",
+        "projectedCorners": [
+          [
+            -0.04970775075031541,
+            -0.13796830494771897,
+            0.977668432205375
+          ],
+          [
+            -0.174045120056145,
+            -0.370320952213972,
+            0.9737673913541234
+          ],
+          [
+            -0.053758275069847386,
+            0.47334905800097904,
+            0.9757834892503391
+          ],
+          [
+            -0.19085019899013708,
+            0.33161044718318905,
+            0.9711572032505081
+          ],
+          [
+            0.1753530113969437,
+            -0.3824212296980078,
+            0.9735642360325376
+          ],
+          [
+            0.07050702179187872,
+            -0.7144746934817209,
+            0.9679892871681268
+          ],
+          [
+            0.19242400309686528,
+            0.3241208117186989,
+            0.9709127448386944
+          ],
+          [
+            0.07894415102235318,
+            0.11426056102295469,
+            0.9640629984349935
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "farm-shelter",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 4108,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 91,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183
+      ]
+    },
+    {
+      "name": "asset-guard-station",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "guard-station",
+        "projectedCorners": [
+          [
+            -0.018503651533010385,
+            -0.261053099460953,
+            0.978671570450048
+          ],
+          [
+            -0.13338730145950195,
+            -0.505253897990764,
+            0.9750710613047765
+          ],
+          [
+            -0.020540976698798976,
+            0.5513994576719886,
+            0.976235107651016
+          ],
+          [
+            -0.1507748594692708,
+            0.4247898312047742,
+            0.971717151483954
+          ],
+          [
+            0.12762006149885646,
+            -0.42979532805981746,
+            0.9761836263445355
+          ],
+          [
+            0.024379871111524776,
+            -0.7376253658356466,
+            0.9716449644201121
+          ],
+          [
+            0.14344727290659365,
+            0.464402847798471,
+            0.9731307080799984
+          ],
+          [
+            0.028044678883690725,
+            0.29994865074938876,
+            0.9672623007993756
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "guard-station",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 38,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 3080,
+      "calls": 3,
+      "dpr": 1,
+      "geometries": 93,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927
+      ]
+    },
+    {
+      "name": "asset-farm-fence",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "farm-fence",
+        "projectedCorners": [
+          [
+            -0.1391819309300095,
+            -0.2492270786286493,
+            0.9656251366256342
+          ],
+          [
+            -0.16868199626054356,
+            -0.3023584732592163,
+            0.9643700227636653
+          ],
+          [
+            -0.15377118750880364,
+            0.5254859839288262,
+            0.961938021682668
+          ],
+          [
+            -0.18706315066641493,
+            0.4972203110772965,
+            0.9604002397651747
+          ],
+          [
+            0.21128784062638842,
+            -0.6918562316237046,
+            0.9551689837333847
+          ],
+          [
+            0.1890049932006499,
+            -0.7822286501506881,
+            0.9530341315236587
+          ],
+          [
+            0.2409429269113205,
+            0.2833450064339706,
+            0.9487644447212535
+          ],
+          [
+            0.2169572279238627,
+            0.23197934128688605,
+            0.9459699175413022
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "farm-fence",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 40,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 1848,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 94,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-farm-gate",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "farm-gate",
+        "projectedCorners": [
+          [
+            -0.1370678836706631,
+            -0.24924844206253471,
+            0.9659662928648047
+          ],
+          [
+            -0.16816805702129822,
+            -0.3054061290192526,
+            0.964652574694381
+          ],
+          [
+            -0.15144900579048876,
+            0.5261883184049598,
+            0.962311516949524
+          ],
+          [
+            -0.18655036219747367,
+            0.49633332681631437,
+            0.9607012958382051
+          ],
+          [
+            0.20962555013597206,
+            -0.6863307915574349,
+            0.9557414589084913
+          ],
+          [
+            0.1860485420382215,
+            -0.7813467923259688,
+            0.9535187133957205
+          ],
+          [
+            0.2389792666515444,
+            0.2873882597833693,
+            0.9494318986573886
+          ],
+          [
+            0.2135760892716466,
+            0.23345414603794581,
+            0.946522976431928
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "farm-gate",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 41,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 2068,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 94,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-alarm-bell",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "alarm-bell",
+        "projectedCorners": [
+          [
+            -0.041941194282141776,
+            -0.44951387330450854,
+            0.9710246265718523
+          ],
+          [
+            -0.09445006580066026,
+            -0.5711077144486496,
+            0.9688814326396938
+          ],
+          [
+            -0.048400642082521136,
+            0.6579092503713623,
+            0.966438812039426
+          ],
+          [
+            -0.11021833288647437,
+            0.6090330557746905,
+            0.9635526322970801
+          ],
+          [
+            0.09775094286035126,
+            -0.6344195467381177,
+            0.9677655082349721
+          ],
+          [
+            0.05027595741476812,
+            -0.7852769318207624,
+            0.9651065196769318
+          ],
+          [
+            0.11473999038119108,
+            0.5831476955156414,
+            0.9620240803502784
+          ],
+          [
+            0.05985115412071878,
+            0.5202265655332455,
+            0.9583085355493931
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "alarm-bell",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 42,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 2320,
+      "calls": 4,
+      "dpr": 1,
+      "geometries": 94,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545
+      ]
+    },
+    {
+      "name": "asset-island-palm",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "island-palm",
+        "projectedCorners": [
+          [
+            -0.020429217804844392,
+            -0.1719319474684465,
+            0.9826477221743464
+          ],
+          [
+            -0.14961565926143927,
+            -0.42952680817858657,
+            0.9793354823668787
+          ],
+          [
+            -0.022238592306848465,
+            0.48950081300444453,
+            0.9810399832879962
+          ],
+          [
+            -0.16554208881352486,
+            0.33802177370179737,
+            0.977050572965431
+          ],
+          [
+            0.14241195403380683,
+            -0.3490755153036416,
+            0.9803699516652491
+          ],
+          [
+            0.027833376651303417,
+            -0.6830175551557757,
+            0.9760760146094558
+          ],
+          [
+            0.15676731448415662,
+            0.38586295497077,
+            0.9783105367417844
+          ],
+          [
+            0.031302192486248936,
+            0.18401821176764638,
+            0.9729946758425002
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "island-palm",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 44,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 2772,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 95,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291
+      ]
+    },
+    {
+      "name": "asset-island-cloud",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "island-cloud",
+        "projectedCorners": [
+          [
+            -0.11090975165676864,
+            -0.05083995313450662,
+            0.9645549808357882
+          ],
+          [
+            -0.23027510085114308,
+            -0.24377920126718602,
+            0.9591366503132173
+          ],
+          [
+            -0.11788741751282916,
+            0.42661768279795553,
+            0.9622746775924482
+          ],
+          [
+            -0.2470862185369983,
+            0.2961790588676669,
+            0.9560950150956323
+          ],
+          [
+            0.26225723876205637,
+            -0.44977675873846557,
+            0.9533516020971381
+          ],
+          [
+            0.17499185727812358,
+            -0.7964427149366109,
+            0.9436161503951968
+          ],
+          [
+            0.2842849237229615,
+            0.15415029052498755,
+            0.9493662577172559
+          ],
+          [
+            0.19301623155083622,
+            -0.09154673250539411,
+            0.9377261113169719
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "island-cloud",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 46,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 1968,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 96,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545
+      ]
+    },
+    {
+      "name": "asset-planet-ring",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "planet-ring",
+        "projectedCorners": [
+          [
+            -0.032681281789553,
+            -0.05131882361173082,
+            0.9784643847708765
+          ],
+          [
+            -0.19497761048868162,
+            -0.3422510740331889,
+            0.973431376479886
+          ],
+          [
+            -0.03471365901966308,
+            0.4206053700407226,
+            0.9770753619435147
+          ],
+          [
+            -0.2100462016995007,
+            0.22174690695901095,
+            0.9713162032419306
+          ],
+          [
+            0.18621589034063074,
+            -0.27117319652835015,
+            0.9746609945310633
+          ],
+          [
+            0.04873196986120153,
+            -0.6855202640844517,
+            0.9674929606560412
+          ],
+          [
+            0.19991321214320745,
+            0.27085014259886414,
+            0.9727382866797122
+          ],
+          [
+            0.053393498604685424,
+            -0.02027804237541232,
+            0.9643068958613994
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "planet-ring",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 47,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 3904,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 97,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728
+      ]
+    },
+    {
+      "name": "asset-planet-moon",
+      "viewport": [
+        844,
+        390
+      ],
+      "framing": {
+        "asset": "planet-moon",
+        "projectedCorners": [
+          [
+            -0.020664580264415672,
+            -0.15453050343533764,
+            0.9834738423581652
+          ],
+          [
+            -0.1518523404839858,
+            -0.4128057213612207,
+            0.9802644316186613
+          ],
+          [
+            -0.02240449440313488,
+            0.47573128817971483,
+            0.9820149894194512
+          ],
+          [
+            -0.16724638042858667,
+            0.3198527569170459,
+            0.9781826047136308
+          ],
+          [
+            0.1444213953983847,
+            -0.3319345944608378,
+            0.9812693621933954
+          ],
+          [
+            0.02827488001984661,
+            -0.6680333974987652,
+            0.9770928906113879
+          ],
+          [
+            0.15827693906044013,
+            0.36918996955297423,
+            0.9793955952236268
+          ],
+          [
+            0.03163655773484943,
+            0.16088420145335147,
+            0.9742742495621516
+          ]
+        ],
+        "clipped": false
+      },
+      "scene": "farm",
+      "selected": "planet-moon",
+      "night": false,
+      "close": true,
+      "quality": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 0.27,
+      "frame": 48,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 3488,
+      "calls": 2,
+      "dpr": 1,
+      "geometries": 98,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.69999999999709
+      ]
+    }
+  ],
+  "mobileProfiles": [
+    {
+      "name": "space-390x844-mobile-profile",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.27,
+      "frame": 49,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 29772,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 98,
+      "textures": 11,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.69999999999709,
+        383.2999999999993
+      ]
+    },
+    {
+      "name": "farm-390x844-mobile-profile",
+      "viewport": [
+        390,
+        844
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.27,
+      "frame": 50,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24503,
+      "calls": 35,
+      "dpr": 1,
+      "geometries": 99,
+      "textures": 12,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.69999999999709,
+        383.2999999999993,
+        16.600000000002183
+      ]
+    },
+    {
+      "name": "space-844x390-mobile-profile",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.27,
+      "frame": 51,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 31364,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 99,
+      "textures": 12,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.69999999999709,
+        383.2999999999993,
+        16.600000000002183,
+        150.10000000000218
+      ]
+    },
+    {
+      "name": "farm-844x390-mobile-profile",
+      "viewport": [
+        844,
+        390
+      ],
+      "scene": "farm",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "low",
+      "shadowMode": "contact",
+      "materialMode": "matte",
+      "time": 0.27,
+      "frame": 52,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 24023,
+      "calls": 34,
+      "dpr": 1,
+      "geometries": 99,
+      "textures": 12,
+      "instancedMeshes": 11,
+      "samples": [
+        2838.8999999999996,
+        66.80000000000018,
+        16.600000000000364,
+        16.699999999999818,
+        16.600000000000364,
+        16.69999999999891,
+        16.80000000000109,
+        16.600000000000364,
+        16.600000000000364,
+        333.2999999999993,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.600000000002183,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.5,
+        16.599999999998545,
+        99.90000000000146,
+        16.600000000002183,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.69999999999709,
+        383.2999999999993,
+        16.600000000002183,
+        150.10000000000218,
+        16.600000000002183
+      ]
+    }
+  ],
+  "finishedUTC": "2026-11-04T21:32:26.634233+00:00"
+}

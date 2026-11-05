@@ -1,0 +1,26 @@
+{
+  "name": "north-brand-v1",
+  "colors": {
+    "warmBlack": "#15120f",
+    "deepBlack": "#0e0c0a",
+    "panel": "#1e1915",
+    "mutedGold": "#c8a45a",
+    "lightGold": "#e4cca0",
+    "ivory": "#f0e6d2",
+    "secondaryText": "#c1b4a2",
+    "divider": "#4b3c2b",
+    "controlBoundary": "#8a765c"
+  },
+  "textRule": "Use ivory or secondaryText on warmBlack. Use warmBlack on mutedGold. Do not use small mutedGold text on ivory.",
+  "fonts": {
+    "heading": "Frank Ruhl Libre",
+    "body": "Assistant",
+    "delivery": "local WOFF2, SIL Open Font License"
+  },
+  "controlBoundaryContrast": {
+    "onWarmBlack": 4.289,
+    "onDeepBlack": 4.487,
+    "onPanel": 4.005,
+    "onRaised": 3.602
+  }
+}

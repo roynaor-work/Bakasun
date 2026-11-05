@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "seed": 740511,
+  "maxTextureEdge": 1024,
+  "maps": [
+    {
+      "id": "powder-albedo",
+      "file": "textures/powder-albedo.webp",
+      "bytes": 80330,
+      "sha256": "4de34d964c220368a1b86b06acaec23eb9dfc4b2a687df876e97f5780c78fa21",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "sRGB",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "powder-normal",
+      "file": "textures/powder-normal.webp",
+      "bytes": 560540,
+      "sha256": "1e5adcf16927c6bd8ffe01614a9478113994e386e12c11b00d82306ab830b167",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": "OpenGL +Y",
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "powder-roughness",
+      "file": "textures/powder-roughness.webp",
+      "bytes": 104600,
+      "sha256": "7728ca3690659dd8948de625937f4a3cb0ad6bc4171fd11ba140cde23c4e9781",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "ice-albedo",
+      "file": "textures/ice-albedo.webp",
+      "bytes": 67164,
+      "sha256": "77ad4bc78f956cac066a89879cde746bf43c321774c651697e4e0df687f44ada",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "sRGB",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "ice-normal",
+      "file": "textures/ice-normal.webp",
+      "bytes": 404478,
+      "sha256": "ae7f50d9e3aeb90f05b61eaa10af76e9175ab4bf73e4770fd9605927db827337",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": "OpenGL +Y",
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "ice-roughness",
+      "file": "textures/ice-roughness.webp",
+      "bytes": 50558,
+      "sha256": "7ea94c227e2a96526352f7fb2ed7504cb09a55f4bb5ab8b91be8adb5793b54c2",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "churned-albedo",
+      "file": "textures/churned-albedo.webp",
+      "bytes": 121218,
+      "sha256": "78df7120a6b66940142f5fdaf906ef4d32b9926eb7b625f75ef10582c7de597f",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "sRGB",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "churned-normal",
+      "file": "textures/churned-normal.webp",
+      "bytes": 576598,
+      "sha256": "092151b8e84b46219ecd434bb81b1f3c34ea7990fc8d8defd2c990797294ccb7",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": "OpenGL +Y",
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "churned-roughness",
+      "file": "textures/churned-roughness.webp",
+      "bytes": 121406,
+      "sha256": "8255f493defcc46fdaef4adfb3e4f4c95b63714e0ec283b8c3296cce06561269",
+      "width": 512,
+      "height": 512,
+      "colorSpace": "linear-data",
+      "wrap": "repeat",
+      "mipmaps": true,
+      "normalConvention": null,
+      "seamEdgeMaxDifference": 0,
+      "source": "tools/world-textures.py; original procedural material",
+      "license": "Original contribution under repository terms"
+    },
+    {
+      "id": "fog-landscape",
+      "file": "backgrounds/fog-landscape.webp",
+      "bytes": 76616,
+      "sha256": "60fd3a4fd9573fb9676e5a2db0537240129de698cea9a84808f4efcf8599565c",
+      "width": 1024,
+      "height": 576,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/fog-landscape.webp",
+      "sourceSha256": "e436fe34d22048d8d50c294716823657b039fb8d37e25b412df9a2bb87d08a1f",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": null,
+      "derivation": "Aspect-preserving Lanczos downsample to maximum edge 1024; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    },
+    {
+      "id": "fog-portrait",
+      "file": "backgrounds/fog-portrait.webp",
+      "bytes": 57660,
+      "sha256": "46762ef73abf43b0d20019e50e9611dc0a7904c00923d0a809529e32a5bfad30",
+      "width": 486,
+      "height": 864,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/fog-landscape.webp",
+      "sourceSha256": "e436fe34d22048d8d50c294716823657b039fb8d37e25b412df9a2bb87d08a1f",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": [
+        141,
+        0,
+        627,
+        864
+      ],
+      "derivation": "9:16 portrait crop centered on principal massif at x=25% of v5 wide master; no upsampling; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    },
+    {
+      "id": "night-floodlit-landscape",
+      "file": "backgrounds/night-floodlit-landscape.webp",
+      "bytes": 81716,
+      "sha256": "8350f77a216a95d6f996c3ae759e360c9380dc90510b6d7cd43f9d31cdf01726",
+      "width": 1024,
+      "height": 576,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/night-floodlit-landscape.webp",
+      "sourceSha256": "95b8b39da5d3091f4c68e56ff91f6139f67d64b72e307298ff3db0a5a3948ba9",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": null,
+      "derivation": "Aspect-preserving Lanczos downsample to maximum edge 1024; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    },
+    {
+      "id": "night-floodlit-portrait",
+      "file": "backgrounds/night-floodlit-portrait.webp",
+      "bytes": 64580,
+      "sha256": "231990b45e9f97bd5738a0f29b53538836bcd2bdcc31352a48d0500e563c94ac",
+      "width": 486,
+      "height": 864,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/night-floodlit-landscape.webp",
+      "sourceSha256": "95b8b39da5d3091f4c68e56ff91f6139f67d64b72e307298ff3db0a5a3948ba9",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": [
+        141,
+        0,
+        627,
+        864
+      ],
+      "derivation": "9:16 portrait crop centered on principal massif at x=25% of v5 wide master; no upsampling; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    },
+    {
+      "id": "sunset-landscape",
+      "file": "backgrounds/sunset-landscape.webp",
+      "bytes": 88494,
+      "sha256": "5ff61a8bdf3980da776fec01d9ff05cb3e201f9f0953d403ccfd9349c937cf65",
+      "width": 1024,
+      "height": 576,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/sunset-landscape.webp",
+      "sourceSha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": null,
+      "derivation": "Aspect-preserving Lanczos downsample to maximum edge 1024; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    },
+    {
+      "id": "sunset-portrait",
+      "file": "backgrounds/sunset-portrait.webp",
+      "bytes": 61244,
+      "sha256": "b6081ab142366d53a0002200382e1067947e9c256d49491cab64e13540651558",
+      "width": 486,
+      "height": 864,
+      "colorSpace": "sRGB",
+      "source": "../../alpine-v5/backgrounds/sunset-landscape.webp",
+      "sourceSha256": "8718af8696d0c90e8d2ca6e79e27b895cebe5728400147fadd0a410c6b0cc511",
+      "sourceDimensions": [
+        1536,
+        864
+      ],
+      "sourceCropPixels": [
+        141,
+        0,
+        627,
+        864
+      ],
+      "derivation": "9:16 portrait crop centered on principal massif at x=25% of v5 wide master; no upsampling; WebP quality 91",
+      "license": "Existing repository AI-assisted artwork; retain alpine-v5/LICENSES.md terms"
+    }
+  ],
+  "sourceTool": "tools/world-textures.py",
+  "sourceToolSha256": "eef4e5179ac9abc9f69c6df3b7e87b668009fbef078375b399c9473af3abfac8",
+  "runtimeTextureBytes": 2086892,
+  "backdropStoredBytes": 430310,
+  "decodedMaterialTextureBytesWithMipmaps": 12582912,
+  "materialRecommendations": {
+    "powder": {
+      "repeatMetres": 4,
+      "normalScale": 0.58,
+      "roughness": 1,
+      "metalness": 0
+    },
+    "ice": {
+      "repeatMetres": 4,
+      "normalScale": 0.14,
+      "roughness": 0.24,
+      "metalness": 0.015,
+      "clearcoat": 0.48,
+      "clearcoatRoughness": 0.12,
+      "envMapIntensity": 1.25,
+      "ior": 1.31,
+      "frostEdgeRoughness": 0.92
+    },
+    "churned": {
+      "repeatMetres": 3,
+      "normalScale": 0.7,
+      "roughness": 1,
+      "metalness": 0
+    }
+  },
+  "notes": "Albedo in sRGB. Normal and roughness are linear data. Roughness is duplicated in RGB for Three.js G sampling. Repeat textures have exactly identical opposite edge texels. One environment backdrop orientation at a time.",
+  "inspectionSheet": {
+    "file": "textures/materials-contact-sheet.webp",
+    "width": 768,
+    "height": 768,
+    "bytes": 145674,
+    "sha256": "187d63c1d55432477fcddf0514425a714147bdff898a19a4fdad666a74ef0003",
+    "runtime": false,
+    "layout": "Rows powder/ice/churned; columns albedo/OpenGL normal/roughness"
+  }
+}

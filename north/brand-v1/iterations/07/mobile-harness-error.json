@@ -1,0 +1,59 @@
+{
+  "started": "2026-11-04T22:24:51.125Z",
+  "method": {
+    "deviceScaleFactor": 2,
+    "isMobile": true,
+    "hasTouch": true,
+    "offline": true,
+    "screenshots": "Rendered at DPR 2, encoded at the requested CSS viewport dimensions."
+  },
+  "checks": [
+    {
+      "name": "mobile opening home 390",
+      "pass": true,
+      "width": 390,
+      "scrollWidth": 390,
+      "dpr": 2,
+      "touch": 1,
+      "zoomAllowed": true
+    },
+    {
+      "name": "mobile opening product 390",
+      "pass": true,
+      "width": 390,
+      "scrollWidth": 390,
+      "dpr": 2,
+      "touch": 1,
+      "zoomAllowed": true
+    },
+    {
+      "name": "mobile opening builder 390",
+      "pass": true,
+      "width": 390,
+      "scrollWidth": 390,
+      "dpr": 2,
+      "touch": 1,
+      "zoomAllowed": true
+    },
+    {
+      "name": "mobile opening index 390",
+      "pass": true,
+      "width": 390,
+      "scrollWidth": 390,
+      "dpr": 2,
+      "touch": 1,
+      "zoomAllowed": true
+    },
+    {
+      "name": "touch menu opens 390",
+      "pass": true
+    },
+    {
+      "name": "touch menu link closes 390",
+      "pass": true
+    }
+  ],
+  "accessibility": [],
+  "screenshots": [],
+  "fatal": "locator.tap: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-gallery-role=\"mood\"]')\u001b[22m\n"
+}

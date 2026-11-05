@@ -1,0 +1,162 @@
+{
+  "started": "2026-11-04T20:24:23.469171+00:00",
+  "conditions": "fresh contexts, external requests blocked, original CSP, local markers only",
+  "cases": [
+    {
+      "name": "bakasun-old-XSS-controls",
+      "import": {
+        "count": 4,
+        "badId": "",
+        "attempts": 0
+      },
+      "routes": [
+        {
+          "route": "calls",
+          "executed": 0,
+          "inlineHandlers": 0,
+          "markerImages": 0,
+          "renderError": false
+        },
+        {
+          "route": "notes",
+          "executed": 0,
+          "inlineHandlers": 0,
+          "markerImages": 0,
+          "renderError": false
+        },
+        {
+          "route": "clients",
+          "executed": 0,
+          "inlineHandlers": 0,
+          "markerImages": 0,
+          "renderError": false
+        },
+        {
+          "route": "tasks",
+          "executed": 0,
+          "inlineHandlers": 0,
+          "markerImages": 0,
+          "renderError": false
+        }
+      ]
+    },
+    {
+      "name": "bakasun-backup-type-confusion",
+      "result": {
+        "count": 1,
+        "type": "object",
+        "warning": [
+          "(p || \"normal\").charAt is not a function"
+        ],
+        "afterReloadWarning": [
+          "(p || \"normal\").charAt is not a function"
+        ]
+      }
+    },
+    {
+      "name": "bakasun-CSP-inline-marker",
+      "result": {
+        "metaPolicy": true,
+        "executed": 0,
+        "csp": [
+          {
+            "directive": "script-src-elem",
+            "blocked": "inline",
+            "disposition": "enforce"
+          }
+        ]
+      }
+    },
+    {
+      "name": "workout-CSP-inline-marker",
+      "result": {
+        "metaPolicy": false,
+        "executed": 1,
+        "csp": []
+      }
+    },
+    {
+      "name": "island-CSP-inline-marker",
+      "result": {
+        "metaPolicy": true,
+        "executed": 0,
+        "csp": [
+          {
+            "directive": "script-src-elem",
+            "blocked": "inline",
+            "disposition": "enforce"
+          }
+        ]
+      }
+    },
+    {
+      "name": "north-CSP-inline-marker",
+      "result": {
+        "metaPolicy": false,
+        "executed": 1,
+        "csp": []
+      }
+    },
+    {
+      "name": "north-local-state-XSS",
+      "precondition": "attacker already controls same-origin localStorage; no remote delivery established",
+      "result": {
+        "executed": 1,
+        "handlers": 1
+      }
+    },
+    {
+      "name": "workout-local-state-XSS",
+      "precondition": "attacker already controls same-origin localStorage; no remote delivery established",
+      "result": {
+        "executed": 1,
+        "handlers": 1
+      }
+    },
+    {
+      "name": "response-security-headers",
+      "path": "index.html",
+      "headers": {
+        "Content-Security-Policy": null,
+        "X-Content-Type-Options": null,
+        "Referrer-Policy": null,
+        "Permissions-Policy": null,
+        "X-Frame-Options": null
+      }
+    },
+    {
+      "name": "response-security-headers",
+      "path": "workout/index.html",
+      "headers": {
+        "Content-Security-Policy": null,
+        "X-Content-Type-Options": null,
+        "Referrer-Policy": null,
+        "Permissions-Policy": null,
+        "X-Frame-Options": null
+      }
+    },
+    {
+      "name": "response-security-headers",
+      "path": "workout/island/index.html",
+      "headers": {
+        "Content-Security-Policy": null,
+        "X-Content-Type-Options": null,
+        "Referrer-Policy": null,
+        "Permissions-Policy": null,
+        "X-Frame-Options": null
+      }
+    },
+    {
+      "name": "response-security-headers",
+      "path": "north/index.html",
+      "headers": {
+        "Content-Security-Policy": null,
+        "X-Content-Type-Options": null,
+        "Referrer-Policy": null,
+        "Permissions-Policy": null,
+        "X-Frame-Options": null
+      }
+    }
+  ],
+  "finished": "2026-11-04T20:24:38.157675+00:00"
+}

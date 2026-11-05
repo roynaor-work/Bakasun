@@ -1,0 +1,1685 @@
+{
+  "started": "2026-11-04T20:32:37.154767+00:00",
+  "completed": "2026-11-04T20:33:06.261397+00:00",
+  "transport": "http://127.0.0.1:8765/preview.html",
+  "externalRequestsBlocked": [],
+  "consoleErrors": [],
+  "sourceHashes": {
+    "preview.js": "7327e4f22d40cb6c308be45ec036b24c1521970b0b7551f7cd865a184d4d718a",
+    "preview.css": "410b5cc2866e9ad8a02c708883216a18bef90f1834624f65f3054695d3b52a3d",
+    "manifest.json": "69f171c8da165fb2839434e76d51217320ddbbccf551781c4c6976dd24aad13e",
+    "source/motions.mjs": "3713fbf2551646b24544ef80f13478af3769d0032621956991d97a30083a4014"
+  },
+  "captures": [
+    {
+      "file": "390x844-far.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "surface": "hard",
+        "light": "day",
+        "actor": 0,
+        "motion": "serve"
+      },
+      "seconds": 2.048,
+      "diagnostics": {
+        "state": {
+          "surface": "hard",
+          "light": "day",
+          "view": "wide",
+          "actor": 0,
+          "motion": "serve",
+          "playing": false,
+          "quality": "balanced",
+          "time": 2.048,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "stage": {
+          "width": 390,
+          "height": 578
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 61,
+          "triangles": 266063,
+          "textures": 12,
+          "geometries": 60
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 17935,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -2.1472533764067063,
+          2.367751677712073,
+          9.87239040613474
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 7
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 58,
+          "width": 390,
+          "height": 578,
+          "top": 58,
+          "right": 390,
+          "bottom": 636,
+          "left": 0
+        },
+        "dock": {
+          "x": 0,
+          "y": 637,
+          "width": 390,
+          "height": 207,
+          "top": 637,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "תקריב",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "סגל",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "על הקו",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 268.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 273,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-far.png",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "wide",
+        "surface": "hard",
+        "light": "day",
+        "actor": 0,
+        "motion": "serve"
+      },
+      "seconds": 2.048,
+      "diagnostics": {
+        "state": {
+          "surface": "hard",
+          "light": "day",
+          "view": "wide",
+          "actor": 0,
+          "motion": "serve",
+          "playing": false,
+          "quality": "balanced",
+          "time": 2.048,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "stage": {
+          "width": 576,
+          "height": 344
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 61,
+          "triangles": 266063,
+          "textures": 12,
+          "geometries": 60
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 17935,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -2.1472533764067063,
+          2.367751677712073,
+          9.87239040613474
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 15
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 46,
+          "width": 576,
+          "height": 344,
+          "top": 46,
+          "right": 576,
+          "bottom": 390,
+          "left": 0
+        },
+        "dock": {
+          "x": 576,
+          "y": 46,
+          "width": 268,
+          "height": 344,
+          "top": 46,
+          "right": 844,
+          "bottom": 390,
+          "left": 576
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "תקריב",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "סגל",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "על הקו",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 151.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 156,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-close.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "close",
+        "surface": "hard",
+        "light": "day",
+        "actor": 2,
+        "motion": "forehand"
+      },
+      "seconds": 0.624,
+      "diagnostics": {
+        "state": {
+          "surface": "hard",
+          "light": "day",
+          "view": "close",
+          "actor": 2,
+          "motion": "forehand",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.624,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "stage": {
+          "width": 390,
+          "height": 536
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 37,
+          "triangles": 257229,
+          "textures": 12,
+          "geometries": 61
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 1,
+          "bodyAndRacketTriangles": 10749,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -0.5998282621262894,
+          1.2737373324562424,
+          0.8789940169211161
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 24
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 58,
+          "width": 390,
+          "height": 536,
+          "top": 58,
+          "right": 390,
+          "bottom": 594,
+          "left": 0
+        },
+        "dock": {
+          "x": 0,
+          "y": 596,
+          "width": 390,
+          "height": 248,
+          "top": 596,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "תקריב",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "סגל",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "על הקו",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "שחקן א׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקן ב׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקנית א׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקנית ב׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 268.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 273,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-close.png",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "close",
+        "surface": "hard",
+        "light": "day",
+        "actor": 0,
+        "motion": "serve"
+      },
+      "seconds": 1.536,
+      "diagnostics": {
+        "state": {
+          "surface": "hard",
+          "light": "day",
+          "view": "close",
+          "actor": 0,
+          "motion": "serve",
+          "playing": false,
+          "quality": "balanced",
+          "time": 1.536,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "stage": {
+          "width": 576,
+          "height": 344
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 39,
+          "triangles": 257610,
+          "textures": 12,
+          "geometries": 62
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 1,
+          "bodyAndRacketTriangles": 11082,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -0.037081479103372755,
+          2.7573567729075554,
+          0.27922757960597905
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 31
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 46,
+          "width": 576,
+          "height": 344,
+          "top": 46,
+          "right": 576,
+          "bottom": 390,
+          "left": 0
+        },
+        "dock": {
+          "x": 576,
+          "y": 46,
+          "width": 268,
+          "height": 344,
+          "top": 46,
+          "right": 844,
+          "bottom": 390,
+          "left": 576
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "תקריב",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "סגל",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "על הקו",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "שחקן א׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקן ב׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקנית א׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקנית ב׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 151.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 156,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-roster.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "roster",
+        "surface": "grass",
+        "light": "day",
+        "actor": 0,
+        "motion": "idle"
+      },
+      "seconds": 0.5,
+      "diagnostics": {
+        "state": {
+          "surface": "grass",
+          "light": "day",
+          "view": "roster",
+          "actor": 0,
+          "motion": "idle",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.5,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "stage": {
+          "width": 390,
+          "height": 536
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 47,
+          "triangles": 292483,
+          "textures": 13,
+          "geometries": 67
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 45211,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -2.0853043170932413,
+          0.055,
+          0.06895422008760746
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 38
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 58,
+          "width": 390,
+          "height": 536,
+          "top": 58,
+          "right": 390,
+          "bottom": 594,
+          "left": 0
+        },
+        "dock": {
+          "x": 0,
+          "y": 596,
+          "width": 390,
+          "height": 248,
+          "top": 596,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "תקריב",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "סגל",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "על הקו",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "שחקן א׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקן ב׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקנית א׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "שחקנית ב׳",
+            "width": 87,
+            "height": 35
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 268.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 273,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-roster.png",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "roster",
+        "surface": "hard",
+        "light": "day",
+        "actor": 0,
+        "motion": "idle"
+      },
+      "seconds": 0.5,
+      "diagnostics": {
+        "state": {
+          "surface": "hard",
+          "light": "day",
+          "view": "roster",
+          "actor": 0,
+          "motion": "idle",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.5,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "stage": {
+          "width": 576,
+          "height": 344
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 47,
+          "triangles": 292483,
+          "textures": 13,
+          "geometries": 67
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 45211,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -2.0853043170932413,
+          0.055,
+          0.06895422008760746
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 46
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 46,
+          "width": 576,
+          "height": 344,
+          "top": 46,
+          "right": 576,
+          "bottom": 390,
+          "left": 0
+        },
+        "dock": {
+          "x": 576,
+          "y": 46,
+          "width": 268,
+          "height": 344,
+          "top": 46,
+          "right": 844,
+          "bottom": 390,
+          "left": 576
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "תקריב",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "סגל",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "על הקו",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "שחקן א׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקן ב׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקנית א׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "שחקנית ב׳",
+            "width": 57.75,
+            "height": 35
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 151.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 156,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-evening-clay.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "wide",
+        "surface": "clay",
+        "light": "evening",
+        "actor": 0,
+        "motion": "slide"
+      },
+      "seconds": 0.841,
+      "diagnostics": {
+        "state": {
+          "surface": "clay",
+          "light": "evening",
+          "view": "wide",
+          "actor": 0,
+          "motion": "slide",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.841,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "stage": {
+          "width": 390,
+          "height": 578
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 68,
+          "triangles": 266511,
+          "textures": 14,
+          "geometries": 77
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 17935,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -1.5559885142588539,
+          0.8842650711753439,
+          9.495058050432048
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 53
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 58,
+          "width": 390,
+          "height": 578,
+          "top": 58,
+          "right": 390,
+          "bottom": 636,
+          "left": 0
+        },
+        "dock": {
+          "x": 0,
+          "y": 637,
+          "width": 390,
+          "height": 207,
+          "top": 637,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת יום",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "תקריב",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "סגל",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "על הקו",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 268.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 273,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-evening-clay.png",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "wide",
+        "surface": "clay",
+        "light": "evening",
+        "actor": 0,
+        "motion": "slide"
+      },
+      "seconds": 0.841,
+      "diagnostics": {
+        "state": {
+          "surface": "clay",
+          "light": "evening",
+          "view": "wide",
+          "actor": 0,
+          "motion": "slide",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.841,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "stage": {
+          "width": 576,
+          "height": 344
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 68,
+          "triangles": 266511,
+          "textures": 14,
+          "geometries": 77
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 4,
+          "bodyAndRacketTriangles": 17935,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -1.5559885142588539,
+          0.8842650711753439,
+          9.495058050432048
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 60
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 46,
+          "width": 576,
+          "height": 344,
+          "top": 46,
+          "right": 576,
+          "bottom": 390,
+          "left": 0
+        },
+        "dock": {
+          "x": 576,
+          "y": 46,
+          "width": 268,
+          "height": 344,
+          "top": 46,
+          "right": 844,
+          "bottom": 390,
+          "left": 576
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת יום",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "תקריב",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "סגל",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "על הקו",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 151.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 156,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "390x844-line.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "settings": {
+        "view": "line",
+        "surface": "grass",
+        "light": "day",
+        "actor": 0,
+        "motion": "serve"
+      },
+      "seconds": 3.17,
+      "diagnostics": {
+        "state": {
+          "surface": "grass",
+          "light": "day",
+          "view": "line",
+          "actor": 0,
+          "motion": "serve",
+          "playing": false,
+          "quality": "balanced",
+          "time": 3.17,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "stage": {
+          "width": 390,
+          "height": 578
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 34,
+          "triangles": 246052,
+          "textures": 14,
+          "geometries": 77
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 0,
+          "bodyAndRacketTriangles": 0,
+          "canonicalBones": 18
+        },
+        "ball": [
+          4.115,
+          0.08583865716838068,
+          -6.4
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 68
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 58,
+          "width": 390,
+          "height": 578,
+          "top": 58,
+          "right": 390,
+          "bottom": 636,
+          "left": 0
+        },
+        "dock": {
+          "x": 0,
+          "y": 637,
+          "width": 390,
+          "height": 207,
+          "top": 637,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 98,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "תקריב",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "סגל",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "על הקו",
+            "width": 87.75,
+            "height": 43
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 268.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 273,
+            "height": 18
+          }
+        ]
+      }
+    },
+    {
+      "file": "844x390-net.png",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "settings": {
+        "view": "net",
+        "surface": "clay",
+        "light": "day",
+        "actor": 0,
+        "motion": "idle"
+      },
+      "seconds": 0.5,
+      "diagnostics": {
+        "state": {
+          "surface": "clay",
+          "light": "day",
+          "view": "net",
+          "actor": 0,
+          "motion": "idle",
+          "playing": false,
+          "quality": "balanced",
+          "time": 0.5,
+          "orbit": 0,
+          "zoom": 1,
+          "ready": true
+        },
+        "threeRevision": "160",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "stage": {
+          "width": 576,
+          "height": 344
+        },
+        "pixelRatio": 1,
+        "render": {
+          "calls": 47,
+          "triangles": 247198,
+          "textures": 14,
+          "geometries": 77
+        },
+        "crowd": {
+          "total": 480,
+          "visible": 480,
+          "instancedDraws": 3,
+          "seatDraws": 2
+        },
+        "actors": {
+          "visible": 0,
+          "bodyAndRacketTriangles": 0,
+          "canonicalBones": 18
+        },
+        "ball": [
+          -2.43,
+          0.055,
+          10.02
+        ],
+        "landing": [
+          4.115,
+          0.035,
+          -6.4
+        ],
+        "errors": [],
+        "renderCount": 77
+      },
+      "layout": {
+        "overflow": false,
+        "stage": {
+          "x": 0,
+          "y": 46,
+          "width": 576,
+          "height": 344,
+          "top": 46,
+          "right": 576,
+          "bottom": 390,
+          "left": 0
+        },
+        "dock": {
+          "x": 576,
+          "y": 46,
+          "width": 268,
+          "height": 344,
+          "top": 46,
+          "right": 844,
+          "bottom": 390,
+          "left": 576
+        },
+        "controls": [
+          {
+            "name": "איפוס מצלמה",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "name": "איכות מאוזנת, לחץ לחסכון",
+            "width": 50.796875,
+            "height": 20
+          },
+          {
+            "name": "קשיח",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "חימר",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "דשא",
+            "width": 59,
+            "height": 34
+          },
+          {
+            "name": "החלפה לתאורת ערב",
+            "width": 44,
+            "height": 42
+          },
+          {
+            "name": "שידור",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "תקריב",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "סגל",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "על הקו",
+            "width": 58.5,
+            "height": 48
+          },
+          {
+            "name": "ניגון תנועה",
+            "width": 44,
+            "height": 35
+          },
+          {
+            "name": "עמידת מוצאריצהשירות · ארבעה שלביםפורהנדבקהנדוולהשמאשהחלקהחגיגה",
+            "width": 151.4375,
+            "height": 35
+          },
+          {
+            "name": "זמן בתנועה",
+            "width": 156,
+            "height": 18
+          }
+        ]
+      }
+    }
+  ]
+}

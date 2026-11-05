@@ -1,0 +1,311 @@
+{
+  "at": "2026-11-04T22:34:23.473Z",
+  "sourceSha256": "3fb26ea164c2d51cf5b376019c928f4da19cb99f026e1e43c2b512bcc66510bd",
+  "offline": true,
+  "errors": [],
+  "checks": [
+    {
+      "label": "Sky probe count and GPU texture count recover",
+      "pass": true
+    },
+    {
+      "label": "Far scenery textures dispose after restoration",
+      "pass": true
+    },
+    {
+      "label": "Context loss during delayed first Draco decode recovers",
+      "pass": true
+    }
+  ],
+  "before": {
+    "three": "160",
+    "state": {
+      "ship": "cruiser",
+      "fleet": "tide",
+      "weather": "sunset",
+      "view": "near",
+      "quality": "high",
+      "adaptiveScale": 1,
+      "paused": true,
+      "reduced": false,
+      "crew": true,
+      "time": 12,
+      "frozen": true,
+      "theta": 0.79,
+      "elevation": 0.22,
+      "zoom": 1,
+      "storm": 0,
+      "loading": false
+    },
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 1,
+      "bufferWidth": 844,
+      "bufferHeight": 390
+    },
+    "triangles": 41918,
+    "drawCalls": 19,
+    "geometries": 18,
+    "textures": 8,
+    "programs": 10,
+    "cpuFrame": {
+      "samples": 0,
+      "meanMs": 0,
+      "p95Ms": 0,
+      "fps": 0
+    },
+    "lod": [
+      {
+        "type": "corvette",
+        "fleet": "ember",
+        "lod": 1,
+        "triangles": 2637
+      },
+      {
+        "type": "destroyer",
+        "fleet": "tide",
+        "lod": 1,
+        "triangles": 3235
+      },
+      {
+        "type": "cruiser",
+        "fleet": "tide",
+        "lod": 0,
+        "triangles": 9889
+      },
+      {
+        "type": "carrier",
+        "fleet": "ember",
+        "lod": 0,
+        "triangles": 8093
+      }
+    ],
+    "crewInstances": 14,
+    "effects": {
+      "capacity": 320,
+      "allocatedCapacity": 320,
+      "active": 0,
+      "waterColumnCapacity": 3
+    },
+    "dracoWorkers": 2,
+    "renderer": "WebKit WebGL",
+    "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "environmentProbes": [
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      },
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      }
+    ],
+    "contextLost": false,
+    "contextRestores": 0,
+    "adaptationEvents": [],
+    "reducedMotion": false,
+    "offline": true
+  },
+  "after": {
+    "three": "160",
+    "state": {
+      "ship": "cruiser",
+      "fleet": "tide",
+      "weather": "sunset",
+      "view": "near",
+      "quality": "high",
+      "adaptiveScale": 1,
+      "paused": true,
+      "reduced": false,
+      "crew": true,
+      "time": 12,
+      "frozen": true,
+      "theta": 0.79,
+      "elevation": 0.22,
+      "zoom": 1,
+      "storm": 0,
+      "loading": false
+    },
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 1,
+      "bufferWidth": 844,
+      "bufferHeight": 390
+    },
+    "triangles": 41918,
+    "drawCalls": 19,
+    "geometries": 18,
+    "textures": 8,
+    "programs": 10,
+    "cpuFrame": {
+      "samples": 0,
+      "meanMs": 0,
+      "p95Ms": 0,
+      "fps": 0
+    },
+    "lod": [
+      {
+        "type": "corvette",
+        "fleet": "ember",
+        "lod": 1,
+        "triangles": 2637
+      },
+      {
+        "type": "destroyer",
+        "fleet": "tide",
+        "lod": 1,
+        "triangles": 3235
+      },
+      {
+        "type": "cruiser",
+        "fleet": "tide",
+        "lod": 0,
+        "triangles": 9889
+      },
+      {
+        "type": "carrier",
+        "fleet": "ember",
+        "lod": 0,
+        "triangles": 8093
+      }
+    ],
+    "crewInstances": 14,
+    "effects": {
+      "capacity": 320,
+      "allocatedCapacity": 320,
+      "active": 0,
+      "waterColumnCapacity": 3
+    },
+    "dracoWorkers": 2,
+    "renderer": "WebKit WebGL",
+    "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "environmentProbes": [
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      },
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      }
+    ],
+    "contextLost": false,
+    "contextRestores": 1,
+    "adaptationEvents": [],
+    "reducedMotion": false,
+    "offline": true
+  },
+  "disposed": {
+    "geometries": 0,
+    "textures": 0
+  },
+  "startupBefore": {
+    "ready": false,
+    "loading": true
+  },
+  "startupAfter": {
+    "three": "160",
+    "state": {
+      "ship": "cruiser",
+      "fleet": "tide",
+      "weather": "sunset",
+      "view": "near",
+      "quality": "balanced",
+      "adaptiveScale": 1,
+      "paused": false,
+      "reduced": false,
+      "crew": true,
+      "time": 0.1,
+      "frozen": false,
+      "theta": 0.48,
+      "elevation": 0.22,
+      "zoom": 1,
+      "storm": 0,
+      "loading": false
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "bufferWidth": 390,
+      "bufferHeight": 844
+    },
+    "triangles": 28592,
+    "drawCalls": 17,
+    "geometries": 16,
+    "textures": 8,
+    "programs": 9,
+    "cpuFrame": {
+      "samples": 1,
+      "meanMs": 883.2999999999997,
+      "p95Ms": 883.2999999999997,
+      "fps": 1.132118193139364
+    },
+    "lod": [
+      {
+        "type": "corvette",
+        "fleet": "ember",
+        "lod": 2,
+        "triangles": 583
+      },
+      {
+        "type": "destroyer",
+        "fleet": "tide",
+        "lod": 2,
+        "triangles": 839
+      },
+      {
+        "type": "cruiser",
+        "fleet": "tide",
+        "lod": 0,
+        "triangles": 9889
+      },
+      {
+        "type": "carrier",
+        "fleet": "ember",
+        "lod": 0,
+        "triangles": 8093
+      }
+    ],
+    "crewInstances": 14,
+    "effects": {
+      "capacity": 160,
+      "allocatedCapacity": 320,
+      "active": 0,
+      "waterColumnCapacity": 3
+    },
+    "dracoWorkers": 2,
+    "renderer": "WebKit WebGL",
+    "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "environmentProbes": [
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      },
+      {
+        "width": 336,
+        "height": 256,
+        "format": "RGBA16F",
+        "bytes": 688128
+      }
+    ],
+    "contextLost": false,
+    "contextRestores": 1,
+    "adaptationEvents": [],
+    "reducedMotion": false,
+    "offline": true
+  },
+  "pass": true
+}

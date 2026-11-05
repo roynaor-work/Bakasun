@@ -1,0 +1,425 @@
+{
+  "generated": "2026-11-04T21:54:57.861588+00:00",
+  "entry": "standalone.html",
+  "pass": true,
+  "checks": [
+    {
+      "name": "offline-local-files-ready",
+      "pass": true,
+      "details": {
+        "coldLoadSeconds": 5.855227938999633,
+        "network": "offline=True, local files fulfilled directly"
+      }
+    },
+    {
+      "name": "390-surface-clay",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-surface-grass",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-surface-hard",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-view-wide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-view-roster",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-view-close",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-view-line",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-actor-0",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-actor-1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-actor-2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-actor-3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-focus-body",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-focus-face",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-focus-grip",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-focus-body",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-idle",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-run",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-serve",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-forehand",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-backhand",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-volley",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-smash",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-slide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-motion-celebrate",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-lighting",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-play-pause",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-paused-no-continuous-render",
+      "pass": true,
+      "details": {
+        "before": 74,
+        "after": 74
+      }
+    },
+    {
+      "name": "390-timeline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-drag-orbit",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-keyboard-reset",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-economy",
+      "pass": true,
+      "details": {
+        "calls": 21,
+        "triangles": 38278,
+        "main": {
+          "calls": 21,
+          "triangles": 38278
+        },
+        "shadow": {
+          "calls": 0,
+          "triangles": 0
+        },
+        "textures": 18,
+        "geometries": 52
+      }
+    },
+    {
+      "name": "390-balanced-restore",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "390-layout-and-touch",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "small": []
+      }
+    },
+    {
+      "name": "844-surface-clay",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-surface-grass",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-surface-hard",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-view-wide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-view-roster",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-view-close",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-view-line",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-actor-0",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-actor-1",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-actor-2",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-actor-3",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-focus-body",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-focus-face",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-focus-grip",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-focus-body",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-idle",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-run",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-serve",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-forehand",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-backhand",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-volley",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-smash",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-slide",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-motion-celebrate",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-lighting",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-play-pause",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-paused-no-continuous-render",
+      "pass": true,
+      "details": {
+        "before": 154,
+        "after": 154
+      }
+    },
+    {
+      "name": "844-timeline",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-drag-orbit",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-keyboard-reset",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-economy",
+      "pass": true,
+      "details": {
+        "calls": 21,
+        "triangles": 38324,
+        "main": {
+          "calls": 21,
+          "triangles": 38324
+        },
+        "shadow": {
+          "calls": 0,
+          "triangles": 0
+        },
+        "textures": 18,
+        "geometries": 52
+      }
+    },
+    {
+      "name": "844-balanced-restore",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "844-layout-and-touch",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "small": []
+      }
+    },
+    {
+      "name": "two-finger-pinch",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "orientation-while-playing",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "webgl-context-recovery",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "no-external-network",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "no-console-errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reduced-motion-starts-paused",
+      "pass": true,
+      "details": null
+    }
+  ],
+  "externalRequests": [],
+  "consoleErrors": [],
+  "localFilesServed": [
+    {
+      "path": "standalone.html",
+      "bytes": 4030268
+    },
+    {
+      "path": "standalone.html",
+      "bytes": 4030268
+    }
+  ]
+}

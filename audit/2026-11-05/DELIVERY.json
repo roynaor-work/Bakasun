@@ -1,0 +1,140 @@
+{
+  "packagedAt": "2026-11-04T22:31:43.866341+00:00",
+  "base": "5d1fca7d11c6f4ed3a7e1cf8b92517fa63d0c275",
+  "branch": "codex/audit-2026-11-05-20261105",
+  "targetRepository": "roynaor-work/Bakasun",
+  "requestedPullRequest": "draft against main; do not merge",
+  "scope": "new files under audit/2026-11-05/ only; product and existing tests unchanged",
+  "findingCount": 37,
+  "priorities": {
+    "P1": 3,
+    "P2": 24,
+    "P3": 10
+  },
+  "payloadFiles": 393,
+  "payloadBytes": 17427936,
+  "payloadMB": 17.427936,
+  "weightExclusions": [
+    "DELIVERY.json",
+    "FILE-WEIGHTS.md",
+    "SHA256SUMS",
+    "__pycache__/"
+  ],
+  "largestFiles": [
+    {
+      "path": "evidence/assets.json",
+      "bytes": 1306000
+    },
+    {
+      "path": "iterations/03/accessibility.json",
+      "bytes": 805925
+    },
+    {
+      "path": "iterations/04/startup-performance.json",
+      "bytes": 653113
+    },
+    {
+      "path": "iterations/13/capture.json",
+      "bytes": 453894
+    },
+    {
+      "path": "iterations/10/capture.json",
+      "bytes": 452231
+    },
+    {
+      "path": "iterations/06/capture.json",
+      "bytes": 448298
+    },
+    {
+      "path": "evidence/soak.json",
+      "bytes": 388064
+    },
+    {
+      "path": "iterations/02/capture.json",
+      "bytes": 310495
+    },
+    {
+      "path": "iterations/05/capture.json",
+      "bytes": 300456
+    },
+    {
+      "path": "iterations/01/capture.json",
+      "bytes": 290010
+    },
+    {
+      "path": "iterations/03/capture.json",
+      "bytes": 281824
+    },
+    {
+      "path": "iterations/04/capture.json",
+      "bytes": 262069
+    }
+  ],
+  "screenshots": 272,
+  "iterations": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "soak": {
+    "started": "2026-11-04T20:27:27.319099+00:00",
+    "finished": "2026-11-04T22:27:28.095790+00:00",
+    "elapsedSeconds": 7200.78,
+    "samples": 639,
+    "segments": 12
+  },
+  "unitTotalsPerRun": [
+    {
+      "tests": 3278,
+      "suites": 0,
+      "pass": 3227,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 51,
+      "todo": 0
+    },
+    {
+      "tests": 3278,
+      "suites": 0,
+      "pass": 3227,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 51,
+      "todo": 0
+    },
+    {
+      "tests": 3278,
+      "suites": 0,
+      "pass": 3227,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 51,
+      "todo": 0
+    }
+  ],
+  "limits": [
+    "No physical phone GPU/30fps certification.",
+    "file:// is blocked by managed Chromium policy; local-file response fulfilment with offline=true passed, direct file:// outside this environment unverified.",
+    "Original offline automatic-download test had failing runs; later diagnostic and repeated outcomes are all retained.",
+    "No live database, Storage, payment, message or production deployment was changed."
+  ],
+  "entrypoints": {
+    "review": "index.html",
+    "report": "REPORT.md",
+    "weights": "WEIGHTS.md",
+    "textures": "TEXTURES.md",
+    "fileWeights": "FILE-WEIGHTS.md"
+  }
+}

@@ -1,0 +1,941 @@
+{
+  "startedUTC": "2026-11-04T23:06:29.731538+00:00",
+  "offlineSHA256": "25308c465dc2c6619f6f3dc4502f6a2e701a672754759884894a485b1feba058",
+  "checks": [
+    {
+      "name": "Self-contained local HTML loads with browser offline",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Three r160",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "No HTTP/HTTPS requests",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Scene tab",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Night control",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Day control",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Pause restores sharp DPR",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Pause freezes simulation",
+      "pass": true,
+      "detail": [
+        0.8999000000000005,
+        0.8999000000000005
+      ]
+    },
+    {
+      "name": "Play resumes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Catalog modal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Catalog selection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Inspector restores sharp DPR",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Inspector near/far changes camera",
+      "pass": true,
+      "detail": [
+        [
+          4.81705897869878,
+          3.2011784928224167,
+          6.233841031257245
+        ],
+        [
+          6.35851785188239,
+          4.19355561052559,
+          8.228670161259563
+        ]
+      ]
+    },
+    {
+      "name": "Keyboard orbit",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Reset view",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "True geometry LOD",
+      "pass": true,
+      "detail": {
+        "high": 122560,
+        "low": 26128
+      }
+    },
+    {
+      "name": "Instanced crowd and props",
+      "pass": true,
+      "detail": 13
+    },
+    {
+      "name": "Laser emitter anchors 390x844",
+      "pass": true,
+      "detail": [
+        {
+          "emitter": [
+            -0.594,
+            0.4947696885994962,
+            3.2859999999999996
+          ],
+          "laserFrom": [
+            -0.5939999999999999,
+            0.49476968859949655,
+            3.2859999999999996
+          ],
+          "laserTo": [
+            -1.1102230246251565e-16,
+            1.587067474758612,
+            -0.5999999999999994
+          ]
+        },
+        {
+          "emitter": [
+            0.5940000000000002,
+            0.4947696885994962,
+            3.2859999999999996
+          ],
+          "laserFrom": [
+            0.5940000000000001,
+            0.49476968859949655,
+            3.2859999999999996
+          ],
+          "laserTo": [
+            1.1102230246251565e-16,
+            1.587067474758612,
+            -0.5999999999999994
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Effects expire 390x844",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Alert stays animated in low LOD 390x844",
+      "pass": true,
+      "detail": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Controls within 390x844",
+      "pass": true,
+      "detail": [
+        {
+          "id": "library-open",
+          "x": 20,
+          "y": 17,
+          "w": 72.671875,
+          "h": 44
+        },
+        {
+          "id": "משמר השמיים",
+          "x": 273.640625,
+          "y": 73,
+          "w": 95.359375,
+          "h": 46
+        },
+        {
+          "id": "החווה השקטה",
+          "x": 158.453125,
+          "y": 73,
+          "w": 93.1875,
+          "h": 46
+        },
+        {
+          "id": "day",
+          "x": 326,
+          "y": 759,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "night",
+          "x": 282,
+          "y": 759,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "far",
+          "x": 215.6875,
+          "y": 759,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "close",
+          "x": 171.6875,
+          "y": 759,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "effect",
+          "x": 74.3125,
+          "y": 759,
+          "w": 79.046875,
+          "h": 44
+        },
+        {
+          "id": "play",
+          "x": 16,
+          "y": 759,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "metrics-toggle",
+          "x": 18,
+          "y": 815,
+          "w": 34.421875,
+          "h": 24
+        }
+      ]
+    },
+    {
+      "name": "Laser emitter anchors 844x390",
+      "pass": true,
+      "detail": [
+        {
+          "emitter": [
+            -0.594,
+            0.4947696885994962,
+            3.2859999999999996
+          ],
+          "laserFrom": [
+            -0.5939999999999999,
+            0.49476968859949655,
+            3.2859999999999996
+          ],
+          "laserTo": [
+            -1.1102230246251565e-16,
+            1.587067474758612,
+            -0.5999999999999994
+          ]
+        },
+        {
+          "emitter": [
+            0.5940000000000002,
+            0.4947696885994962,
+            3.2859999999999996
+          ],
+          "laserFrom": [
+            0.5940000000000001,
+            0.49476968859949655,
+            3.2859999999999996
+          ],
+          "laserTo": [
+            1.1102230246251565e-16,
+            1.587067474758612,
+            -0.5999999999999994
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Effects expire 844x390",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Alert stays animated in low LOD 844x390",
+      "pass": true,
+      "detail": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "name": "Controls within 844x390",
+      "pass": true,
+      "detail": [
+        {
+          "id": "library-open",
+          "x": 22,
+          "y": 8.5,
+          "w": 72.671875,
+          "h": 32
+        },
+        {
+          "id": "משמר השמיים",
+          "x": 731.25,
+          "y": 47,
+          "w": 88.75,
+          "h": 36
+        },
+        {
+          "id": "החווה השקטה",
+          "x": 620.5,
+          "y": 47,
+          "w": 86.75,
+          "h": 36
+        },
+        {
+          "id": "day",
+          "x": 758.203125,
+          "y": 336,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "night",
+          "x": 714.203125,
+          "y": 336,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "far",
+          "x": 628.75,
+          "y": 336,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "close",
+          "x": 584.75,
+          "y": 336,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "effect",
+          "x": 478.109375,
+          "y": 336,
+          "w": 89.640625,
+          "h": 44
+        },
+        {
+          "id": "play",
+          "x": 418.109375,
+          "y": 336,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "id": "metrics-toggle",
+          "x": 24,
+          "y": 347,
+          "w": 34.421875,
+          "h": 24
+        }
+      ]
+    },
+    {
+      "name": "Context restored",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Context restore resumes playback",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Reduced motion defaults to paused",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "errors": [
+    "Cannot read properties of null (reading 'trim')"
+  ],
+  "requests": [],
+  "effects": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 0,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 34086,
+      "calls": 28,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 0.07,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 34086,
+      "calls": 28,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 0.2,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 34086,
+      "calls": 28,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 0.45,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 34086,
+      "calls": 28,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 0.8,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 34086,
+      "calls": 28,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "seconds": 1.2,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 35,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 32300,
+      "calls": 19,
+      "dpr": 1,
+      "geometries": 82,
+      "textures": 12,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 0,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 35678,
+      "calls": 30,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 0.07,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 35678,
+      "calls": 30,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 0.2,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 35678,
+      "calls": 30,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 0.45,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 35678,
+      "calls": 30,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 0.8,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 35678,
+      "calls": 30,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "seconds": 1.2,
+      "scene": "space",
+      "selected": null,
+      "night": true,
+      "close": true,
+      "quality": "auto",
+      "detailMode": "auto",
+      "shadowMode": "dynamic",
+      "materialMode": "pbr",
+      "time": 1.9831999999999996,
+      "frame": 37,
+      "ready": true,
+      "errors": [],
+      "revision": "160",
+      "triangles": 33892,
+      "calls": 21,
+      "dpr": 1,
+      "geometries": 84,
+      "textures": 13,
+      "instancedMeshes": 13,
+      "samples": [
+        199.90000000000055,
+        200.09999999999945,
+        16.699999999999818,
+        83.30000000000109,
+        33.29999999999927,
+        66.60000000000036,
+        33.399999999999636,
+        16.700000000000728,
+        16.599999999998545,
+        50,
+        166.70000000000073,
+        16.700000000000728,
+        83.29999999999927
+      ]
+    }
+  ],
+  "transport": "HTML read from local disk and injected into about:blank with browser offline. Managed Chromium blocks direct file:// navigation with ERR_BLOCKED_BY_ADMINISTRATOR; direct file open is not claimed.",
+  "final": {
+    "scene": "farm",
+    "selected": null,
+    "night": true,
+    "close": true,
+    "quality": "auto",
+    "detailMode": "auto",
+    "shadowMode": "dynamic",
+    "materialMode": "pbr",
+    "time": 3.006399999999995,
+    "frame": 71,
+    "ready": true,
+    "errors": [],
+    "revision": "160",
+    "triangles": 34360,
+    "calls": 25,
+    "dpr": 0.75,
+    "geometries": 25,
+    "textures": 9,
+    "instancedMeshes": 13,
+    "samples": [
+      199.90000000000055,
+      200.09999999999945,
+      16.699999999999818,
+      83.30000000000109,
+      33.29999999999927,
+      66.60000000000036,
+      33.399999999999636,
+      16.700000000000728,
+      16.599999999998545,
+      50,
+      166.70000000000073,
+      16.700000000000728,
+      83.29999999999927,
+      16.799999999999272,
+      33.400000000001455,
+      16.599999999998545,
+      300,
+      183.3000000000011,
+      33.399999999999636,
+      16.600000000000364,
+      16.69999999999891,
+      33.30000000000109,
+      16.600000000000364,
+      16.799999999999272,
+      16.600000000000364,
+      50,
+      16.69999999999891,
+      16.600000000000364,
+      16.700000000000728,
+      16.69999999999891,
+      33.30000000000109,
+      16.600000000000364,
+      33.399999999999636,
+      33.29999999999927,
+      33.399999999999636,
+      33.30000000000109,
+      33.29999999999927,
+      33.30000000000109,
+      33.399999999999636,
+      33.29999999999927,
+      33.399999999999636,
+      33.30000000000109,
+      50,
+      16.600000000000364,
+      33.399999999999636,
+      949.8999999999996
+    ]
+  },
+  "finishedUTC": "2026-11-04T23:06:49.298737+00:00",
+  "pass": false
+}

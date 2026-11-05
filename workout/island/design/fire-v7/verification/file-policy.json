@@ -1,0 +1,8 @@
+{
+  "testedAt": "2026-11-04T20:33:00Z",
+  "attempt": "Open preview.html directly as a file URL in the installed Chromium without bypass flags",
+  "result": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+  "policy": "Managed Chromium URLBlocklist=*; file: URLs are not allowlisted",
+  "response": "Policy preserved. Rendering verification uses a loopback-only HTTP server and blocks all non-loopback HTTP(S) requests.",
+  "delivery": "Classic local scripts and styles; embedded model, image and Draco data. No server or build is required by the page code. Direct file opening remains unverified in this managed browser."
+}

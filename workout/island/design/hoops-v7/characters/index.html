@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#141a1d">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="תצוגה מקומית של דמויות כדורסל ותנועה — חמישה מבני גוף, שני צבעים ושופט.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23141a1d'/%3E%3Cpath d='M9 8h14l-8 17h-5l7-13H9z' fill='%238fdbc9'/%3E%3C/svg%3E">
+  <title>תנועה / 07 · דמויות כדורסל</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="identity"><span class="edition" dir="ltr">07</span><div><h1>תנועה<span class="title-slash"> / </span><span class="title-kind">כדורסל</span></h1><p>שישה אנשים. משחק אחד.</p></div></div>
+    <div class="local-badge"><i aria-hidden="true"></i><span>מקומי · ללא רשת</span></div>
+  </header>
+  <main class="workspace">
+    <section id="stage" class="stage" aria-label="במת תצוגה תלת ממדית">
+      <canvas id="canvas" aria-label="דמות כדורסל אינטראקטיבית. אפשר לסובב בגרירה ולהתקרב בצביטה."></canvas>
+      <div class="stage-heading"><span class="eyebrow" id="view-kicker" dir="ltr">ATHLETE STUDY / 01</span><h2 id="stage-title">רכז.</h2><p id="stage-description">מבנה קל. שליטה קרובה.</p></div>
+      <div class="stage-status"><span class="status-dot" aria-hidden="true"></span><span id="status" role="status" aria-live="polite">טוען את הדמויות…</span></div>
+      <div class="camera-tools" role="group" aria-label="זווית מצלמה"><button id="rotate-front" title="מבט מלפנים" aria-label="מבט מלפנים">חזית</button><button id="rotate-side" title="מבט שלושה רבעים" aria-label="מבט שלושה רבעים">¾</button><button id="rotate-back" title="מבט מאחור" aria-label="מבט מאחור">גב</button><button id="reset-camera" class="icon-button" title="איפוס מצלמה" aria-label="איפוס מצלמה">↺</button></div>
+      <div id="height-labels" class="height-labels" aria-hidden="true"></div>
+      <nav class="view-strip" aria-label="מרחק ותקריב"><button data-view="near" aria-pressed="true">גוף מלא</button><button data-view="far" aria-pressed="false">החמישייה + שופט</button><button data-view="face" aria-pressed="false">פנים</button><button data-view="hands" aria-pressed="false">מגע בכדור</button><button data-view="cloth" aria-pressed="false">בד</button></nav>
+      <div class="stage-corner" dir="ltr"><span id="stage-role-code">PG · 1.78 m</span><span class="scene-count" id="scene-count">18 BONES</span></div>
+      <p class="gesture-hint" id="gesture-hint">גוררים לסיבוב · צובטים לקירוב</p>
+      <div id="error" class="error" role="alert" hidden></div>
+      <div class="loading" id="loading"><div class="loading-mark" aria-hidden="true">07</div><p>מרכיבים את החמישייה</p><div class="loading-track"><i id="loading-progress"></i></div><span id="loading-detail">גאומטריה · עור · בד · תנועה</span></div>
+    </section>
+    <aside class="panel" aria-label="אפשרויות הדמות והתנועה">
+      <section class="profile-section">
+        <div class="section-heading"><h2>על המגרש</h2><span class="small-number" dir="ltr">01—06</span></div>
+        <div class="roles" role="group" aria-label="בחירת עמדה"><button data-role="pg" aria-pressed="true">PG</button><button data-role="sg" aria-pressed="false">SG</button><button data-role="sf" aria-pressed="false">SF</button><button data-role="pf" aria-pressed="false">PF</button><button data-role="c" aria-pressed="false">C</button><button data-role="referee" aria-pressed="false">שופט</button></div>
+        <div class="profile-caption"><strong id="role-label">רכז</strong><span id="profile-build">קל וזריז</span><b id="profile-height" dir="ltr">1.78 <small>m</small></b></div>
+      </section>
+      <section class="motion-section">
+        <div class="section-heading"><h2>תנועה</h2><span id="action-count" class="small-number">—</span></div>
+        <label class="sr-only" for="action">בחירת תנועה</label><select id="action" aria-label="בחירת תנועה"><option value="hold">החזקת כדור</option></select>
+        <div class="transport"><button id="play" class="play-button" aria-label="השהיית התנועה" aria-pressed="true"><span id="play-icon" aria-hidden="true">Ⅱ</span><span id="play-text">השהיה</span></button><label class="sr-only" for="speed">מהירות התנועה</label><select id="speed" aria-label="מהירות התנועה"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select><button id="hold-toggle" class="hold-button" aria-label="מעבר בין כדרור לאחיזה">כדרור ↔ אחיזה</button></div>
+        <div class="timeline-row"><input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="מיקום בתנועה"><output id="time-output" dir="ltr">0.00 / 1.00 s</output></div>
+      </section>
+      <section class="appearance-section">
+        <div class="section-heading"><h2>צבעי קבוצה</h2><span class="small-number">צבע בלבד</span></div>
+        <div class="teams" role="group" aria-label="צבעי הקבוצה"><button data-team="teal" aria-pressed="true"><i class="swatch teal" aria-hidden="true"></i>טורקיז</button><button data-team="ivory" aria-pressed="false"><i class="swatch ivory" aria-hidden="true"></i>שנהב</button></div>
+      </section>
+      <details class="advanced"><summary>תצוגה ומדידה <span aria-hidden="true">＋</span></summary><div class="advanced-inner"><label for="lod">רמת פירוט<select id="lod"><option value="auto">אוטומטי</option><option value="high">מלא</option><option value="low">מרוחק</option></select></label><label class="check-control"><input id="crowd" type="checkbox"><span>קהל ברקע</span><small dir="ltr">INSTANCED</small></label><label class="check-control"><input id="ruler" type="checkbox"><span>סרגל גובה</span></label><p class="measurement"><span id="triangles" dir="ltr">— triangles</span><span id="drawcalls" dir="ltr">— draws</span></p><p class="measurement"><span id="actual-lod" dir="ltr">LOD 0</span><span id="fps" dir="ltr">— fps</span></p><p class="measurement-note">מדידה בדפדפן הזה. יעד התצוגה 30fps.</p><button id="copy-diagnostics" class="text-button">העתקת דוח מדידה</button></div></details>
+      <p class="panel-note"><span class="note-copy">דמויות בדויות · תנועה לתצוגה<br></span><a href="review.html">יומן סבבים והשוואות ↗</a><span class="note-separator"> · </span><a href="REPORT.md">דוח הנכסים והבדיקות ↗</a></p>
+    </aside>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

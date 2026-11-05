@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101820">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'">
+  <title>מרוצים · חמישה רכבים, שלוש דרכים</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101820'/%3E%3Cpath d='M18 48 27 16h10l9 32M23 35h18' fill='none' stroke='%23d6f34a' stroke-width='6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main id="app" aria-label="תצוגת מרוצים אינטראקטיבית">
+    <div id="world" aria-label="סצנת מרוצים תלת־ממדית"></div>
+    <canvas id="velocity" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="identity" href="./index.html" aria-label="מרוצים, התחלה">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M7 27 14 8h8l7 19M11 21h14"/><path class="mark-accent" d="m22 8 7 19"/></svg>
+        <span>מרוצים<small dir="ltr">VOLUME 07</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="local-badge"><i></i> חופשי לנסוע</span>
+        <button class="icon-button" id="infoButton" aria-label="הוראות ותצוגה" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6M12 7v1"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="destinations" aria-label="בחירת מסלול">
+      <button class="destination active" data-track="coast" aria-pressed="true">
+        <svg viewBox="0 0 68 35" aria-hidden="true"><path d="M4 29c13-16 8-15 20-13S37 7 47 8s9 8 17-3"/><path class="mini-terrain" d="m3 30 12-4 18 5 17-6 15 1"/></svg>
+        <span>חוף<small>שעת זהב</small></span><b dir="ltr">01</b>
+      </button>
+      <button class="destination" data-track="neon" aria-pressed="false">
+        <svg viewBox="0 0 68 35" aria-hidden="true"><path d="M5 27h11V12h17v16h14V6h16"/><path class="mini-terrain" d="M4 33h59M13 4v5M52 13v19"/></svg>
+        <span>עיר<small>אחרי חצות</small></span><b dir="ltr">02</b>
+      </button>
+      <button class="destination" data-track="ridge" aria-pressed="false">
+        <svg viewBox="0 0 68 35" aria-hidden="true"><path d="M3 30 20 8l13 17L46 4l19 26"/><path class="mini-terrain" d="m14 15 6 5 5-5M39 15l7 5 6-5"/></svg>
+        <span>הר<small>מעל העננים</small></span><b dir="ltr">03</b>
+      </button>
+    </nav>
+
+    <section class="scene-caption" aria-live="polite">
+      <div class="eyebrow"><span class="line"></span><span id="sceneEnglish" dir="ltr">SOLSTICE COAST</span></div>
+      <h1 id="sceneName">דרך החוף</h1>
+      <p id="sceneDescription">האופק פתוח. הדרך שלך.</p>
+    </section>
+
+    <div class="view-tools" role="group" aria-label="אפשרויות מצלמה">
+      <button class="tool-button active" id="driveButton" aria-pressed="true" title="נסיעה / מקש D">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 8 2-4h6l2 4M5 8h14v10H5zM8 12h1m6 0h1M7 18v2m10-2v2"/></svg><span>נסיעה</span>
+      </button>
+      <button class="tool-button" id="garageButton" aria-pressed="false" title="סיבוב סביב הרכב / מקש G">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7c3-4 11-4 14 0m0 0V3m0 4h-4M19 17c-3 4-11 4-14 0m0 0v4m0-4h4"/><path d="M8 10h8v5H8z"/></svg><span>מבט רכב</span>
+      </button>
+      <button class="tool-button" id="distanceButton" aria-pressed="false" title="קרוב / רחוק / מקש V">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5M9 9l-4-4m10 4 4-4M9 15l-4 4m10-4 4 4"/></svg><span id="distanceLabel">להתרחק</span>
+      </button>
+      <button class="tool-button" id="pauseButton" aria-pressed="false" title="השהיה / רווח">
+        <svg id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span id="pauseLabel">השהיה</span>
+      </button>
+    </div>
+
+    <aside class="telemetry" aria-label="מצב נסיעה">
+      <div class="speed"><span id="speedValue" dir="ltr">184</span><span class="speed-unit">קמ״ש</span></div>
+      <div class="speed-rule"><i id="speedBar"></i></div>
+      <div class="drive-state"><span id="driveStatus">שיוט חופשי</span><span dir="ltr" id="gearValue">D 4</span></div>
+    </aside>
+    <button id="overviewButton" class="minimap-button" aria-label="מבט על המסלול המלא" aria-pressed="false"><canvas id="minimap" width="168" height="168" aria-hidden="true"></canvas><span id="overviewLabel">המסלול המלא</span></button>
+
+    <section class="garage" aria-label="בחירת רכב וצבע">
+      <div class="garage-top"><span class="garage-label">בחרו את הדרך שלכם</span><span id="selectedCar" dir="ltr">01 / APEX</span></div>
+      <div class="car-list" role="group" aria-label="חמשת הרכבים">
+        <button class="car-choice active" data-car="apex" aria-label="קופה, דגם 01" aria-pressed="true"><span class="car-silhouette coupe"></span><span><b>01</b> קופה</span></button>
+        <button class="car-choice" data-car="velour" aria-label="GT, דגם 02" aria-pressed="false"><span class="car-silhouette gt"></span><span><b>02</b> GT</span></button>
+        <button class="car-choice" data-car="prism" aria-label="טריז, דגם 03" aria-pressed="false"><span class="car-silhouette wedge"></span><span><b>03</b> טריז</span></button>
+        <button class="car-choice" data-car="solis" aria-label="רודסטר, דגם 04" aria-pressed="false"><span class="car-silhouette roadster"></span><span><b>04</b> רודסטר</span></button>
+        <button class="car-choice" data-car="vector" aria-label="מסלול, דגם 05" aria-pressed="false"><span class="car-silhouette track"></span><span><b>05</b> מסלול</span></button>
+      </div>
+      <div class="garage-bottom">
+        <div class="swatches" role="group" aria-label="צבע הרכב">
+          <button class="swatch active" data-color="#14c6b8" style="--swatch:#14c6b8" aria-label="טורקיז" aria-pressed="true"></button>
+          <button class="swatch" data-color="#ef6c32" style="--swatch:#ef6c32" aria-label="כתום" aria-pressed="false"></button>
+          <button class="swatch" data-color="#8b5cf6" style="--swatch:#8b5cf6" aria-label="סגול" aria-pressed="false"></button>
+          <button class="swatch" data-color="#e8dfc4" style="--swatch:#e8dfc4" aria-label="שנהב" aria-pressed="false"></button>
+          <button class="swatch" data-color="#c2e940" style="--swatch:#c2e940" aria-label="ליים" aria-pressed="false"></button>
+        </div>
+        <button id="driftButton" class="drift-button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 17v-4c0-5 6-3 6-8V3m0 0L6 7m4-4 4 4M15 13l-2 4m5-5-2 4"/></svg> דריפט</button>
+        <button id="boostButton" class="boost-button" aria-pressed="false"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="m9 1-7 11h5l-1 7 8-12H9z"/></svg> בוסט</button>
+      </div>
+    </section>
+
+    <div id="loading" class="loading" role="status"><span class="loading-wheel"></span><strong>פותחים את הדרך</strong><small>מכינים את הרכב והמסלול…</small></div>
+    <div id="toast" role="status"></div>
+    <dialog id="infoDialog" aria-labelledby="infoTitle">
+      <form method="dialog"><button class="dialog-close" aria-label="סגירה">×</button></form>
+      <div class="eyebrow">הדרך פתוחה</div><h2 id="infoTitle">פשוט לצאת לדרך.</h2>
+      <p>בחרו מסלול ורכב, החליפו צבע וצאו לסיור אוטומטי. במבט רכב אפשר לגרור לסיבוב ולצבוט לזום.</p>
+      <div class="settings-row"><label for="paceRange">קצב נסיעה</label><output id="paceOutput">184 קמ״ש</output></div>
+      <input id="paceRange" type="range" min="0" max="240" value="184" step="1">
+      <div class="settings-row"><label for="qualitySelect">איכות תצוגה</label><select id="qualitySelect"><option value="auto">אוטומטית</option><option value="high">גבוהה</option><option value="low">חסכונית</option></select></div>
+      <div class="settings-row"><label for="motionToggle">אפקט מהירות</label><input id="motionToggle" type="checkbox" checked></div>
+      <p class="help-keys">מקלדת: רווח להשהיה · V למרחק · G למבט רכב · D לנסיעה · חצים להטיה · Shift לבוסט</p>
+      <details><summary>פרטי החבילה</summary><p>חמישה דגמים ושלושה מסלולים בדיוניים. התצוגה מקומית. זהו סיור חזותי בנכסים; חיבור למרוץ נמצא מחוץ לחבילה.</p><pre id="diagnostics"></pre><a href="./REPORT.md">דוח מסירה</a> · <a href="./LICENSES.md">מקורות ורישיונות</a></details>
+    </dialog>
+  </main>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

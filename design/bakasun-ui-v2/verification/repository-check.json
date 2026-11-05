@@ -1,0 +1,19 @@
+{
+  "command": "npm test",
+  "exit_code": 1,
+  "finished_at": "2026-11-04T20:50:08.897184+00:00",
+  "tests": 269,
+  "suites": 0,
+  "pass": 265,
+  "fail": 4,
+  "cancelled": 0,
+  "skipped": 0,
+  "todo": 0,
+  "failed_files": [
+    "tests/cam-lab-keyframes.test.mjs",
+    "tests/island-browser-csp.test.mjs",
+    "tests/workout-dad-test.test.mjs",
+    "tests/workout-royiki.test.mjs"
+  ],
+  "note": "Initial command ran without the browser socket permission required in this managed sandbox; focused diagnostic rerun follows."
+}

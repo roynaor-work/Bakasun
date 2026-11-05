@@ -1,0 +1,577 @@
+{
+  "round": "02",
+  "startedAt": "2026-11-04T20:36:38.856Z",
+  "browser": "151.0.7922.173",
+  "transport": "loopback HTTP; managed Chromium blocks file:// by policy",
+  "renderer": "Chromium ANGLE / SwiftShader software renderer; not a physical phone",
+  "captures": [
+    {
+      "file": "390x844-near.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "scene",
+      "camera": "near",
+      "time": 10,
+      "engine": "160",
+      "drawCalls": 75,
+      "triangles": 24890,
+      "particles": 210,
+      "crowd": 28,
+      "lod": {
+        "high": 0,
+        "low": 11
+      },
+      "memory": {
+        "geometries": 78,
+        "textures": 24
+      },
+      "loadedAssets": [
+        "street-block",
+        "engine-pumper",
+        "engine-ladder",
+        "response-unit",
+        "crew-nozzle",
+        "crew-tool",
+        "crew-command",
+        "row-house-intact",
+        "corner-store-scorched",
+        "warehouse-burning",
+        "apartment-scorched",
+        "workshop-intact",
+        "hydrant",
+        "street-barrier",
+        "traffic-cone",
+        "street-lamp",
+        "bystander",
+        "bystander-lod",
+        "row-house-intact-lod",
+        "corner-store-scorched-lod",
+        "warehouse-burning-lod",
+        "apartment-scorched-lod",
+        "workshop-intact-lod",
+        "engine-pumper-lod",
+        "engine-ladder-lod",
+        "response-unit-lod",
+        "crew-nozzle-lod",
+        "crew-tool-lod",
+        "crew-command-lod",
+        "corner-store-burning",
+        "corner-store-burning-lod",
+        "apartment-burning",
+        "apartment-burning-lod"
+      ],
+      "horizontalOverflow": false,
+      "simulation": {
+        "time": 9.999999999999975,
+        "water": true,
+        "target": 2,
+        "enabled": true,
+        "buildings": [
+          {
+            "id": 0,
+            "type": "row-house",
+            "heat": 0.1314032104483387,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          },
+          {
+            "id": 1,
+            "type": "corner-store",
+            "heat": 0.6542012354837013,
+            "fuel": 0.996838629612924,
+            "wet": 0,
+            "damage": 0.10157240741933996,
+            "burning": true,
+            "ignitedAt": 9.666666666666643
+          },
+          {
+            "id": 2,
+            "type": "warehouse",
+            "heat": 1,
+            "fuel": 0.8731569730559151,
+            "wet": 0,
+            "damage": 0.3477450192457755,
+            "burning": true,
+            "ignitedAt": 0
+          },
+          {
+            "id": 3,
+            "type": "apartment",
+            "heat": 0.7126788927158104,
+            "fuel": 0.9824572200276775,
+            "wet": 0,
+            "damage": 0.1187972237897545,
+            "burning": true,
+            "ignitedAt": 8.333333333333314
+          },
+          {
+            "id": 4,
+            "type": "workshop",
+            "heat": 0.13142200269916554,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          }
+        ],
+        "events": [
+          {
+            "time": 8.333333333333314,
+            "type": "ignited",
+            "building": 3
+          },
+          {
+            "time": 9.666666666666643,
+            "type": "ignited",
+            "building": 1
+          }
+        ]
+      },
+      "cameraPosition": [
+        20,
+        18,
+        33
+      ],
+      "target": [
+        0.2,
+        1.4,
+        -1.6
+      ]
+    },
+    {
+      "file": "390x844-far.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "view": "scene",
+      "camera": "far",
+      "time": 10,
+      "engine": "160",
+      "drawCalls": 101,
+      "triangles": 28494,
+      "particles": 210,
+      "crowd": 28,
+      "lod": {
+        "high": 0,
+        "low": 11
+      },
+      "memory": {
+        "geometries": 83,
+        "textures": 24
+      },
+      "loadedAssets": [
+        "street-block",
+        "engine-pumper",
+        "engine-ladder",
+        "response-unit",
+        "crew-nozzle",
+        "crew-tool",
+        "crew-command",
+        "row-house-intact",
+        "corner-store-scorched",
+        "warehouse-burning",
+        "apartment-scorched",
+        "workshop-intact",
+        "hydrant",
+        "street-barrier",
+        "traffic-cone",
+        "street-lamp",
+        "bystander",
+        "bystander-lod",
+        "row-house-intact-lod",
+        "corner-store-scorched-lod",
+        "warehouse-burning-lod",
+        "apartment-scorched-lod",
+        "workshop-intact-lod",
+        "engine-pumper-lod",
+        "engine-ladder-lod",
+        "response-unit-lod",
+        "crew-nozzle-lod",
+        "crew-tool-lod",
+        "crew-command-lod",
+        "corner-store-burning",
+        "corner-store-burning-lod",
+        "apartment-burning",
+        "apartment-burning-lod"
+      ],
+      "horizontalOverflow": false,
+      "simulation": {
+        "time": 9.999999999999975,
+        "water": true,
+        "target": 2,
+        "enabled": true,
+        "buildings": [
+          {
+            "id": 0,
+            "type": "row-house",
+            "heat": 0.1314032104483387,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          },
+          {
+            "id": 1,
+            "type": "corner-store",
+            "heat": 0.6542012354837013,
+            "fuel": 0.996838629612924,
+            "wet": 0,
+            "damage": 0.10157240741933996,
+            "burning": true,
+            "ignitedAt": 9.666666666666643
+          },
+          {
+            "id": 2,
+            "type": "warehouse",
+            "heat": 1,
+            "fuel": 0.8731569730559151,
+            "wet": 0,
+            "damage": 0.3477450192457755,
+            "burning": true,
+            "ignitedAt": 0
+          },
+          {
+            "id": 3,
+            "type": "apartment",
+            "heat": 0.7126788927158104,
+            "fuel": 0.9824572200276775,
+            "wet": 0,
+            "damage": 0.1187972237897545,
+            "burning": true,
+            "ignitedAt": 8.333333333333314
+          },
+          {
+            "id": 4,
+            "type": "workshop",
+            "heat": 0.13142200269916554,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          }
+        ],
+        "events": [
+          {
+            "time": 8.333333333333314,
+            "type": "ignited",
+            "building": 3
+          },
+          {
+            "time": 9.666666666666643,
+            "type": "ignited",
+            "building": 1
+          }
+        ]
+      },
+      "cameraPosition": [
+        51.999999999999986,
+        49.99999999999998,
+        66.99999999999999
+      ],
+      "target": [
+        0,
+        1.3,
+        -0.7
+      ]
+    },
+    {
+      "file": "844x390-near.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "scene",
+      "camera": "near",
+      "time": 10,
+      "engine": "160",
+      "drawCalls": 101,
+      "triangles": 59470,
+      "particles": 210,
+      "crowd": 28,
+      "lod": {
+        "high": 4,
+        "low": 7
+      },
+      "memory": {
+        "geometries": 83,
+        "textures": 24
+      },
+      "loadedAssets": [
+        "street-block",
+        "engine-pumper",
+        "engine-ladder",
+        "response-unit",
+        "crew-nozzle",
+        "crew-tool",
+        "crew-command",
+        "row-house-intact",
+        "corner-store-scorched",
+        "warehouse-burning",
+        "apartment-scorched",
+        "workshop-intact",
+        "hydrant",
+        "street-barrier",
+        "traffic-cone",
+        "street-lamp",
+        "bystander",
+        "bystander-lod",
+        "row-house-intact-lod",
+        "corner-store-scorched-lod",
+        "warehouse-burning-lod",
+        "apartment-scorched-lod",
+        "workshop-intact-lod",
+        "engine-pumper-lod",
+        "engine-ladder-lod",
+        "response-unit-lod",
+        "crew-nozzle-lod",
+        "crew-tool-lod",
+        "crew-command-lod",
+        "corner-store-burning",
+        "corner-store-burning-lod",
+        "apartment-burning",
+        "apartment-burning-lod"
+      ],
+      "horizontalOverflow": false,
+      "simulation": {
+        "time": 9.999999999999975,
+        "water": true,
+        "target": 2,
+        "enabled": true,
+        "buildings": [
+          {
+            "id": 0,
+            "type": "row-house",
+            "heat": 0.1314032104483387,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          },
+          {
+            "id": 1,
+            "type": "corner-store",
+            "heat": 0.6542012354837013,
+            "fuel": 0.996838629612924,
+            "wet": 0,
+            "damage": 0.10157240741933996,
+            "burning": true,
+            "ignitedAt": 9.666666666666643
+          },
+          {
+            "id": 2,
+            "type": "warehouse",
+            "heat": 1,
+            "fuel": 0.8731569730559151,
+            "wet": 0,
+            "damage": 0.3477450192457755,
+            "burning": true,
+            "ignitedAt": 0
+          },
+          {
+            "id": 3,
+            "type": "apartment",
+            "heat": 0.7126788927158104,
+            "fuel": 0.9824572200276775,
+            "wet": 0,
+            "damage": 0.1187972237897545,
+            "burning": true,
+            "ignitedAt": 8.333333333333314
+          },
+          {
+            "id": 4,
+            "type": "workshop",
+            "heat": 0.13142200269916554,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          }
+        ],
+        "events": [
+          {
+            "time": 8.333333333333314,
+            "type": "ignited",
+            "building": 3
+          },
+          {
+            "time": 9.666666666666643,
+            "type": "ignited",
+            "building": 1
+          }
+        ]
+      },
+      "cameraPosition": [
+        17,
+        13,
+        24
+      ],
+      "target": [
+        1,
+        1.1,
+        -1.8
+      ]
+    },
+    {
+      "file": "844x390-far.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "view": "scene",
+      "camera": "far",
+      "time": 10,
+      "engine": "160",
+      "drawCalls": 102,
+      "triangles": 28538,
+      "particles": 210,
+      "crowd": 28,
+      "lod": {
+        "high": 0,
+        "low": 11
+      },
+      "memory": {
+        "geometries": 96,
+        "textures": 24
+      },
+      "loadedAssets": [
+        "street-block",
+        "engine-pumper",
+        "engine-ladder",
+        "response-unit",
+        "crew-nozzle",
+        "crew-tool",
+        "crew-command",
+        "row-house-intact",
+        "corner-store-scorched",
+        "warehouse-burning",
+        "apartment-scorched",
+        "workshop-intact",
+        "hydrant",
+        "street-barrier",
+        "traffic-cone",
+        "street-lamp",
+        "bystander",
+        "bystander-lod",
+        "row-house-intact-lod",
+        "corner-store-scorched-lod",
+        "warehouse-burning-lod",
+        "apartment-scorched-lod",
+        "workshop-intact-lod",
+        "engine-pumper-lod",
+        "engine-ladder-lod",
+        "response-unit-lod",
+        "crew-nozzle-lod",
+        "crew-tool-lod",
+        "crew-command-lod",
+        "corner-store-burning",
+        "corner-store-burning-lod",
+        "apartment-burning",
+        "apartment-burning-lod"
+      ],
+      "horizontalOverflow": false,
+      "simulation": {
+        "time": 9.999999999999975,
+        "water": true,
+        "target": 2,
+        "enabled": true,
+        "buildings": [
+          {
+            "id": 0,
+            "type": "row-house",
+            "heat": 0.1314032104483387,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          },
+          {
+            "id": 1,
+            "type": "corner-store",
+            "heat": 0.6542012354837013,
+            "fuel": 0.996838629612924,
+            "wet": 0,
+            "damage": 0.10157240741933996,
+            "burning": true,
+            "ignitedAt": 9.666666666666643
+          },
+          {
+            "id": 2,
+            "type": "warehouse",
+            "heat": 1,
+            "fuel": 0.8731569730559151,
+            "wet": 0,
+            "damage": 0.3477450192457755,
+            "burning": true,
+            "ignitedAt": 0
+          },
+          {
+            "id": 3,
+            "type": "apartment",
+            "heat": 0.7126788927158104,
+            "fuel": 0.9824572200276775,
+            "wet": 0,
+            "damage": 0.1187972237897545,
+            "burning": true,
+            "ignitedAt": 8.333333333333314
+          },
+          {
+            "id": 4,
+            "type": "workshop",
+            "heat": 0.13142200269916554,
+            "fuel": 1,
+            "wet": 0,
+            "damage": 0,
+            "burning": false,
+            "ignitedAt": null
+          }
+        ],
+        "events": [
+          {
+            "time": 8.333333333333314,
+            "type": "ignited",
+            "building": 3
+          },
+          {
+            "time": 9.666666666666643,
+            "type": "ignited",
+            "building": 1
+          }
+        ]
+      },
+      "cameraPosition": [
+        31.000000000000007,
+        24.000000000000004,
+        36
+      ],
+      "target": [
+        0,
+        1,
+        -1
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "completedAt": "2026-11-04T20:36:51.625Z",
+  "passed": true,
+  "sourceHashes": {
+    "preview.html": "b531aa17409d364e0fff44dd08bf277e9d97486315e9017b7483d46c685ad4ac",
+    "preview.css": "f9f62210d45c7e60daec9d64b38e4e951a8b900d1a94366f2d18c2eaec0c9ffa",
+    "preview.js": "f513cef3f6b5e80c6057397562ee4ed7678b76c991f3bc5728d3ecceca7e3b98",
+    "effects.js": "706d7aee6f9d1d1a316b10466f8b5d6fff47df81dd4a004f2f3e8eb79fffc0cd",
+    "simulation.js": "a4706904d2b2d485f1881d3d2d734f5b26517e94ef62b96417ae598c15b47bea",
+    "manifest.json": "d3e11c6993be98bf8d4fb040743c30e5990d184e13bdea15540c5336db06aadf"
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "file": "models/court-hard.glb",
+    "bytes": 132120,
+    "MB": 0.13212,
+    "sha256": "0750effa13be0a81ba9b061fcaed8062cd3d5e7af0a6287c80ee3aa81ee44418",
+    "triangles": 1168,
+    "vertices": 849,
+    "kind": "court",
+    "surface": "hard",
+    "dimensions": {
+      "length": 23.77,
+      "doubles": 10.97,
+      "singles": 8.23,
+      "service": 6.4
+    },
+    "textures": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "file": "textures/hard-court.jpg"
+      }
+    ]
+  },
+  {
+    "file": "models/court-clay.glb",
+    "bytes": 235788,
+    "MB": 0.235788,
+    "sha256": "5345c465c30114e01c983bcfe56511db3296a797fdec341b0422a35566494a1d",
+    "triangles": 1168,
+    "vertices": 849,
+    "kind": "court",
+    "surface": "clay",
+    "dimensions": {
+      "length": 23.77,
+      "doubles": 10.97,
+      "singles": 8.23,
+      "service": 6.4
+    },
+    "textures": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "file": "textures/clay-court.jpg"
+      }
+    ]
+  },
+  {
+    "file": "models/court-grass.glb",
+    "bytes": 207540,
+    "MB": 0.20754,
+    "sha256": "76071edce8a6a6c22b6420caa2f07cef2149fe7d64c898592b7d83042c0471f4",
+    "triangles": 1168,
+    "vertices": 849,
+    "kind": "court",
+    "surface": "grass",
+    "dimensions": {
+      "length": 23.77,
+      "doubles": 10.97,
+      "singles": 8.23,
+      "service": 6.4
+    },
+    "textures": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "file": "textures/grass-court.jpg"
+      }
+    ]
+  },
+  {
+    "file": "models/venue.glb",
+    "bytes": 20740,
+    "MB": 0.02074,
+    "sha256": "10c6f1490e9a27facc8e2609b94db1be92f08acc903a19c365a39fe7ef7c7dce",
+    "triangles": 6316,
+    "vertices": 6771,
+    "kind": "venue",
+    "contains": [
+      "terraces",
+      "canopy",
+      "floodlights",
+      "umpire-chair",
+      "benches",
+      "trees"
+    ]
+  },
+  {
+    "file": "models/crowd-prototypes.glb",
+    "bytes": 6380,
+    "MB": 0.00638,
+    "sha256": "0e3d4d1eb700ec4e7d2b9d33cc657d0a0030951fd48a51d934d65585a0a86517",
+    "triangles": 566,
+    "vertices": 650,
+    "kind": "instancing-prototypes",
+    "instancesBaked": false
+  },
+  {
+    "file": "models/crew.glb",
+    "bytes": 22616,
+    "MB": 0.022616,
+    "sha256": "237d2fddd42837063228979e281a5d6c6ac3d80a7b567d3bdee0a9d10a5610b1",
+    "triangles": 5336,
+    "vertices": 4729,
+    "kind": "crew",
+    "umpires": 1,
+    "lineJudges": 4,
+    "photographers": 2
+  }
+]

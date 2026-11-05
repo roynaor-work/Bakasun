@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 2,
+  "startedAt": "2026-11-05T00:06:32.807Z",
+  "playbackProtocol": "At least10 wall-clock seconds of actual playback with independently observed time changes and rendered frames. Unfinished one-shots then receive a separately recorded seek-assisted near-end probe. This does not claim that every full clip naturally completes in ten seconds under software rendering.",
+  "sourceHTMLSHA256": "7ca632790d23dffa8bda9e4d054a625317fad296a4541c1ac6426a9b96fec6e5",
+  "dwellSeconds": 10,
+  "expectedCases": 504,
+  "devicePixelRatio": 1.5,
+  "minimumProgressTimeoutSeconds": 45,
+  "endProbeTimeoutSeconds": 45,
+  "screenshotTimeoutSeconds": 90,
+  "toolSourceSHA256": "5dfce9b27d0f714302a725d84b5714bf94beddc05cff42bb9814532ec9200842",
+  "execution": {
+    "node": "v24.19.0",
+    "cpuAffinity": "0-2",
+    "cpuQuota": "400000 100000"
+  },
+  "renderer": "Chromium / ANGLE SwiftShader, software rendering; not physical phone performance",
+  "errors": [],
+  "externalRequests": [],
+  "baselines": [
+    {
+      "size": [
+        390,
+        844
+      ],
+      "snapshot": {
+        "focus": "athlete",
+        "athlete": 2,
+        "clip": "glide",
+        "environment": "sunset",
+        "view": "close",
+        "playing": false,
+        "time": 0,
+        "speed": 1,
+        "detail": "low",
+        "yaw": 0.55,
+        "elevation": 0.13,
+        "distance": 8.235,
+        "wire": false,
+        "rig": false,
+        "ready": true,
+        "activeLOD": 2,
+        "lastDraw": 11441.5,
+        "viewport": [
+          390,
+          844
+        ],
+        "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+        "bundleSources": {
+          "three": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+          "geometry": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+          "gltf": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+          "draco": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+          "world": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1",
+          "motion": "db9237533fcbb21520823fb97f455c358ae884223af0b5bec0e4b4ecbdc3338c",
+          "preview": "3b634bb1d291eab5aa40128b26eb53555b1c5e537a3e3e45495611ac4d942328"
+        },
+        "threeRevision": "160",
+        "render": {
+          "frame": 27,
+          "calls": 42,
+          "triangles": 55642,
+          "points": 96,
+          "lines": 0
+        },
+        "renderScope": "main and shadow passes; excludes PMREM setup",
+        "memory": {
+          "geometries": 76,
+          "textures": 24
+        },
+        "programs": 20,
+        "actorScale": 1.35,
+        "pixelRatio": 1.5,
+        "drawingBufferSize": [
+          585,
+          1266
+        ],
+        "loadedRecords": 9,
+        "characterRoots": 9,
+        "pendingLoads": 0,
+        "fps": 0,
+        "renderSamples": [],
+        "clips": [
+          {
+            "name": "glide",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "carve_left",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "carve_right",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "crouch",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "accelerate",
+            "duration": 2.5999999046325684
+          },
+          {
+            "name": "ramp_jump",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_180",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_360",
+            "duration": 3.5999999046325684
+          },
+          {
+            "name": "trick_shifty",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_tail_grab",
+            "duration": 3.4000000953674316
+          },
+          {
+            "name": "trick_backflip",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "fall_roll",
+            "duration": 4
+          },
+          {
+            "name": "get_up",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "celebrate",
+            "duration": 3
+          }
+        ],
+        "events": [],
+        "worldStats": {
+          "trees": 2,
+          "treeLOD": [
+            0,
+            0,
+            2
+          ],
+          "crowd": 36,
+          "particleCapacity": 96,
+          "activeParticles": 0,
+          "materialTextureBytesWithMipmaps": 12582912,
+          "pineAtlasBytesWithMipmaps": 5592405,
+          "backgroundTextureBytesAllLoaded": 12116736,
+          "environment": "sunset",
+          "drawCallsStatic": 27,
+          "worldTriangles": 53064,
+          "treeThresholdsMeters": [
+            15,
+            34,
+            100
+          ],
+          "instancing": true
+        }
+      }
+    },
+    {
+      "size": [
+        844,
+        390
+      ],
+      "snapshot": {
+        "focus": "athlete",
+        "athlete": 2,
+        "clip": "glide",
+        "environment": "sunset",
+        "view": "close",
+        "playing": false,
+        "time": 0,
+        "speed": 1,
+        "detail": "low",
+        "yaw": 0.55,
+        "elevation": 0.13,
+        "distance": 8.235,
+        "wire": false,
+        "rig": false,
+        "ready": true,
+        "activeLOD": 2,
+        "lastDraw": 13725.39999999851,
+        "viewport": [
+          844,
+          390
+        ],
+        "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+        "bundleSources": {
+          "three": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+          "geometry": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+          "gltf": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+          "draco": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+          "world": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1",
+          "motion": "db9237533fcbb21520823fb97f455c358ae884223af0b5bec0e4b4ecbdc3338c",
+          "preview": "3b634bb1d291eab5aa40128b26eb53555b1c5e537a3e3e45495611ac4d942328"
+        },
+        "threeRevision": "160",
+        "render": {
+          "frame": 27,
+          "calls": 47,
+          "triangles": 55082,
+          "points": 96,
+          "lines": 0
+        },
+        "renderScope": "main and shadow passes; excludes PMREM setup",
+        "memory": {
+          "geometries": 77,
+          "textures": 24
+        },
+        "programs": 21,
+        "actorScale": 1.35,
+        "pixelRatio": 1.5,
+        "drawingBufferSize": [
+          1266,
+          585
+        ],
+        "loadedRecords": 9,
+        "characterRoots": 9,
+        "pendingLoads": 0,
+        "fps": 0,
+        "renderSamples": [],
+        "clips": [
+          {
+            "name": "glide",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "carve_left",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "carve_right",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "crouch",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "accelerate",
+            "duration": 2.5999999046325684
+          },
+          {
+            "name": "ramp_jump",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_180",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_360",
+            "duration": 3.5999999046325684
+          },
+          {
+            "name": "trick_shifty",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_tail_grab",
+            "duration": 3.4000000953674316
+          },
+          {
+            "name": "trick_backflip",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "fall_roll",
+            "duration": 4
+          },
+          {
+            "name": "get_up",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "celebrate",
+            "duration": 3
+          }
+        ],
+        "events": [],
+        "worldStats": {
+          "trees": 13,
+          "treeLOD": [
+            0,
+            6,
+            7
+          ],
+          "crowd": 36,
+          "particleCapacity": 96,
+          "activeParticles": 0,
+          "materialTextureBytesWithMipmaps": 12582912,
+          "pineAtlasBytesWithMipmaps": 5592405,
+          "backgroundTextureBytesAllLoaded": 12116736,
+          "environment": "sunset",
+          "drawCallsStatic": 28,
+          "worldTriangles": 53132,
+          "treeThresholdsMeters": [
+            15,
+            34,
+            100
+          ],
+          "instancing": true
+        }
+      }
+    }
+  ],
+  "recoveryBaselines": [
+    {
+      "size": [
+        844,
+        390
+      ],
+      "snapshot": {
+        "focus": "athlete",
+        "athlete": 2,
+        "clip": "glide",
+        "environment": "sunset",
+        "view": "close",
+        "playing": false,
+        "time": 0,
+        "speed": 1,
+        "detail": "low",
+        "yaw": 0.55,
+        "elevation": 0.13,
+        "distance": 8.235,
+        "wire": false,
+        "rig": false,
+        "ready": true,
+        "activeLOD": 2,
+        "lastDraw": 13395.79999999702,
+        "viewport": [
+          844,
+          390
+        ],
+        "bundleBuiltAt": "2026-11-04T23:25:42.006Z",
+        "bundleSources": {
+          "three": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+          "geometry": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+          "gltf": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+          "draco": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+          "world": "f307bd77e3a767eee7662127c94df56fe6a48ddc25d7639e99dcbd1062da97e1",
+          "motion": "db9237533fcbb21520823fb97f455c358ae884223af0b5bec0e4b4ecbdc3338c",
+          "preview": "3b634bb1d291eab5aa40128b26eb53555b1c5e537a3e3e45495611ac4d942328"
+        },
+        "threeRevision": "160",
+        "render": {
+          "frame": 27,
+          "calls": 47,
+          "triangles": 55082,
+          "points": 96,
+          "lines": 0
+        },
+        "renderScope": "main and shadow passes; excludes PMREM setup",
+        "memory": {
+          "geometries": 77,
+          "textures": 24
+        },
+        "programs": 21,
+        "actorScale": 1.35,
+        "pixelRatio": 1.5,
+        "drawingBufferSize": [
+          1266,
+          585
+        ],
+        "loadedRecords": 9,
+        "characterRoots": 9,
+        "pendingLoads": 0,
+        "fps": 0,
+        "renderSamples": [],
+        "clips": [
+          {
+            "name": "glide",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "carve_left",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "carve_right",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "crouch",
+            "duration": 2.4000000953674316
+          },
+          {
+            "name": "accelerate",
+            "duration": 2.5999999046325684
+          },
+          {
+            "name": "ramp_jump",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_180",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_360",
+            "duration": 3.5999999046325684
+          },
+          {
+            "name": "trick_shifty",
+            "duration": 3.200000047683716
+          },
+          {
+            "name": "trick_tail_grab",
+            "duration": 3.4000000953674316
+          },
+          {
+            "name": "trick_backflip",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "fall_roll",
+            "duration": 4
+          },
+          {
+            "name": "get_up",
+            "duration": 3.799999952316284
+          },
+          {
+            "name": "celebrate",
+            "duration": 3
+          }
+        ],
+        "events": [],
+        "worldStats": {
+          "trees": 13,
+          "treeLOD": [
+            0,
+            6,
+            7
+          ],
+          "crowd": 36,
+          "particleCapacity": 96,
+          "activeParticles": 0,
+          "materialTextureBytesWithMipmaps": 12582912,
+          "pineAtlasBytesWithMipmaps": 5592405,
+          "backgroundTextureBytesAllLoaded": 12116736,
+          "environment": "sunset",
+          "drawCallsStatic": 28,
+          "worldTriangles": 53132,
+          "treeThresholdsMeters": [
+            15,
+            34,
+            100
+          ],
+          "instancing": true
+        }
+      },
+      "controllerSegment": 2,
+      "observedAt": "2026-11-05T01:14:38.802Z"
+    }
+  ],
+  "continuations": [
+    {
+      "index": 1,
+      "resumedAt": "2026-11-05T01:14:23.420Z",
+      "completedPrefix": 285,
+      "incompleteCase": "286",
+      "reason": "Original Playwright screenshot timed out after30000ms; incomplete286 is fully rerun with90s capture patience and explicit retry evidence",
+      "archiveDirectory": "verification/matrix/continuation-01",
+      "prefixSHA256": "7edac607068b9d2ad452b5186232b4187051449416b3dcfea3be413f8ef4d381",
+      "previousJournalSHA256": "92b1feaa01897be2717fc3f463dbc9ebe6ef54134dc8b15f5b440f3796ec5495",
+      "previousLogSHA256": "f2e21ac60427f2eecd27084e25a101193f96b43e9d7fb1ef446ff81303d7d5fd",
+      "previousControllerSHA256": "6c33eb217a3daabbd5c7aa3def82ccc85f1620b31e9669b1539dfdac7dbbdc9d",
+      "replayStart": 253,
+      "replayEnd": 285,
+      "replayDirectory": "verification/matrix/replay-01"
+    }
+  ],
+  "controllerSegments": [
+    {
+      "index": 1,
+      "firstCase": 1,
+      "lastCase": 285,
+      "startedAt": "2026-11-05T00:06:32.807Z",
+      "lastCheckpointAt": "2026-11-05T01:05:28.907Z",
+      "sourceFile": "verification/matrix/continuation-01/controller.mjs",
+      "toolSourceSHA256": "6c33eb217a3daabbd5c7aa3def82ccc85f1620b31e9669b1539dfdac7dbbdc9d"
+    },
+    {
+      "index": 2,
+      "firstCase": 286,
+      "lastCase": 504,
+      "startedAt": "2026-11-05T01:14:23.420Z",
+      "sourceFile": "verification/matrix/controller-02.mjs",
+      "toolSourceSHA256": "5dfce9b27d0f714302a725d84b5714bf94beddc05cff42bb9814532ec9200842"
+    }
+  ],
+  "completedAt": "2026-11-05T02:12:39.303Z",
+  "durationMinutes": 126.10826666666667,
+  "pass": true,
+  "summary": {
+    "cases": 504,
+    "seekAssistedEndProbes": 324,
+    "naturalOneShotEnds": 0,
+    "failures": [],
+    "maxGeometries": 85,
+    "maxTextures": 26
+  },
+  "updatedAt": "2026-11-05T02:12:39.397Z",
+  "caseCount": 504,
+  "replayCaseCount": 33,
+  "replayExpectedCount": 33,
+  "replayLastId": "285",
+  "replayFailures": [],
+  "lastCompletedId": "504"
+}

@@ -1,0 +1,4139 @@
+{
+  "iteration": "01",
+  "startedAtUtc": "2026-11-04T20:20:12.357Z",
+  "finishedAtUtc": "2026-11-04T20:20:44.174Z",
+  "renderer": "Chromium WebGL ANGLE SwiftShader; software rendering, no physical-phone FPS inference",
+  "inputs": [
+    {
+      "file": "BRIEF.md",
+      "bytes": 3684,
+      "sha256": "ac04ab231561598df47c5a92976dc04cb13d7dae0e78adc96bcc4e2b82df80b9"
+    },
+    {
+      "file": "index.html",
+      "bytes": 7218,
+      "sha256": "5043128784929588556b3e21dfe07bf02ef9700e6592dbb130d439d80e77b4fb"
+    },
+    {
+      "file": "model-authoring.json",
+      "bytes": 69144,
+      "sha256": "cb6d6a799dd6a87bf6e38422389ea6e849c505062bf1affb4916fe0e3164d47e"
+    },
+    {
+      "file": "models/c-lod1.glb",
+      "bytes": 995392,
+      "sha256": "21fa5d5cbbceeb026624a3e24f75acbe64db6226b54b05aee5d2f0537252622f"
+    },
+    {
+      "file": "models/c.glb",
+      "bytes": 1251060,
+      "sha256": "4e1b2faada09835fef22e419d50c22a7fdb0a13809773e0296c65ef92a3939c2"
+    },
+    {
+      "file": "models/pf-lod1.glb",
+      "bytes": 1004116,
+      "sha256": "a1835862d89cbd63546a948a61631dbff074077c25d0d4d244685dac7bf44dea"
+    },
+    {
+      "file": "models/pf.glb",
+      "bytes": 1257032,
+      "sha256": "89dd43dbfda7ff39ecdd76392da00f851a28a4f93e701b71de6dde9b7d888b15"
+    },
+    {
+      "file": "models/pg-lod1.glb",
+      "bytes": 982176,
+      "sha256": "a83ae928cfb338b9f896b4deebfce4067cc9522b79d9f66b89ad212541eecd42"
+    },
+    {
+      "file": "models/pg.glb",
+      "bytes": 1237472,
+      "sha256": "64399fc81bc142def30f9fd8c43114d7dc4f1c6ced7891f46e526ce5dc966c88"
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "bytes": 1094540,
+      "sha256": "053ea92905cd18ca05270c5ea29e1ee6c72d99e3f43b1492f9f925ed43be29cd"
+    },
+    {
+      "file": "models/referee.glb",
+      "bytes": 1343328,
+      "sha256": "dfead55c364f7daa4e62538a2376f30db59d996ac657f6a2859615f176651503"
+    },
+    {
+      "file": "models/sf-lod1.glb",
+      "bytes": 1112912,
+      "sha256": "9819e01832d421920f7889ae8f282e492627697c8d37ae28845881bede972e19"
+    },
+    {
+      "file": "models/sf.glb",
+      "bytes": 1376944,
+      "sha256": "b6f8f0f910ab388c6f646a3614113da3f14f8590542c02b649538974b91a0f48"
+    },
+    {
+      "file": "models/sg-lod1.glb",
+      "bytes": 1058836,
+      "sha256": "3e3ee4520a1f0b8ab9839d7a959419930484043b4f7edf53001ad51446f2aa24"
+    },
+    {
+      "file": "models/sg.glb",
+      "bytes": 1331056,
+      "sha256": "6749c980472030217568870ea14e9bd97d8682e627dae94fe3abab7ecb544ec1"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 15037,
+      "sha256": "fb238b394c3e42cf8f168280964451bee01bc0d11beb50de5bdf3901672041d4"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 27629,
+      "sha256": "9dfbfcd72bdf0abe85be1164e8016e45605019ba0f28e0b346923465ea10fc56"
+    },
+    {
+      "file": "REFERENCE.md",
+      "bytes": 2822,
+      "sha256": "dfa4756da7ddcf3e48d547811f99b874e7599fe670757ec6516df9b0d3d130c2"
+    },
+    {
+      "file": "rig.json",
+      "bytes": 58315,
+      "sha256": "2edcfb93c5cefd2af878d9b482b5dfe3e6ac97024d823ae58522eebd437be287"
+    },
+    {
+      "file": "source/build_characters.mjs",
+      "bytes": 18016,
+      "sha256": "fd70c62090982b4f5c296777b91e856cfe340fcb5d5346c5d03f515c20d9b5d8"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 7565,
+      "sha256": "4287f8abe1d8a52c7df859abb160685f19f2bf42c97272164d763d77549acc10"
+    },
+    {
+      "file": "source/model_helpers_atlas.py",
+      "bytes": 4829,
+      "sha256": "ae8390b7e70679d8e1873a93c80ddf3a74130d07c0bb556354c0edb9977c1f99"
+    },
+    {
+      "file": "source/motion.mjs",
+      "bytes": 29568,
+      "sha256": "e651f2e204870a72ae4de30632783765b8b7079680b987e56bd3a8414f6e6535"
+    },
+    {
+      "file": "source/package-offline.mjs",
+      "bytes": 2824,
+      "sha256": "eafa1667d411826aa1847777eeb5adf545e26fc989313f399e36a5e557b2bd77"
+    },
+    {
+      "file": "source/validate-assets.mjs",
+      "bytes": 18814,
+      "sha256": "fa1cc2281d35b92553929bcf653fd515ace4c9c7ad2d83e6347ff048be76a2f4"
+    },
+    {
+      "file": "textures/atlas-layout.json",
+      "bytes": 664,
+      "sha256": "295e0b9b94aeaa8c9877b1742a76f599c15f36770d7e8ccc0d5fef34872a8a61"
+    },
+    {
+      "file": "textures/c-atlas.png",
+      "bytes": 618586,
+      "sha256": "a9b05a245ef3ea3b4cfdca2967d7bb0946bcfdd462807db572da5b212c68bdb4"
+    },
+    {
+      "file": "textures/cloth-normal.png",
+      "bytes": 50110,
+      "sha256": "dce2b38e0df0c0aa79122636273fcf5267d8f2191c72ff5c510926ae80374af8"
+    },
+    {
+      "file": "textures/pf-atlas.png",
+      "bytes": 623423,
+      "sha256": "f606cdf2fa198513f1dfcff7fcc7425efa056592f47de3977ad546e87666cf29"
+    },
+    {
+      "file": "textures/pg-atlas.png",
+      "bytes": 630349,
+      "sha256": "83d0304ea4cb7ce6f15814cdf56c0ca09ecd083489cbcde5ef192732f9719354"
+    },
+    {
+      "file": "textures/referee-atlas.png",
+      "bytes": 730547,
+      "sha256": "2de9766cd7947ad07281a015c6609155db93a6712d6c1e848384f573d1a475fc"
+    },
+    {
+      "file": "textures/sf-atlas.png",
+      "bytes": 715652,
+      "sha256": "7b350909d44b204500e15bbbfb422d7df7fa6e83af1a9b2bda7948a46ea6838a"
+    },
+    {
+      "file": "textures/sg-atlas.png",
+      "bytes": 693692,
+      "sha256": "85ea16ad28d0a6579c64927458cc436cf1010e59ce1cf40b9c4f7a4fafad6336"
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "file": "vendor/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "file": "vendor/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "file": "vendor/draco/LICENSE.draco",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "vendor/draco/README.md",
+      "bytes": 407,
+      "sha256": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923"
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "bytes": 13640,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "bytes": 8019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    },
+    {
+      "file": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ],
+  "changedDuringCapture": [
+    "preview.mjs",
+    "source/build_characters.mjs",
+    "source/motion.mjs",
+    "source/validate-assets.mjs"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "cases": [
+    {
+      "name": "layout-390x844",
+      "noHorizontalOverflow": true,
+      "details": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "buttons": [
+          {
+            "text": "חזית",
+            "width": 33.21875,
+            "height": 27,
+            "x": 14,
+            "y": 106
+          },
+          {
+            "text": "¾",
+            "width": 23.515625,
+            "height": 27,
+            "x": 49.21875,
+            "y": 106
+          },
+          {
+            "text": "גב",
+            "width": 25.203125,
+            "height": 27,
+            "x": 74.734375,
+            "y": 106
+          },
+          {
+            "text": "↺",
+            "width": 30.578125,
+            "height": 27,
+            "x": 101.9375,
+            "y": 106
+          },
+          {
+            "text": "גוף מלא",
+            "width": 52.78125,
+            "height": 30,
+            "x": 326.21875,
+            "y": 477.125
+          },
+          {
+            "text": "החמישייה + שופט",
+            "width": 89.453125,
+            "height": 30,
+            "x": 232.765625,
+            "y": 477.125
+          },
+          {
+            "text": "פנים",
+            "width": 39.265625,
+            "height": 30,
+            "x": 189.5,
+            "y": 477.125
+          },
+          {
+            "text": "מגע בכדור",
+            "width": 61.796875,
+            "height": 30,
+            "x": 123.703125,
+            "y": 477.125
+          },
+          {
+            "text": "בד",
+            "width": 32.375,
+            "height": 30,
+            "x": 87.328125,
+            "y": 477.125
+          },
+          {
+            "text": "PG",
+            "width": 55.5,
+            "height": 34,
+            "x": 16,
+            "y": 582.3125
+          },
+          {
+            "text": "SG",
+            "width": 55.5,
+            "height": 34,
+            "x": 76.5,
+            "y": 582.3125
+          },
+          {
+            "text": "SF",
+            "width": 55.5,
+            "height": 34,
+            "x": 137,
+            "y": 582.3125
+          },
+          {
+            "text": "PF",
+            "width": 55.5,
+            "height": 34,
+            "x": 197.5,
+            "y": 582.3125
+          },
+          {
+            "text": "C",
+            "width": 55.5,
+            "height": 34,
+            "x": 258,
+            "y": 582.3125
+          },
+          {
+            "text": "שופט",
+            "width": 55.5,
+            "height": 34,
+            "x": 318.5,
+            "y": 582.3125
+          },
+          {
+            "text": "▶ניגון",
+            "width": 75,
+            "height": 32,
+            "x": 299,
+            "y": 702
+          },
+          {
+            "text": "כדרור ↔ אחיזה",
+            "width": 211,
+            "height": 32,
+            "x": 16,
+            "y": 702
+          },
+          {
+            "text": "טורקיז",
+            "width": 146.140625,
+            "height": 28,
+            "x": 168.15625,
+            "y": 765
+          },
+          {
+            "text": "שנהב",
+            "width": 146.15625,
+            "height": 28,
+            "x": 16,
+            "y": 765
+          },
+          {
+            "text": "העתקת דוח מדידה",
+            "width": 358,
+            "height": 30,
+            "x": 16,
+            "y": 981.390625
+          }
+        ]
+      }
+    },
+    {
+      "name": "layout-844x390",
+      "noHorizontalOverflow": true,
+      "details": {
+        "innerWidth": 844,
+        "innerHeight": 390,
+        "scrollWidth": 844,
+        "scrollHeight": 390,
+        "buttons": [
+          {
+            "text": "חזית",
+            "width": 31.296875,
+            "height": 25,
+            "x": 15,
+            "y": 87
+          },
+          {
+            "text": "¾",
+            "width": 22.671875,
+            "height": 25,
+            "x": 49.296875,
+            "y": 87
+          },
+          {
+            "text": "גב",
+            "width": 24.171875,
+            "height": 25,
+            "x": 74.96875,
+            "y": 87
+          },
+          {
+            "text": "↺",
+            "width": 29.734375,
+            "height": 25,
+            "x": 102.140625,
+            "y": 87
+          },
+          {
+            "text": "גוף מלא",
+            "width": 51.359375,
+            "height": 27,
+            "x": 391.265625,
+            "y": 326
+          },
+          {
+            "text": "החמישייה + שופט",
+            "width": 83.953125,
+            "height": 27,
+            "x": 303.3125,
+            "y": 326
+          },
+          {
+            "text": "פנים",
+            "width": 39.34375,
+            "height": 27,
+            "x": 259.96875,
+            "y": 326
+          },
+          {
+            "text": "מגע בכדור",
+            "width": 59.375,
+            "height": 27,
+            "x": 196.59375,
+            "y": 326
+          },
+          {
+            "text": "בד",
+            "width": 33.21875,
+            "height": 27,
+            "x": 159.375,
+            "y": 326
+          },
+          {
+            "text": "PG",
+            "width": 33,
+            "height": 30,
+            "x": 617,
+            "y": 75.1875
+          },
+          {
+            "text": "SG",
+            "width": 33,
+            "height": 30,
+            "x": 653,
+            "y": 75.1875
+          },
+          {
+            "text": "SF",
+            "width": 33,
+            "height": 30,
+            "x": 689,
+            "y": 75.1875
+          },
+          {
+            "text": "PF",
+            "width": 33,
+            "height": 30,
+            "x": 725,
+            "y": 75.1875
+          },
+          {
+            "text": "C",
+            "width": 33,
+            "height": 30,
+            "x": 761,
+            "y": 75.1875
+          },
+          {
+            "text": "שופט",
+            "width": 33,
+            "height": 30,
+            "x": 797,
+            "y": 75.1875
+          },
+          {
+            "text": "▶ניגון",
+            "width": 59,
+            "height": 29,
+            "x": 771,
+            "y": 194.875
+          },
+          {
+            "text": "כדרור ↔ אחיזה",
+            "width": 97,
+            "height": 29,
+            "x": 617,
+            "y": 194.875
+          },
+          {
+            "text": "טורקיז",
+            "width": 103,
+            "height": 29,
+            "x": 727,
+            "y": 293.0625
+          },
+          {
+            "text": "שנהב",
+            "width": 103,
+            "height": 29,
+            "x": 617,
+            "y": 293.0625
+          },
+          {
+            "text": "העתקת דוח מדידה",
+            "width": 213,
+            "height": 30,
+            "x": 617,
+            "y": 527.453125
+          }
+        ]
+      }
+    },
+    {
+      "name": "renderer",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30360,
+          "calls": 15,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.3950436501887784,
+            1.1137525690815284,
+            3.957259593097962
+          ],
+          "target": [
+            0,
+            0.9752000000000001,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 3.9594531697439597
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 29636,
+            "heightMeters": 1.84,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457862,
+                    1.1117360222277832,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457861,
+                    1.1117360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.3877787807814457e-16
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    0.2037013821803743,
+                    0.09346433354104255,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 2.7928509224031823e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037434,
+                    0.09346433354104244,
+                    1.3877787807814457e-17
+                  ],
+                  "errorMeters": 3.927683650008203e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.107,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 15,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "390x844-near.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 30138,
+      "sha256": "a22fb13a9ae2754a67910e62d2f4b446adb020da56436078e365514e5b312c7b",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30148,
+          "calls": 16,
+          "geometries": 26,
+          "textures": 30,
+          "fps": 11.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.38216179203044864,
+            1.0774345505245222,
+            3.828870693323028
+          ],
+          "target": [
+            0,
+            0.9434,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 3.8303405663827435
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-far.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 34198,
+      "sha256": "6c647b4401e1dcd13c1f66d3e519a1a14c70f3ce645c219804693258e2aff21c",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "far",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 98258,
+          "calls": 75,
+          "geometries": 85,
+          "textures": 104,
+          "fps": 11.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.1475542610707586,
+            1.3313516821308877,
+            14.754934256259945
+          ],
+          "target": [
+            0,
+            1.11,
+            0
+          ],
+          "yaw": 0.01,
+          "pitch": 0.015,
+          "distance": 14.757332202457716
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 1,
+            "triangles": 14664,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "sg",
+            "lod": 1,
+            "triangles": 15910,
+            "heightMeters": 1.88,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457857,
+                    1.1357360222277828,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.8041124150158794e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457891,
+                    1.135736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.6653345369377348e-16
+                }
+              ],
+              "handContactErrorMeters": 1.8041124150158794e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    0.21068779270415852,
+                    0.09466885448226853,
+                    4.163336342344337e-17
+                  ],
+                  "errorMeters": 1.2177709378935645e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    -0.21068779270415852,
+                    0.09466885448226875,
+                    6.938893903907228e-17
+                  ],
+                  "errorMeters": 1.3383253895372864e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1309999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "sf",
+            "lod": 1,
+            "triangles": 16732,
+            "heightMeters": 1.99,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.1184005556945786,
+                    1.201736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457884,
+                    1.201736022227783,
+                    0.32105591108886755
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    0.22560475660837154,
+                    0.09999678696057818,
+                    0
+                  ],
+                  "errorMeters": 1.1102230246251565e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    -0.22560475660837154,
+                    0.09999678696057801,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 5.721958498152797e-17
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1969999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "pf",
+            "lod": 1,
+            "triangles": 15782,
+            "heightMeters": 2.09,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457858,
+                    1.261736022227783,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457898,
+                    1.261736022227783,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.942890293094024e-16
+                }
+              ],
+              "handContactErrorMeters": 1.942890293094024e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    0.2633750939368463,
+                    0.10550299168466148,
+                    1.942890293094024e-16
+                  ],
+                  "errorMeters": 2.5589376332604516e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    -0.26337509393684627,
+                    0.10550299168466137,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 1.249000902703301e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.2569999999999997,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "c",
+            "lod": 1,
+            "triangles": 15600,
+            "heightMeters": 2.2,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457865,
+                    1.3277360222277832,
+                    0.3210559110888672
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457855,
+                    1.327736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 2.0816681711721685e-16
+                }
+              ],
+              "handContactErrorMeters": 2.0816681711721685e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    0.23045320719474052,
+                    0.11105578072069633,
+                    5.551115123125783e-17
+                  ],
+                  "errorMeters": 1.2719202621569003e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    -0.23045320719474047,
+                    0.11105578072069644,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 2.5626980138831173e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.323,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "referee",
+            "lod": 1,
+            "triangles": 15236,
+            "heightMeters": 1.84,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457862,
+                    1.1117360222277832,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457861,
+                    1.1117360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.3877787807814457e-16
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    0.2037013821803743,
+                    0.09346433354104255,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 2.7928509224031823e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037434,
+                    0.09346433354104244,
+                    1.3877787807814457e-17
+                  ],
+                  "errorMeters": 3.927683650008203e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.107,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-face.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 34556,
+      "sha256": "432cc331d6b1b1114775cc22aa2b6275dd8967b093addfa2bb8d9cca5ef60ca8",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "face",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 29426,
+          "calls": 14,
+          "geometries": 85,
+          "textures": 104,
+          "fps": 10.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.07421321874923155,
+            1.6362196512539235,
+            0.6354721071254441
+          ],
+          "target": [
+            0,
+            1.6269200000000001,
+            0.02
+          ],
+          "yaw": 0.12,
+          "pitch": 0.015,
+          "distance": 0.62
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-hands.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 34316,
+      "sha256": "1c11af29bf7aa9bca7fcfa07b430064207efab039be6d74a147d4959b8e80f62",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "hands",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30146,
+          "calls": 15,
+          "geometries": 85,
+          "textures": 104,
+          "fps": 10.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.15233942094283773,
+            1.0811998300008498,
+            1.328241256023137
+          ],
+          "target": [
+            -0.1,
+            1.071,
+            0.34
+          ],
+          "yaw": 0.25,
+          "pitch": 0.01,
+          "distance": 1.02
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-cloth.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 31686,
+      "sha256": "a5068656f01a6cc79d208a26dd2fe53948f21ca6a8877e396637e484f309dfcf",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "cloth",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30146,
+          "calls": 15,
+          "geometries": 85,
+          "textures": 104,
+          "fps": 10.2
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.023985602591777844,
+            1.2575364001619964,
+            0.8392802159740818
+          ],
+          "target": [
+            0,
+            1.2335399999999999,
+            0.04
+          ],
+          "yaw": 0.03,
+          "pitch": 0.03,
+          "distance": 0.8
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 4,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-role-sg.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 31114,
+      "sha256": "f77ba6c10867250ba300d5d002ce2bec9640e1f73d30e9c356853bb04b2d2b43",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "sg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 32376,
+          "calls": 16,
+          "geometries": 95,
+          "textures": 117,
+          "fps": 10.8
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4036315556276648,
+            1.137964581452866,
+            4.042852192947916
+          ],
+          "target": [
+            0,
+            0.9964,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.045528238651436
+        },
+        "actors": [
+          {
+            "id": "sg",
+            "lod": 0,
+            "triangles": 31652,
+            "heightMeters": 1.88,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457857,
+                    1.1357360222277828,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.8041124150158794e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457891,
+                    1.135736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.6653345369377348e-16
+                }
+              ],
+              "handContactErrorMeters": 1.8041124150158794e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    0.21068779270415852,
+                    0.09466885448226853,
+                    4.163336342344337e-17
+                  ],
+                  "errorMeters": 1.2177709378935645e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    -0.21068779270415852,
+                    0.09466885448226875,
+                    6.938893903907228e-17
+                  ],
+                  "errorMeters": 1.3383253895372864e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1309999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 5,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-role-sf.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 32232,
+      "sha256": "d80e788863ded6bbf6990b68fb4c866b300c06cf54ffaa5691ae4f68d6337107",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "sf",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 32644,
+          "calls": 16,
+          "geometries": 105,
+          "textures": 130,
+          "fps": 10.8
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4272482955846027,
+            1.2045476154740444,
+            4.278231842535295
+          ],
+          "target": [
+            0,
+            1.0547,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.282234678147
+        },
+        "actors": [
+          {
+            "id": "sf",
+            "lod": 0,
+            "triangles": 31920,
+            "heightMeters": 1.99,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.1184005556945786,
+                    1.201736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457884,
+                    1.201736022227783,
+                    0.32105591108886755
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    0.22560475660837154,
+                    0.09999678696057818,
+                    0
+                  ],
+                  "errorMeters": 1.1102230246251565e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    -0.22560475660837154,
+                    0.09999678696057801,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 5.721958498152797e-17
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1969999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 6,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-role-pf.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 32986,
+      "sha256": "3da01bf78b9d7f5fee4ce88e3f17605d705941a65c211a231dce989278e9e2c5",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "pf",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 31104,
+          "calls": 16,
+          "geometries": 115,
+          "textures": 143,
+          "fps": 10.8
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.44871805918181884,
+            1.2650776464023883,
+            4.492213342160183
+          ],
+          "target": [
+            0,
+            1.1077,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.497422350415692
+        },
+        "actors": [
+          {
+            "id": "pf",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.09,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457858,
+                    1.261736022227783,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457898,
+                    1.261736022227783,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.942890293094024e-16
+                }
+              ],
+              "handContactErrorMeters": 1.942890293094024e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    0.2633750939368463,
+                    0.10550299168466148,
+                    1.942890293094024e-16
+                  ],
+                  "errorMeters": 2.5589376332604516e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    -0.26337509393684627,
+                    0.10550299168466137,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 1.249000902703301e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.2569999999999997,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 7,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-role-c.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 31314,
+      "sha256": "b43853169edd093df8285d480d2369a46a27141009e7d0db60ead755f530761a",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "c",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 31104,
+          "calls": 16,
+          "geometries": 125,
+          "textures": 156,
+          "fps": 11.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4723347991387568,
+            1.331660680423567,
+            4.727592991747563
+          ],
+          "target": [
+            0,
+            1.1660000000000001,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.7341287899112565
+        },
+        "actors": [
+          {
+            "id": "c",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.2,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457865,
+                    1.3277360222277832,
+                    0.3210559110888672
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457855,
+                    1.327736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 2.0816681711721685e-16
+                }
+              ],
+              "handContactErrorMeters": 2.0816681711721685e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    0.23045320719474052,
+                    0.11105578072069633,
+                    5.551115123125783e-17
+                  ],
+                  "errorMeters": 1.2719202621569003e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    -0.23045320719474047,
+                    0.11105578072069644,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 2.5626980138831173e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.323,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 8,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "390x844-role-referee.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 32940,
+      "sha256": "86eca7c13ae07b8ecfc5d905d06111d1374ed89e5c0e505beb0ba9ffb46f3ae1",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 390,
+          "height": 490,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30360,
+          "calls": 15,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.3950436501887784,
+            1.1137525690815284,
+            3.957259593097962
+          ],
+          "target": [
+            0,
+            0.9752000000000001,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 3.9594531697439597
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 29636,
+            "heightMeters": 1.84,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457862,
+                    1.1117360222277832,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457861,
+                    1.1117360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.3877787807814457e-16
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    0.2037013821803743,
+                    0.09346433354104255,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 2.7928509224031823e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037434,
+                    0.09346433354104244,
+                    1.3877787807814457e-17
+                  ],
+                  "errorMeters": 3.927683650008203e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.107,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 9,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-near.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 26740,
+      "sha256": "3fe0bf8c23b6be2567a7422af0410dca8658e8a292f430e2273cdee5cfd8f7a1",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30148,
+          "calls": 16,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.8
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.38216179203044864,
+            1.0774345505245222,
+            3.828870693323028
+          ],
+          "target": [
+            0,
+            0.9434,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 3.8303405663827435
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-far.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 45626,
+      "sha256": "9df88cfde6c5a2a2156bd0bc982e277d04d4d7304b8f394dcd2ed38fafa11c8c",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "far",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 187726,
+          "calls": 75,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 11.6
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.06730431157051518,
+            1.2109657225259711,
+            6.730206807850618
+          ],
+          "target": [
+            0,
+            1.11,
+            0
+          ],
+          "yaw": 0.01,
+          "pitch": 0.015,
+          "distance": 6.731300589330414
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "sg",
+            "lod": 0,
+            "triangles": 31652,
+            "heightMeters": 1.88,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457857,
+                    1.1357360222277828,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.8041124150158794e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457891,
+                    1.135736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.6653345369377348e-16
+                }
+              ],
+              "handContactErrorMeters": 1.8041124150158794e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    0.21068779270415852,
+                    0.09466885448226853,
+                    4.163336342344337e-17
+                  ],
+                  "errorMeters": 1.2177709378935645e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    -0.21068779270415852,
+                    0.09466885448226875,
+                    6.938893903907228e-17
+                  ],
+                  "errorMeters": 1.3383253895372864e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1309999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "sf",
+            "lod": 0,
+            "triangles": 31920,
+            "heightMeters": 1.99,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.1184005556945786,
+                    1.201736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457884,
+                    1.201736022227783,
+                    0.32105591108886755
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    0.22560475660837154,
+                    0.09999678696057818,
+                    0
+                  ],
+                  "errorMeters": 1.1102230246251565e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    -0.22560475660837154,
+                    0.09999678696057801,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 5.721958498152797e-17
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1969999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "pf",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.09,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457858,
+                    1.261736022227783,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457898,
+                    1.261736022227783,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.942890293094024e-16
+                }
+              ],
+              "handContactErrorMeters": 1.942890293094024e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    0.2633750939368463,
+                    0.10550299168466148,
+                    1.942890293094024e-16
+                  ],
+                  "errorMeters": 2.5589376332604516e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    -0.26337509393684627,
+                    0.10550299168466137,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 1.249000902703301e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.2569999999999997,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "c",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.2,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457865,
+                    1.3277360222277832,
+                    0.3210559110888672
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457855,
+                    1.327736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 2.0816681711721685e-16
+                }
+              ],
+              "handContactErrorMeters": 2.0816681711721685e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    0.23045320719474052,
+                    0.11105578072069633,
+                    5.551115123125783e-17
+                  ],
+                  "errorMeters": 1.2719202621569003e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    -0.23045320719474047,
+                    0.11105578072069644,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 2.5626980138831173e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.323,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          },
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 29636,
+            "heightMeters": 1.84,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457862,
+                    1.1117360222277832,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457861,
+                    1.1117360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.3877787807814457e-16
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    0.2037013821803743,
+                    0.09346433354104255,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 2.7928509224031823e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037434,
+                    0.09346433354104244,
+                    1.3877787807814457e-17
+                  ],
+                  "errorMeters": 3.927683650008203e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.107,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-face.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 29840,
+      "sha256": "f64fa1d3d56f0dad8aa24bd89d11af23c78b2dfa4f5dcdbddb0089796503bcd1",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "face",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 29426,
+          "calls": 14,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 11.6
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.07421321874923155,
+            1.6362196512539235,
+            0.6354721071254441
+          ],
+          "target": [
+            0,
+            1.6269200000000001,
+            0.02
+          ],
+          "yaw": 0.12,
+          "pitch": 0.015,
+          "distance": 0.62
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-hands.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 31572,
+      "sha256": "7aa7ed67b5f40a36a8c5e7c3133159c55e10e242613d2a8c9684fd32637844ca",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "hands",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30146,
+          "calls": 15,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.15233942094283773,
+            1.0811998300008498,
+            1.328241256023137
+          ],
+          "target": [
+            -0.1,
+            1.071,
+            0.34
+          ],
+          "yaw": 0.25,
+          "pitch": 0.01,
+          "distance": 1.02
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-cloth.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 34700,
+      "sha256": "0e2655fe7a39180799a67f56ddea98c46091bf826357c8635eaa4a44e4b4350e",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "cloth",
+        "selectedId": "pg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30146,
+          "calls": 15,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.023985602591777844,
+            1.2575364001619964,
+            0.8392802159740818
+          ],
+          "target": [
+            0,
+            1.2335399999999999,
+            0.04
+          ],
+          "yaw": 0.03,
+          "pitch": 0.03,
+          "distance": 0.8
+        },
+        "actors": [
+          {
+            "id": "pg",
+            "lod": 0,
+            "triangles": 29424,
+            "heightMeters": 1.78,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457877,
+                    1.0757360222277832,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 4.163336342344337e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457868,
+                    1.0757360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 6.938893903907228e-17,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    0.19488516187783547,
+                    0.09112423434822153,
+                    -5.551115123125783e-17
+                  ],
+                  "errorMeters": 2.0396099332657776e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.1948851618778355,
+                    0.09112423434822134,
+                    0
+                  ],
+                  "position": [
+                    -0.19488516187783544,
+                    0.09112423434822131,
+                    -8.326672684688674e-17
+                  ],
+                  "errorMeters": 1.0385185452638061e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.071,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 10,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-role-sg.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 28132,
+      "sha256": "1e661bec5b2549fff369b98150849e37cd0318a69685abc9995d60f4e41de7fb",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "sg",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 32376,
+          "calls": 16,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4036315556276648,
+            1.137964581452866,
+            4.042852192947916
+          ],
+          "target": [
+            0,
+            0.9964,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.045528238651436
+        },
+        "actors": [
+          {
+            "id": "sg",
+            "lod": 0,
+            "triangles": 31652,
+            "heightMeters": 1.88,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457857,
+                    1.1357360222277828,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.8041124150158794e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457891,
+                    1.135736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.6653345369377348e-16
+                }
+              ],
+              "handContactErrorMeters": 1.8041124150158794e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    0.21068779270415852,
+                    0.09466885448226853,
+                    4.163336342344337e-17
+                  ],
+                  "errorMeters": 1.2177709378935645e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2106877927041585,
+                    0.09466885448226864,
+                    0
+                  ],
+                  "position": [
+                    -0.21068779270415852,
+                    0.09466885448226875,
+                    6.938893903907228e-17
+                  ],
+                  "errorMeters": 1.3383253895372864e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1309999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 11,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-role-sf.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 28958,
+      "sha256": "11d51ae96b2eb900917c8a00cb13e63745784a8b5ce4825b49c267f032486676",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "sf",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 32644,
+          "calls": 16,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 11.6
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4272482955846027,
+            1.2045476154740444,
+            4.278231842535295
+          ],
+          "target": [
+            0,
+            1.0547,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.282234678147
+        },
+        "actors": [
+          {
+            "id": "sf",
+            "lod": 0,
+            "triangles": 31920,
+            "heightMeters": 1.99,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.1184005556945786,
+                    1.201736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457884,
+                    1.201736022227783,
+                    0.32105591108886755
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    0.22560475660837154,
+                    0.09999678696057818,
+                    0
+                  ],
+                  "errorMeters": 1.1102230246251565e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.22560475660837154,
+                    0.09999678696057807,
+                    0
+                  ],
+                  "position": [
+                    -0.22560475660837154,
+                    0.09999678696057801,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 5.721958498152797e-17
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.1969999999999998,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 12,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-role-pf.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 29134,
+      "sha256": "2467c0700cb6b20a5a0b6c8dbcbac1f7acf1042c1bfd906d27ff78a28893b4ab",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "pf",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 31104,
+          "calls": 16,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.3
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.44871805918181884,
+            1.2650776464023883,
+            4.492213342160183
+          ],
+          "target": [
+            0,
+            1.1077,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.497422350415692
+        },
+        "actors": [
+          {
+            "id": "pf",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.09,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457858,
+                    1.261736022227783,
+                    0.32105591108886733
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457898,
+                    1.261736022227783,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.942890293094024e-16
+                }
+              ],
+              "handContactErrorMeters": 1.942890293094024e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    0.2633750939368463,
+                    0.10550299168466148,
+                    1.942890293094024e-16
+                  ],
+                  "errorMeters": 2.5589376332604516e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.2633750939368463,
+                    0.10550299168466132,
+                    0
+                  ],
+                  "position": [
+                    -0.26337509393684627,
+                    0.10550299168466137,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 1.249000902703301e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.2569999999999997,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 13,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-role-c.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 28660,
+      "sha256": "6365373fabe799f133000eb15c3509cdd6f1137dec6d0c9c1517866cea6df40d",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "c",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 31104,
+          "calls": 16,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.4723347991387568,
+            1.331660680423567,
+            4.727592991747563
+          ],
+          "target": [
+            0,
+            1.1660000000000001,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 4.7341287899112565
+        },
+        "actors": [
+          {
+            "id": "c",
+            "lod": 0,
+            "triangles": 30380,
+            "heightMeters": 2.2,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457865,
+                    1.3277360222277832,
+                    0.3210559110888672
+                  ],
+                  "errorMeters": 6.938893903907228e-17
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457855,
+                    1.327736022227783,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 2.0816681711721685e-16
+                }
+              ],
+              "handContactErrorMeters": 2.0816681711721685e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    0.23045320719474052,
+                    0.11105578072069633,
+                    5.551115123125783e-17
+                  ],
+                  "errorMeters": 1.2719202621569003e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.23045320719474055,
+                    0.11105578072069622,
+                    0
+                  ],
+                  "position": [
+                    -0.23045320719474047,
+                    0.11105578072069644,
+                    -9.71445146547012e-17
+                  ],
+                  "errorMeters": 2.5626980138831173e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.323,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 14,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    {
+      "file": "844x390-role-referee.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bytes": 29274,
+      "sha256": "2a1047c74203e99c9188d48305f7dbb1da556d1d9649cd657b3a945bd79ec193",
+      "diagnostics": {
+        "version": "hoops-characters-v7",
+        "threeRevision": "160",
+        "ready": true,
+        "offline": false,
+        "source": "http:",
+        "view": "near",
+        "selectedId": "referee",
+        "team": "teal",
+        "actionId": "idle_hold",
+        "playing": false,
+        "speed": 1,
+        "lodMode": "auto",
+        "viewport": {
+          "width": 602,
+          "height": 345,
+          "devicePixelRatio": 1
+        },
+        "renderer": {
+          "triangles": 30360,
+          "calls": 15,
+          "geometries": 134,
+          "textures": 168,
+          "fps": 10.5
+        },
+        "crowd": {
+          "enabled": false,
+          "instances": 240,
+          "instancedDraws": 2
+        },
+        "camera": {
+          "position": [
+            0.3950436501887784,
+            1.1137525690815284,
+            3.957259593097962
+          ],
+          "target": [
+            0,
+            0.9752000000000001,
+            0.02
+          ],
+          "yaw": 0.1,
+          "pitch": 0.035,
+          "distance": 3.9594531697439597
+        },
+        "actors": [
+          {
+            "id": "referee",
+            "lod": 0,
+            "triangles": 29636,
+            "heightMeters": 1.84,
+            "motion": {
+              "action": "idle_hold",
+              "time": 0.6,
+              "phase": 0.25,
+              "transition": null,
+              "contact": [
+                {
+                  "effector": "LeftHand",
+                  "palm": [
+                    0.11840055569457862,
+                    1.1117360222277832,
+                    0.3210559110888676
+                  ],
+                  "errorMeters": 1.5265566588595902e-16
+                },
+                {
+                  "effector": "RightHand",
+                  "palm": [
+                    -0.11840055569457861,
+                    1.1117360222277832,
+                    0.32105591108886744
+                  ],
+                  "errorMeters": 1.3877787807814457e-16
+                }
+              ],
+              "handContactErrorMeters": 1.5265566588595902e-16,
+              "footErrors": {
+                "left": {
+                  "support": true,
+                  "target": [
+                    0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    0.2037013821803743,
+                    0.09346433354104255,
+                    -1.3877787807814457e-17
+                  ],
+                  "errorMeters": 2.7928509224031823e-16
+                },
+                "right": {
+                  "support": true,
+                  "target": [
+                    -0.20370138218037429,
+                    0.09346433354104283,
+                    0
+                  ],
+                  "position": [
+                    -0.20370138218037434,
+                    0.09346433354104244,
+                    1.3877787807814457e-17
+                  ],
+                  "errorMeters": 3.927683650008203e-16
+                }
+              },
+              "maxReach": {
+                "left": 0,
+                "right": 0,
+                "leftLeg": 0,
+                "rightLeg": 0
+              },
+              "ballPosition": [
+                0,
+                1.107,
+                0.34
+              ],
+              "ballVisible": true,
+              "frame": 15,
+              "rootMotion": false
+            }
+          }
+        ],
+        "error": null
+      }
+    }
+  ],
+  "pass": false
+}

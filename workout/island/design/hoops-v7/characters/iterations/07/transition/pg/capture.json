@@ -1,0 +1,6814 @@
+{
+  "schemaVersion": 1,
+  "iteration": "07",
+  "role": "pg",
+  "startedAtUtc": "2026-11-04T21:48:11.331Z",
+  "finishedAtUtc": "2026-11-04T21:48:33.772Z",
+  "source": "/tmp/hoops-v7-transition-K3UOa3",
+  "inputs": [
+    {
+      "file": "BRIEF.md",
+      "bytes": 3684,
+      "sha256": "ac04ab231561598df47c5a92976dc04cb13d7dae0e78adc96bcc4e2b82df80b9"
+    },
+    {
+      "file": "LICENSES.md",
+      "bytes": 2732,
+      "sha256": "d5e7511a8b9cc699a6a0f74afa72014af8dd7937a4072b47148954ef75bab5c3"
+    },
+    {
+      "file": "REFERENCE.md",
+      "bytes": 2822,
+      "sha256": "dfa4756da7ddcf3e48d547811f99b874e7599fe670757ec6516df9b0d3d130c2"
+    },
+    {
+      "file": "RETARGET.md",
+      "bytes": 7715,
+      "sha256": "9faba8e66daccd093667815a04c3dc04987af5349434450c811f03e2ef5ac86c"
+    },
+    {
+      "file": "index.html",
+      "bytes": 7355,
+      "sha256": "7dc7e69dc07fbb85c485fd611003b30ef698030c429c4880cc7cd82aa2658793"
+    },
+    {
+      "file": "model-authoring.json",
+      "bytes": 82576,
+      "sha256": "2d1a9a0a15acd36df51cba5f0a94d974e36737f1bebf9fbb1e76339e0bc6e5d4"
+    },
+    {
+      "file": "models/c-lod1.glb",
+      "bytes": 492660,
+      "sha256": "0c025541a8685749ffe788e7413a592d6ec1960d8582d6d487de7e236fee60a0"
+    },
+    {
+      "file": "models/c.glb",
+      "bytes": 889636,
+      "sha256": "8fbb2e833b774c28c946d5b8be0dc68ef5cdb2bd1a2ceec7075da0124b381ef5"
+    },
+    {
+      "file": "models/pf-lod1.glb",
+      "bytes": 492740,
+      "sha256": "49e6eee3c324bafda359429f9b0ca3d084065d7f45316db32db20b4ad9f97ac9"
+    },
+    {
+      "file": "models/pf.glb",
+      "bytes": 891336,
+      "sha256": "01d93b4b810a02a2883ead757c23dc6231e1028e3bce41bf931ca7b2ec6f1ef3"
+    },
+    {
+      "file": "models/pg-lod1.glb",
+      "bytes": 485184,
+      "sha256": "cc1ccea0fa3c797ca247031e0c260c55b3801e5b23a0daa17cb0632f49b63119"
+    },
+    {
+      "file": "models/pg.glb",
+      "bytes": 868296,
+      "sha256": "15f43b13efd78cd0b8265783a5f07d902c2127dcb21f2e707e9b1d2ffbb3f054"
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "bytes": 537424,
+      "sha256": "577c25e88c87ec7b8a5d65be6eb3474580665da8a9cc7a555ef97f2b5a68cfda"
+    },
+    {
+      "file": "models/referee.glb",
+      "bytes": 934092,
+      "sha256": "8d8065c58a80309bdfe44ee558430dca1971b1f8b020ea6aebe3e6b759890382"
+    },
+    {
+      "file": "models/sf-lod1.glb",
+      "bytes": 516344,
+      "sha256": "be36d90cd9224a8a872fa89fe6b66025eff3c7ab463920e1370cb4cf1b116881"
+    },
+    {
+      "file": "models/sf.glb",
+      "bytes": 921812,
+      "sha256": "22d3f398386fe95ec5275bb124c337b2f6c2bcaa585801fe130fbdd6ae566537"
+    },
+    {
+      "file": "models/sg-lod1.glb",
+      "bytes": 505420,
+      "sha256": "459c121802a5a1c646211a42d55a97db2f41b9dff3ef1a87ae769593e4b78e99"
+    },
+    {
+      "file": "models/sg.glb",
+      "bytes": 905508,
+      "sha256": "b48e25852ddc8ff4a57d7a6d1d9b736427d3d23d14409e1229f3449aec3f4e1d"
+    },
+    {
+      "file": "motion-contract.json",
+      "bytes": 2600,
+      "sha256": "e492145896f69042b87eaafc6bee00f03be771b1b00b53e7bb2eeb6dce6f989e"
+    },
+    {
+      "file": "motions.json",
+      "bytes": 55774,
+      "sha256": "2bb381add226b7bf2f06509befd8ee0fd2a23fa9be8e87e6413196e911c3b6ec"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 17015,
+      "sha256": "e9bcaefbd800ae9a5e7632606957100e895c081cc6b46fcce307f7fb796ed9b1"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 39451,
+      "sha256": "7cd9eeb28ddea1be9038d3967ccf94a0a2512d5a491e4b5d96956b1322abd327"
+    },
+    {
+      "file": "retarget-map.json",
+      "bytes": 274919,
+      "sha256": "87f1a5d5dc9f003b37bec88b5e3e6d6c136015ea07150e6598185f91db52f0fb"
+    },
+    {
+      "file": "review.html",
+      "bytes": 31901,
+      "sha256": "bfb3cd9cb6cd0f11939691f93fa00852431920531ff505f969d7f680aecad37d"
+    },
+    {
+      "file": "rig.json",
+      "bytes": 68401,
+      "sha256": "64b17ba39851a14eae93c9235373dae57f9219bb5fd0e4843462246a9be8098f"
+    },
+    {
+      "file": "source/archive-evidence.py",
+      "bytes": 1968,
+      "sha256": "97446581ad4ba259d177897f35f176c4cbd33aa085cecaf05644ef72f615b4e0"
+    },
+    {
+      "file": "source/benchmark.mjs",
+      "bytes": 6020,
+      "sha256": "a94ec5ad1d7a5c4aec1d676df2eff7c932e7f1b5efc71d56a01c97a08f933ad4"
+    },
+    {
+      "file": "source/build-review.mjs",
+      "bytes": 6006,
+      "sha256": "75848347c601b6e4c53c54038c63e965edd35673993accb0c199007feb7679dc"
+    },
+    {
+      "file": "source/build_characters.mjs",
+      "bytes": 43229,
+      "sha256": "d0b79573286426800c8b7a19cb5675c6de6e4e1622c2eece90fe94520904eb4d"
+    },
+    {
+      "file": "source/capture-motion.mjs",
+      "bytes": 6410,
+      "sha256": "09ff3012d7099c3de501f3c73a13a8c1dc1f145f10cc48491ea1776e6c29b70f"
+    },
+    {
+      "file": "source/capture-transition.mjs",
+      "bytes": 7975,
+      "sha256": "161c81d0b39d8099ca9942c2a7435e1908628f1a0c099a3b01496085389e9e8f"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 9037,
+      "sha256": "14a897fd741f32299a41a5d7178d4e60ca33f94c9dc789391ba6b901e207a395"
+    },
+    {
+      "file": "source/model_helpers_atlas.py",
+      "bytes": 6742,
+      "sha256": "77fb456806319a2588bb6900f693a1879666b7add769858c36ac957bfd02842b"
+    },
+    {
+      "file": "source/model_helpers_garments.mjs",
+      "bytes": 9816,
+      "sha256": "1788ff82850376c87b78717bdbe16860641dafabda6de86b65377791f327cbc7"
+    },
+    {
+      "file": "source/model_helpers_hair.mjs",
+      "bytes": 8933,
+      "sha256": "0e815f8554622c7633590a17276a6285c9804ca9c9d5d657642084a13b821b34"
+    },
+    {
+      "file": "source/model_helpers_pants.mjs",
+      "bytes": 5256,
+      "sha256": "a9e795892352f2a677c8b03325525d749fd9fcbf3e4f9a9c1aad76aeb2b250d0"
+    },
+    {
+      "file": "source/motion-checks.mjs",
+      "bytes": 3300,
+      "sha256": "5f079b390a03195a53a988999a69d251edfa1f8c7e39143e8b05892e54ae246f"
+    },
+    {
+      "file": "source/motion-export.mjs",
+      "bytes": 36873,
+      "sha256": "b973d14f0b02deda67226c06e686e8b9e0d5231bdca59705300c151aadc483c4"
+    },
+    {
+      "file": "source/motion.mjs",
+      "bytes": 49287,
+      "sha256": "9c342e79f89f23918ca7f168b4a1b2a73351e85288454f629dc337aa6c26669e"
+    },
+    {
+      "file": "source/package-offline.mjs",
+      "bytes": 11687,
+      "sha256": "00345a3e03dbb3d9817ae5437266c0e171f3aeceb1ada4e8124fd65871685803"
+    },
+    {
+      "file": "source/package.json",
+      "bytes": 560,
+      "sha256": "7678be61f8a2096b63de3e01992b28aa555ddaf9908d359f7f1555b1be341f1f"
+    },
+    {
+      "file": "source/requirements.txt",
+      "bytes": 30,
+      "sha256": "dee66a6fd7af314ef9bffcc1170d09684e468588fbe5d8668c6379b0b9e65839"
+    },
+    {
+      "file": "source/retarget-motion2.mjs",
+      "bytes": 26817,
+      "sha256": "330d2a0c888e48dc3337237d57c35b36d800d5b334d221cde91f454181aa3aea"
+    },
+    {
+      "file": "source/validate-assets.mjs",
+      "bytes": 31052,
+      "sha256": "96973bb428b85c558bbb5227da08d5333cfebefe444a450451d50e541ce76f7d"
+    },
+    {
+      "file": "source/validate-motion.mjs",
+      "bytes": 11152,
+      "sha256": "9547d81328b7ad34f83c1f21d15e3b5671ec920caf06a8660a1d876358b567ce"
+    },
+    {
+      "file": "source/validate-offline.mjs",
+      "bytes": 13340,
+      "sha256": "7298dd73ef25c347a7991b93f8d29ac2d1bd3c60c1f65896cbe1e001c336db18"
+    },
+    {
+      "file": "source/validate-skin.mjs",
+      "bytes": 12104,
+      "sha256": "6b572face9c3e16ed58240d27dfa6715157da37586a0dd749a7113ba79bfccd5"
+    },
+    {
+      "file": "source/write-motion-manifest.mjs",
+      "bytes": 12650,
+      "sha256": "8a002dee3e2e8e0e7eab41b0d72950efbab0e411cc2c970953c08d72a7b41899"
+    },
+    {
+      "file": "textures/atlas-layout.json",
+      "bytes": 786,
+      "sha256": "0b75507d87f33ea491fa55dda1d2aad5cb0b4c0228762cecd78454f7d714f1f3"
+    },
+    {
+      "file": "textures/c-atlas.png",
+      "bytes": 717198,
+      "sha256": "14a4012b62398d2ff63e226ae5accf7722aed0a5d292a4b2a2e2eeefe212acc2"
+    },
+    {
+      "file": "textures/cloth-normal.png",
+      "bytes": 214782,
+      "sha256": "c2dab32aa9a541d4375fbf825e6747f944bb80aa656f1745832dc1dd62bcfec3"
+    },
+    {
+      "file": "textures/pf-atlas.png",
+      "bytes": 723353,
+      "sha256": "8bcb0560b8822fcb768bb182fc0ea3ce78754a00cf8e4450c235188b875ce4b0"
+    },
+    {
+      "file": "textures/pg-atlas.png",
+      "bytes": 724622,
+      "sha256": "bb7f4f0fd0514879fa370f320c7186d664d5384d2f2db9b4c0095000911c09ff"
+    },
+    {
+      "file": "textures/referee-atlas.png",
+      "bytes": 832142,
+      "sha256": "094002e2df0b89ce831fd9270de7c51bd34df4ccf2a73efd6b4c5c014cd16fb7"
+    },
+    {
+      "file": "textures/sf-atlas.png",
+      "bytes": 819003,
+      "sha256": "b1ba9753968210c765b3e70d52e43e8a67013f77c2823167620673694c5f44b1"
+    },
+    {
+      "file": "textures/sg-atlas.png",
+      "bytes": 818218,
+      "sha256": "e590c80444085e14e464d0d58f87577e6862c762a0b4c3e02e5e2e4a656cb63c"
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "bytes": 13640,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "vendor/LICENSE.meshoptimizer",
+      "bytes": 1079,
+      "sha256": "e4a26033e3551fb2722888949fbb41e77aee628e8e8f04dcffeee301aa7e5634"
+    },
+    {
+      "file": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "bytes": 8019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    },
+    {
+      "file": "vendor/draco/LICENSE.draco",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "vendor/draco/README.md",
+      "bytes": 407,
+      "sha256": "19c090806aff487faeeb303bd37d59a2c18a112470b5169f0dd24c074ac8f923"
+    },
+    {
+      "file": "vendor/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "file": "vendor/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "file": "vendor/meshopt_decoder.module.js",
+      "bytes": 32483,
+      "sha256": "4ac97b2c44347dacb9a0ca9c3740c8678d166fdcf02bc1612f371e27418e70a7"
+    },
+    {
+      "file": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    }
+  ],
+  "scope": "Rendered actual controller in fixed100ms increments, internally12steps of1/120s. Hold requested at0.0s fromdribblephase.30; reverse requested at1.4s. These are not frame-rate measurements.",
+  "frames": [
+    {
+      "file": "390x844-00.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 0,
+      "timeSeconds": 0,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.23399999999999999,
+        "phase": 0.3,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1177050547288471,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.11770505472884712,
+              -0.045000000000000207
+            ],
+            "errorMeters": 2.118352371637509e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11717565295980897,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11717565295980903,
+              0.06499999999999961
+            ],
+            "errorMeters": 3.925231146709438e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022506070969602106,
+          "right": 0.002169266186068608
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.6156242701777317,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 7,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2030853601620677,
+            0.9287358629331348,
+            0.10714663252441511
+          ],
+          "right": [
+            -0.2332581573291544,
+            0.9323130856573731,
+            0.061912844053993374
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bytes": 20764,
+      "sha256": "d0d1eed3b90664c4545c9c42603ae6a2e12ae264c9b03ca6d04e622c5f932347"
+    },
+    {
+      "file": "390x844-01.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 1,
+      "timeSeconds": 0.1,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.33400000000000024,
+        "phase": 0.4282051282051285,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11766521550736278,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.11766521550736275,
+              -0.045000000000000095
+            ],
+            "errorMeters": 1.0477500027681816e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11712654134594713,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11712654134594719,
+              0.06499999999999978
+            ],
+            "errorMeters": 2.3551386880256624e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022420174762830206,
+          "right": 0.002162506728436455
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.32538440467918495,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 19,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20231803127551162,
+            0.9300811081590727,
+            0.10629616468750372
+          ],
+          "right": [
+            -0.23351483262293973,
+            0.9339396351856049,
+            0.062483963370970286
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -3.3520236549854676,
+          0
+        ]
+      },
+      "bytes": 19168,
+      "sha256": "60399a5e63f91a58cab9af65094afe90e2a9107f6a29b60ed54293b4e7398a21"
+    },
+    {
+      "file": "390x844-02.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 2,
+      "timeSeconds": 0.2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.43400000000000055,
+        "phase": 0.5564102564102571,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1179416683009994,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783555,
+              0.11794166830099939,
+              -0.04500000000000015
+            ],
+            "errorMeters": 1.6302709355362946e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11747234264676519,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778356,
+              0.1174723426467652,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.249000902703301e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023044212343408255,
+          "right": 0.0022114327723061628
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.28396330081936205,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 31,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20805013980672377,
+            0.9204452834946424,
+            0.11264685876114419
+          ],
+          "right": [
+            -0.23176127426250137,
+            0.9221347650072645,
+            0.058586651756469675
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          3.5514936549854914,
+          0
+        ]
+      },
+      "bytes": 18892,
+      "sha256": "30a76ddbba2220cf1ccc1c76680fb3dc6ac56fd4b49a2ebaa7362319bd31193a"
+    },
+    {
+      "file": "390x844-03.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 3,
+      "timeSeconds": 0.3,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.5340000000000006,
+        "phase": 0.6846153846153853,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11795636421653234,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783547,
+              0.1179563642165325,
+              -0.044999999999999984
+            ],
+            "errorMeters": 1.5577778178957092e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11749108796004777,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11749108796004776,
+              0.06499999999999995
+            ],
+            "errorMeters": 7.97218214573518e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002307939338057525,
+          "right": 0.00221417810455948
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.5859751663179076,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 43,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20838398013651865,
+            0.9199120784717271,
+            0.11301655533305939
+          ],
+          "right": [
+            -0.23166992957091403,
+            0.9214697739877806,
+            0.05838393474703439
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          2.5704936549854596,
+          0
+        ]
+      },
+      "bytes": 20300,
+      "sha256": "7374e5c64571177aae2ed22bf8971e21f3b80284b89d2c96963dbdf5da933c58"
+    },
+    {
+      "file": "390x844-04.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 4,
+      "timeSeconds": 0.4,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.6340000000000002,
+        "phase": 0.812820512820513,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11768041117280592,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11768041117280587,
+              -0.045000000000000095
+            ],
+            "errorMeters": 1.249000902703301e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11714524790693487,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11714524790693492,
+              0.06500000000000006
+            ],
+            "errorMeters": 1.594436429147036e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022452791668183293,
+          "right": 0.0021650743683137314
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7898870318164525,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 55,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.9218870318164525,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2026085770143925,
+            0.9295696156874735,
+            0.10661820315410012
+          ],
+          "right": [
+            -0.22607751283154517,
+            0.932477478952445,
+            0.04604523212385498
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          1.5894936549854544,
+          0
+        ]
+      },
+      "bytes": 20158,
+      "sha256": "c90769fe23fef5d0a4acd541b55f4999aa649818aad106072904001e2007221d"
+    },
+    {
+      "file": "390x844-05.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 5,
+      "timeSeconds": 0.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.7339999999999999,
+        "phase": 0.9410256410256408,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.34709999442100514,
+              1.015448129495728,
+              0.35000000000000003
+            ],
+            "errorMeters": 0
+          }
+        ],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11768746643445349,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.1176874664344536,
+              -0.04500000000000015
+            ],
+            "errorMeters": 1.9078803932353506e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11715394401272028,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11715394401272045,
+              0.065
+            ],
+            "errorMeters": 2.1677797545656835e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022467996377274306,
+          "right": 0.002166270921548705
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.895448129495728,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 67,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3682544938129861,
+            1.0479361069996371,
+            0.3106866043878163
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20274436466348095,
+            0.9293314572775182,
+            0.10676870380095388
+          ],
+          "right": [
+            -0.252282908427898,
+            0.9388849732223681,
+            0.09422418535147929
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.5856818887570014,
+          0
+        ]
+      },
+      "bytes": 17194,
+      "sha256": "6f0daf13cab74acce3e0c44f003a3aa6c07e1bf8893b76c7e2972f44f318f2cc"
+    },
+    {
+      "file": "390x844-06.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 6,
+      "timeSeconds": 0.6,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.06666666666666667,
+        "phase": 0.02777777777777778,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.14423076923076922
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.33778708738021324,
+              1.0551474474480236,
+              0.3485098496298557
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        ],
+        "handContactErrorMeters": 5.551115123125783e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21847499140389376,
+              0.1432592966773489,
+              -0.04246169314690487
+            ],
+            "position": [
+              0.21847499140389365,
+              0.14325929667734927,
+              -0.04246169314690479
+            ],
+            "errorMeters": 3.8659043403122315e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21847499140389376,
+              0.1423912395828063,
+              0.061333556767751485
+            ],
+            "position": [
+              -0.21847499140389376,
+              0.1423912395828062,
+              0.06133355676775143
+            ],
+            "errorMeters": 1.2412670766236366e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.027450112198395923,
+          "right": 0.026875332140102026
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.3275211878754915,
+          0.9355947732814209,
+          0.3471796590521165
+        ],
+        "ballVisible": true,
+        "frame": 79,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.29756900513948886,
+            1.0858690204351067,
+            0.2437524937328472
+          ],
+          "right": [
+            -0.36169976875503357,
+            1.0861368873290065,
+            0.3095693451812848
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.16828214577307363,
+            0.9345508063869586,
+            0.06323855327617015
+          ],
+          "right": [
+            -0.25506891267458126,
+            0.9512518000918392,
+            0.10309074817308889
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.47115306811741586,
+          0.4929118955906908,
+          -0.06786993311586276
+        ]
+      },
+      "bytes": 17036,
+      "sha256": "9e73403e4d19c1fc12c16a51d7ae51e0f37ecd8054873f61fc299992694fa9c1"
+    },
+    {
+      "file": "390x844-07.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 7,
+      "timeSeconds": 0.7,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.16666666666666666,
+        "phase": 0.06944444444444445,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.3365384615384615
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3023442090191808,
+              1.1049071821211343,
+              0.34296205063467133
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21329658761463569,
+              0.1363193721219313,
+              -0.03314056632624033
+            ],
+            "position": [
+              0.21329658761463557,
+              0.13631937212193135,
+              -0.03314056632624057
+            ],
+            "errorMeters": 2.727435500648127e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21329658761463569,
+              0.1358431795594747,
+              0.047869706915680474
+            ],
+            "position": [
+              -0.21329658761463569,
+              0.13584317955947495,
+              0.04786970691568038
+            ],
+            "errorMeters": 2.68024601344063e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.02162777835952783,
+          "right": 0.021246854366058644
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.25562423082104385,
+          0.9945461660383421,
+          0.33682285147360036
+        ],
+        "ballVisible": true,
+        "frame": 91,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.18144864742172576,
+            1.0517488002790838,
+            0.19639169722432517
+          ],
+          "right": [
+            -0.3350489141768657,
+            1.1284859661765991,
+            0.3052398051501493
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.17324845692469476,
+            1.0172538703786176,
+            -0.0699547562788581
+          ],
+          "right": [
+            -0.2415687129000002,
+            0.994272726750763,
+            0.09205961005229019
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.8834034313137318,
+          0.6486149305175815,
+          -0.12725488987507916
+        ]
+      },
+      "bytes": 14920,
+      "sha256": "f4c7d9b726bd22785acdf1942d362adcf583a44ee1e5cbed9c05dc737c2639c3"
+    },
+    {
+      "file": "390x844-08.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 8,
+      "timeSeconds": 0.8,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.26666666666666666,
+        "phase": 0.11111111111111112,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.5288461538461539
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.24645781079142498,
+              1.1418048253415298,
+              0.33462727958704264
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.20630463125368892,
+              0.12532616431957116,
+              -0.020555044876536185
+            ],
+            "position": [
+              0.2063046312536889,
+              0.1253261643195711,
+              -0.020555044876536255
+            ],
+            "errorMeters": 9.309503074677274e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.20630463125368892,
+              0.12593755832434342,
+              0.029690620377218938
+            ],
+            "position": [
+              -0.20630463125368897,
+              0.12593755832434356,
+              0.02969062037721873
+            ],
+            "errorMeters": 2.5626980138831173e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.01379120579299381,
+          "right": 0.013584954493693114
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.15854791026598272,
+          1.0609785646958907,
+          0.3228389387517069
+        ],
+        "ballVisible": true,
+        "frame": 103,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.10822980313919134,
+            1.0631891013692025,
+            0.17730588807334408
+          ],
+          "right": [
+            -0.2865725395103206,
+            1.1517480605135721,
+            0.29801491534348734
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.24560847000175287,
+            1.0758547467330066,
+            -0.053267874365778164
+          ],
+          "right": [
+            -0.21772498117990643,
+            1.0507881776457513,
+            0.058714574739556005
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.9994259886204881,
+          0.6544804521802483,
+          -0.14396802141809495
+        ]
+      },
+      "bytes": 13552,
+      "sha256": "3edae24062dc95d9e540a362e5301246d0fde191751e8b28e9a6ea527ac1dca5"
+    },
+    {
+      "file": "390x844-09.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 9,
+      "timeSeconds": 0.9,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.366666666666667,
+        "phase": 0.1527777777777779,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.7211538461538468
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.17837255042508535,
+              1.1586718294621132,
+              0.3249234194467879
+            ],
+            "errorMeters": 1.3877787807814457e-17
+          }
+        ],
+        "handContactErrorMeters": 1.3877787807814457e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.19963271358186369,
+              0.11342098423997639,
+              -0.008545593067250758
+            ],
+            "position": [
+              0.19963271358186369,
+              0.11342098423997637,
+              -0.00854559306725075
+            ],
+            "errorMeters": 1.5515838457795457e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.19963271358186369,
+              0.11437405573436492,
+              0.012343634430473316
+            ],
+            "position": [
+              -0.19963271358186369,
+              0.11437405573436477,
+              0.012343634430473177
+            ],
+            "errorMeters": 2.063081476116683e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.00662983170242789,
+          "right": 0.00619419891467764
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.06591500679926492,
+          1.119745386703293,
+          0.3094951034080564
+        ],
+        "ballVisible": true,
+        "frame": 115,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.11696602192440336,
+            1.1090537519405463,
+            0.21839002879627814
+          ],
+          "right": [
+            -0.21970041452089553,
+            1.1538116228739395,
+            0.28863415598528436
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.22045551350456627,
+            1.118209713977739,
+            -0.029407610616211083
+          ],
+          "right": [
+            -0.20321524291922768,
+            1.1090161865285397,
+            0.02421187014350787
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.8192207400376617,
+          0.5076349828135207,
+          -0.11800932774489681
+        ]
+      },
+      "bytes": 13446,
+      "sha256": "215391c2ee86ceccf717111b941bcc564120835be58189f7a82b80c7b9d8f2e0"
+    },
+    {
+      "file": "390x844-10.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 10,
+      "timeSeconds": 1,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.4666666666666673,
+        "phase": 0.1944444444444447,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.9134615384615397
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.12588701581103112,
+              1.1641078467988792,
+              0.3176125497546307
+            ],
+            "errorMeters": 9.71445146547012e-17
+          }
+        ],
+        "handContactErrorMeters": 9.71445146547012e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1954144258599702,
+              0.1034470620277613,
+              -0.000952675167842483
+            ],
+            "position": [
+              0.19541442585997015,
+              0.10344706202776122,
+              -0.0009526751678425316
+            ],
+            "errorMeters": 1.1123893155135927e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1954144258599702,
+              0.1043051090132692,
+              0.001376086353550257
+            ],
+            "position": [
+              -0.19541442585997015,
+              0.10430510901326934,
+              0.0013760863535500767
+            ],
+            "errorMeters": 2.342840229615247e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0018683240559122724,
+          "right": 0.0015327241378459457
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.0073483010098479365,
+          1.155474339061698,
+          0.3010585279642694
+        ],
+        "ballVisible": true,
+        "frame": 127,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.15175433935894905,
+            1.1449020566140493,
+            0.2721258928350627
+          ],
+          "right": [
+            -0.1648904869311433,
+            1.150108252777505,
+            0.2811260425334788
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2017626887109941,
+            1.147450566595119,
+            0.008136789463902228
+          ],
+          "right": [
+            -0.20082227477878967,
+            1.147030038504669,
+            0.014861196057524232
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.3427876855652777,
+          0.20645345439756824,
+          -0.04937880885551138
+        ]
+      },
+      "bytes": 13624,
+      "sha256": "1e04d1f0f69e8c27e5665a4e4d1685a9893e172f47bf6b3b368b100b85ee703d"
+    },
+    {
+      "file": "390x844-11.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 11,
+      "timeSeconds": 1.1,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.5666666666666671,
+        "phase": 0.2361111111111113,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.1647384804575922,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915185,
+              1.1647384804575922,
+              0.3166247023598813
+            ],
+            "errorMeters": 0
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10180186021757492,
+              0
+            ],
+            "position": [
+              0.1948851618778355,
+              0.10180186021757509,
+              1.3877787807814457e-17
+            ],
+            "errorMeters": 1.6711069443220838e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10261576581047727,
+              0
+            ],
+            "position": [
+              -0.19488516187783547,
+              0.10261576581047732,
+              0
+            ],
+            "errorMeters": 6.206335383118183e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012896669241350598,
+          "right": 0.0009692265839867783
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159988565497626,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 139,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1496437072985635,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1496436452545513,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.1518818357066096,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.20055380490644212,
+            1.151881850775676,
+            0.014910091867481493
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.0007698095529828919,
+          0
+        ]
+      },
+      "bytes": 13290,
+      "sha256": "5ef492b0d83160509efaa58f2399896c57abe9a4584a4d123294e75f7b66e509"
+    },
+    {
+      "file": "390x844-12.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 12,
+      "timeSeconds": 1.2,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.6666666666666667,
+        "phase": 0.27777777777777785,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.1647043196223537,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915177,
+              1.1647043196223539,
+              0.3166247023598814
+            ],
+            "errorMeters": 6.938893903907228e-17
+          }
+        ],
+        "handContactErrorMeters": 6.938893903907228e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10180898668857791,
+              0
+            ],
+            "position": [
+              0.1948851618778355,
+              0.10180898668857791,
+              -1.3877787807814457e-16
+            ],
+            "errorMeters": 1.3877787807814457e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10262395193478681,
+              0
+            ],
+            "position": [
+              -0.19488516187783553,
+              0.10262395193478663,
+              2.7755575615628914e-17
+            ],
+            "errorMeters": 1.8463195827281384e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012897442856364886,
+          "right": 0.000969166537904193
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.1599544046623875,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 151,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.149609546463325,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1496094844193128,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.151847674871371,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.2005538049064421,
+            1.1518476899404375,
+            0.014910091867481549
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.0012793526840049196,
+          0
+        ]
+      },
+      "bytes": 13360,
+      "sha256": "ecb97f66c6b412c911118244cd61fc4257079bc8c1172fb439a67e53e7f24c10"
+    },
+    {
+      "file": "390x844-13.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 13,
+      "timeSeconds": 1.3,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.7666666666666664,
+        "phase": 0.31944444444444436,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.164468819724427,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915177,
+              1.1644688197244273,
+              0.3166247023598814
+            ],
+            "errorMeters": 6.938893903907228e-17
+          }
+        ],
+        "handContactErrorMeters": 6.938893903907228e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10185792706627295,
+              0
+            ],
+            "position": [
+              0.19488516187783556,
+              0.10185792706627289,
+              -8.326672684688674e-17
+            ],
+            "errorMeters": 1.1443916996305594e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10268017051619349,
+              0
+            ],
+            "position": [
+              -0.19488516187783544,
+              0.10268017051619355,
+              8.326672684688674e-17
+            ],
+            "errorMeters": 1.1443916996305594e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012902934807663613,
+          "right": 0.0009687780556329731
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159718904764461,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 163,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1493740465653983,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1493739845213862,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.1516121749734445,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.2005538049064421,
+            1.151612190042511,
+            0.014910091867481549
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.0032413291498034624,
+          0
+        ]
+      },
+      "bytes": 13322,
+      "sha256": "affc86edd77b1818cbc75b88be4ab4a228adb3dd1dffed4dc58704edb05ca34b"
+    },
+    {
+      "file": "390x844-14.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 14,
+      "timeSeconds": 1.4,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.866666666666666,
+        "phase": 0.3611111111111109,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915188,
+              1.164048029692674,
+              0.31662470235988116
+            ],
+            "errorMeters": 0
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915174,
+              1.164048029692674,
+              0.3166247023598813
+            ],
+            "errorMeters": 1.1102230246251565e-16
+          }
+        ],
+        "handContactErrorMeters": 1.1102230246251565e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10194456609438651,
+              0
+            ],
+            "position": [
+              0.19488516187783547,
+              0.10194456609438668,
+              -1.3877787807814457e-16
+            ],
+            "errorMeters": 2.1854762094519229e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10277969922398668,
+              0
+            ],
+            "position": [
+              -0.19488516187783553,
+              0.10277969922398678,
+              -4.163336342344337e-17
+            ],
+            "errorMeters": 1.0927381047259614e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012913419296098436,
+          "right": 0.000968191838270383
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159298114732708,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 175,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1489532565336453,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1489531944896332,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20055373922349454,
+            1.1511913849416913,
+            0.014910058108237641
+          ],
+          "right": [
+            -0.20055380490644212,
+            1.1511914000107577,
+            0.014910091867481472
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.004982414390584111,
+          0
+        ]
+      },
+      "bytes": 24010,
+      "sha256": "3684481abf5102d14540761056b5d4a3e43830d1e2267de75b37de6cb2d5521d"
+    },
+    {
+      "file": "390x844-15.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 15,
+      "timeSeconds": 1.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.23809523809523808
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.1645823330173812,
+              1.1537205445288805,
+              0.32299264122214966
+            ],
+            "errorMeters": 1.3877787807814457e-17
+          }
+        ],
+        "handContactErrorMeters": 1.3877787807814457e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1984619894342549,
+              0.11707052786190765,
+              -0.006438289601554907
+            ],
+            "position": [
+              0.1984619894342549,
+              0.11707052786190758,
+              -0.006438289601554681
+            ],
+            "errorMeters": 2.3677704553288463e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1984619894342549,
+              0.11901385884434595,
+              0.009299751646690422
+            ],
+            "position": [
+              -0.19846198943425483,
+              0.11901385884434584,
+              0.009299751646690418
+            ],
+            "errorMeters": 1.2417518519112547e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.010804768803609196,
+          "right": 0.01118377750699142
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.049660672995122765,
+          1.1230262685680845,
+          0.30715365511283876
+        ],
+        "ballVisible": true,
+        "frame": 187,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.12476104205901625,
+            1.1129625301945363,
+            0.23139645810408727
+          ],
+          "right": [
+            -0.20550124136994566,
+            1.1462679451131166,
+            0.2866797467828118
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2141353471480324,
+            1.1251443867231705,
+            -0.02170710285095017
+          ],
+          "right": [
+            -0.2022238325324522,
+            1.1190121186505775,
+            0.019389799786937598
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -0.8730960564053412,
+          -0.6338325948342938,
+          0.12577010522021315
+        ]
+      },
+      "bytes": 25720,
+      "sha256": "f7a65bd1252cc8787ce67059fed11e7fba7dfe11d13b4de667b8e92ddb7dd23d"
+    },
+    {
+      "file": "390x844-16.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 16,
+      "timeSeconds": 1.6,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.47619047619047616
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.24814376224353657,
+              1.1240949939549534,
+              0.3348725996790746
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        ],
+        "handContactErrorMeters": 5.551115123125783e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2064929796081022,
+              0.11871588844273369,
+              -0.02089407191448007
+            ],
+            "position": [
+              0.20649297960810212,
+              0.1187158884427339,
+              -0.02089407191448031
+            ],
+            "errorMeters": 3.2798662237380893e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2064929796081022,
+              0.12004322025090765,
+              0.03018032609869344
+            ],
+            "position": [
+              -0.2064929796081022,
+              0.12004322025090752,
+              0.030180326098693422
+            ],
+            "errorMeters": 1.2609900516398658e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.007456026206206445,
+          "right": 0.007883711378579539
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.16116293877662483,
+          1.042250925542969,
+          0.32321563546053345
+        ],
+        "ballVisible": true,
+        "frame": 199,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.10900663045448697,
+            1.0531392418917844,
+            0.17700560562506265
+          ],
+          "right": [
+            -0.2881377015867458,
+            1.1344424181304984,
+            0.2982400973058687
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.24539810205675164,
+            1.0733948884912603,
+            -0.0536123725591086
+          ],
+          "right": [
+            -0.2166494187454729,
+            1.0476572017722754,
+            0.0542005740970983
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -1.233838680992555,
+          -0.8929420393785392,
+          0.1777353357568856
+        ]
+      },
+      "bytes": 26278,
+      "sha256": "45c3d7337d9bae4cb0ec599befe1eb003f57cae3061deecd8dfe1cb53d623ef5"
+    },
+    {
+      "file": "390x844-17.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 17,
+      "timeSeconds": 1.7,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.7142857142857145
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3138552157290251,
+              1.0720508147338843,
+              0.3447404293960873
+            ],
+            "errorMeters": 3.191891195797325e-16
+          }
+        ],
+        "handContactErrorMeters": 3.191891195797325e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21492889365626117,
+              0.11877530409695916,
+              -0.03607871720116619
+            ],
+            "position": [
+              0.2149288936562612,
+              0.1187753040969593,
+              -0.036078717201166066
+            ],
+            "errorMeters": 1.8875832159447664e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21492889365626117,
+              0.11871695218520557,
+              0.05211370262390673
+            ],
+            "position": [
+              -0.2149288936562612,
+              0.11871695218520562,
+              0.05211370262390658
+            ],
+            "errorMeters": 1.6064700823479085e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.004162296838241009,
+          "right": 0.004320086170410851
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.2782871675387069,
+          0.9575376545433192,
+          0.3400874635568513
+        ],
+        "ballVisible": true,
+        "frame": 211,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.21231988303708033,
+            1.05384140914094,
+            0.20883795432224472
+          ],
+          "right": [
+            -0.3440469605702477,
+            1.0982649497683066,
+            0.30666416028763244
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.148504993832177,
+            0.9896329155189763,
+            -0.0441492111018401
+          ],
+          "right": [
+            -0.24281479252734445,
+            0.9771213169773507,
+            0.08923875782176405
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -1.0323850075217766,
+          -0.7463957950632683,
+          0.1487157914312176
+        ]
+      },
+      "bytes": 25732,
+      "sha256": "aef50495f8cc4384ed6c0222a10ccc914c97ed53b9a09bab44fb087eb9f51753"
+    },
+    {
+      "file": "390x844-18.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 18,
+      "timeSeconds": 1.8,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.9523809523809534
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.34601404116853046,
+              1.0294459210665021,
+              0.34982567110965773
+            ],
+            "errorMeters": 2.498001805406602e-16
+          }
+        ],
+        "handContactErrorMeters": 2.498001805406602e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21972049283561543,
+              0.11786218911740003,
+              -0.0447035957240039
+            ],
+            "position": [
+              0.21972049283561537,
+              0.11786218911740032,
+              -0.04470359572400373
+            ],
+            "errorMeters": 3.4021815010030383e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21972049283561543,
+              0.11737107479761158,
+              0.06457186049022785
+            ],
+            "position": [
+              -0.2197204928356154,
+              0.11737107479761139,
+              0.06457186049022762
+            ],
+            "errorMeters": 3.06884301130794e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002338692169019196,
+          "right": 0.0022605029046035546
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.3448137294755695,
+          0.909452024455093,
+          0.3496706619155599
+        ],
+        "ballVisible": true,
+        "frame": 223,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.33326418264454505,
+            1.101255191324566,
+            0.25804730452934993
+          ],
+          "right": [
+            -0.36749712318795463,
+            1.0617713817376213,
+            0.31055651806650575
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20066607245911391,
+            0.9249136622622817,
+            0.10468830443487598
+          ],
+          "right": [
+            -0.2555765156163653,
+            0.9368034270286741,
+            0.10066529589042189
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -0.26873503599298854,
+          -0.1941938618883743,
+          0.03871147224322247
+        ]
+      },
+      "bytes": 24288,
+      "sha256": "160df0c149c87718c5552c11d44deb61e3c08cdcf056df7fc5cdcda9e1370b9c"
+    },
+    {
+      "file": "390x844-19.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 19,
+      "timeSeconds": 1.9,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.075,
+        "phase": 0.09615384615384615,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11799257886730836,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778354,
+              0.11799257886730857,
+              -0.04500000000000015
+            ],
+            "errorMeters": 2.71238868666702e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11753746074980148,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778354,
+              0.11753746074980154,
+              0.065
+            ],
+            "errorMeters": 1.0007415106216802e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023167068454480588,
+          "right": 0.0022210135247333444
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.8751128513204198,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 235,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3608703618955604,
+            1.0225671090023125,
+            0.3056040836491395
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2092207829151604,
+            0.9185882583641511,
+            0.11394315630669272
+          ],
+          "right": [
+            -0.24596036626660334,
+            0.9234764660104735,
+            0.0838513505748471
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.8112336549854504,
+          0
+        ]
+      },
+      "bytes": 24150,
+      "sha256": "fb7761fa0fb0262a8ec843adf4add3e1d7e11d6b14296e30ddb67bc2d1973866"
+    },
+    {
+      "file": "390x844-20.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 20,
+      "timeSeconds": 2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.175,
+        "phase": 0.22435897435897434,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11788016560303273,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783533,
+              0.11788016560303294,
+              -0.044999999999999984
+            ],
+            "errorMeters": 2.669445784096911e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11739432678479918,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11739432678479955,
+              0.06499999999999995
+            ],
+            "errorMeters": 4.034117999026819e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022899358567904874,
+          "right": 0.002200114254571473
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7408519858218738,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 247,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8728519858218738,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.206687416504719,
+            0.9226524785945253,
+            0.11113758252813137
+          ],
+          "right": [
+            -0.22805638605531173,
+            0.9243699202601712,
+            0.0503923515707708
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.7922336549854556,
+          0
+        ]
+      },
+      "bytes": 23588,
+      "sha256": "b50166181f161c54b87d1f3aedb592ed7d48f97432b6a021c420d54ec474d952"
+    },
+    {
+      "file": "390x844-21.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 21,
+      "timeSeconds": 2.1,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.275,
+        "phase": 0.3525641025641026,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11762911543588819,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778355,
+              0.1176291154358885,
+              -0.04499999999999993
+            ],
+            "errorMeters": 3.1309716410295113e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11708222468445667,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783538,
+              0.11708222468445656,
+              0.06499999999999978
+            ],
+            "errorMeters": 2.7194799110210365e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022343391816369348,
+          "right": 0.002156457945480356
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.5084911203233278,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 259,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.201638079490229,
+            0.931288387538327,
+            0.10554245152139545
+          ],
+          "right": [
+            -0.23374853317706848,
+            0.9353942834657676,
+            0.0630041490212347
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -2.773233654985474,
+          0
+        ]
+      },
+      "bytes": 23822,
+      "sha256": "1db0a49228c236c88ddc1a4e4b3426e39b30428a4e4a92d9a1fc55174882499a"
+    },
+    {
+      "file": "390x844-22.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 22,
+      "timeSeconds": 2.2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.37500000000000033,
+        "phase": 0.48076923076923117,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11777404501129388,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11777404501129402,
+              -0.04500000000000015
+            ],
+            "errorMeters": 2.1364582767275725e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11726123694613484,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783558,
+              0.11726123694613522,
+              0.06500000000000011
+            ],
+            "errorMeters": 3.9957426392311836e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022657841054916344,
+          "right": 0.002181190411033167
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.17803025482478063,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 271,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20445825096842624,
+            0.9263731446827628,
+            0.10866801174723881
+          ],
+          "right": [
+            -0.2328167648375816,
+            0.9294407657166193,
+            0.06093122895810046
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -3.7542336549854793,
+          0
+        ]
+      },
+      "bytes": 23704,
+      "sha256": "f50cb38edb441861ea3b31cebbcd40e8519cecbd733194563cc1db6532ac7a92"
+    },
+    {
+      "file": "390x844-23.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 23,
+      "timeSeconds": 2.3,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.47500000000000064,
+        "phase": 0.6089743589743598,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11800049234741908,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783536,
+              0.1180004923474195,
+              -0.045000000000000207
+            ],
+            "errorMeters": 4.85722573273506e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11754762883770502,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11754762883770498,
+              0.06499999999999972
+            ],
+            "errorMeters": 2.8609792490763985e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023186416992463828,
+          "right": 0.002222520785614685
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.419653360673766,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 283,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20940637679877216,
+            0.9182970823558219,
+            0.11414865130494431
+          ],
+          "right": [
+            -0.23139685390434064,
+            0.9194469163182495,
+            0.057778096158811965
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          3.1492836549854664,
+          0
+        ]
+      },
+      "bytes": 23494,
+      "sha256": "d2b754e234ec0c5dafb7bdc8f64f9c7e2b303ab0bb46dedab9429b6155d5714d"
+    },
+    {
+      "file": "390x844-24.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 24,
+      "timeSeconds": 2.4,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.5750000000000004,
+        "phase": 0.7371794871794877,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11785082772141994,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783547,
+              0.11785082772142008,
+              -0.04500000000000026
+            ],
+            "errorMeters": 2.992586547019258e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11735734741638414,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.1173573474163841,
+              0.06499999999999967
+            ],
+            "errorMeters": 3.632164660233972e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002283155907627201,
+          "right": 0.0021948084187769067
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.6814442261723108,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 295,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20605618245353907,
+            0.9236919365563252,
+            0.11043835846669313
+          ],
+          "right": [
+            -0.23233023411366616,
+            0.926155048857433,
+            0.05985000133008493
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          2.168283654985448,
+          0
+        ]
+      },
+      "bytes": 24416,
+      "sha256": "1813a75e3ea4cc0efdc1d1ffce10c62ef85f61568741ce5253844ddcbdaaf000"
+    },
+    {
+      "file": "390x844-25.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 25,
+      "timeSeconds": 2.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.675,
+        "phase": 0.8653846153846154,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1176224520316655,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778354,
+              0.11762245203166566,
+              -0.04499999999999976
+            ],
+            "errorMeters": 2.930810050475307e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11707406336003741,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783547,
+              0.1170740633600374,
+              0.06499999999999989
+            ],
+            "errorMeters": 1.1527756336890508e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002232932550199365,
+          "right": 0.002155349178259299
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.845135091670856,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 307,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.977135091670856,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2015141280579673,
+            0.9315100340488418,
+            0.10540504462195721
+          ],
+          "right": [
+            -0.22740134249509494,
+            0.9347993203821101,
+            0.048900687643059416
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          1.187283654985456,
+          0
+        ]
+      },
+      "bytes": 24540,
+      "sha256": "738ffa5488be9fe838fa555f44bab299a8d094849c65698569e96042cb0d2ceb"
+    },
+    {
+      "file": "390x844-26.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 26,
+      "timeSeconds": 2.6,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.7749999999999997,
+        "phase": 0.9935897435897432,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3470999944210051,
+              1.0276540513833452,
+              0.35000000000000003
+            ],
+            "errorMeters": 1.1102230246251565e-16
+          }
+        ],
+        "handContactErrorMeters": 1.1102230246251565e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1178048575939761,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778355,
+              0.11780485759397608,
+              -0.04499999999999993
+            ],
+            "errorMeters": 7.473417450352271e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11729969252250957,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11729969252250949,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.0007415106216802e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022726923479191394,
+          "right": 0.0021866098458863895
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.9076540513833451,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 319,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3682544938129861,
+            1.0601420288872543,
+            0.3106866043878163
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2050903335931672,
+            0.9253038798415734,
+            0.10936834786549371
+          ],
+          "right": [
+            -0.25578971469369977,
+            0.9359428359332446,
+            0.10063001397198523
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.10701828532105218,
+          0
+        ]
+      },
+      "bytes": 24134,
+      "sha256": "c8a17e27a5a1cbd53ec6c32bfbfd52acb79a4e46c50874af7fbe107b3b087017"
+    },
+    {
+      "file": "390x844-27.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 27,
+      "timeSeconds": 2.7,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.8749999999999993,
+        "phase": 0.12179487179487092,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11800391141419808,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783538,
+              0.1180039114141983,
+              -0.04499999999999982
+            ],
+            "errorMeters": 3.06884301130794e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11755202597852354,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11755202597852354,
+              0.06500000000000006
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023194798166621972,
+          "right": 0.002223173546611685
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.8561086782207113,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 331,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3403624309594514,
+            0.9895827985464414,
+            0.29148841163031336
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2094868734618518,
+            0.91817106417248,
+            0.11423777787384228
+          ],
+          "right": [
+            -0.23094727878222643,
+            0.9192066774559842,
+            0.05638617152146747
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.0074336549854435,
+          0
+        ]
+      },
+      "bytes": 24178,
+      "sha256": "ec458de23f67df82725a91341c09b6bd9e65704139c0b790a6dc9ff8297afbd2"
+    },
+    {
+      "file": "390x844-28.webp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "index": 28,
+      "timeSeconds": 2.8,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.974999999999999,
+        "phase": 0.24999999999999867,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11782031495460255,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11782031495460277,
+              -0.04499999999999982
+            ],
+            "errorMeters": 2.914335439641036e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11731904047535509,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783558,
+              0.11731904047535519,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.3947004136484323e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022761893703902754,
+          "right": 0.0021893512315097827
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7022278127221667,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 343,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2054119985104384,
+            0.9247641216750604,
+            0.10972472033276877
+          ],
+          "right": [
+            -0.23252297289892976,
+            0.927472496037566,
+            0.06027823054420341
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.9884336549854487,
+          0
+        ]
+      },
+      "bytes": 24458,
+      "sha256": "b71a6ea9424ce8e791331035fdf9f3989640aed66abb99f38948805f9663f4f6"
+    },
+    {
+      "file": "844x390-00.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 0,
+      "timeSeconds": 0,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.23399999999999999,
+        "phase": 0.3,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1177050547288471,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.11770505472884712,
+              -0.045000000000000207
+            ],
+            "errorMeters": 2.118352371637509e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11717565295980897,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11717565295980903,
+              0.06499999999999961
+            ],
+            "errorMeters": 3.925231146709438e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022506070969602106,
+          "right": 0.002169266186068608
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.6156242701777317,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 7,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2030853601620677,
+            0.9287358629331348,
+            0.10714663252441511
+          ],
+          "right": [
+            -0.2332581573291544,
+            0.9323130856573731,
+            0.061912844053993374
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bytes": 21686,
+      "sha256": "d02e0eb53c8969536baf8c2b292f5d09cb70d0638eaad26b6733f8dea65e7e8d"
+    },
+    {
+      "file": "844x390-01.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 1,
+      "timeSeconds": 0.1,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.33400000000000024,
+        "phase": 0.4282051282051285,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11766521550736278,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.11766521550736275,
+              -0.045000000000000095
+            ],
+            "errorMeters": 1.0477500027681816e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11712654134594713,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11712654134594719,
+              0.06499999999999978
+            ],
+            "errorMeters": 2.3551386880256624e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022420174762830206,
+          "right": 0.002162506728436455
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.32538440467918495,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 19,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20231803127551162,
+            0.9300811081590727,
+            0.10629616468750372
+          ],
+          "right": [
+            -0.23351483262293973,
+            0.9339396351856049,
+            0.062483963370970286
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -3.3520236549854676,
+          0
+        ]
+      },
+      "bytes": 20446,
+      "sha256": "c893f8250460f40133ab5eb3aab8cb4d169d3cea5dab61a23eebb92593bce092"
+    },
+    {
+      "file": "844x390-02.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 2,
+      "timeSeconds": 0.2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.43400000000000055,
+        "phase": 0.5564102564102571,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1179416683009994,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783555,
+              0.11794166830099939,
+              -0.04500000000000015
+            ],
+            "errorMeters": 1.6302709355362946e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11747234264676519,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778356,
+              0.1174723426467652,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.249000902703301e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023044212343408255,
+          "right": 0.0022114327723061628
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.28396330081936205,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 31,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20805013980672377,
+            0.9204452834946424,
+            0.11264685876114419
+          ],
+          "right": [
+            -0.23176127426250137,
+            0.9221347650072645,
+            0.058586651756469675
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          3.5514936549854914,
+          0
+        ]
+      },
+      "bytes": 20216,
+      "sha256": "4e1a5da60a64f5c31f14a89d19c30f1ad4305e93ab5927f1d8f88bb2f61e9f80"
+    },
+    {
+      "file": "844x390-03.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 3,
+      "timeSeconds": 0.3,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.5340000000000006,
+        "phase": 0.6846153846153853,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11795636421653234,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783547,
+              0.1179563642165325,
+              -0.044999999999999984
+            ],
+            "errorMeters": 1.5577778178957092e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11749108796004777,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11749108796004776,
+              0.06499999999999995
+            ],
+            "errorMeters": 7.97218214573518e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002307939338057525,
+          "right": 0.00221417810455948
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.5859751663179076,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 43,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20838398013651865,
+            0.9199120784717271,
+            0.11301655533305939
+          ],
+          "right": [
+            -0.23166992957091403,
+            0.9214697739877806,
+            0.05838393474703439
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          2.5704936549854596,
+          0
+        ]
+      },
+      "bytes": 21442,
+      "sha256": "5935bd5e1f26157930bfacb78303ddb0fbfe497d718fc2fb65c1c02113c1d4a1"
+    },
+    {
+      "file": "844x390-04.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 4,
+      "timeSeconds": 0.4,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.6340000000000002,
+        "phase": 0.812820512820513,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11768041117280592,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11768041117280587,
+              -0.045000000000000095
+            ],
+            "errorMeters": 1.249000902703301e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11714524790693487,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11714524790693492,
+              0.06500000000000006
+            ],
+            "errorMeters": 1.594436429147036e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022452791668183293,
+          "right": 0.0021650743683137314
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7898870318164525,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 55,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.9218870318164525,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2026085770143925,
+            0.9295696156874735,
+            0.10661820315410012
+          ],
+          "right": [
+            -0.22607751283154517,
+            0.932477478952445,
+            0.04604523212385498
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          1.5894936549854544,
+          0
+        ]
+      },
+      "bytes": 21450,
+      "sha256": "af32e520cff6d0d4b2dbb7ebe945a482358cd180de47571ddfee1205f8d23ec5"
+    },
+    {
+      "file": "844x390-05.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 5,
+      "timeSeconds": 0.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.7339999999999999,
+        "phase": 0.9410256410256408,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "waitingForCatch": true
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.34709999442100514,
+              1.015448129495728,
+              0.35000000000000003
+            ],
+            "errorMeters": 0
+          }
+        ],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11768746643445349,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783552,
+              0.1176874664344536,
+              -0.04500000000000015
+            ],
+            "errorMeters": 1.9078803932353506e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11715394401272028,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11715394401272045,
+              0.065
+            ],
+            "errorMeters": 2.1677797545656835e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022467996377274306,
+          "right": 0.002166270921548705
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.895448129495728,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 67,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3682544938129861,
+            1.0479361069996371,
+            0.3106866043878163
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20274436466348095,
+            0.9293314572775182,
+            0.10676870380095388
+          ],
+          "right": [
+            -0.252282908427898,
+            0.9388849732223681,
+            0.09422418535147929
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.5856818887570014,
+          0
+        ]
+      },
+      "bytes": 19416,
+      "sha256": "83ea5ed53f6f1dc2ca49917ecbb8ecf0af26bd0c52861c652cf9e83e6f7f1f00"
+    },
+    {
+      "file": "844x390-06.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 6,
+      "timeSeconds": 0.6,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.06666666666666667,
+        "phase": 0.02777777777777778,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.14423076923076922
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.33778708738021324,
+              1.0551474474480236,
+              0.3485098496298557
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        ],
+        "handContactErrorMeters": 5.551115123125783e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21847499140389376,
+              0.1432592966773489,
+              -0.04246169314690487
+            ],
+            "position": [
+              0.21847499140389365,
+              0.14325929667734927,
+              -0.04246169314690479
+            ],
+            "errorMeters": 3.8659043403122315e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21847499140389376,
+              0.1423912395828063,
+              0.061333556767751485
+            ],
+            "position": [
+              -0.21847499140389376,
+              0.1423912395828062,
+              0.06133355676775143
+            ],
+            "errorMeters": 1.2412670766236366e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.027450112198395923,
+          "right": 0.026875332140102026
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.3275211878754915,
+          0.9355947732814209,
+          0.3471796590521165
+        ],
+        "ballVisible": true,
+        "frame": 79,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.29756900513948886,
+            1.0858690204351067,
+            0.2437524937328472
+          ],
+          "right": [
+            -0.36169976875503357,
+            1.0861368873290065,
+            0.3095693451812848
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.16828214577307363,
+            0.9345508063869586,
+            0.06323855327617015
+          ],
+          "right": [
+            -0.25506891267458126,
+            0.9512518000918392,
+            0.10309074817308889
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.47115306811741586,
+          0.4929118955906908,
+          -0.06786993311586276
+        ]
+      },
+      "bytes": 19048,
+      "sha256": "224899e892b02835334aca1d96b8dcb07cd9c793c85344d2af8c3e991d43bafa"
+    },
+    {
+      "file": "844x390-07.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 7,
+      "timeSeconds": 0.7,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.16666666666666666,
+        "phase": 0.06944444444444445,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.3365384615384615
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3023442090191808,
+              1.1049071821211343,
+              0.34296205063467133
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21329658761463569,
+              0.1363193721219313,
+              -0.03314056632624033
+            ],
+            "position": [
+              0.21329658761463557,
+              0.13631937212193135,
+              -0.03314056632624057
+            ],
+            "errorMeters": 2.727435500648127e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21329658761463569,
+              0.1358431795594747,
+              0.047869706915680474
+            ],
+            "position": [
+              -0.21329658761463569,
+              0.13584317955947495,
+              0.04786970691568038
+            ],
+            "errorMeters": 2.68024601344063e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.02162777835952783,
+          "right": 0.021246854366058644
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.25562423082104385,
+          0.9945461660383421,
+          0.33682285147360036
+        ],
+        "ballVisible": true,
+        "frame": 91,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.18144864742172576,
+            1.0517488002790838,
+            0.19639169722432517
+          ],
+          "right": [
+            -0.3350489141768657,
+            1.1284859661765991,
+            0.3052398051501493
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.17324845692469476,
+            1.0172538703786176,
+            -0.0699547562788581
+          ],
+          "right": [
+            -0.2415687129000002,
+            0.994272726750763,
+            0.09205961005229019
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.8834034313137318,
+          0.6486149305175815,
+          -0.12725488987507916
+        ]
+      },
+      "bytes": 17772,
+      "sha256": "7b9f6e1d8f4c14b03240f01b8f50cfcbdf405d1222d3872510f553d4bda78d5e"
+    },
+    {
+      "file": "844x390-08.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 8,
+      "timeSeconds": 0.8,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.26666666666666666,
+        "phase": 0.11111111111111112,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.5288461538461539
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.24645781079142498,
+              1.1418048253415298,
+              0.33462727958704264
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.20630463125368892,
+              0.12532616431957116,
+              -0.020555044876536185
+            ],
+            "position": [
+              0.2063046312536889,
+              0.1253261643195711,
+              -0.020555044876536255
+            ],
+            "errorMeters": 9.309503074677274e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.20630463125368892,
+              0.12593755832434342,
+              0.029690620377218938
+            ],
+            "position": [
+              -0.20630463125368897,
+              0.12593755832434356,
+              0.02969062037721873
+            ],
+            "errorMeters": 2.5626980138831173e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.01379120579299381,
+          "right": 0.013584954493693114
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.15854791026598272,
+          1.0609785646958907,
+          0.3228389387517069
+        ],
+        "ballVisible": true,
+        "frame": 103,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.10822980313919134,
+            1.0631891013692025,
+            0.17730588807334408
+          ],
+          "right": [
+            -0.2865725395103206,
+            1.1517480605135721,
+            0.29801491534348734
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.24560847000175287,
+            1.0758547467330066,
+            -0.053267874365778164
+          ],
+          "right": [
+            -0.21772498117990643,
+            1.0507881776457513,
+            0.058714574739556005
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.9994259886204881,
+          0.6544804521802483,
+          -0.14396802141809495
+        ]
+      },
+      "bytes": 16700,
+      "sha256": "174b04852589031e5e729611f31ac4512ea470c8abb99b9f07d481ad72fa4846"
+    },
+    {
+      "file": "844x390-09.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 9,
+      "timeSeconds": 0.9,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.366666666666667,
+        "phase": 0.1527777777777779,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.7211538461538468
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.17837255042508535,
+              1.1586718294621132,
+              0.3249234194467879
+            ],
+            "errorMeters": 1.3877787807814457e-17
+          }
+        ],
+        "handContactErrorMeters": 1.3877787807814457e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.19963271358186369,
+              0.11342098423997639,
+              -0.008545593067250758
+            ],
+            "position": [
+              0.19963271358186369,
+              0.11342098423997637,
+              -0.00854559306725075
+            ],
+            "errorMeters": 1.5515838457795457e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.19963271358186369,
+              0.11437405573436492,
+              0.012343634430473316
+            ],
+            "position": [
+              -0.19963271358186369,
+              0.11437405573436477,
+              0.012343634430473177
+            ],
+            "errorMeters": 2.063081476116683e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.00662983170242789,
+          "right": 0.00619419891467764
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.06591500679926492,
+          1.119745386703293,
+          0.3094951034080564
+        ],
+        "ballVisible": true,
+        "frame": 115,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.11696602192440336,
+            1.1090537519405463,
+            0.21839002879627814
+          ],
+          "right": [
+            -0.21970041452089553,
+            1.1538116228739395,
+            0.28863415598528436
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.22045551350456627,
+            1.118209713977739,
+            -0.029407610616211083
+          ],
+          "right": [
+            -0.20321524291922768,
+            1.1090161865285397,
+            0.02421187014350787
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.8192207400376617,
+          0.5076349828135207,
+          -0.11800932774489681
+        ]
+      },
+      "bytes": 16634,
+      "sha256": "551a78795a4b6c1c6544c5025a512b4088fc7e3afdb03c522bbb1f59a186365a"
+    },
+    {
+      "file": "844x390-10.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 10,
+      "timeSeconds": 1,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.4666666666666673,
+        "phase": 0.1944444444444447,
+        "transition": {
+          "from": "dribble_right",
+          "to": "idle_hold",
+          "progress": 0.9134615384615397
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.12588701581103112,
+              1.1641078467988792,
+              0.3176125497546307
+            ],
+            "errorMeters": 9.71445146547012e-17
+          }
+        ],
+        "handContactErrorMeters": 9.71445146547012e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1954144258599702,
+              0.1034470620277613,
+              -0.000952675167842483
+            ],
+            "position": [
+              0.19541442585997015,
+              0.10344706202776122,
+              -0.0009526751678425316
+            ],
+            "errorMeters": 1.1123893155135927e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1954144258599702,
+              0.1043051090132692,
+              0.001376086353550257
+            ],
+            "position": [
+              -0.19541442585997015,
+              0.10430510901326934,
+              0.0013760863535500767
+            ],
+            "errorMeters": 2.342840229615247e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0018683240559122724,
+          "right": 0.0015327241378459457
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.0073483010098479365,
+          1.155474339061698,
+          0.3010585279642694
+        ],
+        "ballVisible": true,
+        "frame": 127,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.15175433935894905,
+            1.1449020566140493,
+            0.2721258928350627
+          ],
+          "right": [
+            -0.1648904869311433,
+            1.150108252777505,
+            0.2811260425334788
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2017626887109941,
+            1.147450566595119,
+            0.008136789463902228
+          ],
+          "right": [
+            -0.20082227477878967,
+            1.147030038504669,
+            0.014861196057524232
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0.3427876855652777,
+          0.20645345439756824,
+          -0.04937880885551138
+        ]
+      },
+      "bytes": 16954,
+      "sha256": "e0540179f172f9e4e16b398f1f6cb99835b209df0100946030adac645efc0de9"
+    },
+    {
+      "file": "844x390-11.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 11,
+      "timeSeconds": 1.1,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.5666666666666671,
+        "phase": 0.2361111111111113,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.1647384804575922,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915185,
+              1.1647384804575922,
+              0.3166247023598813
+            ],
+            "errorMeters": 0
+          }
+        ],
+        "handContactErrorMeters": 2.7755575615628914e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10180186021757492,
+              0
+            ],
+            "position": [
+              0.1948851618778355,
+              0.10180186021757509,
+              1.3877787807814457e-17
+            ],
+            "errorMeters": 1.6711069443220838e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10261576581047727,
+              0
+            ],
+            "position": [
+              -0.19488516187783547,
+              0.10261576581047732,
+              0
+            ],
+            "errorMeters": 6.206335383118183e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012896669241350598,
+          "right": 0.0009692265839867783
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159988565497626,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 139,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1496437072985635,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1496436452545513,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.1518818357066096,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.20055380490644212,
+            1.151881850775676,
+            0.014910091867481493
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.0007698095529828919,
+          0
+        ]
+      },
+      "bytes": 16196,
+      "sha256": "51e3934f239a02a2a2f0ab79e220039b4153aac004bf2bb0d3c9f4b0a384e317"
+    },
+    {
+      "file": "844x390-12.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 12,
+      "timeSeconds": 1.2,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.6666666666666667,
+        "phase": 0.27777777777777785,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.1647043196223537,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915177,
+              1.1647043196223539,
+              0.3166247023598814
+            ],
+            "errorMeters": 6.938893903907228e-17
+          }
+        ],
+        "handContactErrorMeters": 6.938893903907228e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10180898668857791,
+              0
+            ],
+            "position": [
+              0.1948851618778355,
+              0.10180898668857791,
+              -1.3877787807814457e-16
+            ],
+            "errorMeters": 1.3877787807814457e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10262395193478681,
+              0
+            ],
+            "position": [
+              -0.19488516187783553,
+              0.10262395193478663,
+              2.7755575615628914e-17
+            ],
+            "errorMeters": 1.8463195827281384e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012897442856364886,
+          "right": 0.000969166537904193
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.1599544046623875,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 151,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.149609546463325,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1496094844193128,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.151847674871371,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.2005538049064421,
+            1.1518476899404375,
+            0.014910091867481549
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.0012793526840049196,
+          0
+        ]
+      },
+      "bytes": 16180,
+      "sha256": "be64e7c98a6c4962368abded2aa97c3d1c22047245c85f2501daef31c0fb7a29"
+    },
+    {
+      "file": "844x390-13.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 13,
+      "timeSeconds": 1.3,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.7666666666666664,
+        "phase": 0.31944444444444436,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915189,
+              1.164468819724427,
+              0.31662470235988127
+            ],
+            "errorMeters": 2.7755575615628914e-17
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915177,
+              1.1644688197244273,
+              0.3166247023598814
+            ],
+            "errorMeters": 6.938893903907228e-17
+          }
+        ],
+        "handContactErrorMeters": 6.938893903907228e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10185792706627295,
+              0
+            ],
+            "position": [
+              0.19488516187783556,
+              0.10185792706627289,
+              -8.326672684688674e-17
+            ],
+            "errorMeters": 1.1443916996305594e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10268017051619349,
+              0
+            ],
+            "position": [
+              -0.19488516187783544,
+              0.10268017051619355,
+              8.326672684688674e-17
+            ],
+            "errorMeters": 1.1443916996305594e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012902934807663613,
+          "right": 0.0009687780556329731
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159718904764461,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 163,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1493740465653983,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1493739845213862,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2005537392234946,
+            1.1516121749734445,
+            0.01491005810823768
+          ],
+          "right": [
+            -0.2005538049064421,
+            1.151612190042511,
+            0.014910091867481549
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.0032413291498034624,
+          0
+        ]
+      },
+      "bytes": 17030,
+      "sha256": "67b739c5be233f7d197b8ed947ef53ba20e72a4a87909e88e935bf804777ef37"
+    },
+    {
+      "file": "844x390-14.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 14,
+      "timeSeconds": 1.4,
+      "diagnostics": {
+        "action": "idle_hold",
+        "time": 0.866666666666666,
+        "phase": 0.3611111111111109,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "LeftHand",
+            "palm": [
+              0.11874787399915188,
+              1.164048029692674,
+              0.31662470235988116
+            ],
+            "errorMeters": 0
+          },
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.11874787399915174,
+              1.164048029692674,
+              0.3166247023598813
+            ],
+            "errorMeters": 1.1102230246251565e-16
+          }
+        ],
+        "handContactErrorMeters": 1.1102230246251565e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1948851618778355,
+              0.10194456609438651,
+              0
+            ],
+            "position": [
+              0.19488516187783547,
+              0.10194456609438668,
+              -1.3877787807814457e-16
+            ],
+            "errorMeters": 2.1854762094519229e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1948851618778355,
+              0.10277969922398668,
+              0
+            ],
+            "position": [
+              -0.19488516187783553,
+              0.10277969922398678,
+              -4.163336342344337e-17
+            ],
+            "errorMeters": 1.0927381047259614e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0012913419296098436,
+          "right": 0.000968191838270383
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          0,
+          1.159298114732708,
+          0.3
+        ],
+        "ballVisible": true,
+        "frame": 175,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.1572969991935802,
+            1.1489532565336453,
+            0.2800919236834739
+          ],
+          "right": [
+            -0.15729681193731623,
+            1.1489531944896332,
+            0.28009184132474635
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20055373922349454,
+            1.1511913849416913,
+            0.014910058108237641
+          ],
+          "right": [
+            -0.20055380490644212,
+            1.1511914000107577,
+            0.014910091867481472
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.004982414390584111,
+          0
+        ]
+      },
+      "bytes": 21168,
+      "sha256": "ba7e6ada1739eecc19a0fcbe0c706118d2cef3fde9c530c7b1350eadcc7d9125"
+    },
+    {
+      "file": "844x390-15.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 15,
+      "timeSeconds": 1.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.23809523809523808
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.1645823330173812,
+              1.1537205445288805,
+              0.32299264122214966
+            ],
+            "errorMeters": 1.3877787807814457e-17
+          }
+        ],
+        "handContactErrorMeters": 1.3877787807814457e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.1984619894342549,
+              0.11707052786190765,
+              -0.006438289601554907
+            ],
+            "position": [
+              0.1984619894342549,
+              0.11707052786190758,
+              -0.006438289601554681
+            ],
+            "errorMeters": 2.3677704553288463e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.1984619894342549,
+              0.11901385884434595,
+              0.009299751646690422
+            ],
+            "position": [
+              -0.19846198943425483,
+              0.11901385884434584,
+              0.009299751646690418
+            ],
+            "errorMeters": 1.2417518519112547e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.010804768803609196,
+          "right": 0.01118377750699142
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.049660672995122765,
+          1.1230262685680845,
+          0.30715365511283876
+        ],
+        "ballVisible": true,
+        "frame": 187,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.12476104205901625,
+            1.1129625301945363,
+            0.23139645810408727
+          ],
+          "right": [
+            -0.20550124136994566,
+            1.1462679451131166,
+            0.2866797467828118
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2141353471480324,
+            1.1251443867231705,
+            -0.02170710285095017
+          ],
+          "right": [
+            -0.2022238325324522,
+            1.1190121186505775,
+            0.019389799786937598
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -0.8730960564053412,
+          -0.6338325948342938,
+          0.12577010522021315
+        ]
+      },
+      "bytes": 21392,
+      "sha256": "5c1218b727ea3d0858ea0792ec94aabed95e099e97dd2740cd4eeb1d2eff8eb4"
+    },
+    {
+      "file": "844x390-16.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 16,
+      "timeSeconds": 1.6,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.47619047619047616
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.24814376224353657,
+              1.1240949939549534,
+              0.3348725996790746
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        ],
+        "handContactErrorMeters": 5.551115123125783e-17,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2064929796081022,
+              0.11871588844273369,
+              -0.02089407191448007
+            ],
+            "position": [
+              0.20649297960810212,
+              0.1187158884427339,
+              -0.02089407191448031
+            ],
+            "errorMeters": 3.2798662237380893e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2064929796081022,
+              0.12004322025090765,
+              0.03018032609869344
+            ],
+            "position": [
+              -0.2064929796081022,
+              0.12004322025090752,
+              0.030180326098693422
+            ],
+            "errorMeters": 1.2609900516398658e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.007456026206206445,
+          "right": 0.007883711378579539
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.16116293877662483,
+          1.042250925542969,
+          0.32321563546053345
+        ],
+        "ballVisible": true,
+        "frame": 199,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.10900663045448697,
+            1.0531392418917844,
+            0.17700560562506265
+          ],
+          "right": [
+            -0.2881377015867458,
+            1.1344424181304984,
+            0.2982400973058687
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.24539810205675164,
+            1.0733948884912603,
+            -0.0536123725591086
+          ],
+          "right": [
+            -0.2166494187454729,
+            1.0476572017722754,
+            0.0542005740970983
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -1.233838680992555,
+          -0.8929420393785392,
+          0.1777353357568856
+        ]
+      },
+      "bytes": 22848,
+      "sha256": "3351403dfa6f49337b82625eff02b3c4e67f55c96e511b3823153916dcda076b"
+    },
+    {
+      "file": "844x390-17.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 17,
+      "timeSeconds": 1.7,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.7142857142857145
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3138552157290251,
+              1.0720508147338843,
+              0.3447404293960873
+            ],
+            "errorMeters": 3.191891195797325e-16
+          }
+        ],
+        "handContactErrorMeters": 3.191891195797325e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21492889365626117,
+              0.11877530409695916,
+              -0.03607871720116619
+            ],
+            "position": [
+              0.2149288936562612,
+              0.1187753040969593,
+              -0.036078717201166066
+            ],
+            "errorMeters": 1.8875832159447664e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21492889365626117,
+              0.11871695218520557,
+              0.05211370262390673
+            ],
+            "position": [
+              -0.2149288936562612,
+              0.11871695218520562,
+              0.05211370262390658
+            ],
+            "errorMeters": 1.6064700823479085e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.004162296838241009,
+          "right": 0.004320086170410851
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.2782871675387069,
+          0.9575376545433192,
+          0.3400874635568513
+        ],
+        "ballVisible": true,
+        "frame": 211,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.21231988303708033,
+            1.05384140914094,
+            0.20883795432224472
+          ],
+          "right": [
+            -0.3440469605702477,
+            1.0982649497683066,
+            0.30666416028763244
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.148504993832177,
+            0.9896329155189763,
+            -0.0441492111018401
+          ],
+          "right": [
+            -0.24281479252734445,
+            0.9771213169773507,
+            0.08923875782176405
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -1.0323850075217766,
+          -0.7463957950632683,
+          0.1487157914312176
+        ]
+      },
+      "bytes": 23534,
+      "sha256": "4d34674656b365fa08435fe7fe94e8dba84b1d1447e8028a3f7fe8cfa96a4be4"
+    },
+    {
+      "file": "844x390-18.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 18,
+      "timeSeconds": 1.8,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0,
+        "phase": 0,
+        "transition": {
+          "from": "idle_hold",
+          "to": "dribble_right",
+          "progress": 0.9523809523809534
+        },
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.34601404116853046,
+              1.0294459210665021,
+              0.34982567110965773
+            ],
+            "errorMeters": 2.498001805406602e-16
+          }
+        ],
+        "handContactErrorMeters": 2.498001805406602e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.21972049283561543,
+              0.11786218911740003,
+              -0.0447035957240039
+            ],
+            "position": [
+              0.21972049283561537,
+              0.11786218911740032,
+              -0.04470359572400373
+            ],
+            "errorMeters": 3.4021815010030383e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.21972049283561543,
+              0.11737107479761158,
+              0.06457186049022785
+            ],
+            "position": [
+              -0.2197204928356154,
+              0.11737107479761139,
+              0.06457186049022762
+            ],
+            "errorMeters": 3.06884301130794e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002338692169019196,
+          "right": 0.0022605029046035546
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.3448137294755695,
+          0.909452024455093,
+          0.3496706619155599
+        ],
+        "ballVisible": true,
+        "frame": 223,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.33326418264454505,
+            1.101255191324566,
+            0.25804730452934993
+          ],
+          "right": [
+            -0.36749712318795463,
+            1.0617713817376213,
+            0.31055651806650575
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20066607245911391,
+            0.9249136622622817,
+            0.10468830443487598
+          ],
+          "right": [
+            -0.2555765156163653,
+            0.9368034270286741,
+            0.10066529589042189
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          -0.26873503599298854,
+          -0.1941938618883743,
+          0.03871147224322247
+        ]
+      },
+      "bytes": 24326,
+      "sha256": "9d4c758a666aba0bea757e9825e6d0521c40205f35a5362d0846003d8c40cdc5"
+    },
+    {
+      "file": "844x390-19.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 19,
+      "timeSeconds": 1.9,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.075,
+        "phase": 0.09615384615384615,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11799257886730836,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778354,
+              0.11799257886730857,
+              -0.04500000000000015
+            ],
+            "errorMeters": 2.71238868666702e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11753746074980148,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778354,
+              0.11753746074980154,
+              0.065
+            ],
+            "errorMeters": 1.0007415106216802e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023167068454480588,
+          "right": 0.0022210135247333444
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.8751128513204198,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 235,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3608703618955604,
+            1.0225671090023125,
+            0.3056040836491395
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2092207829151604,
+            0.9185882583641511,
+            0.11394315630669272
+          ],
+          "right": [
+            -0.24596036626660334,
+            0.9234764660104735,
+            0.0838513505748471
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -0.8112336549854504,
+          0
+        ]
+      },
+      "bytes": 24696,
+      "sha256": "094651430c144c1853aa936c2a0b911697025a4d1ac02f35bcb73275178ff824"
+    },
+    {
+      "file": "844x390-20.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 20,
+      "timeSeconds": 2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.175,
+        "phase": 0.22435897435897434,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11788016560303273,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783533,
+              0.11788016560303294,
+              -0.044999999999999984
+            ],
+            "errorMeters": 2.669445784096911e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11739432678479918,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.11739432678479955,
+              0.06499999999999995
+            ],
+            "errorMeters": 4.034117999026819e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022899358567904874,
+          "right": 0.002200114254571473
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7408519858218738,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 247,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8728519858218738,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.206687416504719,
+            0.9226524785945253,
+            0.11113758252813137
+          ],
+          "right": [
+            -0.22805638605531173,
+            0.9243699202601712,
+            0.0503923515707708
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.7922336549854556,
+          0
+        ]
+      },
+      "bytes": 23320,
+      "sha256": "a0db32b559079f00bdd331a2b833b7ac4242f92793f8b215f9298ac8a7292190"
+    },
+    {
+      "file": "844x390-21.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 21,
+      "timeSeconds": 2.1,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.275,
+        "phase": 0.3525641025641026,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11762911543588819,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778355,
+              0.1176291154358885,
+              -0.04499999999999993
+            ],
+            "errorMeters": 3.1309716410295113e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11708222468445667,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783538,
+              0.11708222468445656,
+              0.06499999999999978
+            ],
+            "errorMeters": 2.7194799110210365e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022343391816369348,
+          "right": 0.002156457945480356
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.5084911203233278,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 259,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.201638079490229,
+            0.931288387538327,
+            0.10554245152139545
+          ],
+          "right": [
+            -0.23374853317706848,
+            0.9353942834657676,
+            0.0630041490212347
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -2.773233654985474,
+          0
+        ]
+      },
+      "bytes": 22980,
+      "sha256": "5e89b92c29920b0c6bc913751b48233192057b073209cb4b5b1d508c007d1e2d"
+    },
+    {
+      "file": "844x390-22.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 22,
+      "timeSeconds": 2.2,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.37500000000000033,
+        "phase": 0.48076923076923117,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11777404501129388,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11777404501129402,
+              -0.04500000000000015
+            ],
+            "errorMeters": 2.1364582767275725e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11726123694613484,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783558,
+              0.11726123694613522,
+              0.06500000000000011
+            ],
+            "errorMeters": 3.9957426392311836e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022657841054916344,
+          "right": 0.002181190411033167
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.17803025482478063,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 271,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20445825096842624,
+            0.9263731446827628,
+            0.10866801174723881
+          ],
+          "right": [
+            -0.2328167648375816,
+            0.9294407657166193,
+            0.06093122895810046
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -3.7542336549854793,
+          0
+        ]
+      },
+      "bytes": 23040,
+      "sha256": "838b79096bd392abf8479ffbc9dc91e248e0540597654cb7e5f35ffd27e01bbe"
+    },
+    {
+      "file": "844x390-23.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 23,
+      "timeSeconds": 2.3,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.47500000000000064,
+        "phase": 0.6089743589743598,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11800049234741908,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783536,
+              0.1180004923474195,
+              -0.045000000000000207
+            ],
+            "errorMeters": 4.85722573273506e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11754762883770502,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783555,
+              0.11754762883770498,
+              0.06499999999999972
+            ],
+            "errorMeters": 2.8609792490763985e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023186416992463828,
+          "right": 0.002222520785614685
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.419653360673766,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 283,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20940637679877216,
+            0.9182970823558219,
+            0.11414865130494431
+          ],
+          "right": [
+            -0.23139685390434064,
+            0.9194469163182495,
+            0.057778096158811965
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          3.1492836549854664,
+          0
+        ]
+      },
+      "bytes": 22834,
+      "sha256": "6526fb47de65ca447dc0a3ac9de76053305983847542f33d428a135f90c3c65d"
+    },
+    {
+      "file": "844x390-24.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 24,
+      "timeSeconds": 2.4,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.5750000000000004,
+        "phase": 0.7371794871794877,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11785082772141994,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783547,
+              0.11785082772142008,
+              -0.04500000000000026
+            ],
+            "errorMeters": 2.992586547019258e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11735734741638414,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783536,
+              0.1173573474163841,
+              0.06499999999999967
+            ],
+            "errorMeters": 3.632164660233972e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002283155907627201,
+          "right": 0.0021948084187769067
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.6814442261723108,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 295,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.20605618245353907,
+            0.9236919365563252,
+            0.11043835846669313
+          ],
+          "right": [
+            -0.23233023411366616,
+            0.926155048857433,
+            0.05985000133008493
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          2.168283654985448,
+          0
+        ]
+      },
+      "bytes": 23158,
+      "sha256": "48b9a980fb22ab62cb8177ebe5a0fbf921d0bb7bae67be4fe021576ea063bd33"
+    },
+    {
+      "file": "844x390-25.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 25,
+      "timeSeconds": 2.5,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.675,
+        "phase": 0.8653846153846154,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1176224520316655,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778354,
+              0.11762245203166566,
+              -0.04499999999999976
+            ],
+            "errorMeters": 2.930810050475307e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11707406336003741,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783547,
+              0.1170740633600374,
+              0.06499999999999989
+            ],
+            "errorMeters": 1.1527756336890508e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.002232932550199365,
+          "right": 0.002155349178259299
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.845135091670856,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 307,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.977135091670856,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2015141280579673,
+            0.9315100340488418,
+            0.10540504462195721
+          ],
+          "right": [
+            -0.22740134249509494,
+            0.9347993203821101,
+            0.048900687643059416
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          1.187283654985456,
+          0
+        ]
+      },
+      "bytes": 24228,
+      "sha256": "820478c27a18a75a8544e275d8c30f1db156028609afe4c63dd223953920c6de"
+    },
+    {
+      "file": "844x390-26.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 26,
+      "timeSeconds": 2.6,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.7749999999999997,
+        "phase": 0.9935897435897432,
+        "transition": null,
+        "contact": [
+          {
+            "effector": "RightHand",
+            "palm": [
+              -0.3470999944210051,
+              1.0276540513833452,
+              0.35000000000000003
+            ],
+            "errorMeters": 1.1102230246251565e-16
+          }
+        ],
+        "handContactErrorMeters": 1.1102230246251565e-16,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.1178048575939761,
+              -0.045
+            ],
+            "position": [
+              0.2198851618778355,
+              0.11780485759397608,
+              -0.04499999999999993
+            ],
+            "errorMeters": 7.473417450352271e-17
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11729969252250957,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11729969252250949,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.0007415106216802e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022726923479191394,
+          "right": 0.0021866098458863895
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.9076540513833451,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 319,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3682544938129861,
+            1.0601420288872543,
+            0.3106866043878163
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2050903335931672,
+            0.9253038798415734,
+            0.10936834786549371
+          ],
+          "right": [
+            -0.25578971469369977,
+            0.9359428359332446,
+            0.10063001397198523
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          0.10701828532105218,
+          0
+        ]
+      },
+      "bytes": 24596,
+      "sha256": "f8cd72e49789164aa5ff35ea9d0d4e83af5a16bcc17422528f1f404da3fe9d60"
+    },
+    {
+      "file": "844x390-27.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 27,
+      "timeSeconds": 2.7,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.8749999999999993,
+        "phase": 0.12179487179487092,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11800391141419808,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783538,
+              0.1180039114141983,
+              -0.04499999999999982
+            ],
+            "errorMeters": 3.06884301130794e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11755202597852354,
+              0.065
+            ],
+            "position": [
+              -0.2198851618778355,
+              0.11755202597852354,
+              0.06500000000000006
+            ],
+            "errorMeters": 5.551115123125783e-17
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0023194798166621972,
+          "right": 0.002223173546611685
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.8561086782207113,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 331,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3403624309594514,
+            0.9895827985464414,
+            0.29148841163031336
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2094868734618518,
+            0.91817106417248,
+            0.11423777787384228
+          ],
+          "right": [
+            -0.23094727878222643,
+            0.9192066774559842,
+            0.05638617152146747
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.0074336549854435,
+          0
+        ]
+      },
+      "bytes": 24488,
+      "sha256": "ea689ee5918bc45b5ea1ff2e9898e0ed8e0ae1aa1f82e11206686adade301093"
+    },
+    {
+      "file": "844x390-28.webp",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "index": 28,
+      "timeSeconds": 2.8,
+      "diagnostics": {
+        "action": "dribble_right",
+        "time": 0.974999999999999,
+        "phase": 0.24999999999999867,
+        "transition": null,
+        "contact": [],
+        "handContactErrorMeters": 0,
+        "footErrors": {
+          "left": {
+            "support": true,
+            "target": [
+              0.2198851618778355,
+              0.11782031495460255,
+              -0.045
+            ],
+            "position": [
+              0.21988516187783544,
+              0.11782031495460277,
+              -0.04499999999999982
+            ],
+            "errorMeters": 2.914335439641036e-16
+          },
+          "right": {
+            "support": true,
+            "target": [
+              -0.2198851618778355,
+              0.11731904047535509,
+              0.065
+            ],
+            "position": [
+              -0.21988516187783558,
+              0.11731904047535519,
+              0.06499999999999995
+            ],
+            "errorMeters": 1.3947004136484323e-16
+          }
+        },
+        "soleProbeHeights": {
+          "left": 0.0022761893703902754,
+          "right": 0.0021893512315097827
+        },
+        "groundProbeCount": {
+          "leftFoot": 23,
+          "rightFoot": 22,
+          "leftHand": 22,
+          "rightHand": 22,
+          "body": 649
+        },
+        "maxReach": {
+          "left": 0,
+          "right": 0,
+          "leftLeg": 0,
+          "rightLeg": 0
+        },
+        "ballPosition": [
+          -0.34709999442100525,
+          0.7022278127221667,
+          0.35
+        ],
+        "ballVisible": true,
+        "frame": 343,
+        "rootMotion": false,
+        "handTargets": {
+          "left": [
+            0.3381999945640564,
+            1.1035999822616578,
+            0.26
+          ],
+          "right": [
+            -0.3381999945640564,
+            0.8365999865531921,
+            0.29
+          ]
+        },
+        "elbows": {
+          "left": [
+            0.2054119985104384,
+            0.9247641216750604,
+            0.10972472033276877
+          ],
+          "right": [
+            -0.23252297289892976,
+            0.927472496037566,
+            0.06027823054420341
+          ]
+        },
+        "ballVelocityMetersPerSecond": [
+          0,
+          -1.9884336549854487,
+          0
+        ]
+      },
+      "bytes": 23190,
+      "sha256": "b249ac6124882ac97a9ba19117eb46158a19575a38d95b47e9694d888beade9d"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "pass": true
+}

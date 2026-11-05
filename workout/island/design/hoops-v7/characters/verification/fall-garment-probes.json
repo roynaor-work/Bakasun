@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "createdAtUTC": "2026-11-04T22:19:49.530Z",
+  "scope": "Independent Node reconstruction of both actual decoded referee GLBs using their joints, inverse binds, skin weights, morph targets and named materials; the exact runtime controller drives the high-detail mesh and its bone/morph snapshots drive LOD1, matching the preview and baked animation authoring. No renderer or GPU is involved.",
+  "inputScope": "GLB input hashes identify pre-bake generated character templates. Final delivered GLB bytes change when clips are embedded; geometry payload preservation and final staged SHA coverage are checked separately by the bake and authoritative LIVE/BAKED browser skin audits.",
+  "inputs": [
+    {
+      "file": "source/motion.mjs",
+      "bytes": 50514,
+      "sha256": "27c37c661a2619d72c254a04ba542bcde2766568b9b35ae452a1d52c68f5f1cc"
+    },
+    {
+      "file": "models/referee.glb",
+      "bytes": 934140,
+      "sha256": "c3a4a6b0212e9829eb34d0d5a8a505e57dd66af5e8a3ecf4a48f5f8fe2f746c6"
+    },
+    {
+      "file": "models/referee-lod1.glb",
+      "bytes": 537468,
+      "sha256": "0ce1daeb86b65aa68f60f8f7854a1e8eb4dc343506c1bb9b199b6a126e9d39f4"
+    }
+  ],
+  "runtime": {
+    "nodeVersion": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "threeRevision": "160"
+  },
+  "baseline": {
+    "description": "Current frozen source evaluated only in memory with denseFallGarment forced false; all other constraints, the preserved sole reference and fixed four projection passes remain identical.",
+    "memoryOnlyReplacement": "const denseFallGarment=...; -> const denseFallGarment=false;"
+  },
+  "candidate": {
+    "description": "Append every official_trousers vertex to fall body-floor probes once per controller, omit duplicate body extrema for that material, retain existing foot/hand probes and four projection passes.",
+    "material": "official_trousers",
+    "affectsOnly": "Referee FALL body-floor projection; hold, locomotion, dribbles and the five player roles retain their prior probe sets."
+  },
+  "coverage": {
+    "cause": "A fixed set of 26 bind-pose support directions can miss the lowest surface vertex after articulation. The reproduced offender is fully weighted to LeftLeg, so blended weights are not required for the failure.",
+    "high": {
+      "garmentVertices": 3624,
+      "garmentBindExtremaAcrossAllBoneBins": 214,
+      "offender": {
+        "phase": 0.7678571428571429,
+        "index": 2377,
+        "mesh": "referee_5",
+        "material": "official_trousers",
+        "y": -0.03510677471930305,
+        "selectedAsBindExtremum": false,
+        "influences": [
+          {
+            "bone": "LeftLeg",
+            "weight": 1
+          },
+          {
+            "bone": "Root",
+            "weight": 0
+          },
+          {
+            "bone": "Root",
+            "weight": 0
+          },
+          {
+            "bone": "Root",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "low": {
+      "garmentVertices": 870,
+      "garmentBindExtremaAcrossAllBoneBins": 176,
+      "sharedHighDriverOffender": {
+        "phase": 0.7738095238095238,
+        "mesh": "referee_5",
+        "material": "official_trousers",
+        "vertex": 709,
+        "y": -0.03234509611680045
+      },
+      "offenderSelectedAsBindExtremum": false
+    }
+  },
+  "sharedHighDriverFloorAudit": {
+    "sampleHz": 60,
+    "samplesPerLOD": 169,
+    "normalizedPhases": "i/168 for i=0..168",
+    "scan": "Every skinned/morphed vertex in every mesh, including actual world transforms.",
+    "fallBodyPenetrationLimitMeters": 0.015,
+    "baseline": {
+      "kind": "extrema",
+      "minima": [
+        -0.03510677471930305,
+        -0.03234509611680045
+      ],
+      "worst": [
+        {
+          "phase": 0.7678571428571429,
+          "mesh": "referee_5",
+          "material": "official_trousers",
+          "vertex": 2377,
+          "y": -0.03510677471930305
+        },
+        {
+          "phase": 0.7738095238095238,
+          "mesh": "referee_5",
+          "material": "official_trousers",
+          "vertex": 709,
+          "y": -0.03234509611680045
+        }
+      ],
+      "driverBodyProbes": 575
+    },
+    "candidate": {
+      "kind": "denseOfficialTrousers",
+      "minima": [
+        -0.005632985973020325,
+        -0.0024430752893602413
+      ],
+      "worst": [
+        {
+          "phase": 0.7023809523809523,
+          "mesh": "referee_5",
+          "material": "official_trousers",
+          "vertex": 2335,
+          "y": -0.005632985973020325
+        },
+        {
+          "phase": 0.9821428571428571,
+          "mesh": "referee_3",
+          "material": "human_surface",
+          "vertex": 321,
+          "y": -0.0024430752893602413
+        }
+      ],
+      "driverBodyProbes": 4023
+    },
+    "pass": true
+  },
+  "adaptiveContinuity": {
+    "description": "Source poses compared with coherent local TRS interpolation at interval quarters, midpoint and three-quarter; uniform 30Hz seed, maximum recursion depth 10 and minimum interval 0.1ms.",
+    "limits": {
+      "positionMeters": 0.0006,
+      "rotationRadians": 0.006,
+      "morphWeight": 0.004
+    },
+    "highDriver": {
+      "evaluated": 633,
+      "frames": 154,
+      "unresolved": [],
+      "limits": {
+        "positionMeters": 0.0006,
+        "rotationRadians": 0.006,
+        "morphWeight": 0.004
+      },
+      "intervalFractions": [
+        0.25,
+        0.5,
+        0.75
+      ]
+    },
+    "auxiliaryIndependentLowController": {
+      "description": "Independent LOD1 controller diagnostic, separate from the production high-driver path.",
+      "evaluated": 644,
+      "frames": 157,
+      "unresolved": [],
+      "limits": {
+        "positionMeters": 0.0006,
+        "rotationRadians": 0.006,
+        "morphWeight": 0.004
+      },
+      "intervalFractions": [
+        0.25,
+        0.5,
+        0.75
+      ]
+    },
+    "pass": true
+  },
+  "pairedCPU": {
+    "scope": "Desktop Node controller.seek CPU wall time only, after 40 warm-up seeks; 169 deterministic full-cycle phases per variant. No physical-phone measurement, GPU rendering or FPS claim. Other workspace processes were not isolated.",
+    "productionHighDriverBothLODs": {
+      "extrema": {
+        "medianMs": 1.0032530000003135,
+        "p95Ms": 2.020477000000028,
+        "samples": 169,
+        "bodyProbes": 575
+      },
+      "denseOfficialTrousers": {
+        "medianMs": 3.570252999999866,
+        "p95Ms": 4.786976999999752,
+        "samples": 169,
+        "bodyProbes": 4023
+      }
+    },
+    "auxiliaryIndependentLowController": {
+      "extrema": {
+        "medianMs": 1.1586429999999837,
+        "p95Ms": 1.3191199999998844,
+        "samples": 169,
+        "bodyProbes": 484
+      },
+      "denseOfficialTrousers": {
+        "medianMs": 1.95981699999993,
+        "p95Ms": 2.1040009999996983,
+        "samples": 169,
+        "bodyProbes": 1210
+      }
+    }
+  },
+  "authoritativeBrowserAudit": "verification/skin-referee-validation.json independently covers all 27 actions on both LODs at 60Hz.",
+  "pass": true,
+  "bakeProvenance": {
+    "validationReport": "verification/baked-validation.json",
+    "bakePass": true,
+    "written": true,
+    "stageDirectory": "/tmp/hoops-v7-baked-E1cPGV",
+    "description": "The final bake completed while this independent evidence file was being saved. Its referee sourceSha256 values match these pre-bake geometry inputs exactly; delivered GLB SHA256 values differ because the clips are now embedded.",
+    "assets": [
+      {
+        "file": "models/referee.glb",
+        "sourceSha256": "c3a4a6b0212e9829eb34d0d5a8a505e57dd66af5e8a3ecf4a48f5f8fe2f746c6",
+        "finalBakedSha256": "e8c9f4af42dab33efc3f17753031c7e24d518f5e4040dd13e8a2a15c5f921e61",
+        "independentInputMatches": true
+      },
+      {
+        "file": "models/referee-lod1.glb",
+        "sourceSha256": "0ce1daeb86b65aa68f60f8f7854a1e8eb4dc343506c1bb9b199b6a126e9d39f4",
+        "finalBakedSha256": "7799703bd700636030d15cfd87726f069564c3a9c28f52496da371d50cb95edc",
+        "independentInputMatches": true
+      }
+    ]
+  }
+}

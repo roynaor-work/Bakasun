@@ -1,0 +1,63 @@
+{
+  "started": "2026-11-04T21:05:57.615539+00:00",
+  "conditions": "fresh local Bakasun context, 24 today/calls cycles, GC between samples; then dispatch installable event at calls; no product code changes",
+  "samples": [
+    {
+      "label": "baseline",
+      "JSHeapUsedSize": 2697236,
+      "JSEventListeners": 21,
+      "Nodes": 181,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-4",
+      "JSHeapUsedSize": 2810100,
+      "JSEventListeners": 33,
+      "Nodes": 230,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-8",
+      "JSHeapUsedSize": 2857184,
+      "JSEventListeners": 45,
+      "Nodes": 278,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-12",
+      "JSHeapUsedSize": 2919092,
+      "JSEventListeners": 57,
+      "Nodes": 325,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-16",
+      "JSHeapUsedSize": 2920868,
+      "JSEventListeners": 69,
+      "Nodes": 375,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-20",
+      "JSHeapUsedSize": 2922940,
+      "JSEventListeners": 81,
+      "Nodes": 422,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-24",
+      "JSHeapUsedSize": 2924716,
+      "JSEventListeners": 93,
+      "Nodes": 470,
+      "Documents": 1
+    },
+    {
+      "label": "after-target-event",
+      "JSHeapUsedSize": 2915512,
+      "JSEventListeners": 21,
+      "Nodes": 181,
+      "Documents": 1
+    }
+  ],
+  "finished": "2026-11-04T21:06:25.298797+00:00"
+}

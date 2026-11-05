@@ -1,0 +1,100 @@
+{
+  "started": "2026-11-04T20:30:07.311443+00:00",
+  "cases": [
+    {
+      "name": "root-worker-cross-app-cache-deletion",
+      "before": [
+        "bakasun-share",
+        "island-assets-audit",
+        "workout-royiki-v1",
+        "audit-unrelated"
+      ],
+      "after": [
+        "bakasun-v60"
+      ],
+      "deleted": [
+        "bakasun-share",
+        "island-assets-audit",
+        "workout-royiki-v1",
+        "audit-unrelated"
+      ],
+      "scope": "Bakasun/"
+    },
+    {
+      "name": "root-worker-caches-error-response",
+      "networkStatus": 503,
+      "cachedStatus": {
+        "module": 503,
+        "index": 200
+      },
+      "offlineHasHeading": false
+    },
+    {
+      "name": "bakasun-corrupt-local-state",
+      "result": {
+        "originalPreserved": false,
+        "backupKeys": [],
+        "bodyWarning": false
+      }
+    },
+    {
+      "name": "workout-corrupt-local-state",
+      "result": {
+        "originalPreserved": false,
+        "backupKeys": [],
+        "bodyWarning": false
+      }
+    },
+    {
+      "name": "north-corrupt-local-state",
+      "result": {
+        "originalPreserved": false,
+        "backupKeys": [],
+        "bodyWarning": false
+      }
+    },
+    {
+      "name": "island-corrupt-local-state",
+      "result": {
+        "originalPreserved": true,
+        "backupKeys": [
+          "island.v1.corrupt.1793824240759"
+        ],
+        "bodyWarning": false
+      }
+    },
+    {
+      "name": "bakasun-quota-error",
+      "result": {
+        "errorBar": true,
+        "roleAlerts": 0,
+        "cartCount": null,
+        "storageUnchanged": true
+      }
+    },
+    {
+      "name": "workout-quota-error",
+      "result": {
+        "errorBar": false,
+        "roleAlerts": 0,
+        "cartCount": null,
+        "storageUnchanged": true
+      }
+    },
+    {
+      "name": "north-quota-error",
+      "result": {
+        "errorBar": false,
+        "roleAlerts": 0,
+        "cartCount": "1",
+        "storageUnchanged": true
+      }
+    },
+    {
+      "name": "north-fabricated-thanks-route",
+      "claimsReceived": true
+    }
+  ],
+  "conditions": "fresh browser storage only; no remote calls, no real data; actual service worker source",
+  "finished": "2026-11-04T20:31:14.365270+00:00"
+}

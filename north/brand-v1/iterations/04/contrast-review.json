@@ -1,0 +1,7 @@
+{
+  "findings": [
+    {"view":"home 390x844 opening","text":"לכל סיבה טובה","ratio":1.803,"status":"real issue","action":"Give the small label a local dark backing in round 05."},
+    {"view":"product 390x844 opening","text":"תכולת המארז בהדמיה. הבקבוקים מוצגים ללא מותג.","ratio":1.158,"status":"occluded text rectangle","action":"Sample only pixels whose hit-test belongs to the text element; the fixed buy bar is a different visible layer."}
+  ],
+  "note":"Original measurements.json remains unchanged. The revised visibility mask will be measured in the next round."
+}

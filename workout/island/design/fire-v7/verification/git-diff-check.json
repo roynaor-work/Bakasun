@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-11-04T23:44:40.758697+00:00",
+  "fullDiffCheckPassed": false,
+  "fullExitCode": 2,
+  "fullOutput": "workout/island/design/fire-v7/vendor/fire-core.js:88: trailing whitespace.\n+\t#if defined( USE_CLEARCOAT ) \nworkout/island/design/fire-v7/vendor/fire-core.js:91: trailing whitespace.\n+\t#if defined( USE_SHEEN ) \nworkout/island/design/fire-v7/vendor/fire-core.js:544: trailing whitespace.\n+\t\nworkout/island/design/fire-v7/vendor/fire-core.js:561: trailing whitespace.\n+\t\t\nworkout/island/design/fire-v7/vendor/fire-core.js:1378: trailing whitespace.\n+\t\n",
+  "firstPartyDiffCheckPassed": true,
+  "firstPartyExitCode": 0,
+  "excludedUnmodifiedUpstreamBundle": "workout/island/design/fire-v7/vendor/fire-core.js",
+  "reason": "Five trailing spaces occur inside original r160 GLSL template strings. Preserve the exact runtime bytes covered by the sustained browser run.",
+  "upstreamShaderWhitespaceWarnings": 5
+}

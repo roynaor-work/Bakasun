@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-11-04T22:43:12.771Z",
+  "checks": [
+    "Each of the five visible target options directs water and wetness only to that building while fully offline",
+    "Overlapping view requests and visible previous/next, damage, motion and all atlas-size controls complete without stale scene errors",
+    "Canvas keyboard rotation, Home and Space work through actual input events",
+    "Repeated quality changes preserve the scene and all 11 LOD roots",
+    "Reduced motion produces byte-identical canvas pixels across elapsed wall time, including lights and particles",
+    "A paused scene survives deliberate WebGL context loss/restoration offline",
+    "Missing WebGL replaces loading with a visible error rather than leaving an indefinite spinner"
+  ],
+  "errors": [],
+  "cspViolations": [],
+  "externalRequests": [],
+  "sourceHashes": {
+    "preview.html": "b531aa17409d364e0fff44dd08bf277e9d97486315e9017b7483d46c685ad4ac",
+    "preview.css": "c5d63402d6600afc97a11ca2d347a56df5921b14927aaa2682e7331780e2c0b4",
+    "preview.js": "1647b11cb092c8118dbbe4d57e791f071151426ff6f05fd0fba332e83af80149",
+    "effects.js": "3afee6308febb39aa5d4e1af9a6293ae383652dc70a7c24b3e963c0704496f9c",
+    "simulation.js": "836b37801922f4c20303fdcbe96caf4c245cb066f1832eb9ab478fa9d0da1f86",
+    "manifest.json": "021d7baf9eaf54d5f6fdfaa2d39c1287ad9fc3622e90add70518a58086e5caed",
+    "assets-data.js": "5305dbc2468b6ba86a45d9280e72dd8e11f7755b44e2a4fbb52b2a98ead5cef5",
+    "vendor/fire-core.js": "0440350bdfc0622192384281670a179d92bf45a9a3f7c5f315e3ffc18aa00eee"
+  },
+  "expectedStartupErrors": [
+    "THREE.WebGLRenderer: Error creating WebGL context.",
+    "Error: Error creating WebGL context.\n    at new _a (http://127.0.0.1:39393/vendor/fire-core.js:3682:67461)\n    at http://127.0.0.1:39393/preview.js:30:18\n    at http://127.0.0.1:39393/preview.js:580:3",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "contextRecovery": {
+    "supported": true,
+    "lost": true,
+    "restored": true
+  },
+  "passed": true,
+  "completedAt": "2026-11-04T22:43:35.514Z"
+}

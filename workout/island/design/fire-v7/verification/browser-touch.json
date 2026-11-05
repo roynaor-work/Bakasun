@@ -1,0 +1,181 @@
+{
+  "startedAt": "2026-11-04T22:39:06.377Z",
+  "deviceScaleFactor": 3,
+  "physicalPhone": false,
+  "checks": [
+    "A one-finger canvas drag rotates the camera through actual touch events",
+    "A two-finger outward pinch decreases camera distance without scrolling the document",
+    "Water, camera, crew navigation and the information dialog respond to taps in both orientations",
+    "DPR=3 is capped to 1.25 / 0.75 / 1.75 in mobile / low / detail; canvas dimensions match, with no scroll overflow",
+    "No HTTP image, model or WASM fetches: all binary resources are embedded data"
+  ],
+  "pixelBudgets": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "mobile",
+      "css": [
+        390,
+        844
+      ],
+      "buffer": [
+        487,
+        1055
+      ],
+      "scale": 1.25,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "css": [
+        390,
+        844
+      ],
+      "buffer": [
+        292,
+        633
+      ],
+      "scale": 0.75,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "detail",
+      "css": [
+        390,
+        844
+      ],
+      "buffer": [
+        682,
+        1477
+      ],
+      "scale": 1.75,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "quality": "mobile",
+      "css": [
+        844,
+        390
+      ],
+      "buffer": [
+        1055,
+        487
+      ],
+      "scale": 1.25,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "quality": "low",
+      "css": [
+        844,
+        390
+      ],
+      "buffer": [
+        633,
+        292
+      ],
+      "scale": 0.75,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "quality": "detail",
+      "css": [
+        844,
+        390
+      ],
+      "buffer": [
+        1477,
+        682
+      ],
+      "scale": 1.75,
+      "deviceDpr": 3,
+      "overflow": false,
+      "scrollY": 0
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "httpResources": [
+    "/preview.html",
+    "/preview.css",
+    "/vendor/fire-core.js",
+    "/assets-data.js",
+    "/simulation.js",
+    "/effects.js",
+    "/preview.js"
+  ],
+  "sourceHashes": {
+    "preview.html": "b531aa17409d364e0fff44dd08bf277e9d97486315e9017b7483d46c685ad4ac",
+    "preview.css": "c5d63402d6600afc97a11ca2d347a56df5921b14927aaa2682e7331780e2c0b4",
+    "preview.js": "1647b11cb092c8118dbbe4d57e791f071151426ff6f05fd0fba332e83af80149",
+    "effects.js": "3afee6308febb39aa5d4e1af9a6293ae383652dc70a7c24b3e963c0704496f9c",
+    "simulation.js": "836b37801922f4c20303fdcbe96caf4c245cb066f1832eb9ab478fa9d0da1f86",
+    "manifest.json": "021d7baf9eaf54d5f6fdfaa2d39c1287ad9fc3622e90add70518a58086e5caed",
+    "assets-data.js": "5305dbc2468b6ba86a45d9280e72dd8e11f7755b44e2a4fbb52b2a98ead5cef5",
+    "vendor/fire-core.js": "0440350bdfc0622192384281670a179d92bf45a9a3f7c5f315e3ffc18aa00eee"
+  },
+  "drag": {
+    "before": {
+      "camera": [
+        20,
+        18,
+        33
+      ],
+      "target": [
+        0.2,
+        1.4,
+        -1.6
+      ]
+    },
+    "after": {
+      "camera": [
+        12.83246774610046,
+        20.459971652831378,
+        35.03192923170979
+      ],
+      "target": [
+        0.2,
+        1.4,
+        -1.6
+      ]
+    }
+  },
+  "pinch": {
+    "beforeDistance": 43.18286697290951,
+    "afterDistance": 25.40168645465264
+  },
+  "passed": true,
+  "completedAt": "2026-11-04T22:39:49.817Z"
+}

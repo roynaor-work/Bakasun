@@ -1,0 +1,44 @@
+{
+  "started": "2026-11-04T20:51:32.413720+00:00",
+  "conditions": "fresh context per application; browser HTTP cache disabled; Service Worker Cache API remains enabled; root SW manually registered on trusted localhost because product registration is HTTPS-only",
+  "apps": [
+    {
+      "app": "bakasun",
+      "before": {
+        "controller": "sw.js",
+        "caches": [
+          "bakasun-v60"
+        ]
+      },
+      "loadedOffline": true
+    },
+    {
+      "app": "workout",
+      "before": {
+        "controller": null,
+        "caches": []
+      },
+      "loadedOffline": false,
+      "navigationError": "Page.reload: net::ERR_INTERNET_DISCONNECTED"
+    },
+    {
+      "app": "island",
+      "before": {
+        "controller": "offline-sw.js?v=island-v2-20261104-3",
+        "caches": []
+      },
+      "loadedOffline": false,
+      "navigationError": "Page.reload: net::ERR_FAILED"
+    },
+    {
+      "app": "north",
+      "before": {
+        "controller": null,
+        "caches": []
+      },
+      "loadedOffline": false,
+      "navigationError": "Page.reload: net::ERR_INTERNET_DISCONNECTED"
+    }
+  ],
+  "finished": "2026-11-04T20:52:07.192320+00:00"
+}

@@ -1,0 +1,63 @@
+{
+  "started": "2026-11-04T21:02:54.394709+00:00",
+  "conditions": "fresh local workout context, 24 settings/home cycles, GC between samples; then dispatch standard voiceschanged event at home; no product code changes",
+  "samples": [
+    {
+      "label": "baseline",
+      "JSHeapUsedSize": 4725296,
+      "JSEventListeners": 16,
+      "Nodes": 404,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-4",
+      "JSHeapUsedSize": 5782908,
+      "JSEventListeners": 20,
+      "Nodes": 408,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-8",
+      "JSHeapUsedSize": 6485052,
+      "JSEventListeners": 24,
+      "Nodes": 412,
+      "Documents": 1
+    },
+    {
+      "label": "cycles-12",
+      "JSHeapUsedSize": 6833064,
+      "JSEventListeners": 28,
+      "Nodes": 440,
+      "Documents": 3
+    },
+    {
+      "label": "cycles-16",
+      "JSHeapUsedSize": 7099448,
+      "JSEventListeners": 32,
+      "Nodes": 444,
+      "Documents": 3
+    },
+    {
+      "label": "cycles-20",
+      "JSHeapUsedSize": 7394844,
+      "JSEventListeners": 36,
+      "Nodes": 448,
+      "Documents": 3
+    },
+    {
+      "label": "cycles-24",
+      "JSHeapUsedSize": 7695896,
+      "JSEventListeners": 40,
+      "Nodes": 452,
+      "Documents": 3
+    },
+    {
+      "label": "after-voiceschanged",
+      "JSHeapUsedSize": 7691716,
+      "JSEventListeners": 16,
+      "Nodes": 428,
+      "Documents": 1
+    }
+  ],
+  "finished": "2026-11-04T21:03:52.864506+00:00"
+}

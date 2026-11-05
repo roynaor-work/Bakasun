@@ -1,0 +1,934 @@
+[
+  {
+    "file": "models/man-01.glb",
+    "bytes": 333984,
+    "MB": 0.333984,
+    "sha256": "5e91b9f9c130563530d8163d84d1fa3b0db619397c99c8657b825a27f7fd06bf",
+    "triangles": 19329,
+    "vertices": 11477,
+    "kind": "character",
+    "gender": "male",
+    "label": "שחקן א׳",
+    "atlas": {
+      "file": "textures/man-01-atlas.png",
+      "width": 512,
+      "height": 512
+    },
+    "joints": 18,
+    "LODs": [
+      {
+        "name": "Body_LOD0",
+        "triangles": 14230,
+        "distance": 0
+      },
+      {
+        "name": "Body_LOD1",
+        "triangles": 2392,
+        "distance": 14,
+        "error": 0.003085464471951127
+      },
+      {
+        "name": "Body_LOD2",
+        "triangles": 883,
+        "distance": 24,
+        "error": 0.006552309729158878
+      }
+    ],
+    "racketTriangles": 1568,
+    "racketLODs": [
+      {
+        "name": "Racket_RightHand",
+        "triangles": 1568
+      },
+      {
+        "name": "Racket_LOD1",
+        "triangles": 256
+      }
+    ],
+    "clips": [
+      {
+        "id": "idle",
+        "duration": 2.4,
+        "loop": true,
+        "events": [],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "run",
+        "duration": 0.72,
+        "loop": true,
+        "events": [
+          {
+            "name": "left_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "right_plant",
+            "time": 0.5,
+            "atSeconds": 0.36
+          }
+        ],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "serve",
+        "duration": 3.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "prepare",
+            "time": 0,
+            "label": "הכנה",
+            "atSeconds": 0
+          },
+          {
+            "name": "toss",
+            "time": 0.28,
+            "label": "זריקה",
+            "atSeconds": 0.8960000000000001
+          },
+          {
+            "name": "load",
+            "time": 0.48,
+            "label": "העמסה",
+            "atSeconds": 1.536
+          },
+          {
+            "name": "contact",
+            "time": 0.64,
+            "label": "פגיעה ומעקב",
+            "atSeconds": 2.048
+          }
+        ],
+        "contactSweetSpot": [
+          -0.20274666238607095,
+          2.361751724667119,
+          0.2626096432907623
+        ]
+      },
+      {
+        "id": "forehand",
+        "duration": 1.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.624
+          }
+        ],
+        "contactSweetSpot": [
+          -0.5931775024660532,
+          1.2689385734140686,
+          0.848027941099727
+        ]
+      },
+      {
+        "id": "backhand",
+        "duration": 1.35,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.7020000000000001
+          }
+        ],
+        "contactSweetSpot": [
+          0.3574783593957461,
+          1.400988458344398,
+          0.7113157015331583
+        ]
+      },
+      {
+        "id": "volley",
+        "duration": 0.78,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.45,
+            "atSeconds": 0.35100000000000003
+          }
+        ],
+        "contactSweetSpot": [
+          -0.588868839244504,
+          1.7175108475147813,
+          0.5801455678463334
+        ]
+      },
+      {
+        "id": "smash",
+        "duration": 1.15,
+        "loop": false,
+        "events": [
+          {
+            "name": "takeoff",
+            "time": 0.34,
+            "atSeconds": 0.391
+          },
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.598
+          },
+          {
+            "name": "land",
+            "time": 0.82,
+            "atSeconds": 0.9429999999999998
+          }
+        ],
+        "contactSweetSpot": [
+          -0.1961203075314925,
+          2.439999276277666,
+          0.34028135166996837
+        ]
+      },
+      {
+        "id": "slide",
+        "duration": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "name": "brake",
+            "time": 0.35,
+            "atSeconds": 0.5075
+          },
+          {
+            "name": "contact",
+            "time": 0.58,
+            "atSeconds": 0.841
+          },
+          {
+            "name": "recover",
+            "time": 0.85,
+            "atSeconds": 1.2325
+          }
+        ],
+        "contactSweetSpot": [
+          -0.785473973478876,
+          0.8710675092943562,
+          0.6430670897001542
+        ]
+      },
+      {
+        "id": "celebrate",
+        "duration": 2.1,
+        "loop": false,
+        "events": [
+          {
+            "name": "fist_pump",
+            "time": 0.3,
+            "atSeconds": 0.63
+          },
+          {
+            "name": "settle",
+            "time": 0.85,
+            "atSeconds": 1.785
+          }
+        ],
+        "contactSweetSpot": null
+      }
+    ]
+  },
+  {
+    "file": "models/man-02.glb",
+    "bytes": 356504,
+    "MB": 0.356504,
+    "sha256": "6027578166ee929bee2b4f43456a5bf53a8c5f6f6a331dbc06b3bb405fc48829",
+    "triangles": 23439,
+    "vertices": 13962,
+    "kind": "character",
+    "gender": "male",
+    "label": "שחקן ב׳",
+    "atlas": {
+      "file": "textures/man-02-atlas.png",
+      "width": 512,
+      "height": 512
+    },
+    "joints": 18,
+    "LODs": [
+      {
+        "name": "Body_LOD0",
+        "triangles": 18348,
+        "distance": 0
+      },
+      {
+        "name": "Body_LOD1",
+        "triangles": 2390,
+        "distance": 14,
+        "error": 0.004021578002721071
+      },
+      {
+        "name": "Body_LOD2",
+        "triangles": 877,
+        "distance": 24,
+        "error": 0.0070412736386060715
+      }
+    ],
+    "racketTriangles": 1568,
+    "racketLODs": [
+      {
+        "name": "Racket_RightHand",
+        "triangles": 1568
+      },
+      {
+        "name": "Racket_LOD1",
+        "triangles": 256
+      }
+    ],
+    "clips": [
+      {
+        "id": "idle",
+        "duration": 2.4,
+        "loop": true,
+        "events": [],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "run",
+        "duration": 0.72,
+        "loop": true,
+        "events": [
+          {
+            "name": "left_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "right_plant",
+            "time": 0.5,
+            "atSeconds": 0.36
+          }
+        ],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "serve",
+        "duration": 3.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "prepare",
+            "time": 0,
+            "label": "הכנה",
+            "atSeconds": 0
+          },
+          {
+            "name": "toss",
+            "time": 0.28,
+            "label": "זריקה",
+            "atSeconds": 0.8960000000000001
+          },
+          {
+            "name": "load",
+            "time": 0.48,
+            "label": "העמסה",
+            "atSeconds": 1.536
+          },
+          {
+            "name": "contact",
+            "time": 0.64,
+            "label": "פגיעה ומעקב",
+            "atSeconds": 2.048
+          }
+        ],
+        "contactSweetSpot": [
+          -0.20274666238607095,
+          2.361751724667119,
+          0.2626096432907623
+        ]
+      },
+      {
+        "id": "forehand",
+        "duration": 1.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.624
+          }
+        ],
+        "contactSweetSpot": [
+          -0.5931775024660532,
+          1.2689385734140686,
+          0.848027941099727
+        ]
+      },
+      {
+        "id": "backhand",
+        "duration": 1.35,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.7020000000000001
+          }
+        ],
+        "contactSweetSpot": [
+          0.3574783593957461,
+          1.400988458344398,
+          0.7113157015331583
+        ]
+      },
+      {
+        "id": "volley",
+        "duration": 0.78,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.45,
+            "atSeconds": 0.35100000000000003
+          }
+        ],
+        "contactSweetSpot": [
+          -0.588868839244504,
+          1.7175108475147813,
+          0.5801455678463334
+        ]
+      },
+      {
+        "id": "smash",
+        "duration": 1.15,
+        "loop": false,
+        "events": [
+          {
+            "name": "takeoff",
+            "time": 0.34,
+            "atSeconds": 0.391
+          },
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.598
+          },
+          {
+            "name": "land",
+            "time": 0.82,
+            "atSeconds": 0.9429999999999998
+          }
+        ],
+        "contactSweetSpot": [
+          -0.1961203075314925,
+          2.439999276277666,
+          0.34028135166996837
+        ]
+      },
+      {
+        "id": "slide",
+        "duration": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "name": "brake",
+            "time": 0.35,
+            "atSeconds": 0.5075
+          },
+          {
+            "name": "contact",
+            "time": 0.58,
+            "atSeconds": 0.841
+          },
+          {
+            "name": "recover",
+            "time": 0.85,
+            "atSeconds": 1.2325
+          }
+        ],
+        "contactSweetSpot": [
+          -0.785473973478876,
+          0.8710675092943562,
+          0.6430670897001542
+        ]
+      },
+      {
+        "id": "celebrate",
+        "duration": 2.1,
+        "loop": false,
+        "events": [
+          {
+            "name": "fist_pump",
+            "time": 0.3,
+            "atSeconds": 0.63
+          },
+          {
+            "name": "settle",
+            "time": 0.85,
+            "atSeconds": 1.785
+          }
+        ],
+        "contactSweetSpot": null
+      }
+    ]
+  },
+  {
+    "file": "models/woman-01.glb",
+    "bytes": 338428,
+    "MB": 0.338428,
+    "sha256": "adbea280047cbbc2c49d2b19c8c2ac2c51f3ada414bfa08514632ee95fb197d4",
+    "triangles": 19390,
+    "vertices": 11707,
+    "kind": "character",
+    "gender": "female",
+    "label": "שחקנית א׳",
+    "atlas": {
+      "file": "textures/woman-01-atlas.png",
+      "width": 512,
+      "height": 512
+    },
+    "joints": 18,
+    "LODs": [
+      {
+        "name": "Body_LOD0",
+        "triangles": 14296,
+        "distance": 0
+      },
+      {
+        "name": "Body_LOD1",
+        "triangles": 2396,
+        "distance": 14,
+        "error": 0.0035807692911475897
+      },
+      {
+        "name": "Body_LOD2",
+        "triangles": 874,
+        "distance": 24,
+        "error": 0.007589812856167555
+      }
+    ],
+    "racketTriangles": 1568,
+    "racketLODs": [
+      {
+        "name": "Racket_RightHand",
+        "triangles": 1568
+      },
+      {
+        "name": "Racket_LOD1",
+        "triangles": 256
+      }
+    ],
+    "clips": [
+      {
+        "id": "idle",
+        "duration": 2.4,
+        "loop": true,
+        "events": [],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "run",
+        "duration": 0.72,
+        "loop": true,
+        "events": [
+          {
+            "name": "left_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "right_plant",
+            "time": 0.5,
+            "atSeconds": 0.36
+          }
+        ],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "serve",
+        "duration": 3.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "prepare",
+            "time": 0,
+            "label": "הכנה",
+            "atSeconds": 0
+          },
+          {
+            "name": "toss",
+            "time": 0.28,
+            "label": "זריקה",
+            "atSeconds": 0.8960000000000001
+          },
+          {
+            "name": "load",
+            "time": 0.48,
+            "label": "העמסה",
+            "atSeconds": 1.536
+          },
+          {
+            "name": "contact",
+            "time": 0.64,
+            "label": "פגיעה ומעקב",
+            "atSeconds": 2.048
+          }
+        ],
+        "contactSweetSpot": [
+          -0.20274666238607095,
+          2.361751724667119,
+          0.2626096432907623
+        ]
+      },
+      {
+        "id": "forehand",
+        "duration": 1.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.624
+          }
+        ],
+        "contactSweetSpot": [
+          -0.5931775024660532,
+          1.2689385734140686,
+          0.848027941099727
+        ]
+      },
+      {
+        "id": "backhand",
+        "duration": 1.35,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.7020000000000001
+          }
+        ],
+        "contactSweetSpot": [
+          0.3574783593957461,
+          1.400988458344398,
+          0.7113157015331583
+        ]
+      },
+      {
+        "id": "volley",
+        "duration": 0.78,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.45,
+            "atSeconds": 0.35100000000000003
+          }
+        ],
+        "contactSweetSpot": [
+          -0.588868839244504,
+          1.7175108475147813,
+          0.5801455678463334
+        ]
+      },
+      {
+        "id": "smash",
+        "duration": 1.15,
+        "loop": false,
+        "events": [
+          {
+            "name": "takeoff",
+            "time": 0.34,
+            "atSeconds": 0.391
+          },
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.598
+          },
+          {
+            "name": "land",
+            "time": 0.82,
+            "atSeconds": 0.9429999999999998
+          }
+        ],
+        "contactSweetSpot": [
+          -0.1961203075314925,
+          2.439999276277666,
+          0.34028135166996837
+        ]
+      },
+      {
+        "id": "slide",
+        "duration": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "name": "brake",
+            "time": 0.35,
+            "atSeconds": 0.5075
+          },
+          {
+            "name": "contact",
+            "time": 0.58,
+            "atSeconds": 0.841
+          },
+          {
+            "name": "recover",
+            "time": 0.85,
+            "atSeconds": 1.2325
+          }
+        ],
+        "contactSweetSpot": [
+          -0.785473973478876,
+          0.8710675092943562,
+          0.6430670897001542
+        ]
+      },
+      {
+        "id": "celebrate",
+        "duration": 2.1,
+        "loop": false,
+        "events": [
+          {
+            "name": "fist_pump",
+            "time": 0.3,
+            "atSeconds": 0.63
+          },
+          {
+            "name": "settle",
+            "time": 0.85,
+            "atSeconds": 1.785
+          }
+        ],
+        "contactSweetSpot": null
+      }
+    ]
+  },
+  {
+    "file": "models/woman-02.glb",
+    "bytes": 338396,
+    "MB": 0.338396,
+    "sha256": "4427bbf716a7aa3e5820f55b38fb857c69d87fabee3a73ec8598e0da4ab46d72",
+    "triangles": 19435,
+    "vertices": 11763,
+    "kind": "character",
+    "gender": "female",
+    "label": "שחקנית ב׳",
+    "atlas": {
+      "file": "textures/woman-02-atlas.png",
+      "width": 512,
+      "height": 512
+    },
+    "joints": 18,
+    "LODs": [
+      {
+        "name": "Body_LOD0",
+        "triangles": 14336,
+        "distance": 0
+      },
+      {
+        "name": "Body_LOD1",
+        "triangles": 2396,
+        "distance": 14,
+        "error": 0.0034493058919906616
+      },
+      {
+        "name": "Body_LOD2",
+        "triangles": 879,
+        "distance": 24,
+        "error": 0.0074236649088561535
+      }
+    ],
+    "racketTriangles": 1568,
+    "racketLODs": [
+      {
+        "name": "Racket_RightHand",
+        "triangles": 1568
+      },
+      {
+        "name": "Racket_LOD1",
+        "triangles": 256
+      }
+    ],
+    "clips": [
+      {
+        "id": "idle",
+        "duration": 2.4,
+        "loop": true,
+        "events": [],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "run",
+        "duration": 0.72,
+        "loop": true,
+        "events": [
+          {
+            "name": "left_plant",
+            "time": 0,
+            "atSeconds": 0
+          },
+          {
+            "name": "right_plant",
+            "time": 0.5,
+            "atSeconds": 0.36
+          }
+        ],
+        "contactSweetSpot": null
+      },
+      {
+        "id": "serve",
+        "duration": 3.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "prepare",
+            "time": 0,
+            "label": "הכנה",
+            "atSeconds": 0
+          },
+          {
+            "name": "toss",
+            "time": 0.28,
+            "label": "זריקה",
+            "atSeconds": 0.8960000000000001
+          },
+          {
+            "name": "load",
+            "time": 0.48,
+            "label": "העמסה",
+            "atSeconds": 1.536
+          },
+          {
+            "name": "contact",
+            "time": 0.64,
+            "label": "פגיעה ומעקב",
+            "atSeconds": 2.048
+          }
+        ],
+        "contactSweetSpot": [
+          -0.20274666238607095,
+          2.361751724667119,
+          0.2626096432907623
+        ]
+      },
+      {
+        "id": "forehand",
+        "duration": 1.2,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.624
+          }
+        ],
+        "contactSweetSpot": [
+          -0.5931775024660532,
+          1.2689385734140686,
+          0.848027941099727
+        ]
+      },
+      {
+        "id": "backhand",
+        "duration": 1.35,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.7020000000000001
+          }
+        ],
+        "contactSweetSpot": [
+          0.3574783593957461,
+          1.400988458344398,
+          0.7113157015331583
+        ]
+      },
+      {
+        "id": "volley",
+        "duration": 0.78,
+        "loop": false,
+        "events": [
+          {
+            "name": "contact",
+            "time": 0.45,
+            "atSeconds": 0.35100000000000003
+          }
+        ],
+        "contactSweetSpot": [
+          -0.588868839244504,
+          1.7175108475147813,
+          0.5801455678463334
+        ]
+      },
+      {
+        "id": "smash",
+        "duration": 1.15,
+        "loop": false,
+        "events": [
+          {
+            "name": "takeoff",
+            "time": 0.34,
+            "atSeconds": 0.391
+          },
+          {
+            "name": "contact",
+            "time": 0.52,
+            "atSeconds": 0.598
+          },
+          {
+            "name": "land",
+            "time": 0.82,
+            "atSeconds": 0.9429999999999998
+          }
+        ],
+        "contactSweetSpot": [
+          -0.1961203075314925,
+          2.439999276277666,
+          0.34028135166996837
+        ]
+      },
+      {
+        "id": "slide",
+        "duration": 1.45,
+        "loop": false,
+        "events": [
+          {
+            "name": "brake",
+            "time": 0.35,
+            "atSeconds": 0.5075
+          },
+          {
+            "name": "contact",
+            "time": 0.58,
+            "atSeconds": 0.841
+          },
+          {
+            "name": "recover",
+            "time": 0.85,
+            "atSeconds": 1.2325
+          }
+        ],
+        "contactSweetSpot": [
+          -0.785473973478876,
+          0.8710675092943562,
+          0.6430670897001542
+        ]
+      },
+      {
+        "id": "celebrate",
+        "duration": 2.1,
+        "loop": false,
+        "events": [
+          {
+            "name": "fist_pump",
+            "time": 0.3,
+            "atSeconds": 0.63
+          },
+          {
+            "name": "settle",
+            "time": 0.85,
+            "atSeconds": 1.785
+          }
+        ],
+        "contactSweetSpot": null
+      }
+    ]
+  }
+]
