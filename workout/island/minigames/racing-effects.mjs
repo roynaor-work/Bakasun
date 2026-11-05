@@ -21,5 +21,7 @@ export function createRacingEffects({T,scene,track,keep,night=false}){
   count=0;for(const m of marks){if(!m)continue;m.age+=dt;if(m.age>12)continue;dummy.position.set(m.x,m.y,m.z);dummy.rotation.set(-Math.PI/2,0,m.heading);dummy.scale.set(1,1,1);dummy.updateMatrix();if(count<[128,96,64][quality])markMesh.setMatrixAt(count++,dummy.matrix);}markMesh.count=count;markMesh.instanceMatrix.needsUpdate=true;
   count=0;for(const s of sparks){if(!s)continue;s.age+=dt;if(s.age>.35)continue;s.x+=s.dx*dt;s.z+=s.dz*dt;s.y+=s.dy*dt;s.dy-=8*dt;dummy.position.set(s.x,s.y,s.z);dummy.rotation.set(s.age*7,s.age*11,0);dummy.scale.setScalar(1-s.age/.35);dummy.updateMatrix();sparkMesh.setMatrixAt(count++,dummy.matrix);}sparkMesh.count=count;sparkMesh.instanceMatrix.needsUpdate=true;
  }
- return {update,dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const mesh of [smokeMesh,markMesh,sparkMesh])mesh.dispose();},metrics:()=>({smoke:smokeMesh.count,skidMarks:markMesh.count,sparks:sparkMesh.count,capacity:{smoke:32,skidMarks:128,sparks:20},disposed})};
+ /** v7: the package's tire-smoke sprite replaces the generated gradient (same pool, same capacity), and the impact sparks glow additively. */
+ function setSmokeMap(map){if(disposed||!map)return;smokeMaterial.map=map;smokeMaterial.opacity=.32;smokeMaterial.needsUpdate=true;sparkMaterial.blending=T.AdditiveBlending;sparkMaterial.needsUpdate=true;}
+ return {update,setSmokeMap,dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const mesh of [smokeMesh,markMesh,sparkMesh])mesh.dispose();},metrics:()=>({smoke:smokeMesh.count,skidMarks:markMesh.count,sparks:sparkMesh.count,capacity:{smoke:32,skidMarks:128,sparks:20},disposed})};
 }
