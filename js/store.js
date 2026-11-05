@@ -99,7 +99,7 @@ export const db = {
         else if (String(r.updated || '') > String(a[i].updated || '')) { a[i] = r; n++; if (onChange) onChange({ col: c, id: r.id, data: r }); }
       });
     });
-    if (data.settings && typeof data.settings === 'object') Object.keys(data.settings).forEach(k => { if (state.settings[k] === undefined || state.settings[k] === '') state.settings[k] = data.settings[k]; if (onChange) onChange({ setting: k, value: data.settings[k] }); });
+    if (data.settings && typeof data.settings === 'object') Object.keys(data.settings).forEach(k => { if (state.settings[k] === undefined || state.settings[k] === '') { state.settings[k] = data.settings[k]; if (onChange) onChange({ setting: k, value: data.settings[k] }); } });
     persist(); emit(); return n;
   },
   snapshot() { return state; }

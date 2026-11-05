@@ -333,12 +333,14 @@ async function submitOrder() {
   if (Object.keys(errs).length) { renderCheckout(errs); const sum = $('#errsum'); window.scrollTo({ top: 0, behavior: 'smooth' }); sum?.focus({ preventScroll: true }); return; }
   const sub = C.subtotal(cart), ship = C.shippingPrice(co.method, sub);
   const order = {
-    no: C.orderNo(), store: STORE.name, items: cart, subtotal: sub, shipping: ship, total: sub + ship,
+    no: C.orderNo(), access: C.accessToken(), store: STORE.name, items: cart, subtotal: sub, shipping: ship, total: sub + ship,
     method: co.method, shippingLabel: SHIPPING[co.method].label, pay: co.pay, payLabel: PAY[co.pay].label,
     customer: { name: f.name, phone: f.phone, email: f.email, city: f.city, street: f.street, when: f.when, notes: f.notes },
   };
   const btn = $('#paybtn'); btn.disabled = true; btn.textContent = 'שולחים…';
   await saveOrder(order);
+  // כשיש ענן והשמירה לא אושרה: לא מרוקנים את הסל ולא מתקדמים לעמוד "התקבלה". הלקוח מנסה שוב.
+  if (CLOUD.url && CLOUD.key && !order.saved) { btn.disabled = false; btn.textContent = 'ההזמנה לא נשמרה. לנסות שוב'; const sum = $('#errsum'); if (sum) { sum.hidden = false; sum.textContent = 'לא הצלחנו לשמור את ההזמנה. הסל נשאר כמו שהוא; אפשר לנסות שוב, או להתקשר אלינו.'; sum.focus({ preventScroll: true }); } else toast('לא הצלחנו לשמור את ההזמנה. הסל נשמר, אפשר לנסות שוב.'); return; }
   lastOrder = order; try { sessionStorage.setItem('north.last', JSON.stringify(order)); } catch { /* */ }
   cart = []; saveCart();
   if (order.pay === 'card' && PAY.card.grow) {
@@ -354,7 +356,7 @@ async function growUrl(order) {
   const returnBase = location.origin + location.pathname;
   if (!/^https:/.test(returnBase)) return '';
   try {
-    const r = await fetch(`${CLOUD.url}/functions/v1/grow-pay`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ order: { no: order.no, store: order.store, total: order.total, shipping: order.shipping, items: order.items.map(i => ({ id: i.id, variantId: i.variantId || '', name: i.name + (i.variant ? ' ' + i.variant : ''), qty: i.qty, price: i.price, parts: (i.parts || []).map(p => p.id) })), method: order.method, customer: order.customer }, returnBase }) });
+    const r = await fetch(`${CLOUD.url}/functions/v1/grow-pay`, { method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ order: { no: order.no, access: order.access, store: order.store }, returnBase }) });
     const j = await r.json().catch(() => ({}));
     return r.ok && j.url ? j.url : '';
   } catch { return ''; }
@@ -364,7 +366,7 @@ async function saveOrder(order) {
   try {
     const r = await fetch(`${CLOUD.url}/rest/v1/${CLOUD.table}`, {
       method: 'POST', headers: { apikey: CLOUD.key, Authorization: `Bearer ${CLOUD.key}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-      body: JSON.stringify({ order_no: order.no, pay: order.pay, method: order.method, total: order.total, customer: order.customer, items: order.items, totals: { subtotal: order.subtotal, shipping: order.shipping, total: order.total }, ua: navigator.userAgent.slice(0, 200) }),
+      body: JSON.stringify({ order_no: order.no, pay: order.pay, method: order.method, total: order.total, customer: order.customer, items: order.items, totals: { subtotal: order.subtotal, shipping: order.shipping, total: order.total, access: order.access }, ua: navigator.userAgent.slice(0, 200) }),
     });
     order.saved = r.ok; return r.ok;
   } catch { order.saved = false; return false; }
@@ -376,7 +378,7 @@ function payUrl(order) {
 }
 function thanksHtml(no) {
   let o = lastOrder; if (!o || o.no !== no) { try { o = JSON.parse(sessionStorage.getItem('north.last')); } catch { /* */ } }
-  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">${icon('check')}</span><h1>ההזמנה נקלטה</h1><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
+  if (!o || o.no !== no) return `<section class="thanks"><div class="box"><span class="i">${icon('check')}</span><h1>לא ניתן לאמת את ההזמנה</h1><p>במכשיר הזה אין רשומה של ההזמנה${no ? ' ' + esc(no) : ''}, לכן איננו יכולים לאשר שנקלטה. אם שילמתם, ההזמנה אצלנו ונחזור אליכם; אפשר גם ליצור קשר ולציין את המספר.</p><p class="no">${esc(no)}</p><a class="btn gold" href="#/">לחנות</a></div></section>`;
   const url = payUrl(o); const text = C.orderText(o);
   const paid = new URLSearchParams(location.search).get('paid');
   let payBlock = '';

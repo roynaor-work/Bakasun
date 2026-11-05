@@ -217,3 +217,10 @@ test('תוכן: בלי אותיות ערביות, בלי סימני קריאה �
 test('sw.js: מטמון לגופנים ולתמונות בלבד, לא ל-HTML/JS/CSS', () => {
   const sw = read('sw.js'); assert.match(sw, /fonts\|img/); assert.ok(!/\.html|\.js\b|\.css/.test(sw.replace(/\/\*[\s\S]*?\*\//, '')));
 });
+
+test('A01 (audit 2026-11-05): access token is 128 random bits, hex, different each time', async () => {
+  const { accessToken } = await import('../north/js/cart.js');
+  const a = accessToken(), b = accessToken();
+  assert.match(a, /^[0-9a-f]{32}$/); assert.notEqual(a, b);
+  assert.throws(() => accessToken(null === 1 ? 0 : { }), /אקראיות/);
+});

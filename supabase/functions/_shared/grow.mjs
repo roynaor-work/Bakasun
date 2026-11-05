@@ -97,6 +97,8 @@ export function parseInfo(json) {
 export function matchesOrder(info, order, cb) {
   if (!info || !info.paid) return false;
   if (cb && cb.transactionId && info.transactionId && String(cb.transactionId) !== String(info.transactionId)) return false;
-  if (info.sum != null && order && order.total != null && Math.abs(Number(info.sum) - Number(order.total)) > 0.5) return false;
+  // סכום חסר או לא מספרי אינו אימות: דורשים סכום סופי שתואם להזמנה.
+  if (info.sum == null || !Number.isFinite(Number(info.sum))) return false;
+  if (order && order.total != null && !(Math.abs(Number(info.sum) - Number(order.total)) <= 0.5)) return false;
   return true;
 }

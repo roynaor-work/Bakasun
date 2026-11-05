@@ -40,7 +40,7 @@ export function monthReport(payments, links, cases, sups, ym) {
 
 /** The month as CSV (Excel opens it, Hebrew safe with the BOM). */
 export function monthCsv(rep) {
-  const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const q = v => { let t = String(v == null ? '' : v); if (/^[=+\-@]/.test(t) && !/^[+-]?\d[\d\-\s.]*$/.test(t)) t = "'" + t; return '"' + t.replace(/"/g, '""') + '"'; };
   const lines = [['סוג', 'תאריך', 'לקוח / ספק', 'אירוע', 'סכום לפני מע״מ', 'חשבונית', 'סטטוס', 'הערה'].map(q).join(',')];
   rep.clientRows.forEach(r => lines.push(['הכנסה', r.date, r.client, r.event, r.amount, r.invoiceNo, r.status, r.note].map(q).join(',')));
   rep.supplierRows.forEach(r => lines.push(['הוצאה', r.date, r.supplier, r.client + (r.event ? ' · ' + r.event : ''), r.amount, r.invoice, Office.yes(r.invoice !== 'חסרה' ? 'כן' : 'לא') ? 'חשבונית התקבלה' : 'חסרה חשבונית', r.note].map(q).join(',')));
