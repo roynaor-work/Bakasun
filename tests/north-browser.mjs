@@ -153,3 +153,26 @@ test('north: טעינה בטלפון איטי (CPU x4, 200KB/s): LCP עד 3 שנ
     if (process.env.NORTH_PERF_OUT) fs.writeFileSync(process.env.NORTH_PERF_OUT, JSON.stringify(table, null, 1));
   } finally { await browser.close(); srv.close(); }
 });
+
+test('north: תמונות v4 שלא נטענות נופלות לתמונת v2 של אותו מארז, ובאנר אירוע בלי עותק מוסתר', { skip: !enabled, timeout: 120000 }, async () => {
+  const { chromium } = await import(pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href);
+  const { srv, base } = await serve();
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--no-sandbox'] });
+  try {
+    const { c } = await newCtx(browser, 'm');
+    await c.route(/\/img\/s\/v4\//, r => r.abort());
+    const p = await c.newPage();
+    await p.goto(base, { waitUntil: 'load' });
+    for (let y = 0; y < 6; y++) { await p.evaluate(n => document.querySelector('#grid').scrollIntoView(), 0); await p.mouse.wheel(0, 700); await p.waitForTimeout(300); }
+    await p.$$eval('#grid .card img', is => is.forEach(i => i.scrollIntoView()));
+    await p.waitForFunction(() => [...document.querySelectorAll('#grid .card img')].every(i => i.complete && i.naturalWidth > 0), null, { timeout: 20000 });
+    const srcs = await p.$$eval('#grid .card img', is => is.map(i => i.currentSrc));
+    assert.ok(srcs.length >= 12 && srcs.every(s => /\/img\/s\/v2\//.test(s)), 'כרטיסים חזרו ל-v2: ' + srcs.slice(0, 2));
+    await p.click('[data-occ="work"]');
+    await p.waitForFunction(() => document.querySelectorAll('#occslot .occban').length === 0, null, { timeout: 15000 });
+    await p.goto(base + '#/p/flask', { waitUntil: 'load' });
+    await p.waitForFunction(() => { const i = document.querySelector('#pmain'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 15000 });
+    assert.match(await p.$eval('#pmain', i => i.currentSrc), /\/img\/s\/v2\//);
+    await c.close();
+  } finally { await browser.close(); srv.close(); }
+});
