@@ -25,7 +25,7 @@ test('naval v7: every kind maps to a shipped hull and the player has the articul
   for(const key of ['player',0,1,2,'boss'])assert.ok(NAVAL_V7.ships[NAVAL_V7.kinds[key]],String(key));
   assert.equal(NAVAL_V7.ships[NAVAL_V7.kinds.player].turret,true);
 });
-const chromium=process.env.CHROMIUM_PATH||'/usr/bin/chromium',browser=process.env.ISLAND_BROWSER!=='0'&&existsSync(chromium);
+const chromium=process.env.CHROMIUM_PATH||'/usr/bin/chromium',browser=process.env.ISLAND_CSP_BROWSER==='1'&&existsSync(chromium); // opt-in like the other island browser checks: the plain CI test job has no playwright
 for(const mode of ['on','blocked'])test('naval v7 browser ('+mode+'): '+(mode==='on'?'v7 hulls load under the real CSP':'blocked v7 files fall back silently to the earlier boats'),{skip:!browser,timeout:900000},()=>{
   const r=spawnSync(process.execPath,['workout/island/tests/naval-v7-browser.mjs'],{env:{...process.env,NAVAL_V7_MODE:mode,CHROMIUM_PATH:chromium},encoding:'utf8',cwd:new URL('..',import.meta.url)});
   assert.equal(r.status,0,(r.stdout||'').slice(-1500)+(r.stderr||'').slice(-1500));
