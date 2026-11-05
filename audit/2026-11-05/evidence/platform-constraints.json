@@ -1,0 +1,2443 @@
+{
+  "at": "2026-11-04T21:49:46.871310+00:00",
+  "method": "Existing inventory and actual six game resource traces; requests do not prove an asset remains drawn. Runtime canvas packing uses original code and synthetic appearance, without WebGL timing.",
+  "threeRevision": "160",
+  "motionContracts": {
+    "soccer": {
+      "file": "workout/island/design/motion2/soccer.json",
+      "bones": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "parents": [
+        null,
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Chest",
+        "LeftArm",
+        "LeftForeArm",
+        "Chest",
+        "RightArm",
+        "RightForeArm",
+        "Hips",
+        "LeftUpLeg",
+        "LeftLeg",
+        "Hips",
+        "RightUpLeg",
+        "RightLeg"
+      ]
+    },
+    "hoops": {
+      "file": "workout/island/design/motion2/hoops.json",
+      "bones": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "parents": [
+        null,
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Chest",
+        "LeftArm",
+        "LeftForeArm",
+        "Chest",
+        "RightArm",
+        "RightForeArm",
+        "Hips",
+        "LeftUpLeg",
+        "LeftLeg",
+        "Hips",
+        "RightUpLeg",
+        "RightLeg"
+      ]
+    },
+    "alpine": {
+      "file": "workout/island/design/motion2/alpine.json",
+      "bones": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "parents": [
+        null,
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Chest",
+        "LeftArm",
+        "LeftForeArm",
+        "Chest",
+        "RightArm",
+        "RightForeArm",
+        "Hips",
+        "LeftUpLeg",
+        "LeftLeg",
+        "Hips",
+        "RightUpLeg",
+        "RightLeg"
+      ]
+    }
+  },
+  "motionContractsIdentical": true,
+  "selectedCharacters": [
+    {
+      "path": "workout/island/assets/soccer-v5/teal-quiff.glb",
+      "bytes": 45060,
+      "skinCounts": [
+        18
+      ],
+      "canonicalNameSet": true,
+      "imageCount": 0,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/assets/soccer-v5/goalkeeper.glb",
+      "bytes": 45412,
+      "skinCounts": [
+        18
+      ],
+      "canonicalNameSet": true,
+      "imageCount": 0,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/skier3/skier.glb",
+      "bytes": 424676,
+      "skinCounts": [
+        18
+      ],
+      "canonicalNameSet": true,
+      "imageCount": 0,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "bytes": 244148,
+      "skinCounts": [
+        52
+      ],
+      "canonicalNameSet": false,
+      "imageCount": 6,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "bytes": 235528,
+      "skinCounts": [
+        52
+      ],
+      "canonicalNameSet": false,
+      "imageCount": 6,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "bytes": 255148,
+      "skinCounts": [
+        52
+      ],
+      "canonicalNameSet": false,
+      "imageCount": 5,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "bytes": 264488,
+      "skinCounts": [
+        52
+      ],
+      "canonicalNameSet": false,
+      "imageCount": 6,
+      "dracoComplete": true
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-c-lod.glb",
+      "bytes": 263716,
+      "skinCounts": [
+        52
+      ],
+      "canonicalNameSet": false,
+      "imageCount": 6,
+      "dracoComplete": true
+    }
+  ],
+  "observedExternalImages": [
+    {
+      "path": "workout/island/assets/alpine-rush/granite-v5.webp",
+      "bytes": 443746,
+      "MB": 0.44375,
+      "image": {
+        "width": 1024,
+        "height": 1024,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/assets/soccer-v4/turf-color-512.jpg",
+      "bytes": 45591,
+      "MB": 0.04559,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "JPEG"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/assets/soccer-v4/turf-normal-512.jpg",
+      "bytes": 68274,
+      "MB": 0.06827,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "JPEG"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-track/textures/groomed-normal.webp",
+      "bytes": 28636,
+      "MB": 0.02864,
+      "image": {
+        "width": 128,
+        "height": 128,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-track/textures/groomed-snow.webp",
+      "bytes": 79646,
+      "MB": 0.07965,
+      "image": {
+        "width": 256,
+        "height": 256,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-track/textures/snow-ripples.webp",
+      "bytes": 61444,
+      "MB": 0.06144,
+      "image": {
+        "width": 256,
+        "height": 256,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/atlases/landing-cloud.png",
+      "bytes": 23178,
+      "MB": 0.02318,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "PNG"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/atlases/powder-spray.png",
+      "bytes": 25611,
+      "MB": 0.02561,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "PNG"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/atlases/snow-flecks.png",
+      "bytes": 11600,
+      "MB": 0.0116,
+      "image": {
+        "width": 256,
+        "height": 256,
+        "format": "PNG"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/backgrounds/sunset-landscape.webp",
+      "bytes": 138576,
+      "MB": 0.13858,
+      "image": {
+        "width": 1536,
+        "height": 864,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "background image; not assumed to be a material texture"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/backgrounds/sunset-portrait.webp",
+      "bytes": 75298,
+      "MB": 0.0753,
+      "image": {
+        "width": 720,
+        "height": 1280,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "background image; not assumed to be a material texture"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/decals/route-and-snow.png",
+      "bytes": 37845,
+      "MB": 0.03784,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "PNG"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/textures/snow-normal.webp",
+      "bytes": 50344,
+      "MB": 0.05034,
+      "image": {
+        "width": 256,
+        "height": 256,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/alpine-v5/textures/snow-roughness.webp",
+      "bytes": 6116,
+      "MB": 0.00612,
+      "image": {
+        "width": 256,
+        "height": 256,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/environment/backgrounds/stadium-day-landscape.webp",
+      "bytes": 48784,
+      "MB": 0.04878,
+      "image": {
+        "width": 1280,
+        "height": 720,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "background image; not assumed to be a material texture"
+    },
+    {
+      "path": "workout/island/design/environment/backgrounds/stadium-day-portrait.webp",
+      "bytes": 34282,
+      "MB": 0.03428,
+      "image": {
+        "width": 720,
+        "height": 1280,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "background image; not assumed to be a material texture"
+    },
+    {
+      "path": "workout/island/design/environment/textures/crowd-dots.webp",
+      "bytes": 142986,
+      "MB": 0.14299,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/environment/textures/grass-mown.webp",
+      "bytes": 159586,
+      "MB": 0.15959,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/environment/textures/snow.webp",
+      "bytes": 124254,
+      "MB": 0.12425,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/environment/textures/stand-concrete.webp",
+      "bytes": 115602,
+      "MB": 0.1156,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/burning-ball-glow.webp",
+      "bytes": 120744,
+      "MB": 0.12074,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "hoops"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/confetti.webp",
+      "bytes": 90786,
+      "MB": 0.09079,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "hoops",
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/goal-burst.webp",
+      "bytes": 110040,
+      "MB": 0.11004,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/landing-dust.webp",
+      "bytes": 85306,
+      "MB": 0.08531,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine",
+        "hoops",
+        "soccer"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/net-spark.webp",
+      "bytes": 50834,
+      "MB": 0.05083,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "hoops"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/ski-scrape.webp",
+      "bytes": 93372,
+      "MB": 0.09337,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/snow-dust.webp",
+      "bytes": 120988,
+      "MB": 0.12099,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    },
+    {
+      "path": "workout/island/design/vfx/atlases/speed-lines.webp",
+      "bytes": 71104,
+      "MB": 0.0711,
+      "image": {
+        "width": 512,
+        "height": 512,
+        "format": "WEBP"
+      },
+      "games": [
+        "alpine",
+        "hoops"
+      ],
+      "classification": "observed image request; binding must be checked separately"
+    }
+  ],
+  "observedModels": [
+    {
+      "path": "workout/island/assets/models/hoops-anim.glb",
+      "bytes": 475572,
+      "MB": 0.47557,
+      "glb": {
+        "trianglesUniqueMeshes": 0,
+        "primitives": 0,
+        "dracoPrimitives": 0,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 24,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_mesh_quantization"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/assets/soccer-v5/goalkeeper.glb",
+      "bytes": 45412,
+      "MB": 0.04541,
+      "glb": {
+        "trianglesUniqueMeshes": 12616,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [
+          18
+        ],
+        "boneNames": [
+          [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ]
+        ],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/assets/soccer-v5/teal-curls.glb",
+      "bytes": 49332,
+      "MB": 0.04933,
+      "glb": {
+        "trianglesUniqueMeshes": 14297,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [
+          18
+        ],
+        "boneNames": [
+          [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ]
+        ],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/assets/soccer-v5/teal-knot.glb",
+      "bytes": 45740,
+      "MB": 0.04574,
+      "glb": {
+        "trianglesUniqueMeshes": 12757,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [
+          18
+        ],
+        "boneNames": [
+          [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ]
+        ],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/assets/soccer-v5/teal-quiff.glb",
+      "bytes": 45060,
+      "MB": 0.04506,
+      "glb": {
+        "trianglesUniqueMeshes": 12564,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [
+          18
+        ],
+        "boneNames": [
+          [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ]
+        ],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-track/models/flag-rope.glb",
+      "bytes": 9908,
+      "MB": 0.00991,
+      "glb": {
+        "trianglesUniqueMeshes": 584,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-track/models/kicker.glb",
+      "bytes": 7568,
+      "MB": 0.00757,
+      "glb": {
+        "trianglesUniqueMeshes": 920,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-v5/models/route-marker-sunset.glb",
+      "bytes": 11648,
+      "MB": 0.01165,
+      "glb": {
+        "trianglesUniqueMeshes": 129,
+        "primitives": 3,
+        "dracoPrimitives": 0,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": []
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-v5/models/safety-fence-sunset.glb",
+      "bytes": 45108,
+      "MB": 0.04511,
+      "glb": {
+        "trianglesUniqueMeshes": 592,
+        "primitives": 3,
+        "dracoPrimitives": 0,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": []
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/finish-gate.glb",
+      "bytes": 2648,
+      "MB": 0.00265,
+      "glb": {
+        "trianglesUniqueMeshes": 256,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/ice-wall.glb",
+      "bytes": 22480,
+      "MB": 0.02248,
+      "glb": {
+        "trianglesUniqueMeshes": 3696,
+        "primitives": 4,
+        "dracoPrimitives": 4,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/mogul.glb",
+      "bytes": 5152,
+      "MB": 0.00515,
+      "glb": {
+        "trianglesUniqueMeshes": 384,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/rock-large.glb",
+      "bytes": 1980,
+      "MB": 0.00198,
+      "glb": {
+        "trianglesUniqueMeshes": 54,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/rock-small.glb",
+      "bytes": 1988,
+      "MB": 0.00199,
+      "glb": {
+        "trianglesUniqueMeshes": 54,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/snow-powder.glb",
+      "bytes": 39684,
+      "MB": 0.03968,
+      "glb": {
+        "trianglesUniqueMeshes": 96,
+        "primitives": 16,
+        "dracoPrimitives": 16,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 1,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 384,
+            "height": 384,
+            "bytes": 15811
+          }
+        ],
+        "imageCount": 1,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/snow-sign.glb",
+      "bytes": 1828,
+      "MB": 0.00183,
+      "glb": {
+        "trianglesUniqueMeshes": 69,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/alpine-world/models/start-gate.glb",
+      "bytes": 2632,
+      "MB": 0.00263,
+      "glb": {
+        "trianglesUniqueMeshes": 256,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops-v5/models/arena.glb",
+      "bytes": 198352,
+      "MB": 0.19835,
+      "glb": {
+        "trianglesUniqueMeshes": 30738,
+        "primitives": 30,
+        "dracoPrimitives": 30,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 1024,
+            "height": 128,
+            "bytes": 3502
+          },
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 1024,
+            "height": 512,
+            "bytes": 23506
+          }
+        ],
+        "imageCount": 2,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops-v5/models/ball.glb",
+      "bytes": 209800,
+      "MB": 0.2098,
+      "glb": {
+        "trianglesUniqueMeshes": 1840,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 1024,
+            "height": 512,
+            "bytes": 46217
+          },
+          {
+            "mime": "image/jpeg",
+            "external": false,
+            "width": 1024,
+            "height": 512,
+            "bytes": 153745
+          }
+        ],
+        "imageCount": 2,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops-v5/models/court.glb",
+      "bytes": 296216,
+      "MB": 0.29622,
+      "glb": {
+        "trianglesUniqueMeshes": 1094,
+        "primitives": 6,
+        "dracoPrimitives": 6,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 18487
+          },
+          {
+            "mime": "image/jpeg",
+            "external": false,
+            "width": 1024,
+            "height": 1024,
+            "bytes": 143676
+          },
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 119618
+          }
+        ],
+        "imageCount": 3,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops-v5/models/crowd.glb",
+      "bytes": 1029776,
+      "MB": 1.02978,
+      "glb": {
+        "trianglesUniqueMeshes": 5524,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 1,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 1024,
+            "height": 1024,
+            "bytes": 683028
+          }
+        ],
+        "imageCount": 1,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops-v5/models/hoops.glb",
+      "bytes": 33832,
+      "MB": 0.03383,
+      "glb": {
+        "trianglesUniqueMeshes": 6156,
+        "primitives": 10,
+        "dracoPrimitives": 10,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [
+          {
+            "mime": "image/png",
+            "external": false,
+            "width": 256,
+            "height": 128,
+            "bytes": 2661
+          }
+        ],
+        "imageCount": 1,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-c-lod.glb",
+      "bytes": 263716,
+      "MB": 0.26372,
+      "glb": {
+        "trianglesUniqueMeshes": 5751,
+        "primitives": 9,
+        "dracoPrimitives": 9,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 6,
+        "textures": [
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 31688
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 5632
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 6892
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 2476
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 13116
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 9996
+          }
+        ],
+        "imageCount": 6,
+        "extensionsRequired": [
+          "EXT_texture_webp",
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "bytes": 264488,
+      "MB": 0.26449,
+      "glb": {
+        "trianglesUniqueMeshes": 5848,
+        "primitives": 9,
+        "dracoPrimitives": 9,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 6,
+        "textures": [
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 31688
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 5632
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 6892
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 2476
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 13116
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 9996
+          }
+        ],
+        "imageCount": 6,
+        "extensionsRequired": [
+          "EXT_texture_webp",
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "bytes": 244148,
+      "MB": 0.24415,
+      "glb": {
+        "trianglesUniqueMeshes": 5260,
+        "primitives": 9,
+        "dracoPrimitives": 9,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 6,
+        "textures": [
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 5158
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 6892
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 2476
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 13116
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 21088
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 10924
+          }
+        ],
+        "imageCount": 6,
+        "extensionsRequired": [
+          "EXT_texture_webp",
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "bytes": 255148,
+      "MB": 0.25515,
+      "glb": {
+        "trianglesUniqueMeshes": 5283,
+        "primitives": 9,
+        "dracoPrimitives": 9,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 6,
+        "textures": [
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 6892
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 2476
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 13116
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 36312
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 12300
+          }
+        ],
+        "imageCount": 5,
+        "extensionsRequired": [
+          "EXT_texture_webp",
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "bytes": 235528,
+      "MB": 0.23553,
+      "glb": {
+        "trianglesUniqueMeshes": 5253,
+        "primitives": 9,
+        "dracoPrimitives": 9,
+        "skinJoints": [
+          52
+        ],
+        "boneNames": [
+          [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3"
+          ]
+        ],
+        "animations": 6,
+        "textures": [
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 5150
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 6892
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 2476
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 13116
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 256,
+            "height": 256,
+            "bytes": 12068
+          },
+          {
+            "mime": "image/webp",
+            "external": false,
+            "width": 512,
+            "height": 512,
+            "bytes": 12818
+          }
+        ],
+        "imageCount": 6,
+        "extensionsRequired": [
+          "EXT_texture_webp",
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "hoops"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/fence.glb",
+      "bytes": 9340,
+      "MB": 0.00934,
+      "glb": {
+        "trianglesUniqueMeshes": 488,
+        "primitives": 3,
+        "dracoPrimitives": 3,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/fir-a.glb",
+      "bytes": 5112,
+      "MB": 0.00511,
+      "glb": {
+        "trianglesUniqueMeshes": 87,
+        "primitives": 2,
+        "dracoPrimitives": 2,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/fir-b.glb",
+      "bytes": 5320,
+      "MB": 0.00532,
+      "glb": {
+        "trianglesUniqueMeshes": 96,
+        "primitives": 2,
+        "dracoPrimitives": 2,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/fir-c.glb",
+      "bytes": 5324,
+      "MB": 0.00532,
+      "glb": {
+        "trianglesUniqueMeshes": 96,
+        "primitives": 2,
+        "dracoPrimitives": 2,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/rock.glb",
+      "bytes": 3344,
+      "MB": 0.00334,
+      "glb": {
+        "trianglesUniqueMeshes": 54,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/ski-slope.glb",
+      "bytes": 13604,
+      "MB": 0.0136,
+      "glb": {
+        "trianglesUniqueMeshes": 822,
+        "primitives": 4,
+        "dracoPrimitives": 4,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/slalom-gate.glb",
+      "bytes": 7748,
+      "MB": 0.00775,
+      "glb": {
+        "trianglesUniqueMeshes": 220,
+        "primitives": 4,
+        "dracoPrimitives": 4,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/soccer-ball.glb",
+      "bytes": 3564,
+      "MB": 0.00356,
+      "glb": {
+        "trianglesUniqueMeshes": 116,
+        "primitives": 1,
+        "dracoPrimitives": 1,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/design/models/soccer-goal.glb",
+      "bytes": 19408,
+      "MB": 0.01941,
+      "glb": {
+        "trianglesUniqueMeshes": 1376,
+        "primitives": 4,
+        "dracoPrimitives": 4,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/design/models2/soccer-stadium.glb",
+      "bytes": 153156,
+      "MB": 0.15316,
+      "glb": {
+        "trianglesUniqueMeshes": 38264,
+        "primitives": 17,
+        "dracoPrimitives": 17,
+        "skinJoints": [],
+        "boneNames": [],
+        "animations": 0,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "soccer"
+      ]
+    },
+    {
+      "path": "workout/island/design/skier3/skier.glb",
+      "bytes": 424676,
+      "MB": 0.42468,
+      "glb": {
+        "trianglesUniqueMeshes": 24758,
+        "primitives": 2,
+        "dracoPrimitives": 2,
+        "skinJoints": [
+          18
+        ],
+        "boneNames": [
+          [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ]
+        ],
+        "animations": 5,
+        "textures": [],
+        "imageCount": 0,
+        "extensionsRequired": [
+          "KHR_draco_mesh_compression"
+        ]
+      },
+      "games": [
+        "alpine"
+      ]
+    }
+  ],
+  "allInventoryImagesOver1024": [
+    {
+      "path": "workout/island-library/models/shop-corner.glb",
+      "image": 0,
+      "width": 2048,
+      "height": 2048,
+      "bytes": 1080049,
+      "external": false,
+      "externalPath": null
+    },
+    {
+      "path": "workout/island/assets/athlete/athlete.glb",
+      "image": 0,
+      "width": 2048,
+      "height": 2048,
+      "bytes": 148130,
+      "external": true,
+      "externalPath": "workout/island/assets/athlete/textures/skin-albedo.jpg"
+    },
+    {
+      "path": "workout/island/assets/athlete/athlete.glb",
+      "image": 4,
+      "width": 2048,
+      "height": 2048,
+      "bytes": 471737,
+      "external": true,
+      "externalPath": "workout/island/assets/athlete/textures/kit-detail.png"
+    }
+  ],
+  "unresolvedGLBImages": [],
+  "hoopsPacking": [
+    {
+      "role": "PG",
+      "path": "design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "meshes": [
+        {
+          "name": "hoops-adult-lod",
+          "bones": 52,
+          "triangles": 4621
+        },
+        {
+          "name": "hoops-adult-alpha",
+          "bones": 52,
+          "triangles": 639
+        }
+      ],
+      "textureCount": 2,
+      "textures": [
+        {
+          "slots": [
+            "hoops-adult-lod:map"
+          ],
+          "width": 1024,
+          "height": 512,
+          "canvas": true
+        },
+        {
+          "slots": [
+            "hoops-adult-alpha:map"
+          ],
+          "width": 1024,
+          "height": 1024,
+          "canvas": true
+        }
+      ],
+      "packing": {
+        "sourceTriangles": 5260,
+        "triangles": 5260,
+        "bodyTriangles": 4621,
+        "hairTriangles": 639,
+        "vertices": 2962,
+        "drawCalls": 2,
+        "multiplier": 1,
+        "targetMet": false,
+        "maxDisplacement": 0,
+        "headDisplacement": 0,
+        "atlasWidth": 1024,
+        "atlasHeight": 512
+      }
+    },
+    {
+      "role": "SG",
+      "path": "design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "meshes": [
+        {
+          "name": "hoops-adult-lod",
+          "bones": 52,
+          "triangles": 4613
+        },
+        {
+          "name": "hoops-adult-alpha",
+          "bones": 52,
+          "triangles": 640
+        }
+      ],
+      "textureCount": 2,
+      "textures": [
+        {
+          "slots": [
+            "hoops-adult-lod:map"
+          ],
+          "width": 1024,
+          "height": 512,
+          "canvas": true
+        },
+        {
+          "slots": [
+            "hoops-adult-alpha:map"
+          ],
+          "width": 1024,
+          "height": 1024,
+          "canvas": true
+        }
+      ],
+      "packing": {
+        "sourceTriangles": 5253,
+        "triangles": 5253,
+        "bodyTriangles": 4613,
+        "hairTriangles": 640,
+        "vertices": 2925,
+        "drawCalls": 2,
+        "multiplier": 1,
+        "targetMet": false,
+        "maxDisplacement": 0,
+        "headDisplacement": 0,
+        "atlasWidth": 1024,
+        "atlasHeight": 512
+      }
+    },
+    {
+      "role": "SF",
+      "path": "design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "meshes": [
+        {
+          "name": "hoops-adult-lod",
+          "bones": 52,
+          "triangles": 4611
+        },
+        {
+          "name": "hoops-adult-alpha",
+          "bones": 52,
+          "triangles": 672
+        }
+      ],
+      "textureCount": 2,
+      "textures": [
+        {
+          "slots": [
+            "hoops-adult-lod:map"
+          ],
+          "width": 1024,
+          "height": 512,
+          "canvas": true
+        },
+        {
+          "slots": [
+            "hoops-adult-alpha:map"
+          ],
+          "width": 1024,
+          "height": 1024,
+          "canvas": true
+        }
+      ],
+      "packing": {
+        "sourceTriangles": 5283,
+        "triangles": 5283,
+        "bodyTriangles": 4611,
+        "hairTriangles": 672,
+        "vertices": 2895,
+        "drawCalls": 2,
+        "multiplier": 1,
+        "targetMet": false,
+        "maxDisplacement": 0,
+        "headDisplacement": 0,
+        "atlasWidth": 1024,
+        "atlasHeight": 512
+      }
+    },
+    {
+      "role": "PF",
+      "path": "design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "meshes": [
+        {
+          "name": "hoops-adult-lod",
+          "bones": 52,
+          "triangles": 4615
+        },
+        {
+          "name": "hoops-adult-alpha",
+          "bones": 52,
+          "triangles": 1233
+        }
+      ],
+      "textureCount": 2,
+      "textures": [
+        {
+          "slots": [
+            "hoops-adult-lod:map"
+          ],
+          "width": 1024,
+          "height": 512,
+          "canvas": true
+        },
+        {
+          "slots": [
+            "hoops-adult-alpha:map"
+          ],
+          "width": 1024,
+          "height": 1024,
+          "canvas": true
+        }
+      ],
+      "packing": {
+        "sourceTriangles": 5848,
+        "triangles": 5848,
+        "bodyTriangles": 4615,
+        "hairTriangles": 1233,
+        "vertices": 2909,
+        "drawCalls": 2,
+        "multiplier": 1,
+        "targetMet": false,
+        "maxDisplacement": 0,
+        "headDisplacement": 0,
+        "atlasWidth": 1024,
+        "atlasHeight": 512
+      }
+    },
+    {
+      "role": "C",
+      "path": "design/hoops/lod-v4/hoops-v4-c-lod.glb",
+      "meshes": [
+        {
+          "name": "hoops-adult-lod",
+          "bones": 52,
+          "triangles": 4615
+        },
+        {
+          "name": "hoops-adult-alpha",
+          "bones": 52,
+          "triangles": 1136
+        }
+      ],
+      "textureCount": 2,
+      "textures": [
+        {
+          "slots": [
+            "hoops-adult-lod:map"
+          ],
+          "width": 1024,
+          "height": 512,
+          "canvas": true
+        },
+        {
+          "slots": [
+            "hoops-adult-alpha:map"
+          ],
+          "width": 1024,
+          "height": 1024,
+          "canvas": true
+        }
+      ],
+      "packing": {
+        "sourceTriangles": 5751,
+        "triangles": 5751,
+        "bodyTriangles": 4615,
+        "hairTriangles": 1136,
+        "vertices": 2901,
+        "drawCalls": 2,
+        "multiplier": 1,
+        "targetMet": false,
+        "maxDisplacement": 0,
+        "headDisplacement": 0,
+        "atlasWidth": 1024,
+        "atlasHeight": 512
+      }
+    }
+  ],
+  "limits": [
+    "No physical phone GPU measured.",
+    "Backgrounds at 1280 pixels are listed separately from material textures.",
+    "Zero embedded images can mean vertex colours; imageCount is not atlas count.",
+    "The active v5 basketball crowd uses one merged card mesh plus index-based density LOD; the soccer crowd uses five InstancedMesh batches.",
+    "The legacy characters/rig.json has 20 joints; it is not the canonical 18-bone motion2 contract."
+  ]
+}

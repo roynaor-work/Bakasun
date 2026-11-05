@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>ביקורת ארבע האפליקציות · 05.11.2026</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="review.css">
+  <script defer src="data.js"></script>
+  <script defer src="review.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">דילוג לתוכן</a>
+  <header class="masthead">
+    <div class="eyebrow">AUDIT / 2026–11–05</div>
+    <h1>ארבע אפליקציות.<br>דוח אחד עם ראיות.</h1>
+    <p class="lede">אבטחה, נגישות, ביצועים ואמינות — על גרסת main קבועה, עם בדיקות מקומיות ונתונים סינתטיים.</p>
+    <div class="meta" id="meta"></div>
+    <div class="header-actions"><a href="REPORT.md">פתיחת הדוח המלא</a><a href="README.md">איך בודקים ומשחזרים</a></div>
+  </header>
+  <nav class="views" aria-label="תצוגות הדוח">
+    <button type="button" data-panel="findings" aria-pressed="true" aria-controls="findings">הממצאים</button>
+    <button type="button" data-panel="gallery" aria-pressed="false" aria-controls="gallery">סבבים וצילומים</button>
+    <button type="button" data-panel="weights" aria-pressed="false" aria-controls="weights">משקל וביצועים</button>
+    <button type="button" data-panel="coverage" aria-pressed="false" aria-controls="coverage">כיסוי וציונים</button>
+  </nav>
+  <main id="main" tabindex="-1">
+    <section id="findings" class="panel" aria-labelledby="findings-title">
+      <div class="section-heading"><div><p class="eyebrow">מה דורש טיפול</p><h2 id="findings-title">הממצאים המדורגים</h2></div><p class="subtle">P1 דחוף · P2 לתיקון · P3 הקשחה ואיכות</p></div>
+      <div class="stats" id="stats"></div>
+      <div class="filters">
+        <label>חיפוש בממצאים<input type="search" id="search" placeholder="למשל: גיבוי, CSP, מקלדת"></label>
+        <label>אפליקציה<select id="app-filter"><option value="">כל האפליקציות</option><option value="bakasun">באקה סאן</option><option value="workout">האימון</option><option value="island">האי</option><option value="north">החנות</option></select></label>
+        <label>עדיפות<select id="priority-filter"><option value="">כל העדיפויות</option><option value="1">P1 — דחוף</option><option value="2">P2 — לתיקון</option><option value="3">P3 — הקשחה ואיכות</option></select></label>
+        <label>תחום<select id="area-filter"><option value="">כל התחומים</option></select></label>
+      </div>
+      <p id="filter-count" class="subtle" role="status" aria-live="polite"></p>
+      <div id="finding-list" class="finding-list"></div>
+      <p id="empty" hidden>לא נמצאו ממצאים שמתאימים לסינון. אפשר לנקות את שדה החיפוש או לבחור את כל האפליקציות.</p>
+    </section>
+    <section id="gallery" class="panel" hidden aria-labelledby="gallery-title">
+      <div class="section-heading"><div><p class="eyebrow">ראיות חזותיות</p><h2 id="gallery-title">סבבים, השוואה וביקורת עצמית</h2></div></div>
+      <p class="notice">אין רפרנס חיצוני שסופק. נקודת הייחוס היא main ורשימת הבדיקה. במסכי HTML רחוק = zoom לצילום; באי רחוק = overview כשנקודת הבדיקה זמינה. הצילומים אינם אישור נגישות או 30fps.</p>
+      <div class="filters"><label>סבב<select id="iteration-filter"></select></label><label>אפליקציה<select id="gallery-app"><option value="">כולן</option><option value="bakasun">באקה סאן</option><option value="workout">האימון</option><option value="island">האי</option><option value="north">החנות</option><option value="review">דף הביקורת</option></select></label><label>תנוחה<select id="orientation"><option value="">שתי התנוחות</option><option value="390x844">390×844 · לאורך</option><option value="844x390">844×390 · לרוחב</option></select></label></div>
+      <p id="iteration-note" class="subtle"></p>
+      <div id="gallery-grid" class="gallery-grid"></div>
+    </section>
+    <section id="weights" class="panel" hidden aria-labelledby="weights-title">
+      <div class="section-heading"><div><p class="eyebrow">העלות של מה שטוענים</p><h2 id="weights-title">משקל וביצועים</h2></div></div>
+      <p class="notice">MB = מיליון בתים. משולשי GLB הם meshes ייחודיים; instances ומעברי רינדור נמדדים בנפרד. מספר תמונות אינו מספר אטלסי UV. LCP ו־FPS הם מדידות מעבדה בענן משותף, לא תוצאות מטלפון פיזי.</p>
+      <h3>טעינה קרה בפרופיל רשת ומעבד מואטים</h3><div id="startup-table" class="table-wrap" role="region" aria-label="מדידות טעינה" tabindex="0"></div>
+      <p class="subtle">CPU ×4, השהיה 150ms, הורדה 1.6Mbps, HTTP/1 מקומי ללא דחיסה ובלי webfonts חיצוניים. באי מחכים גם לעיר ולדמות מוכנות.</p>
+      <h3>בדיקות משחקים בשתי תנוחות</h3><div id="game-table" class="table-wrap" role="region" aria-label="מדידות משחקים בענן" tabindex="0"></div>
+      <h3>דרישות הפלטפורמה מול המימוש הקיים</h3><div id="platform-table" class="table-wrap" role="region" aria-label="בדיקת דרישות הפלטפורמה" tabindex="0"></div>
+      <p><a href="TEXTURES.md">משקלי תמונות וטקסטורות ואריזת אטלסים</a> · <a href="WEIGHTS.md">טבלת כל קובצי GLB</a> · <a href="FILE-WEIGHTS.md">משקלי קובצי הביקורת החדשים</a></p>
+      <h3>קובצי GLB במאגר</h3><p class="subtle">כולל נכסי runtime, חלופות וחומרי preview. חריגה בקובץ preview אינה אומרת שהקובץ נטען בפתיחה.</p>
+      <label class="asset-search">סינון נתיב קובץ<input type="search" id="asset-search" placeholder="למשל: skier3 או lod-v4"></label>
+      <p id="asset-count" class="subtle" role="status"></p><div id="asset-table" class="table-wrap asset-table" role="region" aria-label="משקלי GLB" tabindex="0"></div>
+      <div id="distribution" class="notice"></div>
+    </section>
+    <section id="coverage" class="panel" hidden aria-labelledby="coverage-title">
+      <div class="section-heading"><div><p class="eyebrow">מה נבדק ומה עדיין חסר</p><h2 id="coverage-title">כיסוי, מגבלות וציון עצמי</h2></div></div>
+      <div id="coverage-summary" class="notice"></div>
+      <div id="coverage-table" class="table-wrap" role="region" aria-label="ציוני הביקורת" tabindex="0"></div>
+      <h3>תנאי הבדיקה</h3><ul id="conditions"></ul>
+      <p class="notice">הציונים מעריכים את איכות הביקורת והראיות. המוצרים עצמם אינם מאושרים לפרסום או לעמידה ביעדים בגלל הציונים. ממצאים פתוחים נותרו פתוחים; קוד המוצר לא שונה.</p>
+    </section>
+  </main>
+  <footer class="footer">נבנה לבדיקה מקומית. אין תקשורת רשת, נתוני לקוחות או פעולת תשלום בדף זה. <a href="SESSION.md">רישום הסשן</a></footer>
+  <dialog id="image-dialog" aria-labelledby="image-title"><div class="image-header"><h2 id="image-title">צילום בדיקה</h2><button type="button" id="close-image">סגירה</button></div><img id="large-image" alt=""><p id="image-caption"></p></dialog>
+  <div class="sr-only" id="copy-status" role="status" aria-live="polite"></div>
+  <noscript><p class="notice">לתצוגה האינטראקטיבית נדרש JavaScript מקומי. הדוח המלא זמין ב־REPORT.md.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "started": "2026-11-04T20:41:43.502260+00:00",
+  "conditions": "no real order sent; all external requests aborted; synthetic form values are not exported",
+  "cases": [
+    {
+      "name": "failed-order",
+      "result": {
+        "cartCount": "0",
+        "savedOrder": false,
+        "sessionOrderAvailable": true,
+        "checkoutRecoveryLink": false,
+        "manualSendSuggested": true,
+        "afterReloadClaimsReceived": false,
+        "afterReloadCartCount": "0"
+      },
+      "blockedRequestTypes": [
+        {
+          "host": "fonts.googleapis.com",
+          "type": "stylesheet"
+        },
+        {
+          "host": "ckfezrtrmfyqepozdzzp.supabase.co",
+          "type": "fetch"
+        },
+        {
+          "host": "fonts.googleapis.com",
+          "type": "stylesheet"
+        }
+      ]
+    },
+    {
+      "name": "failed-order-and-session-denied",
+      "result": {
+        "cartCount": "0",
+        "savedOrder": null,
+        "sessionOrderAvailable": false,
+        "checkoutRecoveryLink": false,
+        "manualSendSuggested": true,
+        "afterReloadClaimsReceived": true,
+        "afterReloadCartCount": "0"
+      },
+      "blockedRequestTypes": [
+        {
+          "host": "fonts.googleapis.com",
+          "type": "stylesheet"
+        },
+        {
+          "host": "ckfezrtrmfyqepozdzzp.supabase.co",
+          "type": "fetch"
+        },
+        {
+          "host": "fonts.googleapis.com",
+          "type": "stylesheet"
+        }
+      ]
+    }
+  ],
+  "finished": "2026-11-04T20:42:08.964609+00:00"
+}

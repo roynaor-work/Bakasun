@@ -1,0 +1,15 @@
+{
+  "started": "2026-11-04T20:56:42.852600+00:00",
+  "conditions": "synthetic same-origin worker; real island HTML policy; response headers varied deliberately; not a remote exploit or a statement about live hosting",
+  "cases": [
+    {
+      "workerResponseHasPolicy": false,
+      "evalRan": true
+    },
+    {
+      "workerResponseHasPolicy": true,
+      "evalRan": false
+    }
+  ],
+  "finished": "2026-11-04T20:56:47.966131+00:00"
+}

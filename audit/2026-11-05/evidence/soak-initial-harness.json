@@ -1,0 +1,596 @@
+{
+  "started": "2026-11-04T20:23:23.224626+00:00",
+  "requestedSeconds": 7200,
+  "segmentSeconds": 600,
+  "externalNetwork": "blocked",
+  "samples": [
+    {
+      "at": "2026-11-04T20:23:25.176222+00:00",
+      "elapsedSeconds": 1.95,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 0,
+      "metrics": {
+        "JSHeapUsedSize": 2780720,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 218,
+        "Documents": 1,
+        "JSEventListeners": 25,
+        "TaskDuration": 0.335195,
+        "LayoutCount": 0,
+        "RecalcStyleCount": 0
+      },
+      "dom": {
+        "elements": 129,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:23:35.792224+00:00",
+      "elapsedSeconds": 12.57,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 1,
+      "metrics": {
+        "JSHeapUsedSize": 2850740,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 205,
+        "Documents": 1,
+        "JSEventListeners": 27,
+        "TaskDuration": 0.358573,
+        "LayoutCount": 2,
+        "RecalcStyleCount": 3
+      },
+      "dom": {
+        "elements": 112,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:23:46.325124+00:00",
+      "elapsedSeconds": 23.1,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 2,
+      "metrics": {
+        "JSHeapUsedSize": 2876680,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 213,
+        "Documents": 1,
+        "JSEventListeners": 28,
+        "TaskDuration": 0.382396,
+        "LayoutCount": 4,
+        "RecalcStyleCount": 7
+      },
+      "dom": {
+        "elements": 113,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:23:56.853819+00:00",
+      "elapsedSeconds": 33.63,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 3,
+      "metrics": {
+        "JSHeapUsedSize": 2920364,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 636,
+        "Documents": 1,
+        "JSEventListeners": 136,
+        "TaskDuration": 0.432868,
+        "LayoutCount": 6,
+        "RecalcStyleCount": 11
+      },
+      "dom": {
+        "elements": 315,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:24:07.382049+00:00",
+      "elapsedSeconds": 44.16,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 4,
+      "metrics": {
+        "JSHeapUsedSize": 3145844,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 199,
+        "Documents": 1,
+        "JSEventListeners": 26,
+        "TaskDuration": 0.466556,
+        "LayoutCount": 8,
+        "RecalcStyleCount": 18
+      },
+      "dom": {
+        "elements": 109,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:24:17.913900+00:00",
+      "elapsedSeconds": 54.69,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 5,
+      "metrics": {
+        "JSHeapUsedSize": 2973616,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 230,
+        "Documents": 1,
+        "JSEventListeners": 28,
+        "TaskDuration": 0.502388,
+        "LayoutCount": 10,
+        "RecalcStyleCount": 22
+      },
+      "dom": {
+        "elements": 129,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:24:28.442158+00:00",
+      "elapsedSeconds": 65.22,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 6,
+      "metrics": {
+        "JSHeapUsedSize": 2974152,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 217,
+        "Documents": 1,
+        "JSEventListeners": 30,
+        "TaskDuration": 0.528374,
+        "LayoutCount": 12,
+        "RecalcStyleCount": 26
+      },
+      "dom": {
+        "elements": 112,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:24:38.985957+00:00",
+      "elapsedSeconds": 75.76,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 7,
+      "metrics": {
+        "JSHeapUsedSize": 2974556,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 225,
+        "Documents": 1,
+        "JSEventListeners": 31,
+        "TaskDuration": 0.550718,
+        "LayoutCount": 14,
+        "RecalcStyleCount": 30
+      },
+      "dom": {
+        "elements": 113,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:24:49.514971+00:00",
+      "elapsedSeconds": 86.29,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 8,
+      "metrics": {
+        "JSHeapUsedSize": 2999092,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 648,
+        "Documents": 1,
+        "JSEventListeners": 139,
+        "TaskDuration": 0.575954,
+        "LayoutCount": 16,
+        "RecalcStyleCount": 34
+      },
+      "dom": {
+        "elements": 315,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:00.047636+00:00",
+      "elapsedSeconds": 96.82,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 9,
+      "metrics": {
+        "JSHeapUsedSize": 3182312,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 211,
+        "Documents": 1,
+        "JSEventListeners": 29,
+        "TaskDuration": 0.605461,
+        "LayoutCount": 18,
+        "RecalcStyleCount": 41
+      },
+      "dom": {
+        "elements": 109,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:10.574190+00:00",
+      "elapsedSeconds": 107.35,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 10,
+      "metrics": {
+        "JSHeapUsedSize": 3003044,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 242,
+        "Documents": 1,
+        "JSEventListeners": 31,
+        "TaskDuration": 0.643974,
+        "LayoutCount": 20,
+        "RecalcStyleCount": 45
+      },
+      "dom": {
+        "elements": 129,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:21.121939+00:00",
+      "elapsedSeconds": 117.9,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 11,
+      "metrics": {
+        "JSHeapUsedSize": 3004472,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 229,
+        "Documents": 1,
+        "JSEventListeners": 33,
+        "TaskDuration": 0.699105,
+        "LayoutCount": 22,
+        "RecalcStyleCount": 49
+      },
+      "dom": {
+        "elements": 112,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:31.702802+00:00",
+      "elapsedSeconds": 128.48,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 12,
+      "metrics": {
+        "JSHeapUsedSize": 3004704,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 237,
+        "Documents": 1,
+        "JSEventListeners": 34,
+        "TaskDuration": 0.725147,
+        "LayoutCount": 24,
+        "RecalcStyleCount": 53
+      },
+      "dom": {
+        "elements": 113,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:42.249575+00:00",
+      "elapsedSeconds": 139.02,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 13,
+      "metrics": {
+        "JSHeapUsedSize": 3012444,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 660,
+        "Documents": 1,
+        "JSEventListeners": 142,
+        "TaskDuration": 0.754668,
+        "LayoutCount": 26,
+        "RecalcStyleCount": 57
+      },
+      "dom": {
+        "elements": 315,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:25:52.783973+00:00",
+      "elapsedSeconds": 149.56,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 14,
+      "metrics": {
+        "JSHeapUsedSize": 3186148,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 223,
+        "Documents": 1,
+        "JSEventListeners": 32,
+        "TaskDuration": 0.810525,
+        "LayoutCount": 28,
+        "RecalcStyleCount": 64
+      },
+      "dom": {
+        "elements": 109,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:03.363676+00:00",
+      "elapsedSeconds": 160.14,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 15,
+      "metrics": {
+        "JSHeapUsedSize": 3012992,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 254,
+        "Documents": 1,
+        "JSEventListeners": 34,
+        "TaskDuration": 0.876659,
+        "LayoutCount": 30,
+        "RecalcStyleCount": 68
+      },
+      "dom": {
+        "elements": 129,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:13.926854+00:00",
+      "elapsedSeconds": 170.7,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 16,
+      "metrics": {
+        "JSHeapUsedSize": 3013296,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 241,
+        "Documents": 1,
+        "JSEventListeners": 36,
+        "TaskDuration": 0.907036,
+        "LayoutCount": 32,
+        "RecalcStyleCount": 72
+      },
+      "dom": {
+        "elements": 112,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:24.478555+00:00",
+      "elapsedSeconds": 181.25,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 17,
+      "metrics": {
+        "JSHeapUsedSize": 3013600,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 249,
+        "Documents": 1,
+        "JSEventListeners": 37,
+        "TaskDuration": 0.954873,
+        "LayoutCount": 34,
+        "RecalcStyleCount": 76
+      },
+      "dom": {
+        "elements": 113,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:35.038561+00:00",
+      "elapsedSeconds": 191.81,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 18,
+      "metrics": {
+        "JSHeapUsedSize": 3021736,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 672,
+        "Documents": 1,
+        "JSEventListeners": 145,
+        "TaskDuration": 0.999078,
+        "LayoutCount": 36,
+        "RecalcStyleCount": 80
+      },
+      "dom": {
+        "elements": 315,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:45.603528+00:00",
+      "elapsedSeconds": 202.38,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 19,
+      "metrics": {
+        "JSHeapUsedSize": 3199480,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 235,
+        "Documents": 1,
+        "JSEventListeners": 35,
+        "TaskDuration": 1.029397,
+        "LayoutCount": 38,
+        "RecalcStyleCount": 87
+      },
+      "dom": {
+        "elements": 109,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:26:56.132904+00:00",
+      "elapsedSeconds": 212.91,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 20,
+      "metrics": {
+        "JSHeapUsedSize": 3020632,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 266,
+        "Documents": 1,
+        "JSEventListeners": 37,
+        "TaskDuration": 1.0615,
+        "LayoutCount": 40,
+        "RecalcStyleCount": 91
+      },
+      "dom": {
+        "elements": 129,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:27:06.670382+00:00",
+      "elapsedSeconds": 223.45,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 21,
+      "metrics": {
+        "JSHeapUsedSize": 3020852,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 253,
+        "Documents": 1,
+        "JSEventListeners": 39,
+        "TaskDuration": 1.084734,
+        "LayoutCount": 42,
+        "RecalcStyleCount": 95
+      },
+      "dom": {
+        "elements": 112,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    },
+    {
+      "at": "2026-11-04T20:27:17.206573+00:00",
+      "elapsedSeconds": 233.98,
+      "segment": 0,
+      "app": "bakasun",
+      "step": 22,
+      "metrics": {
+        "JSHeapUsedSize": 3021168,
+        "JSHeapTotalSize": 3670016,
+        "Nodes": 261,
+        "Documents": 1,
+        "JSEventListeners": 40,
+        "TaskDuration": 1.127614,
+        "LayoutCount": 44,
+        "RecalcStyleCount": 99
+      },
+      "dom": {
+        "elements": 113,
+        "canvas": 0,
+        "bodyEmpty": false,
+        "storedKeys": 2
+      },
+      "newErrors": [],
+      "externalBlockedCount": 1
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "app": "bakasun",
+      "started": "2026-11-04T20:23:25.176209+00:00",
+      "size": [
+        390,
+        844
+      ]
+    }
+  ],
+  "finished": null,
+  "chromium": "151.0.7922.173"
+}

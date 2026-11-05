@@ -1,0 +1,1631 @@
+{
+  "started": "2026-11-04T21:48:15.672Z",
+  "foregroundIntervention": false,
+  "closeSaverBeforeAuto": false,
+  "conditions": "Original test and local Chromium adapter. Every ten seconds record flags, request paths and readiness; no page content, saves, credentials or contact values. Optional interventions are explicitly recorded and do not count as passing the original setup.",
+  "pages": [
+    {
+      "index": 0,
+      "errors": [],
+      "failed": [],
+      "samples": [
+        {
+          "at": 1793828906652,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 69,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 331,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828908034,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 70,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 341,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793828911053,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 72,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 341,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793828966725,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 172,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793828976725,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 185,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829006754,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 230,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829016751,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 239,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829056754,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 311,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 343,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829087615,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 340,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 344,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829096906,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 342,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 344,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829106907,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 345,
+          "island": false,
+          "offline": "save-data",
+          "canvasCount": 3,
+          "resources": 344,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 599,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 549.2999999998137,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 549,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 548.7000000001863,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 548.5999999996275,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 581.2000000001863,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 581.7000000001863,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 580.0999999996275,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 566,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 568,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        }
+      ],
+      "timeouts": []
+    },
+    {
+      "index": 1,
+      "errors": [],
+      "failed": [],
+      "samples": [
+        {
+          "at": 1793828960707,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 13,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 330,
+          "avatarResources": [],
+          "loadError": false
+        },
+        {
+          "at": 1793828968561,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 16,
+          "island": true,
+          "avatarLoaded": false,
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829004294,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 21,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829007788,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 22,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 3,
+          "resources": 342,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829048824,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 29,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 2,
+          "resources": 343,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829075573,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 32,
+          "island": true,
+          "avatarLoaded": true,
+          "canvasCount": 2,
+          "resources": 343,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829087800,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 37,
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "downloading",
+          "canvasCount": 2,
+          "resources": 710,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            },
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 461,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 518.3999999994412,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 131.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 130.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 183.29999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 48.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 90.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 67.20000000018626,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 191.30000000074506,
+              "bytes": 0
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829096909,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 39,
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "downloading",
+          "canvasCount": 2,
+          "resources": 829,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            },
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 461,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 518.3999999994412,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 131.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 130.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 183.29999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 48.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 90.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 67.20000000018626,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 191.30000000074506,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/characters2/soccer-player.glb",
+              "duration": 26.700000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/characters2/goalkeeper.glb",
+              "duration": 46.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models2/soccer-stadium.glb",
+              "duration": 38.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/soccer-goal.glb",
+              "duration": 37.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/soccer-ball.glb",
+              "duration": 27.5,
+              "bytes": 0
+            }
+          ],
+          "loadError": false
+        },
+        {
+          "at": 1793829106918,
+          "visibility": "visible",
+          "ready": "complete",
+          "rafFrames": 42,
+          "island": true,
+          "avatarLoaded": true,
+          "offline": "downloading",
+          "canvasCount": 2,
+          "resources": 1012,
+          "avatarResources": [
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 15699,
+              "bytes": 299472
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 15673.099999999627,
+              "bytes": 331436
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 15681.700000000186,
+              "bytes": 329004
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 15683.099999999627,
+              "bytes": 296440
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 15679.599999999627,
+              "bytes": 290768
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 15680.5,
+              "bytes": 265652
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 15687.400000000373,
+              "bytes": 1218976
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 15685.799999999814,
+              "bytes": 552880
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 15678.399999999441,
+              "bytes": 327964
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 15694.5,
+              "bytes": 1473668
+            },
+            {
+              "path": "/workout/island/assets/models/palm-tree-512.glb",
+              "duration": 461,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/house-a-512.glb",
+              "duration": 518.3999999994412,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/apartment-block-512.glb",
+              "duration": 131.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/shop-corner-512.glb",
+              "duration": 130.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/fire-station-512.glb",
+              "duration": 183.29999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/hospital-512.glb",
+              "duration": 48.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-man-rigged-512.glb",
+              "duration": 90.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/adult-woman-rigged-512.glb",
+              "duration": 67.20000000018626,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/car-a-512.glb",
+              "duration": 191.30000000074506,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/characters2/soccer-player.glb",
+              "duration": 26.700000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/characters2/goalkeeper.glb",
+              "duration": 46.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models2/soccer-stadium.glb",
+              "duration": 38.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/soccer-goal.glb",
+              "duration": 37.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/soccer-ball.glb",
+              "duration": 27.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/athlete/athlete.glb",
+              "duration": 66.20000000018626,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/kid-full.glb",
+              "duration": 107,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/soccer-v5/teal-quiff.glb",
+              "duration": 22.799999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/soccer-v5/teal-curls.glb",
+              "duration": 18,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/soccer-v5/teal-knot.glb",
+              "duration": 18.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/soccer-v5/goalkeeper.glb",
+              "duration": 17.399999999441206,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/assets/models/hoops-anim.glb",
+              "duration": 35.10000000055879,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops-v5/models/arena.glb",
+              "duration": 1935.2000000001863,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops-v5/models/ball.glb",
+              "duration": 137.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops-v5/models/court.glb",
+              "duration": 146.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops-v5/models/crowd.glb",
+              "duration": 65.79999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops-v5/models/hoops.glb",
+              "duration": 35.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod/hoops-big-lod.glb",
+              "duration": 21.600000000558794,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod/hoops-forward-lod.glb",
+              "duration": 95.29999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod/hoops-guard-lod.glb",
+              "duration": 94.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod/hoops-player-v2-lod.glb",
+              "duration": 106.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod/hoops-wing-lod.glb",
+              "duration": 52.700000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+              "duration": 62.80000000074506,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+              "duration": 127.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+              "duration": 164.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+              "duration": 88.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-c-lod.glb",
+              "duration": 33,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+              "duration": 66.30000000074506,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/basketball-arena.glb",
+              "duration": 59.60000000055879,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/basketball-hoop.glb",
+              "duration": 27.100000000558794,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models2/basketball-arena.glb",
+              "duration": 35.30000000074506,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-track/models/flag-rope.glb",
+              "duration": 35.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-track/models/kicker.glb",
+              "duration": 35.200000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/characters/skier.glb",
+              "duration": 49.200000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/fence.glb",
+              "duration": 20.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/fir-a.glb",
+              "duration": 38.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/fir-b.glb",
+              "duration": 50.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/fir-c.glb",
+              "duration": 43.40000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/rock.glb",
+              "duration": 41,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/ski-slope.glb",
+              "duration": 108.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/models/slalom-gate.glb",
+              "duration": 116.29999999981374,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/rock-small.glb",
+              "duration": 29.399999999441206,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/rock-large.glb",
+              "duration": 32.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/snow-sign.glb",
+              "duration": 20.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/mogul.glb",
+              "duration": 37.700000000186265,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/ice-wall.glb",
+              "duration": 32.799999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/start-gate.glb",
+              "duration": 41.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/finish-gate.glb",
+              "duration": 36.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-world/models/snow-powder.glb",
+              "duration": 29.299999999813735,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/skier3/skier.glb",
+              "duration": 47,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/safety-fence-sunset.glb",
+              "duration": 17.5,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/safety-fence-fog.glb",
+              "duration": 16.399999999441206,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/safety-fence-night-floodlit.glb",
+              "duration": 24.699999999254942,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/route-marker-sunset.glb",
+              "duration": 29.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/route-marker-fog.glb",
+              "duration": 32.90000000037253,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/route-marker-night-floodlit.glb",
+              "duration": 46.09999999962747,
+              "bytes": 0
+            },
+            {
+              "path": "/workout/island/design/alpine-v5/models/floodlight-tower.glb",
+              "duration": 28.200000000186265,
+              "bytes": 0
+            }
+          ],
+          "loadError": false
+        }
+      ],
+      "timeouts": []
+    }
+  ],
+  "finished": "2026-11-04T21:51:52.048Z"
+}
