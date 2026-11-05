@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "samplingHz": 240,
+  "clipDuration": 1,
+  "referenceDistanceMeters": 2,
+  "rows": [
+    {
+      "scale": 0.15,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.335559509131367e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    },
+    {
+      "scale": 0.3,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.443059973708341e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    },
+    {
+      "scale": 0.5,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.619448428525918e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    },
+    {
+      "scale": 0.75,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 5.340694943204953e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    },
+    {
+      "scale": 1,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.718447854656915e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    },
+    {
+      "scale": 1.2,
+      "contacts": 273,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 6.581349743728024e-16,
+      "minBootCornerMeters": -4.992653561824989e-7,
+      "pass": true
+    }
+  ],
+  "limits": "Canonical bones and approximate boot corners only; whole-mesh displayed floor remains separate."
+}

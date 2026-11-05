@@ -1,0 +1,20 @@
+--- source/audit-transition-matrix.cjs
++++ source/audit-transition-matrix.cjs
+@@ -219,6 +219,8 @@
+   saveJournal();
+   fs.mkdirSync(path.join(outputDirectory, "transitions"), { recursive: true });
+   const results = new Array(jobs.length);
++  // Start the denser job early; logical job and receipt order stays unchanged.
++  const launchIndices = jobs.map((_, index) => index).sort((a, b) => jobs[b].hz - jobs[a].hz || a - b);
+   let nextJobIndex = 0;
+   const signals = new Map([['SIGINT', 130], ['SIGTERM', 143]]);
+   for (const [signal, exitCode] of signals) process.on(signal, () => { process.exitCode = exitCode; void abortOwnedWorkers(new Error('Received ' + signal)); });
+@@ -239,7 +241,7 @@
+     try {
+     while (nextJobIndex < jobs.length) {
+       if (abortReason) throw abortReason;
+-      const index = nextJobIndex++, job = jobs[index], destination = path.join(outputDirectory, job.file);
++      const index = launchIndices[nextJobIndex++], job = jobs[index], destination = path.join(outputDirectory, job.file);
+       const changedBeforeJob = unchangedInputNames(inputs);
+       if (changedBeforeJob.length) throw new Error('Frozen inputs changed before job: ' + changedBeforeJob.join(', '));
+       const completed = journal.completed.find(row => row.file === job.file);

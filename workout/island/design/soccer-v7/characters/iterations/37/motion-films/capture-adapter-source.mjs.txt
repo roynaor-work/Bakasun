@@ -1,0 +1,107 @@
+#!/usr/bin/env node
+/** Deterministic rendered motion review. Encoded30Hz is not measured device FPS. */
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {spawn} from 'node:child_process';
+import {once} from 'node:events';
+import {openPreview,root} from '/workspace/Bakasun/workout/island/design/soccer-v7/characters/source/browser-session.mjs';
+
+const argument=(name,fallback)=>process.argv.find(x=>x.startsWith('--'+name+'='))?.slice(name.length+3)||fallback;
+const sequence=argument('sequence','motor'),size=argument('size','390x844'),round=argument('round','18');
+const semanticOnly=process.argv.includes('--semantic-only');
+if(!/^\d{2}$/.test(round)||!['390x844','844x390'].includes(size))throw Error('Expected a two-digit round and a requested phone size');
+const plans={
+  motor:{character:'player-01',seed:'idle',phase:.15,segments:[['run_1',.8],['run_5',1.4],['sprint',1.7],['decelerate',3.2],['run_2',1.5]]},
+  recovery:{character:'player-01',seed:'fall',phase:.7,segments:[['get_up',3.7],['run_2',2.8],['long_pass',3.2]]},
+  keeper:{character:'goalkeeper',seed:'keeper_dive_right',phase:.83,segments:[['keeper_catch',.8],['get_up',3.7],['keeper_throw',2.0]]},
+  pass:{character:'player-01',seed:'idle',phase:.2,segments:[['long_pass',2.4],['run_2',2.8]]},
+};
+const plan=plans[sequence];if(!plan)throw Error('Unknown motion review sequence');
+const [width,height]=size.split('x').map(Number),out=path.join(root,'iterations',round,semanticOnly?'verification':'motion-films');await fs.mkdir(out,{recursive:true});
+const stem=sequence+'-'+size,digest=b=>crypto.createHash('sha256').update(b).digest('hex');
+const manifest=JSON.parse(await fs.readFile(path.join(root,'asset-manifest.json'),'utf8'));
+const motion=JSON.parse(await fs.readFile(path.join(root,'animations.json'),'utf8')),clips=new Map(motion.clips.map(c=>[c.id,c]));
+const identity=manifest.characters.find(c=>c.id===plan.character),selectedModel=(identity.kits||[identity])[0].lod0;
+const frozenFiles=['vendor/viewer-runtime.js','vendor/data.js','asset-manifest.json','animations.json',selectedModel,'offline/'+path.basename(selectedModel,'.glb')+'.js'];
+const frozen=Object.fromEntries(await Promise.all(frozenFiles.map(async file=>[file,digest(await fs.readFile(path.join(root,file)))])));
+const startedAt=new Date().toISOString(),records=[],timeline=[],segmentChecks=[],s=await openPreview({width,height,dpr:1.5});
+const captureAdapter={method:'CDP Page.captureScreenshot',fromSurface:true,captureBeyondViewport:false,clipScale:1,expectedPngDimensions:[width,height],canonicalUtilitySha256:digest(await fs.readFile(path.join(root,'source/capture-motion-film.mjs'))),adapterSha256:digest(await fs.readFile(new URL(import.meta.url))),sourceArtifact:'capture-adapter-source.mjs.txt',semanticCodeUnchanged:true};const screenshotSession=semanticOnly?null:await s.page.context().newCDPSession(s.page);
+const video=path.join(out,stem+'.webm');
+const encoder=semanticOnly?null:spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate','30','-vcodec','png','-i','pipe:0','-an','-c:v','libvpx-vp9','-deadline','realtime','-cpu-used','5','-crf','32','-b:v','0','-pix_fmt','yuv420p',video],{stdio:['pipe','ignore','pipe']});
+const encoderDone=encoder?new Promise((resolve,reject)=>{encoder.once('error',reject);encoder.once('close',code=>code===0?resolve():reject(Error('Review encoder exit '+code)));}):Promise.resolve();
+encoderDone.catch(()=>{});
+let encoderError='',frame=0;
+if(encoder){encoder.stderr.on('data',b=>{encoderError+=b;});encoder.stdin.on('error',e=>{encoderError+=String(e);});}
+const epsilon=1e-6;
+const findRequest=(observation,id)=>observation.request?.id===id?observation.request:observation.requests.find(request=>request.id===id)||null;
+const compactRequest=request=>request&&Object.fromEntries(['id','clipID','scope','status','requestedAt','activatedAt','firstProgressAt','completedAt','entrySeconds','sampleSeconds','progress','motorRequestID','motorClockOffset','activationDeadline'].filter(key=>request[key]!=null).map(key=>[key,request[key]]));
+async function observe(includeFull=false){
+  return s.page.evaluate(includeFull=>{
+    const full=soccerV7.state(),recovery=full.recovery||{},model=full.models[0]||{},motor=recovery.physicalMotor||model.locomotion;
+    return{full:includeFull?full:null,summary:{activeBaseClip:recovery.activeBaseClip||model.activeBaseClip,baseSeconds:recovery.baseSeconds??model.activeBaseSeconds,phase:recovery.phase,request:recovery.request||null,requests:recovery.requests||[],contributors:recovery.contributors||[],overlayClip:recovery.overlayClip,overlaySeconds:recovery.overlaySeconds,presentation:recovery.presentation||null,physicalMotor:motor?{clock:motor.clock,actualSpeed:motor.actualSpeed,targetSpeed:motor.targetSpeed,requestID:motor.requestID,requestedClip:motor.requestedClip,unwrappedPhase:motor.unwrappedPhase??motor.phase}:null,physicalMotorTargetClip:model.physicalMotorTargetClip}};
+  },includeFull);
+}
+try{
+  // Finish the last queued callback while paused, then advance only through API steps.
+  await s.page.evaluate(()=>{globalThis.requestAnimationFrame=()=>0;soccerV7.setPlaying(false);});
+  await s.page.waitForTimeout(60);
+  await s.page.evaluate(async p=>{await soccerV7.setCharacter(p.character);await soccerV7.setView('body');await soccerV7.setLOD(0);soccerV7.setClip(p.seed);soccerV7.seek(p.phase);soccerV7.setOrbit(.65,0,1);soccerV7.setPlaying(true);},plan);
+  if(semanticOnly)await s.page.evaluate(()=>{soccerV7.inspect().renderer.render=()=>{};});
+  const expectedTargets=await s.page.evaluate(ids=>Object.fromEntries(ids.map(id=>{const api=soccerV7.inspect(),physicalClip=api.motorClipFor(id);return[id,physicalClip?{physicalClip,speed:api.clipMap.get(physicalClip).speedMps||0}:null];})),plan.segments.map(([id])=>id));
+  for(const [clipID,seconds]of plan.segments){
+    await s.page.evaluate(id=>soccerV7.setClip(id),clipID);
+    const before=(await observe()).summary,requestID=before.request?.id,count=Math.round(seconds*30),startFrame=frame,keyFrames=new Set([0,Math.floor(count/2),count-1]);
+    const samples=[],eventClockWitnesses=[],eventKeys=new Set(),initialClock=new Map(),previousClock=new Map();
+    let firstActivation=null,firstProgress=null,speedWitness=null,liveContributorWitness=null,terminalPoseWitness=null;
+    for(let i=0;i<count;i++,frame++){
+      await s.page.evaluate(()=>soccerV7.step(1/30));
+      const observation=await observe(!semanticOnly&&keyFrames.has(i)),actual=observation.summary,record=findRequest(actual,requestID),simulationSeconds=(frame+1)/30;
+      const summary={frame,simulationSeconds,requestedClip:clipID,requestID,request:compactRequest(record),activeBaseClip:actual.activeBaseClip,baseSeconds:actual.baseSeconds,phase:actual.phase,contributors:actual.contributors,overlayClip:actual.overlayClip,overlaySeconds:actual.overlaySeconds,physicalMotor:actual.physicalMotor};
+      samples.push(summary);timeline.push(summary);
+      if(record?.activatedAt!=null&&!firstActivation)firstActivation={frame,simulationSeconds,record:compactRequest(record),activeBaseClip:actual.activeBaseClip,baseSeconds:actual.baseSeconds};
+      if(record?.firstProgressAt!=null&&!firstProgress)firstProgress={frame,simulationSeconds,record:compactRequest(record),contributors:actual.contributors};
+      const expected=expectedTargets[clipID];
+      if(expected&&actual.physicalMotor&&Math.abs(actual.physicalMotor.actualSpeed-expected.speed)<epsilon&&actual.physicalMotor.requestedClip===expected.physicalClip&&!speedWitness)speedWitness={frame,simulationSeconds,...actual.physicalMotor};
+      for(const contributor of actual.contributors){
+        if(contributor.weight<=epsilon||!Number.isFinite(contributor.sampleSeconds))continue;
+        const key=contributor.clipID+':'+contributor.scope,previous=initialClock.get(key);
+        if(previous==null)initialClock.set(key,contributor.sampleSeconds);
+        if(expected&&!liveContributorWitness&&contributor.scope==='body'&&(expected.speed>0?/^(run_[1-5]|sprint)$/.test(contributor.clipID):contributor.clipID==='idle')&&previous!=null&&Math.abs(contributor.sampleSeconds-previous)>epsilon)liveContributorWitness={frame,simulationSeconds,contributor,previousSampleSeconds:previous};
+        // A speed-blended motor's physical heels are not the native clip's events.
+        if(contributor.clipID!==clipID||expected)continue;
+        const source=clips.get(clipID),sourceDuration=source.duration??source.durationSeconds,previousSourceSeconds=previousClock.get(key)??record?.entrySeconds??contributor.sampleSeconds;
+        if(contributor.scope==='body'&&contributor.sampleSeconds>=sourceDuration-epsilon&&!terminalPoseWitness)terminalPoseWitness={frame,simulationSeconds,contributor};
+        for(const event of source.events||[]){
+          const eventKey=String(event.name||event.type)+':'+event.timeSeconds;
+          if(eventKeys.has(eventKey)||contributor.sampleSeconds<event.timeSeconds-epsilon||previousSourceSeconds>event.timeSeconds+epsilon)continue;
+          eventKeys.add(eventKey);eventClockWitnesses.push({frame,simulationSeconds,clipID,scope:contributor.scope,weight:contributor.weight,eventName:event.name||event.type,eventTimeSeconds:event.timeSeconds,previousSampleSeconds:previousSourceSeconds,actualSampleSeconds:contributor.sampleSeconds,kind:'actualContributingSourceClockCrossing'});
+        }
+        previousClock.set(key,contributor.sampleSeconds);
+      }
+      if(!semanticOnly){
+        const screenshot=await screenshotSession.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false,clip:{x:0,y:0,width,height,scale:1}});const bytes=Buffer.from(screenshot.data,'base64');if(bytes.readUInt32BE(16)!==width||bytes.readUInt32BE(20)!==height)throw Error('CDP screenshot dimensions differ from requested CSS size');if(frame%60===0)console.log(JSON.stringify({capturing:sequence,size,frame,captureMethod:captureAdapter.method,pngDimensions:[bytes.readUInt32BE(16),bytes.readUInt32BE(20)]}));
+        if(encoder.stdin.destroyed)throw Error('Review encoder stopped: '+encoderError);
+        if(!encoder.stdin.write(bytes))await Promise.race([once(encoder.stdin,'drain'),encoderDone.then(()=>{throw Error('Review encoder ended before all frames');})]);
+        if(keyFrames.has(i)){const file=stem+'-'+String(frame).padStart(4,'0')+'.png';await fs.writeFile(path.join(out,file),bytes);records.push({frame,simulationSeconds,requestedClip:clipID,requestID,file,state:observation.full});}
+      }
+    }
+    const final=samples.at(-1),record=final.request,expected=expectedTargets[clipID],catchSegment=sequence==='keeper'&&clipID==='keeper_catch';
+    const checks={requestIdentity:record?.id===requestID&&record?.clipID===clipID,activated:!!firstActivation,realProgress:!!firstProgress};
+    if(catchSegment){checks.activeCatchEvent=eventClockWitnesses.some(event=>event.scope==='arms'&&/catch/.test(event.eventName));checks.catchOverlayDisplayed=final.overlayClip===clipID&&final.overlaySeconds>=(clips.get(clipID).events.find(event=>/catch/.test(event.name))?.timeSeconds??.4)-epsilon;}
+    else if(expected){checks.completedLedger=record?.status==='completed'&&Number.isFinite(record?.completedAt);checks.actualTargetSpeed=!!speedWitness&&Math.abs(final.physicalMotor?.actualSpeed-expected.speed)<epsilon;checks.livePhysicalContributor=!!liveContributorWitness;}
+    else{checks.completedLedger=record?.status==='completed'&&Number.isFinite(record?.completedAt);checks.displayedTerminalClock=!!terminalPoseWitness;checks.terminalProgress=record?.progress>=1-epsilon;}
+    segmentChecks.push({requestedClip:clipID,requestID,expectation:catchSegment?'actualArmOverlayCatchEvent':expected?'physicalMotorFulfillment':'authoredActionTerminal',startFrame,frames:count,simulationStartSeconds:startFrame/30,simulationEndSeconds:frame/30,checks,pass:Object.values(checks).every(Boolean),failedChecks:Object.entries(checks).filter(([,value])=>!value).map(([name])=>name),initialRequest:compactRequest(before.request),finalRequest:record,firstActivation,firstProgress,speedWitness,liveContributorWitness,terminalPoseWitness,eventClockWitnesses,finalActualPose:{activeBaseClip:final.activeBaseClip,baseSeconds:final.baseSeconds,contributors:final.contributors,overlayClip:final.overlayClip,overlaySeconds:final.overlaySeconds,physicalMotor:final.physicalMotor}});
+  }
+  if(encoder){encoder.stdin.end();await encoderDone;}
+  const changed=[];for(const file of frozenFiles)if(digest(await fs.readFile(path.join(root,file)))!==frozen[file])changed.push(file);
+  const loadedHashes=await s.page.evaluate(()=>soccerV7.inspect().data.hashes),models=await s.page.evaluate(()=>soccerV7.state().models.map(model=>({id:model.id,path:model.path})));
+  const browserCapturePass=s.errors.length===0&&s.remoteRequests.length===0&&changed.length===0;
+  const semanticChecks={pass:segmentChecks.every(segment=>segment.pass),segments:segmentChecks};
+  const packageChecks={requestedIdentityAndModelLoaded:models.some(model=>model.id===plan.character&&model.path===selectedModel),motionMatchesSource:loadedHashes.motion===frozen['animations.json'],manifestMatchesSource:loadedHashes.manifest===frozen['asset-manifest.json'],selectedModelMatchesDeclaration:loadedHashes.models?.[selectedModel]===frozen[selectedModel]};
+  const pass=browserCapturePass&&semanticChecks.pass&&Object.values(packageChecks).every(Boolean),bytes=encoder?await fs.readFile(video):null;
+  const report={captureAdapter,kind:semanticOnly?'motion-film-plan-semantic-dry-run':'deterministic-rendered-motion-review',pass,browserCapturePass,semanticChecks,packageChecks,startedAt,finishedAt:new Date().toISOString(),sequence,plan,size:{width,height},deviceScaleFactor:1.5,screenshotScale:'css',simulationRateHz:30,encodedFrameRateHz:semanticOnly?null:30,frames:frame,simulationSeconds:frame/30,automaticRAFDisabledForCapture:true,video:bytes?{file:path.basename(video),bytes:bytes.length,sha256:digest(bytes)}:null,frozenInputs:frozen,changedInputs:changed,models,loadedHashes,records,timeline,errors:s.errors,remoteRequests:s.remoteRequests,encoderError,limits:'Frames advance deterministically by1/30s. Event witnesses are crossings of the actual active contributor clock, not a separate ball-physics proof. Neither encoded30Hz nor this dry run measures phone/browser/GPU FPS. Independent full-vertex/contact/phase audits remain separate.'};
+  const reportFile=path.join(out,stem+(semanticOnly?'-film-semantic-dry-run':'')+'.json');await fs.writeFile(reportFile,JSON.stringify(report,null,2)+'\n');
+  console.log(JSON.stringify({pass,browserCapturePass,semanticPass:semanticChecks.pass,sequence,size,frames:frame,reportFile,video:bytes?video:null,bytes:bytes?.length||0,failures:segmentChecks.filter(segment=>!segment.pass).map(segment=>({clip:segment.requestedClip,checks:segment.failedChecks,finalRequest:segment.finalRequest}))}));
+  if(!pass)process.exitCode=1;
+}finally{if(encoder){if(!encoder.stdin.destroyed)encoder.stdin.end();if(encoder.exitCode===null)encoder.kill('SIGTERM');await encoderDone.catch(()=>{});}await s.close();}

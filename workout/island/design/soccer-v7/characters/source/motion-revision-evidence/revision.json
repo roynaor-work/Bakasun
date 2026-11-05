@@ -1,0 +1,30 @@
+{
+  "kind": "coherent-authored-motion-source-revision",
+  "priorMotionSha256": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+  "newMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "changedClipIDs": [
+    "kick",
+    "long_pass",
+    "slide_tackle",
+    "fall",
+    "celebrate_victory_leap",
+    "keeper_dive_left",
+    "keeper_dive_right",
+    "keeper_dive_high",
+    "keeper_punt"
+  ],
+  "unchanged22ClipsByteIdentical": true,
+  "fps": 30,
+  "clipCount": 31,
+  "frameCount": 1209,
+  "preservedCanonicalSkeleton": true,
+  "actualPhoneApprovalEvidence": "iterations/21/motion-preflight",
+  "notes": [
+    "Lift-before-horizontal-transfer and return-before-lowering for kick/long pass/punt; supported lift and airborne slide entry; initial fall support and sequential boot release; side-dive push-off and vertical leap feet.",
+    "Protected late dive arm IK now preserves original world axial twist without changing wrist targets, torso or leg channels.",
+    "Raw interpolation still requires the documented contact IK and whole-mesh floor adapter. Native GLB and final floor/transition/role-specific render verification must be regenerated after the final geometry freeze."
+  ],
+  "nativeEmbedPendingAtPublication": true,
+  "native24EmbeddedReport": "../motion-embedded-report.json",
+  "native24ManifestSha256": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c"
+}

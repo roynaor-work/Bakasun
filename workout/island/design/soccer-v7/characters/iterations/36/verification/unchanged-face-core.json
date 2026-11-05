@@ -1,0 +1,26 @@
+{
+  "kind": "actual-recaptured-full-phone-face-comparison",
+  "generatedAt": "2026-11-05T11:29:32.650982+00:00",
+  "pass": true,
+  "scope": "P01 actual round36 core faces versus35, bothphone sizes. Other identities share unchanged non-Cloth/BIN proof, not a claim of new36face screenshots.",
+  "records": [
+    {
+      "size": "390x844",
+      "baseline": "iterations/35/face-390x844.png",
+      "current": "iterations/36/face-390x844.png",
+      "baselineRgbaSha256": "e1695e31e42059ba39abb63779a5ac0f84e76bab8f3fa7dc8f12564f749451e5",
+      "currentRgbaSha256": "e1695e31e42059ba39abb63779a5ac0f84e76bab8f3fa7dc8f12564f749451e5",
+      "maximumChannelDifference": 0,
+      "pixelIdentical": true
+    },
+    {
+      "size": "844x390",
+      "baseline": "iterations/35/face-844x390.png",
+      "current": "iterations/36/face-844x390.png",
+      "baselineRgbaSha256": "c64585633f62c08d757b12f410a74aa6bec1114f2001171b4bd78b2180150f40",
+      "currentRgbaSha256": "c64585633f62c08d757b12f410a74aa6bec1114f2001171b4bd78b2180150f40",
+      "maximumChannelDifference": 0,
+      "pixelIdentical": true
+    }
+  ]
+}

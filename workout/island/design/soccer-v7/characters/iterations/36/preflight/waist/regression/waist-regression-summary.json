@@ -1,0 +1,579 @@
+{
+  "kind": "waist36-independent-exported-regression-summary",
+  "complete": true,
+  "scope": "68 exact controller/movie poses \u00d72actual decoded P01 LODs \u00d7baseline/candidate. TMP diagnostics only; no package/source/model writes.",
+  "primaryReports": [
+    "cloth-raster-frontside-regression.json",
+    "cloth-raster-frontside-local-delta.json",
+    "skin-summary.json",
+    "skin-local-regression-result.json"
+  ],
+  "supersededDiagnostics": [
+    "cloth-raster-regression.json",
+    "cloth-raster-local-delta.json"
+  ],
+  "supersededReason": "Initial Cloth raster included both windings; actual GLB Cloth uses FrontSide, so those conservative backface projection totals/increases are not the rendered regression evidence.",
+  "cloth": {
+    "comparisons": 136,
+    "newOverlapCases": 0,
+    "increasedOverlapCases": 0,
+    "candidateNonzeroCases": 49,
+    "baselinePixelTotal": 58703,
+    "candidatePixelTotal": 22609,
+    "maxBaseline": 3035,
+    "maxCandidate": 2204,
+    "new": [],
+    "increased": [],
+    "candidateNonzero": [
+      {
+        "pose": "motor-65",
+        "lod": 0,
+        "baseline": 355,
+        "candidate": 183,
+        "delta": -172
+      },
+      {
+        "pose": "motor-66",
+        "lod": 0,
+        "baseline": 290,
+        "candidate": 136,
+        "delta": -154
+      },
+      {
+        "pose": "motor-116",
+        "lod": 0,
+        "baseline": 662,
+        "candidate": 326,
+        "delta": -336
+      },
+      {
+        "pose": "motor-117",
+        "lod": 0,
+        "baseline": 584,
+        "candidate": 223,
+        "delta": -361
+      },
+      {
+        "pose": "motor-140",
+        "lod": 0,
+        "baseline": 307,
+        "candidate": 117,
+        "delta": -190
+      },
+      {
+        "pose": "motor-257",
+        "lod": 0,
+        "baseline": 519,
+        "candidate": 34,
+        "delta": -485
+      },
+      {
+        "pose": "run_1-0.8",
+        "lod": 0,
+        "baseline": 1078,
+        "candidate": 128,
+        "delta": -950
+      },
+      {
+        "pose": "run_2-0.8",
+        "lod": 0,
+        "baseline": 1148,
+        "candidate": 434,
+        "delta": -714
+      },
+      {
+        "pose": "run_3-0.2",
+        "lod": 0,
+        "baseline": 623,
+        "candidate": 169,
+        "delta": -454
+      },
+      {
+        "pose": "run_3-0.8",
+        "lod": 0,
+        "baseline": 1142,
+        "candidate": 559,
+        "delta": -583
+      },
+      {
+        "pose": "run_4-0.2",
+        "lod": 0,
+        "baseline": 725,
+        "candidate": 381,
+        "delta": -344
+      },
+      {
+        "pose": "run_4-0.8",
+        "lod": 0,
+        "baseline": 1035,
+        "candidate": 534,
+        "delta": -501
+      },
+      {
+        "pose": "run_5-0.2",
+        "lod": 0,
+        "baseline": 886,
+        "candidate": 678,
+        "delta": -208
+      },
+      {
+        "pose": "run_5-0.8",
+        "lod": 0,
+        "baseline": 948,
+        "candidate": 541,
+        "delta": -407
+      },
+      {
+        "pose": "sprint-0.2",
+        "lod": 0,
+        "baseline": 839,
+        "candidate": 734,
+        "delta": -105
+      },
+      {
+        "pose": "sprint-0.8",
+        "lod": 0,
+        "baseline": 857,
+        "candidate": 501,
+        "delta": -356
+      },
+      {
+        "pose": "decelerate-0.2",
+        "lod": 0,
+        "baseline": 449,
+        "candidate": 83,
+        "delta": -366
+      },
+      {
+        "pose": "kick-0.5",
+        "lod": 0,
+        "baseline": 304,
+        "candidate": 96,
+        "delta": -208
+      },
+      {
+        "pose": "dribble-0.8",
+        "lod": 0,
+        "baseline": 1069,
+        "candidate": 372,
+        "delta": -697
+      },
+      {
+        "pose": "get_up-0.2",
+        "lod": 0,
+        "baseline": 2565,
+        "candidate": 1965,
+        "delta": -600
+      },
+      {
+        "pose": "get_up-0.5",
+        "lod": 0,
+        "baseline": 3035,
+        "candidate": 2204,
+        "delta": -831
+      },
+      {
+        "pose": "slide_tackle-0.5",
+        "lod": 0,
+        "baseline": 299,
+        "candidate": 279,
+        "delta": -20
+      },
+      {
+        "pose": "slide_tackle-0.8",
+        "lod": 0,
+        "baseline": 1307,
+        "candidate": 1087,
+        "delta": -220
+      },
+      {
+        "pose": "keeper_dive_right-0.5",
+        "lod": 0,
+        "baseline": 405,
+        "candidate": 128,
+        "delta": -277
+      },
+      {
+        "pose": "keeper_dive_right-0.8",
+        "lod": 0,
+        "baseline": 244,
+        "candidate": 134,
+        "delta": -110
+      },
+      {
+        "pose": "motor-65",
+        "lod": 1,
+        "baseline": 325,
+        "candidate": 158,
+        "delta": -167
+      },
+      {
+        "pose": "motor-66",
+        "lod": 1,
+        "baseline": 265,
+        "candidate": 114,
+        "delta": -151
+      },
+      {
+        "pose": "motor-116",
+        "lod": 1,
+        "baseline": 627,
+        "candidate": 282,
+        "delta": -345
+      },
+      {
+        "pose": "motor-117",
+        "lod": 1,
+        "baseline": 539,
+        "candidate": 159,
+        "delta": -380
+      },
+      {
+        "pose": "motor-140",
+        "lod": 1,
+        "baseline": 280,
+        "candidate": 95,
+        "delta": -185
+      },
+      {
+        "pose": "run_1-0.8",
+        "lod": 1,
+        "baseline": 962,
+        "candidate": 11,
+        "delta": -951
+      },
+      {
+        "pose": "run_2-0.8",
+        "lod": 1,
+        "baseline": 1041,
+        "candidate": 293,
+        "delta": -748
+      },
+      {
+        "pose": "run_3-0.2",
+        "lod": 1,
+        "baseline": 564,
+        "candidate": 130,
+        "delta": -434
+      },
+      {
+        "pose": "run_3-0.8",
+        "lod": 1,
+        "baseline": 1071,
+        "candidate": 467,
+        "delta": -604
+      },
+      {
+        "pose": "run_4-0.2",
+        "lod": 1,
+        "baseline": 664,
+        "candidate": 333,
+        "delta": -331
+      },
+      {
+        "pose": "run_4-0.8",
+        "lod": 1,
+        "baseline": 983,
+        "candidate": 458,
+        "delta": -525
+      },
+      {
+        "pose": "run_5-0.2",
+        "lod": 1,
+        "baseline": 833,
+        "candidate": 635,
+        "delta": -198
+      },
+      {
+        "pose": "run_5-0.8",
+        "lod": 1,
+        "baseline": 916,
+        "candidate": 492,
+        "delta": -424
+      },
+      {
+        "pose": "sprint-0.2",
+        "lod": 1,
+        "baseline": 792,
+        "candidate": 675,
+        "delta": -117
+      },
+      {
+        "pose": "sprint-0.8",
+        "lod": 1,
+        "baseline": 815,
+        "candidate": 453,
+        "delta": -362
+      },
+      {
+        "pose": "decelerate-0.2",
+        "lod": 1,
+        "baseline": 410,
+        "candidate": 60,
+        "delta": -350
+      },
+      {
+        "pose": "kick-0.5",
+        "lod": 1,
+        "baseline": 285,
+        "candidate": 78,
+        "delta": -207
+      },
+      {
+        "pose": "dribble-0.8",
+        "lod": 1,
+        "baseline": 966,
+        "candidate": 240,
+        "delta": -726
+      },
+      {
+        "pose": "get_up-0.2",
+        "lod": 1,
+        "baseline": 2478,
+        "candidate": 1841,
+        "delta": -637
+      },
+      {
+        "pose": "get_up-0.5",
+        "lod": 1,
+        "baseline": 2930,
+        "candidate": 2100,
+        "delta": -830
+      },
+      {
+        "pose": "slide_tackle-0.5",
+        "lod": 1,
+        "baseline": 297,
+        "candidate": 267,
+        "delta": -30
+      },
+      {
+        "pose": "slide_tackle-0.8",
+        "lod": 1,
+        "baseline": 1299,
+        "candidate": 1050,
+        "delta": -249
+      },
+      {
+        "pose": "keeper_dive_right-0.5",
+        "lod": 1,
+        "baseline": 344,
+        "candidate": 85,
+        "delta": -259
+      },
+      {
+        "pose": "keeper_dive_right-0.8",
+        "lod": 1,
+        "baseline": 218,
+        "candidate": 107,
+        "delta": -111
+      }
+    ]
+  },
+  "pixelLocationChanges": {
+    "comparisons": 136,
+    "casesWithNewLocalPixels": 10,
+    "casesWithNewComponentsAtLeast4px": 5,
+    "newLocalPixelTotal": 170,
+    "clearedPixelTotal": 36264
+  },
+  "selectedLocalChanges": [
+    {
+      "pose": "get_up-0.2",
+      "lod": 0,
+      "baselinePixels": 2565,
+      "candidatePixels": 1965,
+      "newLocalPixels": 22,
+      "clearedPixels": 622,
+      "newComponentsAtLeast4px": [
+        {
+          "pixels": 15,
+          "screenBounds": [
+            267,
+            465,
+            272,
+            471
+          ],
+          "restYRange": [
+            0.7078694105148315,
+            0.7544011473655701
+          ]
+        },
+        {
+          "pixels": 7,
+          "screenBounds": [
+            220,
+            454,
+            223,
+            457
+          ],
+          "restYRange": [
+            0.7137567400932312,
+            0.7342533469200134
+          ]
+        }
+      ]
+    },
+    {
+      "pose": "get_up-0.2",
+      "lod": 1,
+      "baselinePixels": 2478,
+      "candidatePixels": 1841,
+      "newLocalPixels": 17,
+      "clearedPixels": 654,
+      "newComponentsAtLeast4px": [
+        {
+          "pixels": 14,
+          "screenBounds": [
+            269,
+            464,
+            272,
+            470
+          ],
+          "restYRange": [
+            0.6792017221450806,
+            0.7547032237052917
+          ]
+        }
+      ]
+    },
+    {
+      "pose": "get_up-0.5",
+      "lod": 1,
+      "baselinePixels": 2930,
+      "candidatePixels": 2100,
+      "newLocalPixels": 40,
+      "clearedPixels": 870,
+      "newComponentsAtLeast4px": [
+        {
+          "pixels": 39,
+          "screenBounds": [
+            248,
+            427,
+            259,
+            432
+          ],
+          "restYRange": [
+            0.8794220685958862,
+            0.9000054597854614
+          ]
+        }
+      ]
+    },
+    {
+      "pose": "slide_tackle-0.8",
+      "lod": 0,
+      "baselinePixels": 1307,
+      "candidatePixels": 1087,
+      "newLocalPixels": 36,
+      "clearedPixels": 256,
+      "newComponentsAtLeast4px": [
+        {
+          "pixels": 35,
+          "screenBounds": [
+            246,
+            476,
+            251,
+            490
+          ],
+          "restYRange": [
+            0.7111401557922363,
+            0.7645186185836792
+          ]
+        }
+      ]
+    },
+    {
+      "pose": "slide_tackle-0.8",
+      "lod": 1,
+      "baselinePixels": 1299,
+      "candidatePixels": 1050,
+      "newLocalPixels": 43,
+      "clearedPixels": 292,
+      "newComponentsAtLeast4px": [
+        {
+          "pixels": 43,
+          "screenBounds": [
+            245,
+            476,
+            251,
+            490
+          ],
+          "restYRange": [
+            0.6899938583374023,
+            0.7797688245773315
+          ]
+        }
+      ]
+    }
+  ],
+  "skinLocalResult": {
+    "baseline": 0,
+    "candidate": 0,
+    "method": "Delivered upper-leg Skin camera-ray diagnostic, same-leg shorts, FrontSide, source rest separation\u226440mm and camera-depth gap\u226440mm; lower exposed skin and arms excluded."
+  },
+  "geometry": "Decoded baseline/candidate Skin and Cloth positions/UV/indices are bitwise unchanged. Canonical joint names unchanged. Delivered Skin joint/weight arrays unchanged. Shorts weights below restY.70 unchanged.",
+  "verdict": "No pose\u00d7LOD has new or increased total projected shorts-over-shirt pixels with actual FrontSide culling. Some local pixels move within existing folded-pose overlap; five cases have new connected components\u22654pixels, mainly get_up and slide_tackle. No new locally corresponding delivered-Skin-through-shorts witness detected. This supports bounded candidate regression acceptance only after actual paired action-photo review; does not establish universal intersection-free clothing.",
+  "limitations": [
+    "Single P01 identity and fixed baseline camera/poses; no all8 identity proof.",
+    "Far decoded geometry uses identical captured pose/camera as near, not a separate far film.",
+    "Projected shorts-before-shirt pixels can be legitimate folded-leg self-overlap; positive masks are not themselves proof of mesh penetration.",
+    "49candidate pose\u00d7LOD masks remain positive; native action/playback/PBR photos remain necessary.",
+    "No new art grade, FPS or full-motion acceptance inferred."
+  ],
+  "receipts": [
+    {
+      "file": "regression-fixtures.json",
+      "sha256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/regression-fixtures.json",
+      "producerOriginalSHA256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a"
+    },
+    {
+      "file": "decoded-regression.json",
+      "sha256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/decoded-regression.json",
+      "producerOriginalSHA256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.py.txt",
+      "sha256": "65fab3c6d64d2992cfe238daffa882da9a6f828b261c62e26271946dc7d79847",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-regression.py",
+      "producerOriginalSHA256": "65fab3c6d64d2992cfe238daffa882da9a6f828b261c62e26271946dc7d79847"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.json",
+      "sha256": "40db9caa0a7e65571a5e0b4ac90ed42c3195c3c68b66b1d3a4fbbba446460c31",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-regression.json",
+      "producerOriginalSHA256": "3f480ca7113f234d0ce24ba6168e6c741bb48d6408620419145d685fada79dd5"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.py.txt",
+      "sha256": "aec9fd09c4d5807832b2d7c6d777323d62fd2b559ffa9b2f4d6111a81651005d",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-local-delta.py",
+      "producerOriginalSHA256": "aec9fd09c4d5807832b2d7c6d777323d62fd2b559ffa9b2f4d6111a81651005d"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.json",
+      "sha256": "20313e7ce063ac0f351a9c95bfb3f8cc8d0067569f3ffd75450cc9a80c6d4a33",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-local-delta.json",
+      "producerOriginalSHA256": "baea9279892ebd4da4b6b74b423a43104595a1e2413e9f8215b003841c599573"
+    },
+    {
+      "file": "skin-summary.json",
+      "sha256": "1453d1e65ef4601ce5a51f1a90c6eec31a6fec3e268eea11b99ea88b42ad54c7",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-summary.json",
+      "producerOriginalSHA256": "5fcd7645484d3949eda1086ca67d74f3582ec7992b13a3e52b6f2d8452cbd341"
+    },
+    {
+      "file": "skin-local-regression-result.json",
+      "sha256": "62b4f766b3356abcf9a4ab8f1617e02ef96787a4f36296ad78ccf42802690c3a",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-local-regression-result.json",
+      "producerOriginalSHA256": "d42ecac0630e64a2b9e34cd62d18256c0120096fe665b18ec0cbb59da26d5ed9"
+    }
+  ],
+  "archiveProvenance": {
+    "producerOriginalPath": "/tmp/soccer-v7-waist36/waist-regression-summary.json",
+    "producerOriginalSHA256": "438fd0d9132e9c99b026262558e03d324662ab87621b9d2f25b0fade78599ee4",
+    "receiptConvention": "file and inputs names resolve inside this retained archive; producerOriginalPath/SHA256 are historical notes. Numeric observations are unchanged."
+  }
+}

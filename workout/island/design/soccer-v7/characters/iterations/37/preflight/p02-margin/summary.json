@@ -1,0 +1,57 @@
+{
+  "kind": "P02-existing-two-key-physical-margin-focused-proof",
+  "complete": false,
+  "pass": true,
+  "cases": 12,
+  "sourceEntryPhases": [
+    0.15,
+    0.5,
+    0.85
+  ],
+  "ratesHz": [
+    30,
+    120
+  ],
+  "LODs": [
+    0,
+    1
+  ],
+  "maxPalmY": 0.002991685100758351,
+  "minPalmY": 0.0018399570984574689,
+  "minVertexY": 0.0008005799952827031,
+  "maxPalmXZ": 0.0020945831579672583,
+  "maxFootResidual": 1.2953834656333483e-08,
+  "maxAngular": 17.534589572012912,
+  "maxSpeed": 6.207457649662261,
+  "maxC0Position": 0,
+  "maxC0Angle": 0.0006351783868263618,
+  "targetedLODSwaps": 8,
+  "targetedLODPersistentStateExact": true,
+  "targetedLODmaxAngular": 10.123105888567393,
+  "targetedLODminVertexY": 0.0008043326199965914,
+  "primarySourcesMutated": false,
+  "gateChanges": false,
+  "solverMathChanges": false,
+  "modelsMutated": false,
+  "files": {
+    "final-lod-proof.json": "d9a420c3dda4000c6cfb4c4c7e9245781c8dc9c66e74505158010fa293bce7a4",
+    "late-finite-corrected-analysis.json": "9b89ddd5cc461fa206582843fd4db4b59e3b22fc853cc8c13e2ff4600554a893",
+    "palm-plan.patch.txt": "1107c851ee88602b3c56933f5652441715d6ad009c5f24b33359e2e458f8042f",
+    "build-final.mjs.txt": "fc7d514adfd9a113c0b793c99afc1dbbe3dbf370a1a5e034a5e08bc82d723f39",
+    "lod.mjs.txt": "8b379c65316ed681048a1bfb442b72d9b82919f76e8e3273e49c9fdaf2102de6",
+    "final-proof.json": "f608b01581fe6bad1c7f348260b304c5085e9c765fe16d3d9cf5b76bab5b0fcd",
+    "grid2-proof.json": "21c9756d93bdeabe38f024da46999c096650fd938e26c645874d7d6517d94473",
+    "final-other-entries.mjs.txt": "4201c414bcf3b53da0b1bef7c712f5b84ec3ed7d342bf9395ac90813b2543ccc",
+    "twist-null-proof.json": "e07de6624e84743db107eaf10e8e88136dff6647217e270036819bfe8f7fc046",
+    "baseline-proof.json": "e9dfc78ef22302ba221de3b3ce259ad6d264acccbfb8a63d06045ed0503ea6d1",
+    "final-inputs.json": "7bebd844a414885c0d833315a8fa7ec7857be66711cafd41bb7bf2f83bb2925d",
+    "pitch-twist-proof.json": "81e56f48b360c82ee7ba8668b26047c0be333ab53e4fbcd08ae4d5d185f658f6",
+    "probe.mjs.txt": "57f31b37d2eaa25a1eb712ec8606cf8ed97068f14fec1fede69bf0124a1a9719",
+    "joint-proof.json": "eb28e984cb37d3ae0ad5ad048da2a5c4e2eb7159579a2fd7f90c81f5e261ded5",
+    "pronation-proof.json": "275f62d70b0a62107b9ea9c289cd157aa2297fe7be2f5b71436b764b70736bad",
+    "micro-proof.json": "397917cfcbfbe7fde6493a2c6be63a7f82ab35e877835227648c5b574779794f",
+    "candidate-palm-support.js.txt": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+    "grid-proof.json": "b28bbb4cb7aada3ff3652b778ca1fc8bc903e9f99f341260ddce7ace3b648f0f",
+    "final-other-entries-proof.json": "9d681e88651c6f0ac90e5b53c6f4c27bf45823fac1596bd696ac6ecfc0257c2a"
+  }
+}

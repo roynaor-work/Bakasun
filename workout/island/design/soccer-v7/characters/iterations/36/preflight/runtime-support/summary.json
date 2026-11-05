@@ -1,0 +1,34 @@
+{
+  "kind": "isolated-waist36-actual-runtime-support-preflight",
+  "pass": true,
+  "complete": false,
+  "primaryModelsMutated": false,
+  "primaryRuntimeMutated": false,
+  "cases": 32,
+  "swaps": 64,
+  "maxC0Meters": 0.001856053848133754,
+  "maxC0Degrees": 0.06861599522949466,
+  "maxJointRadiansPerSecond": 16.254427584507596,
+  "maxJointMetersPerSecond": 5.169005142184266,
+  "minimumRenderedVertexMeters": 0.0008140737281091479,
+  "minimumPhysicalPalmMeters": 0.0015141125837094707,
+  "maximumPhysicalPalmMeters": 0.002989829002308153,
+  "maximumPalmXZResidualMeters": 0.0023392865136769143,
+  "maximumPalmResidualMeters": 0.002466071099941121,
+  "persistentStateExactAcrossAllSwaps": true,
+  "files": {
+    "all16-focused-lod.json": "febc7dfaece57364a4081f516d510c8ef514e9ebd2c228bd0639885d533d9b81",
+    "all16-inputs.json": "ae4fa157c6dd8f7942b57ea0d367ef7f8e6ac7e3e9aca28121343f40895ee43c",
+    "all16-build.mjs.txt": "cd66cf2bd3e439ebbb4bdf2b4ecd35be82f8a3cad212ce01496e58721dcb21be",
+    "all16-focused-lod.mjs.txt": "5a68378948e62d4c51689c9d4c8a07965c412431211bde789776dfecccea58fe",
+    "p01-runtime-contact-pilot.json": "adf4c029137f40c3c3d594a97a614e8fd528be7f92c35efb995a4a892b3c4275",
+    "p01-runtime-foot-body-pilot.json": "dde72e90c7c2154793620b74a4744d7e342c572820a1ff8a43bf49a7969a3e45",
+    "all16-native-retained.json": "443b4b15b6c01e867785d428b19ebdaa216e3a9245434cec7010c4f117e11a45",
+    "append-truncation-guard-proof.json": "506c37cf02ae0b1938818e3f1567b46a9243df97405657f7ffccb16791cfd228"
+  },
+  "limits": [
+    "This is an isolated candidate, not the canonical final package.",
+    "Full final structural, dense, transition, LOD, yaw, pitch, screenshot/movie and quiet CPU checks are still required after coordinated installation.",
+    "P01 full-interval pilots cover fresh and disabled-envelope modes; all-avatar focused swaps cover native slide/getup, inherited bridge and held-body stages."
+  ]
+}

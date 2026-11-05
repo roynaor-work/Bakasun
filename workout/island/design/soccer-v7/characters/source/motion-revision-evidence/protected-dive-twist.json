@@ -1,0 +1,152 @@
+{
+  "kind": "temporary-protected-dive-source-axial-twist-correction",
+  "complete": false,
+  "actualViewerConfirmationRequired": true,
+  "motionSHA": "d228c6c076ef85678ba1b50582b9ce4f5cbf86605acb4d6c8c5bb734d08291e7",
+  "baselineSHA": "5a0c09bcb3f37452cea35faf82cc28d000ff41326d1853d223d6432fe753d9ff",
+  "changedClips": [
+    "keeper_dive_left",
+    "keeper_dive_right",
+    "keeper_dive_high"
+  ],
+  "allOther28ClipsUnchanged": true,
+  "hipsTorsoNeckHeadRootUnchanged": true,
+  "allLegFootChannelsUnchanged": true,
+  "maximumAuthoredKeyWristPositionDifferenceMeters": 8.968679076976795e-07,
+  "maximumAuthoredKeyWristOrientationDifferenceRadians": 4.122534907186101e-06,
+  "maximumAuthoredKeyElbowPositionDifferenceMeters": 5.371464485404922e-07,
+  "rows": [
+    {
+      "id": "keeper_dive_left",
+      "hz": 30,
+      "maxWorldAngular": 9.513057543590609,
+      "worstWorldAngular": {
+        "time": 0.8666666666666667,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 8.968679078445725e-07,
+      "maxHandWorldOrientationDifferenceRadians": 4.122211727423618e-06,
+      "maxRelativeSpeed": 6.696986751614261,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_left",
+      "hz": 120,
+      "maxWorldAngular": 9.530086298517627,
+      "worstWorldAngular": {
+        "time": 0.8416666666666667,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.009241053567765252,
+      "maxHandWorldOrientationDifferenceRadians": 0.03891549324325329,
+      "maxRelativeSpeed": 6.780760132725717,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_left",
+      "hz": 240,
+      "maxWorldAngular": 9.5324740327933,
+      "worstWorldAngular": {
+        "time": 0.8375,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.009241053567765252,
+      "maxHandWorldOrientationDifferenceRadians": 0.03891549324325329,
+      "maxRelativeSpeed": 6.792231900152057,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_right",
+      "hz": 30,
+      "maxWorldAngular": 9.513057543590609,
+      "worstWorldAngular": {
+        "time": 0.8666666666666667,
+        "bone": "LeftForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 8.968679078445725e-07,
+      "maxHandWorldOrientationDifferenceRadians": 4.122211727423618e-06,
+      "maxRelativeSpeed": 6.696986751614261,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_right",
+      "hz": 120,
+      "maxWorldAngular": 9.530086298517627,
+      "worstWorldAngular": {
+        "time": 0.8416666666666667,
+        "bone": "LeftForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.009241053567765252,
+      "maxHandWorldOrientationDifferenceRadians": 0.03891549324325329,
+      "maxRelativeSpeed": 6.780760132725717,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_right",
+      "hz": 240,
+      "maxWorldAngular": 9.5324740327933,
+      "worstWorldAngular": {
+        "time": 0.8375,
+        "bone": "LeftForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.009241053567765252,
+      "maxHandWorldOrientationDifferenceRadians": 0.03891549324325329,
+      "maxRelativeSpeed": 6.792231900152057,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "hz": 30,
+      "maxWorldAngular": 9.086638427508177,
+      "worstWorldAngular": {
+        "time": 1.0,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 6.801756464163967e-07,
+      "maxHandWorldOrientationDifferenceRadians": 3.992732705203648e-06,
+      "maxRelativeSpeed": 6.309834428989522,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "hz": 120,
+      "maxWorldAngular": 9.111740651444052,
+      "worstWorldAngular": {
+        "time": 0.975,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.008326283718666597,
+      "maxHandWorldOrientationDifferenceRadians": 0.035063777880758505,
+      "maxRelativeSpeed": 6.394532030590134,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "hz": 240,
+      "maxWorldAngular": 9.115449104178769,
+      "worstWorldAngular": {
+        "time": 0.9708333333333333,
+        "bone": "RightForeArm"
+      },
+      "maxHandWorldPathDifferenceMeters": 0.008326283718666597,
+      "maxHandWorldOrientationDifferenceRadians": 0.035063777880758505,
+      "maxRelativeSpeed": 6.40557570389328,
+      "maxLimbReachResidualMeters": 0,
+      "passAngularBelow30": true
+    }
+  ],
+  "limits": [
+    "IK desired wrist positions and orientations are identical at source30Hz keys; native local-quaternion interpolation can follow a different path between keys because the previous axial twist flip is removed.",
+    "Arm skin deformation changes by design. Full displayed mesh/floor and texture inspection remain required in the browser.",
+    "Toe-off parent candidate is immutable and lives in its separate tree."
+  ],
+  "pass": true
+}

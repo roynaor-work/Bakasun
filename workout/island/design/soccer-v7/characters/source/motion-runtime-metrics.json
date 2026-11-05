@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "threeRevision": "160",
+  "samplingHz": 120,
+  "supportedSamples": 6911,
+  "maxInterpolatedSlipBeforeIKMeters": 0.018015301304874852,
+  "maxAnchorErrorAfterIKMeters": 1.0123177976349365e-15,
+  "maxReachResidualMeters": 0,
+  "transitionSamples": 117,
+  "maxTransitionAnchorErrorMeters": 3.833421471403816e-16,
+  "transitionRows": [
+    {
+      "sourceId": "run_2",
+      "targetId": "run_5",
+      "heldContacts": 1,
+      "maxAnchorErrorMeters": 2.3263411494723067e-16
+    },
+    {
+      "sourceId": "run_5",
+      "targetId": "sprint",
+      "heldContacts": 1,
+      "maxAnchorErrorMeters": 2.242025235105681e-16
+    },
+    {
+      "sourceId": "idle",
+      "targetId": "short_pass",
+      "heldContacts": 2,
+      "maxAnchorErrorMeters": 3.833421471403816e-16
+    },
+    {
+      "sourceId": "short_pass",
+      "targetId": "long_pass",
+      "heldContacts": 1,
+      "maxAnchorErrorMeters": 2.618947968389199e-16
+    },
+    {
+      "sourceId": "celebrate_arms_up",
+      "targetId": "idle",
+      "heldContacts": 2,
+      "maxAnchorErrorMeters": 2.3386539223808865e-16
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "maxBeforeIKMeters": 6.687750685176716e-7,
+      "maxAfterIKMeters": 4.642405244016395e-17
+    },
+    {
+      "id": "run_1",
+      "maxBeforeIKMeters": 0.005088197905685037,
+      "maxAfterIKMeters": 5.172153026307198e-16
+    },
+    {
+      "id": "run_2",
+      "maxBeforeIKMeters": 0.004524155836415751,
+      "maxAfterIKMeters": 4.613190423717512e-16
+    },
+    {
+      "id": "run_3",
+      "maxBeforeIKMeters": 0.006266752771608335,
+      "maxAfterIKMeters": 5.551115123125783e-16
+    },
+    {
+      "id": "run_4",
+      "maxBeforeIKMeters": 0.008605624823601818,
+      "maxAfterIKMeters": 6.524036463030991e-16
+    },
+    {
+      "id": "run_5",
+      "maxBeforeIKMeters": 0.012178755095236615,
+      "maxAfterIKMeters": 5.551115123125783e-16
+    },
+    {
+      "id": "sprint",
+      "maxBeforeIKMeters": 0.018015301304874852,
+      "maxAfterIKMeters": 1.0123177976349365e-15
+    },
+    {
+      "id": "decelerate",
+      "maxBeforeIKMeters": 0.006406604352243074,
+      "maxAfterIKMeters": 4.718447854656915e-16
+    },
+    {
+      "id": "turn_left",
+      "maxBeforeIKMeters": 0.0002794017534877671,
+      "maxAfterIKMeters": 3.2957919968262575e-16
+    },
+    {
+      "id": "turn_right",
+      "maxBeforeIKMeters": 0.0002794017534877671,
+      "maxAfterIKMeters": 3.2957919968262575e-16
+    },
+    {
+      "id": "kick",
+      "maxBeforeIKMeters": 0.0004840275936622054,
+      "maxAfterIKMeters": 4.183405213737745e-16
+    },
+    {
+      "id": "short_pass",
+      "maxBeforeIKMeters": 0.002592137308906714,
+      "maxAfterIKMeters": 3.401053669213241e-16
+    },
+    {
+      "id": "long_pass",
+      "maxBeforeIKMeters": 0.0005539718916302838,
+      "maxAfterIKMeters": 3.498475527840598e-16
+    },
+    {
+      "id": "header",
+      "maxBeforeIKMeters": 0.001223288917397407,
+      "maxAfterIKMeters": 2.4777195746752203e-16
+    },
+    {
+      "id": "dribble",
+      "maxBeforeIKMeters": 0.004524155836415751,
+      "maxAfterIKMeters": 4.613190423717512e-16
+    },
+    {
+      "id": "slide_tackle",
+      "maxBeforeIKMeters": 0.0012369449897654604,
+      "maxAfterIKMeters": 2.822151114723951e-16
+    },
+    {
+      "id": "fall",
+      "maxBeforeIKMeters": 0.00010272337526043424,
+      "maxAfterIKMeters": 2.6522191705965666e-16
+    },
+    {
+      "id": "get_up",
+      "maxBeforeIKMeters": 0.0007346196690046855,
+      "maxAfterIKMeters": 4.4208664017056293e-16
+    },
+    {
+      "id": "celebrate_arms_up",
+      "maxBeforeIKMeters": 3.450967149198528e-7,
+      "maxAfterIKMeters": 5.5458390564355904e-17
+    },
+    {
+      "id": "celebrate_fist_pump",
+      "maxBeforeIKMeters": 3.450967149198528e-7,
+      "maxAfterIKMeters": 5.5458390564355904e-17
+    },
+    {
+      "id": "celebrate_victory_leap",
+      "maxBeforeIKMeters": 0.0009423921592626234,
+      "maxAfterIKMeters": 3.143892072554329e-16
+    },
+    {
+      "id": "celebrate_aeroplane",
+      "maxBeforeIKMeters": 0.0008958384611605207,
+      "maxAfterIKMeters": 3.686358423713014e-16
+    },
+    {
+      "id": "celebrate_applause",
+      "maxBeforeIKMeters": 3.450967149198528e-7,
+      "maxAfterIKMeters": 5.5458390564355904e-17
+    },
+    {
+      "id": "keeper_dive_left",
+      "maxBeforeIKMeters": 0.0001727352222699205,
+      "maxAfterIKMeters": 3.388681852935512e-16
+    },
+    {
+      "id": "keeper_dive_right",
+      "maxBeforeIKMeters": 0.0001727352222699205,
+      "maxAfterIKMeters": 3.388681852935512e-16
+    },
+    {
+      "id": "keeper_dive_high",
+      "maxBeforeIKMeters": 0.00013584074495060638,
+      "maxAfterIKMeters": 2.9757342750966473e-16
+    },
+    {
+      "id": "keeper_catch",
+      "maxBeforeIKMeters": 0.00044298104147341694,
+      "maxAfterIKMeters": 2.8883140665633564e-16
+    },
+    {
+      "id": "keeper_throw",
+      "maxBeforeIKMeters": 0.0007694076644724032,
+      "maxAfterIKMeters": 3.3486903561235222e-16
+    },
+    {
+      "id": "keeper_punt",
+      "maxBeforeIKMeters": 0.0003579981071781119,
+      "maxAfterIKMeters": 3.58724037616909e-16
+    },
+    {
+      "id": "referee_whistle",
+      "maxBeforeIKMeters": 3.450967149198528e-7,
+      "maxAfterIKMeters": 5.5458390564355904e-17
+    },
+    {
+      "id": "referee_signal",
+      "maxBeforeIKMeters": 3.450967149198528e-7,
+      "maxAfterIKMeters": 5.5458390564355904e-17
+    }
+  ],
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "runtimeSha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+  "pass": true,
+  "limitations": [
+    "Canonical bones and approximate soles, not skinned vertex or collision tests.",
+    "Transition sweep checks the portable helper, not an unobserved game integration.",
+    "No mobile GPU or physical-device framerate claim."
+  ]
+}

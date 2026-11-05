@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "kind": "retained-waist36-bounded-regression-archive",
+  "generatedAt": "2026-11-05T11:19:26.354148+00:00",
+  "complete": true,
+  "currentAdoptedManifestSHA256": "f0e5f049fd0683e35615e0824e3d3411d3b05dce5c2ffae7c5e0d33a8e851caf",
+  "scope": {
+    "identity": "player-01",
+    "poses": 68,
+    "lods": [
+      0,
+      1
+    ],
+    "baselineCandidateCases": 272,
+    "comparisonPairs": 136,
+    "notCanonicalAcceptance": true
+  },
+  "review": "REVIEW.md",
+  "primary": [
+    "cloth-raster-frontside-regression.json",
+    "cloth-raster-frontside-local-delta.json",
+    "skin-local-regression-result.json",
+    "skin-summary.json"
+  ],
+  "retainedFailed": [
+    "floor-fixed-pose-FAILED.json"
+  ],
+  "superseded": [
+    "cloth-raster-regression.json",
+    "cloth-raster-local-delta.json"
+  ],
+  "localReceiptValidation": {
+    "pass": true,
+    "checkedFileReceipts": 22
+  },
+  "producerRecords": [
+    {
+      "file": "decoded-regression.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/decoded-regression.json",
+      "producerOriginalSHA256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09"
+    },
+    {
+      "file": "regression-fixtures.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/regression-fixtures.json",
+      "producerOriginalSHA256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a"
+    },
+    {
+      "file": "patch-proof.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/patch-proof.json",
+      "producerOriginalSHA256": "a5e713c57f4998626bd8ee24f0a3a1849c1a8c6da5dc5fdca27cd8a37593350a"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-regression.json",
+      "producerOriginalSHA256": "3f480ca7113f234d0ce24ba6168e6c741bb48d6408620419145d685fada79dd5"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-local-delta.json",
+      "producerOriginalSHA256": "baea9279892ebd4da4b6b74b423a43104595a1e2413e9f8215b003841c599573"
+    },
+    {
+      "file": "cloth-raster-regression.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-regression.json",
+      "producerOriginalSHA256": "e64f542fa73eab50767827d0ba42c024250e292bf7f4116bec9b7cbd0c367cc7"
+    },
+    {
+      "file": "cloth-raster-local-delta.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-local-delta.json",
+      "producerOriginalSHA256": "d1c15506d1044db4205cccb7c2928b3a30b2351a4ddf4a071613beef1d04811b"
+    },
+    {
+      "file": "skin-regression-result.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-regression-result.json",
+      "producerOriginalSHA256": "2aedcd5a0c1c952dd08dfb99898d04087587088d077dfaeb7577d32d1342e116"
+    },
+    {
+      "file": "skin-local-regression-result.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-local-regression-result.json",
+      "producerOriginalSHA256": "d42ecac0630e64a2b9e34cd62d18256c0120096fe665b18ec0cbb59da26d5ed9"
+    },
+    {
+      "file": "skin-ray-separation-examples.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-ray-separation-examples.json",
+      "producerOriginalSHA256": "e3c5e85ffd7cfa7a35de51d5a2dafe2e1aabaa144cd5ddb7bc208feccefa8b2e"
+    },
+    {
+      "file": "skin-summary.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-summary.json",
+      "producerOriginalSHA256": "5fcd7645484d3949eda1086ca67d74f3582ec7992b13a3e52b6f2d8452cbd341"
+    },
+    {
+      "file": "waist-regression-summary.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/waist-regression-summary.json",
+      "producerOriginalSHA256": "438fd0d9132e9c99b026262558e03d324662ab87621b9d2f25b0fade78599ee4"
+    },
+    {
+      "file": "floor-fixed-pose-FAILED.json",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/floor-regression.json",
+      "producerOriginalSHA256": "3d6cbbdebd45876978c045c1c0442cbd8d4ef16f0c2c6d1cdb2c98d17c5b488b"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-regression.py",
+      "producerOriginalSHA256": "65fab3c6d64d2992cfe238daffa882da9a6f828b261c62e26271946dc7d79847"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-frontside-local-delta.py",
+      "producerOriginalSHA256": "aec9fd09c4d5807832b2d7c6d777323d62fd2b559ffa9b2f4d6111a81651005d"
+    },
+    {
+      "file": "cloth-raster-regression.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-regression.py",
+      "producerOriginalSHA256": "0b5e818542625b0b93ea4937ecf413bdd7e323031c880faf1570fffc345c1e65"
+    },
+    {
+      "file": "cloth-raster-local-delta.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/cloth-raster-local-delta.py",
+      "producerOriginalSHA256": "f180ca649994e1e285bcf8e37c1c58c49100d10a87ed568ef7a59cf7c0936874"
+    },
+    {
+      "file": "skin-regression-probe.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-regression-probe.py",
+      "producerOriginalSHA256": "fe103894da98d6cf5871ec91389bea1124affa568deab32307b05cb8567d4c81"
+    },
+    {
+      "file": "skin-local-regression-probe.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-local-regression-probe.py",
+      "producerOriginalSHA256": "d7b89bad080ae55073915cb0da7eca2a7f0a9465824f3eda62cfa8a8129b9efd"
+    },
+    {
+      "file": "skin-ray-examples.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-ray-examples.py",
+      "producerOriginalSHA256": "56da5cecff5a8b0e422c63d820f87801a7c96b93f05b89691842a82482dab378"
+    },
+    {
+      "file": "floor-fixed-pose.py.txt",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36-floor-regression.py",
+      "producerOriginalSHA256": "1209985dad99226fe65c95c6645371816fa136d8af428b33bb58997c2d6f1b23"
+    }
+  ],
+  "files": [
+    {
+      "file": "REVIEW.md",
+      "bytes": 4128,
+      "sha256": "6d081c1bae1681d8728e3d4f31cd866a72bcd4a56326371a60d50ccbbb63fd96"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.json",
+      "bytes": 30975,
+      "sha256": "20313e7ce063ac0f351a9c95bfb3f8cc8d0067569f3ffd75450cc9a80c6d4a33"
+    },
+    {
+      "file": "cloth-raster-frontside-local-delta.py.txt",
+      "bytes": 5121,
+      "sha256": "aec9fd09c4d5807832b2d7c6d777323d62fd2b559ffa9b2f4d6111a81651005d"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.json",
+      "bytes": 101675,
+      "sha256": "40db9caa0a7e65571a5e0b4ac90ed42c3195c3c68b66b1d3a4fbbba446460c31"
+    },
+    {
+      "file": "cloth-raster-frontside-regression.py.txt",
+      "bytes": 6374,
+      "sha256": "65fab3c6d64d2992cfe238daffa882da9a6f828b261c62e26271946dc7d79847"
+    },
+    {
+      "file": "cloth-raster-local-delta.json",
+      "bytes": 35323,
+      "sha256": "bc0937c7106e04b9fd205b4e9b394bdb0b5be5423c5c230311ecf473c6ca8a44"
+    },
+    {
+      "file": "cloth-raster-local-delta.py.txt",
+      "bytes": 5060,
+      "sha256": "f180ca649994e1e285bcf8e37c1c58c49100d10a87ed568ef7a59cf7c0936874"
+    },
+    {
+      "file": "cloth-raster-regression.json",
+      "bytes": 104010,
+      "sha256": "b061a70c563d4f1b3a238f094ba85ec3685d9fcd2dc8e2aee2732ece93d2a383"
+    },
+    {
+      "file": "cloth-raster-regression.py.txt",
+      "bytes": 6303,
+      "sha256": "0b5e818542625b0b93ea4937ecf413bdd7e323031c880faf1570fffc345c1e65"
+    },
+    {
+      "file": "decoded-regression.json",
+      "bytes": 5556028,
+      "sha256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09"
+    },
+    {
+      "file": "floor-fixed-pose-FAILED.json",
+      "bytes": 49295,
+      "sha256": "a884a77784dbc71663758e03e799555fb05aa942a623412d05562a55713b0b28"
+    },
+    {
+      "file": "floor-fixed-pose.py.txt",
+      "bytes": 2395,
+      "sha256": "1209985dad99226fe65c95c6645371816fa136d8af428b33bb58997c2d6f1b23"
+    },
+    {
+      "file": "patch-proof.json",
+      "bytes": 2291,
+      "sha256": "a5e713c57f4998626bd8ee24f0a3a1849c1a8c6da5dc5fdca27cd8a37593350a"
+    },
+    {
+      "file": "regression-fixtures.json",
+      "bytes": 1070853,
+      "sha256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a"
+    },
+    {
+      "file": "skin-local-regression-probe.py.txt",
+      "bytes": 7737,
+      "sha256": "d7b89bad080ae55073915cb0da7eca2a7f0a9465824f3eda62cfa8a8129b9efd"
+    },
+    {
+      "file": "skin-local-regression-result.json",
+      "bytes": 129573,
+      "sha256": "62b4f766b3356abcf9a4ab8f1617e02ef96787a4f36296ad78ccf42802690c3a"
+    },
+    {
+      "file": "skin-ray-examples.py.txt",
+      "bytes": 1719,
+      "sha256": "56da5cecff5a8b0e422c63d820f87801a7c96b93f05b89691842a82482dab378"
+    },
+    {
+      "file": "skin-ray-separation-examples.json",
+      "bytes": 8010,
+      "sha256": "e3c5e85ffd7cfa7a35de51d5a2dafe2e1aabaa144cd5ddb7bc208feccefa8b2e"
+    },
+    {
+      "file": "skin-regression-probe.py.txt",
+      "bytes": 6881,
+      "sha256": "fe103894da98d6cf5871ec91389bea1124affa568deab32307b05cb8567d4c81"
+    },
+    {
+      "file": "skin-regression-result.json",
+      "bytes": 143427,
+      "sha256": "008a081fcaaee176540213cd5347afce18dd00b25841a93b01271ac80cee1a87"
+    },
+    {
+      "file": "skin-summary.json",
+      "bytes": 6176,
+      "sha256": "1453d1e65ef4601ce5a51f1a90c6eec31a6fec3e268eea11b99ea88b42ad54c7"
+    },
+    {
+      "file": "waist-regression-summary.json",
+      "bytes": 15305,
+      "sha256": "64216b87d710e49d65c45ac164ee602f53c5f5415f70e3948a02b4b61fa0f928"
+    }
+  ]
+}

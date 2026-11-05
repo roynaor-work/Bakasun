@@ -1,0 +1,40 @@
+{
+  "initial": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 3278,
+    "passed": 3226,
+    "failed": 1,
+    "skipped": 51,
+    "durationMilliseconds": 982673.014442,
+    "failure": "workout-royiki.test.mjs could not launch the expected Playwright Chromium headless shell. Its already opened local server left the child alive; the stalled child was terminated after more than 13 minutes, allowing the runner to print its summary.",
+    "log": "repository-tests-initial.log",
+    "logSha256": "6b0f6940150165a6b00ac46559988263212be89d984f36d92de5ed0f550f9d4a"
+  },
+  "retry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/soccer-v7-browser-cache timeout -k 10s 180s node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationMilliseconds": 21949.965701,
+    "setup": "A temporary /tmp Playwright executable-path symlink points to the installed /usr/bin/chromium. No repository code, tests, cache-version tags or configuration were edited.",
+    "log": "repository-tests-retry.log",
+    "logSha256": "dc824d9ca29f040d6ff2dded48ebfdfd8b8ea6c5d9f87c6df5e086e3d5d8c88a"
+  },
+  "interpretation": "The complete suite passed on the final run: 3,227 passes, zero failures and 51 skips. The initial missing-browser failure and isolated successful retry are retained above. These repository tests are separate from asset, motion and device-performance acceptance.",
+  "finalFullSuite": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/soccer-v7-browser-cache timeout -k 15s 300s npm test",
+    "exitCode": 0,
+    "tests": 3278,
+    "passed": 3227,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 51,
+    "durationMilliseconds": 146112.507146,
+    "setup": "The same temporary /tmp executable-path symlink to installed Chromium; no repository tests or configuration edited.",
+    "log": "repository-tests-final.log",
+    "logSha256": "5abc90bad69ab3424c32a291f60c949830053f7d337a0bbb2aa66e6d221a3b54"
+  }
+}

@@ -1,0 +1,934 @@
+{
+  "kind": "cloth31-bounded-helper-reference-vs-delivered-skin-fixture",
+  "helperSha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+  "skinScope": "Actual parent Face27 subsurf/tri plus delivered Skin body/underlay BEFORE final QEM; outermost normal-ray test distinguishes exterior from inset underlay. Full source anatomy is diagnostic only. All original canonical weights are used for LBS poses. Final GLB phone/flex renders remain required.",
+  "records": [
+    {
+      "id": "player-01",
+      "metrics": {
+        "kind": "bounded-collar-and-two-upper-tension-folds31",
+        "vertices": 2540,
+        "triangles": 4890,
+        "topologyUnchanged": true,
+        "uvUnchanged": true,
+        "weightsUnchanged": true,
+        "materialsUnchanged": true,
+        "collarVertices": 40,
+        "collarTransitionVertices": 80,
+        "collarSmoothingMaximumMeters": 0.0008000000000000759,
+        "collarVisibleSkinRepairMaximumMeters": 0.006855569640257443,
+        "collarDeliveredSkinRestTargetMeters": 0.00225,
+        "collarTransitionRepairMaximumMeters": 0.0,
+        "collarFullReferenceMinimumBeforeMeters": -0.003808044490725533,
+        "collarFullReferenceMinimumAfterMeters": 0.0020212041389742127,
+        "collarDeliveredSkinMinimumBeforeMeters": -0.004252870116148963,
+        "collarDeliveredSkinMinimumAfterMeters": 0.0022509439343110374,
+        "collarDeliveredSkinSamples": 40,
+        "modifiedTriangleMinimumOriginalNormalCosine": 0.9416781974874664,
+        "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+        "deliveredSkinIncludes": {
+          "vertices": 24307,
+          "faces": 42306
+        },
+        "folds": 2,
+        "foldAffectedVertices": 33,
+        "foldMaximumOffsetMeters": 0.002174998371693099,
+        "foldMinimumOriginalNormalDotMeters": 1.0199815226781123e-05,
+        "cuffHemMaximumDisplacementMeters": 0.0,
+        "allMovedVertices": 153,
+        "maximumTotalDisplacementMeters": 0.006509060104989194
+      },
+      "visibleSkinObjects": [
+        "player-01-face",
+        "player-01-body",
+        "player-01-underlay"
+      ],
+      "poses": {
+        "rest": {
+          "rotationsRadians": {},
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.003808044490725533,
+            "visibleOutermostRayMinimumMeters": -0.004252870400650369,
+            "visibleOutermostRayMedianMeters": -0.0002861119248420696,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.055164991877973e-05,
+            "worstVisibleSample": [
+              -0.004252870400650369,
+              2096,
+              [
+                0.0680471882224083,
+                1.4255536794662476,
+                -0.0048077949322760105
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.002021158000182574,
+            "visibleOutermostRayMinimumMeters": 0.002250946866093062,
+            "visibleOutermostRayMedianMeters": 0.0022510144277577016,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.002236860105767846,
+            "worstVisibleSample": [
+              0.002250946866093062,
+              2100,
+              [
+                0.05821656808257103,
+                1.4246265888214111,
+                -0.031682416796684265
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.003808044490725533,
+            "visibleOutermostRayMinimumMeters": -0.004252870400650369,
+            "visibleOutermostRayMedianMeters": 0.01009883981490145,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.055164991877973e-05,
+            "worstVisibleSample": [
+              -0.004252870400650369,
+              2096,
+              [
+                0.0680471882224083,
+                1.4255536794662476,
+                -0.0048077949322760105
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.002021158000182574,
+            "visibleOutermostRayMinimumMeters": 0.002250946866093062,
+            "visibleOutermostRayMedianMeters": 0.010492386675339138,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.002236860105767846,
+            "worstVisibleSample": [
+              0.002250946866093062,
+              2100,
+              [
+                0.05821656808257103,
+                1.4246265888214111,
+                -0.031682416796684265
+              ]
+            ]
+          }
+        },
+        "neck-flex": {
+          "rotationsRadians": {
+            "Neck": [
+              0.22,
+              0,
+              0
+            ],
+            "Head": [
+              0,
+              0.3,
+              0
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.0037381442672420324,
+            "visibleOutermostRayMinimumMeters": -0.004162485487580278,
+            "visibleOutermostRayMedianMeters": -0.00028031707217932435,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 8.404413529206067e-05,
+            "worstVisibleSample": [
+              -0.004162485487580278,
+              2096,
+              [
+                0.06696872031651355,
+                1.4255906982466906,
+                0.009283716755510873
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.00012792055911680264,
+            "visibleOutermostRayMinimumMeters": 0.00022673474124776047,
+            "visibleOutermostRayMedianMeters": 0.0022934154410818247,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.00022674976207781583,
+            "worstVisibleSample": [
+              0.00022673474124776047,
+              2120,
+              [
+                0.05222148820757866,
+                1.395409819416654,
+                0.05370323779812984
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.0037381442672420324,
+            "visibleOutermostRayMinimumMeters": -0.004162485487580278,
+            "visibleOutermostRayMedianMeters": 0.009940991021032219,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 8.404413529206067e-05,
+            "worstVisibleSample": [
+              -0.004162485487580278,
+              2096,
+              [
+                0.06696872031651355,
+                1.4255906982466906,
+                0.009283716755510873
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.00012792055911680264,
+            "visibleOutermostRayMinimumMeters": 0.00022673474124776047,
+            "visibleOutermostRayMedianMeters": 0.010251995014994419,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.00022674976207781583,
+            "worstVisibleSample": [
+              0.00022673474124776047,
+              2120,
+              [
+                0.05222148820757866,
+                1.395409819416654,
+                0.05370323779812984
+              ]
+            ]
+          }
+        },
+        "neck-back": {
+          "rotationsRadians": {
+            "Neck": [
+              -0.18,
+              0,
+              0
+            ],
+            "Head": [
+              0,
+              -0.25,
+              0
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.0037857511516645494,
+            "visibleOutermostRayMinimumMeters": -0.00424761682483617,
+            "visibleOutermostRayMedianMeters": -0.0002878601059204816,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.42325423238799e-05,
+            "worstVisibleSample": [
+              -0.00424761682483617,
+              2096,
+              [
+                0.06782328536754104,
+                1.4240460020296373,
+                -0.016006098139866805
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.0017351504481068528,
+            "visibleOutermostRayMinimumMeters": 0.001559286462607991,
+            "visibleOutermostRayMedianMeters": 0.0022517458889740483,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015592925483360887,
+            "worstVisibleSample": [
+              0.001559286462607991,
+              2119,
+              [
+                0.05789648285218972,
+                1.4154676621520101,
+                0.02457648036709515
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.0037857511516645494,
+            "visibleOutermostRayMinimumMeters": -0.00424761682483617,
+            "visibleOutermostRayMedianMeters": 0.009611856950017135,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.42325423238799e-05,
+            "worstVisibleSample": [
+              -0.00424761682483617,
+              2096,
+              [
+                0.06782328536754104,
+                1.4240460020296373,
+                -0.016006098139866805
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.0017351504481068528,
+            "visibleOutermostRayMinimumMeters": 0.001559286462607991,
+            "visibleOutermostRayMedianMeters": 0.010623325930505072,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015592925483360887,
+            "worstVisibleSample": [
+              0.001559286462607991,
+              2119,
+              [
+                0.05789648285218972,
+                1.4154676621520101,
+                0.02457648036709515
+              ]
+            ]
+          }
+        },
+        "neck-side": {
+          "rotationsRadians": {
+            "Neck": [
+              0,
+              -0.28,
+              0
+            ],
+            "Head": [
+              0,
+              0,
+              0.12
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.003972753610697394,
+            "visibleOutermostRayMinimumMeters": -0.004482853536274068,
+            "visibleOutermostRayMedianMeters": -0.0002864322740590618,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.024578321259469e-05,
+            "worstVisibleSample": [
+              -0.004482853536274068,
+              2096,
+              [
+                0.06784855864878994,
+                1.4276007378396627,
+                0.014507526665571268
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.001461873263075397,
+            "visibleOutermostRayMinimumMeters": 0.0015315142474143309,
+            "visibleOutermostRayMedianMeters": 0.002263770125615321,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015315123600885272,
+            "worstVisibleSample": [
+              0.0015315142474143309,
+              2120,
+              [
+                0.042846033170643144,
+                1.402753472328186,
+                0.0537414015812729
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.003972753610697394,
+            "visibleOutermostRayMinimumMeters": -0.004482853536274068,
+            "visibleOutermostRayMedianMeters": 0.0094388418602418,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.024578321259469e-05,
+            "worstVisibleSample": [
+              -0.004482853536274068,
+              2096,
+              [
+                0.06784855864878994,
+                1.4276007378396627,
+                0.014507526665571268
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.001461873263075397,
+            "visibleOutermostRayMinimumMeters": 0.0015315142474143309,
+            "visibleOutermostRayMedianMeters": 0.01028644816039748,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015315123600885272,
+            "worstVisibleSample": [
+              0.0015315142474143309,
+              2120,
+              [
+                0.042846033170643144,
+                1.402753472328186,
+                0.0537414015812729
+              ]
+            ]
+          }
+        },
+        "arm-neck-flex": {
+          "rotationsRadians": {
+            "Chest": [
+              0,
+              0.1,
+              0
+            ],
+            "Neck": [
+              0.12,
+              0.18,
+              0
+            ],
+            "Head": [
+              0,
+              -0.22,
+              0
+            ],
+            "LeftArm": [
+              0,
+              0,
+              0.8
+            ],
+            "LeftForeArm": [
+              -0.35,
+              0,
+              0
+            ],
+            "RightArm": [
+              0,
+              0,
+              -0.55
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.003792390696613797,
+            "visibleOutermostRayMinimumMeters": -0.004252194402834304,
+            "visibleOutermostRayMedianMeters": -0.00028501441178834446,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.387097088620067e-05,
+            "worstVisibleSample": [
+              -0.004252194402834304,
+              2096,
+              [
+                0.06776397123803685,
+                1.4250807440784146,
+                -0.01005721839639893
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.0018400136804847525,
+            "visibleOutermostRayMinimumMeters": 0.0015506020292077134,
+            "visibleOutermostRayMedianMeters": 0.002262303989390975,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.001550597487948835,
+            "worstVisibleSample": [
+              0.0015506020292077134,
+              2120,
+              [
+                0.06181024249119958,
+                1.3989672297274867,
+                0.03772715013425898
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.003792390696613797,
+            "visibleOutermostRayMinimumMeters": -0.004252194402834304,
+            "visibleOutermostRayMedianMeters": 0.009670294589544352,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 9.387097088620067e-05,
+            "worstVisibleSample": [
+              -0.004252194402834304,
+              2096,
+              [
+                0.06776397123803685,
+                1.4250807440784146,
+                -0.01005721839639893
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.0018400136804847525,
+            "visibleOutermostRayMinimumMeters": 0.0015506020292077134,
+            "visibleOutermostRayMedianMeters": 0.01071129851738152,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.001550597487948835,
+            "worstVisibleSample": [
+              0.0015506020292077134,
+              2120,
+              [
+                0.06181024249119958,
+                1.3989672297274867,
+                0.03772715013425898
+              ]
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "metrics": {
+        "kind": "bounded-collar-and-two-upper-tension-folds31",
+        "vertices": 2540,
+        "triangles": 4890,
+        "topologyUnchanged": true,
+        "uvUnchanged": true,
+        "weightsUnchanged": true,
+        "materialsUnchanged": true,
+        "collarVertices": 40,
+        "collarTransitionVertices": 80,
+        "collarSmoothingMaximumMeters": 0.000800000000000052,
+        "collarVisibleSkinRepairMaximumMeters": 0.006931195970170112,
+        "collarDeliveredSkinRestTargetMeters": 0.00225,
+        "collarTransitionRepairMaximumMeters": 0.0,
+        "collarFullReferenceMinimumBeforeMeters": -0.003898399370742185,
+        "collarFullReferenceMinimumAfterMeters": 0.0020334615331796045,
+        "collarDeliveredSkinMinimumBeforeMeters": -0.004335380106910827,
+        "collarDeliveredSkinMinimumAfterMeters": 0.0022509537167716403,
+        "collarDeliveredSkinSamples": 40,
+        "modifiedTriangleMinimumOriginalNormalCosine": 0.9398858040001287,
+        "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+        "deliveredSkinIncludes": {
+          "vertices": 24308,
+          "faces": 42309
+        },
+        "folds": 2,
+        "foldAffectedVertices": 33,
+        "foldMaximumOffsetMeters": 0.0021966989790779367,
+        "foldMinimumOriginalNormalDotMeters": 1.114909399029412e-05,
+        "cuffHemMaximumDisplacementMeters": 0.0,
+        "allMovedVertices": 153,
+        "maximumTotalDisplacementMeters": 0.006591723114524246
+      },
+      "visibleSkinObjects": [
+        "player-04-face",
+        "player-04-body",
+        "player-04-underlay"
+      ],
+      "poses": {
+        "rest": {
+          "rotationsRadians": {},
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.003898399370742185,
+            "visibleOutermostRayMinimumMeters": -0.004335380077095462,
+            "visibleOutermostRayMedianMeters": -0.00031178599939291063,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00015456024266313761,
+            "worstVisibleSample": [
+              -0.004335380077095462,
+              2096,
+              [
+                0.06789273023605347,
+                1.425226092338562,
+                -0.004324158653616905
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.0020334582291709293,
+            "visibleOutermostRayMinimumMeters": 0.00225095464530152,
+            "visibleOutermostRayMedianMeters": 0.0022510076975672533,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.002250900724902749,
+            "worstVisibleSample": [
+              0.00225095464530152,
+              2103,
+              [
+                -0.08123651891946793,
+                1.4196627140045166,
+                0.003965973388403654
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.003898399370742185,
+            "visibleOutermostRayMinimumMeters": -0.004335380077095462,
+            "visibleOutermostRayMedianMeters": 0.010110138535368629,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00015456024266313761,
+            "worstVisibleSample": [
+              -0.004335380077095462,
+              2096,
+              [
+                0.06789273023605347,
+                1.425226092338562,
+                -0.004324158653616905
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.0020334582291709293,
+            "visibleOutermostRayMinimumMeters": 0.00225095464530152,
+            "visibleOutermostRayMedianMeters": 0.010510108195230794,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.002250900724902749,
+            "worstVisibleSample": [
+              0.00225095464530152,
+              2103,
+              [
+                -0.08123651891946793,
+                1.4196627140045166,
+                0.003965973388403654
+              ]
+            ]
+          }
+        },
+        "neck-flex": {
+          "rotationsRadians": {
+            "Neck": [
+              0.22,
+              0,
+              0
+            ],
+            "Head": [
+              0,
+              0.3,
+              0
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.0038343166305938375,
+            "visibleOutermostRayMinimumMeters": -0.004246167744999305,
+            "visibleOutermostRayMedianMeters": -0.00030505832066356816,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014187228225637227,
+            "worstVisibleSample": [
+              -0.004246167744999305,
+              2096,
+              [
+                0.06686709744467305,
+                1.4251474867211749,
+                0.009764595101051774
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": -6.480807990756023e-05,
+            "visibleOutermostRayMinimumMeters": 0.00013305809901110422,
+            "visibleOutermostRayMedianMeters": 0.002295884991981432,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0001330467639490962,
+            "worstVisibleSample": [
+              0.00013305809901110422,
+              2120,
+              [
+                0.05227196589112282,
+                1.3951696980058412,
+                0.05418768426848251
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.0038343166305938375,
+            "visibleOutermostRayMinimumMeters": -0.004246167744999305,
+            "visibleOutermostRayMedianMeters": 0.009932668009155132,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014187228225637227,
+            "worstVisibleSample": [
+              -0.004246167744999305,
+              2096,
+              [
+                0.06686709744467305,
+                1.4251474867211749,
+                0.009764595101051774
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": -6.480807990756023e-05,
+            "visibleOutermostRayMinimumMeters": 0.00013305809901110422,
+            "visibleOutermostRayMedianMeters": 0.01044376094097729,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0001330467639490962,
+            "worstVisibleSample": [
+              0.00013305809901110422,
+              2120,
+              [
+                0.05227196589112282,
+                1.3951696980058412,
+                0.05418768426848251
+              ]
+            ]
+          }
+        },
+        "neck-back": {
+          "rotationsRadians": {
+            "Neck": [
+              -0.18,
+              0,
+              0
+            ],
+            "Head": [
+              0,
+              -0.25,
+              0
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.003869081018419354,
+            "visibleOutermostRayMinimumMeters": -0.00432709787957548,
+            "visibleOutermostRayMedianMeters": -0.0003137422128024276,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014999337145127356,
+            "worstVisibleSample": [
+              -0.00432709787957548,
+              2096,
+              [
+                0.06764506547217282,
+                1.4237963085585879,
+                -0.015548476679470272
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.0017622871150739816,
+            "visibleOutermostRayMinimumMeters": 0.0015793660136742419,
+            "visibleOutermostRayMedianMeters": 0.0022516366909386123,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.001579382922500372,
+            "worstVisibleSample": [
+              0.0015793660136742419,
+              2119,
+              [
+                0.05789139260803608,
+                1.4153385897471402,
+                0.02504308778307245
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.003869081018419354,
+            "visibleOutermostRayMinimumMeters": -0.00432709787957548,
+            "visibleOutermostRayMedianMeters": 0.009612223454709848,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014999337145127356,
+            "worstVisibleSample": [
+              -0.00432709787957548,
+              2096,
+              [
+                0.06764506547217282,
+                1.4237963085585879,
+                -0.015548476679470272
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.0017622871150739816,
+            "visibleOutermostRayMinimumMeters": 0.0015793660136742419,
+            "visibleOutermostRayMedianMeters": 0.010627793949337092,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.001579382922500372,
+            "worstVisibleSample": [
+              0.0015793660136742419,
+              2119,
+              [
+                0.05789139260803608,
+                1.4153385897471402,
+                0.02504308778307245
+              ]
+            ]
+          }
+        },
+        "neck-side": {
+          "rotationsRadians": {
+            "Neck": [
+              0,
+              -0.28,
+              0
+            ],
+            "Head": [
+              0,
+              0,
+              0.12
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.00406987961898093,
+            "visibleOutermostRayMinimumMeters": -0.004572802016682665,
+            "visibleOutermostRayMedianMeters": -0.0003129888091485681,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014767136599402875,
+            "worstVisibleSample": [
+              -0.004572802016682665,
+              2096,
+              [
+                0.06755779257033494,
+                1.4272366940447465,
+                0.014927150158630931
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.001494624112813915,
+            "visibleOutermostRayMinimumMeters": 0.001556638097932943,
+            "visibleOutermostRayMedianMeters": 0.002265400545170412,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015566451475024223,
+            "worstVisibleSample": [
+              0.001556638097932943,
+              2120,
+              [
+                0.04281182478283894,
+                1.4025765657424927,
+                0.05425443115539353
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.00406987961898093,
+            "visibleOutermostRayMinimumMeters": -0.004572802016682665,
+            "visibleOutermostRayMedianMeters": 0.00951130696598685,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00014767136599402875,
+            "worstVisibleSample": [
+              -0.004572802016682665,
+              2096,
+              [
+                0.06755779257033494,
+                1.4272366940447465,
+                0.014927150158630931
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.001494624112813915,
+            "visibleOutermostRayMinimumMeters": 0.001556638097932943,
+            "visibleOutermostRayMedianMeters": 0.010291391416287913,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0015566451475024223,
+            "worstVisibleSample": [
+              0.001556638097932943,
+              2120,
+              [
+                0.04281182478283894,
+                1.4025765657424927,
+                0.05425443115539353
+              ]
+            ]
+          }
+        },
+        "arm-neck-flex": {
+          "rotationsRadians": {
+            "Chest": [
+              0,
+              0.1,
+              0
+            ],
+            "Neck": [
+              0.12,
+              0.18,
+              0
+            ],
+            "Head": [
+              0,
+              -0.22,
+              0
+            ],
+            "LeftArm": [
+              0,
+              0,
+              0.8
+            ],
+            "LeftForeArm": [
+              -0.35,
+              0,
+              0
+            ],
+            "RightArm": [
+              0,
+              0,
+              -0.55
+            ]
+          },
+          "collarBaseline": {
+            "referenceMinimumMeters": -0.0038765760887516333,
+            "visibleOutermostRayMinimumMeters": -0.004332104112408227,
+            "visibleOutermostRayMedianMeters": -0.0003099367219261145,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00015225699462462217,
+            "worstVisibleSample": [
+              -0.004332104112408227,
+              2096,
+              [
+                0.06769750598963604,
+                1.4247058106470598,
+                -0.00965001393794507
+              ]
+            ]
+          },
+          "collarFinished": {
+            "referenceMinimumMeters": 0.0017405438782346601,
+            "visibleOutermostRayMinimumMeters": 0.0014799355570062787,
+            "visibleOutermostRayMedianMeters": 0.0022667122361300167,
+            "visibleRaySamples": 40,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0014799409545958042,
+            "worstVisibleSample": [
+              0.0014799355570062787,
+              2120,
+              [
+                0.0619613938617102,
+                1.398754720907907,
+                0.038214842768117784
+              ]
+            ]
+          },
+          "changedBaseline": {
+            "referenceMinimumMeters": -0.0038765760887516333,
+            "visibleOutermostRayMinimumMeters": -0.004332104112408227,
+            "visibleOutermostRayMedianMeters": 0.00964946137035152,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 23,
+            "visibleNearestEuclideanMinimumMeters": 0.00015225699462462217,
+            "worstVisibleSample": [
+              -0.004332104112408227,
+              2096,
+              [
+                0.06769750598963604,
+                1.4247058106470598,
+                -0.00965001393794507
+              ]
+            ]
+          },
+          "changedFinished": {
+            "referenceMinimumMeters": 0.0017405438782346601,
+            "visibleOutermostRayMinimumMeters": 0.0014799355570062787,
+            "visibleOutermostRayMedianMeters": 0.010713605520983301,
+            "visibleRaySamples": 153,
+            "visibleNegativeSamples": 0,
+            "visibleNearestEuclideanMinimumMeters": 0.0014799409545958042,
+            "worstVisibleSample": [
+              0.0014799355570062787,
+              2120,
+              [
+                0.0619613938617102,
+                1.398754720907907,
+                0.038214842768117784
+              ]
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "status": "Numeric helper fixture and actual decoded P01/P04 collar correctness accepted; finite scope only. See decoded proof and phone review; overall cloth remains about7.5 in independent review.",
+  "decodedProof": "source/character-cloth-finish31-decoded-proof.json",
+  "phoneReview": "iterations/31/preflight/CLOTH-FINISH-REVIEW.md"
+}

@@ -1,0 +1,1956 @@
+{
+  "schemaVersion": 2,
+  "partial": false,
+  "mode": "verifyExistingNativeAfterAppendOnlyGeometryPatch",
+  "dryRun": false,
+  "modelsMutated": false,
+  "source": "animations.json",
+  "motionSHA256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "clipCount": 31,
+  "fps": 30,
+  "rootMotion": false,
+  "authored": true,
+  "motionCapture": false,
+  "modelCount": 16,
+  "maxGlbBytes": 1494560,
+  "nativePayloadRetainedByteExact": true,
+  "entries": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-01-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-01-lod0.glb",
+      "beforeBytes": 1336564,
+      "bytes": 1452956,
+      "addedBytes": 116392,
+      "sha256": "a10ee1699c6ba8b4f1eda1808e098d8d5a93ce0a06778a019807ff9c6b92e267",
+      "baselineSha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35365,
+      "originalFullBinaryBytes": 1198600,
+      "originalFullBinarySha256": "461bc02b3ac0e8602ed0f5177d43370bd578fcc19a31d15f0ddef50187b9383c",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 115960,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30215,
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 212719,
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 121600,
+          "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-01-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-01-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-01-lod1.glb",
+      "beforeBytes": 889984,
+      "bytes": 944336,
+      "addedBytes": 54352,
+      "sha256": "3f2bd44f1914f4f83a7a6cdb882601e6b307dd4073a07c9edc37a5c863983d28",
+      "baselineSha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5781,
+      "originalFullBinaryBytes": 752032,
+      "originalFullBinarySha256": "7e1f26b6bf8cad44e61e3c4ebbdf63fa42d2c0f01ceb082ee78089e0bd92e8c7",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 53920,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30215,
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 212719,
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 121600,
+          "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-02-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-02-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-02-lod0.glb",
+      "beforeBytes": 1309188,
+      "bytes": 1425840,
+      "addedBytes": 116652,
+      "sha256": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+      "baselineSha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 33865,
+      "originalFullBinaryBytes": 1171848,
+      "originalFullBinarySha256": "0fc6ab7e68faf759047d12aa3f7b3e838d904539a66b0bee011e695d21ba67bf",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 116220,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30271,
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 200843,
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 115832,
+          "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-02-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-02-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-02-lod1.glb",
+      "beforeBytes": 869612,
+      "bytes": 924844,
+      "addedBytes": 55232,
+      "sha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "baselineSha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5778,
+      "originalFullBinaryBytes": 732232,
+      "originalFullBinarySha256": "9dbfe76b7b2af2ce29398bdbc8bbeccf3fe1e8764e445fdf4294886e569ef676",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 54800,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30271,
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 200843,
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 115832,
+          "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-03-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-03-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-03-lod0.glb",
+      "beforeBytes": 1361628,
+      "bytes": 1477440,
+      "addedBytes": 115812,
+      "sha256": "474bab206170ec80d56bfe30833136a34aabc317bbb6d9a17c4edb4d7f510a4e",
+      "baselineSha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35296,
+      "originalFullBinaryBytes": 1222604,
+      "originalFullBinarySha256": "8984718e342c7af264c36e8ed2bf172fb6399a01ef975d214b347e29df23ad32",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 115380,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212779,
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30071,
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 142894,
+          "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-03-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-03-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-03-lod1.glb",
+      "beforeBytes": 911836,
+      "bytes": 965948,
+      "addedBytes": 54112,
+      "sha256": "5438af304eefb02dd1b54bd4e5c00670ddb1ff3a6afe6e7f7b6d31e8abfb8180",
+      "baselineSha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5759,
+      "originalFullBinaryBytes": 772892,
+      "originalFullBinarySha256": "66f823537050df7ddeb53acc2501ec21c056553250dd471f16b8e99b09dfafa6",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 53680,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212779,
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30071,
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 142894,
+          "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-04-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-04-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-04-lod0.glb",
+      "beforeBytes": 1378168,
+      "bytes": 1494560,
+      "addedBytes": 116392,
+      "sha256": "9819043a3d8096299ceeffc54adcde8e5faf922aed166de978038637e0b6e5b1",
+      "baselineSha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35327,
+      "originalFullBinaryBytes": 1240224,
+      "originalFullBinarySha256": "b65d412baeaf2982931d224dc6d314950e6d8eddaf766b691c3bb81cdd5724a6",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 115960,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212999,
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30128,
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 160098,
+          "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-04-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-04-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-04-lod1.glb",
+      "beforeBytes": 929072,
+      "bytes": 983444,
+      "addedBytes": 54372,
+      "sha256": "44cefd62773857678787254f2504e98b9d6aaaac1d956b3527d867a59b3a7b35",
+      "baselineSha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5780,
+      "originalFullBinaryBytes": 791260,
+      "originalFullBinarySha256": "557e6d6baaa83943d283474f11c6cc9bd1a9c9d3366e7803936028b35832795c",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 53940,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212999,
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30128,
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 160098,
+          "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-05-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-05-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-05-lod0.glb",
+      "beforeBytes": 1273936,
+      "bytes": 1390208,
+      "addedBytes": 116272,
+      "sha256": "14487a98d38e67d2c26c7d8b1fb8961465d9ce8d446b95430fa52a9bddfb27a0",
+      "baselineSha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 33673,
+      "originalFullBinaryBytes": 1136136,
+      "originalFullBinarySha256": "8c2d3bd45f92b819078cd137382889638367d8f485a7c60f33e8f2b0be363258",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 115840,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212979,
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30204,
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 110934,
+          "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-05-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-05-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-05-lod1.glb",
+      "beforeBytes": 875864,
+      "bytes": 930292,
+      "addedBytes": 54428,
+      "sha256": "9236d88ed2e6b9b8c4711c34b96317f583327177ca245cf170a497c1ca3c8ebb",
+      "baselineSha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5773,
+      "originalFullBinaryBytes": 737944,
+      "originalFullBinarySha256": "f78d77b19b408cf284873178a41c3fd76c3193e60ac6fa98c4440f51596de45a",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 54000,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212979,
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30204,
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 110934,
+          "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-06-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-06-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-06-lod0.glb",
+      "beforeBytes": 1359124,
+      "bytes": 1475516,
+      "addedBytes": 116392,
+      "sha256": "f5506667facca228ec11e84c36fbd735da3d08f2a2d57609f54eca62a47359b5",
+      "baselineSha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35365,
+      "originalFullBinaryBytes": 1221240,
+      "originalFullBinarySha256": "e71fdc962e3b1307d5cbb8baef41b734f07239cf6212819f141ed7dc85f047c8",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 115960,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 29973,
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213521,
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 138386,
+          "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-06-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/player-06-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/player-06-lod1.glb",
+      "beforeBytes": 904828,
+      "bytes": 959316,
+      "addedBytes": 54488,
+      "sha256": "a0df76d393b9812379b334eca56bb1e36c2957cd8828e5b510c52f80f7b17704",
+      "baselineSha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5777,
+      "originalFullBinaryBytes": 767036,
+      "originalFullBinarySha256": "a29f534a635db45859747abb07ba11972a4775d4da78c9e772ecf96acb5a3c0e",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 54060,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 29973,
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213521,
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 138386,
+          "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/goalkeeper-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/goalkeeper-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/goalkeeper-lod0.glb",
+      "beforeBytes": 1352292,
+      "bytes": 1468864,
+      "addedBytes": 116572,
+      "sha256": "bf054c195f684ad687e76b84187f47c3c14347fa2651f737db7aac55f7b9030a",
+      "baselineSha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35426,
+      "originalFullBinaryBytes": 1214896,
+      "originalFullBinarySha256": "5856d6065253d089ab97bbbcbe4523a07af146524ac0684e1f646f883bf0fa7f",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 116140,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 202968,
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30852,
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 137478,
+          "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/goalkeeper-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/goalkeeper-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/goalkeeper-lod1.glb",
+      "beforeBytes": 896884,
+      "bytes": 951796,
+      "addedBytes": 54912,
+      "sha256": "deccb70c477ac427692fb32987ec6a3764da5f54ef5c8c1e9af43ba29c325c3f",
+      "baselineSha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5997,
+      "originalFullBinaryBytes": 759560,
+      "originalFullBinarySha256": "a24e65f67bd430e929929b99dabe0b8f7fc0e11c96ae32a7f22fd776d17f5ab6",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 54480,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 202968,
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30852,
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 137478,
+          "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/referee-lod0.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/referee-lod0.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/referee-lod0.glb",
+      "beforeBytes": 1360752,
+      "bytes": 1477204,
+      "addedBytes": 116452,
+      "sha256": "88a5d83154e79623aa9c82c0ab622b61dcb474f017dc4b272b6324c5e159a7a9",
+      "baselineSha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 35365,
+      "originalFullBinaryBytes": 1222816,
+      "originalFullBinarySha256": "592b7b77e7272c7866735c348a93532975711f15cfd5bcaee0cd54744372ee04",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 116020,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30104,
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213142,
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 144638,
+          "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/referee-lod1.glb",
+      "candidateFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/models/referee-lod1.glb",
+      "baselineFile": "/workspace/Bakasun/workout/island/design/soccer-v7/characters/iterations/35/frozen-package/models/referee-lod1.glb",
+      "beforeBytes": 912812,
+      "bytes": 967220,
+      "addedBytes": 54408,
+      "sha256": "c2f14d49c61f762b3a6dfde4abb60fe74a4ce63df0b332718c21576c245e5c8e",
+      "baselineSha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "triangles": 5778,
+      "originalFullBinaryBytes": 774976,
+      "originalFullBinarySha256": "483060e15ec966573ebba6bf68bedd638467152c1ffe643e0a73656a1bb5ac38",
+      "fullOriginalBinaryPrefixPreserved": true,
+      "nativeAnimationJsonUnchanged": true,
+      "nativeAccessorCount": 449,
+      "nativeAccessorPayloadSha256": "775ea79fa3520fda6b8c3fb1d0e90c6087259edce32e11907dacb467cdecd1ee",
+      "nativePayloadRetainedByteExact": true,
+      "postNativeGeometryBytes": 53980,
+      "modifiedClothPrimitives": 1,
+      "modelsMutated": false,
+      "sourceMotionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30104,
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213142,
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 144638,
+          "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d"
+        }
+      ],
+      "extensions": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material"
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/4"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/5"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/6"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/7"
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/bufferViews/8"
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,73 @@
+{
+  "sourceModel": "offline/goalkeeper-lod0.js",
+  "motionSHA256": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+  "beforeBytes": 876548,
+  "bytes": 1244980,
+  "addedBytes": 368432,
+  "beforeSha256": "2fde47c3ebcb508a404ed25163099ddcf2d47a3b773c26c416738dca69d43fb9",
+  "nativeContract": {
+    "keys": 22971,
+    "maxTimestampErrorSeconds": 9.536743172944284e-8,
+    "maxComponentError": 5.6587219354753415e-8,
+    "maxQuaternionNormError": 4.305054734921043e-8,
+    "pass": true
+  },
+  "geometryBinaryPreserved": true,
+  "geometryJsonPreserved": true,
+  "idempotent": true,
+  "originalBinarySha256": "14efd3d3e6c2b9a36d7b47d2b537f561219041e05eda9dbc0dc69ef740466a94",
+  "uniqueAccessorBytes": 252572,
+  "uniqueAccessors": 449,
+  "khronosErrors": 0,
+  "khronosWarnings": 4,
+  "issues": [
+    {
+      "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+      "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+      "severity": 1,
+      "pointer": "/meshes/0/primitives/0/material"
+    },
+    {
+      "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+      "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+      "severity": 1,
+      "pointer": "/meshes/0/primitives/1/material"
+    },
+    {
+      "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+      "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+      "severity": 1,
+      "pointer": "/meshes/0/primitives/2/material"
+    },
+    {
+      "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+      "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+      "severity": 1,
+      "pointer": "/meshes/0/primitives/3/material"
+    },
+    {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/bufferViews/4"
+    },
+    {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/bufferViews/5"
+    },
+    {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/bufferViews/6"
+    },
+    {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/bufferViews/7"
+    }
+  ]
+}

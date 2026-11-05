@@ -1,0 +1,131 @@
+{
+  "kind": "temporary-three-native-ball-action-foot-trajectory-correction",
+  "complete": false,
+  "pass": true,
+  "candidateMotionSHA256": "48e787f129c69ef0dce7ea3c72f73cbd6751784e17a8fbf473229f85d85ba041",
+  "baselineMotionSHA256": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+  "other28ClipsByteIdentical": true,
+  "rows": [
+    {
+      "id": "kick",
+      "hz": 30,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 1.2087002565133666e-07,
+      "nearGroundRigidVertexXZ": 0,
+      "minBootY": 0.0020000483788323864,
+      "maxAngular": 18.24188555102216,
+      "maxRelative": 9.701689820298778,
+      "maxLegReach": 0.7414077579947882,
+      "pass": true
+    },
+    {
+      "id": "kick",
+      "hz": 120,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 0.00012883702512109157,
+      "nearGroundRigidVertexXZ": 9.979218359877274e-06,
+      "minBootY": 0.0020000483788323864,
+      "maxAngular": 18.244709366130394,
+      "maxRelative": 10.046129784545638,
+      "maxLegReach": 0.7414077579947882,
+      "pass": true
+    },
+    {
+      "id": "kick",
+      "hz": 240,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 7.536059453543626e-05,
+      "nearGroundRigidVertexXZ": 7.558266269612396e-05,
+      "minBootY": 0.0020000483788323864,
+      "maxAngular": 18.244878214879193,
+      "maxRelative": 10.089013270466321,
+      "maxLegReach": 0.7414077579947882,
+      "pass": true
+    },
+    {
+      "id": "long_pass",
+      "hz": 30,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 1.0831293664047755e-06,
+      "nearGroundRigidVertexXZ": 1.106619480032116e-06,
+      "minBootY": 0.001999938941166901,
+      "maxAngular": 9.482317045668221,
+      "maxRelative": 4.798801552118117,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    },
+    {
+      "id": "long_pass",
+      "hz": 120,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 4.274532109970777e-05,
+      "nearGroundRigidVertexXZ": 4.2761325865344155e-05,
+      "minBootY": 0.001999938941166901,
+      "maxAngular": 9.489181423555095,
+      "maxRelative": 4.829425592378874,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    },
+    {
+      "id": "long_pass",
+      "hz": 240,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 2.4377098386613385e-05,
+      "nearGroundRigidVertexXZ": 2.4387847954314904e-05,
+      "minBootY": 0.001999938941166901,
+      "maxAngular": 9.489903100246861,
+      "maxRelative": 4.832564531551087,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "hz": 30,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 2.0539066663259088e-17,
+      "nearGroundRigidVertexXZ": 2.7755575615628914e-17,
+      "minBootY": 0.001999938941166887,
+      "maxAngular": 19.467703456054707,
+      "maxRelative": 4.624552803879771,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "hz": 120,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 0.0027613536716105088,
+      "nearGroundRigidVertexXZ": 0.002761514734741144,
+      "minBootY": 0.001999938941166887,
+      "maxAngular": 19.578039787092045,
+      "maxRelative": 4.6845873197401815,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "hz": 240,
+      "unchangedProtectedFrames": true,
+      "unchangedBallContactGeometry": true,
+      "nearGroundSoleXZ": 0.0013822028052775973,
+      "nearGroundRigidVertexXZ": 0.0013823165584490487,
+      "minBootY": 0.001999938941166887,
+      "maxAngular": 19.59874698158563,
+      "maxRelative": 4.688513864865093,
+      "maxLegReach": 0.765000019242163,
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "Canonical dense FK plus decoded native15 rigidCloth boot vertices. Final combined native-reembedded bundled viewer confirmation remains required.",
+    "No live generator, motion, model or viewer was modified."
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "fps": 30,
+  "clipCount": 31,
+  "file": "animations.json",
+  "rig": "rig.json",
+  "animationBytes": 992407,
+  "animationSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "authored": true,
+  "motionCapture": false,
+  "sources": [
+    {
+      "path": "motion/soccer.json",
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b"
+    },
+    {
+      "path": "motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076"
+    },
+    {
+      "path": "motion2/soccer/throws-receives.json",
+      "sha256": "c8f055cfe23c059c89c5c8de647df41e1a961f0473a228e870e415bd0d3c4fa2"
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "label": "עמידה ונשימה",
+      "duration": 1.8,
+      "fps": 30,
+      "frameCount": 55,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "run_1",
+      "label": "ריצה · 1.6 מ׳/ש׳",
+      "duration": 0.9,
+      "fps": 30,
+      "frameCount": 28,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "run_2",
+      "label": "ריצה · 2.4 מ׳/ש׳",
+      "duration": 0.8,
+      "fps": 30,
+      "frameCount": 25,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "run_3",
+      "label": "ריצה · 3.2 מ׳/ש׳",
+      "duration": 0.7,
+      "fps": 30,
+      "frameCount": 22,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "run_4",
+      "label": "ריצה · 4.2 מ׳/ש׳",
+      "duration": 0.6,
+      "fps": 30,
+      "frameCount": 19,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "run_5",
+      "label": "ריצה · 5.4 מ׳/ש׳",
+      "duration": 0.533333,
+      "fps": 30,
+      "frameCount": 17,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "sprint",
+      "label": "ספרינט · 7.2 מ׳/ש׳",
+      "duration": 0.466667,
+      "fps": 30,
+      "frameCount": 15,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "decelerate",
+      "label": "בלימה מריצה",
+      "duration": 1.0,
+      "fps": 30,
+      "frameCount": 31,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "turn_left",
+      "label": "פנייה שמאלה",
+      "duration": 0.8,
+      "fps": 30,
+      "frameCount": 25,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "turn_right",
+      "label": "פנייה ימינה",
+      "duration": 0.8,
+      "fps": 30,
+      "frameCount": 25,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "kick",
+      "label": "בעיטה לשער",
+      "duration": 0.666667,
+      "fps": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "short_pass",
+      "label": "מסירה קצרה",
+      "duration": 0.866667,
+      "fps": 30,
+      "frameCount": 27,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "long_pass",
+      "label": "מסירה ארוכה",
+      "duration": 1.3,
+      "fps": 30,
+      "frameCount": 40,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "header",
+      "label": "נגיחה בקפיצה",
+      "duration": 1.266667,
+      "fps": 30,
+      "frameCount": 39,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "dribble",
+      "label": "כדרור בריצה",
+      "duration": 0.8,
+      "fps": 30,
+      "frameCount": 25,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "slide_tackle",
+      "label": "גלישה לכדור",
+      "duration": 1.466667,
+      "fps": 30,
+      "frameCount": 45,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "fall",
+      "label": "נפילה לצד",
+      "duration": 0.866667,
+      "fps": 30,
+      "frameCount": 27,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "get_up",
+      "label": "קימה בתמיכת יד וברכיים",
+      "duration": 1.6,
+      "fps": 30,
+      "frameCount": 49,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "celebrate_arms_up",
+      "label": "חגיגה · ידיים למעלה",
+      "duration": 2.0,
+      "fps": 30,
+      "frameCount": 61,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "celebrate_fist_pump",
+      "label": "חגיגה · יד באוויר",
+      "duration": 1.8,
+      "fps": 30,
+      "frameCount": 55,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "celebrate_victory_leap",
+      "label": "חגיגה · ניתור",
+      "duration": 1.8,
+      "fps": 30,
+      "frameCount": 55,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "celebrate_aeroplane",
+      "label": "חגיגה · כנפיים",
+      "duration": 2.2,
+      "fps": 30,
+      "frameCount": 67,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "celebrate_applause",
+      "label": "חגיגה · מחיאות כפיים",
+      "duration": 2.2,
+      "fps": 30,
+      "frameCount": 67,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_dive_left",
+      "label": "שוער · זינוק שמאלה",
+      "duration": 1.466667,
+      "fps": 30,
+      "frameCount": 45,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_dive_right",
+      "label": "שוער · זינוק ימינה",
+      "duration": 1.466667,
+      "fps": 30,
+      "frameCount": 45,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_dive_high",
+      "label": "שוער · זינוק לפינה",
+      "duration": 1.666667,
+      "fps": 30,
+      "frameCount": 51,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_catch",
+      "label": "שוער · תפיסה וריכוך",
+      "duration": 1.2,
+      "fps": 30,
+      "frameCount": 37,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_throw",
+      "label": "שוער · הוצאה ביד",
+      "duration": 1.166667,
+      "fps": 30,
+      "frameCount": 36,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "keeper_punt",
+      "label": "שוער · הוצאה ברגל",
+      "duration": 1.666667,
+      "fps": 30,
+      "frameCount": 51,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "referee_whistle",
+      "label": "שופט · שריקה",
+      "duration": 1.6,
+      "fps": 30,
+      "frameCount": 49,
+      "loop": false,
+      "rootMotion": false
+    },
+    {
+      "id": "referee_signal",
+      "label": "שופט · הושטת יד",
+      "duration": 1.8,
+      "fps": 30,
+      "frameCount": 55,
+      "loop": false,
+      "rootMotion": false
+    }
+  ],
+  "canonicalContactMetrics": "source/motion-metrics.json"
+}

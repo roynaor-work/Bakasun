@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "kind": "recovery-state-and-six-arm-composition-check",
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "tests": [
+    {
+      "name": "catch keeps continuing dive body and changes only six arm locals",
+      "pass": true,
+      "maxNonArmAngleError": 0,
+      "contributors": [
+        {
+          "clipID": "keeper_dive_left",
+          "sampleSeconds": 0.9999999999999993,
+          "playbackRate": 1,
+          "weight": 1,
+          "scope": "body",
+          "transform": "identity"
+        },
+        {
+          "clipID": "keeper_catch",
+          "sampleSeconds": 0.19999999999999998,
+          "playbackRate": 1,
+          "weight": 0.7407407407407407,
+          "scope": "arms",
+          "transform": "chestTranslationGravityAlignedSixArmIK",
+          "requestID": 1
+        }
+      ]
+    },
+    {
+      "name": "latest request supersedes without resetting recovery episode",
+      "pass": true,
+      "episode": {
+        "id": 1,
+        "startedAt": 0,
+        "activationDeadline": 4.5,
+        "origin": {
+          "clipID": "keeper_dive_left",
+          "seconds": 0.8,
+          "frameHeadingQuaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "measured": {
+            "minimumY": 0.002,
+            "pelvisHeight": 0.18,
+            "hipsUpDot": 0,
+            "soles": {
+              "LeftFoot": [
+                0.4,
+                0.12,
+                0.2
+              ],
+              "RightFoot": [
+                0.3,
+                0.15,
+                -0.1
+              ]
+            },
+            "hands": {
+              "LeftHand": {
+                "position": [
+                  0.3,
+                  0.03,
+                  0.05
+                ],
+                "orientation": [
+                  -0.766,
+                  0,
+                  0,
+                  0.643
+                ]
+              }
+            }
+          }
+        },
+        "closedAt": null,
+        "deadlineBreached": false
+      },
+      "requests": [
+        {
+          "id": 1,
+          "clipID": "keeper_catch",
+          "requestedAt": 0,
+          "status": "superseded",
+          "progress": 0.16666666666666666,
+          "activatedAt": 0,
+          "completedAt": null,
+          "episodeID": 1,
+          "activationDeadline": 4.5,
+          "entrySeconds": 0,
+          "scope": "arms",
+          "mirrored": false,
+          "playbackRate": 1,
+          "completionDeadline": 1.5499999999999998,
+          "sampleSeconds": 0.19999999999999998,
+          "firstProgressAt": 0.008333333333333333,
+          "supersededBy": 2,
+          "endedAt": 0.19999999999999998
+        },
+        {
+          "id": 2,
+          "clipID": "keeper_throw",
+          "requestedAt": 0.19999999999999998,
+          "status": "superseded",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 1,
+          "activationDeadline": 4.5,
+          "supersededBy": 3,
+          "endedAt": 0.3
+        },
+        {
+          "id": 3,
+          "clipID": "kick",
+          "requestedAt": 0.3,
+          "status": "queued",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 1,
+          "activationDeadline": 4.5
+        }
+      ]
+    },
+    {
+      "name": "queued kick begins at normal authored entry within fixed recovery deadline",
+      "pass": true,
+      "request": {
+        "id": 3,
+        "clipID": "kick",
+        "requestedAt": 0.3,
+        "status": "active",
+        "progress": 0,
+        "activatedAt": 3.3666666666666574,
+        "completedAt": null,
+        "episodeID": 1,
+        "activationDeadline": 4.5,
+        "entrySeconds": 0,
+        "scope": "body",
+        "mirrored": false,
+        "playbackRate": 1,
+        "completionDeadline": 4.383333666666657,
+        "sampleSeconds": 0
+      }
+    },
+    {
+      "name": "activation has actual authored phase progression",
+      "pass": true,
+      "request": {
+        "id": 3,
+        "clipID": "kick",
+        "requestedAt": 0.3,
+        "status": "active",
+        "progress": 0.0499999750000125,
+        "activatedAt": 3.3666666666666574,
+        "completedAt": null,
+        "episodeID": 1,
+        "activationDeadline": 4.5,
+        "entrySeconds": 0,
+        "scope": "body",
+        "mirrored": false,
+        "playbackRate": 1,
+        "completionDeadline": 4.383333666666657,
+        "sampleSeconds": 0.03333333333333333,
+        "firstProgressAt": 3.3999999999999906
+      }
+    },
+    {
+      "name": "right-side recovery reflects side orientation and swaps limbs",
+      "pass": true,
+      "mirroredHips": [
+        0.05142999579778378,
+        -0.04712699614937112,
+        0.6739449449336457,
+        0.7354809399056935
+      ]
+    },
+    {
+      "name": "paused standalone preview bypasses recovery queue",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "limits": [
+    "State transitions and canonical arm-scope composition with synthetic measured context only.",
+    "This is not a geometry, foot drift, reach, actual-ball contact or rendered-transition proof. Root actual adapter must supply real FK measurements and audit all intermediate states."
+  ]
+}

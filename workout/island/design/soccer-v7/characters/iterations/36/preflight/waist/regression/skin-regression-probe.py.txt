@@ -1,0 +1,61 @@
+import json,hashlib,time,os
+from pathlib import Path
+import numpy as np
+from scipy.spatial.transform import Rotation
+ROOT=Path('/tmp/soccer-v7-waist36');D=json.load(open(ROOT/'decoded-regression.json'));F=json.load(open(ROOT/'regression-fixtures.json'))['fixtures'];W,H=390,844
+M=lambda a:np.array(a,float).reshape(4,4).T
+
+def prepared(d,surface):
+ p=next(p for p in d['parts'] if p['surface']==surface);v=np.array(p['position']).reshape(-1,3);uv=np.array(p['uv']).reshape(-1,2);j=np.array(p['joints']).reshape(-1,4);w=np.array(p['weights']).reshape(-1,4);full=np.zeros((len(v),18))
+ for k in range(4):full[np.arange(len(v)),j[:,k]]+=w[:,k]
+ tri=np.array(p['indices']).reshape(-1,3)
+ side=np.where(v[tri,0].mean(1)>=0,0,1)
+ if surface=='Skin':
+  leg=full[:,12:18].sum(1);keep=(leg[tri].mean(1)>.75)&(v[tri,1].max(1)>.61)&(v[tri,1].min(1)<.67)
+  left=full[:,12:15].sum(1);right=full[:,15:18].sum(1);side=np.where(left[tri].mean(1)>=right[tri].mean(1),0,1)
+ else:
+  short=(uv[:,0]>.615)&(uv[:,0]<.995)&(uv[:,1]>.455)&(uv[:,1]<.645);keep=short[tri].all(1)
+ return {'v':v,'full':full,'tri':tri[keep],'side':side[keep],'surface':surface}
+
+def posed(p,d,f):
+ v=p['v'];mesh=next(m for m in f['meshes'] if m['material']==[p['surface']]);vb=np.c_[v,np.ones(len(v))]@M(mesh['bindMatrix']).T;out=np.zeros_like(vb)
+ for k,name in enumerate(d['joints']):out+=(vb@(M(f['bones'][name]['matrixWorld'])@M(mesh['boneInverses'][k])).T)*p['full'][:,k,None]
+ world=out@(M(mesh['matrixWorld'])@M(mesh['bindMatrixInverse'])).T
+ cam=np.eye(4);cam[:3,:3]=Rotation.from_quat(f['camera']['quaternion']).as_matrix();cam[:3,3]=f['camera']['position'];clip=world@(M(f['camera']['projectionMatrix'])@np.linalg.inv(cam)).T;ndc=clip[:,:3]/clip[:,3,None]
+ return np.c_[(ndc[:,0]+1)*W/2,(1-ndc[:,1])*H/2,ndc[:,2]],1/clip[:,3]
+
+def raster(screen,invw,tri,attr):
+ depth=np.full((H,W),np.inf);ymap=np.full((H,W),np.nan);tid=np.full((H,W),-1,int)
+ for i,t in enumerate(tri):
+  q=screen[t];xmin=max(0,int(np.floor(q[:,0].min())));xmax=min(W-1,int(np.ceil(q[:,0].max())));ymin=max(0,int(np.floor(q[:,1].min())));ymax=min(H-1,int(np.ceil(q[:,1].max())))
+  if xmax<xmin or ymax<ymin:continue
+  a,b,c=q;den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1])
+  # Actual production Skin and Cloth use front faces only. Projection flips Y.
+  if den>=-1e-12:continue
+  yy,xx=np.mgrid[ymin:ymax+1,xmin:xmax+1];xx=xx+.5;yy=yy+.5;u=((b[1]-c[1])*(xx-c[0])+(c[0]-b[0])*(yy-c[1]))/den;v=((c[1]-a[1])*(xx-c[0])+(a[0]-c[0])*(yy-c[1]))/den;w=1-u-v;z=u*a[2]+v*b[2]+w*c[2];old=depth[ymin:ymax+1,xmin:xmax+1];hit=(u>=0)&(v>=0)&(w>=0)&(z<old)
+  old[hit]=z[hit];tid[ymin:ymax+1,xmin:xmax+1][hit]=i
+  av=attr[t]*invw[t];rest=(u*av[0]+v*av[1]+w*av[2])/(u*invw[t[0]]+v*invw[t[1]]+w*invw[t[2]]);ymap[ymin:ymax+1,xmin:xmax+1][hit]=rest[hit]
+ return depth,ymap,tid
+
+start=time.time();results=[];masks={};cache={}
+for d in D:
+ skin=prepared(d,'Skin');short=prepared(d,'Cloth');print('prepared',d['variant'],d['lod'],'skin',len(skin['tri']),'shorts',len(short['tri']),flush=True)
+ for i,f in enumerate(F):
+  ss,si=posed(skin,d,f);cs,ci=posed(short,d,f);projection=M(f['camera']['projectionMatrix']);m22=projection[2,2];m23=projection[2,3];mask=np.zeros((H,W),bool);core=np.zeros_like(mask);depthgap=[];witness=[]
+  for side in (0,1):
+   sselect=skin['side']==side;cselect=short['side']==side
+   sd,sy,st=raster(ss,si,skin['tri'][sselect],skin['v'][:,1]);cd,cy,ct=raster(cs,ci,short['tri'][cselect],short['v'][:,1]);valid=np.isfinite(sd)&np.isfinite(cd)&(sy>=.615)&(sy<=.667)
+   delta=np.zeros((H,W));delta[valid]=m23/(cd[valid]+m22)-m23/(sd[valid]+m22)
+   exposed=valid&(delta>.001);inside=exposed&(sy>=.625);mask|=exposed;core|=inside
+   if exposed.any():
+    depthgap.extend(delta[exposed].tolist());witness.extend(np.unique(st[exposed]).tolist())
+  row={'variant':d['variant'],'lod':d['lod'],'label':f['label'],'frame':f.get('frame'),'clip':f.get('requestedClip'),'skinInShortsSilhouettePixels':int(mask.sum()),'coreRestY625mmPixels':int(core.sum()),'minimumRestY':.615,'coreMinimumRestY':.625,'depthThresholdMeters':.001,'maxPositiveDepthGapMeters':max(depthgap,default=0)}
+  if mask.any():ys,xs=np.where(mask);row['screenBounds']=[int(xs.min()),int(ys.min()),int(xs.max()),int(ys.max())]
+  results.append(row);masks[(d['variant'],d['lod'],f['label'])]=mask
+  if (i+1)%17==0:print('progress',d['variant'],d['lod'],i+1,'elapsed',round(time.time()-start,1),flush=True)
+pairs=[]
+for lod in (0,1):
+ for f in F:
+  b=masks[('baseline',lod,f['label'])];c=masks[('candidate',lod,f['label'])];br=next(r for r in results if r['variant']=='baseline' and r['lod']==lod and r['label']==f['label']);cr=next(r for r in results if r['variant']=='candidate' and r['lod']==lod and r['label']==f['label']);pairs.append({'lod':lod,'label':f['label'],'baselinePixels':int(b.sum()),'candidatePixels':int(c.sum()),'newCandidatePixels':int((c&~b).sum()),'removedCandidatePixels':int((b&~c).sum()),'baselineCorePixels':br['coreRestY625mmPixels'],'candidateCorePixels':cr['coreRestY625mmPixels']})
+source=Path(__file__);report={'kind':'actual-delivered-upperleg-skin-versus-exported-shorts-visibility-regression','generatedSeconds':time.time()-start,'complete':len(results)==272,'fixtures':len(F),'posedModelCases':len(results),'method':'Front-face rasterization of actual decoded exported Skin and shorts triangles under exact captured Three bone matrices/camera at390x844. Per-leg comparison excludes arm/hand source triangles and opposite-leg silhouette overlap. Perspective-correct source restY restricts Skin witnesses to.615-.667m, with core threshold.625m. Count Skin nearer camera than same-leg shorts by>1mm. Lower exposed legs below shorts source hem are excluded.','limitations':['Camera-visible same-leg silhouette diagnostic, not full 3D collision or full PBR render.','Depth rays can detect legitimate self-overlap where the same thigh bends across its own shorts silhouette; actual action images decide severity.','Triangles are culled using production front-face material setting.','All upperleg Skin is the delivered clipped geometry, never hidden full anatomical reference.','Both LODs use identical captured pose/camera fixtures; far geometry diagnostic is not a separately captured far film.'],'inputs':[{'file':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}for p in [ROOT/'regression-fixtures.json',ROOT/'decoded-regression.json',source]],'summary':{'baselineTotalPixels':sum(r['baselinePixels']for r in pairs),'candidateTotalPixels':sum(r['candidatePixels']for r in pairs),'newCandidatePixels':sum(r['newCandidatePixels']for r in pairs),'newPositiveCases':sum(r['newCandidatePixels']>0 for r in pairs),'candidatePositiveCases':sum(r['candidatePixels']>0 for r in pairs)},'pairs':pairs,'results':results}
+(ROOT/'skin-regression-result.json').write_text(json.dumps(report,indent=2)+'\n');print('DONE',json.dumps(report['summary']),flush=True)

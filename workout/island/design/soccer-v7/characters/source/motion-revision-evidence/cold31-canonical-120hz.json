@@ -1,0 +1,892 @@
+{
+  "kind": "cold31-source-rigid-boot-native-prescan",
+  "complete": false,
+  "actualViewerConfirmationRequired": true,
+  "hz": 120,
+  "motionSHA256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "decodedNative15BootSHA256": "189b11be43c63fe660cdc31c81c64834cc8aec8248968ed63b25b2c4915afce4",
+  "thresholds": {
+    "sameRigidVertexBothYAtMost": 0.008,
+    "xzStepAbove": 0.003,
+    "minimumFixedWitnesses": 7,
+    "maximumFootRotationDegrees": 1
+  },
+  "rows": [
+    {
+      "id": "idle",
+      "duration": 1.8,
+      "samples": 217,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.001999938941166901,
+      "maxAngular": 0.04254042491083767,
+      "maxRelative": 0.0125425251972367,
+      "worstAngular": {
+        "time": 0.008333333333333333,
+        "bone": "Spine"
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "run_1",
+      "duration": 0.9,
+      "samples": 109,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.002246159121757778,
+      "maximumNearGroundSoleStep": 0.002302536380517926,
+      "minimumBootY": 6.0157013141409754e-05,
+      "maxAngular": 6.319237556513534,
+      "maxRelative": 2.546323717917288,
+      "worstAngular": {
+        "time": 0.24166666666666667,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.38333333333333336,
+        "foot": "LeftFoot",
+        "before": [
+          0.10009537365281346,
+          0.0036780473122531993,
+          0.3046515434843692
+        ],
+        "after": [
+          0.10012601920743813,
+          0.0076033464109167,
+          0.30695387591770507
+        ],
+        "degrees": 0.334862996050564
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "run_2",
+      "duration": 0.8,
+      "samples": 97,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0011897171675922342,
+      "maximumNearGroundSoleStep": 0.0025780412726739677,
+      "minimumBootY": -0.0024711196092919163,
+      "maxAngular": 9.141879983761463,
+      "maxRelative": 3.2381175384071876,
+      "worstAngular": {
+        "time": 0.03333333333333333,
+        "bone": "LeftLeg"
+      },
+      "worstNearSole": {
+        "t": 0.8,
+        "foot": "LeftFoot",
+        "before": [
+          0.09994773836554684,
+          0.007032017080844277,
+          2.2630223677387353
+        ],
+        "after": [
+          0.1,
+          5.023039234275384e-07,
+          2.2655998792372887
+        ],
+        "degrees": 2.1161000113999564
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "run_3",
+      "duration": 0.7,
+      "samples": 85,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.004867310457233654,
+      "maximumNearGroundSoleStep": 0.004885901934280197,
+      "minimumBootY": -0.004242999356485366,
+      "maxAngular": 10.933522466372809,
+      "maxRelative": 3.9757870618023903,
+      "worstAngular": {
+        "time": 0.03333333333333333,
+        "bone": "LeftLeg"
+      },
+      "worstNearSole": {
+        "t": 0.575,
+        "foot": "RightFoot",
+        "before": [
+          -0.09999943407130803,
+          6.189613548091e-08,
+          1.4783989535289725
+        ],
+        "after": [
+          -0.1001296611356077,
+          0.005682991300748161,
+          1.4832831196423564
+        ],
+        "degrees": 0.43730376501475826
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "run_4",
+      "duration": 0.6,
+      "samples": 73,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0008110706839301981,
+      "maximumNearGroundSoleStep": 0.0008043611667691225,
+      "minimumBootY": -0.006606441962289988,
+      "maxAngular": 12.949101134970702,
+      "maxRelative": 4.838764261821917,
+      "worstAngular": {
+        "time": 0.3333333333333333,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.06666666666666667,
+        "foot": "LeftFoot",
+        "before": [
+          0.0997347804574976,
+          -0.0034558909502284824,
+          0.35204109039291265
+        ],
+        "after": [
+          0.10000026978384845,
+          -3.550394254286937e-07,
+          0.35280037446636603
+        ],
+        "degrees": 0.020054198023713454
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "run_5",
+      "duration": 0.533333,
+      "samples": 65,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0011039180793304775,
+      "maximumNearGroundSoleStep": 0.0010874599799627178,
+      "minimumBootY": -0.01016025690288637,
+      "maxAngular": 17.164954145571837,
+      "maxRelative": 6.295761198266224,
+      "worstAngular": {
+        "time": 0.1,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.3333333333333333,
+        "foot": "RightFoot",
+        "before": [
+          -0.09955256681405525,
+          -0.00534174991928045,
+          1.813409719814111
+        ],
+        "after": [
+          -0.10000073951782051,
+          1.0852443989295413e-07,
+          1.8144005328315973
+        ],
+        "degrees": 0.03617090133452753
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "sprint",
+      "duration": 0.466667,
+      "samples": 57,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.002893040410281248,
+      "maximumNearGroundSoleStep": 0.002892605665428426,
+      "minimumBootY": -0.01578848889090384,
+      "maxAngular": 20.565318744251222,
+      "maxRelative": 8.380467558813823,
+      "worstAngular": {
+        "time": 0.2916666666666667,
+        "bone": "LeftUpLeg"
+      },
+      "worstNearSole": {
+        "t": 0.03333333333333333,
+        "foot": "LeftFoot",
+        "before": [
+          0.09961510294391192,
+          -0.013169111112336512,
+          0.36673242021047114
+        ],
+        "after": [
+          0.10000012689851863,
+          -1.0178295195423237e-06,
+          0.36959928680835247
+        ],
+        "degrees": 0.028177580843010717
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "decelerate",
+      "duration": 1.0,
+      "samples": 121,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0009436214584978498,
+      "maximumNearGroundSoleStep": 0.0009433449015015672,
+      "minimumBootY": -0.004317268024607107,
+      "maxAngular": 13.967139126698813,
+      "maxRelative": 5.305856196235465,
+      "worstAngular": {
+        "time": 0.14166666666666666,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.1,
+        "foot": "LeftFoot",
+        "before": [
+          0.10003694964391761,
+          -0.0046984810400052535,
+          0.6229825743044209
+        ],
+        "after": [
+          0.09999944857055543,
+          -3.0137855348832954e-07,
+          0.6239251735154782
+        ],
+        "degrees": 0.005458674301653861
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "turn_left",
+      "duration": 0.8,
+      "samples": 97,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.00018046551573359492,
+      "maximumNearGroundSoleStep": 0.001447652988677133,
+      "minimumBootY": 0.001721563591349437,
+      "maxAngular": 5.861591150338426,
+      "maxRelative": 2.5711401451034686,
+      "worstAngular": {
+        "time": 0.075,
+        "bone": "LeftLeg"
+      },
+      "worstNearSole": {
+        "t": 0.7,
+        "foot": "RightFoot",
+        "before": [
+          0.14932577632224328,
+          0.007941550290427549,
+          0.26532156251692673
+        ],
+        "after": [
+          0.14999992020532746,
+          -3.8206946863239555e-07,
+          0.26660266719669573
+        ],
+        "degrees": 1.0246630530079734
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "turn_right",
+      "duration": 0.8,
+      "samples": 97,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.00018046556413702284,
+      "maximumNearGroundSoleStep": 0.001447652988677133,
+      "minimumBootY": 0.0017215604056184525,
+      "maxAngular": 5.861591150338426,
+      "maxRelative": 2.5711401451034686,
+      "worstAngular": {
+        "time": 0.075,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.7,
+        "foot": "LeftFoot",
+        "before": [
+          -0.14932577632224328,
+          0.007941550290427549,
+          0.26532156251692673
+        ],
+        "after": [
+          -0.14999992020532746,
+          -3.8206946863239555e-07,
+          0.26660266719669573
+        ],
+        "degrees": 1.0246630530079734
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "kick",
+      "duration": 0.666667,
+      "samples": 81,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 2.4748663704978117e-05,
+      "maximumNearGroundSoleStep": 0.00012883702512109157,
+      "minimumBootY": 0.0019830690109581134,
+      "maxAngular": 18.244709366130394,
+      "maxRelative": 10.046129784545638,
+      "worstAngular": {
+        "time": 0.2,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.008333333333333333,
+        "foot": "RightFoot",
+        "before": [
+          -0.1,
+          1.5089387099542773e-07,
+          -5.785785507506058e-07
+        ],
+        "after": [
+          -0.10011749608147252,
+          0.007574379216448643,
+          -5.3433567725436996e-05
+        ],
+        "degrees": 0.008627390428261394
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "short_pass",
+      "duration": 0.866667,
+      "samples": 105,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0021145519624545042,
+      "maximumNearGroundSoleStep": 0.011395495150612523,
+      "minimumBootY": 0.0013796604094312437,
+      "maxAngular": 11.789091009248038,
+      "maxRelative": 6.120919422567693,
+      "worstAngular": {
+        "time": 0.275,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.7666666666666667,
+        "foot": "RightFoot",
+        "before": [
+          -0.10000942827952017,
+          0.00696861019490716,
+          0.01601234095283046
+        ],
+        "after": [
+          -0.10000067580374816,
+          0.002408177712341822,
+          0.004616849163451586
+        ],
+        "degrees": 0.004011921881892509
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "long_pass",
+      "duration": 1.3,
+      "samples": 157,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0003569631543980084,
+      "maximumNearGroundSoleStep": 0.0003442957598007026,
+      "minimumBootY": 0.0016687816012832396,
+      "maxAngular": 9.489181423555095,
+      "maxRelative": 4.829425592378874,
+      "worstAngular": {
+        "time": 0.44166666666666665,
+        "bone": "RightLeg"
+      },
+      "worstNearSole": {
+        "t": 0.175,
+        "foot": "LeftFoot",
+        "before": [
+          0.09999891651330724,
+          3.9366802584428484e-07,
+          -2.1942089177731932e-07
+        ],
+        "after": [
+          0.10034205330302948,
+          -0.0002357810954254913,
+          2.8006697436085134e-05
+        ],
+        "degrees": 0.020308011878971424
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "header",
+      "duration": 1.266667,
+      "samples": 153,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0007483967315403406,
+      "maximumNearGroundSoleStep": 0.0007483965020592331,
+      "minimumBootY": 0.001390323841387875,
+      "maxAngular": 15.190686949385848,
+      "maxRelative": 3.686616182012865,
+      "worstAngular": {
+        "time": 0.65,
+        "bone": "Head"
+      },
+      "worstNearSole": {
+        "t": 0.275,
+        "foot": "RightFoot",
+        "before": [
+          -0.1,
+          0.0015863971727484716,
+          -0.0002968871442254517
+        ],
+        "after": [
+          -0.1,
+          0.005578648343896361,
+          -0.0010452836462846848
+        ],
+        "degrees": 6.156649318399951e-06
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "dribble",
+      "duration": 0.8,
+      "samples": 97,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0011995346713940726,
+      "maximumNearGroundSoleStep": 0.0012033251471713989,
+      "minimumBootY": -0.0024711196092919163,
+      "maxAngular": 10.479522544549564,
+      "maxRelative": 3.5738118000300103,
+      "worstAngular": {
+        "time": 0.6416666666666667,
+        "bone": "LeftLeg"
+      },
+      "worstNearSole": {
+        "t": 0.2916666666666667,
+        "foot": "LeftFoot",
+        "before": [
+          0.1002098525903926,
+          0.0017553914525319514,
+          0.34684292077347634
+        ],
+        "after": [
+          0.10015891951167691,
+          0.004941665671985493,
+          0.34804516751658177
+        ],
+        "degrees": 0.18473873790421388
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "slide_tackle",
+      "duration": 1.466667,
+      "samples": 177,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0014323595804980652,
+      "maximumNearGroundSoleStep": 0.0014431162970373636,
+      "minimumBootY": 0.0007725225240643868,
+      "maxAngular": 17.53458956534316,
+      "maxRelative": 6.206262605854251,
+      "worstAngular": {
+        "time": 1.0083333333333333,
+        "bone": "LeftUpLeg"
+      },
+      "worstNearSole": {
+        "t": 1.1083333333333334,
+        "foot": "LeftFoot",
+        "before": [
+          0.19999985026488812,
+          0.0076160452254173255,
+          0.15830934438350952
+        ],
+        "after": [
+          0.20015835572361215,
+          0.006385587283266353,
+          0.15687495926565256
+        ],
+        "degrees": 0.052010326775328304
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "fall",
+      "duration": 0.866667,
+      "samples": 105,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.001492987389197974,
+      "maximumNearGroundSoleStep": 0.00010591758275915542,
+      "minimumBootY": 0.00189836408932538,
+      "maxAngular": 8.755621024727027,
+      "maxRelative": 6.607196156666088,
+      "worstAngular": {
+        "time": 0.5,
+        "bone": "LeftForeArm"
+      },
+      "worstNearSole": {
+        "t": 0.075,
+        "foot": "LeftFoot",
+        "before": [
+          0.1000002250922268,
+          3.9213198163579044e-07,
+          7.868892581929205e-07
+        ],
+        "after": [
+          0.09991249936203679,
+          0.005550952219982613,
+          -5.856570630572002e-05
+        ],
+        "degrees": 0.0168341228369411
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "get_up",
+      "duration": 1.6,
+      "samples": 193,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0030256279101405843,
+      "maximumNearGroundSoleStep": 0.006574462180270857,
+      "minimumBootY": 0.0015993009516333673,
+      "maxAngular": 15.56616734524509,
+      "maxRelative": 3.794370016217113,
+      "worstAngular": {
+        "time": 0.75,
+        "bone": "LeftHand"
+      },
+      "worstNearSole": {
+        "t": 0.43333333333333335,
+        "foot": "LeftFoot",
+        "before": [
+          0.08127763655656756,
+          0.004552913919768892,
+          -0.0031047860938404424
+        ],
+        "after": [
+          0.08778019363864416,
+          0.0033291379080975514,
+          -0.0021350931763932397
+        ],
+        "degrees": 1.1682941392248891
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "celebrate_arms_up",
+      "duration": 2.0,
+      "samples": 241,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.0019998415739114206,
+      "maxAngular": 10.569917120112132,
+      "maxRelative": 5.259991194571986,
+      "worstAngular": {
+        "time": 1.8333333333333333,
+        "bone": "LeftForeArm"
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "celebrate_fist_pump",
+      "duration": 1.8,
+      "samples": 217,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.0019998415739114206,
+      "maxAngular": 12.37663086806183,
+      "maxRelative": 5.25215922603043,
+      "worstAngular": {
+        "time": 1.6333333333333333,
+        "bone": "RightForeArm"
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "celebrate_victory_leap",
+      "duration": 1.8,
+      "samples": 217,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 9.581640486311382e-06,
+      "maximumNearGroundSoleStep": 9.582838389707826e-06,
+      "minimumBootY": 0.0016252915927609107,
+      "maxAngular": 11.403962173522487,
+      "maxRelative": 5.399421898910508,
+      "worstAngular": {
+        "time": 1.6333333333333333,
+        "bone": "LeftForeArm"
+      },
+      "worstNearSole": {
+        "t": 0.008333333333333333,
+        "foot": "LeftFoot",
+        "before": [
+          0.1,
+          2.4994377234577314e-08,
+          -3.4419038874132635e-07
+        ],
+        "after": [
+          0.1,
+          -0.00028133230134992637,
+          -9.927028778449152e-06
+        ],
+        "degrees": 3.4278772669429116e-05
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "celebrate_aeroplane",
+      "duration": 2.2,
+      "samples": 265,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 3.631628885876952e-06,
+      "maximumNearGroundSoleStep": 3.0960501102320633e-06,
+      "minimumBootY": 0.0019897064351606236,
+      "maxAngular": 5.915141743068362,
+      "maxRelative": 2.946558959595241,
+      "worstAngular": {
+        "time": 2.0,
+        "bone": "RightForeArm"
+      },
+      "worstNearSole": {
+        "t": 1.9333333333333333,
+        "foot": "LeftFoot",
+        "before": [
+          0.10000163262736236,
+          -4.397776892914318e-06,
+          -4.2291342585078303e-07
+        ],
+        "after": [
+          0.09999853667148638,
+          -1.225906551827194e-07,
+          -4.470691503789802e-07
+        ],
+        "degrees": 0.0006828097104192888
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "celebrate_applause",
+      "duration": 2.2,
+      "samples": 265,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.0019998415739114206,
+      "maxAngular": 10.782819301931365,
+      "maxRelative": 2.1142939072311107,
+      "worstAngular": {
+        "time": 2.0,
+        "bone": "LeftHand"
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_dive_left",
+      "duration": 1.466667,
+      "samples": 177,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 6.401232176500152e-05,
+      "maximumNearGroundSoleStep": 5.393671714510693e-05,
+      "minimumBootY": 0.0018382126599589266,
+      "maxAngular": 9.530086298517627,
+      "maxRelative": 6.780760132725717,
+      "worstAngular": {
+        "time": 0.8416666666666667,
+        "bone": "RightForeArm"
+      },
+      "worstNearSole": {
+        "t": 0.16666666666666666,
+        "foot": "LeftFoot",
+        "before": [
+          0.10005449185158977,
+          -0.00011525192130064366,
+          1.1844455407887298e-06
+        ],
+        "after": [
+          0.10000055825787935,
+          2.438247913433278e-07,
+          6.039923810958234e-07
+        ],
+        "degrees": 0.013053494243209547
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_dive_right",
+      "duration": 1.466667,
+      "samples": 177,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 6.401163602723645e-05,
+      "maximumNearGroundSoleStep": 5.393671714510693e-05,
+      "minimumBootY": 0.0018383005324216634,
+      "maxAngular": 9.530086298517627,
+      "maxRelative": 6.780760132725717,
+      "worstAngular": {
+        "time": 0.8416666666666667,
+        "bone": "LeftForeArm"
+      },
+      "worstNearSole": {
+        "t": 0.16666666666666666,
+        "foot": "RightFoot",
+        "before": [
+          -0.10005449185158977,
+          -0.00011525192130064366,
+          1.1844455407887298e-06
+        ],
+        "after": [
+          -0.10000055825787935,
+          2.438247913433278e-07,
+          6.039923810958234e-07
+        ],
+        "degrees": 0.013053494243209547
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "duration": 1.666667,
+      "samples": 201,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0010342593109709702,
+      "maximumNearGroundSoleStep": 0.0021859922658017407,
+      "minimumBootY": 0.0018740179501945536,
+      "maxAngular": 9.111740651444052,
+      "maxRelative": 6.394532030590134,
+      "worstAngular": {
+        "time": 0.975,
+        "bone": "RightForeArm"
+      },
+      "worstNearSole": {
+        "t": 0.375,
+        "foot": "RightFoot",
+        "before": [
+          -0.0970108474211732,
+          0.0037345861674830255,
+          -0.0011957725693991985
+        ],
+        "after": [
+          -0.09498078640563784,
+          0.006249291926983425,
+          -0.002006583558069526
+        ],
+        "degrees": 0.0012856413747566436
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_catch",
+      "duration": 1.2,
+      "samples": 145,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 2.851668814037034e-06,
+      "maximumNearGroundSoleStep": 2.8532041009110433e-06,
+      "minimumBootY": 0.0018977772871637683,
+      "maxAngular": 4.936040884685067,
+      "maxRelative": 1.0395053705584323,
+      "worstAngular": {
+        "time": 0.125,
+        "bone": "LeftForeArm"
+      },
+      "worstNearSole": {
+        "t": 1.1,
+        "foot": "LeftFoot",
+        "before": [
+          0.1,
+          -7.670418440086646e-05,
+          -2.1778519463011574e-06
+        ],
+        "after": [
+          0.1,
+          -7.571577391451978e-08,
+          6.753521546098857e-07
+        ],
+        "degrees": 4.396727046699063e-05
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_throw",
+      "duration": 1.166667,
+      "samples": 141,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 2.4398167093863142e-06,
+      "maximumNearGroundSoleStep": 2.43064738905139e-06,
+      "minimumBootY": 0.0019729032488714077,
+      "maxAngular": 22.278041471399305,
+      "maxRelative": 4.209160976287429,
+      "worstAngular": {
+        "time": 0.5833333333333334,
+        "bone": "RightArm"
+      },
+      "worstNearSole": {
+        "t": 0.9333333333333333,
+        "foot": "RightFoot",
+        "before": [
+          -0.12000096024807899,
+          -1.9398008438475944e-05,
+          -0.0450027028801147
+        ],
+        "after": [
+          -0.12000055350291011,
+          5.619324021099992e-07,
+          -0.04500030650679289
+        ],
+        "degrees": 2.606457820835492e-05
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "keeper_punt",
+      "duration": 1.666667,
+      "samples": 201,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.002761514734741144,
+      "maximumNearGroundSoleStep": 0.0027613536716105088,
+      "minimumBootY": 0.0016587086970323434,
+      "maxAngular": 19.578039787092045,
+      "maxRelative": 4.6845873197401815,
+      "worstAngular": {
+        "time": 0.36666666666666664,
+        "bone": "LeftHand"
+      },
+      "worstNearSole": {
+        "t": 1.5333333333333334,
+        "foot": "RightFoot",
+        "before": [
+          -0.10000065320452733,
+          0.002037993148728587,
+          0.0027620220925508396
+        ],
+        "after": [
+          -0.1,
+          -1.92418912470238e-08,
+          6.684981988447187e-07
+        ],
+        "degrees": 0.0003176772308104692
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "referee_whistle",
+      "duration": 1.6,
+      "samples": 193,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.0019998415739114206,
+      "maxAngular": 13.365132575099233,
+      "maxRelative": 2.7895682319555357,
+      "worstAngular": {
+        "time": 1.3833333333333333,
+        "bone": "RightForeArm"
+      },
+      "candidateNativeFlatSkateFree": true
+    },
+    {
+      "id": "referee_signal",
+      "duration": 1.8,
+      "samples": 217,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0,
+      "maximumNearGroundSoleStep": 0,
+      "minimumBootY": 0.0019998415739114206,
+      "maxAngular": 5.6631498358505965,
+      "maxRelative": 2.870485950418551,
+      "worstAngular": {
+        "time": 1.6,
+        "bone": "RightForeArm"
+      },
+      "candidateNativeFlatSkateFree": true
+    }
+  ],
+  "flags": [],
+  "limitations": [
+    "Native canonical FK plus actual decoded rigidCloth boot vertices. No viewer floor lift, post-IK or recovery/controller overlays are simulated. A flag requires confirmation in the actual bundled viewer.",
+    "30Hz source samples are interpolated at120Hz; no cadence or drift criterion was changed."
+  ]
+}

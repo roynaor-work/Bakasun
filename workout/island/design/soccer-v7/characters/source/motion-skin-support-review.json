@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "kind": "independent-supported-recovery-skin-pitch-calibration",
+  "generatedAt": "2026-11-04T21:26:06.877Z",
+  "model": {
+    "file": "models/player-01-lod0.glb",
+    "sha256": "ef5489f592606aff18b2f19d376f5f4db015070d636a0da439683c35d89abbc9",
+    "bytes": 983148,
+    "decodedVertices": 16988
+  },
+  "sourceHashes": {
+    "source/motion-build.py": "373550626815f121eb12c0b2b53919a0bfaae2cf2b4cf41e107759489f2c15e9",
+    "rig.json": "b577cdd2fce0b82bb94b35e6cf353979b7c6336b341afc2111cc1fb0a6eaa834",
+    "animations.json": "3002ce3cff5c7bbe00ee050d22b52b566cd0e60304910ca23bd5a099685381e3"
+  },
+  "provenance": {
+    "reviewer": "motion_review read-only subagent",
+    "runnerPath": "/tmp/soccer-v7-motion-skin-support-review.mjs",
+    "modelWasMutated": false,
+    "builderWasRun": false,
+    "note": "This is a reproducible rerun after calibration, with the exact decoded model byte buffer hashed before decoding. The earlier exploratory scan did not record a contemporaneous SHA; its result was reconfirmed by this rerun."
+  },
+  "methodology": {
+    "modelDecode": "Khronos glTF-Transform NodeIO plus draco3dgltf decoder on the exact hashed in-memory GLB buffer.",
+    "pose": "Canonical rest translations and parent-local absolute quaternions; analytic two-link limbs from function definitions only. Pose candidates sampled at get_up t=.5 and .6 seconds, preserving original hip height .34m, Hips40/Spine40/Chest20/Head-20 degrees, pelvisZ=-.05m. Both ankle targets [±.1,.08,0]; wrist targets [±.24,.03,.45].",
+    "skin": "Full decoded-vertex linear blend skinning: sum(weight * canonicalWorldJointMatrix * inverseBindMatrix * restPosition). Every primitive and all four influences included. No runtime floor uplift applied.",
+    "palmProxy": "Geometric proxy, not artist-authored semantic segmentation: Hand influence >.6; bind Y in (.69,.77)m; abs(bindX-sign*.16)<.04m. This excludes long distal finger tips while retaining the palm/wrist region.",
+    "palmProxyVertices": {
+      "left": 90,
+      "right": 82
+    },
+    "units": "meters"
+  },
+  "selection": {
+    "handWorldPitchDegrees": -100,
+    "wristTargetYMeters": 0.03,
+    "reason": "Original -90 degree hand pitch put distal fingers below the surface. A further ten degrees lifts them while preserving the body pose, exact feet and reachable wrists. Selected candidates leave the boot sole as the lowest vertex and palm proxy roughly 3.1–3.3mm above the ground.",
+    "rotatedCanonicalSupportOffsetMeters": [
+      0,
+      0.005209445,
+      -0.029544233
+    ],
+    "pass": true
+  },
+  "limitations": [
+    "Calibrates this model and the two supported-crouch instants only; the delivery-wide whole-mesh motion audit must independently cover every model and all frames.",
+    "Palm proxy clearance quantifies nearby skin vertices; it is not a pressure/contact simulation or a visual-quality score.",
+    "No runtime floor correction was applied; later runtime floor correction and contact IK must be verified together."
+  ],
+  "candidates": [
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -90,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.018158697783947058,
+      "leftPalmProxyMinimumYMeters": -0.009713785052299553,
+      "rightPalmProxyMinimumYMeters": -0.010075704455375725,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.1741437315940857,
+          0.6646625995635986,
+          -0.04815869778394699
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -95,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.007051563300116123,
+      "leftPalmProxyMinimumYMeters": -0.0009765371488465596,
+      "rightPalmProxyMinimumYMeters": -0.0012424492761578948,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.1741437315940857,
+          0.6646625995635986,
+          -0.04815869778394699
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -97,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.0026354362676059284,
+      "leftPalmProxyMinimumYMeters": 0.0014988825835046643,
+      "rightPalmProxyMinimumYMeters": 0.0012800731213225402,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -98,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.0004705078382233052,
+      "leftPalmProxyMinimumYMeters": 0.002075523007864509,
+      "rightPalmProxyMinimumYMeters": 0.001891907628996535,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -99,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0017037022030212678,
+      "leftPalmProxyMinimumYMeters": 0.002659481897532772,
+      "rightPalmProxyMinimumYMeters": 0.0025112709674302265,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -100,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.0032505813729747602,
+      "rightPalmProxyMinimumYMeters": 0.00313797447255087,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -101,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.0038486413795641196,
+      "rightPalmProxyMinimumYMeters": 0.003771827244399762,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.5,
+      "handWorldPitchDegrees": -103,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.005064912221945895,
+      "rightPalmProxyMinimumYMeters": 0.0050602061585815795,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -90,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.018158697783947058,
+      "leftPalmProxyMinimumYMeters": -0.009713785052299553,
+      "rightPalmProxyMinimumYMeters": -0.010075704455375725,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.1741437315940857,
+          0.6646625995635986,
+          -0.04815869778394699
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -95,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.007051563300116123,
+      "leftPalmProxyMinimumYMeters": -0.0009765371488465596,
+      "rightPalmProxyMinimumYMeters": -0.0012424492761578948,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.1741437315940857,
+          0.6646625995635986,
+          -0.04815869778394699
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -97,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.0026354362676059284,
+      "leftPalmProxyMinimumYMeters": 0.0014988825835046643,
+      "rightPalmProxyMinimumYMeters": 0.0012800731213225402,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -98,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": -0.0004705078382233052,
+      "leftPalmProxyMinimumYMeters": 0.002075523007864509,
+      "rightPalmProxyMinimumYMeters": 0.001891907628996535,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -99,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0017037022030212678,
+      "leftPalmProxyMinimumYMeters": 0.002659481897532772,
+      "rightPalmProxyMinimumYMeters": 0.0025112709674302265,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.17848682403564453,
+          0.6711370348930359,
+          -0.04747506231069565
+        ],
+        "bones": [
+          "RightHand",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -100,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.0032505813729747602,
+      "rightPalmProxyMinimumYMeters": 0.00313797447255087,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -101,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.0038486413795641196,
+      "rightPalmProxyMinimumYMeters": 0.003771827244399762,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "timeSeconds": 0.6,
+      "handWorldPitchDegrees": -103,
+      "armReachResidualMeters": 0,
+      "wholeMeshMinimumYMeters": 0.0020000018831342814,
+      "leftPalmProxyMinimumYMeters": 0.005064912221945895,
+      "rightPalmProxyMinimumYMeters": 0.0050602061585815795,
+      "footTargetErrorMeters": 1.1857187100668868e-16,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.12898297607898712,
+          0.0020000000949949026,
+          -0.0350193977355957
+        ],
+        "bones": [
+          "RightFoot",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

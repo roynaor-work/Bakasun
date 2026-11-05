@@ -1,0 +1,135 @@
+{
+  "kind": "hair31-actual-groom-authoring-proof",
+  "scope": "Actual P03/P04 source29groom plus unchanged-coil control, before QEM. Independent generated-mesh finite/winding/Headweights/nearest-cap root-tip checks. No live model/map/runtime writes. Phone review required.",
+  "helperSha256": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+  "results": [
+    {
+      "id": "player-02",
+      "deterministic": true,
+      "report": {
+        "variant": "31",
+        "kind": "sparse-cap-rooted-crown-wisps",
+        "style": "coils",
+        "cards": 0,
+        "triangles": 0,
+        "additionalImages": 0,
+        "additionalSurfaces": 0,
+        "farLODOmitted": true,
+        "existingGroomUnchanged": true,
+        "skipped": true,
+        "reason": "Coils retain their original edge treatment."
+      },
+      "independentMeshChecks": {
+        "finite": true,
+        "minimumTriangleCrossNorm": null,
+        "rootClearanceRange": null,
+        "tipClearanceRange": null,
+        "rigidHead5": true,
+        "outwardWinding": true
+      }
+    },
+    {
+      "id": "player-03",
+      "deterministic": true,
+      "report": {
+        "variant": "31",
+        "kind": "sparse-cap-rooted-crown-wisps",
+        "style": "sweep",
+        "cards": 28,
+        "triangles": 224,
+        "additionalImages": 0,
+        "additionalSurfaces": 0,
+        "farLODOmitted": true,
+        "existingGroomUnchanged": true,
+        "seed": 314077,
+        "vertices": 280,
+        "rootSignedClearanceRangeMeters": [
+          -0.00025,
+          -0.00025
+        ],
+        "tipSignedClearanceRangeMeters": [
+          0.0012231325378325624,
+          0.0023990873231579716
+        ],
+        "actualCurveLengthRangeMeters": [
+          0.00443930263584081,
+          0.008072495510165043
+        ],
+        "widthRangeMeters": [
+          0.0004656780038902429,
+          0.0007344246330869599
+        ],
+        "minimumRootY": 1.6985573768615723,
+        "crownMinimumY": 1.6984615106582641,
+        "rigidHead5": true,
+        "skipped": false
+      },
+      "independentMeshChecks": {
+        "finite": true,
+        "minimumTriangleCrossNorm": 1.7274090113947656e-07,
+        "rootClearanceRange": [
+          -0.0002500486386192158,
+          -0.00024727120712925155
+        ],
+        "tipClearanceRange": [
+          0.0012214861531522347,
+          0.002392753933920806
+        ],
+        "rigidHead5": true,
+        "outwardWinding": true
+      }
+    },
+    {
+      "id": "player-04",
+      "deterministic": true,
+      "report": {
+        "variant": "31",
+        "kind": "sparse-cap-rooted-crown-wisps",
+        "style": "quiff",
+        "cards": 28,
+        "triangles": 224,
+        "additionalImages": 0,
+        "additionalSurfaces": 0,
+        "farLODOmitted": true,
+        "existingGroomUnchanged": true,
+        "seed": 314086,
+        "vertices": 280,
+        "rootSignedClearanceRangeMeters": [
+          -0.00025,
+          -0.00025
+        ],
+        "tipSignedClearanceRangeMeters": [
+          0.0012143837555511259,
+          0.0023188009995579917
+        ],
+        "actualCurveLengthRangeMeters": [
+          0.004506062193443294,
+          0.0073021343499919365
+        ],
+        "widthRangeMeters": [
+          0.000458045890334608,
+          0.0007376214363433125
+        ],
+        "minimumRootY": 1.7143688201904297,
+        "crownMinimumY": 1.7010253448486328,
+        "rigidHead5": true,
+        "skipped": false
+      },
+      "independentMeshChecks": {
+        "finite": true,
+        "minimumTriangleCrossNorm": 1.7898621808167982e-07,
+        "rootClearanceRange": [
+          -0.0002500744493836027,
+          -0.00024757130125596834
+        ],
+        "tipClearanceRange": [
+          0.0012142681678941891,
+          0.002318717524420026
+        ],
+        "rigidHead5": true,
+        "outwardWinding": true
+      }
+    }
+  ],
+  "pass": true
+}

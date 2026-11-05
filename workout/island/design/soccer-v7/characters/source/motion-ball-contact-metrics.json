@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "id": "kick",
+      "bone": "RightFoot",
+      "timeSeconds": 0.235294,
+      "pointErrorMeters": 9.360423469045485e-7,
+      "sphereRadiusErrorMeters": 1.3877787807814457e-17,
+      "pass": true
+    },
+    {
+      "id": "short_pass",
+      "bone": "RightFoot",
+      "timeSeconds": 0.329333,
+      "pointErrorMeters": 0.0000011543926325242396,
+      "sphereRadiusErrorMeters": 1.3877787807814457e-17,
+      "pass": true
+    },
+    {
+      "id": "long_pass",
+      "bone": "RightFoot",
+      "timeSeconds": 0.559,
+      "pointErrorMeters": 6.761055978937795e-7,
+      "sphereRadiusErrorMeters": 1.3877787807814457e-17,
+      "pass": true
+    },
+    {
+      "id": "header",
+      "bone": "Head",
+      "timeSeconds": 0.658667,
+      "pointErrorMeters": 8.6431892589921e-7,
+      "sphereRadiusErrorMeters": 1.3877787807814457e-17,
+      "pass": true
+    },
+    {
+      "id": "slide_tackle",
+      "bone": "RightFoot",
+      "timeSeconds": 0.630667,
+      "pointErrorMeters": 6.414645781987875e-7,
+      "sphereRadiusErrorMeters": 2.7204542119019237e-8,
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_left",
+      "bone": "LeftHand",
+      "timeSeconds": 0.733333,
+      "pointErrorMeters": 0.0000014222688466841714,
+      "sphereRadiusErrorMeters": 4.0572719711695626e-8,
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_right",
+      "bone": "RightHand",
+      "timeSeconds": 0.733333,
+      "pointErrorMeters": 0.0000014222688466841714,
+      "sphereRadiusErrorMeters": 4.0572719711695626e-8,
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "bone": "RightHand",
+      "timeSeconds": 0.833333,
+      "pointErrorMeters": 5.263929529185294e-7,
+      "sphereRadiusErrorMeters": 2.2787750875163937e-7,
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "bone": "LeftHand",
+      "timeSeconds": 0,
+      "pointErrorMeters": 5.948577777617105e-7,
+      "sphereRadiusErrorMeters": 1.699680505229395e-7,
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "bone": "RightHand",
+      "timeSeconds": 0,
+      "pointErrorMeters": 5.948577777617105e-7,
+      "sphereRadiusErrorMeters": 1.699680505229395e-7,
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "bone": "RightHand",
+      "timeSeconds": 0.653333,
+      "pointErrorMeters": 3.1462432179075994e-7,
+      "sphereRadiusErrorMeters": 6.555456498469336e-8,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "bone": "LeftHand",
+      "timeSeconds": 0.3,
+      "pointErrorMeters": 4.463049195563712e-7,
+      "sphereRadiusErrorMeters": 2.5689060910438766e-7,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "bone": "RightHand",
+      "timeSeconds": 0.3,
+      "pointErrorMeters": 4.463049195563712e-7,
+      "sphereRadiusErrorMeters": 2.5689060910438766e-7,
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "bone": "RightFoot",
+      "timeSeconds": 0.8,
+      "pointErrorMeters": 6.459213070777227e-7,
+      "sphereRadiusErrorMeters": 1.3877787807814457e-17,
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "limits": "Authored ball contact metadata checked against canonical FK; presentation trajectories and gameplay collisions are separate."
+}

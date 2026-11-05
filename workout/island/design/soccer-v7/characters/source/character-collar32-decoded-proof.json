@@ -1,0 +1,915 @@
+{
+  "kind": "actual-decoded-Draco-combined32-collar-clearance",
+  "source": "Eight immutable combined32 pre-native compressed near GLBs; actual POSITION/JOINTS/WEIGHTS and delivered Skin triangles after QEM/Draco",
+  "referenceRole": "Full CC0 anatomy supplies local outward-ray direction only; distances are to decoded Skin, including exterior and inset underlay",
+  "limits": "Finite static LBS poses and rounded accepted clip frames; runtime IK/camera screenshots remain visual authority. Collar interior rows can intentionally meet hidden/cut Skin; no threshold is silently changed.",
+  "records": [
+    {
+      "id": "player-01",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-01-lod0.glb",
+      "sha256": "5c92abc94e762bc78b88647b7ea74970c08f87dc9e29d006441498432d9f15ef",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.0017559565203156598,
+          "visibleOutermostRayMinimumMeters": 0.0016125830802528052,
+          "visibleOutermostRayMedianMeters": 0.008087779160301085,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00161258433945477,
+          "worstVisibleSample": [
+            0.0016125830802528052,
+            3075,
+            [
+              0.024152368307113647,
+              1.3884451389312744,
+              0.06599739193916321
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.0015777421954046372,
+          "visibleOutermostRayMinimumMeters": 0.0011100050613077979,
+          "visibleOutermostRayMedianMeters": 0.008129402588030405,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0011100333649665117,
+          "worstVisibleSample": [
+            0.0011100050613077979,
+            3075,
+            [
+              0.024152368307113647,
+              1.3791408569613888,
+              0.0713644467884256
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0017639894106006942,
+          "visibleOutermostRayMinimumMeters": 0.0015662212756971695,
+          "visibleOutermostRayMedianMeters": 0.008040738480298454,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001566226244904101,
+          "worstVisibleSample": [
+            0.0015662212756971695,
+            3071,
+            [
+              0.0025218576192855835,
+              1.3928192232040368,
+              0.06470979675789582
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.001699658034080096,
+          "visibleOutermostRayMinimumMeters": 0.0012829432727603748,
+          "visibleOutermostRayMedianMeters": 0.007940176073187996,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0012829384068027139,
+          "worstVisibleSample": [
+            0.0012829432727603748,
+            3075,
+            [
+              0.03797153475747668,
+              1.3835157218105731,
+              0.06242795158455823
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.001755948686265955,
+          "visibleOutermostRayMinimumMeters": 0.0016125817895242718,
+          "visibleOutermostRayMedianMeters": 0.008087778686284058,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00161256012506783,
+          "worstVisibleSample": [
+            0.0016125817895242718,
+            3075,
+            [
+              0.03693839505671059,
+              1.3756669608206715,
+              0.1039317693080073
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0017422752182326038,
+          "visibleOutermostRayMinimumMeters": 0.0015876375653953304,
+          "visibleOutermostRayMedianMeters": 0.007675755060390959,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015876292018219829,
+          "worstVisibleSample": [
+            0.0015876375653953304,
+            3075,
+            [
+              0.024152368307113647,
+              1.003976710940396,
+              0.4380919279750515
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-02",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-02-lod0.glb",
+      "sha256": "81d8cc54a73116cc3c521c02bdb0a9be19ea5cda00fc3bd6ed02ffa27fcde153",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.0015588674637855612,
+          "visibleOutermostRayMinimumMeters": 0.0014230575373054832,
+          "visibleOutermostRayMedianMeters": 0.00828788001143499,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0014270520769059658,
+          "worstVisibleSample": [
+            0.0014230575373054832,
+            3083,
+            [
+              0.02481028437614441,
+              1.3913748264312744,
+              0.06976494938135147
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.00026375610565415277,
+          "visibleOutermostRayMinimumMeters": 0.0005103453359036839,
+          "visibleOutermostRayMedianMeters": 0.008079229344976784,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0005103566800244153,
+          "worstVisibleSample": [
+            0.0005103453359036839,
+            3089,
+            [
+              0.050749242305755615,
+              1.395697285758669,
+              0.05932596276382099
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0015742295730356262,
+          "visibleOutermostRayMinimumMeters": 0.001709897239976922,
+          "visibleOutermostRayMedianMeters": 0.008324762820249073,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0017099130200222135,
+          "worstVisibleSample": [
+            0.001709897239976922,
+            3083,
+            [
+              0.02481028437614441,
+              1.3984419995136246,
+              0.06350706487897681
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0014673050781298463,
+          "visibleOutermostRayMinimumMeters": 0.0011427942263919685,
+          "visibleOutermostRayMedianMeters": 0.00806677472518709,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0011440905509516597,
+          "worstVisibleSample": [
+            0.0011427942263919685,
+            3083,
+            [
+              0.039551049329021565,
+              1.38608886767982,
+              0.06613976932366654
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.0015588648678597611,
+          "visibleOutermostRayMinimumMeters": 0.0014230571081964801,
+          "visibleOutermostRayMedianMeters": 0.008287872528505802,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0014270556857809424,
+          "worstVisibleSample": [
+            0.0014230571081964801,
+            3083,
+            [
+              0.038159362782252626,
+              1.3779719915337552,
+              0.10798226041723469
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0015589328432413926,
+          "visibleOutermostRayMinimumMeters": 0.001330049287178286,
+          "visibleOutermostRayMedianMeters": 0.00782134423365892,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001334432396106422,
+          "worstVisibleSample": [
+            0.001330049287178286,
+            3083,
+            [
+              0.02481028437614441,
+              1.0001444117336797,
+              0.4409364033570071
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-03",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-03-lod0.glb",
+      "sha256": "878c553649e2fcda06ab36a5ac3e823843b5b7867f9aa0c3c999bcfd7c7aa942",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.0017992261680681565,
+          "visibleOutermostRayMinimumMeters": 0.0015543733033991716,
+          "visibleOutermostRayMedianMeters": 0.00789991828626577,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001554375747218728,
+          "worstVisibleSample": [
+            0.0015543733033991716,
+            3069,
+            [
+              0.0024101734161376953,
+              1.3827475309371948,
+              0.05812016129493714
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.0006070953051262545,
+          "visibleOutermostRayMinimumMeters": 0.0012910458913643552,
+          "visibleOutermostRayMedianMeters": 0.007524046193853115,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0012911787489429116,
+          "worstVisibleSample": [
+            0.0012910458913643552,
+            3053,
+            [
+              -0.06487762928009033,
+              1.3985556392315721,
+              0.028636069634769848
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0016456381032733225,
+          "visibleOutermostRayMinimumMeters": 0.001503624613069464,
+          "visibleOutermostRayMedianMeters": 0.008099153494717362,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001503625069744885,
+          "worstVisibleSample": [
+            0.001503624613069464,
+            3069,
+            [
+              0.0024101734161376953,
+              1.388390492117504,
+              0.05312924861253747
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0015024245426950352,
+          "visibleOutermostRayMinimumMeters": 0.0010564593204424302,
+          "visibleOutermostRayMedianMeters": 0.007476009627028833,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001056460663676262,
+          "worstVisibleSample": [
+            0.0010564593204424302,
+            3053,
+            [
+              -0.057533532088283976,
+              1.4005104564076312,
+              0.03801556439703459
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.001799248301758389,
+          "visibleOutermostRayMinimumMeters": 0.0015543679150520327,
+          "visibleOutermostRayMedianMeters": 0.007899956499109722,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015543720219284296,
+          "worstVisibleSample": [
+            0.0015543679150520327,
+            3069,
+            [
+              0.014206382407097264,
+              1.3715016729668001,
+              0.09817481526872918
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.001783078900452769,
+          "visibleOutermostRayMinimumMeters": 0.0015543905445545084,
+          "visibleOutermostRayMedianMeters": 0.007506179904235575,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015543659683316946,
+          "worstVisibleSample": [
+            0.0015543905445545084,
+            3069,
+            [
+              0.0024101734161376953,
+              1.011979711988122,
+              0.432572374410583
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-04",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-04-lod0.glb",
+      "sha256": "bb10e10670c2601b8d466d77b4e50aeb60ca9e95755c4cf292338f2755e9c427",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.0018262325968679315,
+          "visibleOutermostRayMinimumMeters": 0.001640760941124659,
+          "visibleOutermostRayMedianMeters": 0.008122038665474451,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016407609218731523,
+          "worstVisibleSample": [
+            0.001640760941124659,
+            3071,
+            [
+              0.0025637447834014893,
+              1.3855624198913574,
+              0.07060056924819946
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.001567638379076535,
+          "visibleOutermostRayMinimumMeters": 0.00123286570085174,
+          "visibleOutermostRayMedianMeters": 0.008165628319891722,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0012328906450420618,
+          "worstVisibleSample": [
+            0.00123286570085174,
+            3081,
+            [
+              0.04939176142215729,
+              1.3928760203659039,
+              0.05682247707556461
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0018329105814251846,
+          "visibleOutermostRayMinimumMeters": 0.001587401243487901,
+          "visibleOutermostRayMedianMeters": 0.00806243672880488,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015873932279646397,
+          "worstVisibleSample": [
+            0.001587401243487901,
+            3071,
+            [
+              0.0025637447834014893,
+              1.3925902266679884,
+              0.06511124076478611
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0016791547837785477,
+          "visibleOutermostRayMinimumMeters": 0.0016688728639937171,
+          "visibleOutermostRayMedianMeters": 0.00791070593531865,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016688675386831164,
+          "worstVisibleSample": [
+            0.0016688728639937171,
+            3071,
+            [
+              0.017712833292639313,
+              1.3803790554665123,
+              0.0711164208643546
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.001826235839899697,
+          "visibleOutermostRayMinimumMeters": 0.0016407607531316519,
+          "visibleOutermostRayMedianMeters": 0.008122044847763054,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001640776521526277,
+          "worstVisibleSample": [
+            0.0016407607531316519,
+            3071,
+            [
+              0.016027423071906632,
+              1.372353457260267,
+              0.11081071816424126
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0017487028425045392,
+          "visibleOutermostRayMinimumMeters": 0.001640758590391624,
+          "visibleOutermostRayMedianMeters": 0.007690974469297818,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016408065566793084,
+          "worstVisibleSample": [
+            0.001640758590391624,
+            3071,
+            [
+              0.0025637447834014893,
+              0.9994393267831825,
+              0.43510672199579403
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-05",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-05-lod0.glb",
+      "sha256": "701d3aec8ab2b0bd69e91d2ee186ac3a732180459f44cd44e67690e998b5a258",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.001689695333084428,
+          "visibleOutermostRayMinimumMeters": 0.0015677752269371847,
+          "visibleOutermostRayMedianMeters": 0.008103913984101048,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015677755000069737,
+          "worstVisibleSample": [
+            0.0015677752269371847,
+            3075,
+            [
+              0.024072319269180298,
+              1.388848066329956,
+              0.06396705657243729
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.0016105593699183018,
+          "visibleOutermostRayMinimumMeters": 0.0010197026310301564,
+          "visibleOutermostRayMedianMeters": 0.00833592794451979,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0010197187075391412,
+          "worstVisibleSample": [
+            0.0010197026310301564,
+            3081,
+            [
+              0.0490727424621582,
+              1.393809119688703,
+              0.05394342102857425
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0016989726648449562,
+          "visibleOutermostRayMinimumMeters": 0.0015625032546384234,
+          "visibleOutermostRayMedianMeters": 0.008058339766558243,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001562500256113708,
+          "worstVisibleSample": [
+            0.0015625032546384234,
+            3075,
+            [
+              0.024072319269180298,
+              1.395229610094697,
+              0.058114631051607205
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0016679758733441751,
+          "visibleOutermostRayMinimumMeters": 0.0015565097710147772,
+          "visibleOutermostRayMedianMeters": 0.008159793449141105,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00155650672968477,
+          "worstVisibleSample": [
+            0.0015565097710147772,
+            3075,
+            [
+              0.03749798026248042,
+              1.3840548248021873,
+              0.06050033201133996
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.001689690880992275,
+          "visibleOutermostRayMinimumMeters": 0.0015677619246846205,
+          "visibleOutermostRayMedianMeters": 0.00810390755286184,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015677688643336296,
+          "worstVisibleSample": [
+            0.0015677619246846205,
+            3075,
+            [
+              0.036614413673303425,
+              1.3763794911647018,
+              0.1020138651033391
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0016896816021034916,
+          "visibleOutermostRayMinimumMeters": 0.0015677215761510303,
+          "visibleOutermostRayMedianMeters": 0.0076740305002386735,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015676826005801558,
+          "worstVisibleSample": [
+            0.0015677215761510303,
+            3075,
+            [
+              0.024072319269180298,
+              1.0059975014832547,
+              0.4385402779211418
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-06",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/player-06-lod0.glb",
+      "sha256": "78088079bd06b78bdd96de0b39e8734e2cab2384ff2dca970d10d28481f02b94",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.001781316133537581,
+          "visibleOutermostRayMinimumMeters": 0.0016178563229738985,
+          "visibleOutermostRayMedianMeters": 0.00809955723556257,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016178557416424155,
+          "worstVisibleSample": [
+            0.0016178563229738985,
+            3071,
+            [
+              0.002499297261238098,
+              1.3860832452774048,
+              0.0701911672949791
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.0016171484433605,
+          "visibleOutermostRayMinimumMeters": 0.0011481207319180276,
+          "visibleOutermostRayMedianMeters": 0.00814034830907277,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0011481327237561345,
+          "worstVisibleSample": [
+            0.0011481207319180276,
+            3075,
+            [
+              0.024178072810173035,
+              1.3793456592783795,
+              0.07136028076527286
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0017898556824432234,
+          "visibleOutermostRayMinimumMeters": 0.0015696797821848397,
+          "visibleOutermostRayMedianMeters": 0.008050317674734003,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015696750488132238,
+          "worstVisibleSample": [
+            0.0015696797821848397,
+            3071,
+            [
+              0.002499297261238098,
+              1.3930744519765326,
+              0.06464145232320712
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0017330506180389027,
+          "visibleOutermostRayMinimumMeters": 0.0013193359401588486,
+          "visibleOutermostRayMedianMeters": 0.007978657639139878,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0013193318154662848,
+          "worstVisibleSample": [
+            0.0013193359401588486,
+            3075,
+            [
+              0.03799996373752422,
+              1.3837245160347533,
+              0.06240027300120035
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.0017813173884906215,
+          "visibleOutermostRayMinimumMeters": 0.0016178526602262922,
+          "visibleOutermostRayMedianMeters": 0.008099555274245997,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016178482910618186,
+          "worstVisibleSample": [
+            0.0016178526602262922,
+            3071,
+            [
+              0.015927918741690195,
+              1.3729319582913377,
+              0.11049693824473183
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0017236744140748347,
+          "visibleOutermostRayMinimumMeters": 0.0016178900717069965,
+          "visibleOutermostRayMedianMeters": 0.007677182330625917,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016178373480215669,
+          "worstVisibleSample": [
+            0.0016178900717069965,
+            3071,
+            [
+              0.002499297261238098,
+              0.9998369479458438,
+              0.43563659598368787
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "goalkeeper",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/goalkeeper-lod0.glb",
+      "sha256": "fd6783372f04c8f2483d5fd5da926ed21dce6afa8aeb60eee48cd0a04853c119",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.001641709105915644,
+          "visibleOutermostRayMinimumMeters": 0.001522546744476383,
+          "visibleOutermostRayMedianMeters": 0.008253807719961537,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.001522545120678842,
+          "worstVisibleSample": [
+            0.001522546744476383,
+            3087,
+            [
+              0.024563521146774292,
+              1.3904958963394165,
+              0.06826375424861908
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.00011855290744323011,
+          "visibleOutermostRayMinimumMeters": 0.00025446132769752346,
+          "visibleOutermostRayMedianMeters": 0.008076866798791313,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00025444739731028676,
+          "worstVisibleSample": [
+            0.00025446132769752346,
+            3093,
+            [
+              0.05021651089191437,
+              1.3949822202890596,
+              0.05799537315544879
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.0016552951529318477,
+          "visibleOutermostRayMinimumMeters": 0.0015206632480777263,
+          "visibleOutermostRayMedianMeters": 0.00808571560016455,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015206526732072234,
+          "worstVisibleSample": [
+            0.0015206632480777263,
+            3087,
+            [
+              0.024563521146774292,
+              1.3973781157988863,
+              0.06214321435464522
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0013168125599030205,
+          "visibleOutermostRayMinimumMeters": 0.0012140630478846728,
+          "visibleOutermostRayMedianMeters": 0.008097531355256506,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0012140581384301186,
+          "worstVisibleSample": [
+            0.0012140630478846728,
+            3093,
+            [
+              0.06078952889458837,
+              1.3988231503194895,
+              0.042339409661085604
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.001641702037923982,
+          "visibleOutermostRayMinimumMeters": 0.0015225549755569438,
+          "visibleOutermostRayMedianMeters": 0.008253810267832739,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015225473325699568,
+          "worstVisibleSample": [
+            0.0015225549755569438,
+            3087,
+            [
+              0.03769711857490754,
+              1.3773383040534046,
+              0.10641007495616472
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0016417473942486795,
+          "visibleOutermostRayMinimumMeters": 0.0015225966515014138,
+          "visibleOutermostRayMedianMeters": 0.007702857882468049,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0015225053066387773,
+          "worstVisibleSample": [
+            0.0015225966515014138,
+            3087,
+            [
+              0.024563521146774292,
+              1.0016649366744783,
+              0.4400913537914164
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "referee",
+      "stage": "combined32-prenative",
+      "file": "source/character-candidates32-final/models/referee-lod0.glb",
+      "sha256": "884ac69af6a72faf0ccc98c27d1577641714432ac908ceb74c97e22f549f39a5",
+      "collarRibVertexSamples": 320,
+      "measuredRegion": "All decoded Cloth rib-atlas vertices above1.34m, including collar edge/interior rows; Draco UV seam duplicates retained",
+      "poses": {
+        "rest": {
+          "referenceMinimumMeters": 0.001765353888789993,
+          "visibleOutermostRayMinimumMeters": 0.0016879856924743135,
+          "visibleOutermostRayMedianMeters": 0.008114528837887769,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00168799445964396,
+          "worstVisibleSample": [
+            0.0016879856924743135,
+            3071,
+            [
+              0.0025430768728256226,
+              1.3858627080917358,
+              0.07087299227714539
+            ]
+          ]
+        },
+        "neck-forward": {
+          "referenceMinimumMeters": 0.0016099289222259424,
+          "visibleOutermostRayMinimumMeters": 0.001259424122480463,
+          "visibleOutermostRayMedianMeters": 0.008159017828863736,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.00125941913574934,
+          "worstVisibleSample": [
+            0.001259424122480463,
+            3081,
+            [
+              0.0494714081287384,
+              1.3931519558114354,
+              0.05696620821886525
+            ]
+          ]
+        },
+        "neck-back": {
+          "referenceMinimumMeters": 0.001773003999004052,
+          "visibleOutermostRayMinimumMeters": 0.0016361342767467982,
+          "visibleOutermostRayMedianMeters": 0.00804402398886851,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016361220041289926,
+          "worstVisibleSample": [
+            0.0016361342767467982,
+            3071,
+            [
+              0.0025430768728256226,
+              1.3929241981902645,
+              0.0653432539701295
+            ]
+          ]
+        },
+        "arm-neck-flex": {
+          "referenceMinimumMeters": 0.0017219301249567212,
+          "visibleOutermostRayMinimumMeters": 0.001682550852600444,
+          "visibleOutermostRayMedianMeters": 0.007932817002485333,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016825394704937935,
+          "worstVisibleSample": [
+            0.001682550852600444,
+            3075,
+            [
+              0.03817175546530817,
+              1.3835019773016937,
+              0.06304239644843093
+            ]
+          ]
+        },
+        "kick": {
+          "referenceMinimumMeters": 0.0017653627773120432,
+          "visibleOutermostRayMinimumMeters": 0.0016880049615759789,
+          "visibleOutermostRayMedianMeters": 0.008114502145131378,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016879781614989042,
+          "worstVisibleSample": [
+            0.0016880049615759789,
+            3071,
+            [
+              0.016050811448061975,
+              1.37260828659553,
+              0.11112588387877076
+            ]
+          ]
+        },
+        "get_up": {
+          "referenceMinimumMeters": 0.0017387874169267352,
+          "visibleOutermostRayMinimumMeters": 0.0016879780398351355,
+          "visibleOutermostRayMedianMeters": 0.007701633925478728,
+          "visibleRaySamples": 320,
+          "visibleNegativeSamples": 0,
+          "visibleNearestEuclideanMinimumMeters": 0.0016878971364349127,
+          "worstVisibleSample": [
+            0.0016879780398351355,
+            3071,
+            [
+              0.0025430768728256226,
+              0.999160239231724,
+              0.43540082647528777
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "generatedAt": "2026-11-05T05:49:55.494437+00:00",
+  "pass": true,
+  "summary": {
+    "characters": 8,
+    "posesPerCharacter": 6,
+    "poseCases": 48,
+    "minimumGapMeters": 0.00025446132769752346,
+    "negativeSamples": 0,
+    "minimumHitFraction": 1.0
+  },
+  "nativeScope": "Models are the accepted combined32 pre-native stage. The later native embedding report must prove that original compressed geometry and image bytes remain unchanged; this report is not a substitute for final hash-bound floor/controller audits."
+}

@@ -1,0 +1,19 @@
+/** State/composition diagnostic only; independent whole-mesh audit is required. */
+import fs from'node:fs/promises';import crypto from'node:crypto';import*as THREE from'../vendor/three.module.js';
+import{RecoveryState,RECOVERY_ARM_BONES,mirrorRecoveryPoseX}from'./recovery-state.js';import{sampleClip}from'./motion-runtime.js';
+const bytes=await fs.readFile(new URL('../animations.json',import.meta.url)),data=JSON.parse(bytes),clips=new Map(data.clips.map(c=>[c.id,c])),tests=[];
+const measured={minimumY:.002,pelvisHeight:.18,hipsUpDot:0,soles:{LeftFoot:[.4,.12,.2],RightFoot:[.3,.15,-.1]},hands:{LeftHand:{position:[.3,.03,.05],orientation:[-.766,0,0,.643]}}};
+function check(name,pass,evidence){tests.push({name,pass,...evidence});if(!pass)throw Error(name);}
+const r=new RecoveryState({clips});r.reset({clipID:'keeper_dive_left',seconds:.8});r.request('keeper_catch',{measured});
+for(let i=0;i<24;i++)r.step(1/120,{measured});const pose=r.pose(THREE),base=sampleClip(THREE,clips.get('keeper_dive_left'),1),armSet=new Set(RECOVERY_ARM_BONES);
+const nonArmError=Math.max(...Object.keys(pose.rotations).filter(n=>!armSet.has(n)).map(n=>new THREE.Quaternion().fromArray(pose.rotations[n]).normalize().angleTo(new THREE.Quaternion().fromArray(base.rotations[n]).normalize())));
+check('catch keeps continuing dive body and changes only six arm locals',nonArmError<1e-6&&pose.hipsOffsetMeters.every((v,i)=>Math.abs(v-base.hipsOffsetMeters[i])<1e-6),{maxNonArmAngleError:nonArmError,contributors:r.snapshot().contributors});
+const e=r.snapshot().episode;r.request('keeper_throw',{measured});const first=r.snapshot().request;r.step(.1,{measured});r.request('kick',{measured});const second=r.snapshot();
+check('latest request supersedes without resetting recovery episode',second.episode.id===e.id&&second.episode.startedAt===e.startedAt&&second.episode.activationDeadline===e.activationDeadline&&second.requests.find(q=>q.id===first.id).supersededBy===second.request.id,{episode:second.episode,requests:second.requests});
+for(let i=0;i<500&&r.snapshot().request.status==='queued';i++)r.step(1/120,{pose:sampleClip(THREE,clips.get('keeper_dive_left'),clips.get('keeper_dive_left').duration),measured:{...measured,pelvisHeight:.85,hipsUpDot:1,soles:{LeftFoot:[.1,0,0],RightFoot:[-.1,0,0]}}});
+check('queued kick begins at normal authored entry within fixed recovery deadline',r.snapshot().activeBaseClip==='kick'&&r.snapshot().request.entrySeconds===0&&r.snapshot().request.activatedAt<=e.activationDeadline,{request:r.snapshot().request});
+r.step(1/30,{measured});check('activation has actual authored phase progression',r.snapshot().request.firstProgressAt!=null&&r.snapshot().request.sampleSeconds>0,{request:r.snapshot().request});
+const mirror=mirrorRecoveryPoseX(sampleClip(THREE,clips.get('get_up'),0));check('right-side recovery reflects side orientation and swaps limbs',mirror.rotations.Hips[2]>0,{mirroredHips:mirror.rotations.Hips});
+r.request('header',{paused:true,seconds:.25});check('paused standalone preview bypasses recovery queue',r.snapshot().activeBaseClip==='header'&&r.snapshot().baseSeconds===.25&&!r.snapshot().episode&&!r.snapshot().overlayClip,{});
+const report={schemaVersion:1,kind:'recovery-state-and-six-arm-composition-check',motionSha256:crypto.createHash('sha256').update(bytes).digest('hex'),tests,pass:tests.every(t=>t.pass),limits:['State transitions and canonical arm-scope composition with synthetic measured context only.','This is not a geometry, foot drift, reach, actual-ball contact or rendered-transition proof. Root actual adapter must supply real FK measurements and audit all intermediate states.']};
+await fs.writeFile(new URL('./motion-recovery-state-check.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({tests:tests.length,pass:report.pass}));

@@ -1,0 +1,57 @@
+/** Whole-roster phone review, using the actual offline payloads and renderer. */
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {createRequire} from 'node:module';
+import {openPreview,root} from './browser-session.mjs';
+const require=createRequire(import.meta.url),sharp=require('sharp');
+const number=process.argv[2]||'09';if(!/^\d{2}$/.test(number))throw Error('Expected iteration number');
+const out=path.join(root,'iterations',number,'roster');await fs.mkdir(out,{recursive:true});
+const initialRuntime=await fs.readFile(path.join(root,'vendor/viewer-runtime.js'));
+const dpr=Number(process.env.CAPTURE_DPR||(Number(number)>=13?1.5:1));
+if(![1,1.5].includes(dpr))throw Error('Capture DPR must match an explicit production/reference setting');
+const initialData=await fs.readFile(path.join(root,'vendor/data.js'));
+const session=await openPreview({dpr});const {page}=session,records=[];
+const startedAt=new Date().toISOString();
+const lossless=Number(number)>=24;
+const save=async file=>{
+  // Let ResizeObserver and camera projection settle before both image and state.
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  const encoder=sharp(await page.screenshot({type:'png',scale:'css'}));
+  await (lossless?encoder.webp({lossless:true}):encoder.webp({quality:94})).toFile(path.join(out,file));
+};
+try{
+  const ids=await page.evaluate(()=>soccerV7.inspect().data.manifest.characters.map(c=>c.id));
+  if(ids.length!==8||new Set(ids).size!==8)throw Error('Full eight-character roster required');
+  for(const id of ids){
+    await page.evaluate(async id=>{await soccerV7.setCharacter(id);soccerV7.setClip('idle');soccerV7.seek(.15);},id);
+    for(const size of [{width:390,height:844},{width:844,height:390}]){
+      await page.setViewportSize(size);
+      for(const spec of [
+        {view:'face',label:'face',orbit:.13,lod:0},
+        {view:'face',label:'profile',orbit:-.7,lod:0},
+        {view:'face',label:'side',orbit:-Math.PI/2,lod:0},
+        {view:'face',label:'face-stadium',orbit:.13,lod:0,lighting:'stadium'},
+        {view:'body',label:'body',orbit:.13,lod:0},
+        {view:'body',label:'body-far',orbit:.13,lod:1,zoom:1.65},
+        {view:'cloth',label:'cloth',orbit:.13,lod:0},
+        {view:'cloth',label:'cloth-profile',orbit:-.7,lod:0},
+      ]){
+        await page.evaluate(async spec=>{await soccerV7.setView(spec.view);await soccerV7.setLOD(spec.lod);soccerV7.setLighting(spec.lighting||'studio');soccerV7.seek(.15);soccerV7.setOrbit(spec.orbit,0,spec.zoom||1);},spec);
+        const file=id+'-'+spec.label+'-'+size.width+'x'+size.height+'.webp';await save(file);
+        records.push({id,view:spec.label,size,file,state:await page.evaluate(()=>soccerV7.state())});
+      }
+    }
+    console.log('Captured '+id);
+  }
+  for(const size of [{width:390,height:844},{width:844,height:390}]){
+    await page.setViewportSize(size);await page.evaluate(async()=>{await soccerV7.setView('pitch');await soccerV7.setLOD(1);soccerV7.setClip('run_3');soccerV7.seek(.25);});
+    const file='pitch-'+size.width+'x'+size.height+'.webp';await save(file);records.push({view:'pitch',size,file,state:await page.evaluate(()=>soccerV7.state())});
+  }
+  const hashes=await page.evaluate(()=>soccerV7.inspect().data.hashes);
+  if(!(await fs.readFile(path.join(root,'vendor/data.js'))).equals(initialData))throw Error('Data changed during roster capture');
+  const runtime=await fs.readFile(path.join(root,'vendor/viewer-runtime.js'));if(!runtime.equals(initialRuntime))throw Error('Runtime changed during roster capture');
+  await fs.writeFile(path.join(out,'capture.json'),JSON.stringify({schemaVersion:1,deviceScaleFactor:dpr,screenshotScale:'css',imageEncoding:lossless?'WebP lossless':'WebP quality94',dataSha256:crypto.createHash('sha256').update(initialData).digest('hex'),startedAt,finishedAt:new Date().toISOString(),characters:ids,records,hashes,runtimeSha256:crypto.createHash('sha256').update(runtime).digest('hex'),errors:session.errors,remoteRequests:session.remoteRequests},null,2)+'\n');
+  if(session.errors.length||session.remoteRequests.length)throw Error(JSON.stringify({errors:session.errors,remote:session.remoteRequests}));
+  console.log(JSON.stringify({characters:ids.length,captures:records.length,errors:session.errors,out}));
+}finally{await session.close();}

@@ -1,0 +1,1261 @@
+{
+  "schemaVersion": 1,
+  "kind": "independent-dive-body-support-calibration",
+  "selected": {
+    "pelvisDropMeters": 0.044245,
+    "handTargetRaiseMeters": 0.003,
+    "lowElbowPole": "[+0.6,1,0.1] for left/high; [-0.6,1,0.1] for right",
+    "otherLimbPoles": "original joint plane",
+    "footTargetsAndOrientations": "retained in canonical world"
+  },
+  "modelSHA": "3dadebee708095d02bebd3f553719aafbe02477432fe002a0ec00d66b13e7ba3",
+  "selectedEndpointRows": [
+    {
+      "kind": "dive_settle_candidate",
+      "clip": "keeper_dive_left",
+      "drop": 0.044245,
+      "handDeltaY": 0.003,
+      "arch": 0,
+      "polemode": "head-up",
+      "preserveTwist": false,
+      "reachResidual": 0,
+      "joints": {
+        "Root": [
+          0,
+          0,
+          0
+        ],
+        "Hips": [
+          0.6,
+          0.175755,
+          0
+        ],
+        "Spine": [
+          0.799878114288,
+          0.18273510521439998,
+          0
+        ],
+        "Chest": [
+          0.9797684171472001,
+          0.18901719990735996,
+          0
+        ],
+        "Neck": [
+          1.0797074742912,
+          0.19250725251455997,
+          0
+        ],
+        "Head": [
+          1.2096282485784,
+          0.19704432090391996,
+          0
+        ],
+        "LeftArm": [
+          1.04531593560512,
+          0.031208740041279964,
+          0
+        ],
+        "LeftForeArm": [
+          1.211907583578253,
+          0.2308884776342969,
+          0.07263034859104033
+        ],
+        "LeftHand": [
+          1.2733275515620317,
+          0.0665039871513988,
+          0.23635364738097686
+        ],
+        "RightArm": [
+          1.03414776726208,
+          0.35101372290208,
+          0
+        ],
+        "RightForeArm": [
+          1.3020237740859997,
+          0.3846220771449041,
+          0.003589736113784253
+        ],
+        "RightHand": [
+          1.2607703775112336,
+          0.42608396513438157,
+          0.23635364738097675
+        ],
+        "LeftUpLeg": [
+          0.6034900526072,
+          0.07581594285599999,
+          0
+        ],
+        "LeftLeg": [
+          0.397618529595411,
+          0.13124780092891938,
+          0.35020585135246207
+        ],
+        "LeftFoot": [
+          0.3000002538026666,
+          0.19999899039689048,
+          3.797575605091197e-07
+        ],
+        "RightUpLeg": [
+          0.5965099473927999,
+          0.27569405714399997,
+          0
+        ],
+        "RightLeg": [
+          0.26597614787636803,
+          0.2341723529210618,
+          0.23900478391732152
+        ],
+        "RightFoot": [
+          0.1200000202009252,
+          0.25999933445579143,
+          -0.09999944991311535
+        ]
+      },
+      "wholeMeshMinimumYMeters": 0.00202151661027683,
+      "leftPalmProxyMinimumYMeters": 0.03009617272606127,
+      "rightPalmProxyMinimumYMeters": 0.39408094515646197,
+      "footTargetErrorMeters": 0,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          0.17382214963436127,
+          0.859505295753479,
+          0.03467041254043579
+        ],
+        "bones": [
+          "Hips",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "minimaByBone": {
+        "Chest": 0.0045662102940675665,
+        "LeftArm": 0.003222500135231984,
+        "RightArm": 0.30403316892085674,
+        "Neck": 0.051965800616950254,
+        "LeftUpLeg": 0.010069962016811318,
+        "LeftLeg": 0.08839735103816387,
+        "LeftHand": 0.0024310740839553063,
+        "LeftForeArm": 0.05954347597708645,
+        "RightLeg": 0.18494274719769163,
+        "RightUpLeg": 0.15177358198389984,
+        "RightHand": 0.39408094515646197,
+        "RightForeArm": 0.36594249749518504,
+        "Head": 0.11270649271949784,
+        "RightFoot": 0.18199888231313394,
+        "LeftFoot": 0.12199896901068658,
+        "Hips": 0.00202151661027683,
+        "Spine": 0.028331564696500652
+      },
+      "bodyProxyMin": 0.00202151661027683
+    },
+    {
+      "kind": "dive_settle_candidate",
+      "clip": "keeper_dive_right",
+      "drop": 0.044245,
+      "handDeltaY": 0.003,
+      "arch": 0,
+      "polemode": "head-up",
+      "preserveTwist": false,
+      "reachResidual": 0,
+      "joints": {
+        "Root": [
+          0,
+          0,
+          0
+        ],
+        "Hips": [
+          -0.6,
+          0.175755,
+          0
+        ],
+        "Spine": [
+          -0.799878114288,
+          0.18273510521439998,
+          0
+        ],
+        "Chest": [
+          -0.9797684171472001,
+          0.18901719990735996,
+          0
+        ],
+        "Neck": [
+          -1.0797074742912,
+          0.19250725251455997,
+          0
+        ],
+        "Head": [
+          -1.2096282485784,
+          0.19704432090391996,
+          0
+        ],
+        "LeftArm": [
+          -1.03414776726208,
+          0.35101372290208,
+          0
+        ],
+        "LeftForeArm": [
+          -1.3020237740859997,
+          0.3846220771449041,
+          0.003589736113784253
+        ],
+        "LeftHand": [
+          -1.2607703775112336,
+          0.42608396513438157,
+          0.23635364738097675
+        ],
+        "RightArm": [
+          -1.04531593560512,
+          0.031208740041279964,
+          0
+        ],
+        "RightForeArm": [
+          -1.211907583578253,
+          0.2308884776342969,
+          0.07263034859104033
+        ],
+        "RightHand": [
+          -1.2733275515620317,
+          0.0665039871513988,
+          0.23635364738097686
+        ],
+        "LeftUpLeg": [
+          -0.5965099473927999,
+          0.27569405714399997,
+          0
+        ],
+        "LeftLeg": [
+          -0.40581337893856656,
+          0.19800963893954177,
+          0.3545418000348941
+        ],
+        "LeftFoot": [
+          -0.29999997518115445,
+          0.19999988196683216,
+          5.47271519102388e-07
+        ],
+        "RightUpLeg": [
+          -0.6034900526072,
+          0.07581594285599999,
+          0
+        ],
+        "RightLeg": [
+          -0.27426361031638996,
+          0.17205600348110586,
+          0.2246056678156095
+        ],
+        "RightFoot": [
+          -0.11999999871043879,
+          0.2599995983565948,
+          -0.09999960814513029
+        ]
+      },
+      "wholeMeshMinimumYMeters": 0.001979607858034249,
+      "leftPalmProxyMinimumYMeters": 0.39398757173240695,
+      "rightPalmProxyMinimumYMeters": 0.031699062812017176,
+      "footTargetErrorMeters": 0,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          -0.1738716959953308,
+          0.8597232699394226,
+          0.03467041254043579
+        ],
+        "bones": [
+          "Hips",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "minimaByBone": {
+        "Chest": 0.0030770854765082103,
+        "LeftArm": 0.30788091869674605,
+        "RightArm": 0.002891084256937287,
+        "Neck": 0.06224559740850259,
+        "LeftUpLeg": 0.15518332257505915,
+        "LeftLeg": 0.1452190299519355,
+        "LeftHand": 0.39398757173240695,
+        "LeftForeArm": 0.36596756021211624,
+        "RightLeg": 0.12542099452060798,
+        "RightUpLeg": 0.024724355562357248,
+        "RightHand": 0.0024266568330254396,
+        "RightForeArm": 0.054836912216074084,
+        "Head": 0.11271522692441821,
+        "RightFoot": 0.18199950378283508,
+        "LeftFoot": 0.12199983153947558,
+        "Hips": 0.001979607858034249,
+        "Spine": 0.01643059242258422
+      },
+      "bodyProxyMin": 0.001979607858034249
+    },
+    {
+      "kind": "dive_settle_candidate",
+      "clip": "keeper_dive_high",
+      "drop": 0.044245,
+      "handDeltaY": 0.003,
+      "arch": 0,
+      "polemode": "head-up",
+      "preserveTwist": false,
+      "reachResidual": 0,
+      "joints": {
+        "Root": [
+          0,
+          0,
+          0
+        ],
+        "Hips": [
+          0.6,
+          0.175755,
+          0
+        ],
+        "Spine": [
+          0.799878114288,
+          0.18273510521439998,
+          0
+        ],
+        "Chest": [
+          0.9797684171472001,
+          0.18901719990735996,
+          0
+        ],
+        "Neck": [
+          1.0797074742912,
+          0.19250725251455997,
+          0
+        ],
+        "Head": [
+          1.2096282485784,
+          0.19704432090391996,
+          0
+        ],
+        "LeftArm": [
+          1.04531593560512,
+          0.031208740041279964,
+          0
+        ],
+        "LeftForeArm": [
+          1.211907583578253,
+          0.2308884776342969,
+          0.07263034859104033
+        ],
+        "LeftHand": [
+          1.2733275515620317,
+          0.0665039871513988,
+          0.23635364738097686
+        ],
+        "RightArm": [
+          1.03414776726208,
+          0.35101372290208,
+          0
+        ],
+        "RightForeArm": [
+          1.3020237740859997,
+          0.3846220771449041,
+          0.003589736113784253
+        ],
+        "RightHand": [
+          1.2607703775112336,
+          0.42608396513438157,
+          0.23635364738097675
+        ],
+        "LeftUpLeg": [
+          0.6034900526072,
+          0.07581594285599999,
+          0
+        ],
+        "LeftLeg": [
+          0.397618529595411,
+          0.13124780092891938,
+          0.35020585135246207
+        ],
+        "LeftFoot": [
+          0.3000002538026666,
+          0.19999899039689048,
+          3.797575605091197e-07
+        ],
+        "RightUpLeg": [
+          0.5965099473927999,
+          0.27569405714399997,
+          0
+        ],
+        "RightLeg": [
+          0.26597614787636803,
+          0.2341723529210618,
+          0.23900478391732152
+        ],
+        "RightFoot": [
+          0.1200000202009252,
+          0.25999933445579143,
+          -0.09999944991311535
+        ]
+      },
+      "wholeMeshMinimumYMeters": 0.00202151661027683,
+      "leftPalmProxyMinimumYMeters": 0.03009617272606127,
+      "rightPalmProxyMinimumYMeters": 0.39408094515646197,
+      "footTargetErrorMeters": 0,
+      "minimumVertex": {
+        "bindPositionMeters": [
+          0.17382214963436127,
+          0.859505295753479,
+          0.03467041254043579
+        ],
+        "bones": [
+          "Hips",
+          "Root",
+          "Root",
+          "Root"
+        ],
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "minimaByBone": {
+        "Chest": 0.0045662102940675665,
+        "LeftArm": 0.003222500135231984,
+        "RightArm": 0.30403316892085674,
+        "Neck": 0.051965800616950254,
+        "LeftUpLeg": 0.010069962016811318,
+        "LeftLeg": 0.08839735103816387,
+        "LeftHand": 0.0024310740839553063,
+        "LeftForeArm": 0.05954347597708645,
+        "RightLeg": 0.18494274719769163,
+        "RightUpLeg": 0.15177358198389984,
+        "RightHand": 0.39408094515646197,
+        "RightForeArm": 0.36594249749518504,
+        "Head": 0.11270649271949784,
+        "RightFoot": 0.18199888231313394,
+        "LeftFoot": 0.12199896901068658,
+        "Hips": 0.00202151661027683,
+        "Spine": 0.028331564696500652
+      },
+      "bodyProxyMin": 0.00202151661027683
+    }
+  ],
+  "roster": [
+    {
+      "file": "goalkeeper-lod0.glb",
+      "sha": "3dadebee708095d02bebd3f553719aafbe02477432fe002a0ec00d66b13e7ba3",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.0215,
+          "bodyMM": 2.0215,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 1.9796,
+          "bodyMM": 1.9796,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.0215,
+          "bodyMM": 2.0215,
+          "reach": 0,
+          "lowBone": "Hips"
+        }
+      ]
+    },
+    {
+      "file": "goalkeeper-lod1.glb",
+      "sha": "73acb4bd1ac09df61a5a08331453f5955c1bd0a91c137b2a1d87551d65b371d4",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.0178,
+          "bodyMM": 2.0178,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 1.1558,
+          "bodyMM": 1.9695,
+          "reach": 0,
+          "lowBone": "RightHand"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.0178,
+          "bodyMM": 2.0178,
+          "reach": 0,
+          "lowBone": "Hips"
+        }
+      ]
+    },
+    {
+      "file": "player-01-lod0.glb",
+      "sha": "ac2e9fb269f4d2322fb99d5fb0fcac6493ae95d59a31d5c35d4d379e9a936f41",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.9349,
+          "bodyMM": 6.0742,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.4156,
+          "bodyMM": 6.0704,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.9349,
+          "bodyMM": 6.0742,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-01-lod1.glb",
+      "sha": "eac92a17fa0fdca0605c50c5216ff5541c6cc4a72f3a008306a8faaf0489bd21",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 3.0944,
+          "bodyMM": 6.1014,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.289,
+          "bodyMM": 6.0854,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 3.0944,
+          "bodyMM": 6.1014,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-02-lod0.glb",
+      "sha": "1052d39590f56a8f69aa0be5166b10f081646b6609d32c9cf13e15e54e78711c",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": -0.0382,
+          "bodyMM": -0.0382,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": -0.0415,
+          "bodyMM": -0.0415,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": -0.0382,
+          "bodyMM": -0.0382,
+          "reach": 0,
+          "lowBone": "Hips"
+        }
+      ]
+    },
+    {
+      "file": "player-02-lod1.glb",
+      "sha": "5d8696e48e384f218fec84d2656c177fcfd350628efb6aff770d3f584a62b5e5",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": -0.0413,
+          "bodyMM": -0.0413,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": -0.0481,
+          "bodyMM": -0.0481,
+          "reach": 0,
+          "lowBone": "Hips"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": -0.0413,
+          "bodyMM": -0.0413,
+          "reach": 0,
+          "lowBone": "Hips"
+        }
+      ]
+    },
+    {
+      "file": "player-03-lod0.glb",
+      "sha": "ae75f268df5eada42b8b39629c916421529da2ee482a60e5ded5e64f959ca6da",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 5.6175,
+          "bodyMM": 15.7816,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 5.0938,
+          "bodyMM": 15.8194,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 5.6175,
+          "bodyMM": 15.7816,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-03-lod1.glb",
+      "sha": "565f74389a34268a2c5502c842bbdb8da495c452c2f8061019bfeaa2b4de15cc",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 5.0914,
+          "bodyMM": 13.9592,
+          "reach": 0,
+          "lowBone": "LeftHand"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 4.224,
+          "bodyMM": 14.8619,
+          "reach": 0,
+          "lowBone": "RightHand"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 5.0914,
+          "bodyMM": 13.9592,
+          "reach": 0,
+          "lowBone": "LeftHand"
+        }
+      ]
+    },
+    {
+      "file": "player-04-lod0.glb",
+      "sha": "77d9b85228df015afa91915d02730a9e59f6f25d8f32cebd2f47c633657f624c",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.876,
+          "bodyMM": 6.3125,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.3776,
+          "bodyMM": 6.2981,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.876,
+          "bodyMM": 6.3125,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-04-lod1.glb",
+      "sha": "2db4f4f1f636f5c4c7eaa2a1da3e3833c751b197ab47e8e4b0e57c5d3ba5383b",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.8718,
+          "bodyMM": 6.2895,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.2617,
+          "bodyMM": 6.2783,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.8718,
+          "bodyMM": 6.2895,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-05-lod0.glb",
+      "sha": "c775e092a80815ba104e174ab3a4055c337b32d0c1b5a21433772601a0c63f05",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 3.1743,
+          "bodyMM": 6.0503,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.5909,
+          "bodyMM": 6.0544,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 3.1743,
+          "bodyMM": 6.0503,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-05-lod1.glb",
+      "sha": "81cb8e14e6ef9009794e92004c14e6046b6bfbe8bb726267f0f56c702d2e675b",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 3.2516,
+          "bodyMM": 6.0405,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.3493,
+          "bodyMM": 6.0628,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 3.2516,
+          "bodyMM": 6.0405,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-06-lod0.glb",
+      "sha": "847438f39cb9aeefad23621d95290ab3e549d77b0a7cda7d84b634be3529f4b1",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.9539,
+          "bodyMM": 5.8274,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.4376,
+          "bodyMM": 5.7889,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.9539,
+          "bodyMM": 5.8274,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "player-06-lod1.glb",
+      "sha": "df7a12ccc87905f2d9cac058d68ad9735265e74335dc17a7ca74b856f77ffb36",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 3.0487,
+          "bodyMM": 5.7908,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.2845,
+          "bodyMM": 5.7844,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 3.0487,
+          "bodyMM": 5.7908,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "referee-lod0.glb",
+      "sha": "dce18adce60353d5a82fecaf369d0621dace7b35d225d2b63162d80bc0d181ee",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.8931,
+          "bodyMM": 5.7828,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.3831,
+          "bodyMM": 5.7711,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.8931,
+          "bodyMM": 5.7828,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    },
+    {
+      "file": "referee-lod1.glb",
+      "sha": "4bd415489cb9f55360265d33a4aa54dd76955914b52e64bb482b840d9377e5d9",
+      "clips": [
+        {
+          "id": "keeper_dive_left",
+          "minMM": 2.9182,
+          "bodyMM": 5.7911,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_right",
+          "minMM": 2.2653,
+          "bodyMM": 5.7794,
+          "reach": 0,
+          "lowBone": "Chest"
+        },
+        {
+          "id": "keeper_dive_high",
+          "minMM": 2.9182,
+          "bodyMM": 5.7911,
+          "reach": 0,
+          "lowBone": "Chest"
+        }
+      ]
+    }
+  ],
+  "originalEndpointFrames": {
+    "keeper_dive_left": {
+      "rotations": {
+        "Root": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Hips": [
+          0,
+          0,
+          -0.694658,
+          0.71934
+        ],
+        "Spine": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Chest": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Neck": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Head": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftArm": [
+          0,
+          0,
+          0.999048,
+          0.043619
+        ],
+        "LeftForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "LeftHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "RightArm": [
+          0,
+          0,
+          -0.999048,
+          0.043619
+        ],
+        "RightForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "RightHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftUpLeg": [
+          -0.470572,
+          -0.454426,
+          0.193073,
+          0.731288
+        ],
+        "LeftLeg": [
+          0.909411,
+          0.394247,
+          0.115268,
+          0.065217
+        ],
+        "LeftFoot": [
+          -0.703218,
+          0,
+          0.205882,
+          0.680512
+        ],
+        "RightUpLeg": [
+          -0.282978,
+          -0.273268,
+          0.125056,
+          0.910829
+        ],
+        "RightLeg": [
+          0.754746,
+          0.450893,
+          0.190784,
+          0.43664
+        ],
+        "RightFoot": [
+          -0.633029,
+          0,
+          0.27279,
+          0.724472
+        ]
+      },
+      "hipsOffsetMeters": [
+        0.6,
+        -0.64,
+        0
+      ],
+      "referenceRootTranslationMeters": [
+        0,
+        0,
+        0
+      ],
+      "timeSeconds": 1.466667
+    },
+    "keeper_dive_right": {
+      "rotations": {
+        "Root": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Hips": [
+          0,
+          0,
+          0.694658,
+          0.71934
+        ],
+        "Spine": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Chest": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Neck": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Head": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftArm": [
+          0,
+          0,
+          0.999048,
+          0.043619
+        ],
+        "LeftForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "LeftHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "RightArm": [
+          0,
+          0,
+          -0.999048,
+          0.043619
+        ],
+        "RightForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "RightHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftUpLeg": [
+          -0.401205,
+          0.387439,
+          -0.316086,
+          0.767474
+        ],
+        "LeftLeg": [
+          0.909387,
+          -0.299623,
+          -0.084001,
+          0.276015
+        ],
+        "LeftFoot": [
+          -0.639393,
+          0,
+          -0.186687,
+          0.745872
+        ],
+        "RightUpLeg": [
+          -0.326888,
+          0.315672,
+          0.02849,
+          0.890328
+        ],
+        "RightLeg": [
+          0.720565,
+          -0.579038,
+          -0.222332,
+          0.30995
+        ],
+        "RightFoot": [
+          -0.676361,
+          0,
+          -0.323187,
+          0.661881
+        ]
+      },
+      "hipsOffsetMeters": [
+        -0.6,
+        -0.64,
+        0
+      ],
+      "referenceRootTranslationMeters": [
+        0,
+        0,
+        0
+      ],
+      "timeSeconds": 1.466667
+    },
+    "keeper_dive_high": {
+      "rotations": {
+        "Root": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Hips": [
+          0,
+          0,
+          -0.694658,
+          0.71934
+        ],
+        "Spine": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Chest": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Neck": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Head": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftArm": [
+          0,
+          0,
+          0.999048,
+          0.043619
+        ],
+        "LeftForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "LeftHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "RightArm": [
+          0,
+          0,
+          -0.999048,
+          0.043619
+        ],
+        "RightForeArm": [
+          -0.766044,
+          0,
+          0,
+          0.642788
+        ],
+        "RightHand": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "LeftUpLeg": [
+          -0.470572,
+          -0.454426,
+          0.193073,
+          0.731288
+        ],
+        "LeftLeg": [
+          0.909411,
+          0.394247,
+          0.115268,
+          0.065217
+        ],
+        "LeftFoot": [
+          -0.703218,
+          0,
+          0.205882,
+          0.680512
+        ],
+        "RightUpLeg": [
+          -0.282978,
+          -0.273268,
+          0.125056,
+          0.910829
+        ],
+        "RightLeg": [
+          0.754746,
+          0.450893,
+          0.190784,
+          0.43664
+        ],
+        "RightFoot": [
+          -0.633029,
+          0,
+          0.27279,
+          0.724472
+        ]
+      },
+      "hipsOffsetMeters": [
+        0.6,
+        -0.64,
+        0
+      ],
+      "referenceRootTranslationMeters": [
+        0,
+        0,
+        0
+      ],
+      "timeSeconds": 1.666667
+    }
+  },
+  "sourceMotionSha256": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+  "methodology": "Independent full decoded-vertex skinning on exact hashed GLB bytes; all four influences and inverse bind matrices. Sixteen LOD files times three dive endpoints. Old plane caused 32\u201337mm upper-arm penetration; changing the low elbow plane avoids it. No runtime floor uplift.",
+  "limitations": [
+    "Endpoint calibration, not proof of every intermediate frame or a dynamic pressure/contact simulation.",
+    "Roster rows use minMM/bodyMM in millimetres; selectedEndpointRows are metres.",
+    "The original endpoint samples are retained here so the calibration can be repeated after the published animation source is updated."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "kind": "exact-circle-locomotion-coordinate-proof",
+  "generatedAt": "2026-11-05T04:02:59.418Z",
+  "pass": true,
+  "radius": 8,
+  "points": 192,
+  "reachCases": 24,
+  "cases": [
+    {
+      "yaw": 0,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "yaw": 0,
+      "origin": [
+        2,
+        0.07,
+        -3
+      ],
+      "pass": true
+    },
+    {
+      "yaw": 3.141592653589793,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "yaw": 3.141592653589793,
+      "origin": [
+        2,
+        0.07,
+        -3
+      ],
+      "pass": true
+    },
+    {
+      "yaw": 0.77,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "yaw": 0.77,
+      "origin": [
+        2,
+        0.07,
+        -3
+      ],
+      "pass": true
+    },
+    {
+      "yaw": -2.4,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "yaw": -2.4,
+      "origin": [
+        2,
+        0.07,
+        -3
+      ],
+      "pass": true
+    }
+  ],
+  "maximumErrorsMeters": {
+    "inverse": 5.0242958677880805e-15,
+    "polarConstruction": 4.440892098500626e-15,
+    "rootUnitTangent": 3.2699997251767865e-10,
+    "oppositeSquad": 1.9860273225978185e-15,
+    "worldReach": 2.3314683517128287e-15
+  },
+  "orientationMaximumComponentError": 2.220446049250313e-16,
+  "source": {
+    "curveSHA256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "motorSHA256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+  },
+  "method": "Compare implementation against an independent circle-centre/radius construction, finite-difference unit tangent, opposite-heading displacement symmetry, quaternion inverse, world-fixed anchors, and current/future Euclidean hip-to-ankle predictions.",
+  "limits": [
+    "Coordinate and geometry contract proof only. Final mapped Actor poses, mesh floor, planted feet, joint speed, request fulfillment and all16 LODs still require actual bundled browser audit.",
+    "Circle inverse assumes x < radius and unwraps to the nearest supplied arc distance; callers must pass the current motor distance."
+  ]
+}

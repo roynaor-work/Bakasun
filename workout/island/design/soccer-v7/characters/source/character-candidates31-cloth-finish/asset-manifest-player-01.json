@@ -1,0 +1,3158 @@
+{
+  "schemaVersion": 1,
+  "kind": "soccer-human-character-library",
+  "skeleton": "rig.json",
+  "license": "CC0-1.0",
+  "characters": [
+    {
+      "id": "player-01",
+      "label": "איתן",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-square",
+        "heritage": [
+          0.12,
+          0.1,
+          0.78
+        ],
+        "hair": "crop",
+        "eye": [
+          67,
+          45,
+          26
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-a",
+          "color": "#146c70",
+          "textures": {
+            "basecolor": "textures/player-01-kit-a-basecolor.webp",
+            "normal": "textures/player-01-normal.png",
+            "orm": "textures/player-01-orm.png"
+          },
+          "lod0": "models/player-01-lod0.glb",
+          "lod0Triangles": 35365,
+          "lod0BytesBeforeDraco": 2068800,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 86,
+            "faceCoreMappedTriangles": 86,
+            "shirtCoreTriangles": 305,
+            "explicitRegionObjects": 48,
+            "eye19Alignment": [
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  0.02991277500000001,
+                  1.6029758500000002,
+                  0.1008765770054095
+                ],
+                "opticalCenter": [
+                  0.03241277500000001,
+                  1.601016257562256,
+                  0.1008765770054095
+                ],
+                "centerCorrectionMeters": [
+                  0.0025000000000000022,
+                  -0.0019595924377442397,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    0.031851525000000006,
+                    1.6010036461730959
+                  ],
+                  "widthMeters": 0.020938499999999995,
+                  "heightAtAxisMeters": 0.0069282188415529244,
+                  "upperAtAxisY": 1.6044677555938722,
+                  "lowerAtAxisY": 1.5975395367523193,
+                  "xRange": [
+                    0.02138227500000001,
+                    0.042320775000000005
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    0.03241277500000001,
+                    1.6010194321533207
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.006980403900146648,
+                  "upperAtAxisY": 1.604509634103394,
+                  "lowerAtAxisY": 1.5975292302032473,
+                  "xRange": [
+                    0.020780275000000015,
+                    0.04404527500000001
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000031745910646918674,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  0.03241277500000001,
+                  1.601016257562256,
+                  0.10648408750557739
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11562833189964294,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11426368355751038,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08640941977500916,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11635628342628479,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11665946245193481,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.1162099838256836,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08592629432678223,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08526381850242615,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.11613059043884277,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11714386940002441,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11607873439788818,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08576476573944092,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08515796065330505,
+                    "opaqueZ": 0.11183999613522057,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11527657700540951
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08492514491081238,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11701861023902893,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11491042375564575,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08703884482383728,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08617478609085083,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08584371209144592,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11585390567779541,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.1118554174900055,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11125126481056213,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08856230974197388,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.1136547327041626,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.113736093044281,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.00000811793837401935,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              },
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  -0.02991277500000001,
+                  1.6029758500000002,
+                  0.1008765770054095
+                ],
+                "opticalCenter": [
+                  -0.03241277500000001,
+                  1.6010162466903686,
+                  0.1008765770054095
+                ],
+                "centerCorrectionMeters": [
+                  -0.0025000000000000022,
+                  -0.00195960330963163,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    -0.031851525000000006,
+                    1.6010036787887574
+                  ],
+                  "widthMeters": 0.020938499999999995,
+                  "heightAtAxisMeters": 0.0069281536102296926,
+                  "upperAtAxisY": 1.6044677555938722,
+                  "lowerAtAxisY": 1.5975396019836425,
+                  "xRange": [
+                    -0.042320775000000005,
+                    -0.02138227500000001
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    -0.03241277500000001,
+                    1.6010195082565308
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.006980316925048857,
+                  "upperAtAxisY": 1.6045096667190553,
+                  "lowerAtAxisY": 1.5975293497940064,
+                  "xRange": [
+                    -0.04404527500000001,
+                    -0.020780275000000015
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000032615661622603653,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  -0.03241277500000001,
+                  1.6010162466903686,
+                  0.10648408750557739
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11185547709465027,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11125105619430542,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08856227993965149,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11365476250648499,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.1137361228466034,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11491042375564575,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08703887462615967,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08617481589317322,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08584371209144592,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11585390567779541,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11607867479324341,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08576476573944092,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08515799045562744,
+                    "opaqueZ": 0.11183999613522057,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11527657700540951
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08492514491081238,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.1170186698436737,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11621001362800598,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08592626452445984,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08526381850242615,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.11613062024116516,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.1171438992023468,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11562833189964294,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11426383256912231,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08640944957733154,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11635631322860718,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11665946245193481,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019349,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              }
+            ],
+            "faceCurvatureRefinement": [
+              {
+                "variant": "27",
+                "method": "Catmull-Clark level1 before triangulation and feature fitting",
+                "protectedBoundaryEdges": 80,
+                "controlTriangles": 9122,
+                "refinedBeforeQEMTriangles": 36484,
+                "finalTriangles": 14000,
+                "anatomicalCheekCurvature": {
+                  "kind": "two compact C1 anatomical malar/outer-cheek pads",
+                  "maximumDisplacementMeters": 0.0026027292934923023,
+                  "verticesMoved": 424,
+                  "eyesNoseLipNeckGates": true,
+                  "eyeHeight": 1.6044758500000003
+                }
+              }
+            ],
+            "hairGeometryPostprocess": [
+              {
+                "variant": "29",
+                "method": "overlapping short crown sublocks with cap-rooted starts",
+                "style": "crop",
+                "objects": [
+                  {
+                    "name": "hair-groom-clumps",
+                    "oldVertices": 3916,
+                    "newVertices": 6442,
+                    "oldPolygons": 3246,
+                    "newPolygons": 5143,
+                    "splitOriginalRibbons": 308,
+                    "unchangedShortRibbons": 27,
+                    "invalidRibbons": 0,
+                    "discardedDegenerateTriangles": 1,
+                    "newRibbonCount": 649,
+                    "oldLengthRangeMeters": [
+                      0.0055850126018376755,
+                      0.04743213972205613
+                    ],
+                    "newLengthRangeMeters": [
+                      0.0055850126018376755,
+                      0.02186396971480301
+                    ],
+                    "rootSignedDepthRangeMeters": [
+                      -0.000055591369673693367,
+                      0.0002000000000000001
+                    ],
+                    "rigidHead5": true,
+                    "canonicalGroupsUnchanged": true,
+                    "uvTilePreserved": true,
+                    "normalRecipeChangedHere": false
+                  }
+                ],
+                "normalRecipeOwnedByExporter": true,
+                "undercoatAndFringeUnchanged": true,
+                "maximumSublockLengthMeters": 0.02186396971480301,
+                "skipped": false
+              }
+            ],
+            "clothFinishing": [
+              {
+                "kind": "bounded-collar-and-two-upper-tension-folds31",
+                "vertices": 2540,
+                "triangles": 4890,
+                "topologyUnchanged": true,
+                "uvUnchanged": true,
+                "weightsUnchanged": true,
+                "materialsUnchanged": true,
+                "collarVertices": 40,
+                "collarTransitionVertices": 80,
+                "collarSmoothingMaximumMeters": 0.0008000000000000759,
+                "collarVisibleSkinRepairMaximumMeters": 0.006855569640257443,
+                "collarDeliveredSkinRestTargetMeters": 0.00225,
+                "collarTransitionRepairMaximumMeters": 0,
+                "collarFullReferenceMinimumBeforeMeters": -0.003808044490725533,
+                "collarFullReferenceMinimumAfterMeters": 0.0020212041389742127,
+                "collarDeliveredSkinMinimumBeforeMeters": -0.004252870116148963,
+                "collarDeliveredSkinMinimumAfterMeters": 0.0022509439343110374,
+                "collarDeliveredSkinSamples": 40,
+                "modifiedTriangleMinimumOriginalNormalCosine": 0.9416781974874664,
+                "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+                "deliveredSkinIncludes": {
+                  "vertices": 22927,
+                  "faces": 41010
+                },
+                "folds": 2,
+                "foldAffectedVertices": 33,
+                "foldMaximumOffsetMeters": 0.002174998371693099,
+                "foldMinimumOriginalNormalDotMeters": 0.000010199815226781123,
+                "cuffHemMaximumDisplacementMeters": 0,
+                "allMovedVertices": 153,
+                "maximumTotalDisplacementMeters": 0.006509060104989194
+              }
+            ],
+            "anatomicalSockFit": [
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 0
+              },
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 1.1102230246251565e-16
+              }
+            ],
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 94,
+            "hemCorrectedVertices": 19,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.00281776093571387,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 256
+          },
+          "lod1": "models/player-01-lod1.glb",
+          "lod1Triangles": 5781,
+          "lod1BytesBeforeDraco": 748852,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 6,
+            "faceCoreMappedTriangles": 6,
+            "shirtCoreTriangles": 78,
+            "explicitRegionObjects": 47,
+            "eye19Alignment": [
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  0.02991277500000001,
+                  1.6029758500000002,
+                  0.1008765770054095
+                ],
+                "opticalCenter": [
+                  0.03241277500000001,
+                  1.601016257562256,
+                  0.1008765770054095
+                ],
+                "centerCorrectionMeters": [
+                  0.0025000000000000022,
+                  -0.0019595924377442397,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    0.031851525000000006,
+                    1.6010036461730959
+                  ],
+                  "widthMeters": 0.020938499999999995,
+                  "heightAtAxisMeters": 0.0069282188415529244,
+                  "upperAtAxisY": 1.6044677555938722,
+                  "lowerAtAxisY": 1.5975395367523193,
+                  "xRange": [
+                    0.02138227500000001,
+                    0.042320775000000005
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    0.03241277500000001,
+                    1.6010194321533207
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.006980403900146648,
+                  "upperAtAxisY": 1.604509634103394,
+                  "lowerAtAxisY": 1.5975292302032473,
+                  "xRange": [
+                    0.020780275000000015,
+                    0.04404527500000001
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000031745910646918674,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  0.03241277500000001,
+                  1.601016257562256,
+                  0.10648408750557739
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11562833189964294,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11426368355751038,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08640941977500916,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11635628342628479,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11665946245193481,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.1162099838256836,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08592629432678223,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08526381850242615,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.11613059043884277,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11714386940002441,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11607873439788818,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08576476573944092,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08515796065330505,
+                    "opaqueZ": 0.11183999613522057,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11527657700540951
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08492514491081238,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11701861023902893,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11491042375564575,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08703884482383728,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08617478609085083,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08584371209144592,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11585390567779541,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.1118554174900055,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11125126481056213,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08856230974197388,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.1136547327041626,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.113736093044281,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.00000811793837401935,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              },
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  -0.02991277500000001,
+                  1.6029758500000002,
+                  0.1008765770054095
+                ],
+                "opticalCenter": [
+                  -0.03241277500000001,
+                  1.6010162466903686,
+                  0.1008765770054095
+                ],
+                "centerCorrectionMeters": [
+                  -0.0025000000000000022,
+                  -0.00195960330963163,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    -0.031851525000000006,
+                    1.6010036787887574
+                  ],
+                  "widthMeters": 0.020938499999999995,
+                  "heightAtAxisMeters": 0.0069281536102296926,
+                  "upperAtAxisY": 1.6044677555938722,
+                  "lowerAtAxisY": 1.5975396019836425,
+                  "xRange": [
+                    -0.042320775000000005,
+                    -0.02138227500000001
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    -0.03241277500000001,
+                    1.6010195082565308
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.006980316925048857,
+                  "upperAtAxisY": 1.6045096667190553,
+                  "lowerAtAxisY": 1.5975293497940064,
+                  "xRange": [
+                    -0.04404527500000001,
+                    -0.020780275000000015
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000032615661622603653,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  -0.03241277500000001,
+                  1.6010162466903686,
+                  0.10648408750557739
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11185547709465027,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11125105619430542,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08856227993965149,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11365476250648499,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.1137361228466034,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11491042375564575,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08703887462615967,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08617481589317322,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08584371209144592,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11585390567779541,
+                    "opaqueZ": 0.11158545182959155,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11607867479324341,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08576476573944092,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08515799045562744,
+                    "opaqueZ": 0.11183999613522057,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11527657700540951
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08492514491081238,
+                    "opaqueZ": 0.1119960357750669,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11474894513318709
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.1170186698436737,
+                    "opaqueZ": 0.11202211353899061,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11273777862141691
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11621001362800598,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08592626452445984,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08526381850242615,
+                    "opaqueZ": 0.1120760087421117,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11431402183510136
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.11613062024116516,
+                    "opaqueZ": 0.11214926982934534,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11373213321273502
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.1171438992023468,
+                    "opaqueZ": 0.11158545182959154,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11562833189964294,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11426383256912231,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08640944957733154,
+                    "opaqueZ": 0.11137610080413485,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11635631322860718,
+                    "opaqueZ": 0.1108440240205684,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11665946245193481,
+                    "opaqueZ": 0.10904235927044695,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019349,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              }
+            ],
+            "faceCurvatureRefinement": [
+              {
+                "variant": "27",
+                "method": "Catmull-Clark level1 before triangulation and feature fitting",
+                "protectedBoundaryEdges": 80,
+                "controlTriangles": 9122,
+                "refinedBeforeQEMTriangles": 36484,
+                "finalTriangles": 1049,
+                "anatomicalCheekCurvature": {
+                  "kind": "two compact C1 anatomical malar/outer-cheek pads",
+                  "maximumDisplacementMeters": 0.0026027292934923023,
+                  "verticesMoved": 424,
+                  "eyesNoseLipNeckGates": true,
+                  "eyeHeight": 1.6044758500000003
+                }
+              }
+            ],
+            "hairGeometryPostprocess": [
+              {
+                "variant": "29",
+                "method": "overlapping short crown sublocks with cap-rooted starts",
+                "style": "crop",
+                "objects": [
+                  {
+                    "name": "hair-groom-clumps",
+                    "oldVertices": 3916,
+                    "newVertices": 6442,
+                    "oldPolygons": 3246,
+                    "newPolygons": 5143,
+                    "splitOriginalRibbons": 308,
+                    "unchangedShortRibbons": 27,
+                    "invalidRibbons": 0,
+                    "discardedDegenerateTriangles": 1,
+                    "newRibbonCount": 649,
+                    "oldLengthRangeMeters": [
+                      0.0055850126018376755,
+                      0.04743213972205613
+                    ],
+                    "newLengthRangeMeters": [
+                      0.0055850126018376755,
+                      0.02186396971480301
+                    ],
+                    "rootSignedDepthRangeMeters": [
+                      -0.000055591369673693367,
+                      0.0002000000000000001
+                    ],
+                    "rigidHead5": true,
+                    "canonicalGroupsUnchanged": true,
+                    "uvTilePreserved": true,
+                    "normalRecipeChangedHere": false
+                  }
+                ],
+                "normalRecipeOwnedByExporter": true,
+                "undercoatAndFringeUnchanged": true,
+                "maximumSublockLengthMeters": 0.02186396971480301,
+                "skipped": false
+              }
+            ],
+            "coherentFarCap": [
+              {
+                "verticesBeforeWeld": 1304,
+                "verticesAfterWeld": 367,
+                "islandsBeforeWeld": 327,
+                "islandsAfterWeld": 1,
+                "trianglesAfterQEM": 260,
+                "islandsAfterQEM": 1,
+                "crownRays": 216,
+                "missedCrownRays": 0,
+                "maximumCrownApproximationErrorMeters": 0.0011630389581146407,
+                "farAtlasVIntervalNormalized": [
+                  0.28,
+                  1
+                ],
+                "sameHairCardsMaterial": true
+              }
+            ],
+            "clothFinishing": [
+              {
+                "kind": "bounded-collar-and-two-upper-tension-folds31",
+                "vertices": 2540,
+                "triangles": 4890,
+                "topologyUnchanged": true,
+                "uvUnchanged": true,
+                "weightsUnchanged": true,
+                "materialsUnchanged": true,
+                "collarVertices": 40,
+                "collarTransitionVertices": 80,
+                "collarSmoothingMaximumMeters": 0.0008000000000000759,
+                "collarVisibleSkinRepairMaximumMeters": 0.006855569640257443,
+                "collarDeliveredSkinRestTargetMeters": 0.00225,
+                "collarTransitionRepairMaximumMeters": 0,
+                "collarFullReferenceMinimumBeforeMeters": -0.003808044490725533,
+                "collarFullReferenceMinimumAfterMeters": 0.0020212041389742127,
+                "collarDeliveredSkinMinimumBeforeMeters": -0.004252870116148963,
+                "collarDeliveredSkinMinimumAfterMeters": 0.0022509439343110374,
+                "collarDeliveredSkinSamples": 40,
+                "modifiedTriangleMinimumOriginalNormalCosine": 0.9416781974874664,
+                "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+                "deliveredSkinIncludes": {
+                  "vertices": 22927,
+                  "faces": 41010
+                },
+                "folds": 2,
+                "foldAffectedVertices": 33,
+                "foldMaximumOffsetMeters": 0.002174998371693099,
+                "foldMinimumOriginalNormalDotMeters": 0.000010199815226781123,
+                "cuffHemMaximumDisplacementMeters": 0,
+                "allMovedVertices": 153,
+                "maximumTotalDisplacementMeters": 0.006509060104989194
+              }
+            ],
+            "anatomicalSockFit": [
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 0
+              },
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 1.1102230246251565e-16
+              }
+            ],
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 30,
+            "hemCorrectedVertices": 7,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.004012255943973045,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 114
+          },
+          "lod0Bytes": 967968,
+          "lod0Sha256": "40b1e4d2bc5cf45216d758b9575a6fa1ca391c45df6bac257242cba671199a4f",
+          "lod1Bytes": 521696,
+          "lod1Sha256": "0952b8daad63bf67881e102c630d020150227b38b4b96f931a0d07f30a442345"
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "label": "נבו",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-rectangular",
+        "heritage": [
+          0,
+          0.05,
+          0.95
+        ],
+        "hair": "quiff",
+        "eye": [
+          79,
+          105,
+          103
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-b",
+          "color": "#da912e",
+          "textures": {
+            "basecolor": "textures/player-04-kit-b-basecolor.webp",
+            "normal": "textures/player-04-normal.png",
+            "orm": "textures/player-04-orm.png"
+          },
+          "lod0": "models/player-04-lod0.glb",
+          "lod0Triangles": 35327,
+          "lod0BytesBeforeDraco": 2107680,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 84,
+            "faceCoreMappedTriangles": 84,
+            "shirtCoreTriangles": 306,
+            "explicitRegionObjects": 48,
+            "eye19Alignment": [
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  0.0299057625,
+                  1.601494405,
+                  0.10167752408013733
+                ],
+                "opticalCenter": [
+                  0.0324057625,
+                  1.5995549690411375,
+                  0.10167752408013733
+                ],
+                "centerCorrectionMeters": [
+                  0.0024999999999999988,
+                  -0.0019394359588624788,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    0.0318445125,
+                    1.5995428577587891
+                  ],
+                  "widthMeters": 0.0209385,
+                  "heightAtAxisMeters": 0.006981230163574548,
+                  "upperAtAxisY": 1.6030334728405764,
+                  "lowerAtAxisY": 1.5960522426770019,
+                  "xRange": [
+                    0.0213752625,
+                    0.0423137625
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    0.0324057625,
+                    1.5995584697888183
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.00703463287353534,
+                  "upperAtAxisY": 1.603075786225586,
+                  "lowerAtAxisY": 1.5960411533520507,
+                  "xRange": [
+                    0.0207732625,
+                    0.044038262499999994
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000035007476808512905,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  0.0324057625,
+                  1.5995549690411375,
+                  0.10728503458030522
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11636048555374146,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11503303050994873,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08737555146217346,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.117095947265625,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11735105514526367,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.1169479489326477,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08689197897911072,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08624064922332764,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.0860007107257843,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11779788136482239,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11683270335197449,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08674266934394836,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08613860607147217,
+                    "opaqueZ": 0.1126409432099484,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11607752408013734
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08590713143348694,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11766412854194641,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11567479372024536,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08802038431167603,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08715614676475525,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08682560920715332,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.1165057122707367,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11261135339736938,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11183229088783264,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08954384922981262,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11440125107765198,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11440011858940125,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019347,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              },
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  -0.0299057625,
+                  1.601494405,
+                  0.10167752408013733
+                ],
+                "opticalCenter": [
+                  -0.0324057625,
+                  1.5995550016567992,
+                  0.10167752408013733
+                ],
+                "centerCorrectionMeters": [
+                  -0.0024999999999999988,
+                  -0.0019394033432007518,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    -0.0318445125,
+                    1.5995428903744506
+                  ],
+                  "widthMeters": 0.0209385,
+                  "heightAtAxisMeters": 0.00698129539489778,
+                  "upperAtAxisY": 1.6030335380718996,
+                  "lowerAtAxisY": 1.5960522426770019,
+                  "xRange": [
+                    -0.0423137625,
+                    -0.0213752625
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    -0.0324057625,
+                    1.5995584806607055
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.007034676361084458,
+                  "upperAtAxisY": 1.6030758188412477,
+                  "lowerAtAxisY": 1.5960411424801633,
+                  "xRange": [
+                    -0.044038262499999994,
+                    -0.0207732625
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000034790039062926326,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  -0.0324057625,
+                  1.5995550016567992,
+                  0.10728503458030522
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11261138319969177,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11183241009712219,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08954387903213501,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11440125107765198,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11440008878707886,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11567482352256775,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08802035450935364,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08715614676475525,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08682557940483093,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11650574207305908,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11683273315429688,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08674269914627075,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08613857626914978,
+                    "opaqueZ": 0.1126409432099484,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11607752408013734
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08590713143348694,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11766412854194641,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11694797873497009,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08689194917678833,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08624067902565002,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.0860007107257843,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11779791116714478,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11636048555374146,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11503273248672485,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08737552165985107,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11709597706794739,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11735111474990845,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019347,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              }
+            ],
+            "faceCurvatureRefinement": [
+              {
+                "variant": "27",
+                "method": "Catmull-Clark level1 before triangulation and feature fitting",
+                "protectedBoundaryEdges": 80,
+                "controlTriangles": 9122,
+                "refinedBeforeQEMTriangles": 36484,
+                "finalTriangles": 14000,
+                "anatomicalCheekCurvature": {
+                  "kind": "two compact C1 anatomical malar/outer-cheek pads",
+                  "maximumDisplacementMeters": 0.002600150895629892,
+                  "verticesMoved": 431,
+                  "eyesNoseLipNeckGates": true,
+                  "eyeHeight": 1.602994405
+                }
+              }
+            ],
+            "hairGeometryPostprocess": [
+              {
+                "variant": "29",
+                "method": "overlapping short crown sublocks with cap-rooted starts",
+                "style": "quiff",
+                "objects": [
+                  {
+                    "name": "hair-groom-clumps",
+                    "oldVertices": 4024,
+                    "newVertices": 6872,
+                    "oldPolygons": 3346,
+                    "newPolygons": 5488,
+                    "splitOriginalRibbons": 329,
+                    "unchangedShortRibbons": 10,
+                    "invalidRibbons": 0,
+                    "discardedDegenerateTriangles": 6,
+                    "newRibbonCount": 689,
+                    "oldLengthRangeMeters": [
+                      0.0071368216888450485,
+                      0.04694714150910321
+                    ],
+                    "newLengthRangeMeters": [
+                      0.0071368216888450485,
+                      0.021987663405382277
+                    ],
+                    "rootSignedDepthRangeMeters": [
+                      0.000014836529185768832,
+                      0.0002000000000000001
+                    ],
+                    "rigidHead5": true,
+                    "canonicalGroupsUnchanged": true,
+                    "uvTilePreserved": true,
+                    "normalRecipeChangedHere": false
+                  }
+                ],
+                "normalRecipeOwnedByExporter": true,
+                "undercoatAndFringeUnchanged": true,
+                "maximumSublockLengthMeters": 0.021987663405382277,
+                "skipped": false
+              }
+            ],
+            "clothFinishing": [
+              {
+                "kind": "bounded-collar-and-two-upper-tension-folds31",
+                "vertices": 2540,
+                "triangles": 4890,
+                "topologyUnchanged": true,
+                "uvUnchanged": true,
+                "weightsUnchanged": true,
+                "materialsUnchanged": true,
+                "collarVertices": 40,
+                "collarTransitionVertices": 80,
+                "collarSmoothingMaximumMeters": 0.000800000000000052,
+                "collarVisibleSkinRepairMaximumMeters": 0.006931195970170112,
+                "collarDeliveredSkinRestTargetMeters": 0.00225,
+                "collarTransitionRepairMaximumMeters": 0,
+                "collarFullReferenceMinimumBeforeMeters": -0.003898399370742185,
+                "collarFullReferenceMinimumAfterMeters": 0.0020334615331796045,
+                "collarDeliveredSkinMinimumBeforeMeters": -0.004335380106910827,
+                "collarDeliveredSkinMinimumAfterMeters": 0.0022509537167716403,
+                "collarDeliveredSkinSamples": 40,
+                "modifiedTriangleMinimumOriginalNormalCosine": 0.9398858040001287,
+                "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+                "deliveredSkinIncludes": {
+                  "vertices": 22927,
+                  "faces": 41010
+                },
+                "folds": 2,
+                "foldAffectedVertices": 33,
+                "foldMaximumOffsetMeters": 0.0021966989790779367,
+                "foldMinimumOriginalNormalDotMeters": 0.00001114909399029412,
+                "cuffHemMaximumDisplacementMeters": 0,
+                "allMovedVertices": 153,
+                "maximumTotalDisplacementMeters": 0.006591723114524246
+              }
+            ],
+            "anatomicalSockFit": [
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 0
+              },
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 1.1102230246251565e-16
+              }
+            ],
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 91,
+            "hemCorrectedVertices": 22,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.00287157074182047,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 256
+          },
+          "lod1": "models/player-04-lod1.glb",
+          "lod1Triangles": 5780,
+          "lod1BytesBeforeDraco": 786436,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 4,
+            "faceCoreMappedTriangles": 4,
+            "shirtCoreTriangles": 76,
+            "explicitRegionObjects": 47,
+            "eye19Alignment": [
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  0.0299057625,
+                  1.601494405,
+                  0.10167752408013733
+                ],
+                "opticalCenter": [
+                  0.0324057625,
+                  1.5995549690411375,
+                  0.10167752408013733
+                ],
+                "centerCorrectionMeters": [
+                  0.0024999999999999988,
+                  -0.0019394359588624788,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    0.0318445125,
+                    1.5995428577587891
+                  ],
+                  "widthMeters": 0.0209385,
+                  "heightAtAxisMeters": 0.006981230163574548,
+                  "upperAtAxisY": 1.6030334728405764,
+                  "lowerAtAxisY": 1.5960522426770019,
+                  "xRange": [
+                    0.0213752625,
+                    0.0423137625
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    0.0324057625,
+                    1.5995584697888183
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.00703463287353534,
+                  "upperAtAxisY": 1.603075786225586,
+                  "lowerAtAxisY": 1.5960411533520507,
+                  "xRange": [
+                    0.0207732625,
+                    0.044038262499999994
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000035007476808512905,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  0.0324057625,
+                  1.5995549690411375,
+                  0.10728503458030522
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11636048555374146,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11503303050994873,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08737555146217346,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.117095947265625,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11735105514526367,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.1169479489326477,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08689197897911072,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08624064922332764,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.0860007107257843,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11779788136482239,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11683270335197449,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08674266934394836,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08613860607147217,
+                    "opaqueZ": 0.1126409432099484,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11607752408013734
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08590713143348694,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11766412854194641,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11567479372024536,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08802038431167603,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08715614676475525,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08682560920715332,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.1165057122707367,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11261135339736938,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11183229088783264,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08954384922981262,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11440125107765198,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11440011858940125,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019347,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              },
+              {
+                "coordinateConvention": "+Y up; common +Z optical axis; canonical rest metres",
+                "sourceCenter": [
+                  -0.0299057625,
+                  1.601494405,
+                  0.10167752408013733
+                ],
+                "opticalCenter": [
+                  -0.0324057625,
+                  1.5995550016567992,
+                  0.10167752408013733
+                ],
+                "centerCorrectionMeters": [
+                  -0.0024999999999999988,
+                  -0.0019394033432007518,
+                  0
+                ],
+                "globeRadiiMeters": [
+                  0.0132,
+                  0.012,
+                  0.0132
+                ],
+                "initialAperture": {
+                  "center": [
+                    -0.0318445125,
+                    1.5995428903744506
+                  ],
+                  "widthMeters": 0.0209385,
+                  "heightAtAxisMeters": 0.00698129539489778,
+                  "upperAtAxisY": 1.6030335380718996,
+                  "lowerAtAxisY": 1.5960522426770019,
+                  "xRange": [
+                    -0.0423137625,
+                    -0.0213752625
+                  ]
+                },
+                "measuredAperture": {
+                  "center": [
+                    -0.0324057625,
+                    1.5995584806607055
+                  ],
+                  "widthMeters": 0.023264999999999994,
+                  "heightAtAxisMeters": 0.007034676361084458,
+                  "upperAtAxisY": 1.6030758188412477,
+                  "lowerAtAxisY": 1.5960411424801633,
+                  "xRange": [
+                    -0.044038262499999994,
+                    -0.0207732625
+                  ]
+                },
+                "axisToMeasuredApertureXYMeters": 0.0000034790039062926326,
+                "irisRadiusMeters": 0.006468,
+                "irisDiameterMeters": 0.012936,
+                "irisCenterRecessMeters": 0.00035,
+                "cornealApexAboveGlobeMeters": 0.0012,
+                "cornealSphereCenter": [
+                  -0.0324057625,
+                  1.5995550016567992,
+                  0.10728503458030522
+                ],
+                "cornealSphereRadiusMeters": 0.008792489499832122,
+                "minimumCorneaIrisSeparationMeters": 0.0002500000000000002,
+                "skinDepthSamples": [
+                  {
+                    "dx": -0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11261138319969177,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11183241009712219,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0,
+                    "skinZ": 0.08954387903213501,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11440125107765198,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11440008878707886,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11567482352256775,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08802035450935364,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0,
+                    "skinZ": 0.08715614676475525,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.08682557940483093,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": -0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11650574207305908,
+                    "opaqueZ": 0.11238639890431938,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.006,
+                    "skinZ": 0.11683273315429688,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0,
+                    "dy": -0.003,
+                    "skinZ": 0.08674269914627075,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0,
+                    "skinZ": 0.08613857626914978,
+                    "opaqueZ": 0.1126409432099484,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11607752408013734
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.003,
+                    "skinZ": 0.08590713143348694,
+                    "opaqueZ": 0.11279698284979472,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11554989220791492
+                  },
+                  {
+                    "dx": 0,
+                    "dy": 0.006,
+                    "skinZ": 0.11766412854194641,
+                    "opaqueZ": 0.11282306061371844,
+                    "opaqueVisible": false,
+                    "corneaZ": 0.11353872569614475
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.006,
+                    "skinZ": 0.11694797873497009,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": -0.003,
+                    "skinZ": 0.08689194917678833,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0,
+                    "skinZ": 0.08624067902565002,
+                    "opaqueZ": 0.11287695581683953,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.1151149689098292
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.003,
+                    "skinZ": 0.0860007107257843,
+                    "opaqueZ": 0.11295021690407317,
+                    "opaqueVisible": true,
+                    "corneaZ": 0.11453308028746285
+                  },
+                  {
+                    "dx": 0.004,
+                    "dy": 0.006,
+                    "skinZ": 0.11779791116714478,
+                    "opaqueZ": 0.11238639890431937,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.006,
+                    "skinZ": 0.11636048555374146,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": -0.003,
+                    "skinZ": 0.11503273248672485,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0,
+                    "skinZ": 0.08737552165985107,
+                    "opaqueZ": 0.11217704787886268,
+                    "opaqueVisible": true,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.003,
+                    "skinZ": 0.11709597706794739,
+                    "opaqueZ": 0.11164497109529622,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  },
+                  {
+                    "dx": 0.008,
+                    "dy": 0.006,
+                    "skinZ": 0.11735111474990845,
+                    "opaqueZ": 0.10984330634517478,
+                    "opaqueVisible": false,
+                    "corneaZ": null
+                  }
+                ],
+                "opaqueGeometry": {
+                  "vertices": 674,
+                  "triangles": 1344,
+                  "minimumTriangleAreaSquareMeters": 1.0925474028778064e-7,
+                  "boundaryEdges": 0,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": 0.000008117938374019347,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 1008,
+                  "pass": true
+                },
+                "corneaGeometry": {
+                  "vertices": 385,
+                  "triangles": 720,
+                  "minimumTriangleAreaSquareMeters": 4.2706126186766244e-8,
+                  "boundaryEdges": 48,
+                  "nonmanifoldEdges": 0,
+                  "inconsistentSharedEdgeDirections": 0,
+                  "signedVolumeCubicMeters": null,
+                  "outwardOrientationPass": true,
+                  "positiveProjectedTriangles": 720,
+                  "pass": true
+                },
+                "geometryPass": true,
+                "apertureAlignmentPass": true,
+                "normalModel": "Analytic spherical cap; outer rim smoothly follows ellipsoid limbus",
+                "headJoint": 5,
+                "lod": "near",
+                "extraDrawCalls": 1,
+                "extraImages": 0,
+                "transmissionRenderTarget": false,
+                "paintedHighlights": false
+              }
+            ],
+            "faceCurvatureRefinement": [
+              {
+                "variant": "27",
+                "method": "Catmull-Clark level1 before triangulation and feature fitting",
+                "protectedBoundaryEdges": 80,
+                "controlTriangles": 9122,
+                "refinedBeforeQEMTriangles": 36484,
+                "finalTriangles": 1050,
+                "anatomicalCheekCurvature": {
+                  "kind": "two compact C1 anatomical malar/outer-cheek pads",
+                  "maximumDisplacementMeters": 0.002600150895629892,
+                  "verticesMoved": 431,
+                  "eyesNoseLipNeckGates": true,
+                  "eyeHeight": 1.602994405
+                }
+              }
+            ],
+            "hairGeometryPostprocess": [
+              {
+                "variant": "29",
+                "method": "overlapping short crown sublocks with cap-rooted starts",
+                "style": "quiff",
+                "objects": [
+                  {
+                    "name": "hair-groom-clumps",
+                    "oldVertices": 4024,
+                    "newVertices": 6872,
+                    "oldPolygons": 3346,
+                    "newPolygons": 5488,
+                    "splitOriginalRibbons": 329,
+                    "unchangedShortRibbons": 10,
+                    "invalidRibbons": 0,
+                    "discardedDegenerateTriangles": 6,
+                    "newRibbonCount": 689,
+                    "oldLengthRangeMeters": [
+                      0.0071368216888450485,
+                      0.04694714150910321
+                    ],
+                    "newLengthRangeMeters": [
+                      0.0071368216888450485,
+                      0.021987663405382277
+                    ],
+                    "rootSignedDepthRangeMeters": [
+                      0.000014836529185768832,
+                      0.0002000000000000001
+                    ],
+                    "rigidHead5": true,
+                    "canonicalGroupsUnchanged": true,
+                    "uvTilePreserved": true,
+                    "normalRecipeChangedHere": false
+                  }
+                ],
+                "normalRecipeOwnedByExporter": true,
+                "undercoatAndFringeUnchanged": true,
+                "maximumSublockLengthMeters": 0.021987663405382277,
+                "skipped": false
+              }
+            ],
+            "coherentFarCap": [
+              {
+                "verticesBeforeWeld": 1324,
+                "verticesAfterWeld": 373,
+                "islandsBeforeWeld": 332,
+                "islandsAfterWeld": 1,
+                "trianglesAfterQEM": 260,
+                "islandsAfterQEM": 1,
+                "crownRays": 216,
+                "missedCrownRays": 0,
+                "maximumCrownApproximationErrorMeters": 0.0011185765814335823,
+                "farAtlasVIntervalNormalized": [
+                  0.28,
+                  1
+                ],
+                "sameHairCardsMaterial": true
+              }
+            ],
+            "clothFinishing": [
+              {
+                "kind": "bounded-collar-and-two-upper-tension-folds31",
+                "vertices": 2540,
+                "triangles": 4890,
+                "topologyUnchanged": true,
+                "uvUnchanged": true,
+                "weightsUnchanged": true,
+                "materialsUnchanged": true,
+                "collarVertices": 40,
+                "collarTransitionVertices": 80,
+                "collarSmoothingMaximumMeters": 0.000800000000000052,
+                "collarVisibleSkinRepairMaximumMeters": 0.006931195970170112,
+                "collarDeliveredSkinRestTargetMeters": 0.00225,
+                "collarTransitionRepairMaximumMeters": 0,
+                "collarFullReferenceMinimumBeforeMeters": -0.003898399370742185,
+                "collarFullReferenceMinimumAfterMeters": 0.0020334615331796045,
+                "collarDeliveredSkinMinimumBeforeMeters": -0.004335380106910827,
+                "collarDeliveredSkinMinimumAfterMeters": 0.0022509537167716403,
+                "collarDeliveredSkinSamples": 40,
+                "modifiedTriangleMinimumOriginalNormalCosine": 0.9398858040001287,
+                "clearanceMethod": "outermost delivered Skin hit on local reference-normal ray; full reference diagnostic only",
+                "deliveredSkinIncludes": {
+                  "vertices": 22927,
+                  "faces": 41010
+                },
+                "folds": 2,
+                "foldAffectedVertices": 33,
+                "foldMaximumOffsetMeters": 0.0021966989790779367,
+                "foldMinimumOriginalNormalDotMeters": 0.00001114909399029412,
+                "cuffHemMaximumDisplacementMeters": 0,
+                "allMovedVertices": 153,
+                "maximumTotalDisplacementMeters": 0.006591723114524246
+              }
+            ],
+            "anatomicalSockFit": [
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 0
+              },
+              {
+                "samples": 72,
+                "fitBeginsY": 0.34,
+                "fullFitY": 0.39,
+                "anatomicalClearanceMeters": 0.0018,
+                "topRingMaximumSkinWeightDifference": 1.1102230246251565e-16
+              }
+            ],
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 31,
+            "hemCorrectedVertices": 9,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.003888573494067432,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 113
+          },
+          "lod0Bytes": 1009448,
+          "lod0Sha256": "c0a76d4c9ab2e54dbc9a71b486049ada6e16c7f7856166d80feef5596a9b1253",
+          "lod1Bytes": 560784,
+          "lod1Sha256": "6f836a62524349fa6b3ea6ef65728c2d9a4c2b2f8cf940fc546d3f4b480a42aa"
+        }
+      ]
+    }
+  ],
+  "authoring": {
+    "skinInputs": [
+      {
+        "file": "young_lightskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+      },
+      {
+        "file": "young_darkskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+      }
+    ],
+    "faceSourceUvCrop": [
+      0.78,
+      0.32,
+      0.99,
+      0.65
+    ],
+    "runtimeAtlasDimensions": [
+      1024,
+      1024
+    ],
+    "atlasRegions": {
+      "face": [
+        0.015,
+        0.46,
+        0.6,
+        0.99
+      ],
+      "skin": [
+        0.015,
+        0.015,
+        0.4,
+        0.27
+      ],
+      "scalp": [
+        0.015,
+        0.275,
+        0.4,
+        0.3
+      ],
+      "shirt": [
+        0.62,
+        0.56,
+        0.99,
+        0.99
+      ],
+      "shorts": [
+        0.62,
+        0.36,
+        0.99,
+        0.54
+      ],
+      "socks": [
+        0.42,
+        0.015,
+        0.6,
+        0.2
+      ],
+      "boots": [
+        0.42,
+        0.22,
+        0.6,
+        0.44
+      ],
+      "stitch": [
+        0.42,
+        0.445,
+        0.6,
+        0.455
+      ],
+      "hair": [
+        0.62,
+        0.085,
+        0.99,
+        0.34
+      ],
+      "wisps": [
+        0.62,
+        0.015,
+        0.99,
+        0.075
+      ],
+      "eyes": [
+        0.015,
+        0.31,
+        0.155,
+        0.435
+      ],
+      "brows": [
+        0.015,
+        0.438,
+        0.4,
+        0.455
+      ],
+      "gloves": [
+        0.17,
+        0.31,
+        0.4,
+        0.435
+      ]
+    },
+    "hair": "anatomical scalp undercoat with authored curved alpha cards",
+    "synthetic": true,
+    "generator": "source/character_build.py",
+    "restExpression": {
+      "mouthCompression": 0.4,
+      "eyeSlit": 0.06,
+      "eyeClosureExtra": 0.05,
+      "eyeColorFactor": 0.88
+    },
+    "hairShading": "isotropic",
+    "crownOwnNormalBlend": 0.2,
+    "hairMacroShape": "0",
+    "farCap": "32",
+    "clothFinishing": "31",
+    "crownFlyaways": "1",
+    "hairGeometryVariant": "29",
+    "faceVariant": "27",
+    "hairNormalField": "projected",
+    "eyeVariant": "19",
+    "hairTextureVariant": "20",
+    "sockVariant": "23",
+    "clothVariant": "18"
+  },
+  "budgets": {
+    "lod0Triangles": 36000,
+    "lod1Triangles": 6000,
+    "textureMaxDimension": 1024,
+    "maxGlbBytes": 1500000
+  },
+  "compression": {
+    "extension": "KHR_draco_mesh_compression",
+    "method": "edgebreaker",
+    "positionBits": 15,
+    "normalBits": 12,
+    "uvBits": 13,
+    "genericBits": 0
+  }
+}

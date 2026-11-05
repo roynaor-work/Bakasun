@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "samplingHz": 240,
+  "duration": 1.6,
+  "palmSamples": 82,
+  "maxPalmSupportPointErrorMeters": 0.00016098055443370768,
+  "maximumKneeFlexionRadians": 2.6551464573370587,
+  "fallToRecoveryEntryRotationErrorRadians": 4.2146848510894035e-8,
+  "fallToRecoveryEntryPositionErrorMeters": 0,
+  "pass": true,
+  "limits": "Authored hand support point and canonical FK only; actual mesh/floor lifting can alter support and is checked separately."
+}

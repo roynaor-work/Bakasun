@@ -1,0 +1,349 @@
+{
+  "kind": "focused-nongait-entry-physical-pelvis-height-diagnostic",
+  "runtimeSha256": "96f22f06531f491214c52d9643e7156524a974619b70f6be01e11578d45348c6",
+  "previewSha256": "74e5ab71fefdd7139034ba666f8107c66adfe55c63aa14122597e56244801d89",
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "focusedCasesPass": true,
+  "finalAcceptance": false,
+  "method": "Independent actual decoded native24 player01 LOD0, exact same kick/header cases and unchanged30rad/s25m/s3mm/fullmesh/contact/C0/fulfillment gates as failed rotation-only diagnostic. Only runtime is overridden, so complete remains false.",
+  "policy": "During nongait entry preserve displayed HipsY then approach the actual motor target by at most1m/s before authoritative actual-hip reach, foot IK and full-skin floor correction. No body-fade offsets are written to the physical root, planned feet or frozen anchors; the planner continues to use measured hip geometry. This is not a bound on final HipsY after all physical corrections.",
+  "followup": "C15c hardens terminal fade behavior and tilted-Hips reach geometry; final combined package still requires full observer verification.",
+  "rows": [
+    {
+      "report": "soccer-v7-c15b-header-early-120hz.json",
+      "sha256": "06b8e7d2c989936a420ed3fad44ac9690f0a239ee0d867b165bc569f5665dc1b",
+      "generatedAt": "2026-11-05T04:31:30.515Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 13.13704679359868,
+      "maximumRootRelativeBoneSpeedMps": 5.276377564337817,
+      "minimumVertexY": 0.00151615,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.783333333333333,
+        "clip": "run_2",
+        "sampleSeconds": 0.7855230034722228,
+        "secondsSincePreviousSample": 0.008333333333333304,
+        "bone": "LeftUpLeg",
+        "degrees": 6.2724778,
+        "previousHipsPosition": [
+          -0.0015937736851326493,
+          0.7673544666486247,
+          0.9130295162326628
+        ],
+        "hipsPosition": [
+          -0.001011517862574427,
+          0.7663799569035273,
+          0.9345295312328129
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.9171354166666671
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.9371354166666671
+        ],
+        "previousWorldQuaternion": [
+          -0.39909117435137903,
+          -7.835825506559745e-05,
+          0.0009766208574874006,
+          0.9169107233676144
+        ],
+        "worldQuaternion": [
+          -0.34833009827159933,
+          -1.1994321506337734e-05,
+          0.0006253831885820548,
+          0.9373717252990416
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 752.6973360000027,
+        "fade": null
+      }
+    },
+    {
+      "report": "soccer-v7-c15b-header-early-30hz.json",
+      "sha256": "d46c88b571cc88dac639cac429c102bcf1f97256e62a875dbbc11851b91f538b",
+      "generatedAt": "2026-11-05T04:31:09.653Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 11.067453242606248,
+      "maximumRootRelativeBoneSpeedMps": 4.168503326647513,
+      "minimumVertexY": 0.002,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.7666666666666666,
+        "clip": "run_2",
+        "sampleSeconds": 0.7521896701388893,
+        "secondsSincePreviousSample": 0.033333333333333326,
+        "bone": "RightLeg",
+        "degrees": 21.13727869,
+        "previousHipsPosition": [
+          -0.005306118815514193,
+          0.7689015138496418,
+          0.7666790470593138
+        ],
+        "hipsPosition": [
+          -0.0032718896360614206,
+          0.7688599189956826,
+          0.8492279218340637
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.777777777777778
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.857135416666667
+        ],
+        "previousWorldQuaternion": [
+          0.3622417601356757,
+          3.333308663894743e-05,
+          0.003087644736797422,
+          0.9320790591750746
+        ],
+        "worldQuaternion": [
+          0.527050057116125,
+          0.0004305857001798623,
+          0.001758775756541507,
+          0.8498323120461369
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 634.1183607000002,
+        "fade": null
+      }
+    },
+    {
+      "report": "soccer-v7-c15b-header-late-120hz.json",
+      "sha256": "5e2bcb333a13e4ac873f70f0038cb4b78cae89eceeeb69e6d3c1b5cb6738a736",
+      "generatedAt": "2026-11-05T04:31:43.832Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 13.137046793598191,
+      "maximumRootRelativeBoneSpeedMps": 5.276377564337632,
+      "minimumVertexY": 0.00151615,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.783333333333333,
+        "clip": "run_2",
+        "sampleSeconds": 1.5855230034722214,
+        "secondsSincePreviousSample": 0.008333333333333304,
+        "bone": "LeftUpLeg",
+        "degrees": 6.2724778,
+        "previousHipsPosition": [
+          -0.0015937736851327424,
+          0.7673544666486249,
+          0.9130295162326626
+        ],
+        "hipsPosition": [
+          -0.00101151786257452,
+          0.7663799569035274,
+          0.9345295312328126
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.9171354166666671
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.9371354166666671
+        ],
+        "previousWorldQuaternion": [
+          -0.39909117435138625,
+          -7.835825506560667e-05,
+          0.0009766208574874646,
+          0.9169107233676114
+        ],
+        "worldQuaternion": [
+          -0.3483300982716085,
+          -1.1994321506345871e-05,
+          0.0006253831885821145,
+          0.9373717252990381
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 752.6973360000027,
+        "fade": null
+      }
+    },
+    {
+      "report": "soccer-v7-c15b-header-late-30hz.json",
+      "sha256": "cc5840b60ade270478041a5339ff85ff9a4600a62bef9de45b4b18f0aaf08724",
+      "generatedAt": "2026-11-05T04:31:16.313Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 11.06745324260614,
+      "maximumRootRelativeBoneSpeedMps": 4.168503326647699,
+      "minimumVertexY": 0.002,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.7666666666666666,
+        "clip": "run_2",
+        "sampleSeconds": 1.5521896701388886,
+        "secondsSincePreviousSample": 0.033333333333333326,
+        "bone": "RightLeg",
+        "degrees": 21.13727869,
+        "previousHipsPosition": [
+          -0.00530611881551423,
+          0.7689015138496417,
+          0.7666790470593138
+        ],
+        "hipsPosition": [
+          -0.003271889636061464,
+          0.7688599189956826,
+          0.8492279218340637
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.777777777777778
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.857135416666667
+        ],
+        "previousWorldQuaternion": [
+          0.3622417601356707,
+          3.3333086638936315e-05,
+          0.0030876447367974183,
+          0.9320790591750767
+        ],
+        "worldQuaternion": [
+          0.5270500571161197,
+          0.0004305857001798559,
+          0.001758775756541535,
+          0.8498323120461401
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 634.1183607000002,
+        "fade": null
+      }
+    },
+    {
+      "report": "soccer-v7-c15b-kick-mid-120hz.json",
+      "sha256": "dd16b18107d69c27e2665428f90b08a53913d68f827e418cfe3f63c8288d9a14",
+      "generatedAt": "2026-11-05T04:31:23.586Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 13.137046793598191,
+      "maximumRootRelativeBoneSpeedMps": 5.276377564337632,
+      "minimumVertexY": 0.00151615,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.783333333333333,
+        "clip": "run_2",
+        "sampleSeconds": 1.5855230034722214,
+        "secondsSincePreviousSample": 0.008333333333333304,
+        "bone": "LeftUpLeg",
+        "degrees": 6.2724778,
+        "previousHipsPosition": [
+          -0.0015937736851327424,
+          0.7673544666486249,
+          0.9130295162326626
+        ],
+        "hipsPosition": [
+          -0.00101151786257452,
+          0.7663799569035274,
+          0.9345295312328126
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.9171354166666671
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.9371354166666671
+        ],
+        "previousWorldQuaternion": [
+          -0.39909117435138625,
+          -7.835825506560667e-05,
+          0.0009766208574874646,
+          0.9169107233676114
+        ],
+        "worldQuaternion": [
+          -0.3483300982716085,
+          -1.1994321506345871e-05,
+          0.0006253831885821145,
+          0.9373717252990381
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 752.6973360000027,
+        "fade": null
+      }
+    },
+    {
+      "report": "soccer-v7-c15b-kick-mid-30hz.json",
+      "sha256": "a4bb2694c1580ba6d3ce3632e3d051cb593d7fda68bad61d3306f6c9c4185d6d",
+      "generatedAt": "2026-11-05T04:31:02.573Z",
+      "pass": true,
+      "complete": false,
+      "failedChecks": [],
+      "maximumJointAngularSpeedRadiansPerSecond": 11.06745324260614,
+      "maximumRootRelativeBoneSpeedMps": 4.168503326647699,
+      "minimumVertexY": 0.002,
+      "maximumPlantAnchorDistanceMeters": 0,
+      "worstBoneRotationStep": {
+        "clock": 0.7666666666666666,
+        "clip": "run_2",
+        "sampleSeconds": 1.5521896701388886,
+        "secondsSincePreviousSample": 0.033333333333333326,
+        "bone": "RightLeg",
+        "degrees": 21.13727869,
+        "previousHipsPosition": [
+          -0.00530611881551423,
+          0.7689015138496417,
+          0.7666790470593138
+        ],
+        "hipsPosition": [
+          -0.003271889636061464,
+          0.7688599189956826,
+          0.8492279218340637
+        ],
+        "previousRootWorld": [
+          0,
+          0,
+          0.777777777777778
+        ],
+        "rootWorld": [
+          0,
+          0,
+          0.857135416666667
+        ],
+        "previousWorldQuaternion": [
+          0.3622417601356707,
+          3.3333086638936315e-05,
+          0.0030876447367974183,
+          0.9320790591750767
+        ],
+        "worldQuaternion": [
+          0.5270500571161197,
+          0.0004305857001798559,
+          0.001758775756541535,
+          0.8498323120461401
+        ],
+        "fadeElapsed": null,
+        "previousFadeElapsed": null,
+        "degreesPerSecond": 634.1183607000002,
+        "fade": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,833 @@
+{
+  "kind": "read-only-final-script-syntax-check",
+  "generatedAt": "2026-11-05T12:56:06.671146+00:00",
+  "pass": true,
+  "files": 164,
+  "failures": [],
+  "incrementallyRechecked": [
+    "iterations/37/verification/p02-independent-focused-replay.cjs",
+    "iterations/37/verification/p02-independent-focused.cjs"
+  ],
+  "records": [
+    {
+      "file": "iterations/24/frozen-package/vendor/data.js",
+      "sha256": "b0b9c9a0d313983446dc1a782640094e172b5e15a53838171e3ce40df9c111df",
+      "pass": true
+    },
+    {
+      "file": "iterations/24/frozen-package/vendor/viewer-runtime.js",
+      "sha256": "e02e717b28faf7e5554cfe86096ef191f9b58bc51c79c3af0ac3abd976d2700f",
+      "pass": true
+    },
+    {
+      "file": "iterations/33/frozen-package/preview.js",
+      "sha256": "12c09ce33eeb6c751a9b1790562e74f2605b6737e4bd7c32084263dc9e24f2a8",
+      "pass": true
+    },
+    {
+      "file": "iterations/33/frozen-package/vendor/data.js",
+      "sha256": "54d23f421ee2c838b592a9ef917d8896c450d24f96ffcdc1cda87d4f60fa763a",
+      "pass": true
+    },
+    {
+      "file": "iterations/33/frozen-package/vendor/viewer-runtime.js",
+      "sha256": "69e0f8039ed9051b72f242618ff72b63d07ef162cf5eeedb826812732a85615f",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/frozen-package/preview.js",
+      "sha256": "67e36e54266c802fe3c9112350d432829c243c6c0bff3b6065572568141627cd",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/frozen-package/vendor/data.js",
+      "sha256": "d9f17fab0f3a712e32f49c34d2ef22bba9425f912aab2a1efd00e8296ea52c64",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/frozen-package/vendor/viewer-runtime.js",
+      "sha256": "576c7ddca7f2692d67a20d41e26bc1296a3b55466208da03ef13ad499e2581a9",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-clearance-candidate/airborne-foot-goal-clearance.mjs",
+      "sha256": "69674b60a5676b1aaa2d88d21e3ba41b134deec63aa48bb561f0e0f44d9f5e4a",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-clearance-candidate/helper-algebra-check.mjs",
+      "sha256": "0207467f7038248ec744e34f49579a51c71e1963a28394ea20e05257d98ecb0e",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-clearance-candidate/proof.cjs",
+      "sha256": "d8f0d0e68506263cfe19725ac9977b7c294b26d4294e2f16213457994f370071",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/build.mjs",
+      "sha256": "f8113fa84a95bd7a0873c3d3350fa2c63a3625ddbf4b85db04b36961a857b7a7",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/independent-state-check.mjs",
+      "sha256": "790170bb7db4c2eac05e41595d02b577050e60f50058769d2bd582a254cb9d91",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/locomotion-space.js",
+      "sha256": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/proof.cjs",
+      "sha256": "10220ec0d35d4cd99ff18a78ae3bc34005c807b102cf8cc0434aa32c758e8599",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/seed-check.mjs",
+      "sha256": "0a1f7bac3eaa3ff7d38742f39c8745ee31bf4f9a1534e84c2b66ec030e379a1a",
+      "pass": true
+    },
+    {
+      "file": "iterations/34/verification/cold-decelerate-nongait-candidate/state-check.mjs",
+      "sha256": "058630ffed6dab62c5697595392f380516b91ccfba132d621b5991ee3f64dd11",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/preview.js",
+      "sha256": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/locomotion-curve.js",
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/locomotion-dribble.js",
+      "sha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/locomotion-space.js",
+      "sha256": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/motion-runtime.js",
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/palm-support.js",
+      "sha256": "461d8636e69c1ace5f082081b40083ccee959126dbfa11cf8704664208eb1cc1",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/props.js",
+      "sha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/recovery-state.js",
+      "sha256": "63df25521eae804f172f9463977a08dd0ed15526462d4afde5859a70ac036453",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/source/scene.js",
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/vendor/data.js",
+      "sha256": "f4d3878855abdbbc6e04bc57fd5c334ef672c2834ae6d846831f7705bf04844d",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/frozen-package/vendor/viewer-runtime.js",
+      "sha256": "ef474e25f1c7d68309198f1a769eaf6135bfcd6bc097c4ab91d58573ec954b08",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/preflight/palm-integration/getup-calibration-algorithm.mjs",
+      "sha256": "2dea335b327804318d7cfeaa367e63e166e1f9032276999bd12ba64620a71378",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/c16-body-cache-fix/known-supersession.cjs",
+      "sha256": "35b2ff519e4f5e40e2e6c646b448d5b41656336d159571baa37a2ae0b8c7170d",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/action-observer-fixture-clocks.cjs",
+      "sha256": "5e7d17a62855401d2ad8b25d22b1d80b4607873bd462e64db550dd925a311fb4",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/body-settling-fixture.cjs",
+      "sha256": "2743d04feef8a7036ab44f03106330a21d05d896d1767cfe4b68c541c9c9144b",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/matrix-pool.py",
+      "sha256": "464eced31b651ea7215b5c3adf075bbb93d85d41431075519fb140bbce547a73",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/palm-lifecycle-fixture.cjs",
+      "sha256": "f0d30b482a1c8cfeddcc704709f24e1e67f5495490871efb266229c88ffd328e",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/palm-observer-fixture.cjs",
+      "sha256": "d187c50da2f144939caef4719586008734fc7ff28d257d1f0e9fdeb97729ef55",
+      "pass": true
+    },
+    {
+      "file": "iterations/35/verification/observer-fixtures/terminal-palm-exclusion-fixture.cjs",
+      "sha256": "0719253a605cb884f841e393212aa680ad9a623b8aa621328d4779f6e8462bbc",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/preview.js",
+      "sha256": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/locomotion-curve.js",
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/locomotion-dribble.js",
+      "sha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/locomotion-space.js",
+      "sha256": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/motion-runtime.js",
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/palm-support.js",
+      "sha256": "f0bc5a904dc0324ff4425b734c82633efc68da6a5346c8dc076ff68f65991863",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/props.js",
+      "sha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/recovery-state.js",
+      "sha256": "63df25521eae804f172f9463977a08dd0ed15526462d4afde5859a70ac036453",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/source/scene.js",
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/vendor/data.js",
+      "sha256": "68ddec0174bf30eda27e71901ea638d3ac9b9b6af1363af788c909e9d859bb65",
+      "pass": true
+    },
+    {
+      "file": "iterations/36/frozen-package/vendor/viewer-runtime.js",
+      "sha256": "c3221f8578ede967b73319a9f465fc7229220e21c0cf97921480ef65f5a8d51d",
+      "pass": true
+    },
+    {
+      "file": "iterations/37/verification/matrix-launch-order/matrix-launch-order.py",
+      "sha256": "fa4c1100a77756d897f9123bff3863d671b761dcca1e709dce1747282dd1487d",
+      "pass": true
+    },
+    {
+      "file": "iterations/37/verification/p02-independent-focused-replay.cjs",
+      "sha256": "743d10e850690fb27e3276b0ff8c7dd5abb719cb9c320cd93af799abb0abab8f",
+      "pass": true
+    },
+    {
+      "file": "iterations/37/verification/p02-independent-focused.cjs",
+      "sha256": "08dcca5431b58b9ba8268a99eee0e6b1ef095db4313a108681a83e40c2ae4ad2",
+      "pass": true
+    },
+    {
+      "file": "offline/goalkeeper-lod0.js",
+      "sha256": "eb94403900a15187972e5c52aa847e192257f7f19b727659120919a430aff970",
+      "pass": true
+    },
+    {
+      "file": "offline/goalkeeper-lod1.js",
+      "sha256": "32aab10c2c8de1691b65db9637de63dda4c95040be7958f957acc48098fa9f47",
+      "pass": true
+    },
+    {
+      "file": "offline/player-01-lod0.js",
+      "sha256": "7ad0269ca52da8bd6e069570fb3988bbf5752a17d8f740078fe77fa5c69a56fd",
+      "pass": true
+    },
+    {
+      "file": "offline/player-01-lod1.js",
+      "sha256": "a531bce105f48a456bf97fc17230baf8b8f088436165953ace6f687ddb1f2109",
+      "pass": true
+    },
+    {
+      "file": "offline/player-02-lod0.js",
+      "sha256": "6c2f147ab206eee8b799b90ac4424880da2a55dcb553ea180d3f6369dbfbb081",
+      "pass": true
+    },
+    {
+      "file": "offline/player-02-lod1.js",
+      "sha256": "29629f96271693211797ab2df71bff707d8c3823968b57ff6946df45b9df1eb6",
+      "pass": true
+    },
+    {
+      "file": "offline/player-03-lod0.js",
+      "sha256": "563d3062e6e9454a4ed6020888b8f204611ad12c4585c6219ec2bfc0e0c3319a",
+      "pass": true
+    },
+    {
+      "file": "offline/player-03-lod1.js",
+      "sha256": "d03a8d4db1ba8ecc09ea6ee2fce6f81cded1e1fa5a4a3e6d37f8a170fdce4be9",
+      "pass": true
+    },
+    {
+      "file": "offline/player-04-lod0.js",
+      "sha256": "93cff36c9afdaa50c50f8cf3dcfe77ef967fe17ff1515d9e57884e581a9b6d65",
+      "pass": true
+    },
+    {
+      "file": "offline/player-04-lod1.js",
+      "sha256": "91b80146836b4ccf7e5a6b2f397e2cdd02cd0921599cb9e3fdddbf3e28d9764e",
+      "pass": true
+    },
+    {
+      "file": "offline/player-05-lod0.js",
+      "sha256": "7e2760705cf20b1d0aaf2b32fd9f4756bac8aa6b85b14910e26d433f65d125d5",
+      "pass": true
+    },
+    {
+      "file": "offline/player-05-lod1.js",
+      "sha256": "7d1c6759c22715e9dba7fdfd01647ffb19d9eeadf7997234561bee325324a9aa",
+      "pass": true
+    },
+    {
+      "file": "offline/player-06-lod0.js",
+      "sha256": "921e1b2bf22cab13bf4205cc87ed8311a07105b5ded9f3b05bbbd503bc72ebc7",
+      "pass": true
+    },
+    {
+      "file": "offline/player-06-lod1.js",
+      "sha256": "83d92e6dc80435c076dfa965f265a56e46e765335c8846d185a22cc4148849cc",
+      "pass": true
+    },
+    {
+      "file": "offline/referee-lod0.js",
+      "sha256": "aa21e699ac97e6bd0a5758018c6c652edfe243e93e74f783e2ed2df7858a53fc",
+      "pass": true
+    },
+    {
+      "file": "offline/referee-lod1.js",
+      "sha256": "08a2416f34a045a954c17b00465100f281f23ac630df4d350181df06558c7e73",
+      "pass": true
+    },
+    {
+      "file": "preview.js",
+      "sha256": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+      "pass": true
+    },
+    {
+      "file": "source/audit-action-observer.cjs",
+      "sha256": "c9b6de82bf07fc6d57e417e3fdf33d1d04d57b88412eaa322e0d23ac3f981691",
+      "pass": true
+    },
+    {
+      "file": "source/audit-cpu.mjs",
+      "sha256": "3796dc5ba5c446c871d0cce9a0758844ec7e27f4f2719e23bb474c9b7a518d6f",
+      "pass": true
+    },
+    {
+      "file": "source/audit-equivariance.cjs",
+      "sha256": "e85c796c3d36e638bf98a99a81fd212cd739530b7a70192e62758dab15826500",
+      "pass": true
+    },
+    {
+      "file": "source/audit-eye-visibility.mjs",
+      "sha256": "11481ed25c64b4c916b22f68aafb37c4307a844bbc162fb5b62e461a40f9e256",
+      "pass": true
+    },
+    {
+      "file": "source/audit-locomotion-curve.cjs",
+      "sha256": "f7566f4236b15e04f157d0d1c8e9f3be2029ba68130821afec9f63b91c0d839d",
+      "pass": true
+    },
+    {
+      "file": "source/audit-locomotion.cjs",
+      "sha256": "4f7504c25d09ebe899110c58ac9361125c1fcb5cd31328f876b72c96e4dca8c2",
+      "pass": true
+    },
+    {
+      "file": "source/audit-native-flat-boot.mjs",
+      "sha256": "5c74f451e25092ae0d3adbe0e5520ff39fa600dbef8bcd1782930de17ce027d9",
+      "pass": true
+    },
+    {
+      "file": "source/audit-pitch.cjs",
+      "sha256": "020816dd3a7dafb3834d474a54bc5f4f3506c6f020dfe209bb2ffa15b14dbce4",
+      "pass": true
+    },
+    {
+      "file": "source/audit-skinning.mjs",
+      "sha256": "dbb2fa642ea04f48a328c3da29305d513c2217e516a4b714db01c3a9d8dc1260",
+      "pass": true
+    },
+    {
+      "file": "source/audit-transition-matrix.cjs",
+      "sha256": "9004aa8f594f7a57684ab9d801f39b4db54a074407324705af3a96b5f8a25dd3",
+      "pass": true
+    },
+    {
+      "file": "source/audit-transitions.cjs",
+      "sha256": "6b392f4f5893d443753005a74925abd7027e4877c0e00b462ef693106e28f77f",
+      "pass": true
+    },
+    {
+      "file": "source/audit-ui.mjs",
+      "sha256": "26b1ca21046458302b597822f9f5006bd3ce80884b13b2425a668cf02f09b6f9",
+      "pass": true
+    },
+    {
+      "file": "source/audit-viewer-session.cjs",
+      "sha256": "153cef4b5d98f1fc1152f5ac5bcc3634fdb099bc219086e2e31c91f1dd31ee66",
+      "pass": true
+    },
+    {
+      "file": "source/audit.mjs",
+      "sha256": "01efb468e7453e30cd09c14d911b776dd2bf389a7b994cf1712938781ecd39bb",
+      "pass": true
+    },
+    {
+      "file": "source/boot-bounds.mjs",
+      "sha256": "d706c65af2d646ffaf4f3f91b0602f74cfc9041eea62c4c96683ba7d1e9f5d78",
+      "pass": true
+    },
+    {
+      "file": "source/browser-session.mjs",
+      "sha256": "f412f05cf01c298838bc1ac84542cb20cadc05ea55d8cdb1ccd93d36890e89c7",
+      "pass": true
+    },
+    {
+      "file": "source/build-gallery.mjs",
+      "sha256": "0b9922f1cd2fc691ed150229faf7a495236ba57e0bb0432d22165ea0e09debc5",
+      "pass": true
+    },
+    {
+      "file": "source/capture-motion-candidate.mjs",
+      "sha256": "8fc15fa2f377ae8ecb6a40559ba9da3bb8dc40f9c9cc9a52060599edb763061b",
+      "pass": true
+    },
+    {
+      "file": "source/capture-motion-film.mjs",
+      "sha256": "cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96",
+      "pass": true
+    },
+    {
+      "file": "source/capture-preflight.mjs",
+      "sha256": "014c83541956a1043fd93b5ab4603b5c3b58424c42fb7edf0bcc4bff1ec710f6",
+      "pass": true
+    },
+    {
+      "file": "source/capture-roster.mjs",
+      "sha256": "9800b3bf1ad6d90566629bb1f4d8be72cd72b80659554efaab625cfc3f7fd190",
+      "pass": true
+    },
+    {
+      "file": "source/capture.mjs",
+      "sha256": "7861e711e58fa6e21826c9d684b908277c46df3cfae48266d5c55ba665aa00de",
+      "pass": true
+    },
+    {
+      "file": "source/character-measure-textures.py",
+      "sha256": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645",
+      "pass": true
+    },
+    {
+      "file": "source/character-waist36.mjs",
+      "sha256": "c012046a6326e3fa42b118152510aa77d07601d38ccf00b8562e18bb04da6cfe",
+      "pass": true
+    },
+    {
+      "file": "source/character_atlas.py",
+      "sha256": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3",
+      "pass": true
+    },
+    {
+      "file": "source/character_build.py",
+      "sha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+      "pass": true
+    },
+    {
+      "file": "source/character_cloth17.py",
+      "sha256": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5",
+      "pass": true
+    },
+    {
+      "file": "source/character_cloth_finish.py",
+      "sha256": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+      "pass": true
+    },
+    {
+      "file": "source/character_compress.mjs",
+      "sha256": "c3a458da7af299ffba68943c98735bcae847519dc0cbb99226b7d9868d5fe1de",
+      "pass": true
+    },
+    {
+      "file": "source/character_eye19.py",
+      "sha256": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31",
+      "pass": true
+    },
+    {
+      "file": "source/character_face27.py",
+      "sha256": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342",
+      "pass": true
+    },
+    {
+      "file": "source/character_face_helper.py",
+      "sha256": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d",
+      "pass": true
+    },
+    {
+      "file": "source/character_farcap32.py",
+      "sha256": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0",
+      "pass": true
+    },
+    {
+      "file": "source/character_fetch_skin.py",
+      "sha256": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8",
+      "pass": true
+    },
+    {
+      "file": "source/character_groom_atlas.py",
+      "sha256": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4",
+      "pass": true
+    },
+    {
+      "file": "source/character_hair.py",
+      "sha256": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c",
+      "pass": true
+    },
+    {
+      "file": "source/character_hair28.py",
+      "sha256": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a",
+      "pass": true
+    },
+    {
+      "file": "source/character_hair29.py",
+      "sha256": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+      "pass": true
+    },
+    {
+      "file": "source/character_hair31.py",
+      "sha256": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+      "pass": true
+    },
+    {
+      "file": "source/character_hair_shape31.py",
+      "sha256": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+      "pass": true
+    },
+    {
+      "file": "source/character_material24.mjs",
+      "sha256": "a9430d61d4a110d1344732df7b2af9a2132d82d7a176a98861be5dbd252064f7",
+      "pass": true
+    },
+    {
+      "file": "source/character_normal_field.py",
+      "sha256": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b",
+      "pass": true
+    },
+    {
+      "file": "source/character_promote.mjs",
+      "sha256": "7bf4108b4c88628b3f534c24f9d364cbfb5bdba80074ad6b2fa9109f824822ff",
+      "pass": true
+    },
+    {
+      "file": "source/character_seams.py",
+      "sha256": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03",
+      "pass": true
+    },
+    {
+      "file": "source/character_sock21.py",
+      "sha256": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703",
+      "pass": true
+    },
+    {
+      "file": "source/file-inventory.mjs",
+      "sha256": "52cf4809fd8716f3da9bfe3e3629ae0cce69a8739bfacc0831ba2abec50db84f",
+      "pass": true
+    },
+    {
+      "file": "source/floor-envelope.mjs",
+      "sha256": "abba43d3a0f95420169d2b9820e6f14994e8cf7b8d1dac2495b725156421b230",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-curve-check.mjs",
+      "sha256": "4a35dd52968f93daeda2e6ddfd00c295ebac386f185797b84f3d20bc3fa2c443",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-curve.js",
+      "sha256": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-dribble.js",
+      "sha256": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-seed-check.mjs",
+      "sha256": "0ffefeb83278776c98943d2ff08636385cff47f071b6ca44240047b23b0933ce",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-space.js",
+      "sha256": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a",
+      "pass": true
+    },
+    {
+      "file": "source/locomotion-state-check.mjs",
+      "sha256": "40a8d012cece2453f19bdc77f64ab3bf8e10e73e7a9c7d3427b0cb218db52996",
+      "pass": true
+    },
+    {
+      "file": "source/motion-build.py",
+      "sha256": "623c31c7f305abfc287df3f31ac8d277807dad37008ea556e5e1605c32ebb717",
+      "pass": true
+    },
+    {
+      "file": "source/motion-capture.mjs",
+      "sha256": "059f2ed8af318d073b608a2f715b1a2c7b730cc37fcea96124d7a279b2ce489b",
+      "pass": true
+    },
+    {
+      "file": "source/motion-decelerate-fk-diagnostic.mjs",
+      "sha256": "b7f6a5cf08eeb849136d532eb5bea687f3217f4fc369fa00bc8c79928b9074fb",
+      "pass": true
+    },
+    {
+      "file": "source/motion-embed.mjs",
+      "sha256": "797e30428a207ecdd31f73fde492c9d91230b3026090abce7335a64e4d887d49",
+      "pass": true
+    },
+    {
+      "file": "source/motion-eye-diagnostic.mjs",
+      "sha256": "f00519ad95a93ef635e6320f5fd1786115aa1bb187e442c7ae401d4866899524",
+      "pass": true
+    },
+    {
+      "file": "source/motion-eye-height-sweep.mjs",
+      "sha256": "ac88b73fed88b8428a5b53119160aada48939a052168fc48d19c03bbe50a276a",
+      "pass": true
+    },
+    {
+      "file": "source/motion-fall-support-probe.mjs",
+      "sha256": "fba59e1bd6418eb96116737bd69965adfbaa10bb7ab6d3b101206bbaa9dee238",
+      "pass": true
+    },
+    {
+      "file": "source/motion-floor-diagnostic.mjs",
+      "sha256": "6d4d1bf4628bb8302add1a2c5485affdb482f26750ef9b7f1014843f97551171",
+      "pass": true
+    },
+    {
+      "file": "source/motion-ground-events.mjs",
+      "sha256": "fa60630562a674db27e1cf366535cb6ccfb3949b09da038734685ae12d8c0235",
+      "pass": true
+    },
+    {
+      "file": "source/motion-longpass-isolation.mjs",
+      "sha256": "533de224317bc9792ac1c861d029a9a93674fefc08b6d1d61cfaa1e98310c16c",
+      "pass": true
+    },
+    {
+      "file": "source/motion-measure.mjs",
+      "sha256": "2d57ae38eb287c6b219ffdcd49c17fe9e3e79e45a53654bc3ffa2d59d55a73b0",
+      "pass": true
+    },
+    {
+      "file": "source/motion-native-verify.mjs",
+      "sha256": "0f98f7d94abc701267d949d28575c5eef5faf9e03361ba72ba83d63945c24b1e",
+      "pass": true
+    },
+    {
+      "file": "source/motion-recovery-merge.mjs",
+      "sha256": "d73a2515979efd6e766ce1fab9312dfb37ab2a587529f8e64d0e489a0d025410",
+      "pass": true
+    },
+    {
+      "file": "source/motion-recovery-probe.mjs",
+      "sha256": "79e94b3da114d4966c9fbaab8e369efdad2da9e1946a315e10618fbeec49383b",
+      "pass": true
+    },
+    {
+      "file": "source/motion-recovery-prototype.mjs",
+      "sha256": "33ba98a134074b34c60afd7aea5f712d8678a790fd1bb6b1ca99f4560d525449",
+      "pass": true
+    },
+    {
+      "file": "source/motion-recovery-state-check.mjs",
+      "sha256": "0be3242ec0d1aea08d88f482eb439cd22808ce52867363faa928884b27d6e0f2",
+      "pass": true
+    },
+    {
+      "file": "source/motion-revision-evidence/e60a-motion-build.py",
+      "sha256": "1bbd6a7f6edb9cf8e8e14ebdf96eee311586c522c1efad9836d74360e358e4b2",
+      "pass": true
+    },
+    {
+      "file": "source/motion-runtime.js",
+      "sha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+      "pass": true
+    },
+    {
+      "file": "source/motion-skin-support-scan.mjs",
+      "sha256": "9bc5290ebe36848dec04651f5d327893a6f0bbfc88e85ecfdab82cfb76faf4a5",
+      "pass": true
+    },
+    {
+      "file": "source/motion-supported-recovery-capture.mjs",
+      "sha256": "e9125bde398d6234826ba4b8e5d51d6b155f64e85003906ba84adefae3d697f6",
+      "pass": true
+    },
+    {
+      "file": "source/motion-world-inertia-prototype.mjs",
+      "sha256": "cd645d1330d913ae85004960855c9ce7c9c21915b8efbc747827c1f92e299b2e",
+      "pass": true
+    },
+    {
+      "file": "source/package-viewer.mjs",
+      "sha256": "fac2f2a84964d80648b96a8077df85d9b2f94308a10c89aa28ca86e7e6a15564",
+      "pass": true
+    },
+    {
+      "file": "source/palm-support.js",
+      "sha256": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+      "pass": true
+    },
+    {
+      "file": "source/probe-cloth-close.mjs",
+      "sha256": "f75f4bfba350ca611e2299253f2aafac677653d261fbfa105d56b6304e2d0512",
+      "pass": true
+    },
+    {
+      "file": "source/probe-corneal-env.mjs",
+      "sha256": "a9d1a98ed8f344513de7034e48d2ccb7ebb1853bc8072d8f2eb86976a69b78c6",
+      "pass": true
+    },
+    {
+      "file": "source/probe-hair-normal.mjs",
+      "sha256": "9fed81b4beb4b1e4a31c647433f625abca4248b4543bb67b7dedfed76e048347",
+      "pass": true
+    },
+    {
+      "file": "source/probe-look.mjs",
+      "sha256": "e3eee0dc4dd6d83f5d191bca07afa4f5fbde74c65e3a6f572fcd2525dc7135bc",
+      "pass": true
+    },
+    {
+      "file": "source/probe-surface-balance.mjs",
+      "sha256": "cbd6f71ffc9552a2eb17562d75d6ba76644482dc6001c25f9fb827bf874e7363",
+      "pass": true
+    },
+    {
+      "file": "source/props.js",
+      "sha256": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+      "pass": true
+    },
+    {
+      "file": "source/recovery-state.js",
+      "sha256": "63df25521eae804f172f9463977a08dd0ed15526462d4afde5859a70ac036453",
+      "pass": true
+    },
+    {
+      "file": "source/review-frames.mjs",
+      "sha256": "99c9b9bffe01b6cbad2f484e8a5110bdab8018c88e664be27e317998fb6bcc50",
+      "pass": true
+    },
+    {
+      "file": "source/scene.js",
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+      "pass": true
+    },
+    {
+      "file": "source/semantic-uv-surface.mjs",
+      "sha256": "53f762a92f7570580962c011bcd3cfc92eae774c762a0ac37402240549a73804",
+      "pass": true
+    },
+    {
+      "file": "source/serve.py",
+      "sha256": "ebe8c890adc2dfe6c91d2288e42f57653a40a879c3ad48ce723b0e27cf379a51",
+      "pass": true
+    },
+    {
+      "file": "source/work-session.mjs",
+      "sha256": "7197ec913b6d632a5395063b9dbbb84e78f1c3e2bf7d50412c1924672ce54628",
+      "pass": true
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "pass": true
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+      "pass": true
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "pass": true
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+      "pass": true
+    },
+    {
+      "file": "vendor/data.js",
+      "sha256": "9e7b695d504665147d73a085ed01e068bb016e0c0a35fbfcff065ea74cc47665",
+      "pass": true
+    },
+    {
+      "file": "vendor/draco_wasm_wrapper.js",
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+      "pass": true
+    },
+    {
+      "file": "vendor/three.module.js",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "pass": true
+    },
+    {
+      "file": "vendor/viewer-runtime.js",
+      "sha256": "f69347424a99aa2ccde2fced5fcaddf7e74e8631130ab62e85d7b8a818155c6e",
+      "pass": true
+    },
+    {
+      "file": "verification/check-report-bindings.py",
+      "sha256": "7989ffd3c6142730bcbc8d83c69cc8fb99e9142b22c7d743fc6df2461bcfa393",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Rejected diagnostic capture: fixed skeletal poses and actual loader checks passed, but final paired camera check failed for landscape action poses because changed garment bounds affected automatic framing. All48 actual images are preserved here; they are not the accepted same-camera action comparison. A new locked-camera capture follows in ../actions/.

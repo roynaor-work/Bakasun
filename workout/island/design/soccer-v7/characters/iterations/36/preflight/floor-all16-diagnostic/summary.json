@@ -1,0 +1,57 @@
+{
+  "kind": "scoped-all16-waist36-canonical-floor-and-boot-proof",
+  "generatedAt": "2026-11-05T11:04:00.116647+00:00",
+  "productionPackage": false,
+  "partialDiagnostic": true,
+  "canonicalCoverageComplete": true,
+  "actualBrowserAcceptanceComplete": false,
+  "pass": true,
+  "scope": "Exact staged16candidateGLBs/all31canonicalclips; no primary or canonical output writes. Actual C16 palm/body/foot/transition/LOD gates remain pending.",
+  "manifestSha256": "f4ae269a56b0c0c8ef6ce33eeb338b916e17de976365e01acc1ae4ee6ce2e741",
+  "floor": {
+    "file": "floor-envelope.json",
+    "sha256": "b6dee47171d768fe98303285f924b43fd6a32ed51aa7bb828307187974cb7900",
+    "totals": {
+      "models": 16,
+      "clips": 31,
+      "sourceSamples": 75888,
+      "midpointProbes": 78640,
+      "vertexEvaluations": 3709352951
+    },
+    "minimum240HzMeters": 0.0014801916569820717,
+    "maximumLiftMeters": 0.06829021644435032,
+    "maximumReachResidualMeters": 0,
+    "maximumSoleAnchorErrorMeters": 5.900916318210353e-16
+  },
+  "boot": {
+    "file": "boot-bounds.json",
+    "sha256": "bf37e1f3f8523b60ae3314d5256eed65d7db729662ffe7a4c3d3b3b3aa14456d",
+    "models": 16,
+    "hullValuesExactlyEqualToPrimary32": {
+      "LeftFoot": true,
+      "RightFoot": true
+    }
+  },
+  "modelSha256": {
+    "models/goalkeeper-lod0.glb": "bf054c195f684ad687e76b84187f47c3c14347fa2651f737db7aac55f7b9030a",
+    "models/goalkeeper-lod1.glb": "deccb70c477ac427692fb32987ec6a3764da5f54ef5c8c1e9af43ba29c325c3f",
+    "models/player-01-lod0.glb": "a10ee1699c6ba8b4f1eda1808e098d8d5a93ce0a06778a019807ff9c6b92e267",
+    "models/player-01-lod1.glb": "3f2bd44f1914f4f83a7a6cdb882601e6b307dd4073a07c9edc37a5c863983d28",
+    "models/player-02-lod0.glb": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+    "models/player-02-lod1.glb": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+    "models/player-03-lod0.glb": "474bab206170ec80d56bfe30833136a34aabc317bbb6d9a17c4edb4d7f510a4e",
+    "models/player-03-lod1.glb": "5438af304eefb02dd1b54bd4e5c00670ddb1ff3a6afe6e7f7b6d31e8abfb8180",
+    "models/player-04-lod0.glb": "9819043a3d8096299ceeffc54adcde8e5faf922aed166de978038637e0b6e5b1",
+    "models/player-04-lod1.glb": "44cefd62773857678787254f2504e98b9d6aaaac1d956b3527d867a59b3a7b35",
+    "models/player-05-lod0.glb": "14487a98d38e67d2c26c7d8b1fb8961465d9ce8d446b95430fa52a9bddfb27a0",
+    "models/player-05-lod1.glb": "9236d88ed2e6b9b8c4711c34b96317f583327177ca245cf170a497c1ca3c8ebb",
+    "models/player-06-lod0.glb": "f5506667facca228ec11e84c36fbd735da3d08f2a2d57609f54eca62a47359b5",
+    "models/player-06-lod1.glb": "a0df76d393b9812379b334eca56bb1e36c2957cd8828e5b510c52f80f7b17704",
+    "models/referee-lod0.glb": "88a5d83154e79623aa9c82c0ab622b61dcb474f017dc4b272b6324c5e159a7a9",
+    "models/referee-lod1.glb": "c2f14d49c61f762b3a6dfde4abb60fe74a4ce63df0b332718c21576c245e5c8e"
+  },
+  "limitations": [
+    "The canonical floor solver preserves authored Foot constraints but does not run actual C16 anatomical palm or captured-body support.",
+    "Actual all-avatar acceptance must independently prove the changed garment root lifts preserve physical hand/foot/body support and transition/LOD state."
+  ]
+}

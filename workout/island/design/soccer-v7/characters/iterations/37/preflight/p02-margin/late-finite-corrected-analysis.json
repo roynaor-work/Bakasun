@@ -1,0 +1,36 @@
+{
+  "kind": "late-key-corrected-one-sided-linear-analysis",
+  "primaryWrites": false,
+  "complete": false,
+  "pass": null,
+  "warning": "DO NOT USE CENTRAL NEAR FLOOR DERIVATIVES for pitch or deviation: minus .01deg runs enter a floor/history correction branch. Central proposal fields in raw reports are NOT a usable physical candidate.",
+  "units": "response values microns per key-degree",
+  "baseline": {
+    "nearSkinFloor": 0.0008058190062034199,
+    "farSkinFloor": 0.0008408086385117168,
+    "farHeel": 0.00300108956147541
+  },
+  "response": {
+    "pitch": {
+      "farHeel": 28.997784538159486,
+      "nearFloor": -82.88932121036999,
+      "farFloor": 44.63312459294239
+    },
+    "twist": {
+      "farHeel": 6.548009471988616,
+      "nearFloor": -5.295601927519759,
+      "farFloor": 9.13447581987921
+    }
+  },
+  "proposal": {
+    "desiredFarHeelDeltaMicrons": -3,
+    "nearFloorDeltaMicrons": 0,
+    "twistDeltaDegrees": -0.6389218587266071,
+    "pitchDeltaDegrees": 0.04081920055805492,
+    "predictedFarHeelY": 0.0029980895614754102,
+    "predictedNearFloor": 0.0008058190062034199,
+    "predictedFarFloor": 0.0008367943107066782
+  },
+  "scope": "Existing .4 key only on original C322/.35 plan. Candidate is analytical, not dynamically applied or accepted. Writer owns validation.",
+  "allOwnedBrowsersAndServersClosed": true
+}

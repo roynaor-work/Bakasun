@@ -1,0 +1,19 @@
+{
+  "kind": "c16-auditor-freeze-after-actual-rise-cache-key-fix",
+  "generatedAt": "2026-11-05T09:43:11.592182+00:00",
+  "runtimeSha256": "ef474e25f1c7d68309198f1a769eaf6135bfcd6bc097c4ab91d58573ec954b08",
+  "dataSha256": "f4d3878855abdbbc6e04bc57fd5c334ef672c2834ae6d846831f7705bf04844d",
+  "sourceBindings": {
+    "source/audit-action-observer.cjs": "c9b6de82bf07fc6d57e417e3fdf33d1d04d57b88412eaa322e0d23ac3f981691",
+    "source/audit-transitions.cjs": "6b392f4f5893d443753005a74925abd7027e4877c0e00b462ef693106e28f77f",
+    "source/audit-transition-matrix.cjs": "bf3447d98e6a0041e5e884f916f5ec09b309a48772b8a989302a6f188e33488f",
+    "source/audit-viewer-session.cjs": "153cef4b5d98f1fc1152f5ac5bcc3634fdb099bc219086e2e31c91f1dd31ee66",
+    "source/audit-skinning.mjs": "dbb2fa642ea04f48a328c3da29305d513c2217e516a4b714db01c3a9d8dc1260",
+    "source/audit-locomotion.cjs": "4f7504c25d09ebe899110c58ac9361125c1fcb5cd31328f876b72c96e4dca8c2",
+    "source/audit-pitch.cjs": "020816dd3a7dafb3834d474a54bc5f4f3506c6f020dfe209bb2ffa15b14dbce4",
+    "source/audit-equivariance.cjs": "e85c796c3d36e638bf98a99a81fd212cd739530b7a70192e62758dab15826500",
+    "source/audit-cpu.mjs": "3796dc5ba5c446c871d0cce9a0758844ec7e27f4f2719e23bb474c9b7a518d6f",
+    "source/audit-ui.mjs": "26b1ca21046458302b597822f9f5006bd3ce80884b13b2425a668cf02f09b6f9"
+  },
+  "reason": "Same physical rise continues through queued-request supersession; observer cache now keys immutable actual rise/model identity, with unchanged physical thresholds. New final queues start fresh; original C16 failed/interrupted evidence remains retained."
+}

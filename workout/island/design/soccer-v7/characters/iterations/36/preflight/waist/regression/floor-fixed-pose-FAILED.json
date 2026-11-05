@@ -1,0 +1,1378 @@
+{
+  "kind": "waist36-fixed-pose-Cloth-floor-regression",
+  "summary": {
+    "cases": 136,
+    "newFloorRegressions": 2,
+    "minimumCandidateClothY": -0.014540547165703247,
+    "worstClothMinimumDelta": -0.01654056115384996,
+    "limits": "Same fixed baseline Near skeletal poses applied to each actual decoded LOD. Near full-mesh minimum is a bound for unchanged non-Cloth only on near; far baseline full-mesh floor requires final runtime audit. This is not a new canonical floor PASS."
+  },
+  "records": [
+    {
+      "label": "motor-0",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883134133,
+      "candidateClothMinimumY": 0.002000001883134133,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134133,
+      "candidateFullMeshBound": 0.002000001883134133,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-0",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245283,
+      "candidateClothMinimumY": 0.005128013361245283,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134133,
+      "candidateFullMeshBound": 0.002000001883134133,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-12",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019273596534,
+      "candidateClothMinimumY": 0.0020000019273596534,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019273596534,
+      "candidateFullMeshBound": 0.0020000019273596534,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-12",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0051280134020947644,
+      "candidateClothMinimumY": 0.0051280134020947644,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019273596534,
+      "candidateFullMeshBound": 0.0020000019273596534,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-23",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018834189,
+      "candidateClothMinimumY": 0.0020000018834189,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018834188996,
+      "candidateFullMeshBound": 0.0020000018834188996,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-23",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013360851645,
+      "candidateClothMinimumY": 0.005128013360851645,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018834188996,
+      "candidateFullMeshBound": 0.0020000018834188996,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-24",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018751388654,
+      "candidateClothMinimumY": 0.0020000018751388654,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001875138879,
+      "candidateFullMeshBound": 0.0020000018751388654,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-24",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013353658764,
+      "candidateClothMinimumY": 0.005128013353658764,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001875138879,
+      "candidateFullMeshBound": 0.002000001875138879,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-45",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883294112,
+      "candidateClothMinimumY": 0.002000001883294112,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883294112,
+      "candidateFullMeshBound": 0.002000001883294112,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-45",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013360425769,
+      "candidateClothMinimumY": 0.005128013360425769,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883294112,
+      "candidateFullMeshBound": 0.002000001883294112,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-65",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000002307235074,
+      "candidateClothMinimumY": 0.002000002307235074,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000023072350745,
+      "candidateFullMeshBound": 0.002000002307235074,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-65",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013712084208,
+      "candidateClothMinimumY": 0.005128013712084208,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000023072350745,
+      "candidateFullMeshBound": 0.0020000023072350745,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-66",
+      "lod": 0,
+      "baselineClothMinimumY": 0.09095856319887666,
+      "candidateClothMinimumY": 0.09095856319887666,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.09095856319887666,
+      "candidateFullMeshBound": 0.09095856319887666,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-66",
+      "lod": 1,
+      "baselineClothMinimumY": 0.09318268831355893,
+      "candidateClothMinimumY": 0.09318268831355893,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.09095856319887666,
+      "candidateFullMeshBound": 0.09095856319887666,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-91",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018832913176,
+      "candidateClothMinimumY": 0.0020000018832913176,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018832913176,
+      "candidateFullMeshBound": 0.0020000018832913176,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-91",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013360465873,
+      "candidateClothMinimumY": 0.005128013360465873,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018832913176,
+      "candidateFullMeshBound": 0.0020000018832913176,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-116",
+      "lod": 0,
+      "baselineClothMinimumY": 0.17437646941958032,
+      "candidateClothMinimumY": 0.17437646941958032,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.17437646941958032,
+      "candidateFullMeshBound": 0.17437646941958032,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-116",
+      "lod": 1,
+      "baselineClothMinimumY": 0.1771926863862337,
+      "candidateClothMinimumY": 0.1771926863862337,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.17437646941958032,
+      "candidateFullMeshBound": 0.17437646941958032,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-117",
+      "lod": 0,
+      "baselineClothMinimumY": 0.18012435943595254,
+      "candidateClothMinimumY": 0.18012435943595254,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.18012435943595254,
+      "candidateFullMeshBound": 0.18012435943595254,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-117",
+      "lod": 1,
+      "baselineClothMinimumY": 0.17871204538835933,
+      "candidateClothMinimumY": 0.17871204538835933,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.18012435943595254,
+      "candidateFullMeshBound": 0.17871204538835933,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-140",
+      "lod": 0,
+      "baselineClothMinimumY": 0.06148642652118386,
+      "candidateClothMinimumY": 0.06148642652118386,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06148642652118384,
+      "candidateFullMeshBound": 0.06148642652118384,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-140",
+      "lod": 1,
+      "baselineClothMinimumY": 0.06440265989726525,
+      "candidateClothMinimumY": 0.06440265989726525,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06148642652118384,
+      "candidateFullMeshBound": 0.06148642652118384,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-165",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018831343586,
+      "candidateClothMinimumY": 0.0020000018831343586,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831343586,
+      "candidateFullMeshBound": 0.0020000018831343586,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-165",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245507,
+      "candidateClothMinimumY": 0.005128013361245507,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831343586,
+      "candidateFullMeshBound": 0.0020000018831343586,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-190",
+      "lod": 0,
+      "baselineClothMinimumY": 0.00200000188313387,
+      "candidateClothMinimumY": 0.00200000188313387,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188313387,
+      "candidateFullMeshBound": 0.00200000188313387,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-190",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245018,
+      "candidateClothMinimumY": 0.005128013361245018,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188313387,
+      "candidateFullMeshBound": 0.00200000188313387,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-212",
+      "lod": 0,
+      "baselineClothMinimumY": 0.00200000188313387,
+      "candidateClothMinimumY": 0.00200000188313387,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188313387,
+      "candidateFullMeshBound": 0.00200000188313387,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-212",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245018,
+      "candidateClothMinimumY": 0.005128013361245018,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188313387,
+      "candidateFullMeshBound": 0.00200000188313387,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-213",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883133981,
+      "candidateClothMinimumY": 0.002000001883133981,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883133981,
+      "candidateFullMeshBound": 0.002000001883133981,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-213",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801336124513,
+      "candidateClothMinimumY": 0.00512801336124513,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883133981,
+      "candidateFullMeshBound": 0.002000001883133981,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-235",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018831001962,
+      "candidateClothMinimumY": 0.0020000018831001962,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188310021,
+      "candidateFullMeshBound": 0.0020000018831001962,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-235",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361012764,
+      "candidateClothMinimumY": 0.005128013361012764,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.00200000188310021,
+      "candidateFullMeshBound": 0.00200000188310021,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-257",
+      "lod": 0,
+      "baselineClothMinimumY": 0.11513242465916787,
+      "candidateClothMinimumY": 0.11513242465916787,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.11513242465916786,
+      "candidateFullMeshBound": 0.11513242465916786,
+      "newFloorRegression": false
+    },
+    {
+      "label": "motor-257",
+      "lod": 1,
+      "baselineClothMinimumY": 0.11373367688797029,
+      "candidateClothMinimumY": 0.11373367688797029,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.11513242465916786,
+      "candidateFullMeshBound": 0.11373367688797029,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019653915774,
+      "candidateClothMinimumY": 0.0020000019653915774,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019653915774,
+      "candidateFullMeshBound": 0.0020000019653915774,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013411746664,
+      "candidateClothMinimumY": 0.005128013411746664,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019653915774,
+      "candidateFullMeshBound": 0.0020000019653915774,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018831340892,
+      "candidateClothMinimumY": 0.0020000018831340892,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831340892,
+      "candidateFullMeshBound": 0.0020000018831340892,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245236,
+      "candidateClothMinimumY": 0.005128013361245236,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831340892,
+      "candidateFullMeshBound": 0.0020000018831340892,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019771341296,
+      "candidateClothMinimumY": 0.0020000019771341296,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019771341153,
+      "candidateFullMeshBound": 0.0020000019771341153,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_1-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801345238176,
+      "candidateClothMinimumY": 0.00512801345238176,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019771341153,
+      "candidateFullMeshBound": 0.0020000019771341153,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019368248837,
+      "candidateClothMinimumY": 0.0020000019368248837,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019368248694,
+      "candidateFullMeshBound": 0.0020000019368248694,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013396656328,
+      "candidateClothMinimumY": 0.005128013396656328,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019368248694,
+      "candidateFullMeshBound": 0.0020000019368248694,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883134076,
+      "candidateClothMinimumY": 0.002000001883134076,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134076,
+      "candidateFullMeshBound": 0.002000001883134076,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245223,
+      "candidateClothMinimumY": 0.005128013361245223,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134076,
+      "candidateFullMeshBound": 0.002000001883134076,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019530467717,
+      "candidateClothMinimumY": 0.0020000019530467717,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019530467578,
+      "candidateFullMeshBound": 0.0020000019530467578,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_2-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013429509655,
+      "candidateClothMinimumY": 0.005128013429509655,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019530467578,
+      "candidateFullMeshBound": 0.0020000019530467578,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000015237641618,
+      "candidateClothMinimumY": 0.0020000015237641618,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000015237641618,
+      "candidateFullMeshBound": 0.0020000015237641618,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0051280130123342845,
+      "candidateClothMinimumY": 0.0051280130123342845,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000015237641618,
+      "candidateFullMeshBound": 0.0020000015237641618,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018831342545,
+      "candidateClothMinimumY": 0.0020000018831342545,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831342545,
+      "candidateFullMeshBound": 0.0020000018831342545,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245404,
+      "candidateClothMinimumY": 0.005128013361245404,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831342545,
+      "candidateFullMeshBound": 0.0020000018831342545,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001361586653,
+      "candidateClothMinimumY": 0.002000001361586653,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000013615866534,
+      "candidateFullMeshBound": 0.002000001361586653,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_3-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801284700431,
+      "candidateClothMinimumY": 0.00512801284700431,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000013615866534,
+      "candidateFullMeshBound": 0.0020000013615866534,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000016428424533,
+      "candidateClothMinimumY": 0.0020000016428424533,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000016428424533,
+      "candidateFullMeshBound": 0.0020000016428424533,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013127115136,
+      "candidateClothMinimumY": 0.005128013127115136,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000016428424533,
+      "candidateFullMeshBound": 0.0020000016428424533,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883134091,
+      "candidateClothMinimumY": 0.002000001883134091,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134091,
+      "candidateFullMeshBound": 0.002000001883134091,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801336124524,
+      "candidateClothMinimumY": 0.00512801336124524,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134091,
+      "candidateFullMeshBound": 0.002000001883134091,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.018312303833096084,
+      "candidateClothMinimumY": 0.018312303833096084,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.018312303833096066,
+      "candidateFullMeshBound": 0.018312303833096066,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_4-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.021579895188995103,
+      "candidateClothMinimumY": 0.021579895188995103,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.018312303833096066,
+      "candidateFullMeshBound": 0.018312303833096066,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000015954190135,
+      "candidateClothMinimumY": 0.0020000015954190135,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001595419014,
+      "candidateFullMeshBound": 0.0020000015954190135,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801308043401,
+      "candidateClothMinimumY": 0.00512801308043401,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001595419014,
+      "candidateFullMeshBound": 0.002000001595419014,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0019999242791677546,
+      "candidateClothMinimumY": 0.0019999242791677546,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0019999242791677546,
+      "candidateFullMeshBound": 0.0019999242791677546,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005127962316251023,
+      "candidateClothMinimumY": 0.005127962316251023,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0019999242791677546,
+      "candidateFullMeshBound": 0.0019999242791677546,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.03820092573331331,
+      "candidateClothMinimumY": 0.03820092573331331,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.03820092573331331,
+      "candidateFullMeshBound": 0.03820092573331331,
+      "newFloorRegression": false
+    },
+    {
+      "label": "run_5-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.04159491897589668,
+      "candidateClothMinimumY": 0.04159491897589668,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.03820092573331331,
+      "candidateFullMeshBound": 0.03820092573331331,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001591685005,
+      "candidateClothMinimumY": 0.002000001591685005,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001591685005,
+      "candidateFullMeshBound": 0.002000001591685005,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013075830999,
+      "candidateClothMinimumY": 0.005128013075830999,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001591685005,
+      "candidateFullMeshBound": 0.002000001591685005,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018831341964,
+      "candidateClothMinimumY": 0.0020000018831341964,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831341964,
+      "candidateFullMeshBound": 0.0020000018831341964,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245346,
+      "candidateClothMinimumY": 0.005128013361245346,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018831341964,
+      "candidateFullMeshBound": 0.0020000018831341964,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.08045353220868294,
+      "candidateClothMinimumY": 0.08045353220868294,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.08045353220868294,
+      "candidateFullMeshBound": 0.08045353220868294,
+      "newFloorRegression": false
+    },
+    {
+      "label": "sprint-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.08384252751702997,
+      "candidateClothMinimumY": 0.08384252751702997,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.08045353220868294,
+      "candidateFullMeshBound": 0.08045353220868294,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.05706961345074246,
+      "candidateClothMinimumY": 0.05706961345074246,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.057069613450742476,
+      "candidateFullMeshBound": 0.05706961345074246,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.06011464526230699,
+      "candidateClothMinimumY": 0.06011464526230699,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.057069613450742476,
+      "candidateFullMeshBound": 0.057069613450742476,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018410599118,
+      "candidateClothMinimumY": 0.0020000018410599118,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018410599118,
+      "candidateFullMeshBound": 0.0020000018410599118,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013312863722,
+      "candidateClothMinimumY": 0.005128013312863722,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018410599118,
+      "candidateFullMeshBound": 0.0020000018410599118,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001896391944,
+      "candidateClothMinimumY": 0.002000001896391944,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001896391944,
+      "candidateFullMeshBound": 0.002000001896391944,
+      "newFloorRegression": false
+    },
+    {
+      "label": "decelerate-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013374791979,
+      "candidateClothMinimumY": 0.005128013374791979,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001896391944,
+      "candidateFullMeshBound": 0.002000001896391944,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001654281773,
+      "candidateClothMinimumY": 0.002000001654281773,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001654281759,
+      "candidateFullMeshBound": 0.002000001654281759,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013136715692,
+      "candidateClothMinimumY": 0.005128013136715692,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001654281759,
+      "candidateFullMeshBound": 0.002000001654281759,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000000501516212,
+      "candidateClothMinimumY": 0.002000000501516212,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000000501516198,
+      "candidateFullMeshBound": 0.002000000501516198,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128012216406353,
+      "candidateClothMinimumY": 0.005128012216406353,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000000501516198,
+      "candidateFullMeshBound": 0.002000000501516198,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000016056767314,
+      "candidateClothMinimumY": 0.0020000016056767314,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001605676731,
+      "candidateFullMeshBound": 0.002000001605676731,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_left-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128012613445521,
+      "candidateClothMinimumY": 0.005128012613445521,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001605676731,
+      "candidateFullMeshBound": 0.002000001605676731,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000016665840726,
+      "candidateClothMinimumY": 0.0020000016665840726,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000016665840587,
+      "candidateFullMeshBound": 0.0020000016665840587,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013149322447,
+      "candidateClothMinimumY": 0.005128013149322447,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000016665840587,
+      "candidateFullMeshBound": 0.0020000016665840587,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0019999941047582855,
+      "candidateClothMinimumY": 0.0019999941047582855,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0019999941047582855,
+      "candidateFullMeshBound": 0.0019999941047582855,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0051280056453012115,
+      "candidateClothMinimumY": 0.0051280056453012115,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0019999941047582855,
+      "candidateFullMeshBound": 0.0019999941047582855,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000025240902008,
+      "candidateClothMinimumY": 0.0020000025240902008,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000025240902008,
+      "candidateFullMeshBound": 0.0020000025240902008,
+      "newFloorRegression": false
+    },
+    {
+      "label": "turn_right-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0051280139428887565,
+      "candidateClothMinimumY": 0.0051280139428887565,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000025240902008,
+      "candidateFullMeshBound": 0.0020000025240902008,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000007411341766,
+      "candidateClothMinimumY": 0.0020000007411341766,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000000741134177,
+      "candidateFullMeshBound": 0.0020000007411341766,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128012495870645,
+      "candidateClothMinimumY": 0.005128012495870645,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000000741134177,
+      "candidateFullMeshBound": 0.002000000741134177,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000021764438043,
+      "candidateClothMinimumY": 0.0020000021764438043,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000021764438043,
+      "candidateFullMeshBound": 0.0020000021764438043,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.00512801365415868,
+      "candidateClothMinimumY": 0.00512801365415868,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000021764438043,
+      "candidateFullMeshBound": 0.0020000021764438043,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000002524292066,
+      "candidateClothMinimumY": 0.002000002524292066,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000002524292066,
+      "candidateFullMeshBound": 0.002000002524292066,
+      "newFloorRegression": false
+    },
+    {
+      "label": "kick-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128014000289762,
+      "candidateClothMinimumY": 0.005128014000289762,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000002524292066,
+      "candidateFullMeshBound": 0.002000002524292066,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019368248837,
+      "candidateClothMinimumY": 0.0020000019368248837,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019368248694,
+      "candidateFullMeshBound": 0.0020000019368248694,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013396656328,
+      "candidateClothMinimumY": 0.005128013396656328,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019368248694,
+      "candidateFullMeshBound": 0.0020000019368248694,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000001883134076,
+      "candidateClothMinimumY": 0.002000001883134076,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134076,
+      "candidateFullMeshBound": 0.002000001883134076,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013361245223,
+      "candidateClothMinimumY": 0.005128013361245223,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002000001883134076,
+      "candidateFullMeshBound": 0.002000001883134076,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000019530467717,
+      "candidateClothMinimumY": 0.0020000019530467717,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019530467578,
+      "candidateFullMeshBound": 0.0020000019530467578,
+      "newFloorRegression": false
+    },
+    {
+      "label": "dribble-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013429509655,
+      "candidateClothMinimumY": 0.005128013429509655,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000019530467578,
+      "candidateFullMeshBound": 0.0020000019530467578,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0073436007984472446,
+      "candidateClothMinimumY": 0.0073436007984472446,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.001999999341661729,
+      "candidateFullMeshBound": 0.001999999341661729,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.006614777896535515,
+      "candidateClothMinimumY": 0.006614777896535515,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.001999999341661729,
+      "candidateFullMeshBound": 0.001999999341661729,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000218715418815,
+      "candidateClothMinimumY": 0.0020000218715418815,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000218715418815,
+      "candidateFullMeshBound": 0.0020000218715418815,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128033194167574,
+      "candidateClothMinimumY": 0.005128033194167574,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000218715418815,
+      "candidateFullMeshBound": 0.0020000218715418815,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000015204977963,
+      "candidateClothMinimumY": 0.0020000015204977963,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000015204977963,
+      "candidateFullMeshBound": 0.0020000015204977963,
+      "newFloorRegression": false
+    },
+    {
+      "label": "get_up-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013000168059,
+      "candidateClothMinimumY": 0.005128013000168059,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000015204977963,
+      "candidateFullMeshBound": 0.0020000015204977963,
+      "newFloorRegression": false
+    },
+    {
+      "label": "slide_tackle-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0503246880237104,
+      "candidateClothMinimumY": 0.0503246880237104,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0503246880237104,
+      "candidateFullMeshBound": 0.0503246880237104,
+      "newFloorRegression": false
+    },
+    {
+      "label": "slide_tackle-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.052027217057026315,
+      "candidateClothMinimumY": 0.052027217057026315,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0503246880237104,
+      "candidateFullMeshBound": 0.0503246880237104,
+      "newFloorRegression": false
+    },
+    {
+      "label": "slide_tackle-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.03200037603631058,
+      "candidateClothMinimumY": 0.03200037603631058,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.03200037603631058,
+      "candidateFullMeshBound": 0.03200037603631058,
+      "newFloorRegression": false
+    },
+    {
+      "label": "slide_tackle-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.03512839891963233,
+      "candidateClothMinimumY": 0.03512839891963233,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.03200037603631058,
+      "candidateFullMeshBound": 0.03200037603631058,
+      "newFloorRegression": false
+    },
+    {
+      "label": "slide_tackle-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000013988146712,
+      "candidateClothMinimumY": -0.014540547165703247,
+      "deltaMinimumMeters": -0.01654056115384996,
+      "baselineActualNearFullMeshMinimumY": 0.001763341034758707,
+      "candidateFullMeshBound": -0.014540547165703247,
+      "newFloorRegression": true
+    },
+    {
+      "label": "slide_tackle-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0019857836096816017,
+      "candidateClothMinimumY": -0.014537242779167223,
+      "deltaMinimumMeters": -0.016523026388848824,
+      "baselineActualNearFullMeshMinimumY": 0.001763341034758707,
+      "candidateFullMeshBound": -0.014537242779167223,
+      "newFloorRegression": true
+    },
+    {
+      "label": "header-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002801173026556088,
+      "candidateClothMinimumY": 0.002801173026556088,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002801173026556088,
+      "candidateFullMeshBound": 0.002801173026556088,
+      "newFloorRegression": false
+    },
+    {
+      "label": "header-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0058862392179291345,
+      "candidateClothMinimumY": 0.0058862392179291345,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.002801173026556088,
+      "candidateFullMeshBound": 0.002801173026556088,
+      "newFloorRegression": false
+    },
+    {
+      "label": "header-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.35164767872485925,
+      "candidateClothMinimumY": 0.35164767872485925,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.3516476787248592,
+      "candidateFullMeshBound": 0.3516476787248592,
+      "newFloorRegression": false
+    },
+    {
+      "label": "header-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.3547757012625134,
+      "candidateClothMinimumY": 0.3547757012625134,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.3516476787248592,
+      "candidateFullMeshBound": 0.3516476787248592,
+      "newFloorRegression": false
+    },
+    {
+      "label": "header-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000018828485434,
+      "candidateClothMinimumY": 0.0020000018828485434,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018828485434,
+      "candidateFullMeshBound": 0.0020000018828485434,
+      "newFloorRegression": false
+    },
+    {
+      "label": "header-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128013360960935,
+      "candidateClothMinimumY": 0.005128013360960935,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000018828485434,
+      "candidateFullMeshBound": 0.0020000018828485434,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.01658684207549263,
+      "candidateClothMinimumY": 0.01658684207549263,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.016586842075492644,
+      "candidateFullMeshBound": 0.01658684207549263,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.01862350231126972,
+      "candidateClothMinimumY": 0.01862350231126972,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.016586842075492644,
+      "candidateFullMeshBound": 0.016586842075492644,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.014146918089033997,
+      "candidateClothMinimumY": 0.014146918089033997,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.014146918089033997,
+      "candidateFullMeshBound": 0.014146918089033997,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.013126681527791992,
+      "candidateClothMinimumY": 0.013126681527791992,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.014146918089033997,
+      "candidateFullMeshBound": 0.013126681527791992,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.002000004250829328,
+      "candidateClothMinimumY": 0.002000004250829328,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000042657305067,
+      "candidateFullMeshBound": 0.002000004250829328,
+      "newFloorRegression": false
+    },
+    {
+      "label": "fall-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.0021371378421073213,
+      "candidateClothMinimumY": 0.0021371378421073213,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000042657305067,
+      "candidateFullMeshBound": 0.0020000042657305067,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000032448109833,
+      "candidateClothMinimumY": 0.0020000032448109833,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000032448109833,
+      "candidateFullMeshBound": 0.0020000032448109833,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128014715292396,
+      "candidateClothMinimumY": 0.005128014715292396,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000032448109833,
+      "candidateFullMeshBound": 0.0020000032448109833,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.06409611516087635,
+      "candidateClothMinimumY": 0.06409611516087635,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06409611516087635,
+      "candidateFullMeshBound": 0.06409611516087635,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.06722386619480566,
+      "candidateClothMinimumY": 0.06722386619480566,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06409611516087635,
+      "candidateFullMeshBound": 0.06409611516087635,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.12035596827840586,
+      "candidateClothMinimumY": 0.12035596827840586,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.11403455483661759,
+      "candidateFullMeshBound": 0.11403455483661759,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_left-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.12023439318707105,
+      "candidateClothMinimumY": 0.12023439318707105,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.11403455483661759,
+      "candidateFullMeshBound": 0.11403455483661759,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.2",
+      "lod": 0,
+      "baselineClothMinimumY": 0.0020000032448109725,
+      "candidateClothMinimumY": 0.0020000032448109725,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000032448109725,
+      "candidateFullMeshBound": 0.0020000032448109725,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.2",
+      "lod": 1,
+      "baselineClothMinimumY": 0.005128014715292402,
+      "candidateClothMinimumY": 0.005128014715292402,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.0020000032448109725,
+      "candidateFullMeshBound": 0.0020000032448109725,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.5",
+      "lod": 0,
+      "baselineClothMinimumY": 0.06409600965996816,
+      "candidateClothMinimumY": 0.06409600965996816,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06409600965996817,
+      "candidateFullMeshBound": 0.06409600965996816,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.5",
+      "lod": 1,
+      "baselineClothMinimumY": 0.06722400872191292,
+      "candidateClothMinimumY": 0.06722400872191292,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.06409600965996817,
+      "candidateFullMeshBound": 0.06409600965996817,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.8",
+      "lod": 0,
+      "baselineClothMinimumY": 0.1209206477080419,
+      "candidateClothMinimumY": 0.1209206477080419,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.1140382454723367,
+      "candidateFullMeshBound": 0.1140382454723367,
+      "newFloorRegression": false
+    },
+    {
+      "label": "keeper_dive_right-0.8",
+      "lod": 1,
+      "baselineClothMinimumY": 0.12150710888514514,
+      "candidateClothMinimumY": 0.12150710888514514,
+      "deltaMinimumMeters": 0.0,
+      "baselineActualNearFullMeshMinimumY": 0.1140382454723367,
+      "candidateFullMeshBound": 0.1140382454723367,
+      "newFloorRegression": false
+    }
+  ],
+  "archiveProvenance": {
+    "producerOriginalPath": "/tmp/soccer-v7-waist36/floor-regression.json",
+    "producerOriginalSHA256": "3d6cbbdebd45876978c045c1c0442cbd8d4ef16f0c2c6d1cdb2c98d17c5b488b",
+    "receiptConvention": "file and inputs names resolve inside this retained archive; producerOriginalPath/SHA256 are historical notes. Numeric observations are unchanged."
+  },
+  "archiveVerdict": "FAILED fixed-baseline-pose diagnostic retained. Two newly negative fixed-pose cases and minimum -0.014540547165703247m. It does not run the adopted runtime candidate floor correction. It is superseded for floor acceptance by the fresh canonical envelope and separate actual-runtime C16 proof, not deleted or relabeled PASS."
+}

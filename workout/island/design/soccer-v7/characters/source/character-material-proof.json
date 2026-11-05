@@ -1,0 +1,38 @@
+{
+  "kind": "candidate15-isotropic-hair-material-fix",
+  "method": "GLB JSON material edit; complete original BIN chunk preserved byte-for-byte, including Draco streams and all image data. Source exporter produces the same isotropic material.",
+  "records": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "beforeSha256": "23d21e0dbc1e829065ba5e65d721560ab6ad82ce3adeab921814965e89137556",
+      "afterSha256": "1832d91b9e822cb768d2bc9bb8dacfeb174f6cee87cf8607e2acf7f82fb29096",
+      "binSha256": "fef7f00c4cb44a737aadf2366e31577ff1c5319f771ac100543e18ab756a62a3",
+      "binUnchanged": true,
+      "change": "Removed KHR_materials_anisotropy from HairCards only"
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "beforeSha256": "af607a7b6e24399650d0492dfac31050e544ce2ac010470185c0da7c801f05b3",
+      "afterSha256": "0e1f3536ca4f8faab3d26eea2b9073f8e969aa05982204d67f794c95ac1e2259",
+      "binSha256": "83d3746f48bedf3aade3b4a7f307e28aedcf1dbd398fb1db311da38b171f020a",
+      "binUnchanged": true,
+      "change": "Removed KHR_materials_anisotropy from HairCards only"
+    },
+    {
+      "file": "models/goalkeeper-lod0.glb",
+      "beforeSha256": "4e08b25085630b996167dcc632ace1e54e47991e9442af9b996d75a7e413d830",
+      "afterSha256": "1c2dca07fa591284240dee861e9c5aeca947ed9a4fe8b3e6a69cd1812a2f472a",
+      "binSha256": "f90586c5e9165221dce75de9580cca0dd63723fc41ca562e64c12afa571a3655",
+      "binUnchanged": true,
+      "change": "Removed KHR_materials_anisotropy from HairCards only"
+    },
+    {
+      "file": "models/goalkeeper-lod1.glb",
+      "beforeSha256": "e0144db8503108d3e2005a8652de02fb31bcbb09033fe01c861ef9eca2ea89b0",
+      "afterSha256": "233ac076a15716495929fbe22d8849bfbb99af4f5835fbf90d65b25922786148",
+      "binSha256": "b3b464fd06fc5f076ae67a3cab0528bb06610a7598a37495bc660d9f6378ce92",
+      "binUnchanged": true,
+      "change": "Removed KHR_materials_anisotropy from HairCards only"
+    }
+  ]
+}

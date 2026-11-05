@@ -1,0 +1,50 @@
+import json,numpy as np
+from pathlib import Path
+D=json.load(open('/tmp/soccer-v7-waist36/decoded-regression.json')); F=json.load(open('/tmp/soccer-v7-waist36/regression-fixtures.json'))['fixtures']
+W,H=390,844
+M=lambda a:np.array(a,float).reshape(4,4).T
+
+def pose(d,f,band=None):
+ p=next(p for p in d['parts'] if p['surface']=='Cloth');v=np.array(p['position']).reshape(-1,3);uv=np.array(p['uv']).reshape(-1,2);j=np.array(p['joints']).reshape(-1,4);weights=np.array(p['weights']).reshape(-1,4);full=np.zeros((len(v),18))
+ for k in range(4):full[np.arange(len(v)),j[:,k]]+=weights[:,k]
+ shorts=(uv[:,0]>.615)&(uv[:,0]<.995)&(uv[:,1]>.455)&(uv[:,1]<.645);shirt=(uv[:,0]>.615)&(uv[:,0]<.995)&(uv[:,1]>.005)&(uv[:,1]<.445)
+ if band:
+  a,b=band;t=np.clip((v[:,1]-a)/(b-a),0,1);t=t*t*(3-2*t);t*=shorts
+  torso=np.zeros_like(full);s=np.clip((v[:,1]-.88)/.16,0,1);torso[:,1]=1-s;torso[:,2]=s;full=full*(1-t[:,None])+torso*t[:,None]
+ mesh=next(m for m in f['meshes'] if m['material']==['Cloth']);vb=np.c_[v,np.ones(len(v))]@M(mesh['bindMatrix']).T;posed=np.zeros_like(vb)
+ for k,name in enumerate(d['joints']):posed+=(vb@(M(f['bones'][name]['matrixWorld'])@M(mesh['boneInverses'][k])).T)*full[:,k,None]
+ world=posed@(M(mesh['matrixWorld'])@M(mesh['bindMatrixInverse'])).T
+ from scipy.spatial.transform import Rotation
+ cam=np.eye(4);cam[:3,:3]=Rotation.from_quat(f['camera']['quaternion']).as_matrix();cam[:3,3]=f['camera']['position'];clip=world@(M(f['camera']['projectionMatrix'])@np.linalg.inv(cam)).T;ndc=clip[:,:3]/clip[:,3,None];screen=np.c_[(ndc[:,0]+1)*W/2,(1-ndc[:,1])*H/2,ndc[:,2]]
+ tri=np.array(p['indices']).reshape(-1,3);tag=np.where(shirt[tri].all(1),1,np.where(shorts[tri].all(1),2,3));return v,screen,tri,tag,full
+
+def raster(screen,tri,tag,shirt_only=False):
+ depth=np.full((H,W),np.inf);tid=np.full((H,W),-1,int)
+ for i,(t,c) in enumerate(zip(tri,tag)):
+  if shirt_only and c!=1:continue
+  q=screen[t];xmin=max(0,int(np.floor(q[:,0].min())));xmax=min(W-1,int(np.ceil(q[:,0].max())));ymin=max(0,int(np.floor(q[:,1].min())));ymax=min(H-1,int(np.ceil(q[:,1].max())))
+  if xmax<xmin or ymax<ymin:continue
+  a,b,c=q;den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1])
+  if den>=-1e-12:continue
+  yy,xx=np.mgrid[ymin:ymax+1,xmin:xmax+1];xx=xx+.5;yy=yy+.5;u=((b[1]-c[1])*(xx-c[0])+(c[0]-b[0])*(yy-c[1]))/den;v=((c[1]-a[1])*(xx-c[0])+(a[0]-c[0])*(yy-c[1]))/den;w=1-u-v;z=u*a[2]+v*b[2]+w*c[2];old=depth[ymin:ymax+1,xmin:xmax+1];hit=(u>=0)&(v>=0)&(w>=0)&(z<old);old[hit]=z[hit];tid[ymin:ymax+1,xmin:xmax+1][hit]=i
+ return depth,tid
+
+import time,hashlib,concurrent.futures
+from scipy.ndimage import label as components
+ROOT=Path('/tmp/soccer-v7-waist36')
+
+def evaluate(di,fi):
+ d=D[di];f=F[fi];v,screen,tri,tag,w=pose(d,f);_,tid=raster(screen,tri,tag);sdepth,_=raster(screen,tri,tag,True);valid=tid>=0;tags=np.zeros_like(tid);tags[valid]=tag[tid[valid]];mask=(tags==2)&np.isfinite(sdepth)
+ return mask,tid,tri,v
+
+def worker(task):
+ lod,fi=task;a=next(i for i,d in enumerate(D)if d['variant']=='baseline'and d['lod']==lod);b=next(i for i,d in enumerate(D)if d['variant']=='candidate'and d['lod']==lod);am,_,_,_=evaluate(a,fi);bm,tid,tri,v=evaluate(b,fi);new=bm&~am;cleared=am&~bm;labs,n=components(new);comps=[]
+ for k in range(1,n+1):
+  ys,xs=np.where(labs==k)
+  if len(xs)>=4:
+   ids=np.unique(tid[labs==k]);verts=np.unique(tri[ids]);comps.append({'pixels':int(len(xs)),'screenBounds':[int(xs.min()),int(ys.min()),int(xs.max()),int(ys.max())],'restYRange':[float(v[verts,1].min()),float(v[verts,1].max())]})
+ return{'pose':F[fi]['label'],'lod':lod,'baselinePixels':int(am.sum()),'candidatePixels':int(bm.sum()),'newLocalPixels':int(new.sum()),'clearedPixels':int(cleared.sum()),'newComponentsAtLeast4px':sorted(comps,key=lambda x:-x['pixels'])}
+if __name__=='__main__':
+ start=time.time();tasks=[(lod,fi)for fi in range(len(F))for lod in[0,1]]
+ with concurrent.futures.ProcessPoolExecutor(max_workers=2)as pool:rows=list(pool.map(worker,tasks,chunksize=2))
+ report={'kind':'waist36-exported-pixel-location-comparison','complete':True,'method':'FrontSide culling matching actual GLB Cloth material. Difference actual-exported candidate versus baseline shorts-over-projected-shirt masks under identical captured camera/pose. A new local pixel may be silhouette movement or real overlap; folded-leg projection is not by itself penetration. Connected components omit isolated groups smaller than4pixels.','elapsedSeconds':time.time()-start,'inputs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in[ROOT/'decoded-regression.json',ROOT/'regression-fixtures.json',Path(__file__)]},'summary':{'comparisons':len(rows),'casesWithNewLocalPixels':sum(r['newLocalPixels']>0 for r in rows),'casesWithNewComponentsAtLeast4px':sum(bool(r['newComponentsAtLeast4px'])for r in rows),'newLocalPixelTotal':sum(r['newLocalPixels']for r in rows),'clearedPixelTotal':sum(r['clearedPixels']for r in rows)},'rows':rows};(ROOT/'cloth-raster-frontside-local-delta.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'summary':report['summary'],'largest':sorted(rows,key=lambda x:-x['newLocalPixels'])[:10]}),flush=True)

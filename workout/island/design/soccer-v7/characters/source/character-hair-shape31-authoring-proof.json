@@ -1,0 +1,112 @@
+{
+  "kind": "macro-groom-shape31-actual-authoring-proof",
+  "scope": "Actual P03/P04 source29+31 groom before QEM; exact body/face/fringe/UV/weight/topology preservation, common volume field and bounded root attachment. No export/live model/map/runtime writes. Requires matched-camera phone review.",
+  "helperSha256": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+  "results": [
+    {
+      "id": "player-03",
+      "deterministic": true,
+      "finite": true,
+      "bodyAndFaceUnchanged": true,
+      "report": {
+        "variant": "macro-shape31",
+        "style": "sweep",
+        "method": "shared C1 front-crown volume field with bounded attached-root refit",
+        "addedVertices": 0,
+        "addedPolygons": 0,
+        "objects": [
+          {
+            "name": "hair-scalp-undercoat",
+            "vertices": 1380,
+            "maximumLiftMeters": 0.007664680480957031,
+            "maximumDisplacementMeters": 0.007798249464338032,
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-groom-clumps",
+            "vertices": 7150,
+            "maximumLiftMeters": 0.008000016212463379,
+            "maximumDisplacementMeters": 0.008139426192324651,
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-crown-flyaway-layer",
+            "vertices": 280,
+            "maximumLiftMeters": 0.00789332389831543,
+            "maximumDisplacementMeters": 0.008030874155275534,
+            "topologyUvWeightsUnchanged": true
+          }
+        ],
+        "fringeUnchanged": true,
+        "otherObjectsUnchanged": true,
+        "skipped": false,
+        "eyeY": 1.5983144500000002,
+        "supportStartsAtY": 1.6893144500000001,
+        "fringeMaximumY": 1.6883144500000002,
+        "fringeMaximumFieldDisplacementMeters": 0.0,
+        "nominalMaximumLiftMeters": 0.008,
+        "nominalMaximumLateralMeters": 0.0015,
+        "rootRefits": 56,
+        "irregularClippedCardComponents": 0,
+        "maximumRootFitMeters": 0.0008619904618258125,
+        "rootSignedDepthRangeMeters": [
+          -0.0013677608133245353,
+          0.00029945694161348513
+        ]
+      }
+    },
+    {
+      "id": "player-04",
+      "deterministic": true,
+      "finite": true,
+      "bodyAndFaceUnchanged": true,
+      "report": {
+        "variant": "macro-shape31",
+        "style": "quiff",
+        "method": "shared C1 front-crown volume field with bounded attached-root refit",
+        "addedVertices": 0,
+        "addedPolygons": 0,
+        "objects": [
+          {
+            "name": "hair-scalp-undercoat",
+            "vertices": 1324,
+            "maximumLiftMeters": 0.013659477233886719,
+            "maximumDisplacementMeters": 0.013659477233886719,
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-groom-clumps",
+            "vertices": 6872,
+            "maximumLiftMeters": 0.0140000581741333,
+            "maximumDisplacementMeters": 0.0140000581741333,
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-crown-flyaway-layer",
+            "vertices": 280,
+            "maximumLiftMeters": 0.013908624649047852,
+            "maximumDisplacementMeters": 0.013908624649047852,
+            "topologyUvWeightsUnchanged": true
+          }
+        ],
+        "fringeUnchanged": true,
+        "otherObjectsUnchanged": true,
+        "skipped": false,
+        "eyeY": 1.602994405,
+        "supportStartsAtY": 1.693994405,
+        "fringeMaximumY": 1.692994405,
+        "fringeMaximumFieldDisplacementMeters": 0.0,
+        "nominalMaximumLiftMeters": 0.014,
+        "nominalMaximumLateralMeters": 0.0,
+        "rootRefits": 46,
+        "irregularClippedCardComponents": 0,
+        "maximumRootFitMeters": 0.0012217724672040826,
+        "rootSignedDepthRangeMeters": [
+          -0.001681312511867053,
+          0.00029050903921564245
+        ]
+      }
+    }
+  ],
+  "pass": true
+}

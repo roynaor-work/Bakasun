@@ -1,0 +1,16 @@
+const fs=require('fs'),{spawn}=require('node:child_process'),{once}=require('node:events'),crypto=require('node:crypto');
+const root='/workspace/Bakasun/workout/island/design/soccer-v7/characters',source='source/capture-motion-film.mjs',hash=p=>crypto.createHash('sha256').update(fs.readFileSync(root+'/'+p)).digest('hex');
+const expectedSource='cbbd5f5904c578f19c5acb9e5102ad6bc6187cfa68507d33c8146529877e7d96';if(hash(source)!==expectedSource)throw Error('Final movie utility changed');
+const frozen=Object.fromEntries([source,'preview.js','vendor/viewer-runtime.js','vendor/data.js','asset-manifest.json','animations.json'].map(p=>[p,hash(p)]));
+const adapter='/tmp/soccer-v7-capture-motion-film-cdp.mjs',adapterSha=crypto.createHash('sha256').update(fs.readFileSync(adapter)).digest('hex');const rows=[];
+(async()=>{for(const size of['390x844','844x390'])for(const sequence of['motor','recovery','keeper','pass']){
+ const before=Date.now();process.stdout.write(JSON.stringify({starting:sequence,size})+'\n');
+ const p=spawn(process.execPath,[adapter,'--sequence='+sequence,'--round=37','--size='+size],{cwd:root,stdio:'inherit'});const[code]=await once(p,'close');
+ const file='iterations/37/motion-films/'+sequence+'-'+size+'.json';if(code!==0||!fs.existsSync(root+'/'+file))throw Error('Final movie failed: '+file);
+ const d=JSON.parse(fs.readFileSync(root+'/'+file));if(!d.pass||!d.browserCapturePass||!d.semanticChecks?.pass)throw Error('Final movie semantic failure: '+file);
+ for(const[path,sha]of Object.entries(frozen))if(hash(path)!==sha)throw Error('Final movie inputs changed: '+path);
+ rows.push({sequence,size,report:file,reportSha256:hash(file),frames:d.frames,simulationSeconds:d.simulationSeconds,captureWallSeconds:(Date.now()-before)/1000,video:d.video,captureAdapter:d.captureAdapter,browserCapturePass:d.browserCapturePass,semanticPass:d.semanticChecks.pass});
+ }
+ const proof={kind:'final-eight-rendered-motion-films',captureAdapter:{method:'CDP Page.captureScreenshot',sha256:adapterSha,source:'iterations/37/motion-films/capture-adapter-source.mjs.txt',canonicalUtilitySha256:expectedSource},pass:rows.length===8&&rows.every(r=>r.browserCapturePass&&r.semanticPass),frozenInputs:frozen,rows};
+ fs.writeFileSync(root+'/iterations/37/motion-films/summary.json',JSON.stringify(proof,null,2)+'\n');console.log(JSON.stringify({allEightComplete:proof.pass,frames:rows.reduce((sum,r)=>sum+r.frames,0),videoBytes:rows.reduce((sum,r)=>sum+r.video.bytes,0)}));
+})().catch(error=>{console.error(error);process.exitCode=1;});

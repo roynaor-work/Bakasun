@@ -1,0 +1,37 @@
+{
+  "kind": "cold31-source-rigid-boot-native-prescan",
+  "complete": false,
+  "actualViewerConfirmationRequired": true,
+  "hz": 120,
+  "motionSHA256": "d2595fcaa96142fb0e26ce0caed8105fd27bf1c3ea41c954bf32e2d1ab6ba81c",
+  "decodedNative15BootSHA256": "189b11be43c63fe660cdc31c81c64834cc8aec8248968ed63b25b2c4915afce4",
+  "thresholds": {
+    "sameRigidVertexBothYAtMost": 0.008,
+    "xzStepAbove": 0.003,
+    "minimumFixedWitnesses": 7,
+    "maximumFootRotationDegrees": 1
+  },
+  "rows": [
+    {
+      "id": "slide_tackle",
+      "duration": 1.466667,
+      "samples": 177,
+      "flags": [],
+      "maximumFlatNearGroundRigidVertexStep": 0.0014323595804980652,
+      "maximumNearGroundSoleStep": 0.0014431162970373636,
+      "minimumBootY": 0.0007725225240643868,
+      "maxAngular": 17.53458956534316,
+      "maxRelative": 6.206262605854251,
+      "worstAngular": {
+        "time": 1.0083333333333333,
+        "bone": "LeftUpLeg"
+      },
+      "candidateNativeFlatSkateFree": true
+    }
+  ],
+  "flags": [],
+  "limitations": [
+    "Native canonical FK plus actual decoded rigidCloth boot vertices. No viewer floor lift, post-IK or recovery/controller overlays are simulated. A flag requires confirmation in the actual bundled viewer.",
+    "30Hz source samples are interpolated at120Hz; no cadence or drift criterion was changed."
+  ]
+}

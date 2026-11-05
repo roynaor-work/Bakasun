@@ -1,0 +1,15 @@
+from pathlib import Path
+ns={};exec(Path('/tmp/soccer-v7-waist36/skin-local-regression-probe.py').read_text().split('start=time.time();results=[]')[0],ns)
+D,F,prepared,posed,raster,sample_rest,M=[ns[k] for k in ('D','F','prepared','posed','raster','sample_rest','M')];np=ns['np'];json=ns['json'];out=[]
+for d in D:
+ skin=prepared(d,'Skin');short=prepared(d,'Cloth')
+ for f in F:
+  if f['label'] not in ['run_5-0.2','sprint-0.2','keeper_dive_right-0.8']:continue
+  ss,si=posed(skin,d,f);cs,ci=posed(short,d,f);projection=M(f['camera']['projectionMatrix']);m22=projection[2,2];m23=projection[2,3]
+  for side in (0,1):
+   sk=skin['side']==side;sh=short['side']==side;sd,sy,st=raster(ss,si,skin['tri'][sk],skin['v'][:,1]);cd,cy,ct=raster(cs,ci,short['tri'][sh],short['v'][:,1]);valid=np.isfinite(sd)&np.isfinite(cd)&(sy>=.615)&(sy<=.667);delta=np.zeros((844,390));delta[valid]=m23/(cd[valid]+m22)-m23/(sd[valid]+m22);hit=valid&(delta>.001)
+   if not hit.any():continue
+   yy,xx=np.where(hit);sr=sample_rest(ss,si,skin['tri'][sk],skin['v'],st[hit],xx,yy);cr=sample_rest(cs,ci,short['tri'][sh],short['v'],ct[hit],xx,yy);rd=np.linalg.norm(sr-cr,axis=1)
+   out.append({'variant':d['variant'],'lod':d['lod'],'pose':f['label'],'side':side,'rawPixels':int(hit.sum()),'sourceRestSeparationMinMedianMaxMeters':np.quantile(rd,[0,.5,1]).tolist(),'cameraDepthGapMinMedianMaxMeters':np.quantile(delta[hit],[0,.5,1]).tolist(),'skinRestYMinMax':np.quantile(sr[:,1],[0,1]).tolist(),'shortsRestYMinMax':np.quantile(cr[:,1],[0,1]).tolist(),'within40mmBoth':int(((rd<=.04)&(delta[hit]<=.04)).sum())})
+Path('/tmp/soccer-v7-waist36/skin-ray-separation-examples.json').write_text(json.dumps(out,indent=2)+'\n')
+for r in out:print(json.dumps(r))

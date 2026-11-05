@@ -1,0 +1,3 @@
+# Final37 P02 Far contact views
+
+Four fresh diagnostic-camera photos show the two corrected bridge phases in both phone orientations. Runtime/data/model and actual-patch metadata are retained in `capture.json`. The landscape view shows wrist/hand support context; the tight portrait frame crops fingers and the supporting underside is partly occluded. These images provide pose context. The actual decoded Skin triangle, fixed anchor and floor are checked independently in `iterations/37/verification/p02-independent-focused.json`. The coarse Far hand and rigid fingers remain visual limitations. The camera alone changes for these photographs; the physical pose comes from the frozen package.

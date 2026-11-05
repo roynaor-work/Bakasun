@@ -1,0 +1,37 @@
+--- source/palm-support.js before
++++ source/palm-support.js candidate
+@@ -485,10 +485,10 @@
+       {
+         "elapsedSeconds": 0.35,
+         "degrees": [
+-          1.5645060644374618,
++          2.664506064437462,
+           5.170552412576722,
+           0.21974923492769038,
+-          15.411348418559923,
++          9.411348418559923,
+           -18.764621713115808
+         ]
+       },
+@@ -505,10 +505,10 @@
+       {
+         "elapsedSeconds": 0.4,
+         "degrees": [
+-          1.6083384352804042,
++          1.728338435280404,
+           7.881809524425935,
+           -0.21703946796532156,
+-          20.42625221029654,
++          18.42625221029654,
+           -23.93647349743879
+         ]
+       }
+@@ -518,7 +518,7 @@
+     "pairedReferenceBlend": 0,
+     "interpolation": "smoothstep-per-key-no-overshoot",
+     "scope": "bridgeLifecycleOnly",
+-    "internalBoundNote": "Late ForeArm/pole continuation20.426/\u221223.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
++    "internalBoundNote": "Late ForeArm/pole continuation18.426/\u221223.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+   }
+ };
+ const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};

@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+/** Confirm canonical prescan flags on the actual decoded, cold-seeked viewer. */
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {openPreview,root} from './browser-session.mjs';
+const argument=(name,fallback)=>process.argv.find(x=>x.startsWith('--'+name+'='))?.slice(name.length+3)||fallback;
+const input=argument('prescan','/tmp/soccer-v7-long-pass-source/prescan31-120hz.json');
+const output=path.resolve(argument('out',path.join(root,'iterations/17/native-flat-boot-before.json')));
+if(!output.startsWith(root+path.sep))throw Error('Report must remain inside this package');
+const raw=await fs.readFile(input),prescan=JSON.parse(raw),digest=b=>crypto.createHash('sha256').update(b).digest('hex');
+const auditSource={file:'source/audit-native-flat-boot.mjs',sha256:digest(await fs.readFile(fileURLToPath(import.meta.url)))};
+const runtime=await fs.readFile(path.join(root,'vendor/viewer-runtime.js')),data=await fs.readFile(path.join(root,'vendor/data.js'));
+const motionPath=argument('motion',null),overrides={};let motionOverride=null;
+if(motionPath){
+  const bytes=await fs.readFile(motionPath),text=data.toString('utf8'),payload=JSON.parse(text.slice(text.indexOf('globalThis.SOCCER_V7_DATA=')+'globalThis.SOCCER_V7_DATA='.length).trim().replace(/;$/,''));
+  payload.motion=JSON.parse(bytes);payload.floor=null;payload.hashes.motion=digest(bytes);
+  overrides['/vendor/data.js']='globalThis.SOCCER_V7_DATA='+JSON.stringify(payload)+';';
+  motionOverride={file:path.basename(motionPath),bytes:bytes.length,sha256:digest(bytes),envelopeDisabled:true};
+}
+const rows=prescan.rows.filter(r=>r.flags?.length),s=await openPreview({dpr:1,resourceOverrides:overrides}),results=[];
+try{
+  await s.page.evaluate(async()=>{soccerV7.setPlaying(false);await soccerV7.setView('body');await soccerV7.setLOD(0);soccerV7.inspect().renderer.render=()=>{};});
+  for(const row of rows){
+    const character=/^keeper_/.test(row.id)?'goalkeeper':'player-01';
+    await s.page.evaluate(async({character,id})=>{await soccerV7.setCharacter(character);soccerV7.setClip(id);}, {character,id:row.id});
+    const confirmations=[];
+    for(const flag of row.flags){
+      const times=[Math.max(0,flag.t-1/prescan.hz),Math.min(row.duration,flag.t)],frames=[];
+      for(const seconds of times){
+        frames.push(await s.page.evaluate(({seconds,duration,side})=>{
+          soccerV7.seek(seconds/duration);
+          const a=soccerV7.inspect().actors[0],points={},quaternion=a.bones[side].getWorldQuaternion(a.bones[side].quaternion.clone()).toArray();
+          for(let m=0;m<a.meshes.length;m++){
+            const mesh=a.meshes[m],materials=Array.isArray(mesh.material)?mesh.material:[mesh.material];
+            if(!materials.some(x=>x.name==='Cloth'))continue;
+            const p=mesh.geometry.attributes.position,j=mesh.geometry.attributes.skinIndex,w=mesh.geometry.attributes.skinWeight;
+            if(!j||!w)continue;
+            for(let i=0;i<p.count;i++){
+              let footWeight=0;
+              for(let k=0;k<4;k++)if(mesh.skeleton.bones[j.getComponent(i,k)]?.name===side)footWeight+=w.getComponent(i,k);
+              if(footWeight<.99999)continue;
+              const bindKey=[p.getX(i),p.getY(i),p.getZ(i)].map(v=>v.toFixed(6)).join('/'),key=m+'/'+i;
+              const v=mesh.getVertexPosition(i,a.bones[side].position.clone()).applyMatrix4(mesh.matrixWorld);points[key]={vertex:i,mesh:m,bindKey,position:v.toArray()};
+            }
+          }
+          return{seconds,minimumY:a.minimumY(true),sole:a.bones[side].localToWorld(a.bones[side].position.clone().set(0,-.08,0)).toArray(),quaternion,points};
+        },{seconds,duration:row.duration,side:flag.side}));
+      }
+      const [a,b]=frames,witnesses=[];
+      for(const [key,point]of Object.entries(a.points)){
+        const next=b.points[key];if(!next)continue;
+        if(point.position[1]<=.008&&next.position[1]<=.008){
+          const xz=Math.hypot(point.position[0]-next.position[0],point.position[2]-next.position[2]);
+          witnesses.push({key,bindKey:point.bindKey,vertexBefore:point.vertex,vertexAfter:next.vertex,positionBefore:point.position,positionAfter:next.position,xzMeters:xz});
+        }
+      }
+      const dot=Math.min(1,Math.abs(a.quaternion.reduce((sum,x,i)=>sum+x*b.quaternion[i],0))),degrees=2*Math.acos(dot)*180/Math.PI,skating=witnesses.filter(w=>w.xzMeters>.003);
+      confirmations.push({times,side:flag.side,canonicalFlag:flag,rigidNearFloorVertices:witnesses.length,uniqueBindPositions:new Set(witnesses.map(w=>w.bindKey)).size,skatingVertices:skating.length,uniqueSkatingBindPositions:new Set(skating.map(w=>w.bindKey)).size,maximumXZMeters:Math.max(0,...witnesses.map(w=>w.xzMeters)),footRotationDegrees:degrees,confirmedFlatBootTranslation:skating.length>=7&&degrees<=1,minimumVertexY:Math.min(a.minimumY,b.minimumY),witnesses});
+    }
+    results.push({id:row.id,character,confirmations});
+  }
+  const unchanged=(await fs.readFile(path.join(root,'vendor/viewer-runtime.js'))).equals(runtime)&&(await fs.readFile(path.join(root,'vendor/data.js'))).equals(data);
+  if(!unchanged)throw Error('Served package changed during the confirmation');
+  if(motionOverride&&digest(await fs.readFile(motionPath))!==motionOverride.sha256)throw Error('Motion candidate changed during confirmation');
+  const loadedHashes=await s.page.evaluate(()=>soccerV7.inspect().data.hashes),loadedModels=await s.page.evaluate(()=>soccerV7.state().models.map(m=>({id:m.id,path:m.path})));
+  const checks={instrumentationNoErrorsOrRemoteRequests:s.errors.length===0&&s.remoteRequests.length===0,standingActionFlatBootSkateFree:!results.some(row=>['kick','keeper_punt','celebrate_victory_leap'].includes(row.id)&&row.confirmations.some(x=>x.confirmedFlatBootTranslation))};
+  const report={kind:'actual-cold-viewer-flat-boot-prescan-confirmation',complete:false,auditSource,motionOverride,generatedAt:new Date().toISOString(),pass:Object.values(checks).every(Boolean),checks,instrumentationPass:checks.instrumentationNoErrorsOrRemoteRequests,prescan:{file:path.basename(input),sha256:digest(raw),motionSHA256:prescan.motionSHA256},actualRuntimeSha256:digest(runtime),actualDataSha256:digest(overrides['/vendor/data.js']||data),baseDataSha256:digest(data),loadedHashes,loadedModels,results,errors:s.errors,remoteRequests:s.remoteRequests,limits:'Confirms candidate time pairs only, using the SAME decoded rigid Cloth render vertices and exact displayed skinning after floor/IK; unique bind positions are reported separately. The canonical prescan may use staged motion; actual loaded motion is explicitly identified above. Confirmed low-body translations still require classification as intentional slide/dive/fall or unintended standing-action skating. Not a full31 acceptance or performance result.'};
+  await fs.mkdir(path.dirname(output),{recursive:true});await fs.writeFile(output,JSON.stringify(report,null,2)+'\n');
+  console.log(JSON.stringify({report:output,rows:results.map(r=>({id:r.id,confirmed:r.confirmations.filter(x=>x.confirmedFlatBootTranslation).length,maxMM:Math.max(...r.confirmations.map(x=>x.maximumXZMeters))*1000})),errors:s.errors}));
+}finally{await s.close();}

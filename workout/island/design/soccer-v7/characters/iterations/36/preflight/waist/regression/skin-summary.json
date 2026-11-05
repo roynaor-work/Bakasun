@@ -1,0 +1,147 @@
+{
+  "kind": "waist36-delivered-skin-short-regression-summary",
+  "generatedAt": "2026-11-05T10:46:40.341035+00:00",
+  "scope": {
+    "identity": "player-01",
+    "lods": [
+      0,
+      1
+    ],
+    "poses": 68,
+    "variants": [
+      "baseline",
+      "actual exported candidate"
+    ],
+    "posedModelCases": 272,
+    "viewport": [
+      390,
+      844
+    ],
+    "materials": "Production FrontSide Skin and Cloth; backfaces culled, never a hidden anatomical reference."
+  },
+  "result": "No local-shell ray witness under the stated heuristic in either baseline or candidate; this is not a universal skin-penetration PASS.",
+  "localityHeuristic": {
+    "skinSourceRestYMeters": [
+      0.615,
+      0.667
+    ],
+    "coreSkinSourceRestYMeters": [
+      0.625,
+      0.667
+    ],
+    "sourceTriangles": "Leg-weighted delivered Skin only; arms/hands excluded. Shorts side is restX sign, not Hips-dominant joint.",
+    "skinMustBeNearerCameraByMoreThanMeters": 0.001,
+    "maximumSourceRestSeparationMeters": 0.04,
+    "maximumCameraDepthGapMeters": 0.04,
+    "pixels": "Same-leg source restY is perspective-correctly interpolated at actual camera rays; the40mm thresholds are heuristic locality bounds, not anatomical collision guarantees."
+  },
+  "localCounts": {
+    "baselineTotalPixels": 0,
+    "candidateTotalPixels": 0,
+    "newCandidatePixels": 0,
+    "newPositiveCases": 0,
+    "candidatePositiveCases": 0
+  },
+  "rawProjectedCounts": {
+    "baselineTotalPixels": 3594,
+    "candidateTotalPixels": 4857,
+    "newCandidatePixels": 1790,
+    "newPositiveCases": 54,
+    "candidatePositiveCases": 67
+  },
+  "unchangedGeometryProof": {
+    "SkinAttributesExactlyEqualAtBothLODs": [
+      "position",
+      "uv",
+      "joints",
+      "weights",
+      "indices"
+    ],
+    "shortsBelow70cmFull18BoneWeightsExactlyEqual": {
+      "lod0Vertices": 144,
+      "lod1Vertices": 93,
+      "maximumAbsoluteWeightDelta": 0
+    }
+  },
+  "examples": {
+    "candidateSprint02": "near112raw pixels; source-rest separation224\u2013298mm and camera-depth gap102\u2013228mm, hence distant silhouette overlap.",
+    "candidateKeeperDiveRight08Far": "155raw pixels total; worst side\u2019s source-rest separation74\u2013217mm and gap83\u2013184mm, hence no local40mm witness."
+  },
+  "photoReviewPriorities": [
+    "sprint phase.2",
+    "run_5 phase.2",
+    "keeper_dive_right phase.8",
+    "run_3/run_4 phase.8",
+    "motor116/117"
+  ],
+  "limitations": [
+    "Camera-visible same-leg silhouette diagnostic, not full 3D collision or full PBR render.",
+    "Depth rays can detect legitimate self-overlap where the same thigh bends across its own shorts silhouette; actual action images decide severity.",
+    "Triangles are culled using production front-face material setting.",
+    "All upperleg Skin is the delivered clipped geometry, never hidden full anatomical reference.",
+    "Both LODs use identical captured pose/camera fixtures; far geometry diagnostic is not a separately captured far film."
+  ],
+  "receipts": [
+    {
+      "file": "decoded-regression.json",
+      "bytes": 5556028,
+      "sha256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/decoded-regression.json",
+      "producerOriginalSHA256": "29387df531af3f66bde8cce0232b5fabf122fa6504c3bf7ea2af8945b4badc09"
+    },
+    {
+      "file": "regression-fixtures.json",
+      "bytes": 1070853,
+      "sha256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/regression-fixtures.json",
+      "producerOriginalSHA256": "b616eec8de7ed346fb40021615e59f37255a6d1de5c0d635744f8ac4bf59e20a"
+    },
+    {
+      "file": "skin-regression-probe.py.txt",
+      "bytes": 6881,
+      "sha256": "fe103894da98d6cf5871ec91389bea1124affa568deab32307b05cb8567d4c81",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-regression-probe.py",
+      "producerOriginalSHA256": "fe103894da98d6cf5871ec91389bea1124affa568deab32307b05cb8567d4c81"
+    },
+    {
+      "file": "skin-regression-result.json",
+      "bytes": 142567,
+      "sha256": "008a081fcaaee176540213cd5347afce18dd00b25841a93b01271ac80cee1a87",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-regression-result.json",
+      "producerOriginalSHA256": "2aedcd5a0c1c952dd08dfb99898d04087587088d077dfaeb7577d32d1342e116"
+    },
+    {
+      "file": "skin-local-regression-probe.py.txt",
+      "bytes": 7737,
+      "sha256": "d7b89bad080ae55073915cb0da7eca2a7f0a9465824f3eda62cfa8a8129b9efd",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-local-regression-probe.py",
+      "producerOriginalSHA256": "d7b89bad080ae55073915cb0da7eca2a7f0a9465824f3eda62cfa8a8129b9efd"
+    },
+    {
+      "file": "skin-local-regression-result.json",
+      "bytes": 128701,
+      "sha256": "62b4f766b3356abcf9a4ab8f1617e02ef96787a4f36296ad78ccf42802690c3a",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-local-regression-result.json",
+      "producerOriginalSHA256": "d42ecac0630e64a2b9e34cd62d18256c0120096fe665b18ec0cbb59da26d5ed9"
+    },
+    {
+      "file": "skin-ray-examples.py.txt",
+      "bytes": 1719,
+      "sha256": "56da5cecff5a8b0e422c63d820f87801a7c96b93f05b89691842a82482dab378",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-ray-examples.py",
+      "producerOriginalSHA256": "56da5cecff5a8b0e422c63d820f87801a7c96b93f05b89691842a82482dab378"
+    },
+    {
+      "file": "skin-ray-separation-examples.json",
+      "bytes": 8010,
+      "sha256": "e3c5e85ffd7cfa7a35de51d5a2dafe2e1aabaa144cd5ddb7bc208feccefa8b2e",
+      "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-ray-separation-examples.json",
+      "producerOriginalSHA256": "e3c5e85ffd7cfa7a35de51d5a2dafe2e1aabaa144cd5ddb7bc208feccefa8b2e"
+    }
+  ],
+  "archiveProvenance": {
+    "producerOriginalPath": "/tmp/soccer-v7-waist36/skin-summary.json",
+    "producerOriginalSHA256": "5fcd7645484d3949eda1086ca67d74f3582ec7992b13a3e52b6f2d8452cbd341",
+    "receiptConvention": "file and inputs names resolve inside this retained archive; producerOriginalPath/SHA256 are historical notes. Numeric observations are unchanged."
+  }
+}

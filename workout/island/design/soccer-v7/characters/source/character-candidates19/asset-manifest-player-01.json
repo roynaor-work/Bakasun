@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "kind": "soccer-human-character-library",
+  "skeleton": "rig.json",
+  "license": "CC0-1.0",
+  "characters": [
+    {
+      "id": "player-01",
+      "label": "איתן",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-square",
+        "heritage": [
+          0.12,
+          0.1,
+          0.78
+        ],
+        "hair": "crop",
+        "eye": [
+          67,
+          45,
+          26
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-a",
+          "color": "#146c70",
+          "textures": {
+            "basecolor": "textures/player-01-kit-a-basecolor.webp",
+            "normal": "textures/player-01-normal.png",
+            "orm": "textures/player-01-orm.png"
+          },
+          "lod0": "models/player-01-lod0.glb",
+          "lod0Triangles": 28292,
+          "lod0BytesBeforeDraco": 1698064,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 72,
+            "faceCoreMappedTriangles": 72,
+            "shirtCoreTriangles": 306,
+            "explicitRegionObjects": 47,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 94,
+            "hemCorrectedVertices": 19,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.00281776093571387,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 256
+          },
+          "lod1": "models/player-01-lod1.glb",
+          "lod1Triangles": 5991,
+          "lod1BytesBeforeDraco": 720408,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 4,
+            "faceCoreMappedTriangles": 4,
+            "shirtCoreTriangles": 82,
+            "explicitRegionObjects": 47,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 30,
+            "hemCorrectedVertices": 7,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.004014091183998383,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 114
+          },
+          "lod0Bytes": 817064,
+          "lod0Sha256": "9f3033bb856f15017e6b58c4c63058fc6d26cfbdc482d860b23eaeb443e19779",
+          "lod1Bytes": 491448,
+          "lod1Sha256": "96f5d95fdf6b596caec9d84be10544accd91e7e12fbf0f6ee8f14d6fc792854d"
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "label": "שוער",
+      "role": "goalkeeper",
+      "fictional": true,
+      "design": {
+        "head": "head-oval",
+        "heritage": [
+          0.7,
+          0.06,
+          0.24
+        ],
+        "hair": "coils",
+        "eye": [
+          44,
+          31,
+          23
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "keeper",
+          "color": "#aac449",
+          "textures": {
+            "basecolor": "textures/goalkeeper-keeper-basecolor.webp",
+            "normal": "textures/goalkeeper-normal.png",
+            "orm": "textures/goalkeeper-orm.png"
+          },
+          "lod0": "models/goalkeeper-lod0.glb",
+          "lod0Triangles": 33345,
+          "lod0BytesBeforeDraco": 1982156,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 84,
+            "faceCoreMappedTriangles": 84,
+            "shirtCoreTriangles": 281,
+            "explicitRegionObjects": 47,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 94,
+            "hemCorrectedVertices": 27,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.0031052514089192074,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 256
+          },
+          "lod1": "models/goalkeeper-lod1.glb",
+          "lod1Triangles": 6259,
+          "lod1BytesBeforeDraco": 738464,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 9,
+            "faceCoreMappedTriangles": 9,
+            "shirtCoreTriangles": 76,
+            "explicitRegionObjects": 47,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 31,
+            "hemCorrectedVertices": 12,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.003639114233929111,
+            "bindingHemMinimumRadialClearanceMeters": 0.006,
+            "bindingHemEnclosureSamples": 117
+          },
+          "lod0Bytes": 923204,
+          "lod0Sha256": "19947f3dda7cdf800591ea1de0134194b47ed36d457676dfc799498f3417a705",
+          "lod1Bytes": 501188,
+          "lod1Sha256": "549ef7b341c04c79b554c57b73a2108be3a8622f569c96f95b82eff874f34978"
+        }
+      ]
+    }
+  ],
+  "authoring": {
+    "skinInputs": [
+      {
+        "file": "young_lightskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+      },
+      {
+        "file": "young_darkskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+      }
+    ],
+    "faceSourceUvCrop": [
+      0.78,
+      0.32,
+      0.99,
+      0.65
+    ],
+    "runtimeAtlasDimensions": [
+      1024,
+      1024
+    ],
+    "atlasRegions": {
+      "face": [
+        0.015,
+        0.46,
+        0.6,
+        0.99
+      ],
+      "skin": [
+        0.015,
+        0.015,
+        0.4,
+        0.27
+      ],
+      "scalp": [
+        0.015,
+        0.275,
+        0.4,
+        0.3
+      ],
+      "shirt": [
+        0.62,
+        0.56,
+        0.99,
+        0.99
+      ],
+      "shorts": [
+        0.62,
+        0.36,
+        0.99,
+        0.54
+      ],
+      "socks": [
+        0.42,
+        0.015,
+        0.6,
+        0.2
+      ],
+      "boots": [
+        0.42,
+        0.22,
+        0.6,
+        0.44
+      ],
+      "stitch": [
+        0.42,
+        0.445,
+        0.6,
+        0.455
+      ],
+      "hair": [
+        0.62,
+        0.085,
+        0.99,
+        0.34
+      ],
+      "wisps": [
+        0.62,
+        0.015,
+        0.99,
+        0.075
+      ],
+      "eyes": [
+        0.015,
+        0.31,
+        0.155,
+        0.435
+      ],
+      "brows": [
+        0.015,
+        0.438,
+        0.4,
+        0.455
+      ],
+      "gloves": [
+        0.17,
+        0.31,
+        0.4,
+        0.435
+      ]
+    },
+    "hair": "anatomical scalp undercoat with authored curved alpha cards",
+    "synthetic": true,
+    "generator": "source/character_build.py",
+    "restExpression": {
+      "mouthCompression": 0.4,
+      "eyeSlit": 0.06
+    },
+    "hairShading": "isotropic",
+    "clothVariant": "18"
+  },
+  "budgets": {
+    "lod0Triangles": 30000,
+    "lod1Triangles": 6000,
+    "textureMaxDimension": 1024,
+    "maxGlbBytes": 1500000
+  },
+  "compression": {
+    "extension": "KHR_draco_mesh_compression",
+    "method": "edgebreaker",
+    "positionBits": 15,
+    "normalBits": 12,
+    "uvBits": 13,
+    "genericBits": 0
+  }
+}

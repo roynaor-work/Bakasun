@@ -1,0 +1,5101 @@
+{
+  "kind": "final37-actual-P02-far-physical-palm-closeups",
+  "inputs": {
+    "preview.js": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+    "vendor/viewer-runtime.js": "f69347424a99aa2ccde2fced5fcaddf7e74e8631130ab62e85d7b8a818155c6e",
+    "vendor/data.js": "9e7b695d504665147d73a085ed01e068bb016e0c0a35fbfcff065ea74cc47665",
+    "asset-manifest.json": "f0e5f049fd0683e35615e0824e3d3411d3b05dce5c2ffae7c5e0d33a8e851caf",
+    "animations.json": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "source/palm-support.js": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0"
+  },
+  "captureMethod": "CDP Page.captureScreenshot clipScale1 everyPNGdimensionverified",
+  "note": "Only diagnostic camera changes; physical pose/controller/models are the frozen final package. Numeric support acceptance remains independent.",
+  "rows": [
+    {
+      "file": "P02-far-bridge-0.300000-390x844.png",
+      "width": 390,
+      "height": 844,
+      "elapsed": 0.3,
+      "sha256": "edab2ab8b5236753662df93a2be7d06823c0bec613ce51fe23bc48b9b38771d5",
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "base": "__seated_recovery_bridge",
+      "baseSeconds": 0.3,
+      "bridgeElapsed": 0.3,
+      "recovery": {
+        "clock": 1.033333333333332,
+        "phase": "seated-bridge",
+        "transitionSerial": 4,
+        "activeBaseClip": "__seated_recovery_bridge",
+        "baseSeconds": 0.3,
+        "overlayClip": null,
+        "overlaySeconds": 0,
+        "contributors": [
+          {
+            "clipID": "__seated_recovery_bridge",
+            "sampleSeconds": 0.3,
+            "playbackRate": 1,
+            "weight": 1,
+            "scope": "body",
+            "transform": "explicitWorldConstraints",
+            "virtual": true
+          }
+        ],
+        "request": {
+          "id": 2,
+          "clipID": "run_2",
+          "requestedAt": 0.8999999999999992,
+          "status": "queued",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 1,
+          "activationDeadline": 4.6
+        },
+        "pendingRequestID": 2,
+        "episode": {
+          "id": 1,
+          "startedAt": 0.09999999999999999,
+          "activationDeadline": 4.6,
+          "origin": {
+            "clipID": "slide_tackle",
+            "seconds": 0.8333334999999996,
+            "frameHeadingQuaternion": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "measured": {
+              "minimumY": 0.012619417480288275,
+              "bodySupportSurface": null,
+              "rootSpeedMps": 0,
+              "rigidBootMinimumY": {
+                "LeftFoot": 0.042735302391248446,
+                "RightFoot": 0.029920575265748383
+              },
+              "chestPosition": [
+                0.1950246074308681,
+                0.4215767868080966,
+                0.4838749588489121
+              ],
+              "pelvisHeight": 0.15633483420831595,
+              "hipsUpDot": 0.6980049186559206,
+              "soles": {
+                "LeftFoot": [
+                  0.196312033727064,
+                  0.037608259517528844,
+                  0.23806334032736873
+                ],
+                "RightFoot": [
+                  -0.1254974442571503,
+                  0.02479042941887931,
+                  1.0047644700368723
+                ]
+              },
+              "footQuaternions": {
+                "LeftFoot": [
+                  0.000008336556803934949,
+                  -0.000030341504179643767,
+                  -0.00003487287254359438,
+                  0.9999999988968888
+                ],
+                "RightFoot": [
+                  -0.00000983860338414674,
+                  0.000034063567108050525,
+                  -0.00004642916505840227,
+                  0.9999999982936041
+                ]
+              },
+              "kneePoles": {
+                "LeftFoot": [
+                  0.18063716066136015,
+                  0.4408761448361147,
+                  0.8792032990740236
+                ],
+                "RightFoot": [
+                  0.3106420316851659,
+                  0.9394938123387022,
+                  0.14440534868142463
+                ]
+              },
+              "hands": {
+                "LeftHand": {
+                  "position": [
+                    0.62383236099201,
+                    0.13992035245325307,
+                    0.2512884215506014
+                  ],
+                  "orientation": [
+                    -0.1078536951893052,
+                    0.02271447128327963,
+                    0.3425720873754868,
+                    0.9330037503566292
+                  ],
+                  "pole": [
+                    -0.2045325906781581,
+                    0.4614202451678638,
+                    -0.8632831381995767
+                  ]
+                },
+                "RightHand": {
+                  "position": [
+                    -0.35403239407651277,
+                    0.2636890122037584,
+                    0.5979210385432077
+                  ],
+                  "orientation": [
+                    0.013219877300019455,
+                    0.23192474240498548,
+                    -0.47490462280003093,
+                    0.8488237437464351
+                  ],
+                  "pole": [
+                    -0.27335356786909887,
+                    0.3113688838430946,
+                    -0.9101248513844347
+                  ]
+                }
+              }
+            }
+          },
+          "closedAt": null,
+          "deadlineBreached": false
+        },
+        "bridgePlan": {
+          "kind": "seatedSupportedTuck",
+          "frame": "headingLocalWorld",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "duration": 1.6,
+          "entrySeconds": 0.8,
+          "sourceSoles": {
+            "LeftFoot": [
+              0.20000046442496283,
+              0.01958426432015753,
+              0.1500005752030374
+            ],
+            "RightFoot": [
+              -0.12000159432950057,
+              0.01958464589938927,
+              1.0599999580249553
+            ]
+          },
+          "sourceFootQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574142498,
+              -8.568851504304102e-7,
+              -3.21014070805285e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529278578e-7,
+              -9.652223962280984e-7,
+              -2.984539198132551e-7,
+              0.9999999999992033
+            ]
+          },
+          "sourceKneePoles": {
+            "LeftFoot": [
+              0.010001206295490016,
+              0.9838566795176763,
+              0.17867851029457218
+            ],
+            "RightFoot": [
+              0.005636823123840107,
+              0.9986221266992541,
+              0.05217350181585868
+            ]
+          },
+          "sourcePalm": {
+            "position": [
+              0.27478171957615793,
+              0.009325826617944566,
+              0.049394843908451835
+            ],
+            "orientation": [
+              -0.8033371234353779,
+              -0.01983689971785376,
+              0.3200381581569561,
+              0.5018281985337802
+            ],
+            "pole": [
+              -0.32681796365677557,
+              -0.2065511923319319,
+              0.9222400032407485
+            ]
+          },
+          "sourcePose": {
+            "rotations": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                -0.252684,
+                -0.056019,
+                -0.209065,
+                0.94303
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Neck": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Head": [
+                0.087156,
+                0,
+                0,
+                0.996195
+              ],
+              "LeftArm": [
+                0.08096351636538698,
+                0.002962471834482758,
+                0.05997322630765598,
+                0.9949067016080614
+              ],
+              "LeftForeArm": [
+                0.5454734661433479,
+                -0.47026465201274537,
+                -0.30652367020649385,
+                0.6223769712995767
+              ],
+              "LeftHand": [
+                -0.48470464633388893,
+                0.19701328533745238,
+                0.850488160416053,
+                -0.05400981591341406
+              ],
+              "RightArm": [
+                -0.08418600662939596,
+                -0.0225580017763751,
+                -0.2578340203036571,
+                0.9622500757743124
+              ],
+              "RightForeArm": [
+                -0.21644,
+                0,
+                0,
+                0.976296
+              ],
+              "RightHand": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "LeftUpLeg": [
+                0.728175,
+                -0.026424,
+                0.663114,
+                -0.171298
+              ],
+              "LeftLeg": [
+                -0.6585020094983567,
+                -0.08225300118643274,
+                -0.6980230100684149,
+                0.2690230038804383
+              ],
+              "LeftFoot": [
+                -0.138082,
+                0,
+                -0.022688,
+                0.990161
+              ],
+              "RightUpLeg": [
+                -0.55048,
+                -0.114604,
+                0.15244,
+                0.812773
+              ],
+              "RightLeg": [
+                0.209465,
+                0.001503,
+                0.006464,
+                0.977794
+              ],
+              "RightFoot": [
+                0.603398,
+                0,
+                0.02434,
+                0.797069
+              ]
+            },
+            "hipsOffsetMeters": [
+              0,
+              -0.7769999999999999,
+              0.32
+            ],
+            "referenceRootTranslationMeters": [
+              0,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "bone": "RightFoot",
+              "liftStart": 0,
+              "landAt": 0.7200000000000001
+            },
+            {
+              "bone": "LeftFoot",
+              "liftStart": 0.7200000000000001,
+              "landAt": 1.2400000000000002
+            }
+          ]
+        },
+        "risePlan": null,
+        "bodySettling": {
+          "active": false,
+          "phase": "inactive",
+          "elapsedSeconds": 0,
+          "carryWeight": 0,
+          "actualGeometryWitness": null,
+          "offsetMeters": 0,
+          "velocityMps": 0,
+          "firstFootTransferConcurrent": true,
+          "initialWitness": null,
+          "actualWitness": null,
+          "deadlineMissed": false
+        },
+        "matchedEntrySeconds": null,
+        "locomotionAllowed": false,
+        "motorAction": null,
+        "presentation": null,
+        "constraints": {
+          "frame": "headingLocalWorld",
+          "feet": [
+            {
+              "bone": "RightFoot",
+              "target": [
+                -0.11406062008785493,
+                0.11958464589938927,
+                0.7451534341414286
+              ],
+              "pole": [
+                0.005578702915206074,
+                0.9883255243267492,
+                0.15225483912848295
+              ],
+              "mode": "flight",
+              "anchor": null,
+              "worldQuaternion": [
+                7.568740529278578e-7,
+                -9.652223962280984e-7,
+                -2.984539198132551e-7,
+                0.9999999999992033
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "target": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "pole": [
+                0.009775701473288084,
+                0.9616729129767475,
+                0.2740248968753062
+              ],
+              "mode": "plant",
+              "anchor": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "worldQuaternion": [
+                -0.0000010061676574142498,
+                -8.568851504304102e-7,
+                -3.21014070805285e-7,
+                0.9999999999990752
+              ]
+            }
+          ],
+          "hands": [
+            {
+              "bone": "LeftHand",
+              "target": [
+                0.27478171957615793,
+                0.009325826617944566,
+                0.049394843908451835
+              ],
+              "worldQuaternion": [
+                -0.8033371234353779,
+                -0.01983689971785376,
+                0.3200381581569561,
+                0.5018281985337802
+              ],
+              "pole": [
+                -0.32681796365677557,
+                -0.2065511923319319,
+                0.9222400032407485
+              ],
+              "weight": 1,
+              "mode": "hand-support"
+            }
+          ],
+          "elapsed": 0.3,
+          "duration": 1.6
+        },
+        "measured": {
+          "minimumY": 0.0009119215834262153,
+          "bodySupportSurface": null,
+          "rootSpeedMps": 0,
+          "rigidBootMinimumY": {
+            "LeftFoot": 0.02471224193388041,
+            "RightFoot": 0.12471240852106791
+          },
+          "chestPosition": [
+            0.30517397585750894,
+            0.41046570635400936,
+            0.058569921432855304
+          ],
+          "pelvisHeight": 0.10527961505288519,
+          "hipsUpDot": 0.8000286954764638,
+          "soles": {
+            "LeftFoot": [
+              0.20000046442496286,
+              0.019584264320157446,
+              0.15000057520303733
+            ],
+            "RightFoot": [
+              -0.11458822384794143,
+              0.11958464589938934,
+              0.7731142033847432
+            ]
+          },
+          "footQuaternions": {
+            "LeftFoot": [
+              -0.000001006167657423174,
+              -8.568851504299076e-7,
+              -3.2101407081345474e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740527797362e-7,
+              -9.652223962145342e-7,
+              -2.984539198734196e-7,
+              0.9999999999992033
+            ]
+          },
+          "kneePoles": {
+            "LeftFoot": [
+              0.025760325320380164,
+              0.9513646599003787,
+              0.30698809346947814
+            ],
+            "RightFoot": [
+              0.07439083448753042,
+              0.9941210643601773,
+              -0.07867218784066522
+            ]
+          },
+          "hands": {
+            "LeftHand": {
+              "position": [
+                0.27710015121978654,
+                0.01348053157833956,
+                0.049831639245757564
+              ],
+              "orientation": [
+                -0.7992375649698291,
+                0.014805151642855601,
+                0.2972847574864068,
+                0.522132066810858
+              ],
+              "pole": [
+                -0.04478938502724815,
+                -0.019028256193327417,
+                0.9988152163714377
+              ]
+            },
+            "RightHand": {
+              "position": [
+                -0.20196186330466848,
+                0.3696016834643609,
+                0.28038362989794496
+              ],
+              "orientation": [
+                -0.48651917605973655,
+                -0.015562331466622047,
+                -0.45242159630446216,
+                0.7472426676540898
+              ],
+              "pole": [
+                -0.2432438076830295,
+                -0.6773331114819265,
+                -0.6942998675745757
+              ]
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "idle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 1
+          },
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 2
+          },
+          {
+            "type": "base-changed",
+            "clock": 0.09999999999999999,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 3
+          },
+          {
+            "type": "request-received",
+            "clock": 0.09999999999999999,
+            "requestID": 1,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 0.09999999999999999,
+            "episodeID": 1,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 4.6
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 0.7333333333333332,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 1
+          },
+          {
+            "type": "request-superseded",
+            "clock": 0.8999999999999992,
+            "requestID": 1,
+            "supersededBy": 2
+          },
+          {
+            "type": "request-received",
+            "clock": 0.8999999999999992,
+            "requestID": 2,
+            "clipID": "run_2"
+          }
+        ],
+        "requests": [
+          {
+            "id": 1,
+            "clipID": "get_up",
+            "requestedAt": 0.09999999999999999,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "supersededBy": 2,
+            "endedAt": 0.8999999999999992
+          },
+          {
+            "id": 2,
+            "clipID": "run_2",
+            "requestedAt": 0.8999999999999992,
+            "status": "queued",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6
+          }
+        ],
+        "palmBodyCompression": null,
+        "palmSupports": [
+          {
+            "key": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bone": "LeftHand",
+            "clipID": "slide_tackle",
+            "sourceContactStartSeconds": 1.173333,
+            "sourceContactEndSeconds": 1.466667,
+            "admissionStartSourceSeconds": 0.993333,
+            "approachSeconds": 0.18,
+            "releaseSeconds": 0.18,
+            "startedAtClock": 0.26666666666666666,
+            "sourceTimeAtCreation": 1.0000001666666658,
+            "coldSeek": false,
+            "anchorWorldMeters": [
+              0.2970253712590408,
+              0.00184,
+              0.07642735753292632
+            ],
+            "orientationWorld": [
+              -0.8033371030417138,
+              -0.01983695695213475,
+              0.32003823815380117,
+              0.5018281781542907
+            ],
+            "contactSourceWorldRotations": {
+              "LeftArm": [
+                -0.1489366068734181,
+                -1.7995686719659105e-7,
+                0.17392172985134527,
+                0.9734316201041121
+              ],
+              "LeftForeArm": [
+                0.45522836276300505,
+                0.00008731047530957158,
+                -0.30415037759320174,
+                0.8368151993856872
+              ],
+              "LeftHand": [
+                -0.7656288372378375,
+                -0.00005811993571680493,
+                0.00030206074272763985,
+                0.6432825110099123
+              ]
+            },
+            "poleWorld": [
+              -0.060765618236436135,
+              -0.045787648665035534,
+              0.1658251318807774
+            ],
+            "sourcePoleWorld": [
+              0.10867296374555255,
+              -0.0522703200971843,
+              0.13691217652532575
+            ],
+            "recipe": {
+              "heightMeters": 0.00184,
+              "extensionDegrees": 10.25,
+              "rollDegrees": -32.25,
+              "deviationDegrees": 20,
+              "forearmTwistDegrees": -30,
+              "elbowSwivelDegrees": 56.25,
+              "clipID": "slide_tackle"
+            },
+            "authoredAnchorWorldMeters": [
+              0.3,
+              0,
+              0.05
+            ],
+            "authoredMarkerOffsetMeters": [
+              0,
+              0.005554,
+              -0.031499
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solveCount": 93,
+            "lastSolveClock": 1.033333333333332,
+            "appliedForearmTwistRadians": 0.06887136712719358,
+            "logicalReferenceModelSha256": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+            "originalPressurePointAtContactMeters": [
+              0.2970253712590408,
+              0.014497482793951568,
+              0.07642735753292632
+            ],
+            "precontactShiftWorldMeters": [
+              0,
+              0,
+              0
+            ],
+            "precontactShiftMagnitudeMeters": 0,
+            "sourcePoseAtClock": 1.033333333333332,
+            "sourceRootY": 0,
+            "sourceWorldRotations": {
+              "LeftArm": [
+                -0.1756726337640576,
+                -0.048511792853717164,
+                -0.14229186926787582,
+                0.9729022333414449
+              ],
+              "LeftForeArm": [
+                0.3633856802920456,
+                -0.6097923240384007,
+                -0.27942101806633335,
+                0.6465508978922753
+              ],
+              "LeftHand": [
+                -0.79335215294596,
+                -0.023212054409221042,
+                0.31913673275088217,
+                0.5178854195236681
+              ]
+            },
+            "sourceLogicalPoint": [
+              0.4408132348755335,
+              0.012882342107778418,
+              -0.021784588046424164
+            ],
+            "currentSourcePoleWorld": [
+              -0.04665363787900499,
+              -0.03343109772516828,
+              0.14661933242320774
+            ],
+            "currentSourceAxisWorld": [
+              -0.1491033403077919,
+              -0.9527393256905176,
+              -0.26468088558080055
+            ],
+            "lastSolvedWorldRotations": {
+              "LeftArm": [
+                -0.25612545818262344,
+                -0.04555802698219343,
+                -0.20105698747117248,
+                0.9444047350777356
+              ],
+              "LeftForeArm": [
+                0.1061952897295362,
+                -0.5785454330299913,
+                -0.3466661363252401,
+                0.7306369360254995
+              ],
+              "LeftHand": [
+                -0.800581043766502,
+                0.014324545890469638,
+                0.29456922005336933,
+                0.5216260867172189
+              ]
+            },
+            "actualSurfacePointMeters": [
+              0.29594974615856084,
+              0.002982709237206594,
+              0.07492669393958319
+            ],
+            "logicalSurfacePointMeters": [
+              0.2970253712605325,
+              0.0021312111647894703,
+              0.07642735753103215
+            ],
+            "actualSurfaceResidualMeters": 0.0021713463514523297,
+            "actualXZResidualMeters": 0.0018463370703011052,
+            "logicalSurfaceResidualMeters": 3.7796922364479726e-12,
+            "reachResidualMeters": 0,
+            "evaluatedAtClock": 1.033333333333332,
+            "solverName": "nativePalmSurfaceIK",
+            "solverIterations": 6,
+            "bridgeLifecycle": {
+              "episodeID": 1,
+              "startClock": 0.7333333333333332,
+              "duration": 1.6,
+              "holdEndSeconds": 0.4,
+              "releaseEndSeconds": 0.6400000000000001
+            },
+            "bridgeElapsedSeconds": 0.3,
+            "bridgeCorrectionPlan": {
+              "kind": "fixedInheritedHeelContactCorrection",
+              "keys": [
+                {
+                  "elapsedSeconds": 0,
+                  "degrees": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.125,
+                  "degrees": [
+                    3.0951834798045863,
+                    0.1824558652477417,
+                    1.7625837513525058,
+                    -7.976945741965256,
+                    6.2640278765232065
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.2,
+                  "degrees": [
+                    4.527811261885566,
+                    1.729764008590982,
+                    2.578408230549951,
+                    -11.669132056817746,
+                    9.163377922228234
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.35,
+                  "degrees": [
+                    2.664506064437462,
+                    5.170552412576722,
+                    0.21974923492769038,
+                    9.411348418559923,
+                    -18.764621713115808
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.3625,
+                  "degrees": [
+                    1.6963548723816715,
+                    5.969186336303162,
+                    0.15150100010065726,
+                    16.19492713601877,
+                    -19.572723554416275
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.4,
+                  "degrees": [
+                    1.728338435280404,
+                    7.881809524425935,
+                    -0.21703946796532156,
+                    18.42625221029654,
+                    -23.93647349743879
+                  ]
+                }
+              ],
+              "verticalCompliancePeakMeters": 0.00029121116187861944,
+              "verticalComplianceRampSeconds": 0.2,
+              "pairedReferenceBlend": 0,
+              "interpolation": "smoothstep-per-key-no-overshoot",
+              "scope": "bridgeLifecycleOnly",
+              "internalBoundNote": "Late ForeArm/pole continuation18.426/−23.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+            },
+            "bridgeCorrection": {
+              "pitchDegrees": 3.1475851897017852,
+              "rollDegrees": 4.27849615969153,
+              "deviationDegrees": 0.8312534189779062,
+              "forearmTwistDegrees": 3.9460386656842292,
+              "elbowSwivelDegrees": -11.524029215063651,
+              "heightOffsetMeters": 0.00029121116187861944
+            },
+            "bridgeTargetArmAxisWorld": [
+              -0.45946637268477836,
+              -0.8880124302701248,
+              -0.018015994494870555
+            ],
+            "calibration": {
+              "kind": "anatomicalHeelPalmRayV1",
+              "selector": {
+                "kind": "fixedHandLocalPalmarRay",
+                "region": "proximalPalmarHeel",
+                "coordinateFrame": "inverseBindHandLocalMeters",
+                "referenceXY": [
+                  -0.0025,
+                  -0.03
+                ],
+                "rayOriginZ": -0.2,
+                "rayDirection": [
+                  0,
+                  0,
+                  1
+                ],
+                "palmarNormalZMaximum": -0.5,
+                "minCornerHandInfluence": 0.5,
+                "minPointHandInfluence": 0.8,
+                "noFallback": true
+              },
+              "handName": "LeftHand",
+              "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+              "calibrationSourceSha256": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+              "calibrationKey": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613:LeftHand:anatomicalHeelPalmRayV1",
+              "meshIndex": 0,
+              "meshName": "player-02-lod1",
+              "material": "Skin",
+              "triangleIndex": 370,
+              "triangleVertexIndices": [
+                274,
+                275,
+                288
+              ],
+              "barycentricWeights": [
+                0.07040098421132482,
+                0.7900058105100191,
+                0.13959320527865615
+              ],
+              "bindPositions": [
+                [
+                  0.1755092889070511,
+                  0.7042438983917236,
+                  -0.034997470676898956
+                ],
+                [
+                  0.15320827066898346,
+                  0.760739803314209,
+                  -0.025949627161026
+                ],
+                [
+                  0.1727057248353958,
+                  0.7839328050613403,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalBindPositions": [
+                [
+                  0.015509292483329773,
+                  -0.08575612306594849,
+                  -0.034997470676898956
+                ],
+                [
+                  -0.006791725754737854,
+                  -0.029260218143463135,
+                  -0.025949627161026
+                ],
+                [
+                  0.0127057284116745,
+                  -0.006067216396331787,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalReferencePoint": [
+                -0.002499999999999999,
+                -0.03,
+                -0.025204993982336887
+              ],
+              "handLocalNormal": [
+                0.20512195667801594,
+                0.23319998196578756,
+                -0.9505486580389974
+              ],
+              "namedInfluences": [
+                {
+                  "LeftHand": 1
+                },
+                {
+                  "LeftHand": 0.8448663353919983,
+                  "LeftForeArm": 0.1551336646080017
+                },
+                {
+                  "LeftHand": 0.5763142108917236,
+                  "LeftForeArm": 0.42368578910827637
+                }
+              ],
+              "barycentricHandInfluence": 0.8182998462213251
+            },
+            "authoredMarkerDescriptive": {
+              "worldPointMeters": [
+                0.28999541361960246,
+                -0.015645682451934834,
+                0.0540874165059262
+              ],
+              "anchorWorldMeters": [
+                0.3,
+                0,
+                0.05
+              ],
+              "residualMeters": 0.01901541747431634,
+              "usedForPhysicalSupport": false
+            }
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "nativePalmSurfaceIK",
+            "contactKey": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bones": [
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand"
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solverIterations": 6
+          }
+        ]
+      },
+      "camera": {
+        "position": [
+          0.7759497461585608,
+          0.2579827092372066,
+          0.1749266939395832
+        ],
+        "quaternion": [
+          -0.14931234692717338,
+          0.6190978325192531,
+          0.12141147686261913,
+          0.7613691286827303
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204
+      },
+      "minimumY": 0.0009150771968242267
+    },
+    {
+      "file": "P02-far-bridge-0.391667-390x844.png",
+      "width": 390,
+      "height": 844,
+      "elapsed": 0.3916666666666667,
+      "sha256": "9bf61a2e9386b37402b5ec05d24808aa9131ab3989412a8e025e3e2334b445aa",
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "base": "__seated_recovery_bridge",
+      "baseSeconds": 0.3916666666666667,
+      "bridgeElapsed": 0.3916666666666667,
+      "recovery": {
+        "clock": 2.158333333333328,
+        "phase": "seated-bridge",
+        "transitionSerial": 8,
+        "activeBaseClip": "__seated_recovery_bridge",
+        "baseSeconds": 0.3916666666666667,
+        "overlayClip": null,
+        "overlaySeconds": 0,
+        "contributors": [
+          {
+            "clipID": "__seated_recovery_bridge",
+            "sampleSeconds": 0.3916666666666667,
+            "playbackRate": 1,
+            "weight": 1,
+            "scope": "body",
+            "transform": "explicitWorldConstraints",
+            "virtual": true
+          }
+        ],
+        "request": {
+          "id": 4,
+          "clipID": "run_2",
+          "requestedAt": 1.933333333333329,
+          "status": "queued",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 2,
+          "activationDeadline": 5.633333333333332
+        },
+        "pendingRequestID": 4,
+        "episode": {
+          "id": 2,
+          "startedAt": 1.1333333333333317,
+          "activationDeadline": 5.633333333333332,
+          "origin": {
+            "clipID": "slide_tackle",
+            "seconds": 0.8333334999999996,
+            "frameHeadingQuaternion": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "measured": {
+              "minimumY": 0.012619417480288275,
+              "bodySupportSurface": null,
+              "rootSpeedMps": 0,
+              "rigidBootMinimumY": {
+                "LeftFoot": 0.042735302391248446,
+                "RightFoot": 0.029920575265748383
+              },
+              "chestPosition": [
+                0.1950246074308681,
+                0.4215767868080966,
+                0.4838749588489121
+              ],
+              "pelvisHeight": 0.15633483420831595,
+              "hipsUpDot": 0.6980049186559206,
+              "soles": {
+                "LeftFoot": [
+                  0.196312033727064,
+                  0.037608259517528844,
+                  0.23806334032736873
+                ],
+                "RightFoot": [
+                  -0.1254974442571503,
+                  0.02479042941887931,
+                  1.0047644700368723
+                ]
+              },
+              "footQuaternions": {
+                "LeftFoot": [
+                  0.000008336556803934949,
+                  -0.000030341504179643767,
+                  -0.00003487287254359438,
+                  0.9999999988968888
+                ],
+                "RightFoot": [
+                  -0.00000983860338414674,
+                  0.000034063567108050525,
+                  -0.00004642916505840227,
+                  0.9999999982936041
+                ]
+              },
+              "kneePoles": {
+                "LeftFoot": [
+                  0.18063716066136015,
+                  0.4408761448361147,
+                  0.8792032990740236
+                ],
+                "RightFoot": [
+                  0.3106420316851659,
+                  0.9394938123387022,
+                  0.14440534868142463
+                ]
+              },
+              "hands": {
+                "LeftHand": {
+                  "position": [
+                    0.62383236099201,
+                    0.13992035245325307,
+                    0.2512884215506014
+                  ],
+                  "orientation": [
+                    -0.1078536951893052,
+                    0.02271447128327963,
+                    0.3425720873754868,
+                    0.9330037503566292
+                  ],
+                  "pole": [
+                    -0.2045325906781581,
+                    0.4614202451678638,
+                    -0.8632831381995767
+                  ]
+                },
+                "RightHand": {
+                  "position": [
+                    -0.35403239407651277,
+                    0.2636890122037584,
+                    0.5979210385432077
+                  ],
+                  "orientation": [
+                    0.013219877300019455,
+                    0.23192474240498548,
+                    -0.47490462280003093,
+                    0.8488237437464351
+                  ],
+                  "pole": [
+                    -0.27335356786909887,
+                    0.3113688838430946,
+                    -0.9101248513844347
+                  ]
+                }
+              }
+            }
+          },
+          "closedAt": null,
+          "deadlineBreached": false
+        },
+        "bridgePlan": {
+          "kind": "seatedSupportedTuck",
+          "frame": "headingLocalWorld",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "duration": 1.6,
+          "entrySeconds": 0.8,
+          "sourceSoles": {
+            "LeftFoot": [
+              0.20000046442496283,
+              0.01958426432015753,
+              0.1500005752030374
+            ],
+            "RightFoot": [
+              -0.12000159432950057,
+              0.01958464589938927,
+              1.0599999580249553
+            ]
+          },
+          "sourceFootQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574142498,
+              -8.568851504304102e-7,
+              -3.21014070805285e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529278578e-7,
+              -9.652223962280984e-7,
+              -2.984539198132551e-7,
+              0.9999999999992033
+            ]
+          },
+          "sourceKneePoles": {
+            "LeftFoot": [
+              0.010001206295490016,
+              0.9838566795176763,
+              0.17867851029457218
+            ],
+            "RightFoot": [
+              0.005636823123840107,
+              0.9986221266992541,
+              0.05217350181585868
+            ]
+          },
+          "sourcePalm": {
+            "position": [
+              0.27478171957615793,
+              0.009325826617944566,
+              0.049394843908451835
+            ],
+            "orientation": [
+              -0.8033371234353779,
+              -0.01983689971785376,
+              0.3200381581569561,
+              0.5018281985337802
+            ],
+            "pole": [
+              -0.32681796365677557,
+              -0.2065511923319319,
+              0.9222400032407485
+            ]
+          },
+          "sourcePose": {
+            "rotations": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                -0.252684,
+                -0.056019,
+                -0.209065,
+                0.94303
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Neck": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Head": [
+                0.087156,
+                0,
+                0,
+                0.996195
+              ],
+              "LeftArm": [
+                0.08096351636538698,
+                0.002962471834482758,
+                0.05997322630765598,
+                0.9949067016080614
+              ],
+              "LeftForeArm": [
+                0.5454734661433479,
+                -0.47026465201274537,
+                -0.30652367020649385,
+                0.6223769712995767
+              ],
+              "LeftHand": [
+                -0.48470464633388893,
+                0.19701328533745238,
+                0.850488160416053,
+                -0.05400981591341406
+              ],
+              "RightArm": [
+                -0.08418600662939596,
+                -0.0225580017763751,
+                -0.2578340203036571,
+                0.9622500757743124
+              ],
+              "RightForeArm": [
+                -0.21644,
+                0,
+                0,
+                0.976296
+              ],
+              "RightHand": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "LeftUpLeg": [
+                0.728175,
+                -0.026424,
+                0.663114,
+                -0.171298
+              ],
+              "LeftLeg": [
+                -0.6585020094983567,
+                -0.08225300118643274,
+                -0.6980230100684149,
+                0.2690230038804383
+              ],
+              "LeftFoot": [
+                -0.138082,
+                0,
+                -0.022688,
+                0.990161
+              ],
+              "RightUpLeg": [
+                -0.55048,
+                -0.114604,
+                0.15244,
+                0.812773
+              ],
+              "RightLeg": [
+                0.209465,
+                0.001503,
+                0.006464,
+                0.977794
+              ],
+              "RightFoot": [
+                0.603398,
+                0,
+                0.02434,
+                0.797069
+              ]
+            },
+            "hipsOffsetMeters": [
+              0,
+              -0.7769999999999999,
+              0.32
+            ],
+            "referenceRootTranslationMeters": [
+              0,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "bone": "RightFoot",
+              "liftStart": 0,
+              "landAt": 0.7200000000000001
+            },
+            {
+              "bone": "LeftFoot",
+              "liftStart": 0.7200000000000001,
+              "landAt": 1.2400000000000002
+            }
+          ]
+        },
+        "risePlan": null,
+        "bodySettling": {
+          "active": false,
+          "phase": "inactive",
+          "elapsedSeconds": 0,
+          "carryWeight": 0,
+          "actualGeometryWitness": null,
+          "offsetMeters": 0,
+          "velocityMps": 0,
+          "firstFootTransferConcurrent": true,
+          "initialWitness": null,
+          "actualWitness": null,
+          "deadlineMissed": false
+        },
+        "matchedEntrySeconds": null,
+        "locomotionAllowed": false,
+        "motorAction": null,
+        "presentation": null,
+        "constraints": {
+          "frame": "headingLocalWorld",
+          "feet": [
+            {
+              "bone": "RightFoot",
+              "target": [
+                -0.10781730394966926,
+                0.11958464589938927,
+                0.4142840676603524
+              ],
+              "pole": [
+                0.005501422227512949,
+                0.974634442843193,
+                0.22373519431956473
+              ],
+              "mode": "flight",
+              "anchor": null,
+              "worldQuaternion": [
+                7.568740529278578e-7,
+                -9.652223962280984e-7,
+                -2.984539198132551e-7,
+                0.9999999999992033
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "target": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "pole": [
+                0.009559138658208583,
+                0.9403688056664925,
+                0.3400222525034026
+              ],
+              "mode": "plant",
+              "anchor": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "worldQuaternion": [
+                -0.0000010061676574142498,
+                -8.568851504304102e-7,
+                -3.21014070805285e-7,
+                0.9999999999990752
+              ]
+            }
+          ],
+          "hands": [
+            {
+              "bone": "LeftHand",
+              "target": [
+                0.27478171957615793,
+                0.009325826617944566,
+                0.049394843908451835
+              ],
+              "worldQuaternion": [
+                -0.8033371234353779,
+                -0.01983689971785376,
+                0.3200381581569561,
+                0.5018281985337802
+              ],
+              "pole": [
+                -0.32681796365677557,
+                -0.2065511923319319,
+                0.9222400032407485
+              ],
+              "weight": 1,
+              "mode": "hand-support"
+            }
+          ],
+          "elapsed": 0.3916666666666667,
+          "duration": 1.6
+        },
+        "measured": {
+          "minimumY": 0.0008237663865628447,
+          "bodySupportSurface": null,
+          "rootSpeedMps": 0,
+          "rigidBootMinimumY": {
+            "LeftFoot": 0.02471224193388041,
+            "RightFoot": 0.12471240852106791
+          },
+          "chestPosition": [
+            0.3127074042670211,
+            0.4326613226136469,
+            -0.038608031857056524
+          ],
+          "pelvisHeight": 0.11700966847977956,
+          "hipsUpDot": 0.8233345945540543,
+          "soles": {
+            "LeftFoot": [
+              0.20000046442496286,
+              0.019584264320157432,
+              0.15000057520303722
+            ],
+            "RightFoot": [
+              -0.10838660100759691,
+              0.11958464589938933,
+              0.4444544054627243
+            ]
+          },
+          "footQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574838893,
+              -8.568851504273055e-7,
+              -3.210140708372801e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529185141e-7,
+              -9.652223962396877e-7,
+              -2.984539197970918e-7,
+              0.9999999999992033
+            ]
+          },
+          "kneePoles": {
+            "LeftFoot": [
+              0.4003061099292822,
+              0.8967901178979308,
+              0.18847414356855655
+            ],
+            "RightFoot": [
+              0.1472861980223895,
+              0.9874263916254299,
+              -0.057409903271932405
+            ]
+          },
+          "hands": {
+            "LeftHand": {
+              "position": [
+                0.2800376409687263,
+                0.013383009017877256,
+                0.04874249584335327
+              ],
+              "orientation": [
+                -0.8140147298689401,
+                0.016276878896757795,
+                0.27024095372290513,
+                0.5138919241442811
+              ],
+              "pole": [
+                0.21945625664736068,
+                0.07600692459060604,
+                0.9726571332348339
+              ]
+            },
+            "RightHand": {
+              "position": [
+                -0.1912761581623862,
+                0.3754770164996105,
+                0.18901057583908085
+              ],
+              "orientation": [
+                -0.48864945969291695,
+                -0.00267777102512157,
+                -0.4405444594762143,
+                0.7530837365850942
+              ],
+              "pole": [
+                -0.2553955278673276,
+                -0.6382111616516729,
+                -0.7262641650863625
+              ]
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "idle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 1
+          },
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 2
+          },
+          {
+            "type": "base-changed",
+            "clock": 0.09999999999999999,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 3
+          },
+          {
+            "type": "request-received",
+            "clock": 0.09999999999999999,
+            "requestID": 1,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 0.09999999999999999,
+            "episodeID": 1,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 4.6
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 0.7333333333333332,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 1
+          },
+          {
+            "type": "request-superseded",
+            "clock": 0.8999999999999992,
+            "requestID": 1,
+            "supersededBy": 2
+          },
+          {
+            "type": "request-received",
+            "clock": 0.8999999999999992,
+            "requestID": 2,
+            "clipID": "run_2"
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.033333333333332,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 1.4666668333333308,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 5
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.033333333333332,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 6
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.1333333333333317,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 7
+          },
+          {
+            "type": "request-received",
+            "clock": 1.1333333333333317,
+            "requestID": 3,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 1.1333333333333317,
+            "episodeID": 2,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 5.633333333333332
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 1.7666666666666628,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 2
+          },
+          {
+            "type": "request-superseded",
+            "clock": 1.933333333333329,
+            "requestID": 3,
+            "supersededBy": 4
+          },
+          {
+            "type": "request-received",
+            "clock": 1.933333333333329,
+            "requestID": 4,
+            "clipID": "run_2"
+          }
+        ],
+        "requests": [
+          {
+            "id": 1,
+            "clipID": "get_up",
+            "requestedAt": 0.09999999999999999,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "supersededBy": 2,
+            "endedAt": 0.8999999999999992
+          },
+          {
+            "id": 2,
+            "clipID": "run_2",
+            "requestedAt": 0.8999999999999992,
+            "status": "cancelled-paused-preview",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "endedAt": 1.033333333333332
+          },
+          {
+            "id": 3,
+            "clipID": "get_up",
+            "requestedAt": 1.1333333333333317,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 2,
+            "activationDeadline": 5.633333333333332,
+            "supersededBy": 4,
+            "endedAt": 1.933333333333329
+          },
+          {
+            "id": 4,
+            "clipID": "run_2",
+            "requestedAt": 1.933333333333329,
+            "status": "queued",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 2,
+            "activationDeadline": 5.633333333333332
+          }
+        ],
+        "palmBodyCompression": null,
+        "palmSupports": [
+          {
+            "key": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bone": "LeftHand",
+            "clipID": "slide_tackle",
+            "sourceContactStartSeconds": 1.173333,
+            "sourceContactEndSeconds": 1.466667,
+            "admissionStartSourceSeconds": 0.993333,
+            "approachSeconds": 0.18,
+            "releaseSeconds": 0.18,
+            "startedAtClock": 1.2999999999999978,
+            "sourceTimeAtCreation": 1.0000001666666658,
+            "coldSeek": false,
+            "anchorWorldMeters": [
+              0.2970253712590408,
+              0.00184,
+              0.07642735753292632
+            ],
+            "orientationWorld": [
+              -0.8033371030417138,
+              -0.01983695695213475,
+              0.32003823815380117,
+              0.5018281781542907
+            ],
+            "contactSourceWorldRotations": {
+              "LeftArm": [
+                -0.1489366068734181,
+                -1.7995686719659105e-7,
+                0.17392172985134527,
+                0.9734316201041121
+              ],
+              "LeftForeArm": [
+                0.45522836276300505,
+                0.00008731047530957158,
+                -0.30415037759320174,
+                0.8368151993856872
+              ],
+              "LeftHand": [
+                -0.7656288372378375,
+                -0.00005811993571680493,
+                0.00030206074272763985,
+                0.6432825110099123
+              ]
+            },
+            "poleWorld": [
+              -0.060765618236436135,
+              -0.045787648665035534,
+              0.1658251318807774
+            ],
+            "sourcePoleWorld": [
+              0.10867296374555255,
+              -0.0522703200971843,
+              0.13691217652532575
+            ],
+            "recipe": {
+              "heightMeters": 0.00184,
+              "extensionDegrees": 10.25,
+              "rollDegrees": -32.25,
+              "deviationDegrees": 20,
+              "forearmTwistDegrees": -30,
+              "elbowSwivelDegrees": 56.25,
+              "clipID": "slide_tackle"
+            },
+            "authoredAnchorWorldMeters": [
+              0.3,
+              0,
+              0.05
+            ],
+            "authoredMarkerOffsetMeters": [
+              0,
+              0.005554,
+              -0.031499
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solveCount": 104,
+            "lastSolveClock": 2.158333333333328,
+            "appliedForearmTwistRadians": 0.3166840302717098,
+            "logicalReferenceModelSha256": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+            "originalPressurePointAtContactMeters": [
+              0.2970253712590408,
+              0.014497482793951568,
+              0.07642735753292632
+            ],
+            "precontactShiftWorldMeters": [
+              0,
+              0,
+              0
+            ],
+            "precontactShiftMagnitudeMeters": 0,
+            "sourcePoseAtClock": 2.158333333333328,
+            "sourceRootY": 0,
+            "sourceWorldRotations": {
+              "LeftArm": [
+                -0.17251306169010938,
+                -0.039261460016465584,
+                -0.13354243094955237,
+                0.9751226591766617
+              ],
+              "LeftForeArm": [
+                0.35839149825925737,
+                -0.5842978462303267,
+                -0.2832257042060433,
+                0.6707717654635421
+              ],
+              "LeftHand": [
+                -0.7776933694655934,
+                -0.027432337654090044,
+                0.3171685980664266,
+                0.5420743217868391
+              ]
+            },
+            "sourceLogicalPoint": [
+              0.43994583206149507,
+              0.03464802344101674,
+              -0.11855067784539985
+            ],
+            "currentSourcePoleWorld": [
+              -0.03861945840414917,
+              -0.034216577830388284,
+              0.14642550839434032
+            ],
+            "currentSourceAxisWorld": [
+              -0.16005780437939957,
+              -0.9510246837585767,
+              -0.2644495228567168
+            ],
+            "lastSolvedWorldRotations": {
+              "LeftArm": [
+                -0.2807117559112171,
+                -0.02683158492465455,
+                -0.15700954093218616,
+                0.9464824246651052
+              ],
+              "LeftForeArm": [
+                -0.006979238038841544,
+                -0.42727986162128834,
+                -0.2825885472240077,
+                0.8587938769385322
+              ],
+              "LeftHand": [
+                -0.8152953095153322,
+                0.018037318904669225,
+                0.26581001944706945,
+                0.5141140408222463
+              ]
+            },
+            "actualSurfacePointMeters": [
+              0.295962211627615,
+              0.002991685100758312,
+              0.07462264974390732
+            ],
+            "logicalSurfacePointMeters": [
+              0.29702537126301815,
+              0.002131211174338315,
+              0.07642735752014673
+            ],
+            "actualSurfaceResidualMeters": 0.002390325747037006,
+            "actualXZResidualMeters": 0.002094583157967078,
+            "logicalSurfaceResidualMeters": 1.8286081718702026e-11,
+            "reachResidualMeters": 0,
+            "evaluatedAtClock": 2.158333333333328,
+            "solverName": "nativePalmSurfaceIK",
+            "solverIterations": 6,
+            "bridgeLifecycle": {
+              "episodeID": 2,
+              "startClock": 1.7666666666666628,
+              "duration": 1.6,
+              "holdEndSeconds": 0.4,
+              "releaseEndSeconds": 0.6400000000000001
+            },
+            "bridgeElapsedSeconds": 0.3916666666666667,
+            "bridgeCorrectionPlan": {
+              "kind": "fixedInheritedHeelContactCorrection",
+              "keys": [
+                {
+                  "elapsedSeconds": 0,
+                  "degrees": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.125,
+                  "degrees": [
+                    3.0951834798045863,
+                    0.1824558652477417,
+                    1.7625837513525058,
+                    -7.976945741965256,
+                    6.2640278765232065
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.2,
+                  "degrees": [
+                    4.527811261885566,
+                    1.729764008590982,
+                    2.578408230549951,
+                    -11.669132056817746,
+                    9.163377922228234
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.35,
+                  "degrees": [
+                    2.664506064437462,
+                    5.170552412576722,
+                    0.21974923492769038,
+                    9.411348418559923,
+                    -18.764621713115808
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.3625,
+                  "degrees": [
+                    1.6963548723816715,
+                    5.969186336303162,
+                    0.15150100010065726,
+                    16.19492713601877,
+                    -19.572723554416275
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.4,
+                  "degrees": [
+                    1.728338435280404,
+                    7.881809524425935,
+                    -0.21703946796532156,
+                    18.42625221029654,
+                    -23.93647349743879
+                  ]
+                }
+              ],
+              "verticalCompliancePeakMeters": 0.00029121116187861944,
+              "verticalComplianceRampSeconds": 0.2,
+              "pairedReferenceBlend": 0,
+              "interpolation": "smoothstep-per-key-no-overshoot",
+              "scope": "bridgeLifecycleOnly",
+              "internalBoundNote": "Late ForeArm/pole continuation18.426/−23.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+            },
+            "bridgeCorrection": {
+              "pitchDegrees": 1.724302100867944,
+              "rollDegrees": 7.640435953359689,
+              "deviationDegrees": -0.17052955978689943,
+              "forearmTwistDegrees": 18.144658373762173,
+              "elbowSwivelDegrees": -23.38576705744144,
+              "heightOffsetMeters": 0.00029121116187861944
+            },
+            "bridgeTargetArmAxisWorld": [
+              -0.43138950097032613,
+              -0.883421043945018,
+              0.18294905730193745
+            ],
+            "calibration": {
+              "kind": "anatomicalHeelPalmRayV1",
+              "selector": {
+                "kind": "fixedHandLocalPalmarRay",
+                "region": "proximalPalmarHeel",
+                "coordinateFrame": "inverseBindHandLocalMeters",
+                "referenceXY": [
+                  -0.0025,
+                  -0.03
+                ],
+                "rayOriginZ": -0.2,
+                "rayDirection": [
+                  0,
+                  0,
+                  1
+                ],
+                "palmarNormalZMaximum": -0.5,
+                "minCornerHandInfluence": 0.5,
+                "minPointHandInfluence": 0.8,
+                "noFallback": true
+              },
+              "handName": "LeftHand",
+              "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+              "calibrationSourceSha256": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+              "calibrationKey": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613:LeftHand:anatomicalHeelPalmRayV1",
+              "meshIndex": 0,
+              "meshName": "player-02-lod1",
+              "material": "Skin",
+              "triangleIndex": 370,
+              "triangleVertexIndices": [
+                274,
+                275,
+                288
+              ],
+              "barycentricWeights": [
+                0.07040098421132482,
+                0.7900058105100191,
+                0.13959320527865615
+              ],
+              "bindPositions": [
+                [
+                  0.1755092889070511,
+                  0.7042438983917236,
+                  -0.034997470676898956
+                ],
+                [
+                  0.15320827066898346,
+                  0.760739803314209,
+                  -0.025949627161026
+                ],
+                [
+                  0.1727057248353958,
+                  0.7839328050613403,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalBindPositions": [
+                [
+                  0.015509292483329773,
+                  -0.08575612306594849,
+                  -0.034997470676898956
+                ],
+                [
+                  -0.006791725754737854,
+                  -0.029260218143463135,
+                  -0.025949627161026
+                ],
+                [
+                  0.0127057284116745,
+                  -0.006067216396331787,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalReferencePoint": [
+                -0.002499999999999999,
+                -0.03,
+                -0.025204993982336887
+              ],
+              "handLocalNormal": [
+                0.20512195667801594,
+                0.23319998196578756,
+                -0.9505486580389974
+              ],
+              "namedInfluences": [
+                {
+                  "LeftHand": 1
+                },
+                {
+                  "LeftHand": 0.8448663353919983,
+                  "LeftForeArm": 0.1551336646080017
+                },
+                {
+                  "LeftHand": 0.5763142108917236,
+                  "LeftForeArm": 0.42368578910827637
+                }
+              ],
+              "barycentricHandInfluence": 0.8182998462213251
+            },
+            "authoredMarkerDescriptive": {
+              "worldPointMeters": [
+                0.29175585199381165,
+                -0.01581324442025739,
+                0.05436105556324458
+              ],
+              "anchorWorldMeters": [
+                0.3,
+                0,
+                0.05
+              ],
+              "residualMeters": 0.018358743994850164,
+              "usedForPhysicalSupport": false
+            }
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "nativePalmSurfaceIK",
+            "contactKey": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bones": [
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand"
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solverIterations": 6
+          }
+        ]
+      },
+      "camera": {
+        "position": [
+          0.775962211627615,
+          0.2579916851007583,
+          0.17462264974390734
+        ],
+        "quaternion": [
+          -0.14931234692717335,
+          0.6190978325192531,
+          0.1214114768626191,
+          0.7613691286827303
+        ],
+        "fov": 30,
+        "aspect": 0.46208530805687204
+      },
+      "minimumY": 0.0008278836695935696
+    },
+    {
+      "session": {
+        "width": 390,
+        "height": 844,
+        "errors": [],
+        "remoteRequests": []
+      }
+    },
+    {
+      "file": "P02-far-bridge-0.300000-844x390.png",
+      "width": 844,
+      "height": 390,
+      "elapsed": 0.3,
+      "sha256": "bfe49a9028291ac5e09a0d323bc69e374f8cf7c7c84efe0a7bbd25d2a17c9794",
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "base": "__seated_recovery_bridge",
+      "baseSeconds": 0.3,
+      "bridgeElapsed": 0.3,
+      "recovery": {
+        "clock": 1.033333333333332,
+        "phase": "seated-bridge",
+        "transitionSerial": 4,
+        "activeBaseClip": "__seated_recovery_bridge",
+        "baseSeconds": 0.3,
+        "overlayClip": null,
+        "overlaySeconds": 0,
+        "contributors": [
+          {
+            "clipID": "__seated_recovery_bridge",
+            "sampleSeconds": 0.3,
+            "playbackRate": 1,
+            "weight": 1,
+            "scope": "body",
+            "transform": "explicitWorldConstraints",
+            "virtual": true
+          }
+        ],
+        "request": {
+          "id": 2,
+          "clipID": "run_2",
+          "requestedAt": 0.8999999999999992,
+          "status": "queued",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 1,
+          "activationDeadline": 4.6
+        },
+        "pendingRequestID": 2,
+        "episode": {
+          "id": 1,
+          "startedAt": 0.09999999999999999,
+          "activationDeadline": 4.6,
+          "origin": {
+            "clipID": "slide_tackle",
+            "seconds": 0.8333334999999996,
+            "frameHeadingQuaternion": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "measured": {
+              "minimumY": 0.012619417480288275,
+              "bodySupportSurface": null,
+              "rootSpeedMps": 0,
+              "rigidBootMinimumY": {
+                "LeftFoot": 0.042735302391248446,
+                "RightFoot": 0.029920575265748383
+              },
+              "chestPosition": [
+                0.1950246074308681,
+                0.4215767868080966,
+                0.4838749588489121
+              ],
+              "pelvisHeight": 0.15633483420831595,
+              "hipsUpDot": 0.6980049186559206,
+              "soles": {
+                "LeftFoot": [
+                  0.196312033727064,
+                  0.037608259517528844,
+                  0.23806334032736873
+                ],
+                "RightFoot": [
+                  -0.1254974442571503,
+                  0.02479042941887931,
+                  1.0047644700368723
+                ]
+              },
+              "footQuaternions": {
+                "LeftFoot": [
+                  0.000008336556803934949,
+                  -0.000030341504179643767,
+                  -0.00003487287254359438,
+                  0.9999999988968888
+                ],
+                "RightFoot": [
+                  -0.00000983860338414674,
+                  0.000034063567108050525,
+                  -0.00004642916505840227,
+                  0.9999999982936041
+                ]
+              },
+              "kneePoles": {
+                "LeftFoot": [
+                  0.18063716066136015,
+                  0.4408761448361147,
+                  0.8792032990740236
+                ],
+                "RightFoot": [
+                  0.3106420316851659,
+                  0.9394938123387022,
+                  0.14440534868142463
+                ]
+              },
+              "hands": {
+                "LeftHand": {
+                  "position": [
+                    0.62383236099201,
+                    0.13992035245325307,
+                    0.2512884215506014
+                  ],
+                  "orientation": [
+                    -0.1078536951893052,
+                    0.02271447128327963,
+                    0.3425720873754868,
+                    0.9330037503566292
+                  ],
+                  "pole": [
+                    -0.2045325906781581,
+                    0.4614202451678638,
+                    -0.8632831381995767
+                  ]
+                },
+                "RightHand": {
+                  "position": [
+                    -0.35403239407651277,
+                    0.2636890122037584,
+                    0.5979210385432077
+                  ],
+                  "orientation": [
+                    0.013219877300019455,
+                    0.23192474240498548,
+                    -0.47490462280003093,
+                    0.8488237437464351
+                  ],
+                  "pole": [
+                    -0.27335356786909887,
+                    0.3113688838430946,
+                    -0.9101248513844347
+                  ]
+                }
+              }
+            }
+          },
+          "closedAt": null,
+          "deadlineBreached": false
+        },
+        "bridgePlan": {
+          "kind": "seatedSupportedTuck",
+          "frame": "headingLocalWorld",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "duration": 1.6,
+          "entrySeconds": 0.8,
+          "sourceSoles": {
+            "LeftFoot": [
+              0.20000046442496283,
+              0.01958426432015753,
+              0.1500005752030374
+            ],
+            "RightFoot": [
+              -0.12000159432950057,
+              0.01958464589938927,
+              1.0599999580249553
+            ]
+          },
+          "sourceFootQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574142498,
+              -8.568851504304102e-7,
+              -3.21014070805285e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529278578e-7,
+              -9.652223962280984e-7,
+              -2.984539198132551e-7,
+              0.9999999999992033
+            ]
+          },
+          "sourceKneePoles": {
+            "LeftFoot": [
+              0.010001206295490016,
+              0.9838566795176763,
+              0.17867851029457218
+            ],
+            "RightFoot": [
+              0.005636823123840107,
+              0.9986221266992541,
+              0.05217350181585868
+            ]
+          },
+          "sourcePalm": {
+            "position": [
+              0.27478171957615793,
+              0.009325826617944566,
+              0.049394843908451835
+            ],
+            "orientation": [
+              -0.8033371234353779,
+              -0.01983689971785376,
+              0.3200381581569561,
+              0.5018281985337802
+            ],
+            "pole": [
+              -0.32681796365677557,
+              -0.2065511923319319,
+              0.9222400032407485
+            ]
+          },
+          "sourcePose": {
+            "rotations": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                -0.252684,
+                -0.056019,
+                -0.209065,
+                0.94303
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Neck": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Head": [
+                0.087156,
+                0,
+                0,
+                0.996195
+              ],
+              "LeftArm": [
+                0.08096351636538698,
+                0.002962471834482758,
+                0.05997322630765598,
+                0.9949067016080614
+              ],
+              "LeftForeArm": [
+                0.5454734661433479,
+                -0.47026465201274537,
+                -0.30652367020649385,
+                0.6223769712995767
+              ],
+              "LeftHand": [
+                -0.48470464633388893,
+                0.19701328533745238,
+                0.850488160416053,
+                -0.05400981591341406
+              ],
+              "RightArm": [
+                -0.08418600662939596,
+                -0.0225580017763751,
+                -0.2578340203036571,
+                0.9622500757743124
+              ],
+              "RightForeArm": [
+                -0.21644,
+                0,
+                0,
+                0.976296
+              ],
+              "RightHand": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "LeftUpLeg": [
+                0.728175,
+                -0.026424,
+                0.663114,
+                -0.171298
+              ],
+              "LeftLeg": [
+                -0.6585020094983567,
+                -0.08225300118643274,
+                -0.6980230100684149,
+                0.2690230038804383
+              ],
+              "LeftFoot": [
+                -0.138082,
+                0,
+                -0.022688,
+                0.990161
+              ],
+              "RightUpLeg": [
+                -0.55048,
+                -0.114604,
+                0.15244,
+                0.812773
+              ],
+              "RightLeg": [
+                0.209465,
+                0.001503,
+                0.006464,
+                0.977794
+              ],
+              "RightFoot": [
+                0.603398,
+                0,
+                0.02434,
+                0.797069
+              ]
+            },
+            "hipsOffsetMeters": [
+              0,
+              -0.7769999999999999,
+              0.32
+            ],
+            "referenceRootTranslationMeters": [
+              0,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "bone": "RightFoot",
+              "liftStart": 0,
+              "landAt": 0.7200000000000001
+            },
+            {
+              "bone": "LeftFoot",
+              "liftStart": 0.7200000000000001,
+              "landAt": 1.2400000000000002
+            }
+          ]
+        },
+        "risePlan": null,
+        "bodySettling": {
+          "active": false,
+          "phase": "inactive",
+          "elapsedSeconds": 0,
+          "carryWeight": 0,
+          "actualGeometryWitness": null,
+          "offsetMeters": 0,
+          "velocityMps": 0,
+          "firstFootTransferConcurrent": true,
+          "initialWitness": null,
+          "actualWitness": null,
+          "deadlineMissed": false
+        },
+        "matchedEntrySeconds": null,
+        "locomotionAllowed": false,
+        "motorAction": null,
+        "presentation": null,
+        "constraints": {
+          "frame": "headingLocalWorld",
+          "feet": [
+            {
+              "bone": "RightFoot",
+              "target": [
+                -0.11406062008785493,
+                0.11958464589938927,
+                0.7451534341414286
+              ],
+              "pole": [
+                0.005578702915206074,
+                0.9883255243267492,
+                0.15225483912848295
+              ],
+              "mode": "flight",
+              "anchor": null,
+              "worldQuaternion": [
+                7.568740529278578e-7,
+                -9.652223962280984e-7,
+                -2.984539198132551e-7,
+                0.9999999999992033
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "target": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "pole": [
+                0.009775701473288084,
+                0.9616729129767475,
+                0.2740248968753062
+              ],
+              "mode": "plant",
+              "anchor": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "worldQuaternion": [
+                -0.0000010061676574142498,
+                -8.568851504304102e-7,
+                -3.21014070805285e-7,
+                0.9999999999990752
+              ]
+            }
+          ],
+          "hands": [
+            {
+              "bone": "LeftHand",
+              "target": [
+                0.27478171957615793,
+                0.009325826617944566,
+                0.049394843908451835
+              ],
+              "worldQuaternion": [
+                -0.8033371234353779,
+                -0.01983689971785376,
+                0.3200381581569561,
+                0.5018281985337802
+              ],
+              "pole": [
+                -0.32681796365677557,
+                -0.2065511923319319,
+                0.9222400032407485
+              ],
+              "weight": 1,
+              "mode": "hand-support"
+            }
+          ],
+          "elapsed": 0.3,
+          "duration": 1.6
+        },
+        "measured": {
+          "minimumY": 0.0009119215834262153,
+          "bodySupportSurface": null,
+          "rootSpeedMps": 0,
+          "rigidBootMinimumY": {
+            "LeftFoot": 0.02471224193388041,
+            "RightFoot": 0.12471240852106791
+          },
+          "chestPosition": [
+            0.30517397585750894,
+            0.41046570635400936,
+            0.058569921432855304
+          ],
+          "pelvisHeight": 0.10527961505288519,
+          "hipsUpDot": 0.8000286954764638,
+          "soles": {
+            "LeftFoot": [
+              0.20000046442496286,
+              0.019584264320157446,
+              0.15000057520303733
+            ],
+            "RightFoot": [
+              -0.11458822384794143,
+              0.11958464589938934,
+              0.7731142033847432
+            ]
+          },
+          "footQuaternions": {
+            "LeftFoot": [
+              -0.000001006167657423174,
+              -8.568851504299076e-7,
+              -3.2101407081345474e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740527797362e-7,
+              -9.652223962145342e-7,
+              -2.984539198734196e-7,
+              0.9999999999992033
+            ]
+          },
+          "kneePoles": {
+            "LeftFoot": [
+              0.025760325320380164,
+              0.9513646599003787,
+              0.30698809346947814
+            ],
+            "RightFoot": [
+              0.07439083448753042,
+              0.9941210643601773,
+              -0.07867218784066522
+            ]
+          },
+          "hands": {
+            "LeftHand": {
+              "position": [
+                0.27710015121978654,
+                0.01348053157833956,
+                0.049831639245757564
+              ],
+              "orientation": [
+                -0.7992375649698291,
+                0.014805151642855601,
+                0.2972847574864068,
+                0.522132066810858
+              ],
+              "pole": [
+                -0.04478938502724815,
+                -0.019028256193327417,
+                0.9988152163714377
+              ]
+            },
+            "RightHand": {
+              "position": [
+                -0.20196186330466848,
+                0.3696016834643609,
+                0.28038362989794496
+              ],
+              "orientation": [
+                -0.48651917605973655,
+                -0.015562331466622047,
+                -0.45242159630446216,
+                0.7472426676540898
+              ],
+              "pole": [
+                -0.2432438076830295,
+                -0.6773331114819265,
+                -0.6942998675745757
+              ]
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "idle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 1
+          },
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 2
+          },
+          {
+            "type": "base-changed",
+            "clock": 0.09999999999999999,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 3
+          },
+          {
+            "type": "request-received",
+            "clock": 0.09999999999999999,
+            "requestID": 1,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 0.09999999999999999,
+            "episodeID": 1,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 4.6
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 0.7333333333333332,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 1
+          },
+          {
+            "type": "request-superseded",
+            "clock": 0.8999999999999992,
+            "requestID": 1,
+            "supersededBy": 2
+          },
+          {
+            "type": "request-received",
+            "clock": 0.8999999999999992,
+            "requestID": 2,
+            "clipID": "run_2"
+          }
+        ],
+        "requests": [
+          {
+            "id": 1,
+            "clipID": "get_up",
+            "requestedAt": 0.09999999999999999,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "supersededBy": 2,
+            "endedAt": 0.8999999999999992
+          },
+          {
+            "id": 2,
+            "clipID": "run_2",
+            "requestedAt": 0.8999999999999992,
+            "status": "queued",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6
+          }
+        ],
+        "palmBodyCompression": null,
+        "palmSupports": [
+          {
+            "key": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bone": "LeftHand",
+            "clipID": "slide_tackle",
+            "sourceContactStartSeconds": 1.173333,
+            "sourceContactEndSeconds": 1.466667,
+            "admissionStartSourceSeconds": 0.993333,
+            "approachSeconds": 0.18,
+            "releaseSeconds": 0.18,
+            "startedAtClock": 0.26666666666666666,
+            "sourceTimeAtCreation": 1.0000001666666658,
+            "coldSeek": false,
+            "anchorWorldMeters": [
+              0.2970253712590408,
+              0.00184,
+              0.07642735753292632
+            ],
+            "orientationWorld": [
+              -0.8033371030417138,
+              -0.01983695695213475,
+              0.32003823815380117,
+              0.5018281781542907
+            ],
+            "contactSourceWorldRotations": {
+              "LeftArm": [
+                -0.1489366068734181,
+                -1.7995686719659105e-7,
+                0.17392172985134527,
+                0.9734316201041121
+              ],
+              "LeftForeArm": [
+                0.45522836276300505,
+                0.00008731047530957158,
+                -0.30415037759320174,
+                0.8368151993856872
+              ],
+              "LeftHand": [
+                -0.7656288372378375,
+                -0.00005811993571680493,
+                0.00030206074272763985,
+                0.6432825110099123
+              ]
+            },
+            "poleWorld": [
+              -0.060765618236436135,
+              -0.045787648665035534,
+              0.1658251318807774
+            ],
+            "sourcePoleWorld": [
+              0.10867296374555255,
+              -0.0522703200971843,
+              0.13691217652532575
+            ],
+            "recipe": {
+              "heightMeters": 0.00184,
+              "extensionDegrees": 10.25,
+              "rollDegrees": -32.25,
+              "deviationDegrees": 20,
+              "forearmTwistDegrees": -30,
+              "elbowSwivelDegrees": 56.25,
+              "clipID": "slide_tackle"
+            },
+            "authoredAnchorWorldMeters": [
+              0.3,
+              0,
+              0.05
+            ],
+            "authoredMarkerOffsetMeters": [
+              0,
+              0.005554,
+              -0.031499
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solveCount": 93,
+            "lastSolveClock": 1.033333333333332,
+            "appliedForearmTwistRadians": 0.06887136712719358,
+            "logicalReferenceModelSha256": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+            "originalPressurePointAtContactMeters": [
+              0.2970253712590408,
+              0.014497482793951568,
+              0.07642735753292632
+            ],
+            "precontactShiftWorldMeters": [
+              0,
+              0,
+              0
+            ],
+            "precontactShiftMagnitudeMeters": 0,
+            "sourcePoseAtClock": 1.033333333333332,
+            "sourceRootY": 0,
+            "sourceWorldRotations": {
+              "LeftArm": [
+                -0.1756726337640576,
+                -0.048511792853717164,
+                -0.14229186926787582,
+                0.9729022333414449
+              ],
+              "LeftForeArm": [
+                0.3633856802920456,
+                -0.6097923240384007,
+                -0.27942101806633335,
+                0.6465508978922753
+              ],
+              "LeftHand": [
+                -0.79335215294596,
+                -0.023212054409221042,
+                0.31913673275088217,
+                0.5178854195236681
+              ]
+            },
+            "sourceLogicalPoint": [
+              0.4408132348755335,
+              0.012882342107778418,
+              -0.021784588046424164
+            ],
+            "currentSourcePoleWorld": [
+              -0.04665363787900499,
+              -0.03343109772516828,
+              0.14661933242320774
+            ],
+            "currentSourceAxisWorld": [
+              -0.1491033403077919,
+              -0.9527393256905176,
+              -0.26468088558080055
+            ],
+            "lastSolvedWorldRotations": {
+              "LeftArm": [
+                -0.25612545818262344,
+                -0.04555802698219343,
+                -0.20105698747117248,
+                0.9444047350777356
+              ],
+              "LeftForeArm": [
+                0.1061952897295362,
+                -0.5785454330299913,
+                -0.3466661363252401,
+                0.7306369360254995
+              ],
+              "LeftHand": [
+                -0.800581043766502,
+                0.014324545890469638,
+                0.29456922005336933,
+                0.5216260867172189
+              ]
+            },
+            "actualSurfacePointMeters": [
+              0.29594974615856084,
+              0.002982709237206594,
+              0.07492669393958319
+            ],
+            "logicalSurfacePointMeters": [
+              0.2970253712605325,
+              0.0021312111647894703,
+              0.07642735753103215
+            ],
+            "actualSurfaceResidualMeters": 0.0021713463514523297,
+            "actualXZResidualMeters": 0.0018463370703011052,
+            "logicalSurfaceResidualMeters": 3.7796922364479726e-12,
+            "reachResidualMeters": 0,
+            "evaluatedAtClock": 1.033333333333332,
+            "solverName": "nativePalmSurfaceIK",
+            "solverIterations": 6,
+            "bridgeLifecycle": {
+              "episodeID": 1,
+              "startClock": 0.7333333333333332,
+              "duration": 1.6,
+              "holdEndSeconds": 0.4,
+              "releaseEndSeconds": 0.6400000000000001
+            },
+            "bridgeElapsedSeconds": 0.3,
+            "bridgeCorrectionPlan": {
+              "kind": "fixedInheritedHeelContactCorrection",
+              "keys": [
+                {
+                  "elapsedSeconds": 0,
+                  "degrees": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.125,
+                  "degrees": [
+                    3.0951834798045863,
+                    0.1824558652477417,
+                    1.7625837513525058,
+                    -7.976945741965256,
+                    6.2640278765232065
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.2,
+                  "degrees": [
+                    4.527811261885566,
+                    1.729764008590982,
+                    2.578408230549951,
+                    -11.669132056817746,
+                    9.163377922228234
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.35,
+                  "degrees": [
+                    2.664506064437462,
+                    5.170552412576722,
+                    0.21974923492769038,
+                    9.411348418559923,
+                    -18.764621713115808
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.3625,
+                  "degrees": [
+                    1.6963548723816715,
+                    5.969186336303162,
+                    0.15150100010065726,
+                    16.19492713601877,
+                    -19.572723554416275
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.4,
+                  "degrees": [
+                    1.728338435280404,
+                    7.881809524425935,
+                    -0.21703946796532156,
+                    18.42625221029654,
+                    -23.93647349743879
+                  ]
+                }
+              ],
+              "verticalCompliancePeakMeters": 0.00029121116187861944,
+              "verticalComplianceRampSeconds": 0.2,
+              "pairedReferenceBlend": 0,
+              "interpolation": "smoothstep-per-key-no-overshoot",
+              "scope": "bridgeLifecycleOnly",
+              "internalBoundNote": "Late ForeArm/pole continuation18.426/−23.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+            },
+            "bridgeCorrection": {
+              "pitchDegrees": 3.1475851897017852,
+              "rollDegrees": 4.27849615969153,
+              "deviationDegrees": 0.8312534189779062,
+              "forearmTwistDegrees": 3.9460386656842292,
+              "elbowSwivelDegrees": -11.524029215063651,
+              "heightOffsetMeters": 0.00029121116187861944
+            },
+            "bridgeTargetArmAxisWorld": [
+              -0.45946637268477836,
+              -0.8880124302701248,
+              -0.018015994494870555
+            ],
+            "calibration": {
+              "kind": "anatomicalHeelPalmRayV1",
+              "selector": {
+                "kind": "fixedHandLocalPalmarRay",
+                "region": "proximalPalmarHeel",
+                "coordinateFrame": "inverseBindHandLocalMeters",
+                "referenceXY": [
+                  -0.0025,
+                  -0.03
+                ],
+                "rayOriginZ": -0.2,
+                "rayDirection": [
+                  0,
+                  0,
+                  1
+                ],
+                "palmarNormalZMaximum": -0.5,
+                "minCornerHandInfluence": 0.5,
+                "minPointHandInfluence": 0.8,
+                "noFallback": true
+              },
+              "handName": "LeftHand",
+              "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+              "calibrationSourceSha256": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+              "calibrationKey": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613:LeftHand:anatomicalHeelPalmRayV1",
+              "meshIndex": 0,
+              "meshName": "player-02-lod1",
+              "material": "Skin",
+              "triangleIndex": 370,
+              "triangleVertexIndices": [
+                274,
+                275,
+                288
+              ],
+              "barycentricWeights": [
+                0.07040098421132482,
+                0.7900058105100191,
+                0.13959320527865615
+              ],
+              "bindPositions": [
+                [
+                  0.1755092889070511,
+                  0.7042438983917236,
+                  -0.034997470676898956
+                ],
+                [
+                  0.15320827066898346,
+                  0.760739803314209,
+                  -0.025949627161026
+                ],
+                [
+                  0.1727057248353958,
+                  0.7839328050613403,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalBindPositions": [
+                [
+                  0.015509292483329773,
+                  -0.08575612306594849,
+                  -0.034997470676898956
+                ],
+                [
+                  -0.006791725754737854,
+                  -0.029260218143463135,
+                  -0.025949627161026
+                ],
+                [
+                  0.0127057284116745,
+                  -0.006067216396331787,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalReferencePoint": [
+                -0.002499999999999999,
+                -0.03,
+                -0.025204993982336887
+              ],
+              "handLocalNormal": [
+                0.20512195667801594,
+                0.23319998196578756,
+                -0.9505486580389974
+              ],
+              "namedInfluences": [
+                {
+                  "LeftHand": 1
+                },
+                {
+                  "LeftHand": 0.8448663353919983,
+                  "LeftForeArm": 0.1551336646080017
+                },
+                {
+                  "LeftHand": 0.5763142108917236,
+                  "LeftForeArm": 0.42368578910827637
+                }
+              ],
+              "barycentricHandInfluence": 0.8182998462213251
+            },
+            "authoredMarkerDescriptive": {
+              "worldPointMeters": [
+                0.28999541361960246,
+                -0.015645682451934834,
+                0.0540874165059262
+              ],
+              "anchorWorldMeters": [
+                0.3,
+                0,
+                0.05
+              ],
+              "residualMeters": 0.01901541747431634,
+              "usedForPhysicalSupport": false
+            }
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "nativePalmSurfaceIK",
+            "contactKey": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bones": [
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand"
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solverIterations": 6
+          }
+        ]
+      },
+      "camera": {
+        "position": [
+          0.7759497461585608,
+          0.2579827092372066,
+          0.1749266939395832
+        ],
+        "quaternion": [
+          -0.14931234692717338,
+          0.6190978325192531,
+          0.12141147686261913,
+          0.7613691286827303
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564
+      },
+      "minimumY": 0.0009150771968242267
+    },
+    {
+      "file": "P02-far-bridge-0.391667-844x390.png",
+      "width": 844,
+      "height": 390,
+      "elapsed": 0.3916666666666667,
+      "sha256": "3178c6e08c03a5ce398ce6854c2c8d965993017a8726a00c0a8c5af4e82c4e9e",
+      "identity": "player-02",
+      "path": "models/player-02-lod1.glb",
+      "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "base": "__seated_recovery_bridge",
+      "baseSeconds": 0.3916666666666667,
+      "bridgeElapsed": 0.3916666666666667,
+      "recovery": {
+        "clock": 2.158333333333328,
+        "phase": "seated-bridge",
+        "transitionSerial": 8,
+        "activeBaseClip": "__seated_recovery_bridge",
+        "baseSeconds": 0.3916666666666667,
+        "overlayClip": null,
+        "overlaySeconds": 0,
+        "contributors": [
+          {
+            "clipID": "__seated_recovery_bridge",
+            "sampleSeconds": 0.3916666666666667,
+            "playbackRate": 1,
+            "weight": 1,
+            "scope": "body",
+            "transform": "explicitWorldConstraints",
+            "virtual": true
+          }
+        ],
+        "request": {
+          "id": 4,
+          "clipID": "run_2",
+          "requestedAt": 1.933333333333329,
+          "status": "queued",
+          "progress": 0,
+          "activatedAt": null,
+          "completedAt": null,
+          "episodeID": 2,
+          "activationDeadline": 5.633333333333332
+        },
+        "pendingRequestID": 4,
+        "episode": {
+          "id": 2,
+          "startedAt": 1.1333333333333317,
+          "activationDeadline": 5.633333333333332,
+          "origin": {
+            "clipID": "slide_tackle",
+            "seconds": 0.8333334999999996,
+            "frameHeadingQuaternion": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "measured": {
+              "minimumY": 0.012619417480288275,
+              "bodySupportSurface": null,
+              "rootSpeedMps": 0,
+              "rigidBootMinimumY": {
+                "LeftFoot": 0.042735302391248446,
+                "RightFoot": 0.029920575265748383
+              },
+              "chestPosition": [
+                0.1950246074308681,
+                0.4215767868080966,
+                0.4838749588489121
+              ],
+              "pelvisHeight": 0.15633483420831595,
+              "hipsUpDot": 0.6980049186559206,
+              "soles": {
+                "LeftFoot": [
+                  0.196312033727064,
+                  0.037608259517528844,
+                  0.23806334032736873
+                ],
+                "RightFoot": [
+                  -0.1254974442571503,
+                  0.02479042941887931,
+                  1.0047644700368723
+                ]
+              },
+              "footQuaternions": {
+                "LeftFoot": [
+                  0.000008336556803934949,
+                  -0.000030341504179643767,
+                  -0.00003487287254359438,
+                  0.9999999988968888
+                ],
+                "RightFoot": [
+                  -0.00000983860338414674,
+                  0.000034063567108050525,
+                  -0.00004642916505840227,
+                  0.9999999982936041
+                ]
+              },
+              "kneePoles": {
+                "LeftFoot": [
+                  0.18063716066136015,
+                  0.4408761448361147,
+                  0.8792032990740236
+                ],
+                "RightFoot": [
+                  0.3106420316851659,
+                  0.9394938123387022,
+                  0.14440534868142463
+                ]
+              },
+              "hands": {
+                "LeftHand": {
+                  "position": [
+                    0.62383236099201,
+                    0.13992035245325307,
+                    0.2512884215506014
+                  ],
+                  "orientation": [
+                    -0.1078536951893052,
+                    0.02271447128327963,
+                    0.3425720873754868,
+                    0.9330037503566292
+                  ],
+                  "pole": [
+                    -0.2045325906781581,
+                    0.4614202451678638,
+                    -0.8632831381995767
+                  ]
+                },
+                "RightHand": {
+                  "position": [
+                    -0.35403239407651277,
+                    0.2636890122037584,
+                    0.5979210385432077
+                  ],
+                  "orientation": [
+                    0.013219877300019455,
+                    0.23192474240498548,
+                    -0.47490462280003093,
+                    0.8488237437464351
+                  ],
+                  "pole": [
+                    -0.27335356786909887,
+                    0.3113688838430946,
+                    -0.9101248513844347
+                  ]
+                }
+              }
+            }
+          },
+          "closedAt": null,
+          "deadlineBreached": false
+        },
+        "bridgePlan": {
+          "kind": "seatedSupportedTuck",
+          "frame": "headingLocalWorld",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "duration": 1.6,
+          "entrySeconds": 0.8,
+          "sourceSoles": {
+            "LeftFoot": [
+              0.20000046442496283,
+              0.01958426432015753,
+              0.1500005752030374
+            ],
+            "RightFoot": [
+              -0.12000159432950057,
+              0.01958464589938927,
+              1.0599999580249553
+            ]
+          },
+          "sourceFootQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574142498,
+              -8.568851504304102e-7,
+              -3.21014070805285e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529278578e-7,
+              -9.652223962280984e-7,
+              -2.984539198132551e-7,
+              0.9999999999992033
+            ]
+          },
+          "sourceKneePoles": {
+            "LeftFoot": [
+              0.010001206295490016,
+              0.9838566795176763,
+              0.17867851029457218
+            ],
+            "RightFoot": [
+              0.005636823123840107,
+              0.9986221266992541,
+              0.05217350181585868
+            ]
+          },
+          "sourcePalm": {
+            "position": [
+              0.27478171957615793,
+              0.009325826617944566,
+              0.049394843908451835
+            ],
+            "orientation": [
+              -0.8033371234353779,
+              -0.01983689971785376,
+              0.3200381581569561,
+              0.5018281985337802
+            ],
+            "pole": [
+              -0.32681796365677557,
+              -0.2065511923319319,
+              0.9222400032407485
+            ]
+          },
+          "sourcePose": {
+            "rotations": {
+              "Root": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Hips": [
+                -0.252684,
+                -0.056019,
+                -0.209065,
+                0.94303
+              ],
+              "Spine": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Chest": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Neck": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "Head": [
+                0.087156,
+                0,
+                0,
+                0.996195
+              ],
+              "LeftArm": [
+                0.08096351636538698,
+                0.002962471834482758,
+                0.05997322630765598,
+                0.9949067016080614
+              ],
+              "LeftForeArm": [
+                0.5454734661433479,
+                -0.47026465201274537,
+                -0.30652367020649385,
+                0.6223769712995767
+              ],
+              "LeftHand": [
+                -0.48470464633388893,
+                0.19701328533745238,
+                0.850488160416053,
+                -0.05400981591341406
+              ],
+              "RightArm": [
+                -0.08418600662939596,
+                -0.0225580017763751,
+                -0.2578340203036571,
+                0.9622500757743124
+              ],
+              "RightForeArm": [
+                -0.21644,
+                0,
+                0,
+                0.976296
+              ],
+              "RightHand": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "LeftUpLeg": [
+                0.728175,
+                -0.026424,
+                0.663114,
+                -0.171298
+              ],
+              "LeftLeg": [
+                -0.6585020094983567,
+                -0.08225300118643274,
+                -0.6980230100684149,
+                0.2690230038804383
+              ],
+              "LeftFoot": [
+                -0.138082,
+                0,
+                -0.022688,
+                0.990161
+              ],
+              "RightUpLeg": [
+                -0.55048,
+                -0.114604,
+                0.15244,
+                0.812773
+              ],
+              "RightLeg": [
+                0.209465,
+                0.001503,
+                0.006464,
+                0.977794
+              ],
+              "RightFoot": [
+                0.603398,
+                0,
+                0.02434,
+                0.797069
+              ]
+            },
+            "hipsOffsetMeters": [
+              0,
+              -0.7769999999999999,
+              0.32
+            ],
+            "referenceRootTranslationMeters": [
+              0,
+              0,
+              0
+            ]
+          },
+          "stages": [
+            {
+              "bone": "RightFoot",
+              "liftStart": 0,
+              "landAt": 0.7200000000000001
+            },
+            {
+              "bone": "LeftFoot",
+              "liftStart": 0.7200000000000001,
+              "landAt": 1.2400000000000002
+            }
+          ]
+        },
+        "risePlan": null,
+        "bodySettling": {
+          "active": false,
+          "phase": "inactive",
+          "elapsedSeconds": 0,
+          "carryWeight": 0,
+          "actualGeometryWitness": null,
+          "offsetMeters": 0,
+          "velocityMps": 0,
+          "firstFootTransferConcurrent": true,
+          "initialWitness": null,
+          "actualWitness": null,
+          "deadlineMissed": false
+        },
+        "matchedEntrySeconds": null,
+        "locomotionAllowed": false,
+        "motorAction": null,
+        "presentation": null,
+        "constraints": {
+          "frame": "headingLocalWorld",
+          "feet": [
+            {
+              "bone": "RightFoot",
+              "target": [
+                -0.10781730394966926,
+                0.11958464589938927,
+                0.4142840676603524
+              ],
+              "pole": [
+                0.005501422227512949,
+                0.974634442843193,
+                0.22373519431956473
+              ],
+              "mode": "flight",
+              "anchor": null,
+              "worldQuaternion": [
+                7.568740529278578e-7,
+                -9.652223962280984e-7,
+                -2.984539198132551e-7,
+                0.9999999999992033
+              ]
+            },
+            {
+              "bone": "LeftFoot",
+              "target": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "pole": [
+                0.009559138658208583,
+                0.9403688056664925,
+                0.3400222525034026
+              ],
+              "mode": "plant",
+              "anchor": [
+                0.20000046442496283,
+                0.01958426432015753,
+                0.1500005752030374
+              ],
+              "worldQuaternion": [
+                -0.0000010061676574142498,
+                -8.568851504304102e-7,
+                -3.21014070805285e-7,
+                0.9999999999990752
+              ]
+            }
+          ],
+          "hands": [
+            {
+              "bone": "LeftHand",
+              "target": [
+                0.27478171957615793,
+                0.009325826617944566,
+                0.049394843908451835
+              ],
+              "worldQuaternion": [
+                -0.8033371234353779,
+                -0.01983689971785376,
+                0.3200381581569561,
+                0.5018281985337802
+              ],
+              "pole": [
+                -0.32681796365677557,
+                -0.2065511923319319,
+                0.9222400032407485
+              ],
+              "weight": 1,
+              "mode": "hand-support"
+            }
+          ],
+          "elapsed": 0.3916666666666667,
+          "duration": 1.6
+        },
+        "measured": {
+          "minimumY": 0.0008237663865628447,
+          "bodySupportSurface": null,
+          "rootSpeedMps": 0,
+          "rigidBootMinimumY": {
+            "LeftFoot": 0.02471224193388041,
+            "RightFoot": 0.12471240852106791
+          },
+          "chestPosition": [
+            0.3127074042670211,
+            0.4326613226136469,
+            -0.038608031857056524
+          ],
+          "pelvisHeight": 0.11700966847977956,
+          "hipsUpDot": 0.8233345945540543,
+          "soles": {
+            "LeftFoot": [
+              0.20000046442496286,
+              0.019584264320157432,
+              0.15000057520303722
+            ],
+            "RightFoot": [
+              -0.10838660100759691,
+              0.11958464589938933,
+              0.4444544054627243
+            ]
+          },
+          "footQuaternions": {
+            "LeftFoot": [
+              -0.0000010061676574838893,
+              -8.568851504273055e-7,
+              -3.210140708372801e-7,
+              0.9999999999990752
+            ],
+            "RightFoot": [
+              7.568740529185141e-7,
+              -9.652223962396877e-7,
+              -2.984539197970918e-7,
+              0.9999999999992033
+            ]
+          },
+          "kneePoles": {
+            "LeftFoot": [
+              0.4003061099292822,
+              0.8967901178979308,
+              0.18847414356855655
+            ],
+            "RightFoot": [
+              0.1472861980223895,
+              0.9874263916254299,
+              -0.057409903271932405
+            ]
+          },
+          "hands": {
+            "LeftHand": {
+              "position": [
+                0.2800376409687263,
+                0.013383009017877256,
+                0.04874249584335327
+              ],
+              "orientation": [
+                -0.8140147298689401,
+                0.016276878896757795,
+                0.27024095372290513,
+                0.5138919241442811
+              ],
+              "pole": [
+                0.21945625664736068,
+                0.07600692459060604,
+                0.9726571332348339
+              ]
+            },
+            "RightHand": {
+              "position": [
+                -0.1912761581623862,
+                0.3754770164996105,
+                0.18901057583908085
+              ],
+              "orientation": [
+                -0.48864945969291695,
+                -0.00267777102512157,
+                -0.4405444594762143,
+                0.7530837365850942
+              ],
+              "pole": [
+                -0.2553955278673276,
+                -0.6382111616516729,
+                -0.7262641650863625
+              ]
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "idle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 1
+          },
+          {
+            "type": "base-changed",
+            "clock": 0,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 2
+          },
+          {
+            "type": "base-changed",
+            "clock": 0.09999999999999999,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 3
+          },
+          {
+            "type": "request-received",
+            "clock": 0.09999999999999999,
+            "requestID": 1,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 0.09999999999999999,
+            "episodeID": 1,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 4.6
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 0.7333333333333332,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 1
+          },
+          {
+            "type": "request-superseded",
+            "clock": 0.8999999999999992,
+            "requestID": 1,
+            "supersededBy": 2
+          },
+          {
+            "type": "request-received",
+            "clock": 0.8999999999999992,
+            "requestID": 2,
+            "clipID": "run_2"
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.033333333333332,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 1.4666668333333308,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 5
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.033333333333332,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0,
+              "entrySeconds": 0,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 6
+          },
+          {
+            "type": "base-changed",
+            "clock": 1.1333333333333317,
+            "from": {
+              "clipID": "slide_tackle",
+              "seconds": 0.7333335,
+              "entrySeconds": 0.7333335,
+              "rate": 1,
+              "mirror": false
+            },
+            "to": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "entrySeconds": 0.8333334999999996,
+              "rate": 1,
+              "mirror": false
+            },
+            "transitionSerial": 7
+          },
+          {
+            "type": "request-received",
+            "clock": 1.1333333333333317,
+            "requestID": 3,
+            "clipID": "get_up"
+          },
+          {
+            "type": "recovery-started",
+            "clock": 1.1333333333333317,
+            "episodeID": 2,
+            "origin": {
+              "clipID": "slide_tackle",
+              "seconds": 0.8333334999999996,
+              "frameHeadingQuaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "measured": {
+                "minimumY": 0.012619417480288275,
+                "bodySupportSurface": null,
+                "rootSpeedMps": 0,
+                "rigidBootMinimumY": {
+                  "LeftFoot": 0.042735302391248446,
+                  "RightFoot": 0.029920575265748383
+                },
+                "chestPosition": [
+                  0.1950246074308681,
+                  0.4215767868080966,
+                  0.4838749588489121
+                ],
+                "pelvisHeight": 0.15633483420831595,
+                "hipsUpDot": 0.6980049186559206,
+                "soles": {
+                  "LeftFoot": [
+                    0.196312033727064,
+                    0.037608259517528844,
+                    0.23806334032736873
+                  ],
+                  "RightFoot": [
+                    -0.1254974442571503,
+                    0.02479042941887931,
+                    1.0047644700368723
+                  ]
+                },
+                "footQuaternions": {
+                  "LeftFoot": [
+                    0.000008336556803934949,
+                    -0.000030341504179643767,
+                    -0.00003487287254359438,
+                    0.9999999988968888
+                  ],
+                  "RightFoot": [
+                    -0.00000983860338414674,
+                    0.000034063567108050525,
+                    -0.00004642916505840227,
+                    0.9999999982936041
+                  ]
+                },
+                "kneePoles": {
+                  "LeftFoot": [
+                    0.18063716066136015,
+                    0.4408761448361147,
+                    0.8792032990740236
+                  ],
+                  "RightFoot": [
+                    0.3106420316851659,
+                    0.9394938123387022,
+                    0.14440534868142463
+                  ]
+                },
+                "hands": {
+                  "LeftHand": {
+                    "position": [
+                      0.62383236099201,
+                      0.13992035245325307,
+                      0.2512884215506014
+                    ],
+                    "orientation": [
+                      -0.1078536951893052,
+                      0.02271447128327963,
+                      0.3425720873754868,
+                      0.9330037503566292
+                    ],
+                    "pole": [
+                      -0.2045325906781581,
+                      0.4614202451678638,
+                      -0.8632831381995767
+                    ]
+                  },
+                  "RightHand": {
+                    "position": [
+                      -0.35403239407651277,
+                      0.2636890122037584,
+                      0.5979210385432077
+                    ],
+                    "orientation": [
+                      0.013219877300019455,
+                      0.23192474240498548,
+                      -0.47490462280003093,
+                      0.8488237437464351
+                    ],
+                    "pole": [
+                      -0.27335356786909887,
+                      0.3113688838430946,
+                      -0.9101248513844347
+                    ]
+                  }
+                }
+              }
+            },
+            "activationDeadline": 5.633333333333332
+          },
+          {
+            "type": "seated-bridge-started",
+            "clock": 1.7666666666666628,
+            "duration": 1.6,
+            "entrySeconds": 0.8,
+            "episodeID": 2
+          },
+          {
+            "type": "request-superseded",
+            "clock": 1.933333333333329,
+            "requestID": 3,
+            "supersededBy": 4
+          },
+          {
+            "type": "request-received",
+            "clock": 1.933333333333329,
+            "requestID": 4,
+            "clipID": "run_2"
+          }
+        ],
+        "requests": [
+          {
+            "id": 1,
+            "clipID": "get_up",
+            "requestedAt": 0.09999999999999999,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "supersededBy": 2,
+            "endedAt": 0.8999999999999992
+          },
+          {
+            "id": 2,
+            "clipID": "run_2",
+            "requestedAt": 0.8999999999999992,
+            "status": "cancelled-paused-preview",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 1,
+            "activationDeadline": 4.6,
+            "endedAt": 1.033333333333332
+          },
+          {
+            "id": 3,
+            "clipID": "get_up",
+            "requestedAt": 1.1333333333333317,
+            "status": "superseded",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 2,
+            "activationDeadline": 5.633333333333332,
+            "supersededBy": 4,
+            "endedAt": 1.933333333333329
+          },
+          {
+            "id": 4,
+            "clipID": "run_2",
+            "requestedAt": 1.933333333333329,
+            "status": "queued",
+            "progress": 0,
+            "activatedAt": null,
+            "completedAt": null,
+            "episodeID": 2,
+            "activationDeadline": 5.633333333333332
+          }
+        ],
+        "palmBodyCompression": null,
+        "palmSupports": [
+          {
+            "key": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bone": "LeftHand",
+            "clipID": "slide_tackle",
+            "sourceContactStartSeconds": 1.173333,
+            "sourceContactEndSeconds": 1.466667,
+            "admissionStartSourceSeconds": 0.993333,
+            "approachSeconds": 0.18,
+            "releaseSeconds": 0.18,
+            "startedAtClock": 1.2999999999999978,
+            "sourceTimeAtCreation": 1.0000001666666658,
+            "coldSeek": false,
+            "anchorWorldMeters": [
+              0.2970253712590408,
+              0.00184,
+              0.07642735753292632
+            ],
+            "orientationWorld": [
+              -0.8033371030417138,
+              -0.01983695695213475,
+              0.32003823815380117,
+              0.5018281781542907
+            ],
+            "contactSourceWorldRotations": {
+              "LeftArm": [
+                -0.1489366068734181,
+                -1.7995686719659105e-7,
+                0.17392172985134527,
+                0.9734316201041121
+              ],
+              "LeftForeArm": [
+                0.45522836276300505,
+                0.00008731047530957158,
+                -0.30415037759320174,
+                0.8368151993856872
+              ],
+              "LeftHand": [
+                -0.7656288372378375,
+                -0.00005811993571680493,
+                0.00030206074272763985,
+                0.6432825110099123
+              ]
+            },
+            "poleWorld": [
+              -0.060765618236436135,
+              -0.045787648665035534,
+              0.1658251318807774
+            ],
+            "sourcePoleWorld": [
+              0.10867296374555255,
+              -0.0522703200971843,
+              0.13691217652532575
+            ],
+            "recipe": {
+              "heightMeters": 0.00184,
+              "extensionDegrees": 10.25,
+              "rollDegrees": -32.25,
+              "deviationDegrees": 20,
+              "forearmTwistDegrees": -30,
+              "elbowSwivelDegrees": 56.25,
+              "clipID": "slide_tackle"
+            },
+            "authoredAnchorWorldMeters": [
+              0.3,
+              0,
+              0.05
+            ],
+            "authoredMarkerOffsetMeters": [
+              0,
+              0.005554,
+              -0.031499
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solveCount": 104,
+            "lastSolveClock": 2.158333333333328,
+            "appliedForearmTwistRadians": 0.3166840302717098,
+            "logicalReferenceModelSha256": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+            "originalPressurePointAtContactMeters": [
+              0.2970253712590408,
+              0.014497482793951568,
+              0.07642735753292632
+            ],
+            "precontactShiftWorldMeters": [
+              0,
+              0,
+              0
+            ],
+            "precontactShiftMagnitudeMeters": 0,
+            "sourcePoseAtClock": 2.158333333333328,
+            "sourceRootY": 0,
+            "sourceWorldRotations": {
+              "LeftArm": [
+                -0.17251306169010938,
+                -0.039261460016465584,
+                -0.13354243094955237,
+                0.9751226591766617
+              ],
+              "LeftForeArm": [
+                0.35839149825925737,
+                -0.5842978462303267,
+                -0.2832257042060433,
+                0.6707717654635421
+              ],
+              "LeftHand": [
+                -0.7776933694655934,
+                -0.027432337654090044,
+                0.3171685980664266,
+                0.5420743217868391
+              ]
+            },
+            "sourceLogicalPoint": [
+              0.43994583206149507,
+              0.03464802344101674,
+              -0.11855067784539985
+            ],
+            "currentSourcePoleWorld": [
+              -0.03861945840414917,
+              -0.034216577830388284,
+              0.14642550839434032
+            ],
+            "currentSourceAxisWorld": [
+              -0.16005780437939957,
+              -0.9510246837585767,
+              -0.2644495228567168
+            ],
+            "lastSolvedWorldRotations": {
+              "LeftArm": [
+                -0.2807117559112171,
+                -0.02683158492465455,
+                -0.15700954093218616,
+                0.9464824246651052
+              ],
+              "LeftForeArm": [
+                -0.006979238038841544,
+                -0.42727986162128834,
+                -0.2825885472240077,
+                0.8587938769385322
+              ],
+              "LeftHand": [
+                -0.8152953095153322,
+                0.018037318904669225,
+                0.26581001944706945,
+                0.5141140408222463
+              ]
+            },
+            "actualSurfacePointMeters": [
+              0.295962211627615,
+              0.002991685100758312,
+              0.07462264974390732
+            ],
+            "logicalSurfacePointMeters": [
+              0.29702537126301815,
+              0.002131211174338315,
+              0.07642735752014673
+            ],
+            "actualSurfaceResidualMeters": 0.002390325747037006,
+            "actualXZResidualMeters": 0.002094583157967078,
+            "logicalSurfaceResidualMeters": 1.8286081718702026e-11,
+            "reachResidualMeters": 0,
+            "evaluatedAtClock": 2.158333333333328,
+            "solverName": "nativePalmSurfaceIK",
+            "solverIterations": 6,
+            "bridgeLifecycle": {
+              "episodeID": 2,
+              "startClock": 1.7666666666666628,
+              "duration": 1.6,
+              "holdEndSeconds": 0.4,
+              "releaseEndSeconds": 0.6400000000000001
+            },
+            "bridgeElapsedSeconds": 0.3916666666666667,
+            "bridgeCorrectionPlan": {
+              "kind": "fixedInheritedHeelContactCorrection",
+              "keys": [
+                {
+                  "elapsedSeconds": 0,
+                  "degrees": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.125,
+                  "degrees": [
+                    3.0951834798045863,
+                    0.1824558652477417,
+                    1.7625837513525058,
+                    -7.976945741965256,
+                    6.2640278765232065
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.2,
+                  "degrees": [
+                    4.527811261885566,
+                    1.729764008590982,
+                    2.578408230549951,
+                    -11.669132056817746,
+                    9.163377922228234
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.35,
+                  "degrees": [
+                    2.664506064437462,
+                    5.170552412576722,
+                    0.21974923492769038,
+                    9.411348418559923,
+                    -18.764621713115808
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.3625,
+                  "degrees": [
+                    1.6963548723816715,
+                    5.969186336303162,
+                    0.15150100010065726,
+                    16.19492713601877,
+                    -19.572723554416275
+                  ]
+                },
+                {
+                  "elapsedSeconds": 0.4,
+                  "degrees": [
+                    1.728338435280404,
+                    7.881809524425935,
+                    -0.21703946796532156,
+                    18.42625221029654,
+                    -23.93647349743879
+                  ]
+                }
+              ],
+              "verticalCompliancePeakMeters": 0.00029121116187861944,
+              "verticalComplianceRampSeconds": 0.2,
+              "pairedReferenceBlend": 0,
+              "interpolation": "smoothstep-per-key-no-overshoot",
+              "scope": "bridgeLifecycleOnly",
+              "internalBoundNote": "Late ForeArm/pole continuation18.426/−23.936deg exceeds initial12deg investigation bound; actual physical gates unchanged."
+            },
+            "bridgeCorrection": {
+              "pitchDegrees": 1.724302100867944,
+              "rollDegrees": 7.640435953359689,
+              "deviationDegrees": -0.17052955978689943,
+              "forearmTwistDegrees": 18.144658373762173,
+              "elbowSwivelDegrees": -23.38576705744144,
+              "heightOffsetMeters": 0.00029121116187861944
+            },
+            "bridgeTargetArmAxisWorld": [
+              -0.43138950097032613,
+              -0.883421043945018,
+              0.18294905730193745
+            ],
+            "calibration": {
+              "kind": "anatomicalHeelPalmRayV1",
+              "selector": {
+                "kind": "fixedHandLocalPalmarRay",
+                "region": "proximalPalmarHeel",
+                "coordinateFrame": "inverseBindHandLocalMeters",
+                "referenceXY": [
+                  -0.0025,
+                  -0.03
+                ],
+                "rayOriginZ": -0.2,
+                "rayDirection": [
+                  0,
+                  0,
+                  1
+                ],
+                "palmarNormalZMaximum": -0.5,
+                "minCornerHandInfluence": 0.5,
+                "minPointHandInfluence": 0.8,
+                "noFallback": true
+              },
+              "handName": "LeftHand",
+              "modelSha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+              "calibrationSourceSha256": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+              "calibrationKey": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613:LeftHand:anatomicalHeelPalmRayV1",
+              "meshIndex": 0,
+              "meshName": "player-02-lod1",
+              "material": "Skin",
+              "triangleIndex": 370,
+              "triangleVertexIndices": [
+                274,
+                275,
+                288
+              ],
+              "barycentricWeights": [
+                0.07040098421132482,
+                0.7900058105100191,
+                0.13959320527865615
+              ],
+              "bindPositions": [
+                [
+                  0.1755092889070511,
+                  0.7042438983917236,
+                  -0.034997470676898956
+                ],
+                [
+                  0.15320827066898346,
+                  0.760739803314209,
+                  -0.025949627161026
+                ],
+                [
+                  0.1727057248353958,
+                  0.7839328050613403,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalBindPositions": [
+                [
+                  0.015509292483329773,
+                  -0.08575612306594849,
+                  -0.034997470676898956
+                ],
+                [
+                  -0.006791725754737854,
+                  -0.029260218143463135,
+                  -0.025949627161026
+                ],
+                [
+                  0.0127057284116745,
+                  -0.006067216396331787,
+                  -0.01605222374200821
+                ]
+              ],
+              "handLocalReferencePoint": [
+                -0.002499999999999999,
+                -0.03,
+                -0.025204993982336887
+              ],
+              "handLocalNormal": [
+                0.20512195667801594,
+                0.23319998196578756,
+                -0.9505486580389974
+              ],
+              "namedInfluences": [
+                {
+                  "LeftHand": 1
+                },
+                {
+                  "LeftHand": 0.8448663353919983,
+                  "LeftForeArm": 0.1551336646080017
+                },
+                {
+                  "LeftHand": 0.5763142108917236,
+                  "LeftForeArm": 0.42368578910827637
+                }
+              ],
+              "barycentricHandInfluence": 0.8182998462213251
+            },
+            "authoredMarkerDescriptive": {
+              "worldPointMeters": [
+                0.29175585199381165,
+                -0.01581324442025739,
+                0.05436105556324458
+              ],
+              "anchorWorldMeters": [
+                0.3,
+                0,
+                0.05
+              ],
+              "residualMeters": 0.018358743994850164,
+              "usedForPhysicalSupport": false
+            }
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "nativePalmSurfaceIK",
+            "contactKey": "slide_tackle:LeftHand:1.173333:1.466667",
+            "bones": [
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand"
+            ],
+            "phase": "plant",
+            "weight": 1,
+            "solverIterations": 6
+          }
+        ]
+      },
+      "camera": {
+        "position": [
+          0.775962211627615,
+          0.2579916851007583,
+          0.17462264974390734
+        ],
+        "quaternion": [
+          -0.14931234692717335,
+          0.6190978325192531,
+          0.1214114768626191,
+          0.7613691286827303
+        ],
+        "fov": 30,
+        "aspect": 2.164102564102564
+      },
+      "minimumY": 0.0008278836695935696
+    },
+    {
+      "session": {
+        "width": 844,
+        "height": 390,
+        "errors": [],
+        "remoteRequests": []
+      }
+    }
+  ]
+}

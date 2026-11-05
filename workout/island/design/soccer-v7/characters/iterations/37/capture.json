@@ -1,0 +1,2894 @@
+{
+  "schemaVersion": 1,
+  "iteration": "37",
+  "startedAt": "2026-11-05T12:15:06.106Z",
+  "finishedAt": "2026-11-05T12:15:28.812Z",
+  "runtimeURL": "http://127.0.0.1:<ephemeral>/preview.html",
+  "offline": true,
+  "deviceScaleFactor": 1.5,
+  "screenshotScale": "css",
+  "runtimeSha256": "f69347424a99aa2ccde2fced5fcaddf7e74e8631130ab62e85d7b8a818155c6e",
+  "dataSha256": "9e7b695d504665147d73a085ed01e068bb016e0c0a35fbfcff065ea74cc47665",
+  "fileProtocolTest": "Blocked by managed Chromium administrator policy; actual test uses local classic scripts and embedded assets, with external HTTP blocked.",
+  "remoteRequests": [],
+  "localRequests": [
+    "<package>/preview.html?paused&clean",
+    "<package>/preview.css",
+    "<package>/vendor/data.js",
+    "<package>/vendor/viewer-runtime.js",
+    "<package>/offline/player-01-lod0.js"
+  ],
+  "errors": [],
+  "states": [
+    {
+      "view": "face",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 2,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 7,
+        "triangles": 35379,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 2,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "body",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 4,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35383,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 4,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 3
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 4
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "cloth",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 6,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 5
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 6
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35383,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 6,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 3
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 4
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 5
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 6
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "face",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 8,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 5
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 6
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 7
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 8
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "face",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 7,
+        "triangles": 35379,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 8,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 3
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 4
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 5
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 6
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 7
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 8
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "body",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 10,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 5
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 6
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 7
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 8
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 9
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 10
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "body",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 9,
+        "triangles": 35383,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 10,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 3
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 4
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 5
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 6
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 7
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 8
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 9
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 10
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    },
+    {
+      "view": "cloth",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "recovery": {
+          "clock": 0,
+          "phase": "standalone",
+          "transitionSerial": 12,
+          "activeBaseClip": "idle",
+          "baseSeconds": 0.27,
+          "overlayClip": null,
+          "overlaySeconds": 0,
+          "contributors": [
+            {
+              "clipID": "idle",
+              "sampleSeconds": 0.27,
+              "playbackRate": 1,
+              "weight": 1,
+              "scope": "body",
+              "transform": "identity"
+            }
+          ],
+          "request": null,
+          "pendingRequestID": null,
+          "episode": null,
+          "bridgePlan": null,
+          "risePlan": null,
+          "bodySettling": {
+            "active": false,
+            "phase": "inactive",
+            "elapsedSeconds": 0,
+            "carryWeight": 0,
+            "actualGeometryWitness": null,
+            "offsetMeters": 0,
+            "velocityMps": 0,
+            "firstFootTransferConcurrent": true,
+            "initialWitness": null,
+            "actualWitness": null,
+            "deadlineMissed": false
+          },
+          "matchedEntrySeconds": null,
+          "locomotionAllowed": false,
+          "motorAction": "idle",
+          "presentation": null,
+          "constraints": null,
+          "measured": null,
+          "events": [
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 1
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 2
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 3
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 4
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 5
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 6
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 7
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 8
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 9
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 10
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 11
+            },
+            {
+              "type": "base-changed",
+              "clock": 0,
+              "from": {
+                "clipID": "idle",
+                "seconds": 0,
+                "entrySeconds": 0,
+                "rate": 1,
+                "mirror": false
+              },
+              "to": {
+                "clipID": "idle",
+                "seconds": 0.27,
+                "entrySeconds": 0.27,
+                "rate": 1,
+                "mirror": false
+              },
+              "transitionSerial": 12
+            }
+          ],
+          "requests": [],
+          "palmBodyCompression": null,
+          "palmSupports": []
+        },
+        "characterID": "player-01",
+        "view": "cloth",
+        "lod": "auto",
+        "lighting": "studio",
+        "clipID": "idle",
+        "time": 0.27,
+        "playing": false,
+        "fps": 0,
+        "threeRevision": "160",
+        "errors": [],
+        "draws": 7,
+        "triangles": 35379,
+        "models": [
+          {
+            "id": "player-01",
+            "path": "models/player-01-lod0.glb",
+            "triangles": 35365,
+            "lift": 0,
+            "minimumY": 0.0020000018831341916,
+            "world": [
+              0,
+              0,
+              0
+            ],
+            "requestedAction": "idle",
+            "recovery": {
+              "clock": 0,
+              "phase": "standalone",
+              "transitionSerial": 12,
+              "activeBaseClip": "idle",
+              "baseSeconds": 0.27,
+              "overlayClip": null,
+              "overlaySeconds": 0,
+              "contributors": [
+                {
+                  "clipID": "idle",
+                  "sampleSeconds": 0.27,
+                  "playbackRate": 1,
+                  "weight": 1,
+                  "scope": "body",
+                  "transform": "identity"
+                }
+              ],
+              "request": null,
+              "pendingRequestID": null,
+              "episode": null,
+              "bridgePlan": null,
+              "risePlan": null,
+              "bodySettling": {
+                "active": false,
+                "phase": "inactive",
+                "elapsedSeconds": 0,
+                "carryWeight": 0,
+                "actualGeometryWitness": null,
+                "offsetMeters": 0,
+                "velocityMps": 0,
+                "firstFootTransferConcurrent": true,
+                "initialWitness": null,
+                "actualWitness": null,
+                "deadlineMissed": false
+              },
+              "matchedEntrySeconds": null,
+              "locomotionAllowed": false,
+              "motorAction": "idle",
+              "presentation": null,
+              "constraints": null,
+              "measured": null,
+              "events": [
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 1
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 2
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 3
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 4
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 5
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 6
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 7
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 8
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 9
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 10
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 11
+                },
+                {
+                  "type": "base-changed",
+                  "clock": 0,
+                  "from": {
+                    "clipID": "idle",
+                    "seconds": 0,
+                    "entrySeconds": 0,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "to": {
+                    "clipID": "idle",
+                    "seconds": 0.27,
+                    "entrySeconds": 0.27,
+                    "rate": 1,
+                    "mirror": false
+                  },
+                  "transitionSerial": 12
+                }
+              ],
+              "requests": [],
+              "palmBodyCompression": null,
+              "palmSupports": []
+            },
+            "activeBaseClip": "idle",
+            "activeBaseSeconds": 0.27,
+            "physicalMotorTargetClip": null,
+            "locomotion": null,
+            "motorPresentation": null,
+            "sampleSeconds": 0.27,
+            "phaseRate": 1,
+            "pathScale": 1,
+            "contactResidual": 0,
+            "contacts": [
+              {
+                "bone": "LeftFoot",
+                "key": "idle/LeftFoot/0/0",
+                "anchor": [
+                  0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              },
+              {
+                "bone": "RightFoot",
+                "key": "idle/RightFoot/0/0",
+                "anchor": [
+                  -0.1,
+                  0,
+                  0
+                ],
+                "release": 1.53
+              }
+            ]
+          }
+        ],
+        "environment": {
+          "generatedTextureSizes": [
+            [
+              512,
+              512
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              512,
+              256
+            ],
+            [
+              96,
+              96
+            ],
+            [
+              1024,
+              1024
+            ],
+            [
+              512,
+              512
+            ]
+          ],
+          "crowdInstances": 360,
+          "crowdDrawCalls": 2,
+          "seatInstances": 360,
+          "environmentTriangles": 19580,
+          "shadowMapHero": 1024,
+          "shadowMapPitch": 512,
+          "environmentGeneratedLocally": true,
+          "reflectionSettings": {
+            "frontStrength": 8,
+            "sigma": 0
+          }
+        }
+      }
+    }
+  ],
+  "loadedPackageHashes": {
+    "manifest": "f0e5f049fd0683e35615e0824e3d3411d3b05dce5c2ffae7c5e0d33a8e851caf",
+    "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+    "preview": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0",
+    "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+    "locomotion": "9d72815c00e1aa42da78e21bdf70dd9eb18a9cb7721f0c9beb4c436090183d1a",
+    "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+    "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+    "recovery": "63df25521eae804f172f9463977a08dd0ed15526462d4afde5859a70ac036453",
+    "palmSupport": "18586b3bde2e0be5c55d2bf2d2c5c9a2b78720301835573b2b974563a0acd0e0",
+    "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+    "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+    "models": {
+      "models/player-01-lod0.glb": "a10ee1699c6ba8b4f1eda1808e098d8d5a93ce0a06778a019807ff9c6b92e267",
+      "models/player-01-lod1.glb": "3f2bd44f1914f4f83a7a6cdb882601e6b307dd4073a07c9edc37a5c863983d28",
+      "models/player-02-lod0.glb": "b96508d5e3fa5393627968593a083fea48e0eba66709f8ec8308374fa847ad35",
+      "models/player-02-lod1.glb": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+      "models/player-03-lod0.glb": "474bab206170ec80d56bfe30833136a34aabc317bbb6d9a17c4edb4d7f510a4e",
+      "models/player-03-lod1.glb": "5438af304eefb02dd1b54bd4e5c00670ddb1ff3a6afe6e7f7b6d31e8abfb8180",
+      "models/player-04-lod0.glb": "9819043a3d8096299ceeffc54adcde8e5faf922aed166de978038637e0b6e5b1",
+      "models/player-04-lod1.glb": "44cefd62773857678787254f2504e98b9d6aaaac1d956b3527d867a59b3a7b35",
+      "models/player-05-lod0.glb": "14487a98d38e67d2c26c7d8b1fb8961465d9ce8d446b95430fa52a9bddfb27a0",
+      "models/player-05-lod1.glb": "9236d88ed2e6b9b8c4711c34b96317f583327177ca245cf170a497c1ca3c8ebb",
+      "models/player-06-lod0.glb": "f5506667facca228ec11e84c36fbd735da3d08f2a2d57609f54eca62a47359b5",
+      "models/player-06-lod1.glb": "a0df76d393b9812379b334eca56bb1e36c2957cd8828e5b510c52f80f7b17704",
+      "models/goalkeeper-lod0.glb": "bf054c195f684ad687e76b84187f47c3c14347fa2651f737db7aac55f7b9030a",
+      "models/goalkeeper-lod1.glb": "deccb70c477ac427692fb32987ec6a3764da5f54ef5c8c1e9af43ba29c325c3f",
+      "models/referee-lod0.glb": "88a5d83154e79623aa9c82c0ab622b61dcb474f017dc4b272b6324c5e159a7a9",
+      "models/referee-lod1.glb": "c2f14d49c61f762b3a6dfde4abb60fe74a4ce63df0b332718c21576c245e5c8e"
+    },
+    "bootBounds": "38528324d7a6bdccaf3f217086ff9fc2f733bc4e73eed637e5b24a2d879fb8ae"
+  },
+  "inputs": {
+    "asset-manifest.json": {
+      "bytes": 467074,
+      "sha256": "f0e5f049fd0683e35615e0824e3d3411d3b05dce5c2ffae7c5e0d33a8e851caf"
+    },
+    "animations.json": {
+      "bytes": 992407,
+      "sha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc"
+    },
+    "preview.js": {
+      "bytes": 105259,
+      "sha256": "b4c7826958a8a57af6c9d324d61f314a8a9158b27ed98f8f15a863cb2b45e8d0"
+    },
+    "preview.css": {
+      "bytes": 21078,
+      "sha256": "e5b7a3fe78c2663cf44a30de42e01ec9cf81ac70cdd465501d250b1dcaabdc29"
+    },
+    "source/scene.js": {
+      "bytes": 16830,
+      "sha256": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba"
+    },
+    "source/character_build.py": {
+      "bytes": 70501,
+      "sha256": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af"
+    },
+    "source/character_atlas.py": {
+      "bytes": 25911,
+      "sha256": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3"
+    }
+  }
+}

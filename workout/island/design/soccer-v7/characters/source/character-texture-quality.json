@@ -1,0 +1,989 @@
+{
+  "schemaVersion": 2,
+  "kind": "current-delivery-texture-codec-measurement",
+  "generatedAt": "2026-11-05T11:16:45.503318+00:00",
+  "method": "Regenerated all eight atlas sets into /tmp using current authoring sources and original skin cache. Intercepted the exact pre-WebP RGBA image and pre-palette normal/ORM inputs in memory; source assets, actual textures and models were not written. Compared generated images with current delivered textures.",
+  "sourceScope": "Current source and actual delivered texture SHA256 identify scope; this report does not reuse earlier round10 candidate measurements.",
+  "software": {
+    "python": "3.13.5",
+    "pillow": "11.1.0",
+    "numpy": "2.2.4",
+    "webp": "1.5.0"
+  },
+  "sourceSHA256": {
+    "character_atlas.py": "0522ea4946c556ee88e2352eab6537e36561d29ea1719052ba23e1264af71cc3",
+    "character_groom_atlas.py": "1c5fb656651987252bd24c7b142a53bd400f69f17f5e68269b3deae0e7707ca4",
+    "character_build.py": "af2b7aa6ddfddfeea87692c165b2e9e3c6b8c989587e8bd7627ace064d0483af",
+    "character_hair.py": "ff6c56cf3b03b4d04824fe07a8045c2d3df9a610bec1a4fcb2b4fe11384c667c",
+    "character_normal_field.py": "5fc4c2948139757c0a668bbf1d40beaa1c692b23e9cc87db0ff88376fce9866b",
+    "character_cloth17.py": "052bf564f03f1a9292ebd0b3d3170e66e340a03db3941f0cf95baaa441476be5",
+    "character_eye19.py": "bf1a7038a8efdb4f0bf05c91d9d85c20a8c921413cf297bc6608c4c606b74b31",
+    "character_sock21.py": "781c07e0d65fd61dcf32b7e7eac5d9ae3c58c218c4ec9d982acc26a7574e9703",
+    "character_seams.py": "7ef842e7fcccfbe808fbdd4a19bd2b478897bfd9e9218fbc720bf880719c9e03",
+    "character_face_helper.py": "e99f9612d34af79b1d1379d9d9d38ac45b1784893f1bb3782ff3f7780ddc9b6d",
+    "character_fetch_skin.py": "3ac3e1d351285657ba521adcba91b1ff3ac45d0cb242e023e2941e706aef03f8",
+    "character_face27.py": "37a4674d4879f0953f27a50d926ba58df3c024bfcb50e2793ba011e480ac1342",
+    "character_hair29.py": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+    "character_hair31.py": "9ff61072721ccde87ec5a9a5b747d1850e846726f2ca2fa7c5e3ec89abb729f5",
+    "character_hair_shape31.py": "f8e952f0e807d874ed67aa7bb0ddbadc8415158cda38ad17688ae78b72bed23d",
+    "character_farcap32.py": "8871cd9d40619fdf710b6a217566e470fd21299909ec9062bd2148fcda0350e0",
+    "character_cloth_finish.py": "72af2bcc99b27262719bc9f6019a94aea70343ea4b3f3c02ed812e6e9a84759f",
+    "character-measure-textures.py": "1e953968e62260d3cd56fe70f36c7d353d1b316137c1a6779f3b32ba60fb8645"
+  },
+  "skinInputs": [
+    {
+      "file": "young_lightskinned_male_diffuse.png",
+      "authoringOnly": true,
+      "cacheSource": true,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+    },
+    {
+      "file": "young_darkskinned_male_diffuse.png",
+      "authoringOnly": true,
+      "cacheSource": true,
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+    }
+  ],
+  "measurementStart": "basecolor after authoring color quantization, before WebP; normal after authored 8bit quantization, before 256-color palette; ORM before exact palette conversion",
+  "limitations": [
+    "PSNR/MAE measure WebP encoding of the atlas face rectangle, not photorealism or reference-game likeness.",
+    "Normal angular error isolates PNG palette quantization; it does not assess the realism of authored surface normals.",
+    "DecodedRGBA comparison binds these measurements to actual current image files. A later texture/source edit invalidates that scope."
+  ],
+  "actualSourcesAndTexturesUnchanged": true,
+  "summary": {
+    "characters": 8,
+    "alphaExactAll": true,
+    "ormPaletteExactAll": true,
+    "allActualImagesDecodedIdentically": true,
+    "allActualEncodedFilesIdentical": true,
+    "minimumFacePSNRdB": 44.80121502323976,
+    "maximumFaceRGBMAE": 1.0723202472711322,
+    "maximumMeanNormalPaletteAngularDegrees": 0.0018555911371562746
+  },
+  "characters": [
+    {
+      "id": "player-01",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 0.9193816991896664,
+        "faceRGBMSE": 1.6286813196948875,
+        "facePSNRdB": 46.012442456431515,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.999049186706543,
+        "meanAngularErrorDegrees": 0.0008362829666611898,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 5.163342922481119,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 8.490454716891905e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 5.163342922481119
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 6.299645541609267e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.2138234281277476
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.00606817868959516,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 3.6308397809434543
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-01-kit-a-basecolor.webp",
+          "bytes": 121600,
+          "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+          "regeneratedSha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-01-normal.png",
+          "bytes": 212719,
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "regeneratedSha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-01-orm.png",
+          "bytes": 30215,
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "regeneratedSha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "player-02",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 0.8391651319828115,
+        "faceRGBMSE": 1.4615386192047108,
+        "facePSNRdB": 46.48270065371575,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9978313446044922,
+        "meanAngularErrorDegrees": 0.0016705425722924562,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 5.3116305767974366,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 8.413402703914637e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.2822363338222162
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.01311387083794833,
+            "p99AngularErrorDegrees": 0.44237713474198403,
+            "maximumAngularErrorDegrees": 5.3116305767974366
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-02-kit-a-basecolor.webp",
+          "bytes": 115832,
+          "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+          "regeneratedSha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-02-normal.png",
+          "bytes": 200843,
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "regeneratedSha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-02-orm.png",
+          "bytes": 30271,
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "regeneratedSha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "player-03",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 1.0232616054381611,
+        "faceRGBMSE": 1.9758683133645087,
+        "facePSNRdB": 45.173223642827494,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9993896484375,
+        "meanAngularErrorDegrees": 0.0005765277812681431,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 8.85852017579407,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 0.00011057368254710632,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 8.85852017579407
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 7.266105786638531e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 1.8753227012190676
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.0033449303533957327,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.6800825098153895
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-03-kit-a-basecolor.webp",
+          "bytes": 142894,
+          "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11",
+          "regeneratedSha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-03-normal.png",
+          "bytes": 212779,
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "regeneratedSha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-03-orm.png",
+          "bytes": 30071,
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "regeneratedSha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "player-04",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 1.0723202472711322,
+        "faceRGBMSE": 2.152577807702832,
+        "facePSNRdB": 44.80121502323976,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9993820190429688,
+        "meanAngularErrorDegrees": 0.0005727563235940588,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 8.430725469339215,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 0.00011115744800168765,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 8.430725469339215
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 9.365483387711046e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.2822363338222162
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.0032802175380733365,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 3.7205972256820563
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-04-kit-b-basecolor.webp",
+          "bytes": 160098,
+          "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+          "regeneratedSha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-04-normal.png",
+          "bytes": 212999,
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "regeneratedSha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-04-orm.png",
+          "bytes": 30128,
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "regeneratedSha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "player-05",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 0.782125109272565,
+        "faceRGBMSE": 1.2827261724318513,
+        "facePSNRdB": 47.04946404800262,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9990911483764648,
+        "meanAngularErrorDegrees": 0.0007827306859933064,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 6.3494592687886104,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 8.753266141320445e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 6.3494592687886104
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 3.403419904590144e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 1.4124281508833847
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.006289281895672211,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 4.1011545866351655
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-05-kit-b-basecolor.webp",
+          "bytes": 110934,
+          "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649",
+          "regeneratedSha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-05-normal.png",
+          "bytes": 212979,
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "regeneratedSha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-05-orm.png",
+          "bytes": 30204,
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "regeneratedSha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "player-06",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 0.9630948245028803,
+        "faceRGBMSE": 1.7508001365074388,
+        "facePSNRdB": 45.698437890654986,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.998875617980957,
+        "meanAngularErrorDegrees": 0.0010421380200125278,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 5.805760749857277,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 5.695715081348784e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 5.805760749857277
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 4.5902228343271505e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.2822363338222162
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.008333921032581963,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 4.182366113017407
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/player-06-kit-b-basecolor.webp",
+          "bytes": 138386,
+          "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7",
+          "regeneratedSha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/player-06-normal.png",
+          "bytes": 213521,
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "regeneratedSha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/player-06-orm.png",
+          "bytes": 29973,
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "regeneratedSha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "goalkeeper",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 0.9769413110248204,
+        "faceRGBMSE": 1.8408243327584033,
+        "facePSNRdB": 45.48068014489776,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9976806640625,
+        "meanAngularErrorDegrees": 0.0018555911371562746,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 4.331647869971577,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 8.635256535767013e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 2.7185094885310432
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.014014808883711864,
+            "p99AngularErrorDegrees": 0.5310030184458313,
+            "maximumAngularErrorDegrees": 4.331647869971577
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/goalkeeper-keeper-basecolor.webp",
+          "bytes": 137478,
+          "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8",
+          "regeneratedSha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/goalkeeper-normal.png",
+          "bytes": 202968,
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "regeneratedSha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/goalkeeper-orm.png",
+          "bytes": 30852,
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "regeneratedSha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "referee",
+      "basecolorWebP": {
+        "facePatchImageBounds": [
+          15,
+          10,
+          614,
+          553
+        ],
+        "faceRGBMeanAbsoluteError": 1.014731940178587,
+        "faceRGBMSE": 1.8471752081174784,
+        "facePSNRdB": 45.46572269807875,
+        "alphaExact": true,
+        "webpQuality": 98,
+        "webpMethod": 6,
+        "alphaQuality": 100,
+        "exactFlag": true
+      },
+      "normalPalette": {
+        "identicalPixelFraction": 0.9989891052246094,
+        "meanAngularErrorDegrees": 0.0008452311345783595,
+        "p99AngularErrorDegrees": 0.0,
+        "maximumAngularErrorDegrees": 8.196372214519599,
+        "patches": {
+          "face": {
+            "meanAngularErrorDegrees": 6.913651897348805e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 8.196372214519599
+          },
+          "shirt": {
+            "meanAngularErrorDegrees": 3.224567459864958e-05,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 1.34213149754594
+          },
+          "hair": {
+            "meanAngularErrorDegrees": 0.0062264226720208345,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 3.036182344495738
+          },
+          "wisps": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          },
+          "scalp": {
+            "meanAngularErrorDegrees": 0.0,
+            "p99AngularErrorDegrees": 0.0,
+            "maximumAngularErrorDegrees": 0.0
+          }
+        }
+      },
+      "ormPaletteExact": true,
+      "actualTextureComparison": [
+        {
+          "channel": "basecolor",
+          "actualFile": "textures/referee-referee-basecolor.webp",
+          "bytes": 144638,
+          "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d",
+          "regeneratedSha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "normal",
+          "actualFile": "textures/referee-normal.png",
+          "bytes": 213142,
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "regeneratedSha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "channel": "orm",
+          "actualFile": "textures/referee-orm.png",
+          "bytes": 30104,
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "regeneratedSha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1",
+          "encodedBytesIdentical": true,
+          "decodedRGBAIdentical": true,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "authoringRecipe": {
+    "skinInputs": [
+      {
+        "file": "young_lightskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+      },
+      {
+        "file": "young_darkskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+      }
+    ],
+    "faceSourceUvCrop": [
+      0.78,
+      0.32,
+      0.99,
+      0.65
+    ],
+    "runtimeAtlasDimensions": [
+      1024,
+      1024
+    ],
+    "atlasRegions": {
+      "face": [
+        0.015,
+        0.46,
+        0.6,
+        0.99
+      ],
+      "skin": [
+        0.015,
+        0.015,
+        0.4,
+        0.27
+      ],
+      "scalp": [
+        0.015,
+        0.275,
+        0.4,
+        0.3
+      ],
+      "shirt": [
+        0.62,
+        0.56,
+        0.99,
+        0.99
+      ],
+      "shorts": [
+        0.62,
+        0.36,
+        0.99,
+        0.54
+      ],
+      "socks": [
+        0.42,
+        0.015,
+        0.6,
+        0.2
+      ],
+      "boots": [
+        0.42,
+        0.22,
+        0.6,
+        0.44
+      ],
+      "stitch": [
+        0.42,
+        0.445,
+        0.6,
+        0.455
+      ],
+      "hair": [
+        0.62,
+        0.085,
+        0.99,
+        0.34
+      ],
+      "wisps": [
+        0.62,
+        0.015,
+        0.99,
+        0.075
+      ],
+      "eyes": [
+        0.015,
+        0.31,
+        0.155,
+        0.435
+      ],
+      "brows": [
+        0.015,
+        0.438,
+        0.4,
+        0.455
+      ],
+      "gloves": [
+        0.17,
+        0.31,
+        0.4,
+        0.435
+      ]
+    },
+    "hair": "anatomical scalp undercoat with authored curved alpha cards",
+    "synthetic": true,
+    "generator": "source/character_build.py",
+    "restExpression": {
+      "mouthCompression": 0.4,
+      "eyeSlit": 0.06,
+      "eyeClosureExtra": 0.05,
+      "eyeColorFactor": 0.88
+    },
+    "hairShading": "isotropic",
+    "crownOwnNormalBlend": 0.2,
+    "hairMacroShape": "31",
+    "hairMacroIds": [
+      "player-03"
+    ],
+    "farCap": "32",
+    "clothFinishing": "31",
+    "crownFlyaways": "1",
+    "hairGeometryVariant": "29",
+    "faceVariant": "27",
+    "hairNormalField": "projected",
+    "eyeVariant": "19",
+    "hairTextureVariant": "20",
+    "sockVariant": "23",
+    "clothVariant": "18",
+    "promotedFrom": "iterations/35/frozen-package + source/character-waist36.mjs",
+    "promotionPreservedStagedGlbBytes": true,
+    "waist36": {
+      "bandMeters": [
+        0.7,
+        0.84
+      ],
+      "target": "HipsSpine torso rule",
+      "method": "shorts-only smooth pelvis rebind; original native32 BIN retained",
+      "tool": "source/character-waist36.mjs",
+      "baselinePackage": "iterations/35/frozen-package",
+      "baselineManifestSha256": "fc17d5d022ad91afd6c11ea1532c79a7c893c54a7405a081584ef4bf65b4235a",
+      "proof": "source/character-waist36-report.json",
+      "nativeMotionRetainedByteExact": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "samplingHz": 240,
+  "rows": [
+    {
+      "id": "turn_left",
+      "headingDeltaRadians": 1.047198,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.710764733706023e-16,
+      "maxSupportedFootOrientationErrorRadians": 4.2146848510894035e-8,
+      "minBootCornerMeters": -6.833152914886842e-7,
+      "pass": true
+    },
+    {
+      "id": "turn_right",
+      "headingDeltaRadians": -1.047198,
+      "maxReachResidualMeters": 0,
+      "maxAnchorErrorMeters": 4.710764733706023e-16,
+      "maxSupportedFootOrientationErrorRadians": 4.2146848510894035e-8,
+      "minBootCornerMeters": -6.833152914886842e-7,
+      "pass": true
+    }
+  ],
+  "limits": "Canonical bones and approximate boot corners only; whole-mesh displayed floor remains separate."
+}

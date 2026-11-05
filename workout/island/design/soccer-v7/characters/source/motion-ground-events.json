@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "motionSha256": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+  "landingMaximumClearanceMeters": 0.02,
+  "models": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "bytes": 1153712,
+      "sha256": "189b11be43c63fe660cdc31c81c64834cc8aec8248968ed63b25b2c4915afce4"
+    },
+    {
+      "file": "models/goalkeeper-lod0.glb",
+      "bytes": 1244972,
+      "sha256": "8ac9e08de93ff8adc06d97aba7cbdc602d74b540156b53119880fa71629cf97e"
+    }
+  ],
+  "rows": [
+    {
+      "clip": "decelerate",
+      "event": "braking_stopped",
+      "timeSeconds": 1,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.0020000018831342592,
+      "minimumYAfterFloorCorrectionMeters": 0.0020000018831342592,
+      "floorLiftMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "header",
+      "event": "visual_land",
+      "timeSeconds": 1.013333,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.0020000018831339704,
+      "minimumYAfterFloorCorrectionMeters": 0.0020000018831339704,
+      "floorLiftMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "slide_tackle",
+      "event": "visual_palm_ground",
+      "timeSeconds": 1.173333,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.0017165250610751137,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.00028347493892488633,
+      "pass": true
+    },
+    {
+      "clip": "slide_tackle",
+      "event": "visual_slide_settled",
+      "timeSeconds": 1.466667,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.0016696412247865222,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.0003303587752134778,
+      "pass": true
+    },
+    {
+      "clip": "get_up",
+      "event": "palms_support_ground",
+      "timeSeconds": 0.5,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.002000001883134292,
+      "minimumYAfterFloorCorrectionMeters": 0.002000001883134292,
+      "floorLiftMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "get_up",
+      "event": "recovered_standing",
+      "timeSeconds": 1.6,
+      "model": "models/player-01-lod0.glb",
+      "rawMinimumYMeters": 0.002000001883134203,
+      "minimumYAfterFloorCorrectionMeters": 0.002000001883134203,
+      "floorLiftMeters": 0,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_left",
+      "event": "visual_side_land",
+      "timeSeconds": 1.45,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.0033144243970226472,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.005314424397022647,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_left",
+      "event": "visual_dive_settled",
+      "timeSeconds": 1.466667,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.004496514600111301,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.006496514600111301,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_right",
+      "event": "visual_side_land",
+      "timeSeconds": 1.45,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.003028707279369186,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.005028707279369186,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_right",
+      "event": "visual_dive_settled",
+      "timeSeconds": 1.466667,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.004213878109961405,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.006213878109961405,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_high",
+      "event": "visual_side_land",
+      "timeSeconds": 1.65,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.0035785853002275325,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.0055785853002275326,
+      "pass": true
+    },
+    {
+      "clip": "keeper_dive_high",
+      "event": "visual_dive_settled",
+      "timeSeconds": 1.666667,
+      "model": "models/goalkeeper-lod0.glb",
+      "rawMinimumYMeters": -0.004496514600111301,
+      "minimumYAfterFloorCorrectionMeters": 0.002,
+      "floorLiftMeters": 0.006496514600111301,
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "limitations": [
+    "Canonical FK/contact IK and complete decoded-vertex skinning; this is independent of the viewer blend and floor implementation.",
+    "A low vertex at an event does not prove physically realistic weight support or damping. This only catches floating landings."
+  ]
+}

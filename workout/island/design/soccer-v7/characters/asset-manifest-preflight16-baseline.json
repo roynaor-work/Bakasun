@@ -1,0 +1,704 @@
+{
+  "schemaVersion": 1,
+  "kind": "soccer-human-character-library",
+  "skeleton": "rig.json",
+  "license": "CC0-1.0",
+  "characters": [
+    {
+      "id": "player-01",
+      "label": "איתן",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-square",
+        "heritage": [
+          0.12,
+          0.1,
+          0.78
+        ],
+        "hair": "crop",
+        "eye": [
+          67,
+          45,
+          26
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-a",
+          "color": "#146c70",
+          "textures": {
+            "basecolor": "textures/player-01-kit-a-basecolor.webp",
+            "normal": "textures/player-01-normal.png",
+            "orm": "textures/player-01-orm.png"
+          },
+          "lod0": "models/player-01-lod0.glb",
+          "lod0Triangles": 23894,
+          "lod0BytesBeforeDraco": 1539404,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 72,
+            "faceCoreMappedTriangles": 72,
+            "shirtCoreTriangles": 248,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 78,
+            "hemCorrectedVertices": 10,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.003794740243337341
+          },
+          "lod1": "models/player-01-lod1.glb",
+          "lod1Triangles": 5201,
+          "lod1BytesBeforeDraco": 696836,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 4,
+            "faceCoreMappedTriangles": 4,
+            "shirtCoreTriangles": 63,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 32,
+            "hemCorrectedVertices": 5,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005249140323069862
+          },
+          "lod0Bytes": 1153712,
+          "lod0Sha256": "189b11be43c63fe660cdc31c81c64834cc8aec8248968ed63b25b2c4915afce4",
+          "lod1Bytes": 872180,
+          "lod1Sha256": "d5a50e8e9a1dd73e929ccb798dee42119bd95666bb2296673a8988ea28db0371",
+          "lod0BytesBeforeAnimations": 785396,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 503904,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "player-02",
+      "label": "גיא",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-rectangular",
+        "heritage": [
+          0.92,
+          0,
+          0.08
+        ],
+        "hair": "coils",
+        "eye": [
+          49,
+          31,
+          22
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-a",
+          "color": "#146c70",
+          "textures": {
+            "basecolor": "textures/player-02-kit-a-basecolor.webp",
+            "normal": "textures/player-02-normal.png",
+            "orm": "textures/player-02-orm.png"
+          },
+          "lod0": "models/player-02-lod0.glb",
+          "lod0Triangles": 26328,
+          "lod0BytesBeforeDraco": 1690712,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 82,
+            "faceCoreMappedTriangles": 82,
+            "shirtCoreTriangles": 232,
+            "explicitRegionObjects": 40,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 77,
+            "hemCorrectedVertices": 11,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.004239063313790509
+          },
+          "lod1": "models/player-02-lod1.glb",
+          "lod1Triangles": 5127,
+          "lod1BytesBeforeDraco": 647972,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 5,
+            "faceCoreMappedTriangles": 5,
+            "shirtCoreTriangles": 57,
+            "explicitRegionObjects": 40,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 29,
+            "hemCorrectedVertices": 3,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.0050982180016323625
+          },
+          "lod0Bytes": 1203712,
+          "lod0Sha256": "de8ab8415efdd14e78c91d5dba205b83d1aa00a91f7f973e8b9e58a8717578b4",
+          "lod1Bytes": 839856,
+          "lod1Sha256": "b65a691b248f6e8b2cbf4fb91eecf4498d0b307a86e38f81c631cc159c581495",
+          "lod0BytesBeforeAnimations": 835328,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 471580,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "player-03",
+      "label": "ליאם",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-oval",
+        "heritage": [
+          0,
+          0.88,
+          0.12
+        ],
+        "hair": "sweep",
+        "eye": [
+          54,
+          41,
+          27
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-a",
+          "color": "#146c70",
+          "textures": {
+            "basecolor": "textures/player-03-kit-a-basecolor.webp",
+            "normal": "textures/player-03-normal.png",
+            "orm": "textures/player-03-orm.png"
+          },
+          "lod0": "models/player-03-lod0.glb",
+          "lod0Triangles": 23828,
+          "lod0BytesBeforeDraco": 1551156,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 72,
+            "faceCoreMappedTriangles": 72,
+            "shirtCoreTriangles": 261,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 73,
+            "hemCorrectedVertices": 2,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005758212413558839
+          },
+          "lod1": "models/player-03-lod1.glb",
+          "lod1Triangles": 5187,
+          "lod1BytesBeforeDraco": 708416,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 7,
+            "faceCoreMappedTriangles": 7,
+            "shirtCoreTriangles": 66,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 28,
+            "hemCorrectedVertices": 0,
+            "hemMinimumRadialClearanceMeters": 0.0072515920189459016,
+            "hemMinimumBeforeCorrectionMeters": 0.0072515920189459016
+          },
+          "lod0Bytes": 1170512,
+          "lod0Sha256": "21de38dc3beccbdfbf5cbf7168f27e8e519814506e91392bf357b0244b824c09",
+          "lod1Bytes": 888040,
+          "lod1Sha256": "e362bd6c07e057de7a4d826db7736cd8d99ea043c9559587bc75b699205348fa",
+          "lod0BytesBeforeAnimations": 802168,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 519764,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "player-04",
+      "label": "נבו",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-rectangular",
+        "heritage": [
+          0,
+          0.05,
+          0.95
+        ],
+        "hair": "quiff",
+        "eye": [
+          79,
+          105,
+          103
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-b",
+          "color": "#da912e",
+          "textures": {
+            "basecolor": "textures/player-04-kit-b-basecolor.webp",
+            "normal": "textures/player-04-normal.png",
+            "orm": "textures/player-04-orm.png"
+          },
+          "lod0": "models/player-04-lod0.glb",
+          "lod0Triangles": 24037,
+          "lod0BytesBeforeDraco": 1589412,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 74,
+            "faceCoreMappedTriangles": 74,
+            "shirtCoreTriangles": 249,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 75,
+            "hemCorrectedVertices": 9,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.0038394411722173644
+          },
+          "lod1": "models/player-04-lod1.glb",
+          "lod1Triangles": 5200,
+          "lod1BytesBeforeDraco": 735792,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 7,
+            "faceCoreMappedTriangles": 7,
+            "shirtCoreTriangles": 64,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 32,
+            "hemCorrectedVertices": 5,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.004949663406244101
+          },
+          "lod0Bytes": 1198192,
+          "lod0Sha256": "c7cb95ac7f304c4fd277500e77fe697223b168930707f7d650e3fe9368d4a7be",
+          "lod1Bytes": 912572,
+          "lod1Sha256": "298728bf05aefcdf084253b057c215e08de4a160bde94e23d7a5ad65f2a8f4ad",
+          "lod0BytesBeforeAnimations": 829808,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 544296,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "player-05",
+      "label": "רון",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-square",
+        "heritage": [
+          0.48,
+          0.3,
+          0.22
+        ],
+        "hair": "buzz",
+        "eye": [
+          71,
+          52,
+          27
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-b",
+          "color": "#da912e",
+          "textures": {
+            "basecolor": "textures/player-05-kit-b-basecolor.webp",
+            "normal": "textures/player-05-normal.png",
+            "orm": "textures/player-05-orm.png"
+          },
+          "lod0": "models/player-05-lod0.glb",
+          "lod0Triangles": 23964,
+          "lod0BytesBeforeDraco": 1536020,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 80,
+            "faceCoreMappedTriangles": 80,
+            "shirtCoreTriangles": 247,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 77,
+            "hemCorrectedVertices": 9,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.0040089437089246005
+          },
+          "lod1": "models/player-05-lod1.glb",
+          "lod1Triangles": 5198,
+          "lod1BytesBeforeDraco": 686920,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 5,
+            "faceCoreMappedTriangles": 5,
+            "shirtCoreTriangles": 65,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 35,
+            "hemCorrectedVertices": 4,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005032962603931879
+          },
+          "lod0Bytes": 1145516,
+          "lod0Sha256": "8c9d83f236730c0e03727ed46008f2a99ba1093599c7c9a5f883e471275a6aa9",
+          "lod1Bytes": 862656,
+          "lod1Sha256": "3e9e011958bc038d82499c3dd775ca47182f8146d43f574266a21efd5daa973a",
+          "lod0BytesBeforeAnimations": 777212,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 494384,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "player-06",
+      "label": "עומר",
+      "role": "field",
+      "fictional": true,
+      "design": {
+        "head": "head-oval",
+        "heritage": [
+          0.2,
+          0.12,
+          0.68
+        ],
+        "hair": "waves",
+        "eye": [
+          65,
+          72,
+          41
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "kit-b",
+          "color": "#da912e",
+          "textures": {
+            "basecolor": "textures/player-06-kit-b-basecolor.webp",
+            "normal": "textures/player-06-normal.png",
+            "orm": "textures/player-06-orm.png"
+          },
+          "lod0": "models/player-06-lod0.glb",
+          "lod0Triangles": 23907,
+          "lod0BytesBeforeDraco": 1558768,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 72,
+            "faceCoreMappedTriangles": 72,
+            "shirtCoreTriangles": 248,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 79,
+            "hemCorrectedVertices": 11,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.003824440610627533
+          },
+          "lod1": "models/player-06-lod1.glb",
+          "lod1Triangles": 5199,
+          "lod1BytesBeforeDraco": 701952,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 5,
+            "faceCoreMappedTriangles": 5,
+            "shirtCoreTriangles": 65,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 33,
+            "hemCorrectedVertices": 6,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005290290169118916
+          },
+          "lod0Bytes": 1173568,
+          "lod0Sha256": "69640defd4ed3e97ee0e3365f5e43e7be4fd83ff21ef4ee0217273d5d072e655",
+          "lod1Bytes": 883796,
+          "lod1Sha256": "7d86a11911d8bdbda00bc4d3359b7f740b5db9a08f8d2fd5ddd6fca0b3ba8250",
+          "lod0BytesBeforeAnimations": 805220,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 515524,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper",
+      "label": "שוער",
+      "role": "goalkeeper",
+      "fictional": true,
+      "design": {
+        "head": "head-oval",
+        "heritage": [
+          0.7,
+          0.06,
+          0.24
+        ],
+        "hair": "coils",
+        "eye": [
+          44,
+          31,
+          23
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "keeper",
+          "color": "#aac449",
+          "textures": {
+            "basecolor": "textures/goalkeeper-keeper-basecolor.webp",
+            "normal": "textures/goalkeeper-normal.png",
+            "orm": "textures/goalkeeper-orm.png"
+          },
+          "lod0": "models/goalkeeper-lod0.glb",
+          "lod0Triangles": 27890,
+          "lod0BytesBeforeDraco": 1759692,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 84,
+            "faceCoreMappedTriangles": 84,
+            "shirtCoreTriangles": 237,
+            "explicitRegionObjects": 40,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 79,
+            "hemCorrectedVertices": 12,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.0044589998020946875
+          },
+          "lod1": "models/goalkeeper-lod1.glb",
+          "lod1Triangles": 5347,
+          "lod1BytesBeforeDraco": 674016,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 9,
+            "faceCoreMappedTriangles": 9,
+            "shirtCoreTriangles": 62,
+            "explicitRegionObjects": 40,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 27,
+            "hemCorrectedVertices": 3,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005487122232896879
+          },
+          "lod0Bytes": 1244972,
+          "lod0Sha256": "8ac9e08de93ff8adc06d97aba7cbdc602d74b540156b53119880fa71629cf97e",
+          "lod1Bytes": 863976,
+          "lod1Sha256": "888aa7a7c71f64f3c3003abb6e5ab0574be88d97f66a9a7a50fa010b24e2cba0",
+          "lod0BytesBeforeAnimations": 876540,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 495700,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    },
+    {
+      "id": "referee",
+      "label": "שופט",
+      "role": "referee",
+      "fictional": true,
+      "design": {
+        "head": "head-square",
+        "heritage": [
+          0.08,
+          0.05,
+          0.87
+        ],
+        "hair": "short",
+        "eye": [
+          63,
+          49,
+          36
+        ]
+      },
+      "source": "MakeHuman Community hm08 CC0",
+      "kits": [
+        {
+          "id": "referee",
+          "color": "#bcc3c9",
+          "textures": {
+            "basecolor": "textures/referee-referee-basecolor.webp",
+            "normal": "textures/referee-normal.png",
+            "orm": "textures/referee-orm.png"
+          },
+          "lod0": "models/referee-lod0.glb",
+          "lod0Triangles": 23916,
+          "lod0BytesBeforeDraco": 1566840,
+          "lod0GenerationChecks": {
+            "faceCoreTriangles": 72,
+            "faceCoreMappedTriangles": 72,
+            "shirtCoreTriangles": 250,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 78,
+            "hemCorrectedVertices": 10,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.003926954861064674
+          },
+          "lod1": "models/referee-lod1.glb",
+          "lod1Triangles": 5200,
+          "lod1BytesBeforeDraco": 721064,
+          "lod1GenerationChecks": {
+            "faceCoreTriangles": 7,
+            "faceCoreMappedTriangles": 7,
+            "shirtCoreTriangles": 59,
+            "explicitRegionObjects": 41,
+            "faceCoreCoverage": 1,
+            "hemEnclosureSamples": 33,
+            "hemCorrectedVertices": 5,
+            "hemMinimumRadialClearanceMeters": 0.006,
+            "hemMinimumBeforeCorrectionMeters": 0.005199843307843732
+          },
+          "lod0Bytes": 1179604,
+          "lod0Sha256": "45e3aac879bb713c6d217292e9efb0b24c0f0a5343481ad04a138eb81d15d8ba",
+          "lod1Bytes": 897272,
+          "lod1Sha256": "52fff59b82a6556efb9b4a18af8d5962116859364fa0330f5dd071de2e295fee",
+          "lod0BytesBeforeAnimations": 811248,
+          "lod0NativeAnimationCount": 31,
+          "lod1BytesBeforeAnimations": 528996,
+          "lod1NativeAnimationCount": 31
+        }
+      ]
+    }
+  ],
+  "authoring": {
+    "skinInputs": [
+      {
+        "file": "young_lightskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "6222821cf0425b4459f00c3db4cffc1fa965922fc314f328076bdec7a2791510"
+      },
+      {
+        "file": "young_darkskinned_male_diffuse.png",
+        "authoringOnly": true,
+        "cacheSource": true,
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "sha256": "a541ebd3e900f61bcd84cdccb36293759bc88d76f636f7011a11daf42cae5959"
+      }
+    ],
+    "faceSourceUvCrop": [
+      0.78,
+      0.32,
+      0.99,
+      0.65
+    ],
+    "runtimeAtlasDimensions": [
+      1024,
+      1024
+    ],
+    "atlasRegions": {
+      "face": [
+        0.015,
+        0.46,
+        0.6,
+        0.99
+      ],
+      "skin": [
+        0.015,
+        0.015,
+        0.4,
+        0.27
+      ],
+      "scalp": [
+        0.015,
+        0.275,
+        0.4,
+        0.3
+      ],
+      "shirt": [
+        0.62,
+        0.56,
+        0.99,
+        0.99
+      ],
+      "shorts": [
+        0.62,
+        0.36,
+        0.99,
+        0.54
+      ],
+      "socks": [
+        0.42,
+        0.015,
+        0.6,
+        0.2
+      ],
+      "boots": [
+        0.42,
+        0.22,
+        0.6,
+        0.44
+      ],
+      "stitch": [
+        0.42,
+        0.445,
+        0.6,
+        0.455
+      ],
+      "hair": [
+        0.62,
+        0.085,
+        0.99,
+        0.34
+      ],
+      "wisps": [
+        0.62,
+        0.015,
+        0.99,
+        0.075
+      ],
+      "eyes": [
+        0.015,
+        0.31,
+        0.155,
+        0.435
+      ],
+      "brows": [
+        0.015,
+        0.438,
+        0.4,
+        0.455
+      ],
+      "gloves": [
+        0.17,
+        0.31,
+        0.4,
+        0.435
+      ]
+    },
+    "hair": "anatomical scalp undercoat with authored curved alpha cards",
+    "synthetic": true,
+    "generator": "source/character_build.py",
+    "restExpression": {
+      "mouthCompression": 0.4,
+      "eyeSlit": 0.06
+    },
+    "hairShading": "isotropic"
+  },
+  "budgets": {
+    "lod0Triangles": 30000,
+    "lod1Triangles": 6000,
+    "textureMaxDimension": 1024,
+    "maxGlbBytes": 1500000
+  },
+  "compression": {
+    "extension": "KHR_draco_mesh_compression",
+    "method": "edgebreaker",
+    "positionBits": 15,
+    "normalBits": 12,
+    "uvBits": 13,
+    "genericBits": 0
+  },
+  "nativeAnimations": {
+    "clipCount": 31,
+    "fps": 30,
+    "rootMotion": false,
+    "authored": true,
+    "motionCapture": false,
+    "source": "animations.json",
+    "motionSHA256": "e60a29039e6888d6b548ca325b507f06dd5867b480c27df446451301b6020f65",
+    "channelsPerClip": 19,
+    "referenceRootPathEmbedded": false
+  },
+  "candidate": {
+    "iteration": 16,
+    "kind": "frozen15-comparison-baseline",
+    "complete": false
+  }
+}

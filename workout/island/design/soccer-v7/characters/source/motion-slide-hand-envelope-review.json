@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "kind": "independent-slide-hand-floor-constraint-review",
+  "readOnlyReview": true,
+  "originalMotionSHA256": "53f05fbc42d0ecffaa4ac7f7c6b7061d6a0f784fc32c911f6efc9da42da27612",
+  "frozenMotionCopyPath": "/tmp/soccer-v7-slide-blend-baseline.json",
+  "frozenMotionCopySHA256": "a323bac2ec42500befe9ed2ed0f226561b934c804d7baa51cc4752a0b699c341",
+  "method": {
+    "sourceEffects": "Compiled AST FunctionDef nodes only; builder top-level execution and all source/data/model writes excluded. Candidate corrected poses live only in memory and temp files.",
+    "supportPointConstruction": "Union convex hull of actual LeftHand influence>=.8 local vertices from16decodedGLBs:105hullpoints;9points selected as extremal along current slide global-hand orientation curve at265samples overphase.45..1.",
+    "constraint": "phaseProgress=clamp((u-.45)/.35,0,1); clearance=.002+.007*sin(pi*phaseProgress)^2; wristY=max(authoredWristY,clearance-min(qrot(handWorldQ,p).y for p in supportPoints)); solve canonical left arm with unchanged end orientation and authored pole.",
+    "bake": "Corrected alloriginal30Hz sourceframes afteru.45. Sourceframes at/before.45 unchanged.",
+    "playback": "Parent-local quaternion slerp plus linear hips/path interpolation.126equalphase samples on[.45,.8], duration1.466667sec, time spacing\u2248.004106667sec (about243.5Hz). CanonicalFK then full decoded linearblend skinning of everyprimitive vertex and4influences with inversebind matrices.",
+    "scope": "16GLBs,2016full-mesh samples for selectedcandidate. Rawclearances exclude runtime floor correction."
+  },
+  "supportPointsMeters": [
+    [
+      0.01868143320083618,
+      -0.12469563722610477,
+      -0.05174390599131584
+    ],
+    [
+      -0.06402413904666901,
+      -0.09648416280746464,
+      0.05252142250537872
+    ],
+    [
+      0.014363672733306881,
+      -0.16035471200942997,
+      -0.031290289014577866
+    ],
+    [
+      -0.0068109369277954135,
+      -0.17331335783004764,
+      0.0015445342287421227
+    ],
+    [
+      0.00435599327087402,
+      -0.15795157194137577,
+      -0.027114087715744972
+    ],
+    [
+      0.020678427219390866,
+      -0.12036637306213382,
+      -0.05167149379849434
+    ],
+    [
+      0.008922230601310727,
+      -0.1267368578910828,
+      -0.05069628730416298
+    ],
+    [
+      -0.0657571217417717,
+      -0.09291843414306644,
+      0.05506821349263191
+    ],
+    [
+      -0.027390215396881107,
+      -0.15473762989044193,
+      0.034834153950214386
+    ]
+  ],
+  "endpoint": {
+    "wristYMeters": 0.03198508636786202,
+    "rotationXDegrees": -100,
+    "contactAnchorMeters": [
+      0.3,
+      0,
+      0.05
+    ],
+    "contactPointOffsetMeters": [
+      0,
+      0.005554151960298615,
+      -0.0314991610358356
+    ]
+  },
+  "totals": {
+    "maximumAuthoredWristRaiseMeters": 0.11664186743626848,
+    "maximumAuthoredArmReachResidualMeters": 0,
+    "minimumLeftHandYMeters": 0.0020186685778699476,
+    "maximumRemainingWholeMeshFloorLiftMeters": 0.0033835134824308204,
+    "remainingFloorLiftDominantBone": "Hips; finalcharacterbulk variations, not fingers",
+    "passHandClearanceAndReach": true
+  },
+  "models": [
+    {
+      "file": "goalkeeper-lod0.glb",
+      "sha256": "2fde47c3ebcb508a404ed25163099ddcf2d47a3b773c26c416738dca69d43fb9",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": -0.0005184683434422688,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.0022659451999202662,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.002518468343442269
+      }
+    },
+    {
+      "file": "goalkeeper-lod1.glb",
+      "sha256": "b7a0f45b457d96e2bada2b6d7f82cc164962798b511307e83dd56a04a9890907",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": -0.0005044291098345033,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.0020186685778699476,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.0025044291098345033
+      }
+    },
+    {
+      "file": "player-01-lod0.glb",
+      "sha256": "5620ba2293e672bb9e6903e04dc76e708004f39f5a206c21cd57b343525c45ec",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0017178623750195854,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006298021750424598,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.00028213762498041466
+      }
+    },
+    {
+      "file": "player-01-lod1.glb",
+      "sha256": "5b88f54a24aac1a94817d4b58e6516a08492574aed7449ebea68ef0a50f15f1b",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0017064817909155927,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006213886789552453,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.00029351820908440733
+      }
+    },
+    {
+      "file": "player-02-lod0.glb",
+      "sha256": "dfc33b91e31a741d1d63618e3fc320589e55c7181c7c247f879fac00e11965b0",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": -0.0013835134824308204,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.005653400053323709,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.0033835134824308204
+      }
+    },
+    {
+      "file": "player-02-lod1.glb",
+      "sha256": "a068fa7d9bcc21fa6fd92e2f73f2103121d6c18175746c0a313b1f8713e4d23c",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": -0.0013688402434274272,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006977742250449698,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.003368840243427427
+      }
+    },
+    {
+      "file": "player-03-lod0.glb",
+      "sha256": "6e3aaea7f98595dc1f477daf09b09be56bab2a8f86be336af2a6b9660204e7ee",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0020452604957172595,
+        "worstPhase": 0.8,
+        "worstBone": "RightFoot",
+        "leftHandMinMeters": 0.005955656538287862,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-03-lod1.glb",
+      "sha256": "0c956633b16b17f5a3fb7c248aaff01afd558a0ca01e8630bf53068ab71f9a51",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.005173278120628722,
+        "worstPhase": 0.8,
+        "worstBone": "RightFoot",
+        "leftHandMinMeters": 0.005273272566970411,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-04-lod0.glb",
+      "sha256": "e8b54b74caf489cbe80f3cde3f2e526d959628515ff8e169da86cd90d8a35fb5",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.002045260468948755,
+        "worstPhase": 0.8,
+        "worstBone": "RightFoot",
+        "leftHandMinMeters": 0.006280221775111894,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-04-lod1.glb",
+      "sha256": "d0ba70d3d7416a08ac4113121ae41aea6d276cb88a26cbddff65c93dc1a5f1b8",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.002200939532149837,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006199469146268122,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-05-lod0.glb",
+      "sha256": "15084d635e9b83a950903c2328a2d95a77d620ae03a6ee5f52247a575dbca8bf",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0020452604743099703,
+        "worstPhase": 0.8,
+        "worstBone": "RightFoot",
+        "leftHandMinMeters": 0.006317661599005986,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-05-lod1.glb",
+      "sha256": "aa6f3dc5938fb6db4416020c06a1f6335f4a8597355bb2279c317565785702ce",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.004183167231822382,
+        "worstPhase": 0.576,
+        "worstBone": "LeftUpLeg",
+        "leftHandMinMeters": 0.00603495159968484,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0
+      }
+    },
+    {
+      "file": "player-06-lod0.glb",
+      "sha256": "60f1eac1822a216549e77f07a1125cb24dacbef8d1b5b4aa2bbeeffe3cd22956",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0014035379201021714,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006294213798891585,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.0005964620798978287
+      }
+    },
+    {
+      "file": "player-06-lod1.glb",
+      "sha256": "21ce7ab4851b34d7604c8648931f5952d71613990d0b5e808699ae9d66c66acf",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0013933964677868005,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.005358553687511786,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.0006066035322131996
+      }
+    },
+    {
+      "file": "referee-lod0.glb",
+      "sha256": "a0c81e45008a2897f0120e1e45001d662fc5361418eff754b99c0e3b90f9873b",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.0018770487904689048,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.00628858341569738,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.00012295120953109522
+      }
+    },
+    {
+      "file": "referee-lod1.glb",
+      "sha256": "4bc484209920380d70c359cb5bcccfba50ccf0a16ae0fd8ce06c116882cdaa23",
+      "metrics": {
+        "clearance": 0.007,
+        "maxAuthoredRaiseMeters": 0.11664186743626848,
+        "maxAuthoredReachMeters": 0,
+        "wholeMeshMinMeters": 0.001859318179959324,
+        "worstPhase": 0.8,
+        "worstBone": "Hips",
+        "leftHandMinMeters": 0.006200228447858974,
+        "leftHandWorstPhase": 0.8,
+        "maxRootLiftMeters": 0.00014068182004067613
+      }
+    }
+  ],
+  "limitations": [
+    "This validates the current motion orientation curve and exact model snapshots. Recheck after model geometry, joint hierarchy, handorientation curve or transition edits.",
+    "The reduced9point proxy is specific to this authored slide curve, not a general bound for arbitrary new hand rotations.",
+    "Remaining body penetration up to1.384mm requires the viewer complete-skin floor correction. Source constraint removes >100mm finger-driven correction.",
+    "This is geometric verification; final browser captures must judge pose readability and landing weight."
+  ],
+  "runnerPath": "/tmp/soccer-v7-slide-hand-shaped-review.mjs",
+  "fullCandidateComparisonsPath": "/tmp/soccer-v7-slide-hand-shaped-roster-summary.json"
+}

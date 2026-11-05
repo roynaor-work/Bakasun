@@ -1,0 +1,57 @@
+{
+  "kind": "isolated-waist36-raw-skin-accessor-patch",
+  "method": "No Draco reencode. Only Cloth JOINTS/WEIGHTS accessor data/mappings change; all source BIN including native tracks/images/other attributes remain a prefix.",
+  "records": [
+    {
+      "file": "models/player-01-lod0.glb",
+      "sourceSHA256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "candidateSHA256": "a10ee1699c6ba8b4f1eda1808e098d8d5a93ce0a06778a019807ff9c6b92e267",
+      "sourceBytes": 1336564,
+      "candidateBytes": 1452956,
+      "originalBINBytes": 1198600,
+      "originalBINPrefixByteExact": true,
+      "allOtherAttributesAndIndicesByteEquivalent": true,
+      "clothVertexCount": 5798,
+      "shortsVertices": 705,
+      "changedVertices": 493,
+      "changedRestY": [
+        0.701327919960022,
+        0.9000145196914673
+      ],
+      "maxWeightChange": 1,
+      "appendedJointComponentType": "UNSIGNED_BYTE",
+      "appendedWeightComponentType": "FLOAT",
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "newJointArraySHA256": "7b7b8e14472b6422332014885da19e8b03d25e9973542fba8dc32e120c3dad27",
+      "newWeightArraySHA256": "3815f8b3fdd75f5175954198c07aed8f2dc26c6d0ffc18674d37304a53af0c0f",
+      "nativeClips": 31
+    },
+    {
+      "file": "models/player-01-lod1.glb",
+      "sourceSHA256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "candidateSHA256": "3f2bd44f1914f4f83a7a6cdb882601e6b307dd4073a07c9edc37a5c863983d28",
+      "sourceBytes": 889984,
+      "candidateBytes": 944336,
+      "originalBINBytes": 752032,
+      "originalBINPrefixByteExact": true,
+      "allOtherAttributesAndIndicesByteEquivalent": true,
+      "clothVertexCount": 2696,
+      "shortsVertices": 495,
+      "changedVertices": 342,
+      "changedRestY": [
+        0.7017869353294373,
+        0.9000054597854614
+      ],
+      "maxWeightChange": 1,
+      "appendedJointComponentType": "UNSIGNED_BYTE",
+      "appendedWeightComponentType": "FLOAT",
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "newJointArraySHA256": "c4d64745e5ca1c2c80b761a9919daf1911bda608b2bee87e8b5d807026963ad8",
+      "newWeightArraySHA256": "0b6898376b3798d9c057f0be8d25ea853be66fbfa98ea1ee4e353c4e771c2894",
+      "nativeClips": 31
+    }
+  ],
+  "pass": true
+}

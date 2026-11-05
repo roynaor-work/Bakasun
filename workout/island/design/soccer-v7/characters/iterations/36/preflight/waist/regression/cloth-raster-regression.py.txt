@@ -1,0 +1,60 @@
+import json,numpy as np
+from pathlib import Path
+D=json.load(open('/tmp/soccer-v7-waist36/decoded-regression.json')); F=json.load(open('/tmp/soccer-v7-waist36/regression-fixtures.json'))['fixtures']
+W,H=390,844
+M=lambda a:np.array(a,float).reshape(4,4).T
+
+def pose(d,f,band=None):
+ p=next(p for p in d['parts'] if p['surface']=='Cloth');v=np.array(p['position']).reshape(-1,3);uv=np.array(p['uv']).reshape(-1,2);j=np.array(p['joints']).reshape(-1,4);weights=np.array(p['weights']).reshape(-1,4);full=np.zeros((len(v),18))
+ for k in range(4):full[np.arange(len(v)),j[:,k]]+=weights[:,k]
+ shorts=(uv[:,0]>.615)&(uv[:,0]<.995)&(uv[:,1]>.455)&(uv[:,1]<.645);shirt=(uv[:,0]>.615)&(uv[:,0]<.995)&(uv[:,1]>.005)&(uv[:,1]<.445)
+ if band:
+  a,b=band;t=np.clip((v[:,1]-a)/(b-a),0,1);t=t*t*(3-2*t);t*=shorts
+  torso=np.zeros_like(full);s=np.clip((v[:,1]-.88)/.16,0,1);torso[:,1]=1-s;torso[:,2]=s;full=full*(1-t[:,None])+torso*t[:,None]
+ mesh=next(m for m in f['meshes'] if m['material']==['Cloth']);vb=np.c_[v,np.ones(len(v))]@M(mesh['bindMatrix']).T;posed=np.zeros_like(vb)
+ for k,name in enumerate(d['joints']):posed+=(vb@(M(f['bones'][name]['matrixWorld'])@M(mesh['boneInverses'][k])).T)*full[:,k,None]
+ world=posed@(M(mesh['matrixWorld'])@M(mesh['bindMatrixInverse'])).T
+ from scipy.spatial.transform import Rotation
+ cam=np.eye(4);cam[:3,:3]=Rotation.from_quat(f['camera']['quaternion']).as_matrix();cam[:3,3]=f['camera']['position'];clip=world@(M(f['camera']['projectionMatrix'])@np.linalg.inv(cam)).T;ndc=clip[:,:3]/clip[:,3,None];screen=np.c_[(ndc[:,0]+1)*W/2,(1-ndc[:,1])*H/2,ndc[:,2]]
+ tri=np.array(p['indices']).reshape(-1,3);tag=np.where(shirt[tri].all(1),1,np.where(shorts[tri].all(1),2,3));return v,screen,tri,tag,full
+
+def raster(screen,tri,tag,shirt_only=False):
+ depth=np.full((H,W),np.inf);tid=np.full((H,W),-1,int)
+ for i,(t,c) in enumerate(zip(tri,tag)):
+  if shirt_only and c!=1:continue
+  q=screen[t];xmin=max(0,int(np.floor(q[:,0].min())));xmax=min(W-1,int(np.ceil(q[:,0].max())));ymin=max(0,int(np.floor(q[:,1].min())));ymax=min(H-1,int(np.ceil(q[:,1].max())))
+  if xmax<xmin or ymax<ymin:continue
+  a,b,c=q;den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1])
+  if abs(den)<1e-12:continue
+  yy,xx=np.mgrid[ymin:ymax+1,xmin:xmax+1];xx=xx+.5;yy=yy+.5;u=((b[1]-c[1])*(xx-c[0])+(c[0]-b[0])*(yy-c[1]))/den;v=((c[1]-a[1])*(xx-c[0])+(a[0]-c[0])*(yy-c[1]))/den;w=1-u-v;z=u*a[2]+v*b[2]+w*c[2];old=depth[ymin:ymax+1,xmin:xmax+1];hit=(u>=0)&(v>=0)&(w>=0)&(z<old);old[hit]=z[hit];tid[ymin:ymax+1,xmin:xmax+1][hit]=i
+ return depth,tid
+
+import hashlib, time, concurrent.futures, os
+ROOT=Path('/tmp/soccer-v7-waist36')
+
+def worker(task):
+ di,fi=task;d=D[di];f=F[fi];v,screen,tri,tag,weights=pose(d,f);depth,tid=raster(screen,tri,tag);sdepth,stid=raster(screen,tri,tag,True);valid=tid>=0;label=np.zeros_like(tid);label[valid]=tag[tid[valid]];overlap=(label==2)&np.isfinite(sdepth);ids=np.unique(tid[overlap]);vertices=np.unique(tri[ids]) if len(ids) else np.array([],int)
+ row={'variant':d['variant'],'lod':d['lod'],'pose':f['label'],'frame':f.get('frame'),'shortsOverShirtPixels':int(overlap.sum()),'shortsTriangleWitnesses':int(len(ids))}
+ if len(vertices):row.update(restYRange=[float(v[vertices,1].min()),float(v[vertices,1].max())],screenBounds=[int(np.where(overlap)[1].min()),int(np.where(overlap)[0].min()),int(np.where(overlap)[1].max()),int(np.where(overlap)[0].max())])
+ return row
+
+if __name__=='__main__':
+ start=time.time(); assert len(F)==68 and len(D)==4
+ for lod in [0,1]:
+  a=next(d for d in D if d['variant']=='baseline' and d['lod']==lod);b=next(d for d in D if d['variant']=='candidate' and d['lod']==lod)
+  assert a['joints']==b['joints'];
+  for surface in ['Skin','Cloth']:
+   pa=next(p for p in a['parts'] if p['surface']==surface);pb=next(p for p in b['parts'] if p['surface']==surface)
+   for attr in ['position','uv','indices']:assert pa[attr]==pb[attr],(lod,surface,attr,'unexpected change')
+ tasks=[(di,fi) for fi in range(len(F)) for di in range(len(D))];rows=[]
+ with concurrent.futures.ProcessPoolExecutor(max_workers=2) as pool:
+  for i,row in enumerate(pool.map(worker,tasks,chunksize=2),1):
+   rows.append(row)
+   if i%16==0:print(json.dumps({'done':i,'total':len(tasks),'seconds':round(time.time()-start,1),'latest':row}),flush=True)
+ paired=[]
+ for lod in [0,1]:
+  for f in F:
+   a=next(r for r in rows if r['lod']==lod and r['pose']==f['label'] and r['variant']=='baseline');b=next(r for r in rows if r['lod']==lod and r['pose']==f['label'] and r['variant']=='candidate');paired.append({'pose':f['label'],'lod':lod,'baseline':a['shortsOverShirtPixels'],'candidate':b['shortsOverShirtPixels'],'delta':b['shortsOverShirtPixels']-a['shortsOverShirtPixels']})
+ increased=[p for p in paired if p['delta']>0];new=[p for p in increased if p['baseline']==0];retained=[p for p in paired if p['candidate']>0];summary={'comparisons':len(paired),'newOverlapCases':len(new),'increasedOverlapCases':len(increased),'candidateNonzeroCases':len(retained),'baselinePixelTotal':sum(p['baseline'] for p in paired),'candidatePixelTotal':sum(p['candidate'] for p in paired),'maxBaseline':max(p['baseline'] for p in paired),'maxCandidate':max(p['candidate'] for p in paired),'new':new,'increased':increased,'candidateNonzero':retained}
+ report={'kind':'waist36-actual-exported-short-over-shirt-screen-regression','complete':True,'poses':len(F),'lods':[0,1],'variants':['baseline','candidate'],'elapsedSeconds':time.time()-start,'inputs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'decoded-regression.json',ROOT/'regression-fixtures.json',Path(__file__)]},'geometryUVTopologyUnchanged':True,'canonicalJointNamesUnchanged':True,'method':'Actual exported decoded Cloth vertices through frozen baseline controller bone matrices and exact cameras, rasterized390x844. Count visible shorts triangles closer than projected shirt triangles. Counts measure camera projection/occlusion and may include legitimate folded-leg body overlap; they are not a complete physical cloth collision test. No source, runtime, model, scene or material changes.', 'summary':summary,'pairs':paired,'rows':rows}
+ (ROOT/'cloth-raster-regression.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'output':str(ROOT/'cloth-raster-regression.json'),'summary':summary}),flush=True)

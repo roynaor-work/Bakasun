@@ -1,0 +1,100 @@
+{
+  "kind": "scoped-P01-waist36-canonical-floor-and-boot-proof",
+  "generatedAt": "2026-11-05T10:48:10.829563+00:00",
+  "partialDiagnostic": true,
+  "productionPackage": false,
+  "completeLibraryAcceptance": false,
+  "pass": true,
+  "floor": {
+    "file": "floor-envelope-p01.json",
+    "models": 2,
+    "clips": 31,
+    "sourceSamples": 9486,
+    "midpointProbes": 9808,
+    "vertexEvaluations": 468522874,
+    "minimumMeters": 0.0014802601574040175,
+    "perModel": [
+      {
+        "file": "models/player-01-lod0.glb",
+        "sha256": "a10ee1699c6ba8b4f1eda1808e098d8d5a93ce0a06778a019807ff9c6b92e267",
+        "pass": true,
+        "maximumLiftMeters": 0.06170530573753532,
+        "slide": {
+          "id": "slide_tackle",
+          "samples": 177,
+          "midpointPasses": 1,
+          "minimumAfterContactsMeters": 0.001520000005279228,
+          "minimum240HzMeters": 0.00150766547300728,
+          "maximumLiftMeters": 0.017311934529324346,
+          "maximumLiftPose": {
+            "timeSeconds": 1.1916666666666667,
+            "liftMeters": 0.017311934529324346,
+            "minimumByMaterialMeters": {
+              "Skin": 0.0235195643517776,
+              "Cloth": 0.0015200001934759398,
+              "Eyes": 0.7043062699865483,
+              "HairCards": 0.6027900048073556,
+              "EyesCornea": 0.7139628239175941
+            }
+          },
+          "failedSourceSamples": 0,
+          "failedFinalEndpoints": 0,
+          "failedFinalMidpoints": 0,
+          "pass": true
+        },
+        "contactMetrics": {
+          "maxReachResidualMeters": 0,
+          "maxSoleAnchorErrorMeters": 5.900916318210353e-16
+        }
+      },
+      {
+        "file": "models/player-01-lod1.glb",
+        "sha256": "3f2bd44f1914f4f83a7a6cdb882601e6b307dd4073a07c9edc37a5c863983d28",
+        "pass": true,
+        "maximumLiftMeters": 0.061568173305868355,
+        "slide": {
+          "id": "slide_tackle",
+          "samples": 177,
+          "midpointPasses": 1,
+          "minimumAfterContactsMeters": 0.001519999945289049,
+          "minimum240HzMeters": 0.001507523609669373,
+          "maximumLiftMeters": 0.01730863041209887,
+          "maximumLiftPose": {
+            "timeSeconds": 1.1916666666666667,
+            "liftMeters": 0.01730863041209887,
+            "minimumByMaterialMeters": {
+              "Skin": 0.023448501351724077,
+              "Cloth": 0.0015200000644796548,
+              "Eyes": 0.7042856027322535,
+              "HairCards": 0.6028163670569349,
+              "EyesCornea": 0.7139651705930168
+            }
+          },
+          "failedSourceSamples": 0,
+          "failedFinalEndpoints": 0,
+          "failedFinalMidpoints": 0,
+          "pass": true
+        },
+        "contactMetrics": {
+          "maxReachResidualMeters": 0,
+          "maxSoleAnchorErrorMeters": 5.900916318210353e-16
+        }
+      }
+    ]
+  },
+  "boot": {
+    "file": "boot-bounds.json",
+    "pass": true,
+    "hypotheticalLibrary": "P01 candidate near/far plus14 byte-exact primary32 models",
+    "modelCount": 16,
+    "hullsByteValueEqualToPrimary32": {
+      "LeftFoot": true,
+      "RightFoot": true
+    }
+  },
+  "limitations": [
+    "Native physical palm support is not solved by this canonical foot-only envelope.",
+    "All actual-runtime hand, full-mesh floor, visible supports, transition and LOD gates remain pending.",
+    "No primary model/source/data/runtime/verification file was changed."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "scoped-sensitive-pattern-scan",
+  "generatedAt": "2026-11-05T12:56:38.788751+00:00",
+  "scope": "New authored source/docs/JSON/logs; excludes binary/review media and third-party/base64 runtime payloads. Pattern screening is not an absolute privacy proof. Matched content is never copied into this report.",
+  "pass": true,
+  "results": [
+    {
+      "patternClass": "privateKey",
+      "matchedFiles": []
+    },
+    {
+      "patternClass": "githubToken",
+      "matchedFiles": []
+    },
+    {
+      "patternClass": "awsAccessKey",
+      "matchedFiles": []
+    },
+    {
+      "patternClass": "phone",
+      "matchedFiles": []
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "kind": "hair28-actual-groom-authoring-proof",
+  "scope": "Actual source P03/P04 noncoil grooms and P02 unchanged-coil control, before QEM; no exports or live model/map/runtime writes.",
+  "helperSha256": "449f2ba0518840b153c4c6c0f38277d5ef24b22e4cec7f45a04a1eb50777411a",
+  "builderSha256": "1b3997583ff4ce51bbc11eb42920c32efc3acc8a8d6f063c9672b39449c748aa",
+  "results": [
+    {
+      "id": "player-02",
+      "seconds": 0.02941600399935851,
+      "deterministic": true,
+      "report": {
+        "variant": "28",
+        "seed": null,
+        "style": "coils",
+        "method": "tangential seeded ribbon jitter, gentle bend, staggered fringe and narrower edge clumps",
+        "normalRecipe": "existing projected16c unchanged",
+        "addedVertices": 0,
+        "addedPolygons": 0,
+        "maximumAddedClearanceMeters": 0.0,
+        "maximumDisplacementMeters": 0.0,
+        "objects": [],
+        "skipped": true,
+        "reason": "Coil construction and filled mass are preserved.",
+        "undercoatUnchanged": true
+      }
+    },
+    {
+      "id": "player-03",
+      "seconds": 0.9285676339968632,
+      "deterministic": true,
+      "report": {
+        "variant": "28",
+        "seed": 284363,
+        "style": "sweep",
+        "method": "tangential seeded ribbon jitter, gentle bend, staggered fringe and narrower edge clumps",
+        "normalRecipe": "existing projected16c unchanged",
+        "addedVertices": 0,
+        "addedPolygons": 0,
+        "maximumAddedClearanceMeters": 0.00025441353206739556,
+        "maximumDisplacementMeters": 0.0025686395342830763,
+        "objects": [
+          {
+            "name": "hair-groom-clumps",
+            "vertices": 3876,
+            "polygons": 3212,
+            "acceptedRibbons": 330,
+            "rejectedRibbons": 2,
+            "skippedComponents": 0,
+            "maximumDisplacementMeters": 0.0015006421141750144,
+            "maximumAddedClearanceMeters": 0.00025441353206739556,
+            "lengthScaleRange": [
+              0.9700637481882853,
+              1.0247466745502996
+            ],
+            "widthScaleRange": [
+              0.87038784690941,
+              1.0197801664118402
+            ],
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-fine-fringe",
+            "vertices": 2316,
+            "polygons": 1930,
+            "acceptedRibbons": 193,
+            "rejectedRibbons": 0,
+            "skippedComponents": 0,
+            "maximumDisplacementMeters": 0.0025686395342830763,
+            "maximumAddedClearanceMeters": 0.00025141267164622904,
+            "lengthScaleRange": [
+              0.8207229280830872,
+              1.0447619661571295
+            ],
+            "widthScaleRange": [
+              0.750266436109484,
+              0.9299194185827375
+            ],
+            "topologyUvWeightsUnchanged": true
+          }
+        ],
+        "undercoatUnchanged": true,
+        "skipped": false
+      }
+    },
+    {
+      "id": "player-04",
+      "seconds": 0.9997902359973523,
+      "deterministic": true,
+      "report": {
+        "variant": "28",
+        "seed": 284372,
+        "style": "quiff",
+        "method": "tangential seeded ribbon jitter, gentle bend, staggered fringe and narrower edge clumps",
+        "normalRecipe": "existing projected16c unchanged",
+        "addedVertices": 0,
+        "addedPolygons": 0,
+        "maximumAddedClearanceMeters": 0.000250599392094764,
+        "maximumDisplacementMeters": 0.0024084349231625417,
+        "objects": [
+          {
+            "name": "hair-groom-clumps",
+            "vertices": 4024,
+            "polygons": 3346,
+            "acceptedRibbons": 336,
+            "rejectedRibbons": 3,
+            "skippedComponents": 0,
+            "maximumDisplacementMeters": 0.0015179427323484959,
+            "maximumAddedClearanceMeters": 0.000250599392094764,
+            "lengthScaleRange": [
+              0.9700001948775931,
+              1.024996823407293
+            ],
+            "widthScaleRange": [
+              0.8700220988901343,
+              1.0194457757642474
+            ],
+            "topologyUvWeightsUnchanged": true
+          },
+          {
+            "name": "hair-fine-fringe",
+            "vertices": 2376,
+            "polygons": 1980,
+            "acceptedRibbons": 196,
+            "rejectedRibbons": 2,
+            "skippedComponents": 0,
+            "maximumDisplacementMeters": 0.0024084349231625417,
+            "maximumAddedClearanceMeters": 0.0002503808197513197,
+            "lengthScaleRange": [
+              0.8200205351541552,
+              1.0447473867507922
+            ],
+            "widthScaleRange": [
+              0.7505251136123042,
+              0.9289704853480873
+            ],
+            "topologyUvWeightsUnchanged": true
+          }
+        ],
+        "undercoatUnchanged": true,
+        "skipped": false
+      }
+    }
+  ],
+  "pass": true
+}

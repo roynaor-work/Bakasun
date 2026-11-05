@@ -1,0 +1,2756 @@
+{
+  "kind": "finite-diagnostic-coherent24-motor-c14-proof-summary",
+  "complete": false,
+  "pass": true,
+  "scope": "Six specified critical source/route chains at30Hz and120Hz. Diagnostic runtime14a+privatecore on actual coherent24/new7c served resources. Not a final combined viewer claim or exhaustive ordered-pair proof.",
+  "coreSHA256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f",
+  "runtimeSHA256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159",
+  "runtimeBytes": 847688,
+  "thresholds": {
+    "worldJointRadiansPerSecond": 30,
+    "rootRelativeMetersPerSecond": 25,
+    "anchorAndNearGroundDriftMeters": 0.003,
+    "minimumVertexY": -0.001
+  },
+  "rows": [
+    {
+      "name": "keeper punt recovery @ 0.15",
+      "sampleRateHz": 30,
+      "samples": 34,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/punt-30hz.json",
+      "sourceReportSHA256": "7d3fb90ebfd76f1197b7f9be5af09642ca62256e8c8c7d0000c7c8b2580fd09f",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.00199992,
+      "maximumJointAngularSpeed": 6.32758082831866,
+      "maximumRootRelativeBoneSpeed": 2.107871897041324,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 2.6739018747817625e-05,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          0
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            -1.0341727474383333e-15
+          ],
+          "RightFoot": [
+            -0.1,
+            -4.163336342344337e-17,
+            2.0539125955565396e-17
+          ]
+        },
+        "motor": {
+          "clock": 0.9999999999999977,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 0.1899999920000016,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                -1.6653345369377348e-16,
+                -1.0053069487980792e-15
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                -1.6653345369377348e-16,
+                -1.0053069487980792e-15
+              ],
+              "heelPhase": 0,
+              "stanceEndPhase": null,
+              "flightProgress": null,
+              "sourceSupport": {
+                "sourceClip": "keeper_punt",
+                "sourceSeconds": 0.3166667166666666,
+                "phase": 0.1899999920000016,
+                "soleHeight": -1.6653345369377348e-16,
+                "grounded": true,
+                "authoredPlant": true
+              },
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                0
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                0
+              ],
+              "heelPhase": -0.5,
+              "stanceEndPhase": null,
+              "flightStartTime": 0,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                0
+              ],
+              "sourceSupport": {
+                "sourceClip": "keeper_punt",
+                "sourceSeconds": 0.3166667166666666,
+                "phase": 0.1899999920000016,
+                "soleHeight": 0.013342019163073662,
+                "grounded": false,
+                "authoredPlant": false
+              },
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 1,
+            "clip": "idle",
+            "at": 0,
+            "deadline": 4.5,
+            "targetSpeed": 0,
+            "startedAt": 0.03333333333333333,
+            "completedAt": 0.30000000000000016,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_3 @ 0.68",
+      "sampleRateHz": 30,
+      "samples": 56,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run3-68-30hz.json",
+      "sourceReportSHA256": "757e9d331845492c93693551f1ff9544c3835fe8239ffdf90c5a303cf937e32d",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 10.266434125000782,
+      "maximumRootRelativeBoneSpeed": 4.132511396417333,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 1.5773348055006601e-09,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          3.3809955725000345
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            3.3809695100000345
+          ],
+          "RightFoot": [
+            -0.1,
+            -5.551115123125783e-17,
+            3.3809955725000345
+          ]
+        },
+        "motor": {
+          "clock": 1.7666666666666617,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 1.7633946001364167,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.3227848874628008,
+              "flightStartTime": 0.9333333333333312,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "heelPhase": 1.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 0.8228573809523819,
+              "flightStartTime": 1.237499999999997,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.13333333333333333,
+            "deadline": 4.633333333333334,
+            "targetSpeed": 0,
+            "startedAt": 0.16666666666666677,
+            "completedAt": 1.5666666666666624,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_4 @ 0.68",
+      "sampleRateHz": 30,
+      "samples": 61,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run4-68-30hz.json",
+      "sourceReportSHA256": "7d817a445f0ddd7b8e3013be8bc22e12feea11dfd81bd0d808bd4e6eb5b7256b",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 13.616211585356524,
+      "maximumRootRelativeBoneSpeed": 5.743681605660163,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 6.077688900565729e-10,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.496100000000244
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            4.496100000000244
+          ],
+          "RightFoot": [
+            -0.1,
+            -4.163336342344337e-17,
+            4.496060937500243
+          ]
+        },
+        "motor": {
+          "clock": 1.9333333333333278,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.1113628665985207,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.2816493055555733,
+              "flightStartTime": 1.429166666666663,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.8492996070498906,
+              "flightStartTime": 1.1249999999999973,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.13333333333333333,
+            "deadline": 4.633333333333334,
+            "targetSpeed": 0,
+            "startedAt": 0.16666666666666677,
+            "completedAt": 1.7333333333333285,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_5 @ 0.18",
+      "sampleRateHz": 30,
+      "samples": 70,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run5-18-30hz.json",
+      "sourceReportSHA256": "80ea0e268bafc9bfdef7767848b105b0e9df672674ca484fd323c60e09340dba",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 18.483408066882625,
+      "maximumRootRelativeBoneSpeed": 6.9704833110300175,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 8.914730978906974e-10,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.680904633596849
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            4.680904633596849
+          ],
+          "RightFoot": [
+            -0.1,
+            6.938893903907228e-17,
+            4.680865550003085
+          ]
+        },
+        "motor": {
+          "clock": 2.233333333333339,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.0775100603191405,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.2844402433350766,
+              "flightStartTime": 1.6708333333333287,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.8539047892957443,
+              "flightStartTime": 1.3666666666666631,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.13333333333333333,
+            "deadline": 4.633333333333334,
+            "targetSpeed": 0,
+            "startedAt": 0.16666666666666677,
+            "completedAt": 1.9999999999999942,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_5 @ 0.68",
+      "sampleRateHz": 30,
+      "samples": 70,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run5-68-30hz.json",
+      "sourceReportSHA256": "4faf9c583ee7ef4f71c677dffa413205b8140e11ccfc066ef6e33169618ea0d5",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 18.483406570228674,
+      "maximumRootRelativeBoneSpeed": 6.970483311029591,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 4.5391774228128756e-11,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          6.120904633596392
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            1.3877787807814457e-16,
+            6.120865550002629
+          ],
+          "RightFoot": [
+            -0.1,
+            -2.0816681711721685e-16,
+            6.120904633596392
+          ]
+        },
+        "motor": {
+          "clock": 2.233333333333339,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.5775100603190446,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "heelPhase": 3,
+              "stanceEndPhase": null,
+              "flightStartPhase": 2.353904789295673,
+              "flightStartTime": 1.3666666666666631,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.7844402433350386,
+              "flightStartTime": 1.6708333333333287,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.13333333333333333,
+            "deadline": 4.633333333333334,
+            "targetSpeed": 0,
+            "startedAt": 0.16666666666666677,
+            "completedAt": 1.9999999999999942,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "dribble kick run @ 0.68",
+      "sampleRateHz": 30,
+      "samples": 80,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/restart-30hz.json",
+      "sourceReportSHA256": "47b7545b1a588d269f8ac7c294fb726f3d66af0dc0b7b27da91352901a8efd75",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 12.403554119258695,
+      "maximumRootRelativeBoneSpeed": 4.966023768047323,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 3.8821022451443936e-11,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.836068750000138
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.09999999999952322,
+            0.1480000000168347,
+            4.6985948638521675
+          ],
+          "RightFoot": [
+            -0.10000000000026843,
+            7.819550562615518e-12,
+            4.995005787054333
+          ]
+        },
+        "motor": {
+          "clock": 2.566666666666689,
+          "actualSpeed": 3.2,
+          "targetSpeed": 3.2,
+          "phase": 3.5890459656084666,
+          "feet": {
+            "LeftFoot": {
+              "mode": "flight",
+              "position": [
+                0.1,
+                0.14800000000000002,
+                3.3929948638182266
+              ],
+              "orientation": [
+                0.11723865660914448,
+                0,
+                0,
+                0.9931037697020806
+              ],
+              "anchor": [
+                0.1,
+                0,
+                2.587364143908403
+              ],
+              "heelPhase": 4,
+              "stanceEndPhase": 3.34875,
+              "flightStartPhase": 3.3271412037037056,
+              "flightStartTime": 2.3833333333333466,
+              "flightProgress": 0.3892417894310039,
+              "target": [
+                0.1,
+                0,
+                4.809405787037181
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "heelPhase": 3.5,
+              "stanceEndPhase": 3.82,
+              "flightStartPhase": 2.8781259042245395,
+              "flightStartTime": 2.0499999999999967,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "run_3",
+            "at": 1.3999999999999964,
+            "deadline": 5.899999999999997,
+            "targetSpeed": 3.2,
+            "startedAt": 1.4333333333333296,
+            "completedAt": 2.333333333333344,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_3 @ 0.68",
+      "sampleRateHz": 120,
+      "samples": 213,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run3-68-120hz.json",
+      "sourceReportSHA256": "d21b2e10a5c72d9282895aa5df0283430f46f3b7e650128d30a4e18408d7e116",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.00186949,
+      "maximumJointAngularSpeed": 14.032534707752308,
+      "maximumRootRelativeBoneSpeed": 5.0240432697487805,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 8.206325035499404e-10,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          3.3809955725000345
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            3.3809695100000345
+          ],
+          "RightFoot": [
+            -0.1,
+            -5.551115123125783e-17,
+            3.3809955725000345
+          ]
+        },
+        "motor": {
+          "clock": 1.7499999999999951,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 1.7633946001364167,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.3227848874628008,
+              "flightStartTime": 0.9333333333333312,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                1.857769750000034
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "heelPhase": 1.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 0.8228573809523819,
+              "flightStartTime": 1.237499999999997,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                1.8577958125000342
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.11666666666666665,
+            "deadline": 4.616666666666666,
+            "targetSpeed": 0,
+            "startedAt": 0.12499999999999999,
+            "completedAt": 1.5416666666666625,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_4 @ 0.68",
+      "sampleRateHz": 120,
+      "samples": 236,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run4-68-120hz.json",
+      "sourceReportSHA256": "543ea4373f9588b888627ce4aaa804bf441cf6e8161b9a9d2d4cdbe54eea8a17",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.00185036,
+      "maximumJointAngularSpeed": 15.937696024535951,
+      "maximumRootRelativeBoneSpeed": 6.805774826251875,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 7.549557259862932e-10,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.496100000000244
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            4.496100000000244
+          ],
+          "RightFoot": [
+            -0.1,
+            -4.163336342344337e-17,
+            4.496060937500243
+          ]
+        },
+        "motor": {
+          "clock": 1.941666666666661,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.1113628665985207,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.2816493055555733,
+              "flightStartTime": 1.429166666666663,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                2.782500000000244
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.8492996070498906,
+              "flightStartTime": 1.1249999999999973,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                2.7824609375002427
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.11666666666666665,
+            "deadline": 4.616666666666666,
+            "targetSpeed": 0,
+            "startedAt": 0.12499999999999999,
+            "completedAt": 1.7333333333333285,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_5 @ 0.18",
+      "sampleRateHz": 120,
+      "samples": 265,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run5-18-120hz.json",
+      "sourceReportSHA256": "510e43d9b525e4e8fafa2c0468ef8a83e1461e36597218e0424605b72503babf",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 19.4044222265261,
+      "maximumRootRelativeBoneSpeed": 8.200502989486646,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 1.626052089703194e-09,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.680904633596849
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.0816681711721685e-16,
+            4.680904633596849
+          ],
+          "RightFoot": [
+            -0.1,
+            6.938893903907228e-17,
+            4.680865550003085
+          ]
+        },
+        "motor": {
+          "clock": 2.1833333333333367,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.0775100603191405,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "heelPhase": 2,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.2844402433350766,
+              "flightStartTime": 1.6708333333333287,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                4.162504633596849
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.8539047892957443,
+              "flightStartTime": 1.3666666666666631,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                4.162465550003085
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.11666666666666665,
+            "deadline": 4.616666666666666,
+            "targetSpeed": 0,
+            "startedAt": 0.12499999999999999,
+            "completedAt": 1.9749999999999943,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "entry phase run_5 @ 0.68",
+      "sampleRateHz": 120,
+      "samples": 265,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/run5-68-120hz.json",
+      "sourceReportSHA256": "d4092994e5574fc9be754a2e229284e0a443c445d88ebdf86994002e8c7d8b4d",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.002,
+      "maximumJointAngularSpeed": 19.404430837546364,
+      "maximumRootRelativeBoneSpeed": 8.20051138385793,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 1.6260507577273e-09,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          6.120904633596392
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            1.3877787807814457e-16,
+            6.120865550002629
+          ],
+          "RightFoot": [
+            -0.1,
+            -2.0816681711721685e-16,
+            6.120904633596392
+          ]
+        },
+        "motor": {
+          "clock": 2.1833333333333367,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 2.5775100603190446,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "heelPhase": 3,
+              "stanceEndPhase": null,
+              "flightStartPhase": 2.353904789295673,
+              "flightStartTime": 1.3666666666666631,
+              "flightProgress": null,
+              "target": [
+                0.1,
+                0,
+                4.162465550002629
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "heelPhase": 2.5,
+              "stanceEndPhase": null,
+              "flightStartPhase": 1.7844402433350386,
+              "flightStartTime": 1.6708333333333287,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                4.162504633596392
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "idle",
+            "at": 0.11666666666666665,
+            "deadline": 4.616666666666666,
+            "targetSpeed": 0,
+            "startedAt": 0.12499999999999999,
+            "completedAt": 1.9749999999999943,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "keeper punt recovery @ 0.15",
+      "sampleRateHz": 120,
+      "samples": 129,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/punt-120hz.json",
+      "sourceReportSHA256": "408141bc66bb20d95b81762a2be40f48c212bbad8356b23f2e15145b7569385f",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.00199992,
+      "maximumJointAngularSpeed": 6.402163871419851,
+      "maximumRootRelativeBoneSpeed": 1.9505375059082992,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 4.786362926001422e-09,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          0
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.1,
+            -2.7755575615628914e-16,
+            1.8318679906315084e-17
+          ],
+          "RightFoot": [
+            -0.10000000019584733,
+            -2.186357858646737e-09,
+            8.421506667299905e-07
+          ]
+        },
+        "motor": {
+          "clock": 1.008333333333331,
+          "actualSpeed": 0,
+          "targetSpeed": 0,
+          "phase": 0.1799999940000013,
+          "feet": {
+            "LeftFoot": {
+              "mode": "plant",
+              "position": [
+                0.1,
+                -9.71445146547012e-17,
+                3.663735981263017e-17
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                0.1,
+                -9.71445146547012e-17,
+                3.663735981263017e-17
+              ],
+              "heelPhase": 0,
+              "stanceEndPhase": null,
+              "flightProgress": null,
+              "sourceSupport": {
+                "sourceClip": "keeper_punt",
+                "sourceSeconds": 0.30000005000000013,
+                "phase": 0.1799999940000013,
+                "soleHeight": -9.71445146547012e-17,
+                "grounded": true,
+                "authoredPlant": true
+              },
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.10000000019584733,
+                -2.1863578170133735e-09,
+                8.42150666737762e-07
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.10000000019584733,
+                -2.1863578170133735e-09,
+                8.42150666737762e-07
+              ],
+              "heelPhase": -0.5,
+              "stanceEndPhase": null,
+              "flightProgress": null,
+              "sourceSupport": {
+                "sourceClip": "keeper_punt",
+                "sourceSeconds": 0.30000005000000013,
+                "phase": 0.1799999940000013,
+                "soleHeight": -2.1863578170133735e-09,
+                "grounded": true,
+                "authoredPlant": false
+              },
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 1,
+            "clip": "idle",
+            "at": 0,
+            "deadline": 4.5,
+            "targetSpeed": 0,
+            "startedAt": 0.008333333333333333,
+            "completedAt": 0.008333333333333333,
+            "superseded": false
+          }
+        }
+      }
+    },
+    {
+      "name": "dribble kick run @ 0.68",
+      "sampleRateHz": 120,
+      "samples": 306,
+      "pass": true,
+      "complete": false,
+      "checks": {
+        "sourceInputsUnchangedDuringAudit": true,
+        "diagnosticInputsUnchangedDuringAudit": true,
+        "actualDescriptorSupported": true,
+        "actualLedgerAndFulfillment": true,
+        "virtualPalmSupport": true,
+        "settledAuthoredPalmSupport": true,
+        "catchDiveBodyContinuation": true,
+        "observerUnchangedDuringAudit": true,
+        "noPageErrors": true,
+        "noRemoteRequests": true,
+        "auditorUnchangedDuringAudit": true,
+        "requestedIdentityAndLODLoaded": true,
+        "decodedModelsMatchDisk": true,
+        "decodedModelsMatchDeclaredData": true,
+        "declaredMotionMatchesCurrentSource": true,
+        "declaredManifestMatchesCurrentSource": true,
+        "declaredMotionRuntimeMatchesCurrentSource": true,
+        "logicalRootHasNoSkinWeights": true,
+        "servedPackageUnchangedDuringAudit": true,
+        "fullMeshAboveFloor": true,
+        "activePlantAnchors": true,
+        "boundedActiveLandings": true,
+        "boundedRecovery": true,
+        "noExpiredContactLandings": true,
+        "settledSupportCoverage": true,
+        "unadmittedNearGroundDrift": true,
+        "immediateBonePositionContinuity": true,
+        "immediateBoneRotationContinuity": true,
+        "immediateRootContinuity": true,
+        "advancingJointAngularVelocity": true,
+        "advancingRootRelativeBoneVelocity": true
+      },
+      "sourceReport": "/tmp/soccer-v7-motor-c14/restart-120hz.json",
+      "sourceReportSHA256": "b05c282644c743c1ab5315022dc1a49f1b57efdbbcaf694418ed5a831a487031",
+      "runtime": {
+        "enabled": true,
+        "runtimePath": "/tmp/soccer-v7-motor-c14/runtime.js",
+        "snapshotRoot": null,
+        "inputs": {
+          "/tmp/soccer-v7-motor-c14/runtime.js": {
+            "bytes": 847688,
+            "sha256": "69781a64ac86eba31b897b7052a925e1a29c38ba9327a624b708891dabc31159"
+          },
+          "/tmp/soccer-v7-motor-c14/preview.js": {
+            "bytes": 86699,
+            "sha256": "4527841351a639d5fdfe6e765e444323e2f0aa1fa25f5904b267b9618d3fe161"
+          },
+          "/tmp/soccer-v7-motor-c14/locomotion-space.js": {
+            "bytes": 22346,
+            "sha256": "10392c2b103a4e6ea510352b0f9f2aa02e1ba043f756aed6227dee872d529a9f"
+          },
+          "/tmp/soccer-v7-motor-c14/recovery-state.js": {
+            "bytes": 35502,
+            "sha256": "69b8c52eae054f44117b6de18ae0d69212347264f3f53bcb07a3c5e0bbac56fc"
+          }
+        },
+        "unchanged": [
+          {
+            "file": "/tmp/soccer-v7-motor-c14/runtime.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/preview.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/locomotion-space.js",
+            "pass": true
+          },
+          {
+            "file": "/tmp/soccer-v7-motor-c14/recovery-state.js",
+            "pass": true
+          }
+        ]
+      },
+      "auditSource": {
+        "file": "source/audit-transitions.cjs",
+        "sha256": "dc8db0ef92c9271c408eddb2d8ea3940aa0289233ebf76757fcd5326f47c98c5"
+      },
+      "observerSource": {
+        "file": "source/audit-action-observer.cjs",
+        "sha256": "ee30bed9e82ac2f2e0e77571da153e19e360d5f2655d2bd7191da0cec85a0910"
+      },
+      "declaredPackageHashes": {
+        "manifest": "511a3d2952b3a66bc53f75155e136e0ac82fbbd22b2a8c84ed8703ec3f93c86c",
+        "motion": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+        "preview": "4c47bad1266c5407c2c970e61f19eb3503f234787b703a518bbc1253c4fcf5d9",
+        "motionRuntime": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+        "locomotion": "6d054b8030ee50960784d2c251cfbc6255be475cafe0c8cbba849c56e2e7ebf3",
+        "locomotionCurve": "2f89dc5465b85978c0254601c435d4278a3c69fbdeca61118997ae8cfaef2c12",
+        "dribble": "b6bffb5e39b93bcebf73e78dcbb6951814fae77498e55d89bd8325606f81f34d",
+        "recovery": "cc5f60a8f7c9e7f2566e77fd53c7a88bc909460eda4e90657e2f2e12e8380a4f",
+        "scene": "3d6c9fd774dd14e81bc69d184ec8bb4b2a7e5f2a488c6fb841393e51f01375ba",
+        "props": "14425929c0f4b009c98248b2a9020a52be7c9ef125efcfe7456f6880212233ae",
+        "models": {
+          "models/player-01-lod0.glb": "6787257514762df4ea9105cc8dac536ef6f382d901130181ec94a5dd21f559f7",
+          "models/player-01-lod1.glb": "81f2ef5931c75de017f1e03318628b0d95cb07d8effd9a5f4a5475cb54b14fae",
+          "models/player-02-lod0.glb": "df9758710975e021185c806e4ca2dfdaa4bdd9168e3ed1a3d1b41752c92156e7",
+          "models/player-02-lod1.glb": "cfe28cf5bb4e4a0176ce86fa123e1539ce283ec0d542447ef95c59b7e4af4ef7",
+          "models/player-03-lod0.glb": "d9f95992a28b7d51c208e698583c597c2681eeab97215315d31f0d0527da83d9",
+          "models/player-03-lod1.glb": "042130ce07878978ad8a288330238d5469039d6b95943c7becfca12b4b9c8f66",
+          "models/player-04-lod0.glb": "d19da411a34ac6acfe0aeccad3437888ff22d87ad3dde23e40021c912817ce8a",
+          "models/player-04-lod1.glb": "d042e2cca753fb73b045206f96cdd16af5321de84c45edfc200c6bf41978433a",
+          "models/player-05-lod0.glb": "96df4b4829d8eaa79881a0bd8b1337b30b0d17989f0e1db59245b02b6d69a6ca",
+          "models/player-05-lod1.glb": "068bcbee3d4fcc373f68b0a7f9e9db594b3e5945c7d85cb0b4cdb7d6f77621ee",
+          "models/player-06-lod0.glb": "156174c8cc835562104a1046c51e4a9fc58007f64b2225594661a1fa1f751055",
+          "models/player-06-lod1.glb": "9acf062594eec7f77977953f687e75cfeee916b33b097363c54230973d57a6ad",
+          "models/goalkeeper-lod0.glb": "6f632d9a3946a4b2467de710ee411745c52914a22d62106f18a0699230d10bd4",
+          "models/goalkeeper-lod1.glb": "0551376dcaff3255cb1ea05bcf2028f6b982e9c9274c597d6f591503518d1fea",
+          "models/referee-lod0.glb": "2b119290f0608ce28753e280587952407370a65c629e7f8ba74bf71185782005",
+          "models/referee-lod1.glb": "cac6f5cf36a448b5a9f9d76e5c30cbebb83ab67695ab4eb43887d3d147eb2657"
+        },
+        "bootBounds": "d3b9b494d4ac241c039a44206573d19db1b0c6ed533d0e35ca81f081b3e21860"
+      },
+      "minimumVertexY": 0.00151615,
+      "maximumJointAngularSpeed": 14.700295442475543,
+      "maximumRootRelativeBoneSpeed": 5.394032943973602,
+      "maximumAnchorMeters": 0,
+      "maximumUnlockedNearGroundXZStep": 1.4823314046869505e-10,
+      "actionObserverErrors": [],
+      "unsupportedControls": [],
+      "finalPhysicalState": {
+        "rootWorld": [
+          0,
+          0,
+          4.7027354166668065
+        ],
+        "soles": {
+          "LeftFoot": [
+            0.09999999999994835,
+            0.14800000000653357,
+            4.382495501533608
+          ],
+          "RightFoot": [
+            -0.10000000000000185,
+            6.51770304394006e-13,
+            4.995005787038599
+          ]
+        },
+        "motor": {
+          "clock": 2.5250000000000203,
+          "actualSpeed": 3.2,
+          "targetSpeed": 3.2,
+          "phase": 3.5295221560846572,
+          "feet": {
+            "LeftFoot": {
+              "mode": "flight",
+              "position": [
+                0.1,
+                0.14800000000000002,
+                3.07689550151948
+              ],
+              "orientation": [
+                0.1011331486092488,
+                0,
+                0,
+                0.9948728995466605
+              ],
+              "anchor": [
+                0.1,
+                0,
+                2.587364143908403
+              ],
+              "heelPhase": 4,
+              "stanceEndPhase": 3.34875,
+              "flightStartPhase": 3.3271412037037056,
+              "flightStartTime": 2.3833333333333466,
+              "flightProgress": 0.300777746378503,
+              "target": [
+                0.1,
+                0,
+                4.809405787037181
+              ],
+              "targetFrozen": false,
+              "neutralStep": null
+            },
+            "RightFoot": {
+              "mode": "plant",
+              "position": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "anchor": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "heelPhase": 3.5,
+              "stanceEndPhase": 3.82,
+              "flightStartPhase": 2.8730132679880427,
+              "flightStartTime": 2.04583333333333,
+              "flightProgress": null,
+              "target": [
+                -0.1,
+                0,
+                3.6894057870371744
+              ],
+              "targetFrozen": true,
+              "neutralStep": null
+            }
+          },
+          "request": {
+            "id": 3,
+            "clip": "run_3",
+            "at": 1.3999999999999964,
+            "deadline": 5.899999999999997,
+            "targetSpeed": 3.2,
+            "startedAt": 1.4083333333333297,
+            "completedAt": 2.3166666666666766,
+            "superseded": false
+          }
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Final combined66/69, all12 curved actors, identity/LOD and source31 coverage must bind final shared source/runtime/native/data hashes.",
+    "C13motor suspension was independently diagnosed as a recovery routing error and corrected in14a; its59\u201360rad/s failures are not attributed to this helper alone.",
+    "The13.342mm synthetic captured-airfoot descent is separately documented in the31-case CPU proof; the actual punt fixture proves the integrated route/neutral outcome. No physical-phone FPS or EA-reference visual score is inferred."
+  ]
+}

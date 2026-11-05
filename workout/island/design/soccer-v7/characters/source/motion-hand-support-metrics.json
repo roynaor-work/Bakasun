@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "samplingHz": 240,
+  "motionSha256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "runtimeSha256": "80fdd932df73e95ff4ed39623cb6f5445d7531850b41954312a0dc77bd75fc13",
+  "rows": [
+    {
+      "id": "slide_tackle",
+      "samples": 71,
+      "maxSupportPointErrorMeters": 0.00038710410322138574,
+      "maxAuthoredLimbReachResidualMeters": 0,
+      "pass": true
+    },
+    {
+      "id": "get_up",
+      "samples": 82,
+      "maxSupportPointErrorMeters": 0.00016098055443370768,
+      "maxAuthoredLimbReachResidualMeters": 0,
+      "pass": true
+    }
+  ],
+  "authoredReachRows": [
+    {
+      "id": "idle",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "run_1",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "run_2",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "run_3",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "run_4",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "run_5",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "sprint",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "decelerate",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "turn_left",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "turn_right",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "kick",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "short_pass",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "long_pass",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "header",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "dribble",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "slide_tackle",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "fall",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "get_up",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "celebrate_arms_up",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "celebrate_fist_pump",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "celebrate_victory_leap",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "celebrate_aeroplane",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "celebrate_applause",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_dive_left",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_dive_right",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_dive_high",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_catch",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_throw",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "keeper_punt",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "referee_whistle",
+      "maxAuthoredLimbReachResidualMeters": 0
+    },
+    {
+      "id": "referee_signal",
+      "maxAuthoredLimbReachResidualMeters": 0
+    }
+  ],
+  "pass": true,
+  "limits": "Authored hand-support markers and custom limb reach, canonical FK only. Runtime whole-mesh floor adjustment and real pressure support are separate."
+}

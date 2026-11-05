@@ -1,0 +1,90 @@
+{
+  "runtime": {
+    "vendor/viewer-runtime.js": {
+      "source": "/tmp/soccer-v7-recovery-prototype/runtime.js",
+      "sha256": "3979565983ccb3465045a74d5cb6cf971de81c82dd69e4b5d05238e6f0614ce8",
+      "bytes": 796326
+    }
+  },
+  "checks": {
+    "noPageErrors": true,
+    "noRemoteRequests": true,
+    "immutableInputs": true,
+    "servedInputsUnchanged": true,
+    "nativeMatchesDisk": true,
+    "nativeMatchesDeclared": true,
+    "cases": false
+  },
+  "clip": "long_pass",
+  "seconds": 0.14166666666666666,
+  "bone": "RightFoot",
+  "time": 2.7666666666666595,
+  "rigidVerticesTracked": 380,
+  "bothFrameNearGroundVertices": 7,
+  "minXZStepMeters": 0.012235864258814474,
+  "maxXZStepMeters": 0.012237725545561661,
+  "meanXZStepMeters": 0.012237024115671515,
+  "footWorldOrientationDegrees": 0.01701337811933538,
+  "examples": [
+    {
+      "meshIndex": 1,
+      "vertexIndex": 147,
+      "previous": [
+        -0.129043391799455,
+        0.002914413572908223,
+        0.1689744646908558
+      ],
+      "current": [
+        -0.1295730667159208,
+        0.005816516144258601,
+        0.15675007028282886
+      ],
+      "xzStepMeters": 0.012235864258814474
+    },
+    {
+      "meshIndex": 1,
+      "vertexIndex": 162,
+      "previous": [
+        -0.12904333109989274,
+        0.002914316915507919,
+        0.07398377165818282
+      ],
+      "current": [
+        -0.12959222559356037,
+        0.0058126097019185015,
+        0.06175937926251022
+      ],
+      "xzStepMeters": 0.012236709304733716
+    },
+    {
+      "meshIndex": 1,
+      "vertexIndex": 163,
+      "previous": [
+        -0.12904333109989274,
+        0.002914316915507919,
+        0.07398377165818282
+      ],
+      "current": [
+        -0.12959222559356037,
+        0.0058126097019185015,
+        0.06175937926251022
+      ],
+      "xzStepMeters": 0.012236709304733716
+    },
+    {
+      "meshIndex": 1,
+      "vertexIndex": 164,
+      "previous": [
+        -0.12904333109989274,
+        0.002914316915507919,
+        0.07398377165818282
+      ],
+      "current": [
+        -0.12959222559356037,
+        0.0058126097019185015,
+        0.06175937926251022
+      ],
+      "xzStepMeters": 0.012236709304733716
+    }
+  ]
+}

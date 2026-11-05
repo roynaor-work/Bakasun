@@ -1,0 +1,113 @@
+{
+  "kind": "hair29-actual-groom-authoring-proof",
+  "scope": "Actual P03/P04 crown locks plus unchanged P02 coils, before QEM. No exports or live model/map/runtime writes. Requires independent phone-frame review.",
+  "helperSha256": "813a3ba15267b5c0a97fff77dc6863569eddf8803d5a3e3ef92fb5a03d83e11b",
+  "builderSha256": "148c8de5d5629cbc28ef771c2ea8cf66b0cc2bbaf410ea35badb7cddc0260804",
+  "results": [
+    {
+      "id": "player-02",
+      "seconds": 1.6908939409986488,
+      "deterministic": true,
+      "report": {
+        "variant": "29",
+        "method": "overlapping short crown sublocks with cap-rooted starts",
+        "style": "coils",
+        "objects": [],
+        "normalRecipeOwnedByExporter": true,
+        "undercoatAndFringeUnchanged": true,
+        "maximumSublockLengthMeters": 0.0,
+        "skipped": true,
+        "reason": "Coil geometry is unchanged."
+      }
+    },
+    {
+      "id": "player-03",
+      "seconds": 1.975324033999641,
+      "deterministic": true,
+      "report": {
+        "variant": "29",
+        "method": "overlapping short crown sublocks with cap-rooted starts",
+        "style": "sweep",
+        "objects": [
+          {
+            "name": "hair-groom-clumps",
+            "oldVertices": 3876,
+            "newVertices": 7150,
+            "oldPolygons": 3212,
+            "newPolygons": 5704,
+            "splitOriginalRibbons": 314,
+            "unchangedShortRibbons": 18,
+            "invalidRibbons": 0,
+            "discardedDegenerateTriangles": 4,
+            "newRibbonCount": 721,
+            "oldLengthRangeMeters": [
+              0.008888512195371196,
+              0.050944865694816044
+            ],
+            "newLengthRangeMeters": [
+              0.008888512195371196,
+              0.021563280639999412
+            ],
+            "rootSignedDepthRangeMeters": [
+              0.00019999999999999966,
+              0.0002000000000000001
+            ],
+            "rigidHead5": true,
+            "canonicalGroupsUnchanged": true,
+            "uvTilePreserved": true,
+            "normalRecipeChangedHere": false
+          }
+        ],
+        "normalRecipeOwnedByExporter": true,
+        "undercoatAndFringeUnchanged": true,
+        "maximumSublockLengthMeters": 0.021563280639999412,
+        "skipped": false
+      }
+    },
+    {
+      "id": "player-04",
+      "seconds": 2.147946105000301,
+      "deterministic": true,
+      "report": {
+        "variant": "29",
+        "method": "overlapping short crown sublocks with cap-rooted starts",
+        "style": "quiff",
+        "objects": [
+          {
+            "name": "hair-groom-clumps",
+            "oldVertices": 4024,
+            "newVertices": 6872,
+            "oldPolygons": 3346,
+            "newPolygons": 5488,
+            "splitOriginalRibbons": 329,
+            "unchangedShortRibbons": 10,
+            "invalidRibbons": 0,
+            "discardedDegenerateTriangles": 6,
+            "newRibbonCount": 689,
+            "oldLengthRangeMeters": [
+              0.0071368216888450485,
+              0.04694714150910321
+            ],
+            "newLengthRangeMeters": [
+              0.0071368216888450485,
+              0.021987663405382277
+            ],
+            "rootSignedDepthRangeMeters": [
+              1.4836529185768832e-05,
+              0.0002000000000000001
+            ],
+            "rigidHead5": true,
+            "canonicalGroupsUnchanged": true,
+            "uvTilePreserved": true,
+            "normalRecipeChangedHere": false
+          }
+        ],
+        "normalRecipeOwnedByExporter": true,
+        "undercoatAndFringeUnchanged": true,
+        "maximumSublockLengthMeters": 0.021987663405382277,
+        "skipped": false
+      }
+    }
+  ],
+  "pass": true
+}

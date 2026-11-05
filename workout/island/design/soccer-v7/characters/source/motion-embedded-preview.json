@@ -1,0 +1,5519 @@
+{
+  "schemaVersion": 1,
+  "dryRun": true,
+  "partial": false,
+  "source": "animations.json",
+  "motionSHA256": "7c90b679d353a229a73f4d89275981809a0a9f33e5cc2d4c1938d27cfdf4cabc",
+  "clipCount": 31,
+  "fps": 30,
+  "rootMotion": false,
+  "authored": true,
+  "motionCapture": false,
+  "modelCount": 16,
+  "maxGlbBytes": 1378168,
+  "compression": {
+    "extension": "KHR_draco_mesh_compression",
+    "geometryReencoded": false,
+    "preservedSourceQuantization": {
+      "method": "edgebreaker",
+      "encodeSpeed": 5,
+      "decodeSpeed": 5,
+      "quantizePosition": 15,
+      "quantizeNormal": 12,
+      "quantizeTexcoord": 13,
+      "quantizeGeneric": 0
+    }
+  },
+  "referenceRootPathEmbedded": false,
+  "entries": [
+    {
+      "path": "models/player-01-lod0.glb",
+      "beforeBytes": 1336564,
+      "bytes": 1336564,
+      "addedBytes": 0,
+      "sha256": "c2b8a25bfab7d6aac67844ae9eb991e3ee47314fb343cc3ede2a6c4bdb444cab",
+      "triangles": 35365,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30215,
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 212719,
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 121600,
+          "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 946028,
+      "originalBinarySha256": "05beaa2773bbc6337adef9dd32c32fa176f1301a019796d484b28f1bd6f49259",
+      "originalGeometryJsonSha256": "f7c629c10e1cd2445e259293201490ad4cda0ac25b596ded86c91e3bf3390e80",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-01-lod1.glb",
+      "beforeBytes": 889984,
+      "bytes": 889984,
+      "addedBytes": 0,
+      "sha256": "f969c4920cd0650607d71b5297fb2ffced8efeeb43771c3f1149525bf1b22bf8",
+      "triangles": 5781,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30215,
+          "sha256": "b37d3b70d42a20f1ccf651ee2405a2128727dc664d3d1d1eb4808fbc9819f2fe"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 212719,
+          "sha256": "dfdba590c0462c2da61b45dc05408c12850a79ae55da9cad13ce73c6313beb66"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 121600,
+          "sha256": "a0fbdfee32bd9b342be02b4ea1c5f5f7f376da2872a2549d0897d27e20de9d1e"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 499460,
+      "originalBinarySha256": "e2094cf623dd25959cd7c084c2bc75c9c66a898ea51b7d85a4bb0fd58496fb98",
+      "originalGeometryJsonSha256": "ad8f1ef55e950e340290dffa575211231fe04fcdcb680879b91589bd7c5d8018",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-02-lod0.glb",
+      "beforeBytes": 1309188,
+      "bytes": 1309188,
+      "addedBytes": 0,
+      "sha256": "9f27e5175dff824d2bc6e9a9d4b94e35f8b7bfb6fd5bd7cbf5704508a0a0b89f",
+      "triangles": 33865,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30271,
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 200843,
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 115832,
+          "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 919276,
+      "originalBinarySha256": "88540338ade522be31b2df3036fca6c9cbf2044c1fc4d2530a6cad949c93c5db",
+      "originalGeometryJsonSha256": "d8b0c377dfcee8966edc9644fed953039cdbc7f258a8120b3e02fec802a725af",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-02-lod1.glb",
+      "beforeBytes": 869612,
+      "bytes": 869612,
+      "addedBytes": 0,
+      "sha256": "78318c8e39a32af8f3b54c25dc9d83401d69692a21e049173498da3fc0ab5f64",
+      "triangles": 5778,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30271,
+          "sha256": "11fecfb37c0934a6e1e517422c8d6839ab14334e68a691693349ecbe195cc524"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 200843,
+          "sha256": "df5c8114fc74333cefda0618b6f81c820595cdf7ea35b76138a226f0cd4df55c"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 115832,
+          "sha256": "76c5b8d799d17a5ce9f7b530909c0b9dcb58d83725cee7786f387e80ff479758"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 479660,
+      "originalBinarySha256": "aaaad7c80c01793e97f0b2793a2fea23cf18ce08a6d1ed09b462f80528a25e3b",
+      "originalGeometryJsonSha256": "e4b0c9265578774e49b2293ed58fdfad070a38fb901069423da516a073ff80fc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-03-lod0.glb",
+      "beforeBytes": 1361628,
+      "bytes": 1361628,
+      "addedBytes": 0,
+      "sha256": "669d29d7f565db4aece1008e1093f1fc0a94c83f06fd5029072fed5a3080fca1",
+      "triangles": 35296,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212779,
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30071,
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 142894,
+          "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 970032,
+      "originalBinarySha256": "7f5a715eb854aed8e2e057e8586cd5b2c71c424160e1413e138920220043e97a",
+      "originalGeometryJsonSha256": "06fcb10b84f69e789fd5e2e4ec474c81cdb85a1415eb784192779485cdeedacc",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-03-lod1.glb",
+      "beforeBytes": 911836,
+      "bytes": 911836,
+      "addedBytes": 0,
+      "sha256": "db0c6bc8c40a12fccdecffe0936ef13431a493bfab6f7d171e3444f38de31025",
+      "triangles": 5759,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212779,
+          "sha256": "01b692a249101a3182db1563cad5486ab16dd9b553f9c70eefe6fd2ba8a3fa31"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30071,
+          "sha256": "e2ae2d14248cae73895eb9a0f186597bce9eca5677ad52a251c6bf30d946bd25"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 142894,
+          "sha256": "48dadd0b13d5d0488af59fc4420d68c12f17b7894d4f247a008716b56a3ccd11"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 520320,
+      "originalBinarySha256": "3d5ed5308e0ccbd6c751d55b598390af62ba598170f9a3cdbcdffda2961a423b",
+      "originalGeometryJsonSha256": "cc044132cb54cc8185317a6a005ced699c02a9fd4fcd631464948b44ca12dcec",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-04-lod0.glb",
+      "beforeBytes": 1378168,
+      "bytes": 1378168,
+      "addedBytes": 0,
+      "sha256": "79e962520ea0bccfb99f87478b217c578944827512017d32e3746f2d6617eaa1",
+      "triangles": 35327,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212999,
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30128,
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 160098,
+          "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 987652,
+      "originalBinarySha256": "2989ba2a4d0956a9eed04e10134b80810e8aa0e18d463438529cc7c781551f39",
+      "originalGeometryJsonSha256": "b025c78e2ba68306398072d26d9d0a9acac146e6c385428a0d357e58ed12df17",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-04-lod1.glb",
+      "beforeBytes": 929072,
+      "bytes": 929072,
+      "addedBytes": 0,
+      "sha256": "02e20101aa32ce1d34ddfdccd3e1a04a884dd61981399c6aa09622ec989d8008",
+      "triangles": 5780,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212999,
+          "sha256": "92dc858293b0aad4b519198989204c9d35ca65a986fc9594fcce2f97e53471ca"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30128,
+          "sha256": "fa4385041bb49c4b66baaadff5f7338b120478f549701abaf5892d9c4d288fee"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 160098,
+          "sha256": "8bb1701576b4462fcd00267247d8fec15ca01d3b0ea21a16b57cfb162a9ee64c"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 538688,
+      "originalBinarySha256": "c76c9d90e282b0502721185678b613e8be8fec254ac78025f763257f306607d1",
+      "originalGeometryJsonSha256": "524c8b9d7a7a6ed0f5517a4c868bc0d9d81d330c082cf90dc4b67682056ce1a2",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-05-lod0.glb",
+      "beforeBytes": 1273936,
+      "bytes": 1273936,
+      "addedBytes": 0,
+      "sha256": "03e55e05c328390bd03d0abcd577d5c89e63c2d8c13bbe86b8d2f163419403ab",
+      "triangles": 33673,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212979,
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30204,
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 110934,
+          "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 883564,
+      "originalBinarySha256": "7c0d1310dd724dea1cbdf188b1df2ff02d628a4cbe90f2f198c3de75b9bfe9a7",
+      "originalGeometryJsonSha256": "781ed7a10ad23c7f5cf7a4283cc298f9608606a11729332e579a2b93108216e2",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-05-lod1.glb",
+      "beforeBytes": 875864,
+      "bytes": 875864,
+      "addedBytes": 0,
+      "sha256": "10dbf92977a2ac87ed7539eb5c0da34dada69945e961beaefeb978730e80396d",
+      "triangles": 5773,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 212979,
+          "sha256": "7515cbaca6b13e426d2d40516fd36d4563645e7c2a22aef34403606c45ce5838"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30204,
+          "sha256": "a5b15047fd2ce6ea1838e77cbbdf66dd8c4be729caf5d3182a69e63053e5323f"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 110934,
+          "sha256": "6453b00a8cb9a5d2eaa79833c45b1efe924d4b09bfa52d2138c02d8dad4ba649"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 485372,
+      "originalBinarySha256": "180b327517febc43293b429988289fda68b72577592b25f90c085696b392b55b",
+      "originalGeometryJsonSha256": "010c784f634bce64f69d99c85c3c44fa70e627f08a0554ac90883fec11efecbf",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-06-lod0.glb",
+      "beforeBytes": 1359124,
+      "bytes": 1359124,
+      "addedBytes": 0,
+      "sha256": "50d86c17d06a62ec4cfbf828216716192b6f2ef1bdab9779ba352a70fa7d4c41",
+      "triangles": 35365,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 29973,
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213521,
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 138386,
+          "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 968668,
+      "originalBinarySha256": "26c61df1c451cdb2a05c94299bad552d56ae307b6994e7ebf156a3596d1d5d9c",
+      "originalGeometryJsonSha256": "3d7e8faff5896d9afb639a55c286854888355e625afae93c954cbbe51aef015a",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/player-06-lod1.glb",
+      "beforeBytes": 904828,
+      "bytes": 904828,
+      "addedBytes": 0,
+      "sha256": "a4fe925db908ecb976189e643b97cf34e0d6acc4e5e3b97c738def13a94a59df",
+      "triangles": 5777,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 29973,
+          "sha256": "6604ebbdbf25b9603d68785428bfd04ed644561e39f1a7472cc05455bb6965e9"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213521,
+          "sha256": "c595875654200fc2ddcf5b54272b8cd0c1452d30a9e38d607ebc91788a4562d7"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 138386,
+          "sha256": "f555285af5db17e0c795346f53602375528344f904b3a08d46cdced0108089f7"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 514464,
+      "originalBinarySha256": "d65291b93b718ae9ebd87c74fc2e54a3dbef93aa833fc64ef17817e94e62fae9",
+      "originalGeometryJsonSha256": "555cba275fc3f5b04afdfe15938c361765651a1d5442ff2cefe83d30dd0d610e",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/goalkeeper-lod0.glb",
+      "beforeBytes": 1352292,
+      "bytes": 1352292,
+      "addedBytes": 0,
+      "sha256": "b46dc1d1742eafd3399661a2582fe5a042f7793f36ffb3a90f9b5aff45415f6b",
+      "triangles": 35426,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 202968,
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30852,
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 137478,
+          "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 962324,
+      "originalBinarySha256": "1e9df7f2b5d46c0a56bba0cdcea126881884898831fbb695b9aa4fb308da1f6d",
+      "originalGeometryJsonSha256": "b5eac8529f39290d6f17299daeaf576eecce4838ee538cb2bae80755412f4c4d",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/goalkeeper-lod1.glb",
+      "beforeBytes": 896884,
+      "bytes": 896884,
+      "addedBytes": 0,
+      "sha256": "e50762bed04c37c757813d5bf0bcd14f5f6bff09a324656f0d098c5a00d294e4",
+      "triangles": 5997,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 202968,
+          "sha256": "7f387391d85648537340c1672dcc716ebb761f239a6b4cb32804f989b05876cf"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 30852,
+          "sha256": "851b5264387c1003c54f1ceb08a25d84ff4d7936604ad0366651f0fdb0eee901"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 137478,
+          "sha256": "002448b11ec1a30a07eaac0a0fe99a02a3ac3ffcdc75b7e3effd36643824dbb8"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 506988,
+      "originalBinarySha256": "da9798774c85812e5b95ce2cee813d219f3361040774213dc0911a64762a5cd8",
+      "originalGeometryJsonSha256": "71fc1a167587944871de929bbcfa344b35a184376dc760763d5652bcc65cd865",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/referee-lod0.glb",
+      "beforeBytes": 1360752,
+      "bytes": 1360752,
+      "addedBytes": 0,
+      "sha256": "f17abdd3a6811bc166fe512c32be6f6da76f8800d1f28df747dbce3d0ae6598c",
+      "triangles": 35365,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30104,
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213142,
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 144638,
+          "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 970244,
+      "originalBinarySha256": "4c42d207d766df0b4ad80d58752c0e526c2ceb5e209227ccd9f8ac8c157ef320",
+      "originalGeometryJsonSha256": "7bcd9d67e0e21773c8aeaa61b86e65555cc946ae5db288a16e475b70eddfa93a",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    },
+    {
+      "path": "models/referee-lod1.glb",
+      "beforeBytes": 912812,
+      "bytes": 912812,
+      "addedBytes": 0,
+      "sha256": "12486dcd464b07d528c330b72d1b1e5c9b2d428fdefb1b9737963a17154730ea",
+      "triangles": 5778,
+      "clipCount": 31,
+      "channelsPerClip": 19,
+      "fps": 30,
+      "extensionsBefore": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "extensionsAfter": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular"
+      ],
+      "texturesPreserved": true,
+      "sourceExtrasPreserved": true,
+      "embeddedTextures": [
+        {
+          "mimeType": "image/png",
+          "bytes": 30104,
+          "sha256": "2a9c4bee1876c08ca588626d1b5e5136e17bc6f6907268e5e666b0ab0c41ebc1"
+        },
+        {
+          "mimeType": "image/png",
+          "bytes": 213142,
+          "sha256": "f66c19700259954afd2a6fce2d0192cbc225385be677c0a565a72346a6b89c10"
+        },
+        {
+          "mimeType": "image/webp",
+          "bytes": 144638,
+          "sha256": "1e78d2dc25d7d480821ec47cbcbf182b8b3639fbe33a25270814c967a14aa18d"
+        }
+      ],
+      "rawAccessorBytes": 367536,
+      "uniqueAccessorBytes": 252572,
+      "uniqueAccessors": 449,
+      "geometryEncodingUnchanged": true,
+      "nativeAppendIdempotent": true,
+      "originalBinaryBytes": 522404,
+      "originalBinarySha256": "37709f0340304428f3a9e9222daff37d4dbbc2505d26a0f2fae4d68f46d973c8",
+      "originalGeometryJsonSha256": "93f98b8b83405572d56355919276d3c7916b927249a84cc87fd4ee44ae32361f",
+      "nativeContract": {
+        "keys": 22971,
+        "maxTimestampErrorSeconds": 9.536743172944284e-8,
+        "maxComponentError": 5.6587219354753415e-8,
+        "maxQuaternionNormError": 4.305054734921043e-8,
+        "pass": true
+      },
+      "khronosErrors": 0,
+      "khronosWarnings": 5,
+      "khronosIssues": [
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/0/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/1/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/2/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/3/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+          "severity": 1,
+          "pointer": "/meshes/0/primitives/4/material",
+          "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/4",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/5",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/6",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/7",
+          "message": "This object may be unused."
+        },
+        {
+          "code": "UNUSED_OBJECT",
+          "severity": 2,
+          "pointer": "/bufferViews/8",
+          "message": "This object may be unused."
+        }
+      ],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "run_1",
+          "frames": 28,
+          "duration": 0.9,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_2",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_3",
+          "frames": 22,
+          "duration": 0.7,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_4",
+          "frames": 19,
+          "duration": 0.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "run_5",
+          "frames": 17,
+          "duration": 0.533333,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "sprint",
+          "frames": 15,
+          "duration": 0.466667,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "decelerate",
+          "frames": 31,
+          "duration": 1,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_left",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "turn_right",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 17
+        },
+        {
+          "id": "kick",
+          "frames": 21,
+          "duration": 0.666667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "short_pass",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "long_pass",
+          "frames": 40,
+          "duration": 1.3,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "header",
+          "frames": 39,
+          "duration": 1.266667,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "dribble",
+          "frames": 25,
+          "duration": 0.8,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "slide_tackle",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "fall",
+          "frames": 27,
+          "duration": 0.866667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "get_up",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 18
+        },
+        {
+          "id": "celebrate_arms_up",
+          "frames": 61,
+          "duration": 2,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "celebrate_fist_pump",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 11
+        },
+        {
+          "id": "celebrate_victory_leap",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 9
+        },
+        {
+          "id": "celebrate_aeroplane",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 14
+        },
+        {
+          "id": "celebrate_applause",
+          "frames": 67,
+          "duration": 2.2,
+          "channels": 19,
+          "samplers": 13
+        },
+        {
+          "id": "keeper_dive_left",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_right",
+          "frames": 45,
+          "duration": 1.466667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_dive_high",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "keeper_catch",
+          "frames": 37,
+          "duration": 1.2,
+          "channels": 19,
+          "samplers": 12
+        },
+        {
+          "id": "keeper_throw",
+          "frames": 36,
+          "duration": 1.166667,
+          "channels": 19,
+          "samplers": 15
+        },
+        {
+          "id": "keeper_punt",
+          "frames": 51,
+          "duration": 1.666667,
+          "channels": 19,
+          "samplers": 16
+        },
+        {
+          "id": "referee_whistle",
+          "frames": 49,
+          "duration": 1.6,
+          "channels": 19,
+          "samplers": 10
+        },
+        {
+          "id": "referee_signal",
+          "frames": 55,
+          "duration": 1.8,
+          "channels": 19,
+          "samplers": 10
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true
+}
