@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-11-04T21:46:50.999Z",
+  "command": "ISLAND_PLAYWRIGHT=<racing-v7>/source/playwright-system.mjs node --test --test-concurrency=1 --test-force-exit tests/*.mjs",
+  "summary": {
+    "tests": 3135,
+    "suites": 0,
+    "pass": 3084,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 51,
+    "todo": 0,
+    "duration_ms": 475345.982461
+  },
+  "exitCode": 0,
+  "pass": true,
+  "existingTestsEdited": false,
+  "setup": "Installed system Chromium selected through the existing ISLAND_PLAYWRIGHT hook; the default Playwright browser was absent. The initial attempt was interrupted after browser setup left an open server. Assertions were not changed.",
+  "skips": [
+    "﹣ audit 01-07, 16: poisoned backup, CSP, dialog, labels, buttons, focus and title in Chromium (0.922929ms) # SKIP",
+    "﹣ browser: stick left / actions right in both orientations, floating stick with boost under a second finger (0.93039ms) # SKIP",
+    "﹣ browser: environments per stage, rotate, offline list, silent fallbacks, kit screens (0.686899ms) # SKIP",
+    "﹣ browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently (0.326558ms) # SKIP",
+    "﹣ actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco (0.691115ms) # SKIP",
+    "﹣ soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key (1.202836ms) # SKIP",
+    "﹣ hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key (0.205811ms) # SKIP",
+    "﹣ alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key (0.084448ms) # SKIP",
+    "﹣ ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay (0.089966ms) # SKIP",
+    "﹣ one button downloads soccer, basketball and ski; status counts the real cache; saves stay untouched; then the island opens offline with all three games (1.096955ms) # SKIP",
+    "﹣ automatic download fills the device cache after open, and a data saver skips it (0.161845ms) # SKIP",
+    "﹣ a missing or blocked asset never hangs a game: soccer, basketball and ski still reach the playing screen (0.09885ms) # SKIP",
+    "﹣ soccer supplied controls in the native game, with real CSP, both orientations and lifecycle cancellation (0.647158ms) # SKIP",
+    "﹣ soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations (0.79473ms) # SKIP",
+    "﹣ soccer reopens after a real worker failure under the shipped index CSP (4.798378ms) # SKIP",
+    "﹣ soccer assets download once into the service worker cache and the next match loads without network (1.153763ms) # SKIP",
+    "﹣ soccer uses the v4 turf, and falls back to the 1k pair when a v4 file fails, under the shipped CSP (0.441497ms) # SKIP",
+    "﹣ soccer falls back to the v4 characters when a v5 file fails, under the shipped CSP (0.33078ms) # SKIP"
+  ]
+}

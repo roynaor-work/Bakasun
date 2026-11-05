@@ -1,0 +1,387 @@
+{
+  "generatedAt": "2026-11-04T21:48:48.077Z",
+  "method": "decoded terrain triangle heights at center, lane and road-edge points along the whole closed path",
+  "records": [
+    {
+      "track": "coast",
+      "samples": 3205,
+      "missingTerrainSamples": 0,
+      "maxTerrainRelativeToRoadMeters": 0.03427107737079593,
+      "intrusions": [
+        {
+          "sample": 2,
+          "phase": 0.003125,
+          "offset": -5.546,
+          "meters": 0.01523169992529505
+        },
+        {
+          "sample": 13,
+          "phase": 0.0203125,
+          "offset": -5.546,
+          "meters": 0.013780492598460814
+        },
+        {
+          "sample": 24,
+          "phase": 0.0375,
+          "offset": -5.546,
+          "meters": 0.03427107737079593
+        }
+      ],
+      "pass": false
+    },
+    {
+      "track": "neon",
+      "samples": 3205,
+      "missingTerrainSamples": 0,
+      "maxTerrainRelativeToRoadMeters": -0.20816382557620094,
+      "intrusions": [],
+      "pass": true
+    },
+    {
+      "track": "ridge",
+      "samples": 3205,
+      "missingTerrainSamples": 0,
+      "maxTerrainRelativeToRoadMeters": 0.532471784706238,
+      "intrusions": [
+        {
+          "sample": 5,
+          "phase": 0.0078125,
+          "offset": -5.076,
+          "meters": 0.02583479115879861
+        },
+        {
+          "sample": 6,
+          "phase": 0.009375,
+          "offset": -5.076,
+          "meters": 0.12680690821722518
+        },
+        {
+          "sample": 7,
+          "phase": 0.0109375,
+          "offset": -5.076,
+          "meters": 0.23242969163944416
+        },
+        {
+          "sample": 7,
+          "phase": 0.0109375,
+          "offset": -2,
+          "meters": 0.04208987500183614
+        },
+        {
+          "sample": 8,
+          "phase": 0.0125,
+          "offset": -5.076,
+          "meters": 0.15952858466530895
+        },
+        {
+          "sample": 9,
+          "phase": 0.0140625,
+          "offset": -5.076,
+          "meters": 0.04681416009655681
+        },
+        {
+          "sample": 19,
+          "phase": 0.0296875,
+          "offset": 5.076,
+          "meters": 0.0675862879755611
+        },
+        {
+          "sample": 20,
+          "phase": 0.03125,
+          "offset": 5.076,
+          "meters": 0.05205974838466698
+        },
+        {
+          "sample": 21,
+          "phase": 0.0328125,
+          "offset": -5.076,
+          "meters": 0.126545769302445
+        },
+        {
+          "sample": 22,
+          "phase": 0.034375,
+          "offset": -5.076,
+          "meters": 0.01267804154456531
+        },
+        {
+          "sample": 29,
+          "phase": 0.0453125,
+          "offset": 5.076,
+          "meters": 0.07854338098910674
+        },
+        {
+          "sample": 30,
+          "phase": 0.046875,
+          "offset": 5.076,
+          "meters": 0.20674286414403298
+        },
+        {
+          "sample": 31,
+          "phase": 0.0484375,
+          "offset": 5.076,
+          "meters": 0.33066037561945905
+        },
+        {
+          "sample": 32,
+          "phase": 0.05,
+          "offset": 2,
+          "meters": 0.031904993125415615
+        },
+        {
+          "sample": 32,
+          "phase": 0.05,
+          "offset": 5.076,
+          "meters": 0.31016834244683444
+        },
+        {
+          "sample": 33,
+          "phase": 0.0515625,
+          "offset": 5.076,
+          "meters": 0.011419083150521203
+        },
+        {
+          "sample": 434,
+          "phase": 0.678125,
+          "offset": 5.076,
+          "meters": 0.08116777897759064
+        },
+        {
+          "sample": 435,
+          "phase": 0.6796875,
+          "offset": 5.076,
+          "meters": 0.1629648729034221
+        },
+        {
+          "sample": 436,
+          "phase": 0.68125,
+          "offset": 5.076,
+          "meters": 0.2535725308058021
+        },
+        {
+          "sample": 437,
+          "phase": 0.6828125,
+          "offset": 5.076,
+          "meters": 0.08288121313619179
+        },
+        {
+          "sample": 448,
+          "phase": 0.7,
+          "offset": 5.076,
+          "meters": 0.036667440451948696
+        },
+        {
+          "sample": 449,
+          "phase": 0.7015625,
+          "offset": 5.076,
+          "meters": 0.12950244355550877
+        },
+        {
+          "sample": 450,
+          "phase": 0.703125,
+          "offset": -5.076,
+          "meters": 0.1589518677415298
+        },
+        {
+          "sample": 450,
+          "phase": 0.703125,
+          "offset": 5.076,
+          "meters": 0.1490152669866336
+        },
+        {
+          "sample": 451,
+          "phase": 0.7046875,
+          "offset": -5.076,
+          "meters": 0.14617524392526127
+        },
+        {
+          "sample": 451,
+          "phase": 0.7046875,
+          "offset": 5.076,
+          "meters": 0.014572482349548999
+        },
+        {
+          "sample": 457,
+          "phase": 0.7140625,
+          "offset": 5.076,
+          "meters": 0.06979454126925688
+        },
+        {
+          "sample": 458,
+          "phase": 0.715625,
+          "offset": -5.076,
+          "meters": 0.1676185757662818
+        },
+        {
+          "sample": 458,
+          "phase": 0.715625,
+          "offset": 5.076,
+          "meters": 0.16262009164004754
+        },
+        {
+          "sample": 459,
+          "phase": 0.7171875,
+          "offset": -5.076,
+          "meters": 0.24752055904357628
+        },
+        {
+          "sample": 460,
+          "phase": 0.71875,
+          "offset": -5.076,
+          "meters": 0.12165311077707774
+        },
+        {
+          "sample": 472,
+          "phase": 0.7375,
+          "offset": 5.076,
+          "meters": 0.027408868601815795
+        },
+        {
+          "sample": 539,
+          "phase": 0.8421875,
+          "offset": 5.076,
+          "meters": 0.016421644902793797
+        },
+        {
+          "sample": 540,
+          "phase": 0.84375,
+          "offset": 5.076,
+          "meters": 0.12839465892085944
+        },
+        {
+          "sample": 541,
+          "phase": 0.8453125,
+          "offset": 5.076,
+          "meters": 0.1192646644009
+        },
+        {
+          "sample": 542,
+          "phase": 0.846875,
+          "offset": 5.076,
+          "meters": 0.07509832455346499
+        },
+        {
+          "sample": 543,
+          "phase": 0.8484375,
+          "offset": 5.076,
+          "meters": 0.026487733769927968
+        },
+        {
+          "sample": 544,
+          "phase": 0.85,
+          "offset": 5.076,
+          "meters": 0.010393815467017453
+        },
+        {
+          "sample": 545,
+          "phase": 0.8515625,
+          "offset": 5.076,
+          "meters": 0.42002797724763175
+        },
+        {
+          "sample": 546,
+          "phase": 0.853125,
+          "offset": 5.076,
+          "meters": 0.24957419747376863
+        },
+        {
+          "sample": 553,
+          "phase": 0.8640625,
+          "offset": 5.076,
+          "meters": 0.15806912848130317
+        },
+        {
+          "sample": 554,
+          "phase": 0.865625,
+          "offset": 2,
+          "meters": 0.08559005162935474
+        },
+        {
+          "sample": 554,
+          "phase": 0.865625,
+          "offset": 5.076,
+          "meters": 0.45519849790237965
+        },
+        {
+          "sample": 555,
+          "phase": 0.8671875,
+          "offset": 2,
+          "meters": 0.058867118080821235
+        },
+        {
+          "sample": 555,
+          "phase": 0.8671875,
+          "offset": 5.076,
+          "meters": 0.532471784706238
+        },
+        {
+          "sample": 556,
+          "phase": 0.86875,
+          "offset": 5.076,
+          "meters": 0.2967052199119188
+        },
+        {
+          "sample": 557,
+          "phase": 0.8703125,
+          "offset": 5.076,
+          "meters": 0.05819045045125859
+        },
+        {
+          "sample": 562,
+          "phase": 0.878125,
+          "offset": 5.076,
+          "meters": 0.07412224069376905
+        },
+        {
+          "sample": 563,
+          "phase": 0.8796875,
+          "offset": 2,
+          "meters": 0.018796101258903963
+        },
+        {
+          "sample": 563,
+          "phase": 0.8796875,
+          "offset": 5.076,
+          "meters": 0.21805999820996225
+        },
+        {
+          "sample": 564,
+          "phase": 0.88125,
+          "offset": 2,
+          "meters": 0.03902704632505061
+        },
+        {
+          "sample": 564,
+          "phase": 0.88125,
+          "offset": 5.076,
+          "meters": 0.2780084780618832
+        },
+        {
+          "sample": 565,
+          "phase": 0.8828125,
+          "offset": 5.076,
+          "meters": 0.15313646280367088
+        },
+        {
+          "sample": 566,
+          "phase": 0.884375,
+          "offset": 5.076,
+          "meters": 0.02909518054299265
+        },
+        {
+          "sample": 578,
+          "phase": 0.903125,
+          "offset": 5.076,
+          "meters": 0.19909986868557228
+        },
+        {
+          "sample": 579,
+          "phase": 0.9046875,
+          "offset": 5.076,
+          "meters": 0.12111383544420606
+        }
+      ],
+      "pass": false
+    }
+  ],
+  "pass": false
+}

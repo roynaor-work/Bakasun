@@ -1,0 +1,405 @@
+{
+  "generatedAt": "2026-11-05T01:06:48.652Z",
+  "pass": true,
+  "checks": 489,
+  "failures": [],
+  "warnings": [],
+  "triangleCountDefinitions": {
+    "triangles": "Stored mesh primitives, each mesh once",
+    "trianglesPerScene": "Default GLB scene, including every mesh node and any GPU instances"
+  },
+  "assets": [
+    {
+      "file": "assets/cars/apex-lod0.glb",
+      "bytes": 93520,
+      "MB": 0.09352,
+      "triangles": 16563,
+      "trianglesPerScene": 21171,
+      "meshNodeInstances": 5,
+      "vertices": 14709,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.5453747126414896e-7,
+      "sha256": "fafc077c9f3f88d40a3079d3c04be817a89833a9cb49907009fdfe55c09d29f9"
+    },
+    {
+      "file": "assets/cars/apex-lod1.glb",
+      "bytes": 57700,
+      "MB": 0.0577,
+      "triangles": 7902,
+      "trianglesPerScene": 11214,
+      "meshNodeInstances": 5,
+      "vertices": 7574,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3546849975121233e-7,
+      "sha256": "3a399f3e9405ad052d0f09ff7fb8f0b0838f22d5f328ee0d1c0c9cc7e3a820b4"
+    },
+    {
+      "file": "assets/cars/apex-lod2.glb",
+      "bytes": 28900,
+      "MB": 0.0289,
+      "triangles": 2864,
+      "trianglesPerScene": 4064,
+      "meshNodeInstances": 5,
+      "vertices": 2906,
+      "primitives": 9,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.4375020307433317e-7,
+      "sha256": "d0d2a2dcf7f92706c62eacba1ae98432ba456d09f69c531a189aad6515464562"
+    },
+    {
+      "file": "assets/cars/prism-lod0.glb",
+      "bytes": 94568,
+      "MB": 0.094568,
+      "triangles": 16642,
+      "trianglesPerScene": 20962,
+      "meshNodeInstances": 5,
+      "vertices": 14864,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.5148930732067356e-7,
+      "sha256": "ec4604f16accc7a5a5409baaff6cab0cb9e0338985491fe52246fad90892bfef"
+    },
+    {
+      "file": "assets/cars/prism-lod1.glb",
+      "bytes": 58052,
+      "MB": 0.058052,
+      "triangles": 7980,
+      "trianglesPerScene": 11004,
+      "meshNodeInstances": 5,
+      "vertices": 7532,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3499635520553e-7,
+      "sha256": "b7864f9d8c14f530bff7b553651d70e97effd82100a00abc21a53fedd963c2a5"
+    },
+    {
+      "file": "assets/cars/prism-lod2.glb",
+      "bytes": 29612,
+      "MB": 0.029612,
+      "triangles": 3062,
+      "trianglesPerScene": 4334,
+      "meshNodeInstances": 5,
+      "vertices": 3065,
+      "primitives": 9,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3928869080359618e-7,
+      "sha256": "eaa03656f9dbd6e3ce43d5152f3237fdd43b8246504528d9df50f95d8e4eb7a4"
+    },
+    {
+      "file": "assets/cars/solis-lod0.glb",
+      "bytes": 80544,
+      "MB": 0.080544,
+      "triangles": 14170,
+      "trianglesPerScene": 18418,
+      "meshNodeInstances": 5,
+      "vertices": 11933,
+      "primitives": 11,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.4375020307433317e-7,
+      "sha256": "71354c3c434d53ec1a4b5f9ee4f11f264be0c52a1287cf15a46f745b9a668194"
+    },
+    {
+      "file": "assets/cars/solis-lod1.glb",
+      "bytes": 52172,
+      "MB": 0.052172,
+      "triangles": 7446,
+      "trianglesPerScene": 10398,
+      "meshNodeInstances": 5,
+      "vertices": 6411,
+      "primitives": 11,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.4222519939544043e-7,
+      "sha256": "dfbdce93f31c2edccc3c1b7ef19b96c331ab47e2f257060e867ba582feed2ac8"
+    },
+    {
+      "file": "assets/cars/solis-lod2.glb",
+      "bytes": 29372,
+      "MB": 0.029372,
+      "triangles": 3396,
+      "trianglesPerScene": 4596,
+      "meshNodeInstances": 5,
+      "vertices": 2900,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.2486800615718607e-7,
+      "sha256": "764f70728326b8629d46afb6f6e9b823d74fe43fecf79e3619bf4057d759bc78"
+    },
+    {
+      "file": "assets/cars/vector-lod0.glb",
+      "bytes": 97428,
+      "MB": 0.097428,
+      "triangles": 17601,
+      "trianglesPerScene": 22209,
+      "meshNodeInstances": 5,
+      "vertices": 15391,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.4215207744250336e-7,
+      "sha256": "cb9cae894dc8180edf9a91a2b33868ae17222967873b73b8abf52da54dbb2d4c"
+    },
+    {
+      "file": "assets/cars/vector-lod1.glb",
+      "bytes": 61132,
+      "MB": 0.061132,
+      "triangles": 8939,
+      "trianglesPerScene": 12251,
+      "meshNodeInstances": 5,
+      "vertices": 8159,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3531107767583705e-7,
+      "sha256": "a62994712b10cbf63564008b0dbc546df02222293ec66720836d4310da8abbba"
+    },
+    {
+      "file": "assets/cars/vector-lod2.glb",
+      "bytes": 30824,
+      "MB": 0.030824,
+      "triangles": 3470,
+      "trianglesPerScene": 4670,
+      "meshNodeInstances": 5,
+      "vertices": 3239,
+      "primitives": 9,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3965369660695615e-7,
+      "sha256": "4319c6d1ed30ad88ec83698f664d54ac5ee64b760cab27744dfbe4de8b3044e8"
+    },
+    {
+      "file": "assets/cars/velour-lod0.glb",
+      "bytes": 93540,
+      "MB": 0.09354,
+      "triangles": 16581,
+      "trianglesPerScene": 20973,
+      "meshNodeInstances": 5,
+      "vertices": 14779,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.5148930732067356e-7,
+      "sha256": "fc752e1fea74385db6492a3aa96e8ed48d98b24a108857423e2096405a71fc57"
+    },
+    {
+      "file": "assets/cars/velour-lod1.glb",
+      "bytes": 57568,
+      "MB": 0.057568,
+      "triangles": 7920,
+      "trianglesPerScene": 11016,
+      "meshNodeInstances": 5,
+      "vertices": 7525,
+      "primitives": 10,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3965369660695615e-7,
+      "sha256": "4542e7800ebe414c32c7e58a557f764723bf67507b2f3bbf8be97cf369f537d5"
+    },
+    {
+      "file": "assets/cars/velour-lod2.glb",
+      "bytes": 29572,
+      "MB": 0.029572,
+      "triangles": 3001,
+      "trianglesPerScene": 4345,
+      "meshNodeInstances": 5,
+      "vertices": 3090,
+      "primitives": 9,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3965369660695615e-7,
+      "sha256": "2b3114270b680fce42d957727287a577ebda4a88ae5c5f3e9c5c66ce9f37330e"
+    },
+    {
+      "file": "assets/crowd/spectator.glb",
+      "bytes": 7544,
+      "MB": 0.007544,
+      "triangles": 462,
+      "trianglesPerScene": 462,
+      "meshNodeInstances": 1,
+      "vertices": 263,
+      "primitives": 1,
+      "textures": [
+        {
+          "name": "spectator-atlas",
+          "size": [
+            256,
+            256
+          ],
+          "bytes": 621
+        }
+      ],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.2021510742421526e-7,
+      "sha256": "acf0b7dda3c210d12db3d05551570d6707b885284aad9c1a5de67a22ac00ab0c"
+    },
+    {
+      "file": "assets/tracks/coast.glb",
+      "bytes": 28472,
+      "MB": 0.028472,
+      "triangles": 15648,
+      "trianglesPerScene": 15648,
+      "meshNodeInstances": 3,
+      "vertices": 9248,
+      "primitives": 3,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3965369660695615e-7,
+      "sha256": "2a53dd6c7fda8c96f99cca68d0a6c24d8af88206aa62b6ace3478920d22d0775"
+    },
+    {
+      "file": "assets/tracks/neon.glb",
+      "bytes": 30568,
+      "MB": 0.030568,
+      "triangles": 15648,
+      "trianglesPerScene": 15648,
+      "meshNodeInstances": 3,
+      "vertices": 9248,
+      "primitives": 3,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.3965369660695615e-7,
+      "sha256": "a671b904e6960305f0f033b3c159b8f42addd1ef24637b5a05c65d1ba1dd34d1"
+    },
+    {
+      "file": "assets/tracks/props.glb",
+      "bytes": 30432,
+      "MB": 0.030432,
+      "triangles": 2686,
+      "trianglesPerScene": 2686,
+      "meshNodeInstances": 10,
+      "vertices": 2984,
+      "primitives": 26,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.0097134983677591e-7,
+      "sha256": "d9c44cf5efedc3ff3679f0ccc6916ce8a580f93439aa66cd94450f29033b8338"
+    },
+    {
+      "file": "assets/tracks/ridge.glb",
+      "bytes": 42580,
+      "MB": 0.04258,
+      "triangles": 15648,
+      "trianglesPerScene": 15648,
+      "meshNodeInstances": 3,
+      "vertices": 9248,
+      "primitives": 3,
+      "textures": [],
+      "validatorErrors": 0,
+      "validatorWarnings": 0,
+      "maxNormalError": 1.4518187851919606e-7,
+      "sha256": "986b127b0cf70e2e84f6c441fc29638ae335d0837acfd4c7db3d37a1096f23cb"
+    }
+  ],
+  "textures": [
+    {
+      "file": "textures/asphalt-color.webp",
+      "bytes": 245406,
+      "MB": 0.245406,
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbaVRAMBytes": 5592405.333333333,
+      "sha256": "9f1d1a9c532584bae0b4a02375429cdd98816ed2b0147c583553ab67295f218b"
+    },
+    {
+      "file": "textures/asphalt-normal.png",
+      "bytes": 236472,
+      "MB": 0.236472,
+      "size": [
+        512,
+        512
+      ],
+      "rgbaVRAMBytes": 1398101.3333333333,
+      "sha256": "27ab0ab4e2eceef91334fa50edb187df85d4c3b8dcabf80d913e3be099b5701f"
+    },
+    {
+      "file": "textures/asphalt-orm.webp",
+      "bytes": 13478,
+      "MB": 0.013478,
+      "size": [
+        1024,
+        1024
+      ],
+      "rgbaVRAMBytes": 5592405.333333333,
+      "sha256": "fb6712e456fc3f146b06e6c668d2a251b2501070500ffb60ec33ff0c75e099c3"
+    },
+    {
+      "file": "textures/spectator-atlas.png",
+      "bytes": 621,
+      "MB": 0.000621,
+      "size": [
+        256,
+        256
+      ],
+      "rgbaVRAMBytes": 349525.3333333333,
+      "sha256": "512cf03473f2f1bb58be03b48bb5b52a76f16878cc4b19081ed7292a4e7e6741"
+    },
+    {
+      "file": "textures/tire-smoke.png",
+      "bytes": 2691,
+      "MB": 0.002691,
+      "size": [
+        64,
+        64
+      ],
+      "rgbaVRAMBytes": 21845.333333333332,
+      "sha256": "1d4ffb9532caa41785adaeba0d7b11eaa5315e5979bb831df081e22322140d8f"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "coast",
+      "length": 1105.606,
+      "width": 11.8,
+      "samples": 641,
+      "seamMeters": 0,
+      "maxGradePercent": 5.7599507832421475
+    },
+    {
+      "id": "neon",
+      "length": 1187.125,
+      "width": 11.5,
+      "samples": 641,
+      "seamMeters": 0,
+      "maxGradePercent": 0.9463505399229142
+    },
+    {
+      "id": "ridge",
+      "length": 1213.451,
+      "width": 10.8,
+      "samples": 641,
+      "seamMeters": 0,
+      "maxGradePercent": 12.313739020284459
+    }
+  ]
+}

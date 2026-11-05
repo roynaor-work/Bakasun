@@ -1,0 +1,152 @@
+{
+  "startedAt": "2026-11-04T23:08:09.512Z",
+  "finishedAt": "2026-11-04T23:09:49.718Z",
+  "sourceSHA256": {
+    "app.mjs": "16cb77bd941f4b0dc8a07e3c87d3bed7b6674442c043d7b005d148649d681381",
+    "world.mjs": "60c92a011b15d4a9360148588a232ed2bf75c0cf3220e11087fa0048c89cda87",
+    "loader.mjs": "1432b77d0bc95d936f4790bc039acb40910d5314f0f43a0dce571cee2e0db93d",
+    "effects.mjs": "03058b4f4abe576b6b4040e8020d0912e80942b786070ee72dcf2e2d36a398f1",
+    "index.html": "89d96e5bfe8c9494309e62a4fba4c813dc7314fc468ea016d4e8a74947ac2004",
+    "style.css": "108a18fc55ea7cee7b06f5bdc64b2cb4a26202dd427e33e381a6041cd80a438c"
+  },
+  "checks": [
+    {
+      "pass": true,
+      "description": "neon: active destination control"
+    },
+    {
+      "pass": true,
+      "description": "ridge: active destination control"
+    },
+    {
+      "pass": true,
+      "description": "coast: active destination control"
+    },
+    {
+      "pass": true,
+      "description": "velour: active car control"
+    },
+    {
+      "pass": true,
+      "description": "prism: active car control"
+    },
+    {
+      "pass": true,
+      "description": "solis: active car control"
+    },
+    {
+      "pass": true,
+      "description": "vector: active car control"
+    },
+    {
+      "pass": true,
+      "description": "apex: active car control"
+    },
+    {
+      "pass": true,
+      "description": "#ef6c32: visible paint material matches selected swatch"
+    },
+    {
+      "pass": true,
+      "description": "#8b5cf6: visible paint material matches selected swatch"
+    },
+    {
+      "pass": true,
+      "description": "#e8dfc4: visible paint material matches selected swatch"
+    },
+    {
+      "pass": true,
+      "description": "#c2e940: visible paint material matches selected swatch"
+    },
+    {
+      "pass": true,
+      "description": "#14c6b8: visible paint material matches selected swatch"
+    },
+    {
+      "pass": true,
+      "description": "distance control moves the camera"
+    },
+    {
+      "pass": false,
+      "description": "play advances displayed time"
+    },
+    {
+      "pass": true,
+      "description": "pause freezes displayed time"
+    },
+    {
+      "pass": true,
+      "description": "boost control activates"
+    },
+    {
+      "pass": true,
+      "description": "drift control activates"
+    },
+    {
+      "pass": true,
+      "description": "information dialog opens"
+    },
+    {
+      "pass": true,
+      "description": "low quality uses the shared reduced budget path"
+    },
+    {
+      "pass": true,
+      "description": "native range keyboard updates pace"
+    },
+    {
+      "pass": true,
+      "description": "motion control disables velocity effects"
+    },
+    {
+      "pass": true,
+      "description": "Escape closes the dialog"
+    },
+    {
+      "pass": true,
+      "description": "full circuit view pauses animation"
+    },
+    {
+      "pass": true,
+      "description": "return from circuit view preserves previous pause"
+    },
+    {
+      "pass": true,
+      "description": "return from circuit view resumes previous playback"
+    },
+    {
+      "pass": true,
+      "description": "dragging orbits around the car"
+    },
+    {
+      "pass": true,
+      "description": "native two-touch pinch changes zoom"
+    },
+    {
+      "pass": true,
+      "description": "D returns to driving"
+    },
+    {
+      "pass": true,
+      "description": "390x844: every visible control stays inside the viewport"
+    },
+    {
+      "pass": true,
+      "description": "844x390: every visible control stays inside the viewport"
+    },
+    {
+      "pass": true,
+      "description": "rapid environment selection finishes on the last requested scene"
+    },
+    {
+      "pass": true,
+      "description": "context loss stops the renderer and exposes the reload message"
+    },
+    {
+      "pass": true,
+      "description": "reload recovers from a lost graphics context"
+    }
+  ],
+  "errors": [],
+  "pass": false
+}

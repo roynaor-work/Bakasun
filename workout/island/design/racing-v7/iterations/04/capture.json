@@ -1,0 +1,963 @@
+{
+  "iteration": "04",
+  "startedAt": "2026-11-04T20:45:44.404Z",
+  "finishedAt": "2026-11-04T20:46:13.392Z",
+  "browser": "151.0.7922.173",
+  "renderer": "WebKit WebGL",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 844,
+      "height": 390
+    }
+  ],
+  "records": [
+    {
+      "filename": "coast-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 2,
+        "fps": 0,
+        "drawCalls": 122,
+        "triangles": 136372,
+        "renderMs": 3.8999999999068677,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 73,
+        "textures": 10,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 3,
+        "fps": 0,
+        "drawCalls": 123,
+        "triangles": 147137,
+        "renderMs": 27.899999999906868,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 97,
+        "textures": 11,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 4,
+        "fps": 0,
+        "drawCalls": 131,
+        "triangles": 198304,
+        "renderMs": 831.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 104,
+        "textures": 12,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 5,
+        "fps": 0,
+        "drawCalls": 130,
+        "triangles": 208669,
+        "renderMs": 31.100000000093132,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 107,
+        "textures": 12,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 6,
+        "fps": 0,
+        "drawCalls": 133,
+        "triangles": 154255,
+        "renderMs": 530.3999999999069,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 102,
+        "textures": 13,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2462,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-far-390x844.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 7,
+        "fps": 0,
+        "drawCalls": 132,
+        "triangles": 160324,
+        "renderMs": 9.900000000372529,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 106,
+        "textures": 13,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2462,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 8,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 117132,
+        "renderMs": 656.1000000000931,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 101,
+        "textures": 14,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 10,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 116736,
+        "renderMs": 4,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 112,
+        "textures": 14,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 11,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 116712,
+        "renderMs": 2.7999999998137355,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 123,
+        "textures": 14,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 13,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 112528,
+        "renderMs": 7.2999999998137355,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 134,
+        "textures": 14,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-390x844.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 14,
+        "fps": 0,
+        "drawCalls": 72,
+        "triangles": 119206,
+        "renderMs": 2.8999999999068677,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 145,
+        "textures": 14,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-vector-near-fx-390x844.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "drift": true,
+        "boost": true
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "frames": 15,
+        "fps": 0,
+        "drawCalls": 131,
+        "triangles": 200378,
+        "renderMs": 532,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 151,
+        "textures": 15,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 17,
+        "fps": 0,
+        "drawCalls": 137,
+        "triangles": 170798,
+        "renderMs": 449.39999999990687,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 157,
+        "textures": 16,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 18,
+        "fps": 0,
+        "drawCalls": 133,
+        "triangles": 147899,
+        "renderMs": 2.8999999999068677,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 157,
+        "textures": 16,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 19,
+        "fps": 0,
+        "drawCalls": 137,
+        "triangles": 231636,
+        "renderMs": 585,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 157,
+        "textures": 17,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 20,
+        "fps": 0,
+        "drawCalls": 133,
+        "triangles": 208737,
+        "renderMs": 3.5,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 157,
+        "textures": 17,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 21,
+        "fps": 0,
+        "drawCalls": 142,
+        "triangles": 187632,
+        "renderMs": 489.6999999997206,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 155,
+        "textures": 18,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2462,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "ridge-drive-apex-far-844x390.jpg",
+      "scenario": {
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 22,
+        "fps": 0,
+        "drawCalls": 137,
+        "triangles": 160422,
+        "renderMs": 3.7999999998137355,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 1,
+        "geometries": 155,
+        "textures": 18,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "ridge",
+        "car": "apex",
+        "mode": "drive",
+        "far": true,
+        "crowd": 72,
+        "instances": 2462,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-apex-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 23,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 151316,
+        "renderMs": 506,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 156,
+        "textures": 19,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "apex",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-velour-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 24,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 150920,
+        "renderMs": 2.099999999627471,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 156,
+        "textures": 19,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "velour",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-prism-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 25,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 150896,
+        "renderMs": 2.3000000002793968,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 156,
+        "textures": 19,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "prism",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-solis-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 26,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 146712,
+        "renderMs": 2.2000000001862645,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 156,
+        "textures": 19,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "solis",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "coast-garage-vector-near-844x390.jpg",
+      "scenario": {
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 27,
+        "fps": 0,
+        "drawCalls": 83,
+        "triangles": 153390,
+        "renderMs": 2,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 156,
+        "textures": 19,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "coast",
+        "car": "vector",
+        "mode": "garage",
+        "far": false,
+        "crowd": 72,
+        "instances": 2001,
+        "three": "160",
+        "physicalPhone": false
+      }
+    },
+    {
+      "filename": "neon-drive-vector-near-fx-844x390.jpg",
+      "scenario": {
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "drift": true,
+        "boost": true
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "metrics": {
+        "frames": 28,
+        "fps": 0,
+        "drawCalls": 137,
+        "triangles": 233710,
+        "renderMs": 572.5999999996275,
+        "qualityChanges": 0,
+        "errors": [],
+        "renderer": "WebKit WebGL",
+        "lod": 0,
+        "geometries": 157,
+        "textures": 20,
+        "frameMsMean": 0,
+        "frameMsP95": 0,
+        "width": 844,
+        "height": 390,
+        "pixelRatio": 1,
+        "track": "neon",
+        "car": "vector",
+        "mode": "drive",
+        "far": false,
+        "crowd": 72,
+        "instances": 2565,
+        "three": "160",
+        "physicalPhone": false
+      }
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "uniqueLocalRequests": 40,
+  "physicalPhone": false
+}
