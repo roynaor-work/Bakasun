@@ -1,0 +1,2708 @@
+{
+  "schemaVersion": 1,
+  "package": "fire-v7",
+  "engine": "three.js r160",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "maxGlbBytes": 1500000,
+  "maxTextureSide": 1024,
+  "canonicalSkeletonSource": "workout/island/design/motion2/soccer.json",
+  "assets": [
+    {
+      "id": "apartment-burning-lod",
+      "file": "models/apartment-burning-lod.glb",
+      "bytes": 87852,
+      "mb": 0.0879,
+      "sha256": "c7469f4579a2145832d57fb6fea42bf4039c1a21fa6480f30e8bf58bcb146932",
+      "triangles": 1160,
+      "vertices": 2346,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 1,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-burning",
+      "file": "models/apartment-burning.glb",
+      "bytes": 106408,
+      "mb": 0.1064,
+      "sha256": "cb71cc75c3b41b122e03c1be093ca972bfab4295d56b0fa9ab0dff73827fb055",
+      "triangles": 4866,
+      "vertices": 10294,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 0,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-intact-lod",
+      "file": "models/apartment-intact-lod.glb",
+      "bytes": 84124,
+      "mb": 0.0841,
+      "sha256": "864570c2edb8034d0fcb38f004c6fd080ddd4b9162b1049bbe1b61beebd87ee8",
+      "triangles": 984,
+      "vertices": 1948,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 1,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-intact",
+      "file": "models/apartment-intact.glb",
+      "bytes": 97404,
+      "mb": 0.0974,
+      "sha256": "eb5185b67a5d482ffd5bdd2db732c8f42fc38a1bc954e4adc01973020d40cdeb",
+      "triangles": 4208,
+      "vertices": 8836,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 0,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-ruined-lod",
+      "file": "models/apartment-ruined-lod.glb",
+      "bytes": 85036,
+      "mb": 0.085,
+      "sha256": "fcddea7d204cef43c2a216517f0947841a0cedae2514dee085b700cd219fac5d",
+      "triangles": 712,
+      "vertices": 1466,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 1,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-ruined",
+      "file": "models/apartment-ruined.glb",
+      "bytes": 90844,
+      "mb": 0.0908,
+      "sha256": "5b35df39351e096efcc33d38946188f06c7806acea9459647b963236b08c76a0",
+      "triangles": 1320,
+      "vertices": 2834,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 0,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-scorched-lod",
+      "file": "models/apartment-scorched-lod.glb",
+      "bytes": 86976,
+      "mb": 0.087,
+      "sha256": "f2d54fcfd108a4fbb50dfb8cb4f0c7c0d53216a6f35f5ea507b21a1789239e98",
+      "triangles": 1200,
+      "vertices": 2392,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 1,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "apartment-scorched",
+      "file": "models/apartment-scorched.glb",
+      "bytes": 103224,
+      "mb": 0.1032,
+      "sha256": "d1a5938e2512e8f233d923b211afa57c920689888a5dc7133c59d69b34d09568",
+      "triangles": 4890,
+      "vertices": 10306,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "apartment",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 0,
+      "dimensions": [
+        5.4,
+        8.3,
+        4.7
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.95
+        ],
+        "fireLower": [
+          -1.1880000000000002,
+          1.5,
+          2.5700000000000003
+        ],
+        "fireUpper": [
+          1.1880000000000002,
+          5.976,
+          2.5700000000000003
+        ],
+        "fireRoof": [
+          0,
+          8.75,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "bystander-lod",
+      "file": "models/bystander-lod.glb",
+      "bytes": 78072,
+      "mb": 0.0781,
+      "sha256": "bfefaa9f54b11c1741495d8a5cf59f557ee0194f04879b8055ecebe1ef6f139a",
+      "triangles": 208,
+      "vertices": 504,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crowd",
+      "lod": 1,
+      "instanced": true,
+      "originShiftMeters": 0.020000000000000018,
+      "anchors": {},
+      "animations": []
+    },
+    {
+      "id": "bystander",
+      "file": "models/bystander.glb",
+      "bytes": 80920,
+      "mb": 0.0809,
+      "sha256": "1e7e2f0ed7b6789bdd73322ff39eb847396cd111cfe47f74764e4d6d523f538a",
+      "triangles": 556,
+      "vertices": 1340,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crowd",
+      "lod": 0,
+      "instanced": true,
+      "originShiftMeters": 0.013000000000000005,
+      "anchors": {},
+      "animations": []
+    },
+    {
+      "id": "corner-store-burning-lod",
+      "file": "models/corner-store-burning-lod.glb",
+      "bytes": 85512,
+      "mb": 0.0855,
+      "sha256": "4386aff24bf7079693d49bd37ba198f7cb228fd6cfb4fcf401a51ca492d989df",
+      "triangles": 716,
+      "vertices": 1468,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 1,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-burning",
+      "file": "models/corner-store-burning.glb",
+      "bytes": 95420,
+      "mb": 0.0954,
+      "sha256": "73fd50f91ec4a624823f0072ed840c45e320bada9ca3ad09878eee57671dfcf8",
+      "triangles": 2402,
+      "vertices": 5144,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 0,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-intact-lod",
+      "file": "models/corner-store-intact-lod.glb",
+      "bytes": 81644,
+      "mb": 0.0816,
+      "sha256": "560a7047a06689ce369122baa28827333aec9c15c5965ecf81ad75ce52015bdd",
+      "triangles": 576,
+      "vertices": 1152,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 1,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-intact",
+      "file": "models/corner-store-intact.glb",
+      "bytes": 88056,
+      "mb": 0.0881,
+      "sha256": "74f46842225699fb744fdc104bc37e753259dcbf506abfacae7f739215772ecb",
+      "triangles": 2012,
+      "vertices": 4272,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 0,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-ruined-lod",
+      "file": "models/corner-store-ruined-lod.glb",
+      "bytes": 85044,
+      "mb": 0.085,
+      "sha256": "778e9e240b7ad082975f03bd215fa915102d8d40282e6d4f41fb9a993e06227a",
+      "triangles": 724,
+      "vertices": 1490,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 1,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-ruined",
+      "file": "models/corner-store-ruined.glb",
+      "bytes": 91216,
+      "mb": 0.0912,
+      "sha256": "204d0a432fa9ccb04ff82ffe1de1194a31540a1a841192cd5409f6e8f39288b2",
+      "triangles": 1436,
+      "vertices": 3098,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 0,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-scorched-lod",
+      "file": "models/corner-store-scorched-lod.glb",
+      "bytes": 84172,
+      "mb": 0.0842,
+      "sha256": "0a850968f903c6b41a110083a5d98ec6b6620585e400b7a761a59e07748bf75c",
+      "triangles": 696,
+      "vertices": 1404,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 1,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "corner-store-scorched",
+      "file": "models/corner-store-scorched.glb",
+      "bytes": 92248,
+      "mb": 0.0922,
+      "sha256": "a0be213ef2e3224b87691fdbe5c42777528b3fa82a795f1c59f88fc89958c1b1",
+      "triangles": 2342,
+      "vertices": 4974,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "corner-store",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 0,
+      "dimensions": [
+        6.2,
+        4.2,
+        4.8
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3
+        ],
+        "fireLower": [
+          -1.364,
+          1.5,
+          2.62
+        ],
+        "fireUpper": [
+          1.364,
+          3.024,
+          2.62
+        ],
+        "fireRoof": [
+          0,
+          4.65,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "crew-command-lod",
+      "file": "models/crew-command-lod.glb",
+      "bytes": 152548,
+      "mb": 0.1525,
+      "sha256": "f264867eabe373d4b7ec3caff1286007563ecc36839af1ba9fc598fc61328060",
+      "triangles": 2000,
+      "vertices": 4200,
+      "primitives": 3,
+      "texture": "textures/crew-command-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-command",
+      "lod": 1,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "radioGrip": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.02,
+            0.07
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "crew-command",
+      "file": "models/crew-command.glb",
+      "bytes": 173768,
+      "mb": 0.1738,
+      "sha256": "342c2ee5579fcab5e73ec4c93c5ea80bd5fca03b4c26435ae42444fb0491023c",
+      "triangles": 4816,
+      "vertices": 10522,
+      "primitives": 4,
+      "texture": "textures/crew-command-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-command",
+      "lod": 0,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "radioGrip": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.02,
+            0.07
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "crew-nozzle-lod",
+      "file": "models/crew-nozzle-lod.glb",
+      "bytes": 152720,
+      "mb": 0.1527,
+      "sha256": "ec389e0a991238a4f2a0c126c69a819c07879c747897c6a73aa79c93b34ca372",
+      "triangles": 2108,
+      "vertices": 4384,
+      "primitives": 3,
+      "texture": "textures/crew-nozzle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-nozzle",
+      "lod": 1,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "waterNozzle": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.303,
+            0.04
+          ],
+          "direction": [
+            0,
+            -1,
+            0
+          ]
+        },
+        "hoseInlet": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            0.02,
+            0.04
+          ],
+          "direction": [
+            0,
+            1,
+            0
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "crew-nozzle",
+      "file": "models/crew-nozzle.glb",
+      "bytes": 174676,
+      "mb": 0.1747,
+      "sha256": "ea73c4240a1dd5ea3813cf45be9fa49baa17688c0752f01752f5701237b9b53a",
+      "triangles": 4916,
+      "vertices": 10670,
+      "primitives": 4,
+      "texture": "textures/crew-nozzle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-nozzle",
+      "lod": 0,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "waterNozzle": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.303,
+            0.04
+          ],
+          "direction": [
+            0,
+            -1,
+            0
+          ]
+        },
+        "hoseInlet": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            0.02,
+            0.04
+          ],
+          "direction": [
+            0,
+            1,
+            0
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "crew-tool-lod",
+      "file": "models/crew-tool-lod.glb",
+      "bytes": 153156,
+      "mb": 0.1532,
+      "sha256": "a7f8d04579be5271740d51d3a66864513ec51931b15a19130f1c226cd28a6c00",
+      "triangles": 2056,
+      "vertices": 4296,
+      "primitives": 3,
+      "texture": "textures/crew-tool-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-tool",
+      "lod": 1,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "toolGrip": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.05,
+            0.07
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "crew-tool",
+      "file": "models/crew-tool.glb",
+      "bytes": 174408,
+      "mb": 0.1744,
+      "sha256": "2b209880d8f27ac7d51ce1aeab1cead30e4d054a2da188f0394db47e6aea5364",
+      "triangles": 4872,
+      "vertices": 10618,
+      "primitives": 4,
+      "texture": "textures/crew-tool-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "crew",
+      "role": "crew-tool",
+      "lod": 0,
+      "canonicalSkeleton": true,
+      "atlasCount": 1,
+      "anchors": {
+        "toolGrip": {
+          "bone": "RightHand",
+          "translation": [
+            0,
+            -0.05,
+            0.07
+          ]
+        },
+        "headlamp": {
+          "bone": "Head",
+          "translation": [
+            -0.142,
+            0.116,
+            0.081
+          ]
+        }
+      },
+      "animations": [
+        "idle",
+        "hose",
+        "tool",
+        "command",
+        "walk"
+      ]
+    },
+    {
+      "id": "engine-ladder-lod",
+      "file": "models/engine-ladder-lod.glb",
+      "bytes": 90328,
+      "mb": 0.0903,
+      "sha256": "3b391c348cb6fd08a96d9522c5540a06bf9d4b21db376751db0bf225c60bb6e9",
+      "triangles": 2216,
+      "vertices": 4172,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "engine-ladder",
+      "lod": 1,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.09250000000000003,
+      "anchors": {
+        "ladderPivot": [
+          0,
+          2.7474999999999996,
+          -1.8
+        ],
+        "front": [
+          0,
+          1.1075,
+          4.23
+        ],
+        "rear": [
+          0,
+          0.8075,
+          -4.3
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "engine-ladder",
+      "file": "models/engine-ladder.glb",
+      "bytes": 145820,
+      "mb": 0.1458,
+      "sha256": "5ef58463bff9eefd5a9050671e643f62202bbcb8bc5f010580ae16cd32e4cc24",
+      "triangles": 12584,
+      "vertices": 26144,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "engine-ladder",
+      "lod": 0,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.09249999999999999,
+      "anchors": {
+        "ladderPivot": [
+          0,
+          2.7475,
+          -1.8
+        ],
+        "front": [
+          0,
+          1.1075,
+          4.23
+        ],
+        "rear": [
+          0,
+          0.8075,
+          -4.3
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "engine-pumper-lod",
+      "file": "models/engine-pumper-lod.glb",
+      "bytes": 91484,
+      "mb": 0.0915,
+      "sha256": "858b4874c21a9b413e01513450110f53f45b4421f5fef630dae289ab3a27fb86",
+      "triangles": 2184,
+      "vertices": 4004,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "engine-pumper",
+      "lod": 1,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.09250000000000003,
+      "anchors": {
+        "waterOutlet": [
+          1.45,
+          1.0675,
+          -0.12
+        ],
+        "waterInlet": [
+          -1.42,
+          1.1975,
+          -0.04
+        ],
+        "front": [
+          0,
+          1.1075,
+          3.3800000000000003
+        ],
+        "rear": [
+          0,
+          0.8075,
+          -3.43
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "engine-pumper",
+      "file": "models/engine-pumper.glb",
+      "bytes": 133904,
+      "mb": 0.1339,
+      "sha256": "26c9cdeeffaedde2d3829f7ded523d7f18cb931b9825415cf4c3b38eb8b59ae0",
+      "triangles": 9604,
+      "vertices": 19406,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "engine-pumper",
+      "lod": 0,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.09249999999999999,
+      "anchors": {
+        "waterOutlet": [
+          1.45,
+          1.0675,
+          -0.12
+        ],
+        "waterInlet": [
+          -1.42,
+          1.1975,
+          -0.04
+        ],
+        "front": [
+          0,
+          1.1075,
+          3.3800000000000003
+        ],
+        "rear": [
+          0,
+          0.8075,
+          -3.43
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "hydrant",
+      "file": "models/hydrant.glb",
+      "bytes": 80608,
+      "mb": 0.0806,
+      "sha256": "504842fe5c2dcf7a27672dca7870386addd09994306ab3059b01d0cfce8608c4",
+      "triangles": 408,
+      "vertices": 818,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "prop",
+      "lod": 0,
+      "anchors": {
+        "outlet": [
+          0.31,
+          0.46,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "response-unit-lod",
+      "file": "models/response-unit-lod.glb",
+      "bytes": 88156,
+      "mb": 0.0882,
+      "sha256": "0e96dae6bfa6b3781db539039fc391c52e2adae9bc28a8715a59283ffa658d74",
+      "triangles": 1676,
+      "vertices": 3130,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "response-unit",
+      "lod": 1,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.15249999999999997,
+      "anchors": {
+        "toolRack": [
+          0,
+          2.3575,
+          -1.28
+        ],
+        "front": [
+          0,
+          1.0474999999999999,
+          2.5900000000000003
+        ],
+        "rear": [
+          0,
+          0.7475,
+          -2.64
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "response-unit",
+      "file": "models/response-unit.glb",
+      "bytes": 125880,
+      "mb": 0.1259,
+      "sha256": "171a18e0732aa365ee34c9659878f112224065ad1b85240fc80797f70d2c3a16",
+      "triangles": 8524,
+      "vertices": 17616,
+      "primitives": 4,
+      "texture": "textures/vehicle-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "vehicle",
+      "type": "response-unit",
+      "lod": 0,
+      "front": "+Z",
+      "scale": "metres",
+      "originShiftMeters": 0.15249999999999997,
+      "anchors": {
+        "toolRack": [
+          0,
+          2.3575,
+          -1.28
+        ],
+        "front": [
+          0,
+          1.0474999999999999,
+          2.5900000000000003
+        ],
+        "rear": [
+          0,
+          0.7475,
+          -2.64
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-burning-lod",
+      "file": "models/row-house-burning-lod.glb",
+      "bytes": 86476,
+      "mb": 0.0865,
+      "sha256": "9d107ad00802c9390aa5d416c8648f5212bd84a6f5d9a4c18ee4b165d98522a1",
+      "triangles": 736,
+      "vertices": 1505,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 1,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-burning",
+      "file": "models/row-house-burning.glb",
+      "bytes": 96496,
+      "mb": 0.0965,
+      "sha256": "a0bd185c982c80779e06835ca22edd2f5fab3c483674ecaa10b771325c21bda1",
+      "triangles": 2458,
+      "vertices": 5229,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 0,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-intact-lod",
+      "file": "models/row-house-intact-lod.glb",
+      "bytes": 82824,
+      "mb": 0.0828,
+      "sha256": "5262603affaa676117fab45702c15c10f5703ee81ca8db0ed54e92ba01ffa94d",
+      "triangles": 596,
+      "vertices": 1184,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 1,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-intact",
+      "file": "models/row-house-intact.glb",
+      "bytes": 89016,
+      "mb": 0.089,
+      "sha256": "d0b38deefa2589a0fda68b1e9214cdf96a3e787173cc0651ed65b4c78683c270",
+      "triangles": 2012,
+      "vertices": 4232,
+      "primitives": 4,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 0,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-ruined-lod",
+      "file": "models/row-house-ruined-lod.glb",
+      "bytes": 85056,
+      "mb": 0.0851,
+      "sha256": "936914763053998c1f51b3415a515725c9ebd03d878766a3667a88d6a0d1c434",
+      "triangles": 712,
+      "vertices": 1466,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 1,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-ruined",
+      "file": "models/row-house-ruined.glb",
+      "bytes": 90856,
+      "mb": 0.0909,
+      "sha256": "fc4ea703986623d897a26f4ceea18049a7caaaf7b9cb8c3571e92493cba2afb5",
+      "triangles": 1320,
+      "vertices": 2834,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 0,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-scorched-lod",
+      "file": "models/row-house-scorched-lod.glb",
+      "bytes": 85384,
+      "mb": 0.0854,
+      "sha256": "d9af4520762469071f92972a6a440863bd82e4e6a58d8c2720aad533383a5d25",
+      "triangles": 740,
+      "vertices": 1484,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 1,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "row-house-scorched",
+      "file": "models/row-house-scorched.glb",
+      "bytes": 93560,
+      "mb": 0.0936,
+      "sha256": "e0793b1ab357ff91cf5d80ecf5471dfa6ba1f2f424160738e75e2d6073c32160",
+      "triangles": 2430,
+      "vertices": 5126,
+      "primitives": 5,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "row-house",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 0,
+      "dimensions": [
+        5.1,
+        5,
+        4.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          2.85
+        ],
+        "fireLower": [
+          -1.1219999999999999,
+          1.5,
+          2.47
+        ],
+        "fireUpper": [
+          1.1219999999999999,
+          3.5999999999999996,
+          2.47
+        ],
+        "fireRoof": [
+          0,
+          5.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "street-barrier",
+      "file": "models/street-barrier.glb",
+      "bytes": 79048,
+      "mb": 0.079,
+      "sha256": "9adbb1bebfc69cf94b9f0c9fd31b77163cf88079496641bc3cd91a63b8309bcb",
+      "triangles": 292,
+      "vertices": 624,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "prop",
+      "lod": 0,
+      "anchors": {},
+      "animations": []
+    },
+    {
+      "id": "street-block",
+      "file": "models/street-block.glb",
+      "bytes": 99716,
+      "mb": 0.0997,
+      "sha256": "5c68b8be10f9b72fd28e83c308cb2739646e1838f67ffb5964a11533a2be7786",
+      "triangles": 4168,
+      "vertices": 8548,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "street",
+      "lod": 0,
+      "dimensions": [
+        42,
+        0.8,
+        22
+      ],
+      "anchors": {
+        "crewStart": [
+          1,
+          0.016,
+          3.2
+        ],
+        "engineStart": [
+          -8,
+          0.016,
+          2
+        ],
+        "crowdLine": [
+          0,
+          0.271,
+          7.5
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "street-lamp",
+      "file": "models/street-lamp.glb",
+      "bytes": 78768,
+      "mb": 0.0788,
+      "sha256": "4b89d837b95feb21d265ef056688ab8d2b5273ebdad2b554d75db766504ba5ed",
+      "triangles": 216,
+      "vertices": 404,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "prop",
+      "lod": 0,
+      "anchors": {},
+      "animations": []
+    },
+    {
+      "id": "traffic-cone",
+      "file": "models/traffic-cone.glb",
+      "bytes": 77276,
+      "mb": 0.0773,
+      "sha256": "f57eae3ca183dbb1bac8f403d80cedae3aa553aee23022501f5a6f6db5beb37e",
+      "triangles": 132,
+      "vertices": 240,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "prop",
+      "lod": 0,
+      "anchors": {},
+      "animations": []
+    },
+    {
+      "id": "warehouse-burning-lod",
+      "file": "models/warehouse-burning-lod.glb",
+      "bytes": 82408,
+      "mb": 0.0824,
+      "sha256": "1136865da66b0a71cc1b445f43de9be77eb1254d363a9c8605e66c4e6038d1b0",
+      "triangles": 388,
+      "vertices": 814,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 1,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-burning",
+      "file": "models/warehouse-burning.glb",
+      "bytes": 89184,
+      "mb": 0.0892,
+      "sha256": "3f91720bb3b9235218934f6c6406b67a2dcbf1b61800725c160cdcdfc0e0c7e6",
+      "triangles": 1422,
+      "vertices": 3002,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 0,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-intact-lod",
+      "file": "models/warehouse-intact-lod.glb",
+      "bytes": 79148,
+      "mb": 0.0791,
+      "sha256": "dd1eb9f51d8447fea0753292ba5e61b8058b9852bb029220e655afefc2d6c02e",
+      "triangles": 260,
+      "vertices": 522,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 1,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-intact",
+      "file": "models/warehouse-intact.glb",
+      "bytes": 82752,
+      "mb": 0.0828,
+      "sha256": "382de8830f477fa07bdae3390a25ab2079345a13c1c0e8075ae53a1c45aa2580",
+      "triangles": 1124,
+      "vertices": 2322,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 0,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-ruined-lod",
+      "file": "models/warehouse-ruined-lod.glb",
+      "bytes": 82044,
+      "mb": 0.082,
+      "sha256": "6f78ccf902b31d033f74629eac1f6980bde27e117ddaeba58e9ad9df75dea267",
+      "triangles": 604,
+      "vertices": 1250,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 1,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-ruined",
+      "file": "models/warehouse-ruined.glb",
+      "bytes": 86932,
+      "mb": 0.0869,
+      "sha256": "90816ad7ab1068fdc9e08c47b66a132530ce6266b54dbfb0738ce785323e99f9",
+      "triangles": 1060,
+      "vertices": 2258,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 0,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-scorched-lod",
+      "file": "models/warehouse-scorched-lod.glb",
+      "bytes": 81376,
+      "mb": 0.0814,
+      "sha256": "42bf2f3498007382a2c0197bf27967e49fd7b97943c980f6be272b10ffa5db8f",
+      "triangles": 344,
+      "vertices": 702,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 1,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "warehouse-scorched",
+      "file": "models/warehouse-scorched.glb",
+      "bytes": 86252,
+      "mb": 0.0863,
+      "sha256": "d65927033bf262d4cc0ed339c17f3ad4085400bd743a6bd7d844efb9db97668f",
+      "triangles": 1322,
+      "vertices": 2736,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "warehouse",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 0,
+      "dimensions": [
+        7,
+        4,
+        5.5
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.35
+        ],
+        "fireLower": [
+          -1.54,
+          1.5,
+          2.97
+        ],
+        "fireUpper": [
+          1.54,
+          2.88,
+          2.97
+        ],
+        "fireRoof": [
+          0,
+          4.45,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-burning-lod",
+      "file": "models/workshop-burning-lod.glb",
+      "bytes": 83276,
+      "mb": 0.0833,
+      "sha256": "565a9fdd75442021494034f1088bcd92a2ccaf0ca10f4392e5ab52a2429483c2",
+      "triangles": 496,
+      "vertices": 1010,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 1,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-burning",
+      "file": "models/workshop-burning.glb",
+      "bytes": 90244,
+      "mb": 0.0902,
+      "sha256": "c511bd7b89093e4380a8544fde11ec7a0fd784b43d2cdf590ea47f3f58fe01f6",
+      "triangles": 1562,
+      "vertices": 3270,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "burning",
+      "damageLevel": 2,
+      "lod": 0,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-intact-lod",
+      "file": "models/workshop-intact-lod.glb",
+      "bytes": 79996,
+      "mb": 0.08,
+      "sha256": "de33db6dbcbe1cd52f863429eb946d33aa27fdfbe58d34efc3f1661a27de484a",
+      "triangles": 368,
+      "vertices": 718,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 1,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-intact",
+      "file": "models/workshop-intact.glb",
+      "bytes": 83888,
+      "mb": 0.0839,
+      "sha256": "fdc4d0c58f2b611114992da5f615eec0e53e233440f39995dfd38ad67c030189",
+      "triangles": 1264,
+      "vertices": 2590,
+      "primitives": 2,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "intact",
+      "damageLevel": 0,
+      "lod": 0,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-ruined-lod",
+      "file": "models/workshop-ruined-lod.glb",
+      "bytes": 82980,
+      "mb": 0.083,
+      "sha256": "37c46c4a89be006eaed0c1773799742a77a00875a1631fb58efada4566c6e091",
+      "triangles": 712,
+      "vertices": 1446,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 1,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-ruined",
+      "file": "models/workshop-ruined.glb",
+      "bytes": 88088,
+      "mb": 0.0881,
+      "sha256": "2b406cbdda02e95bc4a93173081b36cce8f7df99650980f71573854a2a88ad55",
+      "triangles": 1200,
+      "vertices": 2526,
+      "primitives": 1,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "ruined",
+      "damageLevel": 3,
+      "lod": 0,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-scorched-lod",
+      "file": "models/workshop-scorched-lod.glb",
+      "bytes": 82252,
+      "mb": 0.0823,
+      "sha256": "f2d2ba83973b94d3f5db0a59b57be83f6625f65f62668b09f6b674d14140ba2a",
+      "triangles": 452,
+      "vertices": 898,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 1,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    },
+    {
+      "id": "workshop-scorched",
+      "file": "models/workshop-scorched.glb",
+      "bytes": 87364,
+      "mb": 0.0874,
+      "sha256": "a39b48d383261388f6509ec0e466ad4f708a0ed4fc67ef569e6660d307fb1170",
+      "triangles": 1462,
+      "vertices": 3004,
+      "primitives": 3,
+      "texture": "textures/environment-atlas.png",
+      "textureCount": 1,
+      "textureDimensions": [
+        512,
+        512
+      ],
+      "category": "building",
+      "type": "workshop",
+      "stage": "scorched",
+      "damageLevel": 1,
+      "lod": 0,
+      "dimensions": [
+        5.7,
+        4.1,
+        4.9
+      ],
+      "anchors": {
+        "frontDoor": [
+          0,
+          0.25,
+          3.0500000000000003
+        ],
+        "fireLower": [
+          -1.254,
+          1.5,
+          2.6700000000000004
+        ],
+        "fireUpper": [
+          1.254,
+          2.9519999999999995,
+          2.6700000000000004
+        ],
+        "fireRoof": [
+          0,
+          4.55,
+          0
+        ]
+      },
+      "animations": []
+    }
+  ]
+}

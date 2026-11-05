@@ -1,0 +1,16 @@
+{
+  "name": "fire-v7-authoring-only",
+  "private": true,
+  "type": "module",
+  "description": "Reproduction dependencies only. preview.html opens directly without a build or network.",
+  "dependencies": {
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1",
+    "@gltf-transform/functions": "4.2.1",
+    "draco3dgltf": "1.5.7",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "meshoptimizer": "0.22.0",
+    "esbuild": "0.25.0",
+    "three": "0.160.0"
+  }
+}
