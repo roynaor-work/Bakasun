@@ -1,0 +1,146 @@
+[
+ {
+  "seconds": 22.2,
+  "frames": 24,
+  "fps": 1.08,
+  "loadMs": 9640,
+  "fixedStep": true,
+  "stage": 1,
+  "seed": 7,
+  "hold": false,
+  "frameMs": {
+   "avg": 924.27,
+   "p50": 883.3,
+   "p95": 1050,
+   "max": 2699.9
+  },
+  "tickMs": {
+   "avg": 113.27,
+   "p50": 5.1,
+   "p95": 8.7
+  },
+  "calls": {
+   "avg": 89.88,
+   "p50": 87,
+   "max": 100
+  },
+  "triangles": {
+   "avg": 151878,
+   "p50": 151868,
+   "max": 152386
+  },
+  "allocMBps": 0.2,
+  "progress": {
+   "lap": 1,
+   "s": 44,
+   "speed": 35.83
+  },
+  "render": {
+   "mode": "webgl",
+   "quality": 0,
+   "frames": 89,
+   "frameMilliseconds": 66.66666666666606,
+   "drawCalls": 84,
+   "triangles": 150193,
+   "countsIncludeShadowPasses": true,
+   "shadowsEnabled": true,
+   "visibleTrees": 19,
+   "treeLimit": 28,
+   "scenery": {
+    "quality": 0,
+    "draws": 13,
+    "instances": 892,
+    "triangles": 16156,
+    "triangleBudget": 30000,
+    "mounds": 16,
+    "cornerSigns": 5,
+    "roadside": {
+     "quality": 0,
+     "triangles": 7004,
+     "draws": 6,
+     "instances": 470,
+     "buildings": 5,
+     "galleries": 0,
+     "lamps": 32,
+     "guardrailSections": 33,
+     "cornerSigns": 5,
+     "disposed": false
+    },
+    "disposed": false
+   },
+   "effects": {
+    "smoke": 0,
+    "skidMarks": 0,
+    "sparks": 0,
+    "capacity": {
+     "smoke": 32,
+     "skidMarks": 128,
+     "sparks": 20
+    },
+    "disposed": false
+   },
+   "v7": {
+    "enabled": true,
+    "active": true,
+    "reason": "",
+    "lods": [
+     0,
+     1,
+     1,
+     -1,
+     -1
+    ],
+    "spectators": {
+     "visible": 41,
+     "capacity": 128,
+     "triangles": 18942
+    }
+   },
+   "modelLoaded": true,
+   "carAsset": "racing-v7",
+   "vegetationLoaded": true,
+   "failures": [],
+   "disposed": false,
+   "geometries": 101,
+   "textures": 11
+  },
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 1
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "params": "?dur=1500&frames=24&racingV7=1&dev=1",
+  "transfer": {
+   "totalMB": 2.48,
+   "assetsMB": 1.26,
+   "files": 43,
+   "assetFiles": 19,
+   "byFile": {
+    "assets/racing-v7/cars/apex-lod0.glb": 93704,
+    "assets/racing-v7/cars/apex-lod1.glb": 57884,
+    "assets/racing-v7/cars/apex-lod2.glb": 29084,
+    "assets/racing-v7/cars/velour-lod1.glb": 57752,
+    "assets/racing-v7/cars/velour-lod2.glb": 29756,
+    "assets/racing-v7/cars/prism-lod1.glb": 58236,
+    "assets/racing-v7/cars/prism-lod2.glb": 29796,
+    "assets/racing-v7/cars/solis-lod1.glb": 52356,
+    "assets/racing-v7/textures/asphalt-orm.webp": 13655,
+    "assets/racing-v7/textures/asphalt-color.webp": 245584,
+    "assets/racing-v7/textures/asphalt-normal.png": 236649,
+    "assets/racing-v7/textures/tire-smoke.png": 2866,
+    "assets/racing-v7/cars/solis-lod2.glb": 29556,
+    "assets/racing-v7/cars/vector-lod1.glb": 61316,
+    "assets/racing-v7/crowd/spectator.glb": 7727,
+    "assets/racing-v7/props/props.glb": 30616,
+    "vendor/draco/draco_decoder.wasm": 192604,
+    "assets/racing-v7/cars/vector-lod2.glb": 31008,
+    "vendor/draco/draco_wasm_wrapper.js": 58638
+   }
+  },
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "viewportLabel": "390x844"
+ }
+]

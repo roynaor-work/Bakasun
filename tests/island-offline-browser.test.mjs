@@ -10,7 +10,7 @@ import {isManagedPath} from '../workout/island/ui/offline.mjs';
 const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_OFFLINE_BROWSER==='1';
 const manifest=JSON.parse(await readFile(new URL('../workout/island/offline-manifest.json',import.meta.url),'utf8'));
 const listed=new Set([...manifest.core,...manifest.shell,...Object.values(manifest.games).flat()].map(p=>'/workout/island/'+p));
-const GAMES={soccer:'soccer',hoops:'streetSlam',alpine:'alpineRush'};
+const GAMES={soccer:'soccer',hoops:'streetSlam',alpine:'alpineRush',racing:'islandRacing'};
 const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
 
 async function open(browser,server,{saveData=false,contextOptions={}}={}){
@@ -32,13 +32,13 @@ async function play(page,id){
  await page.evaluate(id=>{const e=window.__island.engine;if(!e.state.instructionsSeen.includes(id))e.state.instructionsSeen.push(id);window.__island.ui.activityInterface.launch(id,undefined,1);},id);
  await page.waitForTimeout(500);
  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
- await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
+ await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
  await page.waitForTimeout(3000);
- return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
+ return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded&&s.renderMetrics.v7?.active)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
 
-test('one button downloads soccer, basketball and ski; status counts the real cache; saves stay untouched; then the island opens offline with all three games',{skip:!enabled,timeout:900000},async()=>{
+test('one button downloads soccer, basketball, ski and racing; status counts the real cache; saves stay untouched; then the island opens offline with all four games',{skip:!enabled,timeout:900000},async()=>{
  const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
  const t=await open(browser,server,{saveData:true});
@@ -53,7 +53,7 @@ test('one button downloads soccer, basketball and ski; status counts the real ca
   const texts=await t.page.evaluate(()=>[...window.__texts]);
   assert.ok(texts.some(x=>/^מוריד \d+ מתוך \d+ · \d+%$/.test(x)),'progress shows X of Y and percent: '+texts.slice(0,5));
   const state=await t.page.evaluate(async()=>({games:[...document.querySelectorAll('.offline-games li')].map(li=>[li.dataset.game,li.dataset.complete]),keys:await caches.keys(),after:Object.keys(localStorage).filter(k=>!k.startsWith('island.offline')).sort(),marker:localStorage.getItem('island.test.marker'),status:JSON.parse(localStorage.getItem('island.offline.status'))}));
-  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true']]);
+  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true'],['racing','true']]);
   assert.equal(state.keys.length,1);assert.match(state.keys[0],/^island-assets-/);
   assert.equal(state.marker,'keep');assert.deepEqual(state.after,savedBefore,'no save key was removed');
   assert.deepEqual(state.status.failed,[]);
