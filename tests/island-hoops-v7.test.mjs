@@ -78,3 +78,18 @@ test('v7 asset files: five bodies with 27 clips each (GLB header)',async()=>{
   assert.ok(json.nodes.filter(n=>/^(Root|Hips|Spine|Chest|Neck|Head|Left|Right)/.test(n.name)).length>=18);
  }
 });
+
+test('meshopt runs in a static module worker, never in the page (the island CSP has no WebAssembly exception)',async()=>{
+ const {createMeshoptWorkerDecoder}=await import('../workout/island/minigames/hoops-v7.mjs');
+ const page=await readFile(new URL('minigames/hoops-v7.mjs',island),'utf8');
+ assert.ok(!/vendor\/meshopt_decoder/.test(page),'the page module does not import the decoder (its wasm instantiation would break under script-src self)');
+ const worker=await readFile(new URL('minigames/hoops-meshopt-worker.mjs',island),'utf8');
+ assert.match(worker,/vendor\/meshopt_decoder\.module\.js/);
+ const made=[];
+ class FakeWorker{constructor(url,opts){this.url=String(url);this.opts=opts;made.push(this);}postMessage(m){this.last=m;queueMicrotask(()=>this.onmessage({data:{id:m.id,value:new Uint8Array(m.count*m.size)}}));}terminate(){this.dead=true;}}
+ const d=createMeshoptWorkerDecoder(FakeWorker);
+ assert.equal(made.length,0,'no worker until the first decode');
+ const out=await d.decodeGltfBufferAsync(4,12,new Uint8Array([1,2,3]),'ATTRIBUTES','NONE');
+ assert.equal(out.buffer.byteLength,48);assert.equal(made.length,1);assert.equal(made[0].opts.type,'module');assert.match(made[0].url,/hoops-meshopt-worker\.mjs$/);
+ d.dispose();assert.ok(made[0].dead);
+});

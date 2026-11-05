@@ -16,7 +16,6 @@ import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {MeshoptDecoder} from '../vendor/meshopt_decoder.module.js';
 import {HoopsDRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
 
@@ -175,11 +174,37 @@ function prepareRole(gltf,meta,role){
  return {role,scene,clips,groups,palm:palmOffsets(scene),height:box.max.y-box.min.y,restY};
 }
 
+/** GLTFLoader's meshopt hook (`ready`, `decodeGltfBufferAsync`) backed by a static same-origin module worker
+ * (hoops-meshopt-worker.mjs): the page's CSP has no WebAssembly exception, so the decoder never runs in the page.
+ * A worker that cannot start or fails rejects every pending request, so loading falls back instead of hanging. */
+export function createMeshoptWorkerDecoder(WorkerClass=globalThis.Worker,url=new URL('./hoops-meshopt-worker.mjs',import.meta.url)){
+ if(typeof WorkerClass!=='function')throw Error('Basketball v7 needs Web Workers');
+ let worker=null,id=0,failure=null;const pending=new Map();
+ const fail=error=>{failure=error;for(const p of pending.values())p.reject(error);pending.clear();};
+ const start=()=>{
+  if(worker)return worker;
+  worker=new WorkerClass(url,{type:'module'});
+  worker.onmessage=e=>{const {id:rid,value,error}=e.data||{},p=pending.get(rid);if(!p)return;pending.delete(rid);if(error)p.reject(Error('Basketball meshopt worker: '+error));else p.resolve(value);};
+  worker.onerror=e=>fail(Error('Basketball meshopt worker: '+(e?.message||'failed to start')));
+  worker.onmessageerror=()=>fail(Error('Basketball meshopt worker: message decoding failed'));
+  return worker;
+ };
+ return {
+  ready:Promise.resolve(),supported:true,
+  decodeGltfBufferAsync(count,size,source,mode,filter){
+   if(failure)return Promise.reject(failure);
+   const w=start(),rid=++id,bytes=new Uint8Array(source);
+   return new Promise((resolve,reject)=>{pending.set(rid,{resolve,reject});w.postMessage({id:rid,count,size,source:bytes,mode,filter},[bytes.buffer]);});
+  },
+  dispose(){if(worker){worker.onmessage=worker.onerror=worker.onmessageerror=null;worker.terminate();worker=null;}pending.clear();},
+ };
+}
+
 /** Five bodies by position with their authored clips. Throws on any failure (the caller falls back). */
 export async function loadPlayerAssetsV7(cfg,base,onProgress){
  const v7=cfg.v7;if(!v7?.players)throw Error('Basketball v7 is not configured');
- await MeshoptDecoder.ready;
- const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco).setMeshoptDecoder(MeshoptDecoder),roles={};
+ const meshopt=createMeshoptWorkerDecoder();
+ const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco).setMeshoptDecoder(meshopt),roles={};
  let done=0;const tick=()=>onProgress?.(++done/(V7_ROLES.length+1));
  try{
   const metaResponse=await fetch(new URL(v7.clips,base));if(!metaResponse.ok)throw Error('Basketball v7 clip table '+metaResponse.status);
@@ -191,7 +216,7 @@ export async function loadPlayerAssetsV7(cfg,base,onProgress){
   const failure=pending.find(r=>r.status==='rejected');if(failure)throw failure.reason;
   return {v7:true,roles,clips:roles.PG.clips,meta:meta.clips,baseHeights:v7.baseHeights,dispose(){for(const r of Object.values(roles)){releaseScene(r.scene);for(const g of Object.values(r.groups))if(g.base)g.geometry.dispose();}}};
  }catch(error){for(const r of Object.values(roles))releaseScene(r.scene);throw error;}
- finally{draco.dispose();}
+ finally{draco.dispose();meshopt.dispose();}
 }
 
 // ---- two-bone arm reach -------------------------------------------------------------------------
