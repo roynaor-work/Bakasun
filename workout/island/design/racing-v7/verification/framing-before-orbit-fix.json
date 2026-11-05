@@ -1,0 +1,2614 @@
+{
+  "generatedAt": "2026-11-04T23:09:32.304Z",
+  "label": "framing",
+  "sourceSHA256": {
+    "app.mjs": "16cb77bd941f4b0dc8a07e3c87d3bed7b6674442c043d7b005d148649d681381",
+    "world.mjs": "60c92a011b15d4a9360148588a232ed2bf75c0cf3220e11087fa0048c89cda87",
+    "loader.mjs": "1432b77d0bc95d936f4790bc039acb40910d5314f0f43a0dce571cee2e0db93d",
+    "effects.mjs": "03058b4f4abe576b6b4040e8020d0912e80942b786070ee72dcf2e2d36a398f1",
+    "index.html": "89d96e5bfe8c9494309e62a4fba4c813dc7314fc468ea016d4e8a74947ac2004",
+    "style.css": "108a18fc55ea7cee7b06f5bdc64b2cb4a26202dd427e33e381a6041cd80a438c"
+  },
+  "records": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "apex",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 34.29133724035015,
+        "right": 333.22765375249645,
+        "top": 398.24058058058233,
+        "bottom": 517.2639372570485
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18099,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "apex",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 73.7409365544004,
+        "right": 302.38924373306486,
+        "top": 403.8145098224843,
+        "bottom": 491.7718452022885
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10316,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "apex",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 58.589226137460926,
+        "right": 347.1978245939713,
+        "top": 406.12677252937505,
+        "bottom": 523.9683933111439
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10316,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "apex",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 88.79435500183259,
+        "right": 309.86620007622633,
+        "top": 409.9843511481955,
+        "bottom": 497.36743985187036
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10316,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "velour",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 13.481136513031114,
+        "right": 346.57968218199443,
+        "top": 386.678307573363,
+        "bottom": 522.7721799611592
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9835,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "velour",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 58.82137015488941,
+        "right": 313.0549863488862,
+        "top": 394.7553312186529,
+        "bottom": 495.3438561358642
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9835,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "velour",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 47.67993930136773,
+        "right": 367.3792580990746,
+        "top": 400.47909903796534,
+        "bottom": 528.9399902335282
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9835,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "velour",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 79.88276437341409,
+        "right": 324.2502592126845,
+        "top": 405.58181693811645,
+        "bottom": 500.7021133289541
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9835,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "prism",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 21.014455397320315,
+        "right": 344.87948093137663,
+        "top": 404.5434074050638,
+        "bottom": 521.3031207983172
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9698,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "prism",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 63.83894660492438,
+        "right": 311.4939861432377,
+        "top": 408.7766063527732,
+        "bottom": 494.40810484621863
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9698,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "prism",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 48.89955917295479,
+        "right": 361.3259677026586,
+        "top": 407.7936500743048,
+        "bottom": 527.6322288751992
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9698,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "prism",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 81.07298945028982,
+        "right": 320.38485785854493,
+        "top": 411.3163824290517,
+        "bottom": 499.81657681192667
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 9698,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "solis",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 37.452285061313724,
+        "right": 331.6841379376573,
+        "top": 395.2720385926802,
+        "bottom": 516.447892646934
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 8433,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "solis",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 76.01959785186179,
+        "right": 301.0428466925127,
+        "top": 401.50569322566287,
+        "bottom": 491.23229500384554
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 8433,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "solis",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 60.200257970642355,
+        "right": 344.50741396016343,
+        "top": 406.4559199751636,
+        "bottom": 523.2172893228532
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 8433,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "solis",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 90.1247386909777,
+        "right": 307.93851251233144,
+        "top": 410.2401019557595,
+        "bottom": 496.86099868735306
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 8433,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "vector",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 20.55644148691281,
+        "right": 340.5899649112566,
+        "top": 366.12794240292686,
+        "bottom": 519.3260927175153
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10901,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "vector",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 63.058573235281024,
+        "right": 308.00593793563786,
+        "top": 378.5384842915546,
+        "bottom": 493.12261119064607
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10901,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "vector",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 43.99722736436075,
+        "right": 354.7932639337592,
+        "top": 391.4242362547947,
+        "bottom": 525.8416965381402
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10901,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "carId": "vector",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 77.54495581819806,
+        "right": 315.6564279958986,
+        "top": 398.63649087446703,
+        "bottom": 498.61721675921274
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 24,
+          "right": 366,
+          "top": 588,
+          "bottom": 637,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 368,
+          "top": 657,
+          "bottom": 824,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 24,
+          "right": 366,
+          "top": 107,
+          "bottom": 169,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 256.484375,
+          "right": 364,
+          "top": 20.28125,
+          "bottom": 57.71875,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 26,
+          "right": 142.125,
+          "top": 20,
+          "bottom": 58,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 202,
+          "right": 365,
+          "top": 205,
+          "bottom": 286,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 10901,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "apex",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 229.8035875820866,
+        "right": 562.5393069002381,
+        "top": 62.1154473760668,
+        "bottom": 225.5219214021857
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18099,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "apex",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 333.02111625928893,
+        "right": 496.8723485857168,
+        "top": 90.47740314103623,
+        "bottom": 157.459711701026
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18099,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "apex",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 285.28416655071885,
+        "right": 603.0832191127271,
+        "top": 69.87948164535977,
+        "bottom": 226.33122950543807
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18099,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "apex",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 348.2367861915163,
+        "right": 506.1189387600412,
+        "top": 94.74914340509005,
+        "bottom": 160.75443710229263
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18099,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "velour",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 196.21817120169214,
+        "right": 573.9868678080164,
+        "top": 50.54217277696951,
+        "bottom": 240.08976588299473
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17737,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "velour",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 321.00247176654653,
+        "right": 503.9240019351013,
+        "top": 84.1947268390743,
+        "bottom": 160.86448420041353
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17737,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "velour",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 276.7621653668596,
+        "right": 640.4836000460473,
+        "top": 64.19451011344565,
+        "bottom": 241.12502475162847
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17737,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "velour",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 342.51859865419004,
+        "right": 518.0152372944873,
+        "top": 91.67606128503402,
+        "bottom": 163.75703259197988
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17737,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "prism",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 213.19396205542196,
+        "right": 573.8261195324284,
+        "top": 68.11455627720372,
+        "bottom": 235.86285406759126
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17678,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "prism",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 325.6392189698817,
+        "right": 503.10558593309327,
+        "top": 93.86643052806939,
+        "bottom": 159.95012894368472
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17678,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "prism",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 276.9232236594742,
+        "right": 621.3114674790286,
+        "top": 71.3006360338087,
+        "bottom": 236.11895395490734
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17678,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "prism",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 343.11176074197135,
+        "right": 514.0177747626955,
+        "top": 95.59895652456395,
+        "bottom": 162.97224974137146
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 17678,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "solis",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 234.63168705579676,
+        "right": 561.535533575318,
+        "top": 59.04495115696044,
+        "bottom": 223.4432931727462
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 14603,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "solis",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 334.8314442725746,
+        "right": 496.056216366399,
+        "top": 88.86345120275139,
+        "bottom": 156.9571130986458
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 14603,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "solis",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 286.4016780482301,
+        "right": 598.9324489415852,
+        "top": 70.21962565216695,
+        "bottom": 224.71932157517895
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 14603,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "solis",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 349.0694583732174,
+        "right": 504.5911775285376,
+        "top": 94.93024354511833,
+        "bottom": 160.30264551778185
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 14603,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "vector",
+      "orbit": 0.7,
+      "far": false,
+      "car": {
+        "left": 216.92461251458056,
+        "right": 570.6084620675764,
+        "top": 31.149568145412083,
+        "bottom": 230.65507472068262
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18781,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "vector",
+      "orbit": 0.7,
+      "far": true,
+      "car": {
+        "left": 325.63058976970257,
+        "right": 500.8593188554301,
+        "top": 73.19401377603842,
+        "bottom": 158.71892776776193
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18781,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "vector",
+      "orbit": 2.5,
+      "far": false,
+      "car": {
+        "left": 270.1602530644115,
+        "right": 611.5843971104447,
+        "top": 54.10262901993011,
+        "bottom": 230.6163812728376
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18781,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "carId": "vector",
+      "orbit": 2.5,
+      "far": true,
+      "car": {
+        "left": 340.3192065194898,
+        "right": 510.2982115995948,
+        "top": 86.70902564289374,
+        "bottom": 161.88976271127805
+      },
+      "overlays": {
+        ".view-tools": {
+          "left": 22,
+          "right": 61,
+          "top": 67,
+          "bottom": 242,
+          "conservativeOverlapArea": 0
+        },
+        ".garage": {
+          "left": 22,
+          "right": 322,
+          "top": 252,
+          "bottom": 375,
+          "conservativeOverlapArea": 0
+        },
+        ".destinations": {
+          "left": 696,
+          "right": 822,
+          "top": 69,
+          "bottom": 217,
+          "conservativeOverlapArea": 0
+        },
+        ".identity": {
+          "left": 733.34375,
+          "right": 822,
+          "top": 14.40625,
+          "bottom": 43.59375,
+          "conservativeOverlapArea": 0
+        },
+        ".top-actions": {
+          "left": 22,
+          "right": 126.921875,
+          "top": 13,
+          "bottom": 45,
+          "conservativeOverlapArea": 0
+        },
+        ".scene-caption": {
+          "left": 682.609375,
+          "right": 822,
+          "top": 290.609375,
+          "bottom": 360,
+          "conservativeOverlapArea": 0
+        }
+      },
+      "vertices": 18781,
+      "method": "Projected indexed vertices of visible car meshes, including instanced wheels; rectangle intersections are conservative for curved silhouettes",
+      "inside": true,
+      "occluded": [],
+      "pass": true
+    }
+  ],
+  "lifecycle": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mode": "drive",
+      "viewOffsetCleared": true,
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "mode": "overview",
+      "viewOffsetCleared": true,
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "mode": "drive",
+      "viewOffsetCleared": true,
+      "pass": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "mode": "overview",
+      "viewOffsetCleared": true,
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

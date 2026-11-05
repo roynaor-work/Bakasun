@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "name": "racing-v7",
+  "engine": "three.js r160",
+  "entryPoints": {
+    "standalone": "offline.html",
+    "separateFiles": "index.html",
+    "review": "review.html"
+  },
+  "carCatalog": "assets/cars/catalog.json",
+  "tracks": [
+    "coast",
+    "neon",
+    "ridge"
+  ],
+  "canonicalRig": "assets/crowd/rig.json",
+  "GLBMaxBytes": 1500000,
+  "assetTextureMaxDimension": 1024,
+  "physicalPhone30fpsVerified": false,
+  "runtimeFiles": [
+    {
+      "file": "app.mjs",
+      "bytes": 21290,
+      "MB": 0.02129,
+      "sha256": "5ebacf4921909a190b083eb72dfbcb3c51ea3ce8fdaa0b5d1316829f643dab32"
+    },
+    {
+      "file": "assets/cars/apex-lod0.glb",
+      "bytes": 93520,
+      "MB": 0.09352,
+      "sha256": "fafc077c9f3f88d40a3079d3c04be817a89833a9cb49907009fdfe55c09d29f9"
+    },
+    {
+      "file": "assets/cars/apex-lod1.glb",
+      "bytes": 57700,
+      "MB": 0.0577,
+      "sha256": "3a399f3e9405ad052d0f09ff7fb8f0b0838f22d5f328ee0d1c0c9cc7e3a820b4"
+    },
+    {
+      "file": "assets/cars/apex-lod2.glb",
+      "bytes": 28900,
+      "MB": 0.0289,
+      "sha256": "d0d2a2dcf7f92706c62eacba1ae98432ba456d09f69c531a189aad6515464562"
+    },
+    {
+      "file": "assets/cars/catalog.json",
+      "bytes": 1017,
+      "MB": 0.001017,
+      "sha256": "34e59d1964e9c8a549db5410e8b2d3d9ddbac5485fdc84445a6efa0a735e596d"
+    },
+    {
+      "file": "assets/cars/prism-lod0.glb",
+      "bytes": 94568,
+      "MB": 0.094568,
+      "sha256": "ec4604f16accc7a5a5409baaff6cab0cb9e0338985491fe52246fad90892bfef"
+    },
+    {
+      "file": "assets/cars/prism-lod1.glb",
+      "bytes": 58052,
+      "MB": 0.058052,
+      "sha256": "b7864f9d8c14f530bff7b553651d70e97effd82100a00abc21a53fedd963c2a5"
+    },
+    {
+      "file": "assets/cars/prism-lod2.glb",
+      "bytes": 29612,
+      "MB": 0.029612,
+      "sha256": "eaa03656f9dbd6e3ce43d5152f3237fdd43b8246504528d9df50f95d8e4eb7a4"
+    },
+    {
+      "file": "assets/cars/solis-lod0.glb",
+      "bytes": 80544,
+      "MB": 0.080544,
+      "sha256": "71354c3c434d53ec1a4b5f9ee4f11f264be0c52a1287cf15a46f745b9a668194"
+    },
+    {
+      "file": "assets/cars/solis-lod1.glb",
+      "bytes": 52172,
+      "MB": 0.052172,
+      "sha256": "dfbdce93f31c2edccc3c1b7ef19b96c331ab47e2f257060e867ba582feed2ac8"
+    },
+    {
+      "file": "assets/cars/solis-lod2.glb",
+      "bytes": 29372,
+      "MB": 0.029372,
+      "sha256": "764f70728326b8629d46afb6f6e9b823d74fe43fecf79e3619bf4057d759bc78"
+    },
+    {
+      "file": "assets/cars/vector-lod0.glb",
+      "bytes": 97428,
+      "MB": 0.097428,
+      "sha256": "cb9cae894dc8180edf9a91a2b33868ae17222967873b73b8abf52da54dbb2d4c"
+    },
+    {
+      "file": "assets/cars/vector-lod1.glb",
+      "bytes": 61132,
+      "MB": 0.061132,
+      "sha256": "a62994712b10cbf63564008b0dbc546df02222293ec66720836d4310da8abbba"
+    },
+    {
+      "file": "assets/cars/vector-lod2.glb",
+      "bytes": 30824,
+      "MB": 0.030824,
+      "sha256": "4319c6d1ed30ad88ec83698f664d54ac5ee64b760cab27744dfbe4de8b3044e8"
+    },
+    {
+      "file": "assets/cars/velour-lod0.glb",
+      "bytes": 93540,
+      "MB": 0.09354,
+      "sha256": "fc752e1fea74385db6492a3aa96e8ed48d98b24a108857423e2096405a71fc57"
+    },
+    {
+      "file": "assets/cars/velour-lod1.glb",
+      "bytes": 57568,
+      "MB": 0.057568,
+      "sha256": "4542e7800ebe414c32c7e58a557f764723bf67507b2f3bbf8be97cf369f537d5"
+    },
+    {
+      "file": "assets/cars/velour-lod2.glb",
+      "bytes": 29572,
+      "MB": 0.029572,
+      "sha256": "2b3114270b680fce42d957727287a577ebda4a88ae5c5f3e9c5c66ce9f37330e"
+    },
+    {
+      "file": "assets/crowd/rig.json",
+      "bytes": 2750,
+      "MB": 0.00275,
+      "sha256": "ed8ff5b1263a464a98c30c51939415dcdc32a69b349f532649d292730fb68ebb"
+    },
+    {
+      "file": "assets/crowd/spectator.glb",
+      "bytes": 7544,
+      "MB": 0.007544,
+      "sha256": "acf0b7dda3c210d12db3d05551570d6707b885284aad9c1a5de67a22ac00ab0c"
+    },
+    {
+      "file": "assets/tracks/coast.glb",
+      "bytes": 28472,
+      "MB": 0.028472,
+      "sha256": "2a53dd6c7fda8c96f99cca68d0a6c24d8af88206aa62b6ace3478920d22d0775"
+    },
+    {
+      "file": "assets/tracks/coast.json",
+      "bytes": 129334,
+      "MB": 0.129334,
+      "sha256": "46910c48899ef1ce2da628bb5c7ae5bddef30a4859ad5201dc6269471f260a5b"
+    },
+    {
+      "file": "assets/tracks/neon.glb",
+      "bytes": 30568,
+      "MB": 0.030568,
+      "sha256": "a671b904e6960305f0f033b3c159b8f42addd1ef24637b5a05c65d1ba1dd34d1"
+    },
+    {
+      "file": "assets/tracks/neon.json",
+      "bytes": 131013,
+      "MB": 0.131013,
+      "sha256": "1ee01d2dc810f157e8e163a7260a50234ed9310183caedda6e14a9a388fe9bcf"
+    },
+    {
+      "file": "assets/tracks/props.glb",
+      "bytes": 30432,
+      "MB": 0.030432,
+      "sha256": "d9c44cf5efedc3ff3679f0ccc6916ce8a580f93439aa66cd94450f29033b8338"
+    },
+    {
+      "file": "assets/tracks/ridge.glb",
+      "bytes": 42580,
+      "MB": 0.04258,
+      "sha256": "986b127b0cf70e2e84f6c441fc29638ae335d0837acfd4c7db3d37a1096f23cb"
+    },
+    {
+      "file": "assets/tracks/ridge.json",
+      "bytes": 128626,
+      "MB": 0.128626,
+      "sha256": "09e1d00bff34cb093ba80fea59c74eb37c681d0cbcfe5a5fe4746c8da756e2e5"
+    },
+    {
+      "file": "effects.mjs",
+      "bytes": 8903,
+      "MB": 0.008903,
+      "sha256": "03058b4f4abe576b6b4040e8020d0912e80942b786070ee72dcf2e2d36a398f1"
+    },
+    {
+      "file": "index.html",
+      "bytes": 9700,
+      "MB": 0.0097,
+      "sha256": "89d96e5bfe8c9494309e62a4fba4c813dc7314fc468ea016d4e8a74947ac2004"
+    },
+    {
+      "file": "loader.mjs",
+      "bytes": 5363,
+      "MB": 0.005363,
+      "sha256": "1432b77d0bc95d936f4790bc039acb40910d5314f0f43a0dce571cee2e0db93d"
+    },
+    {
+      "file": "offline.html",
+      "bytes": 2624402,
+      "MB": 2.624402,
+      "sha256": "322ed608193c3f27689b0c228255cc95d2b36fed81f2f7770a53914003e1fb8a"
+    },
+    {
+      "file": "style.css",
+      "bytes": 15294,
+      "MB": 0.015294,
+      "sha256": "108a18fc55ea7cee7b06f5bdc64b2cb4a26202dd427e33e381a6041cd80a438c"
+    },
+    {
+      "file": "textures/asphalt-color.webp",
+      "bytes": 245406,
+      "MB": 0.245406,
+      "sha256": "9f1d1a9c532584bae0b4a02375429cdd98816ed2b0147c583553ab67295f218b"
+    },
+    {
+      "file": "textures/asphalt-normal.png",
+      "bytes": 236472,
+      "MB": 0.236472,
+      "sha256": "27ab0ab4e2eceef91334fa50edb187df85d4c3b8dcabf80d913e3be099b5701f"
+    },
+    {
+      "file": "textures/asphalt-orm.webp",
+      "bytes": 13478,
+      "MB": 0.013478,
+      "sha256": "fb6712e456fc3f146b06e6c668d2a251b2501070500ffb60ec33ff0c75e099c3"
+    },
+    {
+      "file": "textures/spectator-atlas.png",
+      "bytes": 621,
+      "MB": 0.000621,
+      "sha256": "512cf03473f2f1bb58be03b48bb5b52a76f16878cc4b19081ed7292a4e7e6741"
+    },
+    {
+      "file": "textures/tire-smoke.png",
+      "bytes": 2691,
+      "MB": 0.002691,
+      "sha256": "1d4ffb9532caa41785adaeba0d7b11eaa5315e5979bb831df081e22322140d8f"
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "MB": 0.031918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "file": "vendor/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "MB": 0.19242,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "file": "vendor/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "MB": 0.058456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "file": "vendor/draco/LICENSE.draco",
+      "bytes": 13898,
+      "MB": 0.013898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "bytes": 13640,
+      "MB": 0.01364,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "MB": 0.108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "MB": 0.001081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "vendor/README.md",
+      "bytes": 651,
+      "MB": 0.000651,
+      "sha256": "f7e88fbabf860cffa37615bb5d625b1608796e7979c99ae3539de81912ebeed4"
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "bytes": 8019,
+      "MB": 0.008019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    },
+    {
+      "file": "vendor/three.module.js",
+      "bytes": 670681,
+      "MB": 0.670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "file": "world.mjs",
+      "bytes": 24636,
+      "MB": 0.024636,
+      "sha256": "6986fe12e3dcb6f9c612cf2f2fffb4cd69da1a588cb8ba8302d2a868498ad1a5"
+    }
+  ]
+}
