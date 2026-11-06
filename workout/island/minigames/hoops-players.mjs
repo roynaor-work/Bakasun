@@ -20,7 +20,7 @@ export async function loadPlayerAssets(cfg,base,onProgress,{params,onFallback,qu
  if((cfg.characterVersion??1)===2)return loadPlayerAssetsV2(cfg,base,onProgress);
  // v7 (05/11, GPT package): five position bodies with authored clips; any failure falls back to the v4 bodies
  if(v7Enabled(cfg,params,quality??2)){
-  try{return await loadPlayerAssetsV7(cfg,base,onProgress);}
+  try{return await loadPlayerAssetsV7(cfg,base,onProgress,{params,onFallback});}
   catch(error){onFallback?.('players-v7',error);}
  }
  // v4 (02/11): the five position bodies; any failure falls back to the v3 bodies instead of stopping the game

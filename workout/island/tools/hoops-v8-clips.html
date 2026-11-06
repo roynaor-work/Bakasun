@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><title>v8 clips</title><style>html,body{margin:0;background:#1b1f27}canvas{display:block}</style></head><body><canvas id="c" width="1200" height="300"></canvas>
+<script type="module">
+import * as THREE from '../vendor/three.module.js';
+import {loadPlayerAssetsV7,createAvatarV7} from '../minigames/hoops-v7.mjs';
+const cfg=(await (await fetch('../data/config.json')).json()).minigames.streetSlam.assets;
+const base=new URL('../',location.href);
+const assets=await loadPlayerAssetsV7(cfg,base,null,{params:new URLSearchParams('')});
+const role=new URLSearchParams(location.search).get('role')||'PG';
+const av=createAvatarV7(assets,{id:'t',pos:role,ratings:{height:cfg.v7.baseHeights[role]}},{primary:'#2a5bd7',secondary:'#fff'});
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true,preserveDrawingBuffer:true});renderer.setSize(1200,300,false);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x2a313d);scene.add(new THREE.HemisphereLight(0xffffff,0x445566,2.2));const d=new THREE.DirectionalLight(0xffffff,2);d.position.set(3,6,4);scene.add(d);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshStandardMaterial({color:0x9a7a4a}));floor.rotation.x=-Math.PI/2;scene.add(floor);
+av.root.rotation.y=Math.PI/2;scene.add(av.root);
+const cam=new THREE.PerspectiveCamera(30,4,.1,50);
+const names=Object.keys(av.actions).filter(n=>n.startsWith('v8:'));
+const bones={};av.root.traverse(o=>{if(o.isBone)bones[o.name]=o;});
+const v=new THREE.Vector3();
+function apply(name,t){for(const a of Object.values(av.actions))a.setEffectiveWeight(0);const a=av.actions[name];a.setEffectiveWeight(1);a.time=t;av.mixer.update(0);av.root.updateMatrixWorld(true);}
+const out={};
+for(const name of names){
+ const a=av.actions[name],dur=a.getClip().duration,rows=[];
+ for(let i=0;i<8;i++){
+  const t=dur*i/7*.999;apply(name,t);
+  const foot={};for(const n of ['LeftFoot','RightFoot','LeftHand','RightHand','Head','Hips']){bones[n].getWorldPosition(v);foot[n]=[v.x,v.y,v.z];}
+  rows.push({t:+t.toFixed(3),...foot});
+ }
+ out[name]={dur,rows};
+}
+// min foot height over a dense sweep, and planted-foot drift from the pack's support windows
+const dense={};
+for(const name of names){
+ const a=av.actions[name],dur=a.getClip().duration,id=name.slice(3),sup=assets.v8.clips[id].support;let minFoot=9,minHand=9;const tracks={};
+ for(let t=0;t<dur;t+=1/60){apply(name,t);for(const n of ['LeftFoot','RightFoot']){bones[n].getWorldPosition(v);minFoot=Math.min(minFoot,v.y);(tracks[n]||(tracks[n]=[])).push([t,v.x,v.z]);}for(const n of ['LeftHand','RightHand']){bones[n].getWorldPosition(v);minHand=Math.min(minHand,v.y);}}
+ let drift=0;for(const w of sup){const pts=tracks[w.bone].filter(p=>p[0]>=w.start&&p[0]<=w.end);if(pts.length>1){const xs=pts.map(p=>p[1]),zs=pts.map(p=>p[2]);drift=Math.max(drift,Math.hypot(Math.max(...xs)-Math.min(...xs),Math.max(...zs)-Math.min(...zs)));}}
+ dense[name]={minFoot:+minFoot.toFixed(4),minHand:+minHand.toFixed(3),plantDrift:+drift.toFixed(4)};
+}
+// contact sheet: 8 frames for the clip chosen by ?clip=
+const clip=new URLSearchParams(location.search).get('clip');
+window.__clips={out,dense,names,rest:(()=>{apply('v8:pass_chest',0);bones.LeftFoot.getWorldPosition(v);return v.y;})()};
+window.__shot=(name,i)=>{const a=av.actions[name],dur=a.getClip().duration;apply(name,dur*i/7*.999);bones.Hips.getWorldPosition(v);cam.position.set(v.x,1.2,v.z+4.2);cam.lookAt(v.x,1.0,v.z);renderer.render(scene,cam);};
+window.__ready=true;
+</script></body></html>
