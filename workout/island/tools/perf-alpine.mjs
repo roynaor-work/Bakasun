@@ -1,4 +1,4 @@
-import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261105-2';
+import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261106-1';
 
 /** Alpine Rush performance page: runs one race on autopilot through the real session
  * (engine, controls, view, HUD) and reports frame pacing. Query: seconds, stage, seed,
