@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as C from '../north/js/cart.js';
-import { PRODUCTS, BUILD, byId } from '../north/js/products.js';
-import { SHIPPING } from '../north/js/config.js';
+import { PRODUCTS, BUILD, OCCASIONS, byId } from '../north/js/products.js';
+import { SHIPPING, PORTRAIT_W, fallbackOf } from '../north/js/config.js';
 import { existsSync } from 'node:fs';
 
 const p = byId('single-malt');
@@ -65,7 +65,15 @@ test('מספר הזמנה ותקציר', () => {
 test('הקטלוג תקין: מזהים ייחודיים, תמונות, בלי ערבית', () => {
   const ids = new Set(PRODUCTS.map(p => p.id)); assert.equal(ids.size, PRODUCTS.length);
   for (const p of PRODUCTS) {
-    for (const f of [p.img, p.img2]) { assert.ok(f.startsWith('img/v2/'), p.id + ' תמונה מקומית'); assert.ok(existsSync(new URL('../north/' + f, import.meta.url)), p.id + ' הקובץ ' + f + ' קיים'); } assert.ok(p.contents.length >= 3); assert.ok(p.price > 0);
+    for (const f of [p.img, p.img2, ...(p.gallery || [])]) { assert.ok(/^img\/v[24]\//.test(f), p.id + ' תמונה מקומית'); assert.ok(existsSync(new URL('../north/' + f, import.meta.url)), p.id + ' הקובץ ' + f + ' קיים'); }
+    // v4: כל זווית עם alt, עותקים קטנים לכל רוחב ב-srcset, ונפילה לתמונת v2 קיימת
+    assert.equal((p.gallery || []).length, 6, p.id + ' שש זוויות');
+    for (const f of p.gallery || []) {
+      assert.ok(altOf(f), f + ' alt');
+      for (const w of f.endsWith('-product.webp') ? PORTRAIT_W : [480, 800]) assert.ok(existsSync(new URL('../north/' + smallSrc(f, w), import.meta.url)), f + ' עותק ' + w);
+      for (const w of [168, 252]) assert.ok(existsSync(new URL('../north/' + smallSrc(f, w), import.meta.url)), f + ' ממוזערת ' + w);
+      assert.ok(existsSync(new URL('../north/' + fallbackOf(f), import.meta.url)), f + ' נפילה');
+    } assert.ok(p.contents.length >= 3); assert.ok(p.price > 0);
     if (p.kosher === false) {
       assert.ok(p.kosherNote, p.id + ' לא כשר בלי פירוט');
       // הפריט שבגללו המארז לא כשר חייב להופיע בתכולה (שורש של 4 אותיות משותף)
@@ -223,4 +231,10 @@ test('A01 (audit 2026-11-05): access token is 128 random bits, hex, different ea
   const a = accessToken(), b = accessToken();
   assert.match(a, /^[0-9a-f]{32}$/); assert.notEqual(a, b);
   assert.throws(() => accessToken(null === 1 ? 0 : { }), /אקראיות/);
+});
+
+test('v4: באנרים לשישה אירועים עם עותקים 640/1024, ועותק קטן של v4 לא עולה על 100KB', () => {
+  for (const o of OCCASIONS) for (const w of [640, 1024]) assert.ok(existsSync(N(`img/s/v4/banner-${o.id}-${w}.webp`)), `חסר באנר ${o.id} ${w}`);
+  const sizes = readdirSync(N('img/s/v4')).map(f => readFileSync(N('img/s/v4/' + f)).length);
+  assert.ok(sizes.length >= 300 && Math.max(...sizes) < 100_000);
 });

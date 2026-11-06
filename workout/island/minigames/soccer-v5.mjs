@@ -5,11 +5,12 @@ import * as T from '../vendor/three.module.js';
  * triangles, 18-bone rig, three hair looks). v5 runs from lightweight runtime
  * copies under assets/soccer-v5 (embedded clips and morph targets stripped, see
  * tools/soccer-v5-build.mjs) and falls back to v4 if anything fails to load.
- * Override for comparison: `?soccerChars=v4` or `?soccerChars=v5`. */
-export const SOCCER_CHARACTER_SET_DEFAULT='v5';
+ * Override for comparison: `?soccerChars=v4`, `v5` (alias `v6`) or `v7` (default, see soccer-v7.mjs). */
+export const SOCCER_CHARACTER_SET_DEFAULT='v7';
+/** `?soccerChars=v7` GPT v7 (default), `v6`/`v5` the cartoon set that shipped before it, `v4` the authored set. */
 export function soccerCharacterSet(search=globalThis.location?.search||''){
   const wanted=new URLSearchParams(search).get('soccerChars');
-  return wanted==='v4'||wanted==='v5'?wanted:SOCCER_CHARACTER_SET_DEFAULT;
+  return wanted==='v6'?'v5':wanted==='v4'||wanted==='v5'||wanted==='v7'?wanted:SOCCER_CHARACTER_SET_DEFAULT;
 }
 const asset=path=>new URL(`../assets/soccer-v5/${path}`,import.meta.url).href;
 export const SOCCER_V5_FILES={outfield:['teal-quiff.glb','teal-curls.glb','teal-knot.glb'],keeper:'goalkeeper.glb'};

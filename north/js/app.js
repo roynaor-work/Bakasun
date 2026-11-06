@@ -1,6 +1,6 @@
 /* הרוח הצפונית · מארזים. ניתוב לפי hash: #/ , #/p/<id> , #/checkout , #/thanks/<no> */
-import { STORE, SHIPPING, CITIES, OUT_OF_AREA, PAY, CLOUD, IMG, LOCAL, smallSrc, srcsetOf, WIDE_W, HERO_W } from './config.js';
-import { CATS, OCCASIONS, PRODUCTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
+import { STORE, SHIPPING, CITIES, OUT_OF_AREA, PAY, CLOUD, IMG, LOCAL, smallSrc, srcsetOf, fallbackOf, WIDE_W, HERO_W } from './config.js';
+import { CATS, OCCASIONS, PRODUCTS, SHOTS, BUILD, FAQ, INCLUDED, byId } from './products.js';
 import * as C from './cart.js';
 import { icon, logo } from './icons.js';
 import { altOf } from './alt.js';
@@ -10,7 +10,23 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 /* תמונה רספונסיבית: עותקים קטנים מ-img/s, עם sizes לפי המקום בעמוד */
 const rimg = (path, { alt = '', sizes = '100vw', widths, w = 480, cls = '', attrs = '' } = {}) => {
   const ss = srcsetOf(path, widths);
-  return `<img${cls ? ` class="${cls}"` : ''} src="${ss ? smallSrc(path, w) : path}"${ss ? ` srcset="${ss}" sizes="${sizes}"` : ''} alt="${esc(alt)}" ${attrs}>`;
+  const fb = fallbackOf(path);
+  return `<img${cls ? ` class="${cls}"` : ''} src="${ss ? smallSrc(path, w) : path}"${ss ? ` srcset="${ss}" sizes="${sizes}"` : ''} alt="${esc(alt)}"${fb ? ` data-fb="${fb}"` : ''} ${attrs}>`;
+};
+/* תמונה שלא נטענה: v4 חוזרת לעותק v2 של אותו מארז; באנר של אירוע בלי עותק קודם מוסתר. error לא עולה במעלה העץ, לכן האזנה בשלב הלכידה. */
+document.addEventListener('error', e => {
+  const im = e.target;
+  if (!(im instanceof HTMLImageElement)) return;
+  if (im.dataset.fb) { const f = im.dataset.fb; delete im.dataset.fb; const ss = srcsetOf(f); im.removeAttribute('srcset'); if (ss) im.srcset = ss; im.src = ss ? smallSrc(f, 480) : f; }
+  else if (im.dataset.hideOnError !== undefined) im.closest('.occban')?.remove();
+}, true);
+/* באנר האירוע שנבחר (north/img/v4/banner-<אירוע>.webp, 1024×384): הפריטים משמאל, השטח הכהה מימין לכותרת */
+const BANNER_ALT = { birthday: 'בקבוק מבעבע, קופסת פרלינים, נר וכרטיס ברכה על משטח כהה', holiday: 'סלסלת קש עם יין אדום, דבש, חטיפי אגוזים ושוקולד וענף זית', thanks: 'פלאסק נירוסטה, בקבוק קטן, משפך וקופסה שחורה עם כרטיס ברכה', work: 'קופסת עץ עם סרט, בקבוק וויסקי ושתי כוסות', couple: 'בקבוק יין קינוח, שתי כוסות וקופסת פרלינים', host: 'יין אדום ולבן, קרקרים, ריבה וזיתים על קרש הגשה' };
+const occBanner = () => {
+  if (!state.occ) return '';
+  const o = OCCASIONS.find(x => x.id === state.occ), n = PRODUCTS.filter(p => p.occ.includes(o.id)).length;
+  const path = LOCAL(`banner-${o.id}`, 'v4');
+  return `<div class="occban">${rimg(path, { alt: BANNER_ALT[o.id] || '', sizes: '(min-width:1100px) 1100px, 100vw', widths: WIDE_W, w: 640, attrs: 'decoding="async" width="1024" height="384" data-hide-on-error' })}<div class="cap"><span class="kicker">${esc(o.name)}</span><b>${n} מארזים שמתאימים</b></div></div>`;
 };
 const money = n => `<span class="num">${C.fmt(n)}</span>`;
 
@@ -103,6 +119,7 @@ function homeHtml() {
   <section class="blk" id="catalog" style="padding-top:0"><div class="wrap">
     <div class="sechead reveal"><div><h2>המארזים${occName ? ` · ${esc(occName)}` : ''}</h2><p>כל מארז נארז אצלנו בחנות. הבקבוקים מהמדף, התוספות מיצרנים שאנחנו עובדים איתם.</p></div>
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
+    <div id="occslot">${occBanner()}</div>
     <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} פגם או טעות במארז? מחליפים או מחזירים את הכסף, ואוספים על חשבוננו.</span></div>
     <div class="chips" id="chips">${chipsHtml()}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
@@ -190,19 +207,20 @@ function buildSumHtml() {
 function refreshBuild() { const s = $('#bsteps'), m = $('#bsum'); if (s) s.innerHTML = buildStepsHtml(); if (m) { const n = $('#bnote'); if (n) state.build.note = n.value; m.innerHTML = buildSumHtml(); } }
 
 /* ---------- עמוד מוצר ---------- */
+const GAL_W = [480, 800]; /* בגלריה הגדולה אין צורך ב-240 */
 const pstate = { variant: null, qty: 1, img: 0, note: '', engrave: '' };
 function productHtml(p) {
   const v = p.variants ? (p.variants.find(x => x.id === pstate.variant) || p.variants[0]) : null;
   const price = v ? v.price : p.price;
-  const imgs = [p.img, p.img2].filter(Boolean);
+  const imgs = (p.gallery || [p.img, p.img2]).filter(Boolean);
   const band = PRODUCTS.filter(x => x.id !== p.id && Math.abs(x.price - p.price) <= p.price * 0.35);
   const related = [...band, ...PRODUCTS.filter(x => x.id !== p.id && !band.includes(x) && (x.cat === p.cat || x.occ.some(o => p.occ.includes(o))))].slice(0, 4);
   return `<section class="pp"><div class="wrap">
     <div class="crumbs"><a href="#/">הבית</a><span>›</span><a href="#/#catalog">המארזים</a><span>›</span><span>${esc(p.name)}</span></div>
     <div class="lay">
       <div class="gallery">
-        <div class="main">${rimg(imgs[pstate.img] || imgs[0], { alt: altOf(imgs[pstate.img] || imgs[0], p.name), sizes: '(min-width:1000px) 560px, 100vw', w: 800, attrs: 'id="pmain" fetchpriority="high" decoding="async" width="1120" height="1400"' })}</div>
-        ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((s, i) => `<button class="${i === pstate.img ? 'on' : ''}" data-img="${i}" aria-label="${i ? 'תמונת אווירה' : 'צילום המארז'}" aria-pressed="${i === pstate.img}">${rimg(s, { sizes: '84px', attrs: 'loading="lazy" decoding="async" width="84" height="84"' })}</button>`).join('')}</div>` : ''}
+        <div class="main">${rimg(imgs[pstate.img] || imgs[0], { alt: altOf(imgs[pstate.img] || imgs[0], p.name), sizes: '(min-width:1000px) 560px, 100vw', widths: GAL_W, w: 800, attrs: 'id="pmain" fetchpriority="high" decoding="async" width="800" height="1000"' })}</div>
+        ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((s, i) => `<button class="${i === pstate.img ? 'on' : ''}" data-img="${i}" aria-label="${(SHOTS[i] || SHOTS[0])[1]}" aria-pressed="${i === pstate.img}">${rimg(s, { sizes: '84px', widths: [168, 252], w: 168, attrs: 'loading="lazy" decoding="async" width="84" height="84"' })}</button>`).join('')}</div>${p.gallery ? '<p class="shotnote">התמונות להמחשה: הרכב המארז לפי הרשימה, והאריזה והגימור בהצעת עיצוב. יחס הגודל לא נמדד.</p>' : ''}` : ''}
       </div>
       <div class="pinfo">
         ${p.badge ? `<span class="kicker">${esc(p.badge)}</span>` : ''}
@@ -484,7 +502,7 @@ document.addEventListener('click', e => {
   if (t.dataset.add) { addProduct(byId(t.dataset.add)); return; }
   if (t.dataset.cat) { state.cat = t.dataset.cat; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
   if (t.id === 'kosherchip') { state.kosherOnly = !state.kosherOnly; $('#chips').innerHTML = chipsHtml(); $('#grid').innerHTML = catalogHtml(); reveal(); return; }
-  if (t.dataset.occ) { state.occ = state.occ === t.dataset.occ ? null : t.dataset.occ; document.querySelectorAll('[data-occ]').forEach(b => b.classList.toggle('on', b.dataset.occ === state.occ)); $('#grid').innerHTML = catalogHtml(); $('#catalog h2').textContent = 'המארזים' + (state.occ ? ' · ' + OCCASIONS.find(o => o.id === state.occ).name : ''); reveal(); $('#catalog').scrollIntoView({ behavior: 'smooth' }); return; }
+  if (t.dataset.occ) { state.occ = state.occ === t.dataset.occ ? null : t.dataset.occ; document.querySelectorAll('[data-occ]').forEach(b => b.classList.toggle('on', b.dataset.occ === state.occ)); $('#grid').innerHTML = catalogHtml(); $('#occslot').innerHTML = occBanner(); $('#catalog h2').textContent = 'המארזים' + (state.occ ? ' · ' + OCCASIONS.find(o => o.id === state.occ).name : ''); reveal(); $('#catalog').scrollIntoView({ behavior: 'smooth' }); return; }
   if (t.dataset.bopt) {
     const id = t.dataset.bopt, b = state.build;
     if (BUILD.bases.some(x => x.id === id)) b.base = b.base === id ? null : id;
@@ -505,7 +523,7 @@ document.addEventListener('click', e => {
   }
   if (t.dataset.var !== undefined) { pstate.variant = t.dataset.var; pstate.note = $('#pnote').value; const en = $('#pengrave'); pstate.engrave = en ? en.value : ''; $('#view').innerHTML = productHtml(byId(route.pid)); $(`[data-var="${t.dataset.var}"]`)?.focus({ preventScroll: true }); return; }
   if (t.dataset.q) { pstate.qty = Math.max(1, Math.min(20, pstate.qty + +t.dataset.q)); refreshQty(); return; }
-  if (t.dataset.img !== undefined) { pstate.img = +t.dataset.img; const p = byId(route.pid), src = [p.img, p.img2][pstate.img], m = $('#pmain'), ss = srcsetOf(src); m.srcset = ss; m.src = ss ? smallSrc(src, 800) : src; document.querySelectorAll('[data-img]').forEach(b => b.classList.toggle('on', b === t)); return; }
+  if (t.dataset.img !== undefined) { pstate.img = +t.dataset.img; const p = byId(route.pid), src = (p.gallery || [p.img, p.img2])[pstate.img], m = $('#pmain'), ss = srcsetOf(src, GAL_W), fb = fallbackOf(src); if (fb) m.dataset.fb = fb; else delete m.dataset.fb; m.alt = altOf(src, p.name); m.srcset = ss; m.src = ss ? smallSrc(src, 800) : src; document.querySelectorAll('[data-img]').forEach(b => { b.classList.toggle('on', b === t); b.setAttribute('aria-pressed', b === t); }); return; }
   if (t.id === 'paddbtn' || t.hasAttribute('data-buybar')) { const p = byId(route.pid); const en = $('#pengrave'); if (p.personalize && en && !en.value.trim()) { toast('כותבים את הטקסט לחריטה'); en.focus(); return; } addProduct(p, pstate.variant, pstate.qty, $('#pnote').value.trim(), en ? en.value.trim() : ''); openDrawer(); return; }
   if (t.dataset.cq) { const it = cart.find(i => i.key === t.dataset.key); if (it) { cart = C.setQty(cart, it.key, it.qty + +t.dataset.cq); saveCart(); renderCart(); const again = [...document.querySelectorAll('[data-cq]')].find(b => b.dataset.key === t.dataset.key && b.dataset.cq === t.dataset.cq); (again || $('#drawer .x')).focus({ preventScroll: true }); } return; }
   if (t.dataset.rm) { cart = C.removeItem(cart, t.dataset.rm); saveCart(); renderCart(); ($('#drawer .rm') || $('#drawer .x')).focus({ preventScroll: true }); toast('הפריט הוסר מהסל'); return; }

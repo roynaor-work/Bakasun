@@ -52,10 +52,15 @@ export const CLOUD = {
 export const LOCAL = (name, v = 'v2') => `img/${v}/${name}.webp`;
 /* עותקים קטנים (north/img/s/<גרסה>/<שם>-<רוחב>.webp), נוצרים ב-verification/deep-v1/make-variants.py.
    srcsetOf מחזיר srcset לפי הרוחבים הקיימים; נתיב שאינו מקומי חוזר כפי שהוא. */
-const VAR_RE = /^img\/(v2|v3)\/([^/]+)\.webp$/;
+const VAR_RE = /^img\/(v2|v3|v4)\/([^/]+)\.webp$/;
 export const PORTRAIT_W = [240, 480, 800];
 export const WIDE_W = [640, 1024];
 export const HERO_W = [640, 1024, 1440];
 export function smallSrc(path, w = 480) { const m = VAR_RE.exec(path || ''); return m ? `img/s/${m[1]}/${m[2]}-${w}.webp` : path; }
 export function srcsetOf(path, widths = PORTRAIT_W) { const m = VAR_RE.exec(path || ''); return m ? widths.map(w => `img/s/${m[1]}/${m[2]}-${w}.webp ${w}w`).join(', ') : ''; }
+/* נפילה לתמונה הקודמת: אם קובץ v4 לא נטען, מחליפים בעותק v2 של אותו מארז (אווירה → אווירה, כל זווית אחרת → צילום המארז). לבאנרים של v4 אין עותק קודם. */
+export function fallbackOf(path) {
+  const m = /^img\/v4\/([a-z-]+?)-(product|mood|inside|packaging|use|scale)\.webp$/.exec(path || '');
+  return m ? `img/v2/${m[1]}-${m[2] === 'mood' ? 'mood' : 'product'}.webp` : '';
+}
 export const IMG = (id, w = 900) => `https://images.unsplash.com/photo-${id}?w=${w}&q=78&auto=format&fit=crop`;
