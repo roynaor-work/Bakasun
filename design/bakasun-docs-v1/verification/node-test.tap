@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: quote: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 1 - quote: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1791.64201
+  type: 'test'
+  ...
+# Subtest: contract: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 2 - contract: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1232.189776
+  type: 'test'
+  ...
+# Subtest: event-brief: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 3 - event-brief: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1265.134196
+  type: 'test'
+  ...
+# Subtest: runsheet: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 4 - runsheet: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1217.960271
+  type: 'test'
+  ...
+# Subtest: participants: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 5 - participants: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1271.597013
+  type: 'test'
+  ...
+# Subtest: invoice-draft: loads, placeholder-only, RTL, embedded fonts and A4 print
+ok 6 - invoice-draft: loads, placeholder-only, RTL, embedded fonts and A4 print
+  ---
+  duration_ms: 1252.487865
+  type: 'test'
+  ...
+# Subtest: privacy guards reject filled names, added fixed copy, identifiers and bank details
+ok 7 - privacy guards reject filled names, added fixed copy, identifiers and bank details
+  ---
+  duration_ms: 222.705845
+  type: 'test'
+  ...
+# Subtest: package budget and iteration retention
+ok 8 - package budget and iteration retention
+  ---
+  duration_ms: 14.455523
+  type: 'test'
+  ...
+# Subtest: mixed Hebrew/Latin values and long tokens wrap within table cells
+ok 9 - mixed Hebrew/Latin values and long tokens wrap within table cells
+  ---
+  duration_ms: 290.019981
+  type: 'test'
+  ...
+# Subtest: gallery links and PDF previews load without errors
+ok 10 - gallery links and PDF previews load without errors
+  ---
+  duration_ms: 1385.70371
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10364.838405

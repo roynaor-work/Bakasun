@@ -1,0 +1,11 @@
+{
+  "name": "bakasun-docs-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 source/build.py",
+    "test": "node --test tests/*.test.mjs",
+    "render": "node source/render.mjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" }
+}
