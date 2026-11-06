@@ -1,0 +1,1034 @@
+[
+ {
+  "seconds": 11.99,
+  "frames": 31,
+  "fps": 2.59,
+  "loadMs": 5936,
+  "frameMs": {
+   "avg": 386.55,
+   "p50": 333.3,
+   "p95": 766.7,
+   "max": 1316.6
+  },
+  "tickMs": {
+   "avg": 53.67,
+   "p95": 44.3
+  },
+  "renderMs": {
+   "avg": 53.49,
+   "p95": 44.1
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 88490,
+   "drawCalls": 65,
+   "geometries": 58,
+   "textures": 26,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 1,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 2.54,
+  "assetMB": 1.41,
+  "requests": 21,
+  "assets": [
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.75,
+  "frames": 43,
+  "fps": 3.66,
+  "loadMs": 4559,
+  "frameMs": {
+   "avg": 273.24,
+   "p50": 200,
+   "p95": 750,
+   "max": 1100
+  },
+  "tickMs": {
+   "avg": 32.07,
+   "p95": 16.9
+  },
+  "renderMs": {
+   "avg": 31.9,
+   "p95": 16.7
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 57160,
+   "drawCalls": 58,
+   "geometries": 55,
+   "textures": 23,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.41,
+  "assetMB": 2.28,
+  "requests": 24,
+  "assets": [
+   [
+    "assets/models/adult-man-512.glb",
+    319170
+   ],
+   [
+    "assets/models/adult-woman-512.glb",
+    298970
+   ],
+   [
+    "assets/models/palm-tree-512.glb",
+    299186
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.75,
+  "frames": 36,
+  "fps": 3.06,
+  "loadMs": 564,
+  "frameMs": {
+   "avg": 315.26,
+   "p50": 283.4,
+   "p95": 833.3,
+   "max": 883.3
+  },
+  "tickMs": {
+   "avg": 34.86,
+   "p95": 48
+  },
+  "renderMs": {
+   "avg": 34.63,
+   "p95": 47.9
+  },
+  "longTasks": 3,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 86172,
+   "drawCalls": 47,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.97,
+  "frames": 62,
+  "fps": 5.18,
+  "loadMs": 905,
+  "frameMs": {
+   "avg": 190.58,
+   "p50": 183.3,
+   "p95": 383.3,
+   "max": 533.3
+  },
+  "tickMs": {
+   "avg": 19.6,
+   "p95": 12.9
+  },
+  "renderMs": {
+   "avg": 19.48,
+   "p95": 12.9
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 59568,
+   "drawCalls": 44,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 12.75,
+  "frames": 29,
+  "fps": 2.28,
+  "loadMs": 4584,
+  "frameMs": {
+   "avg": 439.64,
+   "p50": 316.7,
+   "p95": 850,
+   "max": 1616.6
+  },
+  "tickMs": {
+   "avg": 60.66,
+   "p95": 22.9
+  },
+  "renderMs": {
+   "avg": 60.49,
+   "p95": 22.7
+  },
+  "longTasks": 3,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 88490,
+   "drawCalls": 65,
+   "geometries": 58,
+   "textures": 26,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 1,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 3.41,
+  "assetMB": 2.28,
+  "requests": 24,
+  "assets": [
+   [
+    "assets/models/adult-man-512.glb",
+    319170
+   ],
+   [
+    "assets/models/adult-woman-512.glb",
+    298970
+   ],
+   [
+    "assets/models/palm-tree-512.glb",
+    299186
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.93,
+  "frames": 34,
+  "fps": 2.85,
+  "loadMs": 5334,
+  "frameMs": {
+   "avg": 338.23,
+   "p50": 299.9,
+   "p95": 683.3,
+   "max": 1533.3
+  },
+  "tickMs": {
+   "avg": 32.47,
+   "p95": 48.8
+  },
+  "renderMs": {
+   "avg": 32.28,
+   "p95": 48.6
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 57160,
+   "drawCalls": 59,
+   "geometries": 55,
+   "textures": 23,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.41,
+  "assetMB": 2.28,
+  "requests": 24,
+  "assets": [
+   [
+    "assets/models/adult-man-512.glb",
+    319170
+   ],
+   [
+    "assets/models/adult-woman-512.glb",
+    298970
+   ],
+   [
+    "assets/models/palm-tree-512.glb",
+    299186
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.82,
+  "frames": 29,
+  "fps": 2.45,
+  "loadMs": 735,
+  "frameMs": {
+   "avg": 393.66,
+   "p50": 300,
+   "p95": 1033.3,
+   "max": 1183.3
+  },
+  "tickMs": {
+   "avg": 65.9,
+   "p95": 37.9
+  },
+  "renderMs": {
+   "avg": 65.73,
+   "p95": 37.7
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 86172,
+   "drawCalls": 47,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 1,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.99,
+  "frames": 48,
+  "fps": 4,
+  "loadMs": 958,
+  "frameMs": {
+   "avg": 249.64,
+   "p50": 200,
+   "p95": 583.3,
+   "max": 1050
+  },
+  "tickMs": {
+   "avg": 26.99,
+   "p95": 13.5
+  },
+  "renderMs": {
+   "avg": 26.81,
+   "p95": 13.2
+  },
+  "longTasks": 2,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 59568,
+   "drawCalls": 44,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 10.94,
+  "frames": 22,
+  "fps": 2.01,
+  "loadMs": 5443,
+  "frameMs": {
+   "avg": 497.71,
+   "p50": 383.3,
+   "p95": 916.7,
+   "max": 2100
+  },
+  "tickMs": {
+   "avg": 46.57,
+   "p95": 12.9
+  },
+  "renderMs": {
+   "avg": 46.21,
+   "p95": 10.8
+  },
+  "longTasks": 1,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 88490,
+   "drawCalls": 64,
+   "geometries": 57,
+   "textures": 26,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 1,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 3.41,
+  "assetMB": 2.28,
+  "requests": 24,
+  "assets": [
+   [
+    "assets/models/adult-man-512.glb",
+    319170
+   ],
+   [
+    "assets/models/adult-woman-512.glb",
+    298970
+   ],
+   [
+    "assets/models/palm-tree-512.glb",
+    299186
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.95,
+  "frames": 39,
+  "fps": 3.26,
+  "loadMs": 4669,
+  "frameMs": {
+   "avg": 306.39,
+   "p50": 216.6,
+   "p95": 866.6,
+   "max": 1300.1
+  },
+  "tickMs": {
+   "avg": 34.64,
+   "p95": 95.4
+  },
+  "renderMs": {
+   "avg": 34.39,
+   "p95": 95.2
+  },
+  "longTasks": 5,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 57160,
+   "drawCalls": 58,
+   "geometries": 55,
+   "textures": 23,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 144,
+   "tennisV7": false,
+   "crowdLevel": null,
+   "surface": null,
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=0&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.41,
+  "assetMB": 2.28,
+  "requests": 24,
+  "assets": [
+   [
+    "assets/models/adult-man-512.glb",
+    319170
+   ],
+   [
+    "assets/models/adult-woman-512.glb",
+    298970
+   ],
+   [
+    "assets/models/palm-tree-512.glb",
+    299186
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.73,
+  "frames": 32,
+  "fps": 2.73,
+  "loadMs": 586,
+  "frameMs": {
+   "avg": 367.18,
+   "p50": 316.7,
+   "p95": 833.3,
+   "max": 1216.6
+  },
+  "tickMs": {
+   "avg": 53.43,
+   "p95": 89.4
+  },
+  "renderMs": {
+   "avg": 53.19,
+   "p95": 89.2
+  },
+  "longTasks": 4,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 86300,
+   "drawCalls": 49,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "844x390",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ },
+ {
+  "seconds": 11.95,
+  "frames": 55,
+  "fps": 4.6,
+  "loadMs": 773,
+  "frameMs": {
+   "avg": 215.14,
+   "p50": 166.7,
+   "p95": 433.3,
+   "max": 1000
+  },
+  "tickMs": {
+   "avg": 29.58,
+   "p95": 93.1
+  },
+  "renderMs": {
+   "avg": 28.69,
+   "p95": 93
+  },
+  "longTasks": 5,
+  "viewport": {
+   "w": 390,
+   "h": 844,
+   "dpr": 0.15
+  },
+  "quality": 0,
+  "render": {
+   "triangles": 59568,
+   "drawCalls": 44,
+   "geometries": 46,
+   "textures": 13,
+   "pixelRatio": 0.15,
+   "shadows": true,
+   "crowd": 480,
+   "tennisV7": true,
+   "crowdLevel": 2,
+   "surface": "clay",
+   "v4Fallbacks": []
+  },
+  "phase": "rally",
+  "hits": 2,
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    0,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "errors": [],
+  "variant": "tennisV7=1&dpr=0.15",
+  "viewportLabel": "390x844",
+  "coldMB": 3.11,
+  "assetMB": 1.88,
+  "requests": 33,
+  "assets": [
+   [
+    "assets/tennis-v7/ball.glb",
+    7273
+   ],
+   [
+    "assets/tennis-v7/venue.glb",
+    20753
+   ],
+   [
+    "assets/tennis-v7/crowd-prototypes.glb",
+    6393
+   ],
+   [
+    "assets/tennis-v7/crew.glb",
+    22629
+   ],
+   [
+    "assets/tennis-v7/court-clay.glb",
+    235802
+   ],
+   [
+    "assets/tennis-v7/net.glb",
+    9333
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192434
+   ],
+   [
+    "assets/kid-full.glb",
+    1473383
+   ]
+  ]
+ }
+]
