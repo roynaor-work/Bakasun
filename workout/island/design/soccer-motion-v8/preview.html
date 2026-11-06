@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a111c">
+<title>ספריית תנועה · כדורגל 08</title>
+<link rel="stylesheet" href="./preview.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div class="app">
+  <header class="masthead">
+    <a class="wordmark" href="./preview.html" aria-label="ספריית תנועה לכדורגל, דף ראשי"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span><span>תנועה<span class="wordmark-sub">כדורגל / ספרייה 08</span></span></a>
+    <span class="edition"><span class="live-dot"></span><span>מוכנים למשחק</span><b dir="ltr">V.08</b></span>
+  </header>
+  <main class="workspace">
+    <aside class="library" aria-label="בחירת תנועה">
+      <div class="library-heading"><h1>כל תנועה.<br><em>ברגע שלה.</em></h1><span id="clipCount" class="count" dir="ltr">22+</span></div>
+      <div class="role-tabs" role="group" aria-label="סינון לפי תפקיד"><button id="fieldTab" aria-pressed="true">שחקן שדה</button><button id="keeperTab" aria-pressed="false">שוער</button></div>
+      <label class="select-label" for="clipSelect">בחירת קליפ <span id="clipNumber" dir="ltr">01 / 24</span></label>
+      <select id="clipSelect" aria-label="בחירת קליפ"></select>
+      <div class="clip-facts"><span><i class="tiny-dot"></i><b id="duration">—</b> שניות</span><span id="loopBadge">פעולה מלאה</span><button id="zoneToggle" class="zone-toggle" aria-expanded="false" aria-controls="zonePanel" hidden>9 אזורי שער ＋</button></div>
+      <p id="clipNote" class="clip-note">טוען ספריית תנועה…</p>
+      <div id="transitionDock" class="transition-dock"></div>
+      <div id="zonePanel" class="zone-panel" hidden>
+        <div class="section-label">תשעה אזורי שער <span>מנקודת מבט השוער</span></div>
+        <div id="goalZones" class="goal-zones" role="group" aria-label="אזורי שער"></div>
+      </div>
+      <div class="library-bottom"><span class="section-label">בוחרים. צופים. משלבים.</span><a href="./INTEGRATION.md">מדריך שילוב <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div>
+    </aside>
+    <section class="viewer" aria-label="תצוגת התנועה">
+      <div id="stage" class="stage" tabindex="0" aria-label="במת תלת ממד; גרירה לסיבוב, גלילה לקירוב">
+        <div class="stage-top"><span class="stage-kicker"><span class="live-dot"></span>תצוגת תנועה</span><div class="camera-switch" role="group" aria-label="מרחק מצלמה"><button id="nearCamera" aria-pressed="true">קרוב</button><button id="farCamera" aria-pressed="false">רחוק</button></div></div>
+        <div id="loading" class="loading"><span class="loading-ring"></span><span>מכינים את המגרש…</span></div>
+        <div class="stage-caption"><span id="stageIndex" class="stage-index" dir="ltr">01</span><div><h2 id="clipTitle">מסירה קצרה</h2><span id="clipKind">דיוק. קצב. שליטה.</span></div><span class="view-hint">גרירה לסיבוב <span aria-hidden="true">⟲</span></span></div>
+        <div class="axis-label" dir="ltr" aria-hidden="true">+Y ↑ &nbsp; +Z ↗</div>
+      </div>
+      <div class="player">
+        <div class="playbar"><button id="playPause" class="play-button" aria-label="השהיית תנועה"><span id="playIcon" class="pause-icon" aria-hidden="true"></span><span id="playLabel">השהיה</span></button><button id="restart" class="icon-button" aria-label="התחלה מחדש"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7a8 8 0 1 1-1 9M5 2v6H1"/></svg></button><div class="speed-control"><label for="speed">קצב</label><select id="speed"><option value="0.35">×0.35</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></div><span class="time-readout" dir="ltr"><b id="currentTime">0.00</b><span> / </span><span id="totalTime">0.00</span><small>s</small></span></div>
+        <label class="sr-only" for="scrub">מיקום בזמן הקליפ</label><div class="timeline"><input id="scrub" type="range" min="0" max="1" value="0" step="0.001" dir="ltr"><div id="eventTicks" class="event-ticks" aria-hidden="true"></div></div>
+        <div class="event-bar"><div id="eventButtons" class="event-buttons" aria-label="נקודות אירוע"></div><a id="frameLink" class="frame-link" href="./iterations/06/frames/pass_short.webp" target="_blank" rel="noopener">8 פריימים <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span><i class="tiny-dot"></i><b id="status">טוען…</b><span id="eventStatus" aria-live="polite"></span></span><details id="transitionDetails"><summary>מפת מעברים <span aria-hidden="true">＋</span></summary><div id="transitionList" class="transition-list"></div></details><span class="footer-code" dir="ltr">SOCCER / MOTION LIBRARY</span></footer>
+</div>
+<script type="module" src="./preview.mjs"></script>
+</body>
+</html>

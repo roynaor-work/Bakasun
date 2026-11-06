@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#161d21">
+  <title>מעבדת תנועה · כדורסל</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23f49753'/%3E%3Cpath d='M2 20h36M20 2v36M8 6q24 14 0 28M32 6Q8 20 32 34' fill='none' stroke='%23232d31' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="identity" href="./" aria-label="מעבדת תנועה כדורסל"><span class="brand-mark" aria-hidden="true">◉</span><span><strong>מעבדת תנועה</strong><small>כדורסל · ספריית תנועות</small></span></a>
+    <div class="edition"><span>14 תנועות</span><b>08</b></div>
+  </header>
+  <main class="workspace">
+    <section class="inspector" aria-label="בחירת תנועה ובקרת ניגון">
+      <div class="clip-picker"><label for="clip-select">בחרו תנועה <span id="clip-number" dir="ltr">01 / 14</span></label><select id="clip-select" aria-label="בחרו תנועה"></select></div>
+      <div class="clip-caption"><h1 id="clip-label">מסירת חזה</h1><p id="clip-description">שתי ידיים, שחרור מדויק והמשך תנועה.</p></div>
+      <div class="transport-section"><div class="transport"><button id="play" class="primary" aria-label="ניגון"><span class="play-icon" aria-hidden="true">▶</span><span id="play-label">ניגון</span></button><button id="restart" class="icon-button" title="מהתחלה" aria-label="מהתחלה">↺</button><label class="speed-label"><span class="sr-only">מהירות ניגון</span><select id="speed" aria-label="מהירות ניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></label></div><div class="scrub-row" dir="ltr"><button id="previous-frame" class="step-button" aria-label="פריים קודם">‹</button><input id="scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="מיקום בתנועה"><button id="next-frame" class="step-button" aria-label="פריים הבא">›</button><output id="time">0.00 / 1.00</output></div></div>
+      <div class="view-section"><span class="control-label">מרחק צפייה</span><div class="segmented" aria-label="מרחק צפייה"><button id="near" aria-pressed="true">קרוב</button><button id="far" aria-pressed="false">רחוק</button></div><label class="trajectory-switch"><input id="trajectory" type="checkbox"><span>מסלול הכדור</span><i aria-hidden="true"></i></label></div>
+      <div class="angle-section"><span class="control-label">זווית צפייה</span><div class="angle-buttons" role="group" aria-label="זווית צפייה"><button id="angle-front" aria-pressed="true">קדמי</button><button id="angle-side" aria-pressed="false">צד</button><button id="angle-back" aria-pressed="false">אחורי</button></div></div>
+      <div class="states"><div><span>מצב פתיחה</span><strong id="start-state">כדור בשתי ידיים</strong></div><span class="state-arrow" aria-hidden="true">←</span><div><span>מצב סיום</span><strong id="end-state">ללא כדור</strong></div></div>
+      <p class="panel-note">תנועה אחת, מכל זווית זמן.<br>בחרו פריים כדי לבחון את המגע בכדור ואת עבודת הרגליים.</p>
+      <div class="library-footer"><span class="online-dot"></span><span>ספרייה מקומית</span><span dir="ltr">MOTION / V8</span></div>
+    </section>
+    <section class="stage" id="stage" aria-label="תצוגת תנועה בתלת ממד">
+      <canvas id="canvas" aria-label="דמות כדורסל בתנועה"></canvas>
+      <div class="stage-heading"><span class="eyebrow" dir="ltr">BASKETBALL / MOTION STUDY</span><h2 id="stage-title">מסירת חזה</h2></div>
+      <div class="stage-index" dir="ltr"><span id="stage-index">01</span><small>/ 14</small></div>
+      <div class="stage-readout"><span class="status-dot"></span><span id="phase-label">עמדת מוצא</span></div>
+      <div class="stage-state-summary"><span>פתיחה <strong id="stage-start-state">כדור מוכן למסירה</strong></span><i aria-hidden="true">←</i><span>סיום <strong id="stage-end-state">לאחר שחרור הכדור</strong></span></div>
+      <div class="stage-bottom"><span id="view-label">מבט קרוב</span><span id="event-label">כדור בשתי ידיים</span></div>
+      <div class="loading" id="loading"><div class="loading-ball" aria-hidden="true">◉</div><p id="loading-text">טוענים את המגרש…</p></div>
+    </section>
+    <section class="frames" aria-label="שמונה פריימים של התנועה"><div class="frames-heading"><h2>רצף התנועה</h2><span dir="ltr">8 FRAMES <i>·</i> <span id="duration-label">1.00 s</span></span></div><div class="frame-strip" id="frame-strip" dir="ltr"></div></section>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

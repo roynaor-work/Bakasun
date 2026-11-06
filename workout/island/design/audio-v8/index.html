@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>מעבדת צלילי ספורט · v8</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="listen.css">
+<header><span class="eyebrow">צלילי ספורט / 36 אפקטים מקוריים</span><h1>מרגישים את המשחק.</h1>
+<p>כדור, פרקט, רשת וקהל. סינתזה חיה, בלי קובצי שמע ובלי לולאות רקע.</p></header>
+<main>
+<section class="desk" aria-label="בקרת האזנה">
+<div class="actions"><button id="enable">הפעלת שמע</button><button id="stop" class="secondary">עצירת הכול</button><button id="audition" class="secondary">הקשבה לכל הרשימה</button></div>
+<div class="sliders">
+<label>עוצמת האזנה <input id="volume" type="range" min="0" max="1" step="0.01" value="0.65"></label>
+<details class="advanced"><summary>כוונון פעולה וגוון</summary><div class="advanced-sliders">
+<label>עוצמת הפעולה <input id="intensity" type="range" min="0.1" max="1" step="0.05" value="0.8"></label>
+<label>גוון הצליל <input id="tone" type="range" min="0.75" max="1.25" step="0.05" value="1"></label>
+</div></details>
+</div>
+<p id="status" role="status" aria-live="polite">השמע כבוי עד ללחיצה. מומלץ להתחיל בעוצמה מתונה.</p>
+<canvas id="wave" width="720" height="100" aria-label="צורת הגל האחרונה"></canvas>
+<output id="measurement">משך ושיא יופיעו לאחר בחירת צליל.</output>
+</section>
+<div class="toolbar"><label>סוג צליל <select id="group"><option value="all">כל הצלילים</option></select></label><button id="whistle-check" class="secondary">שריקה אחת + בדיקת שקט</button></div>
+<section id="sounds" class="grid" aria-label="צלילים"></section>
+<section class="notes"><h2>מה להקשיב לו</h2><p>השריקה צריכה להיות קצרה ולהסתיים מיד. בקפיצה צריך לשמוע גוף חלול ומגע בפרקט; בסוויש רשרוש קצר; בטבעת ובקורה תהודה מתכתית. קהל הרקע הוא מקטע סופי בלבד. נסו גם ברמקול הטלפון וגם באוזניות.</p><p>כל הכפתורים משתמשים באותו מודול שהמשחק יכול לייבא. מעבר לרקע עוצר את הקולות. <a href="https://github.com/roynaor-work/Bakasun/blob/codex/audio-v8-20261105/workout/island/design/audio-v8/INTEGRATION.md">הוראות חיבור במאגר</a> · <a href="https://github.com/roynaor-work/Bakasun/blob/codex/audio-v8-20261105/workout/island/design/audio-v8/REPORT.md">מדידות וביקורת</a></p></section>
+</main><footer>WebAudio · מקורי ופרוצדורלי · ללא הקלטות</footer>
+<script type="module" src="listen.mjs"></script>
+</html>
