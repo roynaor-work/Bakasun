@@ -4,7 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
 
-/** Alpine Rush with the GPT/Codex assets (PR 238): design/skier3 (18-bone skier, five embedded clips) and
+/** (These checks pin ?alpineV7=0: the skier3 asset is the fallback now that alpine-v7 is the default rider, see island-alpine-v7.test.mjs.)
+ * Alpine Rush with the GPT/Codex assets (PR 238): design/skier3 (18-bone skier, five embedded clips) and
  * design/alpine-world (12 world pieces). Node part: file integrity. Browser part (ISLAND_CSP_BROWSER=1):
  * every GLB decodes under the shipped CSP, the clips exist and drive the game's state machine, the game
  * starts with the new assets without console errors or external requests, and each asset failing is silent. */
@@ -50,7 +51,7 @@ test('browser: GLBs load under CSP, clips drive the state machine, game starts, 
   {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 600000}, async () => {
   const server = await serveIsland(), chromium = await islandChromium();
   const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader']});
-  async function page(viewport, {abort = [], query = 'autostart=1&seconds=12', start = true} = {}) {
+  async function page(viewport, {abort = [], query = 'autostart=1&seconds=12&alpineV7=0', start = true} = {}) {
     const context = await browser.newContext({viewport, hasTouch: true, isMobile: true, deviceScaleFactor: 1});
     const csp = await installIslandCspMonitor(context), p = await context.newPage(), errors = [], outside = [];
     p.setDefaultTimeout(180000); await csp.attachPage(p);

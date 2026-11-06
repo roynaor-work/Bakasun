@@ -10,7 +10,7 @@ await verify('g4e',[{width:844,height:390},{width:740,height:360},{width:1440,he
  const pause=async value=>page.evaluate(value=>window.__island.games.current.session.setPaused(value),value);
  // Keep quality adaptation deterministic under SwiftShader; explicitly exercise
  // both quality transitions below instead of treating its timings as phone FPS.
- await page.evaluate(()=>window.__island.data.config.minigames.tennis.render.slowFrameMs=10000);
+ await page.evaluate(()=>{const t=window.__island.data.config.minigames.tennis;t.render.slowFrameMs=10000;t.environment.v7.enabled=false;/* this record covers the previous court and crowd; v7 has its own run */});
  await start('tennis');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.characterLoaded);await tick(50);
  const initial=await snap(),metrics=initial.renderMetrics,balance=await page.evaluate(()=>window.__island.data.config.minigames.tennis);
  assert.deepEqual(metrics.missingModels,[]);assert.deepEqual(metrics.loadedModels,balance.environment.models.map(p=>p.split('/').at(-1)).sort());assert.equal(metrics.crowd,144);assert.deepEqual(metrics.crowdSides,[36,36,36,36]);assert.equal(metrics.fullCrowd,4);assert.equal(metrics.spriteCrowd,140);assert.deepEqual(metrics.crowdTrianglesPerModel,[5170,5224]);assert.ok(metrics.umpire&&metrics.atlasFromFullModels);

@@ -40,7 +40,8 @@ test('alpine-v5: every file an environment can request exists, is in games.alpin
   for (const file of listed) if (file.startsWith(V5)) { assert.ok(need.has(file), `${file} is listed but the game never requests it`); }
   assert.ok(bytes < 1_100_000, `alpine-v5 pack ${bytes} bytes`);
   const alpineTotal = await Promise.all(manifest.games.alpine.map(async f => (await stat(path.join(island, f))).size));
-  assert.ok(alpineTotal.reduce((a, b) => a + b, 0) < 6_500_000, 'games.alpine stays within the download budget');
+  // 6.5 MB before alpine-v7; the three rider LODs (2.27 MB, cached for offline play, a session downloads one to three of them) raise it to 8.5 MB.
+  assert.ok(alpineTotal.reduce((a, b) => a + b, 0) < 8_500_000, 'games.alpine stays within the download budget');
 });
 
 test('ui-kit-v2: files the island UI requests are in core; game coverage matches the kit manifest', async () => {
