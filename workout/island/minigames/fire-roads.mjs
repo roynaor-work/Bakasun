@@ -1,3 +1,4 @@
+import {polishLegacy} from './polish-flag.mjs';
 /** Deterministic street graph for lane assistance and optional point navigation.
  * Coordinates and tuning come from fireRescue.city. */
 const EPS=1e-7;
@@ -112,6 +113,7 @@ export function slideFireTruck(truck,dx,dz,buildings,vehicle){
   return Math.hypot(truck.x-start.x,truck.z-start.z);
 }
 export function createFireDriver(truck,balance){
+  const legacyFeel=polishLegacy('fireTruck');
   const route=createRouteDriver(truck,balance),roads=route.roads,v=balance.vehicle,city=balance.city;
   let routed=false,blockedSeconds=0,assistedUntil=0,clock=0;
   return {roads,update(dt,input={}){
@@ -147,12 +149,18 @@ export function createFireDriver(truck,balance){
     }
     const before=truck.speed,turn=Math.abs(angleTo(truck.yaw,heading));
     const corner=Boolean(input.assisted&&throttle&&turn>.28);
-    const targetSpeed=corner?Math.min(v.speed*throttle,4.8+Math.max(0,Math.cos(turn))*2.4):v.speed*throttle;
-    truck.speed+=clamp(targetSpeed-truck.speed,-v.speed/(corner?.16:v.brakeSeconds)*dt,v.speed/v.accelerationSeconds*dt);
+    // 06/11/2026 (Roy): natural driving. Speed falls with the angle still to turn (never reverses),
+    // the wheel turns slower when parked than when rolling, and acceleration is gentler.
+    const feel=legacyFeel?null:v.feel,align=feel?feel.turnSpeedFloor+(1-feel.turnSpeedFloor)*Math.max(0,Math.cos(Math.min(turn,Math.PI/2))):1;
+    const targetSpeed=corner?Math.min(v.speed*throttle,4.8+Math.max(0,Math.cos(turn))*2.4):v.speed*throttle*align;
+    truck.speed+=clamp(targetSpeed-truck.speed,-v.speed/(corner?.16:feel?.brakeSeconds??v.brakeSeconds)*dt,v.speed/(feel?.accelerationSeconds??v.accelerationSeconds)*dt);
+    const yawBefore=truck.yaw;
     if(throttle){
-      const delta=angleTo(truck.yaw,heading),step=clamp(delta*(1-Math.exp(-v.turnResponse*dt)),-v.turnRate*dt,v.turnRate*dt);
+      const rate=v.turnRate*(feel?feel.parkedTurn+(1-feel.parkedTurn)*clamp(truck.speed/(v.speed*.5),0,1):1);
+      const delta=angleTo(truck.yaw,heading),step=clamp(delta*(1-Math.exp(-v.turnResponse*dt)),-rate*dt,rate*dt);
       truck.yaw+=step;
     }
+    truck.yawRate=(truck.yaw-yawBefore)/dt;truck.accel=(truck.speed-before)/dt;
     truck.turning=throttle>0&&Math.abs(angleTo(truck.yaw,truck.heading))>v.turnEpsilon;
     const travel=(before+truck.speed)*.5*dt;
     let x=-Math.sin(truck.yaw)*travel,z=-Math.cos(truck.yaw)*travel;

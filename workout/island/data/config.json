@@ -4959,7 +4959,20 @@
     "wheelSide": 0.95,
     "wheelAxle": 1.6,
     "wheelSelectRadius": 0.58,
-    "headingOffset": 180
+    "headingOffset": 180,
+    "feel": {
+     "headingOffset": 0,
+     "wheelSign": -1,
+     "accelerationSeconds": 0.55,
+     "brakeSeconds": 0.4,
+     "turnSpeedFloor": 0.4,
+     "parkedTurn": 0.45,
+     "rollPerTurn": 0.0016,
+     "maxRoll": 0.06,
+     "pitchPerAccel": 0.0014,
+     "maxPitch": 0.04,
+     "leanEase": 8
+    }
    },
    "hydrant": {
     "path": "assets/models/hydrant-512.glb",
@@ -7396,6 +7409,11 @@
     "reach": {
      "lowAngle": 10,
      "powerSpan": 14
+    },
+    "follow": {
+     "yawFixed": 0.12,
+     "maxLeadDegrees": 14,
+     "rate": 3.5
     }
    },
    "patrol": {
@@ -9782,6 +9800,10 @@
   },
   "islandRacing": {
    "version": 1,
+   "v7": {
+    "enabled": true,
+    "base": "assets/racing-v7/"
+   },
    "requiresBuilding": null,
    "maximumScore": 5,
    "maximumSeconds": 300,
@@ -11574,7 +11596,24 @@
      "assets/models/adult-man-512.glb",
      "assets/models/adult-woman-512.glb",
      "assets/models/palm-tree-512.glb"
-    ]
+    ],
+    "v7": {
+     "enabled": true,
+     "minQuality": 0,
+     "base": "assets/tennis-v7/",
+     "surfaces": [
+      "clay",
+      "hard",
+      "grass"
+     ],
+     "stagesPerSurface": 10,
+     "crowdLevels": [
+      2,
+      1,
+      -1
+     ],
+     "crewMaxQuality": 0
+    }
    }
   },
   "streetSlam": {
@@ -12288,6 +12327,19 @@
    "maximumScore": 6,
    "maximumSeconds": 240,
    "riders": 6,
+   "assets": {
+    "v7": {
+     "enabled": true,
+     "base": "assets/alpine-v7/characters/",
+     "lod": {
+      "player": {"high": 0, "low": 1},
+      "rival": {"high": 1, "low": 2},
+      "farDistance": 22,
+      "hysteresis": 2
+     },
+     "scale": 1.125
+    }
+   },
    "aiCaps": {
     "maxSpeed": 1.0,
     "minReaction": 0.12,

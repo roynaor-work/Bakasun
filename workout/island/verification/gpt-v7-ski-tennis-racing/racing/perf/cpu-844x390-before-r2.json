@@ -1,0 +1,126 @@
+[
+ {
+  "seconds": 66.71,
+  "frames": 150,
+  "fps": 2.25,
+  "loadMs": 8947,
+  "fixedStep": true,
+  "stage": 1,
+  "seed": 7,
+  "hold": false,
+  "frameMs": {
+   "avg": 444.65,
+   "p50": 416.7,
+   "p95": 683.2,
+   "max": 1750
+  },
+  "tickMs": {
+   "avg": 44.52,
+   "p50": 6.6,
+   "p95": 15.1
+  },
+  "calls": {
+   "avg": 77.61,
+   "p50": 58,
+   "max": 186
+  },
+  "triangles": {
+   "avg": 183866,
+   "p50": 157786,
+   "max": 383176
+  },
+  "allocMBps": 0.56,
+  "progress": {
+   "lap": 1,
+   "s": 376,
+   "speed": 40
+  },
+  "render": {
+   "mode": "webgl",
+   "quality": 2,
+   "frames": 215,
+   "frameMilliseconds": 66.66666666666788,
+   "drawCalls": 55,
+   "triangles": 100146,
+   "countsIncludeShadowPasses": true,
+   "shadowsEnabled": false,
+   "visibleTrees": 10,
+   "treeLimit": 10,
+   "scenery": {
+    "quality": 2,
+    "draws": 10,
+    "instances": 328,
+    "triangles": 7280,
+    "triangleBudget": 12000,
+    "mounds": 16,
+    "cornerSigns": 5,
+    "roadside": {
+     "quality": 2,
+     "triangles": 4172,
+     "draws": 6,
+     "instances": 283,
+     "buildings": 5,
+     "galleries": 0,
+     "lamps": 32,
+     "guardrailSections": 33,
+     "cornerSigns": 5,
+     "disposed": false
+    },
+    "disposed": false
+   },
+   "effects": {
+    "smoke": 0,
+    "skidMarks": 0,
+    "sparks": 0,
+    "capacity": {
+     "smoke": 32,
+     "skidMarks": 128,
+     "sparks": 20
+    },
+    "disposed": false
+   },
+   "v7": {
+    "enabled": false,
+    "active": false,
+    "reason": "off",
+    "lods": [
+     -1,
+     -1,
+     -1,
+     -1,
+     -1
+    ],
+    "spectators": null
+   },
+   "modelLoaded": true,
+   "carAsset": "sport-coupe",
+   "vegetationLoaded": true,
+   "failures": [],
+   "disposed": false,
+   "geometries": 132,
+   "textures": 14
+  },
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 0.15
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "params": "?dur=1500&frames=150&dpr=0.15&racingV7=0&dev=1",
+  "transfer": {
+   "totalMB": 3.23,
+   "assetsMB": 2.04,
+   "files": 25,
+   "assetFiles": 3,
+   "byFile": {
+    "assets/racing/sport-coupe-low.glb": 538197,
+    "assets/racing/sport-coupe.glb": 1301878,
+    "assets/models/palm-tree-512.glb": 299357
+   }
+  },
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "viewportLabel": "844x390"
+ }
+]

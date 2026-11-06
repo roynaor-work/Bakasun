@@ -51,26 +51,20 @@ test('B3-A01 control: the shared escaping helper handles element and attribute b
   assert.equal(esc(payload), '&lt;img src=x onerror=&quot;window.__b3Xss=1&quot;&gt;');
 });
 
-test('B3-A02 current: CSV export preserves a formula supplied as participant data', () => {
-  assert.equal(csvCell('=1+1'), '=1+1');
-  const csv = monthCsv({ clientRows: [{ client: '=1+1', amount: 1 }], supplierRows: [], totalIn: 1, totalOut: 0 });
-  assert.ok(csv.includes('"=1+1"')); // CSV quoting does not disable spreadsheet formulas.
+test('A15 (audit 2026-11-05): CSV export neutralizes formulas supplied as data, and leaves numbers and phones alone', () => {
+  for (const prefix of ['=', '+', '-', '@']) assert.ok(csvCell(prefix + '1+1').startsWith("'"));
+  const csv = monthCsv({ clientRows: [{ client: '=1+1', amount: -5 }], supplierRows: [], totalIn: 1, totalOut: 0 });
+  assert.ok(csv.includes('"\'=1+1"')); assert.ok(csv.includes('"-5"'));
+  assert.equal(csvCell('+972-50-000-0000'), '+972-50-000-0000'); assert.equal(csvCell('-12.5'), '-12.5');
 });
-test('B3-A02 fix: text cells beginning with formula characters are neutralized in CSV',
-  { skip: 'B3-A02: csvCell and monthCsv escape delimiters but do not neutralize formula prefixes.' }, () => {
-    for (const prefix of ['=', '+', '-', '@']) assert.ok(csvCell(prefix + '1+1').startsWith("'"));
-  });
 
 const sql = readFileSync(new URL('../supabase/bootstrap.sql', import.meta.url), 'utf8');
 const membershipWhere = sql.slice(sql.indexOf('from auth.users'), sql.indexOf('on conflict', sql.indexOf('from auth.users')));
-test('B3-A03 current (static): bootstrap adds every auth.users row without a membership allowlist', () => {
-  assert.match(sql, /from auth\.users u, orgs o where o\.name = 'Baka San'/);
-  assert.doesNotMatch(membershipWhere, /where[\s\S]*u\.(?:id|email)\s+(?:in|=)/i);
+test('A02 (audit 2026-11-05, P1): organization bootstrap uses an explicit user allowlist', () => {
+  assert.match(membershipWhere, /where[\s\S]*u\.(?:id|email)\s+(?:in|=)/i);
+  assert.doesNotMatch(sql, /from auth\.users u, orgs o where o\.name = 'Baka San'\s*\n?\s*on conflict/);
+  assert.match(membershipWhere, /u\.email in \('[^']+'(, '[^']+')*\)/);
 });
-test('B3-A03 fix (static): organization bootstrap uses an explicit user allowlist',
-  { skip: 'B3-A03: bootstrap.sql cross-joins all registered users into the organization; live memberships were not queried.' }, () => {
-    assert.match(membershipWhere, /where[\s\S]*u\.(?:id|email)\s+(?:in|=)/i);
-  });
 
 test('B3-A04 control: the checked-in Supabase browser JWT is an anon key, not a service-role secret', () => {
   const source = readFileSync(new URL('../js/data/cloudcfg.js', import.meta.url), 'utf8');

@@ -226,6 +226,13 @@ test('sw.js: מטמון לגופנים ולתמונות בלבד, לא ל-HTML/J
   const sw = read('sw.js'); assert.match(sw, /fonts\|img/); assert.ok(!/\.html|\.js\b|\.css/.test(sw.replace(/\/\*[\s\S]*?\*\//, '')));
 });
 
+test('A01 (audit 2026-11-05): access token is 128 random bits, hex, different each time', async () => {
+  const { accessToken } = await import('../north/js/cart.js');
+  const a = accessToken(), b = accessToken();
+  assert.match(a, /^[0-9a-f]{32}$/); assert.notEqual(a, b);
+  assert.throws(() => accessToken(null === 1 ? 0 : { }), /אקראיות/);
+});
+
 test('v4: באנרים לשישה אירועים עם עותקים 640/1024, ועותק קטן של v4 לא עולה על 100KB', () => {
   for (const o of OCCASIONS) for (const w of [640, 1024]) assert.ok(existsSync(N(`img/s/v4/banner-${o.id}-${w}.webp`)), `חסר באנר ${o.id} ${w}`);
   const sizes = readdirSync(N('img/s/v4')).map(f => readFileSync(N('img/s/v4/' + f)).length);

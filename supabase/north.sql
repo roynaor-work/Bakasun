@@ -13,6 +13,12 @@ create table if not exists public.north_orders (
   ua text
 );
 alter table public.north_orders enable row level security;
+-- עמודות Grow חייבות להיות קיימות לפני מדיניות ההוספה שמפנה אליהן (מסד חדש).
+alter table public.north_orders add column if not exists grow_process_id text;
+alter table public.north_orders add column if not exists grow_process_token text;
+alter table public.north_orders add column if not exists grow_transaction_id text;
+alter table public.north_orders add column if not exists paid_at timestamptz;
+alter table public.north_orders add column if not exists pay_details jsonb;
 -- הציבור (anon) רק מוסיף הזמנה חדשה. קריאה ועדכון: רק צוות החנות (מיילים בטבלה north_staff) מחשבון מחובר,
 -- והשרת (service role, הפונקציות של Grow). משתמש מחובר אחר (למשל וירג'יני באפליקציית ההפקות) לא רואה כלום.
 create table if not exists public.north_staff (email text primary key, note text);
@@ -45,11 +51,6 @@ drop policy if exists "survey read auth" on public.north_survey;
 create policy "survey read auth" on public.north_survey for select to authenticated using (public.north_is_staff());
 
 -- Grow: מזהי תהליך התשלום ופרטי העסקה (supabase/functions/grow-pay, grow-notify).
-alter table public.north_orders add column if not exists grow_process_id text;
-alter table public.north_orders add column if not exists grow_process_token text;
-alter table public.north_orders add column if not exists grow_transaction_id text;
-alter table public.north_orders add column if not exists paid_at timestamptz;
-alter table public.north_orders add column if not exists pay_details jsonb;
 create index if not exists north_orders_grow_process on public.north_orders (grow_process_id);
 -- הפונקציות של Grow (grow-pay, grow-notify) כותבות עם service role; הסטטוס 'paid' נכתב רק אחרי אימות מול Grow.
 select 'north ok' as status;

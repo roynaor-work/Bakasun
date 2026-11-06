@@ -55,6 +55,13 @@ export function orderNo(now = new Date(), rnd = Math.random) {
   return `RC-${d}-${tail}`;
 }
 
+/* אסימון גישה להזמנה: 128 ביט אקראיים, נשמר רק אצל הלקוח ובשורת ההזמנה. grow-pay דורש אותו כדי ליצור תשלום. */
+export function accessToken(cryptoObj = globalThis.crypto) {
+  const b = new Uint8Array(16);
+  if (cryptoObj?.getRandomValues) cryptoObj.getRandomValues(b); else throw new Error('אין מקור אקראיות מאובטח');
+  return [...b].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+
 /* בדיקת טופס. מחזירה רשימת שגיאות (ריקה = תקין). */
 /* השוואת יישובים: בלי גרשיים, מקפים ורווחים כפולים; "קרית" = "קריית". */
 export function normCity(c) { return String(c || '').replace(/["'׳״`]/g, '').replace(/[-–]/g, ' ').replace(/\s+/g, ' ').replace(/^קרית /, 'קריית ').trim(); }

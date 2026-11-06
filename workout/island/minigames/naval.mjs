@@ -1,4 +1,5 @@
 import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261105-2';
+import {navalAimLegacy,navalFollowYaw} from './naval-aim-flag.mjs';
 import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261105-2';
 import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261105-2';
 import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261105-2';
@@ -66,12 +67,12 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const enemies=fleet.map((row,i)=>({...createShipEntity(balance.enemyX,settings.enemyLives*balance.shipTypes[row.kind].hp*(row.boss?balance.boss.hp:1)),...row,index:i,hullScale:balance.shipTypes[row.kind].scale*(row.boss?balance.boss.scale:1),z:(i-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing,heading:Math.PI,depth:0,vx:0,vz:0,active:i<settings.concurrent,slot:i<settings.concurrent?i:null,spawnTime:0,fireAt:tactics.fireSeconds+i*balance.combat.enemyStagger,warning:0}));
  let enemyShip=enemies[0],phase='aim',time=0,remaining=settings.seconds,result,score=0,wave=1,fired=0,hits=0,ammoIndex=0,wasFiring=false,wasAmmo=false,delay=0,sinkingShip=null;
  const ballistic=navalBallisticConfig(balance),pressure=navalStagePressure(level),turret={yaw:0,elevation:ballistic.defaultElevation,power:1};let prediction=null,lastShot=null,holdView=-1,quickShots=0,aimSide=1;
- let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
+ const legacyAim=navalAimLegacy();let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
  const ammo=[...settings.ammunition],cooldowns=ammo.map(()=>0),extraShots=[],enemyShots=[],trail=[],mines=[],creditedShots=new Set();
  const blast={x:0,y:balance.shipY,z:0,life:0,hit:false},ball={x:playerShip.x,z:0,y:balance.shipY,owner:'player',ammo:0,age:0,duration:0,fromX:0,fromZ:0,targetX:0,targetZ:0,active:false};
  const aim={x:enemies[0].x,z:enemies[0].z},maxEnemyFleet=enemies.reduce((sum,e)=>sum+e.hp,0);
- const framing=()=>({battle:true,enemies,width:config.width,height:config.height,moving,aimYaw:turret.yaw,aimSide,landing:{x:aim.x,z:aim.z},ship:playerShip});
- let camera=navalCameraPose(playerShip,aim,false,balance,undefined,0,framing()),repairLife=0,lastAction=null,lastFeedback=null,reticle=null;
+ const framing=()=>({battle:true,enemies,width:config.width,height:config.height,moving,aimYaw:camYaw,aimSide,landing:{x:aim.x,z:aim.z},ship:playerShip});
+ let camYaw=turret.yaw,camera=navalCameraPose(playerShip,aim,false,balance,undefined,0,framing()),repairLife=0,lastAction=null,lastFeedback=null,reticle=null;
  const fleetHealth=()=>enemies.reduce((sum,e)=>sum+Math.max(0,e.hp),0);
  const finish=outcome=>{if(!result)result={outcome,score:Math.min(score,balance.maximumScore),performance:.7*Math.min(1,hits/Math.max(1,fired))+.3*Math.max(0,playerShip.hp)/playerShip.maxHp};};
  const targetable=e=>navalTargetable(e,ammoIndex,balance);
@@ -261,7 +262,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(input.aimHeld){if(!aiming||!model.lockedTarget?.hp)lock();aiming=true;}else if(!input.fireRelease&&!input.quickShot){aiming=false;lockedTargetIndex=null;}
    if(input.aimCancel){aiming=false;lockedTargetIndex=null;}
    predict();
-   camera=navalCameraPose(playerShip,aim,aiming||time<holdView,balance,camera,dt,framing());
+   camYaw=legacyAim?turret.yaw:navalFollowYaw(camYaw,turret.yaw,dt,balance,aiming);camera=navalCameraPose(playerShip,aim,aiming||time<holdView,balance,camera,dt,framing());
    for(let i=mines.length-1;i>=0;i--){const mine=mines[i];mine.age+=dt;mine.life-=dt;const e=mine.age>=balance.weapons.mineArmSeconds&&enemies.find(e=>e.active&&e.hp>0&&Math.hypot(e.x-mine.x,e.z-mine.z)<=balance.weapons.mineRadius);if(e){mine.targetX=mine.x;mine.targetZ=mine.z;mine.victim=e.index;impact(mine);mines.splice(i,1);}else if(mine.life<=0)mines.splice(i,1);}
    for(let i=extraShots.length-1;i>=0;i--){advanceProjectile(extraShots[i],dt);if(!extraShots[i].active)extraShots.splice(i,1);}advanceProjectile(ball,dt);
    const missionState=navalMissionState(mission,enemies);
