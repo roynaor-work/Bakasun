@@ -1,0 +1,10 @@
+Resource inventory after rendering each of the three LODs.
+Stadium-owned geometry objects (including hidden LODs): 124
+All resident instance records, including four halos: 7483
+Unique decoded geometry/instance ArrayBuffer bytes: 3231276
+Texture images: 9
+RGBA8 plus full mip-chain estimate: 16340340 bytes
+Renderer geometry / texture objects: 125 / 9
+ArrayBuffer bytes measure CPU-side typed storage only. Texture estimate assumes RGBA8.
+These values exclude framebuffer/MSAA/depth, program storage and driver overhead; they are not a measurement of total GPU memory.
+Software Chromium, not a physical handset.

@@ -1,0 +1,42 @@
+{
+  "initial": {
+    "command": "npm test",
+    "exitCode": 1,
+    "results": {
+      "tests": 3332,
+      "pass": 3276,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 55
+    },
+    "failureFile": "tests/workout-royiki.test.mjs",
+    "cause": "Playwright default chromium_headless_shell executable missing",
+    "serverLeftOpenAfterLaunchFailure": true,
+    "childProcessStoppedAfterSeconds": 805,
+    "applicationOrTestCodeChanged": false
+  },
+  "retry": {
+    "command": "node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "results": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "browser": "/usr/bin/chromium",
+    "browserVersion": "151.0.7922.173",
+    "playwright": "1.62.1",
+    "configuration": "Existing ISLAND_PLAYWRIGHT hook; temporary module outside repository selecting installed Chromium",
+    "durationMs": 23972.439429
+  },
+  "fullSuiteRerun": false,
+  "documentSuite": {
+    "command": "node --test tests/*.test.mjs",
+    "tests": 10,
+    "pass": 10,
+    "fail": 0,
+    "proof": "node-test.tap"
+  }
+}

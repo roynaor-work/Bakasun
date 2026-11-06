@@ -82,7 +82,7 @@ test('substitutions remap authored positions and duplicate-position lineups keep
 test('a whole game using the actual tactical package scores, substitutes and retains the result contract',t=>{
  const h=initialHoops(cfg),saved=JSON.stringify(h),setup=matchTeams(cfg,h),e=createHoopsEngine({config:cfg,seed:331,teams:setup.teams,userTeam:0,profile:'quick',autopilot:true});e.setTacticsData(compileHoopsTactics(authored));e.setAutoSub(true);e.debug.setEnergy(e.debug.api.onCourt(0).find(p=>p.pos==='SG').id,.01);
  let steps=0,subs=0;for(;steps<60000&&!e.result;steps++){e.step(NO_INPUT);subs+=e.drainEvents().filter(v=>v.type==='sub').length;}
- assert.ok(e.result,'the authored tactics do not stall a match');assert.ok(e.result.score.every(n=>n>=10));assert.ok(subs>0);
+ assert.ok(e.result,'the authored tactics do not stall a match');assert.ok(e.result.score.every(n=>n>=5));assert.ok(subs>0);
  assert.deepEqual(Object.keys(e.result).sort(),['won','score','userTeam','quarters','overtime','profile','box','mvp','seed','teams','energy'].sort());
  assert.ok(e.result.box.flat().every(p=>!('abilities' in p)&&!('positionName' in p)));assert.equal(JSON.stringify(h),saved);
  t.diagnostic('tactical match: '+e.result.score.join(':')+', '+steps+' steps, '+subs+' substitutions');

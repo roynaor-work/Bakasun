@@ -1,0 +1,32 @@
+Existing game CSP: PASS
+default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'
+Static decoder workers: 2
+CSP violations: 0
+Runtime triangles: 33234
+Requests: 30
+Exact runtime load files: 25
+/runtime/broadcast.css
+/runtime/broadcast.mjs
+/runtime/cameras.mjs
+/runtime/crowd-atlas.webp
+/runtime/crowd-bed.webp
+/runtime/crowd-distant.webp
+/runtime/draco-loader.mjs
+/runtime/draco-worker.js
+/runtime/evening-sky.webp
+/runtime/goal-net.webp
+/runtime/goal-shadow.webp
+/runtime/lamp-glow.webp
+/runtime/layout.mjs
+/runtime/perimeter-led.webp
+/runtime/pitch.webp
+/runtime/stadium-lod0.glb
+/runtime/stadium-lod1.glb
+/runtime/stadium-lod2.glb
+/runtime/stadium.mjs
+/runtime/vendor/BufferGeometryUtils.js
+/runtime/vendor/DRACOLoader.js
+/runtime/vendor/GLTFLoader.js
+/runtime/vendor/draco/draco_decoder.wasm
+/runtime/vendor/draco/draco_wasm_wrapper.js
+/runtime/vendor/three.module.js

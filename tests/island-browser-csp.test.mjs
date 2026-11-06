@@ -146,7 +146,9 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
     // bodies and the v3 venue (sprite crowd) and still start.
     // v5 (04/11) is the default venue now, so the v4 checks pin it off with ?hoopsV5=0 and v5 has its own checks below
-    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    // v7 (05/11) is the default body set now: the v4/v5 checks pin it off with ?hoopsV7=0 and v7 has its own checks after the v5 ones
+    const hoopsV7Base=hoopsBase.replace('&hoopsV7=0','');
     const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
     const hoops=await fixture('hoops-v4-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
@@ -169,6 +171,29 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.equal(live.m.crowd3d,false);assert.ok(live.m.crowd>0,'the v3 sprite crowd is back');assert.ok(live.m.arenaSource.endsWith('models2/basketball-arena.glb'));
       await fallback.csp.assertClean();reports.push({name:'hoops-v4-fallback-result',...live.m,loadTimes:undefined});
     }finally{await fallback.close();await fallback.csp.assertClean();}
+
+    // Basketball v7 (05/11, GPT hoops-v7 characters): five bodies from assets/hoops-v7 under the production CSP; then the
+    // bodies blocked: the game silently falls back to the v4 bodies.
+    const v7=await fixture('hoops-v7-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];v7.page.on('request',r=>requests.push(r.url()));
+      await v7.page.goto(server.url+hoopsV7Base,{waitUntil:'load'});
+      const live=await hoopsReady(v7.page);
+      assert.equal(live.error,null);assert.equal(live.m.characterVersion,7);assert.deepEqual(live.m.v4Fallbacks,[]);
+      assert.ok(requests.every(u=>u.startsWith(server.url)||/^(data|blob):/.test(u)),'no request leaves the island origin');
+      for(const role of ['pg','sg','sf','pf','c'])assert.ok(requests.some(u=>u.includes(`assets/hoops-v7/${role}.glb`)),role+' body requested');
+      assert.ok(!requests.some(u=>u.includes('design/hoops-v7/')),'the unpublished review pack is never requested');
+      assert.ok(!requests.some(u=>u.includes('lod-v4/hoops-v4-pg-lod.glb')),'the v4 bodies are not downloaded when v7 loads');
+      await v7.csp.assertClean();reports.push({name:'hoops-v7-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await v7.close();await v7.csp.assertClean();}
+    const v7fallback=await fixture('hoops-v7-fallback-v4',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await v7fallback.page.route(/assets\/hoops-v7\//,route=>route.abort());
+      await v7fallback.page.goto(server.url+hoopsV7Base,{waitUntil:'load'});
+      const live=await hoopsReady(v7fallback.page);
+      assert.equal(live.error,null,'a missing v7 asset never stops the game');assert.equal(live.m.characterVersion,4);assert.ok(live.m.v4Fallbacks.includes('players-v7'));
+      await v7fallback.csp.assertClean();reports.push({name:'hoops-v7-fallback-v4-result',...live.m,loadTimes:undefined});
+    }finally{await v7fallback.close();await v7fallback.csp.assertClean();}
 
     // Basketball v5 (04/11, GPT/Codex hoops-v5 package): the new arena with the animated crowd under the production CSP;
     // then v5 files blocked (falls back to the v4 venue, bodies untouched) and v5 + v4 blocked (all the way to v3).

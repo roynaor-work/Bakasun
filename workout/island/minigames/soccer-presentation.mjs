@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261105-1';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261105-2';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */

@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261105-1';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261105-1';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261105-1';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261105-1';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261105-1';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261105-2';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261105-2';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261105-2';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261105-2';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261105-2';
 import {createSoccerSurround} from './soccer-surround.mjs';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
@@ -14,16 +14,17 @@ import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261105-1';
-import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261105-1';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261105-1';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261105-1';
-import {passDestination} from './soccer.mjs?v=island-v2-20261105-1';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261105-1';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261105-1';
-import {soccerRestartBallAttachment,alignSoccerRestartStrike} from './soccer-restart-motion.mjs';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261105-2';
+import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL} from './soccer-v7.mjs';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261105-2';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261105-2';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261105-2';
+import {passDestination} from './soccer.mjs?v=island-v2-20261105-2';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261105-2';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261105-2';
+import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261105-1';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261105-2';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
@@ -103,7 +104,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
   const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0};const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
-  let nearDetail=null,disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
+  let nearDetail=null,v7Full=null,v7Cap=SOCCER_V7_FULL_DETAIL,disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
   const loadStart=globalThis.performance?.now?.()??0,loadReport={characters:null,characterError:null,athleteError:null,sceneError:null,ms:null};
   let designSceneReady=false;
   const designSceneLoader=config.view.designScene===false?null:createSoccerDesignLoader();
@@ -269,6 +270,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     const receiver=passReceiver(s,config);poses.length=s.players.length;let turfAt=0;
     const nearCount=config.view.nearDetailPlayers??0;if(nearCount>0&&quality<config.view.athlete.lodFromQuality)nearDetail=nearDetailPlayers(s.players,cameraState||{x:s.ball.x,z:s.ball.z},nearCount,nearDetail);
     restartStrike=null;
+    // GPT v7 characters: LOD0 is 35K triangles, so at most `fullDetail` players show it (priority actors first,
+    // then the nearest to the camera focus); everyone else uses the 5.8K LOD1 to stay inside maxTriangles.
+    v7Full=characters[0]?.v7&&quality<config.view.athlete.lodFromQuality?soccerV7FullDetail(s.players,cameraState||{x:s.ball.x,z:s.ball.z},[poseFocus,s.controlled,s.ball.owner,...s.players.filter(q=>q.restartMotion||q.kickTime>0||q.headerTime>0||q.slideTime>0||q.diveTime>0).map(q=>q.id)],Math.min(v7Cap,config.view.v7?.fullDetail??SOCCER_V7_FULL_DETAIL),v7Full):null;
     for(const p of s.players){
       // Authored characters remain visible. Foreground/actions retain their
       // detail while distant geometry stays within the mobile triangle budget.
@@ -276,7 +280,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       if(character)character.pivot.visible=Boolean(useModel);
       if(useModel){if(character.design){
         const contactActor=p.id===s.controlled||p.id===s.ball.owner||p.restartMotion||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0;
-        const actorLod=character.setLod(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0);
+        const wantedLod=(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0),actorLod=character.setLod(v7Full&&wantedLod===0&&!v7Full.has(p.id)?1:wantedLod);
         const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt);
         const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;pose.lod=actorLod;
       }else if(character.athlete){
@@ -353,12 +357,21 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     ballRoot.position.set(s.ball.x+ballDrift.x,s.ball.y,s.ball.z+ballDrift.z);{ballRoot.rotation.z-=(s.ball.vx+ballDrift.vx)*dt/config.ball.spinRadius;ballRoot.rotation.x+=(s.ball.vz+ballDrift.vz)*dt/config.ball.spinRadius;}
     const holder=s.ball.owner==null?null:s.players[s.ball.owner],character=holder&&characters[holder.id];
     restartAttachment=character&&soccerRestartBallAttachment(T,character,holder.restartMotion,config.physics.ballRadius,ballRoot.position)?character.restartContactMetrics:null;
+    if(restartAttachment&&character.v7){
+      // The v7 body is shorter-armed than the rig the restart ball heights were calibrated on (hands ~17 cm lower at
+      // the overhead throw), so the attached ball is eased onto the simulation ball over the last half of the motion
+      // instead of snapping at the release edge.
+      const m=holder.restartMotion,u=Math.min(1,Math.max(0,(m.elapsed/(m.kind==='keeperPunt'?SOCCER_RESTART_SEQUENCES.keeperPunt.drop:m.contact)-.5)/.5)),w=u*u*(3-2*u);
+      if(w>0)ballRoot.position.set(ballRoot.position.x+(s.ball.x+ballDrift.x-ballRoot.position.x)*w,ballRoot.position.y+(s.ball.y-ballRoot.position.y)*w,ballRoot.position.z+(s.ball.z+ballDrift.z-ballRoot.position.z)*w);
+    }
     trail.count=0; // The height-correct tapered ribbon owns the flight cue.
     for(let i=0;i<trail.count;i++){dummy.position.set(s.ball.x-s.ball.vx*trailConfig.spacingSeconds*(i+1),s.ball.y,s.ball.z-s.ball.vz*trailConfig.spacingSeconds*(i+1));dummy.rotation.set(0,0,0);dummy.scale.setScalar(1-i/trailConfig.count);dummy.updateMatrix();trail.setMatrixAt(i,dummy.matrix);}trail.instanceMatrix.needsUpdate=true;
     dummy.position.set(s.ball.x,.032,s.ball.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.setScalar(config.view.ballShadowScale+Math.min(s.ball.y,config.pitch.goalHeight)*config.view.ballShadowHeightScale);dummy.updateMatrix();shadows.setMatrixAt(roster.length,dummy.matrix);shadows.instanceMatrix.needsUpdate=true;
     if(!designSceneReady)for(const net of nets){const array=net.geometry.attributes.position.array;for(let i=0;i<array.length;i+=3){const attachment=Math.max(0,(Math.abs(net.base[i])-hx)/gd),edge=Math.max(0,1-Math.abs(net.base[i+2])/(gw/2)),wave=Math.sin(time*25+net.base[i+2]*2+net.base[i+1]*2);array[i]=net.base[i]+(net.direction*s.attackDir===(goalTeam===0?1:-1)?net.direction*wave*goalPulse*.34*attachment*edge:0);}net.geometry.attributes.position.needsUpdate=true;}
     if(poseMode==='split'&&poseFocus!==null){const p=s.players[poseFocus];camera.aspect=lastWidth/2/lastHeight;camera.updateProjectionMatrix();renderer.setScissorTest(true);renderer.setViewport(0,0,lastWidth/2,lastHeight);renderer.setScissor(0,0,lastWidth/2,lastHeight);renderer.render(scene,camera);camera.position.set(p.x,6,p.z+.1);camera.lookAt(p.x,0,p.z);camera.updateMatrixWorld();renderer.setViewport(lastWidth/2,0,lastWidth/2,lastHeight);renderer.setScissor(lastWidth/2,0,lastWidth/2,lastHeight);renderer.render(scene,camera);renderer.setScissorTest(false);renderer.setViewport(0,0,lastWidth,lastHeight);camera.aspect=lastWidth/lastHeight;camera.updateProjectionMatrix();}else renderer.render(scene,camera);
-    if(!pinQuality&&quality<2&&(renderer.info.render.triangles>config.view.maxTriangles||renderer.info.render.calls>config.view.maxDrawCalls)){lowerQuality();renderer.render(scene,camera);}
+    // v7 near meshes are the biggest single line in the budget: shed one before the tier machinery steps down.
+    if(v7Full&&!pinQuality&&quality<2&&v7Cap>0&&renderer.info.render.triangles>config.view.maxTriangles&&renderer.info.render.calls<=config.view.maxDrawCalls)v7Cap--;
+    else if(!pinQuality&&quality<2&&(renderer.info.render.triangles>config.view.maxTriangles||renderer.info.render.calls>config.view.maxDrawCalls)){lowerQuality();renderer.render(scene,camera);}
   }
   const lost=event=>{event.preventDefault();onContextLost();};canvas.addEventListener('webglcontextlost',lost);
   const skipReplay=()=>replay.skip('touch');canvas.addEventListener('pointerdown',skipReplay);

@@ -6,7 +6,7 @@
  * URL: ?frames=60 (frames to measure after a 40-frame warm-up) &stage=1 &seed=7 &dpr=0.15 (tiny backing store: CPU only) &fixed=0 (real dt)
  *      &racingV7=0 (previous assets) &shot=1 (hide the panel for screenshots) &hold=1 (stay on the grid: no driving)
  *      &at=SECONDS (shot mode: drive that long, then freeze for the screenshot) */
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-v2-20261105-1';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-v2-20261105-2';
 const q=new URLSearchParams(location.search);
 const FRAMES=Math.max(10,Number(q.get('frames')||60)),WARM=40,FIXED=q.get('fixed')!=='0',STAGE=Number(q.get('stage')||1),SEED=Number(q.get('seed')||7),HOLD=q.get('hold')==='1',AT=Number(q.get('at')||0);
 if(q.get('shot')==='1')document.body.classList.add('shot');

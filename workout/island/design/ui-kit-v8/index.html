@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="ערכת ממשק עברית למשחקי האי: בקרים, תוצאה, מסכים והודעות.">
+  <title>משחקי האי · ערכת ממשק</title>
+  <link rel="icon" type="image/svg+xml" href="runtime/island.svg">
+  <link rel="stylesheet" href="runtime/island-ui.css">
+  <link rel="stylesheet" href="preview/showcase.css">
+  <script type="module" src="preview/showcase.mjs"></script>
+</head>
+<body class="iu-kit">
+  <header class="demo-header">
+    <a class="demo-brand" href="./" aria-label="משחקי האי, תחילת התצוגה">
+      <img src="runtime/island.svg" alt="" width="48" height="36">
+      <span><strong>משחקי האי</strong><small>ערכת ממשק · 08</small></span>
+    </a>
+    <nav class="demo-nav" aria-label="תצוגת רכיבים">
+      <button type="button" data-view="play" aria-pressed="true">משחק</button>
+      <button type="button" data-view="start" aria-pressed="false">פתיחה</button>
+      <button type="button" data-view="end" aria-pressed="false">סיום</button>
+      <button type="button" data-view="library" aria-pressed="false">רכיבים</button>
+      <button type="button" data-map aria-pressed="false">מפת מגע</button>
+    </nav>
+    <span class="demo-caption">ממשק אחד. אי שלם.</span>
+  </header>
+
+  <main class="demo-main" aria-label="תצוגה אינטראקטיבית של ערכת הממשק">
+    <section class="iu-stage" aria-label="הדגמת בקרים למשחקי האי">
+      <img class="iu-scene" src="preview/scene.svg" alt="" width="1200" height="850">
+      <div class="demo-vignette" aria-hidden="true"></div>
+      <div class="iu-hud" role="group" aria-label="נתוני משחק לדוגמה">
+        <div class="iu-stat iu-stat--score">
+          <svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#star"/></svg>
+          <span class="iu-stat__text"><span class="iu-stat__label">נקודות</span><b class="iu-stat__value iu-number">240</b></span>
+        </div>
+        <div class="iu-stat">
+          <svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#timer"/></svg>
+          <span class="iu-stat__text"><span class="iu-stat__label">זמן</span><b class="iu-stat__value iu-number">01:24</b></span>
+        </div>
+        <div class="iu-stat iu-stat--lives" aria-label="עוד שני חיים מתוך שלושה">
+          <span class="iu-stat__text"><span class="iu-stat__label">חיים</span>
+            <span class="iu-lives" aria-hidden="true">
+              <svg class="iu-icon"><use href="runtime/icons.svg#heart"/></svg>
+              <svg class="iu-icon"><use href="runtime/icons.svg#heart"/></svg>
+              <svg class="iu-icon" data-empty><use href="runtime/icons.svg#heart"/></svg>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="demo-mission">
+        <span class="demo-chip"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#flag"/></svg>מסלול הכוכבים <span class="demo-dot">·</span> הדגמה</span>
+        <h1>עוד כוכב בדרך</h1>
+        <p>זזים בשמאל. קופצים בימין.</p>
+        <div class="demo-progress" aria-label="נאספו שניים מתוך חמישה כוכבים">
+          <span class="demo-progress__track" aria-hidden="true"><span></span></span>
+          <b class="iu-number">2 / 5</b>
+        </div>
+      </div>
+      <div class="demo-player" aria-hidden="true"><span></span></div>
+      <div class="demo-location" aria-hidden="true">מפרץ ההתחלות<small>כל הרפתקה מתחילה בצעד קטן</small></div>
+
+      <div class="iu-controls">
+        <div class="iu-target iu-stick-zone" data-iu-target="joystick" tabindex="0" role="group" aria-label="ג׳ויסטיק תנועה" aria-describedby="stick-help" aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight">
+          <div class="iu-stick" aria-hidden="true"><div class="iu-stick__knob"><svg class="iu-icon"><use href="runtime/icons.svg#move"/></svg></div></div>
+          <span class="iu-stick-zone__label" aria-hidden="true">תנועה</span>
+        </div>
+        <p id="stick-help" class="iu-sr-only">נוגעים וגוררים באזור השמאלי. במקלדת משתמשים בחצים. משחררים כדי לעצור.</p>
+        <button class="iu-target iu-action iu-action--primary" data-iu-target="primary" data-iu-action="jump" type="button" aria-label="קפיצה">
+          <span class="iu-action__face"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#jump"/></svg><span>קפיצה</span></span>
+        </button>
+        <button class="iu-target iu-action iu-action--secondary" data-iu-target="secondary" data-iu-action="swap" type="button" aria-label="החלפה">
+          <span class="iu-action__face"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#swap"/></svg><span>החלפה</span></span>
+        </button>
+        <button class="iu-target iu-action iu-action--accent iu-action--tertiary" data-iu-target="tertiary" data-iu-action="boost" type="button" aria-label="האצה">
+          <span class="iu-action__face"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#spark"/></svg><span>האצה</span></span>
+        </button>
+        <button class="iu-target iu-action iu-pause" data-iu-target="pause" type="button" aria-label="השהיית המשחק"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#pause"/></svg></button>
+      </div>
+      <div class="iu-message iu-toast" data-toast role="status" aria-live="polite" aria-atomic="true" hidden><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#info"/></svg><span></span></div>
+      <div class="demo-map" aria-hidden="true" hidden></div>
+      <div class="demo-map-key" hidden><i></i>שמאל: תנועה <i></i>ימין: פעולות <b>ללא חפיפה</b></div>
+      <div class="demo-bottom-note" aria-hidden="true">אי קטן. אפשרויות גדולות.</div>
+    </section>
+  </main>
+
+  <dialog class="iu-dialog" id="start-dialog" aria-labelledby="start-title">
+    <img class="iu-dialog__art" src="runtime/island.svg" alt="" width="128" height="100">
+    <div class="iu-eyebrow">משחקי האי · מסלול הכוכבים</div>
+    <h2 id="start-title">יוצאים להרפתקה?</h2>
+    <p>חמישה כוכבים מחכים לאורך השביל.<br>אפשר לנסות בקצב שלך.</p>
+    <ul class="iu-instructions">
+      <li><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#move"/></svg><strong>זזים בשמאל</strong><br>נוגעים וגוררים</li>
+      <li><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#jump"/></svg><strong>קופצים בימין</strong><br>לוחצים על קפיצה</li>
+    </ul>
+    <div class="iu-dialog__actions"><button class="iu-button" data-close type="button" autofocus><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#play"/></svg>מתחילים</button></div>
+  </dialog>
+
+  <dialog class="iu-dialog" id="end-dialog" aria-labelledby="end-title">
+    <img class="iu-dialog__art" src="runtime/reward.svg" alt="" width="128" height="100">
+    <div class="iu-eyebrow">המסלול הושלם</div>
+    <h2 id="end-title">איזו דרך עשית</h2>
+    <p>עוד הרפתקה נוספה לאי שלך.</p>
+    <div class="iu-rating" role="img" aria-label="שלושה כוכבים מתוך שלושה"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#star"/></svg><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#star"/></svg><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#star"/></svg></div>
+    <div class="iu-dialog__stats"><div class="iu-stat"><span class="iu-stat__text"><span class="iu-stat__label">נקודות</span><b class="iu-stat__value iu-number">240</b></span></div><div class="iu-stat"><span class="iu-stat__text"><span class="iu-stat__label">זמן</span><b class="iu-stat__value iu-number">01:24</b></span></div></div>
+    <div class="iu-dialog__actions"><button class="iu-button" data-close type="button" autofocus><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#retry"/></svg>עוד סיבוב</button><button class="iu-button iu-button--secondary" data-close type="button"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#home"/></svg>בחזרה לאי</button></div>
+  </dialog>
+
+  <dialog class="iu-dialog" id="pause-dialog" aria-labelledby="pause-title">
+    <div class="iu-eyebrow">רגע לנשום</div><h2 id="pause-title">נחים קצת?</h2><p>ממשיכים כשמתאים לך.</p>
+    <div class="iu-dialog__actions"><button class="iu-button" data-close type="button" autofocus><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#play"/></svg>ממשיכים</button><button class="iu-button iu-button--secondary" data-close type="button">בחזרה לאי</button></div>
+  </dialog>
+
+  <dialog class="iu-dialog demo-library" id="library-dialog" aria-labelledby="library-title">
+    <button class="demo-close iu-button iu-button--secondary" data-close type="button" aria-label="סגירת גלריית הרכיבים" autofocus><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#close"/></svg></button>
+    <div class="iu-eyebrow">שפה אחת לכל המשחקים</div><h2 id="library-title">ארגז הכלים של האי</h2><p>אותם צבעים, אותו קצב, אותה תחושה.</p>
+    <div class="demo-library-grid">
+      <section class="demo-component"><h3>פעולות ברורות</h3><div class="demo-button-row"><button class="iu-button" type="button">מתחילים</button><button class="iu-button iu-button--secondary" type="button">עוד סיבוב</button><button class="iu-button" type="button" disabled>לא זמין</button></div><small>ראשי · משני · לא זמין</small></section>
+      <section class="demo-component"><h3>נתונים במבט</h3><div class="demo-button-row"><div class="iu-stat"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#star"/></svg><span class="iu-stat__text"><span class="iu-stat__label">נקודות</span><b class="iu-stat__value iu-number">1,250</b></span></div><div class="iu-stat"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#timer"/></svg><span class="iu-stat__text"><span class="iu-stat__label">זמן</span><b class="iu-stat__value iu-number">02:15</b></span></div></div><small>מספרים מבודדים בכיוון קריאה נכון</small></section>
+      <section class="demo-component"><h3>הודעה שעוזרת להמשיך</h3><div class="iu-message"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#info"/></svg><span>אפשר לעצור בכל רגע.</span></div><div class="iu-message iu-message--warning"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#warning"/></svg><span>עוד מעט ננסה שוב.</span></div><div class="iu-message iu-message--error"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#error"/></svg><span>הטעינה נעצרה. אפשר לנסות שוב.</span></div></section>
+      <section class="demo-component"><h3>משוב קצר, בלי להפריע</h3><div class="iu-message"><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#check"/></svg><span>ההגדרות נשמרו.</span></div><button class="iu-button iu-button--secondary" data-demo-toast type="button">הצגת טוסט</button><small>תווית וסמל יחד, גם בלי צבע</small></section>
+      <section class="demo-component demo-palette"><h3>ים, חול והרפתקה</h3><div class="demo-swatches" aria-label="צבעי המערכת"><span style="--swatch:#12665f">ים</span><span style="--swatch:#d8efe2">מנטה</span><span style="--swatch:#f8edcf">חול</span><span style="--swatch:#f5a182">אלמוג</span><span style="--swatch:#f4c65d">שמש</span></div><small>ריווח: 4 · 8 · 12 · 16 · 24 · 32</small></section>
+      <section class="demo-component"><h3>לכל סוג של הרפתקה</h3><div class="demo-game-tags"><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#kick"/></svg>כדורגל</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#basketball"/></svg>כדורסל</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#ski"/></svg>סקי</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#racket"/></svg>טניס</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#wheel"/></svg>מירוצים</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#ship"/></svg>ספינות</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#water"/></svg>חילוץ באש</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#shield"/></svg>הגנת האי</span><span><svg class="iu-icon" aria-hidden="true"><use href="runtime/icons.svg#aim"/></svg>הגנה בחלל</span></div><small>מחליפים תווית ואייקון, שומרים על הבקר</small></section>
+    </div>
+  </dialog>
+  <noscript><p class="demo-noscript">התצוגה העיצובית זמינה. להדגמת הבקרים והמסכים יש להפעיל JavaScript.</p></noscript>
+</body>
+</html>

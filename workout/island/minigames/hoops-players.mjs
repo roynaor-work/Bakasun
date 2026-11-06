@@ -13,10 +13,16 @@ async function json(path,base){const response=await fetch(new URL(path,base));if
 function releaseScene(scene){const materials=new Set(),geometries=new Set();scene?.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])materials.add(m);});for(const g of geometries)g.dispose();for(const m of materials){for(const value of Object.values(m))if(value?.isTexture)value.dispose();m.dispose();}}
 import {loadPlayerAssetsV1,createAvatarV1,loadMotionClips,bundlePlayerAssets} from './hoops-players-v1.mjs';
 import {V4_ROLES,v4Enabled} from './hoops-v4.mjs';
+import {v7Enabled,loadPlayerAssetsV7,createAvatarV7} from './hoops-v7.mjs';
 /** Default (v3, 01/11): the textured motion-capture athletes. `assets.characterVersion: 2`
  * (or ?hoopsCharacters=2) selects the characters2 low-poly athlete with the motion2 clips. */
-export async function loadPlayerAssets(cfg,base,onProgress,{params,onFallback}={}){
+export async function loadPlayerAssets(cfg,base,onProgress,{params,onFallback,quality}={}){
  if((cfg.characterVersion??1)===2)return loadPlayerAssetsV2(cfg,base,onProgress);
+ // v7 (05/11, GPT package): five position bodies with authored clips; any failure falls back to the v4 bodies
+ if(v7Enabled(cfg,params,quality??2)){
+  try{return await loadPlayerAssetsV7(cfg,base,onProgress);}
+  catch(error){onFallback?.('players-v7',error);}
+ }
  // v4 (02/11): the five position bodies; any failure falls back to the v3 bodies instead of stopping the game
  if(v4Enabled(cfg,params)){
   try{return await loadPlayerAssetsV4(cfg,base,onProgress);}
@@ -114,6 +120,7 @@ function uniformAtlas(card,look){
  draw();return {texture,draw};
 }
 export function createAvatar(assets,card,teamLook,opts={}){
+ if(assets.v7)return createAvatarV7(assets,card,teamLook,opts);
  if(!assets.v2)return createAvatarV1(assets,card,teamLook,opts);
  return createAvatarV2(assets,card,teamLook,opts);
 }
