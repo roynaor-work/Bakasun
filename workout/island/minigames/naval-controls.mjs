@@ -1,4 +1,5 @@
 import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261105-2';
+import {navalAimLegacy} from './naval-aim-flag.mjs';
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261105-2';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
@@ -29,6 +30,8 @@ export function navalAimFromDrag(start,dx,dy,config){
  * is a smoothstep between `slowSpeed` and `fastSpeed`, so there is no step. */
 export function navalAimGain(speed,config){
  const g=config.aimControls?.gain||{},lo=g.slowSpeed??80,hi=g.fastSpeed??240,t=Math.max(0,Math.min(1,((speed||0)-lo)/Math.max(1,hi-lo))),s=t*t*(3-2*t);
+ // 06/11/2026: one fixed yaw gain (1 px of finger ≈ 1 px of the landing mark at the focal length); the speed blend made the mark lag, then jump.
+ const fixed=config.aimControls?.follow?.yawFixed;if(fixed&&!navalAimLegacy())return {yaw:fixed,elevation:(g.elevationSlow??.06)+((g.elevationFast??.12)-(g.elevationSlow??.06))*s,blend:s};
  return {yaw:(g.yawSlow??.08)+((g.yawFast??.2)-(g.yawSlow??.08))*s,elevation:(g.elevationSlow??.06)+((g.elevationFast??.12)-(g.elevationSlow??.06))*s,blend:s};
 }
 /** One pointer step of the accumulated aim. `track` keeps the smoothed drag

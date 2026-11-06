@@ -2,6 +2,7 @@ import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
 import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261105-2';
+import {polishLegacy} from './polish-flag.mjs';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {palette} from '../view/environment.mjs?v=island-v2-20261105-2';
@@ -132,7 +133,9 @@ export function createFireScene(ctx,model,adapters={}) {
     cannon.position.set(model.truck.x,balance.vehicle.cannonPivot[1],model.truck.z);
     const dx=impact.x-cannon.position.x,dz=impact.z-cannon.position.z;
     cannon.rotation.y=Math.atan2(-dx,-dz);barrel.rotation.x=Math.atan2(impact.y-cannon.position.y,Math.hypot(dx,dz));
-    if(truckVisual){truckVisual.root.position.set(model.truck.x,0,model.truck.z);truckVisual.root.rotation.y=model.truck.yaw+T.MathUtils.degToRad(balance.vehicle.headingOffset);for(const wheel of truckVisual.wheels||[])wheel.rotation.x=model.truck.wheelRotation;truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
+    if(truckVisual){truckVisual.root.position.set(model.truck.x,0,model.truck.z);const heading=legacyTruck?balance.vehicle.headingOffset:balance.vehicle.feel?.headingOffset??balance.vehicle.headingOffset,wheelSign=legacyTruck?1:balance.vehicle.feel?.wheelSign??1;truckVisual.root.rotation.order='YXZ';truckVisual.root.rotation.y=model.truck.yaw+T.MathUtils.degToRad(heading);
+      if(!legacyTruck&&balance.vehicle.feel){const f=balance.vehicle.feel,k=1-Math.exp(-f.leanEase*dtLean());lean.roll+=(clamp01(-(model.truck.yawRate||0)*Math.abs(model.truck.speed||0)*f.rollPerTurn,f.maxRoll)-lean.roll)*k;lean.pitch+=(clamp01((model.truck.accel||0)*f.pitchPerAccel,f.maxPitch)-lean.pitch)*k;truckVisual.root.rotation.z=lean.roll;truckVisual.root.rotation.x=lean.pitch;}
+      for(const wheel of truckVisual.wheels||[])wheel.rotation.x=model.truck.wheelRotation*wheelSign;truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
     else{cannon.updateMatrixWorld(true);cannonMuzzle.getWorldPosition(nozzle);}
     for(let i=0;i<model.rescues.length;i++){
       const rescue=model.rescues[i],citizen=citizenVisuals[i]||citizens[i],start=rescuePoints[i];
@@ -181,6 +184,8 @@ export function createFireScene(ctx,model,adapters={}) {
 }
 
 /** Same two-stage degradation contract as naval-view; the model never changes. */
+const legacyTruck=polishLegacy('fireTruck'),clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
+function dtLean(){const now=globalThis.performance?.now?.()??0,dt=lean.t?Math.min(.1,Math.max(.001,(now-lean.t)/1000)):.016;lean.t=now;return dt;}
 export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRenderer(options)) {
   const r=ctx.balance.render,canvas=globalThis.document?.createElement('canvas');
   let renderer;
