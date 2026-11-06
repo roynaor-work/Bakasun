@@ -7,6 +7,7 @@ import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261105
 import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261105-2';
 import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261105-2';
 import {createControls} from './controls.mjs?v=island-v2-20261105-2';
+import {withSoccerV7Kits} from './soccer-v7.mjs';
 import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261105-2';
 import {gameContext} from './context.mjs?v=island-v2-20261105-2';
 import {expandSoccerConfig} from './soccer-squad.mjs';
@@ -55,7 +56,7 @@ export function soccerActionLabels(state,config){
 export function startSoccer(ctx) {
   const {balance:sourceBalance,canvas,controls,status,t}=ctx,balance=expandSoccerConfig(sourceBalance);
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
-  const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=soccerViewConfig(context,balance),{team,opponent}=viewConfig;
+  const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
   let storage;try{storage=globalThis.localStorage;}catch{}
   const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
