@@ -28,7 +28,7 @@ jobs:
           rm -rf _site/workout/docs _site/workout/tests 2>/dev/null || true
           find _site/workout/island/design -type d -name source -prune -exec rm -rf {} + 2>/dev/null || true
           # Review packs of assets not wired into a game yet (hundreds of MB): not published. When a pack is wired, its runtime copy lives under workout/island/assets/.
-          for d in hoops-v7 racing-v7 defense-v7 alpine-v7 naval-v7 tennis-v7 fire-v7 soccer-v6 hoops-v6 broadcast-v1; do rm -rf "_site/workout/island/design/$d"; done
+          for d in hoops-v7 racing-v7 defense-v7 alpine-v7 naval-v7 tennis-v7 fire-v7 soccer-v6 hoops-v6 broadcast-v1 hoops-motion-v8 soccer-motion-v8 soccer-stadium-v8 hoops-arena-v8 audio-v8 ui-kit-v8; do rm -rf "_site/workout/island/design/$d"; done
           find _site -name '*.md' -o -name '*.csv' -o -name '*.xlsx' -o -name '*.sql' -o -name '*.bundle' | xargs -r rm -f
           ls _site
       - uses: actions/configure-pages@v5
