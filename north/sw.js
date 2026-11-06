@@ -1,5 +1,5 @@
 /* מטמון לגופנים ולתמונות בלבד (שמות הקבצים משתנים כשהתוכן משתנה: v2, v3, s). HTML, CSS ו-JS תמיד מהרשת, כדי שפרסום חדש יעלה מיד. */
-const CACHE = 'north-assets-v1';
+const CACHE = 'north-assets-v2';
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
