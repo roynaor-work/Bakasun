@@ -12,7 +12,9 @@ export const v6GoalsEnabled=(config,search=globalThis.location?.search||'')=>new
 /** Presentation-only asset transaction. The caller keeps its fallback scenery
  * visible until onReady, and owns resources registered through track. Pitch,
  * goal mouth and ball dimensions always come from the simulation config. */
-export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot,onReady=()=>{},onError=()=>{}}){
+/** `stadium` (boolean or a promise of one): false = soccer v8 stadium is active, only the goals (with the net ripple) and the ball are built;
+ * the stands, turf and sky come from soccer-v8-stadium.mjs and the old stadium files are never fetched. */
+export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot,stadium:withStadium=true,onReady=()=>{},onError=()=>{}}){
   if(!loader?.loadAsync)throw new TypeError('Soccer scenery needs the local Draco GLTF loader');
   const root=new T.Group(),ball=new T.Group(),viewSides=[],meshes=[];
   root.name='soccer-design-scenery';ball.name='soccer-design-ball';root.visible=ball.visible=false;
@@ -96,9 +98,9 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
   const textureLoader=new T.TextureLoader();
   // Settle the entire transaction so a failed texture never strands successful
   // GLB decodes or late image loads after the player has left the game.
-  const useV6=v6GoalsEnabled(config);
-  const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>retrying(()=>loader.loadAsync(modelUrl(name)),name+'.glb').then(data=>{loadedModels.push(data.scene);return data.scene;})),
-    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>retrying(()=>textureLoader.loadAsync(environmentUrl(name)),name).then(texture=>{loadedTextures.push(texture);return texture;})),
+  const useV6=v6GoalsEnabled(config),wantStadium=Promise.resolve(withStadium).then(Boolean);
+  const requests=[...['soccer-stadium','soccer-goal','soccer-ball'].map(name=>name==='soccer-stadium'?wantStadium.then(want=>want?retrying(()=>loader.loadAsync(modelUrl(name)),name+'.glb').then(data=>{loadedModels.push(data.scene);return data.scene;}):null):retrying(()=>loader.loadAsync(modelUrl(name)),name+'.glb').then(data=>{loadedModels.push(data.scene);return data.scene;})),
+    ...['textures/grass-mown.webp','textures/stand-concrete.webp','textures/crowd-dots.webp','backgrounds/stadium-day-landscape.webp','backgrounds/stadium-day-portrait.webp'].map(name=>wantStadium.then(want=>want?retrying(()=>textureLoader.loadAsync(environmentUrl(name)),name).then(texture=>{loadedTextures.push(texture);return texture;}):null)),
     useV6?retrying(()=>loader.loadAsync(v6GoalUrl),'soccer-v6/goals.glb').then(data=>{loadedModels.push(data.scene);return data.scene;}).catch(()=>null):Promise.resolve(null)];
   const ready=Promise.allSettled(requests).then(results=>{
     globalThis.performance?.mark?.('soccer:scene-build-start');
@@ -110,9 +112,11 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     }
     const [stadiumSource,goalSource,ballSource,grass,concrete,crowd,landscape,portrait,v6Source]=results.map(result=>result.value);
     for(const source of loadedModels)source.updateMatrixWorld(true);
-    finish(grass,{repeat:[1,1]});finish(concrete,{repeat:[1,1]});finish(crowd,{repeat:[1,1]});
-    skyLandscape=finish(landscape);skyPortrait=finish(portrait);textureCount=5;
+    const builtStadium=Boolean(stadiumSource);
+    if(builtStadium){finish(grass,{repeat:[1,1]});finish(concrete,{repeat:[1,1]});finish(crowd,{repeat:[1,1]});
+    skyLandscape=finish(landscape);skyPortrait=finish(portrait);textureCount=5;}
     const palette=track(new T.MeshStandardMaterial({color:'#d4dedb',vertexColors:true,roughness:.86,metalness:.02,side:T.FrontSide}));
+    if(builtStadium){
     const concreteMaterial=track(new T.MeshStandardMaterial({color:'#b9c3c2',map:concrete,roughness:.96,metalness:0,side:T.FrontSide}));
     const crowdMaterial=track(new T.MeshLambertMaterial({color:'#aab5b8',map:crowd,side:T.FrontSide}));
     // Authoring pitch is 68m wide in X and 105m long in Z. Rotate its long
@@ -157,6 +161,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     skyMaterial=track(new T.MeshBasicMaterial({map:skyLandscape,depthTest:false,depthWrite:false,fog:false,toneMapped:false}));
     skyMaterial.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','gl_Position=vec4(transformed.xy,.9999,1.);');};
     const sky=mesh(new T.PlaneGeometry(2,2),skyMaterial);sky.frustumCulled=false;sky.renderOrder=-1000;sky.receiveShadow=false;
+    }
     // Opening anchors are ±3.66 X at Z=.926, crossbar underside 2.44 Y.
     // Map those anchors to the existing game mouth, leaving collision rules alone.
     const goalParts=['crossbar','goal_post','goal_support','net'].map(name=>goalSource.getObjectByName(name));
@@ -209,7 +214,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     mesh(ballGeometry,ballMaterial,ball).castShadow=true;
     loadedModels.forEach(releaseSource);loadedModels.length=0;loadedTextures.length=0;
     status='ready';root.visible=ball.visible=true;globalThis.performance?.mark?.('soccer:scene-build-end');
-    try{onReady({stadium:true,goals:true,ball:true});}
+    try{onReady({stadium:builtStadium,goals:true,ball:true});}
     catch(error){root.visible=ball.visible=false;status='fallback';failure=String(error?.message||error);reportError(error);return false;}
     return true;
   }).catch(error=>{

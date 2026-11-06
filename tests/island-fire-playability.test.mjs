@@ -1,3 +1,5 @@
+// Pins the pre-06/11 truck feel (`?fireTruck=v1`); the new feel is covered by island-polish-v11.test.mjs.
+globalThis.location={search:'?fireTruck=v1'};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

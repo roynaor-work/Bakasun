@@ -118,3 +118,6 @@
 :root[data-island=true] #game{min-height:0}
 :root[data-island=true] .menu-screen{overflow-y:auto}
 @media(max-height:480px){:root[data-island=true] .menu-content{padding-top:42px;padding-bottom:20px}:root[data-island=true] .menu-content h1{font-size:42px}:root[data-island=true] .menu-meta{margin-top:10px}:root[data-island=true] .sector-tag{display:none}}
+
+/* 06/11/2026: touch players get a one-line hint (the desktop hint is hidden on small screens). */
+.battle-hint.touch-hint{display:block;top:92px;font-size:12px;text-align:center}.battle-hint.touch-hint span{display:block;opacity:.8}

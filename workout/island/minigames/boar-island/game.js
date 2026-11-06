@@ -11,6 +11,10 @@ import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX
 const $=id=>document.getElementById(id);
 const QA=new URLSearchParams(location.search).has('qa');
 const ISLAND=new URLSearchParams(location.search).has('island');
+// 06/11/2026 polish; `?boar=v1` restores the previous behaviour (no last stand, no low-health warning, desktop hint only).
+const LEGACY=new URLSearchParams(location.search).get('boar')==='v1';
+let lastStandUsed=false,lowWarned=false;
+function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
 let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
 const SAVE_KEY='boar-island-v1';
 let save;try{save=sanitizeSave(JSON.parse(localStorage.getItem(SAVE_KEY)));}catch{save=freshSave();}
@@ -347,7 +351,12 @@ function launchShell(from,type,dmg,to=null){
   shells.push({mesh:m,from,to,t:0,T,arc:type==='torpedo'?0:type==='bomb'?2:Math.min(type==='siege'?30:26,dist*.38),dmg,type,trail:0});if(type!=='torpedo')sfx.play('whistle');
 }
 function droneShot(e){e.root.getWorldPosition(tmp);const to=new THREE.Vector3(rand(-1.5,1.5),camera.position.y-1.5,camera.position.z-3);tracer(tmp.clone(),to,{speed:110,len:4,width:.12,kind:'tracerRed'});later(tmp.distanceTo(to)/110,()=>hurtPlayer(e.damage,null));}
-function hurtPlayer(d,from){if(mode!=='battle')return;hp=Math.max(0,hp-d);damageTaken+=d;$('damage-flash').style.opacity=.42;damageUntil=elapsed+.18;trauma=Math.min(1,trauma+.22);sfx.play('hurt');if(hp<=0)defeat();}
+function hurtPlayer(d,from){if(mode!=='battle')return;hp=Math.max(0,hp-d);damageTaken+=d;$('damage-flash').style.opacity=.42;damageUntil=elapsed+.18;trauma=Math.min(1,trauma+.22);sfx.play('hurt');
+  if(hp<=0&&!LEGACY&&!lastStandUsed&&!sandbox){ // last stand, once per wave: the wall holds at 30%, the robots stall for a moment
+    lastStandUsed=true;hp=Math.round(stats(save).hp*.3);frostTimer=Math.max(frostTimer,2.5);for(const e of enemies)e.attack=Math.max(e.attack||0,2.5);trauma=1;
+    announce('קו הגנה אחרון','החומה החזיקה · קירור לכל הרובוטים, נצלו את הרגע');sfx.play('alarm');return;}
+  if(!LEGACY&&!lowWarned&&hp>0&&hp/stats(save).hp<=.3){lowWarned=true;toast('הגנת האי נמוכה');sfx.play('alarm');}
+  if(hp<=0)defeat();}
 function removeEnemy(e){scene.remove(e.root);e.label.remove();const i=enemies.indexOf(e);if(i>=0)enemies.splice(i,1);if(e===boss){boss=null;$('boss-hud').hidden=true;}}
 
 // ---------- new invaders: shark (water), manta (air), siege crab (ground) ----------
@@ -637,10 +646,11 @@ function updateWeapons(dt){
 // ---------- battle loop ----------
 function beginWave(){
   sandbox=false;
-  clearBattlefield();for(const e of showcase)e.root.visible=false;wave=save.nextWave;hp=stats(save).hp;fury=0;furyTimer=0;rocketCooldown=0;frostCooldown=0;frostTimer=0;waveTime=0;spawnIndex=0;killed=0;roundCoins=0;roundShots=0;roundHits=0;roundCrits=0;damageTaken=0;clearTimer=-1;turretTimers=[1,1.5];
+  clearBattlefield();for(const e of showcase)e.root.visible=false;wave=save.nextWave;hp=stats(save).hp;lastStandUsed=false;lowWarned=false;fury=0;furyTimer=0;rocketCooldown=0;frostCooldown=0;frostTimer=0;waveTime=0;spawnIndex=0;killed=0;roundCoins=0;roundShots=0;roundHits=0;roundCrits=0;damageTaken=0;clearTimer=-1;turretTimers=[1,1.5];
   perk=selectedPerk;selectedPerk='';plan=wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
   $('battle-hint').hidden=wave>2;
+  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML='גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>';$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
   weatherKind=waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
   announce(`גל ${String(wave).padStart(2,'0')}`,plan.some(p=>isBoss(p.kind))?'פלישת בוס · החזיקו את קו ההגנה':waveHint(wave));sfx.play('start');
   const wk=weatherKind;if(wk!=='clear')later(3.4,()=>{if(mode==='battle'&&weatherKind===wk)toast(`${WEATHER[wk].name} · ${WEATHER[wk].rule}`);});
@@ -758,7 +768,7 @@ function frame(t){
   // crosshair state
   const cx=(pointer.x*.5+.5)*innerWidth,cy=(-pointer.y*.5+.5)*innerHeight;for(const id of ['crosshair','hit-marker']){$(id).style.left=`${cx}px`;$(id).style.top=`${cy}px`;}
   if(mode==='battle'&&Math.floor(elapsed*20)!==Math.floor((elapsed-dt)*20)){const h=castShot(aimRay(),TOUCH?1.35:1);$('crosshair').classList.toggle('on-target',!!(h.e||h.shell));$('crosshair').classList.toggle('crit',!!h.crit);}
-  if(elapsed>bannerUntil)$('banner').style.opacity=0;if(elapsed>toastUntil)$('toast').style.opacity=0;if(elapsed>hitUntil)$('hit-marker').style.opacity=0;if(elapsed>damageUntil)$('damage-flash').style.opacity=0;
+  if(elapsed>bannerUntil)$('banner').style.opacity=0;if(elapsed>toastUntil)$('toast').style.opacity=0;if(elapsed>hitUntil)$('hit-marker').style.opacity=0;if(elapsed>damageUntil)$('damage-flash').style.opacity=lowPulse();
   if(mode==='battle'||mode==='paused')updateLabels();
   if(elapsed-lastHud>.08){updateHud();lastHud=elapsed;}
   if(shadowsOff&&(++shadowTick%4===0))renderer.shadowMap.needsUpdate=true;

@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261105-2';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261106-1';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */
@@ -26,6 +26,7 @@ export function runBoarSession(ctx) {
   frame.title='אי החזירים — הגנת החווה';frame.setAttribute('allow','autoplay; fullscreen');
   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
   if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
+  if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
   const failed=()=>{if(disposed)return;error='reason.gameStart';ctx.warning.hidden=false;ctx.warning.textContent=ctx.t('boar.loadError');};
   listen(frame,'load',()=>{
     if(disposed)return;

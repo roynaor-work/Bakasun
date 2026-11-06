@@ -135,7 +135,9 @@ export function nameTagsText(list) {
 
 const CSV_HEAD = ['שם', 'טלפון', 'מייל', 'ארגון', 'תפקיד', 'אישור הגעה', 'חדר', 'שותף/ה לחדר', 'הגעה', 'יציאה', 'צרכי תזונה', 'הערות תזונה', 'תג שם', 'הערות', 'תגיות'];
 export function csvCell(v) {
-  const s = str(v);
+  let s = str(v);
+  // תא שמתחיל ב-= + - @ נקרא כנוסחה באקסל: מקדימים גרש. מספרים וטלפונים רגילים נשארים כמו שהם.
+  if (/^[=+\-@]/.test(s) && !/^[+-]?[\d][\d\-\s.]*$/.test(s)) s = "'" + s;
   return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
 }
 /** UTF-8 with BOM so Excel reads the Hebrew. Phones as she dials them (the dash keeps them as text in Excel). */

@@ -1,5 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import {nearDetailPlayers} from './soccer-presentation.mjs';
+import {soccerCharacterSet} from './soccer-v5.mjs';
 
 /** GPT soccer-v7 characters: three identities (team A outfield, team B outfield,
  * keeper), each with a near mesh (~12K triangles, textured atlas: GPT LOD0 simplified,
@@ -97,4 +98,27 @@ export function joinSoccerV7Meshes(scene,{doubleSided=null}={}){
   material.roughness=1;material.metalness=0;
   host.material=material;host.name=host.name.replace(/-lod\d$/,'')||host.name;
   return host;
+}
+
+/** What the v7 atlases actually wear: team A teal, team B amber (shirt, then trim). The HUD badges and the pitch rings take these
+ * instead of the config blue/red, which the v7 meshes cannot show (found in the #289 review). */
+export const SOCCER_V7_KITS=Object.freeze([Object.freeze({colors:Object.freeze(['#1f827f','#f2efe4'])}),Object.freeze({colors:Object.freeze(['#e0a028','#222222'])})]);
+/** The two keepers share one atlas (lime). Team B's keeper is hue-rotated by this angle (lime to violet) so the two never look alike
+ * and neither matches an outfield kit. */
+export const SOCCER_V7_KEEPER_HUE=[0,3.3];
+export function withSoccerV7Kits(config,search=globalThis.location?.search||''){
+  if(soccerCharacterSet(search)!=='v7'||!config?.team||!config?.opponent)return config;
+  return {...config,team:{...config.team,colors:[...SOCCER_V7_KITS[0].colors]},opponent:{...config.opponent,colors:[...SOCCER_V7_KITS[1].colors]}};
+}
+/** GLSL hue rotation (Rodrigues around the grey axis) inserted after the map sample, masked to the lime kit pixels (shirt, socks) so skin,
+ * gloves, boots and shorts keep their colour. Keeper team B only. */
+export function applySoccerV7HueShift(material,radians){
+  if(!radians)return material;
+  const previous=material.onBeforeCompile;
+  material.onBeforeCompile=(shader,renderer)=>{
+    previous?.call(material,shader,renderer);
+    shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>','#include <map_fragment>\n{const float soccerHue='+radians.toFixed(4)+';vec3 c=diffuseColor.rgb,k=vec3(.57735);vec3 turned=c*cos(soccerHue)+cross(k,c)*sin(soccerHue)+k*dot(k,c)*(1.-cos(soccerHue));diffuseColor.rgb=mix(c,turned,smoothstep(.04,.14,c.g-max(c.r*.85,c.b)));}');
+  };
+  material.customProgramCacheKey=()=>'soccer-v7-keeper-hue-masked-'+radians.toFixed(2);
+  return material;
 }
