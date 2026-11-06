@@ -221,9 +221,6 @@ function laneClear(api,t,from,to,r){
  return true;
 }
 
-// v2: a three has to clear the "worth waiting for" bar with 6% less value (0.31/0.33): the early-clock shot mix drops from 47% threes to ~40%.
-// Only the wait-or-shoot threshold uses it, so a dying clock, the drive/pass comparison and the role preferences are untouched.
-const THREE_WAIT_V2=0.31/0.33;
 function shotValue(api,p,t,pref){
  const S=api.S,s=api.side(t),d=api.court.distToRim(s,p.x,p.z),pts=api.court.points(s,p.x,p.z);
  const open=openness(api,t,p);
@@ -291,11 +288,12 @@ function handlerMove(api,p,t){
  const worth=(clock>16?1.08:0.62+clamp((clock-4.5)/11.5,0,1)*0.46)*pref.patience;
  const settled=24-clock>3.5||open>2.6;
  let best={kind:'hold',v:0.55+(1-clamp(clock/24,0,1))*-0.2};
- const waitShot=api.aiV2&&api.court.points(s,p.x,p.z)===3?myShot*THREE_WAIT_V2:myShot;
- if(waitShot>worth&&settled||hurry&&myShot>0.3)best={kind:'shoot',v:myShot+(hurry?0.4:0)};
+ if(myShot>worth&&settled||hurry&&myShot>0.3)best={kind:'shoot',v:myShot+(hurry?0.4:0)};
  if(d<2.4&&open>0.8)best={kind:'shoot',v:1.5};
  // drive when the lane is clear
- if(d>2.2&&laneClear(api,t,p,rim,1.1)&&api.eff(p,'handle')>0.55){const v=(0.9+api.eff(p,'inside')*0.6)*pref.drive;if(v>best.v)best={kind:'drive',v};}
+ // v2: after 1.5 s with the ball a narrower lane is enough to attack (0.72 m instead of 1.1) and a lesser handle (0.45 instead of 0.55): the handler attacks instead of waiting
+ const holdT=S.ball.dribbleT||0,patient=api.aiV2&&holdT>=1.5,laneR=patient?0.72:1.1,needHandle=patient?0.45:0.55;
+ if(d>2.2&&laneClear(api,t,p,rim,laneR)&&api.eff(p,'handle')>needHandle){const v=(0.9+api.eff(p,'inside')*0.6)*pref.drive;if(v>best.v)best={kind:'drive',v};}
  // passes: the receiver's own look, plus who he is (an open shooter, a big rolling to the rim).
  // v4: a pass needs a reason (passReason): a man advancing to the rim down an open line, a look
  // clearly better than mine, pressure on me, a dying clock, or a stuck probe. Sideways and
