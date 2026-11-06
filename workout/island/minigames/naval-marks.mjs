@@ -1,4 +1,4 @@
-import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261105-2';
+import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261106-1';
 const TAU=Math.PI*2;
 /** Model units per display pixel, so marks keep their pixel size on any screen. */
 export function navalPixelUnit(p){
