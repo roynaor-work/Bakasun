@@ -26,22 +26,13 @@ test('B3-S01 fix: a stale tombstone cannot override a newer edit',
     await wait();
   });
 
-test('B3-S02 current: import keeps the local setting but queues the rejected backup value for cloud sync', async () => {
-  const { db, setChangeHook } = await device();
-  db.setting('signer', 'חתימה מקומית');
+test('A09 (audit 2026-11-05): an ignored backup setting is never sent to other devices', async () => {
+  const { db, setChangeHook } = await device(); db.setting('signer', 'חתימה מקומית');
   const changes = []; setChangeHook(item => changes.push(item));
-  db.importJson(JSON.stringify({ settings: { signer: 'חתימה מהגיבוי' } }));
+  db.importJson(JSON.stringify({ settings: { signer: 'חתימה מהגיבוי', fresh: 'חדש' } }));
   assert.equal(db.setting('signer'), 'חתימה מקומית');
-  assert.deepEqual(changes, [{ setting: 'signer', value: 'חתימה מהגיבוי' }]);
-  await wait();
+  assert.deepEqual(changes, [{ setting: 'fresh', value: 'חדש' }]); await wait();
 });
-test('B3-S02 fix: an ignored backup setting is never sent to other devices',
-  { skip: 'B3-S02: importJson invokes onChange with data.settings[k] even when it did not import that value.' }, async () => {
-    const { db, setChangeHook } = await device(); db.setting('signer', 'חתימה מקומית');
-    const changes = []; setChangeHook(item => changes.push(item));
-    db.importJson(JSON.stringify({ settings: { signer: 'חתימה מהגיבוי' } }));
-    assert.deepEqual(changes, []); await wait();
-  });
 
 test('B3-S03 current: corrupt stored JSON silently starts empty and is overwritten by the next save', async () => {
   const { db, memory, lastSaveError } = await device({ 'bakasun.v1': '{broken backup' });

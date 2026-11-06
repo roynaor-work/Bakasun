@@ -9,6 +9,7 @@ import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261105-2';
 import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261105-2';
 import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261105-2';
 import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261105-2';
+import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
  * One scene/context per round. All geometry, vectors and effects are warmed once. */
@@ -132,7 +133,7 @@ export function createVessel(THREE, colors, equipment={},variant={},playerModel=
   let model,modelLength,disposed=false,paintInfo=null;const tinted=[],scorched=new THREE.Color('#2f2b28');
   // Our turret and gun shield read as the lightest part (#DDE6E5); enemy turrets keep gunmetal.
   for(const [color,mat] of materials)if(color===colors.metal){mat.roughness=variant.player?.4:.36;mat.metalness=variant.player?.32:.58;if(variant.player)mat.color.set('#DDE6E5');}const modelStatus={requested:Boolean(playerModel),loaded:false,failed:false};
-  const ready=playerModel?loadPatrolBoat(playerModel,adapters).then(loaded=>{
+  const loadMeshy=()=>playerModel?loadPatrolBoat(playerModel,adapters).then(loaded=>{
     if(disposed){if(loaded)disposeBoat(loaded);return;}
     if(!loaded){modelStatus.failed=true;return;}
     model=loaded;
@@ -143,7 +144,17 @@ export function createVessel(THREE, colors, equipment={},variant={},playerModel=
     root.add(model);staticParts.visible=false;modelStatus.loaded=true;modelLength=playerModel.length*playerModel.scale*root.scale.x;
     turret.position.fromArray(playerModel.cannonPivot);
   }).catch(()=>{if(!disposed)modelStatus.failed=true;}):Promise.resolve();
-  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get body(){return model||staticParts;},setDamage(amount){for(const {mat,base} of tinted)if(base)mat.color.copy(base).lerp(scorched,Math.max(0,Math.min(1,amount))*.42);},get modelLength(){return modelLength;},get paint(){return paintInfo;},dispose(){if(disposed)return;disposed=true;if(model){disposeBoat(model);model=null;}flameMap?.dispose();for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
+  // v7 hull first (shared atlas, optional). Any failure keeps the Meshy boat above: nothing visible changes except the hull.
+  let v7Handle=null,v7Turret=null;const v7=adapters.v7;
+  const procedural=[...turret.children].filter(m=>m.isMesh&&m!==barrel);
+  const applyV7=h=>{
+    if(disposed){h.dispose();return;}
+    v7Handle=h;model=h.root;root.add(model);staticParts.visible=false;modelStatus.loaded=true;modelStatus.v7=true;modelLength=h.length*root.scale.x;
+    if(h.turret){v7Turret=h.turret;turret.position.copy(h.pivot);for(const m of procedural)m.visible=false;Object.defineProperty(barrel,'visible',{get:()=>false,set(){},configurable:true});}
+    for(const mat of h.materials)tinted.push({mat,base:mat.color.clone()});
+  };
+  const ready=v7&&playerModel?v7.api.ship(v7.ship,{fleet:v7.fleet,length:playerModel.length}).then(applyV7).catch(()=>{modelStatus.v7Failed=true;return loadMeshy();}):loadMeshy();
+  return {root,turret,barrel,flag,funnel,shield,foam,smoke,flame,ready,modelStatus,get v7Turret(){return v7Turret;},get body(){return model||staticParts;},setDamage(amount){for(const {mat,base} of tinted)if(base)mat.color.copy(base).lerp(scorched,Math.max(0,Math.min(1,amount))*.42);},get modelLength(){return modelLength;},get paint(){return paintInfo;},dispose(){if(disposed)return;disposed=true;if(model){if(v7Handle){v7Handle.dispose();v7Handle=null;}else disposeBoat(model);model=null;}flameMap?.dispose();for(const g of geometries)g.dispose();const all=new Set(materials.values());root.traverse(o=>{if(o.material)all.add(o.material);});for(const m of all)m.dispose();}};
 }
 
 /** Both Meshy boats have a -X bow, normalized to -Z by the same rotation.
@@ -172,8 +183,10 @@ export function createNavalView(ctx,model,adapters={}) {
   const seaMaterial=new THREE.MeshStandardMaterial({color:r.sea,roughness:.8,metalness:.05,flatShading:true});const sea=new THREE.Mesh(seaGeometry,seaMaterial);sea.position.set(0,-.25,-35);sea.scale.set(900/r.seaSize,1,900/r.seaSize);scene.add(sea);
   const sunGeometry=new THREE.SphereGeometry(7,16,8),sunMaterial=new THREE.MeshBasicMaterial({color:r.sun}),sun=new THREE.Mesh(sunGeometry,sunMaterial);sun.position.set(-22,12,-95);scene.add(sun);
   const environment=createNavalEnvironment(scene,renderer,sea,sun);
-  const player=createVessel(THREE,r,model.equipment,{player:true},balance.playerModel);player.root.scale.setScalar(r.playerScale);scene.add(player.root);
-  const vessels=model.enemies.map(e=>{const type=balance.shipTypes[e.kind],variant=e.boss?balance.boss:type,scale=type.scale*(e.boss?balance.boss.scale:1),spec=variant.modelSpec||(balance.enemyModel&&{...balance.enemyModel,length:(balance.playerModel?.length??balance.enemyModel.length)*r.playerScale/scale});const v=type.submarine?createSubmarine(r,r.effects):createVessel(THREE,{...r,hull:variant.hull},{},variant,spec);v.root.rotation.y=Math.PI;v.root.scale.setScalar(scale);scene.add(v.root);return v;});
+  const v7api=navalV7Enabled(globalThis.location?.search||'',adapters)?createNavalV7(adapters):null;
+  const v7opt=(ship,fleet)=>v7api?{...adapters,v7:{api:v7api,ship,fleet}}:adapters;
+  const player=createVessel(THREE,r,model.equipment,{player:true},balance.playerModel,v7opt(NAVAL_V7.kinds.player,'tide'));player.root.scale.setScalar(r.playerScale);scene.add(player.root);
+  const vessels=model.enemies.map(e=>{const type=balance.shipTypes[e.kind],variant=e.boss?balance.boss:type,scale=type.scale*(e.boss?balance.boss.scale:1),spec=variant.modelSpec||(balance.enemyModel&&{...balance.enemyModel,length:(balance.playerModel?.length??balance.enemyModel.length)*r.playerScale/scale});const v=type.submarine?createSubmarine(r,r.effects):createVessel(THREE,{...r,hull:variant.hull},{},variant,spec,v7opt(NAVAL_V7.kinds[e.boss?'boss':e.kind],'ember'));v.root.rotation.y=Math.PI;v.root.scale.setScalar(scale);scene.add(v.root);return v;});
   const scenery=createNavalEffects(scene,seaMaterial,model,balance),adventure=createNavalScenery(scene,model,balance,adapters);
   const projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
   const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);aimLine.userData.noReflect=true;scene.add(aimLine);
@@ -198,18 +211,19 @@ export function createNavalView(ctx,model,adapters={}) {
     // The player's turret shows the real firing yaw and barrel elevation; enemies face the player.
     if(enemy){const target=navalWorldPoint(model.playerShip.x,model.playerShip.z,balance);v.turret.rotation.y=Math.atan2(x-target.x,z-target.z)-v.root.rotation.y;v.barrel.rotation.x=.3;}
     else{v.turret.rotation.y=-((model.yaw??0)-(model.playerShip.heading||0));v.barrel.rotation.x=model.ammoIndex===2?0:(model.elevation??10)*Math.PI/180;}
+    if(v.v7Turret)v.v7Turret.rotation.y=v.turret.rotation.y;
     v.barrel.position.z=.05+e.recoil*.6;
     v.flag.visible=false;v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.95,e.hp<e.maxHp?2.6:.85,1.35);v.flame.quaternion.copy(v.root.quaternion).invert().multiply(camera.quaternion);v.flame.scale.set(.6+Math.sin(model.time*17)*.05,1.6+Math.sin(model.time*12)*.18,1);v.foam.visible=false;
   }
-  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);arc.dispose();dressing.dispose();environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
+  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);arc.dispose();dressing.dispose();v7api?.dispose();environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
   /** Share of the screen height the player's hull occupies (aim framing target). */
   const frameBox=new THREE.Box3(),corner=new THREE.Vector3();
   // Measured from the hull's actual vertices (every 4th), not its bounding box.
   function playerBox(){if(failed||disposed)return null;let min=Infinity,max=-Infinity,minX=Infinity,maxX=-Infinity;player.root.updateMatrixWorld(true);player.body.traverse(node=>{if(!node.isMesh||!node.geometry?.attributes?.position)return;const pos=node.geometry.attributes.position;for(let i=0;i<pos.count;i+=4){corner.fromBufferAttribute(pos,i).applyMatrix4(node.matrixWorld).project(camera);min=Math.min(min,corner.y);max=Math.max(max,corner.y);minX=Math.min(minX,corner.x);maxX=Math.max(maxX,corner.x);}});if(!Number.isFinite(min))return null;return {height:(Math.min(1,max)-Math.max(-1,min))/2,top:(1-Math.min(1,max))/2,bottom:(1-Math.max(-1,min))/2,left:(Math.max(-1,minX)+1)/2,right:(Math.min(1,maxX)+1)/2};}
   return {get mode(){return failed?'perspective':'three';},resetPeak(){peakTriangles=0;peakDrawCalls=0;},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
     environment:environment.metrics(),models:{requested:Number(Boolean(balance.playerModel))+Number(vessels.some(v=>v.modelStatus.requested)),loaded:Number(player.modelStatus.loaded)+Number(vessels.some(v=>v.modelStatus.loaded)),failed:Number(player.modelStatus.failed)+Number(vessels.some(v=>v.modelStatus.failed))},
-    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),playerPaint:player.paint,aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
+    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),playerPaint:player.paint,aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,v7:{enabled:Boolean(v7api),player:Boolean(player.modelStatus.v7),enemies:vessels.filter(v=>v.modelStatus.v7).length,failed:Number(Boolean(player.modelStatus.v7Failed))+vessels.filter(v=>v.modelStatus.v7Failed).length},enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
     resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(Math.min(config.width,1280)*(low?.75:1),Math.min(config.width,r.width)*config.height/config.width*(low?.75:1),false);},
     projectTarget(x,z,y=0){if(failed||disposed)return null;return model.screenPoint(x,z,y);},
     targetAt(x,y){if(failed||disposed)return null;pointer.set(x/config.width*2-1,1-y/config.height*2);raycaster.setFromCamera(pointer,camera);if(!raycaster.ray.intersectPlane(seaPlane,intersection))return null;return {x:balance.shipX-intersection.z/r.worldScale,z:intersection.x/r.enemySpacing*balance.combat.laneSpacing};},
