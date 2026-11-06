@@ -2,8 +2,8 @@
   "schema": 1,
   "scope": "design/bakasun-docs-v1/",
   "checksumExclusion": "verification/package-manifest.json (this file)",
-  "fileCountIncludingManifest": 79,
-  "totalBytesIncludingManifest": 2511432,
+  "fileCountIncludingManifest": 80,
+  "totalBytesIncludingManifest": 2514093,
   "limitBytes": 60000000,
   "files": [
     {
@@ -18,8 +18,8 @@
     },
     {
       "path": "REPORT.md",
-      "bytes": 9864,
-      "sha256": "73e4a6bf60ec6d63c8f53b46a3391af8f15c1c595b6256bee3833786eeec9a9f"
+      "bytes": 11107,
+      "sha256": "df227a20ad177eb44be11d2934c3948ec3b10425d563df1427b8f53908b92263"
     },
     {
       "path": "assets/documents.css",
@@ -353,13 +353,18 @@
     },
     {
       "path": "verification/context.json",
-      "bytes": 479,
-      "sha256": "4d77a9dd6eeb04a92fe787aa0bdfa2295980d20d407fba51196fed828814fcbd"
+      "bytes": 624,
+      "sha256": "3b969bf8f13c6ea2e296b4584d1b064088fae7658dc9fb36ce5c43a0fd170def"
     },
     {
       "path": "verification/node-test.tap",
       "bytes": 2151,
       "sha256": "c0d35a7f87e34ead930c2c7db0669101b87a8475e2110a813c559f7d0adb17e6"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1103,
+      "sha256": "a64b5068503fa0369b8556261a096351dfa2bf43364b50ef444ed0c69a7d7e86"
     },
     {
       "path": "verification/round-01.json",
