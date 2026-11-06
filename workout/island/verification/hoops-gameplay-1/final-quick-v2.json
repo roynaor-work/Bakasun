@@ -1,0 +1,71 @@
+{
+ "ai": "v2",
+ "profile": "quick",
+ "difficulty": "normal",
+ "mirror": false,
+ "games": 200,
+ "seedBase": 9000,
+ "pace": {
+  "possessionsPerGame": 26.2,
+  "attackSeconds": 16
+ },
+ "shooting": {
+  "fgPct": 43.5,
+  "threePct": 37.3,
+  "fgaPerPoss": 0.99,
+  "ptsPerPoss": 1.01,
+  "pointsPerTeamGame": 13.3,
+  "threeShare": 40.2,
+  "mix": {
+   "close": 36.6,
+   "mid": 23.2,
+   "three": 40.2
+  },
+  "types": {
+   "layup": 1316,
+   "dunk": 74,
+   "jumpshot": 3065,
+   "pullup": 717,
+   "other": 0
+  }
+ },
+ "passing": {
+  "passesPerPoss": 1.86,
+  "passesBeforeShot": 2.09,
+  "pingPongPct": 1.2,
+  "lateralPct": 35.1,
+  "contestedLateralPct": 2.3
+ },
+ "turnovers": {
+  "tovPctOfPoss": 17.5,
+  "steals": 2.31,
+  "intercepts": 1.5,
+  "travel": 0,
+  "doubleDribble": 0,
+  "out": 0.59,
+  "outAfterThrowIn": 0.09,
+  "looseBallOut": 0.64,
+  "shotclock": 0.01,
+  "backcourt": 0.18,
+  "three": 0
+ },
+ "defense": {
+  "blocksPerGame": 0.94,
+  "stealsPerGame": 2.31
+ },
+ "rebounds": {
+  "perGame": 12.93,
+  "offensivePct": 34.6
+ },
+ "fouls": 2.61,
+ "decision": {
+  "avgHoldSec": 4.44,
+  "holdOver4sPct": 54.6
+ },
+ "balance": {
+  "team0WinPct": 44.5,
+  "avgDiff0": -1.3,
+  "avgMargin": 5.5
+ },
+ "simSpeedX": 480
+}
