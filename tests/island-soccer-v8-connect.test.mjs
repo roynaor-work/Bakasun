@@ -110,7 +110,7 @@ test('v8 stadium: no bare sky at the four corners, both goal ends, both touchlin
    await begin(page);
    const state=await page.evaluate(()=>window.__island.games.current.session.debug.view.metrics().v8);
    assert.equal(state.status,'ready',JSON.stringify(state));
-   const magentaShare=async()=>{const png=(await page.screenshot()).toString('base64');return page.evaluate(async b64=>{const img=new Image();img.src='data:image/png;base64,'+b64;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=4)if(d[i]>240&&d[i+1]<20&&d[i+2]>240)n++;return n/(d.length/4);},b64);};
+   const magentaShare=async()=>{const png=(await page.screenshot()).toString('base64');return page.evaluate(async b64=>{const img=new Image();img.src='data:image/png;base64,'+b64;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=4)if(d[i]>240&&d[i+1]<20&&d[i+2]>240)n++;return n/(d.length/4);},png);};
    await view(page,'skyProbe',true);
    for(const [name,x,z] of spots){await moveTo(page,x,z);await page.waitForTimeout(2200);assert.equal(await magentaShare(),0,`${name}: backdrop visible`);}
    await page.evaluate(()=>window.__island.games.current.session.debug.view.skyProbe(true,false));
