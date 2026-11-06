@@ -4,14 +4,16 @@ import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-ph
 import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261105-2';
 import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261105-2';
 import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261105-2';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261105-2';
 import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261105-2';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261105-2';
-import {assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261105-2';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261105-2';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight} from './soccer-restarts.mjs';
+import {resolveSoccerAI} from './soccer-ai-flag.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
@@ -41,12 +43,15 @@ export function passDestination(state,config,power=0){
 }
 export function soccerPassAim(state){return state.passAim?.manual?state.passAim:state.moving?state.aim:state.passAim||state.aim;}
 export function canHead(player,ball,config){return canContactBall(player,ball,config,{kind:'head'});}
-export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false}={}) {
+export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false,aiVersion}={}) {
   if (!config?.stages?.length || !Number.isFinite(config.match?.fixedStep) || config.match.fixedStep<=0) throw Error('Invalid soccer config');
   config=expandSoccerConfig(config);
   seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);config=campaignConfig(config,stage);
+  const aiV2=resolveSoccerAI(aiVersion)==='v2';
   if(config.squad&&!config.tactics.designController)config={...config,tactics:{...config.tactics,designController:compileSoccerTactics(SOCCER_TACTICS_DATA,config)}};
   const attack=config.ai.attack[difficulty];
+  // Rival build-up and pass-lane safety were measured from stage 2 up; the tutorial stage keeps the original rival.
+  const rivalV2=aiV2&&stage>=(config.ai.rivalV2FromStage??2);
   const rng=random || seededRandom(seed), opponent=opponentSettings(config,stage,difficulty), ph=config.physics,effects=cardEffects(card,config);
   // League keepers rise match by match, even when a new league restarts the field tuning lower.
   if(Number.isFinite(ladder?.keeper))opponent.keeper=ladder.keeper;
@@ -286,12 +291,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       else if(p.think<=0) {
         const defender=nearest(1-p.team,p),pressure=distance(defender,p);
         const teammate=passTarget(p);
-        const canPass=distance(teammate,p)>aiConfig.requestDistance && distance(nearest(1-p.team,teammate),teammate)>aiConfig.requestClearance;
+        const canPass=distance(teammate,p)>aiConfig.requestDistance && distance(nearest(1-p.team,teammate),teammate)>aiConfig.requestClearance && (!rivalV2||p.team===0||p.role==='keeper'||aiPassLaneOpen(p,teammate,players,s.ball,config));
         if(p.team===1){
           // A shooting lane wins over recycling possession under pressure.
           // Outside that lane, pass only after a real dribble or to escape a press.
           const range=hx-p.x*d;
-          if(p.role==='keeper'||(canPass&&rivalPasses===0&&range>config.ai.attackCombinationDistance&&p.hold>attack.passHold))kick(p,0,true);
+          if(p.role==='keeper'||(canPass&&rivalPasses<rivalPassBudget(aiConfig,rivalV2)&&range>config.ai.attackCombinationDistance&&p.hold>attack.passHold))kick(p,0,true);
           else if(p.cooldown<=0&&s.elapsed>=nextRivalShot&&range<attack.shootDistance&&Math.abs(p.z)<config.pitch.goalWidth&&p.hold>(rivalPasses?attack.shotHold:Math.max(attack.shotHold,attack.passHold))){kick(p,aiConfig.opponentShotPower+stage*aiConfig.opponentPowerPerStage);nextRivalShot=s.elapsed+attack.shotIntervalSeconds;}
           else if(canPass&&p.hold>attack.passHold&&((teammate.x-p.x)*d>aiConfig.passAheadMargin&&pressure<aiConfig.passPressure||p.hold>attack.buildSeconds))kick(p,0,true);
         }else if(role==='keeper'){
@@ -359,8 +364,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     s.passTarget=null;s.charging=false;s.charge=0;s.chargeKind=null;
     event(clear?'clearance':'header',{player:p.id,team:p.team});return true;
   }
+  let leftId=null,leftAt=-Infinity;
   function selectPlayer(id){
-    if(s.controlled!==id){s.controlled=id;s.selectionTime=.35;s.switchCooldown=config.tactics.switchCooldownSeconds;}
+    if(s.controlled!==id){leftId=s.controlled;leftAt=s.elapsed;s.controlled=id;s.selectionTime=.35;s.switchCooldown=config.tactics.switchCooldownSeconds;}
     s.defenseIdle=0;s.autoSwitchCandidate=null;s.charging=false;s.charge=0;s.chargeKind=null;
   }
   /** The kicker's stick is still pushed the way it was at release: it is a leftover, not a new order
@@ -678,7 +684,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     s.switchCooldown=Math.max(0,s.switchCooldown-step);
     if(role!=='keeper'&&!s.switchCooldown&&candidate.id!==current.id&&(active?!s.bufferedAction&&!s.charging&&current.slideTime<=0&&(mode()==='defense'&&advantage>=config.autoSwitchAdvantage||s.ball.owner===null&&advantage>=config.autoSwitchAdvantage*.5):mode()==='defense'&&advantage>=config.autoSwitchAdvantage)){
       s.defenseIdle=s.autoSwitchCandidate===candidate.id?s.defenseIdle+step:step;s.autoSwitchCandidate=candidate.id;
-      if(s.defenseIdle+1e-8>=config.autoSwitchSeconds)selectPlayer(candidate.id);
+      if(s.defenseIdle+1e-8>=(aiV2?autoSwitchDwell(config,advantage,candidate.id===leftId&&s.elapsed-leftAt<(aiConfig.switchBackSeconds??1.5)):config.autoSwitchSeconds))selectPlayer(candidate.id);
     }else{s.defenseIdle=0;s.autoSwitchCandidate=null;}
     if(role==='keeper')pendingSwitch=false;
     if(pendingSwitch){const id=selectControlledPlayer(s,config,{manual:true,moveX:finite(input.moveX),moveZ:finite(input.moveZ)});if(id!==null){s.bufferedAction=null;selectPlayer(id);event('switch',{player:id});}pendingSwitch=false;}
