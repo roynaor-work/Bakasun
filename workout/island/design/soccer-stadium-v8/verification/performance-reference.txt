@@ -1,0 +1,6 @@
+Software reference, not a handset certification.
+300 measured frames after 60 warm-up frames per case.
+Render time includes gl.finish(); RAF includes the software compositor and host scheduling.
+Renderer DPR capped at 1.25.
+Drivers:
+ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
