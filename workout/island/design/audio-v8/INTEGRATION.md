@@ -34,7 +34,10 @@ function onFoul() {
   sound.whistle({duration: 0.17, intensity: 0.8});
 }
 function onPause(paused) { sound.setPaused(paused); }
-function onSoundSetting(enabled) { sound.setMuted(!enabled); }
+async function onSoundSetting(enabled) {
+  sound.setMuted(!enabled);
+  if (enabled) await sound.unlock(); // מתוך לחיצה, גם אם המשחק התחיל מושתק.
+}
 async function onExit() { await sound.dispose(); }
 ```
 
