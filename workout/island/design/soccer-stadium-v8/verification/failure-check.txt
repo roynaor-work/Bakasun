@@ -1,0 +1,7 @@
+PASS missing texture: rejected, scene preserved, retry succeeded; disposed 8 textures / 99 geometries
+PASS missing GLB: rejected, scene preserved, retry succeeded; disposed 9 textures / 65 geometries
+PASS truncated GLB: rejected, scene preserved, retry succeeded; disposed 9 textures / 65 geometries
+PASS missing WASM: rejected, scene preserved, retry succeeded; disposed 9 textures / 0 geometries
+PASS worker load failure: rejected, scene preserved, retry succeeded; disposed 9 textures / 0 geometries
+PASS abort while loading: rejected, scene preserved, retry succeeded; disposed 9 textures / 99 geometries
+PASS concurrent scene ownership rejected; replacement after dispose succeeds
