@@ -20,7 +20,7 @@ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island
  * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
  * camera and grooves recording engine positions. The Mixamo rig has authored sport outerwear; attribution is in ASSETS.md.
  * This local candidate includes a separately reviewed engine feel proposal; it is not a released build. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}} = {}) {
+export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}, v7 = null} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
   let vfx=null,feel=null;
@@ -246,7 +246,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
 
   // ---------- Riders ----------
   const contactTex=canvasTexture(128,128,(ctx,w,h)=>{const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);g.addColorStop(0,'rgba(25,45,65,.55)');g.addColorStop(1,'rgba(25,45,65,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);});
-  let gltf=null,modelError=null;try{gltf=await loadAlpineCharacters({modelUrl,isDisposed});}catch(error){modelError=String(error.message);}
+  let gltf=null,modelError=null;try{gltf=await loadAlpineCharacters({modelUrl,isDisposed,v7,quality});}catch(error){modelError=String(error.message);}
   if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
   const riders = new Map();
   // Clone skeletons without importing an additional runtime dependency.
@@ -391,6 +391,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
       const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll;
       place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, carve.yaw, s.airKind === 'ramp' ? r.air * .12 : 0);
+      r.actor?.setDistance?.(camera.position.distanceTo(r.root.position)); // alpine-v7: rider LOD by camera distance
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
       let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
       if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
@@ -478,7 +479,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     snowGeo.setDrawRange(0, count); snowGeo.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
   }
-  function setQuality(value) { if (disposed) return; const next = value === 'low' ? 'low' : 'high'; if (next === quality) return; quality = next; applyQuality(); const t0 = performance.now(); resize(); lastSwitch.resizeMs = +(performance.now() - t0).toFixed(2); lastSwitch.totalMs = +(lastSwitch.totalMs + lastSwitch.resizeMs).toFixed(2); }
+  function setQuality(value) { if (disposed) return; const next = value === 'low' ? 'low' : 'high'; if (next === quality) return; quality = next; applyQuality(); gltf?.setQuality?.(quality); const t0 = performance.now(); resize(); lastSwitch.resizeMs = +(performance.now() - t0).toFixed(2); lastSwitch.totalMs = +(lastSwitch.totalMs + lastSwitch.resizeMs).toFixed(2); }
   function disposeAll() {
     if (disposed) return; disposed = true; ro?.disconnect();
     const materials = new Set(), geometries = new Set();
