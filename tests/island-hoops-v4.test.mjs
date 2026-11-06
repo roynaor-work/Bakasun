@@ -77,10 +77,10 @@ test('v4 bodies keep the 52-bone Mixamo rig of the v3 bodies, so every v3 motion
 test('hoops view and players wire the v4 path with a silent fall back to v3',async()=>{
  const view=await read('minigames/hoops-view.mjs'),players=await read('minigames/hoops-players.mjs'),models=await read('minigames/hoops-models.mjs');
  assert.ok(/v4ArenaEnabled\(config\.assets,quality,params\)/.test(view)&&/onFallback\('arena'/.test(view)&&/if\(!models\)models=await replaceArenaAssets\(arena,dyn,court,arenaOptions\)/.test(view),'arena falls back to the v3 venue');
- assert.ok(/loadPlayerAssets\(config\.assets,assetBase,onProgress,\{params,onFallback\}\)/.test(view));
+ assert.ok(/loadPlayerAssets\(config\.assets,assetBase,onProgress,\{params,onFallback,quality\}\)/.test(view));
  assert.ok(/catch\(error\)\{onFallback\?\.\('players',error\);\}\s*\}\s*return loadPlayerAssetsV1/.test(players),'players fall back to the v3 bodies');
  assert.ok(/validate before anything visible changes/.test(models),'the v4 venue is checked before the arena is touched');
- assert.ok(/characterVersion:assets\.v2\?2:assets\.v4\?4:1/.test(view)&&/v4Fallbacks/.test(view),'metrics report which assets are live');
+ assert.ok(/characterVersion:assets\.v7\?7:assets\.v2\?2:assets\.v4\?4:1/.test(view)&&/v4Fallbacks/.test(view),'metrics report which assets are live');
 });
 
 test('the 3D crowd is cut into culling chunks that share one vertex buffer and lose no triangle',()=>{
