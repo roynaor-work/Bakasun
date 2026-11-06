@@ -16,7 +16,7 @@ const bytesOf=async list=>{let n=0;for(const p of list)if(p)n+=(await stat(path.
 test('offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game',async()=>{
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
  for(const [game,list] of Object.entries(manifest.games)){
-  assert.ok(list.length>=5,game+' has a real asset list');
+  assert.ok(list.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'?5:40),game+' has a real asset list');/* small packs */
   assert.equal(new Set(list).size,list.length,game+' has no duplicates');
   for(const p of list){await access(path.join(island,p));assert.ok(isManagedPath('/workout/island/'+p),p+' is served from the cache');}
  }

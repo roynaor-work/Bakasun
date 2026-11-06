@@ -1,0 +1,157 @@
+[
+ {
+  "name": "A skier3 high",
+  "mode": "skier3",
+  "trianglesPerRider": 24918,
+  "riders": {
+   "objects": 24,
+   "tris": 149520,
+   "shadowTris": 149508,
+   "points": 0
+  },
+  "calls": 91,
+  "trianglesLastFrame": 485899,
+  "quality": "high",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "skier.glb"
+  ],
+  "riderBytes": 424676
+ },
+ {
+  "name": "B v7 high",
+  "mode": "v7",
+  "lods": {
+   "player": 0,
+   "rival-1": 1,
+   "rival-2": 1,
+   "rival-3": 1,
+   "rival-4": 1,
+   "rival-5": 1
+  },
+  "loaded": [
+   0,
+   1
+  ],
+  "trianglesPerRider": 19916,
+  "riders": {
+   "objects": 25,
+   "tris": 69378,
+   "shadowTris": 69366,
+   "points": 0
+  },
+  "calls": 94,
+  "trianglesLastFrame": 405809,
+  "quality": "high",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "ski-male.glb",
+   "ski-male-lod1.glb"
+  ],
+  "riderBytes": 1547440
+ },
+ {
+  "name": "A skier3 low",
+  "mode": "skier3",
+  "trianglesPerRider": 24918,
+  "riders": {
+   "objects": 24,
+   "tris": 149520,
+   "shadowTris": 149508,
+   "points": 0
+  },
+  "calls": 81,
+  "trianglesLastFrame": 272604,
+  "quality": "low",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "skier.glb"
+  ],
+  "riderBytes": 424676
+ },
+ {
+  "name": "B v7 low",
+  "mode": "v7",
+  "lods": {
+   "player": 1,
+   "rival-1": 2,
+   "rival-2": 2,
+   "rival-3": 2,
+   "rival-4": 2,
+   "rival-5": 2
+  },
+  "loaded": [
+   1,
+   2
+  ],
+  "trianglesPerRider": 9890,
+  "riders": {
+   "objects": 24,
+   "tris": 30547,
+   "shadowTris": 30535,
+   "points": 0
+  },
+  "calls": 83,
+  "trianglesLastFrame": 153971,
+  "quality": "low",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "ski-male-lod1.glb",
+   "ski-male-lod2.glb"
+  ],
+  "riderBytes": 1475044
+ },
+ {
+  "name": "B v7 high then setQuality(low)",
+  "mode": "v7",
+  "lods": {
+   "player": 1,
+   "rival-1": 2,
+   "rival-2": 2,
+   "rival-3": 2,
+   "rival-4": 2,
+   "rival-5": 2
+  },
+  "loaded": [
+   0,
+   1,
+   2
+  ],
+  "trianglesPerRider": 19916,
+  "riders": {
+   "objects": 4,
+   "tris": 9892,
+   "shadowTris": 9890,
+   "points": 0
+  },
+  "calls": 64,
+  "trianglesLastFrame": 135267,
+  "quality": "low",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "ski-male.glb",
+   "ski-male-lod1.glb",
+   "ski-male-lod2.glb"
+  ],
+  "riderBytes": 2269468
+ },
+ {
+  "name": "A skier3 high then setQuality(low)",
+  "mode": "skier3",
+  "trianglesPerRider": 24918,
+  "riders": {
+   "objects": 20,
+   "tris": 124600,
+   "shadowTris": 124590,
+   "points": 0
+  },
+  "calls": 79,
+  "trianglesLastFrame": 249613,
+  "quality": "low",
+  "riderFilesRequested": [
+   "alpine-v7.mjs",
+   "skier.glb"
+  ],
+  "riderBytes": 424676
+ }
+]

@@ -1,4 +1,4 @@
-// Keeping the island's game assets on the device: soccer, basketball and ski.
+// Keeping the island's game assets on the device: soccer, basketball, ski, tennis and racing.
 // One list (offline-manifest.json) drives everything: the download button, the
 // background download after a release, the worker's rules and the tests.
 // The download runs in the page and fills the Cache API; offline-sw.js serves from
@@ -6,7 +6,7 @@
 // are created or removed here, never localStorage or IndexedDB game data.
 import {DATA_VERSION} from '../release.mjs';
 
-export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים'});
+export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',tennis:'טניס',racing:'מרוצים',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים'});
 export const STATUS_KEY='island.offline.status';
 /** Same rule as offline-sw.js: only these island paths are answered from the cache. */
 export const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;

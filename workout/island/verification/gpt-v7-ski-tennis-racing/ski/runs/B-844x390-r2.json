@@ -1,0 +1,343 @@
+{
+ "label": "B-844x390-r2",
+ "query": "",
+ "size": "844x390",
+ "frames": 3,
+ "cpuMsPerFrame": 11270,
+ "cpuMs": 33810,
+ "wallMs": 32907,
+ "wallMsPerFrame": 10969,
+ "frameMsP50": 6016.4,
+ "jsRenderMs": 31.5,
+ "tickAvgMs": 38.4,
+ "loadMs": 16309,
+ "calls": 96,
+ "trianglesLastFrame": 398259,
+ "ridersAuditAtStart": {
+  "objects": 25,
+  "tris": 69378,
+  "shadowTris": 69366,
+  "points": 0
+ },
+ "characterBytes": 1552710,
+ "pageBytes": 5756411,
+ "characterFiles": [
+  [
+   "minigames/alpine-v7.mjs",
+   5242
+  ],
+  [
+   "assets/alpine-v7/characters/ski-male.glb",
+   794438
+  ],
+  [
+   "assets/alpine-v7/characters/ski-male-lod1.glb",
+   753030
+  ]
+ ],
+ "errors": [],
+ "result": {
+  "width": 844,
+  "height": 390,
+  "pixelRatio": 1.25,
+  "mobileProfile": true,
+  "small": false,
+  "stage": 1,
+  "seed": 7,
+  "seconds": 18.1,
+  "loadMs": 16309,
+  "frames": 2,
+  "allFrames": 3,
+  "avgFps": 0.2,
+  "warmupMs": 2000,
+  "firstRacingFrames": [
+   {
+    "frameMs": 18.3,
+    "render": 10.7,
+    "step": 5.8
+   },
+   {
+    "frameMs": 56.9,
+    "render": 48.2,
+    "step": 1.1
+   },
+   {
+    "frameMs": 19.9,
+    "render": 14.8,
+    "step": 0.7
+   }
+  ],
+  "frameMs": {
+   "p50": 6016.4,
+   "p95": 6016.4,
+   "p99": 6016.4,
+   "max": 6016.4
+  },
+  "over33": 1,
+  "over50": 1,
+  "tickMs": {
+   "avg": 38.4,
+   "p95": 56.9,
+   "max": 56.9
+  },
+  "parts": {
+   "step": 0.9,
+   "snapshot": 0,
+   "presentation": 0,
+   "render": 31.5,
+   "other": 4.567
+  },
+  "allocKB": null,
+  "audit": {
+   "categories": {
+    "track": {
+     "objects": 17,
+     "tris": 36192,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "flags": {
+     "objects": 9,
+     "tris": 52560,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "treesNear": {
+     "objects": 6,
+     "tris": 5877,
+     "shadowTris": 1761,
+     "points": 0
+    },
+    "treesFar": {
+     "objects": 3,
+     "tris": 4254,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "treesDistant": {
+     "objects": 3,
+     "tris": 9120,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "rocks": {
+     "objects": 4,
+     "tris": 594,
+     "shadowTris": 108,
+     "points": 0
+    },
+    "fence": {
+     "objects": 1,
+     "tris": 33152,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "signs": {
+     "objects": 1,
+     "tris": 207,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "moguls": {
+     "objects": 1,
+     "tris": 3840,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "iceWall": {
+     "objects": 1,
+     "tris": 177408,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "markers": {
+     "objects": 3,
+     "tris": 2967,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "decals": {
+     "objects": 1,
+     "tris": 22,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "effects": {
+     "objects": 4,
+     "tris": 72,
+     "shadowTris": 0,
+     "points": 258
+    },
+    "coins": {
+     "objects": 1,
+     "tris": 1920,
+     "shadowTris": 1920,
+     "points": 0
+    },
+    "finish": {
+     "objects": 1,
+     "tris": 256,
+     "shadowTris": 256,
+     "points": 0
+    },
+    "riders": {
+     "objects": 25,
+     "tris": 69378,
+     "shadowTris": 69366,
+     "points": 0
+    },
+    "other": {
+     "objects": 2,
+     "tris": 4,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "props": {
+     "objects": 9,
+     "tris": 358,
+     "shadowTris": 0,
+     "points": 0
+    }
+   },
+   "shadowMapSize": 1024,
+   "shadowsEnabled": true,
+   "programs": 28
+  },
+  "auditHigh": {
+   "categories": {
+    "track": {
+     "objects": 17,
+     "tris": 36192,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "flags": {
+     "objects": 9,
+     "tris": 52560,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "treesNear": {
+     "objects": 6,
+     "tris": 5877,
+     "shadowTris": 1761,
+     "points": 0
+    },
+    "treesFar": {
+     "objects": 3,
+     "tris": 4254,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "treesDistant": {
+     "objects": 3,
+     "tris": 9120,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "rocks": {
+     "objects": 4,
+     "tris": 594,
+     "shadowTris": 108,
+     "points": 0
+    },
+    "fence": {
+     "objects": 1,
+     "tris": 33152,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "signs": {
+     "objects": 1,
+     "tris": 207,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "moguls": {
+     "objects": 1,
+     "tris": 3840,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "iceWall": {
+     "objects": 1,
+     "tris": 177408,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "markers": {
+     "objects": 3,
+     "tris": 2967,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "decals": {
+     "objects": 1,
+     "tris": 22,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "effects": {
+     "objects": 4,
+     "tris": 72,
+     "shadowTris": 0,
+     "points": 258
+    },
+    "coins": {
+     "objects": 1,
+     "tris": 1920,
+     "shadowTris": 1920,
+     "points": 0
+    },
+    "finish": {
+     "objects": 1,
+     "tris": 256,
+     "shadowTris": 256,
+     "points": 0
+    },
+    "riders": {
+     "objects": 25,
+     "tris": 69378,
+     "shadowTris": 69366,
+     "points": 0
+    },
+    "other": {
+     "objects": 2,
+     "tris": 4,
+     "shadowTris": 0,
+     "points": 0
+    },
+    "props": {
+     "objects": 9,
+     "tris": 358,
+     "shadowTris": 0,
+     "points": 0
+    }
+   },
+   "shadowMapSize": 1024,
+   "shadowsEnabled": true,
+   "programs": 28
+  },
+  "switchMetrics": {
+   "quality": "high",
+   "pixelRatioMs": 0,
+   "shadowMs": 0.1,
+   "resizeMs": 0,
+   "totalMs": 0.1
+  },
+  "qualitySwitches": [],
+  "render": {
+   "calls": 96,
+   "triangles": 398259,
+   "trees": 207,
+   "chunks": 51,
+   "visibleChunks": 9,
+   "quality": "high",
+   "mode": "model",
+   "geometries": 63,
+   "textures": 23
+  },
+  "finalPhase": "racing",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36"
+ }
+}
