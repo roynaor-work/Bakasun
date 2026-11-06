@@ -30,7 +30,10 @@ try{
  await page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||s.renderMetrics?.calls>0&&s.stepsRun>30);});
  const res=await page.evaluate(({ticks})=>{const d=window.__session.debug;d.hold=true;
   const out={ticks:0,stops:0,handlerFrames:0,dribbleAfterStop:0,v8Frames:0,passes:0,examples:[]};let locked=new Set();
-  for(let i=0;i<ticks;i++){d.step(1);d.render();const s=d.engine.snapshot();out.ticks++;
+  for(let i=0;i<ticks;i++){
+   // force the engine's own 'dribble ends' every 300 ticks so stops really happen (autoplay almost never gathers)
+   if(i%300===150){const api=d.engine.debug.api,h=api.holder();if(h&&api.gatherBall(h))out.forced=(out.forced||0)+1;}
+   d.step(1);d.render();const s=d.engine.snapshot();out.ticks++;
    for(const p of s.players){const av=d.view.avatars.get(p.id);if(!av)continue;
     if(/^v8:/.test(av.motionState))out.v8Frames++;if(p.act==='pass'&&p.actT<.02)out.passes++;
     if(!p.hasBall){locked.delete(p.id);continue;}out.handlerFrames++;
