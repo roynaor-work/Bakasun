@@ -33,7 +33,7 @@
   (function () {
     var h = location.hash, m = /^#\/p\/([a-z0-9-]+)$/.exec(h), l = document.createElement('link'), n, w, sz;
     l.rel = 'preload'; l.as = 'image'; l.setAttribute('fetchpriority', 'high');
-    if (m) { n = 'img/s/v2/' + m[1] + '-product-'; w = [240, 480, 800]; sz = '(min-width:1000px) 560px, 100vw'; }
+    if (m) { n = 'img/s/v4/' + m[1] + '-product-'; w = [240, 480, 800]; sz = '(min-width:1000px) 560px, 100vw'; }
     else if (!h || /^#\/(#.*)?$/.test(h)) { n = 'img/s/v2/hero-'; w = [640, 1024, 1440]; sz = '100vw'; }
     else return;
     l.setAttribute('imagesrcset', w.map(function (x) { return n + x + '.webp ' + x + 'w'; }).join(', '));
