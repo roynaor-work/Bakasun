@@ -325,3 +325,17 @@
 .game-screen[data-game=islandRacing] .racing-lapinfo{font-size:11px;font-weight:700;color:#d6e8f2;text-shadow:0 1px 4px #000;white-space:nowrap}
 .game-screen[data-game=islandRacing] .racing-draft{position:absolute;left:50%;bottom:calc(var(--race-bottom) + 118px);transform:translateX(-50%);z-index:3;padding:3px 14px;border-radius:3px;background:#0b1729d9;border:1px solid var(--race-nitro);border-inline-start:3px solid var(--race-nitro);color:#f4fbff;font-size:13px;font-weight:800;letter-spacing:.5px;pointer-events:none}
 .game-screen[data-game=islandRacing] .racing-draft[hidden]{display:none}
+
+/* racing-v11 podium */
+.game-screen[data-game=islandRacing] .racing-podium{position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at 50% 60%,#16283ce6,#08111cf2);color:#f4fbff;pointer-events:auto;touch-action:manipulation;cursor:pointer}
+.game-screen[data-game=islandRacing] .racing-podium-title{font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-podium-row{display:flex;align-items:flex-end;gap:10px;direction:ltr}
+.game-screen[data-game=islandRacing] .racing-podium-step{width:110px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;padding:8px 6px 0;border-radius:6px 6px 0 0;background:linear-gradient(#3a4f66,#1c2c3e);border:1px solid #b5cadb44;border-bottom:0}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-1{height:118px;background:linear-gradient(#e6bd3e,#8a6a14)}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-2{height:92px;background:linear-gradient(#cbd5dc,#6d7b86)}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-3{height:74px;background:linear-gradient(#cd8a4b,#6b4220)}
+.game-screen[data-game=islandRacing] .racing-podium-step.you{outline:2px solid #fff;outline-offset:2px}
+.game-screen[data-game=islandRacing] .racing-podium-car{width:46px;height:18px;border-radius:9px 9px 4px 4px;box-shadow:inset 0 -4px 0 #0003,0 2px 4px #0006}
+.game-screen[data-game=islandRacing] .racing-podium-name{font-size:12px;font-weight:700;color:#08111c;text-align:center}
+.game-screen[data-game=islandRacing] .racing-podium-place{font-size:30px;line-height:1;color:#08111c}
+.game-screen[data-game=islandRacing] .racing-podium-note{font-size:12px;opacity:.85}
