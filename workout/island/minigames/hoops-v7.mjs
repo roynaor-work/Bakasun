@@ -87,6 +87,8 @@ export function chooseV7Motion(p,ctx={},hint=null){
   return {upper:'dribble_right',lower:legs,mode:'dribble'};
  }
  if(ctx.defending&&speed>.45&&speed<3.2)return {full:'defense_shuffle',mode:'loop',sideways:Math.abs(lat)>Math.abs(fwd)*.8};
+ // polish (07/11): a defender who stands still plays the defensive stance (hips low, hands out wide) instead of the upright idle
+ if(ctx.polish&&ctx.defending&&speed<=.45)return {full:'defense_shuffle',mode:'stance'};
  if(speed>.4)return {full:speed>1.2||p.sprinting?'run':'walk',mode:'loop'};
  return {full:ctx.catching?'idle_hold':'idle',mode:'loop'};
 }
@@ -302,6 +304,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
    else if(n==='fall')t=Math.min(d-.001,stumbleT);
    else if(plan.mode==='hint')t=Math.min(d-.001,hintAge);
    else if(n==='run'||n==='walk')t=locomotion(n);
+   else if(plan.mode==='stance')t=loopAdvance(n,.12);
    else if(n==='defense_shuffle')t=loopAdvance(n,clamp(speed/1.5,.5,2));
    else t=loopAdvance(n,1);
    out.full=[n,t];

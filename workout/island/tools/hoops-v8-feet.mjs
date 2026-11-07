@@ -15,7 +15,7 @@ const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAY
 const args=Object.fromEntries(process.argv.slice(2).map(a=>{const i=a.indexOf('=');return i<0?[a,'1']:[a.slice(0,i),a.slice(i+1)];}));
 const out=path.resolve(args.out||'/tmp/hoops-seq'),cases=(args.cases||'dunk,layup,shot,block,pass,run').split(','),frames=Number(args.frames||14),ticks=Number(args.ticks||3);
 const [vw,vh]=(args.viewport||'844x390').split('x').map(Number);
-await mkdir(out,{recursive:true});
+await mkdir(path.dirname(out),{recursive:true});
 const workout=path.resolve(fileURLToPath(new URL('../../',import.meta.url)));
 const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.glb':'model/gltf-binary','.ogg':'audio/ogg','.jpg':'image/jpeg','.wasm':'application/wasm'};
 const server=createServer(async(req,res)=>{try{const p=decodeURIComponent(new URL(req.url,'http://x').pathname);if(!p.startsWith('/workout/')){res.writeHead(404).end();return;}let f=path.resolve(workout,p.slice('/workout/'.length)||'.');if(f!==workout&&!f.startsWith(workout+path.sep)){res.writeHead(403).end();return;}if((await stat(f)).isDirectory())f=path.join(f,'index.html');res.writeHead(200,{'content-type':types[path.extname(f)]||'application/octet-stream'});res.end(await readFile(f));}catch{res.writeHead(404).end();}});
