@@ -1,0 +1,2449 @@
+{
+ "name": "Meshy city models (SimCity-style)",
+ "generated": "2026-11-07",
+ "count": 58,
+ "total_bytes": 137098732,
+ "notes": [
+  "units: glTF metres as exported by Meshy; models normalised to ~1 unit tall, origin at bounding-box centre, base sits at y = -height/2 (base_y in catalog)",
+  "models 8, 39, 40 include a base plate on purpose (has_base_plate=true)",
+  "duplicates not copied: Meshy_AI__1107081247_texture.glb (copy of 01), Meshy_AI_small_suburban_house__1107081522_texture.glb (copy of 02)"
+ ],
+ "models": [
+  {
+   "id": 1,
+   "name": "small_house_red_roof",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/01-small-house-red-roof.glb",
+   "bytes": 2004528,
+   "original_file": "Meshy_AI_01_small_house_red_ro_1107081440_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5257,
+   "vertices": 6081,
+   "bbox_min": [
+    -0.4734,
+    -0.4172,
+    -0.3923
+   ],
+   "bbox_max": [
+    0.4739,
+    0.4172,
+    0.3909
+   ],
+   "size_xyz": [
+    0.9473,
+    0.8345,
+    0.7832
+   ],
+   "width": 0.9473,
+   "height": 0.8345,
+   "depth": 0.7832,
+   "base_y": -0.4172,
+   "base_center_xz": [
+    0.0002,
+    -0.0007
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 2,
+   "name": "small_suburban_house_blue_roof",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/02-small-suburban-house-blue-roof.glb",
+   "bytes": 1912316,
+   "original_file": "Meshy_AI_02_small_house_blue_r_1107081547_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4864,
+   "vertices": 5266,
+   "bbox_min": [
+    -0.4744,
+    -0.3577,
+    -0.4617
+   ],
+   "bbox_max": [
+    0.4749,
+    0.3499,
+    0.4587
+   ],
+   "size_xyz": [
+    0.9492,
+    0.7075,
+    0.9204
+   ],
+   "width": 0.9492,
+   "height": 0.7075,
+   "depth": 0.9204,
+   "base_y": -0.3577,
+   "base_center_xz": [
+    0.0002,
+    -0.0015
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 3,
+   "name": "townhouses_row",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/03-townhouses-row.glb",
+   "bytes": 2569400,
+   "original_file": "Meshy_AI_03_townhouses_row_1107082941_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5278,
+   "vertices": 4926,
+   "bbox_min": [
+    -0.4783,
+    -0.2136,
+    -0.1677
+   ],
+   "bbox_max": [
+    0.4753,
+    0.2112,
+    0.1692
+   ],
+   "size_xyz": [
+    0.9536,
+    0.4248,
+    0.3369
+   ],
+   "width": 0.9536,
+   "height": 0.4248,
+   "depth": 0.3369,
+   "base_y": -0.2136,
+   "base_center_xz": [
+    -0.0015,
+    0.0007
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 4,
+   "name": "duplex_house",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/04-duplex-house.glb",
+   "bytes": 2014992,
+   "original_file": "Meshy_AI_04_duplex_house_1107082857_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4473,
+   "vertices": 5112,
+   "bbox_min": [
+    -0.4817,
+    -0.3865,
+    -0.2874
+   ],
+   "bbox_max": [
+    0.4792,
+    0.385,
+    0.2864
+   ],
+   "size_xyz": [
+    0.9609,
+    0.7715,
+    0.5737
+   ],
+   "width": 0.9609,
+   "height": 0.7715,
+   "depth": 0.5737,
+   "base_y": -0.3865,
+   "base_center_xz": [
+    -0.0012,
+    -0.0005
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 5,
+   "name": "apartment_4_floors",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/05-apartment-4-floors.glb",
+   "bytes": 2462412,
+   "original_file": "Meshy_AI_05_apartment_4_floors_1107082812_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 3631,
+   "vertices": 5488,
+   "bbox_min": [
+    -0.2458,
+    -0.4758,
+    -0.2571
+   ],
+   "bbox_max": [
+    0.2488,
+    0.4758,
+    0.2571
+   ],
+   "size_xyz": [
+    0.4946,
+    0.9517,
+    0.5142
+   ],
+   "width": 0.4946,
+   "height": 0.9517,
+   "depth": 0.5142,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0015,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 6,
+   "name": "apartment_8_floors",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/06-apartment-8-floors.glb",
+   "bytes": 2738872,
+   "original_file": "Meshy_AI_06_apartment_8_floors_1107082747_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4294,
+   "vertices": 5865,
+   "bbox_min": [
+    -0.3103,
+    -0.4749,
+    -0.2302
+   ],
+   "bbox_max": [
+    0.3103,
+    0.4753,
+    0.2297
+   ],
+   "size_xyz": [
+    0.6206,
+    0.9502,
+    0.46
+   ],
+   "width": 0.6206,
+   "height": 0.9502,
+   "depth": 0.46,
+   "base_y": -0.4749,
+   "base_center_xz": [
+    0.0,
+    -0.0002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 7,
+   "name": "residential_tower",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/07-residential-tower.glb",
+   "bytes": 2538976,
+   "original_file": "Meshy_AI_07_residential_tower_1107082712_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5094,
+   "vertices": 5510,
+   "bbox_min": [
+    -0.1833,
+    -0.4753,
+    -0.156
+   ],
+   "bbox_max": [
+    0.1794,
+    0.4749,
+    0.156
+   ],
+   "size_xyz": [
+    0.3628,
+    0.9502,
+    0.312
+   ],
+   "width": 0.3628,
+   "height": 0.9502,
+   "depth": 0.312,
+   "base_y": -0.4753,
+   "base_center_xz": [
+    -0.002,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 8,
+   "name": "villa_with_pool",
+   "category": "residential",
+   "category_he": "מגורים",
+   "path": "assets/models/city/residential/08-villa-with-pool.glb",
+   "bytes": 2172260,
+   "original_file": "Meshy_AI_08_villa_with_pool_1107082537_texture.glb",
+   "has_base_plate": true,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 3949,
+   "vertices": 5194,
+   "bbox_min": [
+    -0.1985,
+    -0.2195,
+    -0.3162
+   ],
+   "bbox_max": [
+    0.4807,
+    0.2219,
+    0.324
+   ],
+   "size_xyz": [
+    0.6792,
+    0.4414,
+    0.6401
+   ],
+   "width": 0.6792,
+   "height": 0.4414,
+   "depth": 0.6401,
+   "base_y": -0.2195,
+   "base_center_xz": [
+    0.1411,
+    0.0039
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 9,
+   "name": "corner_shop",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/09-corner-shop.glb",
+   "bytes": 2546256,
+   "original_file": "Meshy_AI_09_corner_shop_1107082615_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4277,
+   "vertices": 4942,
+   "bbox_min": [
+    -0.363,
+    -0.3508,
+    -0.4758
+   ],
+   "bbox_max": [
+    0.363,
+    0.3528,
+    0.4734
+   ],
+   "size_xyz": [
+    0.7261,
+    0.7036,
+    0.9492
+   ],
+   "width": 0.7261,
+   "height": 0.7036,
+   "depth": 0.9492,
+   "base_y": -0.3508,
+   "base_center_xz": [
+    0.0,
+    -0.0012
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 10,
+   "name": "supermarket",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/10-supermarket.glb",
+   "bytes": 1966432,
+   "original_file": "Meshy_AI_10_supermarket_1107082643_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 3700,
+   "vertices": 5531,
+   "bbox_min": [
+    -0.4788,
+    -0.2463,
+    -0.3167
+   ],
+   "bbox_max": [
+    0.4788,
+    0.2468,
+    0.3137
+   ],
+   "size_xyz": [
+    0.9575,
+    0.4932,
+    0.6304
+   ],
+   "width": 0.9575,
+   "height": 0.4932,
+   "depth": 0.6304,
+   "base_y": -0.2463,
+   "base_center_xz": [
+    0.0,
+    -0.0015
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 11,
+   "name": "cafe",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/11-cafe.glb",
+   "bytes": 2512964,
+   "original_file": "Meshy_AI_11_cafe_1107082333_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4914,
+   "vertices": 5349,
+   "bbox_min": [
+    -0.4563,
+    -0.4495,
+    -0.4788
+   ],
+   "bbox_max": [
+    0.4602,
+    0.4495,
+    0.4744
+   ],
+   "size_xyz": [
+    0.9165,
+    0.8989,
+    0.9531
+   ],
+   "width": 0.9165,
+   "height": 0.8989,
+   "depth": 0.9531,
+   "base_y": -0.4495,
+   "base_center_xz": [
+    0.002,
+    -0.0022
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 12,
+   "name": "restaurant",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/12-restaurant.glb",
+   "bytes": 1899528,
+   "original_file": "Meshy_AI_12_restaurant_1107082510_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5076,
+   "vertices": 6758,
+   "bbox_min": [
+    -0.3904,
+    -0.3484,
+    -0.363
+   ],
+   "bbox_max": [
+    0.3943,
+    0.345,
+    0.3596
+   ],
+   "size_xyz": [
+    0.7847,
+    0.6934,
+    0.7227
+   ],
+   "width": 0.7847,
+   "height": 0.6934,
+   "depth": 0.7227,
+   "base_y": -0.3484,
+   "base_center_xz": [
+    0.002,
+    -0.0017
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 13,
+   "name": "shopping_mall",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/13-shopping-mall.glb",
+   "bytes": 2017176,
+   "original_file": "Meshy_AI_13_shopping_mall_1107082441_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5113,
+   "vertices": 5419,
+   "bbox_min": [
+    -0.4749,
+    -0.1785,
+    -0.1885
+   ],
+   "bbox_max": [
+    0.4758,
+    0.178,
+    0.1848
+   ],
+   "size_xyz": [
+    0.9507,
+    0.3564,
+    0.3733
+   ],
+   "width": 0.9507,
+   "height": 0.3564,
+   "depth": 0.3733,
+   "base_y": -0.1785,
+   "base_center_xz": [
+    0.0005,
+    -0.0018
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 14,
+   "name": "office_6_floors",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/14-office-6-floors.glb",
+   "bytes": 3045360,
+   "original_file": "Meshy_AI_14_office_6_floors_1107082402_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5316,
+   "vertices": 5819,
+   "bbox_min": [
+    -0.2756,
+    -0.4763,
+    -0.2766
+   ],
+   "bbox_max": [
+    0.2732,
+    0.4758,
+    0.2727
+   ],
+   "size_xyz": [
+    0.5488,
+    0.9521,
+    0.5493
+   ],
+   "width": 0.5488,
+   "height": 0.9521,
+   "depth": 0.5493,
+   "base_y": -0.4763,
+   "base_center_xz": [
+    -0.0012,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 15,
+   "name": "glass_skyscraper",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/15-glass-skyscraper.glb",
+   "bytes": 2627696,
+   "original_file": "Meshy_AI_15_glass_skyscraper_1107082252_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4284,
+   "vertices": 5984,
+   "bbox_min": [
+    -0.1365,
+    -0.4753,
+    -0.1321
+   ],
+   "bbox_max": [
+    0.1365,
+    0.4758,
+    0.1321
+   ],
+   "size_xyz": [
+    0.2729,
+    0.9512,
+    0.2642
+   ],
+   "width": 0.2729,
+   "height": 0.9512,
+   "depth": 0.2642,
+   "base_y": -0.4753,
+   "base_center_xz": [
+    0.0,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 16,
+   "name": "hotel",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/16-hotel.glb",
+   "bytes": 2515576,
+   "original_file": "Meshy_AI_hotel_tall_multi_sto_1107085454_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5216,
+   "vertices": 5248,
+   "bbox_min": [
+    -0.3347,
+    -0.4758,
+    -0.2419
+   ],
+   "bbox_max": [
+    0.3352,
+    0.4758,
+    0.24
+   ],
+   "size_xyz": [
+    0.6699,
+    0.9517,
+    0.4819
+   ],
+   "width": 0.6699,
+   "height": 0.9517,
+   "depth": 0.4819,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0002,
+    -0.001
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 17,
+   "name": "gas_station",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/17-gas-station.glb",
+   "bytes": 2633384,
+   "original_file": "Meshy_AI_gas_station_3_4_isom_1107091115_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4970,
+   "vertices": 5578,
+   "bbox_min": [
+    -0.4783,
+    -0.2463,
+    -0.4758
+   ],
+   "bbox_max": [
+    0.4729,
+    0.2468,
+    0.4768
+   ],
+   "size_xyz": [
+    0.9512,
+    0.4932,
+    0.9526
+   ],
+   "width": 0.9512,
+   "height": 0.4932,
+   "depth": 0.9526,
+   "base_y": -0.2463,
+   "base_center_xz": [
+    -0.0027,
+    0.0005
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 18,
+   "name": "bank_building",
+   "category": "commerce",
+   "category_he": "מסחר",
+   "path": "assets/models/city/commerce/18-bank-building.glb",
+   "bytes": 2341944,
+   "original_file": "Meshy_AI_bank_building_3_4_is_1107085136_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5136,
+   "vertices": 6265,
+   "bbox_min": [
+    -0.4778,
+    -0.3562,
+    -0.3826
+   ],
+   "bbox_max": [
+    0.4749,
+    0.3562,
+    0.3826
+   ],
+   "size_xyz": [
+    0.9526,
+    0.7124,
+    0.7651
+   ],
+   "width": 0.9526,
+   "height": 0.7124,
+   "depth": 0.7651,
+   "base_y": -0.3562,
+   "base_center_xz": [
+    -0.0015,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 19,
+   "name": "factory_with_chimney",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/19-factory-with-chimney.glb",
+   "bytes": 2300256,
+   "original_file": "Meshy_AI_factory_with_chimney__1107085421_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5096,
+   "vertices": 7260,
+   "bbox_min": [
+    -0.365,
+    -0.4763,
+    -0.2854
+   ],
+   "bbox_max": [
+    0.3699,
+    0.4768,
+    0.2834
+   ],
+   "size_xyz": [
+    0.7349,
+    0.9531,
+    0.5688
+   ],
+   "width": 0.7349,
+   "height": 0.9531,
+   "depth": 0.5688,
+   "base_y": -0.4763,
+   "base_center_xz": [
+    0.0024,
+    -0.001
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 20,
+   "name": "warehouse",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/20-warehouse.glb",
+   "bytes": 2218632,
+   "original_file": "Meshy_AI_warehouse_3_4_isomet_1107091158_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 3904,
+   "vertices": 6333,
+   "bbox_min": [
+    -0.4397,
+    -0.2532,
+    -0.4758
+   ],
+   "bbox_max": [
+    0.4402,
+    0.2498,
+    0.4729
+   ],
+   "size_xyz": [
+    0.8799,
+    0.5029,
+    0.9487
+   ],
+   "width": 0.8799,
+   "height": 0.5029,
+   "depth": 0.9487,
+   "base_y": -0.2532,
+   "base_center_xz": [
+    0.0002,
+    -0.0015
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 21,
+   "name": "industrial_silos",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/21-industrial-silos.glb",
+   "bytes": 2780712,
+   "original_file": "Meshy_AI_industrial_silos_3_4_1107085153_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5045,
+   "vertices": 5498,
+   "bbox_min": [
+    -0.4675,
+    -0.4446,
+    -0.4773
+   ],
+   "bbox_max": [
+    0.4675,
+    0.449,
+    0.4768
+   ],
+   "size_xyz": [
+    0.9351,
+    0.8936,
+    0.9541
+   ],
+   "width": 0.9351,
+   "height": 0.8936,
+   "depth": 0.9541,
+   "base_y": -0.4446,
+   "base_center_xz": [
+    0.0,
+    -0.0002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 22,
+   "name": "power_plant",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/22-power-plant.glb",
+   "bytes": 2199672,
+   "original_file": "Meshy_AI_power_plant_with_cool_1107085212_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4806,
+   "vertices": 5020,
+   "bbox_min": [
+    -0.4788,
+    -0.2766,
+    -0.4451
+   ],
+   "bbox_max": [
+    0.4709,
+    0.2756,
+    0.449
+   ],
+   "size_xyz": [
+    0.9497,
+    0.5522,
+    0.894
+   ],
+   "width": 0.9497,
+   "height": 0.5522,
+   "depth": 0.894,
+   "base_y": -0.2766,
+   "base_center_xz": [
+    -0.0039,
+    0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 23,
+   "name": "solar_panel_field",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/23-solar-panel-field.glb",
+   "bytes": 3413648,
+   "original_file": "Meshy_AI_solar_panel_field_3__1107085241_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5142,
+   "vertices": 10195,
+   "bbox_min": [
+    -0.4441,
+    -0.0486,
+    -0.4773
+   ],
+   "bbox_max": [
+    0.4451,
+    0.052,
+    0.4739
+   ],
+   "size_xyz": [
+    0.8892,
+    0.1006,
+    0.9512
+   ],
+   "width": 0.8892,
+   "height": 0.1006,
+   "depth": 0.9512,
+   "base_y": -0.0486,
+   "base_center_xz": [
+    0.0005,
+    -0.0017
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 24,
+   "name": "wind_turbine",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/24-wind-turbine.glb",
+   "bytes": 1410688,
+   "original_file": "Meshy_AI_wind_turbine_3_4_iso_1107085318_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5155,
+   "vertices": 5391,
+   "bbox_min": [
+    -0.2688,
+    -0.4753,
+    -0.1013
+   ],
+   "bbox_max": [
+    0.2693,
+    0.4753,
+    0.0974
+   ],
+   "size_xyz": [
+    0.5381,
+    0.9507,
+    0.1987
+   ],
+   "width": 0.5381,
+   "height": 0.9507,
+   "depth": 0.1987,
+   "base_y": -0.4753,
+   "base_center_xz": [
+    0.0002,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 25,
+   "name": "water_tower",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/25-water-tower.glb",
+   "bytes": 1625460,
+   "original_file": "Meshy_AI_water_tower_3_4_isom_1107085259_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5246,
+   "vertices": 5505,
+   "bbox_min": [
+    -0.2107,
+    -0.4749,
+    -0.2107
+   ],
+   "bbox_max": [
+    0.2107,
+    0.4753,
+    0.2107
+   ],
+   "size_xyz": [
+    0.4214,
+    0.9502,
+    0.4214
+   ],
+   "width": 0.4214,
+   "height": 0.9502,
+   "depth": 0.4214,
+   "base_y": -0.4749,
+   "base_center_xz": [
+    0.0,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 26,
+   "name": "water_treatment_plant",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/26-water-treatment-plant.glb",
+   "bytes": 2672936,
+   "original_file": "Meshy_AI_water_treatment_plant_1107085403_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5079,
+   "vertices": 4897,
+   "bbox_min": [
+    -0.4749,
+    -0.1169,
+    -0.3411
+   ],
+   "bbox_max": [
+    0.4783,
+    0.1174,
+    0.3391
+   ],
+   "size_xyz": [
+    0.9531,
+    0.2344,
+    0.6802
+   ],
+   "width": 0.9531,
+   "height": 0.2344,
+   "depth": 0.6802,
+   "base_y": -0.1169,
+   "base_center_xz": [
+    0.0017,
+    -0.001
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 27,
+   "name": "recycling_center",
+   "category": "industry",
+   "category_he": "תעשייה",
+   "path": "assets/models/city/industry/27-recycling-center.glb",
+   "bytes": 2499768,
+   "original_file": "Meshy_AI_recycling_center_3_4_1107085334_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5268,
+   "vertices": 5387,
+   "bbox_min": [
+    -0.3977,
+    -0.4036,
+    -0.4783
+   ],
+   "bbox_max": [
+    0.3982,
+    0.4021,
+    0.4734
+   ],
+   "size_xyz": [
+    0.7959,
+    0.8057,
+    0.9517
+   ],
+   "width": 0.7959,
+   "height": 0.8057,
+   "depth": 0.9517,
+   "base_y": -0.4036,
+   "base_center_xz": [
+    0.0002,
+    -0.0024
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 28,
+   "name": "fire_station",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/28-fire-station.glb",
+   "bytes": 2592248,
+   "original_file": "Meshy_AI_fire_station_3_4_iso_1107085511_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 3882,
+   "vertices": 5052,
+   "bbox_min": [
+    -0.2585,
+    -0.4758,
+    -0.262
+   ],
+   "bbox_max": [
+    0.261,
+    0.4753,
+    0.2615
+   ],
+   "size_xyz": [
+    0.5195,
+    0.9512,
+    0.5234
+   ],
+   "width": 0.5195,
+   "height": 0.9512,
+   "depth": 0.5234,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0012,
+    -0.0002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 29,
+   "name": "police_station",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/29-police-station.glb",
+   "bytes": 2290088,
+   "original_file": "Meshy_AI_police_station_build_1107091743_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4583,
+   "vertices": 5136,
+   "bbox_min": [
+    -0.4749,
+    -0.3547,
+    -0.2927
+   ],
+   "bbox_max": [
+    0.4758,
+    0.3557,
+    0.2849
+   ],
+   "size_xyz": [
+    0.9507,
+    0.7104,
+    0.5776
+   ],
+   "width": 0.9507,
+   "height": 0.7104,
+   "depth": 0.5776,
+   "base_y": -0.3547,
+   "base_center_xz": [
+    0.0005,
+    -0.0039
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 30,
+   "name": "hospital",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/30-hospital.glb",
+   "bytes": 1518372,
+   "original_file": "Meshy_AI_hospital_large_white_1107091607_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4624,
+   "vertices": 6001,
+   "bbox_min": [
+    -0.4778,
+    -0.2917,
+    -0.363
+   ],
+   "bbox_max": [
+    0.4749,
+    0.2966,
+    0.363
+   ],
+   "size_xyz": [
+    0.9526,
+    0.5884,
+    0.7261
+   ],
+   "width": 0.9526,
+   "height": 0.5884,
+   "depth": 0.7261,
+   "base_y": -0.2917,
+   "base_center_xz": [
+    -0.0015,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 31,
+   "name": "school_building",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/31-school-building.glb",
+   "bytes": 2432196,
+   "original_file": "Meshy_AI_school_building_3_4__1107091318_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4644,
+   "vertices": 6134,
+   "bbox_min": [
+    -0.4783,
+    -0.2727,
+    -0.2615
+   ],
+   "bbox_max": [
+    0.4778,
+    0.2722,
+    0.2615
+   ],
+   "size_xyz": [
+    0.9561,
+    0.5449,
+    0.5229
+   ],
+   "width": 0.9561,
+   "height": 0.5449,
+   "depth": 0.5229,
+   "base_y": -0.2727,
+   "base_center_xz": [
+    -0.0002,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 32,
+   "name": "university_building",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/32-university-building.glb",
+   "bytes": 2514044,
+   "original_file": "Meshy_AI_university_building__1107091355_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5154,
+   "vertices": 6523,
+   "bbox_min": [
+    -0.4749,
+    -0.3508,
+    -0.2976
+   ],
+   "bbox_max": [
+    0.4749,
+    0.3513,
+    0.2957
+   ],
+   "size_xyz": [
+    0.9497,
+    0.7021,
+    0.5933
+   ],
+   "width": 0.9497,
+   "height": 0.7021,
+   "depth": 0.5933,
+   "base_y": -0.3508,
+   "base_center_xz": [
+    0.0,
+    -0.001
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 33,
+   "name": "library",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/33-library.glb",
+   "bytes": 2101724,
+   "original_file": "Meshy_AI_library_3_4_isometri_1107091336_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5148,
+   "vertices": 6112,
+   "bbox_min": [
+    -0.3137,
+    -0.4758,
+    -0.4329
+   ],
+   "bbox_max": [
+    0.3181,
+    0.4734,
+    0.4329
+   ],
+   "size_xyz": [
+    0.6318,
+    0.9492,
+    0.8657
+   ],
+   "width": 0.6318,
+   "height": 0.9492,
+   "depth": 0.8657,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0022,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 34,
+   "name": "town_hall",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/34-town-hall.glb",
+   "bytes": 2546632,
+   "original_file": "Meshy_AI_town_hall_civic_buil_1107091626_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4985,
+   "vertices": 5517,
+   "bbox_min": [
+    -0.4724,
+    -0.4758,
+    -0.3953
+   ],
+   "bbox_max": [
+    0.4729,
+    0.4753,
+    0.3914
+   ],
+   "size_xyz": [
+    0.9453,
+    0.9512,
+    0.7866
+   ],
+   "width": 0.9453,
+   "height": 0.9512,
+   "depth": 0.7866,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0002,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 35,
+   "name": "small_stadium",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/35-small-stadium.glb",
+   "bytes": 2102532,
+   "original_file": "Meshy_AI_small_stadium_3_4_is_1107091413_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5257,
+   "vertices": 6595,
+   "bbox_min": [
+    -0.4749,
+    -0.1252,
+    -0.4373
+   ],
+   "bbox_max": [
+    0.4749,
+    0.1262,
+    0.4373
+   ],
+   "size_xyz": [
+    0.9497,
+    0.2515,
+    0.8745
+   ],
+   "width": 0.9497,
+   "height": 0.2515,
+   "depth": 0.8745,
+   "base_y": -0.1252,
+   "base_center_xz": [
+    0.0,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 36,
+   "name": "train_station",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/36-train-station.glb",
+   "bytes": 2134252,
+   "original_file": "Meshy_AI_train_station_statio_1107091529_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4602,
+   "vertices": 4778,
+   "bbox_min": [
+    -0.4788,
+    -0.3792,
+    -0.3401
+   ],
+   "bbox_max": [
+    0.4783,
+    0.3049,
+    0.3401
+   ],
+   "size_xyz": [
+    0.957,
+    0.6841,
+    0.6802
+   ],
+   "width": 0.957,
+   "height": 0.6841,
+   "depth": 0.6802,
+   "base_y": -0.3792,
+   "base_center_xz": [
+    -0.0002,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 37,
+   "name": "bus_stop_shelter",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/37-bus-stop-shelter.glb",
+   "bytes": 2095392,
+   "original_file": "Meshy_AI_bus_stop_shelter_3_4_1107091452_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5212,
+   "vertices": 5194,
+   "bbox_min": [
+    -0.4788,
+    -0.4128,
+    -0.2302
+   ],
+   "bbox_max": [
+    0.4788,
+    0.4104,
+    0.2297
+   ],
+   "size_xyz": [
+    0.9575,
+    0.8232,
+    0.46
+   ],
+   "width": 0.9575,
+   "height": 0.8232,
+   "depth": 0.46,
+   "base_y": -0.4128,
+   "base_center_xz": [
+    0.0,
+    -0.0002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 38,
+   "name": "cinema",
+   "category": "services",
+   "category_he": "שירותים",
+   "path": "assets/models/city/services/38-cinema.glb",
+   "bytes": 1912108,
+   "original_file": "Meshy_AI_cinema_movie_theater_1107091512_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4675,
+   "vertices": 5647,
+   "bbox_min": [
+    -0.4783,
+    -0.3215,
+    -0.3547
+   ],
+   "bbox_max": [
+    0.4749,
+    0.321,
+    0.3508
+   ],
+   "size_xyz": [
+    0.9531,
+    0.6426,
+    0.7056
+   ],
+   "width": 0.9531,
+   "height": 0.6426,
+   "depth": 0.7056,
+   "base_y": -0.3215,
+   "base_center_xz": [
+    -0.0017,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 39,
+   "name": "park_with_fountain",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/39-park-with-fountain.glb",
+   "bytes": 2411052,
+   "original_file": "Meshy_AI_park_with_fountain_s_1107091056_texture.glb",
+   "has_base_plate": true,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4586,
+   "vertices": 5348,
+   "bbox_min": [
+    -0.4758,
+    -0.2542,
+    -0.4685
+   ],
+   "bbox_max": [
+    0.4749,
+    0.2561,
+    0.4685
+   ],
+   "size_xyz": [
+    0.9507,
+    0.5103,
+    0.937
+   ],
+   "width": 0.9507,
+   "height": 0.5103,
+   "depth": 0.937,
+   "base_y": -0.2542,
+   "base_center_xz": [
+    -0.0005,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 40,
+   "name": "playground",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/40-playground.glb",
+   "bytes": 3104308,
+   "original_file": "Meshy_AI_playground_compact_k_1107092252_texture.glb",
+   "has_base_plate": true,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5073,
+   "vertices": 5216,
+   "bbox_min": [
+    -0.4714,
+    -0.2864,
+    -0.4768
+   ],
+   "bbox_max": [
+    0.4709,
+    0.2825,
+    0.4729
+   ],
+   "size_xyz": [
+    0.9424,
+    0.5688,
+    0.9497
+   ],
+   "width": 0.9424,
+   "height": 0.5688,
+   "depth": 0.9497,
+   "base_y": -0.2864,
+   "base_center_xz": [
+    -0.0002,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 41,
+   "name": "pine_tree",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/41-pine-tree.glb",
+   "bytes": 1791964,
+   "original_file": "Meshy_AI_pine_tree_3_4_isomet_1107091707_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4477,
+   "vertices": 5255,
+   "bbox_min": [
+    -0.2375,
+    -0.4758,
+    -0.2083
+   ],
+   "bbox_max": [
+    0.238,
+    0.4744,
+    0.2043
+   ],
+   "size_xyz": [
+    0.4756,
+    0.9502,
+    0.4126
+   ],
+   "width": 0.4756,
+   "height": 0.9502,
+   "depth": 0.4126,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0002,
+    -0.002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 42,
+   "name": "round_leafy_tree",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/42-round-leafy-tree.glb",
+   "bytes": 2641780,
+   "original_file": "Meshy_AI_round_leafy_tree_3_4_1107091646_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5085,
+   "vertices": 7093,
+   "bbox_min": [
+    -0.2849,
+    -0.4758,
+    -0.2854
+   ],
+   "bbox_max": [
+    0.2898,
+    0.4758,
+    0.2859
+   ],
+   "size_xyz": [
+    0.5747,
+    0.9517,
+    0.5713
+   ],
+   "width": 0.5747,
+   "height": 0.9517,
+   "depth": 0.5713,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0024,
+    0.0002
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 43,
+   "name": "palm_tree",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/43-palm-tree.glb",
+   "bytes": 2439036,
+   "original_file": "Meshy_AI_palm_tree_3_4_isomet_1107091845_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5187,
+   "vertices": 7101,
+   "bbox_min": [
+    -0.2375,
+    -0.4758,
+    -0.2664
+   ],
+   "bbox_max": [
+    0.2449,
+    0.4763,
+    0.2664
+   ],
+   "size_xyz": [
+    0.4824,
+    0.9521,
+    0.5327
+   ],
+   "width": 0.4824,
+   "height": 0.9521,
+   "depth": 0.5327,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    0.0037,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 44,
+   "name": "bush",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/44-bush.glb",
+   "bytes": 2312256,
+   "original_file": "Meshy_AI_bush_3_4_isometric_v_1107091800_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4813,
+   "vertices": 5181,
+   "bbox_min": [
+    -0.4783,
+    -0.4421,
+    -0.4583
+   ],
+   "bbox_max": [
+    0.4768,
+    0.427,
+    0.4563
+   ],
+   "size_xyz": [
+    0.9551,
+    0.8691,
+    0.9146
+   ],
+   "width": 0.9551,
+   "height": 0.8691,
+   "depth": 0.9146,
+   "base_y": -0.4421,
+   "base_center_xz": [
+    -0.0007,
+    -0.001
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 45,
+   "name": "rock_cluster",
+   "category": "nature",
+   "category_he": "טבע",
+   "path": "assets/models/city/nature/45-rock-cluster.glb",
+   "bytes": 3391516,
+   "original_file": "Meshy_AI_rock_cluster_3_4_iso_1107091902_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5222,
+   "vertices": 6389,
+   "bbox_min": [
+    -0.4788,
+    -0.2532,
+    -0.4724
+   ],
+   "bbox_max": [
+    0.4749,
+    0.2522,
+    0.4714
+   ],
+   "size_xyz": [
+    0.9536,
+    0.5054,
+    0.9438
+   ],
+   "width": 0.9536,
+   "height": 0.5054,
+   "depth": 0.9438,
+   "base_y": -0.2532,
+   "base_center_xz": [
+    -0.002,
+    -0.0005
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 46,
+   "name": "city_bus",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/46-city-bus.glb",
+   "bytes": 2399024,
+   "original_file": "Meshy_AI_city_bus_3_4_isometr_1107092326_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5268,
+   "vertices": 5805,
+   "bbox_min": [
+    -0.4788,
+    -0.2043,
+    -0.1692
+   ],
+   "bbox_max": [
+    0.4788,
+    0.2039,
+    0.1692
+   ],
+   "size_xyz": [
+    0.9575,
+    0.4082,
+    0.3384
+   ],
+   "width": 0.9575,
+   "height": 0.4082,
+   "depth": 0.3384,
+   "base_y": -0.2043,
+   "base_center_xz": [
+    0.0,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 47,
+   "name": "sedan_car",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/47-sedan-car.glb",
+   "bytes": 1869044,
+   "original_file": "Meshy_AI_sedan_car_3_4_isomet_1107092344_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5086,
+   "vertices": 5102,
+   "bbox_min": [
+    -0.4753,
+    -0.1921,
+    -0.2346
+   ],
+   "bbox_max": [
+    0.4749,
+    0.1912,
+    0.2346
+   ],
+   "size_xyz": [
+    0.9502,
+    0.3833,
+    0.4692
+   ],
+   "width": 0.9502,
+   "height": 0.3833,
+   "depth": 0.4692,
+   "base_y": -0.1921,
+   "base_center_xz": [
+    -0.0002,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 48,
+   "name": "delivery_truck",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/48-delivery-truck.glb",
+   "bytes": 2135848,
+   "original_file": "Meshy_AI_delivery_truck_3_4_i_1107092400_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5194,
+   "vertices": 5197,
+   "bbox_min": [
+    -0.4788,
+    -0.2634,
+    -0.2107
+   ],
+   "bbox_max": [
+    0.4749,
+    0.2668,
+    0.2107
+   ],
+   "size_xyz": [
+    0.9536,
+    0.5303,
+    0.4214
+   ],
+   "width": 0.9536,
+   "height": 0.5303,
+   "depth": 0.4214,
+   "base_y": -0.2634,
+   "base_center_xz": [
+    -0.002,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 49,
+   "name": "fire_truck",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/49-fire-truck.glb",
+   "bytes": 3391564,
+   "original_file": "Meshy_AI_fire_truck_3_4_isome_1107092433_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4980,
+   "vertices": 5533,
+   "bbox_min": [
+    -0.4749,
+    -0.2229,
+    -0.1941
+   ],
+   "bbox_max": [
+    0.4753,
+    0.2224,
+    0.1931
+   ],
+   "size_xyz": [
+    0.9502,
+    0.4453,
+    0.3872
+   ],
+   "width": 0.9502,
+   "height": 0.4453,
+   "depth": 0.3872,
+   "base_y": -0.2229,
+   "base_center_xz": [
+    0.0002,
+    -0.0005
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 50,
+   "name": "police_car",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/50-police-car.glb",
+   "bytes": 2603740,
+   "original_file": "Meshy_AI_police_car_3_4_isome_1107092450_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5036,
+   "vertices": 5160,
+   "bbox_min": [
+    -0.4783,
+    -0.2219,
+    -0.2302
+   ],
+   "bbox_max": [
+    0.4763,
+    0.2209,
+    0.2302
+   ],
+   "size_xyz": [
+    0.9546,
+    0.4429,
+    0.4604
+   ],
+   "width": 0.9546,
+   "height": 0.4429,
+   "depth": 0.4604,
+   "base_y": -0.2219,
+   "base_center_xz": [
+    -0.001,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 51,
+   "name": "ambulance",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/51-ambulance.glb",
+   "bytes": 1221992,
+   "original_file": "Meshy_AI_ambulance_3_4_isomet_1107092528_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5167,
+   "vertices": 5244,
+   "bbox_min": [
+    -0.4749,
+    -0.3059,
+    -0.2278
+   ],
+   "bbox_max": [
+    0.4753,
+    0.304,
+    0.2263
+   ],
+   "size_xyz": [
+    0.9502,
+    0.6099,
+    0.4541
+   ],
+   "width": 0.9502,
+   "height": 0.6099,
+   "depth": 0.4541,
+   "base_y": -0.3059,
+   "base_center_xz": [
+    0.0002,
+    -0.0007
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 52,
+   "name": "taxi",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/52-taxi.glb",
+   "bytes": 3390264,
+   "original_file": "Meshy_AI_taxi_yellow_taxi_cab_1107091037_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5069,
+   "vertices": 5025,
+   "bbox_min": [
+    -0.4778,
+    -0.2854,
+    -0.2751
+   ],
+   "bbox_max": [
+    0.4768,
+    0.2825,
+    0.2751
+   ],
+   "size_xyz": [
+    0.9546,
+    0.5679,
+    0.5503
+   ],
+   "width": 0.9546,
+   "height": 0.5679,
+   "depth": 0.5503,
+   "base_y": -0.2854,
+   "base_center_xz": [
+    -0.0005,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 53,
+   "name": "small_bridge",
+   "category": "roads",
+   "category_he": "דרכים",
+   "path": "assets/models/city/roads/53-small-bridge.glb",
+   "bytes": 2394924,
+   "original_file": "Meshy_AI_small_bridge_3_4_iso_1107092510_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4755,
+   "vertices": 5571,
+   "bbox_min": [
+    -0.4749,
+    -0.1672,
+    -0.2312
+   ],
+   "bbox_max": [
+    0.4749,
+    0.1648,
+    0.2288
+   ],
+   "size_xyz": [
+    0.9497,
+    0.332,
+    0.46
+   ],
+   "width": 0.9497,
+   "height": 0.332,
+   "depth": 0.46,
+   "base_y": -0.1672,
+   "base_center_xz": [
+    0.0,
+    -0.0012
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 54,
+   "name": "street_lamp",
+   "category": "roads",
+   "category_he": "דרכים",
+   "path": "assets/models/city/roads/54-street-lamp.glb",
+   "bytes": 1255508,
+   "original_file": "Meshy_AI_street_lamp_3_4_isom_1107092604_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4992,
+   "vertices": 5548,
+   "bbox_min": [
+    -0.0574,
+    -0.4753,
+    -0.0584
+   ],
+   "bbox_max": [
+    0.0564,
+    0.4758,
+    0.0584
+   ],
+   "size_xyz": [
+    0.1138,
+    0.9512,
+    0.1167
+   ],
+   "width": 0.1138,
+   "height": 0.9512,
+   "depth": 0.1167,
+   "base_y": -0.4753,
+   "base_center_xz": [
+    -0.0005,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 55,
+   "name": "traffic_light",
+   "category": "roads",
+   "category_he": "דרכים",
+   "path": "assets/models/city/roads/55-traffic-light.glb",
+   "bytes": 2563544,
+   "original_file": "Meshy_AI_traffic_light_3_4_is_1107092622_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 4514,
+   "vertices": 3973,
+   "bbox_min": [
+    -0.1951,
+    -0.4758,
+    -0.0833
+   ],
+   "bbox_max": [
+    0.1912,
+    0.4758,
+    0.0681
+   ],
+   "size_xyz": [
+    0.3862,
+    0.9517,
+    0.1514
+   ],
+   "width": 0.3862,
+   "height": 0.9517,
+   "depth": 0.1514,
+   "base_y": -0.4758,
+   "base_center_xz": [
+    -0.002,
+    -0.0076
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 56,
+   "name": "getaway_sports_car",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/56-getaway-sports-car.glb",
+   "bytes": 2358388,
+   "original_file": "Meshy_AI_getaway_sports_car_d_1107092235_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5072,
+   "vertices": 4988,
+   "bbox_min": [
+    -0.4783,
+    -0.1438,
+    -0.1965
+   ],
+   "bbox_max": [
+    0.4768,
+    0.1448,
+    0.1965
+   ],
+   "size_xyz": [
+    0.9551,
+    0.2886,
+    0.3931
+   ],
+   "width": 0.9551,
+   "height": 0.2886,
+   "depth": 0.3931,
+   "base_y": -0.1438,
+   "base_center_xz": [
+    -0.0007,
+    0.0
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 57,
+   "name": "police_roadblock",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/57-police-roadblock.glb",
+   "bytes": 2445748,
+   "original_file": "Meshy_AI_police_roadblock_str_1107092217_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5076,
+   "vertices": 7145,
+   "bbox_min": [
+    -0.4749,
+    -0.2986,
+    -0.135
+   ],
+   "bbox_max": [
+    0.4749,
+    0.2947,
+    0.1326
+   ],
+   "size_xyz": [
+    0.9497,
+    0.5933,
+    0.2676
+   ],
+   "width": 0.9497,
+   "height": 0.5933,
+   "depth": 0.2676,
+   "base_y": -0.2986,
+   "base_center_xz": [
+    0.0,
+    -0.0012
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  },
+  {
+   "id": 58,
+   "name": "armored_cash_transport_van",
+   "category": "vehicles",
+   "category_he": "רכבים",
+   "path": "assets/models/city/vehicles/58-armored-cash-transport-van.glb",
+   "bytes": 3095800,
+   "original_file": "Meshy_AI_armored_cash_transpor_1107092200_texture.glb",
+   "has_base_plate": false,
+   "valid": true,
+   "glb_version": 2,
+   "triangles": 5048,
+   "vertices": 5821,
+   "bbox_min": [
+    -0.4788,
+    -0.2097,
+    -0.2151
+   ],
+   "bbox_max": [
+    0.4783,
+    0.2102,
+    0.2126
+   ],
+   "size_xyz": [
+    0.957,
+    0.4199,
+    0.4277
+   ],
+   "width": 0.957,
+   "height": 0.4199,
+   "depth": 0.4277,
+   "base_y": -0.2097,
+   "base_center_xz": [
+    -0.0002,
+    -0.0012
+   ],
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "has_skin": false,
+   "animations": 0
+  }
+ ]
+}
