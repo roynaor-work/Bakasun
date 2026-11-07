@@ -1,15 +1,16 @@
+import {alienV9Enabled} from './alien-v9.mjs';
 const pickupIds=['spread','laser','rapid','shield','wing','nova'];
 const pickupNames=['ירי מניפה','לייזר','ירי מהיר','מגן','מלווים','טיל נוסף'];
 
 /** Optional presentation readers; no model mutation or saved equipment changes. */
-export function alienFlightHudStatus(model,mode='touch'){
+export function alienFlightHudStatus(model,mode='touch',manualFire=alienV9Enabled()){
  const laser=model.powerup===1||(model.upgrades?.laser||0)>0||(model.equipment?.weapon||0)>=2,rapid=model.powerup===2,spread=model.spreadTime>0;
  const weapon=spread?'spread':laser?'laser':rapid?'rapid':'normal';
  const names={normal:'תותח',spread:'ירי מניפה',laser:'לייזר',rapid:'ירי מהיר'};
  const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');
  const wings=model.wings?.filter(w=>w.active).length||0;if(wings)extras.push(wings===1?'מלווה':`${wings} מלווים`);
  return {weapon,weaponText:`נשק: ${names[weapon]}${extras.length?' · '+extras.join(' · '):''}`,
-  controlText:mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
+  controlText:mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
 }
 
 export function alienFlightFeedbackText(feedback){

@@ -1,17 +1,19 @@
-import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-1';
-import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-1';
-import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-1';
-import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-1';
-import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-1';
-import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-1';
-import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-1';
-import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-1';
-import {createFireView} from './fire-view.mjs?v=island-v2-20261107-1';
+import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-3';
+import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-3';
+import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-3';
+import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-3';
+import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-3';
+import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-3';
+import {polishLegacy,polishValue} from './polish-flag.mjs';
+import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-3';
+import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-3';
+import {createFireView} from './fire-view.mjs?v=island-v2-20261107-3';
 export function fireHydrantDistance(truck,balance){return Math.min(...(balance.city?.hydrants||[balance.hydrant.position]).map(p=>Math.hypot(truck.x-p[0],truck.z-p[2])));}
 const EMPTY=Object.freeze({});
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0,coolingAge:0,damaged:false,reignitions:0};}
 export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,sound=()=>{}}) {
   balance=fireScenario(balance,level);
+  const crewV9=!polishLegacy('fireTruck')&&polishValue('fireCrew')!=='v8'&&Boolean(balance.crew?.v9);
   const settings=balance.levels[level-1],flames=[];
   const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1),range=balance.range*(equipment.range||1),aimRadius=balance.aimRadius*(equipment.range||1);
   let water=maxWater,pressure=maxPressure,remaining=settings.seconds+(bonuses.fireTime||0)+balance.startGrace,score=0,out=0,result,reserve=settings.refillWater,time=0,charge=0,eruption=settings.eruptionSeconds,pressureEmpty=false;
@@ -37,10 +39,15 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       followFireCamera(camera,truck,balance,dt);
       const nearby=flames.some(f=>f.active&&f.heat>0&&Math.hypot(f.x-nozzle.x,f.y-nozzle.y)*balance.render.worldScale<=balance.city.parkRadius)||rescues.some(r=>!r.rescued&&!r.expired&&Math.hypot(truck.x-r.world[0],truck.z-r.world[2])<=balance.rescue.truckRadius);
       if(truck.driving){firefighter.state='seated';firefighter.progress=0;firefighter.visible=false;}
-      else if(input.firing||input.rescue||nearby||fireHydrantDistance(truck,balance)<=balance.hydrant.radius){firefighter.progress=Math.min(1,firefighter.progress+dt/balance.city.exitSeconds);firefighter.state=firefighter.progress<1?'exiting':'working';firefighter.visible=true;}
+      else if(input.firing||input.rescue||nearby||fireHydrantDistance(truck,balance)<=balance.hydrant.radius){firefighter.progress=Math.min(1,firefighter.progress+dt/(crewV9?balance.crew.v9.exitSeconds:balance.city.exitSeconds));firefighter.state=firefighter.progress<1?'exiting':'working';firefighter.visible=true;}
       else{firefighter.state='seated';firefighter.progress=0;firefighter.visible=false;}
+      if(crewV9){ // 07/11/2026: climb down by the cab door, walk to a spot beside the truck on the ground (the side facing the camera), then work
+        const c=balance.crew.v9,sx=Math.cos(truck.yaw),sz=-Math.sin(truck.yaw),side=Math.abs(sz)>1e-3?(sz>0?1:-1):(sx>=0?1:-1),e=firefighter.progress*firefighter.progress*(3-2*firefighter.progress),hw=balance.vehicle.width/2,fx=-Math.sin(truck.yaw),fz=-Math.cos(truck.yaw);
+        const out=hw*.85+(hw+c.standOut-hw*.85)*e,fwd=c.doorForward+(c.standForward-c.doorForward)*e;
+        firefighter.x=truck.x+side*sx*out+fx*fwd;firefighter.z=truck.z+side*sz*out+fz*fwd;
+      }else{
       firefighter.x=truck.x+Math.cos(truck.yaw)*balance.city.crewDistance*firefighter.progress;
-      firefighter.z=truck.z-Math.sin(truck.yaw)*balance.city.crewDistance*firefighter.progress;
+      firefighter.z=truck.z-Math.sin(truck.yaw)*balance.city.crewDistance*firefighter.progress;}
       hose.connected=firefighter.visible&&!truck.driving;
       hose.start={x:truck.x,y:balance.city.hoseHeight,z:truck.z};hose.end={x:firefighter.x,y:balance.city.hoseHeight,z:firefighter.z};
       model.atHydrant=!truck.driving&&fireHydrantDistance(truck,balance)<=balance.hydrant.radius&&moveStep/dt<=balance.hydrant.parkedSpeed;

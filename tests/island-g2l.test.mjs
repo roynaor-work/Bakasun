@@ -1,3 +1,5 @@
+// Pins the pre-07/11 truck and crew (`?fireTruck=v1`); the new behaviour is covered by island-fire-v9.test.mjs.
+globalThis.location={search:'?fireTruck=v1'};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

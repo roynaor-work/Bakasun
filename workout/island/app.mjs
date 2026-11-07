@@ -1,19 +1,20 @@
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-1';
-import './view/learning-buildings.mjs?v=island-v2-20261107-1';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-1';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-1';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-1';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-1';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-1';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-1';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-1';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-1';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-1';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-1';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-1';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-1';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-1';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-1';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-3';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-3';
+import './view/learning-buildings.mjs?v=island-v2-20261107-3';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-3';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-3';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-3';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-3';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-3';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-3';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-3';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-3';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-3';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-3';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-3';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-3';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-3';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-3';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -23,6 +24,7 @@ const t = createTranslator(strings);
 document.title = t('app.title');
 const root = document.querySelector('#interface');
 root.textContent = t('app.loading');
+splash.text(t('app.loading'));
 try {
   const data = await loadData();
   let storage;
@@ -38,6 +40,7 @@ try {
     onError: id => { if (ui) ui.toast(id); else root.textContent = t(id); }
   });
   ui = new IslandInterface({ root, engine, view, data, t });
+  splash.end();
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
@@ -80,6 +83,7 @@ try {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }
 } catch (error) {
+  splash.end();
   root.className = 'load-error';
   root.textContent = t('error.load');
   console.error(error);

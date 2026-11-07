@@ -1,9 +1,10 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-1';
-import {kitGameIcon,kitIntro} from './ui-kit.mjs?v=island-v2-20261107-1';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-3';
+import {kitGameIcon,kitIntro} from './ui-kit.mjs?v=island-v2-20261107-3';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({
   boarDefense:{isNew:true,file:'boars.webp',category:'הגנת החוף',description:'אי החזירים — הגנת החווה: עמדת ירי בגוף ראשון מול פלישת חזירים רובוטיים, נשקים, בוסים ומוסך.'},
+  catchCriminal:{file:'catch.webp',category:'עיר ובטחון',description:'תפוס את הפושע: זורקים רשת או חבל על פושע שבורח ברחובות העיר, עם רוח, מכשולים ושלוש זריקות.'},
   navalDuel:{file:'naval.webp',category:'ים פתוח',description:'קרב ספינות בין איים, מול צי היריב.'},
   fireRescue:{file:'fire.webp',category:'חילוץ והצלה',description:'צוות כיבוי, רחובות העיר ומשימת הצלה.'},
   alienDefense:{file:'space.webp',category:'חלל',description:'טיסת הגנה מול טייסת החייזרים.'},

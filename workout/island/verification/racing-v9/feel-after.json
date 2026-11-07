@@ -1,0 +1,56 @@
+{
+ "yaw": {
+  "20": {
+   "fullDegPerS": 82.848,
+   "quarterDegPerS": 24.322,
+   "latAccelFullMs2": 28.92,
+   "ratioQuarterToFull": 0.294
+  },
+  "30": {
+   "fullDegPerS": 67.39,
+   "quarterDegPerS": 21.635,
+   "latAccelFullMs2": 35.286,
+   "ratioQuarterToFull": 0.321
+  },
+  "40": {
+   "fullDegPerS": 54.026,
+   "quarterDegPerS": 16.351,
+   "latAccelFullMs2": 37.717,
+   "ratioQuarterToFull": 0.303
+  },
+  "45": {
+   "fullDegPerS": 49.043,
+   "quarterDegPerS": 14.197,
+   "latAccelFullMs2": 38.518,
+   "ratioQuarterToFull": 0.289
+  }
+ },
+ "response": {
+  "20": {
+   "t63ms": 83
+  },
+  "40": {
+   "t63ms": 67
+  }
+ },
+ "release": {
+  "speed": 40,
+  "settleMs": 100,
+  "extraTurnDegAfterRelease": -25.522,
+  "turnAtReleaseDeg": 24.916
+ },
+ "zigzag": {
+  "maxSlipDeg": 0,
+  "maxLatAccelMs2": 38.517
+ },
+ "pad": {
+  "travelPx": 59,
+  "px5": 0.025,
+  "px10": 0.09,
+  "px20": 0.247,
+  "px30": 0.423,
+  "px45": 0.711,
+  "px59": 1,
+  "firstSteerPx": 4
+ }
+}
