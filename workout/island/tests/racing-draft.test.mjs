@@ -4,7 +4,7 @@ import {createRacing} from '../minigames/racing-physics.mjs';
 
 /** Two cars on a straight: leader at a fixed speed, follower behind it by `gap` m (or alone). */
 function follow(gap,config={}){
-  const race=createRacing({stage:1,seed:1,config:{countdown:0,walls:false,...config}}),tr=race.track,p=race.state.player,ai=race.state.cars[1];
+  const race=createRacing({stage:1,seed:1,config:{countdown:0,walls:false,engine:false,...config}}),tr=race.track,p=race.state.player,ai=race.state.cars[1];
   for(const c of race.state.cars.slice(2)){c.x=1e5;c.z=1e5;c.finished=true;}
   const s0=40;let pt=tr.sample(s0),lead=tr.sample(s0+gap);
   Object.assign(p,{x:pt.x,y:pt.y,z:pt.z,heading:pt.heading,speed:40,s:pt.s,routeS:s0,previousS:s0,progress:s0,lateral:0,nitro:0});

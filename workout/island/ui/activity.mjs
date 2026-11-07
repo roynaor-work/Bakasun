@@ -131,6 +131,7 @@ export class ActivityInterface {
     dialog.append(actions,button('כל המשחקים','game-library-back',()=>this.menu(),'adventure-back'));
   }
   gameUpgrades(id){
+    if(id==='islandRacing'&&this.racingLeagueOnly())return this.racingLeagueScreen('shop');
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'equipment.hint');dialog.dataset.gameUpgrades=id;
     const level=this.engine.state.minigameLevels[id],next=this.data.config.minigameLevels[id]?.[level];
     dialog.append(gameEmblem(id),el('p','',this.t('minigame.level',{level,difficulty:gameContext(this.engine,this.data.config.minigames,this.now(),id).level})));
@@ -139,6 +140,7 @@ export class ActivityInterface {
     if(id==='soccer')dialog.append(button(this.t('soccer.training'),'soccer-training',()=>this.training()));
   }
   equipment(id) {
+    if(id==='islandRacing'&&this.racingLeagueOnly())return this.racingLeagueScreen('shop');
     if(id==='navalDuel')return this.stages(id);
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'equipment.hint');dialog.dataset.equipment=id;
     dialog.append(el('p','',this.t('minigame.totalStars',{stars:this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0)})));
@@ -186,6 +188,8 @@ export class ActivityInterface {
     if(this.requireBuilding(id))return;
     const game=this.engine.registry.minigames.get(id),p=this.engine.state.minigameProgress[id];
     const outer=this.modal(game.title,'minigame.progressHint');outer.dataset.stageMap=id;let dialog=outer;
+    // Racing is a league now (racing-v11): no level or stage picker. The saved stages stay in the save untouched; ?racingLevels=1 shows the old map again.
+    if(id==='islandRacing'&&this.racingLeagueOnly()){this.racingLeagueCard(outer);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
     // basketball: one card and one button; the club, the stages and the stars fold away
     if(id==='streetSlam'&&this.engine.hoops){
       const play=()=>this.start(id,undefined,p.stage);play.refresh=()=>this.stages(id);
@@ -356,7 +360,8 @@ export class ActivityInterface {
     this.engine.narration.announce('minigame.result',result);
   }
   /** Racing league (ui/racing-league.mjs, loaded on first use). ?racingLeague=0 removes every entry point. */
-  leagueOn(){return Boolean(this.engine.racingLeague?.enabled())&&this.data.featureFlags.minigames;}
+  racingLeagueOnly(){return this.leagueOn()&&new URLSearchParams(globalThis.location?.search||'').get('racingLevels')!=='1';}
+    leagueOn(){return Boolean(this.engine.racingLeague?.enabled())&&this.data.featureFlags.minigames;}
   leagueModule(){return this.leagueLoad??=import('./racing-league.mjs?v=island-v2-20261107-4').catch(error=>{this.leagueLoad=null;throw error;});}
   leagueActions(){return {go:()=>this.racingLeagueGo(),season:()=>this.racingLeagueScreen('season'),shop:()=>this.racingLeagueScreen('shop'),refresh:()=>this.stages('islandRacing')};}
   racingLeagueGo(){

@@ -4,6 +4,8 @@ const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
 const FIXED_STEP = 1/60;
 const LAT_CAP = 44;
+// Gearbox (racing-v11). Shift points as fractions of the car's top speed; ENGINE_TAU is the time constant of the pull towards it.
+const GEARS = 7, GEAR_BOUNDS = [0, .15, .31, .47, .62, .76, .89], SHIFT_CUT = .16, ENGINE_TAU = 6.2;
 function randomSource(seed) {
   let value=Number(seed)>>>0;
   return () => { value=(Math.imul(value,1664525)+1013904223)>>>0; return value/4294967296; };
@@ -24,7 +26,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const brakeUp=clamp(finite(equipment.brakes,1),1,1.3), steerUp=clamp(finite(equipment.steer,1),1,1.12), aeroUp=clamp(finite(equipment.aero,1),1,1.25);
   const drivers=Array.isArray(config.drivers)?config.drivers:null;
   // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
-  const walls=config.walls!==false,wallLimit=track.width*.5+.2;
+  const engineModel=config.engine!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
   const names=['אתם','אלמוג','טורקיז','שמש','ברקת'];
   const cars=Array.from({length:1+stage.opponents},(_,index)=>{
@@ -36,7 +38,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
-      distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
+      distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,rpm:.2,shiftT:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
       maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
@@ -121,7 +123,22 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const offLimit=car.offroad?19:Infinity;
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
     const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
-    car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
+    if(engineModel){
+      // racing-v11 gearbox: seven gears share the speed range. Thrust is highest at the start of each gear and fades towards the next shift,
+      // every shift cuts the drive for a moment, and the pull weakens as the speed nears the top: reaching the top takes about 20-25 s.
+      const top=Math.max(8,(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)),ratio=clamp(car.speed/top,0,.999);
+      let g=1;while(g<GEARS&&ratio>=GEAR_BOUNDS[g])g++;
+      const lo=GEAR_BOUNDS[g-1],hi=g<GEARS?GEAR_BOUNDS[g]:1,frac=clamp((ratio-lo)/(hi-lo),0,1);
+      if(g>car.gear&&throttle&&car.speed>1)car.shiftT=SHIFT_CUT;
+      car.gear=g;car.shiftT=Math.max(0,car.shiftT-dt);
+      const shape=1.4-.75*frac,cut=car.shiftT>0?.06:1;
+      if(throttle&&car.speed<target){
+        const pull=(target-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?2.1:1)*(car.isPlayer?engineUp:1);
+        car.speed=Math.min(target,car.speed+pull*dt);
+      } else car.speed=moveToward(car.speed,target,dt*5);
+      const rpmTarget=throttle?.2+.8*frac:Math.max(.12,.14+.5*frac);
+      car.rpm+=(rpmTarget-car.rpm)*(1-Math.exp(-dt*(car.shiftT>0?30:12)));
+    } else car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
     if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27*(car.isPlayer?brakeUp:1));
     if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
     if(car.offroad)car.speed=Math.max(0,car.speed-dt*8);
