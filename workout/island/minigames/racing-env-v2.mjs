@@ -37,15 +37,15 @@ export function buildEnvV2({T,scene,track,keep,f1,kit,night=false}){
  const L=track.length,half=f1.half,[S0,len]=f1.pitSpan;
  // start gantry across the line, scaled in X to the road; pit building (4 modules) on the pit side; grandstand (4 modules) and control tower opposite
  put('start-gantry',L-10,0,{scaleX:(track.width+3)/15.75});
- for(let k=0;k<4;k++)put('pit-building',(S0+12+k*(len-24)/3)%L,-(half+30),{scaleX:1.02});
- for(let k=0;k<4;k++)put('grandstand',(48+k*20.5)%L,half+18);
+ for(let k=0;k<3;k++)put('pit-building',(S0+25+k*(len-50)/2)%L,-(half+30),{scaleX:1.02});
+ for(let k=0;k<3;k++)put('grandstand',(52+k*20.5)%L,half+18);
  put('control-tower',175,half+16);
  // sponsor boards on the straights (generic graphic), a tyre module and fence behind the outside of the eight sharpest corners
- for(const s of [L-120,L-80,260,330]) put('sponsor-board',s%L,((Math.floor(s/10)%2)?1:-1)*(half+7.5));
+ for(const s of [L-100,300]) put('sponsor-board',s%L,((Math.floor(s/10)%2)?1:-1)*(half+7.5));
  const corners=[];for(let i=0;i<f1.n;i++){let sum=0;for(let j=0;j<6;j++)sum+=f1.turn[(i+j)%f1.n];corners.push({i,sum});}
  corners.sort((a,b)=>Math.abs(b.sum)-Math.abs(a.sum));const used=[];
- for(const c of corners){if(used.length>=8)break;const s=c.i*f1.step+18;if(used.some(u=>Math.abs(((u-s+L*1.5)%L)-L/2)<70))continue;
-  const out=c.sum>0?-1:1;used.push(s);put('tire-barrier',s,out*(half+3.1));put('chainlink-fence',s,out*(half+5.4));put('chainlink-fence',s+6.3,out*(half+5.4));}
+ for(const c of corners){if(used.length>=5)break;const s=c.i*f1.step+18;if(used.some(u=>Math.abs(((u-s+L*1.5)%L)-L/2)<70))continue;
+  const out=c.sum>0?-1:1;used.push(s);put('tire-barrier',s,out*(half+3.1));put('chainlink-fence',s,out*(half+5.4));}
  let triangles=0,draws=0;
  for(const [name,list] of Object.entries(jobs)){for(const part of baked[name]){const mesh=new T.InstancedMesh(part.geometry,part.material,list.length);
    list.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.rot,0);dummy.scale.set(p.sx,p.sy,p.sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);});

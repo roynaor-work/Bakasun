@@ -1,50 +1,50 @@
 [
  {
-  "seconds": 48.1,
+  "seconds": 43.8,
   "frames": 60,
-  "fps": 1.25,
-  "loadMs": 6116,
+  "fps": 1.37,
+  "loadMs": 5214,
   "fixedStep": true,
   "stage": 1,
   "seed": 7,
   "hold": false,
   "frameMs": {
-   "avg": 801.63,
-   "p50": 716.6,
-   "p95": 1516.6,
-   "max": 2516.6
+   "avg": 730.25,
+   "p50": 700,
+   "p95": 1399.9,
+   "max": 1866.7
   },
   "tickMs": {
-   "avg": 47.84,
-   "p50": 5.9,
-   "p95": 12.5
+   "avg": 35.19,
+   "p50": 4.2,
+   "p95": 7.5
   },
   "calls": {
-   "avg": 240.15,
-   "p50": 193,
+   "avg": 288.25,
+   "p50": 288,
    "max": 326
   },
   "triangles": {
-   "avg": 209706,
-   "p50": 172706,
+   "avg": 244550,
+   "p50": 256946,
    "max": 257866
   },
-  "allocMBps": 0.32,
+  "allocMBps": 0.3,
   "progress": {
    "lap": 1,
-   "s": 54,
-   "speed": 17.59
+   "s": 21,
+   "speed": 16.34
   },
   "render": {
    "mode": "webgl",
    "quality": 1,
-   "frames": 125,
-   "frameMilliseconds": 66.66666666666788,
-   "drawCalls": 190,
-   "triangles": 168994,
+   "frames": 190,
+   "frameMilliseconds": 33.33333333333303,
+   "drawCalls": 193,
+   "triangles": 172586,
    "countsIncludeShadowPasses": true,
    "shadowsEnabled": false,
-   "visibleTrees": 15,
+   "visibleTrees": 14,
    "treeLimit": 18,
    "scenery": {
     "quality": 1,
@@ -72,7 +72,7 @@
    "effects": {
     "smoke": 0,
     "skidMarks": 0,
-    "sparks": 8,
+    "sparks": 0,
     "capacity": {
      "smoke": 32,
      "skidMarks": 128,
@@ -92,9 +92,9 @@
      -1
     ],
     "spectators": {
-     "visible": 23,
+     "visible": 30,
      "capacity": 128,
-     "triangles": 10626
+     "triangles": 13860
     }
    },
    "modelLoaded": true,
@@ -113,35 +113,34 @@
   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
   "params": "?dur=12&dev=1",
   "transfer": {
-   "totalMB": 2.86,
-   "assetsMB": 1.56,
-   "files": 54,
-   "assetFiles": 24,
+   "totalMB": 2.64,
+   "assetsMB": 1.34,
+   "files": 53,
+   "assetFiles": 23,
    "byFile": {
-    "assets/racing-v7/cars/apex-lod0.glb": 93704,
     "assets/racing-v7/cars/apex-lod1.glb": 57884,
     "assets/racing-v7/cars/apex-lod2.glb": 29084,
     "assets/racing-v7/cars/velour-lod1.glb": 57752,
     "assets/racing-v7/cars/velour-lod2.glb": 29756,
     "assets/racing-v7/cars/prism-lod1.glb": 58236,
-    "assets/racing-v7/cars/prism-lod2.glb": 29796,
+    "assets/racing-v7/cars/apex-lod0.glb": 93704,
     "assets/racing-v7/textures/tire-smoke.png": 2866,
     "assets/racing-v7/textures/asphalt-orm.webp": 13655,
-    "assets/racing-v7/cars/solis-lod1.glb": 52356,
-    "assets/racing-v7/textures/asphalt-normal.png": 236649,
-    "assets/racing-v7/textures/asphalt-color.webp": 245584,
     "assets/racing-v7/cars/solis-lod2.glb": 29556,
-    "assets/racing-v7/cars/vector-lod1.glb": 61316,
     "assets/racing-v7/cars/vector-lod2.glb": 31008,
     "assets/racing-v7/crowd/spectator.glb": 7727,
+    "assets/racing-v7/cars/prism-lod2.glb": 29796,
+    "assets/racing-v7/cars/solis-lod1.glb": 52356,
+    "assets/racing-v7/cars/vector-lod1.glb": 61316,
     "assets/racing-v7/props/props.glb": 30616,
     "vendor/draco/draco_decoder.wasm": 192604,
+    "assets/racing-v7/textures/asphalt-color.webp": 245584,
+    "assets/racing-v7/textures/asphalt-normal.png": 236649,
     "vendor/draco/draco_wasm_wrapper.js": 58638,
-    "design/racing-environment-v2/runtime/grandstand.glb": 111877,
-    "design/racing-environment-v2/textures/gravel-runoff.webp": 22089,
     "design/racing-environment-v2/textures/asphalt-skid.webp": 23947,
-    "design/racing-environment-v2/runtime/pit-building.glb": 133357,
-    "design/racing-environment-v2/textures/asphalt-pits.webp": 25421
+    "design/racing-environment-v2/textures/asphalt-pits.webp": 25421,
+    "design/racing-environment-v2/textures/gravel-runoff.webp": 22089,
+    "design/racing-environment-v2/runtime/sponsor-board.glb": 14552
    }
   },
   "errors": [],
