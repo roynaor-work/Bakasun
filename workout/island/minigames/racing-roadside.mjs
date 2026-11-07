@@ -15,6 +15,7 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  };
  const round=(site,x,y,z,w,h,color,detail=0)=>box('round',site,x,y,z,w,h,w,color,detail);
  const valid=(site,radius)=>track.project(site.x,site.z).distance>track.width/2+radius+1;
+ const clear=(site,hx,hz,margin)=>{const ca=Math.cos(site.angle),sa=Math.sin(site.angle);return [[-hx,-hz],[hx,-hz],[-hx,hz],[hx,hz]].every(([x,z])=>track.project(site.x+ca*x+sa*z,site.z-sa*x+ca*z).distance>track.width/2+margin);};
  const siteAt=(s,lane,angleOffset=0)=>{const p=track.sample(s);return {x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,angle:p.heading+angleOffset,p};};
  // Buildings face the road. Their complete footprints stay beyond its shoulder.
  for(const [index,fraction]of [.075,.235,.415,.635,.865].entries()){
@@ -61,6 +62,17 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   const ca=Math.cos(site.angle),sa=Math.sin(site.angle);if([[-.25,-4.25],[.25,-4.25],[-.25,4.25],[.25,4.25]].some(([x,z])=>track.project(site.x+ca*x+sa*z,site.z-sa*x+ca*z).distance<=track.width/2+.65))continue;
   site.y=site.p.y;barrierSections++;
   box('masonry',site,0,.45,0,.5,.9,8.5,palette.barrier,1);if(base<site.p.y-.3)box('masonry',site,0,(base-site.p.y)/2+.2,0,.45,site.p.y-base,8.5,palette.barrier,1);
+ }
+ // racing-v10 Formula 1 circuits: a stepped grandstand with a roof on each side of the start straight and colour boards (no brands) behind the barrier.
+ if(track.f1){
+  const rowColors=['#c9473f','#e8d8a6','#2f6c8f','#e8d8a6'];
+  for(const [side,from] of [[1,-30],[-1,40]]){
+   const site=siteAt((from+track.length)%track.length,side*(track.width/2+17),side>0?-Math.PI/2:Math.PI/2);if(!clear(site,8,36,4))continue;
+   for(let row=0;row<4;row++)box('masonry',site,0,.6+row*1.1,-row*1.6,5.2,1.2+row*1.1,70,rowColors[row],1);
+   box('roof',site,0,7.4,-5.4,8.5,1.2,72,palette.roof,1);box('metal',site,0,4,-7.6,.3,8,72,palette.trim,1);
+  }
+  const boards=['#2f6c8f','#c9473f','#e0b23a','#3f8d6a','#8a5aa6'];
+  for(let i=0;i<10;i++){const s=(track.length-70+i*16)%track.length,side=i%2?1:-1,site=siteAt(s,side*(track.width/2+2.3));if(!clear(site,.2,6,.9))continue;site.y=site.p.y;box('masonry',site,0,1.5,0,.18,1.3,12,boards[i%boards.length],1);}
  }
  // Retaining walls and two-height steel rails follow the outside of risky bends.
  for(let s=8;s<track.length;s+=6){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
