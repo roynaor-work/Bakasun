@@ -1,3 +1,4 @@
+globalThis.__alienV10=false; // v9 behaviour; v10 is covered in island-alien-v10.test.mjs
 import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
 import {alienStack} from '../workout/island/minigames/aliens.mjs';
 import {createFireModel,fireHydrantDistance} from '../workout/island/minigames/fire.mjs';
