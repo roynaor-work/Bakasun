@@ -306,6 +306,25 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   };
 }
 
+/** After an AI keeper's throw/punt leaves the hand the simulation walks him back to goal at once, while the
+ * authored clip is still swinging the arm/leg forward (it read as a follow-through backwards). The view keeps him
+ * standing where he released, facing the ball's way, until the clip ends, then eases him to his real place.
+ * Presentation only: positions in the simulation are untouched. `?keeperKick=0` restores the old look. */
+const KEEPER_KICKS=new Set(['keeperThrow','keeperPunt']),KEEPER_EASE=.3;
+const keeperKickOn=new URLSearchParams(globalThis.location?.search||'').get('keeperKick')!=='0';
+export function keeperStand(character,p,s,dt){
+  const m=p.restartMotion;
+  if(keeperKickOn&&m&&KEEPER_KICKS.has(m.kind)&&m.released&&p.id!==s.controlled){
+    return character.stand||(character.stand={x:p.x,z:p.z,yaw:Math.atan2(p.fx,p.fz),ease:0});
+  }
+  if(character.stand){
+    const st=character.stand;st.ease+=dt/KEEPER_EASE;
+    if(st.ease>=1){character.stand=null;return null;}
+    const u=st.ease*st.ease*(3-2*st.ease);return {x:st.x+(p.x-st.x)*u,z:st.z+(p.z-st.z)*u,yaw:Math.atan2(p.fx,p.fz)};
+  }
+  return null;
+}
+
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
@@ -457,9 +476,9 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
         setLod(level){const next=isV7?(level>0?1:0):level>=2?2:level>0?1:0;if(next===lod)return lod;lod=next;fullMeshes.forEach(o=>o.visible=lod===0);lowMeshes.forEach(o=>o.visible=lod===1);mobileMeshes.forEach(o=>o.visible=lod===2);return lod;},
         update(p,s,animation,dt){
           if(characterDisposed)return;
-          const wanted=Math.atan2(p.fx,p.fz);
+          const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:Math.atan2(p.fx,p.fz);
           if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*18));
-          pivot.position.set(p.x,Math.max(0,animation.height||0),p.z);pivot.rotation.set(0,this.yaw,0);
+          pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
         metrics:()=>({kind:'design-glb-v2',set,fullTriangles:isV7?fullTriangleCount:undefined,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide}),
