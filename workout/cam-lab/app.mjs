@@ -3,6 +3,7 @@ import { StatusLine, RestGate, diagnosticLines } from './feedback.mjs';
 import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
 import { PlacementCoach } from './placement-coach.mjs';
+import { rangeEnabled, UPPER_BODY_EXERCISES } from './range.mjs';
 import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selection.mjs';
 import { createLabSpeech } from './speech.mjs';
 import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
@@ -181,7 +182,7 @@ function release() {
   stream?.getTracks().forEach(t => t.stop()); stream = null;
   video.srcObject = null; cancelSpeech(); lastPlacementSpeak = -Infinity;
   queuedSpeech = null; recorder.stop(); paintRecorder();
-  placementHint = null; placementCoach.reset(); $('direction-arrow').hidden = true; $('placement-hint').textContent = '';
+  placementHint = null; placementCoach.reset(); $('direction-arrow').hidden = true; $('distance-arrow').hidden = true; $('placement-hint').textContent = '';
   $('camera').disabled = false;
 }
 function fail(message, detail = '') {
@@ -251,6 +252,7 @@ function poseResult(data) {
   poses.forEach(p => draw(p.landmarks || []));
   const childPoints = assigned[0]?.landmarks || (!pair ? poses[0]?.landmarks : null) || [];
   const placementOptions = { aspect, heightCm: Number($('height').value),
+    range: rangeEnabled(), upperBody: UPPER_BODY_EXERCISES.has(exercise),
     mirrored: (cameraInfo.settings?.facingMode || $('camera-facing').value || 'user') !== 'environment' };
   const distance = placementDistance(childPoints, placementOptions);
   $('distance-meter').value = distance.span ?? .5;
@@ -262,6 +264,8 @@ function poseResult(data) {
   if (placementSpeechActive && (previousHint?.code !== placementHint?.code || previousHint?.arrow !== placementHint?.arrow)) cancelSpeech();
   $('placement-hint').textContent = placementHint?.text || '';
   $('direction-arrow').hidden = !placementHint?.arrow;
+  $('distance-arrow').hidden = !placementHint?.vArrow;
+  $('distance-arrow').textContent = placementHint?.vArrow === 'closer' ? '▲ קרוב יותר' : placementHint?.vArrow === 'back' ? '▼ רחוק יותר' : '';
   $('direction-arrow').textContent = placementHint?.arrow === 'right' ? '→' : placementHint?.arrow === 'left' ? '←' : '';
   const interval = lastFrame == null ? 0 : timestamp - lastFrame;
   const fps = interval ? 1000 / interval : 0;

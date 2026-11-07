@@ -70,8 +70,9 @@ test('island bundles only referenced game models and preserves their audited byt
   for (const name of ['config', 'buildings']) {
     collect(JSON.parse(await readFile(new URL(`data/${name}.json`, root), 'utf8')));
   }
+  // assets/models/city is the compressed city catalog, checked by island-city-models.test.mjs.
   const bundled = (await filesIn(new URL('assets/models/', root)))
-    .filter(file => file.pathname.endsWith('.glb'))
+    .filter(file => file.pathname.endsWith('.glb') && !file.pathname.includes('/assets/models/city/'))
     .map(file => path.relative(fileURLToPath(root), fileURLToPath(file)).split(path.sep).join('/'));
   assert.deepEqual(bundled.sort(), [...referenced].sort(), 'unconnected models must stay out of the deployable folder');
   assert.deepEqual(Object.keys(manifest).sort(), bundled);

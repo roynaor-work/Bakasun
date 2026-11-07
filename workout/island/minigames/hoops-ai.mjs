@@ -221,6 +221,8 @@ function laneClear(api,t,from,to,r){
  return true;
 }
 
+// v3: AI defenders go for blocks 1.6x as often (the shot mix moved to the rim, where blocks happen, and they fell 2.52 -> 2.21)
+const BLOCK_V3=1.6;
 function shotValue(api,p,t,pref){
  const S=api.S,s=api.side(t),d=api.court.distToRim(s,p.x,p.z),pts=api.court.points(s,p.x,p.z);
  const open=openness(api,t,p);
@@ -302,7 +304,7 @@ function handlerMove(api,p,t){
  const hold=S.ball.dribbleT||0,pressure=passPressure(api,p,t);
  // a short chain only: two passes (three under pressure) before somebody must shoot or attack
  const chain=T.ai.chain||0;
- if(chain<(pressure>=1?2:1))for(const q of api.onCourt(t)){
+ if(chain<(pressure>=1?2:1)+(api.aiV2?1:0))for(const q of api.onCourt(t)){
   if(q===p)continue;
   if(S.frontcourtSet&&!api.court.frontcourt(s,q.x))continue;
   if(!laneClear(api,t,p,q,0.7))continue;
@@ -368,10 +370,10 @@ function defenseMove(api,p,t){
  if(onBall&&h){
   const d=api.dist(p,h);
   if(d<1.3&&h.act!=='shoot'&&api.rand()<api.diff.stealRate*api.eff(p,'steal'))api.startSteal(p);
-  if(h.act==='shoot'&&d<1.8&&h.actT>h.shot.releaseAt-0.35&&api.rand()<api.diff.blockRate*(0.5+api.eff(p,'block')))api.startJump(p,'block');
+  if(h.act==='shoot'&&d<1.8&&h.actT>h.shot.releaseAt-0.35&&api.rand()<api.diff.blockRate*(api.aiV2?BLOCK_V3:1)*(0.5+api.eff(p,'block')))api.startJump(p,'block');
  }
  // rim protection
- if(h&&h.act==='shoot'&&!onBall&&api.dist(p,h)<2.2&&(h.shot.type==='layup'||h.shot.type==='dunk')&&api.rand()<api.diff.blockRate*api.eff(p,'block'))api.startJump(p,'block');
+ if(h&&h.act==='shoot'&&!onBall&&api.dist(p,h)<2.2&&(h.shot.type==='layup'||h.shot.type==='dunk')&&api.rand()<api.diff.blockRate*(api.aiV2?BLOCK_V3:1)*api.eff(p,'block'))api.startJump(p,'block');
 }
 
 function zoneMove(api,p,t){
@@ -384,5 +386,5 @@ function zoneMove(api,p,t){
  setGoal(p,pt,0.9,Math.atan2(b.x-p.x,b.z-p.z));
  const h=api.holder();
  if(h&&api.dist(p,h)<1.2&&api.rand()<api.diff.stealRate*0.5*api.eff(p,'steal'))api.startSteal(p);
- if(h&&h.act==='shoot'&&api.dist(p,h)<1.9&&api.rand()<api.diff.blockRate*(0.5+api.eff(p,'block')))api.startJump(p,'block');
+ if(h&&h.act==='shoot'&&api.dist(p,h)<1.9&&api.rand()<api.diff.blockRate*(api.aiV2?BLOCK_V3:1)*(0.5+api.eff(p,'block')))api.startJump(p,'block');
 }

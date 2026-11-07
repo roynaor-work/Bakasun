@@ -15,7 +15,8 @@
     "extensions/racing.mjs",
     "extensions/street-slam.mjs",
     "extensions/alpine-rush.mjs",
-    "extensions/boar-defense.mjs"
+    "extensions/boar-defense.mjs",
+    "extensions/catch-criminal.mjs"
   ],
   "records": {
     "islandRacing": {
@@ -129,6 +130,14 @@
       "difficulty": "campaign",
       "helpId": "minigame.boarDefense.help",
       "icon": "🐗"
+    },
+    "catchCriminal": {
+      "id": "catchCriminal",
+      "title": "minigame.catchCriminal.title",
+      "featureFlag": "catchCriminal",
+      "difficulty": "stage",
+      "helpId": "minigame.catchCriminal.help",
+      "icon": "🥅"
     }
   }
 }

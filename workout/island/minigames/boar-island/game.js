@@ -6,13 +6,14 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './core.mjs';
+import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);
 const QA=new URLSearchParams(location.search).has('qa');
 const ISLAND=new URLSearchParams(location.search).has('island');
 // 06/11/2026 polish; `?boar=v1` restores the previous behaviour (no last stand, no low-health warning, desktop hint only).
 const LEGACY=new URLSearchParams(location.search).get('boar')==='v1';
+if(LEGACY){setLegacy(true);WEAPON_ORDER.length=4;}
 let lastStandUsed=false,lowWarned=false;
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
 let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
@@ -166,7 +167,7 @@ function init(){
 function updateStartLabel(){$('start').innerHTML=`${save.nextWave>1?'ממשיכים לגל '+save.nextWave:'הגנו על האי'} <span>←</span>`;}
 
 let shownWeapon='mg';
-function showWeapon(key){shownWeapon=key;for(const k of WEAPON_ORDER){const m=gunModels[k];m.group.visible=k===key;const lv=save.weapons[k];for(const p of m.levelParts)p.obj.visible=lv>=p.min;}}
+function showWeapon(key){shownWeapon=key;const f=fam(key);for(const k of BASE_WEAPONS){const m=gunModels[k];m.group.visible=k===f;const lv=k!==f?save.weapons[k]:WEAPONS[key].family?WEAPON_MAX:save.weapons[key];for(const p of m.levelParts)p.obj.visible=lv>=p.min;}}
 function createTurrets(){
   for(const x of [-8.6,8.6]){const t=new THREE.Group(),head=new THREE.Group();const z=11;mesh(t,cyl(1,1.3,1,14),mat('#56635b',.6,.5),[0,.5,0]);head.position.y=1.4;t.add(head);mesh(head,sph(.8,16,10),mat('#3e5656',.8,.35),[0,0,0],[1,.75,1]);mesh(head,cylZ(.12,.15,2.4,12),mat('#283f46',.9,.3),[0,.1,-1.3]);mesh(head,rb(.3,.25,.4,.05),mat('#c8b26a',.6,.4),[0,.55,0]);
     t.position.set(x,groundY(x,z),z);t.userData.head=head;scene.add(t);turrets.push(t);}
@@ -523,35 +524,35 @@ function impactFx(hit,kind){
   const p=hit.point;
   if(hit.shell){explode(p,.6,{light:false});destroyShell(hit.shell,true);return;}
   if(hit.e){if(hit.crit){sparks(p,8,'crit',7,.1);sprite(TEX.flash,p,1.4,.08);sfx.play('crit');roundCrits++;$('hit-marker').className='crit';}
-    else if((hit.shield||hit.e.armor>.3)&&kind!=='cannon'){sparks(p,6,'blue',8,.07);sfx.play('ping');$('hit-marker').className='armor';}
-    else{sparks(p,kind==='shotgun'?2:4,'spark',6,.08);sfx.play('hit');$('hit-marker').className='';}
+    else if((hit.shield||hit.e.armor>.3)&&fam(kind)!=='cannon'){sparks(p,6,'blue',8,.07);sfx.play('ping');$('hit-marker').className='armor';}
+    else{sparks(p,fam(kind)==='shotgun'?2:4,'spark',6,.08);sfx.play('hit');$('hit-marker').className='';}
     $('hit-marker').style.opacity=1;hitUntil=elapsed+.1;return;}
   if(hit.sky)return;if(hit.water){if(Math.random()<.6)splash(p);sfx.play('splash',.6);}else sandPuff(p);
 }
 function fireWeapon(){
-  const ws=wsCache[current],model=gunModels[current],st=wstate[current];shotCount++;roundShots++;lastShotAt=elapsed;firedSince++;
+  const ws=wsCache[current],model=gunModels[fam(current)],st=wstate[current];shotCount++;roundShots++;lastShotAt=elapsed;firedSince++;
   const furyMul=furyTimer>0?1.5:1;const assist=TOUCH?1.35:1;
-  if(current==='cannon'){
+  if(fam(current)==='cannon'){
     const ray=aimRay(ws.spread);const from=muzzleWorld(model,0);const target=castShot(ray,assist).point;const dir=target.clone().sub(from).normalize();
     const shell=new THREE.Group();mesh(shell,geo('cshell',()=>new THREE.CapsuleGeometry(.14,.35,4,8).rotateX(Math.PI/2)),mat('#ffcf7a',.4,.3,'#ff8a2a',2.5));shell.position.copy(from);scene.add(shell);
     projectiles.push({mesh:shell,vel:dir.multiplyScalar(170),life:0,ws,furyMul});
     flashMuzzle(model,0,1.6);recoil+=.55;recoilRot+=.12;trauma=Math.min(1,trauma+.18);sfx.play('cannon');ejectCasing(model,'shell');
     return;
   }
-  if(current==='tesla'){teslaTick(ws,furyMul,assist);return;}
+  if(fam(current)==='tesla'){teslaTick(ws,furyMul,assist);return;}
   const pellets=ws.pellets;let anyHit=false;const perEnemy=new Map();
   const mi=model.muzzleIndex++;const from=muzzleWorld(model,mi);
   for(let i=0;i<pellets;i++){
     const ray=aimRay(ws.spread*(pellets>1?1:1+heatSpread()));const hit=castShot(ray,assist);
-    if(current==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
+    if(fam(current)==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
     if(hit.e){anyHit=true;const prev=perEnemy.get(hit.e)||{dmg:0,crit:false,point:hit.point};prev.dmg+=ws.damage*furyMul*(hit.shield?.25:1);prev.crit=prev.crit||hit.crit;perEnemy.set(hit.e,prev);}
     if(i<4||hit.e||hit.shell)impactFx(hit,current);
   }
   for(const [e,v] of perEnemy){const tgt=e;damageEnemy(e,v.dmg,{crit:v.crit,point:v.point});fury=clamp(fury+(perk==='charge'?2.4:1.2),0,100);
     if(perk==='chain'&&shotCount%4===0&&!tgt.dead){const n=enemies.find(o=>o!==tgt&&!o.dead&&o.root.position.distanceTo(tgt.root.position)<22);if(n){bolt(v.point,n.zones[0].obj.getWorldPosition(new THREE.Vector3()));damageEnemy(n,v.dmg*.8,{quiet:true});}}}
   if(anyHit)roundHits++;
-  flashMuzzle(model,mi,current==='shotgun'?1.4:1);
-  if(current==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play('mg');ejectCasing(model,'brass');}
+  flashMuzzle(model,mi,fam(current)==='shotgun'?1.4:1);
+  if(fam(current)==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play('mg');ejectCasing(model,'brass');}
   else{recoil+=.38;recoilRot+=.09;trauma=Math.min(1,trauma+.15);sfx.play('shotgun');ejectCasing(model,'shell');}
 }
 function heatSpread(){const s=wstate[current];return s?s.heat/100*1.6:0;}
@@ -698,9 +699,9 @@ function updateEffects(dt){
 
 // ---------- HUD ----------
 function buildWeaponBar(){
-  const bar=$('weapons');bar.replaceChildren();
-  WEAPON_ORDER.forEach((k,i)=>{const w=WEAPONS[k],lv=save.weapons[k];const b=document.createElement('button');b.className='wslot'+(k===current?' active':'')+(lv?'':' locked');b.dataset.key=k;b.setAttribute('aria-label',`${w.name}${lv?'':' · נעול'}`);
-    b.innerHTML=`<kbd>${i+1}</kbd><b>${w.icon}</b><strong>${w.short}</strong><small>${lv?'דרגה '+lv:'נעול'}</small>`;b.onclick=()=>{if(lv)switchWeapon(k);else toast(`${w.name} נפתח במוסך`);};bar.append(b);});
+  const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
+  WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).forEach((k,i)=>{const w=WEAPONS[k],lv=save.weapons[k];const b=document.createElement('button');b.className='wslot'+(k===current?' active':'')+(lv?'':' locked');b.dataset.key=k;b.setAttribute('aria-label',`${w.name}${lv?'':' · נעול'}`);
+    b.innerHTML=`<kbd>${i<9?i+1:''}</kbd><b>${w.icon}</b><strong>${w.short}</strong><small>${lv?'דרגה '+lv:'נעול'}</small>`;b.onclick=()=>{if(lv)switchWeapon(k);else toast(`${w.name} נפתח במוסך`);};bar.append(b);});
 }
 function updateHud(){
   const st=stats(save);$('coins').textContent=save.coins.toLocaleString('he-IL');$('wave').textContent=String(mode==='menu'||mode==='shop'?save.nextWave:wave).padStart(2,'0');
@@ -736,10 +737,10 @@ function renderShop(){
   const wg=$('weapon-grid');wg.replaceChildren();const maxDps=320;
   for(const k of WEAPON_ORDER){const w=WEAPONS[k],lv=save.weapons[k],cost=weaponCost(save,k);const ws=weaponStats(save,k);const dps=Math.round(sustainedDps(ws,st.cooling));const hit=Math.round(ws.damage*ws.pellets);
     const card=document.createElement('article');card.className='weapon-card'+(lv?'':' locked');
-    const label=lv>=WEAPON_MAX?'דרגה מרבית':lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
-    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${WEAPON_MAX}`:'נעול'}</small></h3><p>${w.desc}</p>
+    const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'דרגה מרבית':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
+    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}</p>
       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
-      <button ${lv>=WEAPON_MAX||save.coins<cost?'disabled':''}>${label}</button>`;
+      <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;
     card.querySelector('button').onclick=()=>{if(buyWeapon(save,k)){persist();sfx.play('buy');refreshWeaponCache();showWeapon(current);buildWeaponBar();renderShop();toast(lv===0?`${w.name} נפתח · מקש ${WEAPON_ORDER.indexOf(k)+1} בקרב`:`${w.name} · דרגה ${save.weapons[k]}`);if(lv===0){current=k;showWeapon(k);buildWeaponBar();}}};
     wg.append(card);}
   const ug=$('upgrade-grid');ug.replaceChildren();
@@ -780,7 +781,7 @@ function updateGunRig(dt){
     raycaster.setFromCamera(pointer,camera);const tg=raycaster.ray.at(70,tmp3);gunRig.updateMatrixWorld();const l=gunRig.worldToLocal(tg.clone());
     yoke.rotation.y=damp(yoke.rotation.y,clamp(Math.atan2(-l.x,-l.z),-.55,.55),.035,dt);yoke.rotation.x=damp(yoke.rotation.x,clamp(Math.atan2(l.y,Math.hypot(l.x,l.z)),-.1,.24),.035,dt);
     recoil=damp(recoil,0,.05,dt);recoilRot=damp(recoilRot,0,.07,dt);kick.position.z=Math.min(.6,recoil);kick.rotation.x=Math.min(.25,recoilRot);
-    const m=gunModels[current];if(m){const s=wstate[current],ws=wsCache[current]||weaponStats(save,current);
+    const m=gunModels[fam(current)];if(m){const s=wstate[current],ws=wsCache[current]||weaponStats(save,current);
       m.update(dt,{firing:mode==='battle'&&elapsed-lastShotAt<.14,fired:firedSince,heat:s?s.heat/100:0,overheated:!!s?.overheated,reload:s&&s.reload>0?1-s.reload/s.reloadMax:-1,ammo:s?s.ammo:ws.mag,mag:ws.mag,recoil,t:elapsed});firedSince=0;
       for(const f of m.flashes)if(f.visible&&elapsed>f.userData.until)f.visible=false;}
     const sw=swapTimer>0?Math.sin((1-swapTimer/.32)*Math.PI):0;if(shownWeapon!==current&&swapTimer<=.16){showWeapon(current);}
@@ -806,7 +807,7 @@ window.addEventListener('resize',()=>{if(renderer)resize();});
 window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();keys.add(e.code);if(e.repeat)return;
   if(e.code==='KeyP'||e.code==='Escape'){if(ISLAND){window.__boarIsland?.onPause?.();return;}if(mode==='battle')setMode('paused');else if(mode==='paused')setMode('battle');}
   if(mode!=='battle')return;if(e.code==='KeyQ')rocket();if(e.code==='KeyE')frost();if(e.code==='Space')activateFury();if(e.code==='KeyR')startReload();
-  const n=['Digit1','Digit2','Digit3','Digit4'].indexOf(e.code);if(n>=0){const k=WEAPON_ORDER[n];if(save.weapons[k])switchWeapon(k);else toast(`${WEAPONS[k].name} נפתח במוסך`);}});
+  const n=['Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9'].indexOf(e.code);if(n>=0){const k=WEAPON_ORDER.filter(x=>save.weapons[x]||BASE_WEAPONS.includes(x))[n];if(k&&save.weapons[k])switchWeapon(k);else if(k)toast(`${WEAPONS[k].name} נפתח במוסך`);}});
 window.addEventListener('keyup',e=>keys.delete(e.code));
 $('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=rocket;$('frost').onclick=frost;$('fury').onclick=activateFury;
 $('tab-weapons').onclick=()=>setShopTab('weapons');$('tab-upgrades').onclick=()=>setShopTab('upgrades');
@@ -886,7 +887,7 @@ function installQA(){
     aimZone(type){const e=enemies.find(x=>!x.dead);if(!e)return null;const z=e.zones.find(z=>type==='shield'?z.shield:type==='crit'?z.crit:!z.crit&&!z.shield&&!z.fin);z.obj.getWorldPosition(tmp);projected.copy(tmp).project(camera);pointer.x=projected.x;pointer.y=projected.y;return {hp:e.hp,kind:e.kind};},
     cast(){camera.updateMatrixWorld();const h=castShot(aimRay(),1);return {kind:h.e?.kind,crit:h.crit,shield:h.shield,shell:!!h.shell,dist:h.dist};},
     step(n=30,dt=1/30){camera.updateMatrixWorld();for(let i=0;i<n&&mode==='battle';i++){elapsed+=dt;updateBattle(dt);updateEffects(dt);updateGunRig(dt);}},
-    gunProbe(){const g=gunModels;camera.updateMatrixWorld();return {current,shown:shownWeapon,visible:WEAPON_ORDER.filter(k=>g[k].group.visible),mgSpin:+g.mg.spinners[0].rotation.z.toFixed(3),drum:+g.shotgun.drum.rotation.z.toFixed(3),pump:+g.shotgun.slideGroup.position.z.toFixed(3),barrel:+g.cannon.slide.position.z.toFixed(3),breech:+g.cannon.breech.position.x.toFixed(3),rack:g.cannon.rack.filter(r=>r.visible).length,ring:+g.tesla.ring.rotation.z.toFixed(3),cap:+g.tesla.caps[0].scale.y.toFixed(3),levelVisible:WEAPON_ORDER.map(k=>g[k].levelParts.filter(p=>p.obj.visible).length),polished:WEAPON_ORDER.every(k=>g[k].group.userData.coastalWeaponPolishV1)};},
+    gunProbe(){const g=gunModels;camera.updateMatrixWorld();return {current,shown:shownWeapon,visible:BASE_WEAPONS.filter(k=>g[k].group.visible),mgSpin:+g.mg.spinners[0].rotation.z.toFixed(3),drum:+g.shotgun.drum.rotation.z.toFixed(3),pump:+g.shotgun.slideGroup.position.z.toFixed(3),barrel:+g.cannon.slide.position.z.toFixed(3),breech:+g.cannon.breech.position.x.toFixed(3),rack:g.cannon.rack.filter(r=>r.visible).length,ring:+g.tesla.ring.rotation.z.toFixed(3),cap:+g.tesla.caps[0].scale.y.toFixed(3),levelVisible:WEAPON_ORDER.map(k=>g[k].levelParts.filter(p=>p.obj.visible).length),polished:WEAPON_ORDER.every(k=>g[k].group.userData.coastalWeaponPolishV1)};},
     hittable(){return enemies.map(e=>({kind:e.kind,state:e.state,n:e.zones.filter(z=>zoneHittable(e,z)).length,fin:e.zones.some(z=>z.fin&&zoneHittable(e,z))}));},
     shellTypes(){return shells.map(s=>s.type);},
     perf(){return {resScale,shadowsOff,basePR,adapt:ADAPT};},
@@ -899,8 +900,8 @@ function installQA(){
     aimAtFirst(){const e=enemies.find(x=>!x.dead);if(!e)return false;e.zones.find(z=>z.crit).obj.getWorldPosition(tmp);projected.copy(tmp).project(camera);pointer.x=projected.x;pointer.y=projected.y;return true;},
     shop(){openShop('menu');},
     // photo set-ups for the documentation (not used in play)
-    showroom(key,lv=6){document.body.classList.add('shot');gunRig.visible=false;const src=gunModels[key].group;const g=src.clone(true);g.traverse(o=>{o.visible=true;});
-      for(const k of WEAPON_ORDER)for(const p of gunModels[k].levelParts)p.obj.visible=save.weapons[k]>=p.min;scene.add(g);g.position.set(0,7.2,8);g.rotation.set(.05,Math.PI*.78,0);g.scale.setScalar(1.25);
+    showroom(key,lv=6){document.body.classList.add('shot');gunRig.visible=false;const src=gunModels[fam(key)].group;const g=src.clone(true);g.traverse(o=>{o.visible=true;});
+      for(const k of BASE_WEAPONS)for(const p of gunModels[k].levelParts)p.obj.visible=save.weapons[k]>=p.min;scene.add(g);g.position.set(0,7.2,8);g.rotation.set(.05,Math.PI*.78,0);g.scale.setScalar(1.25);
       const f=g.children.filter(c=>c.isGroup&&c.children.some(m=>m.material?.blending===THREE.AdditiveBlending));f.forEach(x=>x.visible=false);
       g.traverse(o=>{if(o.material?.blending===THREE.AdditiveBlending)o.visible=false;}); // hide flashes, arcs and glow in the photo
       for(const e of showcase)e.root.visible=false;camera.position.set(1.2,8.6,14.4);camera.lookAt(-.6,6.9,7.6);frozenCam=true;},

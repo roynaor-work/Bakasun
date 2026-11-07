@@ -1,15 +1,15 @@
 import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
-import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261107-1';
-import {polishLegacy} from './polish-flag.mjs';
+import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261107-3';
+import {polishLegacy,polishValue} from './polish-flag.mjs';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=island-v2-20261107-1';
-import {loadFireTruck} from './fire-truck.mjs?v=island-v2-20261107-1';
-import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-v2-20261107-1';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-v2-20261107-1';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-1';
+import {palette} from '../view/environment.mjs?v=island-v2-20261107-3';
+import {loadFireTruck} from './fire-truck.mjs?v=island-v2-20261107-3';
+import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-v2-20261107-3';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-v2-20261107-3';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-3';
 import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 
 /** Own everything in this round. Static colored parts share a material and are
@@ -173,7 +173,7 @@ export function createFireScene(ctx,model,adapters={}) {
         if(skip&&(i>=0?skip.lots?.has(i):i===-1?skip.crew:skip.citizens))continue;
         const spec=city.models[key];if(disposed||!await models.load(spec)||disposed)continue;
         if(i>=0){const lot=city.buildings[i],visual=models.create(spec,{width:lot.width});if(!visual)continue;const bounds=new T.Box3().setFromObject(visual),size=bounds.getSize(new T.Vector3()),factor=Math.min(1,lot.depth/size.z,lot.height/size.y);visual.scale.multiplyScalar(factor);visual.position.set(lot.x,.16,lot.z);visual.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}lotBases[i].visible=false;cityVisuals.push(visual);}
-        else if(i===-1){const source=models.assets.get(spec.path),visual=source&&fitModel(cloneFireCharacter(source),spec,{height:city.crewHeight});if(!visual)continue;scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visual.traverse(o=>{if(o.isMesh)o.castShadow=true;});crewVisual=visual;crewRig=createFireCrewRig(visual,source.animations,city.grip);firefighter.visible=false;}
+        else if(i===-1){const source=models.assets.get(spec.path),visual=source&&fitModel(cloneFireCharacter(source),spec,{height:crewV9Flag()?balance.crew.v9.height:city.crewHeight});if(!visual)continue;scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visual.traverse(o=>{if(o.isMesh)o.castShadow=true;});crewVisual=visual;crewRig=createFireCrewRig(visual,source.animations,city.grip);firefighter.visible=false;}
         else for(let j=0;j<model.rescues.length;j++){const source=models.assets.get(spec.path),visual=source&&fitModel(cloneFireCharacter(source),spec,{height:city.citizenHeight});if(!visual)continue;scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}citizens[j].visible=false;citizenVisuals[j]=visual;}
       }
       await scenery.load();
@@ -197,7 +197,7 @@ export function createFireScene(ctx,model,adapters={}) {
     setQuality(level){ultraEffects.setQuality(level);sun.castShadow=level>0;},
     v7Metrics(){return v7?v7.metrics():null;},
     effectsMetrics(){return ultraEffects.metrics();},
-    cityMetrics(){return {buildings:cityVisuals.length,firefighterLoaded:Boolean(crewVisual),crewRigged:Boolean(crewRig),citizens:citizenVisuals.length,roads:city.roadsX.length+city.roadsZ.length,intersections:model.roads.nodes.length,crewVisible:crewVisual?.visible||firefighter.visible,hoseConnected:attackHose.visible,camera:{x:focus.x,z:focus.z},models:models.metrics(),scenery:scenery.metrics()};},
+    cityMetrics(){return {buildings:cityVisuals.length,firefighterLoaded:Boolean(crewVisual),crewRigged:Boolean(crewRig),citizens:citizenVisuals.length,roads:city.roadsX.length+city.roadsZ.length,intersections:model.roads.nodes.length,crewVisible:crewVisual?.visible||firefighter.visible,crewSize:crewVisual?(()=>{const b=new T.Box3().setFromObject(crewVisual),z=b.getSize(new T.Vector3());return {height:+z.y.toFixed(2),width:+z.x.toFixed(2),depth:+z.z.toFixed(2)};})():null,hoseConnected:attackHose.visible,camera:{x:focus.x,z:focus.z},models:models.metrics(),scenery:scenery.metrics()};},
     setHoseStart(v){handHose=Boolean(v);if(v)hoseStart.copy(v);},
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visuals=[];for(const p of city.hydrants){const visual=models.create(spec,{height:spec.height});if(!visual)continue;visual.position.fromArray(p);scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visuals.push(visual);}hydrantVisual=visuals[0];if(visuals.length===city.hydrants.length)hydrantBase.visible=false;return Boolean(hydrantVisual);},
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),height:balance.hydrant.height,ringRadius:balance.hydrant.radius,connected:model.atHydrant,art:models.metrics()};},
@@ -206,7 +206,7 @@ export function createFireScene(ctx,model,adapters={}) {
 }
 
 /** Same two-stage degradation contract as naval-view; the model never changes. */
-const legacyTruck=polishLegacy('fireTruck'),clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
+const legacyTruck=polishLegacy('fireTruck'),crewV9Flag=()=>!legacyTruck&&polishValue('fireCrew')!=='v8',clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
 function dtLean(){const now=globalThis.performance?.now?.()??0,dt=lean.t?Math.min(.1,Math.max(.001,(now-lean.t)/1000)):.016;lean.t=now;return dt;}
 export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRenderer(options)) {
   const r=ctx.balance.render,canvas=globalThis.document?.createElement('canvas');

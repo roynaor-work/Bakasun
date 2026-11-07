@@ -16,8 +16,8 @@ test('soccer default extends each side by two with stable legacy IDs and unique 
  assert.equal(c.players.roster[2].role,'keeper');assert.equal(c.players.roster[5].role,'keeper');assert.equal(expandSoccerConfig(c),c);
 });
 test('soccer extra-player config flag supports zero, one and two per side without mutating persisted cards',()=>{
- for(const n of [0,1,2]){const raw=structuredClone(base);raw.squad.extraPlayersPerTeam=n;const c=expandSoccerConfig(raw);assert.equal(c.players.roster.length,8+2*n);assert.equal(c.team.players.length,4);const save=initialSoccerRoster(c.team.players,null,c);assert.equal(save.players.length,4);}
- for(const n of [-1,3,NaN,1.1]){const raw=structuredClone(base);raw.squad.extraPlayersPerTeam=n;assert.throws(()=>expandSoccerConfig(raw),/extraPlayersPerTeam/);}
+ for(const n of [0,1,2,3,5,7]){const raw=structuredClone(base);raw.squad.extraPlayersPerTeam=n;const c=expandSoccerConfig(raw);assert.equal(c.players.roster.length,8+2*n);assert.equal(c.team.players.length,4);const save=initialSoccerRoster(c.team.players,null,c);assert.equal(save.players.length,4);}
+ for(const n of [-1,8,NaN,1.1]){const raw=structuredClone(base);raw.squad.extraPlayersPerTeam=n;assert.throws(()=>expandSoccerConfig(raw),/extraPlayersPerTeam/);}
 });
 test('extra match players receive distinct numbers while using existing saved card skill totals',()=>{
  const c=expandSoccerConfig(base),cards=soccerMatchCards(c,c.team,rosterCards,null,1,'normal');

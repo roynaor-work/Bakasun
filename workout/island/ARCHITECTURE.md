@@ -48,6 +48,20 @@
 
 מסך: `gameShell.games.alpineRush.orientation` הוא `any`, ולכן אין שכבת סיבוב והכניסה למסך מלא אינה נועלת לרוחב (`FullscreenEntry.enter(orientation)`; משחקי רוחב לא השתנו).
 
+## תפוס את הפושע (catchCriminal)
+
+משחק זריקה בתורות: שוטרת זורקת רשת צרה, רשת רחבה או חבל לכידה על פושע שבורח ברחוב. אף אחד לא יורה: הפושע רק רץ, מתכופף מאחורי מחסה או עומד. 10 שלבים, שלוש זריקות לשלב. הדגל: `featureFlags.catchCriminal` (או `?catch=off`).
+
+| קובץ | תפקיד |
+| --- | --- |
+| `minigames/catch-engine.mjs` | הכללים בלי DOM: מסלול זריקה בכוח, זווית ורוח, מכשולים, תנועת הפושע כפונקציה של השעון, תורות, ניקוד. אותו קוד רץ בדפדפן ובסימולציה |
+| `minigames/catch-actors.mjs` | השוטרת והפושע מהדמויות עם השלד שכבר באי (`assets/models/adult-*-rigged-512.glb`): ריצה והליכה מהקליפים, זריקה והסתתרות לפי עצמות |
+| `minigames/catch-view.mjs` | Three.js: הרחוב מדגמי העיר (`assets/game-catch/models`), מצלמה עוקבת, קו המסלול, הרשת, אפקטים. נטען עצלות רק בכניסה למשחק |
+| `minigames/catch-session.mjs`, `catch.css`, `catch-audio.mjs` | הבקר: לולאה, גרירה לכוונון, כפתור זריקה גדול, ממשק, צלילים מסונתזים. `extensions/catch-criminal.mjs` רושם את המשחק |
+| `tools/catch-sim.mjs` | מדידה: 200 משחקים לשלב עם שחקן לדוגמה (כישרון, טוב, מתחיל) |
+
+הדגמים נשמרו ללא `WebAssembly`: המדיניות של העמוד (`script-src 'self'`) לא מאפשרת אותו, לכן הדחיסה היא קוונטיזציה וטקסטורות WebP בלבד. השמירה היא של `minigameProgress`, `minigameLevels` ו-`minigameEquipment` בלי שינוי סכימה (`GAMES_AFTER_18`).
+
 ## הרצה ובדיקות
 
 משורש המאגר, הפעילו שרת מקומי:

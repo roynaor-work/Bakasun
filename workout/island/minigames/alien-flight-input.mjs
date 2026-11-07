@@ -1,3 +1,4 @@
+import {alienV9Enabled} from './alien-v9.mjs';
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 
 /** A continuous horizontal deadzone. Unlike a second squaring in the movement
@@ -10,7 +11,7 @@ export function alienFlightAxis(value,deadzone=.12){
 
 /** Pointer ownership and relative movement are independent of DOM and RAF. A
  * fresh contact anchors the current ship, including after cancellation/resume. */
-export function createAlienFlightState({deadzone=.12,device='touch'}={}){
+export function createAlienFlightState({deadzone=.12,device='touch',autoFire=!alienV9Enabled()}={}){
  let pointer=null,lastDevice=device;
  function reset(){const old=pointer;pointer=null;return old;}
  function move(event){
@@ -28,7 +29,7 @@ export function createAlienFlightState({deadzone=.12,device='touch'}={}){
   },move,
   end(id){if(!pointer||pointer.id!==id)return false;reset();return true;},reset,
   keyboard(){lastDevice='keyboard';},
-  sample(){return pointer?{active:true,id:pointer.id,mode:pointer.mode,device:pointer.device,moveX:pointer.moveX,...(pointer.mode==='drag'?{x:pointer.target}:{}),autoFire:pointer.device==='touch'||pointer.device==='pen'}:{active:false,mode:'idle',device:lastDevice,moveX:0,autoFire:false};}
+  sample(){return pointer?{active:true,id:pointer.id,mode:pointer.mode,device:pointer.device,moveX:pointer.moveX,...(pointer.mode==='drag'?{x:pointer.target}:{}),autoFire:autoFire&&(pointer.device==='touch'||pointer.device==='pen')}:{active:false,mode:'idle',device:lastDevice,moveX:0,autoFire:false};}
  };
 }
 
@@ -36,7 +37,7 @@ export function createAlienFlightState({deadzone=.12,device='touch'}={}){
  * and keyboard. The existing broad stick zone becomes a relative flight surface
  * outside its visible stick, so touching it cannot pull the ship toward a thumb. */
 export function createAlienFlightInput({canvas,controls,config,modelWidth,playerRadius,getPlayerX,onGesture=()=>{},onCancel=()=>{},windowTarget=globalThis.window}={}){
- const state=createAlienFlightState({...config,device:globalThis.matchMedia?.('(pointer:coarse)').matches?'touch':'keyboard'}),abort=new AbortController(),options={signal:abort.signal,capture:true};
+ const state=createAlienFlightState({...config,autoFire:!alienV9Enabled(),device:globalThis.matchMedia?.('(pointer:coarse)').matches?'touch':'keyboard'}),abort=new AbortController(),options={signal:abort.signal,capture:true};
  const stick=controls.querySelector('#joystick'),knob=controls.querySelector('#knob'),zone=controls.querySelector('.soccer-stick-zone');
  let enabled=false,captured=null;
  const display=(event,mode)=>{

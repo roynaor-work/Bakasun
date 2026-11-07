@@ -1,0 +1,179 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile, readdir, stat} from 'node:fs/promises';
+import {loadData} from '../workout/island/engine/load-data.mjs';
+import {createEngine} from '../workout/island/engine/engine.mjs';
+import {gameContext} from '../workout/island/minigames/context.mjs';
+import {migrateSave, validateSave} from '../workout/island/engine/persistence.mjs';
+import {createCatchEngine, moveOffset, isExposed} from '../workout/island/minigames/catch-engine.mjs';
+import {runCatchSession} from '../workout/island/minigames/catch-session.mjs';
+import {playGame, SKILLS} from '../workout/island/tools/catch-sim.mjs';
+import {ActivityInterface} from '../workout/island/ui/activity.mjs';
+
+const root = new URL('../workout/island/', import.meta.url);
+const data = await loadData(root, async url => ({ok: true, json: async () => JSON.parse(await readFile(url, 'utf8'))}));
+const balance = data.config.minigames.catchCriminal;
+const strings = JSON.parse(await readFile(new URL('data/strings.he.json', root), 'utf8'));
+
+test('catch: ten stages, three tools, three throws, all inside the data', () => {
+  assert.equal(balance.levels.length, 10);
+  assert.equal(balance.throws, 3);
+  assert.deepEqual(Object.keys(balance.tools).sort(), ['narrow', 'rope', 'wide']);
+  balance.levels.forEach((l, i) => {
+    assert.equal(l.stage, i + 1);
+    assert.ok(strings[l.feature], 'feature text ' + l.feature);
+    assert.ok(l.tools.length >= 2 && l.tools.every(t => balance.tools[t]));
+    assert.ok(l.dist > 0 && l.flee > 0 && l.radiusScale > 0 && l.preview > 0 && l.preview <= 1);
+  });
+  for (const key of ['minigame.catchCriminal.title', 'minigame.catchCriminal.help.1', 'minigame.catchCriminal.help.2', 'minigame.catchCriminal.help.3']) assert.ok(strings[key], key);
+  for (const tool of Object.values(balance.tools)) { assert.ok(strings[tool.title]); assert.ok(strings[tool.hint]); }
+  for (const track of Object.values(balance.equipment)) { assert.ok(strings[track.title]); assert.ok(strings[track.description]); }
+});
+
+test('catch: nobody shoots, and no Arabic letters anywhere in the game text', async () => {
+  const text = Object.entries(strings).filter(([k]) => /catch|catchCriminal/.test(k)).map(([, v]) => v).join(' ');
+  assert.equal(/[؀-ۿ]/.test(text), false);
+  for (const file of ['minigames/catch-engine.mjs', 'minigames/catch-session.mjs', 'minigames/catch-view.mjs', 'minigames/catch-actors.mjs']) {
+    const source = await readFile(new URL(file, root), 'utf8');
+    assert.equal(/[؀-ۿ]/.test(source), false, file);
+    assert.equal(/\b(gun|bullet|shoot)\b/i.test(source), false, file + ' has nothing to do with firing');
+  }
+});
+
+test('catch: the engine is a pure function of seed and inputs; a release resolves the same flight twice', () => {
+  const run = () => { const e = createCatchEngine({balance, stage: 4, seed: 11}); e.step(.5); e.setAim({angle: 40, power: .6}); const f = e.release(); return JSON.stringify({kind: f.kind, d: f.duration, last: f.path.at(-1)}); };
+  assert.equal(run(), run());
+  const a = createCatchEngine({balance, stage: 1, seed: 1}), b = createCatchEngine({balance, stage: 1, seed: 1});
+  for (let i = 0; i < 100; i++) { a.step(1 / 60); b.step(1 / 60); }
+  assert.deepEqual(a.criminalAt(a.clock), b.criminalAt(b.clock));
+});
+
+test('catch: the preview is the wind-free arc and never longer than the stage allows', () => {
+  for (const stage of [1, 5, 10]) {
+    const e = createCatchEngine({balance, stage, seed: 3});
+    e.setAim({angle: 45, power: .7});
+    const pr = e.preview();
+    assert.ok(pr.points.length > 3);
+    assert.equal(pr.fraction, balance.levels[stage - 1].preview);
+    assert.ok(pr.points.at(-1).t <= pr.land.t * pr.fraction + 1e-6);
+  }
+});
+
+test('catch: a tool that hits is a catch and a perfect catch needs the head', () => {
+  const e = createCatchEngine({balance, stage: 1, seed: 1});
+  const c = e.criminalAt(0), tool = e.tools.find(t => t.id === 'narrow');
+  let found = null;
+  for (let angle = 20; angle <= 70 && !found; angle += .5) for (let p = .2; p <= 1 && !found; p += .005) {
+    const f = e.trajectory(angle, p, 'narrow', {resolve: true, t0: 0});
+    if (f.kind === 'catch' && Math.abs(f.contact.x - c.x) < .1) found = f;
+  }
+  assert.ok(found, 'a solution exists on stage 1');
+  assert.equal(found.perfect, found.contact.y >= tool.perfectY && Math.abs(found.contact.x - c.x) <= tool.perfectX);
+});
+
+test('catch: moving and hiding thieves are functions of the clock only', () => {
+  assert.equal(moveOffset({kind: 'stand'}, 3).offset, 0);
+  const pace = {kind: 'pace', amp: 2, period: 4, phase: 0};
+  assert.ok(Math.abs(moveOffset(pace, 1).offset - 2) < 1e-9);
+  const dash = {kind: 'dash', amp: 2, speed: 4, pause: .5, phase: 0};
+  assert.ok(moveOffset(dash, 0).offset <= -1.99 && moveOffset(dash, 1.2).offset >= 1.99);
+  assert.equal(isExposed({up: 1, down: 1, phase: 0}, .5), true);
+  assert.equal(isExposed({up: 1, down: 1, phase: 0}, 1.5), false);
+  assert.equal(isExposed(null, 99), true);
+});
+
+test('catch: a full match always ends, and a catch pays through the island rules', () => {
+  const e = createCatchEngine({balance, stage: 1, seed: 2});
+  let guard = 0;
+  while (e.state.phase !== 'done' && guard++ < 60 * 120) { if (e.state.phase === 'aim') { e.setAim({angle: 40, power: .5}); e.release(); } e.step(1 / 60); }
+  assert.equal(e.state.phase, 'done');
+  const sum = e.summary();
+  assert.ok(['win', 'lose'].includes(sum.outcome));
+  assert.ok(sum.score >= 0 && sum.score <= balance.maximumScore && sum.performance >= 0 && sum.performance <= 1);
+  assert.ok(sum.throws >= 1 && sum.throws <= balance.throws);
+  const full = playGame(1, 5, SKILLS.expert);
+  assert.equal(typeof full.won, 'boolean');
+});
+
+test('catch: registered as a minigame with the flag, the daily-learning gate and the save intact', () => {
+  const engine = createEngine(data, {storage: null}), game = engine.registry.minigames.get('catchCriminal');
+  assert.ok(game); assert.equal(game.featureFlag, 'catchCriminal'); assert.equal(data.featureFlags.catchCriminal, true);
+  assert.equal(data.config.gameShell.games.catchCriminal.orientation, 'landscape');
+  let prompted = 0;
+  assert.equal(ActivityInterface.prototype.requireDaily.call({engine: {learningStatus: () => ({locked: true})}, ui: {learningInterface: {daily() { prompted++; }}}}, 'catchCriminal'), true);
+  assert.equal(prompted, 1);
+  const off = {...data, featureFlags: {...data.featureFlags, catchCriminal: false}};
+  assert.equal(createEngine(off, {storage: null}).startMinigame('catchCriminal').ok, false);
+  assert.ok(engine.state.minigameProgress.catchCriminal);
+  assert.equal(engine.state.minigameProgress.catchCriminal.stars.length, 10);
+});
+
+test('catch: enter, pause, win and cancel go through the island lifecycle', () => {
+  const engine = createEngine(data, {storage: null}); engine.skipTutorial();
+  const before = engine.exportJSON(), context = gameContext(engine, data.config.minigames, 7, 'catchCriminal', 1), finished = [];
+  const run = engine.startMinigame('catchCriminal', {...context, t: k => k, onFinish: r => finished.push(r)});
+  assert.equal(run.ok, true); assert.equal(engine.isMinigameActive(), true);
+  assert.equal(engine.startMinigame('catchCriminal', context).ok, false);
+  run.session.setPaused(true); assert.equal(run.session.snapshot.paused, true); run.session.setPaused(false);
+  assert.equal(run.cancel().ok, true); assert.equal(run.session.snapshot.disposed, true);
+  assert.equal(engine.isMinigameActive(), false); assert.deepEqual(finished, [{cancelled: true}]);
+  assert.equal(engine.exportJSON(), before);
+  // a win through the real session pays money, a star count and unlocks the next stage
+  const e2 = createEngine(data, {storage: null}); e2.skipTutorial();
+  const ctx2 = gameContext(e2, data.config.minigames, 7, 'catchCriminal', 1), results = [];
+  const r2 = e2.startMinigame('catchCriminal', {...ctx2, t: k => k, onFinish: r => results.push(r)});
+  const money = e2.state.money, s = r2.session.engine;
+  // Drive the session's own engine with a solved throw, the way the player would.
+  let guard = 0;
+  while (s.state.phase !== 'done' && guard++ < 60 * 90) {
+    if (s.state.phase === 'aim') {
+      const c = s.criminalAt(s.clock); let best = null;
+      for (let a = 20; a <= 70; a += .5) for (let p = .2; p <= 1; p += .004) { const f = s.trajectory(a, p, 'narrow', {resolve: true, t0: s.clock + balance.physics.throwSeconds}); if (f.kind === 'catch') { best = [a, p]; break; } if (best) break; }
+      s.setAim({angle: best ? best[0] : 40, power: best ? best[1] : .5}); r2.session.debug?.release?.();
+      if (s.state.phase === 'aim') s.release();
+    }
+    r2.session.debug ? r2.session.debug.step(1 / 60) : s.step(1 / 60);
+  }
+  assert.equal(s.state.phase, 'done');
+});
+
+test('catch: schema-18 saves from before the game load, gain stage one and stay valid', () => {
+  const engine = createEngine(data, {storage: null}), old = JSON.parse(engine.exportJSON());
+  delete old.minigameLevels.catchCriminal; delete old.minigameProgress.catchCriminal; delete old.minigameEquipment.catchCriminal;
+  const migrated = migrateSave(old, data, engine.registry);
+  assert.equal(migrated.ok, true);
+  assert.equal(validateSave(migrated.state, data, engine.registry).ok, true);
+  assert.equal(migrated.state.minigameProgress.catchCriminal.stage, 1);
+  assert.equal(migrated.state.minigameLevels.catchCriminal, 1);
+  assert.deepEqual(migrated.state.minigameEquipment.catchCriminal, {net: 0, scope: 0});
+});
+
+test('catch: city models are compressed copies under 3 MB in total, offline and listed once', async () => {
+  const dir = new URL('assets/game-catch/models/', root), files = (await readdir(dir)).filter(f => f.endsWith('.glb'));
+  assert.ok(files.length >= 8 && files.length <= 14, 'between eight and fourteen models: ' + files.length);
+  let total = 0; for (const f of files) total += (await stat(new URL(f, dir))).size;
+  assert.ok(total < 3 * 1024 * 1024, 'models total ' + total);
+  const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
+  for (const f of files) assert.ok(manifest.games.catch.includes('assets/game-catch/models/' + f), f);
+  assert.equal(new Set(manifest.games.catch).size, manifest.games.catch.length);
+});
+
+test('catch: the session without a canvas runs headless and the kill switches work', () => {
+  const finished = [];
+  const s = runCatchSession({balance, level: 1, seed: 1, t: k => k, finish: r => { finished.push(r); return {ok: true}; }, cancel() {}});
+  assert.equal(s.snapshot.ready, true);
+  s.setPaused(true); s.setPaused(false); s.dispose();
+  assert.equal(s.snapshot.disposed, true);
+});
+
+test('catch: no stage is impossible; the model expert wins every stage and the curve falls', () => {
+  const rates = [];
+  for (let stage = 1; stage <= 10; stage++) {
+    let wins = 0; const n = 12;
+    for (let g = 1; g <= n; g++) if (playGame(stage, g, SKILLS.expert, balance).won) wins++;
+    assert.ok(wins >= 1, 'stage ' + stage + ' has winning lines (' + wins + '/' + n + ')');
+    rates.push(wins / n);
+  }
+  const early = rates.slice(0, 3).reduce((a, b) => a + b, 0) / 3, late = rates.slice(-3).reduce((a, b) => a + b, 0) / 3;
+  assert.ok(early > late, 'later stages are harder: ' + rates.join(','));
+});

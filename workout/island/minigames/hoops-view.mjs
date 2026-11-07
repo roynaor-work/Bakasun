@@ -2,13 +2,13 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-1';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-1';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-3';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-3';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-1';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-3';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
