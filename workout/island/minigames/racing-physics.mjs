@@ -20,6 +20,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const track=createTrack(stage), random=randomSource(seedUint), sector=track.length/track.checkpoints.length;
   const equipment=config.equipment||{};
   const engine=clamp(finite(equipment.engine,1),1,1.16), grip=clamp(finite(equipment.grip,1),1,1.16), nitroUpgrade=clamp(finite(equipment.nitro,1),1,1.16);
+  // racing-v9 league upgrades (default 1 = no change): brakes, steering and aero (downforce raises the high-speed cornering cap and the slipstream).
+  const brakeUp=clamp(finite(equipment.brakes,1),1,1.3), steerUp=clamp(finite(equipment.steer,1),1,1.12), aeroUp=clamp(finite(equipment.aero,1),1,1.25);
+  const drivers=Array.isArray(config.drivers)?config.drivers:null;
   // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
   const walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
@@ -28,13 +31,13 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const start=index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4;
     const lane=index===0?0:index%2?2.8:-2.8;
     const p=track.sample(start);
-    return {id:index===0?'player':`ai-${index}`,name:names[index]||`רוכב ${index}`,isPlayer:index===0,
+    return {id:index===0?'player':`ai-${index}`,name:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      maxSpeed:stage.aiSpeed*skill*(.96+random()*.075),collisionCooldown:0};
+      maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
   const state={phase:config.countdown===0?'racing':'countdown',countdown:config.countdown===0?0:3,time:0,elapsed:0,
@@ -114,17 +117,17 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       if(gap>3&&gap<22&&Math.abs(other.lateral-car.lateral)<2.4&&other.speed>car.speed*.7)draft=Math.max(draft,(1-(gap-3)/19)*(1-Math.abs(other.lateral-car.lateral)/2.4));
     }
     car.draft+=(draft-car.draft)*(1-Math.exp(-dt*(draft>car.draft?2.2:4)));
-    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*(1+.07*car.draft)+(car.boosting?12:0);
+    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*(1+.07*car.draft*aeroUp)+(car.boosting?12:0);
     const offLimit=car.offroad?19:Infinity;
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
     const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
     car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
-    if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27);
+    if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27*(car.isPlayer?brakeUp:1));
     if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
     if(car.offroad)car.speed=Math.max(0,car.speed-dt*8);
-    let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip:1);
+    let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1);
     // Soft cap on cornering force at speed (about 4 g): full lock stops snapping the car around at 40+ m/s but keeps its authority.
-    if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP/car.speed;yaw=limit*Math.tanh(yaw/limit);}
+    if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp/car.speed;yaw=limit*Math.tanh(yaw/limit);}
     if(car.isPlayer&&Math.abs(steer)<.065&&config.steeringAssist!==false&&!car.offroad) {
       // Small guidance softens a released steering pad. It cannot negotiate a lap by itself.
       const look=track.sample(before.s+12), error=racingAngle(look.heading-car.heading);
