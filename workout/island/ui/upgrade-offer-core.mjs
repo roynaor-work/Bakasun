@@ -23,6 +23,8 @@ export const TRACK_ICON=Object.freeze({
 const LEAGUE_ICON=Object.freeze({engine:'engine',tires:'tires',brakes:'brakes',aero:'aerodynamics',steering:'speed'});
 
 const int=v=>Number.isSafeInteger(v)&&v>=0;
+/** Island money drifts in fractions (income ticks); the child sees and pays whole coins. */
+const whole=v=>Number.isFinite(v)&&v>=0?Math.floor(v):0;
 
 /** A finished stage is worth an offer when it was a win, earned a star or coins, or was a league race (every league finish pays coins).
  * Cancelled or empty runs never offer. */
@@ -37,10 +39,10 @@ export const stageKey=(gameId,result)=>result?.league?`${gameId}:league:${result
 export function moneyCandidates(state,data,gameId,title=k=>k){
   const out=[],cfg=data?.config;if(!state||!cfg||!cfg.minigameLevels?.[gameId])return out;
   const level=state.minigameLevels?.[gameId],next=cfg.minigameLevels[gameId][level];
-  if(next&&next.cost>0)out.push({id:'level',kind:'level',gameId,category:CATEGORY[gameId]||'',name:'רמה חדשה במשחק',icon:'upgrade',unit:'coins',price:next.cost,balance:state.money});
+  if(next&&next.cost>0)out.push({id:'level',kind:'level',gameId,category:CATEGORY[gameId]||'',name:'רמה חדשה במשחק',icon:'upgrade',unit:'coins',price:next.cost,balance:whole(state.money)});
   for(const [key,track] of Object.entries(cfg.minigames?.[gameId]?.equipment||{})){
     const offer=equipmentOffer(state,data,gameId,key);if(!offer||offer.cost===undefined)continue;
-    out.push({id:'track:'+key,kind:'track',track:key,gameId,category:CATEGORY[gameId]||'',name:title(track.title)||key,icon:TRACK_ICON[gameId]?.[key]||'upgrade',unit:'coins',price:offer.cost,balance:state.money,
+    out.push({id:'track:'+key,kind:'track',track:key,gameId,category:CATEGORY[gameId]||'',name:title(track.title)||key,icon:TRACK_ICON[gameId]?.[key]||'upgrade',unit:'coins',price:offer.cost,balance:whole(state.money),
       locked:offer.reason==='equipment.starsReason',lockReason:offer.stars?`נפתח ב-${offer.stars} כוכבים`:undefined});
   }
   return out;

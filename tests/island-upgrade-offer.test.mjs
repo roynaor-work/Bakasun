@@ -83,6 +83,11 @@ test('a bought offer goes through the existing path and the next offer is a diff
   const b=pickOffer({gameId:'tennis',key:'tennis:2',candidates:moneyCandidates(engine.state,data,'tennis',k=>k),memory});
   assert.ok(!b||b.id!==a.id||b.price>a.price);
 });
+test('island money with a fraction (income ticks) still offers, in whole coins',()=>{
+  const engine=fresh();engine.state.money=400.6;
+  const list=moneyCandidates(engine.state,data,'tennis',k=>k);assert.ok(list.every(c=>c.balance===400));
+  assert.ok(pickOffer({gameId:'tennis',key:'tennis:1',candidates:list}));
+});
 test('league coins: a separate purse, cost by level, none at the top level',()=>{
   const league=createLeague();league.coins=99;
   assert.equal(pickOffer({gameId:'islandRacing',key:'k1',candidates:leagueCandidates(league)}),null);

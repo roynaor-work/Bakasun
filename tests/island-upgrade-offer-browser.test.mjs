@@ -78,7 +78,7 @@ test('racing league: a finished race with enough league coins offers a car part 
     await t.page.locator('.uo-primary').click();
     await t.page.waitForFunction(()=>document.querySelector('.uo-card')?.dataset.state==='purchased');
     const s=await t.page.evaluate(()=>({coins:window.__island.engine.state.islandRacingLeague.coins,up:window.__island.engine.state.islandRacingLeague.upgrades,money:window.__island.engine.state.money}));
-    assert.equal(s.coins,160);assert.equal(Object.values(s.up).reduce((a,b)=>a+b,0),1);assert.equal(s.money,5,'island coins untouched');
+    assert.equal(s.coins,160);assert.equal(Object.values(s.up).reduce((a,b)=>a+b,0),1);assert.ok(Math.floor(s.money)===5,'island coins untouched (income may add a fraction)');
     assert.deepEqual(t.errors,[]);await t.csp.assertClean();
   }finally{await t.context.close();await t.csp.dispose();await browser.close();await server.close();}
 });

@@ -45,6 +45,6 @@ export async function offerUpgrade({engine,activity,data,t,gameId,result,place,s
     place(host);
     host.scrollIntoView?.({block:'nearest'});
     return offer;
-  }catch{return null;}
+  }catch(error){globalThis.__offerError=String(error?.stack||error);return null;}
 }
 export const resetOfferMemory=()=>memory.dismissed.clear();
