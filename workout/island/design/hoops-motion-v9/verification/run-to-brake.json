@@ -1,0 +1,131 @@
+{
+  "method": "Actual GLTFLoader Draco scenes + controller, 120Hz contact sweep; 0.1ms one-sided position/velocity probes at touchdown.",
+  "pass": true,
+  "results": [
+    {
+      "source": "run",
+      "target": "brake",
+      "requestedAtSeconds": 0.1,
+      "waitForTouchdownSeconds": 0.23333333334999998,
+      "blendSeconds": 0.18,
+      "plantedFoot": "RightFoot",
+      "lockedSamples": 21,
+      "maxLockedSoleDriftMeters": 6.787494862027209e-12,
+      "newAirborneSeconds": 0,
+      "seamHipPositionStepMeters": 0.00046117527991184736,
+      "seamHipVelocityChangeMetersPerSecond": 6.619933224706691e-7,
+      "seamReferenceVelocityBefore": [
+        0,
+        0,
+        4.600000000180129
+      ],
+      "seamReferenceVelocityAfter": [
+        0,
+        0,
+        4.600000001768745
+      ],
+      "seamReferenceVelocityChangeMetersPerSecond": 1.5886154614008774e-9,
+      "pass": true
+    },
+    {
+      "source": "run",
+      "target": "brake",
+      "requestedAtSeconds": 0.24,
+      "waitForTouchdownSeconds": 0.09333333334999999,
+      "blendSeconds": 0.18,
+      "plantedFoot": "RightFoot",
+      "lockedSamples": 21,
+      "maxLockedSoleDriftMeters": 6.787494862027209e-12,
+      "newAirborneSeconds": 0,
+      "seamHipPositionStepMeters": 0.00046117527991184736,
+      "seamHipVelocityChangeMetersPerSecond": 6.619933224706691e-7,
+      "seamReferenceVelocityBefore": [
+        0,
+        0,
+        4.600000000180129
+      ],
+      "seamReferenceVelocityAfter": [
+        0,
+        0,
+        4.600000001768745
+      ],
+      "seamReferenceVelocityChangeMetersPerSecond": 1.5886154614008774e-9,
+      "pass": true
+    },
+    {
+      "source": "run_ball",
+      "target": "brake_ball",
+      "requestedAtSeconds": 0.24,
+      "waitForTouchdownSeconds": 0.09333333334999999,
+      "blendSeconds": 0.18,
+      "plantedFoot": "RightFoot",
+      "lockedSamples": 21,
+      "maxLockedSoleDriftMeters": 6.787494862027209e-12,
+      "newAirborneSeconds": 0,
+      "seamHipPositionStepMeters": 0.00046117527991184736,
+      "seamHipVelocityChangeMetersPerSecond": 6.619933224706691e-7,
+      "seamReferenceVelocityBefore": [
+        0,
+        0,
+        4.600000000180129
+      ],
+      "seamReferenceVelocityAfter": [
+        0,
+        0,
+        4.600000001768745
+      ],
+      "seamReferenceVelocityChangeMetersPerSecond": 1.5886154614008774e-9,
+      "pass": true
+    },
+    {
+      "source": "sprint",
+      "target": "brake",
+      "requestedAtSeconds": 0.15,
+      "waitForTouchdownSeconds": 0.11666666665,
+      "blendSeconds": 0.08999999999437501,
+      "plantedFoot": "RightFoot",
+      "lockedSamples": 10,
+      "maxLockedSoleDriftMeters": 8.24261056802997e-13,
+      "newAirborneSeconds": 0,
+      "seamHipPositionStepMeters": 0.0006789911755943104,
+      "seamHipVelocityChangeMetersPerSecond": 0.000013835891329309686,
+      "seamReferenceVelocityBefore": [
+        0,
+        0,
+        6.799999999834985
+      ],
+      "seamReferenceVelocityAfter": [
+        0,
+        0,
+        6.800000001424555
+      ],
+      "seamReferenceVelocityChangeMetersPerSecond": 1.589570253202055e-9,
+      "pass": true
+    },
+    {
+      "source": "sprint_ball",
+      "target": "brake_ball",
+      "requestedAtSeconds": 0.15,
+      "waitForTouchdownSeconds": 0.11666666665,
+      "blendSeconds": 0.08999999999437501,
+      "plantedFoot": "RightFoot",
+      "lockedSamples": 10,
+      "maxLockedSoleDriftMeters": 8.24261056802997e-13,
+      "newAirborneSeconds": 0,
+      "seamHipPositionStepMeters": 0.0006789911755943104,
+      "seamHipVelocityChangeMetersPerSecond": 0.000013835891329309686,
+      "seamReferenceVelocityBefore": [
+        0,
+        0,
+        6.799999999834985
+      ],
+      "seamReferenceVelocityAfter": [
+        0,
+        0,
+        6.800000001424555
+      ],
+      "seamReferenceVelocityChangeMetersPerSecond": 1.589570253202055e-9,
+      "pass": true
+    }
+  ]
+}

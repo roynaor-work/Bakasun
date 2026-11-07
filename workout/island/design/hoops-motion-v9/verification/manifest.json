@@ -1,0 +1,837 @@
+{
+  "baseCommit": "d1af33d98b73b4763a399c260fcaa3621fc1792f",
+  "branch": "codex/hoops-motion-v9",
+  "clips": 83,
+  "files": [
+    {
+      "path": "runtime/clips/idle_relaxed.glb",
+      "bytes": 108400,
+      "sha256": "893d45810300618d9c889f6b902647ceb002a3ba6f3af42e0afd8116f3803304"
+    },
+    {
+      "path": "runtime/keyframes/idle_relaxed.json.gz",
+      "bytes": 22491,
+      "sha256": "c62694e34d61d14d4e7134a7d8c0c387e3a2a6d3792a7d3f1c884f0eedf8bc55"
+    },
+    {
+      "path": "runtime/clips/idle_relaxed_ball.glb",
+      "bytes": 113588,
+      "sha256": "e72f270b3171cd2c68f2765cc88e764550a6f1ba8f52a75ed4d7be43ee1e3e59"
+    },
+    {
+      "path": "runtime/keyframes/idle_relaxed_ball.json.gz",
+      "bytes": 24228,
+      "sha256": "16d00dafeddba693c7161ed6215cb10a2122e0b5fcabb6d0980d556688535776"
+    },
+    {
+      "path": "runtime/clips/idle_weight_shift.glb",
+      "bytes": 108520,
+      "sha256": "6cd10fb85968ce7d8863744fabdad9603fe9e5cf591d3a6a19f764e676037da5"
+    },
+    {
+      "path": "runtime/keyframes/idle_weight_shift.json.gz",
+      "bytes": 22693,
+      "sha256": "6b9177e4cb34061a6a4dd47f176698ea731a006301cdf022f4254304020caaee"
+    },
+    {
+      "path": "runtime/clips/idle_weight_shift_ball.glb",
+      "bytes": 113700,
+      "sha256": "c7be570ff1dfec22618dc1812f31453a0ac3c4a219b0e5dfccbf8658836aeb8c"
+    },
+    {
+      "path": "runtime/keyframes/idle_weight_shift_ball.json.gz",
+      "bytes": 25099,
+      "sha256": "c806764153205045d1a9ba42538cdbf69d1dc14131607f0ca6859fdc8a8ca4f6"
+    },
+    {
+      "path": "runtime/clips/idle_ready.glb",
+      "bytes": 108352,
+      "sha256": "b2e008cbef00ae9ba313930ec2951ab1615303db38aea02b8124193a466b309f"
+    },
+    {
+      "path": "runtime/keyframes/idle_ready.json.gz",
+      "bytes": 22787,
+      "sha256": "4e393aabad226a11e96a0f70e2b0809073e1dbca980b3eb642f5224f5e42f54a"
+    },
+    {
+      "path": "runtime/clips/idle_ready_ball.glb",
+      "bytes": 113532,
+      "sha256": "c06f5a33b9d99507b26c5b9f615c11bb233b59cfad1fbb05e517b631e8fdc7d7"
+    },
+    {
+      "path": "runtime/keyframes/idle_ready_ball.json.gz",
+      "bytes": 24961,
+      "sha256": "0558ab9341c8677a3564d56319c33954650db92063b9037669554f1816362241"
+    },
+    {
+      "path": "runtime/clips/walk.glb",
+      "bytes": 90560,
+      "sha256": "987009ddaa629a4078c9e19f319d52ed086b0841a320c3fe412a22dd4fae0c25"
+    },
+    {
+      "path": "runtime/keyframes/walk.json.gz",
+      "bytes": 9606,
+      "sha256": "4a891207a4f0b8ba8d2d1a905647769104b81d3096d0d2ce9a077cf97b7b5525"
+    },
+    {
+      "path": "runtime/clips/walk_ball.glb",
+      "bytes": 97900,
+      "sha256": "8882e44a2c8977d6b76343c799bdf020a09b8c636a81726a18c0f2eb081911a1"
+    },
+    {
+      "path": "runtime/keyframes/walk_ball.json.gz",
+      "bytes": 11882,
+      "sha256": "d314d204a790c4a3bf1a00397bd756c5ef723df89f87e58e79fd06509c46d397"
+    },
+    {
+      "path": "runtime/clips/jog.glb",
+      "bytes": 85408,
+      "sha256": "848550664ca190e9995baa1b5b971faa53362114e1393c27525751c87b5fdc92"
+    },
+    {
+      "path": "runtime/keyframes/jog.json.gz",
+      "bytes": 7395,
+      "sha256": "846f9912c76164b444786e8a43f5ee31fb19abf4451256fc81c76ca22cffaa1a"
+    },
+    {
+      "path": "runtime/clips/jog_ball.glb",
+      "bytes": 89592,
+      "sha256": "eeb27b03b9eb715671b57554d63bdb0258e20532a9da02b0471bb747c9b049f0"
+    },
+    {
+      "path": "runtime/keyframes/jog_ball.json.gz",
+      "bytes": 9808,
+      "sha256": "cf170e8ef70070ab0ac30aacafc3bd79c017762a01d138e74216c06d5a5d67cc"
+    },
+    {
+      "path": "runtime/clips/run.glb",
+      "bytes": 83420,
+      "sha256": "0aa55d010a913e4a74f5cd2b1c92234d0dea7129253435782aa18886e98b1162"
+    },
+    {
+      "path": "runtime/keyframes/run.json.gz",
+      "bytes": 6373,
+      "sha256": "7dd361aa0291234af8084854c055eca3107552b413bf89a624ad0e8c0f0bbef9"
+    },
+    {
+      "path": "runtime/clips/run_ball.glb",
+      "bytes": 87336,
+      "sha256": "5b33885ddee95b25948766e5c59b7721b17768092a8dd710ec60cb2072fad589"
+    },
+    {
+      "path": "runtime/keyframes/run_ball.json.gz",
+      "bytes": 8479,
+      "sha256": "2f90aa050fd4059282f6e38e68b558121203ddaae53a9f1eadaf54ec88789669"
+    },
+    {
+      "path": "runtime/clips/sprint.glb",
+      "bytes": 81680,
+      "sha256": "b02e775dca4669a5b32d9a6dd15b4883518b18f4a7bdce68252a77d254560ffe"
+    },
+    {
+      "path": "runtime/keyframes/sprint.json.gz",
+      "bytes": 5528,
+      "sha256": "0dc4e87e4915a6b1fdaacc500fa7d31fe458b00e49a518cb4e5dc5de7b128357"
+    },
+    {
+      "path": "runtime/clips/sprint_ball.glb",
+      "bytes": 85240,
+      "sha256": "1fdd00d9180e22121e61b2cf38a95e23d270ab810f0a0cb89fb24b1cd1d5ca1f"
+    },
+    {
+      "path": "runtime/keyframes/sprint_ball.json.gz",
+      "bytes": 7222,
+      "sha256": "b4c5e8450c19747034d8b3168ee5e0f7d24174d0fd355d73b1e280a0a645dfbd"
+    },
+    {
+      "path": "runtime/clips/brake.glb",
+      "bytes": 101828,
+      "sha256": "75c82d041d708314b2a09a2c2e51f630242e381cf77f56ab0e4f734526dd12d9"
+    },
+    {
+      "path": "runtime/keyframes/brake.json.gz",
+      "bytes": 21077,
+      "sha256": "1ca60516acd70ba678dec9a08bd12760b87fa2c192384c5e013dd0de4d030731"
+    },
+    {
+      "path": "runtime/clips/brake_ball.glb",
+      "bytes": 109068,
+      "sha256": "eee97fa2b3e3569bf56107333d630f04a08a94ac51a034436d5899f1620068db"
+    },
+    {
+      "path": "runtime/keyframes/brake_ball.json.gz",
+      "bytes": 24179,
+      "sha256": "19fc1f567673db733c93fe6d09ac02a3fd7d90e3d6f4ac10464e4ab2379d7542"
+    },
+    {
+      "path": "runtime/clips/cut_45_left.glb",
+      "bytes": 98848,
+      "sha256": "400ea62f6349505266e80534939dcfb2be888eb3384254e5fcdd6c04104c5e1f"
+    },
+    {
+      "path": "runtime/keyframes/cut_45_left.json.gz",
+      "bytes": 19603,
+      "sha256": "b78907fe92f617d55082f6cbbeb08ea0c401200695738a1beb0b0a9bf720eef0"
+    },
+    {
+      "path": "runtime/clips/cut_45_left_ball.glb",
+      "bytes": 107120,
+      "sha256": "b9c13d58e736386e9056f688a680ab7a94e1baf1ee22b4d2231f63bcdf8ed235"
+    },
+    {
+      "path": "runtime/keyframes/cut_45_left_ball.json.gz",
+      "bytes": 23198,
+      "sha256": "a6546dde20b417674adfc82c31e5f243a808533cf76efcf417128c776d6bbc8c"
+    },
+    {
+      "path": "runtime/clips/cut_45_right.glb",
+      "bytes": 98912,
+      "sha256": "7ec0d9e776374be6ea8ba7d67ca35cf7ddebf155288b75e4584cd83ead466c21"
+    },
+    {
+      "path": "runtime/keyframes/cut_45_right.json.gz",
+      "bytes": 19599,
+      "sha256": "c48141dcd050df848622090aa60adb3871318a326d83346e3feb0227d66059bc"
+    },
+    {
+      "path": "runtime/clips/cut_45_right_ball.glb",
+      "bytes": 107292,
+      "sha256": "611bd3ccedb26cb1f405ef1e8b46c90c72a8058aad7a24403811453d01645fc9"
+    },
+    {
+      "path": "runtime/keyframes/cut_45_right_ball.json.gz",
+      "bytes": 23206,
+      "sha256": "e0c9b2bedf49617b81bae402b730ce84399d2fed76f2d860868ac54d45d30b38"
+    },
+    {
+      "path": "runtime/clips/cut_90_left.glb",
+      "bytes": 98844,
+      "sha256": "21931a320aff80727472b88e1630a8c2ef0e2caa6dd58ed57b4c171349354315"
+    },
+    {
+      "path": "runtime/keyframes/cut_90_left.json.gz",
+      "bytes": 19505,
+      "sha256": "7ea895e7d90ce1aafaa7b14baba658531103ad84c57cb18217cc4482c53bd0cd"
+    },
+    {
+      "path": "runtime/clips/cut_90_left_ball.glb",
+      "bytes": 106768,
+      "sha256": "e81ed5d8beeadbef847c68e6ae65c23f22d03d2817bd1d5383a69c69986d425d"
+    },
+    {
+      "path": "runtime/keyframes/cut_90_left_ball.json.gz",
+      "bytes": 23047,
+      "sha256": "1939d837eb07b10153316ba65cbdacf7d4b1d78c388699d8b1e2a171dfd94e89"
+    },
+    {
+      "path": "runtime/clips/cut_90_right.glb",
+      "bytes": 98904,
+      "sha256": "b5b91cc8e9896c79030ee96cf49a2ad870c17f055a8c8bfa38dabc2b48bdbfe1"
+    },
+    {
+      "path": "runtime/keyframes/cut_90_right.json.gz",
+      "bytes": 19489,
+      "sha256": "04fef85928b23d041e15b7d7fc7f0bf81c9073f409a118ea8e55fd8174b13f8e"
+    },
+    {
+      "path": "runtime/clips/cut_90_right_ball.glb",
+      "bytes": 106928,
+      "sha256": "d81b12284cc6a6100d87e9d356fa1e935817743d0ddb45b4415bca48dc2bd480"
+    },
+    {
+      "path": "runtime/keyframes/cut_90_right_ball.json.gz",
+      "bytes": 23096,
+      "sha256": "3c252d632f8f4d8a3438e2615ddd9f76778e16440ba6c6398b4fa1540721bff4"
+    },
+    {
+      "path": "runtime/clips/cut_135_left.glb",
+      "bytes": 98880,
+      "sha256": "0939e0ad452b484862101663f2f6bcf36f870c724ef395be831c8dcd6e242284"
+    },
+    {
+      "path": "runtime/keyframes/cut_135_left.json.gz",
+      "bytes": 19629,
+      "sha256": "aa4378cd3b8c4e6a4f45c768e29604c27be459654a2172eda1ae6892431d497c"
+    },
+    {
+      "path": "runtime/clips/cut_135_left_ball.glb",
+      "bytes": 107188,
+      "sha256": "971eb165e342eaf08f960b1d4145a421bf49cedb403913e262a891386c060001"
+    },
+    {
+      "path": "runtime/keyframes/cut_135_left_ball.json.gz",
+      "bytes": 23268,
+      "sha256": "40bbaa753c065c8cdf99c63fed27d32a4faca9198d4e61e174b604e7ca8847ab"
+    },
+    {
+      "path": "runtime/clips/cut_135_right.glb",
+      "bytes": 98940,
+      "sha256": "e84516d07de554ae343752de169202b4ce475763207b68a6895d7986d934caf5"
+    },
+    {
+      "path": "runtime/keyframes/cut_135_right.json.gz",
+      "bytes": 19627,
+      "sha256": "1f92b4bfb6ebe574ca136d55ee05ae05e0528b72030b4a2efd839dc74e6dfdb2"
+    },
+    {
+      "path": "runtime/clips/cut_135_right_ball.glb",
+      "bytes": 107308,
+      "sha256": "5d827737fb2063cb41e64888f90b60e87fc2557e7a8e23e51f4da448476d6314"
+    },
+    {
+      "path": "runtime/keyframes/cut_135_right_ball.json.gz",
+      "bytes": 23287,
+      "sha256": "db2f6c02d05f9fa581a32bfe30442fcac2964a472683499cfaa5c45e28efe788"
+    },
+    {
+      "path": "runtime/clips/cut_180_left.glb",
+      "bytes": 98876,
+      "sha256": "414ef900b2cebb1eba1a34108ab486722dd2c98a190d0662c58504526d3b5f52"
+    },
+    {
+      "path": "runtime/keyframes/cut_180_left.json.gz",
+      "bytes": 19523,
+      "sha256": "61139e5f7c51df055b19081426d742bf094fd835977b9fd97c3fb8227d2fb533"
+    },
+    {
+      "path": "runtime/clips/cut_180_left_ball.glb",
+      "bytes": 106828,
+      "sha256": "0c48a48eac0058e5e58bf542f45106f58fc4a1b6332e27885113f50378ed7438"
+    },
+    {
+      "path": "runtime/keyframes/cut_180_left_ball.json.gz",
+      "bytes": 23061,
+      "sha256": "d0aa9680f5ddb7734f433a885ccf6c73c4549e16c38390859b3d0e9017b130c5"
+    },
+    {
+      "path": "runtime/clips/cut_180_right.glb",
+      "bytes": 98936,
+      "sha256": "f933082577e4c16832609d96a9d4d0f69f091b6082f49e388581fc58ccd807b3"
+    },
+    {
+      "path": "runtime/keyframes/cut_180_right.json.gz",
+      "bytes": 19529,
+      "sha256": "e0076b395e0d85026ae19a19f41d9464e4fa9e4260e9e06ff6635f1a81328954"
+    },
+    {
+      "path": "runtime/clips/cut_180_right_ball.glb",
+      "bytes": 106908,
+      "sha256": "ef8a7aa4b0f72a4831fb467db998e8061d567554fce4a0f6704eba08f420ec63"
+    },
+    {
+      "path": "runtime/keyframes/cut_180_right_ball.json.gz",
+      "bytes": 23096,
+      "sha256": "c80e530ba001283db0cb952a47a3683046380330697ff96a0579f7bfef38cf49"
+    },
+    {
+      "path": "runtime/clips/pivot_reverse_left.glb",
+      "bytes": 101244,
+      "sha256": "707038af28ec47a604d5515de35fe0cec102b806949497df9523bd59bb893eeb"
+    },
+    {
+      "path": "runtime/keyframes/pivot_reverse_left.json.gz",
+      "bytes": 18604,
+      "sha256": "47fcbec0779da3e9e9d986a43a72e3fcf20a2a99ef23474e15f12e8d20ab3de7"
+    },
+    {
+      "path": "runtime/clips/pivot_reverse_right.glb",
+      "bytes": 101324,
+      "sha256": "71bdbdfc0bc3454eaf21cfba1b830b027506cffe090f66d3349f0fb9dfe38c7f"
+    },
+    {
+      "path": "runtime/keyframes/pivot_reverse_right.json.gz",
+      "bytes": 18597,
+      "sha256": "50bf2020a32325a0d97e937caec90882b663c80677cc04a9ebf451debbd25f69"
+    },
+    {
+      "path": "runtime/clips/dribble_walk_left.glb",
+      "bytes": 98920,
+      "sha256": "cb07fd90480a8bc32941d0bc81fed11da9bd3ec1ba39bd6f427c7c466e43152a"
+    },
+    {
+      "path": "runtime/keyframes/dribble_walk_left.json.gz",
+      "bytes": 12638,
+      "sha256": "3750e692d3a95e0dbd380e2825482d324bc31eefc21cb0b860870e1c5d945ad4"
+    },
+    {
+      "path": "runtime/clips/dribble_walk_right.glb",
+      "bytes": 99016,
+      "sha256": "afce2c46b467232fc36e42abdd38e0e38957eb6e5a95211f7e3246b93901d568"
+    },
+    {
+      "path": "runtime/keyframes/dribble_walk_right.json.gz",
+      "bytes": 12654,
+      "sha256": "3720c5749e5b9f256a0a9e122ab5014743e9a9800d865e32b047daafdab90630"
+    },
+    {
+      "path": "runtime/clips/dribble_forward.glb",
+      "bytes": 98968,
+      "sha256": "a0706c90eed89ac32a0cecaa6aefc67ca5aaa5fad32021ab64ad4e9d7cf94c67"
+    },
+    {
+      "path": "runtime/keyframes/dribble_forward.json.gz",
+      "bytes": 12603,
+      "sha256": "0a6bf7420db88171bcf42a5e8826517288ba46ec25d4547f8c2f113a5ba553b5"
+    },
+    {
+      "path": "runtime/clips/dribble_backward.glb",
+      "bytes": 99028,
+      "sha256": "1e1b62fccfe2751d0248dee4857dd2423ffdb16f9ba60f529461d50fd0bf03bf"
+    },
+    {
+      "path": "runtime/keyframes/dribble_backward.json.gz",
+      "bytes": 12621,
+      "sha256": "c1f08d8c37cb42e72b8d62df01703fda7b4a14df21704bf30bea56c636b6f2ed"
+    },
+    {
+      "path": "runtime/clips/dribble_left.glb",
+      "bytes": 98812,
+      "sha256": "c79c77bee263a18c1a019150e0271f3f0df00d42c1aebbbefee35db9b84f9e34"
+    },
+    {
+      "path": "runtime/keyframes/dribble_left.json.gz",
+      "bytes": 12792,
+      "sha256": "aa4a9538b344da8256fc7b38aa301d03590c40f49cd0a3831d592ed3e13a5496"
+    },
+    {
+      "path": "runtime/clips/dribble_right.glb",
+      "bytes": 98944,
+      "sha256": "a14c8fe6a4199204c327b918b79fb0cb5379e0b08b89cf70edd5eefd8ba257f8"
+    },
+    {
+      "path": "runtime/keyframes/dribble_right.json.gz",
+      "bytes": 12822,
+      "sha256": "eeefb68a09c7598cf1caa058acc4a3f745d71ccd4a56cd59eb486cf869c17f0a"
+    },
+    {
+      "path": "runtime/clips/dribble_forward_left.glb",
+      "bytes": 99456,
+      "sha256": "3913617ffb9e51c61af387073050b679df2a39a8e82236ea1083227c5b1541bd"
+    },
+    {
+      "path": "runtime/keyframes/dribble_forward_left.json.gz",
+      "bytes": 13093,
+      "sha256": "947cf37a7f8e1cd8df41c342513cfacf13fc0e70b3e880684699d2cb608bb1a0"
+    },
+    {
+      "path": "runtime/clips/dribble_forward_right.glb",
+      "bytes": 99588,
+      "sha256": "c467e60c3b73658ec55034f01a76f7c1eab5572f991f70466933ca9d1867e646"
+    },
+    {
+      "path": "runtime/keyframes/dribble_forward_right.json.gz",
+      "bytes": 13082,
+      "sha256": "60087adb5710e9621abe0f1dd3f4335aa382b275e8d0a21ad907b081213ee1f7"
+    },
+    {
+      "path": "runtime/clips/dribble_backward_left.glb",
+      "bytes": 99516,
+      "sha256": "a25f1a43893f0949f6c39dc770e3f274f4a1a0eef8708c6930ef101d6a092d1d"
+    },
+    {
+      "path": "runtime/keyframes/dribble_backward_left.json.gz",
+      "bytes": 13088,
+      "sha256": "1b2944b1c3e5e379e7528d63a039f1a570042af520cef3ec66ecd20df1316a36"
+    },
+    {
+      "path": "runtime/clips/dribble_backward_right.glb",
+      "bytes": 99648,
+      "sha256": "b0c0e91d229698a0fd0c630f3e087a973629ef7acee84abbe55e2e30e516234f"
+    },
+    {
+      "path": "runtime/keyframes/dribble_backward_right.json.gz",
+      "bytes": 13097,
+      "sha256": "edec6487be54c7c40bc7258ea3e24428ac0cd27d03b3adcbed7befd0d9abcdf5"
+    },
+    {
+      "path": "runtime/clips/dribble_crossover_left.glb",
+      "bytes": 99832,
+      "sha256": "046bbdfca1e7907396e12816800b621e9bf5e4cefb7f4e4c721de2cba4501c3d"
+    },
+    {
+      "path": "runtime/keyframes/dribble_crossover_left.json.gz",
+      "bytes": 16366,
+      "sha256": "ead4a510cc626c1eb2b2f0e8bb88b26cdead51c10a7fd951cff3bc21089c9520"
+    },
+    {
+      "path": "runtime/clips/dribble_crossover_right.glb",
+      "bytes": 99860,
+      "sha256": "7bee9f780ef6ee7126163fa7126e4f763e06e1fa1dc22713be733a5b1c003e6a"
+    },
+    {
+      "path": "runtime/keyframes/dribble_crossover_right.json.gz",
+      "bytes": 16365,
+      "sha256": "24940d6f729e894007aafe2841a3f796c8eda4513897d223e0369633c0c9a16a"
+    },
+    {
+      "path": "runtime/clips/dribble_between_legs_left.glb",
+      "bytes": 100068,
+      "sha256": "555250b296e7d8b69f1b3d1dcc789ad272855627d03e5d5a3f9ce6a458207057"
+    },
+    {
+      "path": "runtime/keyframes/dribble_between_legs_left.json.gz",
+      "bytes": 16672,
+      "sha256": "2875feef3a6fd36f446f3d7f528e897b74c964a4f6915301288a73461a6d04cb"
+    },
+    {
+      "path": "runtime/clips/dribble_between_legs_right.glb",
+      "bytes": 100100,
+      "sha256": "c542b8f9117a9c381934fc3e50886fcd658a52b909e0bbcf14dbc66248644b06"
+    },
+    {
+      "path": "runtime/keyframes/dribble_between_legs_right.json.gz",
+      "bytes": 16672,
+      "sha256": "a5b0bee82519b033663585292c523a61405fa2a817f970b534935109184032cd"
+    },
+    {
+      "path": "runtime/clips/dribble_hesitation_left.glb",
+      "bytes": 99760,
+      "sha256": "00b51da97acba74ede5d454e919e35d319575338fb68cd0b1b79ba444e0cadf1"
+    },
+    {
+      "path": "runtime/keyframes/dribble_hesitation_left.json.gz",
+      "bytes": 17598,
+      "sha256": "d4223ad35efd4b7bf5b3f8497f45dca7a0f5214fa555531d3efe214c67422d6f"
+    },
+    {
+      "path": "runtime/clips/dribble_hesitation_right.glb",
+      "bytes": 99868,
+      "sha256": "489113deafc723130a56b74e470637163ebcb4bb1d55b3368b5cca8fb50e1513"
+    },
+    {
+      "path": "runtime/keyframes/dribble_hesitation_right.json.gz",
+      "bytes": 17619,
+      "sha256": "832f5568164ecff650559b3982183377744d4b61ea4a532983a64dcba090084d"
+    },
+    {
+      "path": "runtime/clips/euro_left.glb",
+      "bytes": 117620,
+      "sha256": "19c6c6935d6b8d93a9aeba135010611ede22fc1eca27258ff52c179cbc54bc47"
+    },
+    {
+      "path": "runtime/keyframes/euro_left.json.gz",
+      "bytes": 32568,
+      "sha256": "1f9f3af17201c38d95c5dfdfc77af932c287f5b9cd437125f0c6f6ddc0b163fe"
+    },
+    {
+      "path": "runtime/clips/euro_right.glb",
+      "bytes": 117704,
+      "sha256": "146d25e3da6451dab5b3d88a9361fe6b3ed492c541b13a5d0ae49506f7cdfc48"
+    },
+    {
+      "path": "runtime/keyframes/euro_right.json.gz",
+      "bytes": 32583,
+      "sha256": "2089e5cea39e14cfd27a2523208fb53ab67a570433f34891f5ab430780e47de2"
+    },
+    {
+      "path": "runtime/clips/layup_left.glb",
+      "bytes": 117384,
+      "sha256": "f075d808b3fc456f6896c9f12126147c15d02131003887f000e96aa5aece431b"
+    },
+    {
+      "path": "runtime/keyframes/layup_left.json.gz",
+      "bytes": 32030,
+      "sha256": "437e8fa6dc5dc6dddc56c7bce12ac8c36acc655a861e1bd6df388597001befb3"
+    },
+    {
+      "path": "runtime/clips/layup_right.glb",
+      "bytes": 117552,
+      "sha256": "03d1a187f9f75242775888a7e2c1662ca09c717c0de199f2e1b8398fb6cca465"
+    },
+    {
+      "path": "runtime/keyframes/layup_right.json.gz",
+      "bytes": 32040,
+      "sha256": "9030db30eea3bfa1d1830bddb9374a40d6f0bd76b3c91711fbc4c02379f4cfd7"
+    },
+    {
+      "path": "runtime/clips/floater.glb",
+      "bytes": 109636,
+      "sha256": "a79523038cad8194e72a0db065b212c923d65706f6bab96244f5b4264f0f3383"
+    },
+    {
+      "path": "runtime/keyframes/floater.json.gz",
+      "bytes": 25763,
+      "sha256": "8a9f855dfa40b12c6844240c85d3b2913ce8ccaef9c9802bc666a399aac0ab59"
+    },
+    {
+      "path": "runtime/clips/jump_shot.glb",
+      "bytes": 109040,
+      "sha256": "32d5c46306d3157d8a9068873c403aa8303720a40452c855f5557c839dd05baf"
+    },
+    {
+      "path": "runtime/keyframes/jump_shot.json.gz",
+      "bytes": 24269,
+      "sha256": "2b1f147e856c931d3e11faa3886b8742018b551e877c7ce6707a0006a780a2d3"
+    },
+    {
+      "path": "runtime/clips/free_throw.glb",
+      "bytes": 115132,
+      "sha256": "1e787a0b60001c3c5b1ec6fd9dd576ba0d21a523289035f0617c8137fcbe74b6"
+    },
+    {
+      "path": "runtime/keyframes/free_throw.json.gz",
+      "bytes": 27516,
+      "sha256": "de694005c72f9c3e239aa7a40061462eb37b1672e4dd3e95f6e791dd6cd8b6ca"
+    },
+    {
+      "path": "runtime/clips/three_point.glb",
+      "bytes": 112720,
+      "sha256": "847efd12652e68cea1c3b3528579c1738a20f28ee6b3140c4bfd4160c4b8e767"
+    },
+    {
+      "path": "runtime/keyframes/three_point.json.gz",
+      "bytes": 26802,
+      "sha256": "9273692fc7f34799776a2bdbdd058c195d22eb26bee4506be692f9ac0de4af3b"
+    },
+    {
+      "path": "runtime/clips/dunk_one_hand.glb",
+      "bytes": 117164,
+      "sha256": "5dd096c03abbc3f3fb7f74bd20d7169f002c22bed576e2bf3166ec75490a1d09"
+    },
+    {
+      "path": "runtime/keyframes/dunk_one_hand.json.gz",
+      "bytes": 30261,
+      "sha256": "3ace24fd4e2d2ae05c5683a61f505e7e618c1faec7048cab66686f27bf1176a9"
+    },
+    {
+      "path": "runtime/clips/dunk_two_hands.glb",
+      "bytes": 116996,
+      "sha256": "b73dc2f80633d0e3c95b1fd54bdf2e55b77d4055410793d863bf892846dee569"
+    },
+    {
+      "path": "runtime/keyframes/dunk_two_hands.json.gz",
+      "bytes": 30231,
+      "sha256": "9e2e7ac90a6f39de7d5d537f2fa66533b30010e3bce45784729c5980107d3cc1"
+    },
+    {
+      "path": "runtime/clips/screen_set.glb",
+      "bytes": 108348,
+      "sha256": "a5eee71a6f2e8d8115aa63dd93e09fa0a94bb4ef553f88edd9f853fd0e6414aa"
+    },
+    {
+      "path": "runtime/keyframes/screen_set.json.gz",
+      "bytes": 12167,
+      "sha256": "4b6741dce419e51e6d19174f7448ac8386fe68c420faddbaf9d3009105ec1564"
+    },
+    {
+      "path": "runtime/clips/basket_cut_left.glb",
+      "bytes": 102180,
+      "sha256": "44d528ae302fadb41a730ae06655910c7ed4bc4308c0d16ffbc9f12f380cda5f"
+    },
+    {
+      "path": "runtime/keyframes/basket_cut_left.json.gz",
+      "bytes": 18858,
+      "sha256": "eefb6b0fe4f9a920a560878109d0061dba69c09c5c4cc6c0e932ddd719e3f90f"
+    },
+    {
+      "path": "runtime/clips/basket_cut_right.glb",
+      "bytes": 102260,
+      "sha256": "2e48cd76c4efbfb8f5b94e069c38508f710203b0655b30bdae29ce6861e299f5"
+    },
+    {
+      "path": "runtime/keyframes/basket_cut_right.json.gz",
+      "bytes": 18851,
+      "sha256": "f9edf600a23af17e5d11364bd47e49d62fca22b8d3e038939daf71c65670ac26"
+    },
+    {
+      "path": "runtime/clips/defensive_stance.glb",
+      "bytes": 108496,
+      "sha256": "1eef29635766250a18e70910dd63e3a354dc3412678c812360721d85702e8f3e"
+    },
+    {
+      "path": "runtime/keyframes/defensive_stance.json.gz",
+      "bytes": 14913,
+      "sha256": "f15b3b6c9eb5e5fbd739d70641cfbaa837d83ea612364838d9380404d58b37be"
+    },
+    {
+      "path": "runtime/clips/defensive_slide_left.glb",
+      "bytes": 94916,
+      "sha256": "c79d8e9c53a8d34a8b9ae653e2af8b3267d36d40e20f8674f3d1cb55d502fbd7"
+    },
+    {
+      "path": "runtime/keyframes/defensive_slide_left.json.gz",
+      "bytes": 13581,
+      "sha256": "f9931f770276efcc26ee297fa4a628ca8d8516ad8daccaa438993d74ee3409ae"
+    },
+    {
+      "path": "runtime/clips/defensive_slide_right.glb",
+      "bytes": 94984,
+      "sha256": "d1105fb8cab98eb1e8dffb182c00696b41447a17ee1434a2e0d66d8d274c4cdf"
+    },
+    {
+      "path": "runtime/keyframes/defensive_slide_right.json.gz",
+      "bytes": 13579,
+      "sha256": "eaecfb43266a7d85bf3884bfa3f772c44ddd5153fe86f60e0422fb0379a0a23f"
+    },
+    {
+      "path": "runtime/clips/closeout.glb",
+      "bytes": 101960,
+      "sha256": "78225dc67f7486948ee4c97df93658557cbc265d370e9523a5b8956905d5dc72"
+    },
+    {
+      "path": "runtime/keyframes/closeout.json.gz",
+      "bytes": 17702,
+      "sha256": "5b464cd618c2fed65344d39f2d756e1a5fb5c41d644953e71469fd7a1d565fb7"
+    },
+    {
+      "path": "runtime/clips/block_two_hands.glb",
+      "bytes": 100876,
+      "sha256": "da8199bf422ec2ffef3909e1c050636aedb772dfec368d48820fa325282c67fb"
+    },
+    {
+      "path": "runtime/keyframes/block_two_hands.json.gz",
+      "bytes": 12121,
+      "sha256": "a2aa955eb386b03b8f1ae97e9dbc6e40c27d4ad55422bd8a5e2e7b40cf107e05"
+    },
+    {
+      "path": "runtime/clips/steal_poke.glb",
+      "bytes": 97112,
+      "sha256": "573f666b14189f339b60640f349e4118e7556038562cfb60d10d408250d64298"
+    },
+    {
+      "path": "runtime/keyframes/steal_poke.json.gz",
+      "bytes": 10977,
+      "sha256": "e5d2b6a7fb6dd0b21fba7f97bd04a55dd1f98bd6c41aa681a4c68cbc2fb45d15"
+    },
+    {
+      "path": "runtime/clips/pass_deflect_left.glb",
+      "bytes": 97284,
+      "sha256": "f61a40b81efb6c1b2cc5d23c7dcda42bdfb640c4c50c5ad3f19b49faeb77ff71"
+    },
+    {
+      "path": "runtime/keyframes/pass_deflect_left.json.gz",
+      "bytes": 12387,
+      "sha256": "6311b2546a1e25aa98ae082ecc003a74068e6581513ecfe7446b23381b35574e"
+    },
+    {
+      "path": "runtime/clips/pass_deflect_right.glb",
+      "bytes": 97308,
+      "sha256": "8513fa3135432420dfb75b57fb64daa634fbb3a42b65945486acf5ed9b2cd891"
+    },
+    {
+      "path": "runtime/keyframes/pass_deflect_right.json.gz",
+      "bytes": 12419,
+      "sha256": "fb67686b807f35ad41f87fb2cfd9ab391926cc767451160cb272c7f5ad63420f"
+    },
+    {
+      "path": "runtime/clips/rebound_jump.glb",
+      "bytes": 105216,
+      "sha256": "69b1afc9f1da2295cd7fe9353538397f6827f8ab5537779604dd1b2cae6c3c15"
+    },
+    {
+      "path": "runtime/keyframes/rebound_jump.json.gz",
+      "bytes": 12299,
+      "sha256": "7f51d2bdfbce3e7ac18c0a260ec34611ea29e30866c7de92694a7e72532af8bc"
+    },
+    {
+      "path": "runtime/clips/rebound_land.glb",
+      "bytes": 96932,
+      "sha256": "6da80626895c33b2b24b9ae0d68e8d15a5c1ec31f3e546cb905ecc0a5bbeec91"
+    },
+    {
+      "path": "runtime/keyframes/rebound_land.json.gz",
+      "bytes": 10155,
+      "sha256": "357a87e3e49ed699fbff2d59ea7aa5c65c6e0f126f07c7fe4375b86af1d41dc1"
+    },
+    {
+      "path": "runtime/clips/loose_ball_dive_left.glb",
+      "bytes": 115968,
+      "sha256": "65a4d0b6990c8e471189df4c2ebe5be27fc56c187b23dcf98152a78c3d999f07"
+    },
+    {
+      "path": "runtime/keyframes/loose_ball_dive_left.json.gz",
+      "bytes": 29842,
+      "sha256": "6cd441b8342b8799cdf7a5ac12138ae31e5fc23bd4ecbad0fd0ec6e53a724c47"
+    },
+    {
+      "path": "runtime/clips/loose_ball_dive_right.glb",
+      "bytes": 116212,
+      "sha256": "8fb92bb47ad645e6906204318bdb8bcf6a5a776653fb04a6fd4f04a0a4cdd66c"
+    },
+    {
+      "path": "runtime/keyframes/loose_ball_dive_right.json.gz",
+      "bytes": 29855,
+      "sha256": "2b396cd427274723e0ff5a86d10a1ca5e3db3a441236b942498573b9abbfdee4"
+    },
+    {
+      "path": "runtime/clips/get_up_front.glb",
+      "bytes": 114740,
+      "sha256": "f312b81a145a4a6e6b40a09300e4eafdfadbc87f546e07cf5e53030092f95f89"
+    },
+    {
+      "path": "runtime/keyframes/get_up_front.json.gz",
+      "bytes": 26106,
+      "sha256": "f93caa8770245512da380e6a04e27b7cc9dba86bead1fc4f91e3fe3639da2d8c"
+    },
+    {
+      "path": "runtime/clips/get_up_back.glb",
+      "bytes": 114716,
+      "sha256": "a9e0f247dbe1943cd3bb134d2653c21d6a17df952c52bd98fce03257d5a35e10"
+    },
+    {
+      "path": "runtime/keyframes/get_up_back.json.gz",
+      "bytes": 26009,
+      "sha256": "74ce7c1d3fc2a3bde8ce4c91030ead1111ee76b913296f42ca59fa439a3ff140"
+    },
+    {
+      "path": "runtime/clips/celebrate_fist.glb",
+      "bytes": 108592,
+      "sha256": "208b1c7b803057bfdc4580dee40aa3387666e1be06ba9b0cde0ac742a2ec1014"
+    },
+    {
+      "path": "runtime/keyframes/celebrate_fist.json.gz",
+      "bytes": 24083,
+      "sha256": "0cbd901adc147c82f3adb5c3acdee04e80f28948f5757b4f06dd1407a255bb98"
+    },
+    {
+      "path": "runtime/clips/celebrate_jump.glb",
+      "bytes": 109200,
+      "sha256": "458c9136a9fad04edd430a92762bc190ec04a29cf98baab345e729d0a880e070"
+    },
+    {
+      "path": "runtime/keyframes/celebrate_jump.json.gz",
+      "bytes": 23652,
+      "sha256": "f0a5fba95e145c0906e62bf3664507a35ddff373effe2cbbbaf96f0da240d23b"
+    },
+    {
+      "path": "runtime/clips/celebrate_chest.glb",
+      "bytes": 108764,
+      "sha256": "06e53dda45b723d5b588fb8f497c3ced851921834a00f5541d3d33905b5c3e94"
+    },
+    {
+      "path": "runtime/keyframes/celebrate_chest.json.gz",
+      "bytes": 22174,
+      "sha256": "1a2015a81f49e6cca637a4955df4a9001fe3a3cfcc46e8aac04fee9c333b33e8"
+    },
+    {
+      "path": "runtime/clips/celebrate_point.glb",
+      "bytes": 108616,
+      "sha256": "81da365acef1910313dcba7e77653876e97be56d3252a0db2c788d027b569ae8"
+    },
+    {
+      "path": "runtime/keyframes/celebrate_point.json.gz",
+      "bytes": 21634,
+      "sha256": "1c31f4090764f6028cfcafc4e2fce4c1c3cd4c559389abe4e0c3a681eba1ecac"
+    },
+    {
+      "path": "runtime/clips/disappointed.glb",
+      "bytes": 114156,
+      "sha256": "4e00e8d6de9ac90343d76a631e72f7d4a75862d3ec0d3f8bd15cf20cdddd6bdf"
+    },
+    {
+      "path": "runtime/keyframes/disappointed.json.gz",
+      "bytes": 12100,
+      "sha256": "50270eed776901e032c7bbf45d57f8af875b28644af9403b6ef7254427ce97ee"
+    },
+    {
+      "path": "runtime/clips/hands_on_hips.glb",
+      "bytes": 108424,
+      "sha256": "12f731b2e5162bdda9bbe8ffb27919330570d4758bde97242298e7eb636492ab"
+    },
+    {
+      "path": "runtime/keyframes/hands_on_hips.json.gz",
+      "bytes": 9784,
+      "sha256": "5ffd49db6451e96beda547dfa50f26ed6e5a44c5873d7cea9979bb96357fa4af"
+    }
+  ]
+}
