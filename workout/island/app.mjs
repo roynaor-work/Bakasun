@@ -15,6 +15,7 @@ import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-4';
 import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-4';
 import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-4';
 import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-4';
+import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-4';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -58,7 +59,10 @@ try {
   // Every open: look for a newer release at once, keep the asset worker registered and
   // fill the device cache in the background (skipped on a data saver, paused during a game).
   releaseWatch.poll();registerOfflineWorker();
-  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
+  // The frame-rate probe samples the first 10 seconds in the city (not during a game); a weak device downloads only by the button.
+  if(new URLSearchParams(location.search).get('quality')==='auto')resetMeasured();
+  startFpsProbe({busy:()=>engine.isMinigameActive()||Boolean(ui.modalRoot.children.length)});
+  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!document.hidden,allowed:()=>!isLowQuality(),idleMs:Number(new URLSearchParams(location.search).get('autoIdleMs'))>=0&&new URLSearchParams(location.search).has('autoIdleMs')?Number(new URLSearchParams(location.search).get('autoIdleMs')):60000,onState:state=>{window.__offlineState=state;}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{

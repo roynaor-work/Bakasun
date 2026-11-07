@@ -11,7 +11,7 @@ export function startTennis(ctx){
  let view,frame,last=0,paused=false,disposed=false,eventId=0,feedbackEvent=-1,feedbackLeft=0,transientFeedback=null;const abort=new AbortController();let input;const audio=createTennisAudio({config:balance.audio,storage:globalThis.localStorage});
  const cancel=()=>{model.update(0,{cancelCharge:true});};
  function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();}
- const session={dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
+ const session={get ready(){return Boolean(view);},get loadFailed(){return null;},dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
  const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-4',import.meta.url);screen.append(powerStyle);
