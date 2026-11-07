@@ -23,7 +23,8 @@ export function placementHint(points, options = {}) {
   const code = lateral && clipped ? rightImageDirection ? imageDirection === rightImageDirection ? 'right' : 'left' : 'arrow' :
     distance.direction === 'closer' ? 'far' : distance.direction === 'away' ? 'near' :
     lateral ? rightImageDirection ? imageDirection === rightImageDirection ? 'right' : 'left' : 'arrow' : null;
-  return { code, center, placed: center != null && distance.span != null && !code,
+  const vArrow = code === 'far' ? 'closer' : code === 'near' ? 'back' : null;
+  return { code, vArrow, center, placed: center != null && distance.span != null && !code,
     imageDirection, rightImageDirection, arrow: ['left', 'right', 'arrow'].includes(code) ? arrow : null,
     ...(PLACEMENT_LINES[code] || {}), advisory: true, blocking: false };
 }

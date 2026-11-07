@@ -1,3 +1,4 @@
+import { estimateRange, rangeDirection } from './range.mjs';
 export const PLACEMENT = { tiltDegrees: 10, agreementDegrees: 6, holdMs: 800,
   minSpan: .24, maxSpan: .85, comfortableSpan: .5 };
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
@@ -5,8 +6,20 @@ const visible = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) &&
   (p.visibility ?? 0) >= .3 && (p.presence ?? 1) >= .3;
 // A visual distance hint, never a condition for starting or counting reps.
 // Steps are a rough pinhole estimate, not a calibrated measurement in metres.
-export function placementDistance(points, { aspect = 1, heightCm = 120 } = {}) {
-  const side = [[11, 23, 27], [12, 24, 28]].find(ids => ids.every(i => visible(points?.[i])));
+export function placementDistance(points, { aspect = 1, heightCm = 120, range = true, upperBody = false } = {}) {
+  const side = upperBody ? null : [[11, 23, 27], [12, 24, 28]].find(ids => ids.every(i => visible(points?.[i])));
+  if (!side && range) {
+    const est = estimateRange(points, { aspect, upperBody }), direction = rangeDirection(est, { upperBody });
+    if (est) {
+      const scale = clamp(Number.isFinite(heightCm) ? heightCm : 120, 90, 180) / 120;
+      const steps = direction ? clamp(Math.ceil(Math.abs(2.5 * scale * PLACEMENT.comfortableSpan / est.span - 2.5 * scale) / .4), 1, 6) : 0;
+      const [lo, hi] = upperBody ? [.28, .75] : [PLACEMENT.minSpan, PLACEMENT.maxSpan];
+      return { span: est.span, position: clamp((est.span - lo) / (hi - lo), 0, 1), direction, steps, partial: true,
+        basis: est.basis, advisory: true, blocking: false,
+        message: direction ? `${direction === 'closer' ? 'תתקרב' : 'תתרחק'} בערך ${steps === 1 ? 'צעד אחד' : `${steps} צעדים`}. זה אומדן מחלק מהגוף.` :
+          'המרחק נוח. אפשר להתחיל כשהנקודות הדרושות לתרגיל נראות.' };
+    }
+  }
   if (!side) return { span: null, position: .5, direction: null, steps: 0, advisory: true, blocking: false,
     message: 'עדיין מכוונים: אפשר להתחיל כשהנקודות הדרושות לתרגיל נראות.' };
   const [s, h, a] = side, p = points;
