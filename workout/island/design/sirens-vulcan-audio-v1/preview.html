@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<title>סירנות וולקן · האזנה</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#edf4ff;background:#0c1220;line-height:1.6}
+*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:32px 20px 64px}
+header{padding:12px 0 24px;border-bottom:1px solid #324158}h1{font-size:clamp(28px,5vw,46px);line-height:1.25;margin:8px 0 12px}
+h2{font-size:19px;margin:0 0 8px}.eyebrow{font-size:13px;letter-spacing:.06em;color:#9db3d3}p{color:#b9c8df;margin:6px 0}
+.controls{position:sticky;top:0;z-index:2;padding:16px 0;background:#0c1220f5;border-bottom:1px solid #324158;display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+button,select{font:inherit;border:1px solid #51627e;border-radius:9px;padding:9px 16px;min-height:44px;background:#202e46;color:#fff;cursor:pointer}
+button:hover,select:hover{background:#304665}button[aria-pressed=true]{background:#235b58;border-color:#6dd8b8}button:disabled{opacity:.55;cursor:wait}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #f4c47c;outline-offset:3px}
+.primary{background:#8ce3c6;color:#10261f;border-color:#8ce3c6;font-weight:700}.primary:hover{background:#b1f1dc}
+label{display:flex;align-items:center;gap:10px}input[type=range]{width:140px;min-height:44px;accent-color:#8ce3c6}output{min-width:40px;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;margin:20px 0}
+article{border:1px solid #324158;background:#141e30;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+article p{font-size:14px;flex:1}.meta{color:#9eb1cc;font-size:13px}.actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px}a{color:#a7d7ff;text-underline-offset:4px}.file{font-size:12px;overflow-wrap:anywhere;direction:ltr;text-align:right}
+#status{min-height:30px;color:#8ce3c6;padding-top:12px}footer{border-top:1px solid #324158;padding-top:20px;font-size:14px}
+@media(max-width:480px){main{padding:18px 14px 40px}.controls{gap:8px}input[type=range]{width:108px}.grid{gap:12px}}
+</style>
+<main>
+<header><div class="eyebrow">האי שלי · חבילת אודיו מקורית 01</div>
+<h1>סירנות, ירי ומרדף</h1>
+<p>12 צלילים מסונתזים · לופים רציפים · שני פורמטים לכל צליל</p>
+<p>כל הצלילים בעוצמה אחידה בקירוב; גרסת הירי לרקע שקטה בכוונה ב־8 דציבל.</p>
+</header>
+<section class="controls" aria-label="בקרת האזנה">
+<label>עוצמה <input id="volume" type="range" min="0" max="100" value="35"><output id="level" for="volume">35%</output></label>
+<label>פורמט <select id="format"><option value="ogg">OGG</option><option value="mp3">MP3</option></select></label>
+<button id="stop" type="button">עצירת הכול</button>
+<button id="burst" class="primary" type="button">הדגמת רצף וולקן</button>
+</section>
+<p id="status" role="status" aria-live="polite">טוען את רשימת הצלילים…</p>
+<section id="sounds" class="grid" aria-label="צלילים"></section>
+<footer><p>לופ מנוגן בזיכרון באמצעות מנוע האודיו של הדפדפן, ללא הפסקות בין מחזורים. כל לחיצה מפסיקה את הצליל הקודם. הדגמת וולקן: עלייה, שלוש שניות ירי וירידה, עם חפיפה קצרה.</p>
+<p><a href="REPORT.md">דוח המדידות</a> · <a href="LICENSES.md">מקורות ורישיונות</a> · <a href="manifest.json">מפרט הקבצים</a></p></footer>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const status = $('status'), buttons = new Map(), cache = new Map();
+let context, master, manifest, voices = [], generation = 0, playing = null;
+const notes = {
+ 'siren-two-tone-loop':'מעבר רך בין שני גוונים, כ־680 ו־1,000 הרץ.',
+ 'siren-wail-loop':'שתי עליות וירידות איטיות בכל לופ.',
+ 'siren-yelp-loop':'ארבע עליות וירידות מהירות בשנייה.',
+ 'siren-doppler-loop':'מסלול עקיפה מחזורי בסטריאו עם שינוי גובה של עד 2.5%.',
+ 'police-horn':'צפירה קצרה והרמונית, ללא הקלטת ניידת.',
+ 'vulcan-fire-loop':'רצף צפוף של 320 פעימות בכל מחזור.',
+ 'vulcan-spin-up':'האצת סיבוב במשך 0.4 שניות.',
+ 'vulcan-spin-down':'האטת סיבוב במשך 0.5 שניות.',
+ 'vulcan-flash':'הדף קצר ונמוך לשכבת הבזק הירי.',
+ 'vulcan-background-loop':'אותו לופ ירי, שקט ב־8 דציבל לשימוש ברקע.',
+ 'metal-impact':'מכה חדה ואחריה תהודת לוח מתכת.',
+ 'near-miss-whoosh':'משב חד שעובר משמאל לימין ליד המאזין.'
+};
+async function ready(){
+ if(!context){context = new AudioContext({sampleRate:44100});master=context.createGain();master.gain.value=Number($('volume').value)/100;master.connect(context.destination)}
+ await context.resume();
+}
+async function buffer(asset,format){
+ const path=asset.files[format];
+ if(!cache.has(path))cache.set(path,fetch(path).then(r=>{if(!r.ok)throw Error(`קובץ חסר: ${path}`);return r.arrayBuffer()}).then(b=>context.decodeAudioData(b)).catch(e=>{cache.delete(path);throw e}));
+ return cache.get(path);
+}
+function reset(){
+ generation++;playing=null;
+ const now=context?context.currentTime:0;
+ for(const {source,gain} of voices){try{gain.gain.cancelScheduledValues(now);gain.gain.setTargetAtTime(0,now,.004);source.stop(now+.025)}catch{}}
+ voices=[];
+ for(const button of buttons.values()){button.setAttribute('aria-pressed','false');button.textContent='האזנה'}
+ $('burst').setAttribute('aria-pressed','false');
+ return generation;
+}
+function voice(b,when,loop=false,until=null){
+ const source=context.createBufferSource(),gain=context.createGain();source.buffer=b;source.loop=loop;source.connect(gain);gain.connect(master);
+ gain.gain.setValueAtTime(0,when);gain.gain.linearRampToValueAtTime(1,when+.008);
+ if(until!==null){gain.gain.setValueAtTime(1,until-.012);gain.gain.linearRampToValueAtTime(0,until)}
+ source.start(when);if(until!==null)source.stop(until);voices.push({source,gain});return source;
+}
+async function play(asset){
+ const same=playing===asset.id,token=reset();if(same){status.textContent='ההאזנה נעצרה';return}
+ try{
+  await ready();status.textContent='טוען צליל…';const b=await buffer(asset,$('format').value);if(token!==generation)return;
+  playing=asset.id;const button=buttons.get(asset.id);button.setAttribute('aria-pressed','true');button.textContent='עצירה';
+  const source=voice(b,context.currentTime+.02,asset.loop);
+  source.onended=()=>{if(token===generation){reset();status.textContent='הצליל הסתיים'}};
+  status.textContent=`מנגן: ${asset.title}${asset.loop?' · לופ רציף':''}`;
+ }catch(e){if(token===generation){reset();status.textContent=`שגיאת שמע: ${e.message}`}}
+}
+$('stop').onclick=()=>{reset();status.textContent='ההאזנה נעצרה'};
+$('format').onchange=()=>{reset();status.textContent='הפורמט הוחלף. אפשר לבחור צליל להאזנה.'};
+$('volume').oninput=()=>{const v=Number($('volume').value)/100;$('level').textContent=`${Math.round(v*100)}%`;if(master)master.gain.setTargetAtTime(v,context.currentTime,.01)};
+$('burst').onclick=async()=>{
+ const token=reset();if(!manifest)return;
+ try{
+  await ready();status.textContent='טוען רצף…';const format=$('format').value;
+  const buffers=await Promise.all(['vulcan-spin-up','vulcan-fire-loop','vulcan-spin-down'].map(id=>buffer(manifest.assets.find(a=>a.id===id),format)));
+  if(token!==generation)return;
+  const start=context.currentTime+.06,fire=start+.39,end=fire+3;
+  voice(buffers[0],start);voice(buffers[1],fire,true,end+.01);const tail=voice(buffers[2],end);
+  $('burst').setAttribute('aria-pressed','true');status.textContent='מנגן: סיבוב עולה ← ירי רציף ← סיבוב יורד';
+  tail.onended=()=>{if(token===generation){reset();status.textContent='הרצף הסתיים'}};
+ }catch(e){if(token===generation){reset();status.textContent=`שגיאת שמע: ${e.message}`}}
+};
+fetch('manifest.json').then(r=>{if(!r.ok)throw Error('manifest.json');return r.json()}).then(data=>{
+ manifest=data;
+ for(const asset of data.assets){
+  const article=document.createElement('article'),h=document.createElement('h2'),note=document.createElement('p'),meta=document.createElement('div'),actions=document.createElement('div'),button=document.createElement('button'),file=document.createElement('div');
+  h.textContent=asset.title;note.textContent=notes[asset.id];meta.className='meta';meta.textContent=`${asset.duration} שנ׳ · ${asset.channels===2?'סטריאו':'מונו'} · ${asset.loop?'לופ':'חד־פעמי'}`;
+  button.type='button';button.textContent='האזנה';button.setAttribute('aria-label',`האזנה: ${asset.title}`);button.setAttribute('aria-pressed','false');button.onclick=()=>play(asset);buttons.set(asset.id,button);actions.className='actions';actions.append(button);
+  for(const [format,path] of Object.entries(asset.files)){const link=document.createElement('a');link.href=path;link.download='';link.textContent=format.toUpperCase();link.setAttribute('aria-label',`הורדת ${asset.title} ${format}`);actions.append(link)}
+  file.className='file';file.textContent=asset.id;article.append(h,note,meta,actions,file);$('sounds').append(article);
+ }
+ status.textContent='מוכן להאזנה · העוצמה ההתחלתית 35%';
+}).catch(e=>{status.textContent=`לא ניתן לטעון: ${e.message}. יש לפתוח באמצעות שרת מקומי לפי קובץ ההוראות.`});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){reset();status.textContent='ההאזנה נעצרה במעבר לרקע'}});
+</script>
+</html>

@@ -1,0 +1,724 @@
+{
+  "schema": 1,
+  "method": "FFmpeg loudnorm EBU R128 + decoded PCM; short clips repeated 8x, capped at 12s",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "numpy": "2.3.5",
+  "audio_bytes": 728983,
+  "package_bytes_at_verification": 815520,
+  "files": [
+    {
+      "file": "audio/siren-two-tone-loop.ogg",
+      "bytes": 19556,
+      "sha256": "21fa1f6d96917d298f609deeb3ac91d43c1a2e00f56ee57b3fbd50285762b02b",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -15.97,
+      "true_peak_dbtp": -12.61,
+      "sample_peak_dbfs": -12.629,
+      "clipped_samples": 0,
+      "dc_dbfs": -127.754,
+      "seam": {
+        "jump_dbfs": -27.197,
+        "jump_vs_internal_p999": 0.7241,
+        "rms_join_delta_db": -0.16,
+        "edge_rms_dbfs": [
+          -15.773,
+          -15.89
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-two-tone-loop.mp3",
+      "bytes": 81127,
+      "sha256": "0f3f6851bc85a59f77c7abe037adcd29b106d347956a1c7de1105d973c6c68ba",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -16.42,
+      "true_peak_dbtp": -14.56,
+      "sample_peak_dbfs": -14.567,
+      "clipped_samples": 0,
+      "dc_dbfs": -145.034,
+      "seam": {
+        "jump_dbfs": -26.507,
+        "jump_vs_internal_p999": 0.8296,
+        "rms_join_delta_db": 0.111,
+        "edge_rms_dbfs": [
+          -16.124,
+          -16.121
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-wail-loop.ogg",
+      "bytes": 19143,
+      "sha256": "41e4dd8e982102ee99e434f94a9768891e76bd7bed445f5869dd90571212fe94",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -15.96,
+      "true_peak_dbtp": -13.5,
+      "sample_peak_dbfs": -13.495,
+      "clipped_samples": 0,
+      "dc_dbfs": -122.829,
+      "seam": {
+        "jump_dbfs": -25.594,
+        "jump_vs_internal_p999": 0.8175,
+        "rms_join_delta_db": 0.05,
+        "edge_rms_dbfs": [
+          -15.643,
+          -15.554
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-wail-loop.mp3",
+      "bytes": 81127,
+      "sha256": "61f906c3431b34b02ac22cdfcd24c53f5f3767a9a68b12a8b9aa895ea75a236a",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -16.45,
+      "true_peak_dbtp": -14.55,
+      "sample_peak_dbfs": -14.552,
+      "clipped_samples": 0,
+      "dc_dbfs": -150.699,
+      "seam": {
+        "jump_dbfs": -27.111,
+        "jump_vs_internal_p999": 0.7247,
+        "rms_join_delta_db": 0.122,
+        "edge_rms_dbfs": [
+          -16.119,
+          -16.087
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-yelp-loop.ogg",
+      "bytes": 22805,
+      "sha256": "e14d89ed5cd685c45655747491dd3a62707d18a53fdbddcf7845940c06b267f2",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -12.59,
+      "sample_peak_dbfs": -12.601,
+      "clipped_samples": 0,
+      "dc_dbfs": -121.302,
+      "seam": {
+        "jump_dbfs": -25.69,
+        "jump_vs_internal_p999": 0.814,
+        "rms_join_delta_db": 0.174,
+        "edge_rms_dbfs": [
+          -15.646,
+          -15.564
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-yelp-loop.mp3",
+      "bytes": 81127,
+      "sha256": "6a116e88d41b939bb7ded4a3c8670fa6457cf0f9dca8c76927fd1393dceaa6cb",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -16.43,
+      "true_peak_dbtp": -14.54,
+      "sample_peak_dbfs": -14.543,
+      "clipped_samples": 0,
+      "dc_dbfs": -161.505,
+      "seam": {
+        "jump_dbfs": -27.118,
+        "jump_vs_internal_p999": 0.7262,
+        "rms_join_delta_db": 0.123,
+        "edge_rms_dbfs": [
+          -16.088,
+          -16.112
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-doppler-loop.ogg",
+      "bytes": 26681,
+      "sha256": "68a2e442280745566bff7d8698fb68d9990ec8f11bb997bc67bb2202412b6461",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -15.97,
+      "true_peak_dbtp": -12.9,
+      "sample_peak_dbfs": -12.903,
+      "clipped_samples": 0,
+      "dc_dbfs": -129.637,
+      "seam": {
+        "jump_dbfs": -28.386,
+        "jump_vs_internal_p999": 0.7735,
+        "rms_join_delta_db": -0.006,
+        "edge_rms_dbfs": [
+          -20.64,
+          -20.638
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/siren-doppler-loop.mp3",
+      "bytes": 81127,
+      "sha256": "8ec433204f89fcbeb7666fea5b69442f22956278e37456f9cf68702bea11ec7c",
+      "samples": 220500,
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration_seconds": 5.0,
+      "integrated_lufs": -16.46,
+      "true_peak_dbtp": -13.49,
+      "sample_peak_dbfs": -13.492,
+      "clipped_samples": 0,
+      "dc_dbfs": -139.565,
+      "seam": {
+        "jump_dbfs": -29.875,
+        "jump_vs_internal_p999": 0.6846,
+        "rms_join_delta_db": 0.047,
+        "edge_rms_dbfs": [
+          -21.141,
+          -21.024
+        ],
+        "pass": true
+      },
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/police-horn.ogg",
+      "bytes": 5698,
+      "sha256": "63debea3f029d99e93d9fea0151f83c37a94192aa944a844c3e2236c12b0cf55",
+      "samples": 19717,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.447098,
+      "integrated_lufs": -15.81,
+      "true_peak_dbtp": -8.99,
+      "sample_peak_dbfs": -8.987,
+      "clipped_samples": 0,
+      "dc_dbfs": -91.179,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/police-horn.mp3",
+      "bytes": 8402,
+      "sha256": "986a6eb4b028b8a489b9c1cbc9a406e97437cdcf6f76aa593f0faebdbcf52a18",
+      "samples": 19845,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.45,
+      "integrated_lufs": -16.39,
+      "true_peak_dbtp": -9.78,
+      "sample_peak_dbfs": -9.782,
+      "clipped_samples": 0,
+      "dc_dbfs": -165.993,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-fire-loop.ogg",
+      "bytes": 37669,
+      "sha256": "af5e8685520f7de4df2d61e2d0af50992a5d459fa01cb366f255074cfbd1286d",
+      "samples": 176400,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "integrated_lufs": -16.04,
+      "true_peak_dbtp": -8.03,
+      "sample_peak_dbfs": -8.027,
+      "clipped_samples": 0,
+      "dc_dbfs": -135.704,
+      "seam": {
+        "jump_dbfs": -93.486,
+        "jump_vs_internal_p999": 0.0001,
+        "rms_join_delta_db": -0.787,
+        "edge_rms_dbfs": [
+          -16.772,
+          -16.136
+        ],
+        "pass": true
+      },
+      "measured_pulse_rate_hz": 80.0,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-fire-loop.mp3",
+      "bytes": 65244,
+      "sha256": "15828098b3df4b07e5f4c7cdddf8e53b0564574e07875f7366b82e3020bba33a",
+      "samples": 176400,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "integrated_lufs": -16.45,
+      "true_peak_dbtp": -8.6,
+      "sample_peak_dbfs": -8.701,
+      "clipped_samples": 0,
+      "dc_dbfs": -103.455,
+      "seam": {
+        "jump_dbfs": -52.274,
+        "jump_vs_internal_p999": 0.0145,
+        "rms_join_delta_db": -0.752,
+        "edge_rms_dbfs": [
+          -17.199,
+          -16.604
+        ],
+        "pass": true
+      },
+      "measured_pulse_rate_hz": 80.0,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-spin-up.ogg",
+      "bytes": 7096,
+      "sha256": "10030c383bfdadde551df633d8d247ce4fc1db6fe861f456ad6c5d45a5d86ce6",
+      "samples": 18112,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.410703,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -4.52,
+      "sample_peak_dbfs": -4.607,
+      "clipped_samples": 0,
+      "dc_dbfs": -74.155,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-spin-up.mp3",
+      "bytes": 7566,
+      "sha256": "d135a85959730cd09c7fb24ba9ed1d54ddd1aed632cefa43cc9ce5e2882a8b24",
+      "samples": 17640,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.4,
+      "integrated_lufs": -16.41,
+      "true_peak_dbtp": -5.23,
+      "sample_peak_dbfs": -5.274,
+      "clipped_samples": 0,
+      "dc_dbfs": -65.855,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-spin-down.ogg",
+      "bytes": 7922,
+      "sha256": "379971112a2730fe0269b76d2fa92bd191ddb2aed84ce3a872f4ff2e2b30e1d0",
+      "samples": 22592,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.51229,
+      "integrated_lufs": -16.15,
+      "true_peak_dbtp": -4.6,
+      "sample_peak_dbfs": -4.624,
+      "clipped_samples": 0,
+      "dc_dbfs": -58.949,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-spin-down.mp3",
+      "bytes": 9238,
+      "sha256": "98ea3f6ea9bbe44857655756b9b98cc3bfd5d371456e9f15088bed7a34590c1a",
+      "samples": 22050,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.5,
+      "integrated_lufs": -16.42,
+      "true_peak_dbtp": -5.32,
+      "sample_peak_dbfs": -5.324,
+      "clipped_samples": 0,
+      "dc_dbfs": -61.211,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-flash.ogg",
+      "bytes": 7337,
+      "sha256": "6317b49fc986b061ab44b89f91db647600b136359dcb94e328322bba01ce2acc",
+      "samples": 19717,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.447098,
+      "integrated_lufs": -16.03,
+      "true_peak_dbtp": -4.03,
+      "sample_peak_dbfs": -4.521,
+      "clipped_samples": 0,
+      "dc_dbfs": -77.032,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-flash.mp3",
+      "bytes": 8402,
+      "sha256": "c2b8920326e49d3f2dff4139bc9f84a12f1b99a8d6c3a08e227c88ff75a4b5ce",
+      "samples": 19845,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.45,
+      "integrated_lufs": -16.41,
+      "true_peak_dbtp": -6.08,
+      "sample_peak_dbfs": -6.122,
+      "clipped_samples": 0,
+      "dc_dbfs": -76.94,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-background-loop.ogg",
+      "bytes": 37422,
+      "sha256": "5d27d8f5020d70191dc2452b2ee80727e48bc798ac2f661b1c3a9e7f07840154",
+      "samples": 176400,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "integrated_lufs": -24.02,
+      "true_peak_dbtp": -15.94,
+      "sample_peak_dbfs": -15.971,
+      "clipped_samples": 0,
+      "dc_dbfs": -101.302,
+      "seam": {
+        "jump_dbfs": -56.477,
+        "jump_vs_internal_p999": 0.0228,
+        "rms_join_delta_db": -0.628,
+        "edge_rms_dbfs": [
+          -24.833,
+          -23.984
+        ],
+        "pass": true
+      },
+      "measured_pulse_rate_hz": 80.0,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/vulcan-background-loop.mp3",
+      "bytes": 65244,
+      "sha256": "f61d78f58083bc202ec8950c507212b6c55d73e6b14006ab83e8cae8a2d46ed6",
+      "samples": 176400,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "integrated_lufs": -24.45,
+      "true_peak_dbtp": -16.7,
+      "sample_peak_dbfs": -16.713,
+      "clipped_samples": 0,
+      "dc_dbfs": -96.108,
+      "seam": {
+        "jump_dbfs": -51.407,
+        "jump_vs_internal_p999": 0.0407,
+        "rms_join_delta_db": -0.679,
+        "edge_rms_dbfs": [
+          -25.111,
+          -24.61
+        ],
+        "pass": true
+      },
+      "measured_pulse_rate_hz": 80.0,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/metal-impact.ogg",
+      "bytes": 8405,
+      "sha256": "564fd5463833f0060f97362e9d380765e89ed64eac92c6cf95ce50bb89de9b19",
+      "samples": 43972,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 0.997098,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -3.33,
+      "sample_peak_dbfs": -3.358,
+      "clipped_samples": 0,
+      "dc_dbfs": -99.318,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/metal-impact.mp3",
+      "bytes": 17179,
+      "sha256": "5f470521fdbed5230e9ca0fdfca25185f37e05926217fa48a744ac7c83f195ff",
+      "samples": 44100,
+      "sample_rate": 44100,
+      "channels": 1,
+      "duration_seconds": 1.0,
+      "integrated_lufs": -16.42,
+      "true_peak_dbtp": -4.6,
+      "sample_peak_dbfs": -4.629,
+      "clipped_samples": 0,
+      "dc_dbfs": -96.553,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/near-miss-whoosh.ogg",
+      "bytes": 11303,
+      "sha256": "52ea1fef5a3437c7eb2d952b323880899bd61a3990ab1a783376039a31aca039",
+      "samples": 30742,
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration_seconds": 0.697098,
+      "integrated_lufs": -16.22,
+      "true_peak_dbtp": -6.58,
+      "sample_peak_dbfs": -6.661,
+      "clipped_samples": 0,
+      "dc_dbfs": -99.008,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    },
+    {
+      "file": "audio/near-miss-whoosh.mp3",
+      "bytes": 12163,
+      "sha256": "d866cc5e693433bdfbff0e9030fea7809806fdb2f882acbb6f78e560750f92f7",
+      "samples": 30870,
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration_seconds": 0.7,
+      "integrated_lufs": -16.06,
+      "true_peak_dbtp": -5.85,
+      "sample_peak_dbfs": -6.021,
+      "clipped_samples": 0,
+      "dc_dbfs": -117.038,
+      "seam": null,
+      "checks": {
+        "size": true,
+        "format": true,
+        "duration": true,
+        "loudness": true,
+        "true_peak": true,
+        "clipping": true,
+        "pulse_rate": true,
+        "loop": true
+      }
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

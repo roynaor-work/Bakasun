@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "sample_rate": 44100,
+  "seed": 11072026,
+  "license": "CC0-1.0",
+  "assets": [
+    {
+      "id": "siren-two-tone-loop",
+      "title": "סירנה — שני גוונים מתחלפים",
+      "duration": 5,
+      "channels": 1,
+      "loop": true,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/siren-two-tone-loop.ogg",
+        "mp3": "audio/siren-two-tone-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -26.025,
+        "jump_vs_internal_p999": 0.833,
+        "rms_join_delta_db": 0.106,
+        "edge_rms_dbfs": [
+          -15.68,
+          -15.674
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "siren-wail-loop",
+      "title": "סירנה — יללה איטית",
+      "duration": 5,
+      "channels": 1,
+      "loop": true,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/siren-wail-loop.ogg",
+        "mp3": "audio/siren-wail-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -26.406,
+        "jump_vs_internal_p999": 0.7467,
+        "rms_join_delta_db": 0.119,
+        "edge_rms_dbfs": [
+          -15.678,
+          -15.642
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "siren-yelp-loop",
+      "title": "סירנה — יללה מהירה",
+      "duration": 5,
+      "channels": 1,
+      "loop": true,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/siren-yelp-loop.ogg",
+        "mp3": "audio/siren-yelp-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -26.396,
+        "jump_vs_internal_p999": 0.7497,
+        "rms_join_delta_db": 0.125,
+        "edge_rms_dbfs": [
+          -15.638,
+          -15.666
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "siren-doppler-loop",
+      "title": "סירנה — עקיפה עם דופלר עדין",
+      "duration": 5,
+      "channels": 2,
+      "loop": true,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/siren-doppler-loop.ogg",
+        "mp3": "audio/siren-doppler-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -28.694,
+        "jump_vs_internal_p999": 0.7451,
+        "rms_join_delta_db": 0.119,
+        "edge_rms_dbfs": [
+          -20.639,
+          -20.602
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "police-horn",
+      "title": "צפירה קצרה",
+      "duration": 0.45,
+      "channels": 1,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/police-horn.ogg",
+        "mp3": "audio/police-horn.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "vulcan-fire-loop",
+      "title": "וולקן — ירי רציף, 80 פעימות בשנייה",
+      "duration": 4,
+      "channels": 1,
+      "loop": true,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/vulcan-fire-loop.ogg",
+        "mp3": "audio/vulcan-fire-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -76.974,
+        "jump_vs_internal_p999": 0.0008,
+        "rms_join_delta_db": -0.72,
+        "edge_rms_dbfs": [
+          -16.701,
+          -16.127
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": 80
+    },
+    {
+      "id": "vulcan-spin-up",
+      "title": "וולקן — סיבוב עולה",
+      "duration": 0.4,
+      "channels": 1,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/vulcan-spin-up.ogg",
+        "mp3": "audio/vulcan-spin-up.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "vulcan-spin-down",
+      "title": "וולקן — סיבוב יורד",
+      "duration": 0.5,
+      "channels": 1,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/vulcan-spin-down.ogg",
+        "mp3": "audio/vulcan-spin-down.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "vulcan-flash",
+      "title": "וולקן — הבזק ירי / הדף רקע",
+      "duration": 0.45,
+      "channels": 1,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/vulcan-flash.ogg",
+        "mp3": "audio/vulcan-flash.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "vulcan-background-loop",
+      "title": "וולקן — ירי רקע שקט",
+      "duration": 4,
+      "channels": 1,
+      "loop": true,
+      "target_lufs": -24,
+      "files": {
+        "ogg": "audio/vulcan-background-loop.ogg",
+        "mp3": "audio/vulcan-background-loop.mp3"
+      },
+      "source_seam": {
+        "jump_dbfs": -84.974,
+        "jump_vs_internal_p999": 0.0008,
+        "rms_join_delta_db": -0.72,
+        "edge_rms_dbfs": [
+          -24.701,
+          -24.127
+        ],
+        "pass": true
+      },
+      "pulse_rate_hz": 80
+    },
+    {
+      "id": "metal-impact",
+      "title": "פגיעה במתכת",
+      "duration": 1,
+      "channels": 1,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/metal-impact.ogg",
+        "mp3": "audio/metal-impact.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    },
+    {
+      "id": "near-miss-whoosh",
+      "title": "החמצה ליד האוזן",
+      "duration": 0.7,
+      "channels": 2,
+      "loop": false,
+      "target_lufs": -16,
+      "files": {
+        "ogg": "audio/near-miss-whoosh.ogg",
+        "mp3": "audio/near-miss-whoosh.mp3"
+      },
+      "source_seam": null,
+      "pulse_rate_hz": null
+    }
+  ]
+}
