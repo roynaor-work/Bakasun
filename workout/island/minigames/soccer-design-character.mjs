@@ -5,6 +5,7 @@ import {loadSoccerRestartMotion} from './soccer-athlete-motion.mjs';
 import {soccerMetreScale,createSoccerCharacterLod} from './soccer-scale.mjs';
 import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
+import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
@@ -167,7 +168,8 @@ export function soccerV7Rung(speed,current=-1){
   if(current>=0&&Math.abs(index-current)===1){const edge=bounds[Math.min(index,current)];if(Math.abs(speed-edge)<.25)index=current;}
   return index;
 }
-const SOCCER_V7_CELEBRATIONS=['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap','celebrate_aeroplane'];
+// v9: the aeroplane holds both arms straight out for 2.2 s, which Roy saw as a T-pose after a goal.
+const SOCCER_V7_CELEBRATIONS=soccerMotionV9Enabled()?['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap']:['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap','celebrate_aeroplane'];
 export function createSoccerDesignMotion(mixer,clips,data,config) {
   const actions=Object.fromEntries(clips.map(clip=>{
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
@@ -184,7 +186,8 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     if(mode==='slide'){t=Math.max(t,(1-clamp((p.slideTime||0)/slide.slideSeconds,0,1))*slideDur);}
     else if(mode==='recover'){
       if(slide.recoverSeconds===null){slide.recoverSeconds=Math.max(.05,p.recover||config.slide?.recoverSeconds||.6);slide.rate=Math.max(1,(total-slideDur)/(slide.recoverSeconds+(config.view.slideGraceSeconds??.35)));}
-      t=Math.max(t,slideDur+(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
+      const v9=soccerMotionV9Enabled()?slideRecoverTime(clip.parts,slide.recoverSeconds,1-clamp((p.recover||0)/slide.recoverSeconds,0,1)):null;
+      t=v9!==null?Math.max(t,v9):Math.max(t,slideDur+(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
     }
     else{
       // The simulation has released the player. Finish the getting up only while
@@ -199,6 +202,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const clean=[],boneByName={};let cleanSaved=false;
   mixer.getRoot().traverse(bone=>{if(bone.isBone){clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});boneByName[bone.name]=bone;}});
   // Procedural arm swing over the locomotion clips (see soccer-arm-swing.mjs).
+  const standLayer={weight:0,breath:0},standPose={},standOn=soccerMotionV9Enabled();
   const arm={phase:0,weight:0,sprint:0,carry:0},armPose={},applyArms=createArmSwingApplier(T,mixer.getRoot(),boneByName);
   const LOCOMOTION=new Set(['run','dribble_run','turn_left','turn_right','decelerate']),ARM_PHASE={run:0,dribble_run:0}; // both authored cycles start with the left foot in front
   const updateMixer=dt=>{
@@ -301,6 +305,8 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const clipPhase=state==='run'||state==='dribble_run'?(actions[state].time/data.states[state].durationSeconds+ARM_PHASE[state])%1:NaN;
       armSwingState(arm,dt,{locomotion,clipPhase,speed01:(speed-idle)/(runSpeed-idle),sprint01:Math.max(mode==='sprint'?1:0,(speed-runSpeed)/2),carrying:s.ball.owner===p.id});
       if(arm.weight>0)applyArms(armSwingPose(arm.phase,1,arm.sprint,arm.carry,undefined,armPose),arm.weight);
+      // v9: natural arms while standing, turning or shadowing (the authored clips hold them out like a T-pose).
+      if(standOn){armStandState(standLayer,dt,armStandWeight(state)*(1-clamp(arm.weight,0,1)*(moving?1:0)));if(standLayer.weight>0)applyArms(armStandPose(state,standLayer.breath,standLayer.weight,standPose),1);}
       return state;
     },
   };
