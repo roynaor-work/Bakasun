@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261105-2';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261106-1';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the

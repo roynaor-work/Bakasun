@@ -145,5 +145,5 @@ test('Naval enemy bar shows the new health at once; the lost part holds 0.15 s a
 test('Naval player paint keeps the specified palette and accent colour; enemies are not repainted',async()=>{
  assert.deepEqual([PLAYER_PAINT.low,PLAYER_PAINT.deck,PLAYER_PAINT.accent,PLAYER_PAINT.contrast],['#536F80','#B9C9CC','#E07843',.8]);
  const view=await readFile(new URL('../workout/island/minigames/naval-view.mjs',import.meta.url),'utf8');
- assert.ok(view.includes("createVessel(THREE,r,model.equipment,{player:true},balance.playerModel)"));assert.ok(view.includes("if(variant.player)mat.color.set('#DDE6E5')"));assert.ok(view.includes('else hullBands(node,mat,model)'));
+ assert.ok(view.includes("createVessel(THREE,r,model.equipment,{player:true},balance.playerModel,v7opt(NAVAL_V7.kinds.player,'tide'))"));assert.ok(view.includes("if(variant.player)mat.color.set('#DDE6E5')"));assert.ok(view.includes('else hullBands(node,mat,model)'));
 });

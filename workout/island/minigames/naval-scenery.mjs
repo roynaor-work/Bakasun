@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {disposeBoat} from './patrol-boat.mjs?v=island-v2-20261105-2';
+import {disposeBoat} from './patrol-boat.mjs?v=island-v2-20261106-1';
 import {NAVAL_SHORES,navalShoreRadius,navalShoreHeight} from './ultra-naval-environment-layout.mjs';
 
 /** A bounded, authored archipelago. All moving detail uses the simulation clock. */

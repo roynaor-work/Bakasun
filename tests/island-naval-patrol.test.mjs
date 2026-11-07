@@ -1,3 +1,5 @@
+// Pins the pre-06/11 aim gain (`?navalAim=v1`); the new gain is covered by island-polish-v11.test.mjs.
+globalThis.location={search:'?navalAim=v1'};
 // Naval gameplay round, stage A (27/10/2026): speed-blended aim and readable enemy patrols.
 import test from 'node:test';
 import assert from 'node:assert/strict';

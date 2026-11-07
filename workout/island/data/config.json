@@ -4959,7 +4959,20 @@
     "wheelSide": 0.95,
     "wheelAxle": 1.6,
     "wheelSelectRadius": 0.58,
-    "headingOffset": 180
+    "headingOffset": 180,
+    "feel": {
+     "headingOffset": 0,
+     "wheelSign": -1,
+     "accelerationSeconds": 0.55,
+     "brakeSeconds": 0.4,
+     "turnSpeedFloor": 0.4,
+     "parkedTurn": 0.45,
+     "rollPerTurn": 0.0016,
+     "maxRoll": 0.06,
+     "pitchPerAccel": 0.0014,
+     "maxPitch": 0.04,
+     "leanEase": 8
+    }
    },
    "hydrant": {
     "path": "assets/models/hydrant-512.glb",
@@ -7396,6 +7409,11 @@
     "reach": {
      "lowAngle": 10,
      "powerSpan": 14
+    },
+    "follow": {
+     "yawFixed": 0.12,
+     "maxLeadDegrees": 14,
+     "rate": 3.5
     }
    },
    "patrol": {
@@ -12226,6 +12244,22 @@
      "enabled": true,
      "minQuality": 1,
      "base": "design/hoops-v5/models/"
+    },
+    "v8": {
+     "enabled": true,
+     "minQuality": 1,
+     "motion": "assets/hoops-v8/motion.json",
+     "arena": {
+      "base": "assets/hoops-v8/arena/",
+      "files": ["arena-lod0.glb", "arena-lod1.glb", "arena-lod2.glb"],
+      "textures": {
+       "parquet": "parquet.webp",
+       "orm": "parquet-orm.webp",
+       "normal": "parquet-normal.webp",
+       "crowd": "crowd.webp",
+       "ceiling": "ceiling.webp"
+      }
+     }
     },
     "v7": {
      "enabled": true,

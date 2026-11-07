@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261105-2';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261105-2';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261105-2';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261106-1';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261106-1';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261106-1';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
@@ -21,7 +21,7 @@ export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>
 /** Effective rating 0..1 (fatigue lowers everything a little). */
 function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
 
-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false}={}){
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2'}={}){
  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
  const prof=R.profiles[profile]||R.profiles.standard,diff=C.ai.difficulty[difficulty]||C.ai.difficulty.normal;
  let rng,S,seq=0,queue=[],history=[],disposed=false,tacticsController=null;
@@ -1072,10 +1072,10 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,positionName:p.positionName,abilities:p.abilities,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
    face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,boost:+p.boost.toFixed(3),boostLocked:p.boostLock,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
-   hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null}));
+   hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null,passTo:p.act==='pass'?p.act2?.target??null:null}));
  }
 
- const api={
+ const api={aiV2:aiVersion!=='v1',
   get S(){return S;},gatherBall,attemptDribble,court,C,rand,eff,onCourt,all,side,holder,byId,dist,nearestTo,
   startShot,startPass,startJump,startSteal,startMove,startFake,choosePassTarget,diff,
  };

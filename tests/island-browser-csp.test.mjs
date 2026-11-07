@@ -146,7 +146,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
     // bodies and the v3 venue (sprite crowd) and still start.
     // v5 (04/11) is the default venue now, so the v4 checks pin it off with ?hoopsV5=0 and v5 has its own checks below
-    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
     // v7 (05/11) is the default body set now: the v4/v5 checks pin it off with ?hoopsV7=0 and v7 has its own checks after the v5 ones
     const hoopsV7Base=hoopsBase.replace('&hoopsV7=0','');
     const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
@@ -228,6 +228,37 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.equal(live.m.crowd3d,false);assert.ok(live.m.crowd>0,'the v3 sprite crowd is back');assert.ok(live.m.arenaSource.endsWith('models2/basketball-arena.glb'));
       await v5v3.csp.assertClean();reports.push({name:'hoops-v5-fallback-v3-result',...live.m,loadTimes:undefined});
     }finally{await v5v3.close();await v5v3.csp.assertClean();}
+    // Basketball v8 (06/11, GPT hoops-arena-v8 + hoops-motion-v8): the hall and the authored passes under the production CSP, nothing from design/;
+    // then the hall blocked (falls back to v5) and the motion pack blocked (v7 arm-IK passes, the hall stays).
+    const v8Base='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    const v8=await fixture('hoops-v8-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];v8.page.on('request',r=>requests.push(r.url()));
+      await v8.page.goto(server.url+v8Base,{waitUntil:'load'});
+      const live=await hoopsReady(v8.page);
+      assert.equal(live.error,null);assert.equal(live.m.v8,true);assert.equal(live.m.v8Motion,true);assert.deepEqual(live.m.v4Fallbacks,[]);assert.equal(live.m.v5,false);
+      assert.ok(live.m.crowd>0&&live.m.crowd<=2084);assert.equal(live.m.characterVersion,7);
+      assert.ok(requests.some(u=>u.includes('assets/hoops-v8/arena/arena-lod0.glb')));assert.ok(requests.some(u=>u.includes('assets/hoops-v8/motion.json')));
+      assert.ok(!requests.some(u=>/\/design\/hoops-(arena|motion)-v8\//.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(!requests.some(u=>u.includes('design/hoops-v5/models/')),'the v5 venue is not downloaded when v8 loads');
+      await v8.csp.assertClean();reports.push({name:'hoops-v8-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await v8.close();await v8.csp.assertClean();}
+    const v8hall=await fixture('hoops-v8-fallback-v5',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await v8hall.page.route(/assets\/hoops-v8\/arena\//,route=>route.abort());
+      await v8hall.page.goto(server.url+v8Base,{waitUntil:'load'});
+      const live=await hoopsReady(v8hall.page);
+      assert.equal(live.error,null,'a missing v8 hall never stops the game');assert.equal(live.m.v8,false);assert.equal(live.m.v5,true);assert.deepEqual(live.m.v4Fallbacks,['v8 arena']);assert.equal(live.m.v8Motion,true);
+      await v8hall.csp.assertClean();reports.push({name:'hoops-v8-fallback-v5-result',...live.m,loadTimes:undefined});
+    }finally{await v8hall.close();await v8hall.csp.assertClean();}
+    const v8motion=await fixture('hoops-v8-fallback-motion',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await v8motion.page.route(/assets\/hoops-v8\/motion\.json/,route=>route.abort());
+      await v8motion.page.goto(server.url+v8Base,{waitUntil:'load'});
+      const live=await hoopsReady(v8motion.page);
+      assert.equal(live.error,null,'a missing motion pack never stops the game');assert.equal(live.m.v8Motion,false);assert.equal(live.m.v8,true);assert.deepEqual(live.m.v4Fallbacks,['v8 motion']);assert.equal(live.m.characterVersion,7);
+      await v8motion.csp.assertClean();reports.push({name:'hoops-v8-fallback-motion-result',...live.m,loadTimes:undefined});
+    }finally{await v8motion.close();await v8motion.csp.assertClean();}
   }finally{
     await browser.close();await server.close();
     if(process.env.ISLAND_CSP_AUDIT_DIR){await mkdir(process.env.ISLAND_CSP_AUDIT_DIR,{recursive:true});await writeFile(path.join(process.env.ISLAND_CSP_AUDIT_DIR,'csp-negative-fixtures.json'),JSON.stringify(reports,null,2)+'\n');}

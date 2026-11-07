@@ -2,16 +2,17 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261105-2';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261105-2';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261106-1';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261106-1';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261105-2';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261106-1';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
+import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -40,9 +41,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
  const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
  let models=null;
+ // v8 (06/11): the new hall with the broadcast surfaces (15K triangles with the whole crowd); first choice, v5 stays as the fallback
+ if(v8ArenaEnabled(config.assets,quality,params)){
+  try{const {replaceArenaAssetsV8}=await import('./hoops-v8-venue.mjs');models=await replaceArenaAssetsV8(arena,dyn,court,{...arenaOptions,v8:config.assets.v8,params});}catch(error){models=null;onFallback('v8 arena',error);}
+ }
  // v5 (04/11): the new arena with the animated crowd, the lacquered maple and the leather ball; the quality tier picks the
  // crowd density and the frame-time governor thins it further on a slow device (hoops-v5.mjs)
- if(v5Enabled(config.assets,quality,params)){
+ if(!models&&v5Enabled(config.assets,quality,params)){
   try{const {replaceArenaAssetsV5}=await import('./hoops-v5-venue.mjs');models=await replaceArenaAssetsV5(arena,dyn,court,{...arenaOptions,v5:config.assets.v5,params,looks});}catch(error){models=null;onFallback('v5 arena',error);}
  }
  if(!models&&v4ArenaEnabled(config.assets,quality,params)){
@@ -55,7 +60,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const reflectable=o=>o.traverse(c=>c.layers.enable(REFLECTION_LAYER));
  let reflection=null;
  const floorMesh=arena.getObjectByName('court_surface');
- if(quality>=2&&floorMesh){reflection=createFloorReflection(renderer,scene,floorMesh,{planeY:0.008,scale:V.reflScale??0.4,maxWidth:V.reflMaxWidth??640,strength:V.reflStrength??0.42});renderer.shadowMap.autoUpdate=false;}
+ if(quality>=2&&floorMesh&&!models.v8){reflection=createFloorReflection(renderer,scene,floorMesh,{planeY:0.008,scale:V.reflScale??0.4,maxWidth:V.reflMaxWidth??640,strength:V.reflStrength??0.42});renderer.shadowMap.autoUpdate=false;}
  // environment reflections from a dim copy of the arena lights
  const pm=new THREE.PMREMGenerator(renderer);loadingPm=pm;
  const envScene=new THREE.Scene();envScene.background=new THREE.Color(0x0b0d14);
@@ -108,6 +113,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   state.w=w;state.h=h;state.landscape=w>=h*1.05;
   // Portrait's close camera is inside the hanging board: use a broadcast cutaway.
   for(const name of ['hanging_scoreboard','live-hanging-scoreboard']){const board=arena.getObjectByName(name);if(board)board.visible=state.landscape;}
+  models.arenaV8?.setHangingBoard(state.landscape);
   const cap=mobile?V.mobileDprCap:V.dprCap;
   renderer.setPixelRatio(Math.min(dpr||1,cap));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
   reflection?.resize(canvas.width,canvas.height);
@@ -196,7 +202,12 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
-   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null},Math.min(0.2,dt));
+   // v8 motion needs: how far the pass goes (short chest passes are hand-offs), the engine's wind-up and reach times, and how long the ball
+   // still has to fly to this receiver (the reception clip meets it)
+   let passDist,eta;
+   if(p.act==='pass'&&p.passTo){const q=s.players.find(o=>o.id===p.passTo);if(q)passDist=Math.hypot(q.x-p.x,q.z-p.z);}
+   if(catching)eta=Math.hypot(s.ball.x-p.x,s.ball.z-p.z)/passFlightSpeed(s.ball.passKind,config.pass?.speed);
+   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
@@ -251,6 +262,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
   const feedback=feel.update(presentationDt,s);
   if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
+  models.arenaV8?.update(camera,now/1000,presentationDt||dt||1/60,state.cheer||0);
   vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
   // metrics: `calls`/`triangles` stay the main pass (comparable with earlier measurements; three.js
   // resets its counters after the shadow pass); the reflection pass is counted separately
@@ -308,7 +320,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||0,crowdLevel:models.crowdV5?.level??null,v5:!!models.v5,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

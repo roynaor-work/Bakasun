@@ -18,6 +18,7 @@ import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {HoopsDRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
+import {v8MotionEnabled,loadV8Motion,buildV8Clips,chooseV8Motion,createDribbleGuard} from './hoops-v8-motion.mjs';
 
 export const V7_ROLES=Object.freeze(['PG','SG','SF','PF','C']);
 export const v7RoleKey=pos=>V7_ROLES.includes(pos)?pos:'SF';
@@ -163,7 +164,7 @@ function prepareRole(gltf,meta,role){
  const onlyHumanMorph=clip=>new THREE.AnimationClip(clip.name,clip.duration,clip.tracks.filter(t=>!/morphTargetInfluences/.test(t.name)||t.name.split('.')[0]===humanName));
  const source=new Map(gltf.animations.map(c=>[c.name,onlyHumanMorph(c)]));
  for(const n of V7_REQUIRED_CLIPS)if(!source.has(n))throw Error('Basketball v7 clip missing: '+n+' ('+role+')');
- const idle=source.get('idle'),hipsTrack=idle.tracks.find(t=>t.name==='Hips.position'),restY=hipsTrack?hipsTrack.values[1]:1;
+ const idle=source.get('idle'),hipsTrack=idle.tracks.find(t=>t.name==='Hips.position'),restY=hipsTrack?hipsTrack.values[1]:1,restVec=hipsTrack?[hipsTrack.values[0],hipsTrack.values[1],hipsTrack.values[2]]:[0,1,0];
  const clips=new Map();
  for(const [name,clip] of source){
   clips.set(name,FLIGHT_CLIPS.includes(name)?flattenFlight(stripAnchor(clip),restY):stripAnchor(clip));
@@ -171,7 +172,7 @@ function prepareRole(gltf,meta,role){
  for(const n of UPPER_SOURCES)if(source.has(n))clips.set('upper:'+n,splitClip(source.get(n),'upper','upper:'+n));
  for(const n of LOWER_SOURCES)if(source.has(n))clips.set('lower:'+n,splitClip(source.get(n),'lower','lower:'+n));
  const box=new THREE.Box3().setFromObject(scene);
- return {role,scene,clips,groups,palm:palmOffsets(scene),height:box.max.y-box.min.y,restY};
+ return {role,scene,clips,groups,palm:palmOffsets(scene),height:box.max.y-box.min.y,restY,restVec};
 }
 
 /** GLTFLoader's meshopt hook (`ready`, `decodeGltfBufferAsync`) backed by a static same-origin module worker
@@ -201,7 +202,7 @@ export function createMeshoptWorkerDecoder(WorkerClass=globalThis.Worker,url=new
 }
 
 /** Five bodies by position with their authored clips. Throws on any failure (the caller falls back). */
-export async function loadPlayerAssetsV7(cfg,base,onProgress){
+export async function loadPlayerAssetsV7(cfg,base,onProgress,{params,onFallback}={}){
  const v7=cfg.v7;if(!v7?.players)throw Error('Basketball v7 is not configured');
  const meshopt=createMeshoptWorkerDecoder();
  const draco=new HoopsDRACOLoader().setDecoderPath(new URL('vendor/draco/',base).href).setWorkerLimit(1),loader=new GLTFLoader().setDRACOLoader(draco).setMeshoptDecoder(meshopt),roles={};
@@ -214,7 +215,13 @@ export async function loadPlayerAssetsV7(cfg,base,onProgress){
    const gltf=await loadHoopsGLTF(loader,new URL(path,base).href);roles[role]=prepareRole(gltf,meta.clips,role);tick();
   }));
   const failure=pending.find(r=>r.status==='rejected');if(failure)throw failure.reason;
-  return {v7:true,roles,clips:roles.PG.clips,meta:meta.clips,baseHeights:v7.baseHeights,dispose(){for(const r of Object.values(roles)){releaseScene(r.scene);for(const g of Object.values(r.groups))if(g.base)g.geometry.dispose();}}};
+  // v8 motion (06/11): passes, receptions, steal and block as authored clips on the same rig. Optional: a failure keeps the v7 arm-IK passes.
+  let v8=null;
+  if(v8MotionEnabled(cfg,params)){
+   try{v8=await loadV8Motion(cfg,base);for(const r of Object.values(roles))for(const [n,c] of buildV8Clips(THREE,v8,r.restVec))r.clips.set(n,c);}
+   catch(error){v8=null;for(const r of Object.values(roles))for(const n of [...r.clips.keys()])if(n.startsWith('v8:'))r.clips.delete(n);onFallback?.('v8 motion',error);}
+  }
+  return {v7:true,v8,roles,clips:roles.PG.clips,meta:meta.clips,baseHeights:v7.baseHeights,dispose(){for(const r of Object.values(roles)){releaseScene(r.scene);for(const g of Object.values(r.groups))if(g.base)g.geometry.dispose();}}};
  }catch(error){for(const r of Object.values(roles))releaseScene(r.scene);throw error;}
  finally{draco.dispose();meshopt.dispose();}
 }
@@ -281,6 +288,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   const loopAdvance=(name,rate)=>{phase[name]=((phase[name]||0)+dt*rate)%duration(name);return phase[name];};
   const stride=name=>{const ref=meta[name]?.refSpeed||1;return speed/Math.max(.05,ref*root.scale.y);};
   const locomotion=name=>name==='run'?loopAdvance(name,clamp(stride(name),.35,2.1)):name==='walk'?loopAdvance(name,clamp(stride(name),.4,2.2)):loopAdvance(name,1);
+  if(plan.mode==='v8'){out.full=[plan.full,plan.t];return out;}
   if(plan.full){
    const n=plan.full,d=duration(n);let t;
    if(plan.mode==='shoot'){
@@ -305,6 +313,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   return out;
  }
  let hintAge=0;
+ const guard=createDribbleGuard(),v8s={releasedAt:null,passClip:null,recvClip:null,recvSince:null},v8pack=assets.v8||null;
  const av={root,hands,mixer,actions,mats,card,kind:'v7',role,scale,dribblePump:0,dribbleCtx:null,
   applyKit(kit){
    const primary=new THREE.Color(kit.base||'#5b38c9'),accent=new THREE.Color(kit.accent||'#f4d377'),secondary=kit.shorts?new THREE.Color(kit.shorts):primary.clone().multiplyScalar(.62);
@@ -320,6 +329,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
    else if(type==='catch'||type==='interception')catchUntil=performance.now()+420;
   },
   get motionState(){return state;},
+  get dribbleLocked(){return guard.locked;},
   get motionPhase(){return statePhase;},
   dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);for(const m of mats)m.dispose();},
  };
@@ -334,7 +344,9 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   if(wasBall&&!p.hasBall&&p.act==='shoot')releaseAt=p.actT;
   if(p.act!=='shoot')releaseAt=p.act==='shoot'?releaseAt:null;
   const catching=ctx.catching||performance.now()<catchUntil;
-  const plan=chooseV7Motion(p,{...ctx,catching},hint);
+  guard.observe(p);
+  let plan=guard.filter(chooseV7Motion(p,{...ctx,catching},hint));
+  if(v8pack){const o=chooseV8Motion(v8pack,p,{...ctx,catching},v8s,dt);if(o)plan=o;}
   // weights: layers cross-fade with the same time constant; full-body and layered poses sum to one per track
   const mixTarget=plan.full?1:0;cur.mix+=(mixTarget-cur.mix)*(1-Math.exp(-dt/.075));
   const times=clipTime(plan,p,ctx,dt,speed);
@@ -353,7 +365,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   // arm reach: pass wind-up / release and the hands going out to an incoming ball
   const rw={l:0,r:0},ball=ctx.ball;
   root.updateMatrixWorld(true);
-  if(p.act==='pass'){
+  if(p.act==='pass'&&plan.mode!=='v8'){
    const t=p.actT||0,k=smooth((t-.06)/.2),kind=p.passKind||ctx.passKind||'chest',high=kind==='lob'||kind==='overhead'||kind==='jump',low=kind==='bounce';
    rw.l=rw.r=k*(t<.5?1:smooth(1-(t-.5)/.25));
    fwd.set(Math.sin(p.face),0,Math.cos(p.face));sideV.crossVectors(up,fwd).normalize();
@@ -366,7 +378,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
     reachTo(key,goal,rw[key]);
    }
    rw.l=rw.r=0;
-  }else if(catching&&!p.hasBall&&ball&&Number.isFinite(ball.x)){
+  }else if(catching&&plan.mode!=='v8'&&!p.hasBall&&ball&&Number.isFinite(ball.x)){
    const d=Math.hypot(ball.x-p.x,ball.z-p.z),w=smooth(1-(d-.4)/2.6);
    for(const key of ['l','r']){
     const sgn=key==='l'?1:-1;goal.set(ball.x,Math.max(.5,ball.y),ball.z);fwd.set(Math.sin(p.face),0,Math.cos(p.face));sideV.crossVectors(up,fwd).normalize();goal.addScaledVector(sideV,sgn*.08);

@@ -1,0 +1,313 @@
+{
+ "before": {
+  "drew": true,
+  "metrics": {
+   "defenseV7": false,
+   "triangles": 9534,
+   "drawCalls": 4,
+   "memory": {
+    "geometries": 7,
+    "textures": 5
+   },
+   "models": {
+    "requested": 6,
+    "loaded": 6,
+    "failed": 0
+   },
+   "playerLoaded": true,
+   "liveModels": 2,
+   "impostors": 0,
+   "sourceTexturesUnmodified": true,
+   "lodTextureSize": 512,
+   "low": false,
+   "disposed": false,
+   "appearances": [
+    {
+     "kind": 0,
+     "path": "assets/models/alien-a.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 1,
+     "path": "assets/models/alien-b.glb",
+     "color": "#edb865",
+     "representation": "model"
+    }
+   ],
+   "elevationDegrees": 44.169684513742
+  },
+  "glbWasmBytes": 1345176,
+  "files": [
+   [
+    "assets/models/ship-player.glb?v=island-v2-20261105-1",
+    382476
+   ],
+   [
+    "assets/models/alien-d-512.glb?v=island-v2-20261105-1",
+    274880
+   ],
+   [
+    "assets/models/boss.glb?v=island-v2-20261105-1",
+    329348
+   ],
+   [
+    "assets/models/alien-c.glb?v=island-v2-20261105-1",
+    358472
+   ]
+  ]
+ },
+ "after": {
+  "drew": true,
+  "metrics": {
+   "defenseV7": true,
+   "triangles": 4334,
+   "drawCalls": 6,
+   "memory": {
+    "geometries": 12,
+    "textures": 0
+   },
+   "models": {
+    "requested": 6,
+    "loaded": 6,
+    "failed": 0
+   },
+   "playerLoaded": true,
+   "liveModels": 2,
+   "impostors": 0,
+   "sourceTexturesUnmodified": true,
+   "lodTextureSize": 512,
+   "low": false,
+   "disposed": false,
+   "appearances": [
+    {
+     "kind": 0,
+     "path": "assets/defense-v7/alien-scout-lod1.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 1,
+     "path": "assets/defense-v7/alien-manta-lod1.glb",
+     "color": "#edb865",
+     "representation": "model"
+    }
+   ],
+   "elevationDegrees": 44.169684513742
+  },
+  "glbWasmBytes": 306312,
+  "files": [
+   [
+    "assets/defense-v7/defender-plane.glb?v=island-v2-20261105-1",
+    24928
+   ],
+   [
+    "assets/defense-v7/alien-scout-lod1.glb?v=island-v2-20261105-1",
+    11744
+   ],
+   [
+    "assets/defense-v7/alien-manta-lod1.glb?v=island-v2-20261105-1",
+    12160
+   ],
+   [
+    "assets/defense-v7/alien-beetle-lod1.glb?v=island-v2-20261105-1",
+    15204
+   ],
+   [
+    "assets/defense-v7/alien-carrier-lod1.glb?v=island-v2-20261105-1",
+    13724
+   ],
+   [
+    "assets/defense-v7/alien-boss-lod1.glb?v=island-v2-20261105-1",
+    36132
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192420
+   ]
+  ]
+ },
+ "before-boss": {
+  "drew": true,
+  "metrics": {
+   "defenseV7": false,
+   "triangles": 44736,
+   "drawCalls": 10,
+   "memory": {
+    "geometries": 8,
+    "textures": 6
+   },
+   "models": {
+    "requested": 6,
+    "loaded": 6,
+    "failed": 0
+   },
+   "playerLoaded": true,
+   "liveModels": 8,
+   "impostors": 0,
+   "sourceTexturesUnmodified": true,
+   "lodTextureSize": 512,
+   "low": false,
+   "disposed": false,
+   "appearances": [
+    {
+     "kind": 0,
+     "path": "assets/models/alien-a.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 1,
+     "path": "assets/models/alien-b.glb",
+     "color": "#edb865",
+     "representation": "model"
+    },
+    {
+     "kind": 2,
+     "path": "assets/models/alien-c.glb",
+     "color": "#c985ed",
+     "representation": "model"
+    },
+    {
+     "kind": 3,
+     "path": "assets/models/alien-d-512.glb",
+     "color": "#a5e68a",
+     "representation": "model"
+    },
+    {
+     "kind": 4,
+     "path": "assets/models/boss.glb",
+     "color": "#f58da5",
+     "representation": "model"
+    },
+    {
+     "kind": 0,
+     "path": "assets/models/alien-a.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 4,
+     "path": "assets/models/boss.glb",
+     "color": "#f58da5",
+     "representation": "model"
+    },
+    {
+     "kind": 2,
+     "path": "assets/models/alien-c.glb",
+     "color": "#c985ed",
+     "representation": "model"
+    }
+   ],
+   "elevationDegrees": 44.169684513742
+  },
+  "glbWasmBytes": 0,
+  "files": []
+ },
+ "after-boss": {
+  "drew": true,
+  "metrics": {
+   "defenseV7": true,
+   "triangles": 42194,
+   "drawCalls": 19,
+   "memory": {
+    "geometries": 14,
+    "textures": 0
+   },
+   "models": {
+    "requested": 6,
+    "loaded": 6,
+    "failed": 0
+   },
+   "playerLoaded": true,
+   "liveModels": 8,
+   "impostors": 0,
+   "sourceTexturesUnmodified": true,
+   "lodTextureSize": 512,
+   "low": false,
+   "disposed": false,
+   "appearances": [
+    {
+     "kind": 0,
+     "path": "assets/defense-v7/alien-scout-lod1.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 1,
+     "path": "assets/defense-v7/alien-manta-lod1.glb",
+     "color": "#edb865",
+     "representation": "model"
+    },
+    {
+     "kind": 2,
+     "path": "assets/defense-v7/alien-beetle-lod1.glb",
+     "color": "#c985ed",
+     "representation": "model"
+    },
+    {
+     "kind": 3,
+     "path": "assets/defense-v7/alien-carrier-lod1.glb",
+     "color": "#a5e68a",
+     "representation": "model"
+    },
+    {
+     "kind": 4,
+     "path": "assets/defense-v7/alien-boss-lod1.glb",
+     "color": "#f58da5",
+     "representation": "model"
+    },
+    {
+     "kind": 0,
+     "path": "assets/defense-v7/alien-scout-lod1.glb",
+     "color": "#a1e5f5",
+     "representation": "model"
+    },
+    {
+     "kind": 4,
+     "path": "assets/defense-v7/alien-boss-lod1.glb",
+     "color": "#f58da5",
+     "representation": "model"
+    },
+    {
+     "kind": 2,
+     "path": "assets/defense-v7/alien-beetle-lod1.glb",
+     "color": "#c985ed",
+     "representation": "model"
+    }
+   ],
+   "elevationDegrees": 44.169684513742
+  },
+  "glbWasmBytes": 306312,
+  "files": [
+   [
+    "assets/defense-v7/defender-plane.glb?v=island-v2-20261105-1",
+    24928
+   ],
+   [
+    "assets/defense-v7/alien-scout-lod1.glb?v=island-v2-20261105-1",
+    11744
+   ],
+   [
+    "assets/defense-v7/alien-manta-lod1.glb?v=island-v2-20261105-1",
+    12160
+   ],
+   [
+    "assets/defense-v7/alien-carrier-lod1.glb?v=island-v2-20261105-1",
+    13724
+   ],
+   [
+    "assets/defense-v7/alien-beetle-lod1.glb?v=island-v2-20261105-1",
+    15204
+   ],
+   [
+    "assets/defense-v7/alien-boss-lod1.glb?v=island-v2-20261105-1",
+    36132
+   ],
+   [
+    "vendor/draco/draco_decoder.wasm",
+    192420
+   ]
+  ]
+ }
+}
