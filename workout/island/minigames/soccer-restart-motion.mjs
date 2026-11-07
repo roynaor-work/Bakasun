@@ -1,4 +1,5 @@
 import {SOCCER_RESTART_RIG_CALIBRATION} from './soccer-restart-poses.mjs';
+import {soccerMotionV9Enabled} from './soccer-motion-v9.mjs';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 let restartData;
 /** Cache lives in this unversioned soccer-only module, so the legacy athlete
@@ -26,7 +27,8 @@ export const SOCCER_RESTART_SEQUENCES=Object.freeze({
  * the view maps them onto this timeline, so there is no cut between the poses. */
 export const SOCCER_SLIDE_SEQUENCES=Object.freeze(Object.fromEntries(['straight','lateral','fast'].flatMap(kind=>[
   [`slide-${kind}`,Object.freeze({clips:[`slide_${kind}`,`slide_${kind}_fall`,`slide_${kind}_recover`],slide:`slide_${kind}`})],
-  [`slide-${kind}-miss`,Object.freeze({clips:[`slide_${kind}`,'slide_miss'],slide:`slide_${kind}`})],
+  // Motion v9: a miss also ends in the authored getting up (it used to end lying down and pop into the run).
+  [`slide-${kind}-miss`,Object.freeze({clips:soccerMotionV9Enabled()?[`slide_${kind}`,'slide_miss',`slide_${kind}_recover`]:[`slide_${kind}`,'slide_miss'],slide:`slide_${kind}`})],
 ])));
 const dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0);
 function slerp(a,b,u){

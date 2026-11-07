@@ -732,7 +732,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         const variant=slideVariant(config,member.slideKind),duration=Math.min(step,member.slideTime),speed=variant.distance/variant.seconds*slideVelocityScale(member.slideTime-duration*.5,variant.seconds);
         member.slideFromX=member.x;member.slideFromZ=member.z;member.slideTick=tickCount;member.slideAge=variant.seconds-member.slideTime;
         member.vx=member.slideX*speed;member.vz=member.slideZ*speed;member.x=clamp(member.x+member.vx*duration,-hx+rules.playerBoundary,hx-rules.playerBoundary);member.z=clamp(member.z+member.vz*duration,-hz+rules.playerBoundary,hz-rules.playerBoundary);member.slideTime=Math.max(0,member.slideTime-step);
-        if(member.slideTime<=1e-8){member.slideTime=0;member.recover=slideRecoverySeconds(variant,{won:member.slideWon,behind:member.slideBehind,late:member.slideLate});}
+        if(member.slideTime<=1e-8){member.slideTime=0;member.recover=slideRecoverySeconds(aiV2?variant:{...variant,maxTotalSeconds:undefined},{won:member.slideWon,behind:member.slideBehind,late:member.slideLate});}
       }else if(member.id===s.controlled&&member.hands){
         const k=config.goalkeeping,d=direction(member.team);member.hold+=step;
         moveControlledKeeper(member,mx,mz,step);
