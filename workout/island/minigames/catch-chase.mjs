@@ -1,4 +1,6 @@
-/** The car chase that opens every v2 stage of "תפוס את הפושע". Pure rules, no DOM:
+/** v3: the officer can overtake and corner the thief. Ramming him (a side hit counts most) fills a damage
+ * meter; a full meter stops his car and ends the chase with a catch. If the time runs out he reaches the roadblock.
+ * The car chase that opens every v2 stage of "תפוס את הפושע". Pure rules, no DOM:
  * the officer's car steers between three lanes, boosts and brakes while the thief's
  * car weaves ahead through traffic. Whoever clips a car or a barrier loses speed.
  * When the time is up (the thief reaches the police roadblock) or he is boxed in,
@@ -42,9 +44,9 @@ export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}}
   const length = spec.seconds * (C.baseSpeed + C.boostSpeed) + 160;
   const obstacles = layout(C, spec, rnd, length);
   const tankScale = 1 + ((Number(equipment.net) || 1) - 1) * 2;
-  const s = {t: 0, phase: 'countdown', countdown: C.countdownSeconds, x: 0, lat: 0, steer: 0, v: C.baseSpeed, tank: 1 * tankScale, stun: 0, hits: 0, boosting: false, braking: false, pads: 0,
-    crim: {x: C.startGap, lat: 0, targetLat: 0, v: spec.crimSpeed, slow: 0, boostLeft: 0, nextBoost: spec.crimBoost || 1e9, hits: 0, retarget: 0},
-    gap: C.startGap, outcome: null, bail: null};
+  const s = {damage: 0, rams: 0, ramCool: 0, t: 0, phase: 'countdown', countdown: C.countdownSeconds, x: 0, lat: 0, steer: 0, v: C.baseSpeed, tank: 1 * tankScale, stun: 0, hits: 0, boosting: false, braking: false, pads: 0,
+    crim: {x: spec.gap ?? C.startGap, lat: 0, targetLat: 0, v: spec.crimSpeed, slow: 0, boostLeft: 0, nextBoost: spec.crimBoost || 1e9, hits: 0, retarget: 0},
+    gap: spec.gap ?? C.startGap, outcome: null, bail: null};
   const events = [];
   const input = {steer: 0, boost: false, brake: false};
   const tankMax = tankScale;
@@ -65,6 +67,12 @@ export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}}
     }
     // a clever driver sometimes still clips something; the chance falls with his skill
     if (rnd() > spec.skill) bestLane = c.targetLat;
+    // when the officer is close the thief swerves away from him (a free lane is still preferred)
+    if (Math.abs(c.x - s.x) < C.crimFlee && rnd() < spec.skill + .15) {
+      const away = s.lat > c.lat ? -1 : s.lat < c.lat ? 1 : (rnd() < .5 ? -1 : 1);
+      let clear = true; for (const o of obstacles) { if (o.kind === 'pad') continue; const ox = obstacleX(o, s.t) - c.x; if (ox > -3 && ox < 22 && Math.abs(o.lat - away) < .6) clear = false; }
+      if (clear) bestLane = away;
+    }
     c.targetLat = bestLane;
   }
 
@@ -114,17 +122,27 @@ export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}}
         }
         if (!o.hitC && o.kind !== 'pad' && hitBox(c.x, c.lat, o, s.t)) { o.hitC = true; c.hits++; c.v *= C.crashKeep; c.slow = C.crimSlowSeconds; events.push({type: 'crimCrash', id: o.id, kind: o.kind}); }
       }
-      // bumper to bumper: the officer cannot pass the thief, he sits on his tail
-      if (c.x - s.x < C.bumperGap) { s.x = c.x - C.bumperGap; s.v = Math.min(s.v, c.v); }
+      // --- contact: the cars touch, he is pushed away, the damage meter fills ---
+      const dx = c.x - s.x, dz = (c.lat - s.lat) * C.laneWidth;
+      s.ramCool = Math.max(0, s.ramCool - dt);
+      if (Math.abs(dx) < C.contactLen && Math.abs(dz) < C.contactWidth) {
+        const side = Math.abs(dz) > C.sideZone ? C.sideBonus : 1, closing = clamp((s.v - c.v) / 8, 0, 1);
+        s.damage = Math.min(1, s.damage + C.ramRate * side * (.6 + .4 * closing) * dt);
+        const push = (dz >= 0 ? 1 : -1) * C.crimPush * dt;
+        c.lat = clamp(c.lat + push, -1.15, 1.15); s.lat = clamp(s.lat - push * .5, -1, 1);
+        c.slow = Math.max(c.slow, .35); s.v *= 1 - C.ramDrag * dt;
+        if (s.ramCool <= 0) { s.ramCool = .45; s.rams++; events.push({type: 'ram', damage: s.damage, side: side > 1}); }
+      }
       s.gap = c.x - s.x;
-      // --- end of the chase: the thief reaches the police roadblock ---
-      if (s.t >= spec.seconds) finish(s.gap <= C.catchGap ? 'onHisTail' : 'roadblock');
+      // --- end of the chase: his car stops, or the time runs out and he reaches the police roadblock ---
+      if (s.damage >= 1) finish('caught');
+      else if (s.t >= spec.seconds) finish('roadblock');
     },
     drainEvents() { return events.splice(0); },
     /** What the throw receives: closeness 0..1 and the numbers derived from it. */
     result() {
-      const closeness = s.outcome ? clamp((C.startGap - s.gap) / (C.startGap - C.catchGap), 0, 1) : 0;
-      return {closeness, gap: s.gap, hits: s.hits, crimHits: s.crim.hits, how: s.outcome, seconds: s.t,
+      const g0 = spec.gap ?? C.startGap, prox = clamp((g0 - Math.abs(s.gap)) / Math.max(1, g0 - C.catchGap), 0, 1), closeness = !s.outcome ? 0 : s.outcome === 'caught' ? 1 : clamp(Math.max(s.damage * .9, prox * .6), 0, 1);
+      return {closeness, damage: s.damage, caught: s.outcome === 'caught', gap: s.gap, hits: s.hits, crimHits: s.crim.hits, how: s.outcome, seconds: s.t,
         mods: {dist: lerp(level.dist * C.farFactor, level.dist * C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
     },
   };

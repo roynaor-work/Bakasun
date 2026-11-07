@@ -14,6 +14,16 @@ export function createCatchAudio({muted = () => false} = {}) {
     g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(gain, t0 + .012); g.gain.exponentialRampToValueAtTime(.0008, t0 + dur);
     osc.connect(g).connect(a.destination); osc.start(t0); osc.stop(t0 + dur + .02);
   };
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const siren = (from, to, delay) => {
+    const a = ensure(); if (!a || muted() || paused) return;
+    const t0 = a.currentTime + delay, osc = a.createOscillator(), osc2 = a.createOscillator(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.type = 'sawtooth'; osc2.type = 'square'; lp.type = 'lowpass'; lp.frequency.value = 2400;
+    for (const o of [osc, osc2]) { o.frequency.setValueAtTime(from, t0); o.frequency.linearRampToValueAtTime(to, t0 + .38); }
+    osc2.detune.value = 7;
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.045, t0 + .03); g.gain.setValueAtTime(.045, t0 + .34); g.gain.linearRampToValueAtTime(0, t0 + .39);
+    osc.connect(lp); osc2.connect(lp); lp.connect(g).connect(a.destination); osc.start(t0); osc2.start(t0); osc.stop(t0 + .41); osc2.stop(t0 + .41);
+  };
   const noise = (dur, {gain = .1, from = 1800, to = 500, delay = 0} = {}) => {
     const a = ensure(); if (!a || muted() || paused) return;
     const t0 = a.currentTime + delay, buf = a.createBuffer(1, Math.ceil(a.sampleRate * dur), a.sampleRate), d = buf.getChannelData(0);
@@ -32,12 +42,18 @@ export function createCatchAudio({muted = () => false} = {}) {
     catch: () => { [523, 659, 784].forEach((f, i) => tone(f, .18, {type: 'triangle', gain: .12, delay: i * .08})); noise(.18, {gain: .05, from: 3200, to: 1200}); },
     perfect: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .12, delay: i * .07})); noise(.3, {gain: .07, from: 4200, to: 1500}); },
     engine: () => tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160}),
-    siren: () => { tone(720, .22, {type: 'square', gain: .035}); tone(560, .22, {type: 'square', gain: .035, delay: .24}); },
+    // Police siren: two alternating notes ("wee-woo"), each with a small glide, softened by a low-pass.
+    // `approach` -1..1 gives a light Doppler shift: higher while the cars close in, lower when they pull apart.
+    siren: arg => {
+      const k = 1 + .045 * clamp(Number(arg?.approach) || 0, -1, 1);
+      siren(960 * k, 800 * k, 0); siren(740 * k, 880 * k, .4);
+    },
     count: () => tone(520, .12, {type: 'triangle', gain: .1}),
     go: () => { tone(780, .3, {type: 'triangle', gain: .12}); tone(1170, .3, {type: 'triangle', gain: .08, delay: .06}); },
     crash: () => { noise(.3, {gain: .12, from: 1400, to: 200}); tone(90, .3, {type: 'sawtooth', gain: .12, slide: -50}); },
     crimCrash: () => { noise(.25, {gain: .08, from: 1800, to: 400}); tone(300, .25, {type: 'triangle', gain: .09, slide: 260, delay: .1}); },
     pad: () => { tone(660, .12, {type: 'triangle', gain: .09}); tone(990, .16, {type: 'triangle', gain: .09, delay: .08}); },
+    ram: () => { noise(.18, {gain: .12, from: 1600, to: 300}); tone(150, .16, {type: 'square', gain: .08, slide: -60}); },
     nitro: () => noise(.5, {gain: .06, from: 600, to: 3000}),
     brake: () => noise(.7, {gain: .07, from: 2600, to: 700}),
     near: () => { noise(.3, {gain: .1, from: 3500, to: 900}); tone(900, .25, {type: 'sine', gain: .06, slide: -500}); },
@@ -45,7 +61,7 @@ export function createCatchAudio({muted = () => false} = {}) {
     stars: () => [659, 784, 988].forEach((f, i) => tone(f, .22, {type: 'triangle', gain: .1, delay: .22 * i})),
   };
   return {
-    cue(name) { try { cues[name]?.(); } catch { /* audio is optional */ } },
+    cue(name, arg) { try { cues[name]?.(arg); } catch { /* audio is optional */ } },
     tick() { /* silent on purpose: dragging should not chatter */ },
     setPaused(v) { paused = Boolean(v); if (ac) { try { paused ? ac.suspend() : ac.resume(); } catch { /* ignore */ } } },
     dispose() { try { ac?.close(); } catch { /* ignore */ } ac = null; },
