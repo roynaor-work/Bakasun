@@ -9,7 +9,7 @@ const server=createServer(async(req,res)=>{try{const p=decodeURIComponent(new UR
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
-const page=await ctx.newPage();page.on('pageerror',e=>console.log('ERR',e.message));
+const page=await ctx.newPage();page.on('pageerror',e=>console.log('ERR',e.message));page.on('console',m=>{if(m.text().startsWith('formula'))console.log(m.text())});
 await page.goto(`http://127.0.0.1:${server.address().port}/island/tools/perf-racing.html?shot=1&${/hold=/.test(extra)?'':'hold=1&'}frames=10${extra?'&'+extra:''}`);
 await page.waitForFunction(()=>window.__session?.snapshot?.renderMetrics?.frames>1,null,{timeout:240000});
 await page.waitForTimeout(1500);
