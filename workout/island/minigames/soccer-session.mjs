@@ -11,6 +11,8 @@ import {withSoccerV7Kits} from './soccer-v7.mjs';
 import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-1';
 import {gameContext} from './context.mjs?v=island-v2-20261107-1';
 import {expandSoccerConfig} from './soccer-squad.mjs';
+import {applySoccerTeams,resolveSoccerTeams} from './soccer-teams.mjs';
+import {createSoccerTelemetry} from './soccer-telemetry.mjs';
 import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-1';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
@@ -54,11 +56,12 @@ export function soccerActionLabels(state,config){
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
-  const {balance:sourceBalance,canvas,controls,status,t}=ctx,balance=expandSoccerConfig(sourceBalance);
+  const {balance:sourceBalance,canvas,controls,status,t}=ctx,teamsKey=resolveSoccerTeams(),balance=expandSoccerConfig(applySoccerTeams(sourceBalance,teamsKey));
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
   let storage;try{storage=globalThis.localStorage;}catch{}
+  const telemetry=context.drill?null:createSoccerTelemetry({teams:teamsKey,stage:context.level,difficulty:context.difficulty,pitch:[balance.pitch.length,balance.pitch.width]});
   const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
@@ -187,7 +190,8 @@ export function startSoccer(ctx) {
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
       audio.update(s);
-      for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);}
+      for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);}
+      if(!paused&&dt>0)telemetry?.frame(s,dt,frameMs);
       if(!paused){feedbackTime=Math.max(0,feedbackTime-dt);feedback.hidden=feedbackTime<=0;}
       if(hud>=.1){hud=0;updateHud();}
       if(model.result&&penaltiesOn&&!shootout){
@@ -198,7 +202,7 @@ export function startSoccer(ctx) {
         if(contracts)model.setDesignTactics?.(contracts.tactics);
         input?.reset();model.clearInput();model.drainEvents();hudSignature='';mode='';audio.play('whistle');updateHud();frame=requestAnimationFrame(tick);return;
       }
-      if(model.result){const m=shootout?shootout.match:model.result;ctx.finish(context.drill?{drill:model.result}:{outcome:m.won?'win':'lose',score:m.goalsFor,performance:m.won?1:0,soccer:m,...(shootout?{penalties:{attempts:model.result.attempts,hits:model.result.hits}}:{})});return;}
+      if(model.result){const m=shootout?shootout.match:model.result;if(telemetry)telemetry.save(storage,telemetry.summary(m));ctx.finish(context.drill?{drill:model.result}:{outcome:m.won?'win':'lose',score:m.goalsFor,performance:m.won?1:0,soccer:m,...(shootout?{penalties:{attempts:model.result.attempts,hits:model.result.hits}}:{})});return;}
       frame=requestAnimationFrame(tick);
     }
     // Kickoff waits for the approved athletes; no old figure is shown meanwhile.

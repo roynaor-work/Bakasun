@@ -6,18 +6,27 @@
  * team-0 behaviour (bot + AI mates) can be read separately.
  * Pure measurement: nothing here changes the model. */
 import {createSoccer} from '../minigames/soccer.mjs';
+import {applySoccerTeams} from '../minigames/soccer-teams.mjs';
 import {hasShootingLane,selectTeamPass} from '../minigames/soccer-tactics.mjs';
 
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 /** Deterministic child proxy. `latency` ticks of reaction delay on every command. */
-export function createHumanBot(seed,{latency=9}={}){
+/** Child profiles: how much the proxy shoots, how fast it reacts, whether it keeps sprinting. The result of a run
+ * depends on this choice, which is why reports show all three. 'typical' is the profile used in gameplay-1. */
+export const BOT_PROFILES={
+ careful:{latency:15,shotChance:.3,shotCooldown:5,shotRange:.8,sprint:false},
+ typical:{latency:9,shotChance:.6,shotCooldown:3,shotRange:1,sprint:true},
+ strong:{latency:5,shotChance:.9,shotCooldown:2,shotRange:1.2,sprint:true}
+};
+export function createHumanBot(seed,{latency=9,profile='typical'}={}){
+  const prof=BOT_PROFILES[profile]||BOT_PROFILES.typical;latency=profile==='typical'?latency:prof.latency;
   let n=(seed^0x9e3779b9)>>>0;const random=()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return n/4294967296;};
   const queue=[];let hold=0,shotCooldown=0,passCooldown=0,stealCooldown=0,decide=0;
   const blank=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
   return (game,dt,c)=>{
-    const s=game.getState(),p=s.players[s.controlled],b=s.ball,hx=c.pitch.length/2,d=s.attackDir,goalX=d*hx,input=blank();
+    const s=game.getState(),p=s.players[s.controlled],b=s.ball,hx=c.pitch.length/2,d=s.attackDir,goalX=d*hx,input=blank(),kd=(c.pitch.length/48+c.pitch.width/30)/2,shotRange=11*prof.shotRange*Math.pow(kd,.7),shotWidth=8*c.pitch.width/30,pressGap=3.2*Math.pow(kd,.3);
     shotCooldown-=dt;passCooldown-=dt;stealCooldown-=dt;decide-=dt;
     const opponents=s.players.filter(q=>q.team!==p.team&&q.role!=='keeper');
     let near=null,nearD=Infinity;for(const q of opponents){const m=dist(q,p);if(m<nearD){nearD=m;near=q;}}
@@ -25,23 +34,23 @@ export function createHumanBot(seed,{latency=9}={}){
     if(s.phase==='playing'||s.phase==='restartReady'){
       if(b.owner===p.id&&!p.hands){
         // Carry toward goal, swerving away from a defender that is close ahead.
-        let tx=goalX,tz=clamp(-p.z*.35,-3,3);
-        if(near&&nearD<4&&(near.x-p.x)*d>-1){tz=p.z+(p.z>=near.z?1:-1)*5;tx=p.x+d*6;}
-        steer(tx,tz);input.sprintHeld=nearD>4.5;
+        let tx=goalX,tz=clamp(-p.z*.35,-3*kd,3*kd);
+        if(near&&nearD<4&&(near.x-p.x)*d>-1){tz=p.z+(p.z>=near.z?1:-1)*5*Math.pow(kd,.5);tx=p.x+d*6*Math.pow(kd,.5);}
+        steer(tx,tz);input.sprintHeld=prof.sprint&&nearD>4.5;
         const range=Math.abs(goalX-p.x);
         if(hold>0){hold-=dt;input.kickHeld=hold>0;}
-        else if(shotCooldown<=0&&range<11&&Math.abs(p.z)<8&&hasShootingLane(p,s,c)&&random()<.6){hold=.25+random()*.25;shotCooldown=3;input.kickHeld=true;}
-        else if(passCooldown<=0&&decide<=0&&nearD<3.2){
+        else if(shotCooldown<=0&&range<shotRange&&Math.abs(p.z)<shotWidth&&hasShootingLane(p,s,c)&&random()<prof.shotChance){hold=.25+random()*.25;shotCooldown=prof.shotCooldown;input.kickHeld=true;}
+        else if(passCooldown<=0&&decide<=0&&nearD<pressGap){
           const mate=selectTeamPass(p,s,c);
           if(mate){steer(mate.x,mate.z);input.passPressed=true;passCooldown=.9;}
           decide=.25;
         }
       }else if(b.owner!==null&&s.players[b.owner].team===p.team){
         // Support: go to the team's tactical spot, as a child follows the play.
-        const t=game.tacticalTarget(p);steer(t.x,t.z);input.sprintHeld=dist(p,t)>6;
+        const t=game.tacticalTarget(p);steer(t.x,t.z);input.sprintHeld=prof.sprint&&dist(p,t)>6;
       }else{
         // Loose ball or rival has it: chase and tap the pass button to tackle.
-        steer(b.x+(b.vx||0)*.25,b.z+(b.vz||0)*.25);input.sprintHeld=dist(p,b)>4;
+        steer(b.x+(b.vx||0)*.25,b.z+(b.vz||0)*.25);input.sprintHeld=prof.sprint&&dist(p,b)>4;
         if(b.owner!==null&&dist(p,b)<c.steal.reach&&stealCooldown<=0){input.passPressed=true;stealCooldown=1.1;}
       }
     }
@@ -66,10 +75,11 @@ const makeTeam=()=>({
 const blankInput=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
 /** bot 'idle' = no input at all; with help (stage rows forced to help:true, difficulty easy) the model's own
  * beginner helper drives the selected player, so both sides are pure model AI. */
-export function playMatch({config,seed,stage=5,difficulty='normal',ai,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false}){
+export function playMatch({config,seed,stage=5,difficulty='normal',ai,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical'}){
+  if(teams)config=applySoccerTeams(config,teams,tune||{});
   const shotLog=[];let openShot=null;
   if(helpAll)config={...config,stages:config.stages.map(row=>({...row,help:true}))};
-  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency});
+  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
   const step=config.match.fixedStep,hx=config.pitch.length/2,L=config.pitch.length;
   const T=[makeTeam(),makeTeam()];
   const m={playingTicks:0,deadTicks:0,restTicks:0,stuckWindows:0,windows:0,maxStuck:0,thirds:[0,0,0],swings:0,progress10:0,progressN:0,coverage:0,coverageN:0,
