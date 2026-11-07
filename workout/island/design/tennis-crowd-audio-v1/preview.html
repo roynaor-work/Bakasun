@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>קהל טניס רך — האזנה</title>
+<style>
+  :root{font-family:system-ui,sans-serif;color:#203b32;background:#f4f5ef;line-height:1.6}
+  *{box-sizing:border-box}body{margin:0;padding:32px 20px 64px}main{max-width:1000px;margin:auto}
+  h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.2;margin:.3em 0}h2{font-size:1.15rem;margin:0}
+  .intro{max-width:680px;color:#4e645b}.eyebrow{font-size:.8rem;letter-spacing:.12em;color:#556c60}
+  .toolbar,.card{border:1px solid #cdd7ca;border-radius:18px;background:#fffef9;padding:20px}
+  .toolbar{margin:28px 0;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .card{display:flex;flex-direction:column;gap:12px}.card[data-playing=true]{outline:2px solid #34705a}
+  .description{color:#52665e;font-size:.9rem;min-height:2.8em;margin:0}.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  button,select{font:inherit;border:1px solid #9cae9e;border-radius:9px;min-height:44px;padding:7px 14px;background:#f1f4ec;color:inherit}
+  button{cursor:pointer}button.play{background:#26583f;color:#fff;border-color:#26583f}button:disabled{opacity:.5;cursor:wait}
+  input[type=range]{accent-color:#34705a;max-width:150px;vertical-align:middle;min-height:32px}
+  button:focus-visible,select:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b77b2c;outline-offset:3px}
+  .meta{font-size:.78rem;color:#65716a;direction:ltr;text-align:right}.state{font-size:.85rem;min-height:1.5em;color:#38634e}
+  progress{width:100%;height:5px;accent-color:#34705a}a{color:#255f44}footer{margin-top:28px;color:#59695f;font-size:.9rem}
+  .notice{background:#fff1cf;padding:14px;border-radius:12px}.hidden{display:none}output{font-variant-numeric:tabular-nums}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}body{padding:20px 14px}.toolbar{gap:12px}.description{min-height:0}}
+  @media(prefers-color-scheme:dark){:root{background:#17231e;color:#e8eee4}.toolbar,.card{background:#213229;border-color:#4c6053}.intro,.description,footer,.meta{color:#b9c8ba}button,select{background:#2f4436}.eyebrow,.state{color:#b2cdb8}a{color:#bbdabe}.notice{background:#503f1f}}
+</style>
+<main>
+  <div class="eyebrow">TENNIS · CROWD AUDIO · V1</div>
+  <h1>מגרש מלא. צליל רך.</h1>
+  <p class="intro">שמונה רגעים של קהל טניס, מסונתזים בשכבות מקוריות. בחרו פורמט והאזינו לכל צליל בנפרד, או השמיעו את החבילה ברצף. הרקע מנוגן בלולאה חלקה.</p>
+  <p id="local" class="notice hidden">כדי לנגן, פתחו את הדף דרך שרת מקומי: הריצו בתיקייה <code dir="ltr">python3 -m http.server 8765</code> ופתחו <a href="http://localhost:8765/preview.html">את דף ההאזנה</a>.</p>
+  <section class="toolbar" aria-label="בקרות כלליות">
+    <label>עוצמה כללית <input id="master" type="range" min="0" max="1" step="0.01" value="0.3"><output id="master-value">30%</output></label>
+    <button id="all" class="play">ניגון הכול ברצף</button>
+    <button id="stop-all">עצירת הכול</button>
+    <span id="global-state" role="status" aria-live="polite"></span>
+  </section>
+  <div class="grid" id="sounds"></div>
+  <footer>
+    <p>כל הקבצים: stereo · 44.1 kHz · כ־‎-18 LUFS. התחלנו בעוצמה של 30%. הבקרות אינן משנות את הקבצים. בניגון הרצף לופ הרקע מושמע פעם אחת.</p>
+    <p><a href="REPORT.md">דוח מדידות</a> · <a href="measurements.json">מדידות מלאות</a> · <a href="manifest.json">מניפסט</a> · <a href="LICENSES.md">מקורות ורישוי CC0</a></p>
+  </footer>
+</main>
+<script>
+"use strict";
+// SPDX-License-Identifier: CC0-1.0 — original standalone review player.
+const sounds = [
+  ["stadium-bed", "קהל רקע שקט",24,"רחש רחוק ומתמשך, בלי צעקות בולטות. לופ של 24 שניות.",true],
+  ["applause-short","מחיאות קצרות",1.5,"גל מחיאות קטן, כניסה רכה ודעיכה קצרה."],
+  ["applause-medium","מחיאות בינוניות",3,"קהל רחב יותר עם מקטע מחיאות יציב ולא מסונכרן."],
+  ["applause-large","מחיאות גדולות",5,"מחיאות צפופות, עלייה טבעית ודעיכה ממושכת."],
+  ["near-point-oh","אוו — כמעט נקודה",2.4,"תגובה מעוגלת של הפתעה, עם תנועת גובה עולה."],
+  ["mistake-aw","אאוו — טעות",2.8,"אכזבה עדינה, תנועת גובה יורדת ושחרור ארוך."],
+  ["pre-serve-hush","לחישה ושקט לפני הגשה",4,"רחש לחישות שדועך לשקט לפני ההגשה."],
+  ["match-cheer","תרועה בסוף משחק",6.5,"שני גלי קהל ומחיאות, סיום גדול בלי שריקות חדות."]
+];
+const cards = new Map(), cache = new Map();
+let context, master, active = null, sequence = 0, pending = 0;
+const globalState = document.querySelector("#global-state");
+if(location.protocol === "file:") document.querySelector("#local").classList.remove("hidden");
+for(const [id,label,duration,description,loop] of sounds){
+  const card = document.createElement("section");
+  card.className = "card";card.dataset.id = id;card.setAttribute("aria-labelledby",id+"-title");
+  card.innerHTML = `<h2 id="${id}-title">${label}</h2><p class="description">${description}</p>
+    <div class="meta">${duration} s · OGG / MP3${loop ? " · LOOP" : ""}</div>
+    <div class="controls"><button class="play" aria-label="ניגון ${label}">ניגון</button>
+    <button class="stop" aria-label="עצירת ${label}">עצירה</button>
+    <label>פורמט <select aria-label="פורמט ${label}"><option value="ogg">OGG</option><option value="mp3">MP3</option></select></label></div>
+    <label>עוצמת הצליל <input class="volume" aria-label="עוצמת ${label}" type="range" min="0" max="1" step="0.01" value="1"><output>100%</output></label>
+    <progress max="${duration}" value="0" aria-label="התקדמות ${label}"></progress>
+    <div class="state" role="status" aria-live="polite">מוכן לניגון</div>
+    <div class="meta"><a href="${id}.ogg" download>OGG ↓</a> · <a href="${id}.mp3" download>MP3 ↓</a></div>`;
+  const entry = {card,id,label,duration,loop:!!loop};cards.set(id,entry);
+  card.querySelector(".play").onclick = () => {sequence++;void play(entry, false);};
+  card.querySelector(".stop").onclick = () => {sequence++;stop();};
+  card.querySelector(".volume").oninput = event => {
+    const value = Number(event.target.value);card.querySelector("output").value = Math.round(value*100)+"%";
+    if(active?.entry === entry) active.gain.gain.setTargetAtTime(value,context.currentTime,.025);
+  };
+  document.querySelector("#sounds").append(card);
+}
+function ensureContext(){
+  if(!context){
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if(!AudioContext) throw new Error("הדפדפן אינו תומך ב־Web Audio");
+    context = new AudioContext();master = context.createGain();
+    master.gain.value = Number(document.querySelector("#master").value);master.connect(context.destination);
+  }
+  return context.resume();
+}
+function stop(){
+  pending++;
+  if(active){
+    const old = active;active = null;
+    // A small gain ramp also makes a mid-waveform manual stop click-free.
+    old.source.onended = null;
+    old.gain.gain.cancelScheduledValues(context.currentTime);
+    old.gain.gain.setTargetAtTime(0,context.currentTime,.008);
+    old.source.stop(context.currentTime+.05);
+    old.source.onended = () => {old.source.disconnect();old.gain.disconnect();};
+    old.entry.card.dataset.playing = "false";
+    old.entry.card.querySelector(".state").textContent = "נעצר";
+    old.entry.card.querySelector("progress").value = 0;
+    old.finish(false);
+  }
+  globalState.textContent = "";
+}
+async function load(entry,format){
+  const name = entry.id+"."+format;
+  if(!cache.has(name)){
+    const response = await fetch(name);
+    if(!response.ok) throw new Error("הקובץ לא נטען ("+response.status+")");
+    cache.set(name,await context.decodeAudioData(await response.arrayBuffer()));
+  }
+  return cache.get(name);
+}
+async function play(entry,once){
+  stop();const token = ++pending;
+  const state = entry.card.querySelector(".state");
+  state.textContent = "טוען…";
+  try{
+    await ensureContext();
+    const buffer = await load(entry,entry.card.querySelector("select").value);
+    if(token !== pending){state.textContent = "מוכן לניגון";return false;}
+    const source = context.createBufferSource(), gain = context.createGain();
+    source.buffer = buffer;source.loop = entry.loop && !once;
+    source.loopStart = 0;source.loopEnd = Math.min(entry.duration,buffer.duration);
+    gain.gain.value = 0;gain.gain.setTargetAtTime(Number(entry.card.querySelector(".volume").value),context.currentTime,.015);
+    source.connect(gain);gain.connect(master);
+    const finished = new Promise(resolve => {
+      active = {entry,source,gain,start:context.currentTime,finish:resolve,period:source.loopEnd};
+    });
+    entry.card.dataset.playing = "true";
+    state.textContent = source.loop ? "מתנגן בלולאה" : "מתנגן";
+    source.onended = () => {
+      if(active?.source === source){
+        const old = active;active = null;old.finish(true);
+        entry.card.dataset.playing = "false";state.textContent = "הסתיים";
+        entry.card.querySelector("progress").value = entry.duration;
+      }
+      source.disconnect();gain.disconnect();
+    };
+    source.start();return await finished;
+  }catch(error){
+    state.textContent = "לא ניתן לנגן: "+error.message+". אפשר לנסות את הפורמט השני או שרת מקומי.";
+    return false;
+  }
+}
+document.querySelector("#master").oninput = event => {
+  const value = Number(event.target.value);document.querySelector("#master-value").value = Math.round(value*100)+"%";
+  if(master)master.gain.setTargetAtTime(value,context.currentTime,.025);
+};
+document.querySelector("#stop-all").onclick = () => {sequence++;stop();};
+document.querySelector("#all").onclick = async () => {
+  const token = ++sequence;
+  for(const entry of cards.values()){
+    if(token !== sequence) break;
+    const result = play(entry,true);globalState.textContent = "ברצף: "+entry.label;
+    if(!await result) break;
+  }
+  if(token === sequence)globalState.textContent = "הרצף הסתיים";
+};
+function tick(){
+  if(active){
+    const elapsed = context.currentTime-active.start;
+    active.entry.card.querySelector("progress").value = active.source.loop ? elapsed%active.period : elapsed;
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+window.addEventListener("pagehide",() => {sequence++;stop();if(context)void context.close();});
+</script>
+</html>

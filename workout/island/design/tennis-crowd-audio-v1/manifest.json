@@ -1,0 +1,96 @@
+{
+  "sampleRate": 44100,
+  "channels": 2,
+  "seed": 20261107,
+  "license": "CC0-1.0",
+  "sounds": [
+    {
+      "id": "stadium-bed",
+      "label": "קהל רקע שקט",
+      "duration": 24.0,
+      "loop": true,
+      "suggestedGameGain": 0.22,
+      "files": {
+        "ogg": "stadium-bed.ogg",
+        "mp3": "stadium-bed.mp3"
+      }
+    },
+    {
+      "id": "applause-short",
+      "label": "מחיאות קצרות",
+      "duration": 1.5,
+      "loop": false,
+      "suggestedGameGain": 0.65,
+      "files": {
+        "ogg": "applause-short.ogg",
+        "mp3": "applause-short.mp3"
+      }
+    },
+    {
+      "id": "applause-medium",
+      "label": "מחיאות בינוניות",
+      "duration": 3.0,
+      "loop": false,
+      "suggestedGameGain": 0.72,
+      "files": {
+        "ogg": "applause-medium.ogg",
+        "mp3": "applause-medium.mp3"
+      }
+    },
+    {
+      "id": "applause-large",
+      "label": "מחיאות גדולות",
+      "duration": 5.0,
+      "loop": false,
+      "suggestedGameGain": 0.8,
+      "files": {
+        "ogg": "applause-large.ogg",
+        "mp3": "applause-large.mp3"
+      }
+    },
+    {
+      "id": "near-point-oh",
+      "label": "אוו — כמעט נקודה",
+      "duration": 2.4,
+      "loop": false,
+      "suggestedGameGain": 0.65,
+      "files": {
+        "ogg": "near-point-oh.ogg",
+        "mp3": "near-point-oh.mp3"
+      }
+    },
+    {
+      "id": "mistake-aw",
+      "label": "אאוו — טעות",
+      "duration": 2.8,
+      "loop": false,
+      "suggestedGameGain": 0.65,
+      "files": {
+        "ogg": "mistake-aw.ogg",
+        "mp3": "mistake-aw.mp3"
+      }
+    },
+    {
+      "id": "pre-serve-hush",
+      "label": "לחישה ושקט לפני הגשה",
+      "duration": 4.0,
+      "loop": false,
+      "suggestedGameGain": 0.35,
+      "files": {
+        "ogg": "pre-serve-hush.ogg",
+        "mp3": "pre-serve-hush.mp3"
+      }
+    },
+    {
+      "id": "match-cheer",
+      "label": "תרועה בסוף משחק",
+      "duration": 6.5,
+      "loop": false,
+      "suggestedGameGain": 0.85,
+      "files": {
+        "ogg": "match-cheer.ogg",
+        "mp3": "match-cheer.mp3"
+      }
+    }
+  ]
+}
