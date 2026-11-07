@@ -78,7 +78,7 @@ try{
   },{withBall,phases,script:SCRIPTS.run.toString()});
   const out={};
   for(const [name,a0,b0] of phases){
-   const r=res.filter(x=>x.t>=a0&&x.t<b0&&x.slide!=null&&x.low<0.12);if(!r.length){out[name]=null;continue;}
+   const r=res.filter(x=>x.t>=a0&&x.t<b0&&x.slide!=null&&x.low<0.075);if(!r.length){out[name]=null;continue;}
    const sl=r.map(x=>x.slide).sort((x,y)=>x-y),sp=res.filter(x=>x.t>=a0&&x.t<b0).map(x=>x.speed);
    out[name]={frames:r.length,meanSlide:+(sl.reduce((x,y)=>x+y,0)/sl.length).toFixed(3),p95Slide:+sl[Math.floor(sl.length*.95)].toFixed(3),over1:+(sl.filter(v=>v>1).length/sl.length).toFixed(2),meanSpeed:+(sp.reduce((x,y)=>x+y,0)/sp.length).toFixed(2),minFloor:+Math.min(...r.map(x=>x.low)).toFixed(3)};
   }
