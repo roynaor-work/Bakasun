@@ -9,10 +9,10 @@ const data=await loadData(new URL('../workout/island/',import.meta.url),async ur
 const b=data.config.minigames.navalDuel,strings=JSON.parse(await readFile(new URL('../workout/island/data/strings.he.json',import.meta.url),'utf8'));
 test('naval campaign opens thirty contiguous stages while retaining the first ten star slots and rewards',()=>{
  assert.equal(b.levels.length,30);
- const originalLives=[8,8,8,8,8,8,9,9,9,9],originalEnemyHp=[2,3,2,3,3,3,4,4,4,5],originalWaves=[1,1,2,2,2,3,3,3,4,4];
+ const originalLives=[8,8,8,8,8,8,9,9,9,9],originalEnemyHp=[2,3,2,3,3,3,4,4,4,5],originalWaves=[1,1,2,2,2,3,3,3,4,4];// stage 9 gained one enemy base (07/11/2026): waves 5 = the original 4 ships + 1 base
  for(let i=0;i<30;i++)assert.equal(b.levels[i].difficulty,i+1);
  for(let i=0;i<10;i++){
-  const s=b.levels[i];assert.equal(s.lives,originalLives[i]);assert.equal(s.enemyLives,originalEnemyHp[i]);assert.equal(s.waves,originalWaves[i]);assert.equal(s.winMoney,35+i*12);assert.equal(s.ammunition[0],28+i*5);
+  const s=b.levels[i];assert.equal(s.lives,originalLives[i]);assert.equal(s.enemyLives,originalEnemyHp[i]);assert.equal(s.waves,originalWaves[i]+(i===8?1:0));assert.equal(s.winMoney,35+i*12);assert.equal(s.ammunition[0],28+i*5);
  }
  const progress=initialProgress(data);assert.equal(progress.navalDuel.stars.length,30);assert.equal(progress.navalDuel.stage,1);assert.equal(validProgress(progress,data),true);
 });
@@ -41,7 +41,7 @@ test('naval missions have localized objectives and introduce tactics before comb
   const c=navalCampaignStage(b,stage);ids.add(c.mission.id);assert.ok(strings[c.mission.title]);assert.ok(strings[c.mission.brief]);assert.equal(c.settings.feature,c.mission.title);
   assert.ok(c.settings.enemyTactics.telegraphSeconds>=1.5);assert.ok(c.settings.enemyTactics.fireSeconds>=9.5);
  }
- assert.deepEqual([...ids],['fleet','subhunt','intercept','flagship']);assert.equal(navalCampaignStage(b,11).fleet.filter(e=>e.behavior==='dive').length,1);
+ assert.deepEqual([...ids],['fleet','bases','subhunt','intercept','flagship']);assert.equal(navalCampaignStage(b,11).fleet.filter(e=>e.behavior==='dive').length,1);
  assert.equal(navalCampaignStage(b,20).mission.id,'flagship');assert.equal(navalCampaignStage(b,30).fleet.filter(e=>e.boss).length,1);
 });
 test('naval fleet mission requires every ship, including ships waiting in reserve',()=>{

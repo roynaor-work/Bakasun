@@ -8,3 +8,15 @@
 .game-screen.fire-play .soccer-stick-zone:active .soccer-knob{transition:none;background:radial-gradient(circle at 35% 25%,#cfdbdc,#99adb3 70%)}
 @media(max-height:380px){.game-screen.fire-play .soccer-stick-zone{left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){.game-screen.fire-play .soccer-knob{transition:none}}
+
+/* 07/11/2026 controls: the stick floats under the left thumb anywhere in the left half, every action is large and always shown on the right. */
+.game-screen.fire-play.fire-v9 .soccer-stick-zone{left:0;bottom:0;width:48%;height:82%;border-radius:0;background:none}
+.game-screen.fire-play.fire-v9 .soccer-stick-zone .soccer-joystick{transform:translate(-50%,-50%)}
+.fire-v9 .fire-move-hint{position:absolute;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));width:140px;height:140px;border-radius:50%;border:2px dashed #cfddd35c;background:radial-gradient(circle,#9bbac712 0 30%,transparent 31%);pointer-events:none}
+.fire-v9 .soccer-stick-zone:has(.soccer-joystick:not([hidden])) .fire-move-hint{display:none}
+.game-screen.fire-play.fire-v9 #shoot{width:96px;height:96px;padding:30px}
+.game-screen.fire-play.fire-v9 #fire-refill{right:calc(max(20px,env(safe-area-inset-right)) + 6px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 110px);width:84px;height:84px;min-width:84px;min-height:84px}
+.game-screen.fire-play.fire-v9 #pass{right:calc(max(20px,env(safe-area-inset-right)) + 110px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 6px);width:84px;height:84px;min-width:84px;min-height:84px}
+.game-screen.fire-play.fire-v9 #fire-finish{right:calc(max(20px,env(safe-area-inset-right)) + 110px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 104px);width:84px;height:84px;min-width:84px;min-height:84px}
+.game-screen.fire-play.fire-v9 #pass.idle{opacity:.55}
+.game-screen.fire-play.fire-v9 .soccer-stick-zone .soccer-joystick{left:calc(max(20px,env(safe-area-inset-left)) + 70px);top:calc(100% - max(20px,env(safe-area-inset-bottom)) - 70px)}
