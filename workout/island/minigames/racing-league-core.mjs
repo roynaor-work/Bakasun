@@ -13,9 +13,9 @@ export const DRIVERS = Object.freeze([
 ]);
 /** Season k uses the circuits of stage tiers 0, 2 and 4 (laps 4, 5, 5 on the longer racing-v10 circuits: about 3.5 to 4.5 minutes a race). */
 export const SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: 4, minRank: 0, rating: 0 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: 5, minRank: 3, rating: 0.025 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: 5, minRank: 3, rating: 0.01 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: 4, minRank: 0, rating: 0.02 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: 5, minRank: 3, rating: 0.045 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: 5, minRank: 3, rating: 0.045 })
 ]);
 export const UPGRADES = Object.freeze({
   engine: { name: 'מנוע', perLevel: 0.03, key: 'engine', cap: 1.16 },

@@ -110,7 +110,7 @@ test('countdown, pause and resume preserve all clocks and controls',()=>{
 
 test('manual throttle remains stopped, auto acceleration moves, steering and braking act',()=>{
   const idle=createRacing({config:{countdown:0}});advance(idle,1,{autoAccelerate:false});assert.equal(idle.state.player.speed,0);
-  const race=createRacing({config:{countdown:0,steeringAssist:false}});advance(race,1);const speed=race.state.player.speed;
+  const race=createRacing({config:{countdown:0,steeringAssist:false,engine:false}});advance(race,1);const speed=race.state.player.speed;
   assert.ok(speed>11);const heading=race.state.player.heading;advance(race,.3,{steer:.8});
   assert.ok(racingAngle(race.state.player.heading-heading)>.15);
   advance(race,.3,{autoAccelerate:false,brake:true});assert.ok(race.state.player.speed<speed);
