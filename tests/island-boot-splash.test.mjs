@@ -87,7 +87,7 @@ test('splash: reduced motion shows only the static screen',()=>{
 
 test('the shipped page: static splash markup, own script before the app, clip inside budget and cached offline',async()=>{
   const html=await readFile(new URL('index.html',root),'utf8');
-  assert.match(html,/data-boot-splash[^>]*role="status"/);assert.match(html,/העיר שלכם מתעוררת/);
+  assert.match(html,/data-boot-splash[^>]*role="status"/);assert.match(html,/העיר שלי מתעוררת/);
   assert.ok(html.indexOf('boot-splash-start.mjs')<html.indexOf('app.mjs'));
   assert.doesNotMatch(html,/<video/,'no video in the first HTML');
   const css=await readFile(new URL('ui/boot-splash.css',root),'utf8');

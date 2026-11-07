@@ -1,4 +1,4 @@
-// Opening screen of the island ("העיר שלכם מתעוררת…"): a short silent clip of the games
+// Opening screen of the island ("העיר שלי מתעוררת…"): a short silent clip of the games
 // themselves behind the text. The page paints first with a plain gradient and the text
 // (static markup, no extra bytes). The clip is requested only when the island is still
 // loading after SPLASH_DELAY_MS (at once when the device already holds it), never on a data saver, a slow link or when the visitor
@@ -8,6 +8,7 @@ export const SPLASH_DELAY_MS=600;
 export const SPLASH_STALL_MS=4000;
 export const SPLASH_FAILSAFE_MS=25000;
 export const SPLASH_FADE_MS=220;
+export const BOOT_FILES_EXPECTED=400;
 export const SPLASH_FLAG='bootVideo'; // ?bootVideo=0 switches the clip off, ?bootVideo=1 forces it (tests)
 
 /** Why the clip must not be requested, or '' when it may. */
@@ -46,6 +47,19 @@ export function startBootSplash({doc=globalThis.document,win=globalThis.window,s
     try{v.removeAttribute('src');for(const s of [...v.querySelectorAll('source')])s.remove();v.load();}catch{}
     v.remove();api.state=reason;el.dataset.clip=reason;
   };
+  // Real progress: files and megabytes this page has actually received so far, from the browser's own resource timing.
+  // The bar is files / BOOT_FILES_EXPECTED (a cold open asks for about 400 files), capped at 95% until the island is ready.
+  const bar=el.querySelector('[data-boot-fill]'),note=el.querySelector('[data-boot-progress]'),t0=win.performance?.now?.()||0;
+  const tickProgress=()=>{
+    if(ended)return;
+    try{
+      const list=win.performance.getEntriesByType('resource');let bytes=0;for(const e of list)bytes+=e.encodedBodySize||0;
+      if(bar)bar.style.width=Math.min(95,Math.round(list.length/BOOT_FILES_EXPECTED*100))+'%';
+      if(note)note.textContent=`נטענו ${list.length} קבצים · ${Math.round(bytes/104857.6)/10} MB · ${Math.round((win.performance.now()-t0)/1000)} שניות`;
+    }catch{}
+    later(tickProgress,400);
+  };
+  if(bar||note)tickProgress();
   api.text=value=>{const p=el.querySelector('[data-boot-text]');if(p&&value)p.textContent=value;};
   api.end=()=>{
     if(ended)return;ended=true;
