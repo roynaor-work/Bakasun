@@ -108,6 +108,17 @@
 | תפוס את הפושע | `session_018LH5qWQs38ZvnKZHDqWEko` | `claude/catch-game-v2` | v1 באי (מוזג ב-#322, גרסה -3). v2 לפי רועי 07/11: מרדף מכוניות לפני הזריקה, זריקה מרגשת (slow-mo, מצלמה, פגיעה), מורכבות (כנופיה, בוס, שדרוגים) |
 ארכיון: הוצאת שוער ועיר (מוזגו ב-#319).
 
+## עוד שיחות (07/11, ערב)
+| נושא | סשן | ענף | מה |
+|---|---|---|---|
+| עיר מלאה בתצוגה | `session_018LH5qVHYyV9tb68Fn47vaq` | `claude/city-full-preview` | `?cityPreview=full` בקריאה בלבד, בעיות מראה וביצועים |
+| שינוי שם: העיר שלי | `session_018LH5qTAWFrpxPkdpreH7AP` | `claude/rename-my-city` | טקסטים בלבד, בלי נתיבים ובלי מזהים; רועי בחר "א" |
+| ליגת מירוצים | `session_018LH5qTW9xGEs1BEkK3H4iN` | `claude/racing-league-v1` | מסכי עונה, חנות שדרוגים, שמירה (מיגרציה), נתיב תוצאה |
+| מראה פורמולה | `session_018LH5qXCcsDQJZWPQ9w4JBM` | `claude/racing-formula-v1` (PR #325) | פודיום; מכונית פורמולה מ-Codex (נבנתה: 11,868 משולשים), ממתינה לדחיפה לענף `codex/racing-formula` |
+| מצלמה | `session_018LH5qXHejz88WcvcdTttbj` | `claude/cam-v9` | רועי: לא לבדוק בטלפון עד שנבנה ובמצב טוב; משוב לפי איבר חסר, מדידה לפי גובה גוף, תאורה, איבוד מעקב ועוד |
+| דיבור ושאלות באימון | `session_018LH5qWqsChRMzHL4BCCu7f` (חדש) | `claude/workout-voice-v1` | ניסוח חם וטבעי, שאלות ברמת הילד, קול נעים, מוקלט + TTS |
+| Codex: ספריות תנועה 3 | | `codex/soccer-motion-v9`, `codex/hoops-motion-v9` | נפתחו (ultra); `ops/codex-motion-v9.md` |
+
 ## החלטות פתוחות לרועי (07/11)
 | # | החלטה | המלצה |
 |---|---|---|
