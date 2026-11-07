@@ -69,7 +69,7 @@ export class ActivityInterface {
   }
   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
   availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
-  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
+  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense','catchCriminal'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
   requireBuilding(id){if(this.requireDaily(id))return true;const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
   playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked,run=()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);};return locked?lockedTaskButton(action,run,'primary-button'):button(this.t(available.ok?'minigame.play':available.reason),action,run,'primary-button');}
   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}

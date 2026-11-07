@@ -132,6 +132,7 @@
   "extensions/alien-defense.mjs",
   "extensions/alpine-rush.mjs",
   "extensions/boar-defense.mjs",
+  "extensions/catch-criminal.mjs",
   "extensions/example-building.mjs",
   "extensions/example-event.mjs",
   "extensions/example-metric.mjs",
@@ -212,6 +213,12 @@
   "minigames/boar-island/world.js",
   "minigames/boar-session.mjs",
   "minigames/canvas-session.mjs",
+  "minigames/catch-actors.mjs",
+  "minigames/catch-audio.mjs",
+  "minigames/catch-engine.mjs",
+  "minigames/catch-session.mjs",
+  "minigames/catch-view.mjs",
+  "minigames/catch.css",
   "minigames/context.mjs",
   "minigames/controls.mjs",
   "minigames/fire-assistance.mjs",
@@ -857,6 +864,22 @@
    "assets/defense-v7/alien-manta-lod1.glb",
    "assets/defense-v7/alien-scout-lod1.glb",
    "assets/defense-v7/defender-plane.glb"
+  ],
+  "catch": [
+   "assets/game-catch/models/apartment.glb",
+   "assets/game-catch/models/armored-van.glb",
+   "assets/game-catch/models/bush.glb",
+   "assets/game-catch/models/cafe.glb",
+   "assets/game-catch/models/getaway-car.glb",
+   "assets/game-catch/models/house.glb",
+   "assets/game-catch/models/lamp.glb",
+   "assets/game-catch/models/police-car.glb",
+   "assets/game-catch/models/police-station.glb",
+   "assets/game-catch/models/roadblock.glb",
+   "assets/game-catch/models/shop.glb",
+   "assets/game-catch/models/tree.glb",
+   "assets/models/adult-man-rigged-512.glb",
+   "assets/models/adult-woman-rigged-512.glb"
   ]
  }
 }

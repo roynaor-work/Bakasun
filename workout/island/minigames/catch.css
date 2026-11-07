@@ -1,0 +1,45 @@
+/* Catch the Criminal: HUD over the Three.js street. The island shell owns the header
+   (pause top-left, sound top-right), so everything else keeps to the middle and bottom. */
+.game-screen[data-game=catchCriminal] .game-stage{background:#101a33}
+.game-screen[data-game=catchCriminal] .minigame-canvas{display:block;width:100%;height:100%;touch-action:none}
+.catch-hud{position:absolute;inset:0;pointer-events:none;color:#fff;font-family:inherit;direction:rtl;unicode-bidi:embed;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.catch-hud button{pointer-events:auto;font-family:inherit}
+.catch-top{position:absolute;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px}
+.catch-wind,.catch-pips{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:20px;background:#0c1830b8;border:1px solid #ffffff3a;backdrop-filter:blur(4px);font-weight:700;font-size:14px;box-shadow:0 2px 10px #0006}
+.catch-wind svg{color:#8fdcff;transition:transform .25s}
+.catch-wind[data-calm=true] svg{opacity:.35}
+.catch-pips{gap:7px;padding:0 12px}
+.catch-pips i{width:16px;height:16px;border-radius:50%;border:2px solid #ffe08a;background:radial-gradient(circle at 35% 30%,#fff7cf,#f4b73c 70%);box-shadow:0 0 8px #ffd25e99;transition:transform .2s,opacity .2s}
+.catch-pips i[data-state=used]{background:transparent;opacity:.35;box-shadow:none;transform:scale(.8)}
+.catch-readout{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:4px;padding:8px 12px;border-radius:14px;background:#0c1830b8;border:1px solid #ffffff30;font-size:13px;font-weight:700;line-height:1.25;min-width:96px;direction:rtl}
+.catch-readout bdi:first-child{color:#8fdcff}.catch-readout bdi:last-child{color:#ffe08a}
+.catch-power{position:absolute;left:max(120px,calc(env(safe-area-inset-left) + 120px));bottom:max(14px,env(safe-area-inset-bottom));width:12px;height:76px;border-radius:8px;background:#0c1830b8;border:1px solid #ffffff40;overflow:hidden;display:flex;align-items:flex-end}
+.catch-power span{display:block;width:100%;background:linear-gradient(0deg,#4de0a0,#ffe08a 60%,#ff7358)}
+.catch-ring{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;border:3px solid #8fdcffcc;background:#8fdcff22;box-shadow:0 0 18px #6fcfff88}
+.catch-ring i{position:absolute;left:50%;top:50%;height:3px;background:linear-gradient(90deg,#8fdcff,#ffffff);transform-origin:0 50%;border-radius:2px}
+.catch-drag-hint{position:absolute;left:30%;top:56%;transform:translateX(-50%);padding:6px 14px;border-radius:16px;background:#0c1830c4;border:1px dashed #8fdcffaa;font-size:13px;font-weight:700;animation:catch-pulse 1.6s ease-in-out infinite}
+.catch-tools{position:absolute;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.catch-tool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:78px;min-height:58px;padding:5px 8px;border-radius:14px;border:2px solid #ffffff44;background:#0c1830c8;color:#e7f2ff;font-size:12px;font-weight:700;line-height:1.1;cursor:pointer;backdrop-filter:blur(4px);transition:transform .12s,border-color .12s,background .12s}
+.catch-tool[aria-pressed=true]{border-color:#8fdcff;background:#17406bdd;color:#fff;transform:translateY(-3px);box-shadow:0 0 14px #6fcfff88}
+.catch-tool:disabled{opacity:.55}
+.catch-tool:focus-visible,.catch-throw:focus-visible,.catch-help-ok:focus-visible{outline:3px solid #fff4bd;outline-offset:3px}
+.catch-throw{position:absolute;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:96px;height:96px;border-radius:50%;border:3px solid #fff2b8;background:radial-gradient(circle at 35% 28%,#ffd95e,#f08c1c 72%);color:#3a1b00;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:16px;font-weight:800;box-shadow:0 5px 0 #8f4a06,0 8px 22px #0008;cursor:pointer;transition:transform .08s,box-shadow .08s,opacity .15s}
+.catch-throw:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 #8f4a06,0 4px 12px #0008}
+.catch-throw:disabled{opacity:.4;filter:grayscale(.5)}
+.catch-popup{position:absolute;left:50%;top:22%;transform:translate(-50%,0) scale(.8);padding:10px 22px;border-radius:22px;background:#0c1830dd;border:2px solid #ffffff55;font-size:22px;font-weight:800;opacity:0;white-space:nowrap;text-shadow:0 2px 4px #0008}
+.catch-popup.show{animation:catch-pop 1.9s ease-out forwards}
+.catch-popup[data-kind=perfect]{border-color:#ffd95e;color:#ffe08a;box-shadow:0 0 24px #ffc83d88}
+.catch-popup[data-kind=good]{border-color:#7fe3a8;color:#b8ffd2}
+.catch-popup[data-kind=bad]{border-color:#ff9b8c;color:#ffd0c8}
+.catch-popup[data-kind=warn]{border-color:#ffd25e}
+.catch-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0c1830;font-size:18px;font-weight:700;pointer-events:auto;text-align:center;padding:16px}
+.catch-loading[hidden],.catch-help[hidden],.catch-drag-hint[hidden],.catch-ring[hidden]{display:none}
+.catch-help{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#050c1cd0;pointer-events:auto}
+.catch-help-card{width:min(560px,92%);padding:16px 20px;border-radius:20px;background:#12294d;border:1px solid #ffffff44;box-shadow:0 10px 40px #000a;display:grid;gap:8px}
+.catch-help-card p{margin:0;font-size:15px;line-height:1.45}
+.catch-help-ok{justify-self:center;min-height:48px;padding:0 24px;border-radius:24px;border:2px solid #fff2b8;background:linear-gradient(#ffd95e,#f08c1c);color:#3a1b00;font-size:16px;font-weight:800;cursor:pointer}
+.catch-hud[data-phase=flight] .catch-readout,.catch-hud[data-phase=flight] .catch-power,.catch-hud[data-phase=throw] .catch-readout,.catch-hud[data-phase=throw] .catch-power{opacity:.45}
+@keyframes catch-pop{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}12%{opacity:1;transform:translate(-50%,0) scale(1.08)}22%{transform:translate(-50%,0) scale(1)}78%{opacity:1}100%{opacity:0;transform:translate(-50%,-16px) scale(1)}}
+@keyframes catch-pulse{0%,100%{opacity:.95}50%{opacity:.55}}
+@media(max-height:360px){.catch-throw{width:84px;height:84px}.catch-tool{min-width:68px;min-height:52px}.catch-popup{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.catch-drag-hint{animation:none}.catch-popup.show{animation-duration:2.6s}}
