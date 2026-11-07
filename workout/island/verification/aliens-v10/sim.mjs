@@ -4,6 +4,7 @@ import {createAlienModel} from '../../minigames/aliens.mjs';
 import {seededRandom} from '../../minigames/context.mjs';
 const config=JSON.parse(await readFile(new URL('../../data/config.json',import.meta.url))).minigames,balance=config.alienDefense;
 if(process.env.ALIEN_V10==='0')globalThis.__alienV10=false;
+if(process.env.ALIEN_V11==='0')globalThis.__alienV11=false;
 const dt=1/30;
 /** Missile hit rate: launch from random player positions at random times in a stage. */
 export function missiles(level,seed,count=12){

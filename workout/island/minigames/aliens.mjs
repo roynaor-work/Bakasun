@@ -4,6 +4,7 @@ import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-4';
 import {runAlienSession} from './alien-session.mjs';
 import {createAlienModel} from './alien-flight-model.mjs';
 import './alien-ui.mjs';
+import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer,wingVisible} from './alien-v10-draw.mjs';
 import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-4';
 export {createAlienModel};
@@ -17,11 +18,12 @@ export function drawAliens(p,m,{config,balance,art,quality,view,pixelAspect=1}) 
   const count=quality.low?balance.starCount:v.stars;
   for(let i=0;i<count;i++){const depth=1+i%3,x=(i*a.starStrideX+a.starOffsetX)%w,y=(i*a.starStrideY+m.time*balance.starSpeed*depth)%h;p.globalAlpha=a.starOpacity+(i%a.starVariants)*a.starOpacityStep;p.fillRect(x,y,a.starSize*depth/2,a.starSize*depth/2);}p.globalAlpha=1;
   for(const e of m.aliens){if(e.shield>0){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.ellipse(e.x,e.y,e.radius+7,e.radius+5,0,0,TAU);p.stroke();}const modelScale=art.modelScales?.enemies[e.kind]||1,regularScale=modelScale!==1?(balance.models.enemies[e.kind]?.regularScale??modelScale):1,size=balance.alienRadius*3*(modelScale!==1&&e.boss?modelScale:e.scale*regularScale);p.save();p.translate(e.x,e.y);p.scale(1/pixelAspect,1);p.rotate(Math.sin(e.age*2+e.phase)*.09);p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);if(e.hitTime>0){p.globalCompositeOperation='screen';p.globalAlpha=e.hitTime/balance.hitFlashSeconds;p.drawImage(art.aliens[e.kind],-size/2,-size/2,size,size*.88);}p.restore();if(e.maxHp>2)drawHealthBar(p,e.x-size/3,e.y-size*.5,size*2/3,3,e.hp,e.maxHp,config);}
-  for(const s of m.shots){p.strokeStyle=s.kind===1?v.foam:a.sandColor;p.lineWidth=s.kind===1?5:3;p.beginPath();p.moveTo(s.x,s.y+16);p.lineTo(s.x,s.y-9);p.stroke();oval(p,s.x,s.y,2,8,palette.white);}
+  if(m.v11)drawV11Tells(p,m,pixelAspect);
+  for(const s of m.shots){if(s.kind===2){drawV11Laser(p,s,pixelAspect);continue;}p.strokeStyle=s.kind===1?v.foam:a.sandColor;p.lineWidth=s.kind===1?5:3;p.beginPath();p.moveTo(s.x,s.y+16);p.lineTo(s.x,s.y-9);p.stroke();oval(p,s.x,s.y,2,8,palette.white);}
   if(m.v10)drawV10Bolts(p,m.bolts,m.time,pixelAspect);else drawAlienBolts(p,m.bolts,balance,pixelAspect);
   if(!m.v10)for(const d of m.pickups){p.save();p.translate(d.x,d.y);p.rotate(m.time*2);p.fillStyle=balance.pickups.colors[d.kind];p.fillRect(-7,-7,14,14);p.fillStyle=palette.white;p.fillRect(-2,-2,4,4);p.restore();}
   for(const s of m.sparks){p.globalAlpha=s.life/balance.sparkSeconds;oval(p,s.x,s.y,3,3,a.creamColor);}p.globalAlpha=1;
-  drawAlienEffects(p,m,balance,pixelAspect);if(m.v10){drawV10Missile(p,m,pixelAspect);drawV10WingTimer(p,m,pixelAspect);}
+  drawAlienEffects(p,m,balance,pixelAspect);if(m.v10){drawV10Missile(p,m,pixelAspect);drawV10WingTimer(p,m,pixelAspect);}if(m.v11){drawV11Blasts(p,m,pixelAspect);drawV11BonusTimer(p,m,pixelAspect);}
   for(const d of m.loot){if(d.kind){p.fillStyle=palette.cockpitShine;p.beginPath();p.moveTo(d.x,d.y-9);p.lineTo(d.x+7,d.y);p.lineTo(d.x,d.y+9);p.lineTo(d.x-7,d.y);p.fill();}else{oval(p,d.x,d.y,7,8,palette.gold);oval(p,d.x-1,d.y-2,3,4,palette.ivory);}}
   for(const wing of m.wings)if(wing.active&&(!m.v10||wingVisible(m))){p.save();p.translate(wing.x,wing.y);p.rotate(m.time*.7);p.fillStyle=palette.gold;p.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?7:15;if(i)p.lineTo(Math.cos(a)*r,Math.sin(a)*r);else p.moveTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();oval(p,-4,-1,2,3,palette.cockpit);oval(p,4,-1,2,3,palette.cockpit);p.restore();}
   const {x,y}=m.player;p.save();p.translate(x,y);p.scale(1/pixelAspect,1);p.rotate(-(m.player.bank||0)*balance.render.bankAngle);if(m.invulnerable&&Math.floor(m.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;

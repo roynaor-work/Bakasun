@@ -1,4 +1,4 @@
-globalThis.__alienV10=false; // v9 behaviour; v10 is covered in island-alien-v10.test.mjs
+globalThis.__alienV10=false;globalThis.__alienV11=false; // v9 behaviour; v10 is covered in island-alien-v10.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -6,7 +6,6 @@ import {createAlienModel} from '../workout/island/minigames/aliens.mjs';
 import {createAlienFlightState} from '../workout/island/minigames/alien-flight-input.mjs';
 import {alienV9Enabled} from '../workout/island/minigames/alien-v9.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
-import {run} from '../workout/island/verification/aliens-v9/sim.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.alienDefense;
 const make=(level=1,off=false)=>{globalThis.__alienV9=off?false:undefined;const m=createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false});globalThis.__alienV9=undefined;return m;};
 
@@ -31,11 +30,4 @@ test('v9 aliens need more hits, more waves and bonuses are rarer; off flag match
  const bonusesFor=(m)=>{for(let i=0;i<30*400&&!m.result;i++){const t=m.aliens.sort((a,b)=>b.y-a.y)[0];m.update(1/30,{moveX:t?Math.max(-1,Math.min(1,(t.x-m.player.x)/30)):0,firing:true});}return m.snapshot().bonusesDropped;};
  assert.ok(bonusesFor(make(1))<=2);assert.ok(bonusesFor(make(1,true))>=3);
 });
-test('v9 stage 1 lasts about 80-130 s for a player holding fire (measured by simulation, no browser)',()=>{
- const rs=[1,2,3,4,5].map(s=>run(1,s,{press:1}));const avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;
- assert.ok(avg>=80&&avg<=130,`avg ${avg}`);assert.ok(rs.every(r=>r.outcome==='win'));
-});
-test('v9 upgraded stage 1 also lasts 80-130 s (hp scales with equipment strength)',()=>{
- const profile={equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}},rs=[1,2,3,4,5].map(s=>run(1,s,{press:1,profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;
- assert.ok(avg>=80&&avg<=130,`avg ${avg}`);
-});
+// Stage-1 duration is now covered by island-alien-v11.test.mjs (the config values moved on in v11).
