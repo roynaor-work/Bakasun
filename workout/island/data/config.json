@@ -12444,6 +12444,7 @@
     "steerBoostSoften": 0.3,
     "lateralBoostDamp": 0.05,
     "airControl": 0.4,
+      "airBoost": {"accel": 2.2, "maxGain": 0.08, "control": 0.55, "steerPenalty": 0.5, "refVy": 6.6},
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
     "hitGraceSeconds": 0.35,

@@ -25,7 +25,9 @@ const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'C
  * input, audio and the HUD. The island engine owns rewards; this file only reports the
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
 export function runAlpineSession(ctx) {
-  const balance = ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+  // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
+  const airOff = new URLSearchParams(globalThis.location?.search || '').get('alpineAir') === '0';
+  const balance = airOff && ctx.balance.physics.airBoost ? {...ctx.balance, physics: (({airBoost, ...rest}) => rest)(ctx.balance.physics)} : ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
   const level = engine.level, track = engine.track;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}

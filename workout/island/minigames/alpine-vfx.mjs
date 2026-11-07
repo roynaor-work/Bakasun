@@ -48,7 +48,7 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
   }
   const forward = new THREE.Vector3(), delta = new THREE.Vector3();
   const lastEmit = new Float64Array([-10, -10, -10, -10]);
-  let disposed = false, previousTime = -1, wasAirborne = false, wasLanding = false, wasBoosting = false;
+  let disposed = false, previousTime = -1, wasAirborne = false, wasLanding = false, wasBoosting = false, airLineAt = 0;
   let spawned = 0, activeCount = 0, warmed = false;
   function uvFrame(slot, index) {
     if (slot.frame === index) return;
@@ -113,6 +113,9 @@ export async function createAlpineVfx({scene, worldPoint, surfaceHeight = () => 
         if (!reducedMotion && Math.abs(lean) > .52) emit(1, now, player, .85, Math.sign(lean) * -.55);
       }
       if(!reducedMotion&&(feedback?feedback.lineTrigger:(player.boosting||speed>95)))emit(3,now,player,1,0,feedback?true:!!player.boosting&&!wasBoosting);
+      // Ramp air boost: speed lines at takeoff and a short pulse every 0.35 s while the push lasts.
+      if (!reducedMotion && player.airBoost && now >= airLineAt) { emit(3, now, player, 1, 0, true); airLineAt = now + .35; }
+      if (!player.airBoost) airLineAt = 0;
       wasAirborne = !!player.airborne; wasLanding = !!player.landing; wasBoosting = !!player.boosting;
     }
     forward.set(0, 0, -1).applyQuaternion(camera.quaternion);
