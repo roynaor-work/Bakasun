@@ -1,5 +1,6 @@
 import {drawAlienFeedback} from './ultra-alien-feedback.mjs';
 export {drawAlienFallbackFeedback} from './ultra-alien-feedback.mjs';
+import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;
 const threatColors={needle:'#ff8298',orb:'#ffbf8b',diamond:'#ffabd0',fork:'#dc9fff',ring:'#ffa58c'};
@@ -22,7 +23,9 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  p.save();p.globalCompositeOperation='lighter';
  thruster(p,m.player.x,m.player.y+playerLength*.48,m.time,pixelAspect,false,.85*screenScale);
  for(const a of m.aliens)if(a.y>0&&a.y<config.height){thruster(p,a.x,a.y-a.radius*.8,m.time+a.phase,pixelAspect,true,a.boss?.8:.33);if(a.hitTime>0)glow(p,a.x,a.y,19,'#fff2b7',pixelAspect,a.hitTime/balance.hitFlashSeconds*.5);}
+ if(m.v11)drawV11Tells(p,m,pixelAspect,screenScale);
  for(const s of m.shots){
+  if(s.kind===2){drawV11Laser(p,s,pixelAspect,screenScale);continue;}
   const laser=s.kind===1,color=s.wing?'#c5b2ff':laser?'#65eeff':'#93dbff';glow(p,s.x,s.y,laser?17:11,color,pixelAspect,laser?.72:.55);
   p.save();p.translate(s.x,s.y);p.scale(1/pixelAspect,1);p.rotate(Math.atan2(s.vx,-s.vy));
   const length=laser?24:13,g=p.createLinearGradient(0,-length,0,laser?28:16);g.addColorStop(0,'#ffffff');g.addColorStop(.28,color);g.addColorStop(1,rgba(color,0));p.strokeStyle=g;p.lineWidth=laser?5:2.5;p.beginPath();p.moveTo(0,-length);p.lineTo(0,laser?28:16);p.stroke();
@@ -44,6 +47,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  }
  for(const s of m.sparks){const alpha=Math.max(0,s.life/balance.sparkSeconds);glow(p,s.x,s.y,9,'#ffb56e',pixelAspect,alpha*.55);p.save();p.globalAlpha=alpha;p.strokeStyle=alpha>.65?'#fff0c4':'#ee9b59';p.lineWidth=1.2;p.beginPath();p.moveTo(s.x,s.y);p.lineTo(s.x-s.vx*.024/pixelAspect,s.y-s.vy*.024);p.stroke();p.restore();}
  const n=m.nova;
+ if(m.v11){p.save();p.globalCompositeOperation='source-over';drawV11Blasts(p,m,pixelAspect,screenScale);drawV11BonusTimer(p,m,pixelAspect,screenScale);p.restore();}
  if(m.v10){p.save();p.globalCompositeOperation='source-over';drawV10Missile(p,m,pixelAspect,screenScale);drawV10WingTimer(p,m,pixelAspect,screenScale,m.v10Blink);p.restore();}
  else if(n.flight>0){
   for(let i=1;i<=12;i++)glow(p,n.x+Math.sin(i*2+m.time)*i*.12/pixelAspect,n.y+i*5,8+i*.6,'#ffb777',pixelAspect,(1-i/13)*.5);

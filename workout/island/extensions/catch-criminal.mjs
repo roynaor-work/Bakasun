@@ -1,5 +1,5 @@
-import {runCatchSession} from '../minigames/catch-session.mjs?v=island-v2-20261107-4';
-import {gameResult} from '../minigames/result.mjs?v=island-v2-20261107-4';
+import {runCatchSession} from '../minigames/catch-session.mjs?v=island-v2-20261107-5';
+import {gameResult} from '../minigames/result.mjs?v=island-v2-20261107-5';
 
 /** Catch the Criminal: throw a net or a lasso at a thief running through the city.
  * Switched off by the data flag `catchCriminal` (data/featureFlags.json) or with ?catch=off. */

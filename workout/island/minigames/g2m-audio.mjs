@@ -1,14 +1,15 @@
+import {alienV11Enabled,BOAR_MG,LASER_SFX,whiteNoise,playLayers} from './alien-v11.mjs';
 const EVENTS=['shot','hit','explosion','missileLaunch','missileExplosion','bonus','stageEnd'];
-export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-v2-20261107-4`,import.meta.url).href])));
-export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235});
+export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-v2-20261107-5`,import.meta.url).href])));
+export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235,laser:.1,explosionBig:.36});
 /** Alien-only sample bank. The shared shell owns the existing island.sound switch. */
 export function createG2mAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
- let context,master,noise,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map();
+ let context,master,noise,white,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map(),v11=alienV11Enabled(),synth=[];
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  function unlock(){
   if(disposed||!AudioContext)return;
   try{if(!context){context=new AudioContext();master=context.createGain();master.gain.value=.3;master.connect(context.destination);
-    noise=context.createBuffer(1,context.sampleRate,context.sampleRate);const data=noise.getChannelData(0);let low=0;for(let i=0;i<data.length;i++){low=low*.92+(Math.random()*2-1)*.08;data[i]=low;}}
+    noise=context.createBuffer(1,context.sampleRate,context.sampleRate);const data=noise.getChannelData(0);let low=0;for(let i=0;i<data.length;i++){low=low*.92+(Math.random()*2-1)*.08;data[i]=low;}white=whiteNoise(context);}
    if(!paused&&context.state==='suspended')void context.resume().catch(()=>{});
   }catch{/* Audio support must never stop gameplay. */}
  }
@@ -28,7 +29,15 @@ export function createG2mAudio({storage=globalThis.localStorage,AudioContext=glo
   event=event==='upgrade'?'bonus':event;
   if(disposed||paused||muted()||!G2M_LEVELS[event]||sources.size>=18)return;
   unlock();if(context.state!=='running')return;
-  const now=context.currentTime;if(now-(last.get(event)??-1)<.045)return;last.set(event,now);
+  const now=context.currentTime;
+  if(v11&&(event==='shot'||event==='laser')){
+   const spec=event==='shot'?BOAR_MG:LASER_SFX;if(now-(last.get(event)??-1)<spec.minGap)return;last.set(event,now);
+   while(synth.length&&synth[0]<=now)synth.shift();if(synth.length>=8)return;synth.push(now+.2);
+   try{playLayers(context,master,white,spec.layers,now,{vol:event==='shot'?2:1.6,pitch:event==='shot'?.92+Math.random()*.16:1});played++;}catch{}
+   return;
+  }
+  if(event==='explosionBig')event='missileExplosion';
+  if(now-(last.get(event)??-1)<.045)return;last.set(event,now);
   try{if(event==='stageEnd')stop();if(buffers.has(event)){const source=context.createBufferSource();source.buffer=buffers.get(event);source.connect(master);source.onended=()=>{sources.delete(source);source.disconnect();};sources.add(source);source.start();}else fallback(event,now);played++;
   }catch{/* Device interruption is non-fatal. */}
  }

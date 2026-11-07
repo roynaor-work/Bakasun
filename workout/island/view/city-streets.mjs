@@ -1,15 +1,16 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-v2-20261107-4';
-import {streetFront} from '../engine/city-sites.mjs?v=island-v2-20261107-4';
-import {plotLandscape} from './plot-landscape.mjs?v=island-v2-20261107-4';
-import {streetSurfaces,STREET_SURFACE} from './street-surfaces.mjs?v=island-v2-20261107-4';
-import {distributedStreetSites} from './street-distribution.mjs?v=island-v2-20261107-4';
+import {cityRoadNetwork} from './city-traffic-model.mjs?v=island-v2-20261107-5';
+import {streetFront} from '../engine/city-sites.mjs?v=island-v2-20261107-5';
+import {plotLandscape} from './plot-landscape.mjs?v=island-v2-20261107-5';
+import {streetSurfaces,STREET_SURFACE} from './street-surfaces.mjs?v=island-v2-20261107-5';
+import {distributedStreetSites} from './street-distribution.mjs?v=island-v2-20261107-5';
 
 /** Paving and street furniture are derived visuals inside existing footprints.
  * No saved building, authored GLB, construction rule or ground plane is changed. */
+const PALM_FULL='assets/models/palm-tree-512.glb',PALM_LOD='assets/models/city/lod/palm-tree-lod.glb';
 export class CityStreets{
   constructor(scene,ground,palmModels,{vehicleModels=null,carSpec=null}={}){
-    Object.assign(this,{scene,ground,palmModels,vehicleModels,carSpec});this.batches=[];this.palms=[];this.parked=[];this.quality='high';this.disposed=false;this.surfaces=streetSurfaces();
+    Object.assign(this,{scene,ground,palmModels,vehicleModels,carSpec});this.batches=[];this.palms=[];this.parked=[];this.quality='high';this.lodPalms=false;this.onPalmLod=()=>{};this.disposed=false;this.surfaces=streetSurfaces();
     this.planeGeometry=new T.PlaneGeometry(1,1);this.boxGeometry=new T.BoxGeometry(1,1,1);this.shrubGeometry=new T.IcosahedronGeometry(.5,1);
     const pixels=new Uint8Array(64*64*4);let seed=11;
     for(let i=0;i<pixels.length;i+=4){seed=(Math.imul(seed,1664525)+1013904223)>>>0;pixels[i]=pixels[i+1]=pixels[i+2]=230+seed%25;pixels[i+3]=255;}
@@ -107,7 +108,10 @@ export class CityStreets{
       for(const [i,p]of items.entries()){dummy.position.set(p.x-offset,p.y,p.z-offset);dummy.rotation.set(p.flat?-Math.PI/2:0,0,0);dummy.scale.set(p.w,p.h,p.d);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);mesh.setColorAt(i,new T.Color(p.color));}
       mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();this.batches.push(mesh);this.scene.add(mesh);
     }
-    const palm=this.palmModels.create('assets/models/palm-tree-512.glb',{height:3.8});
+    // The full palm is ~5K triangles; the full-city preview asks for a light copy (tools/city-models-lod.mjs) and falls back to the full one until it is here.
+    let palmPath=PALM_FULL;
+    if(this.lodPalms){if(this.palmModels.assets?.has(PALM_LOD))palmPath=PALM_LOD;else if(!this.palmLodRequested&&this.palmModels.load){this.palmLodRequested=true;this.palmModels.load({path:PALM_LOD,rotationY:0,scale:1}).then(ok=>{if(ok&&!this.disposed)this.onPalmLod();});}}
+    const palm=this.palmModels.create(palmPath,{height:3.8});
     if(palm&&palms.length){palm.updateMatrixWorld(true);const matrix=new T.Matrix4();palm.traverse(source=>{if(!source.isMesh)return;const mesh=new T.InstancedMesh(source.geometry,source.material,palms.length);mesh.name='Original Meshy street palms';mesh.castShadow=this.quality!=='low';mesh.receiveShadow=true;
       for(const [i,p]of palms.entries()){dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.angle,0);dummy.scale.setScalar(p.scale);dummy.updateMatrix();matrix.multiplyMatrices(dummy.matrix,source.matrixWorld);mesh.setMatrixAt(i,matrix);}
       mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();this.palms.push(mesh);this.scene.add(mesh);

@@ -339,3 +339,11 @@
 .game-screen[data-game=islandRacing] .racing-podium-name{font-size:12px;font-weight:700;color:#08111c;text-align:center}
 .game-screen[data-game=islandRacing] .racing-podium-place{font-size:30px;line-height:1;color:#08111c}
 .game-screen[data-game=islandRacing] .racing-podium-note{font-size:12px;opacity:.85}
+
+/* racing-v11 gearbox readout under the speed number */
+.game-screen[data-game=islandRacing] .racing-gearbox{position:absolute;left:50%;top:27%;transform:translateX(-50%);display:flex;align-items:center;gap:5px;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-gearbox[hidden]{display:none}
+.game-screen[data-game=islandRacing] .racing-gear{font-size:13px;font-weight:800;color:var(--race-yellow);min-width:10px;text-align:center}
+.game-screen[data-game=islandRacing] .racing-rev{display:block;width:34px;height:4px;border-radius:2px;background:#d7e6f330;overflow:hidden}
+.game-screen[data-game=islandRacing] .racing-rev i{display:block;height:100%;background:#e9f3f8;transform-origin:0 50%;transform:scaleX(0)}
+.game-screen[data-game=islandRacing] .racing-rev i.red{background:#ff5a4a}

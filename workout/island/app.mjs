@@ -1,20 +1,21 @@
-import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-4';
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-4';
-import './view/learning-buildings.mjs?v=island-v2-20261107-4';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-4';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-4';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-4';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-4';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-4';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-4';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-4';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-4';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-4';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-4';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-4';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-4';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-4';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-4';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-5';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-5';
+import './view/learning-buildings.mjs?v=island-v2-20261107-5';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-5';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-5';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-5';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-5';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-5';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-5';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-5';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-5';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-5';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-5';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-5';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-5';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-5';
+import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-5';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-5';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -29,6 +30,8 @@ try {
   const data = await loadData();
   let storage;
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
+  const cityPreview = previewMode();
+  if (cityPreview) storage = readOnlyStorage(storage);
   const engine = createEngine(data, { storage });
   let ui;
   const view = new IslandView({
@@ -41,6 +44,7 @@ try {
   });
   ui = new IslandInterface({ root, engine, view, data, t });
   splash.end();
+  if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
@@ -57,8 +61,8 @@ try {
   });
   // Every open: look for a newer release at once, keep the asset worker registered and
   // fill the device cache in the background (skipped on a data saver, paused during a game).
-  releaseWatch.poll();registerOfflineWorker();
-  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
+  releaseWatch.poll();if(!cityPreview)registerOfflineWorker();
+  const stopAutoDownload=cityPreview?()=>{}:startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{

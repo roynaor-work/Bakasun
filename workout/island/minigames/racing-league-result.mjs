@@ -1,4 +1,4 @@
-import {getRacingStage} from './racing-tracks.mjs?v=island-v2-20261107-4';
+import {getRacingStage} from './racing-tracks.mjs?v=island-v2-20261107-5';
 
 /** A league race has its own result path: it checks the same ordered-checkpoint run as racing-result.mjs (with the season's laps and clock),
  * plus the finishing order of the whole grid, and returns no island money and no stars. The regular race path is never touched. */

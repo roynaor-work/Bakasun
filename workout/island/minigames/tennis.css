@@ -8,8 +8,8 @@
 .game-screen[data-game=tennis] button:focus-visible{outline:3px solid var(--tennis-cream);outline-offset:4px}
 
 /* Original shirt swatches and serving flags drive this compact broadcast scorebug. */
-.game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{display:grid;grid-template-columns:54px 26px 38px;grid-template-rows:20px 25px 25px;gap:0 4px;align-items:center;width:142px;max-width:calc(100vw - 100px);height:auto;min-width:0;padding:4px 7px 6px;left:max(12px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));border:1px solid #f5efdc70;border-top:3px solid var(--tennis-brass);border-radius:5px;background:#173f36f0;box-shadow:0 5px 18px #102e292d;color:var(--tennis-cream);font-family:inherit;pointer-events:none;backdrop-filter:blur(6px);direction:ltr;box-sizing:border-box}
-.game-screen[data-game=tennis] .tennis-board::before{content:'טורניר העיר';grid-column:1/-1;text-align:left;direction:rtl;justify-self:start;font-size:10px;line-height:1;font-weight:650;color:#e4d7ae}
+.game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{display:grid;grid-template-columns:54px 26px 38px;grid-template-rows:25px 25px;gap:0 4px;align-items:center;width:142px;max-width:calc(100vw - 100px);height:auto;min-width:0;padding:4px 7px 6px;left:max(12px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));border:1px solid #f5efdc70;border-top:3px solid var(--tennis-brass);border-radius:5px;background:#173f36f0;box-shadow:0 5px 18px #102e292d;color:var(--tennis-cream);font-family:inherit;pointer-events:none;backdrop-filter:blur(6px);direction:ltr;box-sizing:border-box}
+.game-screen[data-game=tennis] .tennis-board::before{content:none;display:none;grid-column:1/-1;text-align:left;direction:rtl;justify-self:start;font-size:10px;line-height:1;font-weight:650;color:#e4d7ae}
 .game-screen[data-game=tennis] .tennis-board .tennis-player-dot{position:relative;display:block;width:7px;height:16px;margin:0 0 0 1px;border:0;border-radius:1px;background:var(--shirt);box-shadow:inset 0 0 0 1px #ffffff50}
 .game-screen[data-game=tennis] .tennis-board .tennis-player-dot::after{content:'שלי';position:absolute;left:14px;top:1px;width:36px;font-size:11px;line-height:15px;font-weight:600;color:var(--tennis-cream);direction:rtl;text-align:left;white-space:nowrap}
 .game-screen[data-game=tennis] .tennis-board .tennis-player-dot:nth-of-type(2)::after{content:'יריב'}
@@ -84,7 +84,7 @@
 
 @keyframes tennis-serve-pulse{50%{opacity:.7}}
 @media(max-height:380px) and (orientation:landscape){
- .game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{top:max(8px,env(safe-area-inset-top));grid-template-rows:17px 23px 23px;padding-top:3px;padding-bottom:4px}
+ .game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{top:max(8px,env(safe-area-inset-top));grid-template-rows:23px 23px;padding-top:3px;padding-bottom:4px}
  .game-screen[data-game=tennis] .soccer-actions{bottom:max(12px,env(safe-area-inset-bottom));right:max(18px,env(safe-area-inset-right))}
  .game-screen[data-game=tennis] .tennis-stick-home{left:44px;bottom:20px}
  .game-screen[data-game=tennis] .left-handed .tennis-stick-home{left:auto;right:44px}
@@ -92,7 +92,7 @@
  .game-screen[data-game=tennis]:has(.left-handed) .game-stage .tennis-serve-meter{right:auto;left:calc(max(16px,env(safe-area-inset-left)) + 184px)}
 }
 @media(min-width:1100px) and (min-height:600px){
- .game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{top:24px;left:24px;grid-template-columns:64px 30px 42px;grid-template-rows:25px 29px 29px;width:162px;padding:5px 8px 8px}
+ .game-screen[data-game=tennis] .soccer-scoreboard.tennis-board{top:24px;left:24px;grid-template-columns:64px 30px 42px;grid-template-rows:29px 29px;width:162px;padding:5px 8px 8px}
  .game-screen[data-game=tennis] .tennis-board::before{font-size:12px}
  .game-screen[data-game=tennis] .tennis-board .tennis-player-dot::after{font-size:12px}
  .game-screen[data-game=tennis] .tennis-board .tennis-player-dot[data-serving=true]::before{right:-58px}
@@ -109,3 +109,10 @@
 .game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true]{background:linear-gradient(to top,#2d4a44 var(--lo,0%),#3aa56f var(--lo,0%) var(--safe),#c9a24a var(--safe) var(--out,100%),#914a38 var(--out,100%))}
 .game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true] .tennis-power-fill{background:#f0f4c0}
 .game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true][data-under=true] .tennis-power-fill{background:#e8c36a}
+
+/* v11: one bar, no top text. The needle takes the colour of the contact grade; the score board has no title or player captions. */
+.game-screen[data-game=tennis] .tennis-board .tennis-player-dot::after{content:none}
+.game-screen[data-game=tennis] .tennis-feedback{display:none}
+.game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-grade=medium] .tennis-serve-needle{background:#efc355}
+.game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-grade=weak] .tennis-serve-needle{background:#f06960}
+.game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-grade=good] .tennis-serve-needle{background:#fff}

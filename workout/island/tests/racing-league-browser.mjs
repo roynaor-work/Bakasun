@@ -11,7 +11,7 @@ await verify('racing-league-v1',sizes,async({page,viewport,tick,snap,shot,assert
  await open(()=>window.__island.games.stages('islandRacing'));
  assert.deepEqual([...new Set(requested)].sort(),['racing-league.css','racing-league.mjs'],'loaded only when the racing menu opens');report.lazyFiles=[...new Set(requested)];
  assert.equal(await page.locator('.rl-card .rl-race').count(),6);assert.equal(await page.locator('[data-action=racing-league-go]').count(),1);
- assert.equal(await page.locator('.stage-map button[data-stage]').count()>0,true,'the regular stage map is still there');
+ assert.equal(await page.locator('.stage-map button[data-stage]').count(),0,'racing-v11: the level map is gone, the league is the entry (saved stages stay in the save)');assert.equal(await page.evaluate(()=>window.__island.engine.state.minigameProgress.islandRacing.stage>=1),true,'saved progress is untouched');
  report.card=await page.locator('.rl-card').boundingBox();await shot(`${tag}-1-card`);
  // 2. season, table and gates
  await page.locator('[data-action=racing-league-season]').tap();await tick(60);await page.waitForSelector('[data-racing-season]');
@@ -32,7 +32,7 @@ await verify('racing-league-v1',sizes,async({page,viewport,tick,snap,shot,assert
  // finish the race with the bot driving the real model, then let the session notice the result
  await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model,p=m.state.player,tr=m.track,w=a=>Math.atan2(Math.sin(a),Math.cos(a));
   for(let n=0;n<(m.stage.timeLimit+2)*60&&m.state.phase!=='finished';n++){const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),e=w(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);m.step(1/60,{steer:Math.max(-1,Math.min(1,e*1.7)),throttle:1,autoAccelerate:true});}});
- await tick(500);await page.waitForSelector('[data-racing-league-result]',{timeout:60000});
+ await tick(500);if(await page.locator('.racing-podium').count())await page.locator('.racing-podium').tap();await page.waitForSelector('[data-racing-league-result]',{timeout:60000});
  const after=await page.evaluate(()=>{const l=window.__island.engine.state.islandRacingLeague,e=window.__island.engine.state;return {race:l.race,coins:l.coins,table:l.table,progress:e.minigameProgress.islandRacing.stage,history:l.history};});
  assert.equal(after.race,1);assert.equal(after.progress,1,'the regular stage progress is untouched');assert.equal(after.history.length,1);report.afterRace=after;
  await shot(`${tag}-6-result`);

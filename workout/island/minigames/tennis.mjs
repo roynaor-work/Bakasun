@@ -59,14 +59,17 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     const tol=v9d('powerTolerance',pw.tolerance);
     return {depth,need,tol,out:clamp(need+tol+(court.halfLength+court.lineTolerance-depth)/pw.metresPerCharge,0,1)};
   }
-  // v10 hit meter: where this swing would land on a serve-style bar. Centre = best shot (accurate, strong, in); the further
-  // from the centre (early/late, or far from the ball) the worse the grade, and the likelier the ball ends net or out.
-  function hitMeter(){
-    const q=v9c.quality,k=state.contact;
-    if(state.phase!=='rally'||!k||k.side!==0||state.shot?.side!==1)return {active:false,value:.5,zone:'green',greenHalf:(1-q.good)/2,yellowHalf:(1-q.medium)/2};
-    const timing=clamp((state.elapsed-k.at)/Math.max(.1,level.timingWindow/2),-1,1),quality=contactStatus(0).quality;
-    const score=1-q.timingWeight*Math.abs(timing)-(1-q.timingWeight)*(1-quality),sign=timing>=0?1:-1;
-    return {active:true,value:clamp(.5+sign*(1-score)/2,0,1),zone:score>=q.good?'green':score>=q.medium?'yellow':'red',greenHalf:(1-q.good)/2,yellowHalf:(1-q.medium)/2};
+  // v11 single hit bar (serve-style), shown only while the hit button is held. The needle is the charge measured from the ideal one for the
+  // length the stick asks for: centre (green) = the best shot, below = too weak (short / net), above = too strong (long / out). The needle colour
+  // is the contact grade (timing and position), which sets how often the ball still ends net or out.
+  function hitMeter(aimIn,preparing){
+    const q=v9c.quality,k=state.contact,guide=powerGuide(aimIn);let grade='good';
+    if(state.phase==='rally'&&k&&k.side===0&&state.shot?.side===1){
+      const timing=clamp((state.elapsed-k.at)/Math.max(.1,level.timingWindow/2),-1,1),quality=contactStatus(0).quality;
+      const score=1-q.timingWeight*Math.abs(timing)-(1-q.timingWeight)*(1-quality);grade=score>=q.good?'good':score>=q.medium?'medium':'weak';
+    }
+    const dev=state.charge-guide.need,green=guide.tol,yellow=green+(config.v9.meter.yellow??.2);
+    return {active:Boolean(preparing)&&state.phase==='rally',value:clamp(.5+dev,0,1),zone:Math.abs(dev)<=green?'green':Math.abs(dev)<=yellow?'yellow':'red',grade,greenHalf:green,yellowHalf:yellow};
   }
   function emit(type, details = {}) { state.event = { id: state.event.id + 1, type, ...details };state.feedback={kind:type,age:0,...details}; }
   function prepareServe() {
@@ -270,7 +273,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       return;
     }
     if(V9)state.powerGuide=powerGuide(input.aim);
-    if(M)state.hitMeter=hitMeter();
+    if(M)state.hitMeter=hitMeter(input.aim,input.prepare);
     if(input.prepare)state.charge=clamp(state.charge+dt/p.chargeSeconds,0,1);else state.charge=0;
     const contact=state.contact;if(contact)contact.eta=contact.at-state.elapsed;
     const length=Math.hypot(input.move||0,input.moveZ||0),hasManual=length>0;

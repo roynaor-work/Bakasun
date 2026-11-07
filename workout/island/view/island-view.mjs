@@ -1,30 +1,30 @@
 import * as T from '../vendor/three.module.js';
-import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-4';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-4';
-import { Avatar } from './avatar.mjs?v=island-v2-20261107-4';
-import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-4';
-import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-4';
-import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-4';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-4';
-import {CityModels,cityModelsEnabled,carSpec,CITY_CARS} from './city-models.mjs?v=island-v2-20261107-4';
-import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-4';
-import { LocalModels } from './local-models.mjs?v=island-v2-20261107-4';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-4';
-import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-4';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-4';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-4';
-import {batchMeshes} from './batch.mjs?v=island-v2-20261107-4';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-4';
-import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-4';
-import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-4';
-import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-4';
-import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-4';
-import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-4';
-import {CitySites} from './city-sites.mjs?v=island-v2-20261107-4';
-import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-4';
-import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-4';
-import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-4';
-import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-4';
+import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-5';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-5';
+import { Avatar } from './avatar.mjs?v=island-v2-20261107-5';
+import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-5';
+import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-5';
+import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-5';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-5';
+import {CityModels,cityModelsEnabled,carSpec,CITY_CARS} from './city-models.mjs?v=island-v2-20261107-5';
+import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-5';
+import { LocalModels } from './local-models.mjs?v=island-v2-20261107-5';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-5';
+import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-5';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-5';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-5';
+import {batchMeshes} from './batch.mjs?v=island-v2-20261107-5';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-5';
+import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-5';
+import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-5';
+import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-5';
+import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-5';
+import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-5';
+import {CitySites} from './city-sites.mjs?v=island-v2-20261107-5';
+import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-5';
+import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-5';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-5';
+import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-5';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -128,7 +128,7 @@ export class IslandView {
   focusReadyPlot(row){this.flyToCell(row.x+(row.w-1)/2,row.z+(row.d-1)/2,Math.max(this.zoom,2.4));}
   syncCity(buildings,force=false){
     if(!this.cityStreets||!this.cityTraffic)return;
-    this.cityStreets.quality=this.cityTraffic.quality=this.quality;
+    this.cityStreets.quality=this.streetQuality||this.quality;this.cityTraffic.quality=this.quality;
     const definition=id=>this.definition(id);
     this.cityStreets.rebuild(buildings,this.size,definition,force);this.cityTraffic.sync(buildings,this.size,definition,force);
     // The same original model now drives on the road network. Retain the

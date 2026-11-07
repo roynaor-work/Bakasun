@@ -53,45 +53,91 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
    if(context.state==='suspended')resume();
   }catch{}
  }
+ // racing-v11: with rpm and gear from the physics the engine gets a sub oscillator, a rough fifth and an exhaust band; created on first use only.
+ let voice2,voice3,gain2,gain3,exhaustGain,lastGear=1,popUntil=0,lastThrottle=1;
+ function extraVoices(){
+  if(voice2||!context||!filter||!context.createOscillator)return;
+  try{
+   voice2=remember(context.createOscillator(),true);voice2.type='triangle';gain2=remember(context.createGain());gain2.gain.value=.5;voice2.connect(gain2);gain2.connect(filter);voice2.start();
+   voice3=remember(context.createOscillator(),true);voice3.type='sawtooth';gain3=remember(context.createGain());gain3.gain.value=.24;voice3.connect(gain3);gain3.connect(filter);voice3.start();
+  }catch{voice2=voice3=undefined;}
+ }
  function update(){
   readMute();if(!context||!gain)return;
   const now=number(context.currentTime),delta=clamp(now-lastTime,1/120,.25);
   const acceleration=clamp((speed-lastSpeed)/delta,-30,25);
-  const previousGear=gear;
-  while(gear<6&&speed>gears[gear]+.8)gear++;
-  while(gear>1&&speed<gears[gear-1]-1.6)gear--;
-  if(gear>previousGear&&!paused&&!disposed)shiftUntil=now+.13;
+  const previousGear=gear,real=extras.rpm!==undefined&&Number.isFinite(Number(extras.rpm));
+  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;}lastGear=gear;extraVoices();}
+  else{
+   while(gear<6&&speed>gears[gear]+.8)gear++;
+   while(gear>1&&speed<gears[gear-1]-1.6)gear--;
+  }
+  if(!real&&gear>previousGear&&!paused&&!disposed)shiftUntil=now+.13;
   const shift=clamp((shiftUntil-now)/.13,0,1);
   const rpm=clamp((speed-gears[gear-1])/(gears[gear]-gears[gear-1]),0,1);
   const throttle=extras.throttle===undefined?clamp(.45+acceleration/25,.16,1):clamp(number(extras.throttle),0,1);
   const drift=!!extras.drifting&&speed>8,offroad=!!extras.offroad;
   const steering=clamp(Math.abs(number(extras.steer)),0,1);
-  const pitch=(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
+  const revs=real?clamp(number(extras.rpm),0,1):rpm;
+  const pitch=real?(40+revs*150)*(1-shift*.18)+(boosting?14:0):(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
+  if(real&&voice2){
+   target(voice2.frequency,pitch*.5,now,.05);target(voice3.frequency,pitch*1.5*(1+Math.sin(now*29)*.004),now,.05);
+   target(gain2.gain,.35+throttle*.35,now,.08);target(gain3.gain,.12+revs*.3,now,.08);
+  }
   target(voice.frequency,pitch+Math.sin(now*23)*Math.min(speed/70,.65),now,.045);
   target(filter.frequency,380+rpm*850+speed*8+throttle*190+(boosting?360:0),now,.055);
   // Entire mix remains below the previous .03 gain ceiling, including boosts.
-  const volume=(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
+  const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*.3):(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
   target(gain.gain,paused||muted||disposed?0:volume,now,paused||muted||disposed?.018:.07);
   if(noiseGain){
    const road=Math.min(speed/55,1)*.045;
    const air=boosting?.33:0,slip=drift?.11+steering*.1:0,gravel=offroad?.2:0;
-   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055),now,boosting?.045:.09);
+   const pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(.02+throttle*revs*.07):0;
+   lastThrottle=throttle;
+   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055+pop+backfire+exhaust),now,boosting?.045:.09);
    target(noiseFilter.frequency,offroad?620:drift?1550+steering*850:boosting?1200+speed*13:760+speed*12,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
   }
   lastSpeed=speed;lastTime=now;
  }
+ // racing-v11 rivals: at most MAX_RIVAL_VOICES live engines (the nearest cars, panned and quieter with distance); the rest share one background voice.
+ const MAX_RIVAL_VOICES=3,rivals=[];let pack=null,rivalList=[];
+ function buildRivals(){
+  if(rivals.length||!context||!context.createOscillator)return;
+  const make=(type,cut)=>{const o=remember(context.createOscillator(),true);o.type=type;const f=remember(context.createBiquadFilter());f.type='lowpass';f.frequency.value=cut;const g=remember(context.createGain());g.gain.value=0;
+   const pan=context.createStereoPanner?remember(context.createStereoPanner()):null;o.connect(f);f.connect(g);if(pan){g.connect(pan);pan.connect(context.destination);}else g.connect(context.destination);o.start();return {o,f,g,pan};};
+  try{for(let i=0;i<MAX_RIVAL_VOICES;i++)rivals.push(make('sawtooth',420));pack=make('sawtooth',260);}catch{rivals.length=0;pack=null;}
+ }
+ function setOpponents(list){
+  rivalList=Array.isArray(list)?list:[];
+  if(!context||paused||disposed)return;
+  buildRivals();if(!pack)return;
+  const now=number(context.currentTime),silent=muted;
+  const sorted=[...rivalList].filter(c=>c&&Number.isFinite(Number(c.distance))).sort((a,b)=>a.distance-b.distance),near=sorted.slice(0,MAX_RIVAL_VOICES),rest=sorted.slice(MAX_RIVAL_VOICES);
+  rivals.forEach((voiceSet,i)=>{
+   const car=near[i];
+   if(!car||silent){target(voiceSet.g.gain,0,now,.1);return;}
+   const rpm=clamp(number(car.rpm),0,1),att=Math.pow(clamp(1-number(car.distance)/90,0,1),2),thr=clamp(number(car.throttle,1),0,1);
+   target(voiceSet.o.frequency,40+rpm*150,now,.06);target(voiceSet.f.frequency,300+rpm*650,now,.08);
+   target(voiceSet.g.gain,(.0025+.0055*thr)*att,now,.09);if(voiceSet.pan)target(voiceSet.pan.pan,clamp(number(car.pan),-1,1),now,.1);
+  });
+  if(!rest.length||silent){target(pack.g.gain,0,now,.12);return;}
+  const mean=rest.reduce((n,c)=>n+clamp(number(c.rpm),0,1),0)/rest.length,att=rest.reduce((n,c)=>n+Math.pow(clamp(1-number(c.distance)/140,0,1),2),0)/rest.length;
+  target(pack.o.frequency,36+mean*130,now,.12);target(pack.g.gain,Math.min(.005,.0035*att*Math.min(rest.length,3)),now,.15);
+ }
  function sync(value=0,boost=false,details={}){
   speed=clamp(number(value),0,85);boosting=!!boost;extras=details&&typeof details==='object'?details:{};
   try{update();}catch{}
  }
- return {unlock,sync,
+ return {unlock,sync,setOpponents,
   setPaused(value){
    paused=!!value;try{update();}catch{}
    if(paused&&context?.state==='running'){try{void context.suspend()?.catch?.(()=>{});}catch{}}
    else if(!paused&&!disposed&&context?.state==='suspended'){lastTime=context.currentTime;shiftUntil=0;resume();}
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed}),
+  /** Last values the engine voice was driven with (for tests and the HUD). */
+  engine:()=>({gear,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}

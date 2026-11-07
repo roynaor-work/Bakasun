@@ -1,6 +1,6 @@
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-v2-20261107-4';
-import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-4';
-import {buildingCenter,levelFactor} from './metrics.mjs?v=island-v2-20261107-4';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-v2-20261107-5';
+import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-5';
+import {buildingCenter,levelFactor} from './metrics.mjs?v=island-v2-20261107-5';
 
 export const siteColor=id=>id==='house'?'#49ba85':id==='shop'?'#579fdb':id==='factory'?'#d9ad58':id==='road'?'#a4bac3':id==='park'?'#77bdaa':'#a69cdb';
 const key=(x,z)=>`${x},${z}`;

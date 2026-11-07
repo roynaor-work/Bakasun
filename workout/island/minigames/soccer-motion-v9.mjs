@@ -1,4 +1,4 @@
-/** Soccer motion v9 (07/11/2026, Roy's phone test of island-v2-20261107-4): natural arms when the player
+/** Soccer motion v9 (07/11/2026, Roy's phone test of island-v2-20261107-5): natural arms when the player
  * is not running, and a slide that gets up quickly and carries on running. Presentation only: the
  * simulation clocks are read, never written (the one sim change is the recovery cap in soccer-control-depth).
  * `?soccerMotion=0` restores the previous look. Pure and unit-tested. */
@@ -13,10 +13,13 @@ export const ARM_STAND_DELTAS=Object.freeze({
   idle:{abd:-.4,flex:.52,fwd:-.06},decelerate:{abd:-.4,flex:.52,fwd:-.06},turn_left:{abd:-.42,flex:.52,fwd:-.06},turn_right:{abd:-.42,flex:.52,fwd:-.06},
   defensive_jockey:{abd:-.5,flex:.3,fwd:-.1},kick_charge:{abd:-.2,flex:.1,fwd:0}
 });
-export const armStandWeight=(state)=>ARM_STAND_DELTAS[state]?1:0;
+/** Codex v9 idles hold the arms 26 degrees out with the elbows at 88 degrees (a ready pose): the elbows open (negative flex)
+ * and the arms come in, to the same target as above (about 12 and 40 degrees). A separate table, since these open the elbows. */
+export const ARM_STAND_DELTAS_CODEX=Object.freeze({v9_idle_relaxed:{abd:-.25,flex:-.84,fwd:-.05},v9_idle_scan:{abd:-.25,flex:-.84,fwd:-.05},v9_idle_weight_shift:{abd:-.25,flex:-.84,fwd:-.05}});
+export const armStandWeight=(state)=>ARM_STAND_DELTAS[state]||ARM_STAND_DELTAS_CODEX[state]?1:0;
 /** `breath` 0..1 is the idle cycle phase: the hands drift a few degrees so a standing player is not frozen. */
 export function armStandPose(state,breath=0,weightScale=1,out={}){
-  const d=ARM_STAND_DELTAS[state]||ARM_STAND_DELTAS.idle,sway=Math.sin(2*Math.PI*breath)*.025,set=(name,x,y,z)=>{const a=out[name]||(out[name]=[0,0,0]);a[0]=x;a[1]=y;a[2]=z;};
+  const d=ARM_STAND_DELTAS[state]||ARM_STAND_DELTAS_CODEX[state]||(String(state).startsWith('v9_')?ARM_STAND_DELTAS_CODEX.v9_idle_relaxed:ARM_STAND_DELTAS.idle),sway=Math.sin(2*Math.PI*breath)*.025,set=(name,x,y,z)=>{const a=out[name]||(out[name]=[0,0,0]);a[0]=x;a[1]=y;a[2]=z;};
   set('LeftArm',(d.fwd+sway)*weightScale,0,d.abd*weightScale);set('RightArm',(d.fwd-sway)*weightScale,0,-d.abd*weightScale);
   set('LeftForeArm',-d.flex*weightScale,0,0);set('RightForeArm',-d.flex*weightScale,0,0);
   return out;
