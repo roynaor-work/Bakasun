@@ -4,6 +4,7 @@ import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-8';
 import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-8';
 import {v7Enabled} from './racing-v7.mjs';
 import {createRacingF1, racingLookEnabled} from './racing-f1.mjs';
+import {envV2Enabled, loadEnvV2, buildEnvV2} from './racing-env-v2.mjs';
 import {tunePaint, tuneMaterial, dressCar, createStandIn, createSpeedLines} from './racing-car-look.mjs';
 
 const PALETTES={
@@ -132,6 +133,9 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
    scene.add(v7.parts.standGroup,v7.parts.crowd.group);carAssetName='racing-v7';
   }else if(!disposed)canvasAsphalt(rngFor(seed^0xa5a5));
  }
+ // racing-env-v2: Codex trackside models and textures on the F1 circuits (?racingEnv=v1 or any load problem keeps the procedural trackside)
+ let envV2=null;
+ if(f1Look&&envV2Enabled()&&!disposed){try{const kit=await loadEnvV2({T,GLTFLoader,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});if(!disposed)envV2=buildEnvV2({T,scene,track,keep,f1:f1Look,kit,night});}catch(e){failures.push('env-v2');console.warn('env v2',e?.message||e);}}
  let carAsset=null,lowCarAsset=null,treeAsset=null;
  // racing-v11 formula car (Codex asset, 11,868 triangles, no Draco): all five cars, or the player only at low quality. ?racingFormulaCar=0 disables it; any failure keeps the previous cars.
  // Weak device or lite restart (ctx.lite): the previous cars, no 11.8K-triangle formula model at all. ?racingFormulaCar=1 forces it back on, =0 off.
