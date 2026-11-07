@@ -128,7 +128,7 @@ export class IslandView {
   focusReadyPlot(row){this.flyToCell(row.x+(row.w-1)/2,row.z+(row.d-1)/2,Math.max(this.zoom,2.4));}
   syncCity(buildings,force=false){
     if(!this.cityStreets||!this.cityTraffic)return;
-    this.cityStreets.quality=this.cityTraffic.quality=this.quality;
+    this.cityStreets.quality=this.streetQuality||this.quality;this.cityTraffic.quality=this.quality;
     const definition=id=>this.definition(id);
     this.cityStreets.rebuild(buildings,this.size,definition,force);this.cityTraffic.sync(buildings,this.size,definition,force);
     // The same original model now drives on the road network. Retain the
