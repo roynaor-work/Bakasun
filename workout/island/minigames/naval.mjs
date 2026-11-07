@@ -64,7 +64,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const campaign=navalCampaignStage(balance,level,seed,previousFleet),{settings,mission,fleet}=campaign,targeting=balance.targeting;
  const mode=Object.hasOwn(balance.lock.difficulties,difficulty)?difficulty:'normal',tactics=settings.enemyTactics||{telegraphSeconds:1.8,fireSeconds:10,speedScale:1};
  const playerShip={...createShipEntity(balance.shipX,settings.lives*power*(equipment.hull||1),equipment.shield||0),z:0,heading:0,speed:0};
- const enemies=fleet.map((row,i)=>({...createShipEntity(balance.enemyX,settings.enemyLives*balance.shipTypes[row.kind].hp*(row.boss?balance.boss.hp:1)),...row,index:i,hullScale:balance.shipTypes[row.kind].scale*(row.boss?balance.boss.scale:1),z:(i-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing,heading:Math.PI,depth:0,vx:0,vz:0,active:i<settings.concurrent,slot:i<settings.concurrent?i:null,spawnTime:0,fireAt:tactics.fireSeconds+i*balance.combat.enemyStagger,warning:0}));
+ const enemies=fleet.map((row,i)=>({...createShipEntity(balance.enemyX,settings.enemyLives*balance.shipTypes[row.kind].hp*(row.boss?balance.boss.hp:1)*(row.hpScale||1)),...row,index:i,hullScale:balance.shipTypes[row.kind].scale*(row.boss?balance.boss.scale:1)*(row.scale||1),z:(i-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing,heading:Math.PI,depth:0,vx:0,vz:0,active:i<settings.concurrent||row.behavior==='base',slot:i<settings.concurrent?i:null,spawnTime:0,fireAt:tactics.fireSeconds+i*balance.combat.enemyStagger,warning:0}));
  let enemyShip=enemies[0],phase='aim',time=0,remaining=settings.seconds,result,score=0,wave=1,fired=0,hits=0,ammoIndex=0,wasFiring=false,wasAmmo=false,delay=0,sinkingShip=null;
  const ballistic=navalBallisticConfig(balance),pressure=navalStagePressure(level),turret={yaw:0,elevation:ballistic.defaultElevation,power:1};let prediction=null,lastShot=null,holdView=-1,quickShots=0,aimSide=1;
  const legacyAim=navalAimLegacy();let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
@@ -117,6 +117,26 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   const options=p=>({power:p,wind:{x:wind.x*windScale,z:wind.z*windScale},ammo:kind,pressure});
   let best;for(const p of [turret.power,1,.85,.7,.58,.47,ballistic.minPower]){const s=navalSolveLaunch(playerShip,point,options(p),balance);if(!best||s.reachable&&!best.reachable)best={...s,power:kind===2?s.power:p};if(s.reachable)break;}
   turret.yaw=best.yaw;turret.elevation=best.elevation;turret.power=best.power;return best;
+ }
+
+ /** 07/11/2026 aim assist: a soft magnet toward the settings that put the shell on the lead point of the locked hull.
+  * It acts only inside a small window around the finger's own aim and fades to zero at its edge (no jump, no override);
+  * the arc and marks are drawn from the assisted settings, so what you see is what flies. Power is never touched. */
+ let idealCache=null;
+ function idealSolution(){
+  const a=balance.aimControls?.assist;if(!a||ammoIndex===1||ammoIndex===3||ammoIndex===5)return null;
+  const e=enemies.find(e=>e.index===(lockedTargetIndex??selectedTargetIndex)&&e.active&&e.hp>0&&targetable(e));if(!e)return null;
+  if(idealCache&&idealCache.index===e.index&&idealCache.ammo===ammoIndex&&time-idealCache.t<(a.refreshSeconds??.1))return idealCache.v;
+  const keep={yaw:turret.yaw,elevation:turret.elevation,power:turret.power};
+  solveTo(e);const flight=launchFor().duration;solveTo({x:e.x+(e.vx||0)*flight,z:e.z+(e.vz||0)*flight});
+  const v={yaw:turret.yaw,elevation:turret.elevation,power:turret.power};Object.assign(turret,keep);idealCache={index:e.index,ammo:ammoIndex,t:time,v};return v;
+ }
+ function assistAim(){
+  const a=balance.aimControls.assist,ideal=idealSolution();if(!ideal)return;
+  const DEG=Math.PI/180,ry=(a.yawRangeDeg??4)*DEG,dy=Math.atan2(Math.sin(ideal.yaw-turret.yaw),Math.cos(ideal.yaw-turret.yaw));
+  if(Math.abs(dy)<ry)turret.yaw+=dy*(a.yawPull??.45)*(1-(dy/ry)**2);
+  const re=a.elevRangeDeg??3.5,de=ideal.elevation-turret.elevation;
+  if(ammoIndex!==2&&turret.power>.999&&ideal.power>.999&&Math.abs(de)<re)turret.elevation+=de*(a.elevPull??.4)*(1-(de/re)**2);
  }
  /** Easy-mode quick shot: moves the landing most of the way from where the
   * turret points now onto the hull, with part of the wind corrected. The share
@@ -202,13 +222,34 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   }
   if(t>=1)impact(p);
  }
+
+ /** 07/11/2026 enemy base: a fortified hull on the far shore with several cannons. Each cannon picks its landing point in advance
+  * (where you are now, plus a bounded scatter), shows it for `telegraph` seconds, then fires; the shell lands where it was shown,
+  * so sailing away from the marker is always enough. Cannons reload on staggered timers. */
+ function updateBase(e,dt){
+  const type=balance.shipTypes[e.kind],count=e.cannons||2,reload=e.reload||8,tele=e.telegraph??tactics.telegraphSeconds+.4;
+  e.x=balance.enemyX+(e.baseX??140);e.z=e.baseZ??0;e.vx=e.vz=0;e.heading=Math.PI;e.depth=0;
+  const cs=e.cannonState||(e.cannonState=Array.from({length:count},(_,i)=>({at:e.spawnTime+tactics.fireSeconds*.8+i*reload/count,attack:null})));
+  e.attacks=[];e.warning=0;
+  for(const c of cs){
+   if(!c.attack&&time>=c.at){const ang=random()*Math.PI*2,r=Math.sqrt(random())*(e.spread??14);c.attack={x:playerShip.x+Math.cos(ang)*r,z:playerShip.z+Math.sin(ang)*r,fireTime:time+tele,kind:0};}
+   if(c.attack){
+    if(time>=c.attack.fireTime){enemyFired++;e.fired=(e.fired||0)+1;sound('cannon');
+     enemyShots.push({x:e.x,z:e.z,fromX:e.x,fromZ:e.z,targetX:c.attack.x,targetZ:c.attack.z,age:0,duration:1.7,kind:0,ammo:0,owner:'enemy',damage:settings.damage*type.damage*(e.damageScale||1)});
+     e.recoil=config.visuals.recoilSeconds;c.attack=null;c.at=time+reload*(.85+random()*.3);}
+    else{e.attacks.push(c.attack);e.warning=Math.max(e.warning,c.attack.fireTime-time);}
+   }
+  }
+  e.attack=e.attacks[0]||null;
+ }
  function updateFleet(dt){
-  const alive=enemies.filter(e=>e.hp>0),occupants=alive.filter(e=>e.active),occupied=new Set(occupants.map(e=>e.slot));
+  const alive=enemies.filter(e=>e.hp>0),occupants=alive.filter(e=>e.active&&e.behavior!=='base'),occupied=new Set(occupants.map(e=>e.slot));
   for(const e of alive.filter(e=>!e.active))if(occupants.length<settings.concurrent){let slot=0;while(occupied.has(slot))slot++;e.slot=slot;e.active=true;e.spawnTime=time;e.fireAt=time+tactics.fireSeconds;occupied.add(slot);occupants.push(e);}
   for(const e of enemies){
    e.recoil=Math.max(0,e.recoil-dt);
    if(e.hp<=0){e.active=time-(e.sunkAt??time)<balance.sinkSeconds;continue;}
    if(!e.active)continue;
+   if(e.behavior==='base'){updateBase(e,dt);continue;}
    const oldX=e.x,oldZ=e.z,age=time-e.spawnTime,type=balance.shipTypes[e.kind],lane=(e.slot-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing;
    const flank=e.behavior==='flank',guard=e.behavior==='guard'||e.behavior==='flagship';
    // Flankers still close in over time; the patrol itself sails a readable route around the station.
@@ -257,6 +298,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(Number.isFinite(input.aimYaw))turret.yaw=input.aimYaw;
    if(Number.isFinite(input.aimElevation))turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,input.aimElevation));
    if(Number.isFinite(input.aimPower))turret.power=Math.max(ballistic.minPower,Math.min(1,input.aimPower));
+   if(!legacyAim&&aiming&&Number.isFinite(input.aimYaw)&&!input.autoAim&&!Number.isFinite(input.targetX)&&!Number.isFinite(input.targetZ))assistAim();
    if(Number.isFinite(input.targetX)||Number.isFinite(input.targetZ))solveTo({x:Math.max(targeting.minX,Math.min(targeting.maxX,Number.isFinite(input.targetX)?input.targetX:aim.x)),z:Math.max(targeting.minZ,Math.min(targeting.maxZ,Number.isFinite(input.targetZ)?input.targetZ:aim.z))});
    if(input.autoAim){const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(e){solveTo(e);const flight=launchFor().duration;solveTo({x:e.x+(e.vx||0)*flight,z:e.z+(e.vz||0)*flight});}}
    if(input.aimHeld){if(!aiming||!model.lockedTarget?.hp)lock();aiming=true;}else if(!input.fireRelease&&!input.quickShot){aiming=false;lockedTargetIndex=null;}

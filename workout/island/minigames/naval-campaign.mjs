@@ -14,10 +14,10 @@ export function navalCampaignStage(balance,stage,seed=0,previousFleet=''){
  const count=integer(settings.waves),kinds=balance.shipTypes.length;
  let fleet;
  if(Array.isArray(settings.fleet)&&settings.fleet.length===count){
-  fleet=settings.fleet.map(row=>({kind:clamp(integer(row.kind,0),0,kinds-1),behavior:row.behavior||'patrol',boss:row.boss===true}));
+  fleet=settings.fleet.map(row=>({kind:clamp(integer(row.kind,0),0,kinds-1),behavior:row.behavior||'patrol',boss:row.boss===true,...(row.behavior==='base'?{cannons:row.cannons,reload:row.reload,spread:row.spread,telegraph:row.telegraph,hpScale:row.hpScale,scale:row.scale,baseX:row.x,baseZ:row.z,damageScale:row.damageScale}:{})}));
   // The flagship always arrives last. Escorts swap entry positions between runs.
-  const escorts=fleet.filter(row=>!row.boss),flagships=fleet.filter(row=>row.boss);
-  const rotate=offset=>[...escorts.slice(offset),...escorts.slice(0,offset),...flagships].map(row=>({...row}));
+  const escorts=fleet.filter(row=>!row.boss&&row.behavior!=='base'),flagships=fleet.filter(row=>row.boss),bases=fleet.filter(row=>row.behavior==='base');
+  const rotate=offset=>[...escorts.slice(offset),...escorts.slice(0,offset),...flagships,...bases].map(row=>({...row}));
   let offset=(seed>>>0)%Math.max(1,escorts.length);
   fleet=rotate(offset);
   if(fleet.map(row=>row.kind).join()===previousFleet&&escorts.length>1)fleet=rotate((offset+1)%escorts.length);
@@ -34,6 +34,7 @@ export function navalCampaignStage(balance,stage,seed=0,previousFleet=''){
 export function navalMissionState(mission,enemies){
  let targets;
  if(mission?.id==='flagship')targets=enemies.filter(e=>e.boss);
+ else if(mission?.id==='bases')targets=enemies.filter(e=>e.behavior==='base');
  else if(mission?.id==='intercept')targets=enemies.filter(e=>e.behavior==='flank');
  else if(mission?.id==='subhunt')targets=enemies.filter(e=>e.behavior==='dive');
  if(!targets?.length)targets=enemies;

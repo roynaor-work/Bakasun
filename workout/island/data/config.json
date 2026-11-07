@@ -5626,16 +5626,16 @@
      "rounds": 100,
      "winMoney": 131,
      "winParts": 2,
-     "waves": 4,
+     "waves": 5,
      "shipKinds": 3,
      "drift": 15.2,
      "concurrent": 3,
-     "seconds": 264,
+     "seconds": 270,
      "feature": "feature.naval.9",
      "ammunition": [
       68,
       4,
-      26,
+      28,
       6,
       8,
       3
@@ -5657,12 +5657,24 @@
       {
        "kind": 0,
        "behavior": "patrol"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 8,
+       "spread": 16,
+       "telegraph": 2.2,
+       "hpScale": 1.6,
+       "scale": 2.0,
+       "x": 140,
+       "z": -60
       }
      ],
      "mission": {
-      "id": "fleet",
+      "id": "bases",
       "title": "feature.naval.9",
-      "brief": "naval.mission.brief.fleet"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.7,
@@ -5983,16 +5995,16 @@
      "rounds": 100,
      "winMoney": 215,
      "winParts": 3,
-     "waves": 4,
+     "waves": 6,
      "shipKinds": 4,
      "drift": 18.75,
      "concurrent": 3,
-     "seconds": 236,
+     "seconds": 263,
      "feature": "feature.naval.16",
      "ammunition": [
-      44,
+      58,
       5,
-      16,
+      18,
       6,
       8,
       3
@@ -6014,12 +6026,36 @@
       {
        "kind": 1,
        "behavior": "guard"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 7.5,
+       "spread": 13,
+       "telegraph": 2.0,
+       "hpScale": 1.7,
+       "scale": 2.0,
+       "x": 140,
+       "z": -85
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 7.5,
+       "spread": 13,
+       "telegraph": 2.0,
+       "hpScale": 1.7,
+       "scale": 2.0,
+       "x": 150,
+       "z": 85
       }
      ],
      "mission": {
-      "id": "intercept",
+      "id": "bases",
       "title": "feature.naval.16",
-      "brief": "naval.mission.brief.intercept"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.6,
@@ -6424,16 +6460,16 @@
      "rounds": 100,
      "winMoney": 311,
      "winParts": 4,
-     "waves": 5,
+     "waves": 6,
      "shipKinds": 4,
      "drift": 21.55,
      "concurrent": 3,
-     "seconds": 254,
+     "seconds": 300,
      "feature": "feature.naval.24",
      "ammunition": [
-      52,
+      66,
       5,
-      18,
+      20,
       6,
       10,
       4
@@ -6459,12 +6495,25 @@
       {
        "kind": 2,
        "behavior": "flank"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 4,
+       "reload": 6.5,
+       "spread": 10,
+       "telegraph": 1.7,
+       "hpScale": 4,
+       "scale": 2.6,
+       "x": 145,
+       "z": 0,
+       "damageScale": 1.3
       }
      ],
      "mission": {
-      "id": "intercept",
+      "id": "bases",
       "title": "feature.naval.24",
-      "brief": "naval.mission.brief.intercept"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.5,
@@ -7419,6 +7468,14 @@
     "reach": {
      "lowAngle": 10,
      "powerSpan": 14
+    },
+    "assist": {
+     "yawRangeDeg": 4,
+     "yawPull": 0.45,
+     "elevRangeDeg": 3.5,
+     "elevPull": 0.4,
+     "refreshSeconds": 0.1,
+     "releaseLagMs": 70
     },
     "follow": {
      "yawFixed": 0.12,
