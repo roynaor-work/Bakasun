@@ -4,6 +4,8 @@ import { PeopleTracker } from './people.mjs';
 import { PlacementGuide, placementDistance } from './placement.mjs';
 import { PlacementCoach } from './placement-coach.mjs';
 import { rangeEnabled, UPPER_BODY_EXERCISES } from './range.mjs';
+import { guardEnabled, TrackingGuard, ChildFocus, LightGuard, analyzeLight, phoneState, ShakeGuard } from './guard.mjs';
+import { GUARD_LINES } from './guard-lines.mjs';
 import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selection.mjs';
 import { createLabSpeech } from './speech.mjs';
 import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
@@ -51,6 +53,13 @@ let poseFilters = [], lastFeatures = [], preparationCounters = [], videoRecorder
 let cameraInfo = {}, model = 'full', modelHistory = [], cameraOrientation = 'portrait', openedAt = null, sessionId, runtimeError = null, attemptTimer = 0;
 let modelTransitionAfter = null;
 let restCalibrations = [], calibrationReady = [];
+const GUARDS = guardEnabled(), FOCUS = guardEnabled(undefined, 'camFocus', false), BEEP = guardEnabled(undefined, 'camBeep', true);
+const trackGuard = new TrackingGuard(), childFocus = new ChildFocus(), lightGuard = new LightGuard(), shakeGuard = new ShakeGuard();
+let gravity = null, accel = null, lastLight = 0, guardNote = null, lightNote = null, lightSpoken = {};
+const lightCanvas = document.createElement('canvas'); lightCanvas.width = 32; lightCanvas.height = 24;
+if (GUARDS) window.addEventListener('devicemotion', e => { gravity = e.accelerationIncludingGravity; accel = gravity; });
+function beep(freq = 880, ms = 70) { try { const ctx = getAudioContext(); if (!ctx || ctx.state !== 'running') return;
+  const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = freq; g.gain.value = .05; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + ms / 1000); } catch {} }
 let placementCoach = new PlacementCoach(), placementHint = null, selectedVoiceId = '';
 let placementSpeechActive = false, playingHintEvent = null, voiceGeneration = 0, lastPlacementSpeak = -Infinity;
 let audioContext;
@@ -179,7 +188,7 @@ function release() {
   generation++; active = false; ready = false; busy = false; modelTransitionAfter = null;
   cancelAnimationFrame(raf); clearTimeout(watchdog); clearTimeout(attemptTimer);
   if (!finishing) void wakeLock.release();
-  stream?.getTracks().forEach(t => t.stop()); stream = null;
+  stream?.getTracks().forEach(t => t.stop()); stream = null; $('cam-live').hidden = true;
   video.srcObject = null; cancelSpeech(); lastPlacementSpeak = -Infinity;
   queuedSpeech = null; recorder.stop(); paintRecorder();
   placementHint = null; placementCoach.reset(); $('direction-arrow').hidden = true; $('distance-arrow').hidden = true; $('placement-hint').textContent = '';
@@ -213,12 +222,34 @@ function draw(points) {
 function handleEvent(event, person = 0) {
   if (!event) return;
   const prefix = pair ? person ? 'אבא: ' : 'הילד: ' : '';
-  if (event.type === 'counted') { $(person ? 'dad-count' : 'count').textContent = person ? adult.count : counter.count; $('feedback').textContent = prefix + 'זוהתה תנועה שלמה'; }
+  if (event.type === 'counted') { if (BEEP) beep(); $(person ? 'dad-count' : 'count').textContent = person ? adult.count : counter.count; $('feedback').textContent = prefix + 'זוהתה תנועה שלמה'; }
   else if (event.type === 'rejected') {
     const reason = event.reason || 'tracking';
     const message = ['partial', 'alignment', 'alternate'].includes(reason) && EXERCISE_FEEDBACK[exercise] ? EXERCISE_FEEDBACK[exercise] : FEEDBACK[reason];
     $('feedback').textContent = prefix + message; speak(message, 1);
   }
+}
+function say(line, key) { const l = GUARD_LINES[key]; if (!l) return; guardNote = l.text; if (l.tts) speak(l.tts, 1); }
+function runGuards(timestamp, childPoints, visible, focused) {
+  if (active) { const ev = trackGuard.update(visible, timestamp); if (ev) { say(null, ev); $('feedback').textContent = GUARD_LINES[ev].text; } }
+  else trackGuard.reset();
+  if (timestamp - lastLight > 1000 && video.readyState >= 2) {
+    lastLight = timestamp;
+    try { const c = lightCanvas.getContext('2d', { willReadFrequently: true }); c.drawImage(video, 0, 0, 32, 24);
+      const d = c.getImageData(0, 0, 32, 24).data, luma = new Uint8Array(32 * 24);
+      for (let i = 0; i < luma.length; i++) luma[i] = .299 * d[i * 4] + .587 * d[i * 4 + 1] + .114 * d[i * 4 + 2];
+      const xs = childPoints.filter(p => p && p.visibility > .3).map(p => p.x), ys = childPoints.filter(p => p && p.visibility > .3).map(p => p.y);
+      const box = xs.length ? { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) } : null;
+      const state = lightGuard.update(analyzeLight(luma, 32, 24, box).state, timestamp);
+      lightNote = state && GUARD_LINES[state] ? GUARD_LINES[state].text : null;
+      if (state && GUARD_LINES[state] && !(timestamp - (lightSpoken[state] || -1e9) < 30000)) { lightSpoken[state] = timestamp; say(null, state); }
+    } catch {}
+  }
+  const phone = phoneState(gravity), shaking = shakeGuard.update(accel, timestamp);
+  const phoneKey = phone || (shaking ? 'shaking' : null);
+  if (phoneKey && !(timestamp - (lightSpoken[phoneKey] || -1e9) < 30000)) { lightSpoken[phoneKey] = timestamp; say(null, phoneKey); }
+  const crowd = focused && focused.others > 0 ? GUARD_LINES.crowd.text : null;
+  $('guard-status').textContent = [lightNote, phoneKey && GUARD_LINES[phoneKey].text, crowd, trackGuard.lost ? GUARD_LINES.lost.text : null].filter(Boolean)[0] || '';
 }
 function poseResult(data) {
   busy = false; clearTimeout(watchdog);
@@ -240,7 +271,8 @@ function poseResult(data) {
   const placementCode = !active ? placement.update(poses, timestamp, aspect) : null;
   keyframes?.frame(data.bitmap, timestamp, poses, counter.count);
   if (!keyframes) data.bitmap?.close();
-  const assigned = pair ? tracker.update(poses, timestamp, aspect) : [poses[0] || null];
+  const focused = !pair && FOCUS ? childFocus.pick(poses, aspect) : null;
+  const assigned = pair ? tracker.update(poses, timestamp, aspect) : [FOCUS ? focused?.pose || null : poses[0] || null];
   if (pair && tracker.tracks.length) placementDone = true;
   const prepared = assigned.map((p, i) => poseFilters[i].update(p?.landmarks || [], p?.world || [], timestamp, aspect));
   const reports = prepared.map(p => p.report), fs = prepared.map(p => p.features);
@@ -267,6 +299,9 @@ function poseResult(data) {
   $('distance-arrow').hidden = !placementHint?.vArrow;
   $('distance-arrow').textContent = placementHint?.vArrow === 'closer' ? '▲ קרוב יותר' : placementHint?.vArrow === 'back' ? '▼ רחוק יותר' : '';
   $('direction-arrow').textContent = placementHint?.arrow === 'right' ? '→' : placementHint?.arrow === 'left' ? '←' : '';
+  if (GUARDS) runGuards(timestamp, childPoints, visible, focused);
+  const guide = placementHint?.code && placementHint.code !== 'arrived' ? 'bad' : distance.direction ? 'warn' : report.ok ? 'ok' : 'warn';
+  for (const g of ['ok', 'warn', 'bad']) $('view').classList.toggle(`guide-${g}`, g === guide);
   const interval = lastFrame == null ? 0 : timestamp - lastFrame;
   const fps = interval ? 1000 / interval : 0;
   totalElapsed += interval;
@@ -397,7 +432,7 @@ $('settings').addEventListener('submit', async event => {
     const { stream: acquired, permission } = await acquireCamera(navigator.mediaDevices, { facing, orientation: cameraOrientation,
       deviceId: $('camera-device').value || undefined });
     if (token !== generation) { acquired.getTracks().forEach(t => t.stop()); return; }
-    stream = acquired; video.srcObject = stream; await video.play();
+    stream = acquired; video.srcObject = stream; await video.play(); $('cam-live').hidden = false;
     if (token !== generation) return;
     mark('cameraReady');
     canvas.width = video.videoWidth; canvas.height = video.videoHeight;
@@ -680,7 +715,7 @@ async function prepareModel(token, pairMode) {
   await new Promise((resolve, reject) => {
     configureWaiter = { generation: token, resolve, reject,
       timer: setTimeout(() => { configureWaiter = null; discardWorker(); reject(new Error('model timeout')); }, 60000) };
-    worker.postMessage({ type: 'configure', numPoses: pairMode ? 2 : 1, generation: token });
+    worker.postMessage({ type: 'configure', numPoses: pairMode || FOCUS ? 2 : 1, generation: token });
   });
 }
 void preloadModel();

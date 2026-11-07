@@ -18,8 +18,8 @@ test('far and near instructions address the child; floor movement and unknown po
   const far = person(pose(), { x: .5, size: .2 }).landmarks;
   const near = person(pose(), { x: .5, size: 1.2 }).landmarks;
   assert.equal(placementHint(far).code, 'far'); assert.equal(placementHint(near).code, 'near');
-  assert.match(placementHint(far).text, /אתה רחוק מדי.*תתקרב/);
-  assert.match(placementHint(near).text, /אתה קרוב מדי.*תתרחק/);
+  assert.match(placementHint(far).text, /בוא קצת יותר קרוב/);
+  assert.match(placementHint(near).text, /קצת אחורה/);
   assert.equal(placementHint(floorPose().p).code, null); assert.equal(placementHint([]).code, null);
   assert.equal(placementHint(near).blocking, false);
 });
@@ -81,7 +81,7 @@ test('stable arrival is acknowledged once after an instruction, never from initi
   assert.equal(coach.update([], 1100), null); assert.equal(coach.update([], 1500), null);
   assert.equal(coach.update(standing().p, 1600), null);
   const arrived = coach.update(standing().p, 2000);
-  assert.equal(arrived.code, 'arrived'); assert.equal(arrived.tts, 'מְעֻלֶּה, תִּשָּׁאֵר שָׁם.'); assert.equal(arrived.urgent, true);
+  assert.equal(arrived.code, 'arrived'); assert.equal(arrived.tts, 'יוֹפִי, עוֹמְדִים.'); assert.equal(arrived.urgent, true);
   coach.markSpoken(arrived, 2000);
   assert.equal(coach.update(standing().p, 2100).urgent, false);
   for (let t = 4000; t <= 5000; t += 100) assert.equal(coach.update(standing().p, t), null);

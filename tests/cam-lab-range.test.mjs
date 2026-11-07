@@ -14,7 +14,7 @@ test('too close with legs cut off: silent before v9, "step back" with a down arr
   assert.equal(placementDistance(l, { range: false }).direction, null);
   assert.equal(placementDistance(l).direction, 'away');
   const hint = placementHint(l); assert.equal(hint.code, 'near'); assert.equal(hint.vArrow, 'back');
-  assert.match(hint.text, /קרוב מדי/);
+  assert.match(hint.text, /קצת אחורה/);
 });
 
 test('far with only torso reliable still says come closer; comfortable torso is in range', () => {
@@ -66,4 +66,14 @@ test('auto start: reaching the range with no tap runs 3-2-1 then begins; leaving
   for (; t < 8000; t += 100) { const h = coach.update(p, t); placed = placementHint(p).placed;
     auto.update(placed, t); if (t === 1500) auto.update(false, t + 1), auto.update(true, t + 2); }
   assert.equal(begun, 1); assert.ok(cancelled >= 1); assert.deepEqual(cues.slice(-3), [3, 2, 1]);
+});
+
+test('torso-normalised size is stable: estimate from the torso alone stays within 15% of the true body span at any distance', () => {
+  for (const size of [.3, .45, .6, .8, 1]) {
+    const l = person(pose(), { x: .5, size }).landmarks;
+    const full = estimateRange(l), cut = l.map((p, i) => [27, 28, 29, 30, 31, 32].includes(i) ? { ...p, visibility: .05 } : p);
+    const torso = estimateRange(cut);
+    assert.equal(full.basis, 'full'); assert.equal(torso.basis, 'torso');
+    assert.ok(Math.abs(torso.span - full.span) / full.span < .15, `size ${size}: ${torso.span} vs ${full.span}`);
+  }
 });

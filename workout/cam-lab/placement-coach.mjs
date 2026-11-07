@@ -1,5 +1,7 @@
 import { placementDistance } from './placement.mjs';
 import { PLACEMENT_LINES } from './placement-lines.mjs';
+import { GUARD_LINES } from './guard-lines.mjs';
+import { missingPart } from './guard.mjs';
 
 export const COACH = { holdMs: 350, maxGap: 1200, edge: .06, centerMargin: .15,
   shoulderWidth: .04, confusionMove: .04, responseMs: 6000 };
@@ -26,7 +28,8 @@ export function placementHint(points, options = {}) {
   const vArrow = code === 'far' ? 'closer' : code === 'near' ? 'back' : null;
   return { code, vArrow, center, placed: center != null && distance.span != null && !code,
     imageDirection, rightImageDirection, arrow: ['left', 'right', 'arrow'].includes(code) ? arrow : null,
-    ...(PLACEMENT_LINES[code] || {}), advisory: true, blocking: false };
+    ...(PLACEMENT_LINES[code] || {}), ...(code === 'near' && options.range !== false && GUARD_LINES[`near-${missingPart(p)}`] || {}),
+    advisory: true, blocking: false };
 }
 
 export class PlacementCoach {
