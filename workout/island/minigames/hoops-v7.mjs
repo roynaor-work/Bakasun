@@ -18,7 +18,7 @@ import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {HoopsDRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
-import {v8MotionEnabled,loadV8Motion,buildV8Clips,chooseV8Motion,createDribbleGuard} from './hoops-v8-motion.mjs';
+import {v8MotionEnabled,loadV8Motion,buildV8Clips,chooseV8Motion,createDribbleGuard,dribbleBallAt} from './hoops-v8-motion.mjs';
 
 export const V7_ROLES=Object.freeze(['PG','SG','SF','PF','C']);
 export const v7RoleKey=pos=>V7_ROLES.includes(pos)?pos:'SF';
@@ -220,7 +220,7 @@ export async function loadPlayerAssetsV7(cfg,base,onProgress,{params,onFallback}
   // v8 motion (06/11): passes, receptions, steal and block as authored clips on the same rig. Optional: a failure keeps the v7 arm-IK passes.
   let v8=null;
   if(v8MotionEnabled(cfg,params)){
-   try{v8=await loadV8Motion(cfg,base);for(const r of Object.values(roles))for(const [n,c] of buildV8Clips(THREE,v8,r.restVec))r.clips.set(n,c);}
+   try{v8=await loadV8Motion(cfg,base);for(const r of Object.values(roles))for(const [n,c] of buildV8Clips(THREE,v8,r.restVec))r.clips.set(n,c);for(const n of ['receive_moving','dribble_idle','dribble_run'])r.clips.set('upper:v8:'+n,splitClip(r.clips.get('v8:'+n),'upper','upper:v8:'+n));}
    catch(error){v8=null;for(const r of Object.values(roles))for(const n of [...r.clips.keys()])if(n.startsWith('v8:'))r.clips.delete(n);onFallback?.('v8 motion',error);}
   }
   return {v7:true,v8,roles,clips:roles.PG.clips,meta:meta.clips,baseHeights:v7.baseHeights,dispose(){for(const r of Object.values(roles)){releaseScene(r.scene);for(const g of Object.values(r.groups))if(g.base)g.geometry.dispose();}}};
@@ -288,9 +288,11 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
  function clipTime(plan,p,ctx,dt,speed){
   const out={};
   const loopAdvance=(name,rate)=>{phase[name]=((phase[name]||0)+dt*rate)%duration(name);return phase[name];};
-  const stride=name=>{const ref=meta[name]?.refSpeed||1;return speed/Math.max(.05,ref*root.scale.y);};
-  const locomotion=name=>name==='run'?loopAdvance(name,clamp(stride(name),.35,2.1)):name==='walk'?loopAdvance(name,clamp(stride(name),.4,2.2)):loopAdvance(name,1);
+  const stride=name=>{const ref=meta[name]?.refSpeed||1;return (ctx.polish?strideSpeed:speed)/Math.max(.05,ref*root.scale.y);};
+  const locomotion=name=>name==='run'?loopAdvance(name,clamp(stride(name),.35,ctx.polish?2.7:2.1)):name==='walk'?loopAdvance(name,clamp(stride(name),.4,2.2)):loopAdvance(name,1);
   if(plan.mode==='v8'){out.full=[plan.full,plan.t];return out;}
+  if(plan.mode==='v8dribble'){const u='upper:'+plan.upper,l='lower:'+plan.lower;out.upper=[u,loopAdvance(u,clamp(.9+speed/8,.9,1.4))];out.lower=[l,plan.lower==='run'||plan.lower==='walk'?locomotion(plan.lower):loopAdvance(l,1)];return out;}
+  if(plan.mode==='v8layer'){const l='lower:'+plan.lower;out.upper=['upper:'+plan.upper,plan.t];out.lower=[l,plan.lower==='run'||plan.lower==='walk'?locomotion(plan.lower):loopAdvance(l,1)];return out;}
   if(plan.full){
    const n=plan.full,d=duration(n);let t;
    if(plan.mode==='shoot'){
@@ -315,7 +317,8 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   }
   return out;
  }
- let hintAge=0;
+ let hintAge=0,strideSpeed=0,leanNow=0;
+ root.rotation.order='YXZ';
  const guard=createDribbleGuard(),v8s={releasedAt:null,passClip:null,recvClip:null,recvSince:null},v8pack=assets.v8||null;
  const av={root,hands,mixer,actions,mats,card,kind:'v7',role,scale,dribblePump:0,dribbleCtx:null,
   applyKit(kit){
@@ -333,6 +336,8 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   },
   get motionState(){return state;},
   get dribbleLocked(){return guard.locked;},
+  /** The authored ball of the current v8 dribble in world space, or null when the dribble is not a v8 clip. */
+  v8BallWorld(out){const b=av.v8Ball;if(!b||!v8pack)return null;const l=dribbleBallAt(v8pack.clips[b.clip],b.t);out.set(l[0],l[1],l[2]);return root.localToWorld(out);},
   get motionPhase(){return statePhase;},
   dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);for(const m of mats)m.dispose();},
  };
@@ -347,12 +352,28 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   if(wasBall&&!p.hasBall&&p.act==='shoot')releaseAt=p.actT;
   if(p.act!=='shoot')releaseAt=p.act==='shoot'?releaseAt:null;
   const catching=ctx.catching||performance.now()<catchUntil;
+  if(ctx.polish){
+   // the stride follows the speed the feet really cover (a short low-pass: the engine's velocity steps with the tick), and the body leans
+   // into an acceleration and back into a braking: forward up to 0.11 rad, back up to 0.07 (about 5 cm of head travel per 0.03 rad)
+   strideSpeed+=(speed-strideSpeed)*(1-Math.exp(-dt/.05));
+   const accel=(speed-lastSpeed)/dt,want=clamp(accel*.012+Math.min(.04,speed*.007),-.07,.11);
+   leanNow+=(want-leanNow)*(1-Math.exp(-dt/.12));root.rotation.x=leanNow;
+  }else{strideSpeed=speed;if(root.rotation.x)root.rotation.x=0;}
   guard.observe(p);
   let plan=guard.filter(chooseV7Motion(p,{...ctx,catching},hint));
-  if(v8pack){const o=chooseV8Motion(v8pack,p,{...ctx,catching},v8s,dt);if(o)plan=o;}
+  if(v8pack){
+   const o=chooseV8Motion(v8pack,p,{...ctx,catching},v8s,dt);
+   // polish (07/11): the moving reception takes the arms of the clip over the legs of the run: the clip's own legs travel 0.95 m on the spot (55 cm of slide)
+   if(o&&ctx.polish&&o.full==='v8:receive_moving'&&actions['upper:v8:receive_moving'])plan={upper:'v8:receive_moving',lower:speed>.4?'run':'idle',mode:'v8layer',t:o.t};
+   else if(o)plan=o;
+  }
+  // polish (07/11): the dribble's upper body and its ball come from the v8 clip (the authored bounce), over the legs of the v7 gait
+  let v8name=null;
+  if(ctx.polish&&v8pack&&plan.mode==='dribble'&&actions['upper:v8:dribble_idle']){v8name=speed<.4?'dribble_idle':'dribble_run';plan={upper:'v8:'+v8name,lower:plan.lower,mode:'v8dribble'};}
   // weights: layers cross-fade with the same time constant; full-body and layered poses sum to one per track
   const mixTarget=plan.full?1:0;cur.mix+=(mixTarget-cur.mix)*(1-Math.exp(-dt/.075));
   const times=clipTime(plan,p,ctx,dt,speed);
+  av.v8Ball=v8name?{clip:v8name,t:times.upper[1]}:null;
   const sF=target(cur.full,plan.full||null,1,dt),sU=target(cur.upper,plan.upper?'upper:'+plan.upper:null,1,dt),sL=target(cur.lower,plan.lower?'lower:'+plan.lower:null,1,dt);
   for(const name in actions)actions[name].setEffectiveWeight(0);
   if(sF>0)for(const [n,w] of Object.entries(cur.full)){const a=actions[n];if(!a)continue;a.setEffectiveWeight(w/sF*cur.mix);}
