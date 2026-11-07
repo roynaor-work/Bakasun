@@ -7,6 +7,7 @@ import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
+import {soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 
@@ -174,7 +175,10 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const actions=Object.fromEntries(clips.map(clip=>{
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
   }));
-  const ladder=SOCCER_V7_LADDER.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3),isLadder=name=>ladder.includes(name);
+  // Codex v9: walk and jog replace the slowed-down runs of the v7 ladder when the library loaded.
+  const codex=Boolean(actions.v9_walk&&actions.v9_jog&&actions.run_4&&actions.run_5&&actions.sprint),ladderDef=codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER;
+  const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
+  let idleAge=0;
   let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null,slide=null,dive=null;
   /** Map the simulation's slide and recovery clocks onto the composite slide clip.
    * The slide part follows slideTime exactly; the fall and the getting up are
@@ -235,7 +239,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
       if(slide&&state!==slide.name)slide=null;
-      if(mode==='celebrate'&&edge){const variants=SOCCER_V7_CELEBRATIONS.filter(n=>actions[n]);change(variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
+      if(mode==='celebrate'&&edge){const variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
       else if(mode==='slide'&&edge&&actions['slide-'+(p.slideKind||'straight')]){
         // One continuous authored timeline (slide, fall, get up) driven by the
         // simulation's own slide and recovery clocks; see slideTimeline().
@@ -271,22 +275,24 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         // The simulation has already released the ball. Enter immediately before
         // the authored contact, then fit only the follow-through to its existing
         // countdown. No physics release, countdown or result is delayed.
-        const v8=soccerV8KickClip(s,n=>Boolean(actions[n])),requested=v8||(s.event?.type==='shot'?'kick_power':s.ball.flight?'pass_long':'pass_short'),name=actions[requested]?requested:'kick';
+        const v9k=codex?soccerCodexKickClip(s,speed,n=>Boolean(actions[n])):null,v8=v9k||soccerV8KickClip(s,n=>Boolean(actions[n])),requested=v8||(s.event?.type==='shot'?'kick_power':s.ball.flight?'pass_long':'pass_short'),name=actions[requested]?requested:'kick';
         const clip=data.states[name],contact=clip.ballContacts?.find(c=>/strike|contact/.test(c.event));
         const contactTime=(contact?.time??.35)*clip.durationSeconds,m=config.view.athlete?.motion||{};
         const at=Math.max(0,contactTime-(m.contactLead??.03));
         const remaining=Math.max(.08,(mode==='steal'?p.stealTime:p.kickTime)||config.ai?.kickAnimationSeconds||.42);
         change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
-      else if(mode==='catch'&&edge)change(p.role==='keeper'&&actions.keeper_catch?'keeper_catch':'catch','receive');
+      else if(mode==='catch'&&edge)change((p.role==='keeper'&&soccerCodexKeeperCatch(s.ball.y||0,n=>Boolean(actions[n])))||(p.role==='keeper'&&actions.keeper_catch?'keeper_catch':'catch'),'receive');
+      else if(state==='v9_run_brake'&&!(moving&&actions[state].time>.2)&&actions[state].time<data.states[state].durationSeconds-.05){/* the brake plays to its end unless the player clearly sets off again */}
+      else if(soccerCodexHeld(state)&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>.7)){/* a Codex once-clip plays to its end */}
       else if(slide&&state===slide.name&&!slideTimeline(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
       else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
-        if(hasLadder&&locomotion==='run'){rung=soccerV7Rung(speed,isLadder(state)?ladder.indexOf(state):rung);locomotion=ladder[rung];}
+        if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,codex?SOCCER_CODEX_BOUNDS:null);locomotion=ladder[rung];}
         if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
-        else if(!moving&&running)change('decelerate','slowing');
-        else if(!moving)change(p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':'idle','stopped');
+        else if(!moving&&running)change(codex&&actions.v9_run_brake?(previousSpeed>=SOCCER_CODEX_BRAKE_FROM?'v9_run_brake':(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':actions.v9_idle_relaxed?'v9_idle_relaxed':'idle')):'decelerate','slowing');
+        else if(!moving)change(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':actions.v9_idle_relaxed?(SOCCER_CODEX_IDLES.includes(state)?state:'v9_idle_relaxed'):'idle','stopped');
         else if(running&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
         else if(speed<previousSpeed-.15&&running)change('decelerate','slowing');
         else if(!['turn_left','turn_right','decelerate'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5){
@@ -298,7 +304,8 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       if(dive&&state===dive.name)actions[state].setEffectiveTimeScale(actions[state].time>=dive.contact?dive.settleRate:dive.rate);
       else if(dive&&state!==dive.name)dive=null;
       if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
-      else if(isLadder(state))actions[state].setEffectiveTimeScale(clamp(speed/SOCCER_V7_LADDER[ladder.indexOf(state)][1],.5,1.4));
+      else if(isLadder(state))actions[state].setEffectiveTimeScale(clamp(speed/ladderDef[ladder.indexOf(state)][1],state==='v9_walk'?.6:.5,state==='v9_walk'?1.6:1.4));
+      if(codex&&p.role!=='keeper'&&SOCCER_CODEX_IDLES.includes(state)&&!moving){idleAge+=dt;if(idleAge>=soccerCodexIdleHold(p.id||0)){idleAge=0;change(soccerCodexNextIdle(state),'idle_variety',true,{fadeSeconds:.35});}}else idleAge=0;
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;
       updateMixer(dt);
       const runSpeed=config.view.animation.runSpeed||4.5,idle=config.view.animation.idleSpeed||.2,locomotion=LOCOMOTION.has(state)&&moving;
@@ -335,6 +342,9 @@ export function keeperStand(character,p,s,dt){
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
 let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null;
+/** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
+let lastCodexError=null;
+export function soccerCodexMotionError(){return lastCodexError;}
 /** Why the v8 motion clips were skipped (null when loaded or not asked for). */
 export function soccerV8MotionError(){return lastV8Error;}
 /** Why the authored characters last failed to prepare (for the load report). */
@@ -392,12 +402,14 @@ async function prepareV7(loader){
   // GPT soccer v8 clips: optional. Any failure keeps the v7/library clips (recorded for the load report).
   let v8={};lastV8Error=null;
   if(soccerV8Enabled(null,'motion')){try{v8=soccerV8States(await fetchJson(soccerV8ClipsUrl()));}catch(error){lastV8Error=String(error?.message||error);}}
-  const data={...library,states:{...library.states,...extra.states,...v8}};
+  let v9={};lastCodexError=null;
+  if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
+  const data={...library,states:{...library.states,...extra.states,...v8,...v9}};
   const lod0=names.map((_,i)=>glbs[i*2].scene),lod1=names.map((_,i)=>glbs[i*2+1].scene);
   for(const scene of lod0)joinSoccerV7Meshes(scene);for(const scene of lod1)joinSoccerV7Meshes(scene,{doubleSided:false});
   const firstMesh=scene=>{let m=null;scene.traverse(o=>{if(!m&&o.isSkinnedMesh)m=o;});return m;};
   return finishSources({scenes:lod0,rig:soccerV7Rig(lod0[0]),map:soccerV7Map(map),data,set:'v7',outfield:SOCCER_V7_FILES.outfield.map((_,i)=>i),keeper:names.length-1,
-    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:[...Object.keys(extra.states),...Object.keys(v8)],
+    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9)],
     lodFor:(mesh,sourceIndex)=>{const low=firstMesh(lod1[sourceIndex]);if(!low||low.skeleton.bones.some((b,i)=>b.name!==mesh.skeleton.bones[i]?.name))throw Error('Soccer v7 LOD1 skeleton mismatch');return [low.geometry,low.geometry];}});
 }
 /** Decode, retarget, floor-bake and LOD the authored characters once per
