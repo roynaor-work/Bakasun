@@ -68,7 +68,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  const shore=mesh(new T.CylinderGeometry(shoreRadius,shoreRadius+15,6,80),mat(colors.sand),center.x,-4,center.z);shore.scale.z=.85;
  const inland=mesh(new T.CylinderGeometry(inlandRadius,inlandRadius+19,4,80),scenery.grassMaterial,center.x,-2.5,center.z);inland.scale.z=.82;
  const terrainGeometry=new T.PlaneGeometry(bounds.max.x-bounds.min.x+100,bounds.max.z-bounds.min.z+100,64,64);terrainGeometry.rotateX(-Math.PI/2);terrainGeometry.translate(center.x,0,center.z);const terrainPosition=terrainGeometry.attributes.position;
- for(let i=0;i<terrainPosition.count;i++){const x=terrainPosition.getX(i),z=terrainPosition.getZ(i),p=track.project(x,z);terrainPosition.setY(i,vergeHeight(p.y,p.distance)-.08);}terrainGeometry.computeVertexNormals();const terrain=mesh(terrainGeometry,scenery.grassMaterial);
+ for(let i=0;i<terrainPosition.count;i++){const x=terrainPosition.getX(i),z=terrainPosition.getZ(i),p=track.project(x,z);terrainPosition.setY(i,vergeHeight(p.y,p.distance)-.2);}terrainGeometry.computeVertexNormals();const terrain=mesh(terrainGeometry,scenery.grassMaterial);
  const dummy=new T.Object3D();
  function instances(geometry,material,rows){const o=new T.InstancedMesh(keep(geometry),material,rows.length);for(let i=0;i<rows.length;i++){const p=rows[i];dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(p.rx||0,p.heading||0,p.rz||0);dummy.scale.set(p.sx||1,p.sy||1,p.sz||1);dummy.updateMatrix();o.setMatrixAt(i,dummy.matrix);}o.receiveShadow=true;o.castShadow=true;scene.add(o);return o;}
  const curbRows=[[],[]],dashes=[],rails=[],posts=[];

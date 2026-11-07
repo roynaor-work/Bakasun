@@ -17,7 +17,7 @@ for (const track of TRACKS) {
     let minx = 1e9, maxx = -1e9, minz = 1e9, maxz = -1e9;
     for (const p of t.points) { minx = Math.min(minx, p.x); maxx = Math.max(maxx, p.x); minz = Math.min(minz, p.z); maxz = Math.max(maxz, p.z); }
     const W = maxx - minx + 100, H = maxz - minz + 100, x0 = (minx + maxx) / 2 - W / 2, z0 = (minz + maxz) / 2 - H / 2, dx = W / 64, dz = H / 64, cache = new Map();
-    const V = (i, j) => { const k = i * 100 + j; if (!cache.has(k)) { const p = t.project(x0 + i * dx, z0 + j * dz); cache.set(k, vergeHeight(t.width, p.y, p.distance) - .08); } return cache.get(k); };
+    const V = (i, j) => { const k = i * 100 + j; if (!cache.has(k)) { const p = t.project(x0 + i * dx, z0 + j * dz); cache.set(k, vergeHeight(t.width, p.y, p.distance) - .2); } return cache.get(k); };
     let worst = -1;
     for (let s = 0; s < t.length; s += 4) for (const lat of [-.9, 0, .9]) {
       const p = t.sample(s), x = p.x + p.normal.x * lat * t.width / 2, z = p.z + p.normal.z * lat * t.width / 2;

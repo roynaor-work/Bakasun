@@ -52,7 +52,27 @@ const F1_TRACKS = {
     vertices: [[240,0,120],[648,0,84],[744,240,31],[576,312,84],[564,516,36],[360,564,29],[300,396,43],[120,456,60],[-60,312,34],[48,144,54]],
     elevation: f => 3 + 3 * Math.sin(f * TAU) + 1.5 * Math.sin(f * TAU * 2.5) }
 };
-for (const [id, spec] of Object.entries(F1_TRACKS)) spec.points = filletCircuit(spec.vertices, 20, spec.elevation);
+// racing-look-v1 (Roy 07/11: "the car sits at top speed all the time"): the circuits must force braking and re-acceleration. Corners with a large radius
+// (over 46 m: the car takes them flat out) are tightened to a 46 m limit at most, and every straight longer than 210 m gets a dog-leg (two opposite
+// corners, a chicane) so only short straights remain. Off with ?racingLook=0 (the v10 circuits).
+function tuneCircuit(vertices, { maxRadius = 46, straight = 230, offset = 20, kink = 40 } = {}) {
+  const n = vertices.length, out = [];
+  vertices.forEach((v, i) => {
+    out.push([v[0], v[1], Math.min(v[2], maxRadius)]);
+    const w = vertices[(i + 1) % n], dx = w[0] - v[0], dz = w[1] - v[1], len = Math.hypot(dx, dz), parts = Math.floor(len / straight);
+    if (parts < 1) return;
+    const nx = -dz / len, nz = dx / len;
+    // one dog-leg per 'straight' metres, never closer than 70 m to a corner
+    for (let k = 0; k < parts; k++) {
+      const c = (k + .5) / parts, a = Math.max(70 / len, c - 55 / len), b = Math.min(1 - 70 / len, c + 55 / len), sign = (i + k) % 2 ? 1 : -1;
+      if (b <= a) continue;
+      out.push([v[0] + dx * a + nx * offset * sign, v[1] + dz * a + nz * offset * sign, kink]);
+      out.push([v[0] + dx * b - nx * offset * sign, v[1] + dz * b - nz * offset * sign, kink]);
+    }
+  });
+  return out;
+}
+for (const [id, spec] of Object.entries(F1_TRACKS)) spec.points = filletCircuit(RACING_LOOK ? tuneCircuit(spec.vertices) : spec.vertices, 20, spec.elevation);
 
 const CLASSIC_LIST = [
   { id: 'coast', name: 'מפרץ הדקלים', theme: 'coast', width: 16, landmark: 'lighthouse',
