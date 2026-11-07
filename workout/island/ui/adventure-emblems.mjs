@@ -9,7 +9,7 @@ const ARTWORK=Object.freeze({
   fireRescue:{file:'fire.webp',category:'חילוץ והצלה',description:'צוות כיבוי, רחובות העיר ומשימת הצלה.'},
   alienDefense:{file:'space.webp',category:'חלל',description:'טיסת הגנה מול טייסת החייזרים.'},
   soccer:{file:'football.webp',category:'ספורט',description:'הקבוצה שלך, המגרש והדרך לאליפות.'},
-  tennis:{file:'tennis.webp',category:'ספורט',description:'משחק טניס במגרש של האי.'},
+  tennis:{file:'tennis.webp',category:'ספורט',description:'משחק טניס במגרש של העיר.'},
   islandRacing:{file:'racing.webp',category:'מרוצים',description:'מרוץ תלת־ממדי בין חופים, ג׳ונגלים ופסגות מול ארבעה נהגים.'},
   streetSlam:{file:'hoops.webp',category:'ספורט',description:'כדורסל מקצועי חמישה נגד חמישה באולם, עם קבוצה, אימונים ועונה.'},
   alpineRush:{file:'alpine.webp',category:'ספורט חורף',description:'מרוץ סנובורד בתלת־ממד מול חמישה גולשים, בשלושה מסלולים בהר.'},

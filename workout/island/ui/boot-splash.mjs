@@ -1,4 +1,4 @@
-// Opening screen of the island ("האי שלכם מתעורר…"): a short silent clip of the games
+// Opening screen of the island ("העיר שלכם מתעוררת…"): a short silent clip of the games
 // themselves behind the text. The page paints first with a plain gradient and the text
 // (static markup, no extra bytes). The clip is requested only when the island is still
 // loading after SPLASH_DELAY_MS (at once when the device already holds it), never on a data saver, a slow link or when the visitor
