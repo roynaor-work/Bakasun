@@ -71,7 +71,7 @@ try{
    // contacts of the feet with the floor before take-off = steps (a foot lands when it goes below 0.075 after being above 0.1)
    const air=rows.findIndex(r=>r.y>0.05);let st=0,prevLow=true;for(let i=0;i<(air<0?rows.length:air);i++){const low=Math.min(rows[i].lf,rows[i].rf)<0.075;const foot=rows[i].lf<rows[i].rf?'L':'R';if(low&&(lastFootDown!==foot)){st++;lastFootDown=foot;}}
    out.groundContactsBeforeJump=st;out.takeoffTick=air;out.releaseTick=rows.findIndex(r=>r.ballState==='shot');out.ticks=rows.length;
-   out.startSpeed=speed;out.speedAtTakeoff=air>0?+rows[air].speed.toFixed(2):null;out.travelDistance=+(Math.abs(rows[Math.max(0,air)].x-rows[0].x)).toFixed(2);
+   out.startSpeed=speed;out.speedAtTakeoff=air>0?+rows[air].speed.toFixed(2):null;out.speedThreeTicksBeforeTakeoff=air>3?+rows[air-3].speed.toFixed(2):null;out.travelDistance=+(Math.abs(rows[Math.max(0,air)].x-rows[0].x)).toFixed(2);
    out.rows=rows.filter((r,i)=>i%6===0).map(r=>({t:r.t,act:r.act,y:+r.y.toFixed(2),handY:+r.handY.toFixed(2),ballY:+r.ballY.toFixed(2),speed:+r.speed.toFixed(2),motion:r.motion}));
    const evs=[];for(const r of rows)for(const ev of (r.events||[]))evs.push([r.t,ev.type]);out.events=evs.filter(x=>/step|travel|violation|score|gather/.test(x[1])).slice(0,12);
   } else if(mode==='dribble'){

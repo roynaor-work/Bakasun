@@ -3,7 +3,7 @@
  "type": "dunk",
  "started": true,
  "rimY": 3.05,
- "maxHandY": 3.347596337324223,
+ "maxHandY": 3.3476091971177473,
  "maxBallY": 3.323,
  "maxJump": 0.8,
  "handOverRim": 0.298,
@@ -13,8 +13,9 @@
  "releaseTick": 56,
  "ticks": 130,
  "startSpeed": 4.5,
- "speedAtTakeoff": 0.68,
- "travelDistance": 0.82,
+ "speedAtTakeoff": 0,
+ "speedThreeTicksBeforeTakeoff": 0.47,
+ "travelDistance": 0.98,
  "rows": [
   {
    "t": 0,
@@ -40,7 +41,7 @@
    "y": 0,
    "handY": 1.4,
    "ballY": 1.6,
-   "speed": 1.86,
+   "speed": 2.84,
    "motion": "dunk_two_hand"
   },
   {
@@ -49,25 +50,25 @@
    "y": 0,
    "handY": 1.51,
    "ballY": 1.6,
-   "speed": 0.95,
+   "speed": 1.44,
    "motion": "dunk_two_hand"
   },
   {
    "t": 24,
    "act": "shoot",
    "y": 0,
-   "handY": 1.69,
+   "handY": 1.7,
    "ballY": 1.6,
-   "speed": 0.48,
+   "speed": 0.73,
    "motion": "dunk_two_hand"
   },
   {
    "t": 30,
    "act": "shoot",
    "y": 0,
-   "handY": 1.75,
+   "handY": 1.76,
    "ballY": 1.6,
-   "speed": 0.7,
+   "speed": 0.03,
    "motion": "dunk_two_hand"
   },
   {
@@ -76,7 +77,7 @@
    "y": 0.34,
    "handY": 2.44,
    "ballY": 1.94,
-   "speed": 0.6,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -85,7 +86,7 @@
    "y": 0.58,
    "handY": 3,
    "ballY": 2.18,
-   "speed": 0.51,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -94,7 +95,7 @@
    "y": 0.74,
    "handY": 3.27,
    "ballY": 2.34,
-   "speed": 0.43,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -103,7 +104,7 @@
    "y": 0.8,
    "handY": 3.3,
    "ballY": 2.4,
-   "speed": 0.37,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -111,8 +112,8 @@
    "act": "shoot",
    "y": 0.77,
    "handY": 3.09,
-   "ballY": 3.05,
-   "speed": 0.31,
+   "ballY": 3.06,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -120,8 +121,8 @@
    "act": "shoot",
    "y": 0.65,
    "handY": 2.9,
-   "ballY": 3,
-   "speed": 0.18,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -129,8 +130,8 @@
    "act": "shoot",
    "y": 0.44,
    "handY": 2.61,
-   "ballY": 3,
-   "speed": 0.1,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -138,8 +139,8 @@
    "act": "shoot",
    "y": 0.14,
    "handY": 2.18,
-   "ballY": 3,
-   "speed": 0.05,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -147,8 +148,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
-   "speed": 0.03,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -156,8 +157,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
-   "speed": 0.01,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -165,8 +166,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
-   "speed": 0.01,
+   "ballY": 3.01,
+   "speed": 0,
    "motion": "dunk_two_hand"
   },
   {
@@ -174,7 +175,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
+   "ballY": 3.01,
    "speed": 0,
    "motion": "dunk_two_hand"
   },
@@ -183,7 +184,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
+   "ballY": 3.01,
    "speed": 0,
    "motion": "dunk_two_hand"
   },
@@ -192,7 +193,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
+   "ballY": 3.01,
    "speed": 0,
    "motion": "dunk_two_hand"
   },
@@ -201,7 +202,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
+   "ballY": 3.01,
    "speed": 0,
    "motion": "dunk_two_hand"
   },
@@ -210,7 +211,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 2.01,
-   "ballY": 3,
+   "ballY": 3.01,
    "speed": 0,
    "motion": "dunk_two_hand"
   }

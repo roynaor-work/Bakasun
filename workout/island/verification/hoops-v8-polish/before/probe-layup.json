@@ -14,6 +14,7 @@
  "ticks": 130,
  "startSpeed": 4.5,
  "speedAtTakeoff": 1.08,
+ "speedThreeTicksBeforeTakeoff": 1.33,
  "travelDistance": 1.58,
  "rows": [
   {
@@ -217,18 +218,3 @@
  ],
  "events": []
 }
-node:internal/fs/promises:639
-  return new FileHandle(await PromisePrototypeThen(
-                        ^
-
-Error: EISDIR: illegal operation on a directory, open 'workout/island/verification/hoops-v8-polish/before/layup.json'
-    at async open (node:internal/fs/promises:639:25)
-    at async writeFile (node:internal/fs/promises:1222:14)
-    at async file:///home/user/Bakasun/workout/island/tools/hoops-v8-probe.mjs:94:14 {
-  errno: -21,
-  code: 'EISDIR',
-  syscall: 'open',
-  path: 'workout/island/verification/hoops-v8-polish/before/layup.json'
-}
-
-Node.js v22.23.4

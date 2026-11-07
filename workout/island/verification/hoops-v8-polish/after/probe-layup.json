@@ -3,24 +3,25 @@
  "type": "layup",
  "started": true,
  "rimY": 3.05,
- "maxHandY": 2.1415000206300836,
- "maxBallY": 3.48,
+ "maxHandY": 2.141647414695282,
+ "maxBallY": 3.509,
  "maxJump": 0.6,
  "handOverRim": -0.908,
- "ballOverRim": 0.43,
+ "ballOverRim": 0.459,
  "groundContactsBeforeJump": 1,
  "takeoffTick": 36,
  "releaseTick": 61,
  "ticks": 130,
  "startSpeed": 4.5,
- "speedAtTakeoff": 0.85,
- "travelDistance": 1.62,
+ "speedAtTakeoff": 0.77,
+ "speedThreeTicksBeforeTakeoff": 1.78,
+ "travelDistance": 1.74,
  "rows": [
   {
    "t": 0,
    "act": "shoot",
    "y": 0,
-   "handY": 1.14,
+   "handY": 1.13,
    "ballY": 1.6,
    "speed": 4.09,
    "motion": "layup"
@@ -47,7 +48,7 @@
    "t": 18,
    "act": "shoot",
    "y": 0,
-   "handY": 1.27,
+   "handY": 1.26,
    "ballY": 1.6,
    "speed": 3.2,
    "motion": "layup"
@@ -56,7 +57,7 @@
    "t": 24,
    "act": "shoot",
    "y": 0,
-   "handY": 1.29,
+   "handY": 1.28,
    "ballY": 1.6,
    "speed": 3.2,
    "motion": "layup"
@@ -67,25 +68,25 @@
    "y": 0,
    "handY": 1.36,
    "ballY": 1.6,
-   "speed": 1.64,
+   "speed": 2.5,
    "motion": "layup"
   },
   {
    "t": 36,
    "act": "shoot",
    "y": 0.05,
-   "handY": 1.46,
+   "handY": 1.48,
    "ballY": 1.65,
-   "speed": 0.85,
+   "speed": 0.77,
    "motion": "layup"
   },
   {
    "t": 42,
    "act": "shoot",
    "y": 0.32,
-   "handY": 1.59,
+   "handY": 1.6,
    "ballY": 1.92,
-   "speed": 0.72,
+   "speed": 0.12,
    "motion": "layup"
   },
   {
@@ -94,7 +95,7 @@
    "y": 0.49,
    "handY": 1.87,
    "ballY": 2.1,
-   "speed": 0.61,
+   "speed": 0.1,
    "motion": "layup"
   },
   {
@@ -103,7 +104,7 @@
    "y": 0.59,
    "handY": 2.08,
    "ballY": 2.19,
-   "speed": 0.52,
+   "speed": 0.09,
    "motion": "layup"
   },
   {
@@ -112,7 +113,7 @@
    "y": 0.59,
    "handY": 2.14,
    "ballY": 2.19,
-   "speed": 0.44,
+   "speed": 0.07,
    "motion": "layup"
   },
   {
@@ -120,8 +121,8 @@
    "act": "shoot",
    "y": 0.51,
    "handY": 2.1,
-   "ballY": 3.44,
-   "speed": 0.38,
+   "ballY": 3.45,
+   "speed": 0.06,
    "motion": "layup"
   },
   {
@@ -129,8 +130,8 @@
    "act": "shoot",
    "y": 0.34,
    "handY": 2.05,
-   "ballY": 3.48,
-   "speed": 0.32,
+   "ballY": 3.51,
+   "speed": 0.05,
    "motion": "layup"
   },
   {
@@ -138,8 +139,8 @@
    "act": "shoot",
    "y": 0.09,
    "handY": 1.89,
-   "ballY": 3.43,
-   "speed": 0.27,
+   "ballY": 3.47,
+   "speed": 0.05,
    "motion": "layup"
   },
   {
@@ -147,8 +148,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.87,
-   "ballY": 3.27,
-   "speed": 0.23,
+   "ballY": 3.33,
+   "speed": 0.04,
    "motion": "layup"
   },
   {
@@ -156,8 +157,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.2,
+   "ballY": 3.1,
+   "speed": 0.03,
    "motion": "layup"
   },
   {
@@ -165,8 +166,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.11,
+   "ballY": 3.05,
+   "speed": 0.02,
    "motion": "layup"
   },
   {
@@ -174,8 +175,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.06,
+   "ballY": 3.05,
+   "speed": 0.01,
    "motion": "layup"
   },
   {
@@ -183,8 +184,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.03,
+   "ballY": 3.05,
+   "speed": 0.01,
    "motion": "layup"
   },
   {
@@ -192,8 +193,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.02,
+   "ballY": 3.05,
+   "speed": 0,
    "motion": "layup"
   },
   {
@@ -201,8 +202,8 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
-   "speed": 0.01,
+   "ballY": 3.05,
+   "speed": 0,
    "motion": "layup"
   },
   {
@@ -210,7 +211,7 @@
    "act": "shoot",
    "y": 0,
    "handY": 1.88,
-   "ballY": 3.02,
+   "ballY": 3.05,
    "speed": 0,
    "motion": "layup"
   }
