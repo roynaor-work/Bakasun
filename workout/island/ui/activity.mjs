@@ -106,8 +106,8 @@ export class ActivityInterface {
   menu() {
     const dialog=this.modal('minigame.title','minigame.subtitle');dialog.dataset.gameLibrary='true';
     const heading=dialog.querySelector?.('h2'),subtitle=dialog.querySelector?.('.modal-subtitle');
-    if(heading)heading.textContent='משחקי האי';if(subtitle)subtitle.textContent='בחרו משחק כדי להתחיל.';
-    const cards=el('div','adventure-game-grid');cards.setAttribute('aria-label','משחקי האי');
+    if(heading)heading.textContent='משחקי העיר';if(subtitle)subtitle.textContent='בחרו משחק כדי להתחיל.';
+    const cards=el('div','adventure-game-grid');cards.setAttribute('aria-label','משחקי העיר');
     // The newest game leads the list with a badge, so a phone shows it without scrolling.
     const games=this.enabledGames(),ordered=[...games.filter(g=>gameArtwork(g.id).isNew),...games.filter(g=>!gameArtwork(g.id).isNew)];
     for(const game of ordered){

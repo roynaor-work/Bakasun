@@ -926,5 +926,5 @@ if(ISLAND){
     dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;pointer.down=false;touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
     onExit:null,onPause:null
   };
-  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לאי';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
+  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לעיר';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
 }
