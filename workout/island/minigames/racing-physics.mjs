@@ -5,7 +5,7 @@ const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) :
 const FIXED_STEP = 1/60;
 const LAT_CAP = 44;
 // Gearbox (racing-v11). Shift points as fractions of the car's top speed; ENGINE_TAU is the time constant of the pull towards it.
-const GEARS = 6, GEAR_BOUNDS = [0, .2, .4, .6, .78, .9], SHIFT_CUT = .16, ENGINE_TAU = 6.2;
+const GEARS = 7, GEAR_BOUNDS = [0, .15, .31, .47, .62, .76, .89], SHIFT_CUT = .16, ENGINE_TAU = 6.2;
 function randomSource(seed) {
   let value=Number(seed)>>>0;
   return () => { value=(Math.imul(value,1664525)+1013904223)>>>0; return value/4294967296; };
@@ -124,7 +124,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
     const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
     if(engineModel){
-      // racing-v11 gearbox: six gears share the speed range. Thrust is highest at the start of each gear and fades towards the next shift,
+      // racing-v11 gearbox: seven gears share the speed range. Thrust is highest at the start of each gear and fades towards the next shift,
       // every shift cuts the drive for a moment, and the pull weakens as the speed nears the top: reaching the top takes about 20-25 s.
       const top=Math.max(8,(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)),ratio=clamp(car.speed/top,0,.999);
       let g=1;while(g<GEARS&&ratio>=GEAR_BOUNDS[g])g++;
@@ -133,7 +133,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       car.gear=g;car.shiftT=Math.max(0,car.shiftT-dt);
       const shape=1.4-.75*frac,cut=car.shiftT>0?.06:1;
       if(throttle&&car.speed<target){
-        const pull=(target-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?1.35:1)*(car.isPlayer?engineUp:1);
+        const pull=(target-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?2.1:1)*(car.isPlayer?engineUp:1);
         car.speed=Math.min(target,car.speed+pull*dt);
       } else car.speed=moveToward(car.speed,target,dt*5);
       const rpmTarget=throttle?.2+.8*frac:Math.max(.12,.14+.5*frac);

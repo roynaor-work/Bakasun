@@ -15,10 +15,10 @@ function launch(config={},equipment={}){
   }
   race.dispose();return out;
 }
-test('gearbox: 0 to 98% of top speed takes 20-30 s on a straight, six gears, a shift between each',()=>{
+test('gearbox: 0 to 98% of top speed takes 20-30 s on a straight, seven gears, a shift between each',()=>{
   const r=launch();
   assert.ok(r.t98>=20&&r.t98<=30,'0-top '+r.t98);assert.ok(r.t100>=6&&r.t100<=10,'0-100 km/h '+r.t100);
-  assert.deepEqual([...r.gears].sort(),[1,2,3,4,5,6]);assert.ok(r.shifts>=5);assert.ok(r.rpmMin>=0&&r.rpmMax<=1);
+  assert.deepEqual([...r.gears].sort(),[1,2,3,4,5,6,7]);assert.ok(r.shifts>=6);assert.ok(r.rpmMin>=0&&r.rpmMax<=1);
 });
 test('the previous model (engine:false) reaches the top in a few seconds and has no gears',()=>{
   const r=launch({engine:false});assert.ok(r.t98<5);assert.equal(r.shifts,0);
@@ -28,14 +28,14 @@ test('engine upgrade shortens the acceleration (and raises the top speed)',()=>{
 });
 
 function audioFixture(){
-  const oscillators=[],noiseGains=[];
+  const oscillators=[],pans=[],gains=[];
   const param=()=>({value:0,setTargetAtTime(v){this.value=v;}});
   const node=()=>({frequency:param(),gain:param(),Q:{value:0},connect(){},disconnect(){},start(){},stop(){}});
   class AudioContext{constructor(){this.state='running';this.currentTime=2;this.destination={};this.sampleRate=44100;}
-    createOscillator(){const n=node();oscillators.push(n);return n;}createBiquadFilter(){return node();}createGain(){return node();}
+    createOscillator(){const n=node();oscillators.push(n);return n;}createBiquadFilter(){return node();}createGain(){const n=node();gains.push(n);return n;}createStereoPanner(){const n=node();n.pan=param();pans.push(n);return n;}
     createBuffer(){return {getChannelData:()=>new Float32Array(2048)};}createBufferSource(){return Object.assign(node(),{playbackRate:{value:1}});}
     resume(){return Promise.resolve();}suspend(){return Promise.resolve();}close(){return Promise.resolve();}}
-  return {oscillators,AudioContext,storage:{getItem:()=>'on'}};
+  return {oscillators,pans,gains,AudioContext,storage:{getItem:()=>'on'}};
 }
 test('engine sound: pitch follows rpm and drops after an upshift; extra voices appear only with rpm data',()=>{
   const f=audioFixture(),audio=createRacingAudio(f);audio.unlock();
@@ -47,4 +47,18 @@ test('engine sound: pitch follows rpm and drops after an upshift; extra voices a
   assert.ok(low>=45&&high<=195);
   audio.sync(30,false,{rpm:.3,gear:2,throttle:1});assert.ok(main.frequency.value<high,'rpm falls after the upshift');assert.equal(audio.engine().gear,2);
   audio.dispose();
+});
+
+test('rival engines: at most three live voices plus one shared background voice, nearer cars louder, panned by side',()=>{
+  const f=audioFixture(),audio=createRacingAudio(f);audio.unlock();audio.sync(30,false,{rpm:.5,gear:3,throttle:1});
+  const before=f.oscillators.length;
+  const cars=[{distance:10,pan:-.8,rpm:.6,gear:4},{distance:30,pan:.5,rpm:.4,gear:3},{distance:60,pan:0,rpm:.7,gear:5},{distance:80,pan:.3,rpm:.5,gear:4},{distance:120,pan:-.2,rpm:.3,gear:2}];
+  audio.setOpponents(cars);audio.setOpponents(cars);
+  assert.equal(f.oscillators.length-before,4,'three rival voices and one background voice, however many cars race');
+  assert.equal(audio.engine().rivalVoices,4);
+  const rivals=f.oscillators.slice(before,before+3);
+  assert.ok(rivals[0].frequency.value>rivals[1].frequency.value-1,'frequencies come from each car rpm');
+  const g=f.gains.slice(-4).map(n=>n.gain.value);assert.ok(g[0]>g[1]&&g[1]>g[2],'nearer rivals are louder: '+g.join(','));assert.ok(g.every(v=>v>=0&&v<=.008),'rival gain stays small');
+  assert.equal(f.pans.length,4);assert.ok(f.pans[0].pan.value<0&&f.pans[1].pan.value>0);
+  audio.setOpponents([]);audio.dispose();
 });

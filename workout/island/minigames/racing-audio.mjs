@@ -67,7 +67,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const now=number(context.currentTime),delta=clamp(now-lastTime,1/120,.25);
   const acceleration=clamp((speed-lastSpeed)/delta,-30,25);
   const previousGear=gear,real=extras.rpm!==undefined&&Number.isFinite(Number(extras.rpm));
-  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,6);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;}lastGear=gear;extraVoices();}
+  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;}lastGear=gear;extraVoices();}
   else{
    while(gear<6&&speed>gears[gear]+.8)gear++;
    while(gear>1&&speed<gears[gear-1]-1.6)gear--;
@@ -100,11 +100,36 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   }
   lastSpeed=speed;lastTime=now;
  }
+ // racing-v11 rivals: at most MAX_RIVAL_VOICES live engines (the nearest cars, panned and quieter with distance); the rest share one background voice.
+ const MAX_RIVAL_VOICES=3,rivals=[];let pack=null,rivalList=[];
+ function buildRivals(){
+  if(rivals.length||!context||!context.createOscillator)return;
+  const make=(type,cut)=>{const o=remember(context.createOscillator(),true);o.type=type;const f=remember(context.createBiquadFilter());f.type='lowpass';f.frequency.value=cut;const g=remember(context.createGain());g.gain.value=0;
+   const pan=context.createStereoPanner?remember(context.createStereoPanner()):null;o.connect(f);f.connect(g);if(pan){g.connect(pan);pan.connect(context.destination);}else g.connect(context.destination);o.start();return {o,f,g,pan};};
+  try{for(let i=0;i<MAX_RIVAL_VOICES;i++)rivals.push(make('sawtooth',420));pack=make('sawtooth',260);}catch{rivals.length=0;pack=null;}
+ }
+ function setOpponents(list){
+  rivalList=Array.isArray(list)?list:[];
+  if(!context||paused||disposed)return;
+  buildRivals();if(!pack)return;
+  const now=number(context.currentTime),silent=muted;
+  const sorted=[...rivalList].filter(c=>c&&Number.isFinite(Number(c.distance))).sort((a,b)=>a.distance-b.distance),near=sorted.slice(0,MAX_RIVAL_VOICES),rest=sorted.slice(MAX_RIVAL_VOICES);
+  rivals.forEach((voiceSet,i)=>{
+   const car=near[i];
+   if(!car||silent){target(voiceSet.g.gain,0,now,.1);return;}
+   const rpm=clamp(number(car.rpm),0,1),att=Math.pow(clamp(1-number(car.distance)/90,0,1),2),thr=clamp(number(car.throttle,1),0,1);
+   target(voiceSet.o.frequency,40+rpm*150,now,.06);target(voiceSet.f.frequency,300+rpm*650,now,.08);
+   target(voiceSet.g.gain,(.0025+.0055*thr)*att,now,.09);if(voiceSet.pan)target(voiceSet.pan.pan,clamp(number(car.pan),-1,1),now,.1);
+  });
+  if(!rest.length||silent){target(pack.g.gain,0,now,.12);return;}
+  const mean=rest.reduce((n,c)=>n+clamp(number(c.rpm),0,1),0)/rest.length,att=rest.reduce((n,c)=>n+Math.pow(clamp(1-number(c.distance)/140,0,1),2),0)/rest.length;
+  target(pack.o.frequency,36+mean*130,now,.12);target(pack.g.gain,Math.min(.005,.0035*att*Math.min(rest.length,3)),now,.15);
+ }
  function sync(value=0,boost=false,details={}){
   speed=clamp(number(value),0,85);boosting=!!boost;extras=details&&typeof details==='object'?details:{};
   try{update();}catch{}
  }
- return {unlock,sync,
+ return {unlock,sync,setOpponents,
   setPaused(value){
    paused=!!value;try{update();}catch{}
    if(paused&&context?.state==='running'){try{void context.suspend()?.catch?.(()=>{});}catch{}}
@@ -112,7 +137,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,pitch:voice?.frequency?.value}),
+  engine:()=>({gear,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}
