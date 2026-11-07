@@ -13,7 +13,7 @@ const VERSION=new URL(self.location.href).searchParams.get('v')||'dev';
 const CACHE='island-assets-'+VERSION.replace(/[^\w.-]/g,'_');
 let MISS_TIMEOUT_MS=45000;
 const CODE_TIMEOUT_MS=6000;
-const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
+const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
 const SCOPE_PATH=new URL('./',self.location.href).pathname;
 /** App shell: pages, modules, styles and data of the island, answered from the network
  * first (fresh code always wins) and from the device when the network is gone or slow. */

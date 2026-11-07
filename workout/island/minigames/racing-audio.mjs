@@ -2,11 +2,12 @@
  * sync(speed, boosting, {drifting, offroad, steer, throttle}) keeps the two-argument API.
  * Noise and custom harmonics are optional so minimal/headless audio contexts still work.
  */
-export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext}={}){
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false}={}){
  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
  const number=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
  const gears=[0,9,18,28,39,52,70];
  let context,voice,filter,gain,noise,noiseFilter,noiseGain;
+ let samples=null,wasBoosting=false;
  let paused=false,disposed=false,muted=false,gear=1,shiftUntil=0,lastTime=0,lastSpeed=0;
  let speed=0,boosting=false,extras={};
  const nodes=[],sources=[];
@@ -49,6 +50,8 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     gain=remember(context.createGain());gain.gain.value=0;
     voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();
     createNoise();lastTime=context.currentTime;
+    // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
+    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-5').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}
@@ -67,7 +70,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const now=number(context.currentTime),delta=clamp(now-lastTime,1/120,.25);
   const acceleration=clamp((speed-lastSpeed)/delta,-30,25);
   const previousGear=gear,real=extras.rpm!==undefined&&Number.isFinite(Number(extras.rpm));
-  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;}lastGear=gear;extraVoices();}
+  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;samples?.shiftUp();}else if(gear<lastGear&&!paused&&!disposed)samples?.shiftDown();lastGear=gear;extraVoices();}
   else{
    while(gear<6&&speed>gears[gear]+.8)gear++;
    while(gear>1&&speed<gears[gear-1]-1.6)gear--;
@@ -98,7 +101,10 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
    const road=Math.min(speed/55,1)*.045;
    const air=boosting?.33:0,slip=drift?.11+steering*.1:0,gravel=offroad?.2:0;
    const wind=top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(.02+throttle*revs*.07):0;
+   if(backfire&&!paused&&!disposed)samples?.backfire();
+   if(wasBoosting&&!boosting&&!paused&&!disposed)samples?.blowoff();wasBoosting=boosting;
    lastThrottle=throttle;
+   if(samples?.ready)samples.update({rpm:real?revs:rpm,throttle,speed,drifting:drift,steer:steering,kerb:number(extras.kerb),offroad,level:paused||muted||disposed?0:1});
    target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055+pop+backfire+exhaust+wind),now,boosting?.045:.09);
    target(noiseFilter.frequency,(offroad?620:drift?1550+steering*850:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
@@ -134,7 +140,9 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   speed=clamp(number(value),0,85);boosting=!!boost;extras=details&&typeof details==='object'?details:{};
   try{update();}catch{}
  }
- return {unlock,sync,setOpponents,
+ /** One-shot game events for the sample layer: 'pass' (overtake whoosh). */
+ function event(name){if(name==='pass'&&!paused&&!muted&&!disposed)samples?.pass();}
+ return {unlock,sync,setOpponents,event,
   setPaused(value){
    paused=!!value;try{update();}catch{}
    if(paused&&context?.state==='running'){try{void context.suspend()?.catch?.(()=>{});}catch{}}
@@ -146,6 +154,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}
+   samples?.dispose();samples=null;
    for(const source of sources){try{source.stop();}catch{}}
    for(const node of nodes){try{node.disconnect();}catch{}}
    if(context){try{void context.close()?.catch?.(()=>{});}catch{}}

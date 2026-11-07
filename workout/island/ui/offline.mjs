@@ -9,7 +9,7 @@ import {DATA_VERSION} from '../release.mjs';
 export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',tennis:'טניס',racing:'מרוצים',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
 export const STATUS_KEY='island.offline.status';
 /** Same rule as offline-sw.js: only these island paths are answered from the cache. */
-export const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
+export const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
 export const isManagedPath=pathname=>typeof pathname==='string'&&!pathname.includes('..')&&MANAGED.test(pathname);
 export const cacheName=version=>'island-assets-'+String(version||'dev').replace(/[^\w.-]/g,'_');
 const islandRoot=new URL('../',import.meta.url);

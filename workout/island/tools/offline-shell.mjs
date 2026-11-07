@@ -14,7 +14,7 @@ const SKIP=/^(?:tests|tools|verification|notes)\//;
 const LITERAL=/(['"`])((?:\.{1,2}\/|[\w-]+\/)[^'"`\s${}]*?\.(?:mjs|js|css|json|svg|html|webmanifest))(?:\?[^'"`]*)?\1/g;
 const CSS_URL=/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g;
 const exists=async file=>{try{await access(file);return true;}catch{return false;}};
-const managed=p=>/(?:^|\/)(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm)$/.test(p)||/^vendor\/draco\//.test(p);
+const managed=p=>/(?:^|\/)(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm)$/.test(p)||/^vendor\/draco\//.test(p);
 const wanted=p=>!SKIP.test(p)&&!managed(p)&&(CODE.test(p)||/^data\/[^/]+\.json$/.test(p));
 export async function buildShell(base=root){
   const seen=new Set(),queue=['index.html','manifest.webmanifest'];
