@@ -21,7 +21,7 @@ export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>
 /** Effective rating 0..1 (fatigue lowers everything a little). */
 function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
 
-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false}={}){
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2'}={}){
  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
  const prof=R.profiles[profile]||R.profiles.standard,diff=C.ai.difficulty[difficulty]||C.ai.difficulty.normal;
  let rng,S,seq=0,queue=[],history=[],disposed=false,tacticsController=null;
@@ -1075,7 +1075,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null}));
  }
 
- const api={
+ const api={aiV2:aiVersion!=='v1',
   get S(){return S;},gatherBall,attemptDribble,court,C,rand,eff,onCourt,all,side,holder,byId,dist,nearestTo,
   startShot,startPass,startJump,startSteal,startMove,startFake,choosePassTarget,diff,
  };
