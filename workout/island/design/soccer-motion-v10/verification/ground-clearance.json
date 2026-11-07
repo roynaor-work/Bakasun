@@ -1,0 +1,823 @@
+{
+  "license": "CC0-1.0",
+  "method": "Independent decoded GLB FK. Center/toe/heel at30Hz and120Hz; no renderer floor correction or IK. Vertical floor clearances are diagnostic, not claimed zero. Horizontal support excursion is gated separately by check.mjs.",
+  "sampleHz": 120,
+  "sourceRunMinimum": {
+    "heightMeters": -0.00712455926906011,
+    "time": 0.31666666666666665,
+    "bone": "RightFoot",
+    "point": "toe"
+  },
+  "clips": [
+    {
+      "id": "cut_45_left",
+      "native30HzMinimum": {
+        "heightMeters": -3.154494616908199e-8,
+        "time": 0.36666666666666664,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.007124559260813568,
+        "time": 0.35,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.007124559260813568,
+        "time": 0.35,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.004592646495735472,
+        "time": 0.325,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_45_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.00027870580911529275,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.007124559260813568,
+        "time": 0.35,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.007124559260813568,
+        "time": 0.35,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.004621064470562708,
+        "time": 0.325,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_90_left",
+      "native30HzMinimum": {
+        "heightMeters": -2.8192421341888263e-8,
+        "time": 0.43333333333333335,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592443199696,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592443199696,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0028620000887517177,
+        "time": 0.39166666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_90_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.00022338963756550478,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592443199696,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592443199696,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.004147477547120318,
+        "time": 0.08333333333333333,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_135_left",
+      "native30HzMinimum": {
+        "heightMeters": -3.185618080436825e-8,
+        "time": 0.3,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592278255665,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592278255665,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0005200843862141896,
+        "time": 0.18333333333333332,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_135_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.00018805082780702642,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592278255665,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592278255665,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.004134528559077852,
+        "time": 0.08333333333333333,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_180_left",
+      "native30HzMinimum": {
+        "heightMeters": -2.7023111429103075e-8,
+        "time": 0.5666666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592731832424,
+        "time": 0.55,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592731832424,
+        "time": 0.55,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0005475103458406627,
+        "time": 0.18333333333333332,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "cut_180_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.00016350801050989128,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0071245592731832424,
+        "time": 0.55,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.0071245592731832424,
+        "time": 0.55,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.004117303864604946,
+        "time": 0.08333333333333333,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_chest_standing_quick",
+      "native30HzMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_chest_running_quick",
+      "native30HzMinimum": {
+        "heightMeters": -2.630662551683649e-8,
+        "time": 0.03333333333333333,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0033965822551359354,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_thigh_standing_quick",
+      "native30HzMinimum": {
+        "heightMeters": -0.0004548099104094011,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0004548099104094011,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0004548099104094011,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_thigh_running_quick",
+      "native30HzMinimum": {
+        "heightMeters": -3.412665947055693e-8,
+        "time": 0.43333333333333335,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.008955435598685973,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.008955435598685973,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.003472356902721921,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      }
+    },
+    {
+      "id": "first_touch_inside_standing_quick",
+      "native30HzMinimum": {
+        "heightMeters": -0.0015477884834665667,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0015477884834665667,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0015477884834665667,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_inside_running_quick",
+      "native30HzMinimum": {
+        "heightMeters": -2.630662551683649e-8,
+        "time": 0.03333333333333333,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0033965822551359354,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_outside_standing_quick",
+      "native30HzMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00008729092762745083,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "first_touch_outside_running_quick",
+      "native30HzMinimum": {
+        "heightMeters": -2.630662551683649e-8,
+        "time": 0.03333333333333333,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.010474892575765476,
+        "time": 0.48333333333333334,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0033965822551359354,
+        "time": 0.4166666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "goalkeeper_hand_roll",
+      "native30HzMinimum": {
+        "heightMeters": -0.00019118819089594674,
+        "time": 1.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.000348966466858433,
+        "time": 0.11666666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.000348966466858433,
+        "time": 0.11666666666666667,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "goalkeeper_short_foot_pass",
+      "native30HzMinimum": {
+        "heightMeters": -0.002595255030826041,
+        "time": 0.9,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.002595255030826041,
+        "time": 0.9,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.002595255030826041,
+        "time": 0.9,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "goalkeeper_long_goal_kick",
+      "native30HzMinimum": {
+        "heightMeters": -0.002283966376399521,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.002283966376399521,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.002283966376399521,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "brake_reaccelerate",
+      "native30HzMinimum": {
+        "heightMeters": -7.177505770283865e-8,
+        "time": 1.5666666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.009668929563816472,
+        "time": 0.21666666666666667,
+        "bone": "RightFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.007124559273183145,
+        "time": 1.55,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.009668929563816472,
+        "time": 0.21666666666666667,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "ball_spin_left",
+      "native30HzMinimum": {
+        "heightMeters": -4.667199055008453e-8,
+        "time": 1.1666666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.007124559227310048,
+        "time": 0.016666666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.007124559227310048,
+        "time": 0.016666666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0003556904760442653,
+        "time": 0.65,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "shield_pressure_left",
+      "native30HzMinimum": {
+        "heightMeters": -0.00011589305685864859,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00013851614286741754,
+        "time": 1.0916666666666666,
+        "bone": "RightFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00013851614286741754,
+        "time": 1.0916666666666666,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "close_jockey_left",
+      "native30HzMinimum": {
+        "heightMeters": -0.0037817657745293776,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0037817657745293776,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0037817657745293776,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "ball_spin_right",
+      "native30HzMinimum": {
+        "heightMeters": -4.667199055008453e-8,
+        "time": 1.1666666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.007124559227310048,
+        "time": 0.016666666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.007124559227310048,
+        "time": 0.016666666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00033493585920069124,
+        "time": 0.45,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "shield_pressure_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.00011538909873842762,
+        "time": 1.1,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.0001432568843768578,
+        "time": 1.0916666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.0001432568843768578,
+        "time": 1.0916666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      }
+    },
+    {
+      "id": "close_jockey_right",
+      "native30HzMinimum": {
+        "heightMeters": -0.003765734519001959,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.003765734519001959,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.003765734519001959,
+        "time": 0.1,
+        "bone": "LeftFoot",
+        "point": "toe"
+      }
+    },
+    {
+      "id": "idle_relaxed",
+      "native30HzMinimum": {
+        "heightMeters": -0.00011185087108607494,
+        "time": 1.7,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00011185087108607494,
+        "time": 1.7,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -4.861958192992066e-8,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00011185087108607494,
+        "time": 1.7,
+        "bone": "RightFoot",
+        "point": "heel"
+      }
+    },
+    {
+      "id": "idle_scan",
+      "native30HzMinimum": {
+        "heightMeters": -0.000042904724737849453,
+        "time": 0.8666666666666667,
+        "bone": "LeftFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00008730532082358577,
+        "time": 2.2583333333333333,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -2.128837230663816e-7,
+        "time": 3.15,
+        "bone": "RightFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00008730532082358577,
+        "time": 2.2583333333333333,
+        "bone": "RightFoot",
+        "point": "heel"
+      }
+    },
+    {
+      "id": "idle_weight_shift",
+      "native30HzMinimum": {
+        "heightMeters": -0.00004902455178301679,
+        "time": 0.6666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.00004902455178301679,
+        "time": 0.6666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.000002120564115151713,
+        "time": 0.016666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.00004902455178301679,
+        "time": 0.6666666666666666,
+        "bone": "RightFoot",
+        "point": "heel"
+      }
+    },
+    {
+      "id": "run",
+      "native30HzMinimum": {
+        "heightMeters": -3.6198707600854085e-8,
+        "time": 0.36666666666666664,
+        "bone": "RightFoot",
+        "point": "heel"
+      },
+      "interpolated120HzMinimum": {
+        "heightMeters": -0.006320718499159342,
+        "time": 0.31666666666666665,
+        "bone": "RightFoot",
+        "point": "toe"
+      },
+      "boundaryIntervalsMinimum": {
+        "heightMeters": -0.006320718468002362,
+        "time": 0.016666666666666666,
+        "bone": "LeftFoot",
+        "point": "toe"
+      },
+      "interiorMinimum": {
+        "heightMeters": -0.006320718499159342,
+        "time": 0.31666666666666665,
+        "bone": "RightFoot",
+        "point": "toe"
+      }
+    }
+  ]
+}

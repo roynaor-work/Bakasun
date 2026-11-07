@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>כדורגל · מעבדת תנועה 10</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="mark" aria-hidden="true">10</span><div><p class="eyebrow">האי שלי / כדורגל</p><h1>מעבדת תנועה</h1></div></div>
+    <a class="report" href="REPORT.md">דוח המדידות <span aria-hidden="true">←</span></a>
+  </header>
+  <main>
+    <section class="stage-card" aria-label="תצוגת תנועה בתלת־ממד">
+      <div class="stage-top"><span class="pill"><i></i> שלד motion2 · 30Hz</span><span id="load-status" role="status">טוען ספריית תנועה…</span></div>
+      <div id="viewport"><div id="error" role="alert" hidden></div></div>
+      <div class="stage-bottom"><div><p class="eyebrow" id="category-label">תנועה</p><h2 id="clip-title">טוען…</h2><p id="clip-id" dir="ltr"></p></div><div class="frame-readout"><span id="frame">00</span><small>פריים / <b id="frame-total">00</b></small></div></div>
+      <div id="phase" class="phase">קליפ</div>
+      <div class="camera-controls" aria-label="זווית צפייה"><button data-view="three-quarter" class="active" aria-pressed="true">¾</button><button data-view="side" aria-pressed="false">צד</button><button data-view="front" aria-pressed="false">חזית</button><button data-view="top" aria-pressed="false">מעל</button></div>
+    </section>
+    <aside class="controls">
+      <section class="panel selection"><div class="panel-heading"><h2>בחירת קליפ</h2><span id="clip-count">—</span></div><label for="filter">סוג תנועה</label><select id="filter"><option value="all">כל התנועות</option></select><label for="clip">הנפשה</label><select id="clip"></select><div class="step-controls"><button id="previous" aria-label="לקליפ הקודם">→ קודם</button><button id="next" aria-label="לקליפ הבא">הבא ←</button></div></section>
+      <section class="panel playback"><h2>ניגון</h2><div class="segmented" role="group" aria-label="מצב ניגון"><button id="loop" class="active" aria-pressed="true">לולאת קליפ</button><button id="transition" aria-pressed="false">ריצה ← קליפ ← ריצה</button></div><p class="mode-note" id="mode-note">המסלול מתאפס בתחילת כל לולאה. אפשר לעצור ולבדוק כל פריים.</p><div class="transport"><button id="play" class="primary" aria-pressed="true">השהיה</button><button id="contact">לפריים המגע</button></div><label class="scrub-label" for="timeline"><span>זמן</span><output id="time">0.00 / 0.00 שנ׳</output></label><input type="range" id="timeline" min="0" max="1" step="0.001" value="0"><div class="speed-row"><label for="speed">קצב</label><select id="speed"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></div><button id="in-place" class="travel-toggle" aria-pressed="false">מסלול ייחוס: פעיל · הצג במקום</button></section>
+      <section class="panel evidence"><h2>רגעי המפתח</h2><dl><div><dt>משך קליפ</dt><dd id="duration">—</dd></div><div><dt>אירוע</dt><dd id="event">—</dd></div><div><dt>רגל נטועה</dt><dd id="support">—</dd></div><div><dt>מסלול ייחוס בלבד</dt><dd id="root">—</dd></div></dl><div class="legend"><span><i class="green"></i>עוגן נטיעה</span><span><i class="gold"></i>מסלול ייחוס</span></div><p class="mode-note">ה־GLB נשאר במקום; המשחק אחראי לתנועה.</p></section>
+    </aside>
+  </main>
+  <footer><span>דמויות בדיוניות · תנועה מקורית · CC0</span><span>גאומטריה ללא Draco או meshopt · ללא WebAssembly</span></footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

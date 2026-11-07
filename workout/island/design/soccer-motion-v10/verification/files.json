@@ -1,0 +1,439 @@
+{
+  "scope": "Every delivered file except this self-referential inventory; LICENSES.md includes this file too.",
+  "files": [
+    {
+      "file": "LICENSES.md",
+      "bytes": 12706,
+      "sha256": "0093400c44d035db336c4951c0e559f7cee5f7f6eeec88828479b24ac9524f83",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "README.md",
+      "bytes": 7136,
+      "sha256": "3ebd8cf02c6c0657cb6e50a046151cd9d345efcd3a25205593ef4fa4ae11be29",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 13616,
+      "sha256": "0b9b4b30af78fd583bdcc5fab1f032f8ab8fa74c1088c60adf0b58f865fc0265",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 8153,
+      "sha256": "9990ea0bab89627e31a1a0a265ab9e23899da43e41cc21d1905a4d2786cced75",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "preview.html",
+      "bytes": 4533,
+      "sha256": "6754f010ba0505b987d3982adca72ae744284c9488964a1e3dc69280258f109a",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 6919,
+      "sha256": "19363b2554e0aec4977750b2c8496bab9a78fef916b071d6c751f6d10ccd0856",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "runtime/catalog.json",
+      "bytes": 614918,
+      "sha256": "204c291649f9795a882be41bdc808f17e8741d2365d9d16066be66df02e87056",
+      "license": "CC0-1.0",
+      "source": "Original v10 source/author.mjs, calibrated by source/calibrate.mjs; CC0 reference poses where documented"
+    },
+    {
+      "file": "runtime/clips/ball_spin_left.glb",
+      "bytes": 784580,
+      "sha256": "745052298035a3b3f79c9cb27c5983464e6fc787ffebafb4f9a58fa29d2cd266",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/ball_spin_right.glb",
+      "bytes": 784616,
+      "sha256": "fec615d3522ae6c4a540081f2a57569dedd770b7ea0f3ac2238ba65dd0e5717d",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/brake_reaccelerate.glb",
+      "bytes": 786808,
+      "sha256": "07cd348bee384d82ed6174b44316734c062d2a01675c95784e016a8e129f8a7d",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/close_jockey_left.glb",
+      "bytes": 782392,
+      "sha256": "5bfcda204309a2c8dfc4c8c35b612453a7ca583a24253735f1a9817a276498d6",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/close_jockey_right.glb",
+      "bytes": 782396,
+      "sha256": "45b58c78206dae95374314355b3621c296447b113e116451e31e828d828df737",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_135_left.glb",
+      "bytes": 776324,
+      "sha256": "5f869e1c947f4b8d3086f4cc0243f0faed46357ade227dfca320befc9ae3ddd2",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_135_right.glb",
+      "bytes": 776228,
+      "sha256": "34b98d10c48b6bd779a011bf8edab5beab9ee614404bd95f098d16bbe87c7c72",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_180_left.glb",
+      "bytes": 776940,
+      "sha256": "b9cb93eb14097ad3c81965b01b36d1776d60b1ae8b2133293140645a558861cb",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_180_right.glb",
+      "bytes": 776864,
+      "sha256": "bebffc58d3064eb2826768e2a767d42ee40d37f29e0e68e280e5023c583e0386",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_45_left.glb",
+      "bytes": 774520,
+      "sha256": "c38896cd1b463627eb91bd4515a2535445b4cfdcf684acdd06a84ce02a54af94",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_45_right.glb",
+      "bytes": 774428,
+      "sha256": "9f6da51c911320f593d29f6dc81156ddd5d1d016f8aee3c421664d5e432c5bb4",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_90_left.glb",
+      "bytes": 775396,
+      "sha256": "4b49d8cbc5f5fd4ef961c519d22d4008177020f17f1864854832ff29fb9abbfa",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/cut_90_right.glb",
+      "bytes": 775300,
+      "sha256": "c9eb91d8ce8a99a3facfc1451b032a6639509ff7bb1c37c30c3f7df91540bf03",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_chest_running_quick.glb",
+      "bytes": 776900,
+      "sha256": "96570e138ea2a3915bc28d64cf5fada138fa7d8a298da66d7f414a9233008df0",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_chest_standing_quick.glb",
+      "bytes": 776612,
+      "sha256": "67a2b2f76e278e49702279c751815dedaca0e7d8d21c0eff8bdd63549d879abc",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_inside_running_quick.glb",
+      "bytes": 776928,
+      "sha256": "14ee2566f6ac5f35d64fdefca2b1b088d00143013901fdf97be6b6ef6163d2b2",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_inside_standing_quick.glb",
+      "bytes": 776632,
+      "sha256": "8db74de67415b745b4f5ae57a0cc95c8ec75c941142582331f431c53a0d63c3c",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_outside_running_quick.glb",
+      "bytes": 776928,
+      "sha256": "158e345ced4308f01d1ae19583e93ef809269364d7250c60c126b4879b06d9aa",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_outside_standing_quick.glb",
+      "bytes": 776656,
+      "sha256": "f470de445f30f6fb8138b73cc7a359a8d46d4a38aea3d7d5603234ecff2955e3",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_thigh_running_quick.glb",
+      "bytes": 776916,
+      "sha256": "03fef163b9ff21332734af247e0dc129b345c2aa4233028b9d21322164de39d7",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/first_touch_thigh_standing_quick.glb",
+      "bytes": 776624,
+      "sha256": "011281c6065523eddfc3b395190279b57eade782d8cba84a265a8c2ac8924848",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/goalkeeper_hand_roll.glb",
+      "bytes": 790524,
+      "sha256": "56a6404d7a2a51f7e33caa4b8fda4d9e75e59dfe45c227f8ec46617d92ed5428",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/goalkeeper_long_goal_kick.glb",
+      "bytes": 792700,
+      "sha256": "e870ecbe4762f36944a4a9121c39f3e3ec0b6ab96c422e563422ae94541b9f96",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/goalkeeper_short_foot_pass.glb",
+      "bytes": 789036,
+      "sha256": "216e5a0f883fcc20af7fa9b7a15a6c9547948e6f5581072fe6e417860baa5f0e",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/idle_scan.glb",
+      "bytes": 798408,
+      "sha256": "e01ff77b904078d5d849f0911cd0e54b00cbf784a97db894e78d8fe841e2aa94",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/idle_weight_shift.glb",
+      "bytes": 794776,
+      "sha256": "8fd5e765c31b6e32b5b591d04f5192a31d421ebaad999b3e505367b59226f203",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/run.glb",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/shield_pressure_left.glb",
+      "bytes": 783924,
+      "sha256": "9b18b6e0b2647e57d05033665ae8847336748595efd4aa61a09a1ddf260165dc",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/clips/shield_pressure_right.glb",
+      "bytes": 783952,
+      "sha256": "1c43cc5e4858f55740aa52e26f373c8197906b59c01c8e66c57c3420dd565993",
+      "license": "CC0-1.0",
+      "source": "source/author.mjs + source/calibrate.mjs + source/bake.mjs; CC0 v8 geometry, exact source hashes below"
+    },
+    {
+      "file": "runtime/motions.json",
+      "bytes": 1308074,
+      "sha256": "7797e60e22b2b8c6caf49f31da385730f5049f49df631a091b3e8f410e78397d",
+      "license": "CC0-1.0",
+      "source": "Original v10 source/author.mjs, calibrated by source/calibrate.mjs; CC0 reference poses where documented"
+    },
+    {
+      "file": "runtime/player.mjs",
+      "bytes": 19361,
+      "sha256": "43d25f9c5b4c3136d690b7fe409661b04a8bc141c5dad973b6aa60e3178b59b3",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "runtime/reference/idle_relaxed.glb",
+      "bytes": 791824,
+      "sha256": "290f6015e18c41d49c010e19896ff4b4639984332feda52817e63a092e1a84de",
+      "license": "CC0-1.0",
+      "source": "v9 5d516207d66cdf91af062b93142e04c6dcbae131, native source hash in verification/reference.json; CC0 v8 geometry"
+    },
+    {
+      "file": "runtime/reference/jog.glb",
+      "bytes": 776604,
+      "sha256": "aa22cfbff49de1d2f804d5a9273d7d8111345b2839bee36e812dd695c47f209b",
+      "license": "CC0-1.0",
+      "source": "v9 5d516207d66cdf91af062b93142e04c6dcbae131, native source hash in verification/reference.json; CC0 v8 geometry"
+    },
+    {
+      "file": "runtime/reference/run.glb",
+      "bytes": 775364,
+      "sha256": "0928d2f27f78f234e71958fb86373c3d383b2e3c147ee406fe531f62e9a991c1",
+      "license": "CC0-1.0",
+      "source": "v9 5d516207d66cdf91af062b93142e04c6dcbae131, native source hash in verification/reference.json; CC0 v8 geometry"
+    },
+    {
+      "file": "source/author.mjs",
+      "bytes": 20210,
+      "sha256": "a2c5d42a54eb66fd0d282cd12f76e6ca66419670f0b145f4765cc498eb8a467d",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "source/bake.mjs",
+      "bytes": 9548,
+      "sha256": "402da00529c036478b2c51de2d9a8dfb2ba4fac090db673c6f7c5cf3d96c4710",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "source/calibrate.mjs",
+      "bytes": 21230,
+      "sha256": "6ffa4bd1a42116a5d1b8e73996b47dff381715f772205288f46df3d7280dcb39",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "source/report.mjs",
+      "bytes": 15015,
+      "sha256": "5e70d82b9bbf361517ae881c84ef9f21552bcc367313a399a07585e14ba37702",
+      "license": "CC0-1.0",
+      "source": "Original v10 code, design or documentation authored for this task"
+    },
+    {
+      "file": "source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "license": "CC0-1.0",
+      "source": "CC0 v9 source/rig.mjs at 5d516207d66cdf91af062b93142e04c6dcbae131; import path adapted to existing v8 renderer"
+    },
+    {
+      "file": "verification/angles.mjs",
+      "bytes": 5201,
+      "sha256": "96282672ce7a7282d44825ed2418a45fdf027328b0767f79a82455b4d3edbc5d",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/browser-check.mjs",
+      "bytes": 9423,
+      "sha256": "7d536bcabe55accd4755a738135685af43ed725f423fe23736d37bb8d4a91989",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/browser.json",
+      "bytes": 557897,
+      "sha256": "0fc5693d19e9c621d4e401795d1fd055ce8cc297aa0313469484e64bf95db80f",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/check.mjs",
+      "bytes": 19659,
+      "sha256": "575df975d64816a63415a75e10e0503628891866f54c69639ede2fdcfe001db0",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/contact-surfaces.json",
+      "bytes": 22924,
+      "sha256": "93d5ebdf28675640aa7b23d6294dc4d203a4f75decb93b4177edfc7b28808a65",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/ground-clearance.json",
+      "bytes": 22386,
+      "sha256": "3fa33aacf2ec190dbb8e4483bcbc8ec28b869781c84da06b54b0e60f1ec34a57",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/ground.mjs",
+      "bytes": 2497,
+      "sha256": "b25bf6aa7a854713e9afef832a2312ea7f3068ea45304d6104eee317a42c9e2d",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/load-files.mjs",
+      "bytes": 3379,
+      "sha256": "91ffe97396807d3e7d2b281acdb2b07216abc5557c168d70e36af00c34adc829",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/metrics.json",
+      "bytes": 2820388,
+      "sha256": "c058fbfba3797ba38a532cd9e4758b159b7c21f29bd8e10f600926b24cf15e7d",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/preview-1280x800.png",
+      "bytes": 135805,
+      "sha256": "beadb9c9f289fd382f44564e90043a6dd4ed24ffa3df73940c5cf2a3f5609a48",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/preview-390x844.png",
+      "bytes": 96630,
+      "sha256": "83e44f22e01315a714d468914db3743cb6095d265b66463b769af17e3f9a6652",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/preview-844x390.png",
+      "bytes": 114350,
+      "sha256": "cf4a4bcf89e42b8b91b06805f1de8272810bbe7123dfe9682cd0db18e1401f75",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    },
+    {
+      "file": "verification/reference.json",
+      "bytes": 1023167,
+      "sha256": "aa1c8850cbbc7c4593ad7abd6dd821920bd6a809a98abda431028f224adc8a9e",
+      "license": "CC0-1.0",
+      "source": "Actual v9 native GLB accessors at 5d516207d66cdf91af062b93142e04c6dcbae131; SHA-256 per reference"
+    },
+    {
+      "file": "verification/validator.json",
+      "bytes": 66061,
+      "sha256": "b435b4cb33f0499ec534a0e8ac1049c17c8ad2949a750032b7293e7b10d4a8de",
+      "license": "CC0-1.0",
+      "source": "Original v10 measurement code or its generated evidence; no external image source"
+    }
+  ]
+}
