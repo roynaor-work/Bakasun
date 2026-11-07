@@ -9,7 +9,7 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   ruins:{wall:'#bba98b',roof:'#8f7e65',trim:'#988064',glass:'#5d6656',barrier:'#b7a58a'}
  },palette=themes[track.theme]||themes.coast,root=new T.Group();root.name='racing-roadside';parent.add(root);
  let word=(seed>>>0)^0x5ca1e9,quality=0,disposed=false;const random=()=>((word=(Math.imul(word,1664525)+1013904223)>>>0)/4294967296);
- const rows={masonry:[],metal:[],glass:[],light:[],round:[],roof:[],pool:[]},batches=[],dummy=new T.Object3D();let buildings=0,galleries=0,lamps=0,guardrailSections=0,cornerSigns=0;
+ const rows={masonry:[],metal:[],glass:[],light:[],round:[],roof:[],pool:[]},batches=[],dummy=new T.Object3D();let buildings=0,galleries=0,lamps=0,guardrailSections=0,cornerSigns=0,barrierSections=0;
  const box=(bucket,site,x,y,z,w,h,d,color,detail=0,rz=0)=>{
   const ca=Math.cos(site.angle),sa=Math.sin(site.angle);rows[bucket].push({x:site.x+ca*x+sa*z,y:site.y+y,z:site.z-sa*x+ca*z,sx:w,sy:h,sz:d,angle:site.angle,rz,color,detail});
  };
@@ -53,6 +53,14 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   box('metal',site,0,.65,-d/2-.1,w,.18,.17,palette.trim);
   for(const x of [-w/2,w/2])box('masonry',site,x,1.15,-d/2-1,1.1,1.3,1.1,palette.barrier,1);
   box('light',site,0,3.8,-d/2-.16,1.3,.12,.08,'#f5d7a1',1);
+ }
+ // racing-v9: a continuous low barrier on both edges (inner face 1.2 m from the asphalt) is the wall the car bounces off.
+ for(let s=2;s<track.length;s+=8.4)for(const side of [-1,1]){const site=siteAt(s,side*(track.width/2+1.45)),base=ground(site.x,site.z);
+  if(!valid(site,.3))continue;
+  // all four corners of the beam must stay beyond the shoulder, so a tight bend never pushes it onto the asphalt
+  const ca=Math.cos(site.angle),sa=Math.sin(site.angle);if([[-.25,-4.25],[.25,-4.25],[-.25,4.25],[.25,4.25]].some(([x,z])=>track.project(site.x+ca*x+sa*z,site.z-sa*x+ca*z).distance<=track.width/2+.65))continue;
+  site.y=site.p.y;barrierSections++;
+  box('masonry',site,0,.45,0,.5,.9,8.5,palette.barrier,1);if(base<site.p.y-.3)box('masonry',site,0,(base-site.p.y)/2+.2,0,.45,site.p.y-base,8.5,palette.barrier,1);
  }
  // Retaining walls and two-height steel rails follow the outside of risky bends.
  for(let s=8;s<track.length;s+=6){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
@@ -108,6 +116,6 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  }
  function setQuality(value){quality=Math.max(0,Math.min(2,value|0));for(const b of batches){const first=b.rows.findIndex(p=>p.detail>2-quality);b.inst.count=first<0?b.rows.length:first;b.inst.visible=b.inst.count>0;}}
  function dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const b of batches)b.inst.dispose();root.clear();}
- function metrics(){return {quality,triangles:batches.reduce((n,b)=>n+b.triangles*b.inst.count,0),draws:batches.filter(b=>b.inst.visible&&b.inst.count>0).length,instances:batches.reduce((n,b)=>n+b.inst.count,0),buildings,galleries,lamps,guardrailSections,cornerSigns,disposed};}
+ function metrics(){return {quality,triangles:batches.reduce((n,b)=>n+b.triangles*b.inst.count,0),draws:batches.filter(b=>b.inst.visible&&b.inst.count>0).length,instances:batches.reduce((n,b)=>n+b.inst.count,0),buildings,galleries,lamps,guardrailSections,barrierSections,cornerSigns,disposed};}
  return {setQuality,dispose,metrics};
 }

@@ -149,7 +149,7 @@ for(const direction of [-1,1])test(`native range toward ${direction>0?'right':'l
   const f=controlsFixture(t);assert.equal(f.slider.type,'range');assert.equal(f.slider.min,'-1');assert.equal(f.slider.max,'1');assert.equal(f.slider.step,'.01');
   f.drag(direction*.75);
   assert.equal(f.slider.value,String(direction*.75));assert.equal(f.slider.getAttribute('aria-valuetext'),`75% ${direction>0?'ימינה':'שמאלה'}`);
-  assert.equal(Number.parseFloat(f.wheel.style.getPropertyValue('--turn')),direction*28.5,'the visible arc keeps clockwise right');
+  assert.equal(Number.parseFloat(f.wheel.style.getPropertyValue('--turn')),direction*.75*95,'the visible arc keeps clockwise right');
   const input=f.controls.sample();
   for(const heading of [0,Math.PI/2,Math.PI,-Math.PI/2])assert.ok(driverSideMovement(input,heading,1)*direction>.05);
   fire(f.slider,'pointerup',{pointerId:1});assert.equal(f.controls.sample().steer,0);

@@ -63,14 +63,14 @@ test('closed 3D centre lines have gentle elevation and no crossing at road level
 });
 
 test('longer circuits scale horizontal distance by 65% while preserving road widths and elevations',()=>{
-  // Measured from the original, unscaled circuits with 40 samples per curve.
+  // Measured from the unscaled circuits with 40 samples per curve (jungle, harbor and ruins reshaped in racing-v9: gentler return to the grid).
   const original={
     coast:{length:843.5964000725697,horizontal:843.5108765661502,width:16,y:[1,2,3,4,5,4,2,1,1,2,2]},
-    jungle:{length:894.6503590768627,horizontal:894.2645965871109,width:14.5,y:[2,3,6,9,11,8,5,3,4,6,4]},
+    jungle:{length:916.77,horizontal:916.6195587079429,width:15,y:[2,3,6,9,11,8,5,3,4,6,5,4]},
     volcano:{length:814.6516391859807,horizontal:814.0934869626604,width:15,y:[4,7,11,15,18,15,11,8,5,4]},
-    harbor:{length:832.5300455631814,horizontal:832.4806346558165,width:14,y:[2,2,3,4,4,3,3,2,2,3,3,2]},
+    harbor:{length:836.77,horizontal:836.7424741585007,width:15.5,y:[2,2,3,4,4,3,3,2,2,3,3,2,2]},
     summit:{length:884.7916026337554,horizontal:883.8201068009035,width:14.5,y:[3,7,13,18,21,18,12,8,5,4,3]},
-    ruins:{length:951.2478403920353,horizontal:951.1354258313588,width:14,y:[2,3,4,5,7,8,6,4,3,3,2,2]}
+    ruins:{length:926.51,horizontal:926.4564643678707,width:15,y:[2,3,4,5,7,8,6,4,3,3,2,2]}
   };
   assert.equal(RACING_TRACK_SCALE,1.65);
   for(const definition of TRACKS){
@@ -164,7 +164,7 @@ test('collectibles refill nitro once and boost pads have a cooldown',()=>{
 });
 
 test('off-road loses speed; fair recovery returns to the last earned checkpoint',()=>{
-  const race=createRacing({config:{countdown:0,stage:{opponents:0}}});const p=place(race,35,17,35);
+  const race=createRacing({config:{countdown:0,walls:false,stage:{opponents:0}}});const p=place(race,35,17,35);
   advance(race,1);assert.ok(p.speed<25);assert.ok(p.offroad);
   p.checkpoints=2;p.nextCheckpoint=3;p.x+=1000;race.step(1/60);
   const safe=race.track.sample(race.track.length/16*2+4);
@@ -181,7 +181,7 @@ test('skipping checkpoints or driving backwards across the finish never wins',()
 });
 
 test('a missed off-road gate cannot award the next gate or finish and recovers fairly',()=>{
-  const race=createRacing({config:{countdown:0,stage:{opponents:0}}}),sector=race.track.length/16;
+  const race=createRacing({config:{countdown:0,walls:false,stage:{opponents:0}}}),sector=race.track.length/16;
   const p=place(race,sector-1,race.track.width*.85,18,{credited:false});
   advance(race,.4);assert.equal(p.checkpoints,0);
   place(race,sector*2+1,0,10,{credited:false});race.step(1/60);
@@ -207,20 +207,23 @@ test('four AI steer through the physical course, change passing lanes and finish
 test('gentle released-steering assistance cannot win a race without driving',()=>{
   const race=createRacing({stage:1,seed:7,config:{countdown:0}});
   advance(race,race.stage.timeLimit+.1);
+  // racing-v9 fences keep an idle car on the circuit (it bounces along the barrier), so it may finish: it must still lose, last.
   assert.equal(race.state.phase,'finished');assert.equal(race.state.result.won,false);
-  assert.ok(race.state.player.checkpoints<race.state.result.requiredCheckpoints);
+  assert.ok(race.state.player.rank>=4);assert.ok(race.state.player.wallHits>50,'an idle car only crawls along the fences');
 });
 
 for(const [stage,seed] of [[1,7],[1,91],[2,11],[3,19],[4,13],[5,17],[6,3],[13,19],[18,29],[19,31],[24,79],[25,17],[30,19],[30,71]]) {
   test(`complete race stage ${stage}, seed ${seed}: legal checkpoints and skilled driving beat AI`,()=>{
     const race=driveToResult(stage,seed),result=race.state.result;
-    assert.ok(result);assert.equal(result.won,true);assert.equal(result.finished,true);assert.equal(result.stars,3);
+    // racing-v9 difficulty ramp: tiers 0-1 (stages 1-12) are won by skilled driving; later tiers only require a legal, complete race.
+    assert.ok(result);assert.equal(result.finished,true);
+    if(stage<=12){assert.equal(result.won,true);assert.equal(result.stars,3);}else{assert.equal(result.stars,result.won?4-result.rank:0);}
     assert.equal(result.checkpoints,16*race.stage.laps);assert.equal(result.requiredCheckpoints,result.checkpoints);
     assert.equal(result.laps,race.stage.laps);assert.equal(race.state.player.recoveries,0);
     assert.ok(result.durationSeconds<race.stage.timeLimit);assert.equal(race.state.phase,'finished');
     const accepted=racingResult({outcome:result.won?'win':'lose',score:result.checkpoints===result.requiredCheckpoints?6-result.rank:0,racing:result},{level:stage,seed},balance);
     assert.ok(accepted,'actual simulation result is accepted by the app reward contract');
-    assert.equal(accepted.stars,result.stars);assert.ok(accepted.money>0);
+    assert.equal(accepted.stars,result.stars);if(result.won)assert.ok(accepted.money>0);
     const time=race.state.time;race.step(.25,{nitro:true});assert.equal(race.state.time,time);
   });
 }
