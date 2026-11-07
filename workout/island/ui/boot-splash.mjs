@@ -1,7 +1,7 @@
 // Opening screen of the island ("האי שלכם מתעורר…"): a short silent clip of the games
 // themselves behind the text. The page paints first with a plain gradient and the text
 // (static markup, no extra bytes). The clip is requested only when the island is still
-// loading after SPLASH_DELAY_MS, never on a data saver, a slow link or when the visitor
+// loading after SPLASH_DELAY_MS (at once when the device already holds it), never on a data saver, a slow link or when the visitor
 // asked for reduced motion, and the request is cancelled the moment the island is ready.
 // Any failure (missing file, offline, decode error, stall) leaves the static screen as is.
 export const SPLASH_DELAY_MS=600;
@@ -56,7 +56,8 @@ export function startBootSplash({doc=globalThis.document,win=globalThis.window,s
   };
   const blocker=clipBlocker({win});
   if(blocker||!sources.length){api.state=blocker||'no-source';el.dataset.clip=api.state;}
-  else later(()=>{
+  else {
+    const begin=()=>{
     if(ended||doc.hidden)return;
     video=doc.createElement('video');
     Object.assign(video,{muted:true,loop:true,playsInline:true,preload:'none',controls:false,disablePictureInPicture:true});
@@ -69,7 +70,12 @@ export function startBootSplash({doc=globalThis.document,win=globalThis.window,s
     const started=video.play?.();
     started?.catch?.(()=>dropVideo('blocked'));
     later(()=>{if(video&&api.state!=='playing')dropVideo('stalled');},stallMs);
-  },delayMs);
+  };
+    // A clip already on the device (kept by the offline cache after the first visit) costs no network:
+    // start it at once. Otherwise wait, so a cold load never competes with the island's own files.
+    let looked;try{looked=Promise.resolve(win.caches?.match?.(sources[0][0],{ignoreSearch:true}));}catch{looked=Promise.resolve();}
+    looked.then(hit=>{if(!ended)later(begin,hit?0:delayMs);},()=>{if(!ended)later(begin,delayMs);});
+  }
   later(()=>api.end(),failsafeMs);
   return api;
 }

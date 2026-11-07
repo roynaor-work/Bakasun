@@ -42,10 +42,10 @@ test('splash: nothing is requested before the delay, and a fast load never reque
   assert.equal(doc.splash.dataset.state,'leaving');
 });
 
-test('splash: slow load starts the clip after the delay, end() cancels the download and restores the page',()=>{
+test('splash: slow load starts the clip after the delay, end() cancels the download and restores the page',async()=>{
   const doc=fakeDoc(),win=fakeWin(),s=startBootSplash({doc,win,sources:src});
   assert.equal(doc.root.attrs['aria-hidden'],'true');
-  win.fire(SPLASH_DELAY_MS);
+  await Promise.resolve();win.fire(SPLASH_DELAY_MS);
   const v=doc.splash.children.find(c=>c.tag==='video');
   assert.ok(v,'video created after the delay');assert.equal(v.preload,'none');assert.equal(v.muted,true);assert.equal(v.attrs['aria-hidden'],'true');assert.ok(v.played);
   s.end();
@@ -54,14 +54,24 @@ test('splash: slow load starts the clip after the delay, end() cancels the downl
   s.end(); // idempotent
 });
 
-test('splash: an error, a missing file or a stall falls back to the static screen',()=>{
+test('splash: an error, a missing file or a stall falls back to the static screen',async()=>{
   for(const how of ['error','stall']){
     const doc=fakeDoc(),win=fakeWin(),s=startBootSplash({doc,win,sources:src,stallMs:4000});
-    win.fire(SPLASH_DELAY_MS);const v=doc.splash.children.find(c=>c.tag==='video');
+    await Promise.resolve();win.fire(SPLASH_DELAY_MS);const v=doc.splash.children.find(c=>c.tag==='video');
     if(how==='error')v.ev.error();else win.fire(SPLASH_DELAY_MS+4000);
     assert.ok(v.removed,how);assert.notEqual(doc.splash.dataset.clip,'playing');assert.equal(doc.splash.removed,false,'the static splash stays until the island is ready');
     s.end();
   }
+});
+
+test('splash: a clip already on the device starts at once, a cold load still waits',async()=>{
+  const hot=fakeWin();hot.caches={match:async()=>({})};const doc=fakeDoc();startBootSplash({doc,win:hot,sources:src});
+  await Promise.resolve();await Promise.resolve();hot.fire(0);
+  assert.ok(doc.splash.children.some(c=>c.tag==='video'),'cached: no delay');
+  const cold=fakeWin();cold.caches={match:async()=>undefined};const doc2=fakeDoc();startBootSplash({doc:doc2,win:cold,sources:src});
+  await Promise.resolve();await Promise.resolve();cold.fire(SPLASH_DELAY_MS-1);
+  assert.equal(doc2.splash.children.some(c=>c.tag==='video'),false,'not cached: waits the full delay');
+  cold.fire(SPLASH_DELAY_MS);assert.ok(doc2.splash.children.some(c=>c.tag==='video'));
 });
 
 test('splash: failsafe ends the splash even if the app never calls end()',()=>{
