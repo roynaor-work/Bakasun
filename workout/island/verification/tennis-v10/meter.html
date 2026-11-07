@@ -1,0 +1,11 @@
+<!doctype html><html dir="rtl" lang="he"><meta charset="utf-8"><body style="margin:0;background:#2f6b5e;color:#fff;font:14px sans-serif">
+<link rel="stylesheet" href="../../minigames/g4f-tennis.css"><link rel="stylesheet" href="../../minigames/tennis.css">
+<style>.row{display:flex;gap:46px;justify-content:center;align-items:flex-end;height:390px;padding-bottom:30px;box-sizing:border-box}.cell{text-align:center;width:120px}.cell .stage{position:relative;height:130px;width:80px;margin:0 auto 12px}.stage .tennis-serve-meter,.stage .tennis-power-meter{position:absolute!important;top:10px!important;bottom:auto!important;right:auto!important}.stage .tennis-serve-meter{left:48px!important}.stage .tennis-power-meter{left:14px!important}</style>
+<div class="game-screen" data-game="tennis"><div class="row game-stage" id="r"></div></div>
+<script>
+const Q={good:.78,medium:.5};const g=(1-Q.good)/2*100,y=(1-Q.medium)/2*100;
+function cell(label,hit,value,charge){const c=document.createElement('div');c.className='cell';const st=document.createElement('div');st.className='stage';
+ if(hit){const m=document.createElement('div');m.className='tennis-serve-meter';m.dataset.mode='hit';m.style.background=`linear-gradient(to top,#f06960 0% ${50-y}%,#efc355 ${50-y}% ${50-g}%,#67d398 ${50-g}% ${50+g}%,#efc355 ${50+g}% ${50+y}%,#f06960 ${50+y}%)`;const n=document.createElement('span');n.className='tennis-serve-needle';n.style.position='absolute';n.style.bottom=value*100+'%';m.append(n);st.append(m);}
+ const p=document.createElement('div');p.className='tennis-power-meter';p.dataset.v9='true';p.style.setProperty('--lo','0%');p.style.setProperty('--safe','12%');p.style.setProperty('--out','73%');const f=document.createElement('span');f.className='tennis-power-fill';f.style.height=charge*100+'%';p.append(f);st.append(p);c.append(st,label);document.getElementById('r').append(c);}
+cell('לפני: רק מד כוח',false,0,.4);cell('אחרי: ירוק, במרכז',true,.5,.4);cell('אחרי: צהוב, קצת מוקדם',true,.33,.4);cell('אחרי: אדום, מאוחר',true,.82,.4);cell('אחרי: אדום, מוקדם',true,.12,.4);
+</script></html>

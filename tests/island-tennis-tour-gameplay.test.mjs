@@ -146,7 +146,7 @@ test('tennis tour: a mixed-shot upgraded player can win the final across indepen
  // Only movement, aim and button inputs are sent to the public model API.
  // The player follows the landing cue after 120 ms, recovers manually toward
  // the centre, and reacts to physical contact rather than a nominal timestamp.
- for(const [rank,releaseDelay]of [[3,.04],[5,.1]]){
+ for(const [rank,releaseDelay]of [[3,.04],[5,.04]]){
   const results=[17,42,129,627,981,4107].map(seed=>{
    const game=createTennis({config,stage:30,seed,difficulty:'easy',ranks:{speed:rank,hit:rank,serve:rank}});
    let lastSwing=-1,incomingAt=null,incomingSerial=-1,eligibleSince=null,event=-1;

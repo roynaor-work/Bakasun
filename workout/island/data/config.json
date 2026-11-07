@@ -11174,6 +11174,7 @@
    "maximumSeconds": 3600,
    "v9": {
     "enabled": true,
+    "meter": {"enabled": true, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
     "shortDelay": {"easy": 0.4, "normal": 0.34, "hard": 0.27},
