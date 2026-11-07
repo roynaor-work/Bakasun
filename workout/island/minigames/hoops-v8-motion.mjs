@@ -7,8 +7,7 @@
  *
  * The pure helpers here do not need WebGL, so node tests can run them. */
 export const V8_BONES=Object.freeze(['Root','Hips','Spine','Chest','Neck','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand','LeftUpLeg','LeftLeg','LeftFoot','RightUpLeg','RightLeg','RightFoot']);
-export const V8_CLIPS=Object.freeze(['pass_chest','pass_bounce','pass_overhead','pass_side','pass_jump','receive_two_hands','receive_moving','steal','block','dribble_idle','dribble_run']);
-export const V8_BALL_CLIPS=Object.freeze(['dribble_idle','dribble_run']);
+export const V8_CLIPS=Object.freeze(['pass_chest','pass_bounce','pass_overhead','pass_side','pass_jump','receive_two_hands','receive_moving','steal','block']);
 /** Clips whose authored Hips track carries the jump: the engine supplies the vertical world motion. */
 export const V8_FLIGHT=Object.freeze(['pass_jump','block']);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -34,7 +33,7 @@ function decode64(text,Type){
 }
 /** Validate and decode motion.json: {fps, clips:{id:{duration,frames,events,quat:Float32Array,hips:Float32Array,support}}}. Throws on a bad pack. */
 export function decodeMotionPack(json){
- if(!json||json.version!==2||!json.clips)throw Error('Basketball v8 motion pack is malformed');
+ if(!json||json.version!==1||!json.clips)throw Error('Basketball v8 motion pack is malformed');
  if(json.bones?.join()!==V8_BONES.join())throw Error('Basketball v8 motion pack has another rig');
  const clips={};
  for(const id of V8_CLIPS){
@@ -43,8 +42,7 @@ export function decodeMotionPack(json){
   if(q.length!==c.frames*V8_BONES.length*4||h.length!==c.frames*3)throw Error('Basketball v8 clip is truncated: '+id);
   const quat=new Float32Array(q.length),hips=new Float32Array(h.length);
   for(let i=0;i<q.length;i++)quat[i]=q[i]/32767;for(let i=0;i<h.length;i++)hips[i]=h[i]/10000;
-  let ball=null;if(V8_BALL_CLIPS.includes(id)){if(!c.ball)throw Error('Basketball v8 ball track missing: '+id);const b=decode64(c.ball,Int16Array);if(b.length!==c.frames*3)throw Error('Basketball v8 ball track is truncated: '+id);ball=new Float32Array(b.length);for(let i=0;i<b.length;i++)ball[i]=b[i]/10000;}
-  clips[id]={id,ball,duration:c.duration,frames:c.frames,events:c.events,quat,hips,support:c.support||[],release:c.release||null,start:c.start,end:c.end};
+  clips[id]={id,duration:c.duration,frames:c.frames,events:c.events,quat,hips,support:c.support||[],release:c.release||null,start:c.start,end:c.end};
  }
  return {fps:json.fps||60,hipsRest:json.hipsRest||0.86,clips};
 }
@@ -142,11 +140,4 @@ export function chooseV8Motion(pack,p,ctx,s,dt){
  }
  if(!p.hasBall||s.recvSince>=RECEIVE_HOLD){s.recvClip=null;s.recvSince=null;}
  return null;
-}
-
-/** The authored ball of a dribble clip at clip time `t` (seconds, wraps), root-local metres: [x, y, z]. Linear between the 60 Hz samples. */
-export function dribbleBallAt(clip,t,out=[0,0,0]){
- const d=clip.duration,f=((t%d)+d)%d*60,i=Math.min(clip.frames-2,Math.floor(f)),u=f-i,b=clip.ball;
- for(let k=0;k<3;k++)out[k]=b[i*3+k]+(b[(i+1)*3+k]-b[i*3+k])*u;
- return out;
 }

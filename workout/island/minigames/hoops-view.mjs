@@ -240,8 +240,6 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
     }
     const drop=top-court.ballR;av.dribbleCtx={u,drop:Math.min(0.28,drop*0.3)};
     bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+drop*dribbleHeight(u);
-    // polish (07/11): the v8 dribble clip carries its own ball track: the bounce is the authored one, hand and floor in step
-    if(handler.act!=='cross'&&av.v8BallWorld?.(v)){bx=v.x;bz=v.z;by=Math.max(court.ballR,v.y);}
    }
   }
   // smooth the hand-off when the engine takes over (release, pass)
