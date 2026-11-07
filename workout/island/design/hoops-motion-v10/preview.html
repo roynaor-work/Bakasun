@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>תנועה בגובה המשחק · כדורסל v10</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div><p class="eyebrow">מעבדת תנועה · כדורסל / 10</p><h1>תנועה בגובה המשחק</h1><p class="subtitle">שלוש דמויות. אותו מהלך. טבעת בגובה 3.05 מטר.</p></div>
+    <div class="header-facts"><span><b>18</b> עצמות</span><span><b>30</b> דגימות לשנייה</span><span class="csp-fact">ללא WebAssembly</span></div>
+  </header>
+  <main class="workspace">
+    <aside class="library" aria-label="ספריית קליפים">
+      <div class="library-heading"><h2>המהלכים</h2><span id="count">—</span></div>
+      <label class="search-label" for="search">חיפוש מהלך</label><input id="search" type="search" placeholder="הטבעה, הגנה, פנייה…" autocomplete="off">
+      <div id="filters" class="filters" aria-label="סינון קליפים"></div>
+      <nav id="clips" aria-label="בחירת קליפ"></nav>
+      <p class="library-note">כל המהלכים מנוגנים מקובצי הריצה שנמסרו, על הדמויות עצמן.</p>
+      <a href="REPORT.md" class="report-link">לדוח המדידות ↗</a>
+    </aside>
+    <section class="review" aria-label="השוואת דמויות">
+      <div class="review-heading"><div><p id="clip-id" class="eyebrow" dir="ltr">טוען ספרייה</p><h2 id="clip-title">מכינים את המגרש…</h2></div><div id="phase" class="phase">30Hz</div></div>
+      <div id="stage" class="stage"><canvas id="canvas" role="img" aria-label="שלוש דמויות כדורסל מנגנות את אותו המהלך מול טבעות תקניות"></canvas><div class="stage-caption"><span>גובה טבעת <b>3.05 מ׳</b></span><span class="clearance-key">קו מקווקו: <b>3.30 מ׳</b></span></div><div id="status" class="status" role="status" aria-live="polite">טוען את שלוש הדמויות…</div></div>
+      <div id="profiles" class="profiles" aria-label="מדידות שלוש הדמויות"></div>
+      <div class="transport">
+        <button id="play" class="primary play" aria-label="השהיה" disabled>Ⅱ</button><button id="restart" class="icon-button" aria-label="נגן מהתחלה" title="מהתחלה">↺</button>
+        <label class="sr-only" for="scrub">זמן הקליפ</label><input id="scrub" type="range" min="0" max="1" step="0.001" value="0" dir="ltr"><output id="time" for="scrub" dir="ltr">0.00 / 0.00 s</output>
+        <label class="speed-label" for="speed">קצב</label><select id="speed" aria-label="מהירות ניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select>
+      </div>
+      <div class="view-controls"><div class="camera-controls" aria-label="זווית מצלמה"><span>מצלמה</span><button data-camera="front" aria-pressed="true">חזית</button><button data-camera="angle" aria-pressed="false">אלכסון</button><button data-camera="side" aria-pressed="false">צד</button></div><label><input id="contacts" type="checkbox" checked> מגעי רגל</label><label><input id="paths" type="checkbox" checked> מסלול תנועה</label><button id="peak" class="peak-button">לשיא ההגעה ↗</button></div>
+      <div class="event-heading"><span>רצף המהלך</span><span id="frame-count" dir="ltr">—</span></div><div id="events" class="event-strip" aria-label="אירועי הקליפ"></div>
+      <p class="method-note">סמן ירוק מציין נטיעה. המסלול והסמנים נמדדים בעולם המגרש; האנימציה שומרת את שלד הדמות ואת אורכי העצמות המקוריים.</p>
+    </section>
+  </main>
+  <footer><span>מהלכים מקוריים · CC0</span><span>תצוגת סקירה עצמאית · ללא חיבור למשחק</span></footer>
+</body>
+</html>

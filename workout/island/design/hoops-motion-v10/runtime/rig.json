@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": 1,
+  "boneNames": [
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Head",
+    "LeftArm",
+    "LeftForeArm",
+    "LeftHand",
+    "RightArm",
+    "RightForeArm",
+    "RightHand",
+    "LeftUpLeg",
+    "LeftLeg",
+    "LeftFoot",
+    "RightUpLeg",
+    "RightLeg",
+    "RightFoot"
+  ],
+  "parents": [
+    null,
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Chest",
+    "LeftArm",
+    "LeftForeArm",
+    "Chest",
+    "RightArm",
+    "RightForeArm",
+    "Hips",
+    "LeftUpLeg",
+    "LeftLeg",
+    "Hips",
+    "RightUpLeg",
+    "RightLeg"
+  ],
+  "profiles": [
+    {
+      "id": "guard",
+      "label": "רכז",
+      "heightMeters": 1.88,
+      "armRatio": 1,
+      "widthRatio": 1,
+      "armLengthMeters": 0.821311011267839,
+      "palmPoint": [
+        -0.029649534957418233,
+        -0.09948164571582985,
+        0.031115048186024494
+      ],
+      "joints": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.0276043053502095,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.0276043053502095,
+            0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.23559708458989187,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.2632013899401013,
+            0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2305843806624474,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.4937857706025488,
+            0
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13033030211355723,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.624116072716106,
+            0
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.03909909063406716,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.663215163350173,
+            0
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "worldPosition": [
+            0.21454372809462496,
+            1.5940398491514391,
+            0
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "worldPosition": [
+            0.21454372809462496,
+            1.2130743506656565,
+            0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "worldPosition": [
+            0.21454372809462496,
+            0.8722104835994299,
+            0
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "worldPosition": [
+            -0.21454372809462496,
+            1.5940398491514391,
+            0
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "worldPosition": [
+            -0.21454372809462496,
+            1.2130743506656565,
+            0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "worldPosition": [
+            -0.21454372809462496,
+            0.8722104835994299,
+            0
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.10526678247633467,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0.10526678247633467,
+            1.0276043053502095,
+            0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "worldPosition": [
+            0.10526678247633467,
+            0.5333516981041809,
+            0
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "worldPosition": [
+            0.10526678247633467,
+            0.08120580384868628,
+            0
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.10526678247633467,
+            0,
+            0
+          ],
+          "worldPosition": [
+            -0.10526678247633467,
+            1.0276043053502095,
+            0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "worldPosition": [
+            -0.10526678247633467,
+            0.5333516981041809,
+            0
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "worldPosition": [
+            -0.10526678247633467,
+            0.08120580384868628,
+            0
+          ]
+        }
+      ],
+      "palms": {
+        "LeftHand": {
+          "palmPoint": [
+            0.029640413079530997,
+            -0.0994902738185709,
+            0.0311014352157285
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 1839,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        },
+        "RightHand": {
+          "palmPoint": [
+            -0.029649534957418233,
+            -0.09948164571582985,
+            0.031115048186024494
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 763,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        }
+      },
+      "triangles": 6226,
+      "shoulderHeightMeters": 1.5940398491514391,
+      "normalizationScale": 1.0025407854889017,
+      "textureSize": [
+        1024,
+        1024
+      ],
+      "uvLayout": "same-indexed-UV-atlas-v1",
+      "runtimePath": "runtime/guard.glb",
+      "dracoPath": "models/guard.glb",
+      "runtimeBytes": 1030508,
+      "dracoBytes": 788564,
+      "runtimeSha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da",
+      "dracoSha256": "53aa0f345ab31e875d39b89f06ef39885fb82b66205b8e2cc67a2472a5c70251"
+    },
+    {
+      "id": "wing",
+      "label": "קיצוני",
+      "heightMeters": 1.98,
+      "armRatio": 1.08,
+      "widthRatio": 1.055,
+      "armLengthMeters": 0.9341975810909804,
+      "palmPoint": [
+        -0.03372476864146137,
+        -0.11315507952001724,
+        0.035391711972840086
+      ],
+      "joints": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.082264099476709,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.082264099476709,
+            0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.24812884242435226,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.3303929419010614,
+            0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.24284950535149372,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.573242447252555,
+            0
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13726276389432254,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.7105052111468775,
+            0
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04117882916829676,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.751684040315174,
+            0
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "worldPosition": [
+            0.23838318618785534,
+            1.6788291887097262,
+            0
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "worldPosition": [
+            0.23838318618785534,
+            1.2455012017694955,
+            0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "worldPosition": [
+            0.23838318618785534,
+            0.8577866871387628,
+            0
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "worldPosition": [
+            -0.23838318618785534,
+            1.6788291887097262,
+            0
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "worldPosition": [
+            -0.23838318618785534,
+            1.2455012017694955,
+            0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "worldPosition": [
+            -0.23838318618785534,
+            0.8577866871387628,
+            0
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.11696371284918135,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0.11696371284918135,
+            1.082264099476709,
+            0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "worldPosition": [
+            0.11696371284918135,
+            0.5617214640928552,
+            0
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "worldPosition": [
+            0.11696371284918135,
+            0.0855252601210132,
+            0
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.11696371284918135,
+            0,
+            0
+          ],
+          "worldPosition": [
+            -0.11696371284918135,
+            1.082264099476709,
+            0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "worldPosition": [
+            -0.11696371284918135,
+            0.5617214640928552,
+            0
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "worldPosition": [
+            -0.11696371284918135,
+            0.0855252601210132,
+            0
+          ]
+        }
+      ],
+      "palms": {
+        "LeftHand": {
+          "palmPoint": [
+            0.03371439299065396,
+            -0.11316489352786507,
+            0.035376227943346376
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 1839,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        },
+        "RightHand": {
+          "palmPoint": [
+            -0.03372476864146137,
+            -0.11315507952001724,
+            0.035391711972840086
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 763,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        }
+      },
+      "triangles": 6226,
+      "shoulderHeightMeters": 1.6788291887097262,
+      "normalizationScale": 1.0025407774721302,
+      "textureSize": [
+        1024,
+        1024
+      ],
+      "uvLayout": "same-indexed-UV-atlas-v1",
+      "runtimePath": "runtime/wing.glb",
+      "dracoPath": "models/wing.glb",
+      "runtimeBytes": 1030504,
+      "dracoBytes": 788612,
+      "runtimeSha256": "e5621aad5be2864d4c0aafb43571dc285f1559928bbb13a8430cb25d610526d5",
+      "dracoSha256": "8b1f0ca23746f163584cfa687ba6e7a4b9f251b93d8ff7f93c60cbf2a41bab4c"
+    },
+    {
+      "id": "center",
+      "label": "סנטר",
+      "heightMeters": 2.08,
+      "armRatio": 1.12,
+      "widthRatio": 1.11,
+      "armLengthMeters": 1.0177267084030017,
+      "palmPoint": [
+        -0.0367401912356104,
+        -0.12327258060816126,
+        0.0385561804696621
+      ],
+      "joints": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.1369239593516665,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.1369239593516665,
+            0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2606606151187841,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.3975845744704507,
+            0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2551146445843419,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.6526992190547924,
+            0
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.14419523389549757,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.7968944529502902,
+            0
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04325857016864927,
+            0
+          ],
+          "worldPosition": [
+            0,
+            1.8401530231189396,
+            0
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "worldPosition": [
+            0.2634779681502808,
+            1.7636186297436367,
+            0
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "worldPosition": [
+            0.2634779681502808,
+            1.2915456178519156,
+            0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "worldPosition": [
+            0.2634779681502808,
+            0.8691645019487964,
+            0
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "worldPosition": [
+            -0.2634779681502808,
+            1.7636186297436367,
+            0
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "worldPosition": [
+            -0.2634779681502808,
+            1.2915456178519156,
+            0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "worldPosition": [
+            -0.2634779681502808,
+            0.8691645019487964,
+            0
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.12927657315784802,
+            0,
+            0
+          ],
+          "worldPosition": [
+            0.12927657315784802,
+            1.1369239593516665,
+            0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "worldPosition": [
+            0.12927657315784802,
+            0.5900912646556642,
+            0
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "worldPosition": [
+            0.12927657315784802,
+            0.08984472244897637,
+            0
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.12927657315784802,
+            0,
+            0
+          ],
+          "worldPosition": [
+            -0.12927657315784802,
+            1.1369239593516665,
+            0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "worldPosition": [
+            -0.12927657315784802,
+            0.5900912646556642,
+            0
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "worldPosition": [
+            -0.12927657315784802,
+            0.08984472244897637,
+            0
+          ]
+        }
+      ],
+      "palms": {
+        "LeftHand": {
+          "palmPoint": [
+            0.036728887869858284,
+            -0.12328327211294077,
+            0.03853931197129686
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 1839,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        },
+        "RightHand": {
+          "palmPoint": [
+            -0.0367401912356104,
+            -0.12327258060816126,
+            0.0385561804696621
+          ],
+          "palmSurface": {
+            "primitive": 2,
+            "sourceVertex": 763,
+            "minimumHandWeight": 0.94
+          },
+          "palmNormal": [
+            0,
+            0,
+            1
+          ],
+          "fingerDirection": [
+            0,
+            -1,
+            0
+          ],
+          "palmarSurfaceVerified": true
+        }
+      },
+      "triangles": 6226,
+      "shoulderHeightMeters": 1.7636186297436367,
+      "normalizationScale": 1.0025408273799388,
+      "textureSize": [
+        1024,
+        1024
+      ],
+      "uvLayout": "same-indexed-UV-atlas-v1",
+      "runtimePath": "runtime/center.glb",
+      "dracoPath": "models/center.glb",
+      "runtimeBytes": 1030504,
+      "dracoBytes": 788588,
+      "runtimeSha256": "68c770f5f93126cb821818dfa857a2bb9cc67ca08d6584c5e9a169767a853e62",
+      "dracoSha256": "88d85ef481e60aeeb2befcef911d12dc9bd50adc42b434ef3a6cac6debe394d6"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "lagoon",
+      "label": "לגונה",
+      "primary": "#176f77",
+      "secondary": "#102a40",
+      "trim": "#f4e3b8"
+    },
+    {
+      "id": "ember",
+      "label": "גחלת",
+      "primary": "#a74332",
+      "secondary": "#302b49",
+      "trim": "#f6e5bf"
+    }
+  ],
+  "source": {
+    "path": "../hoops-v7/characters/models/pg-lod1.glb",
+    "sha256": "4f9ee0fc5b7d08836981483d279dc7025b417501486268797995478b8a9dd651",
+    "retained": "Only MakeHuman core human_surface above ankles and core eyes; native hair, shoes and externally sourced clothing/animation discarded; original project sewn-tank and piping retained as fitted template.",
+    "license": "CC0-1.0 for retained upstream MakeHuman core anatomy/eyes only",
+    "projectOriginal": "Fitted sewn tank template from hoops-v7/characters/source/model_helpers_garments.mjs and build_characters.mjs, adapted into the new canonical proportions and refitted here. No native source garment retained.",
+    "licenseURL": "https://static.makehumancommunity.org/about/license.html"
+  },
+  "units": "meters",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "bindPolicy": "Identity local joint rotations; canonical limb directions. Apply motion2 local quaternions directly; preserve profile translations."
+}
