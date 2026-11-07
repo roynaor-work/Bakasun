@@ -11,7 +11,7 @@ import {clips as catalog} from '../design/soccer-motion-v9/runtime/catalog.mjs';
 const pack=new URL('../design/soccer-motion-v9/runtime/',import.meta.url),out=new URL('../assets/soccer-v9/',import.meta.url);
 const round=(v,n=3)=>Math.round(v*10**n)/10**n;
 /** Clips the game plays, with the key stride of the 30 Hz source (1 = every key). Contact clips keep every key. */
-export const USED={idle_relaxed:2,idle_scan:2,idle_weight_shift:2,walk:1,jog:1,run_brake:1,running_pass:1,long_shot:1,
+export const USED={run:1,sprint:1,idle_relaxed:2,idle_scan:2,idle_weight_shift:2,walk:1,jog:1,run_brake:1,running_pass:1,long_shot:1,
   goalkeeper_ready:2,goalkeeper_catch_high:1,goalkeeper_catch_low:1,celebrate_hop:2,celebrate_clap:2,celebrate_pump:2,celebrate_turn:2};
 const REST_HIPS=[0,.86,0];
 const states={};

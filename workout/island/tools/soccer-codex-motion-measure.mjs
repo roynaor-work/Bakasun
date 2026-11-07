@@ -2,10 +2,10 @@
  * Codex v9), the real motion controller at 60 Hz, with the character travelling at the simulated speed. Prints JSON:
  * foot sliding per constant speed (stance foot horizontal speed while planted), pose pops (largest per-frame bone rotation and
  * hips step) over a scripted sequence, and the idle arm angles.
- * Usage: node tools/soccer-codex-motion-measure.mjs [off]   ("off" = without the Codex clips, the previous behaviour) */
+ * Usage: node tools/soccer-codex-motion-measure.mjs [off|v7run]   ("off" = without the Codex clips; "v7run" = Codex walk/jog/idle/brake but the v7 runs) */
 import {readFile} from 'node:fs/promises';
-const off=process.argv[2]==='off';
-globalThis.location={search:''};
+const off=process.argv[2]==='off',v7run=process.argv[2]==='v7run';
+globalThis.location={search:v7run?'?soccerRunV9=0':''};
 const T=await import('../vendor/three.module.js');
 const {composeSoccerRestartMotion}=await import('../minigames/soccer-restart-motion.mjs');
 const {compileSoccerDesignClips,createSoccerDesignMotion}=await import('../minigames/soccer-design-character.mjs');
@@ -64,14 +64,26 @@ function strideMatch(speed){
   const state=rt.motion.state,clip=data.states[state],rate=rt.motion.actions[state]?.getEffectiveTimeScale?.()??1,implied=(clip?.speedMps||0)*rate;
   return {speed,state,clipSpeedMps:clip?.speedMps??null,rate:r2(rate),impliedMps:r2(implied),mismatchPct:clip?.speedMps?r2(Math.abs(implied-speed)/speed*100):null};
 }
+
+/** What the runs look like in numbers: trunk lean, elbow flexion range, hips bob, step rate, and the playback rate the controller applies. */
+function runPose(speed){
+  const rt=make(),p=mk(),s=S();p.vz=speed;p.fz=1;const T2=T;const rows=[];
+  for(let i=0;i<240;i++){rt.motion.update(p,s,{mode:'run'},dt);if(i<90)continue;rt.group.updateMatrixWorld(true);
+    const W=n=>world(rt.bones,n),hips=W('Hips'),neck=W('Neck'),up=neck.clone().sub(hips);
+    const flex=['Left','Right'].map(side=>{const u=W(side+'ForeArm').sub(W(side+'Arm')),f=W(side+'Hand').sub(W(side+'ForeArm'));return deg(u.angleTo(f));});
+    rows.push({lean:deg(Math.atan2(up.z,up.y)),flexMin:Math.min(...flex),flexMax:Math.max(...flex),hipsY:hips.y});}
+  const state=rt.motion.state,clip=data.states[state],rate=rt.motion.actions[state]?.getEffectiveTimeScale?.()??1;
+  return {speed,state,rate:r2(rate),stepsPerSecond:r2(2/(clip.durationSeconds/rate)),leanDeg:r2(rows.reduce((a,r)=>a+r.lean,0)/rows.length),elbowFlexMinDeg:r2(Math.min(...rows.map(r=>r.flexMin))),elbowFlexMaxDeg:r2(Math.max(...rows.map(r=>r.flexMax))),hipsBobCm:r2((Math.max(...rows.map(r=>r.hipsY))-Math.min(...rows.map(r=>r.hipsY)))*100)};
+}
 const SEQ=[[1.5,0],[2,1],[2,2.6],[2,4.5],[2,6.5],[1.2,0],[1.5,2.6],[1.2,0]];
 const seq=play(SEQ),pops=seq.map(r=>r.pop),steps=seq.map(r=>r.hipsStep);
 const states=[];for(const r of seq)if(!states.length||states.at(-1)!==r.state)states.push(r.state);
 function idleArms(){const rt=make(),p=mk(),s=S();let rows=[];const seen={};for(let i=0;i<1500;i++){rt.motion.update(p,s,{mode:'idle'},dt);if(i>60){const m=measure(rt);rows.push(m);const k=rt.motion.state;(seen[k]||(seen[k]=[])).push(m);}}
   return Object.fromEntries(Object.entries(seen).map(([k,v])=>[k,{abdMax:+Math.max(...v.map(r=>r.abd)).toFixed(1),flexMin:+Math.min(...v.map(r=>r.flex)).toFixed(1)}]));}
-const out={mode:off?'before (no Codex v9 clips)':'after (Codex v9 clips)',
+const out={mode:off?'before (no Codex v9 clips)':v7run?'Codex walk/jog/idle/brake, v7 runs':'Codex clips incl. v9 run and sprint',
   strideMatch:[.8,1,1.3,1.6,2,2.4,2.8,3.2,4,4.5,5.4,6.5].map(strideMatch),
   sequence:{states,popMaxDeg:r2(Math.max(...pops)),popP99Deg:r2(pct(pops,.99)),hipsStepMaxM:r2(Math.max(...steps)),hipsStepP99M:r2(pct(steps,.99))},
+  runs:[3.2,4.2,5.3,6,6.5].map(runPose),
   idle:idleArms()};
 console.log(JSON.stringify(out,null,1));
 if(process.argv.includes('--pops')){const top=seq.map((r,i)=>({i,t:+(i*dt).toFixed(2),state:r.state,pop:+r.pop.toFixed(1)})).sort((a,b)=>b.pop-a.pop).slice(0,8);console.error(JSON.stringify(top));}

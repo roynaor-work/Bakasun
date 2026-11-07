@@ -7,7 +7,7 @@ import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
-import {soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
+import {soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 
@@ -176,7 +176,8 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
   }));
   // Codex v9: walk and jog replace the slowed-down runs of the v7 ladder when the library loaded.
-  const codex=Boolean(actions.v9_walk&&actions.v9_jog&&actions.run_4&&actions.run_5&&actions.sprint),ladderDef=codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER;
+  const codexRuns=Boolean(actions.v9_walk&&actions.v9_jog&&actions.v9_run&&actions.v9_sprint)&&soccerCodexRunEnabled(config),codex=codexRuns||Boolean(actions.v9_walk&&actions.v9_jog&&actions.run_4&&actions.run_5&&actions.sprint);
+  const ladderDef=codexRuns?SOCCER_CODEX_RUN_LADDER:codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER,ladderBounds=codexRuns?SOCCER_CODEX_RUN_BOUNDS:codex?SOCCER_CODEX_BOUNDS:null;
   const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
   let idleAge=0;
   let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null,slide=null,dive=null;
@@ -289,7 +290,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
-        if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,codex?SOCCER_CODEX_BOUNDS:null);locomotion=ladder[rung];}
+        if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,ladderBounds);locomotion=ladder[rung];}
         if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
         else if(!moving&&running)change(codex&&actions.v9_run_brake?(previousSpeed>=SOCCER_CODEX_BRAKE_FROM?'v9_run_brake':(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':actions.v9_idle_relaxed?'v9_idle_relaxed':'idle')):'decelerate','slowing');
         else if(!moving)change(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':actions.v9_idle_relaxed?(SOCCER_CODEX_IDLES.includes(state)?state:'v9_idle_relaxed'):'idle','stopped');

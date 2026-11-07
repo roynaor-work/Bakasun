@@ -3,6 +3,8 @@
  * `?soccerMotionV9=0` switches it off (not to be confused with `?soccerMotion=0`, the arm/slide work), `config.soccer.codexMotion=false` too.
  * assets/soccer-v9/clips.json is built by tools/soccer-v9-clips.mjs (same 18 bones and rest pose as the v7/v8 characters). */
 export const soccerCodexMotionEnabled=(config,search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerMotionV9')!=='0'&&config?.codexMotion!==false;
+/** `?soccerRunV9=0` (or config.codexRun=false) keeps the v7 runs (run_4, run_5, sprint) and only the Codex walk and jog below them. */
+export const soccerCodexRunEnabled=(config,search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerRunV9')!=='0'&&config?.codexRun!==false;
 export const soccerCodexClipsUrl=()=>new URL('../assets/soccer-v9/clips.json',import.meta.url).href;
 export const SOCCER_CODEX_PREFIX='v9_';
 export function soccerCodexStates(json){
@@ -12,6 +14,9 @@ export function soccerCodexStates(json){
 /** Speed ladder with the library's walk (1.0 m/s) and jog (2.6 m/s) in place of the v7 run_1..run_3, which were runs slowed down.
  * All clips share one foot phase (left foot plants at 0, right at half), so a rung change keeps the feet from popping. */
 export const SOCCER_CODEX_LADDER=Object.freeze([['v9_walk',1],['v9_jog',2.6],['run_4',4.2],['run_5',5.4],['sprint',7.2]]);
+/** Ladder with the library's own run (4.5 m/s) and sprint (7.2 m/s) as well: the runs the controlled player is on 89% of the time. */
+export const SOCCER_CODEX_RUN_LADDER=Object.freeze([['v9_walk',1],['v9_jog',2.6],['v9_run',4.5],['v9_sprint',7.2]]);
+export const SOCCER_CODEX_RUN_BOUNDS=Object.freeze([1.55,3.5,6]);
 /** Rung boundaries (m/s). Walk to jog is at 1.55, not the midpoint 1.8: a walk is played up to 1.55x and a jog down to 0.6x. */
 export const SOCCER_CODEX_BOUNDS=Object.freeze([1.55,3.4,4.8,6.3]);
 /** Rung index for a speed with hysteresis (stay until clearly past the boundary between two rungs). */
