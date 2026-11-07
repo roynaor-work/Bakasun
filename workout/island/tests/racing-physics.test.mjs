@@ -164,7 +164,7 @@ test('collectibles refill nitro once and boost pads have a cooldown',()=>{
 });
 
 test('off-road loses speed; fair recovery returns to the last earned checkpoint',()=>{
-  const race=createRacing({config:{countdown:0,stage:{opponents:0}}});const p=place(race,35,17,35);
+  const race=createRacing({config:{countdown:0,walls:false,stage:{opponents:0}}});const p=place(race,35,17,35);
   advance(race,1);assert.ok(p.speed<25);assert.ok(p.offroad);
   p.checkpoints=2;p.nextCheckpoint=3;p.x+=1000;race.step(1/60);
   const safe=race.track.sample(race.track.length/16*2+4);
@@ -181,7 +181,7 @@ test('skipping checkpoints or driving backwards across the finish never wins',()
 });
 
 test('a missed off-road gate cannot award the next gate or finish and recovers fairly',()=>{
-  const race=createRacing({config:{countdown:0,stage:{opponents:0}}}),sector=race.track.length/16;
+  const race=createRacing({config:{countdown:0,walls:false,stage:{opponents:0}}}),sector=race.track.length/16;
   const p=place(race,sector-1,race.track.width*.85,18,{credited:false});
   advance(race,.4);assert.equal(p.checkpoints,0);
   place(race,sector*2+1,0,10,{credited:false});race.step(1/60);
@@ -207,8 +207,9 @@ test('four AI steer through the physical course, change passing lanes and finish
 test('gentle released-steering assistance cannot win a race without driving',()=>{
   const race=createRacing({stage:1,seed:7,config:{countdown:0}});
   advance(race,race.stage.timeLimit+.1);
+  // racing-v9 fences keep an idle car on the circuit (it bounces along the barrier), so it may finish: it must still lose, last.
   assert.equal(race.state.phase,'finished');assert.equal(race.state.result.won,false);
-  assert.ok(race.state.player.checkpoints<race.state.result.requiredCheckpoints);
+  assert.ok(race.state.player.rank>=4);assert.ok(race.state.player.wallHits>50,'an idle car only crawls along the fences');
 });
 
 for(const [stage,seed] of [[1,7],[1,91],[2,11],[3,19],[4,13],[5,17],[6,3],[13,19],[18,29],[19,31],[24,79],[25,17],[30,19],[30,71]]) {

@@ -317,3 +317,6 @@
 .game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1] .racing-steer{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;clip-path:inset(50%)}
 .game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]:focus-within .racing-wheel{opacity:1;outline:2px solid var(--race-yellow);outline-offset:4px;border-radius:50%}
 .game-screen[data-game=islandRacing] .racing-controls .racing-credit,.game-screen[data-game=islandRacing] .racing-actions,.game-screen[data-game=islandRacing] .racing-auto{z-index:3}
+
+/* racing-v9: the wheel eases back to centre on release instead of snapping. */
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]:not(.active) .racing-wheel{transition:opacity .12s,transform .16s ease-out}

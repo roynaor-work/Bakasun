@@ -26,7 +26,7 @@ export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index)
   const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
     timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
-    aiSpeed: 34.5 + tier * 2.0 + (index % 6) * 0.18, aiCorner: 17 + tier * 2.2,
+    aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: 17 + tier * 2.2,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
     // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
     timeLimit: Math.ceil(TRACK_LENGTHS.get(circuit.id) * laps / 18 + 25),
