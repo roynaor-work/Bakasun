@@ -32,6 +32,19 @@ export function runRacingSession(ctx){
  const bounds=model.track.points.reduce((b,p)=>({minX:Math.min(b.minX,p.x),maxX:Math.max(b.maxX,p.x),minZ:Math.min(b.minZ,p.z),maxZ:Math.max(b.maxZ,p.z)}),{minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity});
  function mapPoint(p){const k=Math.min(152/(bounds.maxX-bounds.minX),95/(bounds.maxZ-bounds.minZ));return [90+(p.x-(bounds.minX+bounds.maxX)/2)*k,60+(p.z-(bounds.minZ+bounds.maxZ)/2)*k];}
  function minimap(){mc.clearRect(0,0,180,120);mc.lineCap='round';mc.lineJoin='round';mc.beginPath();model.track.points.forEach((p,i)=>{const [x,y]=mapPoint(p);i?mc.lineTo(x,y):mc.moveTo(x,y);});mc.closePath();mc.strokeStyle='#0d343d9c';mc.lineWidth=9;mc.stroke();mc.strokeStyle='#fff2d390';mc.lineWidth=2;mc.stroke();for(const c of [...model.state.cars].reverse()){const [x,y]=mapPoint(c);mc.beginPath();mc.arc(x,y,c.isPlayer?5:3,0,Math.PI*2);mc.fillStyle=c.isPlayer?'#ffe29a':'#faf6df';mc.fill();if(c.isPlayer){mc.strokeStyle='#14383b';mc.lineWidth=2;mc.stroke();}}}
+ const podiumOn=new URLSearchParams(globalThis.location?.search||'').get('racingPodium')!=='0';
+ const PODIUM_COLORS=['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca'];
+ function showPodium(s,done){
+  const ranked=[...s.cars].sort((x,y)=>x.rank-y.rank),top=ranked.slice(0,3),layout=[top[1],top[0],top[2]].filter(Boolean);
+  const card=node('div','racing-podium');card.setAttribute('role','dialog');card.setAttribute('aria-label','פודיום');
+  const title=node('strong','racing-podium-title',s.result.won?'ניצחון':s.result.rank<=3?'על הפודיום':'סיום המרוץ');card.append(title);
+  const row=node('div','racing-podium-row');
+  for(const car of layout){const place=car.rank,step=node('div','racing-podium-step place-'+place),swatch=node('i','racing-podium-car');swatch.style.background=PODIUM_COLORS[Math.max(0,s.cars.indexOf(car))%PODIUM_COLORS.length];
+   const name=node('span','racing-podium-name',car.isPlayer?'אתם':car.name);if(car.isPlayer)step.classList.add('you');step.append(swatch,name,node('b','racing-podium-place',String(place)));row.append(step);}
+  card.append(row,node('small','racing-podium-note',s.result.rank>3?`סיימתם במקום ${s.result.rank}`:'לחצו להמשך'));stage.append(card);
+  let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);card.remove();done();};
+  const timer=setTimeout(close,4000);card.addEventListener('pointerdown',close,{signal:abort.signal});abort.signal.addEventListener('abort',()=>clearTimeout(timer),{once:true});
+ }
  function tick(at){if(disposed)return;const dt=last?Math.min(.1,(at-last)/1000):0,ms=last?at-last:0;last=at;
   if(!paused&&!document.hidden){model.step(dt,input.sample());view.observeFrame(ms);}const s=model.state,p=s.player;
   audio.sync(paused?0:p.speed,p.boosting,{drifting:p.drifting,offroad:p.offroad,steer:p.steer});view.render(s,paused?0:dt);minimap();
@@ -39,7 +52,11 @@ export function runRacingSession(ctx){
   lapInfo.textContent=p.lapTimes.length?`אחרונה ${fmt(p.lapTimes[p.lapTimes.length-1])} · שיא ${fmt(bestLap)}`:(bestLap?`שיא ${fmt(bestLap)}`:'');draftBadge.hidden=!(p.draft>.15);draftBadge.style.opacity=String(Math.min(1,.4+p.draft));countdown.hidden=s.phase!=='countdown';countdown.textContent=Math.ceil(s.countdown)||'';hint.hidden=s.time>4.5;screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='wall'){ctx.sound?.('hit');view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;
-  if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result});return;}frame=requestAnimationFrame(tick);
+  if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
+   const done=()=>ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result});
+   // racing-v11 podium: the top three of the finished race for 4 s (tap to skip), then the normal result. ?racingPodium=0 skips it.
+   if(podiumOn){showPodium(s,done);return;}
+   done();return;}frame=requestAnimationFrame(tick);
  }
  return session;
 }
