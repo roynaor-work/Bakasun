@@ -1,8 +1,8 @@
-import {fireIndicators} from './fire-navigation.mjs?v=island-v2-20261107-3';
-import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-3';
-import {createControls} from './controls.mjs?v=island-v2-20261107-3';
-import {installFireUI,updateFireUI} from './fire-ui.mjs?v=island-v2-20261107-3';
-import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-3';
+import {fireIndicators} from './fire-navigation.mjs?v=island-v2-20261107-4';
+import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-4';
+import {createControls} from './controls.mjs?v=island-v2-20261107-4';
+import {installFireUI,updateFireUI} from './fire-ui.mjs?v=island-v2-20261107-4';
+import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-4';
 
 /** Fire owns its overlay and lifecycle; shared controls and shell stay untouched. */
 export function runFireSession(source,createModel,draw,createView){

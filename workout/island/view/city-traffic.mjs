@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {cityRoadNetwork,createCityTraffic} from './city-traffic-model.mjs?v=island-v2-20261107-3';
+import {cityRoadNetwork,createCityTraffic} from './city-traffic-model.mjs?v=island-v2-20261107-4';
 
 /** The original Meshy car keeps its geometry, materials and textures. Instanced
  * draws share the pilot's existing model cache; this layer never disposes it. */

@@ -1,11 +1,11 @@
-import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-3';
+import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-4';
 import {drawUltraAlienEffects,drawAlienFallbackFeedback} from './ultra-alien-effects.mjs';
-import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-3';
+import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-4';
 import {runAlienSession} from './alien-session.mjs';
 import {createAlienModel} from './alien-flight-model.mjs';
 import './alien-ui.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer,wingVisible} from './alien-v10-draw.mjs';
-import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-3';
+import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-4';
 export {createAlienModel};
 export {createAlienEntity,separateAliens,alienStack} from './alien-flight-combat.mjs';
 const TAU=Math.PI*2;
