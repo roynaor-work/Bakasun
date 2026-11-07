@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0; original diagnostic preview. See LICENSES.md. -->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>מסלולי פורמולה — מעבדת מסלולים v2</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div><p class="eyebrow"><span class="status-dot"></span> מעבדת מסלולים <b dir="ltr">02</b></p><h1>לבלום. לפנות. להאיץ שוב.</h1><p class="intro">שישה מסלולי פורמולה, עם קצב שמתחלף לאורך ההקפה.</p></div>
+      <div class="header-note"><span>סקירת מסלולים</span><strong>6 <small>מסלולים</small></strong><span>גיאומטריה · בלימה · מהירות</span></div>
+    </header>
+
+    <p id="error" class="error" role="alert" hidden></p>
+    <p id="loading" class="loading" role="status">טוען מסלולים ומחשב פרופילי מהירות…</p>
+
+    <main id="app" hidden>
+      <nav id="track-picker" class="track-picker" aria-label="בחירת מסלול"></nav>
+
+      <div class="section-heading"><div><p class="eyebrow">המסלול הנבחר</p><h2 id="track-name">—</h2></div><div class="profile-options"><label class="tier-label">מודל פנייה<select id="model"><option value="ai">יעד פנייה לפי aiCorner</option><option value="physical">תקרת ההיגוי של השחקן</option></select></label><label class="tier-label">רמת מרוץ<select id="tier"><option value="0">רמה 1 · 144 קמ״ש</option><option value="1">רמה 2 · 147 קמ״ש</option><option value="2">רמה 3 · 149 קמ״ש</option><option value="3">רמה 4 · 152 קמ״ש</option><option value="4">רמה 5 · 155 קמ״ש</option></select></label></div></div>
+
+      <div class="analysis-grid">
+        <section class="panel map-panel" aria-labelledby="map-title">
+          <div class="panel-heading"><h3 id="map-title">מפת הקפה</h3><div class="map-hint">לחצו על הכביש לבדיקת נקודה</div></div>
+          <svg id="track-map" viewBox="0 0 820 560" role="img" aria-label="מבט עליון של המסלול, צבוע לפי מהירות"></svg>
+          <div class="map-footer"><span class="legend-speed"><i class="speed-gradient"></i><span>בלימה</span><span>מהירות שיא</span></span><span class="marker-key"><b>●</b> פנייה <b class="brake-dot">◆</b> תחילת בלימה <b class="start-key">▰</b> זינוק</span></div>
+        </section>
+
+        <aside class="telemetry-column">
+          <section class="panel telemetry" aria-labelledby="telemetry-title">
+            <div class="panel-heading"><h3 id="telemetry-title">בנקודה הנבחרת</h3><span id="drive-phase" class="phase">האצה</span></div>
+            <div class="speed-readout"><strong id="current-speed" dir="ltr">—</strong><span>קמ״ש</span></div>
+            <div class="telemetry-pair"><span>מרחק מתחילת ההקפה<strong id="current-distance" dir="ltr">—</strong></span><span>מתוך המהירות המרבית<strong id="current-ratio" dir="ltr">—</strong></span></div>
+            <div class="playback"><button id="play" type="button" aria-pressed="false">ניגון הקפה</button><label>קצב<select id="playback-rate" aria-label="קצב ניגון"><option value="1">×1</option><option value="4" selected>×4</option><option value="8">×8</option></select></label></div>
+            <label class="scrubber-label" for="scrubber">מיקום בהקפה</label><input id="scrubber" type="range" min="0" max="10000" value="0" aria-label="מיקום בהקפה">
+          </section>
+
+          <section class="panel track-facts" aria-labelledby="facts-title"><h3 id="facts-title">אופי המסלול</h3><dl id="track-facts"></dl><p class="unit-note">אורך, רדיוסים ומרחקים מוצגים במטרים לפני הסקאלה. המהירות מחושבת בגודל המשחק, אחרי סקאלה ×1.65.</p></section>
+        </aside>
+      </div>
+
+      <section class="panel speed-panel" aria-labelledby="profile-title">
+        <div class="panel-heading"><div><h3 id="profile-title">פרופיל יעד לפי aiCorner</h3><p class="subtle">הזיזו את הסמן על הגרף כדי לעבור לאותה נקודה במפה</p></div><div class="chart-key"><span><i class="line-ideal"></i>מהירות לפי הפרופיל</span><span><i class="line-cap"></i>תקרת פנייה</span><span><i class="line-threshold"></i>85% מהשיא</span></div></div>
+        <svg id="speed-chart" viewBox="0 0 1120 240" role="img" aria-label="גרף מהירות אידיאלית ותקרת פנייה לפי מרחק בהקפה"></svg>
+      </section>
+
+      <div class="metrics-strip" id="metrics-strip"></div>
+
+      <section class="panel corners-panel" aria-labelledby="corners-title"><div class="panel-heading"><h3 id="corners-title">פניות ואזורי בלימה</h3><span class="subtle">לחצו על פנייה למעבר במפה ובגרף</span></div><div id="corners" class="corners"></div></section>
+
+      <section class="panel comparison-panel" aria-labelledby="comparison-title"><div class="panel-heading"><div><p class="eyebrow">כל ששת המסלולים</p><h3 id="comparison-title">טבלת מדידות והשוואה</h3></div><span id="table-tier" class="subtle"></span></div><div class="table-scroll"><table><caption>המדדים המחושבים מתעדכנים עם בחירת רמת המרוץ ומודל הפנייה. זמן סימולציה מוצג מהרצה הדלסית שמורה.</caption><thead><tr><th scope="col">מסלול</th><th scope="col">אורך</th><th scope="col">פניות</th><th scope="col">מתחת ל־85%<small>נדרש ≥40%</small></th><th scope="col">מעל 95%<small>נדרש ≤25%</small></th><th scope="col">לפני: מתחת ל־85%</th><th scope="col">הקפה לפי הפרופיל</th><th scope="col">הקפת שחקן<small>סימולציה</small></th><th scope="col">שיפוע מרבי</th></tr></thead><tbody id="comparison"></tbody></table></div></section>
+
+      <footer class="page-footer"><p>יעד aiCorner מתאר את קצב הפניות המתוכנן. הוא אינו המהירות הפיזיקלית המרבית של השחקן; בחרו בתקרת ההיגוי להשוואה. זמן השחקן נמדד בנפרד במנוע הפיזיקה הקיים. ברמה 4 נוסעים בכיוון ההפוך.</p><nav aria-label="קבצי המסירה"><a href="REPORT.md">דוח ומדידות</a><a href="tracks.json">נתוני המסלולים</a><a href="LICENSES.md">מקור ורישיונות</a></nav></footer>
+    </main>
+  </div>
+</body>
+</html>
