@@ -1,0 +1,10 @@
+<!doctype html><html dir="rtl" lang="he"><meta charset="utf-8"><body style="margin:0;background:#2f6b5e;color:#fff;font:14px sans-serif">
+<link rel="stylesheet" href="../../minigames/g4f-tennis.css"><link rel="stylesheet" href="../../minigames/tennis.css">
+<style>.row{display:flex;gap:60px;justify-content:center;align-items:flex-end;height:390px;padding-top:80px;box-sizing:border-box}.cell{text-align:center;direction:rtl}.cell .game-stage{position:relative;height:80px;width:40px;margin:0 auto 12px}.tennis-power-meter{position:absolute!important;left:15px!important;top:5px!important}</style>
+<div class="game-screen" data-game="tennis"><div class="row" id="r"></div></div>
+<script>
+const mk=(label,v9,charge,need,tol)=>{const c=document.createElement('div');c.className='cell';const st=document.createElement('div');st.className='game-stage';const m=document.createElement('div');m.className='tennis-power-meter';const f=document.createElement('span');f.className='tennis-power-fill';f.style.height=charge*100+'%';m.append(f);
+ if(v9){const lo=Math.max(0,need-tol),hi=Math.min(1,need+tol),depth=need?5.4+need/.75*3.3:5.4,out=Math.min(1,need+tol+(9.06-depth)/6);m.style.setProperty('--out',out*100+'%');m.dataset.v9='true';m.style.setProperty('--lo',lo*100+'%');m.style.setProperty('--safe',hi*100+'%');m.dataset.over=String(charge>out);m.dataset.under=String(charge<lo);}else{m.style.setProperty('--safe','82%');m.dataset.over=String(charge>.82);}
+ st.append(m);c.append(st,label);document.getElementById('r').append(c);};
+mk('לפני: כל אורך אותו מד',false,.6);mk('אחרי: כדור רגיל, כוח בטווח',true,.1,0,.12);mk('אחרי: כדור רגיל, יותר מדי (ארוך)',true,.5,0,.12);mk('אחרי: ארוך, כוח נמוך מדי',true,.25,.75,.12);mk('אחרי: ארוך, כוח בטווח',true,.72,.75,.12);mk('אחרי: ארוך, יותר מדי כוח',true,.95,.75,.12);
+</script></html>
