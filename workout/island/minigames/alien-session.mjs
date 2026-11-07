@@ -5,6 +5,7 @@ import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-1';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
 import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-1';
+import {alienV9Enabled} from './alien-v9.mjs';
 import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-1';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
@@ -33,7 +34,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
  const view=createView?.({...ctx,art},model),renderContext={...ctx,art,quality,view};
  void loadOptionalArt(art,alienBakeSettings(b),()=>disposed);
  status.hidden=true;status.textContent='';ctx.upgradePanel?.remove();ctx.spreadButton?.remove();
- controls.classList.add('alien-controls');
+ controls.classList.add('alien-controls');if(alienV9Enabled())controls.dataset.alienV9='true';
  const shoot=controls.querySelector('#shoot'),missile=controls.querySelector('#pass');
  shoot.setAttribute('aria-label',t('minigame.fire'));shoot.replaceChildren(alienIcon('fire'));
  missile.setAttribute('aria-label',t('minigame.nova'));missile.replaceChildren(alienIcon('nova'));

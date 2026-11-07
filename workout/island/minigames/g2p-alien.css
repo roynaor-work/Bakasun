@@ -25,3 +25,7 @@
  .game-screen[data-game=alienDefense] .alien-controls.alien-controls.left-handed #shoot{left:14px;right:auto}
  .game-screen[data-game=alienDefense] .alien-controls.alien-controls.left-handed #pass{left:112px;right:auto}
 }
+
+/* v9: fire button is the only way to shoot; bigger, thumb-sized, opposite the stick */
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-v9=true].alien-controls #shoot{width:108px;height:108px;min-height:108px;padding:30px;right:22px;bottom:max(96px,13vh,env(safe-area-inset-bottom))}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-v9=true].alien-controls #pass{right:144px}
