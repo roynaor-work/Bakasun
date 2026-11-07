@@ -11,7 +11,7 @@ const server=await serveIsland(),chromium=await islandChromium();
 const out=process.env.CATCH_QA_DIR||join(tmpdir(),'island-catch-qa');
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--ignore-gpu-blocklist']});
 const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:1,hasTouch:true});
-await context.addInitScript(()=>{localStorage.setItem('island.sound','off');localStorage.setItem('island.catch.help','1');});
+await context.addInitScript(()=>{localStorage.setItem('island.sound','off');localStorage.setItem('island.catch.help2','1');});
 const page=await context.newPage(),errors=[],outside=[],csp=[];page.setDefaultTimeout(120000);
 page.on('pageerror',e=>errors.push(e.message));
 page.on('console',m=>{if(/content security policy|violates/i.test(m.text()))csp.push(m.text());});
@@ -20,10 +20,14 @@ const session=()=>page.evaluate(()=>window.__island.ui.activityInterface.current
 const solve=`(()=>{const e=window.__island.ui.activityInterface.current.session.engine,st=e.state;let best=null;
  for(const tool of e.tools.map(t=>t.id)){for(let a=12;a<=72&&!best;a+=1)for(let p=.2;p<=1&&!best;p+=.01){const f=e.trajectory(a,p,tool,{resolve:true,t0:e.clock+e.balance.physics.throwSeconds});if(f.kind==='catch')best=[a,p,tool];}if(best)break;}
  return best;})()`;
-const launch=async stage=>{
-  await page.evaluate(s=>window.__island.ui.activityInterface.launch('catchCriminal',undefined,s),stage);
-  await page.waitForFunction(()=>window.__island.ui.activityInterface.current?.session?.snapshot.ready);
-  await page.waitForFunction(()=>document.querySelector('.game-screen')?.dataset.starting!=='true');
+const launch=async (stage,{skipChase=true,target=page}={})=>{
+  await target.evaluate(s=>window.__island.ui.activityInterface.launch('catchCriminal',undefined,s),stage);
+  await target.waitForFunction(()=>window.__island.ui.activityInterface.current?.session?.snapshot.ready);
+  await target.waitForFunction(()=>document.querySelector('.game-screen')?.dataset.starting!=='true');
+  if(!skipChase)return;
+  await target.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.mode==='chase');
+  await target.evaluate(()=>window.__island.ui.activityInterface.current.session.debug.skipChase());
+  await target.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.mode==='throw');
 };
 try{
   await page.goto(server.url+'?dev=1&games=1',{waitUntil:'networkidle'});
@@ -34,8 +38,28 @@ try{
   assert.equal(await page.locator('[data-action=game-enter][data-game-id=catchCriminal]').count(),1,'one library card');
   console.log('library card: ok');
   await page.evaluate(()=>window.__island.ui.closeModal?.());
-  await launch(1);
+  // v2: every stage opens with the car chase
+  await launch(1,{skipChase:false});
   await mkdir(out,{recursive:true});
+  await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.mode==='chase');
+  assert.equal(await page.locator('.catch-boost').isVisible(),true,'boost button');
+  assert.equal(await page.locator('.catch-throw').isVisible(),false,'no throw button during the chase');
+  await page.evaluate(()=>{const d=window.__island.ui.activityInterface.current.session.debug;for(let i=0;i<60*4;i++)d.stepChase(1/60);});
+  await page.screenshot({path:join(out,'00-chase.png')});
+  const box=await page.locator('.catch-boost').boundingBox();
+  await page.mouse.move(box.x+40,box.y+40);await page.mouse.down();await page.waitForTimeout(400);
+  await page.evaluate(()=>{const d=window.__island.ui.activityInterface.current.session.debug;for(let i=0;i<60*2;i++)d.stepChase(1/60);});
+  const boosting=await page.evaluate(()=>({v:window.__island.ui.activityInterface.current.session.chase.state.v,tank:window.__island.ui.activityInterface.current.session.chase.state.tank}));
+  await page.mouse.up();
+  assert.ok(boosting.v>25,'holding the boost button speeds the car up: '+JSON.stringify(boosting));
+  await page.mouse.move(150,180);await page.mouse.down();await page.mouse.move(150,260,{steps:5});
+  const steer=await page.evaluate(()=>window.__island.ui.activityInterface.current.session.chase.input.steer);
+  await page.mouse.up();
+  assert.ok(steer>.5,'dragging down on the left steers toward the camera lane: '+steer);
+  console.log('chase controls: ok');
+  await page.evaluate(()=>window.__island.ui.activityInterface.current.session.debug.skipChase());
+  await page.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.mode==='throw');
+  console.log('chase hands over to the throw: ok');
   assert.equal((await session()).phase,'aim');
   assert.equal(await page.locator('.catch-throw').isVisible(),true);
   assert.equal(await page.locator('.catch-tool').count(),2,'two tools on stage 1');
@@ -83,7 +107,17 @@ try{
   assert.equal(await page.evaluate(()=>window.__island.engine.exportJSON()),snapshot);
   assert.equal(await page.locator('.catch-hud').count(),0,'HUD removed on exit');
   console.log('exit leaves the island untouched: ok');
+  // the off switch: ?catchV2=0 plays the v1 stage with no chase
+  const page2=await context.newPage();page2.setDefaultTimeout(120000);page2.on('pageerror',e=>errors.push(e.message));
+  await page2.goto(server.url+'?dev=1&games=1&catchV2=0',{waitUntil:'networkidle'});
+  await page2.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
+  if(await page2.locator('[data-action=avatar-start]').count())await page2.locator('[data-action=avatar-start]').click();
+  await page2.evaluate(()=>{const e=window.__island.engine;e.skipTutorial();e.tick=()=>({ok:true});window.__island.ui.activityInterface.requireDaily=()=>false;});
+  await launch(1,{skipChase:false,target:page2});
+  const v1=await page2.evaluate(()=>{const s=window.__island.ui.activityInterface.current.session;return {mode:s.snapshot.mode,v2:s.snapshot.v2,throws:s.engine.throwsTotal};});
+  assert.deepEqual(v1,{mode:'throw',v2:false,throws:3});assert.equal(await page2.locator('.catch-boost').isVisible(),false);
+  console.log('?catchV2=0 keeps v1: ok');
   assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);assert.deepEqual(csp,[]);
-  await writeFile(join(out,'report.json'),JSON.stringify({checks:['library card','drag aim','pause','win pays and unlocks','loss pays nothing','exit clean','CSP clean','no external requests']},null,1));
+  await writeFile(join(out,'report.json'),JSON.stringify({checks:['library card','chase controls','chase to throw','catchV2=0 keeps v1','drag aim','pause','win pays and unlocks','loss pays nothing','exit clean','CSP clean','no external requests']},null,1));
   console.log('Catch the Criminal integration browser: all checks passed');
 }finally{await browser.close();await server.close();}

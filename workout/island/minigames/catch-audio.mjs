@@ -32,6 +32,17 @@ export function createCatchAudio({muted = () => false} = {}) {
     catch: () => { [523, 659, 784].forEach((f, i) => tone(f, .18, {type: 'triangle', gain: .12, delay: i * .08})); noise(.18, {gain: .05, from: 3200, to: 1200}); },
     perfect: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .12, delay: i * .07})); noise(.3, {gain: .07, from: 4200, to: 1500}); },
     engine: () => tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160}),
+    siren: () => { tone(720, .22, {type: 'square', gain: .035}); tone(560, .22, {type: 'square', gain: .035, delay: .24}); },
+    count: () => tone(520, .12, {type: 'triangle', gain: .1}),
+    go: () => { tone(780, .3, {type: 'triangle', gain: .12}); tone(1170, .3, {type: 'triangle', gain: .08, delay: .06}); },
+    crash: () => { noise(.3, {gain: .12, from: 1400, to: 200}); tone(90, .3, {type: 'sawtooth', gain: .12, slide: -50}); },
+    crimCrash: () => { noise(.25, {gain: .08, from: 1800, to: 400}); tone(300, .25, {type: 'triangle', gain: .09, slide: 260, delay: .1}); },
+    pad: () => { tone(660, .12, {type: 'triangle', gain: .09}); tone(990, .16, {type: 'triangle', gain: .09, delay: .08}); },
+    nitro: () => noise(.5, {gain: .06, from: 600, to: 3000}),
+    brake: () => noise(.7, {gain: .07, from: 2600, to: 700}),
+    near: () => { noise(.3, {gain: .1, from: 3500, to: 900}); tone(900, .25, {type: 'sine', gain: .06, slide: -500}); },
+    bossHit: () => { tone(140, .35, {type: 'sawtooth', gain: .13, slide: -60}); noise(.25, {gain: .1, from: 2200, to: 500}); tone(784, .2, {type: 'triangle', gain: .09, delay: .12}); },
+    stars: () => [659, 784, 988].forEach((f, i) => tone(f, .22, {type: 'triangle', gain: .1, delay: .22 * i})),
   };
   return {
     cue(name) { try { cues[name]?.(); } catch { /* audio is optional */ } },

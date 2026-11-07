@@ -13115,7 +13115,7 @@
    }
   },
   "catchCriminal": {
-   "version": 1,
+   "version": 2,
    "requiresBuilding": null,
    "maximumScore": 1000,
    "pointsPerCoin": 5,
@@ -13142,7 +13142,8 @@
     "escapeRun": 0.72,
     "throwSeconds": 0.26,
     "impactSeconds": 0.9,
-    "caughtSeconds": 2.2
+    "caughtSeconds": 2.2,
+    "rearmSeconds": 1.4
    },
    "tools": {
     "narrow": {
@@ -13195,7 +13196,9 @@
     "stageBonus": 0.08,
     "perfCatch": 0.35,
     "perfLeft": 0.3,
-    "perfPerfect": 0.35
+    "perfPerfect": 0.35,
+    "perCrew": 30,
+    "boss": 60
    },
    "city": {
     "policeRadiusPerLevel": 0.04,
@@ -13221,7 +13224,7 @@
      "difficulty": 1,
      "winMoney": 30,
      "winParts": 0,
-     "radiusScale": 0.5,
+     "radiusScale": 1.068,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13233,14 +13236,23 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.78,
      "tools": [
       "narrow",
       "wide"
      ],
      "theme": "day",
      "decor": "street",
-     "obstacles": []
+     "obstacles": [],
+     "chase": {
+      "seconds": 32,
+      "crimSpeed": 20.18,
+      "density": 0.35,
+      "crimBoost": 999,
+      "skill": 0.55
+     },
+     "crew": 1,
+     "gust": 0
     },
     {
      "stage": 2,
@@ -13248,7 +13260,7 @@
      "difficulty": 2,
      "winMoney": 38,
      "winParts": 0,
-     "radiusScale": 0.55,
+     "radiusScale": 0.908,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13260,7 +13272,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.67,
      "tools": [
       "narrow",
       "wide"
@@ -13274,7 +13286,16 @@
        "w": 1.8,
        "h": 1.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 34,
+      "crimSpeed": 20.23,
+      "density": 0.45,
+      "crimBoost": 999,
+      "skill": 0.6
+     },
+     "crew": 1,
+     "gust": 0
     },
     {
      "stage": 3,
@@ -13282,7 +13303,7 @@
      "difficulty": 3,
      "winMoney": 46,
      "winParts": 0,
-     "radiusScale": 0.66,
+     "radiusScale": 0.818,
      "wobble": {
       "angle": 0.25,
       "power": 0.005
@@ -13294,7 +13315,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.61,
      "tools": [
       "narrow",
       "wide",
@@ -13309,7 +13330,16 @@
        "w": 1.8,
        "h": 1.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 36,
+      "crimSpeed": 20.04,
+      "density": 0.55,
+      "crimBoost": 10,
+      "skill": 0.65
+     },
+     "crew": 1,
+     "gust": 0
     },
     {
      "stage": 4,
@@ -13317,7 +13347,7 @@
      "difficulty": 4,
      "winMoney": 54,
      "winParts": 0,
-     "radiusScale": 0.912,
+     "radiusScale": 0.897,
      "wobble": {
       "angle": 0.35,
       "power": 0.007
@@ -13331,7 +13361,7 @@
       "period": 4.0
      },
      "pop": null,
-     "preview": 0.95,
+     "preview": 0.66,
      "tools": [
       "narrow",
       "wide",
@@ -13346,7 +13376,16 @@
        "w": 5.4,
        "h": 2.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 38,
+      "crimSpeed": 20.04,
+      "density": 0.65,
+      "crimBoost": 9,
+      "skill": 0.7
+     },
+     "crew": 1,
+     "gust": 0.3
     },
     {
      "stage": 5,
@@ -13354,7 +13393,7 @@
      "difficulty": 5,
      "winMoney": 64,
      "winParts": 0,
-     "radiusScale": 0.685,
+     "radiusScale": 1.319,
      "wobble": {
       "angle": 0.5,
       "power": 0.01
@@ -13368,7 +13407,7 @@
       "period": 3.4
      },
      "pop": null,
-     "preview": 0.68,
+     "preview": 0.95,
      "tools": [
       "narrow",
       "wide",
@@ -13378,19 +13417,24 @@
      "decor": "avenue",
      "obstacles": [
       {
-       "model": "tree",
+       "model": "roadblock",
        "x": 9.5,
-       "w": 3.0,
-       "h": 6.2,
-       "y0": 2.8
-      },
-      {
-       "model": "lamp",
-       "x": 13.6,
-       "w": 0.35,
-       "h": 5.4
+       "w": 2.6,
+       "h": 1.15
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 40,
+      "crimSpeed": 20.02,
+      "density": 0.75,
+      "crimBoost": 8,
+      "skill": 0.72
+     },
+     "crew": 1,
+     "boss": {
+      "hits": 2
+     },
+     "gust": 0.4
     },
     {
      "stage": 6,
@@ -13398,7 +13442,7 @@
      "difficulty": 6,
      "winMoney": 76,
      "winParts": 0,
-     "radiusScale": 0.655,
+     "radiusScale": 1.05,
      "wobble": {
       "angle": 0.6,
       "power": 0.012
@@ -13413,7 +13457,7 @@
       "pause": 0.8
      },
      "pop": null,
-     "preview": 0.65,
+     "preview": 0.85,
      "tools": [
       "narrow",
       "wide",
@@ -13434,6 +13478,27 @@
        "w": 5.4,
        "h": 2.2
       }
+     ],
+     "chase": {
+      "seconds": 42,
+      "crimSpeed": 20.01,
+      "density": 0.85,
+      "crimBoost": 7.5,
+      "skill": 0.75
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.5,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 7,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 2.2,
+       "min": 4,
+       "max": 11
+      }
      ]
     },
     {
@@ -13442,7 +13507,7 @@
      "difficulty": 7,
      "winMoney": 90,
      "winParts": 0,
-     "radiusScale": 0.82,
+     "radiusScale": 1.27,
      "wobble": {
       "angle": 0.75,
       "power": 0.014
@@ -13457,7 +13522,7 @@
       "up": 2.4,
       "down": 1.0
      },
-     "preview": 0.9,
+     "preview": 0.91,
      "tools": [
       "narrow",
       "wide",
@@ -13484,7 +13549,17 @@
        "w": 2.6,
        "h": 1.15
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 44,
+      "crimSpeed": 20.01,
+      "density": 0.95,
+      "crimBoost": 7,
+      "skill": 0.78
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.6
     },
     {
      "stage": 8,
@@ -13492,7 +13567,7 @@
      "difficulty": 8,
      "winMoney": 106,
      "winParts": 0,
-     "radiusScale": 0.766,
+     "radiusScale": 1.27,
      "wobble": {
       "angle": 0.9,
       "power": 0.016
@@ -13509,7 +13584,7 @@
       "up": 2.2,
       "down": 1.0
      },
-     "preview": 0.78,
+     "preview": 0.91,
      "tools": [
       "narrow",
       "wide",
@@ -13543,6 +13618,27 @@
        "h": 6.2,
        "y0": 2.8
       }
+     ],
+     "chase": {
+      "seconds": 46,
+      "crimSpeed": 19.99,
+      "density": 1.05,
+      "crimBoost": 6.5,
+      "skill": 0.8
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.7,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 6,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 2.6,
+       "min": 4,
+       "max": 11
+      }
      ]
     },
     {
@@ -13551,13 +13647,13 @@
      "difficulty": 9,
      "winMoney": 124,
      "winParts": 0,
-     "radiusScale": 0.695,
+     "radiusScale": 1.396,
      "wobble": {
       "angle": 1.0,
       "power": 0.018
      },
      "dist": 19,
-     "flee": 5.0,
+     "flee": 3.4,
      "wind": 1.6,
      "move": {
       "kind": "dash",
@@ -13565,11 +13661,8 @@
       "speed": 3.0,
       "pause": 0.7
      },
-     "pop": {
-      "up": 2.2,
-      "down": 1.0
-     },
-     "preview": 0.69,
+     "pop": null,
+     "preview": 1,
      "tools": [
       "narrow",
       "wide",
@@ -13603,6 +13696,27 @@
        "h": 6.2,
        "y0": 2.8
       }
+     ],
+     "chase": {
+      "seconds": 48,
+      "crimSpeed": 19.98,
+      "density": 1.15,
+      "crimBoost": 6,
+      "skill": 0.82
+     },
+     "crew": 3,
+     "crewGap": 3.2,
+     "gust": 0.3,
+     "movers": [
+      {
+       "model": "van",
+       "x": 6,
+       "w": 5.4,
+       "h": 2.2,
+       "v": 2.4,
+       "min": 4,
+       "max": 11
+      }
      ]
     },
     {
@@ -13611,7 +13725,7 @@
      "difficulty": 10,
      "winMoney": 150,
      "winParts": 0,
-     "radiusScale": 0.672,
+     "radiusScale": 1.333,
      "wobble": {
       "angle": 1.1,
       "power": 0.02
@@ -13629,7 +13743,7 @@
       "up": 2.0,
       "down": 1.1
      },
-     "preview": 0.67,
+     "preview": 0.96,
      "tools": [
       "narrow",
       "wide",
@@ -13662,6 +13776,38 @@
        "w": 3.0,
        "h": 6.2,
        "y0": 2.8
+      }
+     ],
+     "chase": {
+      "seconds": 51,
+      "crimSpeed": 19.95,
+      "density": 1.25,
+      "crimBoost": 5.5,
+      "skill": 0.85
+     },
+     "crew": 1,
+     "boss": {
+      "hits": 2
+     },
+     "gust": 0.9,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 6,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 3,
+       "min": 4,
+       "max": 11
+      },
+      {
+       "model": "policeCar",
+       "x": 11,
+       "w": 4.4,
+       "h": 1.5,
+       "v": -2.2,
+       "min": 7,
+       "max": 14
       }
      ]
     }
@@ -13711,6 +13857,44 @@
       }
      ]
     }
+   },
+   "crewThrows": 3,
+   "chase": {
+    "countdownSeconds": 2.5,
+    "startGap": 26,
+    "catchGap": 7,
+    "baseSpeed": 20,
+    "boostSpeed": 8,
+    "bumperGap": 4.6,
+    "brakeSpeed": 9,
+    "accel": 14,
+    "decel": 22,
+    "boostSeconds": 3.0,
+    "rechargePerSecond": 0.1,
+    "padCharge": 0.4,
+    "steerSpeed": 2.1,
+    "steerResponse": 9,
+    "laneCenter": 1.3,
+    "laneWidth": 1.9,
+    "hitLateral": 1.5,
+    "crashKeep": 0.45,
+    "stunSeconds": 0.7,
+    "crimBoostSpeed": 6,
+    "crimBoostSeconds": 1.3,
+    "crimSteer": 1.9,
+    "crimSlowSeconds": 1.0,
+    "trafficSpeed": [
+     9,
+     13
+    ],
+    "farFactor": 1.3,
+    "nearFactor": 0.75,
+    "windFar": 1.25,
+    "windNear": 0.6,
+    "bonusThrowAt": 0.85,
+    "policeCar": "policeCar",
+    "getaway": "getawayCar",
+    "period": 66
    }
   },
   "boarDefense": {

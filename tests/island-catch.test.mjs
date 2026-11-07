@@ -148,11 +148,11 @@ test('catch: schema-18 saves from before the game load, gain stage one and stay 
   assert.deepEqual(migrated.state.minigameEquipment.catchCriminal, {net: 0, scope: 0});
 });
 
-test('catch: city models are compressed copies under 3 MB in total, offline and listed once', async () => {
+test('catch: city models are compressed copies under 3.6 MB in total, offline and listed once', async () => {
   const dir = new URL('assets/game-catch/models/', root), files = (await readdir(dir)).filter(f => f.endsWith('.glb'));
-  assert.ok(files.length >= 8 && files.length <= 14, 'between eight and fourteen models: ' + files.length);
+  assert.ok(files.length >= 8 && files.length <= 16, 'between eight and sixteen models: ' + files.length);
   let total = 0; for (const f of files) total += (await stat(new URL(f, dir))).size;
-  assert.ok(total < 3 * 1024 * 1024, 'models total ' + total);
+  assert.ok(total < 3.6 * 1024 * 1024, 'models total ' + total);
   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
   for (const f of files) assert.ok(manifest.games.catch.includes('assets/game-catch/models/' + f), f);
   assert.equal(new Set(manifest.games.catch).size, manifest.games.catch.length);
@@ -176,4 +176,87 @@ test('catch: no stage is impossible; the model expert wins every stage and the c
   }
   const early = rates.slice(0, 3).reduce((a, b) => a + b, 0) / 3, late = rates.slice(-3).reduce((a, b) => a + b, 0) / 3;
   assert.ok(early > late, 'later stages are harder: ' + rates.join(','));
+});
+
+// ---------------- v2: the chase, gangs, bosses, moving cover ----------------
+import {createChaseEngine} from '../workout/island/minigames/catch-chase.mjs';
+import {driveChase, DRIVING} from '../workout/island/tools/catch-sim.mjs';
+import {seededRandom as chaseRandom} from '../workout/island/minigames/catch-chase.mjs';
+
+/** Brute-force a throw that catches the current thief and release it (what a perfect player would do). */
+function throwAtThief(e) {
+  const P = e.balance.physics, w = e.wobbleAt(e.clock);
+  for (const tool of e.tools.map(t => t.id)) for (let a = 6; a <= 74; a += .5) for (let p = .2; p <= 1; p += .005) {
+    const f = e.trajectory(Math.max(0, a), p, tool, {resolve: true, t0: e.clock + P.throwSeconds});
+    if (f.kind === 'catch') { e.setTool(tool); e.setAim({angle: a - w.angle, power: p - w.power}); return e.release(); }
+  }
+  return null;
+}
+function runUntil(e, phases, limit = 60 * 60) { let n = 0; while (!phases.includes(e.state.phase) && e.state.phase !== 'done' && n++ < limit) e.step(1 / 60); return e.state.phase; }
+
+test('catch v2: every stage has a chase, the data stays consistent and ten stages include a boss and a gang', () => {
+  assert.equal(balance.version, 2);
+  assert.ok(balance.levels.every(l => l.chase && l.chase.seconds >= 20 && l.chase.seconds <= 60 && l.chase.crimSpeed > 15 && l.chase.density > 0));
+  assert.ok(balance.levels.some(l => l.boss && l.boss.hits >= 2), 'a boss stage');
+  assert.ok(balance.levels.some(l => l.crew >= 2), 'a gang stage');
+  assert.ok(balance.levels.some(l => l.movers?.length), 'moving cover');
+  assert.ok(balance.levels.some(l => l.gust > 0), 'gusts');
+  for (const k of ['catch.boost', 'catch.brake', 'catch.gap', 'catch.pop.near', 'catch.pop.bossHit', 'catch.pop.crew', 'catch.crew', 'catch.boss', 'catch.stars', 'catch.chase.close', 'catch.chase.far']) assert.ok(strings[k], k);
+});
+
+test('catch v2: the chase is deterministic, controls matter, crashes cost speed and closeness feeds the throw', () => {
+  const run = (steer, boost, stage = 3) => { const c = createChaseEngine({balance, stage, seed: 5}); for (let i = 0; i < 60 * 8; i++) { c.setSteer(steer); c.setBoost(boost); c.step(1 / 60); c.drainEvents(); } return c; };
+  const a = run(0, false), b = run(0, false), boosted = run(0, true), left = run(-1, false), right = run(1, false);
+  assert.equal(JSON.stringify([a.state.x, a.state.gap]), JSON.stringify([b.state.x, b.state.gap]));
+  assert.ok(boosted.state.x > a.state.x + 20, 'boost makes ground');
+  assert.ok(left.state.lat < -.9 && right.state.lat > .9, 'steering reaches the outer lanes');
+  const c = createChaseEngine({balance, stage: 6, seed: 2}); c.step(3); let crashes = 0, before = 0;
+  for (let i = 0; i < 60 * 20 && crashes === 0; i++) { before = c.state.v; c.setBoost(true); c.step(1 / 60); for (const ev of c.drainEvents()) if (ev.type === 'crash') crashes++; }
+  assert.ok(crashes === 0 || c.state.v < before, 'a crash slows the car');
+  const close = driveChase(createChaseEngine({balance, stage: 1, seed: 1}), DRIVING.expert, chaseRandom(3)), far = driveChase(createChaseEngine({balance, stage: 10, seed: 1}), DRIVING.casual, chaseRandom(3));
+  for (const r of [close, far]) { assert.ok(r.closeness >= 0 && r.closeness <= 1); assert.ok(r.mods.dist > 0); }
+  assert.ok(close.closeness >= far.closeness, 'a good driver on an easy stage gets closer');
+  const near = createChaseEngine({balance, stage: 3, seed: 1}); near.state.gap = 7; near.state.outcome = 'x';
+  assert.ok(near.result().mods.dist < createChaseEngine({balance, stage: 3, seed: 1}).level.dist * balance.chase.farFactor);
+});
+
+test('catch v2: a gang needs every thief, a boss needs more than one hit, and the throws grow with them', () => {
+  const gangStage = balance.levels.findIndex(l => l.crew >= 2) + 1, bossStage = balance.levels.findIndex(l => l.boss) + 1;
+  const g = createCatchEngine({balance, stage: gangStage, seed: 4, v2: true});
+  assert.equal(g.throwsTotal, balance.throws + (balance.levels[gangStage - 1].crew - 1) * balance.crewThrows);
+  assert.ok(throwAtThief(g)); runUntil(g, ['rearm']);
+  assert.equal(g.state.phase, 'rearm'); assert.equal(g.state.caught.length, 1); assert.equal(g.state.crimIndex, 1);
+  assert.ok(g.drainEvents().some(ev => ev.type === 'crew'));
+  runUntil(g, ['aim']); assert.equal(g.state.phase, 'aim'); assert.ok(g.criminalAt(g.clock).x > g.state.caught[0].x, 'the next thief is further down the street');
+  const b = createCatchEngine({balance, stage: bossStage, seed: 4, v2: true}), hits = balance.levels[bossStage - 1].boss.hits;
+  for (let i = 0; i < hits - 1; i++) { assert.ok(throwAtThief(b)); runUntil(b, ['flee', 'escape']); assert.notEqual(b.state.phase, 'caught'); assert.equal(b.state.bossHp, hits - 1 - i); runUntil(b, ['aim']); }
+  assert.ok(throwAtThief(b)); runUntil(b, ['caught', 'done']); assert.equal(b.state.won, true);
+  assert.equal(b.summary().boss, true);
+  // the same stages play as v1 when v2 is off
+  const v1 = createCatchEngine({balance, stage: gangStage, seed: 4, v2: false});
+  assert.equal(v1.throwsTotal, balance.throws); assert.equal(v1.level.crew, 1);
+});
+
+test('catch v2: crossing cars move with the clock, gusts change the wind, and a near miss is reported', () => {
+  const stage = balance.levels.findIndex(l => l.movers?.length) + 1, e = createCatchEngine({balance, stage, seed: 2, v2: true});
+  const mv = e.level.obstacles.find(o => o.v);
+  assert.ok(mv, 'a mover is part of the v2 obstacles');
+  assert.notEqual(e.obstacleAt(mv, 0).x, e.obstacleAt(mv, 3).x);
+  const gustStage = balance.levels.findIndex(l => l.gust > 0) + 1, gu = createCatchEngine({balance, stage: gustStage, seed: 2, v2: true});
+  assert.notEqual(gu.windAt(0), gu.windAt(1.2));
+  const off = createCatchEngine({balance, stage, seed: 2, v2: false});
+  assert.equal(off.level.obstacles.some(o => o.v), false, 'v1 has no moving cover');
+  const n = createCatchEngine({balance, stage: 1, seed: 3, v2: true}); const thief = n.criminalAt(n.clock);
+  let near = null;
+  for (let a = 6; a <= 70 && !near; a += 1) for (let p = .2; p <= 1 && !near; p += .01) { const f = n.trajectory(a, p, 'narrow', {resolve: true, t0: n.clock + balance.physics.throwSeconds}); if (f.kind !== 'catch' && f.kind !== 'blocked' && f.near > 1.2 && f.near < 2) near = [a, p]; }
+  assert.ok(near, 'a throw that just misses exists'); assert.ok(Math.abs(thief.x - n.level.dist) < 1e-6);
+});
+
+test('catch v2: the session without a canvas plays only the throw, and ?catchV2=0 style off switch keeps v1 rules', () => {
+  const on = runCatchSession({balance, level: 6, seed: 1, t: k => k, finish: () => ({ok: true}), cancel() {}});
+  assert.equal(on.snapshot.v2, true); assert.equal(on.engine.v2, true); assert.equal(on.chase, null);
+  on.dispose();
+  const off = runCatchSession({balance, level: 6, seed: 1, v2: false, t: k => k, finish: () => ({ok: true}), cancel() {}});
+  assert.equal(off.snapshot.v2, false); assert.equal(off.engine.v2, false); assert.equal(off.engine.throwsTotal, balance.throws);
+  off.dispose();
 });

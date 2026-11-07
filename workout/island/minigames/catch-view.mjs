@@ -11,7 +11,7 @@ import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-3';
 
 const FILES = {
   apartment: 'apartment', shop: 'shop', cafe: 'cafe', house: 'house', station: 'police-station',
-  roadblock: 'roadblock', policeCar: 'police-car', van: 'armored-van', bush: 'bush', getawayCar: 'getaway-car', tree: 'tree', lamp: 'lamp',
+  taxi: 'taxi', truck: 'truck', bus: 'bus', roadblock: 'roadblock', policeCar: 'police-car', van: 'armored-van', bush: 'bush', getawayCar: 'getaway-car', tree: 'tree', lamp: 'lamp',
 };
 const BUILDINGS = {apartment: {h: 11}, shop: {h: 6}, cafe: {h: 6.2}, house: {h: 5}, station: {h: 7.2}};
 const THEMES = {
@@ -115,8 +115,9 @@ class Particles {
   }
 }
 
-export async function createCatchView({canvas, engine, balance, quality = 'high', maxDpr = 2, lowDpr = 1.25, onProgress = () => {}, signal}) {
-  const level = engine.level, theme = THEMES[level.theme] || THEMES.day, base = new URL('../' + (balance.render.base || 'assets/game-catch/'), import.meta.url);
+export async function createCatchView({canvas, engine: initialEngine = null, balance, stage = 1, v2 = true, quality = 'high', maxDpr = 2, lowDpr = 1.25, onProgress = () => {}, signal}) {
+  let engine = initialEngine;
+  const level = {...balance.levels[stage - 1]}, movers = v2 ? (level.movers || []) : [], theme = THEMES[level.theme] || THEMES.day, base = new URL('../' + (balance.render.base || 'assets/game-catch/'), import.meta.url);
   const renderer = new T.WebGLRenderer({canvas, antialias: quality !== 'low', alpha: false, powerPreference: 'high-performance'});
   const dprCap = quality === 'low' ? lowDpr : maxDpr;
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, dprCap));
@@ -135,7 +136,8 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
   const load = (key, url) => { pending.total++; return gltfLoader.loadAsync(url).then(g => { models[key] = g; onProgress(++pending.done / pending.total); }); };
   const modelUrl = name => { const u = new URL('models/' + name + '.glb', base); u.searchParams.set('v', DATA_VERSION); return u.href; };
   const needed = new Set(['apartment', 'shop', 'cafe', 'house', 'station', 'lamp', 'tree', 'bush', 'policeCar', 'getawayCar']);
-  for (const o of level.obstacles) needed.add(o.model);
+  for (const o of [...level.obstacles, ...movers]) needed.add(o.model);
+  if (v2) for (const k of ['taxi', 'truck', 'bus', 'roadblock', 'van']) needed.add(k);
   for (const key of needed) jobs.push(load(key, modelUrl(FILES[key])));
   const actorUrl = n => new URL('../assets/models/' + n + '.glb', import.meta.url).href;
   jobs.push(load('officer', actorUrl('adult-woman-rigged-512')), load('thief', actorUrl('adult-man-rigged-512')));
@@ -143,41 +145,46 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
   if (signal?.aborted) { renderer.dispose(); throw Error('aborted'); }
 
   // ----- street -----
-  const P = balance.physics, streetEnd = P.worldEnd + 12, shadowTex = glowTexture('#000000');
-  const asphalt = asphaltTexture(theme), road = new T.Mesh(new T.PlaneGeometry(streetEnd + 40, 8), new T.MeshStandardMaterial({map: asphalt, roughness: .95}));
-  road.rotation.x = -Math.PI / 2; road.position.set((streetEnd - 40) / 2, 0, 1.2); scene.add(road);
+  const P = balance.physics, S = balance.chase?.period || 66, streetEnd = 134, shadowTex = glowTexture('#000000');
+  const asphalt = asphaltTexture(theme), road = new T.Mesh(new T.PlaneGeometry(220, 8), new T.MeshStandardMaterial({map: asphalt, roughness: .95}));
+  road.rotation.x = -Math.PI / 2; road.position.set(35, 0, 1.2); scene.add(road);
   const tiles = tileTexture();
-  const walk = new T.Mesh(new T.BoxGeometry(streetEnd + 40, .16, 3.4), new T.MeshStandardMaterial({map: tiles, roughness: .9}));
-  walk.position.set((streetEnd - 40) / 2, .08, -4.1); scene.add(walk);
+  const walk = new T.Mesh(new T.BoxGeometry(220, .16, 3.4), new T.MeshStandardMaterial({map: tiles, roughness: .9}));
+  walk.position.set(35, .08, -4.1); scene.add(walk);
   const front = walk.clone(); front.position.z = 6.6; front.scale.z = .6; scene.add(front);
-  const plaza = new T.Mesh(new T.PlaneGeometry(streetEnd + 40, 60), new T.MeshStandardMaterial({color: theme === THEMES.night ? '#1d2230' : '#7f8a74', roughness: 1}));
-  plaza.rotation.x = -Math.PI / 2; plaza.position.set((streetEnd - 40) / 2, -.01, -36); scene.add(plaza);
+  const plaza = new T.Mesh(new T.PlaneGeometry(220, 60), new T.MeshStandardMaterial({color: theme === THEMES.night ? '#1d2230' : '#7f8a74', roughness: 1}));
+  plaza.rotation.x = -Math.PI / 2; plaza.position.set(35, -.01, -36); scene.add(plaza);
   const near = plaza.clone(); near.position.z = 40; scene.add(near);
 
   // Buildings: a deterministic row, tallest ones further back, so the street has depth.
   const order = ['apartment', 'shop', 'cafe', 'house', 'apartment', 'station', 'shop', 'cafe', 'apartment', 'house'];
   const rowKeys = level.decor === 'downtown' || level.decor === 'harbor' ? ['apartment', 'apartment', 'shop', 'apartment', 'cafe', 'apartment', 'station', 'apartment'] : level.decor === 'avenue' ? ['shop', 'apartment', 'cafe', 'station', 'house', 'apartment', 'shop'] : order;
-  let bx = -18, bi = (level.stage * 3) % rowKeys.length;
-  const buildings = [];
-  while (bx < streetEnd + 10) {
-    const key = rowKeys[bi++ % rowKeys.length], root = fitModel(models[key], {height: BUILDINGS[key].h}), w = root.userData.size.x;
-    root.position.set(bx + w / 2, 0, -11.5 - (key === 'apartment' ? 1.4 : 0)); scene.add(root); buildings.push(root); bx += w + .8;
-  }
-  let fx = -22, fi = 2;
-  while (fx < streetEnd + 30) {
-    const key = rowKeys[(fi++ * 5) % rowKeys.length], root = fitModel(models[key], {height: BUILDINGS[key].h * 1.5}), w = root.userData.size.x;
-    root.position.set(fx + w / 2, 0, -27); scene.add(root); fx += w + 3;
-  }
+  // The street repeats every S metres, so the car chase can scroll forever by shifting the dynamic things back by S.
+  const period = (keys, height, z, gap, stageSeed) => {
+    const row = []; let w = 0, i = stageSeed % keys.length;
+    while (true) {
+      const key = keys[i++ % keys.length], size = fitModel(models[key], {height: BUILDINGS[key].h * height}).userData.size.x;
+      if (w + size + gap > S && row.length > 3) break;
+      row.push({key, size}); w += size + gap;
+    }
+    const slack = (S - w) / row.length; let x = 0;
+    for (const r of row) { r.x = x + r.size / 2; x += r.size + gap + slack; }
+    for (let k = -1; k <= 1; k++) for (const r of row) {
+      const root = fitModel(models[r.key], {height: BUILDINGS[r.key].h * height}); root.position.set(r.x + k * S, 0, z - (r.key === 'apartment' && height === 1 ? 1.4 : 0)); scene.add(root);
+    }
+  };
+  period(rowKeys, 1, -11.5, .8, level.stage * 3);
+  period(rowKeys, 1.5, -27, 3, 2);
   // street trees and lamps along the near edge of the far sidewalk
   const lamps = [], glowTex = glowTexture('#ffd58a');
-  for (let x = -8; x < streetEnd; x += 11) {
+  for (let x = -8 - S; x < streetEnd; x += 11) {
     const lamp = fitModel(models.lamp, {height: 5.4}); lamp.position.set(x, .16, -3.1); scene.add(lamp);
     if (theme.lamps) {
       const s = new T.Sprite(new T.SpriteMaterial({map: glowTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); s.scale.set(3.6, 3.6, 1); s.position.set(x, 5.3, -3); scene.add(s);
       const pool = new T.Mesh(new T.CircleGeometry(3, 24), new T.MeshBasicMaterial({map: glowTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: .55})); pool.rotation.x = -Math.PI / 2; pool.position.set(x, .2, -2.6); scene.add(pool); lamps.push(s);
     }
-    if (((x + 8) / 11) % 3 === 1) { const tree = fitModel(models.tree, {height: 6.4}); tree.position.set(x + 5, .16, -4.6); scene.add(tree); }
-    else if (((x + 8) / 11) % 3 === 2) { const bush = fitModel(models.bush, {width: 2}); bush.position.set(x + 4, .16, -5.2); scene.add(bush); }
+    if ((Math.round((x + 8) / 11) % 3 + 3) % 3 === 1) { const tree = fitModel(models.tree, {height: 6.4}); tree.position.set(x + 5, .16, -4.6); scene.add(tree); }
+    else if ((Math.round((x + 8) / 11) % 3 + 3) % 3 === 2) { const bush = fitModel(models.bush, {width: 2}); bush.position.set(x + 4, .16, -5.2); scene.add(bush); }
   }
   // obstacles, drawn in front of the thief's line so he stands behind them
   const obstacleViews = [];
@@ -199,21 +206,38 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
   officer.root.position.set(0, 0, 0); thief.root.position.set(level.dist, 0, -.25);
   scene.add(officer.root, thief.root);
   const mat = (color, extra = {}) => new T.MeshStandardMaterial({color, roughness: .7, ...extra});
-  // Cap and badge on the officer; beanie, mask and a sack on the thief.
+  // Cap and badge on the officer; beanie, mask and a sack on every thief.
   {
     const cap = new T.Group(), dome = new T.Mesh(new T.SphereGeometry(.118, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2), mat('#14234a')), visor = new T.Mesh(new T.BoxGeometry(.2, .012, .1), mat('#0b1226')), band = new T.Mesh(new T.CylinderGeometry(.12, .12, .028, 18), mat('#d9b44a'));
     dome.position.y = .15; visor.position.set(0, .165, .115); band.position.y = .158; cap.add(dome, visor, band); officer.attach('Head', cap);
     const badge = new T.Mesh(new T.CylinderGeometry(.03, .03, .008, 12), mat('#e8c352', {metalness: .6, roughness: .3})); badge.rotation.x = Math.PI / 2; badge.position.set(.07, 0, .12);
     officer.attach('Spine2', badge);
+  }
+  const THIEF_TINTS = [[.1, .1, .12], [.34, .06, .07], [.06, .2, .12]];
+  const dressThief = actor => {
     const beanie = new T.Mesh(new T.SphereGeometry(.12, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2), mat('#101114')); beanie.position.y = .15;
     const maskGeo = new T.SphereGeometry(.118, 18, 10, -Math.PI / 2.2, Math.PI / 1.1, Math.PI * .56, Math.PI * .22), mask = new T.Mesh(maskGeo, mat('#0d0e10', {side: T.DoubleSide})); mask.rotation.y = Math.PI / 2; mask.position.set(0, .1, .02);
     const sack = new T.Mesh(new T.SphereGeometry(.17, 14, 10), mat('#a07a3d')); sack.scale.set(.9, 1.1, .9); sack.position.set(.04, -.1, 0);
     const tie = new T.Mesh(new T.ConeGeometry(.05, .09, 8), mat('#8c6a32')); tie.position.set(.04, .05, 0); sack.add(tie);
     const sackHolder = new T.Group(); sackHolder.add(sack);
-    thief.attach('Head', beanie); thief.attach('Head', mask); thief.attach('LeftHand', sackHolder);
-    thief.sack = sackHolder;
+    actor.attach('Head', beanie); actor.attach('Head', mask); actor.attach('LeftHand', sackHolder); actor.sack = sackHolder;
+  };
+  dressThief(thief);
+  officer.root.add(blobShadow(shadowTex, 1.4, 1.1, .5));
+  const thieves = [{actor: thief, shadow: blobShadow(shadowTex, 1.4, 1.1, .5), dodge: 0, stagger: 0}];
+  thief.root.add(thieves[0].shadow);
+  const crewSize = v2 ? (level.crew || 1) : 1;
+  for (let i = 1; i < crewSize; i++) {
+    const t = THIEF_TINTS[i % THIEF_TINTS.length];
+    const a = createActor(models.thief, {height: 1.78 + i * .03, role: 'thief', tint: {torso: t, forearm: t, legs: [.2, .21, .25], shoes: [.9, .9, .9]}});
+    dressThief(a); a.root.visible = false; scene.add(a.root);
+    const sh = blobShadow(shadowTex, 1.4, 1.1, .5); a.root.add(sh); thieves.push({actor: a, shadow: sh, dodge: 0, stagger: 0});
   }
-  officer.root.add(blobShadow(shadowTex, 1.4, 1.1, .5)); const thiefShadow = blobShadow(shadowTex, 1.4, 1.1, .5); thief.root.add(thiefShadow);
+  // the boss arrives with his armoured van, parked right behind him
+  const bossVan = v2 && level.boss ? fitModel(models.van, {width: 5.4}) : null;
+  if (bossVan) scene.add(bossVan);
+  // crossing cars of the later stages (their positions come from the engine clock)
+  const moverViews = movers.map(m => { const r = fitModel(models[m.model], {width: m.w}); r.position.set(m.x, 0, .55); scene.add(r); return {spec: m, root: r}; });
 
   // ----- projectile, preview, effects -----
   const netTex = netTexture(), starTex = starTexture(), dotTex = canvasTexture(64, 64, g => { g.fillStyle = '#7fd4ff55'; g.beginPath(); g.arc(32, 32, 30, 0, 7); g.fill(); g.fillStyle = '#9fe4ff'; g.beginPath(); g.arc(32, 32, 17, 0, 7); g.fill(); g.fillStyle = '#ffffff'; g.beginPath(); g.arc(32, 32, 9, 0, 7); g.fill(); });
@@ -229,7 +253,7 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
   for (let i = 0; i < 42; i++) { const s = new T.Sprite(new T.SpriteMaterial({map: dotTex, transparent: true, depthWrite: false, depthTest: false, blending: T.AdditiveBlending, color: '#8fdcff', fog: false})); s.renderOrder = 8; s.visible = false; dotGroup.add(s); dots.push(s); }
   const mark = new T.Mesh(new T.RingGeometry(.28, .4, 24), new T.MeshBasicMaterial({color: '#ff6a5c', transparent: true, depthTest: false, side: T.DoubleSide})); mark.renderOrder = 9; mark.visible = false; scene.add(mark);
   const sparks = new Particles(scene, {texture: starTex, size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 60});
-  const caughtNet = new T.Mesh(new T.SphereGeometry(1, 18, 12), netMat.clone()); caughtNet.visible = false; scene.add(caughtNet);
+  const caughtNets = thieves.map(() => { const n = new T.Mesh(new T.SphereGeometry(1, 18, 12), netMat.clone()); n.visible = false; n.userData = {t: 0, fade: 0, scale: 1}; scene.add(n); return n; });
   const flash = new T.Sprite(new T.SpriteMaterial({map: glowTexture('#ffffff'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, depthTest: false, fog: false})); flash.visible = false; flash.renderOrder = 10; scene.add(flash);
   const groundNet = new T.Mesh(new T.CircleGeometry(1, 20), new T.MeshBasicMaterial({map: netTex, transparent: true, alphaTest: .2, side: T.DoubleSide, depthWrite: false})); groundNet.rotation.x = -Math.PI / 2; groundNet.visible = false; scene.add(groundNet);
 
@@ -247,7 +271,11 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
     let [l, r] = cam.focus, s = engine.state;
     const t0 = engine.clock;
     const c = engine.criminalAt(t0);
-    if (s.phase === 'flight' && snap.flightPoint) r = Math.max(r, snap.flightPoint.x + 1.5);
+    if (s.phase === 'flight' && snap.flightPoint) {
+      r = Math.max(r, snap.flightPoint.x + 1.5);
+      const fn = engine.flightNow();
+      if (fn && fn.share > .55) { const lo = Math.min(fn.x, c.x) - 3.2, hi = Math.max(fn.x, c.x) + 3.2; l = Math.max(l, lo); r = Math.min(r, hi); }
+    }
     if (s.phase === 'impact' || s.phase === 'caught') { const f = s.flight; const fx = f?.catchX ?? f?.contact?.x ?? c.x; l = fx - (s.phase === 'caught' ? 3.2 : 5); r = fx + (s.phase === 'caught' ? 3.2 : 5); }
     else if (s.phase === 'flee' || s.phase === 'escape') { l = Math.max(-1.5, c.x - 9); r = c.x + 4; }
     else if (s.phase === 'aim' || s.phase === 'throw') { l = -2; r = c.x + 3.2; }
@@ -301,53 +329,163 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
   }
   function endFlight() { projectile.visible = false; trail.visible = false; ropeLine.visible = false; trailPts.length = 0; }
 
+  // ----- car chase scene (v2) -----
+  const throwStuff = [officer.root, ...thieves.map(t => t.actor.root), squad, getaway, ...obstacleViews, ...moverViews.map(m => m.root), ...(bossVan ? [bossVan] : []), dotGroup, mark];
+  const chaseGroup = new T.Group(); chaseGroup.visible = false; scene.add(chaseGroup);
+  let chase = null, mode = 'throw', chaseShift = 0, chaseCam = {x: 0, fov: 30}, sirenPhase = 0, crimBrake = 1, chaseEnded = 0;
+  const carGlow = (color, size) => { const sp = new T.Sprite(new T.SpriteMaterial({map: glowTexture(color), transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); sp.scale.set(size, size, 1); return sp; };
+  const playerCar = fitModel(models.policeCar, {width: 4.4}), crimCar = fitModel(models.getawayCar, {width: 4.2});
+  chaseGroup.add(playerCar, crimCar);
+  const flameP = carGlow('#ffb347', 2.6), flameC = carGlow('#ff8a3d', 2.2), redLight = carGlow('#ff3b3b', 1.3), blueLight = carGlow('#3b6bff', 1.3);
+  flameP.position.set(-2.6, .55, 0); flameC.position.set(-2.4, .55, 0); redLight.position.set(.2, 1.65, -.35); blueLight.position.set(.2, 1.65, .35);
+  playerCar.add(flameP, redLight, blueLight); crimCar.add(flameC);
+  playerCar.add(blobShadow(shadowTex, 5, 2.4, .5).translateY(-.0)); crimCar.add(blobShadow(shadowTex, 5, 2.4, .5));
+  const chaseProps = new Map(), propPool = {};
+  const coneMat = mat('#ff6a1f'), padMat = new T.MeshBasicMaterial({map: glowTexture('#7dffb0'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: .9});
+  function makeProp(o) {
+    let root;
+    if (o.kind === 'traffic') root = fitModel(models[o.model], {width: o.model === 'bus' ? 7.5 : o.model === 'truck' ? 5.6 : 4.4});
+    else if (o.kind === 'barrier') root = fitModel(models.roadblock, {width: 2.6});
+    else if (o.kind === 'cone') { root = new T.Group(); for (let i = 0; i < 3; i++) { const c = new T.Mesh(new T.ConeGeometry(.28, .7, 10), coneMat); c.position.set((i - 1) * .5, .35, (i % 2) * .3); root.add(c); } }
+    else { root = new T.Mesh(new T.CircleGeometry(1.5, 24), padMat); root.rotation.x = -Math.PI / 2; root.position.y = .04; const holder = new T.Group(); holder.add(root); root = holder; }
+    chaseGroup.add(root); return root;
+  }
+  const laneZ = lat => balance.chase.laneCenter + lat * balance.chase.laneWidth;
+  const chaseLights = new T.PointLight('#ffffff', 0, 0);
+  function enterChase(ch) {
+    chase = ch; mode = 'chase'; chaseGroup.visible = true; chaseEnded = 0; crimBrake = 1;
+    for (const o of throwStuff) o.visible = false;
+    for (const t of thieves) t.actor.root.visible = false;
+    for (const n of caughtNets) n.visible = false;
+    groundNet.visible = false; projectile.visible = false; trail.visible = false; ropeLine.visible = false;
+    chaseCam.x = 0;
+  }
+  function leaveChase() {
+    mode = 'throw'; chase = null; chaseGroup.visible = false;
+    for (const o of throwStuff) o.visible = true;
+    thieves.forEach((t, i) => { t.actor.root.visible = i === 0; });
+    for (const [, p] of chaseProps) chaseGroup.remove(p.root);
+    chaseProps.clear();
+    cam.x = 4; cam.d = 20; cam.shake = 0;
+  }
+  function updateChase(dt) {
+    const st = chase.state, C = balance.chase;
+    chaseShift = Math.floor(st.x / S) * S;
+    const px = st.x - chaseShift, cx = st.crim.x - chaseShift;
+    sirenPhase += dt * 9;
+    playerCar.position.set(px, 0, laneZ(st.lat)); playerCar.rotation.y = -st.steer * .28; playerCar.rotation.z = -(st.boosting ? .03 : 0);
+    const brake = st.phase === 'end' ? (crimBrake = Math.max(0, crimBrake - dt * 1.4)) : 1;
+    crimCar.position.set(cx + (1 - brake) * 3, 0, laneZ(st.crim.lat)); crimCar.rotation.y = -clamp((st.crim.targetLat - st.crim.lat) * .5, -.3, .3);
+    flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(sirenPhase * 3) * .4); flameC.visible = st.crim.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(sirenPhase * 3) * .35);
+    const red = Math.sin(sirenPhase) > 0; redLight.visible = red; blueLight.visible = !red;
+    // obstacles inside the window around the officer
+    const lo = st.x - 30, hi = st.x + 85, tn = st.t;
+    for (const o of chase.obstacles) {
+      const ox = chase.obstacleX(o, tn), inside = ox > lo && ox < hi, entry = chaseProps.get(o.id);
+      if (inside && !entry) chaseProps.set(o.id, {root: makeProp(o), o});
+      else if (!inside && entry) { chaseGroup.remove(entry.root); chaseProps.delete(o.id); }
+    }
+    for (const [, e] of chaseProps) { const o = e.o, ox = chase.obstacleX(o, tn) - chaseShift; e.root.position.set(ox, e.root.position.y, laneZ(o.lat)); e.root.visible = !(o.kind === 'pad' && o.used); if (o.hitP || o.hitC) e.root.rotation.y = Math.sin(o.id) * .25; }
+    // camera: behind and above, looking ahead; a boost pulls the lens wider
+    const fovTarget = 32 + (st.boosting ? 5 : 0) + (st.v > 24 ? 1.5 : 0);
+    chaseCam.fov = damp(chaseCam.fov, fovTarget, 5, dt); camera.fov = chaseCam.fov; camera.updateProjectionMatrix();
+    chaseCam.x = damp(chaseCam.x, px + 5.5, 6, dt); cam.shake = Math.max(0, cam.shake - dt * 2.2);
+    const sh = cam.shake * cam.shake * .6, ts = performance.now() / 1000;
+    camera.position.set(chaseCam.x - 14 + Math.sin(ts * 47) * sh * .4, 4.6 + Math.cos(ts * 53) * sh * .3, 13.2);
+    look.set(chaseCam.x + 2.5, 1.2, 1.6); camera.lookAt(look);
+    if (st.boosting && Math.random() < .6) dust.emit(px - 2.4, .3, laneZ(st.lat), 1, {speed: 2, up: .8, color: [1, .75, .4], gravity: 0, life: .35});
+  }
+  const dispatch = {
+    chase(events) {
+      for (const e of events) {
+        if (e.type === 'crash') { cam.shake += .7; sparks.emit(playerCar.position.x + 2, .8, playerCar.position.z, 18, {speed: 4, up: 3, color: [1, .8, .4], life: .6}); dust.emit(playerCar.position.x + 2, .3, playerCar.position.z, 8, {speed: 3, up: 1.5, color: [.7, .65, .55], gravity: 1}); }
+        else if (e.type === 'crimCrash') { cam.shake += .3; sparks.emit(crimCar.position.x, .8, crimCar.position.z, 14, {speed: 4, up: 3, color: [.8, .9, 1], life: .5}); }
+        else if (e.type === 'pad') sparks.emit(playerCar.position.x, .3, playerCar.position.z, 12, {speed: 2.5, up: 2.5, color: [.5, 1, .7], life: .6});
+      }
+    },
+  };
+
   const api = {
-    renderer, scene, camera, officer, thief, project, models,
+    renderer, scene, camera, officer, thief, project, models, thieves,
     get ready() { return true; },
+    get mode() { return mode; },
     shake(amount = 1) { cam.shake = Math.min(1.6, cam.shake + amount); },
+    enterChase, leaveChase, handleChase(events) { dispatch.chase(events); },
+    /** After the chase: the throw engine takes over the same scene. */
+    bindThrow(next) { engine = next; leaveChase(); lastThiefX = engine.criminalAt(0).x; },
     handle(events, snap) {
       for (const e of events) {
+        const s = engine.state, idx = Math.min(s.crimIndex, thieves.length - 1), th = thieves[idx];
         if (e.type === 'release') officer.throwNow();
         else if (e.type === 'launch') { trailPts.length = 0; }
         else if (e.type === 'catch') {
-          const s = engine.state, f = s.flight, c = f.catchX ?? e.x; caughtAt = engine.clock;
-          caughtNet.visible = true; caughtNet.material.opacity = 1; caughtNet.userData.t = 0;
+          const f = s.flight, c = f.catchX ?? e.x, net = caughtNets[idx];
+          net.visible = true; net.material.opacity = 1; net.userData.t = 0; net.userData.fade = 0; th.stagger = 0;
           sparks.emit(e.x, e.y, .5, e.perfect ? 46 : 26, {speed: 5, up: 4, color: e.perfect ? [1, .85, .3] : [.7, .9, 1], gravity: 5, life: 1.2});
           flash.visible = true; flash.position.set(c, 1.3, .8); flash.userData.t = 0; flash.scale.setScalar(.5);
           cam.shake += e.perfect ? .9 : .55; endFlight();
-        } else if (e.type === 'blocked') { sparks.emit(e.x, e.y, .6, 14, {speed: 3, up: 2.5, color: [1, .9, .7], life: .6}); dust.emit(e.x, e.y, .4, 8, {speed: 1.5, up: 1.2, color: [.7, .65, .55], gravity: 1}); cam.shake += .25; endFlight(); groundNet.visible = false; }
-        else if (e.type === 'miss' || e.type === 'hidden') { dust.emit(e.x, .1, .3, 14, {speed: 2.4, up: 1.6, color: [.75, .68, .55], gravity: 2}); groundNet.visible = true; groundNet.position.set(e.x, .05, .2); const f = engine.state.flight, R = toolOf(f.tool).radius; groundNet.scale.setScalar(Math.max(.5, R * 1.1)); groundTimer = 1.4; cam.shake += .2; endFlight(); }
-        else if (e.type === 'turn') { caughtNet.visible = false; groundNet.visible = false; }
+        } else if (e.type === 'bossHit') { caughtNets[idx].userData.fade = .001; th.stagger = .001; cam.shake += .5; sparks.emit(th.actor.root.position.x, 1.2, .3, 20, {speed: 5, up: 3, color: [1, .6, .3], life: .8}); }
+        else if (e.type === 'blocked') { sparks.emit(e.x, e.y, .6, 14, {speed: 3, up: 2.5, color: [1, .9, .7], life: .6}); dust.emit(e.x, e.y, .4, 8, {speed: 1.5, up: 1.2, color: [.7, .65, .55], gravity: 1}); cam.shake += .25; endFlight(); groundNet.visible = false; }
+        else if (e.type === 'miss' || e.type === 'hidden') {
+          dust.emit(e.x, .1, .3, 14, {speed: 2.4, up: 1.6, color: [.75, .68, .55], gravity: 2}); groundNet.visible = true; groundNet.position.set(e.x, .05, .2);
+          const R = toolOf(s.flight.tool).radius; groundNet.scale.setScalar(Math.max(.5, R * 1.1)); groundTimer = 1.4; cam.shake += e.near ? .1 : .2; endFlight();
+          if (e.near && e.kind !== 'hidden') th.dodge = .001;
+        }
+        else if (e.type === 'crew') { const n = thieves[e.index]; if (n) { n.actor.root.visible = true; n.arrive = 0; n.fromX = e.x + 9; } }
+        else if (e.type === 'turn') { groundNet.visible = false; if (!e.crew) for (let i = 0; i < caughtNets.length; i++) if (i >= s.crimIndex) caughtNets[i].visible = false; }
         else if (e.type === 'flee' || e.type === 'escape') { groundNet.visible = false; if (e.type === 'escape') escapeCarStart = null; }
       }
     },
     update(dt, snap) {
-      const s = engine.state, phase = s.phase, tn = engine.clock;
-      // thief
-      let c = engine.criminalAt(tn); const vx = (c.x - lastThiefX) / Math.max(1e-4, dt); lastThiefX = c.x;
-      thief.root.position.x = c.x; thief.state.speed = vx;
-      thief.root.position.y = damp(thief.root.position.y, c.y, 9, dt);
-      thief.state.mode = phase === 'caught' || (phase === 'done' && s.won) ? 'caught' : c.mode === 'gone' ? 'run' : c.mode;
-      if (phase === 'escape' && c.mode === 'gone') { thief.root.visible = false; if (escapeCarStart == null) escapeCarStart = tn; } else thief.root.visible = true;
-      if (phase === 'escape' && escapeCarStart != null) { const u = tn - escapeCarStart; getawayX = P.escapeX + 2.4 + (u * u) * 22; getaway.position.x = getawayX; }
-      thief.update(dt);
-      thiefShadow.visible = c.exposed || phase === 'caught';
+      if (mode === 'chase') { updateChase(dt); sparks.update(dt); dust.update(dt); renderer.render(scene, camera); return; }
+      camera.fov = 30; if (camera.fov !== chaseCam.fov) { chaseCam.fov = 30; camera.updateProjectionMatrix(); }
+      const s = engine.state, phase = s.phase, tn = engine.clock, cur = Math.min(s.crimIndex, thieves.length - 1);
+      // thieves: the ones already caught stand wrapped in their nets, the current one acts, the rest are not on the street yet
+      thieves.forEach((th, i) => {
+        const a = th.actor, net = caughtNets[i];
+        if (i < s.crimIndex) { a.root.visible = true; a.root.position.set(s.caught[i].x, 0, -.25); a.state.mode = 'caught'; a.update(dt); th.shadow.visible = true; return; }
+        if (i > cur) { a.root.visible = false; return; }
+        let c = engine.criminalAt(tn), px = c.x;
+        if (th.arrive !== undefined && th.arrive < 1) { th.arrive = Math.min(1, th.arrive + dt / 1.2); px = th.fromX + (c.x - th.fromX) * smooth(th.arrive); }
+        const vx = (px - (th.lastX ?? px)) / Math.max(1e-4, dt); th.lastX = px;
+        a.root.position.x = px; a.state.speed = vx;
+        th.dodge = th.dodge > 0 ? th.dodge + dt : 0; if (th.dodge > .9) th.dodge = 0;
+        th.stagger = th.stagger > 0 ? th.stagger + dt : 0; if (th.stagger > 1.1) th.stagger = 0;
+        const hop = th.dodge > 0 ? Math.sin(th.dodge / .9 * Math.PI) * .55 : 0;
+        a.root.position.y = damp(a.root.position.y, c.y, 9, dt) + (hop - (th.hopPrev || 0)); th.hopPrev = hop;
+        a.root.position.z = -.25 + (th.dodge > 0 ? Math.sin(th.dodge / .9 * Math.PI) * -.6 : 0);
+        const won = phase === 'caught' || (phase === 'done' && s.won);
+        a.state.mode = won ? 'caught' : th.stagger > 0 ? 'caught' : th.dodge > 0 ? 'caught' : c.mode === 'gone' ? 'run' : c.mode;
+        // a thief who has just been netted pitches forward before he settles
+        const t0 = won || net.visible ? net.userData.t : 9;
+        a.root.rotation.z = (won || (net.visible && !net.userData.fade)) ? -.55 * Math.exp(-Math.max(0, t0 - .1) * 3.2) * smooth(t0 / .12) : th.stagger > 0 ? -.35 * Math.sin(th.stagger / 1.1 * Math.PI) : 0;
+        if (phase === 'escape' && c.mode === 'gone' && i === cur) { a.root.visible = false; if (escapeCarStart == null) escapeCarStart = tn; } else a.root.visible = true;
+        if (i === cur && phase === 'escape' && escapeCarStart != null) { const u = tn - escapeCarStart; getawayX = P.escapeX + 2.4 + (u * u) * 22; getaway.position.x = getawayX; }
+        a.update(dt);
+        th.shadow.visible = c.exposed || phase === 'caught';
+        if (bossVan && i === cur) { const target = (th.arrive !== undefined && th.arrive < 1 ? px : c.x) + 3.6; bossVan.position.set(bossVan.position.x ? damp(bossVan.position.x, target, 4, dt) : target, 0, -1.4); }
+      });
       // officer
       officer.state.aim.angle = engine.aim.angle + engine.wobbleAt(tn).angle; officer.state.aim.power = engine.aim.power;
-      officer.state.mode = phase === 'done' ? (s.won ? 'cheer' : 'dismay') : phase === 'caught' ? 'cheer' : (phase === 'flee' || phase === 'impact') && !s.won ? (s.throwsLeft > 0 && phase === 'flee' ? 'wait' : 'aim') : 'aim';
+      officer.state.mode = phase === 'done' ? (s.won ? 'cheer' : 'dismay') : phase === 'caught' ? 'cheer' : (phase === 'flee' || phase === 'impact' || phase === 'rearm') && !s.won ? (s.throwsLeft > 0 && (phase === 'flee' || phase === 'rearm') ? 'wait' : 'aim') : 'aim';
       if (phase === 'escape') officer.state.mode = 'dismay';
       officer.update(dt);
+      // crossing cars
+      for (const m of moverViews) { const o = engine.obstacleAt(m.spec, tn); m.root.position.x = o.x; m.root.rotation.y = m.spec.v < 0 ? Math.PI : 0; }
       // projectile
       const f = s.flight;
       if (phase === 'flight' && f) { const fp = flightPoint(f); snap.flightPoint = fp; placeNet(f, fp); } else if (phase !== 'throw') { if (phase !== 'impact') endFlight(); }
       drawPreview(phase === 'aim' && !snap.hidePreview);
-      if (phase === 'throw' && f && officer.state.throwT > .4) { /* the net leaves the hand a moment after the arm swing */ }
-      // caught net hugs the thief
-      if (caughtNet.visible) {
-        caughtNet.userData.t += dt; const k = smooth(caughtNet.userData.t / .35), R = toolOf(f?.tool || engine.tools[0].id).radius;
-        caughtNet.position.set(thief.root.position.x, 1.0, thief.root.position.z + .05);
-        caughtNet.scale.set(.2 + (.62 + R * .5) * k, .25 + (1.05 + R * .35) * k, .2 + (.62 + R * .5) * k);
-      }
+      // caught nets hug their thief; a boss shakes his net off
+      caughtNets.forEach((net, i) => {
+        if (!net.visible) return;
+        const th = thieves[i], R = toolOf(f?.tool || engine.tools[0].id).radius;
+        net.userData.t += dt; const k = smooth(net.userData.t / .35);
+        if (net.userData.fade) { net.userData.fade += dt; net.material.opacity = Math.max(0, 1 - net.userData.fade / .6); net.userData.scale = 1 + net.userData.fade * 1.6; if (net.userData.fade > .6) { net.visible = false; return; } }
+        net.position.set(th.actor.root.position.x, 1.0, th.actor.root.position.z + .05);
+        const sc = net.userData.scale || 1;
+        net.scale.set((.2 + (.62 + R * .5) * k) * sc, (.25 + (1.05 + R * .35) * k) * sc, (.2 + (.62 + R * .5) * k) * sc);
+      });
       if (flash.visible) { flash.userData.t += dt; const k = flash.userData.t / .55; flash.scale.setScalar(.5 + k * 5.5); flash.material.opacity = Math.max(0, 1 - k); if (k >= 1) flash.visible = false; }
       if (groundNet.visible) { groundTimer -= dt; groundNet.material.opacity = clamp(groundTimer / .6, 0, 1); if (groundTimer <= 0) groundNet.visible = false; }
       for (const l of lamps) l.material.opacity = .85 + Math.sin(tn * 3 + l.position.x) * .08;
@@ -360,7 +498,7 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
     dispose() {
       observer?.disconnect();
       scene.traverse(o => { o.geometry?.dispose?.(); const m = o.material; if (m) for (const mm of Array.isArray(m) ? m : [m]) { mm.map?.dispose?.(); mm.dispose?.(); } });
-      officer.dispose(); thief.dispose();
+      officer.dispose(); for (const t of thieves) t.actor.dispose();
       renderer.dispose(); renderer.forceContextLoss?.();
     },
   };
