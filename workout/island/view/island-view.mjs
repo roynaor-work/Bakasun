@@ -1,29 +1,30 @@
 import * as T from '../vendor/three.module.js';
-import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-1';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-1';
-import { Avatar } from './avatar.mjs?v=island-v2-20261107-1';
-import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-1';
-import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-1';
-import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-1';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-1';
-import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-1';
-import { LocalModels } from './local-models.mjs?v=island-v2-20261107-1';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-1';
-import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-1';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-1';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-1';
-import {batchMeshes} from './batch.mjs?v=island-v2-20261107-1';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-1';
-import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-1';
-import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-1';
-import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-1';
-import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-1';
-import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-1';
-import {CitySites} from './city-sites.mjs?v=island-v2-20261107-1';
-import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-1';
-import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-1';
-import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-1';
-import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-1';
+import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-2';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-2';
+import { Avatar } from './avatar.mjs?v=island-v2-20261107-2';
+import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-2';
+import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-2';
+import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-2';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-2';
+import {CityModels,cityModelsEnabled,carSpec,CITY_CARS} from './city-models.mjs?v=island-v2-20261107-2';
+import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-2';
+import { LocalModels } from './local-models.mjs?v=island-v2-20261107-2';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-2';
+import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-2';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-2';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-2';
+import {batchMeshes} from './batch.mjs?v=island-v2-20261107-2';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-2';
+import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-2';
+import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-2';
+import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-2';
+import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-2';
+import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-2';
+import {CitySites} from './city-sites.mjs?v=island-v2-20261107-2';
+import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-2';
+import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-2';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-2';
+import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-2';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -46,13 +47,17 @@ export class IslandView {
     this.environment=new Environment(this.scene,{...data.world,viewConfig:data.config.cityView});this.environment.rebuild(this.size);this.decorateBeach();this.buildingRoot=new T.Group();this.scene.add(this.buildingRoot);this.roadBatch=new IslandRoadBatch(this.scene);
     this.cityDepth = new CityDepthView(this);
     this.models=new LocalModels();
-    const records=data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[];
+    // Compressed city models load only when the city holds such a building (?cityModels=0 turns them off).
+    this.cityModels=new CityModels(this.models,{enabled:cityModelsEnabled(globalThis.location?.search||'',data.featureFlags)});
+    this.cityModels.onLoaded=()=>{if(!this.disposed&&this.state&&!this.cityRefresh)this.cityRefresh=Promise.resolve().then(()=>{this.cityRefresh=null;if(!this.disposed&&this.state)this.setWorld(this.state);});};
+    const records=(data.buildings instanceof Map?[...data.buildings.values()]:data.buildings||[]).filter(record=>!this.cityModels.maps(record.id));
     this.modelsReady=Promise.all(records.flatMap(record=>[record.model,...(record.levels||[]).map(level=>level.model)]).filter(Boolean).map(spec=>this.models.load(spec))).then(()=>{if(!this.disposed&&this.state)this.setWorld(this.state,true);});
     this.avatar=new Avatar(this.scene);
-    this.pilot=new MeshyPilot(this.scene,data.config.cityView.meshyPilot);
+    const pilotSettings=this.cityModels.enabled?{...data.config.cityView.meshyPilot,car:carSpec(CITY_CARS[0],data.config.cityView.meshyPilot.car)}:data.config.cityView.meshyPilot;
+    this.pilot=new MeshyPilot(this.scene,pilotSettings);
     this.citizens=new Citizens(this.scene,data.config.cityView.citizens.max,{models:this.pilot.models,quality:this.quality,enabled:data.featureFlags?.citizens!==false});
-    this.cityStreets=new CityStreets(this.scene,GROUND,this.environment.flora.models,{vehicleModels:this.pilot.models,carSpec:data.config.cityView.meshyPilot.car});
-    this.cityTraffic=new CityTraffic(this.scene,this.pilot.models,data.config.cityView.meshyPilot.car,GROUND);
+    this.cityStreets=new CityStreets(this.scene,GROUND,this.environment.flora.models,{vehicleModels:this.pilot.models,carSpec:pilotSettings.car});
+    this.cityTraffic=new CityTraffic(this.scene,this.pilot.models,pilotSettings.car,GROUND,this.cityModels.enabled?CITY_CARS.slice(1).map(id=>carSpec(id,data.config.cityView.meshyPilot.car)):[]);
     this.cityOverlay=new CityOverlay(this.scene,GROUND);
     this.citySites=new CitySites(this.scene,GROUND);
     this.readyPlots=new ReadyPlotsView(this.scene,GROUND);
@@ -84,7 +89,7 @@ export class IslandView {
   }
   decorateBeach(){const group=new T.Group();beachDetails(group,this.size,this.data.config.cityView.beach);batchMeshes(group);this.environment.land.add(group);}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
-  makeBuilding(record,level=1) {return createBuilding(record,level,this.models);}
+  makeBuilding(record,level=1) {this.cityModels.request(record,level);return createBuilding(this.cityModels.recordFor(record,level),level,this.models);}
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
   setWorld(state,force=false) {
     this.state=state;if(!this.renderer)return;
@@ -95,10 +100,11 @@ export class IslandView {
     for(const b of buildings) {
       const record=this.definition(b.typeId||b.type);if(!record)continue;
       let item=this.groups.get(b.id);
-      if(!item||item.level!==b.level||item.typeId!==(b.typeId||b.type)) {
+      const cityKey=this.cityModels.key(record,b.level||1);
+      if(!item||item.level!==b.level||item.typeId!==(b.typeId||b.type)||item.cityKey!==cityKey) {
         if(item){this.buildingRoot.remove(item.group);disposeBuilding(item.group);}
         const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level);
-        group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type};this.groups.set(b.id,item);
+        group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type,cityKey};this.groups.set(b.id,item);
       }
       item.group.position.copy(this.worldPosition(b.x,b.z,record.footprint));
       if(record.requiresShore){const outward=shoreDirection(state,record,b.x,b.z);item.group.rotation.y=outward?Math.atan2(outward.x,outward.z):0;}

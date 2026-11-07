@@ -1253,6 +1253,7 @@
    }
   },
   "alienDefense": {
+   "v9": {"hpBase": 2, "hpPerStage": 0.06, "hpMax": 3.5, "bonusKillsMult": 4, "extraWaves": 2, "secondsMult": 3, "livesAdd": 1, "boltSecondsMult": 1.3, "wavePauseSeconds": 1.2, "upgradeHp": 2.5},
    "playerBottom": 38.4,
    "playerRadius": 18,
    "playerSpeed": 221,
@@ -4711,6 +4712,13 @@
     "secondWaterUse": 0.15,
     "followX": 1.1,
     "followZ": 1.8,
+    "v9": {
+     "height": 1.2,
+     "standOut": 0.95,
+     "doorForward": 1.35,
+     "standForward": 0.25,
+     "exitSeconds": 1.1
+    },
     "sprayLean": 0.18,
     "connectLean": 0.35,
     "armRaise": 1.15,
@@ -4971,7 +4979,10 @@
      "maxRoll": 0.06,
      "pitchPerAccel": 0.0014,
      "maxPitch": 0.04,
-     "leanEase": 8
+     "leanEase": 8,
+     "driveAngle": 0.5,
+     "pivotAngle": 1.3,
+     "pivotTurn": 2.4
     }
    },
    "hydrant": {
@@ -5616,16 +5627,16 @@
      "rounds": 100,
      "winMoney": 131,
      "winParts": 2,
-     "waves": 4,
+     "waves": 5,
      "shipKinds": 3,
      "drift": 15.2,
      "concurrent": 3,
-     "seconds": 264,
+     "seconds": 270,
      "feature": "feature.naval.9",
      "ammunition": [
       68,
       4,
-      26,
+      28,
       6,
       8,
       3
@@ -5647,12 +5658,24 @@
       {
        "kind": 0,
        "behavior": "patrol"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 8,
+       "spread": 16,
+       "telegraph": 2.2,
+       "hpScale": 1.6,
+       "scale": 2.0,
+       "x": 140,
+       "z": -60
       }
      ],
      "mission": {
-      "id": "fleet",
+      "id": "bases",
       "title": "feature.naval.9",
-      "brief": "naval.mission.brief.fleet"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.7,
@@ -5973,16 +5996,16 @@
      "rounds": 100,
      "winMoney": 215,
      "winParts": 3,
-     "waves": 4,
+     "waves": 6,
      "shipKinds": 4,
      "drift": 18.75,
      "concurrent": 3,
-     "seconds": 236,
+     "seconds": 263,
      "feature": "feature.naval.16",
      "ammunition": [
-      44,
+      58,
       5,
-      16,
+      18,
       6,
       8,
       3
@@ -6004,12 +6027,36 @@
       {
        "kind": 1,
        "behavior": "guard"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 7.5,
+       "spread": 13,
+       "telegraph": 2.0,
+       "hpScale": 1.7,
+       "scale": 2.0,
+       "x": 140,
+       "z": -85
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 2,
+       "reload": 7.5,
+       "spread": 13,
+       "telegraph": 2.0,
+       "hpScale": 1.7,
+       "scale": 2.0,
+       "x": 150,
+       "z": 85
       }
      ],
      "mission": {
-      "id": "intercept",
+      "id": "bases",
       "title": "feature.naval.16",
-      "brief": "naval.mission.brief.intercept"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.6,
@@ -6414,16 +6461,16 @@
      "rounds": 100,
      "winMoney": 311,
      "winParts": 4,
-     "waves": 5,
+     "waves": 6,
      "shipKinds": 4,
      "drift": 21.55,
      "concurrent": 3,
-     "seconds": 254,
+     "seconds": 300,
      "feature": "feature.naval.24",
      "ammunition": [
-      52,
+      66,
       5,
-      18,
+      20,
       6,
       10,
       4
@@ -6449,12 +6496,25 @@
       {
        "kind": 2,
        "behavior": "flank"
+      },
+      {
+       "kind": 1,
+       "behavior": "base",
+       "cannons": 4,
+       "reload": 6.5,
+       "spread": 10,
+       "telegraph": 1.7,
+       "hpScale": 4,
+       "scale": 2.6,
+       "x": 145,
+       "z": 0,
+       "damageScale": 1.3
       }
      ],
      "mission": {
-      "id": "intercept",
+      "id": "bases",
       "title": "feature.naval.24",
-      "brief": "naval.mission.brief.intercept"
+      "brief": "naval.mission.brief.bases"
      },
      "enemyTactics": {
       "telegraphSeconds": 1.5,
@@ -7409,6 +7469,14 @@
     "reach": {
      "lowAngle": 10,
      "powerSpan": 14
+    },
+    "assist": {
+     "yawRangeDeg": 4,
+     "yawPull": 0.45,
+     "elevRangeDeg": 3.5,
+     "elevPull": 0.4,
+     "refreshSeconds": 0.1,
+     "releaseLagMs": 70
     },
     "follow": {
      "yawFixed": 0.12,
@@ -9338,6 +9406,7 @@
     "reach": 1,
     "baseChance": 0.55,
     "recoverSeconds": 0.6,
+    "maxTotalSeconds": 1.2,
     "cooldownSeconds": 1.2,
     "distance": 1.5,
     "activeShare": 0.82,
@@ -11103,6 +11172,18 @@
    "maximumScore": 4,
    "pointsPerCoin": 1,
    "maximumSeconds": 3600,
+   "v9": {
+    "enabled": true,
+    "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
+    "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
+    "shortDelay": {"easy": 0.4, "normal": 0.34, "hard": 0.27},
+    "power": {"minDepth": 3, "maxDepth": 8.7, "needAtMax": 0.75, "metresPerCharge": 6, "netDeficit": 0.3, "netSlope": 3, "tolerance": 0.12},
+    "powerTolerance": {"easy": 0.18, "normal": 0.12, "hard": 0.09},
+    "quality": {"timingWeight": 0.55, "good": 0.78, "medium": 0.5, "rankRelief": 0.06,
+     "sigma": {"good": 0.12, "medium": 0.45, "weak": 0.9},
+     "error": {"good": 0.085, "medium": 0.18, "weak": 0.36}},
+    "errorScale": {"easy": 0.7, "normal": 1, "hard": 1.15}
+   },
    "shotPower": {
     "safeMax": {
      "easy": 0.9,

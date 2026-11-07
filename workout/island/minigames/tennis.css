@@ -104,3 +104,8 @@
  .game-screen[data-game=tennis] .game-stage .tennis-serve-meter{right:222px;bottom:108px}
 }
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .serve-ready svg{animation:none}.game-screen[data-game=tennis] .soccer-actions button{transition:none}}
+
+/* v9: the meter shows the charge that matches the length the stick asks for (green band). Below it the ball is short or hits the net, above it the ball is longer than asked (amber) and past the amber it goes out (red). */
+.game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true]{background:linear-gradient(to top,#2d4a44 var(--lo,0%),#3aa56f var(--lo,0%) var(--safe),#c9a24a var(--safe) var(--out,100%),#914a38 var(--out,100%))}
+.game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true] .tennis-power-fill{background:#f0f4c0}
+.game-screen[data-game=tennis] .game-stage .tennis-power-meter[data-v9=true][data-under=true] .tennis-power-fill{background:#e8c36a}

@@ -1,3 +1,4 @@
+import {polishLegacy,polishValue} from './polish-flag.mjs';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
@@ -186,7 +187,7 @@ export function createFireV7({scene,balance,model,adapters={},canAdd=()=>true,lo
   async function loadCrew(){
     const gltf=await fetchGlb('models/crew-nozzle.glb');if(!gltf||disposed)return null;
     const clips={};for(const c of gltf.animations||[])clips[c.name]=c;
-    const object=gltf.scene,box=new T.Box3().setFromObject(object),size=box.getSize(new T.Vector3()),k=city.crewHeight/Math.max(size.y,.01);
+    const object=gltf.scene,box=new T.Box3().setFromObject(object),size=box.getSize(new T.Vector3()),k=(polishLegacy('fireTruck')||polishValue('fireCrew')==='v8'?city.crewHeight:balance.crew?.v9?.height||city.crewHeight)/Math.max(size.y,.01);
     const wrap=new T.Group();wrap.add(object);object.scale.setScalar(k);object.position.set(-(box.min.x+box.max.x)/2*k,-box.min.y*k,-(box.min.z+box.max.z)/2*k);
     object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.frustumCulled=false;}});
     root.add(wrap);

@@ -1,4 +1,4 @@
-import {navalLostHealth} from './naval-marks.mjs?v=island-v2-20261107-1';
+import {navalLostHealth} from './naval-marks.mjs?v=island-v2-20261107-2';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -14,9 +14,9 @@ function vesselMark(p,x,y){p.save();p.translate(x,y);p.strokeStyle='#e3d2a5';p.f
 
 /** Exact landing footprints remain small even when the camera moves close. */
 export function navalDangerMarks(m,balance,project,width,height){
-  const threats=m.enemies.filter(e=>e.active&&e.hp>0&&e.attack).map(e=>({x:e.attack.x,z:e.attack.z,seconds:Math.max(0,e.attack.fireTime-m.time),incoming:false}));
+  const threats=m.enemies.filter(e=>e.active&&e.hp>0).flatMap(e=>e.attacks?.length?e.attacks:e.attack?[e.attack]:[]).map(a=>({x:a.x,z:a.z,seconds:Math.max(0,a.fireTime-m.time),incoming:false}));
   for(const shot of m.enemyShots||[])threats.push({x:shot.targetX,z:shot.targetZ,seconds:Math.max(0,shot.duration-shot.age),incoming:true});
-  return threats.slice(0,6).flatMap(threat=>{
+  return threats.slice(0,8).flatMap(threat=>{
     const q=project(threat.x,threat.z,.1);if(!q||q.depth<=0||q.x<-40||q.x>width+40||q.y<-40||q.y>height+40)return [];
     const heading=m.playerShip.heading||0,c=Math.cos(heading),s=Math.sin(heading),points=[];
     for(let i=0;i<=32;i++){const a=i/32*TAU,x=Math.cos(a)*balance.aim.hullLength,z=Math.sin(a)*balance.aim.hullBeam,r=project(threat.x+x*c-z*s,threat.z+x*s+z*c,.1);if(!r||r.depth<=0)return [];points.push(r);}

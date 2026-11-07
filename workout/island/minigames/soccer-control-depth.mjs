@@ -22,7 +22,7 @@ export function chooseSlideKind(p,aim,c){
 /** Variant parameters with the base slide as the fallback for every field. */
 export function slideVariant(c,kind){
  const base=c.slide,v=base?.variants?.[kind]||{};
- return {kind:base?.variants?.[kind]?kind:'straight',seconds:v.seconds??base.seconds,distance:v.distance??base.distance,reach:v.reach??base.reach,recoverSeconds:v.recoverSeconds??base.recoverSeconds,cooldownSeconds:v.cooldownSeconds??base.cooldownSeconds,baseChance:v.baseChance??base.baseChance};
+ return {kind:base?.variants?.[kind]?kind:'straight',seconds:v.seconds??base.seconds,distance:v.distance??base.distance,reach:v.reach??base.reach,recoverSeconds:v.recoverSeconds??base.recoverSeconds,cooldownSeconds:v.cooldownSeconds??base.cooldownSeconds,baseChance:v.baseChance??base.baseChance,maxTotalSeconds:v.maxTotalSeconds??base.maxTotalSeconds};
 }
 
 /** A committed slide covers the configured distance, with a fast extension and
@@ -68,5 +68,7 @@ export function sweptSlideContact(from,to,ballFrom,ballTo,c,variant,{elapsed=0,d
 /** A missed or rear tackle leaves the tackler down for longer; a clean win uses
  * the variant's own recovery. */
 export function slideRecoverySeconds(variant,{won=false,behind=false,late=false}={}){
- return variant.recoverSeconds*(1+(won?0:.2)+(behind?.25:0)+(late?.15:0));
+ const raw=variant.recoverSeconds*(1+(won?0:.2)+(behind?.25:0)+(late?.15:0));
+ // Motion v9: slide plus getting up never keeps the player down longer than slide.maxTotalSeconds (1.2 s).
+ return Number.isFinite(variant.maxTotalSeconds)?Math.min(raw,Math.max(.3,variant.maxTotalSeconds-variant.seconds)):raw;
 }

@@ -1,0 +1,115 @@
+{
+ "mode": "after (v9)",
+ "stand": {
+  "state": "idle",
+  "abdMax": 12.3,
+  "flexMin": 39.1
+ },
+ "jockey": {
+  "state": "run",
+  "abdMax": 17.2,
+  "flexMin": 47.7,
+  "flexMax": 65.2,
+  "fwdMax": 44.5
+ },
+ "run4": {
+  "state": "run",
+  "abdMax": 12.8,
+  "flexMin": 77.8,
+  "flexMax": 84.3,
+  "fwdMax": 68.3
+ },
+ "sprint6": {
+  "state": "run",
+  "abdMax": 2.9,
+  "flexMin": 89.3,
+  "flexMax": 95.9,
+  "fwdMax": 79
+ },
+ "celebrations": [
+  {
+   "clip": "celebrate",
+   "abdMax": 155.5
+  },
+  {
+   "clip": "celebrate",
+   "abdMax": 155.5
+  },
+  {
+   "clip": "celebrate",
+   "abdMax": 155.5
+  },
+  {
+   "clip": "celebrate",
+   "abdMax": 155.5
+  }
+ ],
+ "slides": [
+  {
+   "kind": "straight",
+   "won": true,
+   "controlReturnsAt": 0.95,
+   "uprightAt": 0.92,
+   "lowestHips": 0.11,
+   "runningStateAt": 0.97,
+   "handFootCrossFrames": 0,
+   "elbowOnTorsoFrames": 24,
+   "maxHipsStepPerFrame": 0.066
+  },
+  {
+   "kind": "straight",
+   "won": false,
+   "controlReturnsAt": 1.2,
+   "uprightAt": 1.13,
+   "lowestHips": 0.11,
+   "runningStateAt": 1.22,
+   "handFootCrossFrames": 6,
+   "elbowOnTorsoFrames": 27,
+   "maxHipsStepPerFrame": 0.066
+  },
+  {
+   "kind": "lateral",
+   "won": true,
+   "controlReturnsAt": 1.1,
+   "uprightAt": 1.05,
+   "lowestHips": 0.11,
+   "runningStateAt": 1.12,
+   "handFootCrossFrames": 0,
+   "elbowOnTorsoFrames": 1,
+   "maxHipsStepPerFrame": 0.065
+  },
+  {
+   "kind": "lateral",
+   "won": false,
+   "controlReturnsAt": 1.2,
+   "uprightAt": 1.15,
+   "lowestHips": 0.11,
+   "runningStateAt": 1.22,
+   "handFootCrossFrames": 6,
+   "elbowOnTorsoFrames": 10,
+   "maxHipsStepPerFrame": 0.065
+  },
+  {
+   "kind": "fast",
+   "won": true,
+   "controlReturnsAt": 1.05,
+   "uprightAt": 0.98,
+   "lowestHips": 0.11,
+   "runningStateAt": 1.07,
+   "handFootCrossFrames": 0,
+   "elbowOnTorsoFrames": 24,
+   "maxHipsStepPerFrame": 0.07
+  },
+  {
+   "kind": "fast",
+   "won": false,
+   "controlReturnsAt": 1.2,
+   "uprightAt": 1.13,
+   "lowestHips": 0.11,
+   "runningStateAt": 1.22,
+   "handFootCrossFrames": 6,
+   "elbowOnTorsoFrames": 26,
+   "maxHipsStepPerFrame": 0.07
+  }
+ ]
+}

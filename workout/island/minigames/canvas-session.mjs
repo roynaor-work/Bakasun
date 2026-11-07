@@ -1,8 +1,9 @@
-import {createControls} from './controls.mjs?v=island-v2-20261107-1';
-import {upgradeCard} from './icons.mjs?v=island-v2-20261107-1';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-1';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-1';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-v2-20261107-1';
+import {createControls} from './controls.mjs?v=island-v2-20261107-2';
+import {fireControlsV9} from './polish-flag.mjs';
+import {upgradeCard} from './icons.mjs?v=island-v2-20261107-2';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-2';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-2';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-v2-20261107-2';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.
@@ -73,7 +74,7 @@ export function runCanvasGame(ctx, createModel, draw, createView) {
     }
   }
   try {
-    if(naval||aliens||fireGame){sharedControls=createControls({root:controls,config:ctx.balance.controls});sharedControls.setHanded(true);sharedControls.setEnabled(true);if(naval){const heat=document.createElement('div');heat.className='naval-heat';heatFill=document.createElement('span');heat.append(heatFill);controls.append(heat);}}
+    if(naval||aliens||fireGame){sharedControls=createControls({root:controls,config:fireGame&&fireControlsV9()?{...ctx.balance.controls,floating:true}:ctx.balance.controls});sharedControls.setHanded(true);sharedControls.setEnabled(true);if(naval){const heat=document.createElement('div');heat.className='naval-heat';heatFill=document.createElement('span');heat.append(heatFill);controls.append(heat);}}
     if(fireGame){certificateButton=document.createElement('button');certificateButton.type='button';certificateButton.dataset.action='fire-certificate';certificateButton.textContent=t('fire.finish');certificateButton.hidden=true;certificateButton.onclick=()=>{if(!paused)model.update(config.maxFrameSeconds,{finish:true});};controls.append(certificateButton);}
     for(const node of [canvas,controls,ctx.dialog])for(const type of ['contextmenu','selectstart','dragstart'])node.addEventListener(type,event=>event.preventDefault(),options);
     canvas.addEventListener('pointerdown',event=>{

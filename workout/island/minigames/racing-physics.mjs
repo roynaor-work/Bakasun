@@ -1,8 +1,9 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-v2-20261107-1';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-v2-20261107-2';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
 const FIXED_STEP = 1/60;
+const LAT_CAP = 44;
 function randomSource(seed) {
   let value=Number(seed)>>>0;
   return () => { value=(Math.imul(value,1664525)+1013904223)>>>0; return value/4294967296; };
@@ -19,19 +20,24 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const track=createTrack(stage), random=randomSource(seedUint), sector=track.length/track.checkpoints.length;
   const equipment=config.equipment||{};
   const engine=clamp(finite(equipment.engine,1),1,1.16), grip=clamp(finite(equipment.grip,1),1,1.16), nitroUpgrade=clamp(finite(equipment.nitro,1),1,1.16);
+  // racing-v9 league upgrades (default 1 = no change): brakes, steering and aero (downforce raises the high-speed cornering cap and the slipstream).
+  const brakeUp=clamp(finite(equipment.brakes,1),1,1.3), steerUp=clamp(finite(equipment.steer,1),1,1.12), aeroUp=clamp(finite(equipment.aero,1),1,1.25);
+  const drivers=Array.isArray(config.drivers)?config.drivers:null;
+  // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
+  const walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
   const names=['אתם','אלמוג','טורקיז','שמש','ברקת'];
   const cars=Array.from({length:1+stage.opponents},(_,index)=>{
     const start=index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4;
     const lane=index===0?0:index%2?2.8:-2.8;
     const p=track.sample(start);
-    return {id:index===0?'player':`ai-${index}`,name:names[index]||`רוכב ${index}`,isPlayer:index===0,
+    return {id:index===0?'player':`ai-${index}`,name:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
-      distanceDriven:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      maxSpeed:stage.aiSpeed*skill*(.96+random()*.075),collisionCooldown:0};
+      distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
+      maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
   const state={phase:config.countdown===0?'racing':'countdown',countdown:config.countdown===0?0:3,time:0,elapsed:0,
@@ -69,7 +75,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const error=racingAngle(Math.atan2(tx-car.x,tz-car.z)-car.heading);
     const turnRate=2*Math.sin(error)*Math.max(10,car.speed)/Math.max(8,look);
     const curvature=Math.abs(racingAngle(track.sample(p.s+22).heading-track.sample(p.s+4).heading))/18;
-    let targetSpeed=Math.min(car.maxSpeed,Math.sqrt(13.5/Math.max(.003,curvature)));
+    let targetSpeed=Math.min(car.maxSpeed,Math.sqrt((stage.aiCorner||13.5)/Math.max(.003,curvature)));
     if(blocked&&blocked.ahead<7&&Math.abs(car.lateral-blocked.other.lateral)<2.8)targetSpeed=Math.min(targetSpeed,blocked.other.speed*.94);
     const steer=clamp(turnRate/steeringRate(car.speed,false),-1,1);
     return {steer,throttle:car.speed<targetSpeed?1:0,autoAccelerate:false,brake:car.speed>targetSpeed+2,
@@ -87,7 +93,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const separationDelta=racingAngle((before.s-car.s)/track.length*Math.PI*2)/(Math.PI*2)*track.length;
     if(Math.abs(separationDelta)<2.6)car.routeS+=separationDelta;
     const steer=clamp(finite(input.steer),-1,1), throttle=input.autoAccelerate!==false?1:clamp(finite(input.throttle),0,1);
-    car.steer+= (steer-car.steer)*(1-Math.exp(-dt*11));
+    // racing-v9 feel (player only; AI tuning untouched, ?racingFeel=0 via config.feel=false): faster response, gentler small inputs at speed.
+    const feel=car.isPlayer&&config.feel!==false,speedF=clamp((car.speed-28)/17,0,1);
+    const steerIn=feel?steer*(1-.3*speedF*(1-Math.abs(steer))):steer;
+    car.steer+= (steerIn-car.steer)*(1-Math.exp(-dt*(feel?16:11)));
     car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);
     car.padCooldown=Math.max(0,car.padCooldown-dt);car.boostTime=Math.max(0,car.boostTime-dt);
     const drifting=!!input.drift&&car.speed>12&&!car.offroad&&Math.abs(car.steer)>.16;
@@ -100,15 +109,25 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const nitro=!!input.nitro&&car.nitro>.1&&car.speed>3&&!car.offroad;
     if(nitro)car.nitro=Math.max(0,car.nitro-dt*29/nitroUpgrade);
     car.boosting=nitro||car.boostTime>0;
-    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)+(car.boosting?12:0);
+    // racing-v9 slipstream: 5-22 m behind another car, nearly in its line, gives up to +7% top speed and stronger pull (config.draft=false disables).
+    let draft=0;
+    if(config.draft!==false&&!car.finished)for(const other of cars){
+      if(other===car||other.finished)continue;
+      const gap=wrapRacingDistance(other.s-car.s,track.length);
+      if(gap>3&&gap<22&&Math.abs(other.lateral-car.lateral)<2.4&&other.speed>car.speed*.7)draft=Math.max(draft,(1-(gap-3)/19)*(1-Math.abs(other.lateral-car.lateral)/2.4));
+    }
+    car.draft+=(draft-car.draft)*(1-Math.exp(-dt*(draft>car.draft?2.2:4)));
+    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*(1+.07*car.draft*aeroUp)+(car.boosting?12:0);
     const offLimit=car.offroad?19:Infinity;
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
-    const acceleration=car.boosting?17:12.5;
+    const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
     car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
-    if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27);
+    if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27*(car.isPlayer?brakeUp:1));
     if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
     if(car.offroad)car.speed=Math.max(0,car.speed-dt*8);
-    let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip:1);
+    let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1);
+    // Soft cap on cornering force at speed (about 4 g): full lock stops snapping the car around at 40+ m/s but keeps its authority.
+    if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp/car.speed;yaw=limit*Math.tanh(yaw/limit);}
     if(car.isPlayer&&Math.abs(steer)<.065&&config.steeringAssist!==false&&!car.offroad) {
       // Small guidance softens a released steering pad. It cannot negotiate a lap by itself.
       const look=track.sample(before.s+12), error=racingAngle(look.heading-car.heading);
@@ -124,18 +143,33 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     car.distanceDriven+=car.speed*dt;
     const after=track.project(car.x,car.z,before.s);
     car.y=after.y;car.s=after.s;car.lateral=after.lateral;
+    // racing-v9: fences along the whole road. A hit pushes the car back inside, scrubs 25-45% of its speed
+    // (more for a straight hit and for more speed) and turns it toward the road direction; it never leaves the circuit.
+    car.wallCooldown=Math.max(0,car.wallCooldown-dt);
+    if(walls&&Math.abs(after.lateral)>wallLimit) {
+      const side=Math.sign(after.lateral),inside=wallLimit-.12;
+      car.x=after.x+after.normal.x*side*inside;car.z=after.z+after.normal.z*side*inside;car.lateral=side*inside;
+      const dx=Math.sin(motionHeading),dz=Math.cos(motionHeading),into=clamp(side*(dx*after.normal.x+dz*after.normal.z),0,1);
+      if(into>.02&&car.wallCooldown<=0) {
+        const angleF=Math.min(1,into/.6),speedF=clamp((car.speed-8)/32,0,1),loss=.25+.2*(.7*angleF+.3*speedF);
+        event('wall',car,{intensity:into,loss,speed:car.speed});
+        car.speed*=1-loss;car.wallHits++;car.wallCooldown=.3;car.drifting=false;car.driftCharge=0;
+      } else if(car.wallCooldown>0)car.speed=Math.max(0,car.speed-dt*3);
+      const error=racingAngle(car.heading-after.heading);car.heading=racingAngle(after.heading+error*(into>.02?.4:.8));
+      car.slipAngle=0;car.steer*=.5;
+    }
     const delta=racingAngle((after.s-before.s)/track.length*Math.PI*2)/ (Math.PI*2)*track.length;
     const maxDelta=Math.max(2,car.speed*dt*2.2);
     const plausible=Math.abs(delta)<=maxDelta;
     if(plausible)car.routeS+=delta;
-    car.offroad=Math.abs(after.lateral)>track.width*.5+.4;
+    car.offroad=Math.abs(car.lateral)>track.width*.5+.4;
     car.offroadTime=car.offroad?car.offroadTime+dt:Math.max(0,car.offroadTime-dt*2);
     const physicalGateDistance=Math.abs(racingAngle((after.s-wrapRacingDistance(car.nextCheckpoint*sector,track.length))/track.length*Math.PI*2))*track.length/(Math.PI*2);
     if(plausible&&delta>0&&physicalGateDistance<maxDelta+1&&car.routeS>=car.nextCheckpoint*sector&&car.previousS<car.nextCheckpoint*sector&&
       Math.abs(before.lateral)<track.width*.64&&Math.abs(after.lateral)<track.width*.64&&Math.abs(racingAngle(after.heading-car.heading))<1.3) {
       car.checkpoints++;car.nextCheckpoint++;
       car.lap=Math.min(stage.laps,1+Math.floor(car.checkpoints/track.checkpoints.length));
-      if(car.checkpoints%track.checkpoints.length===0)event('lap',car,{lap:car.lap});
+      if(car.checkpoints%track.checkpoints.length===0){const lapTime=state.time-(car.lapStart||0);car.lapStart=state.time;car.lapTimes.push(lapTime);event('lap',car,{lap:car.lap,lapTime});}
       if(car.checkpoints>=track.checkpoints.length*stage.laps){car.finished=true;car.finishTime=state.time;event('finish',car);}
     }
     car.previousS=car.routeS;

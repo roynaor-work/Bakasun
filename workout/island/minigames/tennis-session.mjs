@@ -1,20 +1,20 @@
-import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-1';
-import {gameContext} from './context.mjs?v=island-v2-20261107-1';
-import {createTennis} from './tennis.mjs?v=island-v2-20261107-1';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-1';
-import {createTennisControls,applyTennisSample} from './tennis-controls.mjs?v=island-v2-20261107-1';
-import {tennisIcon,tennisScoreCells,tennisEventFeedback,tennisLiveFeedback} from './tennis-ui.mjs?v=island-v2-20261107-1';
+import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-2';
+import {gameContext} from './context.mjs?v=island-v2-20261107-2';
+import {createTennis} from './tennis.mjs?v=island-v2-20261107-2';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-2';
+import {createTennisControls,applyTennisSample} from './tennis-controls.mjs?v=island-v2-20261107-2';
+import {tennisIcon,tennisScoreCells,tennisEventFeedback,tennisLiveFeedback} from './tennis-ui.mjs?v=island-v2-20261107-2';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};
- const {balance,canvas,controls,status,t}=ctx,opponent=tennisOpponent(balance,ctx.level,ctx.state.avatar.shirtColor),viewConfig={...balance,stage:ctx.level,render:{...balance.render,shirtColor:ctx.state.avatar.shirtColor},opponentShirtColor:opponent.shirtColor},model=createTennis({config:balance,stage:ctx.level,seed:ctx.seed>>>0,ranks:ctx.equipment,difficulty:ctx.difficulty});
+ const {balance,canvas,controls,status,t}=ctx,opponent=tennisOpponent(balance,ctx.level,ctx.state.avatar.shirtColor),viewConfig={...balance,stage:ctx.level,render:{...balance.render,shirtColor:ctx.state.avatar.shirtColor},opponentShirtColor:opponent.shirtColor},model=createTennis({config:balance,stage:ctx.level,seed:ctx.seed>>>0,ranks:ctx.equipment,difficulty:ctx.difficulty,v9:globalThis.location?.search&&new URLSearchParams(globalThis.location.search).get('tennisV9')==='0'?false:undefined});
  let view,frame,last=0,paused=false,disposed=false,eventId=0,feedbackEvent=-1,feedbackLeft=0,transientFeedback=null;const abort=new AbortController();let input;const audio=createTennisAudio({config:balance.audio,storage:globalThis.localStorage});
  const cancel=()=>{model.update(0,{cancelCharge:true});};
  function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();}
  const session={dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
- const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-1',import.meta.url);screen.append(powerStyle);
+ const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-2',import.meta.url);screen.append(powerStyle);
  screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls||'';return n;};
  const zone=node('div','soccer-stick-zone'),stick=node('div','soccer-joystick'),knob=node('span','soccer-knob'),home=node('div','tennis-stick-home');
@@ -52,7 +52,7 @@ export function startTennis(ctx){
   const message=feedbackLeft>0&&transientFeedback?transientFeedback:tennisLiveFeedback(s),copy=message.mode==='serve'&&s.server===0?t('tennis.serve'):t('tennis.feedback.'+message.key);
   feedback.dataset.mode=message.mode;if(feedbackText.textContent!==copy)feedbackText.textContent=copy;
   const detail=message.mode==='serve'&&s.server===0?t('tennis.feedback.serve'):'';feedbackDetail.hidden=!detail;if(feedbackDetail.textContent!==detail)feedbackDetail.textContent=detail;
-  powerMeter.hidden=s.phase!=='rally'||s.charge<=0;powerMeter.dataset.over=String(s.charge>balance.shotPower.safeMax[ctx.difficulty]);powerMeter.setAttribute('aria-valuenow',String(Math.round(s.charge*100)));powerFill.style.height=`${s.charge*100}%`;
+  powerMeter.hidden=s.phase!=='rally'||s.charge<=0;const guide=s.powerGuide;if(guide){const lo=Math.max(0,guide.need-guide.tol),hi=Math.min(1,guide.need+guide.tol);powerMeter.dataset.v9='true';powerMeter.style.setProperty('--lo',`${lo*100}%`);powerMeter.style.setProperty('--safe',`${hi*100}%`);powerMeter.style.setProperty('--out',`${guide.out*100}%`);powerMeter.dataset.over=String(s.charge>guide.out);powerMeter.dataset.under=String(s.charge<lo);}else{powerMeter.dataset.over=String(s.charge>balance.shotPower.safeMax[ctx.difficulty]);}powerMeter.setAttribute('aria-valuenow',String(Math.round(s.charge*100)));powerFill.style.height=`${s.charge*100}%`;
   const projected=view.playerScreenPosition?.(s);if(projected){powerMeter.style.left=`${canvas.offsetLeft+projected.x+22}px`;powerMeter.style.top=`${canvas.offsetTop+projected.y-65}px`;}
   const green=balance.serve.green[ctx.difficulty]+(s.ranks.serve-1)*balance.serve.rankGreenBonus,low=(.5-green/2)*100,high=(.5+green/2)*100,yellow=balance.serve.yellowWidth*50;
   meter.style.background=`linear-gradient(to top,#f06960 0% ${low-yellow}%,#efc355 ${low-yellow}% ${low}%,#67d398 ${low}% ${high}%,#efc355 ${high}% ${high+yellow}%,#f06960 ${high+yellow}%)`;needle.style.bottom=`${s.serveMeter*100}%`;

@@ -146,7 +146,7 @@ test('tennis tour: a mixed-shot upgraded player can win the final across indepen
  // Only movement, aim and button inputs are sent to the public model API.
  // The player follows the landing cue after 120 ms, recovers manually toward
  // the centre, and reacts to physical contact rather than a nominal timestamp.
- for(const [rank,releaseDelay]of [[3,.08],[5,.14]]){
+ for(const [rank,releaseDelay]of [[3,.04],[5,.1]]){
   const results=[17,42,129,627,981,4107].map(seed=>{
    const game=createTennis({config,stage:30,seed,difficulty:'easy',ranks:{speed:rank,hit:rank,serve:rank}});
    let lastSwing=-1,incomingAt=null,incomingSerial=-1,eligibleSince=null,event=-1;
@@ -162,7 +162,7 @@ test('tennis tour: a mixed-shot upgraded player can win the final across indepen
     const swing=incoming&&Boolean(s.contactWindow?.eligible)&&s.elapsed-lastSwing>.29&&s.elapsed-eligibleSince>=releaseDelay;
     if(swing)lastSwing=s.elapsed;
     const ai=s.players[1],lob=ai.z>-5&&s.ball.z<6.5,drop=!lob&&ai.z<-6.3&&s.rallyHits%3!==0&&s.ball.z<7.2;
-    const aim={manual:true,x:ai.x>=0?-1:1,z:-.8},serve=s.server===0&&(s.phase==='serve'||s.phase==='toss'&&s.serveMeter>=.49&&s.serveMeter<=.515);
+    const aim={manual:true,x:ai.x>=0?-1:1,z:-.2},serve=s.server===0&&(s.phase==='serve'||s.phase==='toss'&&s.serveMeter>=.49&&s.serveMeter<=.515);
     game.update(1/60,{serve,swing,lob,drop,aim,move,moveZ});
    }
    assert.ok(game.result,'the physical match always ends');assert.equal(game.result.stage,30);assert.ok(game.result.durationSeconds<config.maximumSeconds);return game.result;

@@ -1,15 +1,15 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-1';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-2';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-1';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-1';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-1';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-1';
-import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-1';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-1';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-1';
-import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-1';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-2';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-2';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-2';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-2';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-2';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-2';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-2';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-2';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
-import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
+import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight} from './soccer-restarts.mjs';
@@ -82,7 +82,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     for (const p of players) {
       const d=direction(p.team),role=config.players.roles.indexOf(p.role);
       p.x=d*aiConfig.kickoffX[role];p.z=role===1?(p.team===0?-1:1)*aiConfig.kickoffZ:role===3?(p.team===0?1:-1)*aiConfig.kickoffZ:0;p.vx=p.vz=0;p.fx=d;p.fz=0;p.hold=0;p.think=aiConfig.initialThink;p.cooldown=aiConfig.initialCooldown;p.sprinting=false;p.sprintTime=p.sprintRest=0;
-      if(p.soccerExtra){p.x=-d*hx*.55;p.z=(p.tacticalRole==='LCB'?-1:1)*hz*.32;}
+      if(p.soccerExtra){const spot=SOCCER_EXTRAS.find(e=>e.tacticalRole===p.tacticalRole)?.kickoff||[-.55,.32];p.x=d*hx*spot[0];p.z=hz*spot[1];}
       if(p.role==='keeper')p.x=-d*(hx-aiConfig.keeperInset);
       p.restartMotion=p.distribution=null;
       p.hands=false;p.autoHeadTime=0;p.diveTime=p.diveCooldown=p.throwTime=p.catchTime=0;p.slideTime=p.recover=p.headerTime=p.kickTime=p.stealTime=p.turnLean=0;p.slideAttempted=p.slideWon=false;
@@ -732,7 +732,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         const variant=slideVariant(config,member.slideKind),duration=Math.min(step,member.slideTime),speed=variant.distance/variant.seconds*slideVelocityScale(member.slideTime-duration*.5,variant.seconds);
         member.slideFromX=member.x;member.slideFromZ=member.z;member.slideTick=tickCount;member.slideAge=variant.seconds-member.slideTime;
         member.vx=member.slideX*speed;member.vz=member.slideZ*speed;member.x=clamp(member.x+member.vx*duration,-hx+rules.playerBoundary,hx-rules.playerBoundary);member.z=clamp(member.z+member.vz*duration,-hz+rules.playerBoundary,hz-rules.playerBoundary);member.slideTime=Math.max(0,member.slideTime-step);
-        if(member.slideTime<=1e-8){member.slideTime=0;member.recover=slideRecoverySeconds(variant,{won:member.slideWon,behind:member.slideBehind,late:member.slideLate});}
+        if(member.slideTime<=1e-8){member.slideTime=0;member.recover=slideRecoverySeconds(aiV2?variant:{...variant,maxTotalSeconds:undefined},{won:member.slideWon,behind:member.slideBehind,late:member.slideLate});}
       }else if(member.id===s.controlled&&member.hands){
         const k=config.goalkeeping,d=direction(member.team);member.hold+=step;
         moveControlledKeeper(member,mx,mz,step);

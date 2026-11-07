@@ -1,5 +1,9 @@
 # נכסים ורישיונות — האי שלי
 
+## דגמי העיר (מעבדת העיר, 07.11.2026)
+
+58 דגמי Meshy מ-`workout/city-lab` (מקור ללא שינוי, 137MB) נדחסו לשימוש האי ב-`assets/models/city/NN-name.glb`: טקסטורת JPEG 512 (איכות 80), כימות גאומטריה (`KHR_mesh_quantization`, נקרא ישירות ב-GLTFLoader), בלי meshopt ובלי Draco. הסיבה: מדיניות ה-CSP של האי (`script-src 'self'`) חוסמת קומפילציה של WebAssembly, ופענח meshopt דורש אותה. סה"כ 11.09MB (ממוצע 191KB, מקסימום 288KB). נבנים ב-`tools/city-models-compress.mjs` (תלויות בנייה בלבד, לא נשלחות). `assets/models/city/catalog.json` = מספר, שם, קטגוריה, בתים לפני ואחרי, משולשים, גודל מנורמל וגודל מוצע במטרים. הרישיון והמקור כמו בדוח מעבדת העיר. הטעינה והמיפוי: `view/city-models.mjs`; דגל כיבוי `?cityModels=0`. הבדיקות: `tests/island-city-models.test.mjs`. דוח: `verification/city-models/REPORT.md`.
+
 ## שילוב מראה הים בקרב הספינות · 22.10.2026
 
 `minigames/naval-water.mjs` מבוסס על [Water של Three.js r160](https://github.com/mrdoob/three.js/blob/r160/examples/jsm/objects/Water.js), ברישיון MIT המצורף ב־`vendor/LICENSE.three`. התאמות: ייבוא מקומי ו־`dispose()` למטרת ההשתקפות, לגאומטריה ולחומר. `naval-environment.mjs` מוסיף את פלטת העיצוב המאושרת, תאורה ושמיים מקומיים. `assets/textures/naval-waternormals.jpg` היא טקסטורת [הדוגמה המקורית מאותו תג](https://github.com/mrdoob/three.js/blob/r160/examples/textures/waternormals.jpg), זהה לבייטים בניסוי המאושר: 248,813 בייטים, SHA-256 `add9912b158a4fe9c12421745babe68c44c8af75631ac4837236cb2a03bc373f`. היא מוגשת מקומית; שדה נורמלים מחושב משמש בזמן טעינה או אם הטקסטורה חסרה. אין פנייה ל־CDN.

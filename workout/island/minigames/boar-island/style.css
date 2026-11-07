@@ -121,3 +121,4 @@
 
 /* 06/11/2026: touch players get a one-line hint (the desktop hint is hidden on small screens). */
 .battle-hint.touch-hint{display:block;top:92px;font-size:12px;text-align:center}.battle-hint.touch-hint span{display:block;opacity:.8}
+.weapons.many{flex-wrap:wrap;justify-content:flex-end;align-content:flex-end;max-height:calc(100vh - 150px)}
