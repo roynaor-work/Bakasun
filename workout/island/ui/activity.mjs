@@ -210,6 +210,7 @@ export class ActivityInterface {
       const roles=el('fieldset','soccer-role-choice');roles.append(el('legend','',this.t('soccer.chooseRole')));for(const role of ['field','keeper']){const choice=button(this.t('soccer.playRole.'+role),'soccer-role',()=>{this.engine.setSoccerRole(role);this.stages(id);});choice.dataset.role=role;choice.setAttribute('aria-pressed',String(this.engine.state.soccerRoster.role===role));roles.append(choice);}dialog.append(roles);
       }
     }
+    if(id==='islandRacing'&&this.leagueOn())this.racingLeagueCard(outer);
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
     if(id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length){outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
     const map=el('div','stage-map');
@@ -286,6 +287,7 @@ export class ActivityInterface {
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
     if(rescue.lite)context.lite=true;
+    if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1} · ${next.track}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
@@ -309,7 +311,7 @@ export class ActivityInterface {
    * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
    * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
   async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
-    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite'};
+    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{})};
     this.closing=true;
     try{this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
     let count=0;
@@ -322,6 +324,7 @@ export class ActivityInterface {
     dialog.append(el('p','soccer-outdoor-message',this.t(phrases[(index||0)%phrases.length])),button(this.t('soccer.practice.outdoor'),'soccer-outdoor',()=>{const r=this.engine.soccerOutdoorPractice();this.ui.toast(r.ok?'soccer.practice.outdoorThanks':r.reason);dialog.querySelector('[data-action=soccer-outdoor]').disabled=true;}));
   }
   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
+    if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}
     if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return;}
     const game=this.engine.registry.minigames.get(id);
     this.ui.modalCleanup=null;
@@ -351,6 +354,33 @@ export class ActivityInterface {
     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
+  }
+  /** Racing league (ui/racing-league.mjs, loaded on first use). ?racingLeague=0 removes every entry point. */
+  leagueOn(){return Boolean(this.engine.racingLeague?.enabled())&&this.data.featureFlags.minigames;}
+  leagueModule(){return this.leagueLoad??=import('./racing-league.mjs?v=island-v2-20261107-2').catch(error=>{this.leagueLoad=null;throw error;});}
+  leagueActions(){return {go:()=>this.racingLeagueGo(),season:()=>this.racingLeagueScreen('season'),shop:()=>this.racingLeagueScreen('shop'),refresh:()=>this.stages('islandRacing')};}
+  racingLeagueGo(){
+    if(this.requireBuilding('islandRacing'))return;
+    if(!this.engine.racingLeague.next())return;
+    this.launch('islandRacing',undefined,undefined,undefined,{attempts:0,lite:false,league:true});
+  }
+  racingLeagueCard(outer){
+    this.leagueModule().then(m=>{if(!outer.isConnected)return;const card=m.leagueCard({engine:this.engine,...this.leagueActions()});outer.querySelector('.modal-subtitle')?.after(card);}).catch(()=>{});
+  }
+  racingLeagueScreen(kind,result){
+    this.leagueModule().then(m=>{
+      const dialog=this.modal('minigame.islandRacing.title','minigame.subtitle');dialog.dataset.racingLeagueScreen=kind;
+      const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
+      const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
+      const again={engine:this.engine,...this.leagueActions()};
+      const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result,refresh:()=>this.racingLeagueScreen('result',result)}):m.seasonBody(again);
+      dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
+    }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+  }
+  racingLeagueResult(result){
+    this.ui.modalCleanup=null;this.sound.play(result.outcome==='win'?'win':'lose');
+    this.racingLeagueScreen('result',result);
+    this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
   }
   alpineResult(dialog,summary,a){
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.

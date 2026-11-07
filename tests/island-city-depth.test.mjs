@@ -1,3 +1,4 @@
+import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -64,7 +65,7 @@ test('existing fire outcomes announce damage through engine.subscribe and city r
 });
 test('v17 migration adds only city state, v18 round-trips, and corrupt city saves are rejected',()=>{
   const {engine:e}=fixture(), old=structuredClone(e.state);old.version=17;delete old.city;const before=structuredClone(old);
-  const migrated=migrateSave(old,data,e.registry);assert.ok(migrated.ok);assert.equal(CURRENT_VERSION,18);assert.deepEqual(old,before);assert.deepEqual(migrated.state,{...old,version:18,city:initialCity()});assert.ok(validateSave(migrated.state,data,e.registry).ok);
+  const migrated=migrateSave(old,data,e.registry);assert.ok(migrated.ok);assert.equal(CURRENT_VERSION,19);assert.deepEqual(old,before);assert.deepEqual(migrated.state,{...old,version:19,islandRacingLeague:createLeague(),city:initialCity()});assert.ok(validateSave(migrated.state,data,e.registry).ok);
   for(const mutate of [s=>delete s.city,s=>s.city.investments.unknown=2,s=>s.city.delivered=-1,s=>s.city.port.cycle=Infinity,s=>s.city.claimedGoals=['water','water'],s=>s.city.port.slots=[{id:'fake'}]]){const state=structuredClone(migrated.state);mutate(state);assert.equal(migrateSave(state,data,e.registry).ok,false);}
 });
 test('removing an invested damaged producer clears its saved references; one undo restores both investment and damage',()=>{
@@ -74,7 +75,7 @@ test('removing an invested damaged producer clears its saved references; one und
 });
 test('city release pins the report, runtime, UI module and stylesheet to the shared cache identity',async()=>{
   const root=new URL('../workout/island/',import.meta.url),release=JSON.parse(await readFile(new URL('release.json',root),'utf8'));
-  const {DATA_VERSION}=await import('../workout/island/release.mjs');assert.equal(release.version,DATA_VERSION);assert.equal(CURRENT_VERSION,18);
+  const {DATA_VERSION}=await import('../workout/island/release.mjs');assert.equal(release.version,DATA_VERSION);assert.equal(CURRENT_VERSION,19);
   for(const file of ['engine/engine.mjs','engine/persistence.mjs','engine/city-depth.mjs','engine/city-runtime.mjs','ui/interface.mjs','ui/city-depth.mjs','view/island-view.mjs','view/city-depth.mjs','index.html']){
     const source=await readFile(new URL(file,root),'utf8');for(const match of source.matchAll(/\?v=([\w.-]+)/g))assert.equal(match[1],DATA_VERSION,file);
   }
@@ -82,8 +83,8 @@ test('city release pins the report, runtime, UI module and stylesheet to the sha
 });
 test('published PR170 v18 saves gain the city extension once without losing municipal policy, plans or earned fields',()=>{
   const {engine:e}=fixture();e.setCityPolicy({enabled:true,taxRate:13,funding:{water:150}});e.zone('residential',4,5);
-  const published=structuredClone(e.state);delete published.city;delete published.cityDepthVersion;const before=structuredClone(published),result=migrateSave(published,data,e.registry);
-  assert.ok(result.ok);assert.deepEqual(published,before);assert.deepEqual(result.state,{...published,cityDepthVersion:1,city:initialCity()});assert.ok(validateSave(result.state,data,e.registry).ok);
+  const published=structuredClone(e.state);delete published.city;delete published.cityDepthVersion;delete published.islandRacingLeague;published.version=18;const before=structuredClone(published),result=migrateSave(published,data,e.registry);
+  assert.ok(result.ok);assert.deepEqual(published,before);assert.deepEqual(result.state,{...published,version:19,islandRacingLeague:createLeague(),cityDepthVersion:1,city:initialCity()});assert.ok(validateSave(result.state,data,e.registry).ok);
   const corrupt=structuredClone(result.state);delete corrupt.city;assert.equal(migrateSave(corrupt,data,e.registry).ok,false);
   const future=structuredClone(result.state);future.cityDepthVersion=2;assert.equal(migrateSave(future,data,e.registry).ok,false);
 });

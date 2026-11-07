@@ -4,8 +4,15 @@ import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-3
 import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-3';
 import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-3';
 
+/** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
+function leagueOrder(cars){
+ const order=[...cars].sort((a,b)=>a.rank-b.rank).map(c=>c.id);let fastest=null,best=Infinity;
+ for(const c of cars)for(const lap of c.lapTimes)if(lap>0&&lap<best){best=lap;fastest=c.id;}
+ return {order,fastestLapId:fastest};
+}
+
 export function runRacingSession(ctx){
- const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment,walls:new URLSearchParams(globalThis.location?.search||'').get('racingWalls')!=='0',feel:new URLSearchParams(globalThis.location?.search||'').get('racingFeel')!=='0'}});
+ const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment,...(ctx.league?{drivers:ctx.league.drivers,stage:ctx.league.stageOverride}:{}),walls:new URLSearchParams(globalThis.location?.search||'').get('racingWalls')!=='0',feel:new URLSearchParams(globalThis.location?.search||'').get('racingFeel')!=='0'}});
  const {canvas,controls,status,t}=ctx;let frame,view,input,last=0,paused=false,disposed=false,finished=false,messageUntil=0,toastText='',renderError=null;
  const abort=new AbortController();let audio;try{audio=createRacingAudio();}catch{audio=createRacingAudio({storage:null});}
  const session={setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
@@ -53,7 +60,7 @@ export function runRacingSession(ctx){
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='wall'){ctx.sound?.('hit');view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;
   if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
-   const done=()=>ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result});
+   const done=()=>ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result,...(ctx.league?{league:leagueOrder(s.cars)}:{})});
    // racing-v11 podium: the top three of the finished race for 4 s (tap to skip), then the normal result. ?racingPodium=0 skips it.
    if(podiumOn){showPodium(s,done);return;}
    done();return;}frame=requestAnimationFrame(tick);
