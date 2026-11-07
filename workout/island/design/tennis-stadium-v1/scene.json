@@ -1,0 +1,328 @@
+{
+  "units": "metres",
+  "up": "+Y",
+  "standFront": "-Z",
+  "courtSize": [
+    18.29,
+    36.57
+  ],
+  "crowd": {
+    "columns": 8,
+    "rows": 2,
+    "variants": 8,
+    "poses": [
+      "down",
+      "up"
+    ],
+    "cellSize": [
+      128,
+      256
+    ],
+    "layout": "index = variant * 2 + pose; row-major from top left",
+    "planeSize": [
+      0.88,
+      1.76
+    ],
+    "alphaTest": 0.5,
+    "mipmaps": false
+  },
+  "placements": [
+    {
+      "model": "stand-10m",
+      "position": [
+        -10.4,
+        0,
+        -10
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        -10.4,
+        0,
+        0
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        -10.4,
+        0,
+        10
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        -5,
+        0,
+        -19.5
+      ],
+      "rotationY": 3.141592653589793
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        5,
+        0,
+        -19.5
+      ],
+      "rotationY": 3.141592653589793
+    },
+    {
+      "model": "net-post",
+      "position": [
+        -6.4,
+        0,
+        0
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "player-bench",
+      "position": [
+        -8.1,
+        0,
+        5.8
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "floodlight",
+      "position": [
+        -10,
+        0,
+        -13
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "floodlight",
+      "position": [
+        -10,
+        0,
+        13
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -9.35,
+        0,
+        -8
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -9.35,
+        0,
+        -4
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -9.35,
+        0,
+        4
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -9.35,
+        0,
+        8
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -6,
+        0,
+        -17.5
+      ],
+      "rotationY": 3.141592653589793
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        6,
+        0,
+        -17.5
+      ],
+      "rotationY": 3.141592653589793
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        10.4,
+        0,
+        -10
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        10.4,
+        0,
+        0
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        10.4,
+        0,
+        10
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        -5,
+        0,
+        19.5
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "stand-10m",
+      "position": [
+        5,
+        0,
+        19.5
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "net-post",
+      "position": [
+        6.4,
+        0,
+        0
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "player-bench",
+      "position": [
+        8.1,
+        0,
+        5.8
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "floodlight",
+      "position": [
+        10,
+        0,
+        -13
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "floodlight",
+      "position": [
+        10,
+        0,
+        13
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        9.35,
+        0,
+        -8
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        9.35,
+        0,
+        -4
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        9.35,
+        0,
+        4
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        9.35,
+        0,
+        8
+      ],
+      "rotationY": 1.5707963267948966
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        -6,
+        0,
+        17.5
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "ad-board",
+      "position": [
+        6,
+        0,
+        17.5
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "net",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationY": 0
+    },
+    {
+      "model": "umpire-chair",
+      "position": [
+        7.1,
+        0,
+        0
+      ],
+      "rotationY": -1.5707963267948966
+    },
+    {
+      "model": "scoreboard",
+      "position": [
+        0,
+        0,
+        -18.1
+      ],
+      "rotationY": 3.141592653589793
+    }
+  ]
+}
