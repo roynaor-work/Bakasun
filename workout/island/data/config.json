@@ -4711,6 +4711,13 @@
     "secondWaterUse": 0.15,
     "followX": 1.1,
     "followZ": 1.8,
+    "v9": {
+     "height": 1.2,
+     "standOut": 0.95,
+     "doorForward": 1.35,
+     "standForward": 0.25,
+     "exitSeconds": 1.1
+    },
     "sprayLean": 0.18,
     "connectLean": 0.35,
     "armRaise": 1.15,
@@ -4971,7 +4978,10 @@
      "maxRoll": 0.06,
      "pitchPerAccel": 0.0014,
      "maxPitch": 0.04,
-     "leanEase": 8
+     "leanEase": 8,
+     "driveAngle": 0.5,
+     "pivotAngle": 1.3,
+     "pivotTurn": 2.4
     }
    },
    "hydrant": {
