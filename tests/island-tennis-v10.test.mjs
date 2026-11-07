@@ -10,13 +10,15 @@ const byZone=(config,offsets)=>{const g={};for(let i=0;i<N;i++){const t=offsets[
   const r=playPoint({config,stage:10,difficulty:'normal',seed:i+1,testIndex:1,plan:n=>n!==1?{charge:.3}:{charge:.3,aimX:((i*17)%11-5)/8,aimZ:0,timing:t}});
   const c=classify(r);if(!c||!r.grade)continue;g[r.grade]??={n:0,in:0};g[r.grade].n++;if(c==='in')g[r.grade].in++;}return g;};
 
-test('tennis v10: the hit meter runs only while the player has an incoming ball, centre = best, and the flag turns it off',()=>{
+test('tennis v11: one bar, only while the hit button is held; the needle is the charge measured from the ideal one, green in the centre',()=>{
   const m=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal'});
-  const off=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal',meter:false}),os=off.getState();os.phase='rally';os.shot={serving:false,side:1};off.update(1/60,{});assert.equal(os.hitMeter,undefined);
-  const s=m.getState();s.phase='rally';s.shot={serving:false,side:0};m.update(1/60,{});assert.equal(m.getState().hitMeter.active,false,'no incoming ball, no meter');s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=6;Object.assign(s.ball,{x:0,z:6,y:baseConfig.ball.hitHeight,lastHitter:1,bounces:1});
-  s.contact={side:0,at:s.elapsed+.0,eta:0,x:0,z:6};m.update(1/60,{});
-  const hm=m.getState().hitMeter;assert.equal(hm.active,true);assert.equal(hm.zone,'green');assert.ok(Math.abs(hm.value-.5)<hm.greenHalf);
-  s.contact.at=s.elapsed+.5;m.update(1/60,{});assert.ok(m.getState().hitMeter.value<.5-hm.greenHalf,'an early swing sits below the green');
+  const s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=6;Object.assign(s.ball,{x:0,z:6,y:baseConfig.ball.hitHeight,lastHitter:1,bounces:1});s.contact={side:0,at:s.elapsed+2,eta:2,x:0,z:6};
+  m.update(1/60,{});assert.equal(m.getState().hitMeter.active,false,'no button, no bar');
+  m.update(1/60,{prepare:true,aim:{manual:false,x:0,z:0}});let hm=m.getState().hitMeter;assert.equal(hm.active,true);assert.equal(hm.zone,'green','a quick tap at the default length is green');assert.ok(Math.abs(hm.value-.5)<hm.greenHalf);
+  for(let i=0;i<70;i++)m.update(1/60,{prepare:true,aim:{manual:false,x:0,z:0}});hm=m.getState().hitMeter;assert.ok(hm.value>.5+hm.greenHalf&&hm.zone!=='green','holding too long moves the needle above the green');
+  const deep=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal'}),ds=deep.getState();ds.phase='rally';ds.shot={serving:false,side:1};ds.contact={side:0,at:ds.elapsed+2,eta:2,x:0,z:6};
+  deep.update(1/60,{prepare:true,aim:{manual:true,x:0,z:-1}});const dm=deep.getState().hitMeter;assert.ok(dm.value<.5-dm.greenHalf,'a deep ball with no charge sits below the green: it needs power');
+  const off=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal',meter:false}),os=off.getState();os.phase='rally';os.shot={serving:false,side:1};off.update(1/60,{prepare:true});assert.equal(os.hitMeter,undefined);
 });
 
 test('tennis v10: green is nearly always in, the rims are worse, and the worse the zone the likelier net or out',()=>{
