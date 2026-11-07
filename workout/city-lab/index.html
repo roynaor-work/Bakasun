@@ -1,0 +1,39 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>מעבדת העיר: 58 דגמים</title>
+<script type="importmap">{"imports":{"three":"../island/vendor/three.module.js"}}</script>
+<style>
+html,body{margin:0;height:100%;background:#14202b;color:#f1f5f9;font-family:"Assistant",system-ui,sans-serif;direction:rtl;text-align:right;unicode-bidi:embed;overflow:hidden;touch-action:none}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+.bar{position:fixed;left:0;right:0;z-index:2;display:flex;gap:6px;flex-wrap:wrap;padding:8px calc(8px + env(safe-area-inset-right)) 8px calc(8px + env(safe-area-inset-left));pointer-events:none}
+.bar>*{pointer-events:auto}
+#top{top:0}
+#bottom{bottom:0}
+button{font:inherit;font-size:15px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #3b5368;background:#1f3347cc;color:#f1f5f9;cursor:pointer}
+button[aria-pressed=true]{background:#c8a45a;color:#1a1305;border-color:#e8cf94}
+button:focus-visible{outline:3px solid #e8cf94;outline-offset:2px}
+#info{position:fixed;z-index:3;right:8px;left:8px;bottom:64px;max-width:420px;margin-inline:auto;background:#0f1923ee;border:1px solid #3b5368;border-radius:14px;padding:12px 14px;display:none;font-size:15px;line-height:1.5}
+#info b{font-size:17px}
+#info .en{direction:ltr;display:inline-block;color:#9fb3c5;font-size:13px}
+#status{position:fixed;z-index:3;top:70px;right:8px;left:8px;text-align:center;pointer-events:none;font-size:15px;color:#e8cf94;text-shadow:0 1px 3px #000}
+#bar{height:4px;background:#c8a45a;position:fixed;top:0;right:0;width:0;z-index:4;transition:width .2s}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<canvas id="c" aria-label="תצוגה תלת-ממדית של דגמי העיר"></canvas>
+<div class="bar" id="top" role="toolbar" aria-label="קטגוריות"></div>
+<div id="status" role="status" aria-live="polite"></div>
+<div id="info" role="dialog" aria-label="פרטי דגם"></div>
+<div class="bar" id="bottom" role="toolbar" aria-label="מצב תצוגה">
+  <button id="m-city" aria-pressed="true">גודל יחסי בעיר</button>
+  <button id="m-even" aria-pressed="false">אותו גודל לכולם</button>
+  <button id="reset">מרכז מצלמה</button>
+</div>
+<script type="module" src="viewer.mjs"></script>
+</body>
+</html>
