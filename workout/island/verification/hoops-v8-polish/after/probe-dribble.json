@@ -3,26 +3,36 @@
  "segments": {
   "stand": {
    "frames": 70,
-   "corrBallHand": 1,
-   "meanPalmBallWhenHigh": 0.167,
-   "minBall": 1.043,
-   "maxBall": 1.17,
+   "corrBallHand": 0.87,
+   "meanPalmBallWhenHigh": 0.28,
+   "minBall": 0.133,
+   "maxBall": 1.23,
    "meanSpeed": 0,
    "motions": [
-    "idle_hold"
+    "dribble_right"
    ]
   },
   "walk": {
-   "frames": 14,
-   "corrBallHand": 1,
-   "meanPalmBallWhenHigh": 0.16,
-   "minBall": 1.163,
-   "maxBall": 1.167,
-   "meanSpeed": 0,
+   "frames": 80,
+   "corrBallHand": 0.89,
+   "meanPalmBallWhenHigh": 0.284,
+   "minBall": 0.13,
+   "maxBall": 1.198,
+   "meanSpeed": 1.92,
    "motions": [
-    "idle_hold"
+    "dribble_right"
    ]
   },
-  "run": null
+  "run": {
+   "frames": 110,
+   "corrBallHand": 0.89,
+   "meanPalmBallWhenHigh": 0.315,
+   "minBall": 0.131,
+   "maxBall": 1.091,
+   "meanSpeed": 4.33,
+   "motions": [
+    "dribble_right"
+   ]
+  }
  }
 }

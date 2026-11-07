@@ -78,7 +78,7 @@ try{
    // ball handler: standing, walking, running dribble. Hand-ball sync: how well ball height follows the dribbling hand (correlation), the palm-to-ball
    // distance while the ball is above 0.6 m (in the hand), and the lowest the ball gets (it must reach the floor)
    for(const q of a.onCourt(1))e.debug.place(q.id,-side*10,q.z);
-   e.debug.place(p.id,-side*8,-3);p.face=Math.atan2(side,0);
+   e.debug.place(p.id,side*1.5,-2);p.face=Math.atan2(side,0);
    const av=d.view.avatars.get(p.id),b=bonesOf(av),segs=[['stand',0,70,0],['walk',70,150,.35],['run',150,260,.8]],rows=[];
    const palm=()=>{const w=av.hands.r.getWorldPosition(new av.hands.r.position.constructor());return [w.x,w.y,w.z];};
    for(let t=0;t<260;t++){const sg=segs.find(x=>t>=x[1]&&t<x[2]);
