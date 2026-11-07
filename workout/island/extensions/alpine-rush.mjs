@@ -1,5 +1,5 @@
-import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-2';
-import {alpineResult} from '../minigames/alpine-result.mjs?v=island-v2-20261107-2';
+import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-3';
+import {alpineResult} from '../minigames/alpine-result.mjs?v=island-v2-20261107-3';
 
 /** Alpine Rush snowboard race: same lifecycle and reward contract as the other island games. */
 export function install(registry,data) {

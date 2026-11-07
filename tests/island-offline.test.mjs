@@ -16,7 +16,7 @@ const bytesOf=async list=>{let n=0;for(const p of list)if(p)n+=(await stat(path.
 test('offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game',async()=>{
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
  for(const [game,list] of Object.entries(manifest.games)){
-  assert.ok(list.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'||game==='city'?5:40),game+' has a real asset list');/* small packs */
+  assert.ok(list.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'||game==='city'||game==='catch'?5:40),game+' has a real asset list');/* small packs */
   assert.equal(new Set(list).size,list.length,game+' has no duplicates');
   for(const p of list){await access(path.join(island,p));assert.ok(isManagedPath('/workout/island/'+p),p+' is served from the cache');}
  }
@@ -45,7 +45,7 @@ test('offline worker: classic script with the same managed rule as the page, ver
  assert.ok(!/^\s*(import|export)\s/m.test(source),'classic worker, not a module');
  assert.ok(source.includes(MANAGED.source),'worker carries the same managed pattern as ui/offline.mjs');
  assert.ok(source.includes("'island-assets-'+VERSION"));
- assert.equal(cacheName('island-v2-20261107-2'),'island-assets-island-v2-20261107-2');
+ assert.equal(cacheName('island-v2-20261107-3'),'island-assets-island-v2-20261107-3');
 });
 
 function runWorker(version='v1'){

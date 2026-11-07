@@ -1,20 +1,20 @@
-import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-2';
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-2';
-import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-2';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-2';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-2';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-2';
-import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-2';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-2';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-2';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-2';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-2';
-import { cellsFor } from './rules.mjs?v=island-v2-20261107-2';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-2';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-2';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-2';
-import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-2';
-import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-2';
+import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-3';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-3';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-3';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-3';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-3';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-3';
+import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-3';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-3';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-3';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-3';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-3';
+import { cellsFor } from './rules.mjs?v=island-v2-20261107-3';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-3';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-3';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-3';
+import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-3';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-3';
 
 export const CURRENT_VERSION = 18;
 export const STORAGE_KEY = 'island.v1';
@@ -41,7 +41,7 @@ export function createInitialState(data, now = Date.now()) {
 }
 
 /** Games added while the schema stayed at 18. */
-const GAMES_AFTER_18=['streetSlam','alpineRush'];
+const GAMES_AFTER_18=['streetSlam','alpineRush','catchCriminal'];
 
 /** A game added after a save was written starts at stage one with empty
  * equipment, the same way islandRacing joined in 16 -> 17. Additive only. */

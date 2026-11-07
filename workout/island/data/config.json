@@ -13114,6 +13114,605 @@
     }
    }
   },
+  "catchCriminal": {
+   "version": 1,
+   "requiresBuilding": null,
+   "maximumScore": 1000,
+   "pointsPerCoin": 5,
+   "throws": 3,
+   "physics": {
+    "fixedStep": 0.004166666666666667,
+    "pathEvery": 4,
+    "maxFlight": 7,
+    "worldEnd": 64,
+    "escapeX": 42,
+    "release": {
+     "x": 0.6,
+     "y": 1.7
+    },
+    "angle": {
+     "min": 0,
+     "max": 80,
+     "start": 38
+    },
+    "powerStart": 0.55,
+    "powerMin": 0.18,
+    "fleeSeconds": 1.5,
+    "escapeSeconds": 3.6,
+    "escapeRun": 0.72,
+    "throwSeconds": 0.26,
+    "impactSeconds": 0.9,
+    "caughtSeconds": 2.2
+   },
+   "tools": {
+    "narrow": {
+     "title": "catch.tool.narrow",
+     "hint": "catch.tool.narrow.hint",
+     "vmax": 21,
+     "gravity": 9.8,
+     "radius": 0.5,
+     "windScale": 1.0,
+     "perfectY": 1.5,
+     "perfectX": 0.5,
+     "icon": "net"
+    },
+    "wide": {
+     "title": "catch.tool.wide",
+     "hint": "catch.tool.wide.hint",
+     "vmax": 15,
+     "gravity": 9.8,
+     "radius": 1.3,
+     "windScale": 1.6,
+     "perfectY": 2.35,
+     "perfectX": 0.45,
+     "icon": "wide"
+    },
+    "rope": {
+     "title": "catch.tool.rope",
+     "hint": "catch.tool.rope.hint",
+     "vmax": 19,
+     "gravity": 3.4,
+     "radius": 0.85,
+     "windScale": 0.0,
+     "perfectY": 1.45,
+     "perfectX": 0.45,
+     "icon": "rope"
+    }
+   },
+   "criminal": {
+    "rx": 0.27,
+    "ry": 0.62,
+    "cy": 1.0,
+    "reachX": 0.8,
+    "reachY": 0.7,
+    "groundReach": 0.7,
+    "hideDrop": 1.05
+   },
+   "scoring": {
+    "catch": 100,
+    "perfect": 60,
+    "perThrowLeft": 40,
+    "stageBonus": 0.08,
+    "perfCatch": 0.35,
+    "perfLeft": 0.3,
+    "perfPerfect": 0.35
+   },
+   "city": {
+    "policeRadiusPerLevel": 0.04,
+    "policeMax": 0.12,
+    "prisonCoinPerLevel": 0.05,
+    "prisonMax": 0.15
+   },
+   "controls": {
+    "anglePerPx": 0.22,
+    "powerPerPx": 0.0065,
+    "keyAngle": 0.6,
+    "keyPower": 0.012
+   },
+   "render": {
+    "maxDpr": 2,
+    "lowDpr": 1.25,
+    "base": "assets/game-catch/"
+   },
+   "levels": [
+    {
+     "stage": 1,
+     "feature": "feature.catchCriminal.1",
+     "difficulty": 1,
+     "winMoney": 30,
+     "winParts": 0,
+     "radiusScale": 0.5,
+     "wobble": {
+      "angle": 0,
+      "power": 0
+     },
+     "dist": 8,
+     "flee": 3.5,
+     "wind": 0,
+     "move": {
+      "kind": "stand"
+     },
+     "pop": null,
+     "preview": 1.0,
+     "tools": [
+      "narrow",
+      "wide"
+     ],
+     "theme": "day",
+     "decor": "street",
+     "obstacles": []
+    },
+    {
+     "stage": 2,
+     "feature": "feature.catchCriminal.2",
+     "difficulty": 2,
+     "winMoney": 38,
+     "winParts": 0,
+     "radiusScale": 0.55,
+     "wobble": {
+      "angle": 0,
+      "power": 0
+     },
+     "dist": 10,
+     "flee": 3.5,
+     "wind": 0,
+     "move": {
+      "kind": "stand"
+     },
+     "pop": null,
+     "preview": 1.0,
+     "tools": [
+      "narrow",
+      "wide"
+     ],
+     "theme": "day",
+     "decor": "street",
+     "obstacles": [
+      {
+       "model": "bush",
+       "x": 5.2,
+       "w": 1.8,
+       "h": 1.2
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "feature": "feature.catchCriminal.3",
+     "difficulty": 3,
+     "winMoney": 46,
+     "winParts": 0,
+     "radiusScale": 0.66,
+     "wobble": {
+      "angle": 0.25,
+      "power": 0.005
+     },
+     "dist": 12,
+     "flee": 4,
+     "wind": 0.4,
+     "move": {
+      "kind": "stand"
+     },
+     "pop": null,
+     "preview": 1.0,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "day",
+     "decor": "street",
+     "obstacles": [
+      {
+       "model": "bush",
+       "x": 7.6,
+       "w": 1.8,
+       "h": 1.2
+      }
+     ]
+    },
+    {
+     "stage": 4,
+     "feature": "feature.catchCriminal.4",
+     "difficulty": 4,
+     "winMoney": 54,
+     "winParts": 0,
+     "radiusScale": 0.912,
+     "wobble": {
+      "angle": 0.35,
+      "power": 0.007
+     },
+     "dist": 13,
+     "flee": 4,
+     "wind": 0.6,
+     "move": {
+      "kind": "pace",
+      "amp": 1.0,
+      "period": 4.0
+     },
+     "pop": null,
+     "preview": 0.95,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "day",
+     "decor": "avenue",
+     "obstacles": [
+      {
+       "model": "van",
+       "x": 8.6,
+       "w": 5.4,
+       "h": 2.2
+      }
+     ]
+    },
+    {
+     "stage": 5,
+     "feature": "feature.catchCriminal.5",
+     "difficulty": 5,
+     "winMoney": 64,
+     "winParts": 0,
+     "radiusScale": 0.685,
+     "wobble": {
+      "angle": 0.5,
+      "power": 0.01
+     },
+     "dist": 15,
+     "flee": 4.2,
+     "wind": 0.8,
+     "move": {
+      "kind": "pace",
+      "amp": 1.6,
+      "period": 3.4
+     },
+     "pop": null,
+     "preview": 0.68,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "dusk",
+     "decor": "avenue",
+     "obstacles": [
+      {
+       "model": "tree",
+       "x": 9.5,
+       "w": 3.0,
+       "h": 6.2,
+       "y0": 2.8
+      },
+      {
+       "model": "lamp",
+       "x": 13.6,
+       "w": 0.35,
+       "h": 5.4
+      }
+     ]
+    },
+    {
+     "stage": 6,
+     "feature": "feature.catchCriminal.6",
+     "difficulty": 6,
+     "winMoney": 76,
+     "winParts": 0,
+     "radiusScale": 0.655,
+     "wobble": {
+      "angle": 0.6,
+      "power": 0.012
+     },
+     "dist": 16,
+     "flee": 4.4,
+     "wind": 1.0,
+     "move": {
+      "kind": "dash",
+      "amp": 2.2,
+      "speed": 3.2,
+      "pause": 0.8
+     },
+     "pop": null,
+     "preview": 0.65,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "dusk",
+     "decor": "downtown",
+     "obstacles": [
+      {
+       "model": "bush",
+       "x": 7.6,
+       "w": 1.8,
+       "h": 1.2
+      },
+      {
+       "model": "van",
+       "x": 12.4,
+       "w": 5.4,
+       "h": 2.2
+      }
+     ]
+    },
+    {
+     "stage": 7,
+     "feature": "feature.catchCriminal.7",
+     "difficulty": 7,
+     "winMoney": 90,
+     "winParts": 0,
+     "radiusScale": 0.82,
+     "wobble": {
+      "angle": 0.75,
+      "power": 0.014
+     },
+     "dist": 17,
+     "flee": 4.6,
+     "wind": 1.2,
+     "move": {
+      "kind": "stand"
+     },
+     "pop": {
+      "up": 2.4,
+      "down": 1.0
+     },
+     "preview": 0.9,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "dusk",
+     "decor": "downtown",
+     "obstacles": [
+      {
+       "model": "roadblock",
+       "x": 16.8,
+       "w": 2.6,
+       "h": 1.15
+      },
+      {
+       "model": "roadblock",
+       "x": 21.4,
+       "w": 2.6,
+       "h": 1.15
+      },
+      {
+       "model": "roadblock",
+       "x": 26.0,
+       "w": 2.6,
+       "h": 1.15
+      }
+     ]
+    },
+    {
+     "stage": 8,
+     "feature": "feature.catchCriminal.8",
+     "difficulty": 8,
+     "winMoney": 106,
+     "winParts": 0,
+     "radiusScale": 0.766,
+     "wobble": {
+      "angle": 0.9,
+      "power": 0.016
+     },
+     "dist": 18,
+     "flee": 4.8,
+     "wind": 1.4,
+     "move": {
+      "kind": "pace",
+      "amp": 1.0,
+      "period": 3.2
+     },
+     "pop": {
+      "up": 2.2,
+      "down": 1.0
+     },
+     "preview": 0.78,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "night",
+     "decor": "downtown",
+     "obstacles": [
+      {
+       "model": "policeCar",
+       "x": 17.8,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "policeCar",
+       "x": 22.6,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "policeCar",
+       "x": 27.4,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "tree",
+       "x": 10,
+       "w": 3.0,
+       "h": 6.2,
+       "y0": 2.8
+      }
+     ]
+    },
+    {
+     "stage": 9,
+     "feature": "feature.catchCriminal.9",
+     "difficulty": 9,
+     "winMoney": 124,
+     "winParts": 0,
+     "radiusScale": 0.695,
+     "wobble": {
+      "angle": 1.0,
+      "power": 0.018
+     },
+     "dist": 19,
+     "flee": 5.0,
+     "wind": 1.6,
+     "move": {
+      "kind": "dash",
+      "amp": 1.0,
+      "speed": 3.0,
+      "pause": 0.7
+     },
+     "pop": {
+      "up": 2.2,
+      "down": 1.0
+     },
+     "preview": 0.69,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "night",
+     "decor": "harbor",
+     "obstacles": [
+      {
+       "model": "getawayCar",
+       "x": 18.8,
+       "w": 4.2,
+       "h": 1.35
+      },
+      {
+       "model": "getawayCar",
+       "x": 23.8,
+       "w": 4.2,
+       "h": 1.35
+      },
+      {
+       "model": "getawayCar",
+       "x": 28.8,
+       "w": 4.2,
+       "h": 1.35
+      },
+      {
+       "model": "tree",
+       "x": 9.5,
+       "w": 3.0,
+       "h": 6.2,
+       "y0": 2.8
+      }
+     ]
+    },
+    {
+     "stage": 10,
+     "feature": "feature.catchCriminal.10",
+     "difficulty": 10,
+     "winMoney": 150,
+     "winParts": 0,
+     "radiusScale": 0.672,
+     "wobble": {
+      "angle": 1.1,
+      "power": 0.02
+     },
+     "dist": 20,
+     "flee": 5.2,
+     "wind": 1.8,
+     "move": {
+      "kind": "dash",
+      "amp": 1.2,
+      "speed": 3.4,
+      "pause": 0.6
+     },
+     "pop": {
+      "up": 2.0,
+      "down": 1.1
+     },
+     "preview": 0.67,
+     "tools": [
+      "narrow",
+      "wide",
+      "rope"
+     ],
+     "theme": "night",
+     "decor": "harbor",
+     "obstacles": [
+      {
+       "model": "policeCar",
+       "x": 19.8,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "policeCar",
+       "x": 25.0,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "policeCar",
+       "x": 30.2,
+       "w": 4.4,
+       "h": 1.5
+      },
+      {
+       "model": "tree",
+       "x": 9.0,
+       "w": 3.0,
+       "h": 6.2,
+       "y0": 2.8
+      }
+     ]
+    }
+   ],
+   "equipment": {
+    "net": {
+     "title": "equipment.catchCriminal.net",
+     "description": "equipment.catchCriminal.net.hint",
+     "base": 1,
+     "levels": [
+      {
+       "value": 1.06,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 1.12,
+       "cost": 120,
+       "stars": 4
+      },
+      {
+       "value": 1.2,
+       "cost": 200,
+       "stars": 9
+      }
+     ]
+    },
+    "scope": {
+     "title": "equipment.catchCriminal.scope",
+     "description": "equipment.catchCriminal.scope.hint",
+     "base": 0,
+     "levels": [
+      {
+       "value": 0.08,
+       "cost": 60,
+       "stars": 0
+      },
+      {
+       "value": 0.16,
+       "cost": 120,
+       "stars": 4
+      },
+      {
+       "value": 0.25,
+       "cost": 200,
+       "stars": 9
+      }
+     ]
+    }
+   }
+  },
   "boarDefense": {
    "embeddedCampaign": true,
    "requiresBuilding": null
@@ -13219,6 +13818,20 @@
    }
   ],
   "alpineRush": [
+   {
+    "cost": 0,
+    "power": 1
+   },
+   {
+    "cost": 140,
+    "power": 1.06
+   },
+   {
+    "cost": 280,
+    "power": 1.12
+   }
+  ],
+  "catchCriminal": [
    {
     "cost": 0,
     "power": 1
@@ -13350,6 +13963,9 @@
    },
    "boarDefense": {
     "orientation": "any"
+   },
+   "catchCriminal": {
+    "orientation": "landscape"
    }
   }
  },
