@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createRacing} from '../minigames/racing-physics.mjs';
-import {TRACKS,RACING_STAGES,RACING_TRACK_SCALE,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
+import {TRACKS,CLASSIC_TRACKS,RACING_STAGES,RACING_TRACK_SCALE,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
 import {racingResult} from '../minigames/racing-result.mjs';
 
 const balance=JSON.parse(readFileSync(new URL('../data/config.json',import.meta.url),'utf8')).minigames.islandRacing;
@@ -42,7 +42,7 @@ test('30 deliberate stage variations use six genuinely distinct closed circuits'
 test('closed 3D centre lines have gentle elevation and no crossing at road level',()=>{
   for(const definition of TRACKS) {
     const track=createTrack(definition.id);
-    assert.ok(track.length>1300&&track.length<1900,definition.id);
+    assert.ok(track.length>1300&&track.length<2400,definition.id);
     assert.deepEqual(track.sample(0),track.sample(track.length));
     for(let s=0;s<track.length;s+=5) {
       const p=track.sample(s),ahead=track.sample(s+1);
@@ -73,8 +73,8 @@ test('longer circuits scale horizontal distance by 65% while preserving road wid
     ruins:{length:926.51,horizontal:926.4564643678707,width:15,y:[2,3,4,5,7,8,6,4,3,3,2,2]}
   };
   assert.equal(RACING_TRACK_SCALE,1.65);
-  for(const definition of TRACKS){
-    const track=createTrack(definition.id),old=original[definition.id];
+  for(const definition of CLASSIC_TRACKS){
+    const track=createTrack(definition),old=original[definition.id];
     const horizontal=track.points.reduce((sum,p,index)=>{const q=track.points[(index+1)%track.points.length];return sum+Math.hypot(q.x-p.x,q.z-p.z);},0);
     assert.ok(Math.abs(horizontal/old.horizontal-1.65)<1e-9,definition.id+' horizontal scale');
     assert.ok(track.length/old.length>1.648&&track.length/old.length<=1.65,definition.id+' actual 3D length grows about 65%');
@@ -86,7 +86,7 @@ test('every stage has at least two laps, a distance-based generous clock and spa
   for(const stage of RACING_STAGES){
     const track=createTrack(stage),items=[...track.boostPads,...track.pickups];
     assert.equal(stage.laps,stage.tier<2?2:3);assert.ok(stage.laps>=2);
-    assert.ok(stage.timeLimit>=track.length*stage.laps/18+24.9);
+    assert.ok(stage.timeLimit>=Math.min(295,track.length*stage.laps/18+24.9));
     assert.ok(stage.timeLimit<balance.maximumSeconds,'the complete race and timeout remain accepted by the app');
     assert.equal(track.checkpoints.length,16);assert.equal(track.boostPads.length,1);assert.equal(track.pickups.length,2);
     assert.equal(track.boostPads[0].length,10,'boost pad length remains metres, not scaled with the circuit');

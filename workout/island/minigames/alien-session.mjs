@@ -1,12 +1,12 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-3';
-import {createControls} from './controls.mjs?v=island-v2-20261107-3';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-3';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-3';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-4';
+import {createControls} from './controls.mjs?v=island-v2-20261107-4';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-4';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-4';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-3';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-4';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-3';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-4';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */
@@ -77,7 +77,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
    paint.setTransform(dpr,0,0,dpr,0,0);paint.save();paint.scale(cssWidth/config.width,cssHeight/config.height);renderContext.pixelAspect=(cssWidth/cssHeight)/(config.width/config.height);draw(paint,model,renderContext);paint.restore();hud();flightHud.update(model,flight.sample(),paused||document.hidden);
    count.textContent=String(model.novaCharges);
    missile.disabled=!model.aliens.some(a=>a.y+a.radius>0)||model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
-   const charge=model.nova.flight>0?1-model.nova.flight/b.nova.throwSeconds:model.nova.life>0?1-model.nova.life/b.nova.seconds:model.novaCharges>0?1:0;
+   const charge=model.nova.flight>0?1-model.nova.flight/(model.nova.flightMax||b.nova.throwSeconds):model.nova.life>0?1-model.nova.life/b.nova.seconds:model.novaCharges>0?1:0;
    missile.style.setProperty('--charge',`${charge*100}%`);
    missile.setAttribute('aria-label',`${t('minigame.nova')} ${model.novaCharges}`);
    frame=requestAnimationFrame(tick);

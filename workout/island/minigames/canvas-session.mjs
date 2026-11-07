@@ -1,9 +1,9 @@
-import {createControls} from './controls.mjs?v=island-v2-20261107-3';
+import {createControls} from './controls.mjs?v=island-v2-20261107-4';
 import {fireControlsV9} from './polish-flag.mjs';
-import {upgradeCard} from './icons.mjs?v=island-v2-20261107-3';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-3';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-3';
-import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-v2-20261107-3';
+import {upgradeCard} from './icons.mjs?v=island-v2-20261107-4';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-4';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-4';
+import {fitGameViewport,gamePlayArea} from '../ui/game-shell.mjs?v=island-v2-20261107-4';
 /** Owns one canvas, frame, observer and abortable listeners for one session. */
 export function runCanvasGame(ctx, createModel, draw, createView) {
   // Each adapter keeps its model coordinates; viewport changes never mutate shared game data.

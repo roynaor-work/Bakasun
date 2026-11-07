@@ -1,4 +1,6 @@
+import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
 globalThis.__alienV9=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+globalThis.__alienV9=false;globalThis.__alienV10=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -83,7 +85,7 @@ test('G2d extra hose uses more water, cools faster and rescue walks to the truck
 test('G2d v5 → v7 adds hose and permanent alien ranks and preserves city, event, currency, avatar and all earned upgrades',()=>{
   const e=createEngine(data,{storage:null,now:()=>1234}),old=JSON.parse(e.exportJSON());old.version=5;delete old.minigameEquipment.fireRescue.hose;old.minigameEquipment.navalDuel.damage=2;old.money=432;
   old.events.active={id:'event-1',typeId:'aliens',targetId:null,seed:22,phase:'playing',warningUntil:100,deferred:false};old.events.sequence=1;
-  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,18);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=18;expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
+  const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,19);assert.equal(r.ok,true);assert.equal(r.state.minigameEquipment.fireRescue.hose,0);const expected=structuredClone(before);expected.version=19;expected.islandRacingLeague=createLeague();expected.minigameEquipment.fireRescue.hose=0;assert.deepEqual(r.state,expected);assert.deepEqual(old,before);assert.equal(validateSave(r.state,data,e.registry).ok,true);
 });
 for(const rank of [-1,1.5,99,'1'])test(`G2d v6 rejects invalid hose rank ${rank}`,()=>{
   const e=createEngine(data,{storage:null}),save=JSON.parse(e.exportJSON());save.minigameEquipment.fireRescue.hose=rank;assert.equal(migrateSave(save,data,e.registry).ok,false);

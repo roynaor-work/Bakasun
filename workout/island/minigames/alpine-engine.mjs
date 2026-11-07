@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261107-3';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261107-4';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -52,7 +52,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const grid = physics.grid[index];
     const ai = index === 0 ? null : level.ai[index - 1];
     return {
-      id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, steerOut: 0, alt: 0, vy: 0, airborne: false, airKind: null,
+      id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, steerOut: 0, alt: 0, vy: 0, airborne: false, airKind: null, airCap: 0,
       tank: physics.boostStartTank, boostTime: 0, padTime: 0, hitTime: 0, grace: 0, landTime: 0, crashTime: 0, glideT: 0, glideBonus: 0,
       ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
       trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
@@ -205,11 +205,15 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
 
   function takeoff(r, kind, vy, objectId) {
     r.airborne = true; r.airKind = kind; r.vy = vy; r.airScore = 0; r.airTricks = 0; r.lastTrick = null;
+    // Ramp air boost: a small, capped push forward while airborne (a share of the takeoff speed, never above boost speed).
+    const ab = physics.airBoost, skill = r.ai ? r.ai.speed : wax;
+    r.airCap = ab && kind === 'ramp' ? Math.min(Math.max(r.speed, physics.baseSpeed * skill) * (1 + ab.maxGain), physics.boostSpeed * skill) : 0;
+    r.airScale = ab ? clamp(vy / ab.refVy, .4, 1.2) : 1;
     emit('takeoff', { riderId: r.id, objectId });
   }
   function land(r) {
     const surface = surfaceHeight(r.x, pipe), impact = r.vy;
-    r.alt = surface; r.vy = 0; r.airborne = false; r.landTime = physics.landSeconds;
+    r.alt = surface; r.vy = 0; r.airborne = false; r.landTime = physics.landSeconds; r.airCap = 0;
     if (r.airKind === 'pipe') r.vx = -Math.sign(r.x) * Math.min(physics.pipeReturnSpeed, Math.abs(impact) * .6);
     const kind = r.airKind; r.airKind = null;
     if (r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
@@ -317,8 +321,15 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     // A boost must help below cruising speed too; use the same acceleration rule for
     // the player, rivals and boost pads without changing their configured speed caps.
     const acceleration = physics.acceleration * (boosted ? 2 : 1) * glide;
+    // Ramp air: no snow to slow the rider, so speed is held (no deceleration), and a capped push is added on top (physics.airBoost).
+    const rampAir = r.airborne && r.airCap > 0 && r.crashTime <= 0;
     if (r.speed < target) r.speed = Math.min(target, r.speed + acceleration * dt);
-    else r.speed = Math.max(target, r.speed - physics.deceleration * dt);
+    else if (!rampAir) r.speed = Math.max(target, r.speed - physics.deceleration * dt);
+    if (rampAir && r.speed < r.airCap) {
+      // Flying straight earns the full push; steering hard in the air halves it (a crooked jump is still the worse jump).
+      const ab = physics.airBoost, straight = 1 - ab.steerPenalty * clamp(Math.abs(r.vx) / physics.lateralSpeed, 0, 1);
+      r.speed = Math.min(r.airCap, r.speed + ab.accel * r.airScale * straight * dt);
+    }
     if (r.boostTime > 0) { r.boostTime = Math.max(0, r.boostTime - dt); if (r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
     else r.tank = Math.min(1, r.tank + physics.boostRechargePerSecond * (r.ai ? 1 : recharge) * dt);
     if (r.padTime > 0) { r.padTime = Math.max(0, r.padTime - dt); if (r.padTime === 0 && r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
@@ -326,7 +337,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     // Lateral: steering sets a target lateral speed. Walls pull back toward the floor, turns push
     // toward the outer wall, and airborne riders have reduced (pipe air: no) control.
     if (r.airKind !== 'pipe') {
-      const control = r.airborne ? physics.airControl : Math.cos(angle);
+      const control = r.airborne ? (r.airCap > 0 && physics.airBoost?.control ? physics.airBoost.control : physics.airControl) : Math.cos(angle);
       r.vx += (r.steer * physics.lateralSpeed * (1 - (physics.lateralBoostDamp ?? 0) * clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1)) - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
       if (!r.airborne) {
         if (onWall) r.vx -= Math.sign(r.x) * physics.wallGravity * Math.sin(angle) * dt;
@@ -441,7 +452,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       // What the player is asking for right now (stick after expo and rate limit): the body leans on this before the track position moves.
       intent: r.ai ? clamp(r.steer, -1, 1) : r.steerOut,
       boosting: r.boostTime > 0 || r.padTime > 0, hit: r.hitTime > physics.recoverySeconds - physics.hitFlashSeconds || r.crashTime > 0,
-      crashed: r.crashTime > 0, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind,
+      crashed: r.crashTime > 0, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind, airBoost: r.airborne && r.airCap > 0 && r.crashTime <= 0 && r.speed < r.airCap - 1e-6,
       trick: r.trick ? { id: r.trick.id, progress: Math.min(1, r.trick.t / r.trick.duration) } : null,
     };
   }

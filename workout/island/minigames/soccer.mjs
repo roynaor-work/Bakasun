@@ -1,13 +1,13 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-3';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-4';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-3';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-3';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-3';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-3';
-import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-3';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-3';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-3';
-import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-3';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-4';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-4';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-4';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-4';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-4';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-4';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-4';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-4';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -461,7 +461,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     // Everyone gets time to form a receiving/marking shape, without jumping
     // to assigned spots or advancing the live match clock.
     r.organizeSeconds=config.restarts.walkSeconds;
-    for(const p of players)if(p!==owner&&p.id!==s.controlled&&r.targets[p.id])r.organizeSeconds=Math.max(r.organizeSeconds,Math.min(3,distance(p,r.targets[p.id])/config.players.speed+.2));
+    for(const p of players)if(p!==owner&&p.id!==s.controlled&&r.targets[p.id])r.organizeSeconds=Math.max(r.organizeSeconds,Math.min(aiV2?(config.restarts.organizeMaxSeconds??2):3,distance(p,r.targets[p.id])/config.players.speed+.2));
     Object.assign(s.ball,{thrower:null,shot:null,flight:null,x,z,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:owner.id,grace:rules.restartGrace,lastTeam:teamId,lastPlayer:owner.id});
     if(role!=='keeper'&&s.controlled===owner.id)selectPlayer(nearest(0,s.ball,owner.id,true).id);if(role==='keeper')s.controlled=2;s.passTarget=null;s.chargeKind=null;s.actionAim=s.kickAim=s.passAim=null;
     s.charging=false;s.charge=0;event('restart',{restart:type,team:teamId});

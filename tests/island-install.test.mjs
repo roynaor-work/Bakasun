@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 const root = new URL('../workout/island/', import.meta.url);
 test('island install metadata and every icon stay relative to the published island', async () => {
   const manifest = JSON.parse(await readFile(new URL('manifest.webmanifest', root), 'utf8'));
-  for (const key of ['name','short_name']) assert.equal(manifest[key], 'האי שלי');
+  for (const key of ['name','short_name']) assert.equal(manifest[key], 'העיר שלי');
   for (const key of ['id','start_url','scope']) assert.equal(manifest[key], './');
   for (const [key,value] of Object.entries({ display:'fullscreen',dir:'rtl',lang:'he',orientation:'landscape',theme_color:'#edf7f5',background_color:'#edf7f5' })) assert.equal(manifest[key],value);
   assert.deepEqual(manifest.icons.map(i=>[i.sizes,i.purpose]), [['any','any'],['192x192','any'],['512x512','any'],['512x512','maskable']]);

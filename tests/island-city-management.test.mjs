@@ -1,3 +1,4 @@
+import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -14,7 +15,7 @@ function enabled(){const f=fixture();assert.ok(f.engine.setCityPolicy({enabled:t
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} ~= ${b}`);
 
 test('city management starts paused and preserves the original economy and all unrelated progress',()=>{
- const {engine:e}=fixture(),before=structuredClone(e.state);assert.equal(e.state.version,18);assert.deepEqual(e.state.cityManagement,initialCityManagement());
+ const {engine:e}=fixture(),before=structuredClone(e.state);assert.equal(e.state.version,19);assert.deepEqual(e.state.cityManagement,initialCityManagement());
  const income=e.income();assert.equal('municipal' in income,false);const tick=e.tick(60);close(e.state.money,before.money+income.money);
  assert.deepEqual(tick.developed,[]);assert.deepEqual(e.state.cityManagement,before.cityManagement);
  for(const key of ['learning','minigameProgress','minigameEquipment','highScores','hangar','soccerRoster','buildings','parts'])assert.deepEqual(e.state[key],before[key],key);
@@ -22,8 +23,8 @@ test('city management starts paused and preserves the original economy and all u
 
 test('v17 migration adds only paused management and is immutable and idempotent',()=>{
  const {engine:e}=fixture(),old=structuredClone(e.state);old.version=17;delete old.cityManagement;old.money=7654;old.resources.materials=543;old.minigameProgress.tennis.stars[0]=3;old.minigameProgress.tennis.stage=2;
- const before=structuredClone(old),result=migrateSave(old,data,e.registry);assert.ok(result.ok);assert.deepEqual(old,before);assert.equal(CURRENT_VERSION,18);
- assert.deepEqual(result.state,{...old,version:18,cityManagement:initialCityManagement()});assert.deepEqual(migrateSave(result.state,data,e.registry).state,result.state);
+ const before=structuredClone(old),result=migrateSave(old,data,e.registry);assert.ok(result.ok);assert.deepEqual(old,before);assert.equal(CURRENT_VERSION,19);
+ assert.deepEqual(result.state,{...old,version:19,islandRacingLeague:createLeague(),cityManagement:initialCityManagement()});assert.deepEqual(migrateSave(result.state,data,e.registry).state,result.state);
 });
 
 test('invalid policy commands are atomic, including unknown departments and nonnumeric values',()=>{

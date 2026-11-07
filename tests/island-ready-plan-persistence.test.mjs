@@ -20,7 +20,7 @@ function memory(){const values=new Map();return {values,getItem:key=>values.get(
 const cells=row=>cellsFor(registry.buildings.get(row.typeId),row.x,row.z).map(p=>p.join(','));
 
 test('ready plans remain optional in schema 18; all exact legacy sizes and fields roundtrip unchanged',()=>{
-  assert.equal(CURRENT_VERSION,18);assert.equal(Object.hasOwn(initial(),'readyPlan'),false);
+  assert.equal(CURRENT_VERSION,19);assert.equal(Object.hasOwn(initial(),'readyPlan'),false);
   for(let stage=0;stage<data.config.worldStages.length;stage++){
     const state=initial();state.world={stage,size:data.config.worldStages[stage].size};state.parts[data.world.partGroup]=data.config.worldStages[stage].requiredParts;
     state.money=1837;state.avatar.created=true;state.avatar.name='Player';
@@ -34,7 +34,7 @@ test('ready plans remain optional in schema 18; all exact legacy sizes and field
 test('authentic older backups migrate without enabling a plan or changing existing building positions',async()=>{
   for(const name of ['save-v12.json','save-v15.json']){
     const old=JSON.parse(await readFile(new URL(`./fixtures/${name}`,import.meta.url),'utf8')),snapshot=copy(old),result=migrateSave(old,data,registry);
-    assert.equal(result.ok,true,name);assert.equal(result.state.version,18);assert.equal(Object.hasOwn(result.state,'readyPlan'),false);
+    assert.equal(result.ok,true,name);assert.equal(result.state.version,19);assert.equal(Object.hasOwn(result.state,'readyPlan'),false);
     assert.equal(result.state.money,old.money);assert.deepEqual(result.state.resources,old.resources);assert.deepEqual(result.state.parts,old.parts);
     for(const building of old.buildings)assert.deepEqual(result.state.buildings.find(b=>b.id===building.id),building);
     for(const [id,progress] of Object.entries(old.minigameProgress))assert.deepEqual(result.state.minigameProgress[id].stars.slice(0,progress.stars.length),progress.stars);
@@ -45,7 +45,7 @@ test('authentic older backups migrate without enabling a plan or changing existi
 test('ready city stages save/load/export their exact reservations without an implicit regeneration',()=>{
   for(let stage=0;stage<data.config.readyWorldStages.length;stage++){
     const state=prepared(stage),snapshot=copy(state),storage=memory();assert.equal(validateSave(state,data,registry).ok,true);
-    assert.equal(saveWorld(storage,state).ok,true);assert.equal(JSON.parse(storage.getItem(STORAGE_KEY)).version,18);
+    assert.equal(saveWorld(storage,state).ok,true);assert.equal(JSON.parse(storage.getItem(STORAGE_KEY)).version,19);
     const loaded=loadWorld(storage,data,registry);assert.equal(loaded.ok,true);assert.deepEqual(loaded.state,snapshot);
     assert.deepEqual(migrateSave(JSON.parse(exportWorld(state)),data,registry).state,snapshot);
     const absent=copy(state);delete absent.readyPlan;assert.equal(validateSave(absent,data,registry).ok,false);

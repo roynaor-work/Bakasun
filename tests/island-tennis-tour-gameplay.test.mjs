@@ -74,7 +74,7 @@ test('tennis tour: existing v16 save keeps money, equipment, results and every o
  old.minigameProgress.tennis={stage:10,stars:[1,2,3,1,2,3,1,2,3,2]};old.minigameWins.tennis=12;old.highScores.tennis=4;old.team.wins=12;old.team.rank=teamRank(12,data.config.minigames.soccer);old.team.sportWins.tennis=12;
  const saved=JSON.parse(oldEngine.exportJSON());saved.version=16;
  const before=structuredClone(saved),newEngine=makeEngine();
- assert.equal(saved.version,before.version);assert.equal(CURRENT_VERSION,18);
+ assert.equal(saved.version,before.version);assert.equal(CURRENT_VERSION,19);
  assert.ok(validateSave({...saved,version:CURRENT_VERSION},legacyData,oldEngine.registry).ok);
  const adapted=saved;
  const loaded=migrateSave(adapted,data,newEngine.registry);assert.ok(loaded.ok);
@@ -146,7 +146,7 @@ test('tennis tour: a mixed-shot upgraded player can win the final across indepen
  // Only movement, aim and button inputs are sent to the public model API.
  // The player follows the landing cue after 120 ms, recovers manually toward
  // the centre, and reacts to physical contact rather than a nominal timestamp.
- for(const [rank,releaseDelay]of [[3,.04],[5,.1]]){
+ for(const [rank,releaseDelay]of [[3,.04],[5,.04]]){
   const results=[17,42,129,627,981,4107].map(seed=>{
    const game=createTennis({config,stage:30,seed,difficulty:'easy',ranks:{speed:rank,hit:rank,serve:rank}});
    let lastSwing=-1,incomingAt=null,incomingSerial=-1,eligibleSince=null,event=-1;

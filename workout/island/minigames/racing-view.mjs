@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-3';
-import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-3';
+import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-4';
+import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-4';
 import {v7Enabled} from './racing-v7.mjs';
 
 const PALETTES={
@@ -80,7 +80,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  const cellMat=mat('#ffcd64',{emissive:'#ef9d31',emissiveIntensity:.45,metalness:.6,roughness:.25});
  for(const p of track.pickups){const root=new T.Group();root.position.set(p.x+p.normal.x*p.lane,p.y+1.3,p.z+p.normal.z*p.lane);const cell=mesh(new T.TorusGeometry(.47,.13,6,16),cellMat,0,0,0,root);mesh(new T.OctahedronGeometry(.21),ivory,0,0,0,root);scene.add(root);pickups.push({root,id:p.id,base:root.position.y,cell});}
  function arch(at,label,color='#294f4d'){const p=track.sample(at),root=new T.Group();root.position.set(p.x,p.y,p.z);root.rotation.y=p.heading;scene.add(root);const archMat=mat(color,{roughness:.48,metalness:.2});for(const x of [-track.width/2-.8,track.width/2+.8])mesh(new T.CylinderGeometry(.35,.48,7,8),archMat,x,3.5,0,root);mesh(new T.BoxGeometry(track.width+3,1.4,.7),archMat,0,7,0,root);const c=document.createElement('canvas');c.width=768;c.height=128;const g=c.getContext('2d');g.fillStyle=color;g.fillRect(0,0,768,128);g.fillStyle='#fff0ce';g.textAlign='center';g.textBaseline='middle';g.font='bold 64px Arial';g.fillText(label,384,67);const texture=keep(new T.CanvasTexture(c));texture.colorSpace=T.SRGBColorSpace;const sign=mesh(new T.PlaneGeometry(track.width+1,1.5),basic('#fff',{map:texture,side:T.DoubleSide}),0,7,-.4,root);sign.rotation.y=Math.PI;return root;}
- arch(0,'מרוצי האי');arch(track.length*.48,track.name,colors.curb);
+ arch(0,'מרוצי העיר');arch(track.length*.48,track.name,colors.curb);
  const p0=track.sample(0);for(let i=0;i<12;i++)for(let j=0;j<3;j++){const lane=(i/12-.5)*track.width;const s=track.sample(j*.65);const box=mesh(new T.BoxGeometry(track.width/12,.025,.65),(i+j)%2?ivory:trackMat,s.x+s.normal.x*lane,s.y+.08,s.z+s.normal.z*lane);box.rotation.y=s.heading;}
  // Inland silhouettes establish a coherent island beyond the racing ribbon.
  const rockMat=mat(colors.rock);for(let i=0;i<17;i++){const angle=rnd()*Math.PI*2,radius=80+rnd()*210;const x=center.x+Math.cos(angle)*radius,z=center.z+Math.sin(angle)*radius;if(track.project(x,z).distance<40)continue;const o=mesh(new T.IcosahedronGeometry(1,1),rockMat,x,-2,z);o.scale.set(10+rnd()*16,10+rnd()*27,10+rnd()*15);o.rotation.y=rnd()*6;}
@@ -101,7 +101,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  }
  // Reuse GLB meshes with instancing: texture/material identity is retained.
  function ownAsset(root){root.updateMatrixWorld(true);root.traverse(o=>{if(o.isMesh){keep(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material]){keep(m);for(const v of Object.values(m))if(v?.isTexture)keep(v);}}});}
- async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-v2-20261107-3',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
+ async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-v2-20261107-4',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
  function plant(source,rows,height){const bounds=new T.Box3().setFromObject(source),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3()),scale=height/size.y,base=new T.Matrix4().makeTranslation(-center.x,-bounds.min.y,-center.z);source.traverse(o=>{if(!o.isMesh)return;const inst=new T.InstancedMesh(o.geometry,o.material,rows.length),part=o.matrixWorld.clone(),matrices=[];for(let i=0;i<rows.length;i++){const p=rows[i];dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.heading,0);dummy.scale.setScalar(1);dummy.updateMatrix();const fit=new T.Matrix4().makeScale(scale*p.size,scale*p.size,scale*p.size).multiply(base).multiply(part);matrices.push(dummy.matrix.clone().multiply(fit));}inst.count=0;inst.frustumCulled=false;inst.castShadow=true;inst.receiveShadow=true;foliageParts.push({inst,matrices});scene.add(inst);});}
  const treeRows=[];for(let s=14;s<track.length;s+=17){const p=track.sample(s);for(const sign of [-1,1]){const lane=sign*(track.width/2+5+rnd()*10);treeRows.push({x:p.x+p.normal.x*lane,y:p.y-1.6,z:p.z+p.normal.z*lane,heading:rnd()*6.28,size:.7+rnd()*.6});}}
  const failures=[];
@@ -129,6 +129,29 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
   }else if(!disposed)canvasAsphalt(rngFor(seed^0xa5a5));
  }
  let carAsset=null,lowCarAsset=null,treeAsset=null;
+ // racing-v11 formula car (Codex asset, 11,868 triangles, no Draco): all five cars, or the player only at low quality. ?racingFormulaCar=0 disables it; any failure keeps the previous cars.
+ const formulaOn=new URLSearchParams(globalThis.location?.search||'').get('racingFormulaCar')!=='0';
+ const formulaAsset=formulaOn&&!disposed?await loadAsset('../assets/racing-formula/formula.glb').then(mergeFormula).catch(e=>{console.warn('formula',e?.message||e);failures.push('formula');return null;}):null;
+ // 40 primitives per car would cost 200 draw calls for five cars: every static part is merged per material once (wheels stay separate nodes so they can spin and steer).
+ function mergeFormula(scene){
+  scene.updateMatrixWorld(true);const groups=new Map(),wheelsList=[],out=new T.Group();out.name='Formula';
+  scene.traverse(o=>{if(/^Wheel(Front|Rear)[LR]$/.test(o.name))wheelsList.push(o);});
+  const inWheel=o=>{for(let n=o;n;n=n.parent)if(wheelsList.includes(n))return true;return false;};
+  scene.traverse(o=>{if(!o.isMesh||inWheel(o))return;
+   const geometry=o.geometry.clone();geometry.applyMatrix4(o.matrixWorld);const mats=Array.isArray(o.material)?o.material:[o.material];
+   if(Array.isArray(o.material)){for(const group of geometry.groups||[]){}}
+   const key=mats[0].uuid;let entry=groups.get(key);if(!entry){entry={material:mats[0],parts:[]};groups.set(key,entry);}entry.parts.push(geometry);});
+  for(const {material,parts} of groups.values()){
+   const merged=new T.BufferGeometry(),indexed=parts.every(g=>g.index);let offset=0;const position=[],normal=[],uv=[],index=[];
+   for(const g of parts){const pos=g.attributes.position,nor=g.attributes.normal,tex=g.attributes.uv;for(let i=0;i<pos.count;i++){position.push(pos.getX(i),pos.getY(i),pos.getZ(i));if(nor)normal.push(nor.getX(i),nor.getY(i),nor.getZ(i));if(tex)uv.push(tex.getX(i),tex.getY(i));}
+    if(g.index)for(let i=0;i<g.index.count;i++)index.push(g.index.getX(i)+offset);else for(let i=0;i<pos.count;i++)index.push(i+offset);offset+=pos.count;}
+   merged.setAttribute('position',new T.Float32BufferAttribute(position,3));if(normal.length)merged.setAttribute('normal',new T.Float32BufferAttribute(normal,3));else merged.computeVertexNormals();if(uv.length===position.length/3*2)merged.setAttribute('uv',new T.Float32BufferAttribute(uv,2));merged.setIndex(index);
+   const mesh=new T.Mesh(merged,material);mesh.name='FormulaPart';out.add(mesh);keep(merged);
+  }
+  for(const w of wheelsList){const c=w.clone(true);c.name=w.name;out.add(c);}
+  if(!wheelsList.length||!groups.size)throw new Error('formula asset shape');
+  return out;
+ }
  if(v7)treeAsset=v7.parts.tree(track.theme);
  else if(!disposed)[carAsset,lowCarAsset,treeAsset]=await Promise.all([
   loadAsset('../assets/racing/sport-coupe.glb').then(asset=>{carAssetName='sport-coupe';return asset;}).catch(()=>loadAsset('../assets/models/car-a-512.glb').then(asset=>{carAssetName='original-meshy';failures.push('sport-coupe');return asset;}).catch(()=>{failures.push('car');return null;})),
@@ -145,27 +168,32 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  for(let i=0;i<5;i++){
   const root=new T.Group(),body=new T.Group();root.add(body);scene.add(root);const wheels=[];
   const models=[];
-  const rig=v7?.parts.cars[i];
-  if(rig){body.add(rig.root);modelLoaded=true;}
+  const rig=v7?.parts.cars[i],useFormula=!!formulaAsset&&(i===0||quality<2);
+  if(useFormula){
+   const car=formulaAsset.clone(true);car.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const list=Array.isArray(o.material)?o.material:[o.material],tinted=list.map(m=>{if(!/^Paint 1/.test(m.name))return m;const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}
+    if(/^Wheel(Front|Rear)[LR]$/.test(o.name)){o.rotation.order='YXZ';wheels.push(o);}});
+   body.add(car);modelLoaded=true;
+  }
+  else if(rig){body.add(rig.root);modelLoaded=true;}
   else if(carAsset){
    function fitCar(source){const original=source.clone(true);original.rotation.y=carAssetName==='original-meshy'?Math.PI/2:0;const box=new T.Box3().setFromObject(original),size=box.getSize(new T.Vector3()),c=box.getCenter(new T.Vector3()),fit=new T.Group();original.position.set(-c.x,-box.min.y,-c.z);if(carAssetName==='sport-coupe')fit.scale.setScalar(4.6/size.z);else fit.scale.set(2.25/size.x,1.5/size.y,4.2/size.z);fit.add(original);body.add(fit);original.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(carAssetName==='sport-coupe'){const materials=Array.isArray(o.material)?o.material:[o.material];const tinted=materials.map(m=>{if(!/^Paint 1/.test(m.name))return m;const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}}if(/^Wheel(Front|Rear)[LR]$/.test(o.name))wheels.push(o);});models.push(fit);return fit;}
    fitCar(i===0?carAsset:(lowCarAsset||carAsset));if(i===0&&lowCarAsset)fitCar(lowCarAsset).visible=false;modelLoaded=true;
   }
   else{const shell=mesh(new T.CapsuleGeometry(.85,2.1,6,12),mat(carColors[i],{metalness:.4,roughness:.28}),0,.8,0,body);shell.rotation.x=Math.PI/2;mesh(new T.SphereGeometry(.8,16,10),mat('#294c58',{metalness:.3,roughness:.2}),0,1.3,-.1,body);}
-  const detailed=carAssetName==='sport-coupe'||carAssetName==='racing-v7',accent=mat(carColors[i],{metalness:.3,roughness:.35});if(!detailed){mesh(new T.BoxGeometry(2.45,.12,.48),accent,0,1.3,-1.65,body);for(const x of [-.75,.75])mesh(new T.BoxGeometry(.10,.48,.14),steel,x,1.04,-1.65,body);mesh(new T.BoxGeometry(2.2,.12,.32),accent,0,.23,1.95,body);}
+  const detailed=useFormula||carAssetName==='sport-coupe'||carAssetName==='racing-v7',accent=mat(carColors[i],{metalness:.3,roughness:.35});if(!detailed){mesh(new T.BoxGeometry(2.45,.12,.48),accent,0,1.3,-1.65,body);for(const x of [-.75,.75])mesh(new T.BoxGeometry(.10,.48,.14),steel,x,1.04,-1.65,body);mesh(new T.BoxGeometry(2.2,.12,.32),accent,0,.23,1.95,body);}
   for(const x of [-.78,.78]){if(!detailed)mesh(new T.BoxGeometry(.36,.17,.08),mat('#fe6d48',{emissive:'#ff3924',emissiveIntensity:.6}),x,.66,-2.13,body);const f=mesh(new T.ConeGeometry(.11,.85,8),basic('#71ceff',{transparent:true,opacity:.8,depthWrite:false}),x*.78,.35,-2.48,body);f.rotation.x=-Math.PI/2;f.visible=false;flames.push({mesh:f,index:i});}
   // Small wheel sidewalls roll around X. Existing GLB wheels remain intact.
   if(!detailed){const tire=mat('#263339'),rim=mat('#d9dfda',{metalness:.85,roughness:.24});for(const x of [-1.05,1.05])for(const z of [-1.27,1.26]){const wheel=new T.Group();wheel.position.set(x,.4,z);const t=mesh(new T.CylinderGeometry(.38,.38,.14,18),tire,0,0,0,wheel);t.rotation.z=Math.PI/2;const hub=mesh(new T.TorusGeometry(.24,.035,4,12),rim,x>0?.09:-.09,0,0,wheel);hub.rotation.y=Math.PI/2;for(let j=0;j<5;j++){const spoke=mesh(new T.BoxGeometry(.04,.045,.44),rim,x>0?.1:-.1,0,0,wheel);spoke.rotation.x=j*Math.PI/5;}root.add(wheel);wheels.push(wheel);}}
   const shadow=mesh(new T.PlaneGeometry(4,6),basic('#fff',{map:contactMap,transparent:true,depthWrite:false}),0,0,0);shadow.rotation.x=-Math.PI/2;
   const beacon=mesh(new T.ConeGeometry(.18,.35,4),basic(carColors[i]),0,3,0,root);beacon.rotation.z=Math.PI;
-  cars.push({root,body,wheels,shadow,beacon,models,v7:rig||null,spin:0,steerVis:0});
+  cars.push({root,body,wheels,shadow,beacon,models,v7:useFormula?null:rig||null,formula:useFormula,spin:0,steerVis:0});
  }
  const camTarget=new T.Vector3(),desired=new T.Vector3(),look=new T.Vector3(),carPosition=new T.Vector3(),cameraOffset=new T.Vector3(),lookOffset=new T.Vector3();
  function resize(){if(disposed)return;const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio||1,[1.7,1.25,1][quality]));renderer.setSize(w,h,false);}
  observer=new ResizeObserver(resize);observer.observe(canvas);resize();ready=true;
  function observeFrame(ms){if(!ms||ms>250)return;frameMilliseconds=ms;qualityAge+=ms;slow=ms>30?slow+1:Math.max(0,slow-1);if(slow>65&&qualityAge>6000&&quality<2){quality++;slow=0;qualityAge=0;renderer.shadowMap.enabled=quality===0;scenery.setQuality(quality);resize();}}
  function updateVegetation(player){const forwardX=Math.sin(player.heading),forwardZ=Math.cos(player.heading),radius=[140,110,85][quality];const selected=treeRows.map((p,index)=>({index,distance:Math.hypot(p.x-player.x,p.z-player.z),forward:(p.x-player.x)*forwardX+(p.z-player.z)*forwardZ})).filter(p=>p.distance<radius&&p.forward>-16).sort((a,b)=>a.distance-b.distance).slice(0,[28,18,10][quality]);for(const {inst,matrices}of foliageParts){selected.forEach((p,index)=>inst.setMatrixAt(index,matrices[p.index]));inst.count=selected.length;inst.instanceMatrix.needsUpdate=true;}}
- function render(state,dt=0){if(disposed||!ready)return;frames++;const data=state.cars||[state.player];data.forEach((c,i)=>{const car=cars[i];if(!car)return;car.root.visible=i===0||(c.x-state.player.x)*Math.sin(state.player.heading)+(c.z-state.player.z)*Math.cos(state.player.heading)>-3.5;car.shadow.visible=car.root.visible;car.root.position.set(c.x,carGround(c)+.04,c.z);car.root.rotation.y=c.heading;const response=dt?1-Math.exp(-dt*10):0;car.body.rotation.z+=(-(c.steer||0)*Math.min(c.speed/400,.065)-car.body.rotation.z)*response;car.body.rotation.y=0;car.wheels.forEach(w=>{w.rotation.x+=(carAssetName==='sport-coupe'?1:-1)*c.speed*dt/.4054;if(w.name.startsWith('WheelFront'))w.rotation.y=(c.steer||0)*.25;});if(car.v7){car.spin=(car.spin+c.speed*dt/car.v7.wheelRadius)%car.v7.TAU;car.steerVis=(c.steer||0)*.25;}if(car.models.length>1){car.models[0].visible=quality<2;car.models[1].visible=quality===2;}car.shadow.position.set(c.x,carGround(c)+.07,c.z);car.shadow.rotation.z=c.heading;car.beacon.visible=i>0;});flames.forEach(f=>{const c=data[f.index];f.mesh.visible=!!c?.boosting;f.mesh.scale.y=.8+Math.sin(state.time*38)*.2;});
+ function render(state,dt=0){if(disposed||!ready)return;frames++;const data=state.cars||[state.player];data.forEach((c,i)=>{const car=cars[i];if(!car)return;car.root.visible=i===0||(c.x-state.player.x)*Math.sin(state.player.heading)+(c.z-state.player.z)*Math.cos(state.player.heading)>-3.5;car.shadow.visible=car.root.visible;car.root.position.set(c.x,carGround(c)+.04,c.z);car.root.rotation.y=c.heading;const response=dt?1-Math.exp(-dt*10):0;car.body.rotation.z+=(-(c.steer||0)*Math.min(c.speed/400,.065)-car.body.rotation.z)*response;car.body.rotation.y=0;car.wheels.forEach(w=>{w.rotation.x+=(car.formula?1:carAssetName==='sport-coupe'?1:-1)*c.speed*dt/(car.formula?.35:.4054);if(w.name.startsWith('WheelFront'))w.rotation.y=(c.steer||0)*.25;});if(car.v7){car.spin=(car.spin+c.speed*dt/car.v7.wheelRadius)%car.v7.TAU;car.steerVis=(c.steer||0)*.25;}if(car.models.length>1){car.models[0].visible=quality<2;car.models[1].visible=quality===2;}car.shadow.position.set(c.x,carGround(c)+.07,c.z);car.shadow.rotation.z=c.heading;car.beacon.visible=i>0;});flames.forEach(f=>{const c=data[f.index];f.mesh.visible=!!c?.boosting;f.mesh.scale.y=.8+Math.sin(state.time*38)*.2;});
   const player=state.player||data[0],p=track.sample(player.s||0),forward=new T.Vector3(Math.sin(player.heading-(player.slipAngle||0)),0,Math.cos(player.heading-(player.slipAngle||0))),speed=Math.min(1,player.speed/45),ahead=track.sample((player.s||0)+15);
   const acceleration=dt>0?(player.speed-previousSpeed)/dt:0;previousSpeed=player.speed;cameraKick+=((player.boosting?.24:0)+Math.min(.16,Math.max(0,acceleration)*.008)-cameraKick)*(dt?1-Math.exp(-dt*7):0);
   const boom=6.4+speed*.3+cameraKick,height=(lowCamera?1.95:2.45)+speed*.1;

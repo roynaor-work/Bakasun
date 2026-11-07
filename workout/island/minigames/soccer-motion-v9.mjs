@@ -1,4 +1,4 @@
-/** Soccer motion v9 (07/11/2026, Roy's phone test of island-v2-20261107-3): natural arms when the player
+/** Soccer motion v9 (07/11/2026, Roy's phone test of island-v2-20261107-4): natural arms when the player
  * is not running, and a slide that gets up quickly and carries on running. Presentation only: the
  * simulation clocks are read, never written (the one sim change is the recovery cap in soccer-control-depth).
  * `?soccerMotion=0` restores the previous look. Pure and unit-tested. */

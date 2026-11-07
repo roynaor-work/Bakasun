@@ -1,0 +1,24 @@
+/* Racing league screens (ui/racing-league.mjs). Island palette: teal, cream, warm gold. Right-to-left, 56px targets. */
+.rl-card,.rl-season,.rl-shop,.rl-result{display:grid;gap:10px;text-align:right;margin:8px 0;padding:12px;border-radius:14px;background:#fffdf4;border:1px solid #cfe1d4;color:#224b58}
+.rl-card{background:linear-gradient(135deg,#fffdf4 0,#f1f7ec 100%);border-color:#8eaa98}
+.rl-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.rl-head h3,.rl-season h4{margin:0;font-size:1.05rem}
+.rl-coins,.rl-coins-bar{padding:4px 12px;border-radius:999px;background:#fff0c9;color:#7a5314;font-weight:800;font-size:.9rem;margin:0}
+.rl-line,.rl-next{margin:0;font-size:.9rem;line-height:1.5}.rl-next{font-weight:700}
+.rl-races{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.rl-race{display:grid;gap:2px;padding:6px 8px;border-radius:10px;background:#edf3e9;border:1px solid #dfe8d9;min-width:0}
+.rl-race[data-state=done]{background:#dff0e4;border-color:#74b89b}
+.rl-race[data-state=next]{background:#fff3d9;border-color:#dd9544;box-shadow:0 0 0 2px #dd954455}
+.rl-race[data-state=locked]{opacity:.6}
+.rl-race-no{font-weight:900;font-size:.8rem;color:#986d24}.rl-race-name{font-weight:700;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rl-race-result{font-size:.8rem}
+.rl-actions{display:flex;flex-wrap:wrap;gap:8px}.rl-actions button{flex:1 1 140px;min-height:56px}.rl-actions .primary-button{flex:2 1 200px}
+.rl-table{width:100%;border-collapse:collapse;font-size:.9rem}.rl-table th,.rl-table td{padding:6px;border-bottom:1px solid #0002;text-align:right}.rl-table tr.mine{font-weight:800;background:#ffd84a33}
+.rl-gates{list-style:none;margin:0;padding:0;display:grid;gap:6px}.rl-gate{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;padding:8px 10px;border-radius:10px;background:#edf3e9}.rl-gate[data-open=false]{opacity:.65}.rl-gate span{font-size:.85rem}.rl-gate em{font-style:normal;font-weight:800;color:#2e655e}
+.rl-part{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:10px;border-radius:12px;background:#f7faf2;border:1px solid #dfe8d9}
+.rl-part-name{font-size:1rem}.rl-part-what{grid-column:1;font-size:.85rem;opacity:.85}.rl-part .primary-button{grid-column:2;grid-row:1/span 3;min-width:150px}
+.rl-pips{display:flex;gap:4px;direction:ltr;justify-content:flex-end}.rl-pip{width:22px;height:8px;border-radius:4px;background:#d5dfd3}.rl-pip.on{background:#288c81}
+.rl-result-main{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.rl-medal{justify-self:center;display:grid;place-items:center;width:84px;height:84px;border-radius:50%;font-size:2.4rem;font-weight:900;background:#e9eef0;border:5px solid #9bb0b6;color:#37525a}
+.rl-medal[data-place="1"]{background:#ffe29a;border-color:#d4a62b;color:#6b4b05}.rl-medal[data-place="2"]{background:#eef1f3;border-color:#aab4ba}.rl-medal[data-place="3"]{background:#f3d9c0;border-color:#b5763b;color:#5d3512}
+.rl-rows{display:grid;gap:4px}.rl-rows .result-row{display:flex;justify-content:space-between;margin:0}
+@media(orientation:landscape) and (max-height:600px){.rl-races{grid-template-columns:repeat(6,minmax(0,1fr))}.rl-race-name{display:none}.rl-race{text-align:center;padding:4px}.rl-actions button{min-height:48px}.rl-next{font-size:.85rem}.rl-card,.rl-season,.rl-shop,.rl-result{padding:8px;gap:6px}.rl-shop{grid-template-columns:repeat(2,minmax(0,1fr))}.rl-shop>.rl-coins-bar,.rl-shop>.rl-line{grid-column:1/-1}.rl-part .primary-button{min-width:110px}.rl-result{grid-template-columns:1fr 1fr;align-items:start}.rl-result>.rl-actions,.rl-result>.rl-line{grid-column:1/-1;grid-row:2}.rl-result>.rl-result-main{grid-row:1}.rl-result>.rl-table{grid-row:1;grid-column:2}.rl-table th,.rl-table td{padding:3px 6px}.rl-medal{width:64px;height:64px;font-size:1.8rem}}
+@media(prefers-reduced-motion:no-preference){.rl-race[data-state=next]{animation:rl-pulse 2.4s ease-in-out infinite}@keyframes rl-pulse{50%{box-shadow:0 0 0 4px #dd954433}}}

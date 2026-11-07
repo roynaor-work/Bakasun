@@ -20,7 +20,7 @@ try {
   await show('city-hall');await page.locator('[data-city-goal=production] [data-action=city-goal]').tap();assert.ok(await page.locator('[data-city-goal=production] [data-action=city-goal]').isDisabled());await shot('goals');
   await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
   const restored=await page.evaluate(id=>({version:window.__island.engine.state.version,tier:window.__island.engine.city.report().buildings.find(b=>b.id===id).production.tier,claimed:window.__island.engine.state.city.claimedGoals}),ids.factory);
-  assert.equal(restored.version,18);assert.equal(restored.tier,2);assert.ok(restored.claimed.includes('production'));await fixture.check();
+  assert.equal(restored.version,19);assert.equal(restored.tier,2);assert.ok(restored.claimed.includes('production'));await fixture.check();
   await writeFile(directory+`${width}x${height}.json`,JSON.stringify({viewport:{width,height},checks:['city-upgrade','investment','water-capacity','delivery','skip','damage','repair','one-time-goal','reload-v18'],errors:fixture.errors,shots},null,2)+'\n');
   console.log(`C1 passed ${width}x${height}`);
 } catch(error) {await shot('failure').catch(()=>{});throw error;} finally {await fixture.close();}

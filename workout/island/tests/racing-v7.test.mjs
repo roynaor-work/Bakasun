@@ -116,13 +116,13 @@ test('crowd: spectators stand clear of the road on every track and stage, determ
  assert.equal(CROWD_CAP[2],0,'the lowest tier draws no crowd');assert.ok(CROWD_CAP[0]>CROWD_CAP[1]);
 });
 
-test('offline: racing is a game group with exactly the v7 files, all cacheable, and the shell lists the new modules',async()=>{
+test('offline: racing is a game group with exactly the v7 files and the formula car, all cacheable, and the shell lists the new modules',async()=>{
  assert.equal(OFFLINE_GAMES.racing,'מרוצים');
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
- assert.deepEqual([...manifest.games.racing].sort(),v7FileList().map(f=>'assets/racing-v7/'+f).sort());
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb'].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===17);
+ assert.ok(pathsFor(manifest,['racing']).length===18);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 

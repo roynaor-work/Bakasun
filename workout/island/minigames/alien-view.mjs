@@ -1,5 +1,6 @@
+import {wingVisible} from './alien-v10-draw.mjs';
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-3';
+import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-4';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 import {alienEnvironment} from './ultra-alien-environment.mjs';
 import {modelTriangles,fleetModel,liveFleetIds,bakeFleet} from './ultra-alien-fleet.mjs';
@@ -82,7 +83,7 @@ export function createAlienView(ctx,model,adapters={}){
    playerShield.position.copy(player.position);playerShield.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*1.18));playerShield.visible=model.powerup===3||model.invulnerable>0;
    const visible=model.aliens.filter(a=>a.y+a.radius>0&&a.y-a.radius<config.height);
    const activeWings=model.wings.filter(w=>w.active);
-   for(let i=0;i<wingModels.length;i++){const wing=wingModels[i],state=activeWings[i];wing.visible=Boolean(state);if(state){wing.position.set(...world(state.x,state.y));wing.scale.setScalar(fit(state.x,state.y,playerPixels*.52));wing.rotation.y=Math.sin(model.time*2+i)*.08;}}
+   for(let i=0;i<wingModels.length;i++){const wing=wingModels[i],state=activeWings[i];wing.visible=Boolean(state)&&(!model.v10||wingVisible(model));if(state){wing.position.set(...world(state.x,state.y));wing.scale.setScalar(fit(state.x,state.y,playerPixels*.52));wing.rotation.y=Math.sin(model.time*2+i)*.08;}}
    const ids=liveFleetIds(visible,r.maxTriangles-8500-activeWings.length*5000,costs,low?8:16);liveCount=lodCount=0;
    let shields=0;const active=new Set();for(const a of visible){active.add(a.id);const live=loaded&&ids.has(a.id)&&models.assets.has(balance.models.enemies[a.kind].path),e=entryFor(a,live);if(!e)continue;
     const pixels=Math.min(a.boss?100:62,a.radius*2*currentHeight/config.height*1.65),scale=fit(a.x,a.y,pixels);
