@@ -18,7 +18,7 @@ export function runRacingSession(ctx){
  const speedometer=createRacingSpeedometer({parent:stage,document:canvas.ownerDocument});
  const energy=node('div','racing-energy'),energyFill=node('span','racing-energy-fill');energy.setAttribute('role','meter');energy.setAttribute('aria-label',t('racing.energy'));energy.setAttribute('aria-valuemin','0');energy.setAttribute('aria-valuemax','100');energy.append(energyFill);stage.append(energy);
  const drift=node('div','racing-drift-meter'),driftFill=node('span','racing-drift-fill');drift.append(driftFill);stage.append(drift);
- const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','היגוי משמאל · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
+ const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','גררו אגודל בצד שמאל להיגוי · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
  const loading=node('div','racing-loading','מכינים את מסלול המרוץ…');stage.append(loading);
  const credit=node('a','racing-credit','קרדיט לדגם');credit.href=new URL('../assets/racing/credits.html',import.meta.url).href;credit.target='_blank';credit.rel='noopener';credit.setAttribute('aria-label','קרדיט ורישיון דגם המכונית');controls.append(credit);
  input=createRacingControls({root:controls,canvas,t});input.setEnabled(!paused);

@@ -7,16 +7,16 @@ export const RACING_TRACK_SCALE = 1.65;
 export const TRACKS = Object.freeze([
   { id: 'coast', name: 'מפרץ הדקלים', theme: 'coast', width: 16, landmark: 'lighthouse',
     points: [[0,1,0],[60,2,35],[150,3,45],[220,4,5],[245,5,-80],[210,4,-150],[145,2,-175],[95,1,-140],[35,1,-160],[-35,2,-115],[-55,2,-45]] },
-  { id: 'jungle', name: 'שבילי הג׳ונגל', theme: 'jungle', width: 14.5, landmark: 'waterfall',
-    points: [[0,2,0],[75,3,30],[155,6,10],[190,9,-60],[135,11,-115],[165,8,-185],[105,5,-245],[25,3,-225],[-40,4,-175],[-5,6,-100],[-55,4,-45]] },
+  { id: 'jungle', name: 'שבילי הג׳ונגל', theme: 'jungle', width: 15, landmark: 'waterfall',
+    points: [[0,2,0],[75,3,30],[155,6,10],[190,9,-60],[135,11,-115],[165,8,-185],[105,5,-245],[25,3,-225],[-40,4,-175],[-5,6,-100],[-62,5,-70],[-50,4,-25]] },
   { id: 'volcano', name: 'טבעת הלוע', theme: 'volcano', width: 15, landmark: 'volcano',
     points: [[0,4,0],[80,7,10],[160,11,-30],[215,15,-100],[195,18,-185],[120,15,-230],[35,11,-215],[-40,8,-165],[-65,5,-90],[-35,4,-35]] },
-  { id: 'harbor', name: 'רציף המרינה', theme: 'harbor', width: 14, landmark: 'harbor',
-    points: [[0,2,0],[90,2,12],[185,3,0],[220,4,-50],[205,4,-115],[140,3,-125],[110,3,-180],[45,2,-205],[-30,2,-175],[-55,3,-115],[-15,3,-75],[-40,2,-35]] },
+  { id: 'harbor', name: 'רציף המרינה', theme: 'harbor', width: 15.5, landmark: 'harbor',
+    points: [[0,2,0],[90,2,12],[185,3,0],[220,4,-50],[205,4,-115],[140,3,-125],[110,3,-180],[45,2,-205],[-30,2,-175],[-60,3,-125],[-30,3,-85],[-55,2,-50],[-30,2,-15]] },
   { id: 'summit', name: 'פסגת העננים', theme: 'summit', width: 14.5, landmark: 'bridge',
     points: [[0,3,0],[80,7,40],[160,13,5],[175,18,-65],[120,21,-115],[155,18,-185],[90,12,-240],[10,8,-215],[-60,5,-165],[-85,4,-80],[-50,3,-25]] },
-  { id: 'ruins', name: 'גני העתיקות', theme: 'ruins', width: 14, landmark: 'temple',
-    points: [[0,2,0],[75,3,30],[145,4,-5],[125,5,-70],[200,7,-110],[195,8,-185],[115,6,-225],[35,4,-195],[-35,3,-220],[-75,3,-150],[-35,2,-80],[-65,2,-30]] }
+  { id: 'ruins', name: 'גני העתיקות', theme: 'ruins', width: 15, landmark: 'temple',
+    points: [[0,2,0],[75,3,30],[145,4,-5],[125,5,-70],[200,7,-110],[195,8,-185],[115,6,-225],[35,4,-195],[-35,3,-220],[-85,3,-160],[-75,2,-90],[-50,2,-35]] }
 ].map((track) => Object.freeze({ ...track, points: Object.freeze(track.points.map(([x,y,z]) => Object.freeze([x*RACING_TRACK_SCALE,y,z*RACING_TRACK_SCALE]))) })));
 
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
@@ -26,7 +26,7 @@ export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index)
   const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
     timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
-    aiSpeed: 28.5 + tier * 2.2 + (index % 6) * 0.18,
+    aiSpeed: 34.5 + tier * 2.0 + (index % 6) * 0.18, aiCorner: 17 + tier * 2.2,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
     // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
     timeLimit: Math.ceil(TRACK_LENGTHS.get(circuit.id) * laps / 18 + 25),

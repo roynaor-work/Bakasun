@@ -69,7 +69,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const error=racingAngle(Math.atan2(tx-car.x,tz-car.z)-car.heading);
     const turnRate=2*Math.sin(error)*Math.max(10,car.speed)/Math.max(8,look);
     const curvature=Math.abs(racingAngle(track.sample(p.s+22).heading-track.sample(p.s+4).heading))/18;
-    let targetSpeed=Math.min(car.maxSpeed,Math.sqrt(13.5/Math.max(.003,curvature)));
+    let targetSpeed=Math.min(car.maxSpeed,Math.sqrt((stage.aiCorner||13.5)/Math.max(.003,curvature)));
     if(blocked&&blocked.ahead<7&&Math.abs(car.lateral-blocked.other.lateral)<2.8)targetSpeed=Math.min(targetSpeed,blocked.other.speed*.94);
     const steer=clamp(turnRate/steeringRate(car.speed,false),-1,1);
     return {steer,throttle:car.speed<targetSpeed?1:0,autoAccelerate:false,brake:car.speed>targetSpeed+2,
