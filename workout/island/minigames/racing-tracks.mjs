@@ -3,6 +3,7 @@ const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap = (v, length) => ((v % length) + length) % length;
 export const RACING_TRACK_SCALE = 1.65;
+export const RACING_LOOK = new URLSearchParams(globalThis.location?.search || '').get('racingLook') !== '0';
 
 
 // racing-v10: Formula 1 style circuits. A circuit is a polygon of braking points [x, z, radius]; every corner is filleted with an arc of that radius,
@@ -35,7 +36,10 @@ function filletCircuit(vertices, step, elevation) {
   let startIndex = 0, best = Infinity; const mid = [(last.B[0] + next.A[0]) / 2, (last.B[1] + next.A[1]) / 2];
   out.forEach((q, i) => { const d = Math.hypot(q[0] - mid[0], q[1] - mid[1]); if (d < best) { best = d; startIndex = i; } });
   const ring = out.slice(startIndex).concat(out.slice(0, startIndex)), x0 = ring[0][0], z0 = ring[0][1];
-  return ring.map(([x, z], i) => [(x - x0) / RACING_TRACK_SCALE, elevation(i / ring.length), (z - z0) / RACING_TRACK_SCALE]);
+  // racing-look-v1: the road must never sink under the island surface (inland top -0.5, shore -1.0): at those spots the grass covered the asphalt.
+  // Lift the whole circuit so its lowest point is 1 m; ?racingLook=0 keeps the old heights.
+  const heights = ring.map((_, i) => elevation(i / ring.length)), lift = RACING_LOOK ? Math.max(0, 1 - Math.min(...heights)) : 0;
+  return ring.map(([x, z], i) => [(x - x0) / RACING_TRACK_SCALE, heights[i] + lift, (z - z0) / RACING_TRACK_SCALE]);
 }
 const F1_TRACKS = {
   coast: { name: 'מפרץ הדקלים · גרנד פרי', width: 19.5, samples: 10, f1: true,
