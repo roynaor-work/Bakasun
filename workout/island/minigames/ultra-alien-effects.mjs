@@ -1,5 +1,6 @@
 import {drawAlienFeedback} from './ultra-alien-feedback.mjs';
 export {drawAlienFallbackFeedback} from './ultra-alien-feedback.mjs';
+import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;
 const threatColors={needle:'#ff8298',orb:'#ffbf8b',diamond:'#ffabd0',fork:'#dc9fff',ring:'#ffa58c'};
 const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`;};
@@ -28,7 +29,8 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
   if(laser){p.strokeStyle='#e1ffff';p.lineWidth=1;p.beginPath();p.moveTo(0,-length);p.lineTo(0,20);p.stroke();p.strokeStyle='#65eeff99';p.beginPath();p.moveTo(-4,-14);p.lineTo(-4,12);p.moveTo(4,-14);p.lineTo(4,12);p.stroke();}
   p.restore();
  }
- for(const b of m.bolts){
+ if(m.v10){p.save();p.globalCompositeOperation='source-over';drawV10Bolts(p,m.bolts,m.time,pixelAspect,screenScale);p.restore();}
+ else for(const b of m.bolts){
   const shape=b.shape||balance.enemyTypes?.[b.kind||0]?.projectile||'needle',color=b.mine?'#c986ff':threatColors[shape]||'#ff8298';glow(p,b.x,b.y,b.mine?18:12,color,pixelAspect,.8);
   p.save();p.translate(b.x,b.y);p.scale(1/pixelAspect,1);p.strokeStyle=color;p.fillStyle='#ffe4d7';p.lineWidth=1.5;
   p.rotate(Math.atan2(-(b.vx||0),b.vy||1));p.beginPath();
@@ -42,7 +44,8 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  }
  for(const s of m.sparks){const alpha=Math.max(0,s.life/balance.sparkSeconds);glow(p,s.x,s.y,9,'#ffb56e',pixelAspect,alpha*.55);p.save();p.globalAlpha=alpha;p.strokeStyle=alpha>.65?'#fff0c4':'#ee9b59';p.lineWidth=1.2;p.beginPath();p.moveTo(s.x,s.y);p.lineTo(s.x-s.vx*.024/pixelAspect,s.y-s.vy*.024);p.stroke();p.restore();}
  const n=m.nova;
- if(n.flight>0){
+ if(m.v10){p.save();p.globalCompositeOperation='source-over';drawV10Missile(p,m,pixelAspect,screenScale);drawV10WingTimer(p,m,pixelAspect,screenScale,m.v10Blink);p.restore();}
+ else if(n.flight>0){
   for(let i=1;i<=12;i++)glow(p,n.x+Math.sin(i*2+m.time)*i*.12/pixelAspect,n.y+i*5,8+i*.6,'#ffb777',pixelAspect,(1-i/13)*.5);
   p.save();p.translate(n.x,n.y);p.scale(1/pixelAspect,1);p.fillStyle='#bdccd6';p.strokeStyle='#f6f9fa';p.lineWidth=1;
   p.beginPath();p.moveTo(0,-15);p.quadraticCurveTo(5,-8,4,9);p.lineTo(8,14);p.lineTo(2,12);p.lineTo(-2,12);p.lineTo(-8,14);p.lineTo(-4,9);p.quadraticCurveTo(-5,-8,0,-15);p.fill();p.stroke();p.fillStyle='#5e8b9e';p.fillRect(-3,-4,6,5);p.restore();

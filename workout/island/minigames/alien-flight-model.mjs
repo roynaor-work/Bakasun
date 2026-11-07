@@ -2,14 +2,16 @@ import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-3';
 import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-3';
 import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-3';
 import {alienV9Enabled,alienV9Hp} from './alien-v9.mjs';
+import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){
  level=clamp(Math.floor(level)||1,1,balance.levels.length);
- const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
+ const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
  const behavior={motion:'drift',shoots:true,shield:0,warningSeconds:.7,bulletCap:12,fireCadence:settings.boltSeconds,diveEverySeconds:balance.tactics.diveEverySeconds,...balance.stageBehaviors[level-1]};
  if(v9)behavior.fireCadence*=v9.boltSecondsMult||1;
+ if(v10&&v10.earlyBolt[level-1])behavior.fireCadence*=v10.earlyBolt[level-1];
  const player={x:config.width/2,y:config.height-balance.playerBottom,vx:0,bank:0};
  const aliens=[],shots=[],bolts=[],sparks=[],pickups=[],loot=[],telegraphs=[];
  const ap=createPool(balance.maxAliens),sp=createPool(balance.maxShots),bp=createPool(balance.maxBolts),fp=createPool(balance.maxSparks),pp=createPool(balance.pickups.max),lp=createPool(campaign.maxLoot);
@@ -19,8 +21,8 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  let lives=Math.max(1,maxLives-Math.min(maxLives-1,hangar.damage||0)),wave=1,time=0,score=0,kills=0,fired=0,hits=0,coins=0,crystals=0;
  let invulnerable=0,shotTime=0,boltTime=1.5,diveTime=balance.tactics.firstDiveSeconds,formationAge=0,nextWave=0,serial=0,result,choosing=false;
  let combo=0,comboTime=0,celebration=0,powerup=-1,powerTime=0,spreadTime=0,spreadCooldown=0,wingTime=0,novaCharges=balance.nova.charges,novaPressed=false,dropSerial=0,pendingBonuses=0,bonusX=0,bonusY=0,spawned=0;
- let feedbackSerial=0;const feedback={id:0,kind:'wave',x:player.x,y:player.y,value:1,life:0};
- const nova={x:player.x,y:player.y,life:0,flight:0,fromX:0,fromY:0,radius:balance.nova.radius,stopY:config.height*balance.nova.stopYFraction,hitId:null};
+ let feedbackSerial=0,boltsFired=0,playerHits=0,missilesFired=0,missilesHit=0,wingMax=0;const feedback={id:0,kind:'wave',x:player.x,y:player.y,value:1,life:0};
+ const nova={x:player.x,y:player.y,angle:-Math.PI/2,targetId:null,targetX:0,targetY:0,trail:[],flightMax:0,life:0,flight:0,fromX:0,fromY:0,radius:balance.nova.radius,stopY:config.height*balance.nova.stopYFraction,hitId:null};
  const status={score:0,lives,wave,waves:settings.waves,nova:novaCharges};
  const aspect=()=>model.effectAspect||1;
  function signal(kind,x,y,value,life=.8){Object.assign(feedback,{id:++feedbackSerial,kind,x,y,value,life});}
@@ -59,7 +61,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   separateAliens(aliens,balance.formation);signal('wave',player.x,player.y,wave,1.4);
  }
  function damagePlayer(x,y){
-  if(invulnerable>0)return false;if(powerup===3){signal('shield-hit',x,y,0,.35);return false;}
+  if(invulnerable>0)return false;playerHits++;if(powerup===3){signal('shield-hit',x,y,0,.35);return false;}
   lives--;invulnerable=balance.invulnerableSeconds;burst(player.x,player.y);signal('player-hit',player.x,player.y,lives,1.1);sound('hit');return true;
  }
  function dropBonus(){if(!pendingBonuses||pickups.length)return;const rotation=balance.pickups.rotation,d=pp.take(bonusX,bonusY,0,balance.pickups.speed,0,rotation[dropSerial%rotation.length]);if(d){pendingBonuses--;dropSerial++;pickups.push(d);}}
@@ -82,10 +84,10 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   const type=balance.enemyTypes[a.kind],phase=a.bossPhase||1,style=behavior.bossStyle==='final'?['sweep','cross','fan'][phase-1]:behavior.bossStyle||'fan',speed=settings.boltSpeed*(a.boss?(style==='pulse'?.6:.8):a.kind===0?1.05:a.kind===1?.72:1);
   const offsets=a.boss?(style==='cross'?[-.32,.32]:style==='pulse'?[0]:style==='sweep'?[Math.sin(a.attackPattern*.8)*.38]:style==='escort'?[-.12,.12]:[-.4,0,.4]):a.kind===1?[-.18,.18]:[0];
   const aim=a.boss&&style==='cross'?0:clamp((a.aimX-a.x)*speed/Math.max(80,player.y-a.y),-balance.enemyAimSpeed,balance.enemyAimSpeed);
-  for(const offset of offsets){if(bolts.length>=behavior.bulletCap)break;const fromX=a.x+(a.boss&&style==='escort'?Math.sign(offset)*a.radius*.8:0),b=bp.take(fromX,a.y+a.radius*.55,aim+Math.sin(offset)*speed,speed*Math.cos(offset));if(b){Object.assign(b,{mine:false,kind:a.kind,color:a.boss?'#ff7891':type.color,shape:a.boss?(style==='pulse'?'orb':'diamond'):type.projectile,pattern:a.attackPattern});bolts.push(b);}}
+  for(const offset of offsets){if(bolts.length>=behavior.bulletCap)break;const fromX=a.x+(a.boss&&style==='escort'?Math.sign(offset)*a.radius*.8:0),b=bp.take(fromX,a.y+a.radius*.55,aim+Math.sin(offset)*speed,speed*Math.cos(offset));if(b){boltsFired++;Object.assign(b,{mine:false,kind:a.kind,color:a.boss?'#ff7891':type.color,shape:a.boss?(style==='pulse'?'orb':'diamond'):type.projectile,pattern:a.attackPattern});bolts.push(b);}}
   a.attackPattern++;
  }
- const wingRank=()=>Math.max(powerup===4?1:0,upgrades.wing+(equipment.weapon||0));
+ const wingRank=()=>v10?(wingTime>0?Math.max(1,upgrades.wing+(equipment.weapon||0)):0):Math.max(powerup===4?1:0,upgrades.wing+(equipment.weapon||0));
  function fireShot(vx,kind,fromX=player.x,wing=false,fromY=player.y){
   const s=sp.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed,0,kind);if(!s)return;
   s.hitIds??=new Set();s.hitIds.clear();
@@ -95,25 +97,37 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  function chooseUpgrade(index){if(!choosing||!Number.isInteger(index)||!choices[index])return false;const id=choices[index];upgrades[id]++;onUpgrade({...upgrades});sound('upgrade');if(id==='wing')wingTime=balance.pickups.seconds;if(id==='shield'){maxLives++;lives++;}choosing=false;wave++;formation();return true;}
  function finish(outcome){if(result)return;sound(outcome==='win'?'stageEnd':'lose');score=Math.min(settings.scoreLimit,score);result={outcome,score,damage:Math.max(0,maxLives-lives),performance:.65*lives/maxLives+.35*Math.min(1,hits/Math.max(1,fired))};}
  function blastRadius(){const weak=aliens.filter(a=>a.hp<=balance.nova.damage*(1+Math.min(level-1,8)*balance.hpPerStage)*(1-(balance.enemyTypes[a.kind].novaResistance||0))).map(a=>Math.max(0,Math.hypot((a.x-nova.x)*aspect(),a.y-nova.y)-a.radius)).sort((a,b)=>a-b),count=Math.max(1,Math.round(aliens.length*balance.nova.targetFraction));return Math.max(24,Math.min(balance.nova.maxRadius,weak.length>=count?((weak[count-1]+(weak[count]??weak[count-1]+12))/2):balance.nova.radius));}
+
+ function flyMissile(dt){
+  let target=aliens.find(a=>a.id===nova.targetId);
+  if(!target){target=nearestAlien(aliens,nova.x,nova.y,aspect());nova.targetId=target?.id??null;}
+  nova.targetX=target?.x??nova.x;nova.targetY=target?.y??nova.y-100;
+  const x0=nova.x,y0=nova.y;steerMissile(nova,target,dt,{speed:v10.missileSpeed,turn:v10.missileTurn});
+  nova.trail.push({x:x0,y:y0});if(nova.trail.length>v10.trailLength)nova.trail.shift();
+  let hit=null,tMin=1;for(const a of aliens){const t=segmentContact(x0,y0,nova.x,nova.y,a.x,a.y,a.radius+balance.nova.projectileRadius,aspect());if(t!==null&&(!hit||t<tMin)){hit=a;tMin=t;}}
+  if(hit){nova.x=x0+(nova.x-x0)*tMin;nova.y=y0+(nova.y-y0)*tMin;detonate(hit);return;}
+  nova.flight=Math.max(0,nova.flight-dt);
+  if(nova.flight<=0||nova.y<-30||nova.x<-30||nova.x>config.width+30||nova.y>config.height+30)detonate(null);
+ }
+ function detonate(hit){if(hit)missilesHit++;nova.flight=0;nova.hitId=hit?.id??null;nova.life=balance.nova.seconds;nova.radius=blastRadius();sound('missileExplosion');
+     for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(Math.hypot((a.x-nova.x)*aspect(),a.y-nova.y)<=nova.radius+a.radius){damageAlien(a,balance.nova.damage*(1+Math.min(level-1,8)*balance.hpPerStage)*(1-(balance.enemyTypes[a.kind].novaResistance||0)));a.hitTime=balance.hitFlashSeconds;if(a.hp<=0)destroy(i,false,true);}}
+     for(let i=bolts.length-1;i>=0;i--)if(Math.hypot((bolts[i].x-nova.x)*aspect(),bolts[i].y-nova.y)<=nova.radius)releaseAt(bolts,i,bp);}
  formation();
  const model={settings,behavior,player,aliens,shots,bolts,sparks,pickups,nova,equipment,upgrades,choices,wings,loot,feedback,telegraphs,chooseUpgrade,resetInput(){novaPressed=false;},
   get maxLives(){return maxLives;},get choosing(){return choosing;},get combo(){return combo;},get celebration(){return celebration;},get coins(){return coins;},get crystals(){return crystals;},get pattern(){return pattern();},get remaining(){return Math.max(0,settings.seconds-time);},statusId:'minigame.alienStatus',
-  get spreadTime(){return spreadTime;},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
+  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
   statusValues(){Object.assign(status,{score,lives,wave,nova:novaCharges});return status;},
   update(dt,input=EMPTY){
    if(result||dt<=0||choosing)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;formationAge+=dt;feedback.life=Math.max(0,feedback.life-dt);invulnerable=Math.max(0,invulnerable-dt);nova.life=Math.max(0,nova.life-dt);comboTime=Math.max(0,comboTime-dt);if(!comboTime)combo=0;celebration=Math.max(0,celebration-dt);
    wingTime=Math.max(0,wingTime-dt);spreadTime=Math.max(0,spreadTime-dt);spreadCooldown=Math.max(0,spreadCooldown-dt);powerTime=Math.max(0,powerTime-dt);if(!powerTime)powerup=-1;
    moveAlienPlayer(player,input,dt,balance,config.width);
-   for(let i=0;i<wings.length;i++){const w=wings[i];w.active=(wingTime>0||powerup===4||upgrades.wing>0||(equipment.weapon||0)>0)&&i<Math.min(campaign.maxWings,wingRank());w.x=clamp(player.x+w.side*campaign.wingOffset,campaign.wingRadius,config.width-campaign.wingRadius);w.y=player.y-10+Math.sin(time*3+i)*3;}
+   for(let i=0;i<wings.length;i++){const w=wings[i];w.active=(v10?wingTime>0:(wingTime>0||powerup===4||upgrades.wing>0||(equipment.weapon||0)>0))&&i<Math.min(campaign.maxWings,wingRank());w.x=clamp(player.x+w.side*campaign.wingOffset,campaign.wingRadius,config.width-campaign.wingRadius);w.y=player.y-10+Math.sin(time*3+i)*3;}
    const previousFlight=nova.flight;
-   if(input.nova&&!novaPressed&&novaCharges>0&&!nova.flight&&!nova.life&&aliens.length){nova.x=nova.fromX=player.x;nova.y=nova.fromY=player.y;nova.hitId=null;novaCharges--;nova.flight=balance.nova.throwSeconds;sound('missileLaunch');}novaPressed=Boolean(input.nova);
-   if(previousFlight>0){const y0=nova.y,nextY=Math.max(nova.stopY,nova.y-(nova.fromY-nova.stopY)/balance.nova.throwSeconds*dt);let hit=null,tMin=1;
+   if(input.nova&&!novaPressed&&novaCharges>0&&!nova.flight&&!nova.life&&aliens.length){nova.x=nova.fromX=player.x;nova.y=nova.fromY=player.y;nova.hitId=null;novaCharges--;nova.flight=balance.nova.throwSeconds*(v10?v10.missileFlightMult:1);nova.flightMax=nova.flight;nova.angle=-Math.PI/2;nova.trail.length=0;missilesFired++;const lock=v10?nearestAlien(aliens,nova.x,nova.y,aspect()):null;nova.targetId=lock?.id??null;sound('missileLaunch');}novaPressed=Boolean(input.nova);
+   if(previousFlight>0&&v10)flyMissile(dt);else if(previousFlight>0){const y0=nova.y,nextY=Math.max(nova.stopY,nova.y-(nova.fromY-nova.stopY)/balance.nova.throwSeconds*dt);let hit=null,tMin=1;
     for(const a of aliens){const t=segmentContact(nova.x,y0,nova.x,nextY,a.x,a.y,a.radius+balance.nova.projectileRadius,aspect());if(t!==null&&(!hit||t<tMin)){hit=a;tMin=t;}}
     nova.y=y0+(nextY-y0)*tMin;nova.flight=Math.max(0,(nova.y-nova.stopY)/(nova.fromY-nova.stopY)*balance.nova.throwSeconds);
-    if(hit||nextY===nova.stopY){nova.flight=0;nova.hitId=hit?.id??null;nova.life=balance.nova.seconds;nova.radius=blastRadius();sound('missileExplosion');
-     for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(Math.hypot((a.x-nova.x)*aspect(),a.y-nova.y)<=nova.radius+a.radius){damageAlien(a,balance.nova.damage*(1+Math.min(level-1,8)*balance.hpPerStage)*(1-(balance.enemyTypes[a.kind].novaResistance||0)));a.hitTime=balance.hitFlashSeconds;if(a.hp<=0)destroy(i,false,true);}}
-     for(let i=bolts.length-1;i>=0;i--)if(Math.hypot((bolts[i].x-nova.x)*aspect(),bolts[i].y-nova.y)<=nova.radius)releaseAt(bolts,i,bp);
-    }
+    if(hit||nextY===nova.stopY)detonate(hit);
    }
    shotTime-=dt;if(input.firing&&shotTime<=0){const laser=upgrades.laser>0||powerup===1||(equipment.weapon||0)>=2;sound('shot');fireShot(0,laser?1:0);if(spreadTime>0){fireShot(-balance.pickups.spreadSpeed,0);fireShot(balance.pickups.spreadSpeed,0);}for(const w of wings)if(w.active)fireShot(0,laser?1:0,w.x,true,w.y);
     shotTime=Math.max(.1,settings.shotSeconds/((equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+alienStack(campaign,'rapid',upgrades.rapid))*power+(bonuses.fireRate||0))/(powerup===2?balance.pickups.rapidMultiplier:1));}
@@ -148,7 +162,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
     if(active&&(s.y<-30||s.x<0||s.x>config.width))releaseAt(shots,i,sp);
    }
    for(let i=pickups.length-1;i>=0;i--){const d=pickups[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
-    if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){spreadTime=balance.spread.seconds;spreadCooldown=balance.spread.seconds+balance.spread.cooldownSeconds;}}else{powerup=d.kind;powerTime=balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30)releaseAt(pickups,i,pp);}
+    if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){spreadTime=balance.spread.seconds;spreadCooldown=balance.spread.seconds+balance.spread.cooldownSeconds;}}else if(v10&&d.kind===4){wingTime=wingMax=v10.wingSeconds;}else{powerup=d.kind;powerTime=balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30)releaseAt(pickups,i,pp);}
    dropBonus();
    for(let i=loot.length-1;i>=0;i--){const d=loot[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}if(dist<balance.pickups.radius+balance.playerRadius){sound('bonus');if(d.kind)crystals++;else coins++;score+=d.kind?campaign.crystalPoints:campaign.coinPoints;releaseAt(loot,i,lp);}else if(d.y>config.height)releaseAt(loot,i,lp);}
    for(let i=bolts.length-1;i>=0;i--){const b=bolts[i],x0=b.x,y0=b.y;b.x+=(b.vx||0)*dt;b.y+=(b.vy||settings.boltSpeed)*dt;if(segmentContact(x0,y0,b.x,b.y,player.x,player.y,balance.playerRadius*.62+balance.boltRadius*.55,aspect())!==null){releaseAt(bolts,i,bp);damagePlayer(player.x,player.y);}else if(b.y>config.height+20||b.x<-40||b.x>config.width+40)releaseAt(bolts,i,bp);}
@@ -157,6 +171,6 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(!a.boss&&a.diveAge<0&&a.y-a.radius>player.y+20){releaseAt(aliens,i,ap);damagePlayer(player.x,player.y);}}
    if(lives<=0)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');else if(time>=settings.seconds)finish(completion==='survival'&&!settings.boss?'win':'lose');
   },
-  snapshot(){return{hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
+  snapshot(){return{boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
  };return model;
 }

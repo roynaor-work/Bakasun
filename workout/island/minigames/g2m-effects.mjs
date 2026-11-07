@@ -9,7 +9,7 @@ export function rocketPoint(nova,balance,t){
 export function drawAlienEffects(p,m,balance,pixelAspect=1){
  const n=m.nova;
  p.save();
- if(n.flight>0){
+ if(n.flight>0&&!m.v10){
   const t=1-n.flight/balance.nova.throwSeconds;
   for(let i=18;i>0;i--){const u=t-i*.012;if(u<0)continue;const point=rocketPoint(n,balance,u);p.globalAlpha=(1-i/20)*.55;p.fillStyle=i<6?'#ffad55':'#8295aa';p.beginPath();p.ellipse(point.x+Math.sin(i*2)*2,point.y,2+i*.32,3+i*.32,0,0,TAU);p.fill();}
   const q=rocketPoint(n,balance,t);p.globalAlpha=1;p.translate(q.x,q.y);p.scale(1/pixelAspect,1);p.rotate(q.angle);
