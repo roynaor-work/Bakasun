@@ -107,7 +107,7 @@ test('simulation: offers appear in a share of stage ends, never in every one, an
   const l=simulateLeague();assert.ok(l.offers>0&&l.share<0.8);
 });
 test('runtime assets are in the offline manifest and carry no exclamation marks',async()=>{
-  const manifest=JSON.parse(await readFile(new URL('offline-manifest.json',root),'utf8')),shell=new Set(manifest.shell);
+  const manifest=JSON.parse(await readFile(new URL('offline-manifest.json',root),'utf8')),shell=new Set([...manifest.shell,...manifest.core]);
   const icons=await readdir(new URL('assets/upgrade-offer/icons/',root));assert.equal(icons.length,22);
   for(const f of ['ui/upgrade-offer.mjs','ui/upgrade-offer-core.mjs','assets/upgrade-offer/offer.mjs','assets/upgrade-offer/offer.css',...icons.map(i=>'assets/upgrade-offer/icons/'+i)])assert.ok(shell.has(f),f);
   const code=await readFile(new URL('assets/upgrade-offer/offer.mjs',root),'utf8');
