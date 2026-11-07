@@ -12,7 +12,7 @@ export const CITY_FILES=Object.freeze({
   9:['09-corner-shop',12],19:['19-factory-with-chimney',40],20:['20-warehouse',36],21:['21-industrial-silos',28],
   22:['22-power-plant',60],25:['25-water-tower',20],28:['28-fire-station',26],29:['29-police-station',26],30:['30-hospital',50],
   31:['31-school-building',36],32:['32-university-building',50],33:['33-library',24],34:['34-town-hall',30],35:['35-small-stadium',60],
-  39:['39-park-with-fountain',34],40:['40-playground',20],47:['47-sedan-car',4.6],50:['50-police-car',4.8],51:['51-ambulance',6],52:['52-taxi',4.6]
+  39:['39-park-with-fountain',34],40:['40-playground',20],47:['47-sedan-car',4.6],49:['49-fire-truck',9],50:['50-police-car',4.8],51:['51-ambulance',6],52:['52-taxi',4.6]
 });
 /** building id -> model id, or one model id per level (shorter lists repeat the last). */
 export const CITY_MAP=Object.freeze({

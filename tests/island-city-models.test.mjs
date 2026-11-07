@@ -38,7 +38,7 @@ test('module table matches the catalog and every mapped building is real', () =>
     for(const id of list)assert.ok(CITY_FILES[id],`${building}→${id}`);
   }
   for(const id of CITY_CARS)assert.ok(CITY_FILES[id]);
-  assert.ok(CITY_FILES[47]&&cityModelPath(49)===null,'49 (fire truck) belongs to the fire game and ships in the catalog only');
+  assert.equal(cityModelPath(49),'assets/models/city/49-fire-truck.glb','fire truck for the fire game');assert.ok(!CITY_CARS.includes(49)&&!Object.values(CITY_MAP).flat().includes(49));
   assert.ok(catalog.models.find(m=>m.id===49));
 });
 test('?cityModels=0 and the featureFlags switch turn the layer off',()=>{
