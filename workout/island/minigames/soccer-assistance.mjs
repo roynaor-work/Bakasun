@@ -254,3 +254,15 @@ export function soccerActionContext(state,c){
   const threat=(b.x-ownEnd)*direction<c.pitch.penaltyDepth+1&&finite(b.vx)*direction<0;
   return threat?'defense':'loose';
 }
+
+/** Seconds a better-placed team-mate must stay the best candidate before control moves to him (v2).
+ * A clearly closer one (ai.switchFast = [[metres, factor], ...], widest first) takes over sooner; a marginal
+ * one waits the full autoSwitchSeconds. `recentlyLeft` (he is the player control just left) always waits
+ * the full time, so a faster takeover cannot become flicker between two players. */
+export function autoSwitchDwell(c,advantage,recentlyLeft=false){
+ const full=finite(c.autoSwitchSeconds,0.5);
+ if(recentlyLeft)return full;
+ const table=Array.isArray(c.ai?.switchFast)?c.ai.switchFast:[[3,.5],[2,.75]];
+ for(const [metres,factor] of table)if(advantage>=metres)return full*clamp(finite(factor,1),0.2,1);
+ return full;
+}

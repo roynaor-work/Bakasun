@@ -114,3 +114,18 @@ export function keeperTarget(p,s,c){
  const limit=duty==='keeper-sweep'?c.pitch.penaltyWidth/2-k.areaInset:c.pitch.goalWidth/2-a.keeperPostInset;
  return {x:d*clamp(x*d,-hx+k.areaInset,-hx+c.pitch.penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
 }
+
+/** How many passes a rival may make in one possession before it must dribble or shoot.
+ * v1 allowed one; v2 lets it build (ai.rivalBuildPasses, default 3). */
+export function rivalPassBudget(ai,v2){return v2?Math.max(1,Math.floor(Number.isFinite(ai?.rivalBuildPasses)?ai.rivalBuildPasses:3)):1;}
+
+/** v2: a rival carrier does not pass into a corridor an opponent can reach before the ball does.
+ * Keepers are ignored; a recovering opponent cannot intercept. ai.passLaneClearance is the required
+ * clearance in metres (default 0.6; 0 or less turns the check off). */
+export function aiPassLaneOpen(carrier,mate,players,ball,c){
+ const need=Number.isFinite(c.ai?.passLaneClearance)?c.ai.passLaneClearance:.6;
+ if(!(need>0))return true;
+ const point=teamPassPoint(mate,c),seconds=c.passing.groundTravelSeconds;
+ for(const o of players)if(o.team!==carrier.team&&o.role!=='keeper'&&!(o.recover>0)&&passInterceptionClearance(o,ball,point,seconds)<need)return false;
+ return true;
+}
