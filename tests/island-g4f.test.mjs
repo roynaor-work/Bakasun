@@ -6,7 +6,7 @@ import {synthesizeApplause} from '../workout/island/assets/audio/g4e/applause-so
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis,dt=config.simulation.step;
 const advance=(m,t,input={})=>{for(let n=0;n<Math.round(t/dt);n++)m.update(dt,input);};
 const press=(m,key,input={})=>{m.update(0,{...input,[key]:true});m.update(0,{});};
-function incoming(difficulty='normal',z=6){const m=createTennis({config,difficulty}),s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=z;s.contact={side:0,at:0};Object.assign(s.ball,{x:0,z,y:config.ball.hitHeight,lastHitter:1,bounces:1});return m;}
+function incoming(difficulty='normal',z=6,v9){const m=createTennis({config,difficulty,v9}),s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=z;s.contact={side:0,at:0};Object.assign(s.ball,{x:0,z,y:config.ball.hitHeight,lastHitter:1,bounces:1});return m;}
 function charge(m,value,extra={}){const s=m.getState();s.ball.y=500;advance(m,value*config.player.chargeSeconds,{prepare:true,...extra});s.ball.y=config.ball.hitHeight;s.ball.vy=0;s.contact.at=s.elapsed;}
 function landing(m){const s=m.getState();for(let n=0;n<600&&s.phase==='rally'&&s.ball.bounces===0;n++)m.update(dt);return s;}
 test('G4f computer serves physically enter the service box at 92/85/80 percent across stages and both service sides',()=>{
@@ -34,10 +34,10 @@ test('G4f drop shots from the baseline and net land near the net and rebound low
   const m=incoming('normal',z),s=m.getState();press(m,'swing',{drop:true});assert.equal(s.shot.drop,true);assert.equal(s.shot.lob,false);assert.ok(s.landing.z<-.8&&s.landing.z>-1.8);landing(m);assert.equal(s.event.type,'bounce');assert.ok(s.ball.z<0&&s.ball.z>-1.8);const apex=s.ball.y+s.ball.vy**2/(2*config.ball.gravity);assert.ok(apex<.5,`${z}: ${apex}`);assert.equal(s.ball.vz,(s.shot.targetZ-z)/s.shot.flight*config.drop.horizontalBounce);
  }
 });
-test('G4f hold charges power; exceeding the difficulty threshold physically goes out',()=>{
+test('G4f hold charges power; exceeding the difficulty threshold physically goes out (legacy model, v9 off; v9 has its own tests)',()=>{
  assert.ok(config.shotPower.safeMax.easy>config.shotPower.safeMax.normal&&config.shotPower.safeMax.normal>config.shotPower.safeMax.hard);
  for(const difficulty of ['easy','normal','hard'])for(const over of [false,true]){
-  const m=incoming(difficulty),s=m.getState();charge(m,config.shotPower.safeMax[difficulty]+(over?.05:-.05));const held=s.charge;assert.ok(held>0);press(m,'swing');assert.equal(s.shot.overpowered,over);assert.ok(Math.abs(s.shot.charge-held)<1e-8);landing(m);
+  const m=incoming(difficulty,6,false),s=m.getState();charge(m,config.shotPower.safeMax[difficulty]+(over?.05:-.05));const held=s.charge;assert.ok(held>0);press(m,'swing');assert.equal(s.shot.overpowered,over);assert.ok(Math.abs(s.shot.charge-held)<1e-8);landing(m);
   assert.equal(s.event.reason==='out',over);if(over)assert.ok(Math.abs(s.ball.z)>config.court.halfLength+config.court.lineTolerance);else assert.equal(s.event.type,'bounce');
  }
 });

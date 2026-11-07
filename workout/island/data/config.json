@@ -11105,6 +11105,18 @@
    "maximumScore": 4,
    "pointsPerCoin": 1,
    "maximumSeconds": 3600,
+   "v9": {
+    "enabled": true,
+    "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
+    "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
+    "shortDelay": {"easy": 0.4, "normal": 0.34, "hard": 0.27},
+    "power": {"minDepth": 3, "maxDepth": 8.7, "needAtMax": 0.75, "metresPerCharge": 6, "netDeficit": 0.3, "netSlope": 3, "tolerance": 0.12},
+    "powerTolerance": {"easy": 0.18, "normal": 0.12, "hard": 0.09},
+    "quality": {"timingWeight": 0.55, "good": 0.78, "medium": 0.5, "rankRelief": 0.06,
+     "sigma": {"good": 0.12, "medium": 0.45, "weak": 0.9},
+     "error": {"good": 0.085, "medium": 0.18, "weak": 0.36}},
+    "errorScale": {"easy": 0.7, "normal": 1, "hard": 1.15}
+   },
    "shotPower": {
     "safeMax": {
      "easy": 0.9,
