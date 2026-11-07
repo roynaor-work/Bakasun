@@ -1,6 +1,6 @@
 # משפטים להקלטה
 
-253 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
+297 משפטים וחלקים קבועים. מקור הקטלוג: workout/js/voice-lines.js.
 
 מקליטים בטלפון ב־https://roynaor-work.github.io/Bakasun/workout/voice-rec/ (אחרי מיזוג). Chrome באנדרואיד או Safari באייפון, דרך HTTPS. אין קישור מהאפליקציה.
 
@@ -271,3 +271,47 @@
 | `celebration-dunk` | בום! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/dunk.mp4 | `celebration-dunk.wav` |
 | `celebration-three` | סל! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/three.mp4 | `celebration-three.wav` |
 | `celebration-sprint` | מקום ראשון! | workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/sprint.mp4 | `celebration-sprint.wav` |
+| `copy-howWas-1` | סיימת! איך היה? קל, בדיוק, או קשה? | workout/js/voice-copy.js: COPY.howWas; workout/js/app.js | `copy-howWas-1.wav` |
+| `copy-howWas-2` | וואו, עשית את זה! איך היה לך? קל, בדיוק או קשה? | workout/js/voice-copy.js: COPY.howWas; workout/js/app.js | `copy-howWas-2.wav` |
+| `copy-howWas-3` | יופי של אימון! ספר לי, איך היה: קל, בדיוק או קשה? | workout/js/voice-copy.js: COPY.howWas; workout/js/app.js | `copy-howWas-3.wav` |
+| `copy-howWas-4` | כל הכבוד! היה קל, היה בדיוק, או היה קשה? | workout/js/voice-copy.js: COPY.howWas; workout/js/app.js | `copy-howWas-4.wav` |
+| `copy-howWas-5` | אימון גמור! אז איך היה? קל, בדיוק או קשה? | workout/js/voice-copy.js: COPY.howWas; workout/js/app.js | `copy-howWas-5.wav` |
+| `copy-cheer-2` | יפה מאוד! | workout/js/voice-copy.js: COPY.cheer; workout/js/app.js | `copy-cheer-2.wav` |
+| `copy-cheer-3` | מעולה! | workout/js/voice-copy.js: COPY.cheer; workout/js/app.js | `copy-cheer-3.wav` |
+| `copy-cheer-4` | בול! | workout/js/voice-copy.js: COPY.cheer; workout/js/app.js | `copy-cheer-4.wav` |
+| `copy-cheer-6` | זה היה חזק! | workout/js/voice-copy.js: COPY.cheer; workout/js/app.js | `copy-cheer-6.wav` |
+| `copy-cheer-7` | איזה יופי! | workout/js/voice-copy.js: COPY.cheer; workout/js/app.js | `copy-cheer-7.wav` |
+| `copy-finished-2` | זהו, סיימת! | workout/js/voice-copy.js: COPY.finished; workout/js/app.js | `copy-finished-2.wav` |
+| `copy-finished-3` | וזהו! | workout/js/voice-copy.js: COPY.finished; workout/js/app.js | `copy-finished-3.wav` |
+| `copy-finished-4` | עשית את זה! | workout/js/voice-copy.js: COPY.finished; workout/js/app.js | `copy-finished-4.wav` |
+| `copy-start-1` | יאללה, מתחילים! | workout/js/voice-copy.js: COPY.start; workout/js/app.js | `copy-start-1.wav` |
+| `copy-start-2` | מוכן? קדימה! | workout/js/voice-copy.js: COPY.start; workout/js/app.js | `copy-start-2.wav` |
+| `copy-start-3` | וזזים! | workout/js/voice-copy.js: COPY.start; workout/js/app.js | `copy-start-3.wav` |
+| `copy-start-4` | הולכים על זה! | workout/js/voice-copy.js: COPY.start; workout/js/app.js | `copy-start-4.wav` |
+| `copy-minuteStart-1` | יאללה, בקצב שלך. | workout/js/voice-copy.js: COPY.minuteStart; workout/js/app.js | `copy-minuteStart-1.wav` |
+| `copy-minuteStart-2` | מתחילים. לא ממהרים. | workout/js/voice-copy.js: COPY.minuteStart; workout/js/app.js | `copy-minuteStart-2.wav` |
+| `copy-minuteStart-3` | קדימה, כמה שאתה יכול. | workout/js/voice-copy.js: COPY.minuteStart; workout/js/app.js | `copy-minuteStart-3.wav` |
+| `copy-minuteEnd-1` | הדקה נגמרה. כל תנועה נחשבת! | workout/js/voice-copy.js: COPY.minuteEnd; workout/js/app.js | `copy-minuteEnd-1.wav` |
+| `copy-minuteEnd-2` | זהו, נגמרה הדקה. עשית יופי! | workout/js/voice-copy.js: COPY.minuteEnd; workout/js/app.js | `copy-minuteEnd-2.wav` |
+| `copy-minuteEnd-3` | נגמרה הדקה! כל תנועה נחשבת. | workout/js/voice-copy.js: COPY.minuteEnd; workout/js/app.js | `copy-minuteEnd-3.wav` |
+| `copy-costTwo-2` | משחק גדול! הוא עולה שתי מתנות. | workout/js/voice-copy.js: COPY.costTwo; workout/js/app.js | `copy-costTwo-2.wav` |
+| `copy-costTwo-3` | זה משחק ארוך, אז הוא עולה שתי מתנות. | workout/js/voice-copy.js: COPY.costTwo; workout/js/app.js | `copy-costTwo-3.wav` |
+| `copy-test-1` | היי! ככה אני נשמע. נעים לך? אפשר לבחור קול אחר. | workout/js/voice-copy.js: COPY.test; workout/js/app.js | `copy-test-1.wav` |
+| `copy-test-2` | שלום! אני כאן לעזור לך עם התרגילים. ככה אני נשמע. | workout/js/voice-copy.js: COPY.test; workout/js/app.js | `copy-test-2.wav` |
+| `copy-thanks-2` | קיבלתי, תודה! | workout/js/voice-copy.js: COPY.thanks; workout/js/app.js | `copy-thanks-2.wav` |
+| `copy-adjustOk-2` | יופי, זה בדיוק בגובה שלך. | workout/js/voice-copy.js: COPY.adjustOk; workout/js/app.js | `copy-adjustOk-2.wav` |
+| `copy-adjustOk-3` | בול בשבילך! ממשיכים ככה. | workout/js/voice-copy.js: COPY.adjustOk; workout/js/app.js | `copy-adjustOk-3.wav` |
+| `copy-easyBoost-1` | היה קל? יופי! בפעם הבאה נוסיף עוד קצת. | workout/js/voice-copy.js: COPY.easyBoost; workout/js/app.js | `copy-easyBoost-1.wav` |
+| `copy-easyBoost-2` | קל לך? אז בפעם הבאה אתאים לך עוד קצת חזרות. | workout/js/voice-copy.js: COPY.easyBoost; workout/js/app.js | `copy-easyBoost-2.wav` |
+| `copy-easyBoost-3` | אתה חזק! בפעם הבאה נעלה קצת את הקושי. | workout/js/voice-copy.js: COPY.easyBoost; workout/js/app.js | `copy-easyBoost-3.wav` |
+| `copy-easySwaps-1` | קל לך, הא? בפעם הבאה נכניס תרגילים קצת יותר קשים. | workout/js/voice-copy.js: COPY.easySwaps; workout/js/app.js | `copy-easySwaps-1.wav` |
+| `copy-easySwaps-2` | קל מדי? בפעם הבאה יהיו כמה תרגילים חדשים וקשים יותר. | workout/js/voice-copy.js: COPY.easySwaps; workout/js/app.js | `copy-easySwaps-2.wav` |
+| `copy-levelUp-1` | וואו! עלית רמה, אתה מתחזק! | workout/js/voice-copy.js: COPY.levelUp; workout/js/app.js | `copy-levelUp-1.wav` |
+| `copy-levelUp-2` | עלית רמה! זה אומר שאתה חזק יותר. | workout/js/voice-copy.js: COPY.levelUp; workout/js/app.js | `copy-levelUp-2.wav` |
+| `copy-hardDown-1` | היה קשה? אין בעיה. בפעם הבאה יהיה לך יותר נוח. | workout/js/voice-copy.js: COPY.hardDown; workout/js/app.js | `copy-hardDown-1.wav` |
+| `copy-hardDown-2` | קשה? בסדר גמור. בפעם הבאה אקל עליך קצת. | workout/js/voice-copy.js: COPY.hardDown; workout/js/app.js | `copy-hardDown-2.wav` |
+| `copy-hardDown-3` | הבנתי, היה קשה. בפעם הבאה נעשה את זה קצת יותר קל. | workout/js/voice-copy.js: COPY.hardDown; workout/js/app.js | `copy-hardDown-3.wav` |
+| `copy-bottom-1` | כל הכבוד שסיימת! בפעם הבאה זה יהיה לך יותר קל, כי אתה מתחזק. | workout/js/voice-copy.js: COPY.bottom; workout/js/app.js | `copy-bottom-1.wav` |
+| `copy-firstWorkout-2` | הצעד הראשון הכי חשוב, וכבר עשית אותו! | workout/js/voice-copy.js: COPY.firstWorkout; workout/js/app.js | `copy-firstWorkout-2.wav` |
+| `copy-dayMorning-1` | התחלת את היום בכוח! | workout/js/voice-copy.js: COPY.dayMorning; workout/js/app.js | `copy-dayMorning-1.wav` |
+| `copy-dayEvening-1` | סגרת את היום בגדול! | workout/js/voice-copy.js: COPY.dayEvening; workout/js/app.js | `copy-dayEvening-1.wav` |
