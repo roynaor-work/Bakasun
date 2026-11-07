@@ -15,7 +15,7 @@ async function boot(browser,server,query,viewport={width:390,height:844}){
   await page.goto(server.url+`?dev=1${query}`,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
   if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
-  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=400;});
+  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=400;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});
   await page.waitForTimeout(2500);
   return {context,page,csp,errors};
 }
@@ -104,7 +104,7 @@ test('not enough coins, a lost empty stage and ?upgradeOffer=0 show no offer; a 
     await context.route(/assets\/upgrade-offer\/offer\.mjs/,route=>route.abort());
     await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
     if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
-    await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=400;});await page.waitForTimeout(2500);
+    await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=400;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});await page.waitForTimeout(2500);
     await showTennisWin(page);await page.waitForSelector('[data-result=tennis]');await page.waitForTimeout(800);
     assert.equal(await page.locator('.uo-card').count(),0);assert.equal(await page.locator('[data-action=game-again]').count(),1,'result screen intact');assert.deepEqual(errors,[]);
     await context.close();await csp.dispose();
