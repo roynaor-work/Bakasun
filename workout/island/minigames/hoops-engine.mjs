@@ -677,7 +677,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     if(sh.type==='layup'||sh.type==='dunk'){const near=court.distToRim(side(p.team),p.x,p.z);const stride=C.shot.layupStride===true,takeoffAt=sh.releaseAt-(sh.type==='ft'?0.08:0.32)-0.12;
      // layupStride (07/11): the carry keeps its full speed into the last step (the gather, the long step, the short step) and fades only
      // under the rim; before, it faded from 1.7 m out and he rose from standing, which read as a set shot
-     const k=stride?(p.actT<takeoffAt?clamp((near-0.8)/0.4,0,1):0.4*clamp((near-0.9)/0.8,0,1)):(p.actT<sh.releaseAt?1:0.4)*clamp((near-0.9)/0.8,0,1);tx=sh.toRim.x*sh.drive*k/maxS;tz=sh.toRim.z*sh.drive*k/maxS;}
+     const k=stride?(p.actT<takeoffAt?clamp((near-0.75)/0.5,0,1):0.4*clamp((near-0.9)/0.8,0,1)):(p.actT<sh.releaseAt?1:0.4)*clamp((near-0.9)/0.8,0,1);tx=sh.toRim.x*sh.drive*k/maxS;tz=sh.toRim.z*sh.drive*k/maxS;}
     else{tx=0;tz=0;}
    }
    if(p.act==='pass'||p.act==='steal'){tx*=0.5;tz*=0.5;}
