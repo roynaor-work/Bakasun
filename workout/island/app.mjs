@@ -1,20 +1,20 @@
-import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-2';
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-2';
-import './view/learning-buildings.mjs?v=island-v2-20261107-2';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-2';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-2';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-2';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-2';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-2';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-2';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-2';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-2';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-2';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-2';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-2';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-2';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-2';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-2';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-3';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-3';
+import './view/learning-buildings.mjs?v=island-v2-20261107-3';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-3';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-3';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-3';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-3';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-3';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-3';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-3';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-3';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-3';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-3';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-3';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-3';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-3';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-3';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');

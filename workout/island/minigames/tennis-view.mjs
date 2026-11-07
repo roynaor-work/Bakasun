@@ -1,13 +1,13 @@
-import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-2';
+import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-3';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=island-v2-20261107-2';
-import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-2';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-2';
-import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-2';
+import {seededRandom} from './tennis.mjs?v=island-v2-20261107-3';
+import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-3';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-3';
+import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-3';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-2',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-3',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -28,7 +28,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const params=new URLSearchParams(globalThis.location?.search||''),v7Fallbacks=[];let v7=null;
   if(v7Enabled(config.environment,0,params)){
     try{
-      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-2');
+      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-3');
       v7=await createTennisV7({scene,config,keep,params,surface:surfaceFor(config.environment.v7,config.stage,params),quality:0,camera});
       if(disposed){v7.dispose();v7=null;}
     }catch(error){v7=null;v7Fallbacks.push('tennis v7 venue');}
