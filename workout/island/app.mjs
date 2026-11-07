@@ -1,3 +1,4 @@
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-1';
 import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-1';
 import './view/learning-buildings.mjs?v=island-v2-20261107-1';
 import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-1';
@@ -23,6 +24,7 @@ const t = createTranslator(strings);
 document.title = t('app.title');
 const root = document.querySelector('#interface');
 root.textContent = t('app.loading');
+splash.text(t('app.loading'));
 try {
   const data = await loadData();
   let storage;
@@ -38,6 +40,7 @@ try {
     onError: id => { if (ui) ui.toast(id); else root.textContent = t(id); }
   });
   ui = new IslandInterface({ root, engine, view, data, t });
+  splash.end();
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
@@ -80,6 +83,7 @@ try {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }
 } catch (error) {
+  splash.end();
   root.className = 'load-error';
   root.textContent = t('error.load');
   console.error(error);

@@ -24,13 +24,16 @@
   <link rel="stylesheet" href="./ui/city-access.css?v=island-v2-20261107-1">
   <link rel="stylesheet" href="./design/ui-kit-v2/ui-kit.css">
   <link rel="stylesheet" href="./ui/ui-kit-bridge.css">
+  <link rel="stylesheet" href="./ui/boot-splash.css">
   <title></title>
 </head>
 <body>
+  <div class="boot-splash" data-boot-splash role="status" aria-live="polite"><p class="boot-splash-text"><span data-boot-text>האי שלכם מתעורר…</span><span class="boot-splash-dots" aria-hidden="true"><i></i><i></i><i></i></span></p></div>
   <canvas id="world"></canvas>
   <main id="interface"></main>
   <div id="toast" role="status" aria-live="polite"></div>
   <div id="modal-root"></div>
+  <script type="module" src="./ui/boot-splash-start.mjs?v=island-v2-20261107-1"></script>
   <script type="module" src="./app.mjs?v=island-v2-20261107-1"></script>
 </body>
 </html>
