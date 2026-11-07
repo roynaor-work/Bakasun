@@ -27,7 +27,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  const scene=new T.Scene(),sky=night?'#233649':golden?'#c6bbab':colors.sky;scene.background=new T.Color(sky);scene.fog=new T.Fog(sky,135,480);
  const camera=new T.PerspectiveCamera(64,1,.15,750),resources=new Set(),rnd=rngFor(seed),cars=[],pickups=[],flames=[],foliageParts=[];
  let disposed=false,quality=canvas.clientHeight<500&&(globalThis.devicePixelRatio||1)>1.5?1:0,slow=0,qualityAge=0,frames=0,observer,ready=false,modelLoaded=false,frameMilliseconds=0,cameraReady=false,previousSpeed=0,cameraKick=0,carAssetName='fallback';
- let shakeT=0,shakeA=0;const reducedMotion=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
+ let shakeT=0,shakeA=0;const lowCamera=new URLSearchParams(globalThis.location?.search||'').get('racingCam')!=='0';const reducedMotion=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
  renderer.shadowMap.enabled=quality===0;
  const keep=o=>(resources.add(o),o);
  const mat=(color,extra={})=>keep(new T.MeshStandardMaterial({color,roughness:.82,...extra}));
@@ -168,8 +168,8 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  function render(state,dt=0){if(disposed||!ready)return;frames++;const data=state.cars||[state.player];data.forEach((c,i)=>{const car=cars[i];if(!car)return;car.root.visible=i===0||(c.x-state.player.x)*Math.sin(state.player.heading)+(c.z-state.player.z)*Math.cos(state.player.heading)>-3.5;car.shadow.visible=car.root.visible;car.root.position.set(c.x,carGround(c)+.04,c.z);car.root.rotation.y=c.heading;const response=dt?1-Math.exp(-dt*10):0;car.body.rotation.z+=(-(c.steer||0)*Math.min(c.speed/400,.065)-car.body.rotation.z)*response;car.body.rotation.y=0;car.wheels.forEach(w=>{w.rotation.x+=(carAssetName==='sport-coupe'?1:-1)*c.speed*dt/.4054;if(w.name.startsWith('WheelFront'))w.rotation.y=(c.steer||0)*.25;});if(car.v7){car.spin=(car.spin+c.speed*dt/car.v7.wheelRadius)%car.v7.TAU;car.steerVis=(c.steer||0)*.25;}if(car.models.length>1){car.models[0].visible=quality<2;car.models[1].visible=quality===2;}car.shadow.position.set(c.x,carGround(c)+.07,c.z);car.shadow.rotation.z=c.heading;car.beacon.visible=i>0;});flames.forEach(f=>{const c=data[f.index];f.mesh.visible=!!c?.boosting;f.mesh.scale.y=.8+Math.sin(state.time*38)*.2;});
   const player=state.player||data[0],p=track.sample(player.s||0),forward=new T.Vector3(Math.sin(player.heading-(player.slipAngle||0)),0,Math.cos(player.heading-(player.slipAngle||0))),speed=Math.min(1,player.speed/45),ahead=track.sample((player.s||0)+15);
   const acceleration=dt>0?(player.speed-previousSpeed)/dt:0;previousSpeed=player.speed;cameraKick+=((player.boosting?.24:0)+Math.min(.16,Math.max(0,acceleration)*.008)-cameraKick)*(dt?1-Math.exp(-dt*7):0);
-  const boom=6.4+speed*.3+cameraKick,height=2.45+speed*.1;
-  desired.set(player.x-forward.x*boom,player.y+height,player.z-forward.z*boom);const ground=track.project(desired.x,desired.z);desired.y=Math.max(desired.y,ground.y+1.55);
+  const boom=6.4+speed*.3+cameraKick,height=(lowCamera?1.95:2.45)+speed*.1;
+  desired.set(player.x-forward.x*boom,player.y+height,player.z-forward.z*boom);const ground=track.project(desired.x,desired.z);desired.y=Math.max(desired.y,ground.y+(lowCamera?1.3:1.55));
   look.set(player.x+forward.x*(8+speed*2),player.y+1.2,player.z+forward.z*(8+speed*2));look.x=look.x*.91+ahead.x*.09;look.z=look.z*.91+ahead.z*.09;
   // Follow translation without speed-dependent lag; smooth only the relative
   // boom/aim. A world-position lerp moved the camera six metres back at speed.

@@ -33,7 +33,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
-      distanceDriven:0,wallHits:0,wallCooldown:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
+      distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
       maxSpeed:stage.aiSpeed*skill*(.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
@@ -106,10 +106,18 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const nitro=!!input.nitro&&car.nitro>.1&&car.speed>3&&!car.offroad;
     if(nitro)car.nitro=Math.max(0,car.nitro-dt*29/nitroUpgrade);
     car.boosting=nitro||car.boostTime>0;
-    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)+(car.boosting?12:0);
+    // racing-v9 slipstream: 5-22 m behind another car, nearly in its line, gives up to +7% top speed and stronger pull (config.draft=false disables).
+    let draft=0;
+    if(config.draft!==false&&!car.finished)for(const other of cars){
+      if(other===car||other.finished)continue;
+      const gap=wrapRacingDistance(other.s-car.s,track.length);
+      if(gap>3&&gap<22&&Math.abs(other.lateral-car.lateral)<2.4&&other.speed>car.speed*.7)draft=Math.max(draft,(1-(gap-3)/19)*(1-Math.abs(other.lateral-car.lateral)/2.4));
+    }
+    car.draft+=(draft-car.draft)*(1-Math.exp(-dt*(draft>car.draft?2.2:4)));
+    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*(1+.07*car.draft)+(car.boosting?12:0);
     const offLimit=car.offroad?19:Infinity;
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
-    const acceleration=car.boosting?17:12.5;
+    const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
     car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
     if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27);
     if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
@@ -158,7 +166,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       Math.abs(before.lateral)<track.width*.64&&Math.abs(after.lateral)<track.width*.64&&Math.abs(racingAngle(after.heading-car.heading))<1.3) {
       car.checkpoints++;car.nextCheckpoint++;
       car.lap=Math.min(stage.laps,1+Math.floor(car.checkpoints/track.checkpoints.length));
-      if(car.checkpoints%track.checkpoints.length===0)event('lap',car,{lap:car.lap});
+      if(car.checkpoints%track.checkpoints.length===0){const lapTime=state.time-(car.lapStart||0);car.lapStart=state.time;car.lapTimes.push(lapTime);event('lap',car,{lap:car.lap,lapTime});}
       if(car.checkpoints>=track.checkpoints.length*stage.laps){car.finished=true;car.finishTime=state.time;event('finish',car);}
     }
     car.previousS=car.routeS;

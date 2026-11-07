@@ -320,3 +320,8 @@
 
 /* racing-v9: the wheel eases back to centre on release instead of snapping. */
 .game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]:not(.active) .racing-wheel{transition:opacity .12s,transform .16s ease-out}
+
+/* racing-v9 formula look: lap times and slipstream badge. */
+.game-screen[data-game=islandRacing] .racing-lapinfo{font-size:11px;font-weight:700;color:#d6e8f2;text-shadow:0 1px 4px #000;white-space:nowrap}
+.game-screen[data-game=islandRacing] .racing-draft{position:absolute;left:50%;bottom:calc(var(--race-bottom) + 118px);transform:translateX(-50%);z-index:3;padding:3px 14px;border-radius:3px;background:#0b1729d9;border:1px solid var(--race-nitro);border-inline-start:3px solid var(--race-nitro);color:#f4fbff;font-size:13px;font-weight:800;letter-spacing:.5px;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-draft[hidden]{display:none}
