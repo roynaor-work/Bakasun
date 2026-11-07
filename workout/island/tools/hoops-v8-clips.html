@@ -38,5 +38,5 @@ for(const name of names){
 const clip=new URLSearchParams(location.search).get('clip');
 window.__clips={out,dense,names,rest:(()=>{apply('v8:pass_chest',0);bones.LeftFoot.getWorldPosition(v);return v.y;})()};
 window.__shot=(name,i)=>{const a=av.actions[name],dur=a.getClip().duration;apply(name,dur*i/7*.999);bones.Hips.getWorldPosition(v);cam.position.set(v.x,1.2,v.z+4.2);cam.lookAt(v.x,1.0,v.z);renderer.render(scene,cam);};
-window.__assets=assets;window.__av=av;window.__bones=bones;window.__apply=apply;window.__ready=true;
+window.__ready=true;
 </script></body></html>

@@ -40,8 +40,8 @@ function installFixture(){
    for(const q of a.onCourt(1))e.debug.place(q.id,-side*10,q.z);
    if(kind==='dunk'||kind==='layup'||kind==='shot'){
     if(kind==='dunk'){p=home.filter(q=>q.r.dunk>=a.C.shot.dunkMinRating).sort((x,y)=>y.r.dunk-x.r.dunk)[0]||p;}
-    const dist=kind==='dunk'?1.9:kind==='layup'?2.8:5.2;
-    e.debug.place(p.id,side*(e.court.rimX-dist),kind==='layup'?.35:0);e.debug.give(p.id);S.controlled=p.id;p.face=Math.atan2(side*e.court.rimX-p.x,-p.z);p.vx=kind==='shot'?0:side*4.5;p.vz=0;
+    const dist=kind==='dunk'?1.2:kind==='layup'?1.6:5.2;
+    e.debug.place(p.id,side*(e.court.rimX-dist),kind==='layup'?.35:0);e.debug.give(p.id);S.controlled=p.id;p.face=Math.atan2(side*e.court.rimX-p.x,-p.z);p.vx=kind==='shot'?0:side*3.5;p.vz=0;
     a.startShot(p,kind==='shot');
    } else if(kind==='block'){
     // the user's player guards the shooter and jumps as the shot goes up
@@ -83,7 +83,7 @@ const report={};
 try{
  const context=await browser.newContext({viewport:{width:vw,height:vh},hasTouch:true,isMobile:true,deviceScaleFactor:1.5});context.setDefaultTimeout(300000);
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
- await page.goto(`${base}?dev=1&dur=3600&seed=4242&hoopsAuto=0&hoopsQuality=2&hoopsProfile=quick${args.extra?'&'+args.extra:''}`,{waitUntil:'load'});
+ await page.goto(`${base}?dev=1&dur=3600&seed=4242&hoopsAuto=0&hoopsQuality=2&hoopsProfile=quick`,{waitUntil:'load'});
  await page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||s.renderMetrics?.calls>0&&s.stepsRun>30);});
  const err=await page.evaluate(()=>window.__session.snapshot.error);if(err)throw Error(err);
  await page.evaluate(()=>{document.getElementById('perf').hidden=true;});await page.evaluate(installFixture);

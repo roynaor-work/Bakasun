@@ -87,8 +87,6 @@ export function chooseV7Motion(p,ctx={},hint=null){
   return {upper:'dribble_right',lower:legs,mode:'dribble'};
  }
  if(ctx.defending&&speed>.45&&speed<3.2)return {full:'defense_shuffle',mode:'loop',sideways:Math.abs(lat)>Math.abs(fwd)*.8};
- // polish (07/11): a defender who stands still plays the defensive stance (hips low, hands out wide) instead of the upright idle
- if(ctx.polish&&ctx.defending&&speed<=.45)return {full:'defense_shuffle',mode:'stance'};
  if(speed>.4)return {full:speed>1.2||p.sprinting?'run':'walk',mode:'loop'};
  return {full:ctx.catching?'idle_hold':'idle',mode:'loop'};
 }
@@ -220,7 +218,7 @@ export async function loadPlayerAssetsV7(cfg,base,onProgress,{params,onFallback}
   // v8 motion (06/11): passes, receptions, steal and block as authored clips on the same rig. Optional: a failure keeps the v7 arm-IK passes.
   let v8=null;
   if(v8MotionEnabled(cfg,params)){
-   try{v8=await loadV8Motion(cfg,base);for(const r of Object.values(roles)){for(const [n,c] of buildV8Clips(THREE,v8,r.restVec))r.clips.set(n,c);for(const n of ['receive_moving'])r.clips.set('upper:v8:'+n,splitClip(r.clips.get('v8:'+n),'upper','upper:v8:'+n));}}
+   try{v8=await loadV8Motion(cfg,base);for(const r of Object.values(roles))for(const [n,c] of buildV8Clips(THREE,v8,r.restVec))r.clips.set(n,c);}
    catch(error){v8=null;for(const r of Object.values(roles))for(const n of [...r.clips.keys()])if(n.startsWith('v8:'))r.clips.delete(n);onFallback?.('v8 motion',error);}
   }
   return {v7:true,v8,roles,clips:roles.PG.clips,meta:meta.clips,baseHeights:v7.baseHeights,dispose(){for(const r of Object.values(roles)){releaseScene(r.scene);for(const g of Object.values(r.groups))if(g.base)g.geometry.dispose();}}};
@@ -288,10 +286,9 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
  function clipTime(plan,p,ctx,dt,speed){
   const out={};
   const loopAdvance=(name,rate)=>{phase[name]=((phase[name]||0)+dt*rate)%duration(name);return phase[name];};
-  const stride=name=>{const ref=meta[name]?.refSpeed||1;return (ctx.polish?strideSpeed:speed)/Math.max(.05,ref*root.scale.y);};
-  const locomotion=name=>name==='run'?loopAdvance(name,clamp(stride(name),.35,ctx.polish?2.7:2.1)):name==='walk'?loopAdvance(name,clamp(stride(name),.4,2.2)):loopAdvance(name,1);
+  const stride=name=>{const ref=meta[name]?.refSpeed||1;return speed/Math.max(.05,ref*root.scale.y);};
+  const locomotion=name=>name==='run'?loopAdvance(name,clamp(stride(name),.35,2.1)):name==='walk'?loopAdvance(name,clamp(stride(name),.4,2.2)):loopAdvance(name,1);
   if(plan.mode==='v8'){out.full=[plan.full,plan.t];return out;}
-  if(plan.mode==='v8layer'){const l='lower:'+plan.lower;out.upper=['upper:'+plan.upper,plan.t];out.lower=[l,plan.lower==='run'||plan.lower==='walk'?locomotion(plan.lower):loopAdvance(l,1)];return out;}
   if(plan.full){
    const n=plan.full,d=duration(n);let t;
    if(plan.mode==='shoot'){
@@ -305,7 +302,6 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
    else if(n==='fall')t=Math.min(d-.001,stumbleT);
    else if(plan.mode==='hint')t=Math.min(d-.001,hintAge);
    else if(n==='run'||n==='walk')t=locomotion(n);
-   else if(plan.mode==='stance')t=loopAdvance(n,.12);
    else if(n==='defense_shuffle')t=loopAdvance(n,clamp(speed/1.5,.5,2));
    else t=loopAdvance(n,1);
    out.full=[n,t];
@@ -316,8 +312,7 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   }
   return out;
  }
- let hintAge=0,strideSpeed=0,leanNow=0;
- root.rotation.order='YXZ';
+ let hintAge=0;
  const guard=createDribbleGuard(),v8s={releasedAt:null,passClip:null,recvClip:null,recvSince:null},v8pack=assets.v8||null;
  const av={root,hands,mixer,actions,mats,card,kind:'v7',role,scale,dribblePump:0,dribbleCtx:null,
   applyKit(kit){
@@ -349,21 +344,9 @@ export function createAvatarV7(assets,card,teamLook,opts={}){
   if(wasBall&&!p.hasBall&&p.act==='shoot')releaseAt=p.actT;
   if(p.act!=='shoot')releaseAt=p.act==='shoot'?releaseAt:null;
   const catching=ctx.catching||performance.now()<catchUntil;
-  if(ctx.polish){
-   // the stride follows the speed the feet really cover (a short low-pass: the engine's velocity steps with the tick), and the body leans
-   // into an acceleration and back into a braking: forward up to 0.11 rad, back up to 0.07 (about 5 cm of head travel per 0.03 rad)
-   strideSpeed+=(speed-strideSpeed)*(1-Math.exp(-dt/.05));
-   const accel=(speed-lastSpeed)/dt,want=clamp(accel*.012+Math.min(.04,speed*.007),-.07,.11);
-   leanNow+=(want-leanNow)*(1-Math.exp(-dt/.12));root.rotation.x=leanNow;
-  }else{strideSpeed=speed;if(root.rotation.x)root.rotation.x=0;}
   guard.observe(p);
   let plan=guard.filter(chooseV7Motion(p,{...ctx,catching},hint));
-  if(v8pack){
-   const o=chooseV8Motion(v8pack,p,{...ctx,catching},v8s,dt);
-   // polish (07/11): the moving reception takes the arms of the clip over the legs of the run: the clip's own legs travel 0.95 m on the spot (55 cm of slide)
-   if(o&&ctx.polish&&o.full==='v8:receive_moving'&&actions['upper:v8:receive_moving'])plan={upper:'v8:receive_moving',lower:speed>.4?'run':'idle',mode:'v8layer',t:o.t};
-   else if(o)plan=o;
-  }
+  if(v8pack){const o=chooseV8Motion(v8pack,p,{...ctx,catching},v8s,dt);if(o)plan=o;}
   // weights: layers cross-fade with the same time constant; full-body and layered poses sum to one per track
   const mixTarget=plan.full?1:0;cur.mix+=(mixTarget-cur.mix)*(1-Math.exp(-dt/.075));
   const times=clipTime(plan,p,ctx,dt,speed);
