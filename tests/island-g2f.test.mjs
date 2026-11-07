@@ -1,3 +1,4 @@
+globalThis.__alienV9=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
 import {pilotInput} from '../workout/island/tests/pilot.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';

@@ -1,13 +1,15 @@
 import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-1';
 import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-1';
 import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-1';
+import {alienV9Enabled,alienV9Hp} from './alien-v9.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){
  level=clamp(Math.floor(level)||1,1,balance.levels.length);
- const settings={...balance.levels[level-1]},campaign=balance.campaign;
+ const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
  const behavior={motion:'drift',shoots:true,shield:0,warningSeconds:.7,bulletCap:12,fireCadence:settings.boltSeconds,diveEverySeconds:balance.tactics.diveEverySeconds,...balance.stageBehaviors[level-1]};
+ if(v9)behavior.fireCadence*=v9.boltSecondsMult||1;
  const player={x:config.width/2,y:config.height-balance.playerBottom,vx:0,bank:0};
  const aliens=[],shots=[],bolts=[],sparks=[],pickups=[],loot=[],telegraphs=[];
  const ap=createPool(balance.maxAliens),sp=createPool(balance.maxShots),bp=createPool(balance.maxBolts),fp=createPool(balance.maxSparks),pp=createPool(balance.pickups.max),lp=createPool(campaign.maxLoot);
@@ -37,7 +39,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  function burst(x,y){for(let i=0;i<balance.sparkCount;i++){const a=random()*TAU,s=fp.take(x,y,Math.cos(a)*balance.sparkSpeed,Math.sin(a)*balance.sparkSpeed,balance.sparkSeconds);if(s)sparks.push(s);}}
  function spawn(x,y,kind,child=false,bossHp=0){
   const a=createAlienEntity(ap,balance,x,y,kind,level,random()*TAU,child,bossHp);if(!a)return null;
-  if(!bossHp){a.hp=Math.max(.75,balance.enemyTypes[kind].hp*(settings.enemyHpScale||1)*(child?1:Math.min(1.5,1+(level-1)*balance.hpPerStage)));a.maxHp=a.hp;}
+  if(!bossHp){a.hp=Math.max(.75,balance.enemyTypes[kind].hp*(settings.enemyHpScale||1)*(child?1:Math.min(1.5,1+(level-1)*balance.hpPerStage))*(child?1:hpGear)+(child?0:hpAdd));a.maxHp=a.hp;}
   Object.assign(a,{id:++serial,originY:y,shield:child||bossHp?0:Math.max(behavior.shield,balance.enemyTypes[kind].shield||0),entrySide:0,entry:child?0:balance.formation.entrySeconds,mineTime:balance.enemyTypes[kind].mineSeconds||0,facing:1});aliens.push(a);return a;
  }
  const pattern=()=>settings.formations?.[(wave-1)%settings.formations.length]||campaign.patterns[(wave-1)%settings.patternKinds];
@@ -66,7 +68,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   score+=a.reward*settings.points;kills++;burst(x,y);if(!missile)sound('explosion');
   if(a.reward){combo=comboTime>0?combo+1:1;comboTime=campaign.comboSeconds;if(combo%campaign.comboMilestone===0){celebration=campaign.celebrationSeconds;score+=combo*campaign.comboBonus;}
    const kind=a.boss||type.loot==='crystal'?1:type.loot==='coin'?0:-1;if(kind>=0){const d=lp.take(x,y,0,campaign.lootSpeed,0,kind);if(d)loot.push(d);}}
-  if(kills%settings.killsPerBonus===0){pendingBonuses++;bonusX=x;bonusY=y;}releaseAt(aliens,index,ap);
+  if(kills%Math.round(settings.killsPerBonus*(v9?.bonusKillsMult||1))===0){pendingBonuses++;bonusX=x;bonusY=y;}releaseAt(aliens,index,ap);
   for(let i=0;i<children;i++)spawn(clamp(x+(i-.5)*30,25,config.width-25),y,0,true);dropBonus();
  }
  function announce(a,kind='shot'){
@@ -115,7 +117,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    }
    shotTime-=dt;if(input.firing&&shotTime<=0){const laser=upgrades.laser>0||powerup===1||(equipment.weapon||0)>=2;sound('shot');fireShot(0,laser?1:0);if(spreadTime>0){fireShot(-balance.pickups.spreadSpeed,0);fireShot(balance.pickups.spreadSpeed,0);}for(const w of wings)if(w.active)fireShot(0,laser?1:0,w.x,true,w.y);
     shotTime=Math.max(.1,settings.shotSeconds/((equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+alienStack(campaign,'rapid',upgrades.rapid))*power+(bonuses.fireRate||0))/(powerup===2?balance.pickups.rapidMultiplier:1));}
-   if(!aliens.length){if(time>=settings.seconds){finish(wave>=settings.waves||completion==='survival'?'win':'lose');return;}nextWave+=dt;if(nextWave>=balance.wavePauseSeconds){while(bolts.length)releaseAt(bolts,bolts.length-1,bp);if(wave>=settings.waves){finish('win');return;}if(offerUpgrade())return;wave++;formation();}return;}
+   if(!aliens.length){if(time>=settings.seconds){finish(wave>=settings.waves||completion==='survival'?'win':'lose');return;}nextWave+=dt;if(nextWave>=(v9?.wavePauseSeconds??balance.wavePauseSeconds)){while(bolts.length)releaseAt(bolts,bolts.length-1,bp);if(wave>=settings.waves){finish('win');return;}if(offerUpgrade())return;wave++;formation();}return;}
    for(const a of aliens){a.age+=dt;a.hitTime=Math.max(0,a.hitTime-dt);a.entry=Math.max(0,a.entry-dt);const type=balance.enemyTypes[a.kind];bossGuard(a);
     const healthPhase=a.hp<=a.maxHp/3?3:a.hp<=a.maxHp*2/3?2:1,phaseStep=(balance.balance?.minBossSeconds||0)/3;
     const phase=a.boss?Math.min(healthPhase,phaseStep?1+Math.min(2,Math.floor(Math.max(0,a.age-2)/phaseStep)):3):1;if(phase!==a.bossPhase){a.bossPhase=phase;a.tellTime=0;a.attackTime=1.1;signal('boss-phase',a.x,a.y,phase,1.2);}
