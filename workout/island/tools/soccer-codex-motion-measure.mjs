@@ -2,9 +2,9 @@
  * Codex v9), the real motion controller at 60 Hz, with the character travelling at the simulated speed. Prints JSON:
  * foot sliding per constant speed (stance foot horizontal speed while planted), pose pops (largest per-frame bone rotation and
  * hips step) over a scripted sequence, and the idle arm angles.
- * Usage: node tools/soccer-codex-motion-measure.mjs [off|v7run]   ("off" = without the Codex clips; "v7run" = Codex walk/jog/idle/brake but the v7 runs) */
+ * Usage: node tools/soccer-codex-motion-measure.mjs [off|v7run|v9]   ("off" = without the Codex clips; "v7run" = Codex walk/jog/idle/brake but the v7 runs) */
 import {readFile} from 'node:fs/promises';
-const off=process.argv[2]==='off',v7run=process.argv[2]==='v7run';
+const off=process.argv[2]==='off',v7run=process.argv[2]==='v7run',v9only=process.argv[2]==='v9';
 globalThis.location={search:v7run?'?soccerRunV9=0':''};
 const T=await import('../vendor/three.module.js');
 const {composeSoccerRestartMotion}=await import('../minigames/soccer-restart-motion.mjs');
@@ -14,9 +14,10 @@ const base=await read('motion/soccer.json'),packs=await Promise.all(['throws-rec
 const rig=await read('characters/rig.json'),map=await read('viewer/retarget-map.json');
 const config=JSON.parse(await readFile(new URL('../data/config.json',import.meta.url),'utf8')).minigames.soccer;
 const v7=await readFile(new URL('../assets/soccer-v7/clips.json',import.meta.url),'utf8').then(JSON.parse),v8=await readFile(new URL('../assets/soccer-v8/clips.json',import.meta.url),'utf8').then(JSON.parse),v9=await readFile(new URL('../assets/soccer-v9/clips.json',import.meta.url),'utf8').then(JSON.parse);
-const {soccerV8States}=await import('../minigames/soccer-v8.mjs'),{soccerCodexStates}=await import('../minigames/soccer-codex-motion.mjs');
+const {soccerV8States}=await import('../minigames/soccer-v8.mjs'),{soccerCodexStates,soccerV10States}=await import('../minigames/soccer-codex-motion.mjs');
+const v10=await readFile(new URL('../assets/soccer-v10/clips.json',import.meta.url),'utf8').then(JSON.parse);
 const library=composeSoccerRestartMotion(base,...packs);
-const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...(off?{}:soccerCodexStates(v9))}},clips=compileSoccerDesignClips(data,rig,map);
+const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...(off?{}:soccerCodexStates(v9)),...(off||v7run||v9only?{}:soccerV10States(v10))}},clips=compileSoccerDesignClips(data,rig,map);
 const deg=r=>r*180/Math.PI,dt=1/60;
 function make(){
   const bones={};let root;
@@ -80,7 +81,7 @@ const seq=play(SEQ),pops=seq.map(r=>r.pop),steps=seq.map(r=>r.hipsStep);
 const states=[];for(const r of seq)if(!states.length||states.at(-1)!==r.state)states.push(r.state);
 function idleArms(){const rt=make(),p=mk(),s=S();let rows=[];const seen={};for(let i=0;i<1500;i++){rt.motion.update(p,s,{mode:'idle'},dt);if(i>60){const m=measure(rt);rows.push(m);const k=rt.motion.state;(seen[k]||(seen[k]=[])).push(m);}}
   return Object.fromEntries(Object.entries(seen).map(([k,v])=>[k,{abdMax:+Math.max(...v.map(r=>r.abd)).toFixed(1),flexMin:+Math.min(...v.map(r=>r.flex)).toFixed(1)}]));}
-const out={mode:off?'before (no Codex v9 clips)':v7run?'Codex walk/jog/idle/brake, v7 runs':'Codex clips incl. v9 run and sprint',
+const out={mode:off?'before (no Codex v9 clips)':v7run?'Codex walk/jog/idle/brake, v7 runs':v9only?'Codex v9 clips incl. run and sprint':'Codex v9 + v10 clips',
   strideMatch:[.8,1,1.3,1.6,2,2.4,2.8,3.2,4,4.5,5.4,6.5].map(strideMatch),
   sequence:{states,popMaxDeg:r2(Math.max(...pops)),popP99Deg:r2(pct(pops,.99)),hipsStepMaxM:r2(Math.max(...steps)),hipsStepP99M:r2(pct(steps,.99))},
   runs:[3.2,4.2,5.3,6,6.5].map(runPose),
