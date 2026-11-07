@@ -43,3 +43,37 @@
 @keyframes catch-pulse{0%,100%{opacity:.95}50%{opacity:.55}}
 @media(max-height:360px){.catch-throw{width:84px;height:84px}.catch-tool{min-width:68px;min-height:52px}.catch-popup{font-size:19px}}
 @media(prefers-reduced-motion:reduce){.catch-drag-hint{animation:none}.catch-popup.show{animation-duration:2.6s}}
+
+/* v2: the chase, the crew chip, the stars */
+.catch-chip{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:20px;background:#3a1f0fcc;border:1px solid #ffb35c88;font-weight:800;font-size:14px;color:#ffd9a0;box-shadow:0 2px 10px #0006}
+.catch-chip[hidden]{display:none}
+.catch-chase{position:absolute;inset:0;pointer-events:none}
+.catch-chase[hidden]{display:none}
+.catch-chase-top{position:absolute;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;min-height:40px;padding:0 16px;border-radius:20px;background:#0c1830b8;border:1px solid #ffffff3a;backdrop-filter:blur(4px);font-weight:800;font-size:15px}
+.catch-time{display:block;width:120px;height:8px;border-radius:5px;background:#ffffff26;overflow:hidden}
+.catch-time i{display:block;height:100%;background:linear-gradient(90deg,#ff6a5c,#ffd25e);transition:width .2s linear}
+.catch-tank{position:absolute;right:max(122px,calc(env(safe-area-inset-right) + 122px));bottom:max(16px,env(safe-area-inset-bottom));width:14px;height:96px;border-radius:8px;background:#0c1830b8;border:1px solid #ffffff44;overflow:hidden;display:flex;align-items:flex-end}
+.catch-tank span{display:block;width:100%;background:linear-gradient(0deg,#ff8a3d,#ffe08a)}
+.catch-tank[data-low=true]{border-color:#ff6a5c}
+.catch-boost,.catch-brake{position:absolute;pointer-events:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;font-weight:800;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+.catch-boost{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:100px;height:100px;border:3px solid #fff2b8;background:radial-gradient(circle at 35% 28%,#ffd95e,#f0561c 72%);color:#3a1000;font-size:16px;box-shadow:0 5px 0 #8f2a06,0 8px 22px #0008}
+.catch-boost[data-ready=false]{filter:grayscale(.6);opacity:.7}
+.catch-boost:active{transform:translateY(4px);box-shadow:0 1px 0 #8f2a06,0 4px 12px #0008}
+.catch-brake{right:max(128px,calc(env(safe-area-inset-right) + 128px));bottom:max(122px,calc(env(safe-area-inset-bottom) + 122px));width:64px;height:64px;border:2px solid #ffffff66;background:#12294dd8;color:#e7f2ff;font-size:11px}
+.catch-brake:active{background:#1f4a86}
+.catch-count{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-size:92px;font-weight:900;color:#fff;text-shadow:0 4px 0 #0007,0 0 28px #6fcfffaa;animation:catch-count .9s ease-out infinite}
+.catch-count[hidden]{display:none}
+.catch-steer-hint{left:24%;top:46%}
+.catch-hud[data-mode=chase] .catch-popup,.catch-hud[data-mode=bail] .catch-popup{top:16%}
+.catch-hud[data-mode=loading] .catch-chase{display:none}
+.catch-stars{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);display:flex;gap:10px}
+.catch-stars[hidden]{display:none}
+.catch-stars span{display:block;transform:scale(0);animation:catch-star .55s cubic-bezier(.2,1.6,.4,1) forwards}
+.catch-stars span.on{color:#ffd25e;filter:drop-shadow(0 0 14px #ffc83dcc)}
+.catch-stars span.on svg{fill:#ffd25e}
+.catch-stars span.off{color:#ffffff55}
+@keyframes catch-count{0%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}25%{opacity:1;transform:translate(-50%,-50%) scale(1)}85%{opacity:1}100%{opacity:.2;transform:translate(-50%,-50%) scale(.9)}}
+@keyframes catch-star{from{transform:scale(0) rotate(-40deg)}to{transform:scale(1) rotate(0)}}
+@media(max-height:360px){.catch-boost{width:88px;height:88px}.catch-count{font-size:72px}}
+@media(prefers-reduced-motion:reduce){.catch-count{animation:none}.catch-stars span{animation-duration:.01s}}
+.catch-hud [hidden]{display:none!important}

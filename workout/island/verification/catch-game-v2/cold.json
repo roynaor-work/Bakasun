@@ -1,0 +1,84 @@
+{
+ "main": {
+  "n": 378,
+  "kb": 9368,
+  "catchReq": 4,
+  "ms": 3495,
+  "runs": 4
+ },
+ "branch": {
+  "n": 379,
+  "kb": 9400,
+  "catchReq": 5,
+  "ms": 3445,
+  "runs": 4
+ },
+ "runs": 5,
+ "rows": {
+  "main": [
+   {
+    "n": 380,
+    "kb": 9548,
+    "catchReq": 4,
+    "ms": 6244
+   },
+   {
+    "n": 360,
+    "kb": 4268,
+    "catchReq": 4,
+    "ms": 1342
+   },
+   {
+    "n": 378,
+    "kb": 9368,
+    "catchReq": 4,
+    "ms": 3590
+   },
+   {
+    "n": 378,
+    "kb": 9368,
+    "catchReq": 4,
+    "ms": 3373
+   },
+   {
+    "n": 378,
+    "kb": 9368,
+    "catchReq": 4,
+    "ms": 3401
+   }
+  ],
+  "branch": [
+   {
+    "n": 361,
+    "kb": 4300,
+    "catchReq": 5,
+    "ms": 1393
+   },
+   {
+    "n": 379,
+    "kb": 9400,
+    "catchReq": 5,
+    "ms": 3535
+   },
+   {
+    "n": 379,
+    "kb": 9400,
+    "catchReq": 5,
+    "ms": 3800
+   },
+   {
+    "n": 379,
+    "kb": 9400,
+    "catchReq": 5,
+    "ms": 3287
+   },
+   {
+    "n": 379,
+    "kb": 9400,
+    "catchReq": 5,
+    "ms": 3356
+   }
+  ]
+ },
+ "note": "runs that ended before the page finished loading (about 4.3MB) are dropped"
+}
