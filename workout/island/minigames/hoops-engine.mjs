@@ -1072,7 +1072,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  function snapshotPlayers(){
   return all().map(p=>({id:p.id,team:p.team,pos:p.pos,positionName:p.positionName,abilities:p.abilities,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
    face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,boost:+p.boost.toFixed(3),boostLocked:p.boostLock,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
-   hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null}));
+   hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null,passTo:p.act==='pass'?p.act2?.target??null:null}));
  }
 
  const api={aiV2:aiVersion!=='v1',

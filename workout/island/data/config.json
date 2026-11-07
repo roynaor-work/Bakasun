@@ -12245,6 +12245,22 @@
      "minQuality": 1,
      "base": "design/hoops-v5/models/"
     },
+    "v8": {
+     "enabled": true,
+     "minQuality": 1,
+     "motion": "assets/hoops-v8/motion.json",
+     "arena": {
+      "base": "assets/hoops-v8/arena/",
+      "files": ["arena-lod0.glb", "arena-lod1.glb", "arena-lod2.glb"],
+      "textures": {
+       "parquet": "parquet.webp",
+       "orm": "parquet-orm.webp",
+       "normal": "parquet-normal.webp",
+       "crowd": "crowd.webp",
+       "ceiling": "ceiling.webp"
+      }
+     }
+    },
     "v7": {
      "enabled": true,
      "minQuality": 1,
