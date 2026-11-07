@@ -41,7 +41,7 @@ export function runCatchSession(ctx) {
     engine, city,
   };
   const params = new URLSearchParams(globalThis.location?.search || '');
-  if (params.get('dev') === '1' || ctx.debug) session.debug = {engine, view: () => view, release: () => release(), setAim: a => engine.setAim(a), step: dt => { engine.step(dt); handle(engine.drainEvents()); }};
+  if (params.get('dev') === '1' || ctx.debug) session.debug = {engine, view: () => view, release: () => (ctx.canvas ? release() : (engine.release() && undefined)), setAim: a => engine.setAim(a), step: dt => { engine.step(dt); const events = engine.drainEvents(); if (ctx.canvas) handle(events); else if (events.some(e => e.type === 'done')) finish(); }};
   if (!ctx.canvas) return session;
 
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
@@ -84,12 +84,12 @@ export function runCatchSession(ctx) {
     view?.handle(events, {});
     for (const e of events) {
       if (e.type === 'launch') audio?.cue('whoosh');
-      else if (e.type === 'catch') { audio?.cue(e.perfect ? 'perfect' : 'catch'); say(e.perfect ? 'catch.pop.perfect' : 'catch.pop.catch', e.perfect ? 'perfect' : 'good'); slow = .9; ctx.sound?.('win'); }
+      else if (e.type === 'catch') { audio?.cue(e.perfect ? 'perfect' : 'catch'); say(e.perfect ? 'catch.pop.perfect' : 'catch.pop.catch', e.perfect ? 'perfect' : 'good'); slow = .9; }
       else if (e.type === 'blocked') { audio?.cue('thud'); say('catch.pop.blocked', 'bad'); }
       else if (e.type === 'miss') { audio?.cue('miss'); say('catch.pop.miss', 'bad'); }
       else if (e.type === 'hidden') { audio?.cue('miss'); say('catch.pop.hidden', 'bad'); }
       else if (e.type === 'flee') say('catch.pop.flee', 'warn');
-      else if (e.type === 'escape') { audio?.cue('engine'); say('catch.pop.escape', 'bad'); ctx.sound?.('lose'); }
+      else if (e.type === 'escape') { audio?.cue('engine'); say('catch.pop.escape', 'bad'); }
       else if (e.type === 'turn') { hud.dataset.phase = 'aim'; }
       else if (e.type === 'done') finish();
     }

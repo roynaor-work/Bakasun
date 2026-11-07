@@ -10,9 +10,9 @@ const [,,outDir='catch-shots',base='http://127.0.0.1:8765/workout/island/']=proc
 const {chromium}=await import(process.env.ISLAND_PLAYWRIGHT?pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href:'playwright');
 await mkdir(outDir,{recursive:true});
 const browser=await chromium.launch({args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--ignore-gpu-blocklist','--no-proxy-server']});
-const solve=(tools,mode)=>`(()=>{const s=session,e=s.engine,P=e.balance.physics;let best=null;
+const solve=(tools,mode,minAngle=4)=>`(()=>{const s=session,e=s.engine,P=e.balance.physics;let best=null;
  for(const tool of ${JSON.stringify(tools)}){ if(!e.tools.some(t=>t.id===tool))continue;
-  for(let a=4;a<=74&&!best;a+=.5)for(let p=.2;p<=1&&!best;p+=.004){const w=e.wobbleAt(e.clock);const f=e.trajectory(Math.max(0,a),p,tool,{resolve:true,t0:e.clock+P.throwSeconds});
+  for(let a=(tool==='rope'?4:${minAngle});a<=74&&!best;a+=.5)for(let p=.2;p<=1&&!best;p+=.004){const w=e.wobbleAt(e.clock);const f=e.trajectory(Math.max(0,a),p,tool,{resolve:true,t0:e.clock+P.throwSeconds});
    if(${mode==='miss'?"f.kind!=='catch'&&f.kind==='ground'":"f.kind==='catch'"}){best=[a,p,tool,w.angle,w.power];}}
   if(best)break;}
  if(!best)return null;
@@ -25,35 +25,44 @@ async function open(stage,seed=3,extra=''){
   return page;
 }
 const shot=(page,name)=>page.screenshot({path:path.join(outDir,name+'.png')});
-async function untilPhase(page,phases,ms=9000){const t0=Date.now();while(Date.now()-t0<ms){const ph=await page.evaluate(()=>session.engine.state.phase);if(phases.includes(ph))return ph;await page.waitForTimeout(80);}return null;}
+async function untilPhase(page,phases,ms=9000){const t0=Date.now();while(Date.now()-t0<ms){const ph=await page.evaluate(()=>session.engine.state.phase);if(phases.includes(ph))return ph;await page.waitForTimeout(30);}return null;}
+// A frame while the tool is in the air: wait for a share of the flight, in game time.
+async function untilFlight(page,share,ms=9000){const t0=Date.now();while(Date.now()-t0<ms){const r=await page.evaluate(()=>{const e=session.engine,f=e.state.flight;return e.state.phase==='flight'&&f?(e.clock-f.t0)/f.duration:(['aim','throw'].includes(e.state.phase)?-1:2);});if(r>=share||r===2)return r;await page.waitForTimeout(20);}return null;}
+const only=(process.env.CATCH_ONLY||'stages,tools,escape,help').split(','),on=k=>only.includes(k);
+// The getaway car pulls away in the last part of the escape phase.
+async function untilFlightless(page,ms=40000){const t0=Date.now();while(Date.now()-t0<ms){const r=await page.evaluate(()=>{const e=session.engine,st=e.state;return st.phase==='escape'?(e.clock-st.phaseAt)/e.balance.physics.escapeSeconds:2;});if(r>=.86)return r;await page.waitForTimeout(25);}return null;}
 const report={};
-for(const stage of [1,3,5,7,9,10]){
+for(const stage of on('stages')?[1,3,5,7,9,10]:[]){
   const page=await open(stage);
   await shot(page,`stage${String(stage).padStart(2,'0')}-aim`);
   report[stage]=await page.evaluate(solve(['narrow','wide','rope'],'catch'));
-  await page.waitForTimeout(450);await shot(page,`stage${String(stage).padStart(2,'0')}-flight`);
+  await untilFlight(page,.45);await shot(page,`stage${String(stage).padStart(2,'0')}-flight`);
   await untilPhase(page,['impact','caught']);await page.waitForTimeout(260);await shot(page,`stage${String(stage).padStart(2,'0')}-catch`);
   await untilPhase(page,['caught','done'],5000);await page.waitForTimeout(700);await shot(page,`stage${String(stage).padStart(2,'0')}-caught`);
   await page.close();
 }
-{ // the three tools in flight on stage 3
+if(on('tools')){ // the three tools in flight on stage 3
   for(const tool of ['narrow','wide','rope']){
-    const page=await open(3);const sol=await page.evaluate(solve([tool],'catch'));
-    if(sol){await page.waitForTimeout(700);await shot(page,`tool-${tool}`);}else console.log('no solution for',tool);
+    const page=await open(3);const sol=await page.evaluate(solve([tool],'catch',tool==='rope'?4:30));
+    if(sol){await untilFlight(page,.5);await shot(page,`tool-${tool}`);}else console.log('no solution for',tool);
     await page.close();
   }
 }
-{ // three misses: he flees, flees, escapes to the getaway car
+if(on('escape')){ // three misses: he flees, flees, escapes to the getaway car
   const page=await open(6);
+  let fleeShot=false;
   for(let i=0;i<3;i++){
-    await page.evaluate(`(()=>{const e=session.engine;e.setAim({angle:62,power:1});})()`);await page.evaluate(()=>session.debug.release());
-    await untilPhase(page,['impact']);await page.waitForTimeout(200);if(i===0)await shot(page,'miss-impact');
-    const ph=await untilPhase(page,['flee','escape'],6000);if(ph==='flee'){await page.waitForTimeout(700);if(i===0)await shot(page,'flee');await untilPhase(page,['aim'],6000);}
+    await untilPhase(page,['aim'],40000);
+    await page.evaluate(`(()=>{const e=session.engine;e.setAim({angle:45,power:.3});})()`);await page.evaluate(()=>session.debug.release());
+    if(i===1){await untilPhase(page,['impact'],40000);await shot(page,'miss-impact');}
+    const ph=await untilPhase(page,['flee','escape'],40000);
+    if(ph==='flee'&&!fleeShot){fleeShot=true;await page.waitForTimeout(120);await shot(page,'flee');}
   }
-  await untilPhase(page,['escape'],6000);await page.waitForTimeout(1500);await shot(page,'escape-run');await page.waitForTimeout(1600);await shot(page,'escape-car');
-  await untilPhase(page,['done'],8000);await page.waitForTimeout(400);await shot(page,'lose');
+  await untilPhase(page,['escape'],40000);await page.waitForTimeout(1200);await shot(page,'escape-run');
+  await untilFlightless(page);await shot(page,'escape-car');
+  await untilPhase(page,['done'],40000);await page.waitForTimeout(300);await shot(page,'lose');
   await page.close();
 }
-{ const page=await open(1,3,'&help=1');await shot(page,'help');await page.close(); }
+if(on('help')){ const page=await open(1,3,'&help=1');await shot(page,'help');await page.close(); }
 console.log(JSON.stringify(report));
 await browser.close();

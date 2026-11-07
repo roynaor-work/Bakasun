@@ -252,7 +252,7 @@ export async function createCatchView({canvas, engine, balance, quality = 'high'
     else if (s.phase === 'flee' || s.phase === 'escape') { l = Math.max(-1.5, c.x - 9); r = c.x + 4; }
     else if (s.phase === 'aim' || s.phase === 'throw') { l = -2; r = c.x + 3.2; }
     // Far thieves: keep the characters readable by letting the officer slide off the left edge.
-    if (r - l > 18) l = r - 18;
+    if (r - l > 23) l = r - 23;
     const span = Math.max(10, r - l + 1.5), d = (span / 2) / Math.tan(hfov() / 2);
     cam.x = damp(cam.x, (l + r) / 2, 3.2, dt); cam.d = damp(cam.d, d, 3.2, dt);
     cam.shake = Math.max(0, cam.shake - dt * 2.2);
