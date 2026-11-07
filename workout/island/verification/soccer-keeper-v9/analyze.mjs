@@ -3,7 +3,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
 const frames=JSON.parse(await readFile(new URL('browser-frames.json',import.meta.url),'utf8')),deg=r=>r*180/Math.PI,wrap=v=>Math.atan2(Math.sin(v),Math.cos(v)),out={};
 for(const [key,f] of Object.entries(frames)){
-  const ci=f.findIndex(r=>r.owner!==2);if(ci<1){out[key]={error:'no release'};continue;}
+  const ci=Math.max(1,f.findIndex(r=>r.owner!==2));if(f.length<3){out[key]={error:'no release'};continue;}
   const last=f.map((r,i)=>r.m?i:-1).filter(i=>i>=0).at(-1)??f.length-1;
   const c=f[ci],b=f[ci-1],ball=c.flight?{x:c.flight.x-c.simx,z:c.flight.z-c.simz}:{x:c.bx,z:c.bz},bd=Math.atan2(ball.z,ball.x);
   const ev={x:c.eff[0]-b.eff[0],z:c.eff[2]-b.eff[2]},ed=Math.atan2(ev.z,ev.x);
