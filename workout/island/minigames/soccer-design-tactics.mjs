@@ -17,7 +17,8 @@ export function compileSoccerTactics(data,c){
  const selected=c.squad?.formation||'4-3-3',formation=data.formations?.find(item=>item.id===selected);
  if(!formation)throw Error('Unknown soccer formation: '+selected);
  const available=new Set(formation.roles),striker=available.has('CF')?'CF':'LST',wide=available.has('LW')?'LW':available.has('LM')?'LM':'LWB';
- const selectedRoles=[striker,'RCM','GK',wide,'LCB','RCB'];
+ // Six-a-side uses the six roles below. Larger squads add RW, LCM, LB, RB, DM (4-3-3 only), in that order.
+ const teamSize=Math.max(6,c.players.roster.filter(entry=>entry.team===0).length),selectedRoles=[striker,'RCM','GK',wide,'LCB','RCB',...['RW','LCM','LB','RB','DM'].slice(0,Math.max(0,teamSize-6))];
  if(selectedRoles.some(role=>!available.has(role)))throw Error('Soccer formation lacks a reduced-side role');
  const aliases={CF:striker,LW:wide},rules=new Map((data.rules||[]).map(rule=>[rule.id,rule])),restarts=new Map((data.restartPolicies||[]).map(rule=>[rule.id,rule]));
  const number=(rule,key,fallback)=>metric(rules.get(rule),key,fallback);
@@ -69,7 +70,7 @@ export function compileSoccerTactics(data,c){
   const teams=[0,1].map(team=>({team,nodes:[],byId:new Map(),phase:'defense',possessionPhase:null,lastPossessionAt:-Infinity,transitionUntil:-Infinity,pressId:null,pressUntil:-Infinity,nextDecision:-Infinity,key:'',observed:state.players.filter(player=>player.team!==team).map(player=>({player,x:0,z:0})),candidatePoint:{x:0,z:0},boundsPoint:{x:0,z:0},desiredPoint:{x:0,z:0},placed:[]}));
   for(const team of teams){
    const members=state.players.filter(p=>p.team===team.team).sort((a,b)=>a.id-b.id),used=new Set();
-   if(members.length>selectedRoles.length)throw Error('The soccer tactics adapter supports at most six players per side');
+   if(members.length>selectedRoles.length)throw Error('The soccer tactics adapter supports at most '+(selectedRoles.length===6?'six':selectedRoles.length)+' players per side');
    for(const player of members){
     let role=player.tacticalRole?aliases[player.tacticalRole]||player.tacticalRole:null;
     if(role&&!selectedRoles.includes(role))throw Error('Unsupported reduced soccer role: '+role);

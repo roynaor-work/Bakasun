@@ -9,7 +9,7 @@ import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-1';
 import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-1';
 import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-1';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
-import {expandSoccerConfig,soccerMatchCards} from './soccer-squad.mjs';
+import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
 import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight} from './soccer-restarts.mjs';
@@ -82,7 +82,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     for (const p of players) {
       const d=direction(p.team),role=config.players.roles.indexOf(p.role);
       p.x=d*aiConfig.kickoffX[role];p.z=role===1?(p.team===0?-1:1)*aiConfig.kickoffZ:role===3?(p.team===0?1:-1)*aiConfig.kickoffZ:0;p.vx=p.vz=0;p.fx=d;p.fz=0;p.hold=0;p.think=aiConfig.initialThink;p.cooldown=aiConfig.initialCooldown;p.sprinting=false;p.sprintTime=p.sprintRest=0;
-      if(p.soccerExtra){p.x=-d*hx*.55;p.z=(p.tacticalRole==='LCB'?-1:1)*hz*.32;}
+      if(p.soccerExtra){const spot=SOCCER_EXTRAS.find(e=>e.tacticalRole===p.tacticalRole)?.kickoff||[-.55,.32];p.x=d*hx*spot[0];p.z=hz*spot[1];}
       if(p.role==='keeper')p.x=-d*(hx-aiConfig.keeperInset);
       p.restartMotion=p.distribution=null;
       p.hands=false;p.autoHeadTime=0;p.diveTime=p.diveCooldown=p.throwTime=p.catchTime=0;p.slideTime=p.recover=p.headerTime=p.kickTime=p.stealTime=p.turnLean=0;p.slideAttempted=p.slideWon=false;
