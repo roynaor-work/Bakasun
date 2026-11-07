@@ -34,3 +34,7 @@ test('v9 stage 1 lasts about 80-130 s for a player holding fire (measured by sim
  const rs=[1,2,3,4,5].map(s=>run(1,s,{press:1}));const avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;
  assert.ok(avg>=80&&avg<=130,`avg ${avg}`);assert.ok(rs.every(r=>r.outcome==='win'));
 });
+test('v9 upgraded stage 1 also lasts 80-130 s (hp scales with equipment strength)',()=>{
+ const profile={equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}},rs=[1,2,3,4,5].map(s=>run(1,s,{press:1,profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;
+ assert.ok(avg>=80&&avg<=130,`avg ${avg}`);
+});
