@@ -12,9 +12,12 @@ export const SPLASH_FLAG='bootVideo'; // ?bootVideo=0 switches the clip off, ?bo
 
 /** Why the clip must not be requested, or '' when it may. */
 export function clipBlocker({win=globalThis.window,search=win?.location?.search||''}={}){
-  const flag=new URLSearchParams(search).get(SPLASH_FLAG);
+  const q=new URLSearchParams(search),flag=q.get(SPLASH_FLAG);
   if(flag==='0')return 'flag';
+  // 07/11/2026: the clip is off by default (it was recorded with software rendering, so it stutters and
+  // loops while the city loads). ?loadClip=1 or ?bootVideo=1 brings it back.
   if(flag==='1')return '';
+  if(q.get('loadClip')!=='1')return 'default-off';
   if(win?.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return 'reduced-motion';
   const c=win?.navigator?.connection;
   if(c?.saveData)return 'save-data';

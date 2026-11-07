@@ -15,7 +15,7 @@ function fakeDoc({hidden=false}={}){
   const splash=mk('div'),root=mk('main');splash.textNode=mk('span');
   return {hidden,splash,root,createElement:mk,querySelector:sel=>sel==='[data-boot-splash]'?splash:sel==='#interface'?root:null};
 }
-function fakeWin({reduced=false,connection,search=''}={}){
+function fakeWin({reduced=false,connection,search='?loadClip=1'}={}){
   const timers=new Map();let n=0;
   return {location:{search},navigator:{connection},matchMedia:()=>({matches:reduced}),
     setTimeout(f,ms){timers.set(++n,{f,ms});return n;},clearTimeout(id){timers.delete(id);},
@@ -31,6 +31,7 @@ test('clipBlocker: reduced motion, save data, 2g and the off flag all keep the c
   assert.equal(clipBlocker({win:fakeWin({connection:{effectiveType:'slow-2g'}})}),'slow-network');
   assert.equal(clipBlocker({win:fakeWin({connection:{effectiveType:'4g'}})}),'');
   assert.equal(clipBlocker({win:fakeWin({search:'?bootVideo=0'})}),'flag');
+  assert.equal(clipBlocker({win:fakeWin({search:''})}),'default-off','the opening clip is off unless ?loadClip=1');
   assert.equal(clipBlocker({win:fakeWin({reduced:true,search:'?bootVideo=1'})}),'');
 });
 
