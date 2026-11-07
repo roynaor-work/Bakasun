@@ -461,7 +461,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     // Everyone gets time to form a receiving/marking shape, without jumping
     // to assigned spots or advancing the live match clock.
     r.organizeSeconds=config.restarts.walkSeconds;
-    for(const p of players)if(p!==owner&&p.id!==s.controlled&&r.targets[p.id])r.organizeSeconds=Math.max(r.organizeSeconds,Math.min(3,distance(p,r.targets[p.id])/config.players.speed+.2));
+    for(const p of players)if(p!==owner&&p.id!==s.controlled&&r.targets[p.id])r.organizeSeconds=Math.max(r.organizeSeconds,Math.min(aiV2?(config.restarts.organizeMaxSeconds??2):3,distance(p,r.targets[p.id])/config.players.speed+.2));
     Object.assign(s.ball,{thrower:null,shot:null,flight:null,x,z,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:owner.id,grace:rules.restartGrace,lastTeam:teamId,lastPlayer:owner.id});
     if(role!=='keeper'&&s.controlled===owner.id)selectPlayer(nearest(0,s.ball,owner.id,true).id);if(role==='keeper')s.controlled=2;s.passTarget=null;s.chargeKind=null;s.actionAim=s.kickAim=s.passAim=null;
     s.charging=false;s.charge=0;event('restart',{restart:type,team:teamId});
