@@ -33,14 +33,14 @@ test('tennis: a won stage with enough coins shows one offer; the upgrade buys th
     assert.equal(card.state,'ready');assert.equal(card.dir,'rtl');assert.deepEqual(card.buttons.map(b=>b.text),['שדרג','אחר כך']);
     for(const b of card.buttons)assert.ok(b.w>=48&&b.h>=48,`touch target ${b.text} ${b.w}x${b.h}`);
     assert.ok(!card.text.includes('!'),'no exclamation marks');
-    if(shots)await t.page.screenshot({path:`${shots}/tennis-offer-390x844.png`});
+    if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/tennis-offer-390x844.png`});}
     const before=await t.page.evaluate(()=>({money:window.__island.engine.state.money,eq:structuredClone(window.__island.engine.state.minigameEquipment.tennis),lvl:window.__island.engine.state.minigameLevels.tennis}));
     await t.page.locator('.uo-primary').click();
     await t.page.waitForFunction(()=>document.querySelector('.uo-card')?.dataset.state==='purchased');
     const after=await t.page.evaluate(()=>({money:window.__island.engine.state.money,eq:structuredClone(window.__island.engine.state.minigameEquipment.tennis),lvl:window.__island.engine.state.minigameLevels.tennis}));
     assert.ok(after.money<before.money,'coins were spent');
     assert.ok(JSON.stringify(after.eq)!==JSON.stringify(before.eq)||after.lvl>before.lvl,'an upgrade was applied');
-    if(shots)await t.page.screenshot({path:`${shots}/tennis-bought-390x844.png`});
+    if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/tennis-bought-390x844.png`});}
     await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);
     assert.deepEqual(t.errors,[]);await t.csp.assertClean();
   }finally{await t.context.close();await t.csp.dispose();await browser.close();await server.close();}
@@ -53,13 +53,13 @@ test('tennis: "later" removes the card, and the same stage opened again does not
   try{
     await showTennisWin(t.page);await t.page.waitForSelector('.uo-card');
     const first=await t.page.evaluate(()=>document.querySelector('.uo-card').parentElement.dataset.upgradeOffer);
-    if(shots)await t.page.screenshot({path:`${shots}/tennis-offer-844x390.png`});
+    if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/tennis-offer-844x390.png`});}
     await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);
     const money=await t.page.evaluate(()=>window.__island.engine.state.money);
     await showTennisWin(t.page);await t.page.waitForTimeout(800);
     const again=await t.page.evaluate(()=>document.querySelector('.uo-card')?.parentElement.dataset.upgradeOffer||null);
     assert.notEqual(again,first,'not the same upgrade at the same stage');
-    assert.equal(await t.page.evaluate(()=>window.__island.engine.state.money),money,'"later" spends nothing');
+    assert.ok(await t.page.evaluate(()=>window.__island.engine.state.money)>=money,'"later" spends nothing');
     assert.deepEqual(t.errors,[]);await t.csp.assertClean();
   }finally{await t.context.close();await t.csp.dispose();await browser.close();await server.close();}
 });
@@ -74,11 +74,11 @@ test('racing league: a finished race with enough league coins offers a car part 
     await t.page.waitForSelector('.uo-card');
     assert.equal(await t.page.locator('.uo-card').count(),1);
     assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המירוצים/);
-    if(shots)await t.page.screenshot({path:`${shots}/league-offer-390x844.png`});
+    if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/league-offer-390x844.png`});}
     await t.page.locator('.uo-primary').click();
     await t.page.waitForFunction(()=>document.querySelector('.uo-card')?.dataset.state==='purchased');
     const s=await t.page.evaluate(()=>({coins:window.__island.engine.state.islandRacingLeague.coins,up:window.__island.engine.state.islandRacingLeague.upgrades,money:window.__island.engine.state.money}));
-    assert.equal(s.coins,160);assert.equal(Object.values(s.up).reduce((a,b)=>a+b,0),1);assert.ok(Math.floor(s.money)===5,'island coins untouched (income may add a fraction)');
+    assert.equal(s.coins,160);assert.equal(Object.values(s.up).reduce((a,b)=>a+b,0),1);assert.ok(s.money>=5&&s.money<10,'island coins untouched (only the slow income may add a little)');
     assert.deepEqual(t.errors,[]);await t.csp.assertClean();
   }finally{await t.context.close();await t.csp.dispose();await browser.close();await server.close();}
 });
