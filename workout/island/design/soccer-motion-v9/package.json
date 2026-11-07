@@ -1,0 +1,14 @@
+{
+  "name": "@bakasun/soccer-motion-v9",
+  "version": "9.0.0",
+  "private": true,
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSES.md",
+  "exports": "./runtime/library.mjs",
+  "scripts": {
+    "build": "node source/build.mjs",
+    "capture": "node verification/render-sheets.mjs",
+    "test": "node --test --test-reporter=tap verification/*.test.mjs",
+    "report": "node source/report.mjs"
+  }
+}

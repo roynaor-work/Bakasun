@@ -1,0 +1,5634 @@
+{
+  "browserVersion": "156.0.8078.79",
+  "inputSHA256": {
+    "preview.html": "44f301d6d03378d01399d3cdc9705ab3642afa5ae275ce888846d4348de60dd7",
+    "preview.css": "ecad61d09fbffd83815cbcb7de734af409d1a0179bbbea4a6abf97bcaf8ba4a6",
+    "preview.mjs": "1bcf11f060b47749d5c363bdc4fa1c386a3384dc7f63a5ca46aec22c7d67e58e",
+    "runtime/catalog.mjs": "299d1e897a4d7af1a5a6b4caf738acd14189091c91492761b6db256cdc31db35",
+    "runtime/library.mjs": "e53aaff29a16d573ff191987deca802ab7b7802db62fc2cc96b49974a91d4487",
+    "runtime/state-machine.mjs": "22dd782b54fa681af8cb13c2726dfe2dd6a5b44c85eeead411815674a4aa5582",
+    "runtime/clips/idle_relaxed.glb": "ecaba993fcc541ce66b1d29830c8acd7d18984ffb6a794191f27e2345d0d2db1",
+    "runtime/clips/idle_scan.glb": "459186486b5c9bda11763d0def3d7accb39adc876ea71e9d30ebc7df5eb8ab36",
+    "runtime/clips/idle_weight_shift.glb": "728f3be63542675bfd347688385745de81d5a432582b51b9d460a20dd900cdba",
+    "runtime/clips/walk.glb": "537aea3907578005a6485e2116420668bad4fc64f8cfd32b63bd5f9656eec64d",
+    "runtime/clips/jog.glb": "7db1978cf25b8fc2d9c88e75cd5a78e5c214101e36a8b1c1b5dbb3cede236cb3",
+    "runtime/clips/run.glb": "acc2ac87de5070c79992ea1d662e7a59704197fdd84e4b0c281febca99a94c46",
+    "runtime/clips/sprint.glb": "63a4aa92da24b0175e8b789015e31c967d605de4e59e05b3748855ba040a89f3",
+    "runtime/clips/run_backward.glb": "7dd1b031e54ea0fed82d4ae99094d69889559a0c2c828debab87069d5fdaad61",
+    "runtime/clips/run_lateral.glb": "908a6eab3bb093c259d917ee35df5c27c6e442822974d7ddd2e0f45b45291544",
+    "runtime/clips/run_brake.glb": "ff3021599d1234059e888cc79d2dae4de0b2501b19d01738860a4cee12a94d3c",
+    "runtime/clips/turn_in_place.glb": "412c57c1dd16832f4d5c6169b611ac20ec0a61716306b345883d71af416c334f",
+    "runtime/clips/cut_45.glb": "a3bb87911e51fe054f86671f51f5fd5dc1c20666e6cdd2ae1ac591ad7bbf30cf",
+    "runtime/clips/cut_90.glb": "293bf30c010bc8a4e41c223534cdf7dde4b67930469347d010112373a297c13d",
+    "runtime/clips/cut_135.glb": "b2b72aa86d632aeb27d68834e8e4f1e912c9b27a7d169cea5257d6ce9aa70c62",
+    "runtime/clips/cut_180.glb": "12980e343be38bdb716fcdacd3d89e2341ed84d8d1bbff5ba80218eefa6686a4",
+    "runtime/clips/first_touch_chest_standing.glb": "11939d1c1f1a24517f0cd066d0d1a4d3689b25393596703e00b5ca4155a57b9b",
+    "runtime/clips/first_touch_chest_running.glb": "ee90b4dad48ff240f3d2e16923ecac2b2879b87f535dc5ea45ff87d17bbc4425",
+    "runtime/clips/first_touch_thigh_standing.glb": "8c657bf32ec6e878ca19a9efded000f2f9d28b7948687c98a53716917c07f9be",
+    "runtime/clips/first_touch_thigh_running.glb": "f9f4bac57b4d6d040e94913ea0c1ddd3072baa3b7c52930315ab48efcfdc7dd7",
+    "runtime/clips/first_touch_inside_standing.glb": "89e844f739fd8036667bbf573171a13e941eabb9174f8ef05e5dd850ab544a06",
+    "runtime/clips/first_touch_inside_running.glb": "7e4b8c32dcbd63662275eb3cba46395ba1121fe02d3f87dd17e62562265292d3",
+    "runtime/clips/first_touch_outside_standing.glb": "c043643eb2b5c26e0e946e71e9ec8b1ffdcedd00f0c7feb528e7ed58f7291810",
+    "runtime/clips/first_touch_outside_running.glb": "6cd9a50fbab416c8c9409cbdf05040305c04679466317f3459554795be00b93b",
+    "runtime/clips/dribble_fast.glb": "d831d4a3a7c42672467d775063b068919191977e0312a706ba6024d818352493",
+    "runtime/clips/dribble_cut.glb": "2a94a334faf510e9ed4350d0b4162d6d5d40d495e3806a12d271a8c75f1abefe",
+    "runtime/clips/body_feint.glb": "b35890d28c84b3d242d76c36a28636d0228908b1583b9a31265d0fd8672265b3",
+    "runtime/clips/spin_kick.glb": "18359c4beb8b430b6525d0a36afe69159bd668a4a9cd77c040fca2fcfd31680e",
+    "runtime/clips/volley_kick.glb": "f73aa3c7fc2eecf1efe39757a044d3d41eb1640c875ac36f7d635e28172a0e9c",
+    "runtime/clips/long_shot.glb": "03cbd60a93c7ef31c5a55d321ac3eb47a4ba98e4941e451a08e90914186449f5",
+    "runtime/clips/through_pass.glb": "7424ed7c8114227dc245610c9ec9a1e697f63de4f33b9899b8dfae7357c22113",
+    "runtime/clips/running_pass.glb": "cf8b0743175b8a6919d347f6bced13674368cfe25a2af8ee2684bf9585f72e07",
+    "runtime/clips/jump_header.glb": "d4dc91076ebce82844c68d69bef09eeaadace6e6d1957358956f2fa7e3247236",
+    "runtime/clips/slide_miss.glb": "66ee8090e1d5e0a24971703294f4aeb6b19f19978546b05ae9a47b98f4010dce",
+    "runtime/clips/quick_getup.glb": "6f1556bc3f2b8092203db4717649a93b39f4d4321eaf14a0350a624093f8a814",
+    "runtime/clips/goalkeeper_ready.glb": "e4595f4d8e9431f8995b197affc640f084abe6f30aa8d29e39f587fa24379ec9",
+    "runtime/clips/goalkeeper_roll.glb": "1297e4047168c1ec808a43af723153a33c28b212a1a5a2a5c7099f9ea8e62a14",
+    "runtime/clips/goalkeeper_short_pass.glb": "c44ee45bd7394488674cd2fe60ae9ffdb95d30250401c05b78894a1d57e91881",
+    "runtime/clips/goalkeeper_overarm_throw.glb": "67559062d22870d1871da2163b4b9bc02c09c0c260bf2fd5957abd8df5421b49",
+    "runtime/clips/goalkeeper_catch_high.glb": "e34a93d31b575c38d21e12d26b86ef283e3b11561697c8e2ad310e6d3c0680d9",
+    "runtime/clips/goalkeeper_punch.glb": "8e6c721d0204318b8f8e292373a80f56108763c24ffcde63438e79c9cbefbc34",
+    "runtime/clips/goalkeeper_catch_low.glb": "672deee0976b6817c00d47a72b9feea4abc91c8b0145a0c1cd2c351b2b64aadc",
+    "runtime/clips/goalkeeper_getup.glb": "5afcfa3befc71e834b1f900d68d59cd3ea2a32769973d8b93ee4f343d2351af2",
+    "runtime/clips/celebrate_hop.glb": "2af8688e7c3d1592edef42adb7c0a08eb99e0bc3f75aff4533baa6d12a7dea77",
+    "runtime/clips/celebrate_clap.glb": "f9bfa177f75c0af416ae2965c806f0bf259b22e88512a1e22618a61999b56b32",
+    "runtime/clips/celebrate_pump.glb": "a53d1ff68cb20859ad8ad5b1b593ef13875a9cfc87d294bbf5e8b11c5c807d65",
+    "runtime/clips/celebrate_turn.glb": "2f329257f1baf21aae22a89b96c2230e975ce66696a81e36cbe512ebb80f0868",
+    "runtime/clips/disappointed.glb": "d45ac0e613650a6ca74c31481e67e9aca9e865bb9f10a43bf587d2d9532004b1",
+    "runtime/clips/throw_in.glb": "fa1826d6bc5360c66751ca0d18e0cf2abf6bc9a580793ecd119395522ee5ff50"
+  },
+  "format": "soccer-motion-v9-browser-evidence-1",
+  "renderedWith": "Chromium WebGL + local THREE.GLTFLoader + LocalDRACOLoader + original embedded textures",
+  "allClipsLoaded": true,
+  "clips": [
+    {
+      "id": "idle_relaxed"
+    },
+    {
+      "id": "idle_scan"
+    },
+    {
+      "id": "idle_weight_shift"
+    },
+    {
+      "id": "walk"
+    },
+    {
+      "id": "jog"
+    },
+    {
+      "id": "run"
+    },
+    {
+      "id": "sprint"
+    },
+    {
+      "id": "run_backward"
+    },
+    {
+      "id": "run_lateral"
+    },
+    {
+      "id": "run_brake"
+    },
+    {
+      "id": "turn_in_place"
+    },
+    {
+      "id": "cut_45"
+    },
+    {
+      "id": "cut_90"
+    },
+    {
+      "id": "cut_135"
+    },
+    {
+      "id": "cut_180"
+    },
+    {
+      "id": "first_touch_chest_standing"
+    },
+    {
+      "id": "first_touch_chest_running"
+    },
+    {
+      "id": "first_touch_thigh_standing"
+    },
+    {
+      "id": "first_touch_thigh_running"
+    },
+    {
+      "id": "first_touch_inside_standing"
+    },
+    {
+      "id": "first_touch_inside_running"
+    },
+    {
+      "id": "first_touch_outside_standing"
+    },
+    {
+      "id": "first_touch_outside_running"
+    },
+    {
+      "id": "dribble_fast"
+    },
+    {
+      "id": "dribble_cut"
+    },
+    {
+      "id": "body_feint"
+    },
+    {
+      "id": "spin_kick"
+    },
+    {
+      "id": "volley_kick"
+    },
+    {
+      "id": "long_shot"
+    },
+    {
+      "id": "through_pass"
+    },
+    {
+      "id": "running_pass"
+    },
+    {
+      "id": "jump_header"
+    },
+    {
+      "id": "slide_miss"
+    },
+    {
+      "id": "quick_getup"
+    },
+    {
+      "id": "goalkeeper_ready"
+    },
+    {
+      "id": "goalkeeper_roll"
+    },
+    {
+      "id": "goalkeeper_short_pass"
+    },
+    {
+      "id": "goalkeeper_overarm_throw"
+    },
+    {
+      "id": "goalkeeper_catch_high"
+    },
+    {
+      "id": "goalkeeper_punch"
+    },
+    {
+      "id": "goalkeeper_catch_low"
+    },
+    {
+      "id": "goalkeeper_getup"
+    },
+    {
+      "id": "celebrate_hop"
+    },
+    {
+      "id": "celebrate_clap"
+    },
+    {
+      "id": "celebrate_pump"
+    },
+    {
+      "id": "celebrate_turn"
+    },
+    {
+      "id": "disappointed"
+    },
+    {
+      "id": "throw_in"
+    }
+  ],
+  "clipCount": 48,
+  "contactSheetDimensions": [
+    844,
+    390
+  ],
+  "records": [
+    {
+      "id": "idle_relaxed",
+      "file": "contact-sheets/idle_relaxed.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "ecaba993fcc541ce66b1d29830c8acd7d18984ffb6a794191f27e2345d0d2db1",
+      "sheetSHA256": "4b4ec1cdbe5c600237e341227accb87fc7a2b3a7b40addd9796eb2f73b4fc0df",
+      "times": [
+        0,
+        0.792,
+        1.6320000000000001,
+        2.4
+      ],
+      "samples": [
+        {
+          "id": "idle_relaxed",
+          "time": 0,
+          "animation": "idle_relaxed",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.37504348895706,
+            "maxX": 323.3301440529093,
+            "minY": 57.60587329072646,
+            "maxY": 613.7005187169294,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1b7a787546660ff1c0face5d93c97e01dd27b0cd1585ef68afaa177112e90d30",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_relaxed",
+          "time": 0.792,
+          "animation": "idle_relaxed",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.5927665280197,
+            "maxX": 323.2607192692671,
+            "minY": 56.65045146127609,
+            "maxY": 613.6732608454159,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e9ae713091d60c983713149de1acb477742bed5786c3eb7ffe65ded5b6fe72d1",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_relaxed",
+          "time": 1.6320000000000001,
+          "animation": "idle_relaxed",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.15616734332919,
+            "maxX": 323.39842354134385,
+            "minY": 58.64813219829398,
+            "maxY": 613.727940597536,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "48c82f33b5621be43f2f31e4e5f05b218002ece472a0bf29666bbf632f646f7d",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_relaxed",
+          "time": 2.4,
+          "animation": "idle_relaxed",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.37504342782219,
+            "maxX": 323.33014407218565,
+            "minY": 57.60587357028919,
+            "maxY": 613.7005187247925,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1b7a787546660ff1c0face5d93c97e01dd27b0cd1585ef68afaa177112e90d30",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "idle_relaxed",
+        "animation": "idle_relaxed",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.2861571271029951,
+          0.005127984519385531,
+          -0.15530046096127792
+        ],
+        "max": [
+          0.2887015898012982,
+          1.6739290774957707,
+          0.25099904558658437
+        ]
+      }
+    },
+    {
+      "id": "idle_scan",
+      "file": "contact-sheets/idle_scan.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "459186486b5c9bda11763d0def3d7accb39adc876ea71e9d30ebc7df5eb8ab36",
+      "sheetSHA256": "52a5d02764f7695d845c9bb7c0c29b7be8274c6faa39c5bcba6d095e4a6446d4",
+      "times": [
+        0,
+        1.056,
+        2.176,
+        3.2
+      ],
+      "samples": [
+        {
+          "id": "idle_scan",
+          "time": 0,
+          "animation": "idle_scan",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.18360163474978,
+            "maxX": 323.35910352159385,
+            "minY": 58.060797483819336,
+            "maxY": 613.5119788075331,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "38d3fd1168c2fe0975b8bd473b6db1eb854ab043928d4c6e1e5a008693f4af5c",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_scan",
+          "time": 1.056,
+          "animation": "idle_scan",
+          "meshes": 10,
+          "framing": {
+            "minX": 102.31914790163708,
+            "maxX": 324.731187632483,
+            "minY": 56.91761092169847,
+            "maxY": 612.9101308657304,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8a5202ac88689f60b941530d58656d45dd959af8f294a00fe26c4797e97cfea7",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_scan",
+          "time": 2.176,
+          "animation": "idle_scan",
+          "meshes": 10,
+          "framing": {
+            "minX": 98.06633646245447,
+            "maxX": 321.8329054807594,
+            "minY": 59.273400241308835,
+            "maxY": 614.1111600580962,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "9ca90062223ba33f6571e7fa4df543fd6627952fe5e668f5c9a555d690f18915",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_scan",
+          "time": 3.2,
+          "animation": "idle_scan",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.1836014112552,
+            "maxX": 323.35910336942567,
+            "minY": 58.06079760767354,
+            "maxY": 613.5119788710365,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "38d3fd1168c2fe0975b8bd473b6db1eb854ab043928d4c6e1e5a008693f4af5c",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "idle_scan",
+        "animation": "idle_scan",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.29189858141744074,
+          0.005127978160154371,
+          -0.14137842542705137
+        ],
+        "max": [
+          0.29750308361197486,
+          1.6656663971425871,
+          0.2598515417210072
+        ]
+      }
+    },
+    {
+      "id": "idle_weight_shift",
+      "file": "contact-sheets/idle_weight_shift.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "728f3be63542675bfd347688385745de81d5a432582b51b9d460a20dd900cdba",
+      "sheetSHA256": "f84a3c6c511e23fccd7711f7f1bb89251ea88ecd8a91f70150b2b05afe6766a7",
+      "times": [
+        0,
+        0.9239999999999999,
+        1.904,
+        2.8
+      ],
+      "samples": [
+        {
+          "id": "idle_weight_shift",
+          "time": 0,
+          "animation": "idle_weight_shift",
+          "meshes": 10,
+          "framing": {
+            "minX": 99.19872914249973,
+            "maxX": 324.45396494396084,
+            "minY": 57.83314498691228,
+            "maxY": 614.124554533909,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7d0abca0c233e9c4031ba7a4ee0b2e675b281a3735880bfd6aa8ec77b3464ad1",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_weight_shift",
+          "time": 0.9239999999999999,
+          "animation": "idle_weight_shift",
+          "meshes": 10,
+          "framing": {
+            "minX": 110.36479445614643,
+            "maxX": 331.98970135893524,
+            "minY": 60.12474523484637,
+            "maxY": 611.1623633345673,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6cdbdf703feda830ef4867e946377ce090db90a30bc660999ac9887e55ec3b8c",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_weight_shift",
+          "time": 1.904,
+          "animation": "idle_weight_shift",
+          "meshes": 10,
+          "framing": {
+            "minX": 89.93126963197713,
+            "maxX": 314.85290445341025,
+            "minY": 56.1251380439524,
+            "maxY": 616.3900440258672,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "826404f479fcbb260cf117cc69d2414781ec6c21bfaebf54bd086de5e756cc85",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "idle_weight_shift",
+          "time": 2.8,
+          "animation": "idle_weight_shift",
+          "meshes": 10,
+          "framing": {
+            "minX": 99.19872914249973,
+            "maxX": 324.45396494396084,
+            "minY": 57.83314498691228,
+            "maxY": 614.124554533909,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7d0abca0c233e9c4031ba7a4ee0b2e675b281a3735880bfd6aa8ec77b3464ad1",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "idle_weight_shift",
+        "animation": "idle_weight_shift",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3228918187786546,
+          0.005126042792557568,
+          -0.13482504138654236
+        ],
+        "max": [
+          0.3198439877662146,
+          1.652765803798888,
+          0.2737549562523267
+        ]
+      }
+    },
+    {
+      "id": "walk",
+      "file": "contact-sheets/walk.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "537aea3907578005a6485e2116420668bad4fc64f8cfd32b63bd5f9656eec64d",
+      "sheetSHA256": "60c379dcb42918d38c297ae0ee91a8b7209bf585e7a36f01764300ee72860589",
+      "times": [
+        0,
+        0.396,
+        0.8160000000000001,
+        1.2
+      ],
+      "samples": [
+        {
+          "id": "walk",
+          "time": 0,
+          "animation": "walk",
+          "meshes": 10,
+          "framing": {
+            "minX": 92.5139581172168,
+            "maxX": 373.61545236408796,
+            "minY": 85.38892984979769,
+            "maxY": 613.8540428495437,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7bc95f293ee9a418c59a98a037d04bba02c3b3424cee823eedbd6ef1c936c542",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "walk",
+          "time": 0.396,
+          "animation": "walk",
+          "meshes": 9,
+          "framing": {
+            "minX": 102.42580293124595,
+            "maxX": 318.9956217551727,
+            "minY": 87.10924520353886,
+            "maxY": 589.9304252649198,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "97a564b0b3c98f40516207483c54053914286751f9cfc8966c52428e240e81a0",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "walk",
+          "time": 0.8160000000000001,
+          "animation": "walk",
+          "meshes": 9,
+          "framing": {
+            "minX": 77.45056280438189,
+            "maxX": 323.499873424248,
+            "minY": 93.03212313061773,
+            "maxY": 591.8788145661617,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "177c35dcb3fc229be0d62fe0b66f462183adf6e6812f9d93c1b6e966bc540ed8",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "walk",
+          "time": 1.2,
+          "animation": "walk",
+          "meshes": 9,
+          "framing": {
+            "minX": 92.51396377083042,
+            "maxX": 373.61545854881945,
+            "minY": 85.38892697297,
+            "maxY": 613.8540470599597,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "a054d88f98bd87337df12c91b0844cd14b9fdbb89886ecc90c91e3cbf01a27a6",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "walk",
+        "animation": "walk",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.301851165606689,
+          0.004678281400977601,
+          -0.4521040679056313
+        ],
+        "max": [
+          0.3011552268096064,
+          1.6374154086698902,
+          0.6014035358695028
+        ]
+      }
+    },
+    {
+      "id": "jog",
+      "file": "contact-sheets/jog.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "7db1978cf25b8fc2d9c88e75cd5a78e5c214101e36a8b1c1b5dbb3cede236cb3",
+      "sheetSHA256": "4dc0f67751b2401118b8628c2af11fb2b7624314f1e8936a790b9008f5672cf6",
+      "times": [
+        0,
+        0.242,
+        0.49866666666666665,
+        0.7333333333333333
+      ],
+      "samples": [
+        {
+          "id": "jog",
+          "time": 0,
+          "animation": "jog",
+          "meshes": 9,
+          "framing": {
+            "minX": 94.1834139918287,
+            "maxX": 368.3851390893216,
+            "minY": 90.58397026667475,
+            "maxY": 607.0013862882728,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e020bbca96e2bc55980978dc242cef52974d114c463b9d3b1b559851ea145891",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "jog",
+          "time": 0.242,
+          "animation": "jog",
+          "meshes": 8,
+          "framing": {
+            "minX": 79.10176942637322,
+            "maxX": 339.6198524721982,
+            "minY": 85.1161749893507,
+            "maxY": 601.3879155067964,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ca62617df3cf36550eabac4b31fbdefd52ca30c9bcc1a271b3ca2e83a59ced05",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "jog",
+          "time": 0.49866666666666665,
+          "animation": "jog",
+          "meshes": 9,
+          "framing": {
+            "minX": 98.31408356535758,
+            "maxX": 320.55315110506103,
+            "minY": 99.78901436312587,
+            "maxY": 591.0318687828095,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "68e971855045f0b0dbfb2dfb5f76428bc49395331cf8c164e43e5bea1b2599fe",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "jog",
+          "time": 0.7333333333333333,
+          "animation": "jog",
+          "meshes": 8,
+          "framing": {
+            "minX": 94.18341141648783,
+            "maxX": 368.38514070827983,
+            "minY": 90.58396784447277,
+            "maxY": 607.0013869772712,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e54e4bd11767210c447786e0e15f0dd22fb1d857a5628e27b1d55c2ff0b8242d",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "jog",
+        "animation": "jog",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.33615689719942815,
+          0.002088800737174948,
+          -0.40406536159338047
+        ],
+        "max": [
+          0.3349076262096089,
+          1.6518280403682701,
+          0.5550509410841775
+        ]
+      }
+    },
+    {
+      "id": "run",
+      "file": "contact-sheets/run.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "acc2ac87de5070c79992ea1d662e7a59704197fdd84e4b0c281febca99a94c46",
+      "sheetSHA256": "84a7763d534818067d05922bdbe240f8052838c39f7b450f8e9c2e9f584bff4d",
+      "times": [
+        0,
+        0.198,
+        0.40800000000000003,
+        0.6
+      ],
+      "samples": [
+        {
+          "id": "run",
+          "time": 0,
+          "animation": "run",
+          "meshes": 9,
+          "framing": {
+            "minX": 104.60453108708731,
+            "maxX": 373.69219274755824,
+            "minY": 91.85123219203382,
+            "maxY": 606.0958283220929,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2394924d8e07b0a7d9c6b55e5711a5bce2246fdf12040d4a40718a1929ca6fcc",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run",
+          "time": 0.198,
+          "animation": "run",
+          "meshes": 8,
+          "framing": {
+            "minX": 76.63358311326412,
+            "maxX": 343.11707207234394,
+            "minY": 84.4945477318955,
+            "maxY": 598.1320197258699,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ad793f0b992f8f03bd58ef7cf576a28a29aba968751c6138a88460f8a13eb7fd",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "run",
+          "time": 0.40800000000000003,
+          "animation": "run",
+          "meshes": 9,
+          "framing": {
+            "minX": 84.11592270473635,
+            "maxX": 326.8161021299863,
+            "minY": 100.78065505988457,
+            "maxY": 596.7905729612044,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c69225739fa1050979364744d171b077b8050d7db8b9242498b91e756d934b87",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run",
+          "time": 0.6,
+          "animation": "run",
+          "meshes": 8,
+          "framing": {
+            "minX": 104.60452581820572,
+            "maxX": 373.69219280454473,
+            "minY": 91.85122737157057,
+            "maxY": 606.0958284463553,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d8ed24ea079dc2ce0f83fe609a03095b151921c300ab6958a4933a031557618c",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "run",
+        "animation": "run",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3703551517710156,
+          -0.00018651387987746269,
+          -0.39618791236543305
+        ],
+        "max": [
+          0.3690241014357588,
+          1.649076984973829,
+          0.5447404431300944
+        ]
+      }
+    },
+    {
+      "id": "sprint",
+      "file": "contact-sheets/sprint.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "63a4aa92da24b0175e8b789015e31c967d605de4e59e05b3748855ba040a89f3",
+      "sheetSHA256": "4c1bc95b6313a50a9636b60d3da62b03dae3b20f9a31f86060c7e1b8b546fd19",
+      "times": [
+        0,
+        0.17600000000000002,
+        0.3626666666666667,
+        0.5333333333333333
+      ],
+      "samples": [
+        {
+          "id": "sprint",
+          "time": 0,
+          "animation": "sprint",
+          "meshes": 9,
+          "framing": {
+            "minX": 105.6517067056159,
+            "maxX": 386.071261198634,
+            "minY": 103.22946790963465,
+            "maxY": 594.1615810174014,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0f8ba2917d0af7f4c634b801a72c77be0b686c3359538489cbf00219eb5e8ba8",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "sprint",
+          "time": 0.17600000000000002,
+          "animation": "sprint",
+          "meshes": 8,
+          "framing": {
+            "minX": 73.41809636586991,
+            "maxX": 345.8305201736168,
+            "minY": 98.48189042068833,
+            "maxY": 580.3692889258703,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "82f175293d98653a5468ca35e66a432dc91954499ce9c64f82356fd5b8160013",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "sprint",
+          "time": 0.3626666666666667,
+          "animation": "sprint",
+          "meshes": 9,
+          "framing": {
+            "minX": 65.8009015444599,
+            "maxX": 326.75154025309496,
+            "minY": 110.05187370701849,
+            "maxY": 584.6148280681165,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0e24154697aff81fc1b5362c8694469d4f0b75fb3086ad5978a1967f9591ec68",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "sprint",
+          "time": 0.5333333333333333,
+          "animation": "sprint",
+          "meshes": 8,
+          "framing": {
+            "minX": 105.65171203280295,
+            "maxX": 386.07126516119126,
+            "minY": 103.22946373458778,
+            "maxY": 594.1615808985888,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ce0775039e0d1e9419caf6472bcd1c60cfc73b2a5c281b39f0ab2005cd8a64b5",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "sprint",
+        "animation": "sprint",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3915135764838278,
+          -0.010854877792325,
+          -0.45727761934703404
+        ],
+        "max": [
+          0.3933159288530024,
+          1.6215188777781462,
+          0.5996628950375043
+        ]
+      }
+    },
+    {
+      "id": "run_backward",
+      "file": "contact-sheets/run_backward.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "7dd1b031e54ea0fed82d4ae99094d69889559a0c2c828debab87069d5fdaad61",
+      "sheetSHA256": "348050040e33ffc1e298aba455abbe5b07fe016585282fb6b7e527b298d6217a",
+      "times": [
+        0,
+        0.264,
+        0.544,
+        0.8
+      ],
+      "samples": [
+        {
+          "id": "run_backward",
+          "time": 0,
+          "animation": "run_backward",
+          "meshes": 9,
+          "framing": {
+            "minX": 88.81107745557559,
+            "maxX": 347.00456834266066,
+            "minY": 91.37633366661,
+            "maxY": 599.9120737262227,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "4a85c3d3f318e3c36482747960d421509baf254eb5a1a524167a1406cc300dc9",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_backward",
+          "time": 0.264,
+          "animation": "run_backward",
+          "meshes": 9,
+          "framing": {
+            "minX": 90.34196916770325,
+            "maxX": 349.6178830775082,
+            "minY": 83.90847735376951,
+            "maxY": 607.3076233342382,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6766d2d96d833fc3ac8b41ff561801f158900ee394b6b6be87fa1cedf571cfcf",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_backward",
+          "time": 0.544,
+          "animation": "run_backward",
+          "meshes": 9,
+          "framing": {
+            "minX": 104.49929216052239,
+            "maxX": 313.32272550260393,
+            "minY": 99.15993580379659,
+            "maxY": 586.9693155736778,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "90a1dc30c62da1187f3f95f3407ddeff3e154b6be8168ab3683eb2da53bc3384",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_backward",
+          "time": 0.8,
+          "animation": "run_backward",
+          "meshes": 8,
+          "framing": {
+            "minX": 88.81107615565855,
+            "maxX": 347.0045713405,
+            "minY": 91.37633203030445,
+            "maxY": 599.9120757219408,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "702bceb56ee9342cb8246327275e68de3de962dda4bf3c22e94fe028c3854da9",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "run_backward",
+        "animation": "run_backward",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.29955220473295074,
+          0.005127980601579141,
+          -0.3974213275098081
+        ],
+        "max": [
+          0.29887315630536043,
+          1.654763111241064,
+          0.5481536210128333
+        ]
+      }
+    },
+    {
+      "id": "run_lateral",
+      "file": "contact-sheets/run_lateral.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "908a6eab3bb093c259d917ee35df5c27c6e442822974d7ddd2e0f45b45291544",
+      "sheetSHA256": "f4e8a45d171bc11d7ba0d62cffc0214f1a004d669eef173976065399536d61e1",
+      "times": [
+        0,
+        0.264,
+        0.544,
+        0.8
+      ],
+      "samples": [
+        {
+          "id": "run_lateral",
+          "time": 0,
+          "animation": "run_lateral",
+          "meshes": 9,
+          "framing": {
+            "minX": 64.56674132929855,
+            "maxX": 382.17247086390785,
+            "minY": 75.94954150655373,
+            "maxY": 617.5727531521148,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "30a514dab4878d82d9a60e61f17d749c412fa4efe58cfdbe6b570ab5de12c07c",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_lateral",
+          "time": 0.264,
+          "animation": "run_lateral",
+          "meshes": 8,
+          "framing": {
+            "minX": 93.30576225378537,
+            "maxX": 324.43359965877374,
+            "minY": 72.36850797728047,
+            "maxY": 604.0203869032925,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1bbfee5565827cb6ce340eb6bcd48175e645baa30971351c02461693abd91579",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "run_lateral",
+          "time": 0.544,
+          "animation": "run_lateral",
+          "meshes": 9,
+          "framing": {
+            "minX": 81.67971397126637,
+            "maxX": 335.4103367812977,
+            "minY": 83.90595173308968,
+            "maxY": 608.8754508493498,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5a96eb0c9359d819644f4bf7c535ea1cda33698f02634979ec29191e5d885855",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_lateral",
+          "time": 0.8,
+          "animation": "run_lateral",
+          "meshes": 8,
+          "framing": {
+            "minX": 64.5667379238684,
+            "maxX": 382.1724731460919,
+            "minY": 75.9495398882396,
+            "maxY": 617.5727538815052,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5b1413975894d5264ba86d7a2bc94e938d0fee551c48c71a8f0ebf49a7882dbd",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "run_lateral",
+        "animation": "run_lateral",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.48494207492443153,
+          0.005127975245947578,
+          -0.23941381697975034
+        ],
+        "max": [
+          0.4849573550546642,
+          1.628126677201439,
+          0.38012910779710896
+        ]
+      }
+    },
+    {
+      "id": "run_brake",
+      "file": "contact-sheets/run_brake.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "ff3021599d1234059e888cc79d2dae4de0b2501b19d01738860a4cee12a94d3c",
+      "sheetSHA256": "bb7c72926e2512ffcc37035003a716ec99ca72fb5446c8f3e8a24b1565da3071",
+      "times": [
+        0,
+        0.396,
+        0.8160000000000001,
+        1.2
+      ],
+      "samples": [
+        {
+          "id": "run_brake",
+          "time": 0,
+          "animation": "run_brake",
+          "meshes": 9,
+          "framing": {
+            "minX": 102.4354709350019,
+            "maxX": 371.01305748617006,
+            "minY": 97.4285541415276,
+            "maxY": 610.678625538212,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "9204df8c234ac036988fc3c9a5373535a41bd943458249179d2000fe397939ce",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_brake",
+          "time": 0.396,
+          "animation": "run_brake",
+          "meshes": 9,
+          "framing": {
+            "minX": 95.43335628480408,
+            "maxX": 314.88145443079975,
+            "minY": 116.0074442656003,
+            "maxY": 592.0279063979561,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8e4c0c346a9e4081b9ad2abb1f13c763d432df3e1cf69559df4e70f8df6592f2",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "run_brake",
+          "time": 0.8160000000000001,
+          "animation": "run_brake",
+          "meshes": 10,
+          "framing": {
+            "minX": 112.52254233803802,
+            "maxX": 316.72704823032046,
+            "minY": 103.02303607121907,
+            "maxY": 592.5704100688783,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e5900983ee016f530e7d019c6723c83098bdccd4153ef973db49c2ec4f682240",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "run_brake",
+          "time": 1.2,
+          "animation": "run_brake",
+          "meshes": 10,
+          "framing": {
+            "minX": 117.13775062024351,
+            "maxX": 318.11020101335623,
+            "minY": 84.69010848556273,
+            "maxY": 592.9804631383839,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "3e8b2d7a16b6e6524456b4c22b09d8708c16e44fca7778ed026a0a2302a01b4b",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "run_brake",
+        "animation": "run_brake",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.2613717391117535,
+          -0.013344774379283615,
+          -0.5604539657757357
+        ],
+        "max": [
+          0.35471401336419567,
+          1.6708324805266508,
+          0.5859989905350728
+        ]
+      }
+    },
+    {
+      "id": "turn_in_place",
+      "file": "contact-sheets/turn_in_place.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "412c57c1dd16832f4d5c6169b611ac20ec0a61716306b345883d71af416c334f",
+      "sheetSHA256": "47657a4f79a506d199a96fdf6bd0b30f98016a291f8b35395f12bc9d1f782eaa",
+      "times": [
+        0,
+        0.528,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "turn_in_place",
+          "time": 0,
+          "animation": "turn_in_place",
+          "meshes": 10,
+          "framing": {
+            "minX": 104.61095844586848,
+            "maxX": 325.34438539995506,
+            "minY": 70.60325026428428,
+            "maxY": 604.0813819590716,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "afd9995a14dc3277ea0ce4ecc9938c614a068ae44a8eaed053e4e8805b9c96fc",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "turn_in_place",
+          "time": 0.528,
+          "animation": "turn_in_place",
+          "meshes": 9,
+          "framing": {
+            "minX": 93.03292202166881,
+            "maxX": 337.9136771735164,
+            "minY": 69.05790302680651,
+            "maxY": 612.4267999651402,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "bbf6dd8338f34eb6ceae467ad3135c8f5816494215d12400f20e45a4f9fd0096",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "turn_in_place",
+          "time": 1.088,
+          "animation": "turn_in_place",
+          "meshes": 10,
+          "framing": {
+            "minX": 105.84645761208452,
+            "maxX": 338.86204044585895,
+            "minY": 71.51122172924948,
+            "maxY": 600.3713092831521,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "9f6d98ff92721a5f4ff3c9398e19d50f4116e6764d85a821b85272c847a45f7d",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "turn_in_place",
+          "time": 1.6,
+          "animation": "turn_in_place",
+          "meshes": 10,
+          "framing": {
+            "minX": 126.46061287382287,
+            "maxX": 324.576985368863,
+            "minY": 73.01664473801549,
+            "maxY": 594.5227693449929,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2250d20e92b87da9cbd0e359dffffd61e7f70b56ba2364acb02c6be25d5eca42",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "turn_in_place",
+        "animation": "turn_in_place",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.29590392619679734,
+          -0.00403083569313855,
+          -0.30731484415151966
+        ],
+        "max": [
+          0.3418082909030412,
+          1.6436456208064065,
+          0.34435515587271837
+        ]
+      }
+    },
+    {
+      "id": "cut_45",
+      "file": "contact-sheets/cut_45.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "a3bb87911e51fe054f86671f51f5fd5dc1c20666e6cdd2ae1ac591ad7bbf30cf",
+      "sheetSHA256": "f07a776cc815f3926f1308e70f7301e28f829a443ac107224f13582a4838a1b1",
+      "times": [
+        0,
+        0.46199999999999997,
+        0.952,
+        1.4
+      ],
+      "samples": [
+        {
+          "id": "cut_45",
+          "time": 0,
+          "animation": "cut_45",
+          "meshes": 9,
+          "framing": {
+            "minX": 95.88975832190594,
+            "maxX": 334.79516041291924,
+            "minY": 85.00827762832544,
+            "maxY": 588.8577639499305,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0911c4ce872a65b9294184378c57ee428f4e047fba53f1c13d11c1b9e8f7d7a5",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_45",
+          "time": 0.46199999999999997,
+          "animation": "cut_45",
+          "meshes": 9,
+          "framing": {
+            "minX": 101.1053133501827,
+            "maxX": 346.52548605062213,
+            "minY": 111.22816596303905,
+            "maxY": 587.1106850435484,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "79743098c9b87a65ffd4c4a9856f57b1705b1dd864457fb792d420ce29aacffd",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_45",
+          "time": 0.952,
+          "animation": "cut_45",
+          "meshes": 9,
+          "framing": {
+            "minX": 103.01696924332288,
+            "maxX": 369.7940950149552,
+            "minY": 91.49264868021868,
+            "maxY": 591.1617386681872,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d11acc046cd5111ac6096573f3c74eac8d15cf4a78d5e7e1c165057c86b7b71b",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_45",
+          "time": 1.4,
+          "animation": "cut_45",
+          "meshes": 9,
+          "framing": {
+            "minX": 90.41306086350602,
+            "maxX": 362.4420157135423,
+            "minY": 84.46185228794211,
+            "maxY": 591.2677635309523,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "418b09d43bf8c75bd978f95818c84e2c39af2347bd103d72511bfa4fabe35cd8",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "cut_45",
+        "animation": "cut_45",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.40183969709197476,
+          -0.025019882542840002,
+          -0.37533707906633174
+        ],
+        "max": [
+          0.42611045078135973,
+          1.6213425687810943,
+          0.4406120033173965
+        ]
+      }
+    },
+    {
+      "id": "cut_90",
+      "file": "contact-sheets/cut_90.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "293bf30c010bc8a4e41c223534cdf7dde4b67930469347d010112373a297c13d",
+      "sheetSHA256": "223e1127272cda775711930a5985d463a768abbfc17c6a4312cca4ba4f7311ec",
+      "times": [
+        0,
+        0.46199999999999997,
+        0.952,
+        1.4
+      ],
+      "samples": [
+        {
+          "id": "cut_90",
+          "time": 0,
+          "animation": "cut_90",
+          "meshes": 9,
+          "framing": {
+            "minX": 93.51116270463247,
+            "maxX": 332.76583151928645,
+            "minY": 84.89070893372369,
+            "maxY": 589.7720701732726,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "acfda006bf7edbd525b8d90560a594e7c43296578431c2f71b92551649f74105",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_90",
+          "time": 0.46199999999999997,
+          "animation": "cut_90",
+          "meshes": 9,
+          "framing": {
+            "minX": 99.20482024964538,
+            "maxX": 350.7688603681013,
+            "minY": 120.30572085007518,
+            "maxY": 589.7324683912148,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0529997bb5c1a246477b5660fd89ce3b1361cfd2a23ad89298cc751569140aec",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_90",
+          "time": 0.952,
+          "animation": "cut_90",
+          "meshes": 9,
+          "framing": {
+            "minX": 123.80610516090672,
+            "maxX": 357.47845642920095,
+            "minY": 94.85090881777046,
+            "maxY": 575.208531990588,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "56f668dcb99157020943024ba5941514e25c759bae0f7649f4b463aa846e14c5",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_90",
+          "time": 1.4,
+          "animation": "cut_90",
+          "meshes": 9,
+          "framing": {
+            "minX": 69.93593339842953,
+            "maxX": 340.34196803658295,
+            "minY": 85.2959795059525,
+            "maxY": 587.9307761604924,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "123580be79ad6bcc003e060c011148cb4479a9dabd1f7472c8d17ebb6a365e28",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "cut_90",
+        "animation": "cut_90",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.42037097858838346,
+          -0.023657355145977277,
+          -0.3688796092332126
+        ],
+        "max": [
+          0.4618012466812115,
+          1.6213425687810943,
+          0.43527278105762246
+        ]
+      }
+    },
+    {
+      "id": "cut_135",
+      "file": "contact-sheets/cut_135.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "b2b72aa86d632aeb27d68834e8e4f1e912c9b27a7d169cea5257d6ce9aa70c62",
+      "sheetSHA256": "e627a091337879f0ffdf9503474a40fd3d6df262f9d54a8f9f16bbc0907a9f0c",
+      "times": [
+        0,
+        0.46199999999999997,
+        0.952,
+        1.4
+      ],
+      "samples": [
+        {
+          "id": "cut_135",
+          "time": 0,
+          "animation": "cut_135",
+          "meshes": 9,
+          "framing": {
+            "minX": 92.48906865801783,
+            "maxX": 334.14066826765344,
+            "minY": 84.01574779584682,
+            "maxY": 594.2389089264383,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "aa75a4e64561c4b253525676feb0847c0a2e03828483e1184fd6036f60768532",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_135",
+          "time": 0.46199999999999997,
+          "animation": "cut_135",
+          "meshes": 9,
+          "framing": {
+            "minX": 105.24971413165514,
+            "maxX": 363.94961071152096,
+            "minY": 119.84924766985131,
+            "maxY": 594.0554344353578,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "47c3df9d0e33b76588d242138051c9bbfc69a3dedf2c729912b99ae3fc25b155",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_135",
+          "time": 0.952,
+          "animation": "cut_135",
+          "meshes": 9,
+          "framing": {
+            "minX": 77.52304043758072,
+            "maxX": 339.95122593298674,
+            "minY": 93.51526495818868,
+            "maxY": 582.3192658170507,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7e0e9867c6822afe79b309327cb1f9ee0466d6e1e1863bfa4d41ec192a3f0df4",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_135",
+          "time": 1.4,
+          "animation": "cut_135",
+          "meshes": 9,
+          "framing": {
+            "minX": 56.2867797392933,
+            "maxX": 340.64428082519254,
+            "minY": 85.27110131416602,
+            "maxY": 588.5939327295417,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0d88d541880130090f66e2028a359acabb27ce5e12faed8809fff7ee4fde7930",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "cut_135",
+        "animation": "cut_135",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3753370854357324,
+          -0.02172140081510157,
+          -0.4305646203798117
+        ],
+        "max": [
+          0.44905617556338034,
+          1.6213425687810943,
+          0.44268556896932987
+        ]
+      }
+    },
+    {
+      "id": "cut_180",
+      "file": "contact-sheets/cut_180.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "12980e343be38bdb716fcdacd3d89e2341ed84d8d1bbff5ba80218eefa6686a4",
+      "sheetSHA256": "fd6008de0dc681837c60fde5fdd7112b870a3c56adbcfda7a2e6a612c4d8a25e",
+      "times": [
+        0,
+        0.46199999999999997,
+        0.952,
+        1.4
+      ],
+      "samples": [
+        {
+          "id": "cut_180",
+          "time": 0,
+          "animation": "cut_180",
+          "meshes": 9,
+          "framing": {
+            "minX": 93.97988491355522,
+            "maxX": 336.3906331092724,
+            "minY": 83.74173244833665,
+            "maxY": 595.4471026562251,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d13f0dc44b7eca0b0320ad43824291383e7f136cb0a31f0fe89f67daebcade78",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_180",
+          "time": 0.46199999999999997,
+          "animation": "cut_180",
+          "meshes": 9,
+          "framing": {
+            "minX": 106.54163770737273,
+            "maxX": 375.8417588190102,
+            "minY": 119.54122209769314,
+            "maxY": 596.3618324745114,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7b48e8d1decd13ea2e79debf5d99325794c5d3441dd8baf0e241adf0238b237d",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_180",
+          "time": 0.952,
+          "animation": "cut_180",
+          "meshes": 9,
+          "framing": {
+            "minX": 70.53798909779415,
+            "maxX": 316.6670042077211,
+            "minY": 94.08152182156822,
+            "maxY": 579.5449078061883,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8db0d80fbd32aeff9206bd7fbe60e3a8b13bd4cfc337a23949f79aa42a585d02",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "cut_180",
+          "time": 1.4,
+          "animation": "cut_180",
+          "meshes": 9,
+          "framing": {
+            "minX": 77.17564508311763,
+            "maxX": 337.6005916312843,
+            "minY": 83.6211980064197,
+            "maxY": 595.9555391693723,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "cb8c66fb04afead3d52260bb4601202113e48f2f21d10fdad79dc1ad66862bdd",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "cut_180",
+        "animation": "cut_180",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.37076992057448616,
+          -0.02177674797691581,
+          -0.4738272481784285
+        ],
+        "max": [
+          0.4441626997939736,
+          1.6213425687810943,
+          0.46244390305647304
+        ]
+      }
+    },
+    {
+      "id": "first_touch_chest_standing",
+      "file": "contact-sheets/first_touch_chest_standing.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "11939d1c1f1a24517f0cd066d0d1a4d3689b25393596703e00b5ca4155a57b9b",
+      "sheetSHA256": "76fb04d19163f68170df81f80a17282258ca8a42024bfdc4e1292536624b6164",
+      "times": [
+        0,
+        0.6,
+        0.7,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "first_touch_chest_standing",
+          "time": 0,
+          "animation": "first_touch_chest_standing",
+          "meshes": 10,
+          "framing": {
+            "minX": 92.79975990579918,
+            "maxX": 319.38305789551185,
+            "minY": 57.123652187585314,
+            "maxY": 611.5225934356531,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "894b07742c83e391b5967c330e6f1f8b52e5d2d807b988d34206f2c2981c5f3c",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "first_touch_chest_standing",
+          "time": 0.6,
+          "animation": "first_touch_chest_standing",
+          "meshes": 22,
+          "framing": {
+            "minX": 78.25175215771344,
+            "maxX": 335.6652348853064,
+            "minY": 64.89024454887627,
+            "maxY": 617.1964336881397,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c3caa2919691fda171cead9008b29c6b0a0cd09313f233fc482e20f5affaab9c",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "first_touch_chest_standing",
+          "time": 0.7,
+          "animation": "first_touch_chest_standing",
+          "meshes": 22,
+          "framing": {
+            "minX": 80.54085661567183,
+            "maxX": 343.5695410887443,
+            "minY": 64.11944036397587,
+            "maxY": 623.9163969997858,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5bac2ba26c9ddca09f2391d9721085af9678820de2fe5af2895773a8a173d8ed",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "first_touch_chest_standing",
+          "time": 1.3,
+          "animation": "first_touch_chest_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 92.79975990579918,
+            "maxX": 319.38305789551185,
+            "minY": 57.123652187585314,
+            "maxY": 611.5225934356531,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "25dc6a3c77c7506a7983cdea00dcbe6838077bc0ba6c4f8fdc719c2f09c37029",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_chest_standing",
+        "animation": "first_touch_chest_standing",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3264322182490572,
+          0.005101025471752816,
+          -0.15747722759701865
+        ],
+        "max": [
+          0.3372027273880626,
+          1.650546972103385,
+          0.3598825326059288
+        ]
+      }
+    },
+    {
+      "id": "first_touch_chest_running",
+      "file": "contact-sheets/first_touch_chest_running.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "ee90b4dad48ff240f3d2e16923ecac2b2879b87f535dc5ea45ff87d17bbc4425",
+      "sheetSHA256": "e9ced83dcc3e0ee01fb721e6fbe46bec1bd247251946ffdbb2ead9b3947bcd37",
+      "times": [
+        0,
+        0.9,
+        1,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "first_touch_chest_running",
+          "time": 0,
+          "animation": "first_touch_chest_running",
+          "meshes": 9,
+          "framing": {
+            "minX": 83.74163388728445,
+            "maxX": 371.19537260424016,
+            "minY": 88.07343933479743,
+            "maxY": 613.4999303445672,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "57496cb8a961399ee8e7736594c4f01f3b2305faeb9ac279d88b4da213d449ea",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "first_touch_chest_running",
+          "time": 0.9,
+          "animation": "first_touch_chest_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 92.71078572211553,
+            "maxX": 343.6612795224235,
+            "minY": 106.25196279858422,
+            "maxY": 595.2241741568812,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "266b42822c29ff66b8611f8eb216eb7453b6be825efe1574a0e014afce1aca6c",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_chest_running",
+          "time": 1,
+          "animation": "first_touch_chest_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 93.80412912678773,
+            "maxX": 341.1327418894823,
+            "minY": 101.95323187154963,
+            "maxY": 599.5213343575904,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ee8c341ecbb0e0341d1046cd2cd47fb25f3d9f9924470265240fb2dc459b832c",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_chest_running",
+          "time": 1.6,
+          "animation": "first_touch_chest_running",
+          "meshes": 8,
+          "framing": {
+            "minX": 83.7416311414369,
+            "maxX": 371.1953762420246,
+            "minY": 88.07343608329626,
+            "maxY": 613.4999314652359,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2b9dd8a841f8c7816d6a952b8327ed389b9adca9330d8787b5ce29a4eafab6b9",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_chest_running",
+        "animation": "first_touch_chest_running",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.34447683551933095,
+          0.005127980525244063,
+          -0.4386333031332077
+        ],
+        "max": [
+          0.3462551830019419,
+          1.6366310611409265,
+          0.5710518533802715
+        ]
+      }
+    },
+    {
+      "id": "first_touch_thigh_standing",
+      "file": "contact-sheets/first_touch_thigh_standing.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "8c657bf32ec6e878ca19a9efded000f2f9d28b7948687c98a53716917c07f9be",
+      "sheetSHA256": "21078cbcce0b8a007179d63854c65bb330a69f076b0a2a5f4fa8fc4cf66b02b6",
+      "times": [
+        0,
+        0.6,
+        0.7666666666666667,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "first_touch_thigh_standing",
+          "time": 0,
+          "animation": "first_touch_thigh_standing",
+          "meshes": 10,
+          "framing": {
+            "minX": 85.51472132857648,
+            "maxX": 293.4605288053139,
+            "minY": 76.47086316378743,
+            "maxY": 583.2640602422994,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "cb515d0ba413f09a7d26fb9b5bf5a5bccc6ce3597f59a5d45253fbb2ab8da372",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "first_touch_thigh_standing",
+          "time": 0.6,
+          "animation": "first_touch_thigh_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 74.25007903209448,
+            "maxX": 354.8352344878921,
+            "minY": 78.81012491116637,
+            "maxY": 616.2514475321664,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "47519170ebaca8399b3b71b647923930cd809a893f3fdff38a0fbc634da9ec77",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_thigh_standing",
+          "time": 0.7666666666666667,
+          "animation": "first_touch_thigh_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 75.57303316601454,
+            "maxX": 327.4534531704252,
+            "minY": 78.41870364489768,
+            "maxY": 600.6880803414425,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e18fbda80b7fed73b48fb9d1b441935f51a83d9a0d49c7a271a56228c187affc",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_thigh_standing",
+          "time": 1.3,
+          "animation": "first_touch_thigh_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 85.55010766813345,
+            "maxX": 294.8870743572167,
+            "minY": 76.2673773278289,
+            "maxY": 584.0800373322763,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "116432a43bd00a2bc8c99fb0241bc86caf8ea9165af2c071ca166cd483189ce7",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_thigh_standing",
+        "animation": "first_touch_thigh_standing",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.33239829989187764,
+          0.005101019440538287,
+          -0.1611446908347596
+        ],
+        "max": [
+          0.33020843560290347,
+          1.650546972103385,
+          0.605216615186677
+        ]
+      }
+    },
+    {
+      "id": "first_touch_thigh_running",
+      "file": "contact-sheets/first_touch_thigh_running.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "f9f4bac57b4d6d040e94913ea0c1ddd3072baa3b7c52930315ab48efcfdc7dd7",
+      "sheetSHA256": "7624c3bf054f13eccfeb7b408298b8999d901a33efeaeece230368b3c2fe3e3c",
+      "times": [
+        0,
+        0.9,
+        1.0666666666666667,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "first_touch_thigh_running",
+          "time": 0,
+          "animation": "first_touch_thigh_running",
+          "meshes": 9,
+          "framing": {
+            "minX": 76.64349445781924,
+            "maxX": 364.2607326394796,
+            "minY": 87.6672325052732,
+            "maxY": 615.4845629904495,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "758bb5f73c21061a115ae72440ec9a5d4fc817e01189100f3d9ff0c3c32ebe6f",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "first_touch_thigh_running",
+          "time": 0.9,
+          "animation": "first_touch_thigh_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 93.74052972088096,
+            "maxX": 377.53296082124365,
+            "minY": 107.61036751715162,
+            "maxY": 613.3797424820306,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "b6d34c0031a90f220e0b5257a852786c26a60e0649cbd7db55689ee4a95768bc",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_thigh_running",
+          "time": 1.0666666666666667,
+          "animation": "first_touch_thigh_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 67.54976620800538,
+            "maxX": 337.3246618055418,
+            "minY": 90.23419977843338,
+            "maxY": 606.206064081352,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "207d968c69cf575e2d2afa231bf282f2e93831e788887ffc70ccb2bc1623aacf",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_thigh_running",
+          "time": 1.6,
+          "animation": "first_touch_thigh_running",
+          "meshes": 8,
+          "framing": {
+            "minX": 76.64349173732758,
+            "maxX": 364.2607362519626,
+            "minY": 87.66722923553807,
+            "maxY": 615.4845641269402,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "37bded15c4e31352753a9d5b2ae2d27865c4c715e0d15ebc888bc2e85ab4af35",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_thigh_running",
+        "animation": "first_touch_thigh_running",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3321786100677726,
+          0.005127980932830527,
+          -0.4386333077832294
+        ],
+        "max": [
+          0.3908489551800186,
+          1.6366310611409265,
+          0.5710518187063283
+        ]
+      }
+    },
+    {
+      "id": "first_touch_inside_standing",
+      "file": "contact-sheets/first_touch_inside_standing.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "89e844f739fd8036667bbf573171a13e941eabb9174f8ef05e5dd850ab544a06",
+      "sheetSHA256": "d47fca76c7a9782bb1e7e879fced45b2d2271c2002c2625347d525889741e8ee",
+      "times": [
+        0,
+        0.6,
+        0.7666666666666667,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "first_touch_inside_standing",
+          "time": 0,
+          "animation": "first_touch_inside_standing",
+          "meshes": 14,
+          "framing": {
+            "minX": 86.91684469199748,
+            "maxX": 295.21803200308995,
+            "minY": 76.29757336050642,
+            "maxY": 583.958967568117,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0a6f695017e8f54d3a04830e0c4601875e9ee91cedbd9ee66c0310609dd5e788",
+          "renderedDrawCalls": 14
+        },
+        {
+          "id": "first_touch_inside_standing",
+          "time": 0.6,
+          "animation": "first_touch_inside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 73.36930110562008,
+            "maxX": 350.9108971179678,
+            "minY": 79.30484248172195,
+            "maxY": 613.6824979856117,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "eeea05fb47274c64472d2a4e805f6060222a9ea8de032abab4858d2d46d396e7",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_inside_standing",
+          "time": 0.7666666666666667,
+          "animation": "first_touch_inside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 76.13869621463681,
+            "maxX": 340.9007891318981,
+            "minY": 76.6280367673539,
+            "maxY": 608.1215419479466,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "4b41c7e3863b064169613e4a47eb0000349bf05a30e9cc76fb3081c1a7be0e64",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_inside_standing",
+          "time": 1.3,
+          "animation": "first_touch_inside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 86.95238432960603,
+            "maxX": 296.6503850174639,
+            "minY": 76.09334640396838,
+            "maxY": 584.7777059999215,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "17201d4132e9dcb6646e9b25dadfca183c5ac60511b7388d8c3dd9d368f8eab9",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_inside_standing",
+        "animation": "first_touch_inside_standing",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3381669190462408,
+          0.005101019440538287,
+          -0.16326916065444405
+        ],
+        "max": [
+          0.3328516300852139,
+          1.650546972103385,
+          0.5914914756021257
+        ]
+      }
+    },
+    {
+      "id": "first_touch_inside_running",
+      "file": "contact-sheets/first_touch_inside_running.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "7e4b8c32dcbd63662275eb3cba46395ba1121fe02d3f87dd17e62562265292d3",
+      "sheetSHA256": "0fdcac9852a8ea6556ed02e64826337dd6eda0260b2ef5a714453bccb3f34e7f",
+      "times": [
+        0,
+        0.9,
+        1.0666666666666667,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "first_touch_inside_running",
+          "time": 0,
+          "animation": "first_touch_inside_running",
+          "meshes": 9,
+          "framing": {
+            "minX": 78.98061825708209,
+            "maxX": 364.69473894462317,
+            "minY": 88.20239253468279,
+            "maxY": 611.7618348954435,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8ed630afe4bca5ab5d446aee8e74e9c8912333034775b86ada46d49bcbc22a8a",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "first_touch_inside_running",
+          "time": 0.9,
+          "animation": "first_touch_inside_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 89.68861142854057,
+            "maxX": 387.5839730638403,
+            "minY": 106.38400956674566,
+            "maxY": 618.9892314130444,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "97628cc6e7b485833de9f202658f4bea61e9a468ea41b9e0b4a1b9b00bef94a4",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_inside_running",
+          "time": 1.0666666666666667,
+          "animation": "first_touch_inside_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 68.55894566003698,
+            "maxX": 327.43687436328923,
+            "minY": 91.72868600619306,
+            "maxY": 597.3518488794537,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2748c2d6e77d595ccba46d039b6dcfe24bb241d5315f37d92c843ce2360c5909",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_inside_running",
+          "time": 1.6,
+          "animation": "first_touch_inside_running",
+          "meshes": 8,
+          "framing": {
+            "minX": 78.98061554341248,
+            "maxX": 364.6947425312231,
+            "minY": 88.20238929635823,
+            "maxY": 611.7618360027789,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6f74ddff3d756dc92d2232632f8acb8e5626af99e0ad82242284d487de02bbed",
+          "renderedDrawCalls": 8
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_inside_running",
+        "animation": "first_touch_inside_running",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.33783773953800555,
+          0.0016781649270829618,
+          -0.4386333077832294
+        ],
+        "max": [
+          0.3677277555412467,
+          1.6366310611409265,
+          0.597912404333115
+        ]
+      }
+    },
+    {
+      "id": "first_touch_outside_standing",
+      "file": "contact-sheets/first_touch_outside_standing.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "c043643eb2b5c26e0e946e71e9ec8b1ffdcedd00f0c7feb528e7ed58f7291810",
+      "sheetSHA256": "ceb5f18db4cbc869026a10a53b2eb6ae0fbce4d8892833e0bd267d1478bd6ce9",
+      "times": [
+        0,
+        0.6,
+        0.7666666666666667,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "first_touch_outside_standing",
+          "time": 0,
+          "animation": "first_touch_outside_standing",
+          "meshes": 10,
+          "framing": {
+            "minX": 120.43666097546637,
+            "maxX": 314.78760250925177,
+            "minY": 92.1336721768649,
+            "maxY": 563.6694517523521,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e3c88e33df3ce7d36d0938b4983f0eece269cc0d3cd57e7e6d72973faf8d980a",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "first_touch_outside_standing",
+          "time": 0.6,
+          "animation": "first_touch_outside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 54.08202349934578,
+            "maxX": 368.24301925083427,
+            "minY": 93.26437813944335,
+            "maxY": 604.5548803088936,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ec6a8ae53672705d3d9daccfeeeed67dfe6e899d070d8b36fab9eb733e049658",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_outside_standing",
+          "time": 0.7666666666666667,
+          "animation": "first_touch_outside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 53.06664726098993,
+            "maxX": 337.73041389172664,
+            "minY": 92.84835610608742,
+            "maxY": 588.2458165389676,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f990dd926ce899ca9d48ebdc10b884b1a06837604ae5b755ca54e52904645dda",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_outside_standing",
+          "time": 1.3,
+          "animation": "first_touch_outside_standing",
+          "meshes": 21,
+          "framing": {
+            "minX": 120.47191443605209,
+            "maxX": 316.15794513162683,
+            "minY": 91.9759318930679,
+            "maxY": 564.3939891741068,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "4259137872b8fef2140d2bad6660667eb69837ba096fbc4d12553802605205d5",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_outside_standing",
+        "animation": "first_touch_outside_standing",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.5502553511832242,
+          0.0031973088773924324,
+          -0.1631490015862524
+        ],
+        "max": [
+          0.32677803815693907,
+          1.650546972103385,
+          0.5962988668373206
+        ]
+      }
+    },
+    {
+      "id": "first_touch_outside_running",
+      "file": "contact-sheets/first_touch_outside_running.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "6cd9a50fbab416c8c9409cbdf05040305c04679466317f3459554795be00b93b",
+      "sheetSHA256": "0e52baed77e43095ff75bd07fc70862f4c80293983d1aec9d69bc3a31226511c",
+      "times": [
+        0,
+        0.9,
+        1.0666666666666667,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "first_touch_outside_running",
+          "time": 0,
+          "animation": "first_touch_outside_running",
+          "meshes": 9,
+          "framing": {
+            "minX": 112.23498902595246,
+            "maxX": 368.01911025078147,
+            "minY": 117.98353702670033,
+            "maxY": 575.6614990807733,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "76b98c1f963ceb5d51ba170f2fb38c7813e81a197cf78c6166947d6ac8affe65",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "first_touch_outside_running",
+          "time": 0.9,
+          "animation": "first_touch_outside_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 75.81159498675531,
+            "maxX": 378.1130161667942,
+            "minY": 133.8668076437083,
+            "maxY": 585.8724266838435,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "652c3dbafefe6fc82878821d76cefae8ff840dd4d2441742b42ed2e96167d3ba",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_outside_running",
+          "time": 1.0666666666666667,
+          "animation": "first_touch_outside_running",
+          "meshes": 21,
+          "framing": {
+            "minX": 61.82596354816198,
+            "maxX": 336.99950756200235,
+            "minY": 118.76667755484674,
+            "maxY": 574.4808308885697,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "eb60cdd301a8c5bdbc098cbf8de49fd93cbe4889a103842fb1806e2c908e9e74",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "first_touch_outside_running",
+          "time": 1.6,
+          "animation": "first_touch_outside_running",
+          "meshes": 18,
+          "framing": {
+            "minX": 112.23498645115575,
+            "maxX": 368.0191134220736,
+            "minY": 117.98353436678727,
+            "maxY": 575.6614998819497,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0845437b108cd1e6a4fac2a37e16b3ff61d0c6bd556cb40867daae21c834bb39",
+          "renderedDrawCalls": 18
+        }
+      ],
+      "loaded": {
+        "id": "first_touch_outside_running",
+        "animation": "first_touch_outside_running",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.5409882771834167,
+          -0.0004973164670388913,
+          -0.4386333077832294
+        ],
+        "max": [
+          0.4008312661646226,
+          1.6366310611409265,
+          0.5710518187063283
+        ]
+      }
+    },
+    {
+      "id": "dribble_fast",
+      "file": "contact-sheets/dribble_fast.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "d831d4a3a7c42672467d775063b068919191977e0312a706ba6024d818352493",
+      "sheetSHA256": "f9e3a80d3e9ce31f4566a1ecac2681b4b3e325083a36678c8486beb205f3f6bb",
+      "times": [
+        0,
+        0.16666666666666666,
+        0.4666666666666667,
+        0.6
+      ],
+      "samples": [
+        {
+          "id": "dribble_fast",
+          "time": 0,
+          "animation": "dribble_fast",
+          "meshes": 20,
+          "framing": {
+            "minX": 86.66442163476611,
+            "maxX": 384.4218056781122,
+            "minY": 92.93586668516737,
+            "maxY": 612.909374696726,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2302ae182fa04df11e167c8a1143704845c8219bc1186e65017c3da786df0cf7",
+          "renderedDrawCalls": 20
+        },
+        {
+          "id": "dribble_fast",
+          "time": 0.16666666666666666,
+          "animation": "dribble_fast",
+          "meshes": 22,
+          "framing": {
+            "minX": 87.62534659541635,
+            "maxX": 372.4080733080169,
+            "minY": 87.90228952609453,
+            "maxY": 617.5106897839673,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fef84703c264082e1c43121cec217b3c76b889e24d0c91249d75c9425ebd05fb",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "dribble_fast",
+          "time": 0.4666666666666667,
+          "animation": "dribble_fast",
+          "meshes": 22,
+          "framing": {
+            "minX": 91.54621910046234,
+            "maxX": 376.11753926159,
+            "minY": 87.92793397133796,
+            "maxY": 616.3321775912816,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "761fdda0d455248331c20dfd28e8e9ff195ce89fd17c30293db06f2610f72de9",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "dribble_fast",
+          "time": 0.6,
+          "animation": "dribble_fast",
+          "meshes": 19,
+          "framing": {
+            "minX": 86.66441612227219,
+            "maxX": 384.4218066841366,
+            "minY": 92.93586061212194,
+            "maxY": 612.9093759564436,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "378015895049ebb5890a2451bbed39a493194ee4e1d58294b170c60cbd403648",
+          "renderedDrawCalls": 19
+        }
+      ],
+      "loaded": {
+        "id": "dribble_fast",
+        "animation": "dribble_fast",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3637317197825969,
+          -0.0003507143664107917,
+          -0.4537903393913965
+        ],
+        "max": [
+          0.3620017661363691,
+          1.63166486464447,
+          0.6117629789220838
+        ]
+      }
+    },
+    {
+      "id": "dribble_cut",
+      "file": "contact-sheets/dribble_cut.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "2a94a334faf510e9ed4350d0b4162d6d5d40d495e3806a12d271a8c75f1abefe",
+      "sheetSHA256": "b88c34b1844482fa68ff53d34ab738f6dbd9cab8b7ec85ccc66c84d8274333a2",
+      "times": [
+        0,
+        0.3,
+        0.8,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "dribble_cut",
+          "time": 0,
+          "animation": "dribble_cut",
+          "meshes": 20,
+          "framing": {
+            "minX": 72.80446859342288,
+            "maxX": 286.04273435363706,
+            "minY": 125.05692661021058,
+            "maxY": 561.1243838192154,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fff3377dae0e6e7052a5958c82c3f0319165b1b31afe3f7f41a390b051ed1b82",
+          "renderedDrawCalls": 20
+        },
+        {
+          "id": "dribble_cut",
+          "time": 0.3,
+          "animation": "dribble_cut",
+          "meshes": 22,
+          "framing": {
+            "minX": 61.94364250345547,
+            "maxX": 321.41403108098405,
+            "minY": 121.7999551813493,
+            "maxY": 581.013783785334,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "2d00cb5b2b9b0a31516a8300cfd94bea86d9e7ae1d9d365bdce30248e598743f",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "dribble_cut",
+          "time": 0.8,
+          "animation": "dribble_cut",
+          "meshes": 22,
+          "framing": {
+            "minX": 59.89614727349585,
+            "maxX": 395.0540694767377,
+            "minY": 132.59876825047792,
+            "maxY": 585.8986723972135,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "b8c6b9c5584a6012e4417518c6ac349e2b182bb8afbc586653a397c7fbf1152d",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "dribble_cut",
+          "time": 1.8,
+          "animation": "dribble_cut",
+          "meshes": 9,
+          "framing": {
+            "minX": 45.439896063580456,
+            "maxX": 307.84339396854006,
+            "minY": 122.9561010395379,
+            "maxY": 572.223871211696,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c946f4ad85ffde2d2ff625a2c1aa8a34219eaaf386a021edb75a8a2c6ea90a35",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "dribble_cut",
+        "animation": "dribble_cut",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.41365312080595,
+          -2.468934487409591e-9,
+          -0.32049922917015294
+        ],
+        "max": [
+          0.6303220486800664,
+          1.6063447852193775,
+          0.5887118470047988
+        ]
+      }
+    },
+    {
+      "id": "body_feint",
+      "file": "contact-sheets/body_feint.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "b35890d28c84b3d242d76c36a28636d0228908b1583b9a31265d0fd8672265b3",
+      "sheetSHA256": "ff8aa4d34bcf2485093ce6040cb6d96f309781eb0b7699c85d263cf6ae134f05",
+      "times": [
+        0,
+        0.46199999999999997,
+        0.952,
+        1.4
+      ],
+      "samples": [
+        {
+          "id": "body_feint",
+          "time": 0,
+          "animation": "body_feint",
+          "meshes": 21,
+          "framing": {
+            "minX": 97.11745411906088,
+            "maxX": 318.3599160303556,
+            "minY": 72.40274605277443,
+            "maxY": 599.4993371725614,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "02b230208fb5beb930fcc782931821beca0b2c1c671b21175728bba0c6733756",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "body_feint",
+          "time": 0.46199999999999997,
+          "animation": "body_feint",
+          "meshes": 21,
+          "framing": {
+            "minX": 95.83609824648306,
+            "maxX": 351.8312902201691,
+            "minY": 82.09578980616928,
+            "maxY": 606.9194810988497,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "bc9de52e880b31d970e523c896f96128dc9748261f44c6a806bc84ed5354271f",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "body_feint",
+          "time": 0.952,
+          "animation": "body_feint",
+          "meshes": 21,
+          "framing": {
+            "minX": 76.17864863671997,
+            "maxX": 323.4649470360414,
+            "minY": 80.64539334024144,
+            "maxY": 610.1373531505542,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f05a56302aecf1d106d8f99592db0c74b286165c5ca4e9a40809b0be620c07de",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "body_feint",
+          "time": 1.4,
+          "animation": "body_feint",
+          "meshes": 21,
+          "framing": {
+            "minX": 97.11745411906088,
+            "maxX": 318.3599160303556,
+            "minY": 72.40274605277443,
+            "maxY": 599.4993371725614,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "06539162b99735744d704dd7215ecdf658cd17d2f98943c09e139da76d2d78f0",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "body_feint",
+        "animation": "body_feint",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.35206496915492513,
+          0.004996881754834093,
+          -0.19848464961276646
+        ],
+        "max": [
+          0.3716321530444162,
+          1.6335078881495002,
+          0.36715120467199247
+        ]
+      }
+    },
+    {
+      "id": "spin_kick",
+      "file": "contact-sheets/spin_kick.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "18359c4beb8b430b6525d0a36afe69159bd668a4a9cd77c040fca2fcfd31680e",
+      "sheetSHA256": "0d661e7f5694f977755b382902da7d87dcacd5f975c04b7a937b181fc97c4587",
+      "times": [
+        0,
+        0.9,
+        1.2240000000000002,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "spin_kick",
+          "time": 0,
+          "animation": "spin_kick",
+          "meshes": 21,
+          "framing": {
+            "minX": 63.37823576304395,
+            "maxX": 300.11955746695315,
+            "minY": 99.67156757940465,
+            "maxY": 582.6191300717086,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fe32299c052ac23e7487bebf4321bbf3695c731e78a61146282e0e1e2b8718ac",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "spin_kick",
+          "time": 0.9,
+          "animation": "spin_kick",
+          "meshes": 22,
+          "framing": {
+            "minX": 67.96161964561995,
+            "maxX": 387.53354550124794,
+            "minY": 98.42339867681166,
+            "maxY": 607.2235186087502,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6765c5bc69a68d03b8cda8663fb56bbef47ac0a7d5e49365f652200432d347ce",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "spin_kick",
+          "time": 1.2240000000000002,
+          "animation": "spin_kick",
+          "meshes": 9,
+          "framing": {
+            "minX": 112.01904271246305,
+            "maxX": 308.72306796925926,
+            "minY": 106.94856222499553,
+            "maxY": 567.0631809336315,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "48360f021365fa3ad3e2d570f40e23870fb700d19478c726b3f97e8f7575f97b",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "spin_kick",
+          "time": 1.8,
+          "animation": "spin_kick",
+          "meshes": 10,
+          "framing": {
+            "minX": 86.30745594660625,
+            "maxX": 315.6647891475747,
+            "minY": 101.40508645200786,
+            "maxY": 573.8751667634832,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "4be758cc4ec20041318eb556021036394fc5e875ed17895e7f1ed7cb67b27a3c",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "spin_kick",
+        "animation": "spin_kick",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3545356745318544,
+          0.005023108403259774,
+          -0.40656098689807657
+        ],
+        "max": [
+          0.5243605819016788,
+          1.6401491763046199,
+          0.6239103019012833
+        ]
+      }
+    },
+    {
+      "id": "volley_kick",
+      "file": "contact-sheets/volley_kick.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "f73aa3c7fc2eecf1efe39757a044d3d41eb1640c875ac36f7d635e28172a0e9c",
+      "sheetSHA256": "c5c3ffad463ae164121e39c0a8679f583b5134a39c575748efd34118049f37b2",
+      "times": [
+        0,
+        0.7,
+        1.02,
+        1.5
+      ],
+      "samples": [
+        {
+          "id": "volley_kick",
+          "time": 0,
+          "animation": "volley_kick",
+          "meshes": 10,
+          "framing": {
+            "minX": 101.35518434122477,
+            "maxX": 287.19554978698625,
+            "minY": 117.17610099886447,
+            "maxY": 545.116108591149,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1a0308b727130f3969965b81c7688cfc871dca1a7fb482aa2a0e25a039838765",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "volley_kick",
+          "time": 0.7,
+          "animation": "volley_kick",
+          "meshes": 22,
+          "framing": {
+            "minX": 98.38359768702587,
+            "maxX": 379.2634382438458,
+            "minY": 112.6600306119204,
+            "maxY": 594.0607913176864,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "42c8962280202fae53b92d83907315c152466682dfdc7e21e6e3c155ff747710",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "volley_kick",
+          "time": 1.02,
+          "animation": "volley_kick",
+          "meshes": 9,
+          "framing": {
+            "minX": 98.7936365603214,
+            "maxX": 355.9628593198653,
+            "minY": 115.3659657811585,
+            "maxY": 584.8518167717201,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "a0d431f4024c287a2f95190d9064c06518c221e40563a64c377e8afbc2a8b9c4",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "volley_kick",
+          "time": 1.5,
+          "animation": "volley_kick",
+          "meshes": 10,
+          "framing": {
+            "minX": 99.80357208068207,
+            "maxX": 292.81726096044997,
+            "minY": 116.08888829216212,
+            "maxY": 552.1731098115764,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0cd04735fda84008d5f6597ef34fda294ecc6d80f43b475019104049a77819ca",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "volley_kick",
+        "animation": "volley_kick",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.391528710388821,
+          0.005057062635631167,
+          -0.39908453389315535
+        ],
+        "max": [
+          0.37905484693206076,
+          1.6401067160049665,
+          0.823620630075549
+        ]
+      }
+    },
+    {
+      "id": "long_shot",
+      "file": "contact-sheets/long_shot.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "03cbd60a93c7ef31c5a55d321ac3eb47a4ba98e4941e451a08e90914186449f5",
+      "sheetSHA256": "cec25bf1d6c977ee172edbf0efb83c2b9a8cd74afd92f4a1380519a83fdd9f0f",
+      "times": [
+        0,
+        0.8,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "long_shot",
+          "time": 0,
+          "animation": "long_shot",
+          "meshes": 21,
+          "framing": {
+            "minX": 99.6727947811574,
+            "maxX": 285.4782151229045,
+            "minY": 116.90072186681596,
+            "maxY": 545.6308390735982,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "17b30ddc367d950cbc15f39fef7d54052a411de095d4c8a1890a13ef8084a2b1",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "long_shot",
+          "time": 0.8,
+          "animation": "long_shot",
+          "meshes": 22,
+          "framing": {
+            "minX": 99.53433387802293,
+            "maxX": 378.42258068568424,
+            "minY": 112.68500468361259,
+            "maxY": 593.8250092081262,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1441ce46acc45a8d06a7243335fe4da123b4d52cbe57fcde249dd3c2f25a5597",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "long_shot",
+          "time": 1.088,
+          "animation": "long_shot",
+          "meshes": 9,
+          "framing": {
+            "minX": 99.37830642478062,
+            "maxX": 356.2062698439745,
+            "minY": 115.43928009706438,
+            "maxY": 583.1853958091821,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8647019f4bbce3b1f62e00b3d80f9fd93077bb34cc65b28228b4fd237b57af6d",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "long_shot",
+          "time": 1.6,
+          "animation": "long_shot",
+          "meshes": 10,
+          "framing": {
+            "minX": 98.17336584661588,
+            "maxX": 293.61992079471594,
+            "minY": 115.9242237937859,
+            "maxY": 551.9492364672781,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0ec201b17a3d0324c2f82af84fbbdfc711be5cfbbe63a5ea49f5d28f33cd9941",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "long_shot",
+        "animation": "long_shot",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.38754045552792216,
+          -1.1202244409869166e-9,
+          -0.4048357639577992
+        ],
+        "max": [
+          0.38166807218816357,
+          1.6400818840930302,
+          0.8112895645360825
+        ]
+      }
+    },
+    {
+      "id": "through_pass",
+      "file": "contact-sheets/through_pass.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "7424ed7c8114227dc245610c9ec9a1e697f63de4f33b9899b8dfae7357c22113",
+      "sheetSHA256": "7ce569a9eaa1b99b1acf357ae6f6888d98bdffca89c15433be743d02496afb8c",
+      "times": [
+        0,
+        0.6,
+        0.8840000000000001,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "through_pass",
+          "time": 0,
+          "animation": "through_pass",
+          "meshes": 21,
+          "framing": {
+            "minX": 96.30805745012671,
+            "maxX": 282.65028274008534,
+            "minY": 116.81761937086846,
+            "maxY": 546.1692811919022,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6eca826200a795f9fe369bd8736ced8cc94bf6d786240799d690e737087db4f4",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "through_pass",
+          "time": 0.6,
+          "animation": "through_pass",
+          "meshes": 22,
+          "framing": {
+            "minX": 98.93456584412235,
+            "maxX": 377.70431268436386,
+            "minY": 112.70100123918397,
+            "maxY": 593.6898113119378,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "122f828c8f43fc0ca93ac8514ee4df4272d56fc24022cc9d30511e8fd2fc35df",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "through_pass",
+          "time": 0.8840000000000001,
+          "animation": "through_pass",
+          "meshes": 9,
+          "framing": {
+            "minX": 98.45935303634934,
+            "maxX": 350.90881536447665,
+            "minY": 115.3471157787807,
+            "maxY": 581.53789995165,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "a99a918a99d98c9ec61bf23b38099619f49dc19f5d1e4cbb1ea58fdc0afa3516",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "through_pass",
+          "time": 1.3,
+          "animation": "through_pass",
+          "meshes": 10,
+          "framing": {
+            "minX": 98.82730338708252,
+            "maxX": 292.5503242180928,
+            "minY": 115.97113010641802,
+            "maxY": 551.6095316542611,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "765a12a2b88b53ac57e0f8d7f03837bb1995428a8bb051f4737a3f250b2f2fe4",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "through_pass",
+        "animation": "through_pass",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.38501232572398314,
+          1.6371951017113417e-9,
+          -0.3992972403325173
+        ],
+        "max": [
+          0.38221005801251084,
+          1.6400693581315566,
+          0.8137241787931578
+        ]
+      }
+    },
+    {
+      "id": "running_pass",
+      "file": "contact-sheets/running_pass.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "cf8b0743175b8a6919d347f6bced13674368cfe25a2af8ee2684bf9585f72e07",
+      "sheetSHA256": "565839474a79b4a124ace1ae49bee087979ac9f0fccb2f5552ae606d3916dafd",
+      "times": [
+        0,
+        0.7333333333333333,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "running_pass",
+          "time": 0,
+          "animation": "running_pass",
+          "meshes": 13,
+          "framing": {
+            "minX": 101.06890844485609,
+            "maxX": 306.87602793044954,
+            "minY": 115.55536109250771,
+            "maxY": 555.4847780370427,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5e5958fbb14a535061ea5d7be988d9214ea3fab67cf68c70a775ec346c21fb20",
+          "renderedDrawCalls": 13
+        },
+        {
+          "id": "running_pass",
+          "time": 0.7333333333333333,
+          "animation": "running_pass",
+          "meshes": 22,
+          "framing": {
+            "minX": 86.25110656690637,
+            "maxX": 382.74202791605956,
+            "minY": 111.68108326969802,
+            "maxY": 595.4821051364386,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d570fcd6a81e1f5453746e4bfe0c147435a739f71693c6e289865017b611b2f8",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "running_pass",
+          "time": 1.088,
+          "animation": "running_pass",
+          "meshes": 8,
+          "framing": {
+            "minX": 95.27332377733289,
+            "maxX": 320.7815869907991,
+            "minY": 118.52100416919095,
+            "maxY": 557.2504566511188,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "b106883beebab727622704616a37b12a1139921b88cb77578745b3866e88a84e",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "running_pass",
+          "time": 1.6,
+          "animation": "running_pass",
+          "meshes": 9,
+          "framing": {
+            "minX": 101.06890215373976,
+            "maxX": 308.45790924537124,
+            "minY": 115.42540604881034,
+            "maxY": 556.3162450590307,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "52968d6b26c77274ab4a109d0e56603dd1cff62dec8078b9c8fa149ed1afca3f",
+          "renderedDrawCalls": 9
+        }
+      ],
+      "loaded": {
+        "id": "running_pass",
+        "animation": "running_pass",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3881131443276705,
+          0.005127968247949737,
+          -0.3948448224491856
+        ],
+        "max": [
+          0.3627480235985342,
+          1.612434560803009,
+          0.8019365791776153
+        ]
+      }
+    },
+    {
+      "id": "jump_header",
+      "file": "contact-sheets/jump_header.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "d4dc91076ebce82844c68d69bef09eeaadace6e6d1957358956f2fa7e3247236",
+      "sheetSHA256": "5d7b33dfcec476eb7d05b6e266b22657a13ae49aafa08dce493c8d0dcb2e07cf",
+      "times": [
+        0,
+        0.7666666666666667,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "jump_header",
+          "time": 0,
+          "animation": "jump_header",
+          "meshes": 10,
+          "framing": {
+            "minX": 111.02351295014171,
+            "maxX": 302.7820721890712,
+            "minY": 153.41699761008587,
+            "maxY": 604.617337971125,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "be9983a72a3d5e8ff9373b78c1773f79606b84c0314b3f76c8eed3eb53701514",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "jump_header",
+          "time": 0.7666666666666667,
+          "animation": "jump_header",
+          "meshes": 21,
+          "framing": {
+            "minX": 110.00494446646914,
+            "maxX": 312.8197176878037,
+            "minY": 57.54676443743334,
+            "maxY": 544.4070364333065,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "90dd0504a472bdf2251758f1c408571f7429310a6ee3398ba299877845b9a781",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "jump_header",
+          "time": 1.088,
+          "animation": "jump_header",
+          "meshes": 8,
+          "framing": {
+            "minX": 114.81784795981002,
+            "maxX": 313.16015250080716,
+            "minY": 152.04215812199618,
+            "maxY": 590.2874035229412,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ecd5a48ffb6994b2757440cfd61ea5e5d87115ba42fec4301360bd19d663e965",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "jump_header",
+          "time": 1.6,
+          "animation": "jump_header",
+          "meshes": 10,
+          "framing": {
+            "minX": 111.02351296659666,
+            "maxX": 311.79773746208633,
+            "minY": 153.1736440096437,
+            "maxY": 609.9729887882997,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "07dae750675c620c6bb0d09d7edd6b0bcbf94131392730d41394d5f0af5492fc",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "jump_header",
+        "animation": "jump_header",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.302058777875131,
+          0.005127988398161676,
+          -0.1499954292771409
+        ],
+        "max": [
+          0.29986813984288574,
+          1.9628568261257697,
+          0.3335379683627578
+        ]
+      }
+    },
+    {
+      "id": "slide_miss",
+      "file": "contact-sheets/slide_miss.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "66ee8090e1d5e0a24971703294f4aeb6b19f19978546b05ae9a47b98f4010dce",
+      "sheetSHA256": "246402289af1b808a8827dd4a1109d6304e8b3d240a989eec6afaa57583a30bc",
+      "times": [
+        0,
+        0.5940000000000001,
+        1.2240000000000002,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "slide_miss",
+          "time": 0,
+          "animation": "slide_miss",
+          "meshes": 21,
+          "framing": {
+            "minX": 72.7104518395909,
+            "maxX": 290.62738191307244,
+            "minY": 140.08665226950845,
+            "maxY": 509.75718887269403,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "967f9aaef42a755f7cd6348d16a890b1536db34c8c1809aa0c3be3f02c850e38",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "slide_miss",
+          "time": 0.5940000000000001,
+          "animation": "slide_miss",
+          "meshes": 19,
+          "framing": {
+            "minX": 64.75997543851281,
+            "maxX": 323.9184453154685,
+            "minY": 225.2004555310518,
+            "maxY": 516.2615291887759,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5044f026695e33cfa2c6dddc0fb3161c8cb75f2b8b945a2ca81a760a287394b6",
+          "renderedDrawCalls": 19
+        },
+        {
+          "id": "slide_miss",
+          "time": 1.2240000000000002,
+          "animation": "slide_miss",
+          "meshes": 19,
+          "framing": {
+            "minX": 72.32177746144221,
+            "maxX": 378.808503237076,
+            "minY": 266.8390842592733,
+            "maxY": 555.3709079063933,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8975c7f3bfbb9bcc1063f0ee1072b26cca6d4d53dc8f8c160186ca61814cee89",
+          "renderedDrawCalls": 19
+        },
+        {
+          "id": "slide_miss",
+          "time": 1.8,
+          "animation": "slide_miss",
+          "meshes": 19,
+          "framing": {
+            "minX": 79.60173181568992,
+            "maxX": 374.91308942875213,
+            "minY": 263.9109966500284,
+            "maxY": 572.4706201533386,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "b92b7ad843a372e5ca202edc2346eaaa91bcab48921e2e0e35f93c7d26c9b60e",
+          "renderedDrawCalls": 19
+        }
+      ],
+      "loaded": {
+        "id": "slide_miss",
+        "animation": "slide_miss",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.42774353519125397,
+          -0.06895113226502436,
+          -0.36715828224890446
+        ],
+        "max": [
+          0.4278759458549148,
+          1.604119041169422,
+          1.0260010057520093
+        ]
+      }
+    },
+    {
+      "id": "quick_getup",
+      "file": "contact-sheets/quick_getup.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "6f1556bc3f2b8092203db4717649a93b39f4d4321eaf14a0350a624093f8a814",
+      "sheetSHA256": "9f90a4328975305a6e4b3c454c767c63cfa694be235af3a575e589987b0451bf",
+      "times": [
+        0,
+        0.42900000000000005,
+        0.8840000000000001,
+        1.3
+      ],
+      "samples": [
+        {
+          "id": "quick_getup",
+          "time": 0,
+          "animation": "quick_getup",
+          "meshes": 10,
+          "framing": {
+            "minX": 59.753043730139225,
+            "maxX": 391.83546700306533,
+            "minY": 262.213594470787,
+            "maxY": 615.1506443382905,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c9af2edf7efaa9638d0bf2723d931c91b3f548913a4f0711e7b8f8748b2b9cd9",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "quick_getup",
+          "time": 0.42900000000000005,
+          "animation": "quick_getup",
+          "meshes": 9,
+          "framing": {
+            "minX": 91.37897789941799,
+            "maxX": 340.8038857412608,
+            "minY": 221.05717924121325,
+            "maxY": 566.7875761502133,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8879c38baf4eee158dbfb722f72fae2b2ac8e8a6a2f6a5d144d2962830ee116d",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "quick_getup",
+          "time": 0.8840000000000001,
+          "animation": "quick_getup",
+          "meshes": 10,
+          "framing": {
+            "minX": 82.76890587702803,
+            "maxX": 287.2938810874839,
+            "minY": 133.85221105159744,
+            "maxY": 537.8230885260615,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d888ab8be9d24c49b05113aa9b8d0d84d9d4edb8fd9d12cbd10bf1783792476f",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "quick_getup",
+          "time": 1.3,
+          "animation": "quick_getup",
+          "meshes": 10,
+          "framing": {
+            "minX": 80.21602928595,
+            "maxX": 284.1222616824407,
+            "minY": 104.78049820280484,
+            "maxY": 537.271797796935,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "9775be44181618b8f0da96502eb9b63410db349237117ac3e21e1fd297ff39c3",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "quick_getup",
+        "animation": "quick_getup",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.365797358998868,
+          -0.06895113226502436,
+          -0.28962406396038987
+        ],
+        "max": [
+          0.3659319729974789,
+          1.664384525597706,
+          1.026174413272425
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_ready",
+      "file": "contact-sheets/goalkeeper_ready.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "e4595f4d8e9431f8995b197affc640f084abe6f30aa8d29e39f587fa24379ec9",
+      "sheetSHA256": "4373d76630dbc196de696ebfb8a54b42f0ac442a516349679156f6f7f4533eb3",
+      "times": [
+        0,
+        0.66,
+        1.36,
+        2
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_ready",
+          "time": 0,
+          "animation": "goalkeeper_ready",
+          "meshes": 10,
+          "framing": {
+            "minX": 77.24017960006883,
+            "maxX": 349.1085946962422,
+            "minY": 71.13296894903182,
+            "maxY": 611.7521553482027,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f726312609590922ff4edc450310b6c10040450287544162c13837e0691e590f",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_ready",
+          "time": 0.66,
+          "animation": "goalkeeper_ready",
+          "meshes": 10,
+          "framing": {
+            "minX": 78.71721363986467,
+            "maxX": 351.0820732680048,
+            "minY": 72.71874724278723,
+            "maxY": 611.5415904133122,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "207ede2035ededa8c735325be8ef2d80b0c699e0cbe61a4213bae2149f20103b",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_ready",
+          "time": 1.36,
+          "animation": "goalkeeper_ready",
+          "meshes": 10,
+          "framing": {
+            "minX": 75.72373082492992,
+            "maxX": 347.8467900268329,
+            "minY": 69.58119015021154,
+            "maxY": 612.4132050067715,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "bfe400601c73ae392e2afefb182c7762f6984dac369e1986fe63f7b21402a91b",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_ready",
+          "time": 2,
+          "animation": "goalkeeper_ready",
+          "meshes": 10,
+          "framing": {
+            "minX": 77.24017960006883,
+            "maxX": 349.1085946962422,
+            "minY": 71.13296894903182,
+            "maxY": 611.7521553482027,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f726312609590922ff4edc450310b6c10040450287544162c13837e0691e590f",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_ready",
+        "animation": "goalkeeper_ready",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.34792849328356035,
+          0.005127513188411201,
+          -0.10939604352261288
+        ],
+        "max": [
+          0.34793350332804207,
+          1.620455983951798,
+          0.4567204009883927
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_roll",
+      "file": "contact-sheets/goalkeeper_roll.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "1297e4047168c1ec808a43af723153a33c28b212a1a5a2a5c7099f9ea8e62a14",
+      "sheetSHA256": "b4114a51261f8cc01056974bccdf82eeebf2a01977f169f919b2db75c88b332c",
+      "times": [
+        0,
+        0.48,
+        0.9666666666666667,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_roll",
+          "time": 0,
+          "animation": "goalkeeper_roll",
+          "meshes": 22,
+          "framing": {
+            "minX": 87.37311258777275,
+            "maxX": 288.0481381909352,
+            "minY": 103.06273596384256,
+            "maxY": 564.5577901126895,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "97321de668ca77be6e90ff3dd819198b7c10f5954a83b3e04973cb81d6628695",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "goalkeeper_roll",
+          "time": 0.48,
+          "animation": "goalkeeper_roll",
+          "meshes": 20,
+          "framing": {
+            "minX": 52.576495790764056,
+            "maxX": 314.3113770914813,
+            "minY": 146.8962806522868,
+            "maxY": 573.8415588082975,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ff84689b72c01030ccf94ae4d6a76940aa89d0b08f019412e09c3476a53cb775",
+          "renderedDrawCalls": 20
+        },
+        {
+          "id": "goalkeeper_roll",
+          "time": 0.9666666666666667,
+          "animation": "goalkeeper_roll",
+          "meshes": 22,
+          "framing": {
+            "minX": 78.78752518261759,
+            "maxX": 391.5932813429779,
+            "minY": 232.48154072251302,
+            "maxY": 601.8427810483562,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fadc2c67554843e34feeda063120290f1b5324da3e0f29e697b1574722d3429f",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "goalkeeper_roll",
+          "time": 1.6,
+          "animation": "goalkeeper_roll",
+          "meshes": 10,
+          "framing": {
+            "minX": 75.2203048698389,
+            "maxX": 315.5837177022678,
+            "minY": 100.83895919091928,
+            "maxY": 576.4159490825025,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "b0a84c008c993421aed49b47d86d37ba4f0218bd1df7d335a3b679e3d923789e",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_roll",
+        "animation": "goalkeeper_roll",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.4341700570974987,
+          0.0051279638637096005,
+          -0.1523143160504995
+        ],
+        "max": [
+          0.4736283490262226,
+          1.622925319969941,
+          0.803922155283685
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_short_pass",
+      "file": "contact-sheets/goalkeeper_short_pass.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "c44ee45bd7394488674cd2fe60ae9ffdb95d30250401c05b78894a1d57e91881",
+      "sheetSHA256": "f147e34716938cc9d4fc10a504296451a741b895dc7dca8b46dca2e562380023",
+      "times": [
+        0,
+        0.5666666666666667,
+        0.8160000000000001,
+        1.2
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_short_pass",
+          "time": 0,
+          "animation": "goalkeeper_short_pass",
+          "meshes": 21,
+          "framing": {
+            "minX": 99.96701307463474,
+            "maxX": 327.64875373645407,
+            "minY": 91.34545752772594,
+            "maxY": 581.1364214516929,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "635b991fb388ac5ee22b9702ef9c4a7680f4471f1c24449587e11c5a27370146",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "goalkeeper_short_pass",
+          "time": 0.5666666666666667,
+          "animation": "goalkeeper_short_pass",
+          "meshes": 22,
+          "framing": {
+            "minX": 74.15605581487102,
+            "maxX": 389.6997441585413,
+            "minY": 90.7081995334319,
+            "maxY": 621.9503062713966,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "486fd40dc31326cc09530d82e4b43445e12524bd4b082b5360739a95df041ffd",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "goalkeeper_short_pass",
+          "time": 0.8160000000000001,
+          "animation": "goalkeeper_short_pass",
+          "meshes": 9,
+          "framing": {
+            "minX": 90.67815135349178,
+            "maxX": 386.0337213095912,
+            "minY": 91.9138906370423,
+            "maxY": 616.5199375623757,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "bb7d1b322e04aba84fd4f53a8846cecea33fc4de32ef1e139da8e1ab81df15be",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "goalkeeper_short_pass",
+          "time": 1.2,
+          "animation": "goalkeeper_short_pass",
+          "meshes": 10,
+          "framing": {
+            "minX": 100.96647188956915,
+            "maxX": 327.9416761156037,
+            "minY": 88.4463143653758,
+            "maxY": 581.0865600777817,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "60c4cce71cc5475e2328803d207c682a5d207aeca7b16758189e01a1f473a19e",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_short_pass",
+        "animation": "goalkeeper_short_pass",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.44579965826452483,
+          0.005098395162039296,
+          -0.3160629358313818
+        ],
+        "max": [
+          0.36870999652457426,
+          1.644148272304093,
+          0.695251228793974
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_overarm_throw",
+      "file": "contact-sheets/goalkeeper_overarm_throw.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "67559062d22870d1871da2163b4b9bc02c09c0c260bf2fd5957abd8df5421b49",
+      "sheetSHA256": "ce3e5fdaf4a299a84e28276f28e5cab494c4f585af48a2412d19ff2b50ceff89",
+      "times": [
+        0,
+        0.51,
+        0.9666666666666667,
+        1.7
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_overarm_throw",
+          "time": 0,
+          "animation": "goalkeeper_overarm_throw",
+          "meshes": 22,
+          "framing": {
+            "minX": 120.16929104232948,
+            "maxX": 322.8676777453422,
+            "minY": 130.72537731828797,
+            "maxY": 584.7212118303684,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f078e83ccee0f7968a138277bfb238fe24366f5d17c9aa9e5cd27eb67a5dad8e",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "goalkeeper_overarm_throw",
+          "time": 0.51,
+          "animation": "goalkeeper_overarm_throw",
+          "meshes": 20,
+          "framing": {
+            "minX": 83.51399862356988,
+            "maxX": 369.4012878573911,
+            "minY": 91.73585257688146,
+            "maxY": 598.6527348350531,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "5d6f987eebd66d04e9066c239efb30be9ed49af8acddf2d2c48d200d093e5115",
+          "renderedDrawCalls": 20
+        },
+        {
+          "id": "goalkeeper_overarm_throw",
+          "time": 0.9666666666666667,
+          "animation": "goalkeeper_overarm_throw",
+          "meshes": 22,
+          "framing": {
+            "minX": 108.04041105168618,
+            "maxX": 371.8614693512814,
+            "minY": 115.14563644521007,
+            "maxY": 601.4653716211113,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e51d68131046d3db95774214b5c2f9822c9317385730e20be9b7cd5ccf3c30b5",
+          "renderedDrawCalls": 22
+        },
+        {
+          "id": "goalkeeper_overarm_throw",
+          "time": 1.7,
+          "animation": "goalkeeper_overarm_throw",
+          "meshes": 10,
+          "framing": {
+            "minX": 110.89785358044011,
+            "maxX": 360.27411452928123,
+            "minY": 129.0134605336642,
+            "maxY": 600.783984830916,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "cb8b182c31f8db2f5585beb6a1adf4cddd42545d0379e282fc5f49f66094e702",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_overarm_throw",
+        "animation": "goalkeeper_overarm_throw",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.49185378638377986,
+          0.005038972476537598,
+          -0.21476766628884852
+        ],
+        "max": [
+          0.4260803993077542,
+          1.7650265411084456,
+          0.5859853486332025
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_catch_high",
+      "file": "contact-sheets/goalkeeper_catch_high.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "e34a93d31b575c38d21e12d26b86ef283e3b11561697c8e2ad310e6d3c0680d9",
+      "sheetSHA256": "7d461ef855f34ab8513963dd2e814efec43433716eae2e233e6bd8c6160d7901",
+      "times": [
+        0,
+        0.6333333333333333,
+        1.02,
+        1.5
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_catch_high",
+          "time": 0,
+          "animation": "goalkeeper_catch_high",
+          "meshes": 10,
+          "framing": {
+            "minX": 86.31266241068344,
+            "maxX": 339.3836861501142,
+            "minY": 178.89583437147434,
+            "maxY": 620.4184548157288,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "23ec90532141846521d46c7d4c2754196f55197e067ed0da62609c09c26d753a",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_catch_high",
+          "time": 0.6333333333333333,
+          "animation": "goalkeeper_catch_high",
+          "meshes": 21,
+          "framing": {
+            "minX": 116.11359684238785,
+            "maxX": 291.3845466500643,
+            "minY": 59.620472941554546,
+            "maxY": 528.3160194861989,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6276728ca661e31943f568956d030de63b29bf3f6cb8033ad034c85b77d06ade",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "goalkeeper_catch_high",
+          "time": 1.02,
+          "animation": "goalkeeper_catch_high",
+          "meshes": 19,
+          "framing": {
+            "minX": 106.27274687066772,
+            "maxX": 324.7280318510972,
+            "minY": 193.2302277124056,
+            "maxY": 616.6381825314535,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d2b06af0cd882884cae20672749833d0c4a20eb841f09392d8dd04e07128f6c7",
+          "renderedDrawCalls": 19
+        },
+        {
+          "id": "goalkeeper_catch_high",
+          "time": 1.5,
+          "animation": "goalkeeper_catch_high",
+          "meshes": 21,
+          "framing": {
+            "minX": 98.4421755198276,
+            "maxX": 331.4225637011997,
+            "minY": 178.9406300498978,
+            "maxY": 619.2972017294449,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "3e57f27921b0197355bf294317ce103e4c396f4ba637e4e8ab4f9ec996493329",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_catch_high",
+        "animation": "goalkeeper_catch_high",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.4252404826453936,
+          0.005006930083130522,
+          -0.16894900780414662
+        ],
+        "max": [
+          0.4253921432876371,
+          2.0533207787263024,
+          0.4699082369433252
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_punch",
+      "file": "contact-sheets/goalkeeper_punch.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "8e6c721d0204318b8f8e292373a80f56108763c24ffcde63438e79c9cbefbc34",
+      "sheetSHA256": "fbd61e442a00591d09a55c8294f9d391389786edb8102df3e1d730193bf4e486",
+      "times": [
+        0,
+        0.6333333333333333,
+        1.02,
+        1.5
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_punch",
+          "time": 0,
+          "animation": "goalkeeper_punch",
+          "meshes": 10,
+          "framing": {
+            "minX": 86.98356846320631,
+            "maxX": 329.8401760081319,
+            "minY": 179.2044539597666,
+            "maxY": 602.1299232308185,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "7aab2178a294eaba9563bccded5fb9a8beefbdafe85c0a62ad806d51c0a03ce1",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_punch",
+          "time": 0.6333333333333333,
+          "animation": "goalkeeper_punch",
+          "meshes": 21,
+          "framing": {
+            "minX": 108.95942308196841,
+            "maxX": 324.99607966768593,
+            "minY": 74.6721406246338,
+            "maxY": 518.2180734754706,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c4d719729f83afb476a853dba7e87efb5a004e917b89f28cdf600081966d9e64",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "goalkeeper_punch",
+          "time": 1.02,
+          "animation": "goalkeeper_punch",
+          "meshes": 8,
+          "framing": {
+            "minX": 104.46031194641213,
+            "maxX": 334.63151471104686,
+            "minY": 192.8636815945361,
+            "maxY": 603.4126535165352,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c76d6cc9afc1dc0f9eaacf051be1daf20447d212f5148fb922165faf7cbc5591",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "goalkeeper_punch",
+          "time": 1.5,
+          "animation": "goalkeeper_punch",
+          "meshes": 10,
+          "framing": {
+            "minX": 98.62534766411939,
+            "maxX": 322.09994110171664,
+            "minY": 179.24948781707457,
+            "maxY": 601.0996938603076,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0e684b47ddfbdcfe7edcab734a0b93bcd6a84b3a454b4e4158871b6af732efa8",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_punch",
+        "animation": "goalkeeper_punch",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.4247451585454204,
+          0.004999409008585426,
+          -0.16805446595865853
+        ],
+        "max": [
+          0.4256696513788034,
+          2.014494251391393,
+          0.535542041494525
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_catch_low",
+      "file": "contact-sheets/goalkeeper_catch_low.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "672deee0976b6817c00d47a72b9feea4abc91c8b0145a0c1cd2c351b2b64aadc",
+      "sheetSHA256": "da7b49eb8b4cf45e1a3a589a54b82cfbeae1871887b9a3879582038c8c067489",
+      "times": [
+        0,
+        0.6333333333333333,
+        1.02,
+        1.5
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_catch_low",
+          "time": 0,
+          "animation": "goalkeeper_catch_low",
+          "meshes": 10,
+          "framing": {
+            "minX": 63.80660490565946,
+            "maxX": 326.27021768535,
+            "minY": 72.61053235130657,
+            "maxY": 598.6848396546646,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "a4ab755dac3ac7a5e2dcbb337b362565adbc8e4327150be4650fea2ec1be4877",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_catch_low",
+          "time": 0.6333333333333333,
+          "animation": "goalkeeper_catch_low",
+          "meshes": 23,
+          "framing": {
+            "minX": 88.85461829495925,
+            "maxX": 355.2799983013,
+            "minY": 213.6966749254547,
+            "maxY": 621.3042528989292,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "abd5d029bc56e1b73e9cf8b948200a08ddc4934c62b3119ac3aaff0b22e541d9",
+          "renderedDrawCalls": 23
+        },
+        {
+          "id": "goalkeeper_catch_low",
+          "time": 1.02,
+          "animation": "goalkeeper_catch_low",
+          "meshes": 21,
+          "framing": {
+            "minX": 84.87663398629056,
+            "maxX": 334.1922032202695,
+            "minY": 157.82136842225395,
+            "maxY": 606.6977833656513,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "c683d157d21ed861e29dd752a48413c5c1f67745d1db19709ea338b33e955afa",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "goalkeeper_catch_low",
+          "time": 1.5,
+          "animation": "goalkeeper_catch_low",
+          "meshes": 21,
+          "framing": {
+            "minX": 79.5913434072687,
+            "maxX": 313.7214559142672,
+            "minY": 73.38548831093145,
+            "maxY": 595.5928394156685,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "66bd956b51bfccfc9eb61870392616aaaeaf29ff5998f580fcf584e88f763aed",
+          "renderedDrawCalls": 21
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_catch_low",
+        "animation": "goalkeeper_catch_low",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.3378999317584619,
+          0.005044223202494903,
+          -0.10968605456678703
+        ],
+        "max": [
+          0.3375399142130482,
+          1.6177615981025448,
+          0.6846176415009201
+        ]
+      }
+    },
+    {
+      "id": "goalkeeper_getup",
+      "file": "contact-sheets/goalkeeper_getup.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "5afcfa3befc71e834b1f900d68d59cd3ea2a32769973d8b93ee4f343d2351af2",
+      "sheetSHA256": "fe05170941cecafbdf92d2d51fbbe5248bf3ce957b6598c4fc0f98de314c8e22",
+      "times": [
+        0,
+        0.528,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "goalkeeper_getup",
+          "time": 0,
+          "animation": "goalkeeper_getup",
+          "meshes": 8,
+          "framing": {
+            "minX": 35.82052251427705,
+            "maxX": 369.86590031691503,
+            "minY": 291.15216298634283,
+            "maxY": 590.2739046141228,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e766b0cd0cbfd3dca6d77e06030a01a639e8bddda11e111e8f241d8034413d87",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "goalkeeper_getup",
+          "time": 0.528,
+          "animation": "goalkeeper_getup",
+          "meshes": 8,
+          "framing": {
+            "minX": 125.23977775577755,
+            "maxX": 380.57982387318754,
+            "minY": 221.40217425316706,
+            "maxY": 533.9238211083101,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "66f2c5228a371f770d09775384267e2e335277c8300f4f0282e2747e6f2f0678",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "goalkeeper_getup",
+          "time": 1.088,
+          "animation": "goalkeeper_getup",
+          "meshes": 10,
+          "framing": {
+            "minX": 175.6172970390158,
+            "maxX": 393.8719647890319,
+            "minY": 139.697818746017,
+            "maxY": 514.9672969275674,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "daa2ba95f56c9e6d4afb27b6bc7a18a376f4e8b525c44709ac95553c3b531166",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "goalkeeper_getup",
+          "time": 1.6,
+          "animation": "goalkeeper_getup",
+          "meshes": 10,
+          "framing": {
+            "minX": 176.39744280885958,
+            "maxX": 395.57845342373594,
+            "minY": 105.697452396003,
+            "maxY": 512.9248879849326,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "8694a9135c683dedc3e534f97df3c5f33d8719565e0bbd80ab19b52b1c30c94e",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "goalkeeper_getup",
+        "animation": "goalkeeper_getup",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.8798744507666054,
+          -0.2521319595743473,
+          -0.5103403227090918
+        ],
+        "max": [
+          0.3538555344768569,
+          1.6222274340252727,
+          0.4764122299367701
+        ]
+      }
+    },
+    {
+      "id": "celebrate_hop",
+      "file": "contact-sheets/celebrate_hop.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "2af8688e7c3d1592edef42adb7c0a08eb99e0bc3f75aff4533baa6d12a7dea77",
+      "sheetSHA256": "eede392f38639073b38d880768d985608210118fbb1cc97287455015b81a2c92",
+      "times": [
+        0,
+        0.5940000000000001,
+        1.2240000000000002,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "celebrate_hop",
+          "time": 0,
+          "animation": "celebrate_hop",
+          "meshes": 10,
+          "framing": {
+            "minX": 97.83296039512133,
+            "maxX": 301.8933541956619,
+            "minY": 133.16483830830242,
+            "maxY": 601.1384161543633,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "250bb25fb457621c5deec49aef62f4e94db6f0531c00b6cdb582a02b2fe775c0",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_hop",
+          "time": 0.5940000000000001,
+          "animation": "celebrate_hop",
+          "meshes": 8,
+          "framing": {
+            "minX": 79.85979538328353,
+            "maxX": 343.6939131956984,
+            "minY": 55.2560068515615,
+            "maxY": 556.3207579761964,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "0d03fffa3d0d32b63000d7030b4a6876e346ec00b1830e67185e59c285583df6",
+          "renderedDrawCalls": 8
+        },
+        {
+          "id": "celebrate_hop",
+          "time": 1.2240000000000002,
+          "animation": "celebrate_hop",
+          "meshes": 10,
+          "framing": {
+            "minX": 80.56725075797074,
+            "maxX": 347.1796334013892,
+            "minY": 128.03151972480495,
+            "maxY": 623.1763430972029,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "55a0ede747c5eeb9381d315452e88f094c85be41b8e24c8fb8cc01ab04ac17b8",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_hop",
+          "time": 1.8,
+          "animation": "celebrate_hop",
+          "meshes": 10,
+          "framing": {
+            "minX": 97.83296039512133,
+            "maxX": 301.8933541956619,
+            "minY": 133.16483830830242,
+            "maxY": 601.1384161543633,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "250bb25fb457621c5deec49aef62f4e94db6f0531c00b6cdb582a02b2fe775c0",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "celebrate_hop",
+        "animation": "celebrate_hop",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.401178102905264,
+          0.004186344790762231,
+          -0.13307368440145192
+        ],
+        "max": [
+          0.40356839256219423,
+          1.9051154195957323,
+          0.4399446359213892
+        ]
+      }
+    },
+    {
+      "id": "celebrate_clap",
+      "file": "contact-sheets/celebrate_clap.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "f9bfa177f75c0af416ae2965c806f0bf259b22e88512a1e22618a61999b56b32",
+      "sheetSHA256": "153d9fd4a456e54948c4c9af1313150a6c266c693c78ad4fca459c9be0d2c80c",
+      "times": [
+        0,
+        0.528,
+        1.088,
+        1.6
+      ],
+      "samples": [
+        {
+          "id": "celebrate_clap",
+          "time": 0,
+          "animation": "celebrate_clap",
+          "meshes": 10,
+          "framing": {
+            "minX": 78.7685181396492,
+            "maxX": 349.1706413314886,
+            "minY": 70.561370248429,
+            "maxY": 612.4777742894526,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "893b0480855e52348a59b156725e306149cdb2ec70e630559c162578ffd81ec9",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_clap",
+          "time": 0.528,
+          "animation": "celebrate_clap",
+          "meshes": 10,
+          "framing": {
+            "minX": 79.40938013947431,
+            "maxX": 350.065518948433,
+            "minY": 71.81870915294988,
+            "maxY": 612.1895238916593,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "9f83fe3f9b25e74626bf9a5176a39ee66027820c879fe7238cfb66e10c311a17",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_clap",
+          "time": 1.088,
+          "animation": "celebrate_clap",
+          "meshes": 10,
+          "framing": {
+            "minX": 77.75570616050183,
+            "maxX": 348.0250634638413,
+            "minY": 69.42203195354273,
+            "maxY": 612.717194618151,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "68b1785b4e9ac890b1f3b06cf0660e7678db126d78cabc7684ded83a1b66ee0f",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_clap",
+          "time": 1.6,
+          "animation": "celebrate_clap",
+          "meshes": 10,
+          "framing": {
+            "minX": 78.76851802502958,
+            "maxX": 349.1706412530519,
+            "minY": 70.56137050256247,
+            "maxY": 612.4777743196755,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d308af0ecac7500a31b725d38bdfc71d22a68a6b992a7ab743a3bb08bf8b8bed",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "celebrate_clap",
+        "animation": "celebrate_clap",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.34326316602588014,
+          0.005127974401145073,
+          -0.12403765184074922
+        ],
+        "max": [
+          0.34982328757120235,
+          1.6698115324974059,
+          0.4764295524332065
+        ]
+      }
+    },
+    {
+      "id": "celebrate_pump",
+      "file": "contact-sheets/celebrate_pump.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "a53d1ff68cb20859ad8ad5b1b593ef13875a9cfc87d294bbf5e8b11c5c807d65",
+      "sheetSHA256": "acedaad89b805de64f7425b9810b10444df4a99a27d7802aa199a072841d3b37",
+      "times": [
+        0,
+        0.5940000000000001,
+        1.2240000000000002,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "celebrate_pump",
+          "time": 0,
+          "animation": "celebrate_pump",
+          "meshes": 10,
+          "framing": {
+            "minX": 91.97405242216439,
+            "maxX": 315.1115952829714,
+            "minY": 74.2361738538102,
+            "maxY": 592.2160501604557,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fc7e09d56f09582b9fa33ad7980bac1c65d33f579793988003df73a9d434c140",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_pump",
+          "time": 0.5940000000000001,
+          "animation": "celebrate_pump",
+          "meshes": 10,
+          "framing": {
+            "minX": 81.98018617758356,
+            "maxX": 342.7725727833756,
+            "minY": 71.13465590497287,
+            "maxY": 604.5863656057672,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "ba85a14db2856a702ec927e73147915fd2ad7694ef66cf56a6e3cac1bc20b1c6",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_pump",
+          "time": 1.2240000000000002,
+          "animation": "celebrate_pump",
+          "meshes": 10,
+          "framing": {
+            "minX": 72.85811230361843,
+            "maxX": 345.8592351110825,
+            "minY": 69.94794462844392,
+            "maxY": 609.3043190728372,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f27134fa82b42ac0fcc26abcca95403f42914459f0daad57b57caa0a04e89364",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_pump",
+          "time": 1.8,
+          "animation": "celebrate_pump",
+          "meshes": 10,
+          "framing": {
+            "minX": 91.97405242216439,
+            "maxX": 315.1115952829714,
+            "minY": 74.2361738538102,
+            "maxY": 592.2160501604557,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "fc7e09d56f09582b9fa33ad7980bac1c65d33f579793988003df73a9d434c140",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "celebrate_pump",
+        "animation": "celebrate_pump",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.40086057414361487,
+          0.005115760798105505,
+          -0.12621193711057424
+        ],
+        "max": [
+          0.3544954741373413,
+          1.6658115243911742,
+          0.4101735139861189
+        ]
+      }
+    },
+    {
+      "id": "celebrate_turn",
+      "file": "contact-sheets/celebrate_turn.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "2f329257f1baf21aae22a89b96c2230e975ce66696a81e36cbe512ebb80f0868",
+      "sheetSHA256": "1ba624561a94f13d8255830c014dcac731d44fe9f30ad5711debd39b8e6323f3",
+      "times": [
+        0,
+        0.66,
+        1.36,
+        2
+      ],
+      "samples": [
+        {
+          "id": "celebrate_turn",
+          "time": 0,
+          "animation": "celebrate_turn",
+          "meshes": 10,
+          "framing": {
+            "minX": 90.40207352580761,
+            "maxX": 296.4895076820848,
+            "minY": 78.0301068247456,
+            "maxY": 589.8405399783128,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f03fa3e151f1dd1843621c258417ec68d903d73cf146996b45eba6c7259959ad",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "celebrate_turn",
+          "time": 0.66,
+          "animation": "celebrate_turn",
+          "meshes": 9,
+          "framing": {
+            "minX": 90.99016876679522,
+            "maxX": 346.06348889668044,
+            "minY": 79.84099321374495,
+            "maxY": 607.1377250434416,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "309be1eac1a212fa8d449015611e3ab6643473c49536542d4252b49c8286665d",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "celebrate_turn",
+          "time": 1.36,
+          "animation": "celebrate_turn",
+          "meshes": 9,
+          "framing": {
+            "minX": 75.39997293632054,
+            "maxX": 342.95099394597474,
+            "minY": 79.58479941882024,
+            "maxY": 608.8464038540053,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "6bdecf194735af827a5724038e895b180660fbe1857e57af9fd1b77f886635fb",
+          "renderedDrawCalls": 9
+        },
+        {
+          "id": "celebrate_turn",
+          "time": 2,
+          "animation": "celebrate_turn",
+          "meshes": 10,
+          "framing": {
+            "minX": 90.40207352580761,
+            "maxX": 296.4895076820848,
+            "minY": 78.0301068247456,
+            "maxY": 589.8405399783128,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "f03fa3e151f1dd1843621c258417ec68d903d73cf146996b45eba6c7259959ad",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "celebrate_turn",
+        "animation": "celebrate_turn",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.33312981325299007,
+          0.005091512023263836,
+          -0.15334573047786243
+        ],
+        "max": [
+          0.37130858288158014,
+          1.675454900102367,
+          0.4868618737396917
+        ]
+      }
+    },
+    {
+      "id": "disappointed",
+      "file": "contact-sheets/disappointed.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "d45ac0e613650a6ca74c31481e67e9aca9e865bb9f10a43bf587d2d9532004b1",
+      "sheetSHA256": "1fbbe398dbe6979d904310347a16c4b0142f52cdd1662ee8733be2f11a385bec",
+      "times": [
+        0,
+        0.7260000000000001,
+        1.4960000000000002,
+        2.2
+      ],
+      "samples": [
+        {
+          "id": "disappointed",
+          "time": 0,
+          "animation": "disappointed",
+          "meshes": 10,
+          "framing": {
+            "minX": 93.56392405619333,
+            "maxX": 313.3789667921643,
+            "minY": 58.24443051240179,
+            "maxY": 607.5613999503543,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1294a9c082a2c3e76f3a6eccc2de2dca64fcb846c6115de1a2826443fc0e9c6e",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "disappointed",
+          "time": 0.7260000000000001,
+          "animation": "disappointed",
+          "meshes": 10,
+          "framing": {
+            "minX": 99.03376385193341,
+            "maxX": 327.7484723704674,
+            "minY": 85.406986484559,
+            "maxY": 617.392283380215,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "3f27b07f448858588d60e5be531e9a4e2fe288818f7870e341d73382d75202c4",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "disappointed",
+          "time": 1.4960000000000002,
+          "animation": "disappointed",
+          "meshes": 10,
+          "framing": {
+            "minX": 98.98984720786862,
+            "maxX": 327.85522597556474,
+            "minY": 77.09399127631886,
+            "maxY": 617.4280505364818,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "e0c9a57d74b3e682a8d48651354225ffd366a6602652755a14dac66450d0de88",
+          "renderedDrawCalls": 10
+        },
+        {
+          "id": "disappointed",
+          "time": 2.2,
+          "animation": "disappointed",
+          "meshes": 10,
+          "framing": {
+            "minX": 93.56392410036995,
+            "maxX": 313.37896691106226,
+            "minY": 58.24443057368649,
+            "maxY": 607.5614000289802,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "1294a9c082a2c3e76f3a6eccc2de2dca64fcb846c6115de1a2826443fc0e9c6e",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "disappointed",
+        "animation": "disappointed",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.28830639601494096,
+          0.005125623096971213,
+          -0.11354688746946216
+        ],
+        "max": [
+          0.2895982270155002,
+          1.6650642832881577,
+          0.3738505959800308
+        ]
+      }
+    },
+    {
+      "id": "throw_in",
+      "file": "contact-sheets/throw_in.png",
+      "width": 844,
+      "height": 390,
+      "glbSHA256": "fa1826d6bc5360c66751ca0d18e0cf2abf6bc9a580793ecd119395522ee5ff50",
+      "sheetSHA256": "20c6b71a8bc0c56cc0f69467c21bd8499edcafefb27651136e4edb3ebe232b66",
+      "times": [
+        0,
+        0.54,
+        0.9666666666666667,
+        1.8
+      ],
+      "samples": [
+        {
+          "id": "throw_in",
+          "time": 0,
+          "animation": "throw_in",
+          "meshes": 23,
+          "framing": {
+            "minX": 113.40858147999704,
+            "maxX": 319.00212567197485,
+            "minY": 178.30585068102053,
+            "maxY": 602.443285329484,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "d107147574f49f633e43e30c67962421ef05be20db9188f2ee2596869a0bb706",
+          "renderedDrawCalls": 23
+        },
+        {
+          "id": "throw_in",
+          "time": 0.54,
+          "animation": "throw_in",
+          "meshes": 21,
+          "framing": {
+            "minX": 109.22357914849313,
+            "maxX": 290.6902406197493,
+            "minY": 117.88293802225915,
+            "maxY": 591.4013425589401,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "252056e405c6a1fc8540468dd95a013a29ab6b61ae276270517c922c50ea50cd",
+          "renderedDrawCalls": 21
+        },
+        {
+          "id": "throw_in",
+          "time": 0.9666666666666667,
+          "animation": "throw_in",
+          "meshes": 23,
+          "framing": {
+            "minX": 128.33395269043137,
+            "maxX": 327.1390339657659,
+            "minY": 118.58875099679045,
+            "maxY": 611.4560759776101,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "3bafea58f3b3a5ed90839250e30edac8be08f73037cc3869cd0b1a0a1a6423fb",
+          "renderedDrawCalls": 23
+        },
+        {
+          "id": "throw_in",
+          "time": 1.8,
+          "animation": "throw_in",
+          "meshes": 10,
+          "framing": {
+            "minX": 106.07108641862013,
+            "maxX": 314.8351946752562,
+            "minY": 178.3678444873715,
+            "maxY": 597.6335790974111,
+            "width": 422,
+            "height": 660,
+            "allBodyAndHeldBallVisible": true
+          },
+          "pngSHA256": "a15f9ded64bb128441a43e2fbb8087f36c88d8f0a2e7e667b1dc95340fc93696",
+          "renderedDrawCalls": 10
+        }
+      ],
+      "loaded": {
+        "id": "throw_in",
+        "animation": "throw_in",
+        "bones": "Hips",
+        "meshes": 2
+      },
+      "bounds": {
+        "min": [
+          -0.34920296984311106,
+          0.005104366763482172,
+          -0.3935790671644285
+        ],
+        "max": [
+          0.3507685960907674,
+          2.046499132909124,
+          0.5371188884454369
+        ]
+      }
+    }
+  ],
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390,
+      "id": "idle_scan",
+      "travel": true,
+      "overflow": false,
+      "errors": [],
+      "canvas": [
+        580,
+        202
+      ],
+      "screenshot": "preview-844x390.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "idle_scan",
+      "travel": true,
+      "overflow": false,
+      "errors": [],
+      "canvas": [
+        360,
+        398
+      ],
+      "screenshot": "preview-390x844.png"
+    }
+  ],
+  "brakeDemo": {
+    "from": "run",
+    "to": "run_brake",
+    "requestAt": 0.07,
+    "switchedAt": 0.6,
+    "alignBone": "LeftFoot",
+    "queuedState": {
+      "ok": true,
+      "reason": null,
+      "edge": {
+        "from": "run",
+        "to": "run_brake",
+        "trigger": "stop",
+        "blend": 0,
+        "earliest": 0,
+        "align": "plant",
+        "alignBone": "LeftFoot",
+        "matchPhase": 0,
+        "preserveVelocity": true,
+        "phase": 0,
+        "grounded": true
+      },
+      "pending": true,
+      "state": "run",
+      "time": 0.07,
+      "elapsed": 0.07,
+      "queued": {
+        "to": "run_brake",
+        "at": 0.6,
+        "trigger": "stop"
+      }
+    },
+    "transition": {
+      "ok": true,
+      "reason": null,
+      "edge": {
+        "from": "run",
+        "to": "run_brake",
+        "trigger": "stop",
+        "blend": 0,
+        "earliest": 0,
+        "align": "plant",
+        "alignBone": "LeftFoot",
+        "matchPhase": 0,
+        "preserveVelocity": true,
+        "phase": 0,
+        "grounded": true
+      },
+      "from": "run",
+      "pending": false,
+      "state": "run_brake",
+      "time": 0,
+      "elapsed": 0,
+      "queued": null,
+      "overshoot": 0
+    },
+    "source": {
+      "root": [
+        0,
+        0,
+        2.6999999999999997
+      ],
+      "positions": {
+        "Root": [
+          0,
+          0,
+          2.6999999999999997
+        ],
+        "Hips": [
+          -1.957053386771234e-9,
+          0.7480000386223971,
+          2.6999999999999997
+        ],
+        "Spine": [
+          -2.3749331937687905e-9,
+          0.9471124314835986,
+          2.7188216630775015
+        ],
+        "Chest": [
+          -3.0001034858675538e-9,
+          1.1248963328346009,
+          2.746979866267668
+        ],
+        "Neck": [
+          -3.364105219702022e-9,
+          1.2227110929495086,
+          2.7677710350641678
+        ],
+        "Head": [
+          -3.837307473686831e-9,
+          1.3498702810988885,
+          2.794799554499617
+        ],
+        "LeftArm": [
+          0.1599999967814954,
+          1.183585190300939,
+          2.7594545637725516
+        ],
+        "LeftForeArm": [
+          0.05052446465706677,
+          1.1589505366397173,
+          2.5138771989425592
+        ],
+        "LeftHand": [
+          0.22500001165132344,
+          1.0080000151098438,
+          2.58000002281033
+        ],
+        "RightArm": [
+          -0.1600000032185045,
+          1.183585187506152,
+          2.759454571318584
+        ],
+        "RightForeArm": [
+          -0.2241669304298824,
+          0.9226368944191965,
+          2.785695642493301
+        ],
+        "RightHand": [
+          -0.22499999503909243,
+          1.008000053944057,
+          3.0099999987148527
+        ],
+        "LeftUpLeg": [
+          0.0999999980429466,
+          0.7480000386223971,
+          2.7000000022202064
+        ],
+        "LeftLeg": [
+          0.10894211938126841,
+          0.44933320963502327,
+          2.9807457362247054
+        ],
+        "LeftFoot": [
+          0.11999999951556424,
+          0.08000003491115115,
+          3.0000000437984933
+        ],
+        "RightUpLeg": [
+          -0.10000000195705336,
+          0.7480000386223971,
+          2.699999997779793
+        ],
+        "RightLeg": [
+          -0.11425694061967784,
+          0.38754822533172106,
+          2.894862076587263
+        ],
+        "RightFoot": [
+          -0.12000000270927018,
+          0.24234896648535773,
+          2.5545913313534743
+        ]
+      },
+      "rotations": {
+        "Root": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Hips": [
+          0.04710645175236842,
+          -1.108870943733003e-8,
+          5.229302675835388e-10,
+          0.9988898749127962
+        ],
+        "Spine": [
+          0.07845909429457389,
+          -1.7706901383321828e-9,
+          1.6025976780810748e-9,
+          0.9969173338459291
+        ],
+        "Chest": [
+          0.10452846183715178,
+          1.2182545763752173e-8,
+          3.110470922069763e-9,
+          0.994521895518625
+        ],
+        "Neck": [
+          0.10452846183715178,
+          1.2182545763752173e-8,
+          3.110470922069763e-9,
+          0.994521895518625
+        ],
+        "Head": [
+          0.10452846183715178,
+          1.2182545763752173e-8,
+          3.110470922069763e-9,
+          0.994521895518625
+        ],
+        "LeftArm": [
+          0.6681674729339415,
+          0.3872602048079851,
+          0.08906457892738256,
+          0.6290065680623981
+        ],
+        "LeftForeArm": [
+          -0.20446801355155625,
+          0.11912335856894533,
+          0.37909443435837176,
+          0.8945892167447813
+        ],
+        "LeftHand": [
+          -0.20446801355155625,
+          0.11912335856894533,
+          0.37909443435837176,
+          0.8945892167447813
+        ],
+        "RightArm": [
+          -0.0537349603504842,
+          -0.03944194299129038,
+          -0.11779208099763543,
+          0.9907986237492714
+        ],
+        "RightForeArm": [
+          -0.8168118053692567,
+          0.06908156127765015,
+          -0.10323942627456369,
+          0.5633718428918478
+        ],
+        "RightHand": [
+          -0.8168118053692567,
+          0.06908156127765015,
+          -0.10323942627456369,
+          0.5633718428918478
+        ],
+        "LeftUpLeg": [
+          -0.36820996896053987,
+          -0.005510890735780603,
+          0.013913383939459277,
+          0.9296222171337827
+        ],
+        "LeftLeg": [
+          -0.026025238032475636,
+          -0.0003895119487911852,
+          0.014959961493913767,
+          0.999549265828301
+        ],
+        "LeftFoot": [
+          -1.3251290249370079e-8,
+          -4.606249752532666e-10,
+          -1.2906539167763593e-10,
+          1
+        ],
+        "RightUpLeg": [
+          -0.24506618960721793,
+          0.004844654172605282,
+          -0.019161950256568094,
+          0.9693048600413144
+        ],
+        "RightLeg": [
+          0.5509199028187004,
+          -0.010891000088974012,
+          -0.01649354811616549,
+          0.8343240435621135
+        ],
+        "RightFoot": [
+          0.2247455366653364,
+          1.6989147024814334e-9,
+          -2.182524957465762e-9,
+          0.9744174894515235
+        ]
+      }
+    },
+    "target": {
+      "root": [
+        0,
+        0,
+        2.6999999999999997
+      ],
+      "positions": {
+        "Root": [
+          0,
+          0,
+          2.6999999999999997
+        ],
+        "Hips": [
+          0,
+          0.7480000257492065,
+          2.6999999999999997
+        ],
+        "Spine": [
+          0,
+          0.9471124186104081,
+          2.718821663077501
+        ],
+        "Chest": [
+          0,
+          1.1248963199614106,
+          2.7469798662676657
+        ],
+        "Neck": [
+          0,
+          1.2227110800763183,
+          2.7677710350641647
+        ],
+        "Head": [
+          0,
+          1.3498702682256984,
+          2.794799554499613
+        ],
+        "LeftArm": [
+          0.16,
+          1.1835851760303553,
+          2.759454567545565
+        ],
+        "LeftForeArm": [
+          0.050524437959097085,
+          1.1589505251940584,
+          2.5138772157686127
+        ],
+        "LeftHand": [
+          0.22500000947392093,
+          1.0080000212031466,
+          2.580000014974375
+        ],
+        "RightArm": [
+          -0.16,
+          1.1835851760303553,
+          2.759454567545565
+        ],
+        "RightForeArm": [
+          -0.22416693085035172,
+          0.9226368852754046,
+          2.785695653012031
+        ],
+        "RightHand": [
+          -0.22499999499980444,
+          1.0080000484136755,
+          3.010000007860163
+        ],
+        "LeftUpLeg": [
+          0.1,
+          0.7480000257492065,
+          2.6999999999999997
+        ],
+        "LeftLeg": [
+          0.10894212040444576,
+          0.44933320541975247,
+          2.9807457432448414
+        ],
+        "LeftFoot": [
+          0.11999999976309206,
+          0.0800000293220825,
+          3.0000000249120373
+        ],
+        "RightUpLeg": [
+          -0.1,
+          0.7480000257492065,
+          2.6999999999999997
+        ],
+        "RightLeg": [
+          -0.11425693917943062,
+          0.38754823977738306,
+          2.894862129303492
+        ],
+        "RightFoot": [
+          -0.1200000009056252,
+          0.2423490005553809,
+          2.5545913756895544
+        ]
+      },
+      "rotations": {
+        "Root": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Hips": [
+          0.0471064517523678,
+          0,
+          0,
+          0.9988898749127965
+        ],
+        "Spine": [
+          0.07845909429456943,
+          0,
+          0,
+          0.9969173338459293
+        ],
+        "Chest": [
+          0.10452846183714762,
+          0,
+          0,
+          0.9945218955186257
+        ],
+        "Neck": [
+          0.10452846183714762,
+          0,
+          0,
+          0.9945218955186257
+        ],
+        "Head": [
+          0.10452846183714762,
+          0,
+          0,
+          0.9945218955186257
+        ],
+        "LeftArm": [
+          0.6681674770021052,
+          0.3872602777412336,
+          0.08906457777604185,
+          0.6290065190011939
+        ],
+        "LeftForeArm": [
+          -0.20446798375070155,
+          0.11912339028834859,
+          0.3790944986248882,
+          0.8945891920985171
+        ],
+        "LeftHand": [
+          -0.20446798375070155,
+          0.11912339028834859,
+          0.3790944986248882,
+          0.8945891920985171
+        ],
+        "RightArm": [
+          -0.05373498735667073,
+          -0.03944194246837837,
+          -0.1177920870089647,
+          0.990798621590771
+        ],
+        "RightForeArm": [
+          -0.8168118093979957,
+          0.06908156437866421,
+          -0.10323943085846621,
+          0.5633718358304654
+        ],
+        "RightHand": [
+          -0.8168118093979957,
+          0.06908156437866421,
+          -0.10323943085846621,
+          0.5633718358304654
+        ],
+        "LeftUpLeg": [
+          -0.3682099833404206,
+          -0.005510890569442388,
+          0.013913382818707099,
+          0.929622211455879
+        ],
+        "LeftLeg": [
+          -0.026025202991900524,
+          -0.00038951142229855197,
+          0.014959960404000943,
+          0.9995492667571685
+        ],
+        "LeftFoot": [
+          -2.3158163255854604e-8,
+          -5.353375086384162e-10,
+          1.253734181361095e-10,
+          0.9999999999999998
+        ],
+        "RightUpLeg": [
+          -0.2450662574448489,
+          0.004844655752766401,
+          -0.01916195198523112,
+          0.9693048428480733
+        ],
+        "RightLeg": [
+          0.5509199268493785,
+          -0.010891001931057341,
+          -0.016493549372278503,
+          0.8343240276453252
+        ],
+        "RightFoot": [
+          0.22474557562764613,
+          1.3918227266799615e-9,
+          -9.369983783104985e-10,
+          0.9744174804650202
+        ]
+      }
+    },
+    "worldPositionJumpM": 0,
+    "maxBonePositionJumpM": 5.594378978793165e-8,
+    "maxBoneAngleJumpDeg": 0.000009956626120759427,
+    "incomingVelocityMps": [
+      0,
+      0,
+      4.499999999999997
+    ],
+    "outgoingVelocityMps": [
+      0,
+      0,
+      4.499999999999997
+    ],
+    "velocityDifferenceMps": 0,
+    "beforeState": "run",
+    "afterState": "run_brake",
+    "sourceGLBSHA256": "acc2ac87de5070c79992ea1d662e7a59704197fdd84e4b0c281febca99a94c46",
+    "targetGLBSHA256": "ff3021599d1234059e888cc79d2dae4de0b2501b19d01738860a4cee12a94d3c"
+  },
+  "errors": [],
+  "failedRequests": []
+}
