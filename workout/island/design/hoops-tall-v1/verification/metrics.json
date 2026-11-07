@@ -1,0 +1,6170 @@
+{
+  "schemaVersion": 1,
+  "method": "Independent quaternion FK and actual delivered-mesh LBS; metres; no Root/reference path added to reach.",
+  "limitations": "Bone-length preservation and sampled edge stretch do not prove universal skin nonintersection, foot locking or live-ball contact.",
+  "clipCount": 98,
+  "clips": [
+    {
+      "library": "v9",
+      "id": "basket_cut_left",
+      "path": "runtime/keyframes/v9/basket_cut_left.json.gz",
+      "sha256": "eefb6b0fe4f9a920a560878109d0061dba69c09c5c4cc6c0e932ddd719e3f90f",
+      "bytes": 18858,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "basket_cut_right",
+      "path": "runtime/keyframes/v9/basket_cut_right.json.gz",
+      "sha256": "f9edf600a23af17e5d11364bd47e49d62fca22b8d3e038939daf71c65670ac26",
+      "bytes": 18851,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "block_two_hands",
+      "path": "runtime/keyframes/v9/block_two_hands.json.gz",
+      "sha256": "a2aa955eb386b03b8f1ae97e9dbc6e40c27d4ad55422bd8a5e2e7b40cf107e05",
+      "bytes": 12121,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "brake",
+      "path": "runtime/keyframes/v9/brake.json.gz",
+      "sha256": "1ca60516acd70ba678dec9a08bd12760b87fa2c192384c5e013dd0de4d030731",
+      "bytes": 21077,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "brake_ball",
+      "path": "runtime/keyframes/v9/brake_ball.json.gz",
+      "sha256": "19fc1f567673db733c93fe6d09ac02a3fd7d90e3d6f4ac10464e4ab2379d7542",
+      "bytes": 24179,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "celebrate_chest",
+      "path": "runtime/keyframes/v9/celebrate_chest.json.gz",
+      "sha256": "1a2015a81f49e6cca637a4955df4a9001fe3a3cfcc46e8aac04fee9c333b33e8",
+      "bytes": 22174,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "celebrate_fist",
+      "path": "runtime/keyframes/v9/celebrate_fist.json.gz",
+      "sha256": "0cbd901adc147c82f3adb5c3acdee04e80f28948f5757b4f06dd1407a255bb98",
+      "bytes": 24083,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "celebrate_jump",
+      "path": "runtime/keyframes/v9/celebrate_jump.json.gz",
+      "sha256": "f0a5fba95e145c0906e62bf3664507a35ddff373effe2cbbbaf96f0da240d23b",
+      "bytes": 23652,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "celebrate_point",
+      "path": "runtime/keyframes/v9/celebrate_point.json.gz",
+      "sha256": "1c31f4090764f6028cfcafc4e2fce4c1c3cd4c559389abe4e0c3a681eba1ecac",
+      "bytes": 21634,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "closeout",
+      "path": "runtime/keyframes/v9/closeout.json.gz",
+      "sha256": "5b464cd618c2fed65344d39f2d756e1a5fb5c41d644953e71469fd7a1d565fb7",
+      "bytes": 17702,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "cut_135_left",
+      "path": "runtime/keyframes/v9/cut_135_left.json.gz",
+      "sha256": "aa4378cd3b8c4e6a4f45c768e29604c27be459654a2172eda1ae6892431d497c",
+      "bytes": 19629,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_135_left_ball",
+      "path": "runtime/keyframes/v9/cut_135_left_ball.json.gz",
+      "sha256": "40bbaa753c065c8cdf99c63fed27d32a4faca9198d4e61e174b604e7ca8847ab",
+      "bytes": 23268,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_135_right",
+      "path": "runtime/keyframes/v9/cut_135_right.json.gz",
+      "sha256": "1f92b4bfb6ebe574ca136d55ee05ae05e0528b72030b4a2efd839dc74e6dfdb2",
+      "bytes": 19627,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_135_right_ball",
+      "path": "runtime/keyframes/v9/cut_135_right_ball.json.gz",
+      "sha256": "db2f6c02d05f9fa581a32bfe30442fcac2964a472683499cfaa5c45e28efe788",
+      "bytes": 23287,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_180_left",
+      "path": "runtime/keyframes/v9/cut_180_left.json.gz",
+      "sha256": "61139e5f7c51df055b19081426d742bf094fd835977b9fd97c3fb8227d2fb533",
+      "bytes": 19523,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_180_left_ball",
+      "path": "runtime/keyframes/v9/cut_180_left_ball.json.gz",
+      "sha256": "d0aa9680f5ddb7734f433a885ccf6c73c4549e16c38390859b3d0e9017b130c5",
+      "bytes": 23061,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_180_right",
+      "path": "runtime/keyframes/v9/cut_180_right.json.gz",
+      "sha256": "e0076b395e0d85026ae19a19f41d9464e4fa9e4260e9e06ff6635f1a81328954",
+      "bytes": 19529,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_180_right_ball",
+      "path": "runtime/keyframes/v9/cut_180_right_ball.json.gz",
+      "sha256": "c80e530ba001283db0cb952a47a3683046380330697ff96a0579f7bfef38cf49",
+      "bytes": 23096,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_45_left",
+      "path": "runtime/keyframes/v9/cut_45_left.json.gz",
+      "sha256": "b78907fe92f617d55082f6cbbeb08ea0c401200695738a1beb0b0a9bf720eef0",
+      "bytes": 19603,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_45_left_ball",
+      "path": "runtime/keyframes/v9/cut_45_left_ball.json.gz",
+      "sha256": "a6546dde20b417674adfc82c31e5f243a808533cf76efcf417128c776d6bbc8c",
+      "bytes": 23198,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_45_right",
+      "path": "runtime/keyframes/v9/cut_45_right.json.gz",
+      "sha256": "c48141dcd050df848622090aa60adb3871318a326d83346e3feb0227d66059bc",
+      "bytes": 19599,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_45_right_ball",
+      "path": "runtime/keyframes/v9/cut_45_right_ball.json.gz",
+      "sha256": "e0c9b2bedf49617b81bae402b730ce84399d2fed76f2d860868ac54d45d30b38",
+      "bytes": 23206,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_90_left",
+      "path": "runtime/keyframes/v9/cut_90_left.json.gz",
+      "sha256": "7ea895e7d90ce1aafaa7b14baba658531103ad84c57cb18217cc4482c53bd0cd",
+      "bytes": 19505,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_90_left_ball",
+      "path": "runtime/keyframes/v9/cut_90_left_ball.json.gz",
+      "sha256": "1939d837eb07b10153316ba65cbdacf7d4b1d78c388699d8b1e2a171dfd94e89",
+      "bytes": 23047,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_90_right",
+      "path": "runtime/keyframes/v9/cut_90_right.json.gz",
+      "sha256": "04fef85928b23d041e15b7d7fc7f0bf81c9073f409a118ea8e55fd8174b13f8e",
+      "bytes": 19489,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "cut_90_right_ball",
+      "path": "runtime/keyframes/v9/cut_90_right_ball.json.gz",
+      "sha256": "3c252d632f8f4d8a3438e2615ddd9f76778e16440ba6c6398b4fa1540721bff4",
+      "bytes": 23096,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "defensive_slide_left",
+      "path": "runtime/keyframes/v9/defensive_slide_left.json.gz",
+      "sha256": "f9931f770276efcc26ee297fa4a628ca8d8516ad8daccaa438993d74ee3409ae",
+      "bytes": 13581,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "defensive_slide_right",
+      "path": "runtime/keyframes/v9/defensive_slide_right.json.gz",
+      "sha256": "eaecfb43266a7d85bf3884bfa3f772c44ddd5153fe86f60e0422fb0379a0a23f",
+      "bytes": 13579,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "defensive_stance",
+      "path": "runtime/keyframes/v9/defensive_stance.json.gz",
+      "sha256": "f15b3b6c9eb5e5fbd739d70641cfbaa837d83ea612364838d9380404d58b37be",
+      "bytes": 14913,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "disappointed",
+      "path": "runtime/keyframes/v9/disappointed.json.gz",
+      "sha256": "50270eed776901e032c7bbf45d57f8af875b28644af9403b6ef7254427ce97ee",
+      "bytes": 12100,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 85
+    },
+    {
+      "library": "v9",
+      "id": "dribble_backward",
+      "path": "runtime/keyframes/v9/dribble_backward.json.gz",
+      "sha256": "c1f08d8c37cb42e72b8d62df01703fda7b4a14df21704bf30bea56c636b6f2ed",
+      "bytes": 12621,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_backward_left",
+      "path": "runtime/keyframes/v9/dribble_backward_left.json.gz",
+      "sha256": "1b2944b1c3e5e379e7528d63a039f1a570042af520cef3ec66ecd20df1316a36",
+      "bytes": 13088,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_backward_right",
+      "path": "runtime/keyframes/v9/dribble_backward_right.json.gz",
+      "sha256": "edec6487be54c7c40bc7258ea3e24428ac0cd27d03b3adcbed7befd0d9abcdf5",
+      "bytes": 13097,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_between_legs_left",
+      "path": "runtime/keyframes/v9/dribble_between_legs_left.json.gz",
+      "sha256": "2875feef3a6fd36f446f3d7f528e897b74c964a4f6915301288a73461a6d04cb",
+      "bytes": 16672,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_between_legs_right",
+      "path": "runtime/keyframes/v9/dribble_between_legs_right.json.gz",
+      "sha256": "a5b0bee82519b033663585292c523a61405fa2a817f970b534935109184032cd",
+      "bytes": 16672,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_crossover_left",
+      "path": "runtime/keyframes/v9/dribble_crossover_left.json.gz",
+      "sha256": "ead4a510cc626c1eb2b2f0e8bb88b26cdead51c10a7fd951cff3bc21089c9520",
+      "bytes": 16366,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_crossover_right",
+      "path": "runtime/keyframes/v9/dribble_crossover_right.json.gz",
+      "sha256": "24940d6f729e894007aafe2841a3f796c8eda4513897d223e0369633c0c9a16a",
+      "bytes": 16365,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_forward",
+      "path": "runtime/keyframes/v9/dribble_forward.json.gz",
+      "sha256": "0a6bf7420db88171bcf42a5e8826517288ba46ec25d4547f8c2f113a5ba553b5",
+      "bytes": 12603,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_forward_left",
+      "path": "runtime/keyframes/v9/dribble_forward_left.json.gz",
+      "sha256": "947cf37a7f8e1cd8df41c342513cfacf13fc0e70b3e880684699d2cb608bb1a0",
+      "bytes": 13093,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_forward_right",
+      "path": "runtime/keyframes/v9/dribble_forward_right.json.gz",
+      "sha256": "60087adb5710e9621abe0f1dd3f4335aa382b275e8d0a21ad907b081213ee1f7",
+      "bytes": 13082,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_hesitation_left",
+      "path": "runtime/keyframes/v9/dribble_hesitation_left.json.gz",
+      "sha256": "d4223ad35efd4b7bf5b3f8497f45dca7a0f5214fa555531d3efe214c67422d6f",
+      "bytes": 17598,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_hesitation_right",
+      "path": "runtime/keyframes/v9/dribble_hesitation_right.json.gz",
+      "sha256": "832f5568164ecff650559b3982183377744d4b61ea4a532983a64dcba090084d",
+      "bytes": 17619,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "dribble_left",
+      "path": "runtime/keyframes/v9/dribble_left.json.gz",
+      "sha256": "aa4a9538b344da8256fc7b38aa301d03590c40f49cd0a3831d592ed3e13a5496",
+      "bytes": 12792,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_right",
+      "path": "runtime/keyframes/v9/dribble_right.json.gz",
+      "sha256": "eeefb68a09c7598cf1caa058acc4a3f745d71ccd4a56cd59eb486cf869c17f0a",
+      "bytes": 12822,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_walk_left",
+      "path": "runtime/keyframes/v9/dribble_walk_left.json.gz",
+      "sha256": "3750e692d3a95e0dbd380e2825482d324bc31eefc21cb0b860870e1c5d945ad4",
+      "bytes": 12638,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dribble_walk_right",
+      "path": "runtime/keyframes/v9/dribble_walk_right.json.gz",
+      "sha256": "3720c5749e5b9f256a0a9e122ab5014743e9a9800d865e32b047daafdab90630",
+      "bytes": 12654,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 37
+    },
+    {
+      "library": "v9",
+      "id": "dunk_one_hand",
+      "path": "runtime/keyframes/v9/dunk_one_hand.json.gz",
+      "sha256": "3ace24fd4e2d2ae05c5683a61f505e7e618c1faec7048cab66686f27bf1176a9",
+      "bytes": 30261,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "dunk_two_hands",
+      "path": "runtime/keyframes/v9/dunk_two_hands.json.gz",
+      "sha256": "9e2e7ac90a6f39de7d5d537f2fa66533b30010e3bce45784729c5980107d3cc1",
+      "bytes": 30231,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "euro_left",
+      "path": "runtime/keyframes/v9/euro_left.json.gz",
+      "sha256": "1f9f3af17201c38d95c5dfdfc77af932c287f5b9cd437125f0c6f6ddc0b163fe",
+      "bytes": 32568,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "euro_right",
+      "path": "runtime/keyframes/v9/euro_right.json.gz",
+      "sha256": "2089e5cea39e14cfd27a2523208fb53ab67a570433f34891f5ab430780e47de2",
+      "bytes": 32583,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "floater",
+      "path": "runtime/keyframes/v9/floater.json.gz",
+      "sha256": "8a9f855dfa40b12c6844240c85d3b2913ce8ccaef9c9802bc666a399aac0ab59",
+      "bytes": 25763,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 61
+    },
+    {
+      "library": "v9",
+      "id": "free_throw",
+      "path": "runtime/keyframes/v9/free_throw.json.gz",
+      "sha256": "de694005c72f9c3e239aa7a40061462eb37b1672e4dd3e95f6e791dd6cd8b6ca",
+      "bytes": 27516,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "get_up_back",
+      "path": "runtime/keyframes/v9/get_up_back.json.gz",
+      "sha256": "74ce7c1d3fc2a3bde8ce4c91030ead1111ee76b913296f42ca59fa439a3ff140",
+      "bytes": 26009,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 85
+    },
+    {
+      "library": "v9",
+      "id": "get_up_front",
+      "path": "runtime/keyframes/v9/get_up_front.json.gz",
+      "sha256": "f93caa8770245512da380e6a04e27b7cc9dba86bead1fc4f91e3fe3639da2d8c",
+      "bytes": 26106,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 85
+    },
+    {
+      "library": "v9",
+      "id": "hands_on_hips",
+      "path": "runtime/keyframes/v9/hands_on_hips.json.gz",
+      "sha256": "5ffd49db6451e96beda547dfa50f26ed6e5a44c5873d7cea9979bb96357fa4af",
+      "bytes": 9784,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_ready",
+      "path": "runtime/keyframes/v9/idle_ready.json.gz",
+      "sha256": "4e393aabad226a11e96a0f70e2b0809073e1dbca980b3eb642f5224f5e42f54a",
+      "bytes": 22787,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_ready_ball",
+      "path": "runtime/keyframes/v9/idle_ready_ball.json.gz",
+      "sha256": "0558ab9341c8677a3564d56319c33954650db92063b9037669554f1816362241",
+      "bytes": 24961,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_relaxed",
+      "path": "runtime/keyframes/v9/idle_relaxed.json.gz",
+      "sha256": "c62694e34d61d14d4e7134a7d8c0c387e3a2a6d3792a7d3f1c884f0eedf8bc55",
+      "bytes": 22491,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_relaxed_ball",
+      "path": "runtime/keyframes/v9/idle_relaxed_ball.json.gz",
+      "sha256": "16d00dafeddba693c7161ed6215cb10a2122e0b5fcabb6d0980d556688535776",
+      "bytes": 24228,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_weight_shift",
+      "path": "runtime/keyframes/v9/idle_weight_shift.json.gz",
+      "sha256": "6b9177e4cb34061a6a4dd47f176698ea731a006301cdf022f4254304020caaee",
+      "bytes": 22693,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "idle_weight_shift_ball",
+      "path": "runtime/keyframes/v9/idle_weight_shift_ball.json.gz",
+      "sha256": "c806764153205045d1a9ba42538cdbf69d1dc14131607f0ca6859fdc8a8ca4f6",
+      "bytes": 25099,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "jog",
+      "path": "runtime/keyframes/v9/jog.json.gz",
+      "sha256": "846f9912c76164b444786e8a43f5ee31fb19abf4451256fc81c76ca22cffaa1a",
+      "bytes": 7395,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 25
+    },
+    {
+      "library": "v9",
+      "id": "jog_ball",
+      "path": "runtime/keyframes/v9/jog_ball.json.gz",
+      "sha256": "cf170e8ef70070ab0ac30aacafc3bd79c017762a01d138e74216c06d5a5d67cc",
+      "bytes": 9808,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 25
+    },
+    {
+      "library": "v9",
+      "id": "jump_shot",
+      "path": "runtime/keyframes/v9/jump_shot.json.gz",
+      "sha256": "2b1f147e856c931d3e11faa3886b8742018b551e877c7ce6707a0006a780a2d3",
+      "bytes": 24269,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 61
+    },
+    {
+      "library": "v9",
+      "id": "layup_left",
+      "path": "runtime/keyframes/v9/layup_left.json.gz",
+      "sha256": "437e8fa6dc5dc6dddc56c7bce12ac8c36acc655a861e1bd6df388597001befb3",
+      "bytes": 32030,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "layup_right",
+      "path": "runtime/keyframes/v9/layup_right.json.gz",
+      "sha256": "9030db30eea3bfa1d1830bddb9374a40d6f0bd76b3c91711fbc4c02379f4cfd7",
+      "bytes": 32040,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "loose_ball_dive_left",
+      "path": "runtime/keyframes/v9/loose_ball_dive_left.json.gz",
+      "sha256": "6cd441b8342b8799cdf7a5ac12138ae31e5fc23bd4ecbad0fd0ec6e53a724c47",
+      "bytes": 29842,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "loose_ball_dive_right",
+      "path": "runtime/keyframes/v9/loose_ball_dive_right.json.gz",
+      "sha256": "2b396cd427274723e0ff5a86d10a1ca5e3db3a441236b942498573b9abbfdee4",
+      "bytes": 29855,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "pass_deflect_left",
+      "path": "runtime/keyframes/v9/pass_deflect_left.json.gz",
+      "sha256": "6311b2546a1e25aa98ae082ecc003a74068e6581513ecfe7446b23381b35574e",
+      "bytes": 12387,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "pass_deflect_right",
+      "path": "runtime/keyframes/v9/pass_deflect_right.json.gz",
+      "sha256": "fb67686b807f35ad41f87fb2cfd9ab391926cc767451160cb272c7f5ad63420f",
+      "bytes": 12419,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "pivot_reverse_left",
+      "path": "runtime/keyframes/v9/pivot_reverse_left.json.gz",
+      "sha256": "47fcbec0779da3e9e9d986a43a72e3fcf20a2a99ef23474e15f12e8d20ab3de7",
+      "bytes": 18604,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "pivot_reverse_right",
+      "path": "runtime/keyframes/v9/pivot_reverse_right.json.gz",
+      "sha256": "50bf2020a32325a0d97e937caec90882b663c80677cc04a9ebf451debbd25f69",
+      "bytes": 18597,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "rebound_jump",
+      "path": "runtime/keyframes/v9/rebound_jump.json.gz",
+      "sha256": "7f51d2bdfbce3e7ac18c0a260ec34611ea29e30866c7de92694a7e72532af8bc",
+      "bytes": 12299,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 55
+    },
+    {
+      "library": "v9",
+      "id": "rebound_land",
+      "path": "runtime/keyframes/v9/rebound_land.json.gz",
+      "sha256": "357a87e3e49ed699fbff2d59ea7aa5c65c6e0f126f07c7fe4375b86af1d41dc1",
+      "bytes": 10155,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 43
+    },
+    {
+      "library": "v9",
+      "id": "run",
+      "path": "runtime/keyframes/v9/run.json.gz",
+      "sha256": "7dd361aa0291234af8084854c055eca3107552b413bf89a624ad0e8c0f0bbef9",
+      "bytes": 6373,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 21
+    },
+    {
+      "library": "v9",
+      "id": "run_ball",
+      "path": "runtime/keyframes/v9/run_ball.json.gz",
+      "sha256": "2f90aa050fd4059282f6e38e68b558121203ddaae53a9f1eadaf54ec88789669",
+      "bytes": 8479,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 21
+    },
+    {
+      "library": "v9",
+      "id": "screen_set",
+      "path": "runtime/keyframes/v9/screen_set.json.gz",
+      "sha256": "4b6741dce419e51e6d19174f7448ac8386fe68c420faddbaf9d3009105ec1564",
+      "bytes": 12167,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 73
+    },
+    {
+      "library": "v9",
+      "id": "sprint",
+      "path": "runtime/keyframes/v9/sprint.json.gz",
+      "sha256": "0dc4e87e4915a6b1fdaacc500fa7d31fe458b00e49a518cb4e5dc5de7b128357",
+      "bytes": 5528,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 17
+    },
+    {
+      "library": "v9",
+      "id": "sprint_ball",
+      "path": "runtime/keyframes/v9/sprint_ball.json.gz",
+      "sha256": "b4c5e8450c19747034d8b3168ee5e0f7d24174d0fd355d73b1e280a0a645dfbd",
+      "bytes": 7222,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 17
+    },
+    {
+      "library": "v9",
+      "id": "steal_poke",
+      "path": "runtime/keyframes/v9/steal_poke.json.gz",
+      "sha256": "e5d2b6a7fb6dd0b21fba7f97bd04a55dd1f98bd6c41aa681a4c68cbc2fb45d15",
+      "bytes": 10977,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 49
+    },
+    {
+      "library": "v9",
+      "id": "three_point",
+      "path": "runtime/keyframes/v9/three_point.json.gz",
+      "sha256": "9273692fc7f34799776a2bdbdd058c195d22eb26bee4506be692f9ac0de4af3b",
+      "bytes": 26802,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 67
+    },
+    {
+      "library": "v9",
+      "id": "walk",
+      "path": "runtime/keyframes/v9/walk.json.gz",
+      "sha256": "4a891207a4f0b8ba8d2d1a905647769104b81d3096d0d2ce9a077cf97b7b5525",
+      "bytes": 9606,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 35
+    },
+    {
+      "library": "v9",
+      "id": "walk_ball",
+      "path": "runtime/keyframes/v9/walk_ball.json.gz",
+      "sha256": "d314d204a790c4a3bf1a00397bd756c5ef723df89f87e58e79fd06509c46d397",
+      "bytes": 11882,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 35
+    },
+    {
+      "library": "v8",
+      "id": "block",
+      "path": "runtime/keyframes/v8/block.json.gz",
+      "sha256": "9644767a84de407d9bcd1fcd0a8fffcbecc6b641ee658c7eb8c7a04aeb94b9bd",
+      "bytes": 51431,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 156
+    },
+    {
+      "library": "v8",
+      "id": "dribble_behind_back",
+      "path": "runtime/keyframes/v8/dribble_behind_back.json.gz",
+      "sha256": "156cc068aa81462e505597c1e05323af11669c96a1556a898035ea7e8a609742",
+      "bytes": 47380,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 140
+    },
+    {
+      "library": "v8",
+      "id": "dribble_idle",
+      "path": "runtime/keyframes/v8/dribble_idle.json.gz",
+      "sha256": "966ef5e2eb6c314823a408daf0f84d4060eadac53c080d91efa15f38f56241c7",
+      "bytes": 32275,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 109
+    },
+    {
+      "library": "v8",
+      "id": "dribble_run",
+      "path": "runtime/keyframes/v8/dribble_run.json.gz",
+      "sha256": "824d3602b98aa72eb66652873f50141ba8b54b236d730e448720cb2a32803895",
+      "bytes": 29386,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 93
+    },
+    {
+      "library": "v8",
+      "id": "pass_bounce",
+      "path": "runtime/keyframes/v8/pass_bounce.json.gz",
+      "sha256": "b8ada7b8dd328d9ad988bdb20bb286cdca3ceb969edeb4ec0768be961df0dab0",
+      "bytes": 41676,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 152
+    },
+    {
+      "library": "v8",
+      "id": "pass_chest",
+      "path": "runtime/keyframes/v8/pass_chest.json.gz",
+      "sha256": "bcdd0aa2dbba5aed1d792edc0345b062e984420e826c08bd87dc83141592999f",
+      "bytes": 38255,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 139
+    },
+    {
+      "library": "v8",
+      "id": "pass_jump",
+      "path": "runtime/keyframes/v8/pass_jump.json.gz",
+      "sha256": "5b0d2ccccca2ce582d94469fa322a962adca2945f078f4bbf96493f85ae0ce85",
+      "bytes": 47194,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 159
+    },
+    {
+      "library": "v8",
+      "id": "pass_overhead",
+      "path": "runtime/keyframes/v8/pass_overhead.json.gz",
+      "sha256": "6ba8d79b6f85ae630c88e600d72b84c844c1aae6ac5a9b9df179836f6a8a1562",
+      "bytes": 45184,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 158
+    },
+    {
+      "library": "v8",
+      "id": "pass_side",
+      "path": "runtime/keyframes/v8/pass_side.json.gz",
+      "sha256": "95bc1cc37c26b6e86d45999f00fb8251bc32be01915a34d6b6ef02c7bf7a2e7e",
+      "bytes": 45428,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 143
+    },
+    {
+      "library": "v8",
+      "id": "pivot",
+      "path": "runtime/keyframes/v8/pivot.json.gz",
+      "sha256": "e51803d642c7f245c2d30115264e8140c779c294e79b835d982f77afa0c0544e",
+      "bytes": 45366,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 162
+    },
+    {
+      "library": "v8",
+      "id": "receive_moving",
+      "path": "runtime/keyframes/v8/receive_moving.json.gz",
+      "sha256": "2d289d9226ccafac6d0a960ff0ee37133b9605693959eaecad215e06aeeecb25",
+      "bytes": 45795,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 141
+    },
+    {
+      "library": "v8",
+      "id": "receive_two_hands",
+      "path": "runtime/keyframes/v8/receive_two_hands.json.gz",
+      "sha256": "bff4257887c7ee059efb227699fc042c1bec9b5c58bb8982b059a8dc71a2aba4",
+      "bytes": 24957,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 133
+    },
+    {
+      "library": "v8",
+      "id": "shot_start",
+      "path": "runtime/keyframes/v8/shot_start.json.gz",
+      "sha256": "c9cc5998f3f976ed902df6c83b3ca75f315aa52a34966bcffd5e7ba4c3b56207",
+      "bytes": 50858,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 157
+    },
+    {
+      "library": "v8",
+      "id": "steal",
+      "path": "runtime/keyframes/v8/steal.json.gz",
+      "sha256": "92f9da07de2a5d5729b486ee0cba93f4b3327ec471468bea202c2d97a59ef1e9",
+      "bytes": 45109,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 146
+    },
+    {
+      "library": "v8",
+      "id": "stop_two_feet",
+      "path": "runtime/keyframes/v8/stop_two_feet.json.gz",
+      "sha256": "d177b5bb886e1d4ffd44decd5d96017d9e00447768a2fd8fc7164182b8efd93c",
+      "bytes": 41622,
+      "hashMatches": true,
+      "skeletonMatches": true,
+      "frames": 145
+    }
+  ],
+  "profileCount": 3,
+  "models": [
+    {
+      "path": "runtime/guard.glb",
+      "bytes": 1030508,
+      "sha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da",
+      "triangles": 6226,
+      "vertices": 3845,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.0276043053502095,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.23559708458989187,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2305843806624474,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13033030211355723,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.03909909063406716,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [],
+      "extensionsUsed": [],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "b360483b1fe3a1e806aa798b9acaf27dfdc9335b8759028a9e1228137b80176e"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "356e1da78ab351c98a8c74ec3b3203a437ca0183c2e1b28d65512b5c30fa4cb5"
+        },
+        {
+          "material": "human_surface",
+          "count": 2272,
+          "hash": "3f05c133d7ef643485168b6698065e19667ee51d16c3d2a8c8e72da6e3406917"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "fe3c1f5a4c8d9b08af6dd54c7ab0530ebab71dfc5dd48a6fef081475bea9b3e6"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "8f10d4790dfd7f3f91380beb862180821748373fd4ff4f7e7a2e9460ec9c326b"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "20f627c28151608cf5ad806b5f03720d58f95448a00fae7ee38fa380e7bf35a0"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "07588e7016cc12ba28dede79540b7dd7b965fca11560ef53bc84bb94f701a400",
+        "30af7cc7be60c3edb8a1c2e412016b8318cf49468b4f469c5da805aacaf41f2c",
+        "68d9774e1665507f9b019a244e08b3aa601122a9f666b62111c9e2add961e292",
+        "5870b1419915f20e3a9fb5136610e2cd0bf9b7559a4dcc2b56da75a1137eaa45",
+        "112316ae7b0283c759c9aa316f240c9feb81460e0571de8b4c897ca8b6904c20",
+        "6509e97d2d2f020611c48bb1381eac0fe9b777fdfd62af03e4930c2da20e342f",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "cf9a1d83f2b8220c166c53da1ca45e06eafe29d6db8562dd9de66e08a4a2784b"
+      ],
+      "finite": true,
+      "weightError": 4.563480615615845e-8,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 4.038686440832606e-8,
+      "bounds": {
+        "minimum": [
+          -0.30662643909454346,
+          0,
+          -0.14236079156398773
+        ],
+        "maximum": [
+          0.3066173791885376,
+          1.8799999952316284,
+          0.23058438301086426
+        ],
+        "height": 1.8799999952316284
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 5.13685409764264e-8,
+      "profile": "guard",
+      "format": "plain"
+    },
+    {
+      "path": "models/guard.glb",
+      "bytes": 788564,
+      "sha256": "53aa0f345ab31e875d39b89f06ef39885fb82b66205b8e2cc67a2472a5c70251",
+      "triangles": 6226,
+      "vertices": 3942,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.0276043053502095,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.23559708458989187,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2305843806624474,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13033030211355723,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.03909909063406716,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "extensionsUsed": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "d646977eb9677b3df680025b597f549055af45955c82aea5dbca59f3d0a2b57d"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "2e0149c2441683558951211d2ff2f85d9225e02c9a26d2bebfb296092190e547"
+        },
+        {
+          "material": "human_surface",
+          "count": 2285,
+          "hash": "a01e7001315fd51ba2dd364f66b9070d13bac5109da030b04c28ede6084eb49f"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "f673a4edab62639007cec11a6189611b083ba754b5d179a21536d76708bb79dd"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "62eb9764b8a891ea6a867e8acbed550f58198522b8515ff9f0bc3e80ca23695d"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "bb4c81970e0b4c2ccbc0bc41cdc5da7c903534f044a7980907ede202a78277c2"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "934c8df911dee10f895a42647521b362815aebe830b38250f74149c1c2c17dbb",
+        "0af611cba8a142e6537d9116d8ad001fcf1a287d0988afbb4c66607921410c38",
+        "7426b50fca9d292cfdc27f631c929f8267988d34d253b81a5068d9b2c9d9bf48",
+        "845161ebb35db151feab538504471f4002c67ac24fbc7badffe9a0e29072e43a",
+        "e3fedaeeef0f44a80b012da9e2a85afc1f07c7aa639a4cb475f9f6f4bb628044",
+        "52c193377de8ecbbc1b1097af96b39875a1eb41d80f8d98a747571e3981c01e6",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "28c4a432df01754aeff533d68737cf59ec89bdaaaec811564aa2b329b587be1a"
+      ],
+      "finite": true,
+      "weightError": 0.00000999527946987655,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 1.3416771660335058e-7,
+      "bounds": {
+        "minimum": [
+          -0.30662643909454346,
+          0,
+          -0.14236079156398773
+        ],
+        "maximum": [
+          0.3066129684448242,
+          1.8799995183944702,
+          0.2305840253829956
+        ],
+        "height": 1.8799995183944702
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 5.13685409764264e-8,
+      "profile": "guard",
+      "format": "draco"
+    },
+    {
+      "path": "runtime/wing.glb",
+      "bytes": 1030504,
+      "sha256": "e5621aad5be2864d4c0aafb43571dc285f1559928bbb13a8430cb25d610526d5",
+      "triangles": 6226,
+      "vertices": 3845,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.082264099476709,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.24812884242435226,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.24284950535149372,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13726276389432254,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04117882916829676,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [],
+      "extensionsUsed": [],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "b360483b1fe3a1e806aa798b9acaf27dfdc9335b8759028a9e1228137b80176e"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "356e1da78ab351c98a8c74ec3b3203a437ca0183c2e1b28d65512b5c30fa4cb5"
+        },
+        {
+          "material": "human_surface",
+          "count": 2272,
+          "hash": "3f05c133d7ef643485168b6698065e19667ee51d16c3d2a8c8e72da6e3406917"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "fe3c1f5a4c8d9b08af6dd54c7ab0530ebab71dfc5dd48a6fef081475bea9b3e6"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "8f10d4790dfd7f3f91380beb862180821748373fd4ff4f7e7a2e9460ec9c326b"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "20f627c28151608cf5ad806b5f03720d58f95448a00fae7ee38fa380e7bf35a0"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "07588e7016cc12ba28dede79540b7dd7b965fca11560ef53bc84bb94f701a400",
+        "30af7cc7be60c3edb8a1c2e412016b8318cf49468b4f469c5da805aacaf41f2c",
+        "68d9774e1665507f9b019a244e08b3aa601122a9f666b62111c9e2add961e292",
+        "5870b1419915f20e3a9fb5136610e2cd0bf9b7559a4dcc2b56da75a1137eaa45",
+        "112316ae7b0283c759c9aa316f240c9feb81460e0571de8b4c897ca8b6904c20",
+        "6509e97d2d2f020611c48bb1381eac0fe9b777fdfd62af03e4930c2da20e342f",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "cf9a1d83f2b8220c166c53da1ca45e06eafe29d6db8562dd9de66e08a4a2784b"
+      ],
+      "finite": true,
+      "weightError": 4.563480615615845e-8,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 4.1531546979278744e-8,
+      "bounds": {
+        "minimum": [
+          -0.3431223928928375,
+          0,
+          -0.14993317425251007
+        ],
+        "maximum": [
+          0.3431120812892914,
+          1.9800000190734863,
+          0.24284949898719788
+        ],
+        "height": 1.9800000190734863
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 4.114785223663375e-8,
+      "profile": "wing",
+      "format": "plain"
+    },
+    {
+      "path": "models/wing.glb",
+      "bytes": 788612,
+      "sha256": "8b1f0ca23746f163584cfa687ba6e7a4b9f251b93d8ff7f93c60cbf2a41bab4c",
+      "triangles": 6226,
+      "vertices": 3942,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.082264099476709,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.24812884242435226,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.24284950535149372,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13726276389432254,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04117882916829676,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "extensionsUsed": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "d646977eb9677b3df680025b597f549055af45955c82aea5dbca59f3d0a2b57d"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "2e0149c2441683558951211d2ff2f85d9225e02c9a26d2bebfb296092190e547"
+        },
+        {
+          "material": "human_surface",
+          "count": 2285,
+          "hash": "a01e7001315fd51ba2dd364f66b9070d13bac5109da030b04c28ede6084eb49f"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "f673a4edab62639007cec11a6189611b083ba754b5d179a21536d76708bb79dd"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "62eb9764b8a891ea6a867e8acbed550f58198522b8515ff9f0bc3e80ca23695d"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "bb4c81970e0b4c2ccbc0bc41cdc5da7c903534f044a7980907ede202a78277c2"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "934c8df911dee10f895a42647521b362815aebe830b38250f74149c1c2c17dbb",
+        "0af611cba8a142e6537d9116d8ad001fcf1a287d0988afbb4c66607921410c38",
+        "7426b50fca9d292cfdc27f631c929f8267988d34d253b81a5068d9b2c9d9bf48",
+        "845161ebb35db151feab538504471f4002c67ac24fbc7badffe9a0e29072e43a",
+        "e3fedaeeef0f44a80b012da9e2a85afc1f07c7aa639a4cb475f9f6f4bb628044",
+        "52c193377de8ecbbc1b1097af96b39875a1eb41d80f8d98a747571e3981c01e6",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "28c4a432df01754aeff533d68737cf59ec89bdaaaec811564aa2b329b587be1a"
+      ],
+      "finite": true,
+      "weightError": 0.00000999527946987655,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 1.318503979330643e-7,
+      "bounds": {
+        "minimum": [
+          -0.3431223928928375,
+          0,
+          -0.14993317425251007
+        ],
+        "maximum": [
+          0.3431141674518585,
+          1.9800007343292236,
+          0.24284815788269043
+        ],
+        "height": 1.9800007343292236
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 4.114785223663375e-8,
+      "profile": "wing",
+      "format": "draco"
+    },
+    {
+      "path": "runtime/center.glb",
+      "bytes": 1030504,
+      "sha256": "68c770f5f93126cb821818dfa857a2bb9cc67ca08d6584c5e9a169767a853e62",
+      "triangles": 6226,
+      "vertices": 3845,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.1369239593516665,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2606606151187841,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2551146445843419,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.14419523389549757,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04325857016864927,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [],
+      "extensionsUsed": [],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "b360483b1fe3a1e806aa798b9acaf27dfdc9335b8759028a9e1228137b80176e"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "356e1da78ab351c98a8c74ec3b3203a437ca0183c2e1b28d65512b5c30fa4cb5"
+        },
+        {
+          "material": "human_surface",
+          "count": 2272,
+          "hash": "3f05c133d7ef643485168b6698065e19667ee51d16c3d2a8c8e72da6e3406917"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "fe3c1f5a4c8d9b08af6dd54c7ab0530ebab71dfc5dd48a6fef081475bea9b3e6"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "8f10d4790dfd7f3f91380beb862180821748373fd4ff4f7e7a2e9460ec9c326b"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "20f627c28151608cf5ad806b5f03720d58f95448a00fae7ee38fa380e7bf35a0"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 296,
+          "hash": "4a378daf8ecee9e864bc930f92f20dda5d70ab136d5b837f9fc56166d3bac68b"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "07588e7016cc12ba28dede79540b7dd7b965fca11560ef53bc84bb94f701a400",
+        "30af7cc7be60c3edb8a1c2e412016b8318cf49468b4f469c5da805aacaf41f2c",
+        "68d9774e1665507f9b019a244e08b3aa601122a9f666b62111c9e2add961e292",
+        "5870b1419915f20e3a9fb5136610e2cd0bf9b7559a4dcc2b56da75a1137eaa45",
+        "112316ae7b0283c759c9aa316f240c9feb81460e0571de8b4c897ca8b6904c20",
+        "6509e97d2d2f020611c48bb1381eac0fe9b777fdfd62af03e4930c2da20e342f",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "fe9c0cac4dc679d43ef4a8ce9205f934ea5fd16cee7121b95fcbd35e1de46622",
+        "cf9a1d83f2b8220c166c53da1ca45e06eafe29d6db8562dd9de66e08a4a2784b"
+      ],
+      "finite": true,
+      "weightError": 4.563480615615845e-8,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 3.989538410742455e-8,
+      "bounds": {
+        "minimum": [
+          -0.3775821924209595,
+          0,
+          -0.1575055718421936
+        ],
+        "maximum": [
+          0.3775709569454193,
+          2.0799999237060547,
+          0.2551146447658539
+        ],
+        "height": 2.0799999237060547
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 5.016434956317539e-8,
+      "profile": "center",
+      "format": "plain"
+    },
+    {
+      "path": "models/center.glb",
+      "bytes": 788588,
+      "sha256": "88d85ef481e60aeeb2befcef911d12dc9bd50adc42b434ef3a6cac6debe394d6",
+      "triangles": 6226,
+      "vertices": 3942,
+      "jointNames": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ],
+      "hierarchy": [
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.1369239593516665,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2606606151187841,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2551146445843419,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.14419523389549757,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04325857016864927,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "hierarchyMatches": true,
+      "extensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "extensionsUsed": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [
+        {
+          "name": "shared-athlete-atlas",
+          "mimeType": "image/png",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 727049,
+          "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+        }
+      ],
+      "uvs": [
+        {
+          "material": "eyes",
+          "count": 40,
+          "hash": "d646977eb9677b3df680025b597f549055af45955c82aea5dbca59f3d0a2b57d"
+        },
+        {
+          "material": "uniform_primary",
+          "count": 371,
+          "hash": "2e0149c2441683558951211d2ff2f85d9225e02c9a26d2bebfb296092190e547"
+        },
+        {
+          "material": "human_surface",
+          "count": 2285,
+          "hash": "a01e7001315fd51ba2dd364f66b9070d13bac5109da030b04c28ede6084eb49f"
+        },
+        {
+          "material": "uniform_secondary",
+          "count": 218,
+          "hash": "f673a4edab62639007cec11a6189611b083ba754b5d179a21536d76708bb79dd"
+        },
+        {
+          "material": "uniform_trim",
+          "count": 84,
+          "hash": "62eb9764b8a891ea6a867e8acbed550f58198522b8515ff9f0bc3e80ca23695d"
+        },
+        {
+          "material": "sock",
+          "count": 68,
+          "hash": "bb4c81970e0b4c2ccbc0bc41cdc5da7c903534f044a7980907ede202a78277c2"
+        },
+        {
+          "material": "shoe_upper",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "shoe_sole",
+          "count": 338,
+          "hash": "544270ba6391b1e959b95e16348414bfa6b1e71dbda93e074b8627b34731971c"
+        },
+        {
+          "material": "hair_original",
+          "count": 200,
+          "hash": "f118d74859741107b481237d9a720606f29783917472aa5bad8d913e779d0247"
+        }
+      ],
+      "indices": [
+        "934c8df911dee10f895a42647521b362815aebe830b38250f74149c1c2c17dbb",
+        "0af611cba8a142e6537d9116d8ad001fcf1a287d0988afbb4c66607921410c38",
+        "7426b50fca9d292cfdc27f631c929f8267988d34d253b81a5068d9b2c9d9bf48",
+        "845161ebb35db151feab538504471f4002c67ac24fbc7badffe9a0e29072e43a",
+        "e3fedaeeef0f44a80b012da9e2a85afc1f07c7aa639a4cb475f9f6f4bb628044",
+        "52c193377de8ecbbc1b1097af96b39875a1eb41d80f8d98a747571e3981c01e6",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "d128d064dc9c2d5538a6a2f821ff08dbf44a685de94fd7766b28be3d99a982b4",
+        "28c4a432df01754aeff533d68737cf59ec89bdaaaec811564aa2b329b587be1a"
+      ],
+      "finite": true,
+      "weightError": 0.000009985800716094673,
+      "minimumWeight": 0,
+      "maximumWeight": 1,
+      "invalidJoints": 0,
+      "maximumNormalLengthError": 1.293076177244501e-7,
+      "bounds": {
+        "minimum": [
+          -0.3775821924209595,
+          0,
+          -0.1575055718421936
+        ],
+        "maximum": [
+          0.377566397190094,
+          2.080000400543213,
+          0.255112886428833
+        ],
+        "height": 2.080000400543213
+      },
+      "materials": [
+        "human_surface",
+        "eyes",
+        "uniform_primary",
+        "uniform_secondary",
+        "uniform_trim",
+        "shoe_upper",
+        "shoe_sole",
+        "hair_original",
+        "sock"
+      ],
+      "inverseBindMaximumError": 5.016434956317539e-8,
+      "profile": "center",
+      "format": "draco"
+    }
+  ],
+  "sharedUVLayout": true,
+  "sharedTopology": true,
+  "allFrameCount": 19650,
+  "maximumBoneLengthError": 2.027297324458388e-8,
+  "maximumRuntimeFKError": 3.157069325104574e-8,
+  "maximumQuaternionNormError": 7.980627048098654e-9,
+  "maximumSamplingError": 0,
+  "measurements": [
+    {
+      "profile": "guard",
+      "height": 1.88,
+      "armLength": 0.821311011267839,
+      "dunks": [
+        {
+          "clip": "dunk_one_hand",
+          "hands": [
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.5799621503995871,
+          "requiredJump": 0.8981790971585485,
+          "peakHipsLift": 0.8981790971585485,
+          "staticPalmHeight": 2.4068209028414516,
+          "peakPalmHeight": 3.3049999999999997,
+          "clearance": 0.2549999999999999,
+          "palmPositions": {
+            "RightHand": [
+              -0.3027109690379014,
+              3.3049999999999997,
+              0.06531597723944768
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.3027109543556972,
+                  3.3049999903535228,
+                  0.06531596114054428
+                ],
+                "height": 3.3049999903535228,
+                "clearance": 0.25499999035352294,
+                "guideDistance": 2.3828477245134733e-8,
+                "bindGuideDistance": 2.3828477303387207e-8
+              }
+            },
+            "minimumHeight": 3.3049999903535228,
+            "minimumClearance": 0.25499999035352294
+          },
+          "runtimeCalibrationDifference": 2.0799850730668368e-10
+        },
+        {
+          "clip": "dunk_two_hands",
+          "hands": [
+            "LeftHand",
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.6237755658748122,
+          "requiredJump": 0.9660323077997202,
+          "peakHipsLift": 0.9660323077997202,
+          "staticPalmHeight": 2.33896769220028,
+          "peakPalmHeight": 3.305,
+          "clearance": 0.25500000000000034,
+          "palmPositions": {
+            "LeftHand": [
+              0.14568139385237405,
+              3.305,
+              0.11511089702248763
+            ],
+            "RightHand": [
+              -0.15481087657746348,
+              3.337117775031099,
+              0.11203612250188304
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "LeftHand": {
+                "primitive": 2,
+                "vertex": 1839,
+                "position": [
+                  0.14568139006870787,
+                  3.30499999155263,
+                  0.11511089721927438
+                ],
+                "height": 3.30499999155263,
+                "clearance": 0.25499999155263,
+                "guideDistance": 9.258127284230123e-9,
+                "bindGuideDistance": 9.25812721727475e-9
+              },
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.15481087052834308,
+                  3.3371177603505546,
+                  0.11203610473432571
+                ],
+                "height": 3.3371177603505546,
+                "clearance": 0.2871177603505548,
+                "guideDistance": 2.3828477353908795e-8,
+                "bindGuideDistance": 2.3828477303387207e-8
+              }
+            },
+            "minimumHeight": 3.30499999155263,
+            "minimumClearance": 0.25499999155263
+          },
+          "runtimeCalibrationDifference": 1.993631926211492e-10
+        }
+      ],
+      "surface": [
+        {
+          "clip": "defensive_stance",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.4144605467187497,
+          "maximumEdgeStretch": 2.7374553325877273,
+          "minimumEdgeRatio": 0.1451442297626829,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 2.7374553325877273,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.011573885858593229,
+            "deformedLength": 0.03168299556236772,
+            "aPosition": [
+              -0.16437529027462006,
+              1.5052615404129028,
+              -0.018009379506111145
+            ],
+            "bPosition": [
+              -0.15329068899154663,
+              1.5028387308120728,
+              -0.015725426375865936
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dribble_forward",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.3829939753565186,
+          "maximumEdgeStretch": 2.840989291667015,
+          "minimumEdgeRatio": 0.0175501003309136,
+          "collapsedEdgeFraction": 0.0000506636943965954,
+          "maximumEdge": {
+            "ratio": 2.840989291667015,
+            "time": 0.25,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.011573885858593229,
+            "deformedLength": 0.03288128578723966,
+            "aPosition": [
+              -0.16437529027462006,
+              1.5052615404129028,
+              -0.018009379506111145
+            ],
+            "bPosition": [
+              -0.15329068899154663,
+              1.5028387308120728,
+              -0.015725426375865936
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_one_hand",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.5929411174190204,
+          "maximumEdgeStretch": 4.856062876880872,
+          "minimumEdgeRatio": 0.024899445655453527,
+          "collapsedEdgeFraction": 0.0000506636943965954,
+          "maximumEdge": {
+            "ratio": 4.856062876880872,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.011573885858593229,
+            "deformedLength": 0.05620351745917107,
+            "aPosition": [
+              -0.16437529027462006,
+              1.5052615404129028,
+              -0.018009379506111145
+            ],
+            "bPosition": [
+              -0.15329068899154663,
+              1.5028387308120728,
+              -0.015725426375865936
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_two_hands",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.6864803267387407,
+          "maximumEdgeStretch": 5.794480479934241,
+          "minimumEdgeRatio": 0.024899445655453527,
+          "collapsedEdgeFraction": 0.0000506636943965954,
+          "maximumEdge": {
+            "ratio": 5.794480479934241,
+            "time": 0.5694444444,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 1481,
+            "b": 1465,
+            "restLength": 0.006619405547574317,
+            "deformedLength": 0.0383560162341878,
+            "aPosition": [
+              0.16636157035827637,
+              1.4971904754638672,
+              -0.0009691633167676628
+            ],
+            "bPosition": [
+              0.16645172238349915,
+              1.490586280822754,
+              -0.0005298279575072229
+            ],
+            "aJoints": [
+              6,
+              3,
+              2,
+              7
+            ],
+            "bJoints": [
+              6,
+              3,
+              2,
+              7
+            ],
+            "aWeights": [
+              0.7285929918289185,
+              0.18765702843666077,
+              0.08283041417598724,
+              0.0009195342427119613
+            ],
+            "bWeights": [
+              0.5415643453598022,
+              0.30603349208831787,
+              0.15233807265758514,
+              0.00006408255285350606
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "layup_right",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.508148671437146,
+          "maximumEdgeStretch": 4.264654956260505,
+          "minimumEdgeRatio": 0.04243547334491162,
+          "collapsedEdgeFraction": 0.000016887898132198468,
+          "maximumEdge": {
+            "ratio": 4.264654956260505,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.011573885858593229,
+            "deformedLength": 0.049358629690042975,
+            "aPosition": [
+              -0.16437529027462006,
+              1.5052615404129028,
+              -0.018009379506111145
+            ],
+            "bPosition": [
+              -0.15329068899154663,
+              1.5028387308120728,
+              -0.015725426375865936
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "rebound_jump",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59214,
+          "p99EdgeStretch": 1.6485603685123682,
+          "maximumEdgeStretch": 4.950760733905089,
+          "minimumEdgeRatio": 0.08518612175618177,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 4.950760733905089,
+            "time": 0,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 1481,
+            "b": 1465,
+            "restLength": 0.006619405547574317,
+            "deformedLength": 0.03277109306672445,
+            "aPosition": [
+              0.16636157035827637,
+              1.4971904754638672,
+              -0.0009691633167676628
+            ],
+            "bPosition": [
+              0.16645172238349915,
+              1.490586280822754,
+              -0.0005298279575072229
+            ],
+            "aJoints": [
+              6,
+              3,
+              2,
+              7
+            ],
+            "bJoints": [
+              6,
+              3,
+              2,
+              7
+            ],
+            "aWeights": [
+              0.7285929918289185,
+              0.18765702843666077,
+              0.08283041417598724,
+              0.0009195342427119613
+            ],
+            "bWeights": [
+              0.5415643453598022,
+              0.30603349208831787,
+              0.15233807265758514,
+              0.00006408255285350606
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        }
+      ]
+    },
+    {
+      "profile": "wing",
+      "height": 1.98,
+      "armLength": 0.9341975810909804,
+      "dunks": [
+        {
+          "clip": "dunk_one_hand",
+          "hands": [
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.45307508005410085,
+          "requiredJump": 0.7016709039851148,
+          "peakHipsLift": 0.7016709039851148,
+          "staticPalmHeight": 2.6033290960148854,
+          "peakPalmHeight": 3.3049999999999997,
+          "clearance": 0.2549999999999999,
+          "palmPositions": {
+            "RightHand": [
+              -0.33867730281535846,
+              3.3049999999999997,
+              0.07369694653752884
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.338677314993629,
+                  3.3050000144616862,
+                  0.07369695173215812
+                ],
+                "height": 3.3050000144616862,
+                "clearance": 0.2550000144616864,
+                "guideDistance": 1.9607009563870714e-8,
+                "bindGuideDistance": 1.960700926265547e-8
+              }
+            },
+            "minimumHeight": 3.3050000144616862,
+            "minimumClearance": 0.2550000144616864
+          },
+          "runtimeCalibrationDifference": 2.365889706368307e-10
+        },
+        {
+          "clip": "dunk_two_hands",
+          "hands": [
+            "LeftHand",
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.5029150303361116,
+          "requiredJump": 0.7788573229882871,
+          "peakHipsLift": 0.7788573229882871,
+          "staticPalmHeight": 2.526142677011713,
+          "peakPalmHeight": 3.305,
+          "clearance": 0.25500000000000034,
+          "palmPositions": {
+            "LeftHand": [
+              0.16006830856476834,
+              3.305,
+              0.13102343645092485
+            ],
+            "RightHand": [
+              -0.17044881601303638,
+              3.3415392621427897,
+              0.12683862623449435
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "LeftHand": {
+                "primitive": 2,
+                "vertex": 1839,
+                "position": [
+                  0.16006832420833386,
+                  3.3050000354825504,
+                  0.13102344912427705
+                ],
+                "height": 3.3050000354825504,
+                "clearance": 0.25500003548255057,
+                "guideDistance": 4.079640142593239e-8,
+                "bindGuideDistance": 4.079640149769533e-8
+              },
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.17044882158766336,
+                  3.341539279955196,
+                  0.12683863224086922
+                ],
+                "height": 3.341539279955196,
+                "clearance": 0.29153927995519613,
+                "guideDistance": 1.9607009468413754e-8,
+                "bindGuideDistance": 1.960700926265547e-8
+              }
+            },
+            "minimumHeight": 3.3050000354825504,
+            "minimumClearance": 0.25500003548255057
+          },
+          "runtimeCalibrationDifference": 2.2676394095810792e-10
+        }
+      ],
+      "surface": [
+        {
+          "clip": "defensive_stance",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.409740484746854,
+          "maximumEdgeStretch": 2.782499490920588,
+          "minimumEdgeRatio": 0.1855896710112748,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 2.782499490920588,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.03512235047702772,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dribble_forward",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.3842490528156586,
+          "maximumEdgeStretch": 2.868777401686689,
+          "minimumEdgeRatio": 0.008541055596507995,
+          "collapsedEdgeFraction": 0.00008391232839928843,
+          "maximumEdge": {
+            "ratio": 2.868777401686689,
+            "time": 0.25,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.036211401177752255,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_one_hand",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.5853427219044385,
+          "maximumEdgeStretch": 4.861320256751442,
+          "minimumEdgeRatio": 0.010628383868006349,
+          "collapsedEdgeFraction": 0.00003356493135971537,
+          "maximumEdge": {
+            "ratio": 4.861320256751442,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.06136245285788319,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_two_hands",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.6857629454941185,
+          "maximumEdgeStretch": 4.855063375621051,
+          "minimumEdgeRatio": 0.06884751788731504,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 4.855063375621051,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.06128347481218299,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "layup_right",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.5004293357907053,
+          "maximumEdgeStretch": 4.283351561585726,
+          "minimumEdgeRatio": 0.04890674719424203,
+          "collapsedEdgeFraction": 0.000016782465679857685,
+          "maximumEdge": {
+            "ratio": 4.283351561585726,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.05406699093862707,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "rebound_jump",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59586,
+          "p99EdgeStretch": 1.637742205268671,
+          "maximumEdgeStretch": 4.332221822776931,
+          "minimumEdgeRatio": 0.0923112081145526,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 4.332221822776931,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.01262259008191499,
+            "deformedLength": 0.05468386021283977,
+            "aPosition": [
+              -0.1826401948928833,
+              1.5820778608322144,
+              -0.01896732486784458
+            ],
+            "bPosition": [
+              -0.17032389342784882,
+              1.580716848373413,
+              -0.016561884433031082
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        }
+      ]
+    },
+    {
+      "profile": "center",
+      "height": 2.08,
+      "armLength": 1.0177267084030017,
+      "dunks": [
+        {
+          "clip": "dunk_one_hand",
+          "hands": [
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.3449513260995985,
+          "requiredJump": 0.5342211908592889,
+          "peakHipsLift": 0.5342211908592889,
+          "staticPalmHeight": 2.7707788091407113,
+          "peakPalmHeight": 3.305,
+          "clearance": 0.25500000000000034,
+          "palmPositions": {
+            "RightHand": [
+              -0.3727317251446365,
+              3.305,
+              0.08039345809631154
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.37273172023139445,
+                  3.3049999986534573,
+                  0.08039345043974232
+                ],
+                "height": 3.3049999986534573,
+                "clearance": 0.25499999865345746,
+                "guideDistance": 9.196530722468105e-9,
+                "bindGuideDistance": 9.196530739236645e-9
+              }
+            },
+            "minimumHeight": 3.3049999986534573,
+            "minimumClearance": 0.25499999865345746
+          },
+          "runtimeCalibrationDifference": 2.5774138379119904e-10
+        },
+        {
+          "clip": "dunk_two_hands",
+          "hands": [
+            "LeftHand",
+            "RightHand"
+          ],
+          "time": 0.5694444444,
+          "timeSeconds": 1.3666666665599998,
+          "sourcePeakHipsLift": 1.5486857143,
+          "jumpScale": 0.39924457531058116,
+          "requiredJump": 0.6183043702952675,
+          "peakHipsLift": 0.6183043702952675,
+          "staticPalmHeight": 2.6866956297047326,
+          "peakPalmHeight": 3.305,
+          "clearance": 0.25500000000000034,
+          "palmPositions": {
+            "LeftHand": [
+              0.17815466354561013,
+              3.305,
+              0.14238563690426925
+            ],
+            "RightHand": [
+              -0.1894614752548853,
+              3.3448016505658806,
+              0.13828667881503678
+            ]
+          },
+          "pass": true,
+          "physicalPalm": {
+            "hands": {
+              "LeftHand": {
+                "primitive": 2,
+                "vertex": 1839,
+                "position": [
+                  0.17815465351281257,
+                  3.304999983908986,
+                  0.1423856102853164
+                ],
+                "height": 3.304999983908986,
+                "clearance": 0.25499998390898604,
+                "guideDistance": 3.268250937183912e-8,
+                "bindGuideDistance": 3.268250940505341e-8
+              },
+              "RightHand": {
+                "primitive": 2,
+                "vertex": 763,
+                "position": [
+                  -0.18946147336181052,
+                  3.344801647300986,
+                  0.13828667042856516
+                ],
+                "height": 3.344801647300986,
+                "clearance": 0.29480164730098624,
+                "guideDistance": 9.196530600923617e-9,
+                "bindGuideDistance": 9.196530739236645e-9
+              }
+            },
+            "minimumHeight": 3.304999983908986,
+            "minimumClearance": 0.25499998390898604
+          },
+          "runtimeCalibrationDifference": 2.4704149836907163e-10
+        }
+      ],
+      "surface": [
+        {
+          "clip": "defensive_stance",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.3978471668437291,
+          "maximumEdgeStretch": 2.7591027737264158,
+          "minimumEdgeRatio": 0.2038106255766874,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 2.7591027737264158,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.03826522427277651,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dribble_forward",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.3599722728419794,
+          "maximumEdgeStretch": 2.837561574321308,
+          "minimumEdgeRatio": 0.010690780376086692,
+          "collapsedEdgeFraction": 0.00010049241282283188,
+          "maximumEdge": {
+            "ratio": 2.837561574321308,
+            "time": 0.25,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.039353347422637214,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_one_hand",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.5768131470044853,
+          "maximumEdgeStretch": 4.7654078652982355,
+          "minimumEdgeRatio": 0.011075214802701355,
+          "collapsedEdgeFraction": 0.00003349747094094396,
+          "maximumEdge": {
+            "ratio": 4.7654078652982355,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.06609010815157527,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "dunk_two_hands",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.6796347064011263,
+          "maximumEdgeStretch": 4.76179711362284,
+          "minimumEdgeRatio": 0.08884466769452078,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 4.76179711362284,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.06604003164700718,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "layup_right",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.4868228449109917,
+          "maximumEdgeStretch": 4.20450701146217,
+          "minimumEdgeRatio": 0.029361206592413588,
+          "collapsedEdgeFraction": 0.00003349747094094396,
+          "maximumEdge": {
+            "ratio": 4.20450701146217,
+            "time": 0.75,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.05831113116992367,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        },
+        {
+          "clip": "rebound_jump",
+          "sampleTimes": [
+            0,
+            0.25,
+            0.5,
+            0.5694444444,
+            0.75,
+            1
+          ],
+          "finite": true,
+          "edgesSampled": 59706,
+          "p99EdgeStretch": 1.6211927219689122,
+          "maximumEdgeStretch": 4.256037726156875,
+          "minimumEdgeRatio": 0.07347038249251786,
+          "collapsedEdgeFraction": 0,
+          "maximumEdge": {
+            "ratio": 4.256037726156875,
+            "time": 0.5,
+            "primitive": 2,
+            "material": "human_surface",
+            "a": 399,
+            "b": 392,
+            "restLength": 0.013868720164090116,
+            "deformedLength": 0.0590257962318801,
+            "aPosition": [
+              -0.20186685025691986,
+              1.6602733135223389,
+              -0.019925272092223167
+            ],
+            "bPosition": [
+              -0.18825401365756989,
+              1.6594691276550293,
+              -0.017398344352841377
+            ],
+            "aJoints": [
+              9,
+              3,
+              2,
+              10
+            ],
+            "bJoints": [
+              3,
+              9,
+              2,
+              10
+            ],
+            "aWeights": [
+              0.6290656924247742,
+              0.24874882400035858,
+              0.1221637949347496,
+              0.00002169884101022035
+            ],
+            "bWeights": [
+              0.4047587811946869,
+              0.37089744210243225,
+              0.22434201836585999,
+              0.0000017361719528707908
+            ]
+          },
+          "gates": {
+            "p99LessThan": 3,
+            "maximumLessThan": 8,
+            "restEdgeMinimumMeters": 0.005
+          }
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 41425,
+      "sha256": "4155da4dc91ccc499435c36fb62f74f838ae0c4475e1b7fe18279194dfa10d9e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3684,
+      "sha256": "2210d44be28bb7091764c8d1251298111c7bcb2ed7c03219d661f163c6bf6b20"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 8464,
+      "sha256": "7feb1347edd82c1594d54bc20b2ec6dd55016a9bff81fbe369dd728a177961fb"
+    },
+    {
+      "path": "catalog.json",
+      "bytes": 48415,
+      "sha256": "f4402cb61fae3af0b8c23156f3f81e4c85ecf01685f5c627c7e356af1f944d2e"
+    },
+    {
+      "path": "models/center.glb",
+      "bytes": 788588,
+      "sha256": "88d85ef481e60aeeb2befcef911d12dc9bd50adc42b434ef3a6cac6debe394d6"
+    },
+    {
+      "path": "models/guard.glb",
+      "bytes": 788564,
+      "sha256": "53aa0f345ab31e875d39b89f06ef39885fb82b66205b8e2cc67a2472a5c70251"
+    },
+    {
+      "path": "models/wing.glb",
+      "bytes": 788612,
+      "sha256": "8b1f0ca23746f163584cfa687ba6e7a4b9f251b93d8ff7f93c60cbf2a41bab4c"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 7752,
+      "sha256": "10f83fa252d21b6328391b66a15f68cdd86ad8284a54b18aaa8bace3747a0317"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 4311,
+      "sha256": "5e23a801281959c1e837f05eccca7ff4f5b7b7bcedcc822f3096e001c3e6334d"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 19061,
+      "sha256": "3e89f395aafba223c6c226a8748575b9bbf1bce53284d8565b2027c4938c4b2d"
+    },
+    {
+      "path": "rig.json",
+      "bytes": 23822,
+      "sha256": "4e93152c65774b7004f79d770547f9757d7b289349630dbcb93979585ad27571"
+    },
+    {
+      "path": "runtime/center.glb",
+      "bytes": 1030504,
+      "sha256": "68c770f5f93126cb821818dfa857a2bb9cc67ca08d6584c5e9a169767a853e62"
+    },
+    {
+      "path": "runtime/guard.glb",
+      "bytes": 1030508,
+      "sha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da"
+    },
+    {
+      "path": "runtime/keyframes/v8/block.json.gz",
+      "bytes": 51431,
+      "sha256": "9644767a84de407d9bcd1fcd0a8fffcbecc6b641ee658c7eb8c7a04aeb94b9bd"
+    },
+    {
+      "path": "runtime/keyframes/v8/dribble_behind_back.json.gz",
+      "bytes": 47380,
+      "sha256": "156cc068aa81462e505597c1e05323af11669c96a1556a898035ea7e8a609742"
+    },
+    {
+      "path": "runtime/keyframes/v8/dribble_idle.json.gz",
+      "bytes": 32275,
+      "sha256": "966ef5e2eb6c314823a408daf0f84d4060eadac53c080d91efa15f38f56241c7"
+    },
+    {
+      "path": "runtime/keyframes/v8/dribble_run.json.gz",
+      "bytes": 29386,
+      "sha256": "824d3602b98aa72eb66652873f50141ba8b54b236d730e448720cb2a32803895"
+    },
+    {
+      "path": "runtime/keyframes/v8/pass_bounce.json.gz",
+      "bytes": 41676,
+      "sha256": "b8ada7b8dd328d9ad988bdb20bb286cdca3ceb969edeb4ec0768be961df0dab0"
+    },
+    {
+      "path": "runtime/keyframes/v8/pass_chest.json.gz",
+      "bytes": 38255,
+      "sha256": "bcdd0aa2dbba5aed1d792edc0345b062e984420e826c08bd87dc83141592999f"
+    },
+    {
+      "path": "runtime/keyframes/v8/pass_jump.json.gz",
+      "bytes": 47194,
+      "sha256": "5b0d2ccccca2ce582d94469fa322a962adca2945f078f4bbf96493f85ae0ce85"
+    },
+    {
+      "path": "runtime/keyframes/v8/pass_overhead.json.gz",
+      "bytes": 45184,
+      "sha256": "6ba8d79b6f85ae630c88e600d72b84c844c1aae6ac5a9b9df179836f6a8a1562"
+    },
+    {
+      "path": "runtime/keyframes/v8/pass_side.json.gz",
+      "bytes": 45428,
+      "sha256": "95bc1cc37c26b6e86d45999f00fb8251bc32be01915a34d6b6ef02c7bf7a2e7e"
+    },
+    {
+      "path": "runtime/keyframes/v8/pivot.json.gz",
+      "bytes": 45366,
+      "sha256": "e51803d642c7f245c2d30115264e8140c779c294e79b835d982f77afa0c0544e"
+    },
+    {
+      "path": "runtime/keyframes/v8/receive_moving.json.gz",
+      "bytes": 45795,
+      "sha256": "2d289d9226ccafac6d0a960ff0ee37133b9605693959eaecad215e06aeeecb25"
+    },
+    {
+      "path": "runtime/keyframes/v8/receive_two_hands.json.gz",
+      "bytes": 24957,
+      "sha256": "bff4257887c7ee059efb227699fc042c1bec9b5c58bb8982b059a8dc71a2aba4"
+    },
+    {
+      "path": "runtime/keyframes/v8/shot_start.json.gz",
+      "bytes": 50858,
+      "sha256": "c9cc5998f3f976ed902df6c83b3ca75f315aa52a34966bcffd5e7ba4c3b56207"
+    },
+    {
+      "path": "runtime/keyframes/v8/steal.json.gz",
+      "bytes": 45109,
+      "sha256": "92f9da07de2a5d5729b486ee0cba93f4b3327ec471468bea202c2d97a59ef1e9"
+    },
+    {
+      "path": "runtime/keyframes/v8/stop_two_feet.json.gz",
+      "bytes": 41622,
+      "sha256": "d177b5bb886e1d4ffd44decd5d96017d9e00447768a2fd8fc7164182b8efd93c"
+    },
+    {
+      "path": "runtime/keyframes/v9/basket_cut_left.json.gz",
+      "bytes": 18858,
+      "sha256": "eefb6b0fe4f9a920a560878109d0061dba69c09c5c4cc6c0e932ddd719e3f90f"
+    },
+    {
+      "path": "runtime/keyframes/v9/basket_cut_right.json.gz",
+      "bytes": 18851,
+      "sha256": "f9edf600a23af17e5d11364bd47e49d62fca22b8d3e038939daf71c65670ac26"
+    },
+    {
+      "path": "runtime/keyframes/v9/block_two_hands.json.gz",
+      "bytes": 12121,
+      "sha256": "a2aa955eb386b03b8f1ae97e9dbc6e40c27d4ad55422bd8a5e2e7b40cf107e05"
+    },
+    {
+      "path": "runtime/keyframes/v9/brake.json.gz",
+      "bytes": 21077,
+      "sha256": "1ca60516acd70ba678dec9a08bd12760b87fa2c192384c5e013dd0de4d030731"
+    },
+    {
+      "path": "runtime/keyframes/v9/brake_ball.json.gz",
+      "bytes": 24179,
+      "sha256": "19fc1f567673db733c93fe6d09ac02a3fd7d90e3d6f4ac10464e4ab2379d7542"
+    },
+    {
+      "path": "runtime/keyframes/v9/celebrate_chest.json.gz",
+      "bytes": 22174,
+      "sha256": "1a2015a81f49e6cca637a4955df4a9001fe3a3cfcc46e8aac04fee9c333b33e8"
+    },
+    {
+      "path": "runtime/keyframes/v9/celebrate_fist.json.gz",
+      "bytes": 24083,
+      "sha256": "0cbd901adc147c82f3adb5c3acdee04e80f28948f5757b4f06dd1407a255bb98"
+    },
+    {
+      "path": "runtime/keyframes/v9/celebrate_jump.json.gz",
+      "bytes": 23652,
+      "sha256": "f0a5fba95e145c0906e62bf3664507a35ddff373effe2cbbbaf96f0da240d23b"
+    },
+    {
+      "path": "runtime/keyframes/v9/celebrate_point.json.gz",
+      "bytes": 21634,
+      "sha256": "1c31f4090764f6028cfcafc4e2fce4c1c3cd4c559389abe4e0c3a681eba1ecac"
+    },
+    {
+      "path": "runtime/keyframes/v9/closeout.json.gz",
+      "bytes": 17702,
+      "sha256": "5b464cd618c2fed65344d39f2d756e1a5fb5c41d644953e71469fd7a1d565fb7"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_135_left.json.gz",
+      "bytes": 19629,
+      "sha256": "aa4378cd3b8c4e6a4f45c768e29604c27be459654a2172eda1ae6892431d497c"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_135_left_ball.json.gz",
+      "bytes": 23268,
+      "sha256": "40bbaa753c065c8cdf99c63fed27d32a4faca9198d4e61e174b604e7ca8847ab"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_135_right.json.gz",
+      "bytes": 19627,
+      "sha256": "1f92b4bfb6ebe574ca136d55ee05ae05e0528b72030b4a2efd839dc74e6dfdb2"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_135_right_ball.json.gz",
+      "bytes": 23287,
+      "sha256": "db2f6c02d05f9fa581a32bfe30442fcac2964a472683499cfaa5c45e28efe788"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_180_left.json.gz",
+      "bytes": 19523,
+      "sha256": "61139e5f7c51df055b19081426d742bf094fd835977b9fd97c3fb8227d2fb533"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_180_left_ball.json.gz",
+      "bytes": 23061,
+      "sha256": "d0aa9680f5ddb7734f433a885ccf6c73c4549e16c38390859b3d0e9017b130c5"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_180_right.json.gz",
+      "bytes": 19529,
+      "sha256": "e0076b395e0d85026ae19a19f41d9464e4fa9e4260e9e06ff6635f1a81328954"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_180_right_ball.json.gz",
+      "bytes": 23096,
+      "sha256": "c80e530ba001283db0cb952a47a3683046380330697ff96a0579f7bfef38cf49"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_45_left.json.gz",
+      "bytes": 19603,
+      "sha256": "b78907fe92f617d55082f6cbbeb08ea0c401200695738a1beb0b0a9bf720eef0"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_45_left_ball.json.gz",
+      "bytes": 23198,
+      "sha256": "a6546dde20b417674adfc82c31e5f243a808533cf76efcf417128c776d6bbc8c"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_45_right.json.gz",
+      "bytes": 19599,
+      "sha256": "c48141dcd050df848622090aa60adb3871318a326d83346e3feb0227d66059bc"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_45_right_ball.json.gz",
+      "bytes": 23206,
+      "sha256": "e0c9b2bedf49617b81bae402b730ce84399d2fed76f2d860868ac54d45d30b38"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_90_left.json.gz",
+      "bytes": 19505,
+      "sha256": "7ea895e7d90ce1aafaa7b14baba658531103ad84c57cb18217cc4482c53bd0cd"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_90_left_ball.json.gz",
+      "bytes": 23047,
+      "sha256": "1939d837eb07b10153316ba65cbdacf7d4b1d78c388699d8b1e2a171dfd94e89"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_90_right.json.gz",
+      "bytes": 19489,
+      "sha256": "04fef85928b23d041e15b7d7fc7f0bf81c9073f409a118ea8e55fd8174b13f8e"
+    },
+    {
+      "path": "runtime/keyframes/v9/cut_90_right_ball.json.gz",
+      "bytes": 23096,
+      "sha256": "3c252d632f8f4d8a3438e2615ddd9f76778e16440ba6c6398b4fa1540721bff4"
+    },
+    {
+      "path": "runtime/keyframes/v9/defensive_slide_left.json.gz",
+      "bytes": 13581,
+      "sha256": "f9931f770276efcc26ee297fa4a628ca8d8516ad8daccaa438993d74ee3409ae"
+    },
+    {
+      "path": "runtime/keyframes/v9/defensive_slide_right.json.gz",
+      "bytes": 13579,
+      "sha256": "eaecfb43266a7d85bf3884bfa3f772c44ddd5153fe86f60e0422fb0379a0a23f"
+    },
+    {
+      "path": "runtime/keyframes/v9/defensive_stance.json.gz",
+      "bytes": 14913,
+      "sha256": "f15b3b6c9eb5e5fbd739d70641cfbaa837d83ea612364838d9380404d58b37be"
+    },
+    {
+      "path": "runtime/keyframes/v9/disappointed.json.gz",
+      "bytes": 12100,
+      "sha256": "50270eed776901e032c7bbf45d57f8af875b28644af9403b6ef7254427ce97ee"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_backward.json.gz",
+      "bytes": 12621,
+      "sha256": "c1f08d8c37cb42e72b8d62df01703fda7b4a14df21704bf30bea56c636b6f2ed"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_backward_left.json.gz",
+      "bytes": 13088,
+      "sha256": "1b2944b1c3e5e379e7528d63a039f1a570042af520cef3ec66ecd20df1316a36"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_backward_right.json.gz",
+      "bytes": 13097,
+      "sha256": "edec6487be54c7c40bc7258ea3e24428ac0cd27d03b3adcbed7befd0d9abcdf5"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_between_legs_left.json.gz",
+      "bytes": 16672,
+      "sha256": "2875feef3a6fd36f446f3d7f528e897b74c964a4f6915301288a73461a6d04cb"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_between_legs_right.json.gz",
+      "bytes": 16672,
+      "sha256": "a5b0bee82519b033663585292c523a61405fa2a817f970b534935109184032cd"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_crossover_left.json.gz",
+      "bytes": 16366,
+      "sha256": "ead4a510cc626c1eb2b2f0e8bb88b26cdead51c10a7fd951cff3bc21089c9520"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_crossover_right.json.gz",
+      "bytes": 16365,
+      "sha256": "24940d6f729e894007aafe2841a3f796c8eda4513897d223e0369633c0c9a16a"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_forward.json.gz",
+      "bytes": 12603,
+      "sha256": "0a6bf7420db88171bcf42a5e8826517288ba46ec25d4547f8c2f113a5ba553b5"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_forward_left.json.gz",
+      "bytes": 13093,
+      "sha256": "947cf37a7f8e1cd8df41c342513cfacf13fc0e70b3e880684699d2cb608bb1a0"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_forward_right.json.gz",
+      "bytes": 13082,
+      "sha256": "60087adb5710e9621abe0f1dd3f4335aa382b275e8d0a21ad907b081213ee1f7"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_hesitation_left.json.gz",
+      "bytes": 17598,
+      "sha256": "d4223ad35efd4b7bf5b3f8497f45dca7a0f5214fa555531d3efe214c67422d6f"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_hesitation_right.json.gz",
+      "bytes": 17619,
+      "sha256": "832f5568164ecff650559b3982183377744d4b61ea4a532983a64dcba090084d"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_left.json.gz",
+      "bytes": 12792,
+      "sha256": "aa4a9538b344da8256fc7b38aa301d03590c40f49cd0a3831d592ed3e13a5496"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_right.json.gz",
+      "bytes": 12822,
+      "sha256": "eeefb68a09c7598cf1caa058acc4a3f745d71ccd4a56cd59eb486cf869c17f0a"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_walk_left.json.gz",
+      "bytes": 12638,
+      "sha256": "3750e692d3a95e0dbd380e2825482d324bc31eefc21cb0b860870e1c5d945ad4"
+    },
+    {
+      "path": "runtime/keyframes/v9/dribble_walk_right.json.gz",
+      "bytes": 12654,
+      "sha256": "3720c5749e5b9f256a0a9e122ab5014743e9a9800d865e32b047daafdab90630"
+    },
+    {
+      "path": "runtime/keyframes/v9/dunk_one_hand.json.gz",
+      "bytes": 30261,
+      "sha256": "3ace24fd4e2d2ae05c5683a61f505e7e618c1faec7048cab66686f27bf1176a9"
+    },
+    {
+      "path": "runtime/keyframes/v9/dunk_two_hands.json.gz",
+      "bytes": 30231,
+      "sha256": "9e2e7ac90a6f39de7d5d537f2fa66533b30010e3bce45784729c5980107d3cc1"
+    },
+    {
+      "path": "runtime/keyframes/v9/euro_left.json.gz",
+      "bytes": 32568,
+      "sha256": "1f9f3af17201c38d95c5dfdfc77af932c287f5b9cd437125f0c6f6ddc0b163fe"
+    },
+    {
+      "path": "runtime/keyframes/v9/euro_right.json.gz",
+      "bytes": 32583,
+      "sha256": "2089e5cea39e14cfd27a2523208fb53ab67a570433f34891f5ab430780e47de2"
+    },
+    {
+      "path": "runtime/keyframes/v9/floater.json.gz",
+      "bytes": 25763,
+      "sha256": "8a9f855dfa40b12c6844240c85d3b2913ce8ccaef9c9802bc666a399aac0ab59"
+    },
+    {
+      "path": "runtime/keyframes/v9/free_throw.json.gz",
+      "bytes": 27516,
+      "sha256": "de694005c72f9c3e239aa7a40061462eb37b1672e4dd3e95f6e791dd6cd8b6ca"
+    },
+    {
+      "path": "runtime/keyframes/v9/get_up_back.json.gz",
+      "bytes": 26009,
+      "sha256": "74ce7c1d3fc2a3bde8ce4c91030ead1111ee76b913296f42ca59fa439a3ff140"
+    },
+    {
+      "path": "runtime/keyframes/v9/get_up_front.json.gz",
+      "bytes": 26106,
+      "sha256": "f93caa8770245512da380e6a04e27b7cc9dba86bead1fc4f91e3fe3639da2d8c"
+    },
+    {
+      "path": "runtime/keyframes/v9/hands_on_hips.json.gz",
+      "bytes": 9784,
+      "sha256": "5ffd49db6451e96beda547dfa50f26ed6e5a44c5873d7cea9979bb96357fa4af"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_ready.json.gz",
+      "bytes": 22787,
+      "sha256": "4e393aabad226a11e96a0f70e2b0809073e1dbca980b3eb642f5224f5e42f54a"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_ready_ball.json.gz",
+      "bytes": 24961,
+      "sha256": "0558ab9341c8677a3564d56319c33954650db92063b9037669554f1816362241"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_relaxed.json.gz",
+      "bytes": 22491,
+      "sha256": "c62694e34d61d14d4e7134a7d8c0c387e3a2a6d3792a7d3f1c884f0eedf8bc55"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_relaxed_ball.json.gz",
+      "bytes": 24228,
+      "sha256": "16d00dafeddba693c7161ed6215cb10a2122e0b5fcabb6d0980d556688535776"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_weight_shift.json.gz",
+      "bytes": 22693,
+      "sha256": "6b9177e4cb34061a6a4dd47f176698ea731a006301cdf022f4254304020caaee"
+    },
+    {
+      "path": "runtime/keyframes/v9/idle_weight_shift_ball.json.gz",
+      "bytes": 25099,
+      "sha256": "c806764153205045d1a9ba42538cdbf69d1dc14131607f0ca6859fdc8a8ca4f6"
+    },
+    {
+      "path": "runtime/keyframes/v9/jog.json.gz",
+      "bytes": 7395,
+      "sha256": "846f9912c76164b444786e8a43f5ee31fb19abf4451256fc81c76ca22cffaa1a"
+    },
+    {
+      "path": "runtime/keyframes/v9/jog_ball.json.gz",
+      "bytes": 9808,
+      "sha256": "cf170e8ef70070ab0ac30aacafc3bd79c017762a01d138e74216c06d5a5d67cc"
+    },
+    {
+      "path": "runtime/keyframes/v9/jump_shot.json.gz",
+      "bytes": 24269,
+      "sha256": "2b1f147e856c931d3e11faa3886b8742018b551e877c7ce6707a0006a780a2d3"
+    },
+    {
+      "path": "runtime/keyframes/v9/layup_left.json.gz",
+      "bytes": 32030,
+      "sha256": "437e8fa6dc5dc6dddc56c7bce12ac8c36acc655a861e1bd6df388597001befb3"
+    },
+    {
+      "path": "runtime/keyframes/v9/layup_right.json.gz",
+      "bytes": 32040,
+      "sha256": "9030db30eea3bfa1d1830bddb9374a40d6f0bd76b3c91711fbc4c02379f4cfd7"
+    },
+    {
+      "path": "runtime/keyframes/v9/loose_ball_dive_left.json.gz",
+      "bytes": 29842,
+      "sha256": "6cd441b8342b8799cdf7a5ac12138ae31e5fc23bd4ecbad0fd0ec6e53a724c47"
+    },
+    {
+      "path": "runtime/keyframes/v9/loose_ball_dive_right.json.gz",
+      "bytes": 29855,
+      "sha256": "2b396cd427274723e0ff5a86d10a1ca5e3db3a441236b942498573b9abbfdee4"
+    },
+    {
+      "path": "runtime/keyframes/v9/pass_deflect_left.json.gz",
+      "bytes": 12387,
+      "sha256": "6311b2546a1e25aa98ae082ecc003a74068e6581513ecfe7446b23381b35574e"
+    },
+    {
+      "path": "runtime/keyframes/v9/pass_deflect_right.json.gz",
+      "bytes": 12419,
+      "sha256": "fb67686b807f35ad41f87fb2cfd9ab391926cc767451160cb272c7f5ad63420f"
+    },
+    {
+      "path": "runtime/keyframes/v9/pivot_reverse_left.json.gz",
+      "bytes": 18604,
+      "sha256": "47fcbec0779da3e9e9d986a43a72e3fcf20a2a99ef23474e15f12e8d20ab3de7"
+    },
+    {
+      "path": "runtime/keyframes/v9/pivot_reverse_right.json.gz",
+      "bytes": 18597,
+      "sha256": "50bf2020a32325a0d97e937caec90882b663c80677cc04a9ebf451debbd25f69"
+    },
+    {
+      "path": "runtime/keyframes/v9/rebound_jump.json.gz",
+      "bytes": 12299,
+      "sha256": "7f51d2bdfbce3e7ac18c0a260ec34611ea29e30866c7de92694a7e72532af8bc"
+    },
+    {
+      "path": "runtime/keyframes/v9/rebound_land.json.gz",
+      "bytes": 10155,
+      "sha256": "357a87e3e49ed699fbff2d59ea7aa5c65c6e0f126f07c7fe4375b86af1d41dc1"
+    },
+    {
+      "path": "runtime/keyframes/v9/run.json.gz",
+      "bytes": 6373,
+      "sha256": "7dd361aa0291234af8084854c055eca3107552b413bf89a624ad0e8c0f0bbef9"
+    },
+    {
+      "path": "runtime/keyframes/v9/run_ball.json.gz",
+      "bytes": 8479,
+      "sha256": "2f90aa050fd4059282f6e38e68b558121203ddaae53a9f1eadaf54ec88789669"
+    },
+    {
+      "path": "runtime/keyframes/v9/screen_set.json.gz",
+      "bytes": 12167,
+      "sha256": "4b6741dce419e51e6d19174f7448ac8386fe68c420faddbaf9d3009105ec1564"
+    },
+    {
+      "path": "runtime/keyframes/v9/sprint.json.gz",
+      "bytes": 5528,
+      "sha256": "0dc4e87e4915a6b1fdaacc500fa7d31fe458b00e49a518cb4e5dc5de7b128357"
+    },
+    {
+      "path": "runtime/keyframes/v9/sprint_ball.json.gz",
+      "bytes": 7222,
+      "sha256": "b4c5e8450c19747034d8b3168ee5e0f7d24174d0fd355d73b1e280a0a645dfbd"
+    },
+    {
+      "path": "runtime/keyframes/v9/steal_poke.json.gz",
+      "bytes": 10977,
+      "sha256": "e5d2b6a7fb6dd0b21fba7f97bd04a55dd1f98bd6c41aa681a4c68cbc2fb45d15"
+    },
+    {
+      "path": "runtime/keyframes/v9/three_point.json.gz",
+      "bytes": 26802,
+      "sha256": "9273692fc7f34799776a2bdbdd058c195d22eb26bee4506be692f9ac0de4af3b"
+    },
+    {
+      "path": "runtime/keyframes/v9/walk.json.gz",
+      "bytes": 9606,
+      "sha256": "4a891207a4f0b8ba8d2d1a905647769104b81d3096d0d2ce9a077cf97b7b5525"
+    },
+    {
+      "path": "runtime/keyframes/v9/walk_ball.json.gz",
+      "bytes": 11882,
+      "sha256": "d314d204a790c4a3bf1a00397bd756c5ef723df89f87e58e79fd06509c46d397"
+    },
+    {
+      "path": "runtime/retarget.mjs",
+      "bytes": 5110,
+      "sha256": "c78204a5e0e579881c61e4f1cdb35c5ef649491adbd31e6828f6a66ea5ee5c1d"
+    },
+    {
+      "path": "runtime/wing.glb",
+      "bytes": 1030504,
+      "sha256": "e5621aad5be2864d4c0aafb43571dc285f1559928bbb13a8430cb25d610526d5"
+    },
+    {
+      "path": "source/README.md",
+      "bytes": 2496,
+      "sha256": "07b2588c29bd797bd3b6371d71b04b68418e5eb86f6cd6f49db419037414f497"
+    },
+    {
+      "path": "source/build-models.mjs",
+      "bytes": 19827,
+      "sha256": "b6653504d8b9de068f483206d6fa36878ddf28d61cafefc37780d9577514346d"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 4963,
+      "sha256": "5ef3705a2f0fc32305da26e0835405ea6d90bd57af1c498f42efe7ced1bde15b"
+    },
+    {
+      "path": "source/package-clips.mjs",
+      "bytes": 1814,
+      "sha256": "7d9201c0d6212fba80575920246eb2239ff5d92195e45d45b743158d3946ecbd"
+    },
+    {
+      "path": "source/verify.mjs",
+      "bytes": 21585,
+      "sha256": "e83652bb387e30a05fb41b0b8fcef5cda8d4d517e55325c1ee85ebf5e600416c"
+    },
+    {
+      "path": "source/write-docs.mjs",
+      "bytes": 14681,
+      "sha256": "3616f51243b5e445ec6f4831d0fcc213617c76a3f7013849670f1a792cc3b6f6"
+    },
+    {
+      "path": "tests/assets.test.mjs",
+      "bytes": 6536,
+      "sha256": "9a0c8d08e2d20e3e6611e5004ca4c85a97e4b40d6bba74203741dd95291f74a0"
+    },
+    {
+      "path": "textures/athlete-atlas.png",
+      "bytes": 727049,
+      "sha256": "b1a5927467d1cd47cbf969224485b4ab60aed926bf1b1bf923c97c4cb871f643"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 267674,
+      "sha256": "9fb5445abd85e7f7f30c4f5948fbb16dee5bb4bac806bff4bf4da06c949e84ab"
+    },
+    {
+      "path": "verification/defensive_stance.png",
+      "bytes": 111792,
+      "sha256": "e4b49c3e0aff80230a737c47200764f2192bf11548ae8f543ce279959b721cd0"
+    },
+    {
+      "path": "verification/dribble_forward.png",
+      "bytes": 115548,
+      "sha256": "caf9fddd8fe2f0868e3b6acac1b1acd2732f57a6d142c901279ae9c7537ebbc5"
+    },
+    {
+      "path": "verification/dunk-ember.png",
+      "bytes": 114402,
+      "sha256": "41f564fb9a52e0c845e807fa9e7339d25791e00417036dde343e840f006c1c13"
+    },
+    {
+      "path": "verification/dunk-source-comparison.png",
+      "bytes": 111517,
+      "sha256": "8d372f61f3d5ac7ea38589a7369f1e48ddf4581664979f056084e6f715d0e1a8"
+    },
+    {
+      "path": "verification/dunk_one_hand.png",
+      "bytes": 115552,
+      "sha256": "f78b47738081e728a5d81709f4dfc149ddc947a273b454cc0908c1560c7aaa30"
+    },
+    {
+      "path": "verification/dunk_two_hands.png",
+      "bytes": 114287,
+      "sha256": "c73a935de60019dc89630ee95722da88ff02319af62db4c139f092b75c0e20e8"
+    },
+    {
+      "path": "verification/gltf-validation.json",
+      "generatedAuditOutput": true
+    },
+    {
+      "path": "verification/layup_right.png",
+      "bytes": 111867,
+      "sha256": "cb0bca360a741fe9d411ca9e1771cd6ebe938071aafbd479ba2d8ae3fb923c12"
+    },
+    {
+      "path": "verification/metrics.json",
+      "generatedAuditOutput": true
+    },
+    {
+      "path": "verification/preview-desktop.png",
+      "bytes": 185709,
+      "sha256": "c2ba9d198879a9b8bb0c52adc5b1116eb2925668854e267822bd7d91482ea9bc"
+    },
+    {
+      "path": "verification/preview-mobile.png",
+      "bytes": 82534,
+      "sha256": "42050b84d9672b197a5018c6895c9c6666f3a57e5418b8e4f2bb75dbfa3ee8be"
+    },
+    {
+      "path": "verification/rebound_jump.png",
+      "bytes": 116451,
+      "sha256": "dcc41d273c62b94f134746afe625e43a06dbdb01b861ea3febde722ddc8f92b4"
+    }
+  ]
+}
