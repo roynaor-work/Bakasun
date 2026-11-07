@@ -62,3 +62,17 @@ test('rival engines: at most three live voices plus one shared background voice,
   assert.equal(f.pans.length,4);assert.ok(f.pans[0].pan.value<0&&f.pans[1].pan.value>0);
   audio.setOpponents([]);audio.dispose();
 });
+
+test('top speed is alive: over 10 s at the rev limit the pitch hunts, drops at the limiter and the level rattles; off with topVar:false',()=>{
+  // clock-controlled fixture
+  const make=()=>{const f=audioFixture();const original=f.AudioContext;let clock=2;f.AudioContext=class extends original{get currentTime(){return clock;}set currentTime(v){}};f.setClock=v=>{clock=v;};return f;};
+  const collect=topVar=>{const f=make(),audio=createRacingAudio(f);audio.unlock();const pitches=[],levels=[];
+    for(let step=0;step<200;step++){f.setClock(2+step*.05);audio.sync(40,false,{rpm:.98,gear:7,throttle:1,topVar});pitches.push(f.oscillators[0].frequency.value);levels.push(f.gains[0].gain.value);}
+    audio.dispose();return {pitches:pitches.slice(10),levels:levels.slice(10)};};  // the first half second holds the gear-change dip
+  const range=a=>Math.max(...a)-Math.min(...a);
+  const on=collect(true),off=collect(false);
+  assert.ok(range(on.pitches)>8,'pitch range with variation: '+range(on.pitches).toFixed(2)+' Hz');
+  assert.ok(range(off.pitches)<2.5,'static without it: '+range(off.pitches).toFixed(2)+' Hz');
+  assert.ok(range(on.levels)>range(off.levels)*3+1e-6,'level varies (limiter cut + rattle)');
+  assert.ok(new Set(on.pitches.map(v=>Math.round(v*4))).size>25,'many distinct pitches over 10 s');
+});

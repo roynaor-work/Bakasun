@@ -79,23 +79,28 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const drift=!!extras.drifting&&speed>8,offroad=!!extras.offroad;
   const steering=clamp(Math.abs(number(extras.steer)),0,1);
   const revs=real?clamp(number(extras.rpm),0,1):rpm;
-  const pitch=real?(40+revs*150)*(1-shift*.18)+(boosting?14:0):(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
+  // racing-v11 top-speed life: in gear 7 near the rev limit the note hunts up and down (slow cycle toward the limiter), carries a 6 Hz vibrato,
+  // drops for an instant at the limiter every ~2.6 s, rattles (28 Hz) above 90% and the wind builds. extras.topVar=false switches it off.
+  const top=real&&extras.topVar!==false&&gear>=7?clamp((revs-.72)/.28,0,1):0;
+  const hunt=top*(Math.sin(now*2.4)*5.5+Math.sin(now*.9+1)*3.5+Math.sin(now*6*Math.PI*2)*1.1);
+  const limiter=top>.6&&(now%2.6)<.09?1:0,rattle=top>.65?1+Math.sin(now*28*Math.PI*2)*.1*top:1;
+  const pitch=real?((40+revs*150)*(1-shift*.18)+(boosting?14:0)+hunt)*(1-limiter*.05):(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
   if(real&&voice2){
    target(voice2.frequency,pitch*.5,now,.05);target(voice3.frequency,pitch*1.5*(1+Math.sin(now*29)*.004),now,.05);
-   target(gain2.gain,.35+throttle*.35,now,.08);target(gain3.gain,.12+revs*.3,now,.08);
+   target(gain2.gain,.35+throttle*.35,now,.08);target(gain3.gain,.12+revs*.3+top*.12,now,.08);
   }
   target(voice.frequency,pitch+Math.sin(now*23)*Math.min(speed/70,.65),now,.045);
-  target(filter.frequency,380+rpm*850+speed*8+throttle*190+(boosting?360:0),now,.055);
+  target(filter.frequency,380+rpm*850+speed*8+throttle*190+(boosting?360:0)+top*(260+Math.sin(now*3.1)*140),now,.055);
   // Entire mix remains below the previous .03 gain ceiling, including boosts.
-  const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*.3):(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
+  const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*.3)*(1-limiter*.55)*rattle:(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
   target(gain.gain,paused||muted||disposed?0:volume,now,paused||muted||disposed?.018:.07);
   if(noiseGain){
    const road=Math.min(speed/55,1)*.045;
    const air=boosting?.33:0,slip=drift?.11+steering*.1:0,gravel=offroad?.2:0;
-   const pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(.02+throttle*revs*.07):0;
+   const wind=top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(.02+throttle*revs*.07):0;
    lastThrottle=throttle;
-   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055+pop+backfire+exhaust),now,boosting?.045:.09);
-   target(noiseFilter.frequency,offroad?620:drift?1550+steering*850:boosting?1200+speed*13:760+speed*12,now,.07);
+   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055+pop+backfire+exhaust+wind),now,boosting?.045:.09);
+   target(noiseFilter.frequency,(offroad?620:drift?1550+steering*850:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
   }
   lastSpeed=speed;lastTime=now;
