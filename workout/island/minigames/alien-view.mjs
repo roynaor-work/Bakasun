@@ -79,6 +79,7 @@ export function createAlienView(ctx,model,adapters={}){
    const fit=(x,y,pixels)=>worldLength(x,y,pixels),playerPixels=Math.min(76,currentHeight*.18);
    player.position.set(...world(model.player.x,model.player.y));player.scale.setScalar(fit(model.player.x,model.player.y,playerPixels));
    player.rotation.z=-(model.player.bank||0)*.25;player.rotation.y=(model.player.bank||0)*.18;
+   if(model.v12&&model.firing){const j=model.time*97;player.rotation.z+=Math.sin(j)*.018;player.position.x+=Math.sin(j*1.7)*fit(model.player.x,model.player.y,.9);}
    player.visible=!model.invulnerable||Math.floor(model.time*12)%2===0;
    playerShield.position.copy(player.position);playerShield.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*1.18));playerShield.visible=model.powerup===3||model.invulnerable>0;
    const visible=model.aliens.filter(a=>a.y+a.radius>0&&a.y-a.radius<config.height);

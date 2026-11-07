@@ -1,4 +1,4 @@
-globalThis.__alienV11=false;
+globalThis.__alienV11=false;globalThis.__alienV12=false;
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
