@@ -1,0 +1,102 @@
+{
+ "withBall": {
+  "accel": {
+   "frames": 2,
+   "meanSlide": 3.141,
+   "p95Slide": 4.299,
+   "over1": 1,
+   "meanSpeed": 0.21,
+   "minFloor": 0.08
+  },
+  "sprint": {
+   "frames": 2,
+   "meanSlide": 2.734,
+   "p95Slide": 5.141,
+   "over1": 0.5,
+   "meanSpeed": 4.68,
+   "minFloor": 0.053
+  },
+  "stop": {
+   "frames": 3,
+   "meanSlide": 2.628,
+   "p95Slide": 4.317,
+   "over1": 1,
+   "meanSpeed": 1.07,
+   "minFloor": 0.076
+  },
+  "restart": {
+   "frames": 14,
+   "meanSlide": 0.841,
+   "p95Slide": 3.084,
+   "over1": 0.21,
+   "meanSpeed": 5.46,
+   "minFloor": 0.064
+  },
+  "turn90": {
+   "frames": 13,
+   "meanSlide": 3.064,
+   "p95Slide": 4.227,
+   "over1": 1,
+   "meanSpeed": 5.57,
+   "minFloor": 0.056
+  },
+  "turn180": {
+   "frames": 3,
+   "meanSlide": 1.925,
+   "p95Slide": 3.674,
+   "over1": 0.67,
+   "meanSpeed": 5.56,
+   "minFloor": 0.052
+  }
+ },
+ "noBall": {
+  "accel": {
+   "frames": 11,
+   "meanSlide": 3.332,
+   "p95Slide": 7.257,
+   "over1": 0.91,
+   "meanSpeed": 4.76,
+   "minFloor": 0.052
+  },
+  "sprint": {
+   "frames": 7,
+   "meanSlide": 2.854,
+   "p95Slide": 4.319,
+   "over1": 1,
+   "meanSpeed": 2.44,
+   "minFloor": 0.058
+  },
+  "stop": {
+   "frames": 10,
+   "meanSlide": 2.794,
+   "p95Slide": 5.936,
+   "over1": 0.8,
+   "meanSpeed": 1.92,
+   "minFloor": 0.055
+  },
+  "restart": {
+   "frames": 7,
+   "meanSlide": 2.843,
+   "p95Slide": 4.618,
+   "over1": 0.86,
+   "meanSpeed": 3.89,
+   "minFloor": 0.057
+  },
+  "turn90": {
+   "frames": 12,
+   "meanSlide": 3.61,
+   "p95Slide": 6.313,
+   "over1": 1,
+   "meanSpeed": 4.32,
+   "minFloor": 0.057
+  },
+  "turn180": {
+   "frames": 6,
+   "meanSlide": 3.31,
+   "p95Slide": 4.665,
+   "over1": 1,
+   "meanSpeed": 2.7,
+   "minFloor": 0.062
+  }
+ }
+}
