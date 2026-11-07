@@ -10,6 +10,9 @@ import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-2'
 import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-2';
 import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-2';
 import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-2';
+import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-2';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-2';
+import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-2';
 import { createRegistry } from './registry.mjs?v=island-v2-20261107-2';
 import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-2';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-2';
@@ -388,6 +391,15 @@ export function createEngine(data, options = {}) {
       if(patch.defense!==undefined){if(!['man','zone'].includes(patch.defense))return {ok:false,reason:'reason.invalid'};h.tactics.defense=patch.defense;}
       changed('hoops-settings');return {ok:true};},
   };
+  // Racing league (07/11/2026): own state (islandRacingLeague), own result path in startMinigame, refused while a game runs.
+  const leagueBusy=()=>activeMinigame?{ok:false,reason:'reason.gameBusy'}:null;
+  engine.racingLeague={
+    enabled:()=>leagueEnabled(),
+    summary:()=>leagueSummary(state.islandRacingLeague),
+    next:()=>leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null,
+    buy:name=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-upgrade');return r;})(leagueBuy(state.islandRacingLeague,name))),
+    nextSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-season');return r;})(leagueNext(state.islandRacingLeague))),
+  };
   engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
@@ -398,12 +410,17 @@ export function createEngine(data, options = {}) {
     const customAvailable=minigame.availability?.(state);
     if(customAvailable&&!customAvailable.ok)return customAvailable;
     if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
-    const progress=state.minigameProgress[id],stage=context.level??progress?.stage;
-    if(progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
+    // A league race picks its own circuit from the season, so it neither needs nor changes the regular stage progress.
+    const leagueRun=id==='islandRacing'&&context.league===true&&leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null;
+    if(id==='islandRacing'&&context.league===true&&!leagueRun)return {ok:false,reason:'reason.invalid'};
+    const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:(context.level??progress?.stage);
+    if(!leagueRun&&progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
+    if(leagueRun){ctx.league=leagueRun;ctx.equipment=leagueRun.equipment;}
+    else delete ctx.league;
     if(id==='streetSlam'){ctx.hoops=clone(state.hoops);const g=hoopsNextGame(state.hoops);ctx.hoopsGame=g?{id:g.id,home:g.home,away:g.away,round:g.round}:null;}
     if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;
       // League ladder (29/10/2026): the match number decides the difficulty, the child always plays in the field.
@@ -411,6 +428,16 @@ export function createEngine(data, options = {}) {
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
+      if (!cancelled && ctx.league) {
+        // League race: validated by its own contract, applied to islandRacingLeague only (no stars, stage progress, island money or highscore).
+        let lr; try { lr = racingLeagueResult(raw, ctx, config.minigames.islandRacing); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!lr) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        const league = leagueApply(state.islandRacingLeague, { order: lr.order, fastestLapId: lr.fastestLapId });
+        result = Object.freeze({ outcome: lr.outcome, score: lr.score, money: 0, parts: 0, stars: 0, stage, league: Object.freeze({ ...league, season: ctx.league.season, race: ctx.league.race, track: ctx.league.track, laps: ctx.league.laps, order: lr.order }) });
+        changed('racing-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
       if (!cancelled) {
         try { result = minigame.onResult(raw, ctx); } catch { return { ok: false, reason: 'reason.invalid' }; }
         if (!result || !['win', 'lose'].includes(result.outcome) || !Number.isSafeInteger(result.score) || result.score < 0 || !Number.isSafeInteger(result.money) || result.money < 0 || !Number.isFinite(state.money + result.money)) return { ok: false, reason: 'reason.invalid' };
