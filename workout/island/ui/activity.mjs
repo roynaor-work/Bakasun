@@ -20,6 +20,7 @@ import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-202611
 import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-5';
 import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-5';
 import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-5';
+import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-5';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -48,7 +49,7 @@ export class ActivityInterface {
     this.unsubscribeEngine=engine.subscribe(()=>this.render());this.render();
   }
   cleanup(eventId) {
-    this.closing=true;this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();
+    this.closing=true;this.fpsStop?.();this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();
     this.shell?.dispose();this.shell=null;
     if(eventId)this.activity.cancel(eventId);
     if(!this.switching)this.navigation.leave();
@@ -290,7 +291,7 @@ export class ActivityInterface {
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
-    if(rescue.lite)context.lite=true;
+    if(rescue.lite||isLowQuality())context.lite=true;
     if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1} · ${next.track}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
@@ -305,8 +306,9 @@ export class ActivityInterface {
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
     this.current=response;if(id==='navalDuel')this.lastNavalFleet=response.session.snapshot.composition;
     this.shell.bind(response.session);
-    if(RESCUE_GAMES[id]){this.rescueWatch?.stop();this.rescueWatch=watchLoading({session:response.session,dialog,t:this.t,attempts:rescue.attempts,
+    if(RESCUE_GAMES[id]){this.rescueWatch?.stop();this.rescueWatch=watchLoading({session:response.session,dialog,t:this.t,attempts:rescue.attempts,autoLite:!rescue.lite&&rescue.attempts===0,
       onRestart:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'restart'),onLite:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'lite'),onClear:()=>this.rescueRestart({id,eventId,stageNumber,drill,rescue},'clear'),
+      onReady:()=>{this.fpsStop?.();this.fpsStop=sampleGameFps();},
       onBack:()=>{this.ui.closeModal();this.menu();}});}
     if(id==='navalDuel')status.textContent=this.t('minigame.aimCircle');
     canvas.focus();
@@ -317,7 +319,7 @@ export class ActivityInterface {
   async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
     const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{})};
     this.closing=true;
-    try{this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
+    try{this.fpsStop?.();this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
     let count=0;
     if(kind==='clear'){try{count=await clearGameAssets(key);}catch{}this.ui.toast('rescue.cleared',{count});}
     noteManualRestart(key,this.t('rescue.report.'+kind,{n:next.attempts,count}));

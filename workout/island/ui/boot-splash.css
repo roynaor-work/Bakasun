@@ -16,3 +16,8 @@
 .boot-splash:not([data-clip=playing])::after{display:none}
 .boot-splash:not([data-clip=playing]) .boot-splash-dots i{background:#164a56}
 @media (prefers-reduced-motion:reduce){.boot-splash,.boot-splash-video{transition:none}.boot-splash-dots i{animation:none;opacity:.8}}
+
+.boot-splash-bar{position:absolute;inset-inline:18%;bottom:max(34px,calc(env(safe-area-inset-bottom) + 28px));height:5px;border-radius:3px;overflow:hidden;background:#164a5633;z-index:1}
+.boot-splash-bar i{display:block;height:100%;width:3%;border-radius:3px;background:linear-gradient(90deg,#164a56,#2fa4b8);transition:width .4s ease-out}
+.boot-splash-progress{position:absolute;inset-inline:0;bottom:max(10px,calc(env(safe-area-inset-bottom) + 6px));text-align:center;color:#164a56;font-size:.78rem;z-index:1}
+.boot-splash-text{margin-bottom:max(60px,calc(env(safe-area-inset-bottom) + 50px))}

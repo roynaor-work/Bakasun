@@ -18,7 +18,7 @@ const rngFor=seed=>()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return see
 
 /** Local assets only. Meshy originals stay unchanged; the attributed sports
  * coupe has prepared geometry and separate paint materials for each racer. */
-export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7:v7Config=null}={}){
+export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7:v7Config=null,lite=false}={}){
  // v7 (design/racing-v7): five cars with LODs, spectators, props, asphalt maps, tire-smoke sprite. Off with ?racingV7=0 or v7.enabled=false;
  // any load problem keeps the previous coupe, trees and procedural textures (see the v7 block below the ribbons).
  const v7On=v7Enabled(v7Config,new URLSearchParams(globalThis.location?.search||''));let v7=null,v7Reason=v7On?'':'off';
@@ -134,7 +134,10 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  }
  let carAsset=null,lowCarAsset=null,treeAsset=null;
  // racing-v11 formula car (Codex asset, 11,868 triangles, no Draco): all five cars, or the player only at low quality. ?racingFormulaCar=0 disables it; any failure keeps the previous cars.
- const formulaOn=new URLSearchParams(globalThis.location?.search||'').get('racingFormulaCar')!=='0';
+ // Weak device or lite restart (ctx.lite): the previous cars, no 11.8K-triangle formula model at all. ?racingFormulaCar=1 forces it back on, =0 off.
+const formulaFlag=new URLSearchParams(globalThis.location?.search||'').get('racingFormulaCar');
+const formulaOn=formulaFlag==='1'||(formulaFlag!=='0'&&!lite);
+const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars keep the light model (fewer triangles and draw calls)
  const formulaAsset=formulaOn&&!disposed?await loadAsset('../assets/racing-formula/formula.glb').then(mergeFormula).catch(e=>{console.warn('formula',e?.message||e);failures.push('formula');return null;}):null;
  // 40 primitives per car would cost 200 draw calls for five cars: every static part is merged per material once (wheels stay separate nodes so they can spin and steer).
  function mergeFormula(scene){
@@ -173,7 +176,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  for(let i=0;i<5;i++){
   const root=new T.Group(),body=new T.Group();root.add(body);scene.add(root);const wheels=[];
   const models=[];let dress=null,standIn=null;
-  const rig=v7?.parts.cars[i],useFormula=!!formulaAsset&&(i===0||quality<2);
+  const rig=v7?.parts.cars[i],useFormula=!!formulaAsset&&(i===0||(quality<2&&i<FORMULA_CARS));
   if(useFormula){
    const car=formulaAsset.clone(true);car.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const list=Array.isArray(o.material)?o.material:[o.material],tinted=list.map(m=>{if(lookOn&&!/^Paint 1/.test(m.name)){tuneMaterial(m);return m;}if(!/^Paint 1/.test(m.name))return m;if(lookOn)return paints[i]||(paints[i]=tunePaint(T,m,carColors[i],keep));const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}
     if(/^Wheel(Front|Rear)[LR]$/.test(o.name)){o.rotation.order='YXZ';wheels.push(o);}});

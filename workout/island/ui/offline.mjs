@@ -36,7 +36,7 @@ export const hrefOf=(path,root=islandRoot)=>new URL(path,root).href;
  * parallel pool. A file that still fails is reported, never thrown: the game then
  * loads over the network or falls back to its light version. Files already cached
  * are skipped, so an interrupted download resumes. */
-export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgress=()=>{},concurrency=3,attempts=3,timeoutMs=60000,wait=ms=>new Promise(r=>setTimeout(r,ms)),signal}){
+export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgress=()=>{},concurrency=3,attempts=3,timeoutMs=60000,wait=ms=>new Promise(r=>setTimeout(r,ms)),signal,gate,pauseMs=0}){
   const failed=[];let done=0,bytes=0,fresh=0;const queue=[...urls],total=urls.length;
   const tick=()=>onProgress({done,total,bytes,percent:total?Math.round(done/total*100):100});
   async function one(href){
@@ -58,7 +58,8 @@ export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgres
     }
     failed.push({href,reason});
   }
-  async function worker(){while(queue.length){const href=queue.shift();await one(href);done++;tick();}}
+  // gate(): resolves true when a file may start (a game is not running); files in flight finish. pauseMs spaces files out (gentle background download).
+  async function worker(){while(queue.length){if(gate)while(!signal?.aborted&&!(await gate()))await wait(1000);if(signal?.aborted)break;const href=queue.shift();await one(href);done++;tick();if(pauseMs&&queue.length)await wait(pauseMs);}}
   tick();
   await Promise.all(Array.from({length:Math.min(concurrency,Math.max(1,queue.length))},worker));
   return {total,fresh,failed,bytes};
@@ -112,7 +113,7 @@ let running=null;
 /** Download the named games (all by default). One download at a time; a second call
  * joins the first. onProgress({done,total,bytes,percent}). Resolves with
  * {total,failed,bytes,games,version}. Never rejects for a single bad file. */
-export function downloadGames({games=Object.keys(OFFLINE_GAMES),version=DATA_VERSION,onProgress,signal,timeoutMs,attempts}={}){
+export function downloadGames({games=Object.keys(OFFLINE_GAMES),version=DATA_VERSION,onProgress,signal,timeoutMs,attempts,concurrency,gate,pauseMs}={}){
   if(running){if(onProgress)running.listeners.add(onProgress);return running.promise;}
   const listeners=new Set(onProgress?[onProgress]:[]);
   const promise=(async()=>{
@@ -120,7 +121,7 @@ export function downloadGames({games=Object.keys(OFFLINE_GAMES),version=DATA_VER
     await registerOfflineWorker();
     const manifest=await loadManifest(version),urls=pathsFor(manifest,games,{shell:true}).map(p=>hrefOf(p));
     const cache=await caches.open(cacheName(version));
-    const result=await downloadSet({urls,cache,signal,timeoutMs,attempts,onProgress:p=>{for(const l of listeners)l(p);}});
+    const result=await downloadSet({urls,cache,signal,timeoutMs,attempts,concurrency,gate,pauseMs,onProgress:p=>{for(const l of listeners)l(p);}});
     const missing=new Set(result.failed.map(f=>f.href)),perGame={};
     for(const game of games){const list=pathsFor(manifest,[game]).map(p=>hrefOf(p));perGame[game]={total:list.length,missing:list.filter(u=>missing.has(u)).length};}
     const previous=readStatus();
@@ -137,21 +138,27 @@ export async function prefetchRelease(version,{onProgress}={}){
   const cache=await caches.open(cacheName(version));
   return downloadSet({urls,cache,onProgress});
 }
-/** Background download after a release (or when something is missing). Skips on a
- * data saver, waits while a game is running, and retries once after a failure. */
-export function startAutoDownload({canRun=()=>true,onState=()=>{},delayMs=4000,pollMs=30000,retryMs=120000,maxWaits=40}={}){
+/** Background download after a release (or when something is missing). It never competes with
+ * play: it starts only after `idleMs` (60 s) with no game and no open panel, downloads one file at
+ * a time with a pause between files, and holds back between files the moment a game starts
+ * (files already in flight finish). Skipped on a data saver and on a weak device
+ * (`allowed()` false): there the download button is the only way. `?autodownload=0` turns it off. */
+export function startAutoDownload({canRun=()=>true,allowed=()=>true,onState=()=>{},idleMs=60000,delayMs=4000,pollMs=5000,retryMs=120000,maxWaits=720,pauseMs=250,concurrency=1}={}){
   if(!offlineSupported())return ()=>{};
-  let stopped=false,timer=null,waits=0,retried=false;
+  if(new URLSearchParams(globalThis.location?.search||'').get('autodownload')==='0')return ()=>{};
+  let stopped=false,timer=null,waits=0,retried=false,idleSince=null;
   const later=(fn,ms)=>{timer=setTimeout(()=>{if(!stopped)fn();},ms);};
+  const idle=()=>{if(!canRun()){idleSince=null;return false;}idleSince??=Date.now();return Date.now()-idleSince>=idleMs;};
   async function attempt(){
     if(saveDataOn()){onState({state:'save-data'});return;}
+    if(!allowed()){onState({state:'weak-device'});return;}
     if(navigator.onLine===false){onState({state:'offline'});return;}
+    if(!idle()&&waits++<maxWaits){onState({state:'waiting-idle'});later(attempt,pollMs);return;}
     let status;try{status=await offlineStatus();}catch(error){onState({state:'error',error:String(error?.message||error)});return;}
     if(status.complete){onState({state:'ready',status});return;}
-    if(!canRun()&&waits++<maxWaits){later(attempt,pollMs);return;}
     onState({state:'downloading'});
     try{
-      const result=await downloadGames({onProgress:p=>onState({state:'downloading',progress:p})});
+      const result=await downloadGames({concurrency,pauseMs,gate:async()=>canRun()&&allowed(),onProgress:p=>onState({state:'downloading',progress:p})});
       onState({state:result.failed.length?'partial':'ready',result});
       if(result.failed.length&&!retried){retried=true;later(attempt,retryMs);}
     }catch(error){onState({state:'error',error:String(error?.message||error)});}
