@@ -52,12 +52,12 @@ export function toolValues(balance, toolId, bonus = {}) {
 function insideRect(o, x, y) { return x >= o.x - o.w / 2 && x <= o.x + o.w / 2 && y >= (o.y0 || 0) && y <= o.h; }
 
 /** Creates one match: one stage, three throws. */
-export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {}, city = {}, v2 = false, mods = {}}) {
+export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {}, city = {}, v2 = false, mods = {}, feel = true}) {
   const base = balance.levels[stage - 1];
   if (!base) throw Error('catch: unknown stage ' + stage);
   // v2 (chase, gangs, bosses, gusts, moving cover) is switched off with ?catchV2=0 and the stage plays as v1.
   const crewSize = v2 ? (base.crew || 1) : 1, bossHits = v2 && base.boss ? base.boss.hits : 1;
-  const level = v2 ? {...base, dist: mods.dist ?? base.dist, wind: (base.wind || 0) * (mods.windScale ?? 1), obstacles: [...base.obstacles, ...(base.movers || [])]} : {...base, movers: [], gust: 0, crew: 1, boss: null};
+  const level = v2 ? {...base, ...(!feel && base.v3 ? base.v3 : {}), aimHelp: feel ? base.aimHelp : 0, dist: mods.dist ?? base.dist, wind: (base.wind || 0) * (mods.windScale ?? 1), obstacles: [...base.obstacles, ...(base.movers || [])]} : {...base, movers: [], gust: 0, crew: 1, boss: null};
   const throwsTotal = balance.throws + (v2 ? (crewSize - 1) * (balance.crewThrows || 2) + (bossHits - 1) * 2 + (mods.extraThrows || 0) : 0);
   const rnd = seededRandom((seed * 2654435761 + stage * 97) >>> 0);
   const P = balance.physics, C = balance.criminal;

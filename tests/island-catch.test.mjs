@@ -282,3 +282,24 @@ test('catch v3: the siren is two alternating notes and the old sound is gone', a
   assert.ok(/approach/.test(source), 'Doppler shift');
   assert.equal(/tone\(720, \.22, \{type: 'square', gain: \.035\}\)/.test(source), false, 'the old two-beep siren is removed');
 });
+
+test('catch v4: early stages show a landing ring and a green hit hint, later stages do not; the off switch restores the v3 balance', () => {
+  const mk = (stage, feel) => createCatchEngine({balance, stage, seed: 3, v2: true, feel});
+  const e1 = mk(1, true), e8 = mk(8, true), off = mk(1, false);
+  assert.equal(e1.aimHelp, 2); assert.equal(e8.aimHelp, 0); assert.equal(off.aimHelp, 0);
+  const p = e1.preview(); assert.equal(p.help, 2); assert.ok(p.land && typeof p.hit === 'boolean');
+  assert.equal(e8.preview().hit, false);
+  assert.equal(off.level.radiusScale, balance.levels[0].v3.radiusScale);
+  assert.equal(mk(1, true).level.radiusScale, balance.levels[0].radiusScale);
+  assert.ok(e1.previewFraction > off.previewFraction, 'help lengthens the arc');
+});
+
+test('catch v4: the chase camera follows in unwrapped street coordinates and the throw camera hands over smoothly', async () => {
+  const src = await readFile(new URL('minigames/catch-view.mjs', root), 'utf8');
+  assert.match(src, /chaseCam\.x = damp\(chaseCam\.x, st\.x \+ 5\.5/, 'camera target is the unwrapped position');
+  assert.match(src, /cxw = chaseCam\.x - chaseShift/, 'wrap shift is subtracted after damping');
+  assert.match(src, /handoff = \{p: camera\.position\.clone\(\)/, 'the chase to throw cut is a glide');
+  assert.match(src, /s\.baseX \+ \(engine\.level\.move\?\.amp \|\| 0\) \+ 3\.2/, 'aim framing does not chase the thief');
+  const ses = await readFile(new URL('minigames/catch-session.mjs', root), 'utf8');
+  assert.match(ses, /catchV4/);
+});

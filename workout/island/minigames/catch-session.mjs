@@ -33,7 +33,8 @@ export function runCatchSession(ctx) {
   const policeLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'police').reduce((n, b) => n + (b.level || 1), 0);
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
-  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods});
+  const feel = params.get('catchV4') !== '0'; // ?catchV4=0 brings back the v3 aiming (no help ring, no drag easing, v3 balance)
+  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods, feel});
   const withChase = v2 && Boolean(ctx.canvas);
   const chase = withChase ? createChaseEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
@@ -205,7 +206,7 @@ export function runCatchSession(ctx) {
     if (steerDrag && e.pointerId === steerDrag.id) { const dy = e.clientY - steerDrag.y; chase.setSteer(clamp(dy / 46, -1, 1)); ringLine.style.width = Math.abs(dy) + 'px'; ringLine.style.transform = `rotate(${dy >= 0 ? Math.PI / 2 : -Math.PI / 2}rad)`; return; }
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    drag.to = {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; // eased in the frame loop so the line glides after the finger
+    drag.to = {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; if (!feel) engine.setAim(drag.to); // with the feel on, the frame loop eases the line after the finger
     const len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx); ringLine.style.width = len + 'px'; ringLine.style.transform = `rotate(${ang}rad)`;
   }, {signal: abort.signal});
   const endDrag = e => {
@@ -292,7 +293,7 @@ export function runCatchSession(ctx) {
     dt *= scale;
     const keyAngle = ((keys.has('ArrowUp') ? -1 : 0) + (keys.has('ArrowDown') ? 1 : 0)) * P.keyAngle * dt * 60, keyPower = ((keys.has('ArrowLeft') ? 1 : 0) + (keys.has('ArrowRight') ? -1 : 0)) * P.keyPower * dt * 60;
     if (engine.state.phase === 'aim' && (keyAngle || keyPower)) engine.setAim({angle: engine.aim.angle - keyAngle, power: engine.aim.power + keyPower});
-    if (drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: engine.aim.power + (drag.to.power - engine.aim.power) * k}); }
+    if (feel && drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: engine.aim.power + (drag.to.power - engine.aim.power) * k}); }
     acc += dt;
     while (acc >= STEP) { acc -= STEP; stepThrow(STEP); }
     view.update(dt, {});
