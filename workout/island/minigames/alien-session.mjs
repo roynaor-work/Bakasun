@@ -24,7 +24,7 @@ export function alienFrameInput(controls,dt,flight,deadzone=.12){
 /** Alien-only lifecycle; the other games keep their existing canvas adapter. */
 export function runAlienSession(ctx,createModel,draw,createView){
  const {canvas,controls,status,dialog,balance:b,config,t}=ctx;
- const audio=createG2mAudio();
+ const audio=createG2mAudio({v13:b.v13});
  const model=createModel({...ctx,sound:audio.play,roundChoices:false,completion:'waves'}),paint=canvas.getContext('2d');
  if(!paint)throw Error('reason.gameStart');
  const art=createGameArt('alienDefense',config,b),quality={low:false};

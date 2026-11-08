@@ -1,9 +1,10 @@
 /** v12 presentation: two wing-mounted rotary cannons (local drawing, no logos), muzzle flashes with
  * stars and sparks, and thin tracer bullets. Reads existing model state (player, cannonLast, spinAngle). */
 const TAU=Math.PI*2;
-function cannon(p,side,m,scale,flashAge,flashLen){
- p.save();p.translate(side*m.cannonOffset*(m._aspect||1),-3*scale);
- const spin=m.spinAngle||0,w=7*scale,len=17*scale;
+function cannon(p,side,m,scale,flashAge,flashLen,flashOnly=false){
+ p.save();p.translate(side*m.cannonOffset*(m._aspect||1),flashOnly?0:-3*scale);
+ const spin=m.spinAngle||0,w=7*scale,len=flashOnly?(m.muzzleForward||22)-1*scale:17*scale;
+ if(!flashOnly){
  // housing
  p.fillStyle='#2c3948';p.strokeStyle='#9fb4c6';p.lineWidth=1*scale;p.beginPath();p.rect(-w*.9,-2*scale,w*1.8,9*scale);p.fill();p.stroke();
  // rotating barrel cluster seen from above: six barrels, the front-facing ones show as moving stripes
@@ -12,6 +13,7 @@ function cannon(p,side,m,scale,flashAge,flashLen){
   p.strokeStyle=`rgba(210,226,240,${.35+.55*front})`;p.lineWidth=1.1*scale;p.beginPath();p.moveTo(x,-len+1*scale);p.lineTo(x,-2*scale);p.stroke();}
  p.strokeStyle='#cfdbe6';p.lineWidth=1.2*scale;p.beginPath();p.rect(-w/2,-len,w,len-1*scale);p.stroke();
  p.fillStyle='#8a99a8';p.fillRect(-w*.62,-len-1.5*scale,w*1.24,2.2*scale);
+ }
  // muzzle flash
  if(flashAge<flashLen){
   const k=1-flashAge/flashLen,r=(7+5*k)*scale;p.save();p.translate(0,-len-1*scale);p.globalCompositeOperation='lighter';
@@ -28,7 +30,7 @@ export function drawV12Cannons(p,m,aspect=1,scale=1){
  const view={...m,_aspect:aspect};
  p.save();p.translate(m.player.x,m.player.y);p.scale(1/aspect,1);
  const flash=m.flashSeconds||.045;
- cannon(p,-1,view,scale,m.time-m.cannonLast[0],flash);cannon(p,1,view,scale,m.time-m.cannonLast[1],flash);
+ const only=Boolean(m.shipV13);cannon(p,-1,view,scale,m.time-m.cannonLast[0],flash,only);cannon(p,1,view,scale,m.time-m.cannonLast[1],flash,only);
  p.restore();
 }
 /** A small bright tracer; no glow (dozens are on screen at once). */
