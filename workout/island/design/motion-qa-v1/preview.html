@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>מעבדת תנועה · תצוגת מדידות</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./preview.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">לתוכן</a>
+  <header>
+    <div class="eyebrow">כלי אבחון מקומי</div>
+    <h1>לראות את מה שנמדד</h1>
+    <p>שלד אבחוני בתלת־ממד מתוך אותן דגימות שעליהן מחושבים המדדים. בחרו ספרייה וקליפ, הזיזו את ציר הזמן והשוו בין גרסאות.</p>
+    <nav><a id="reportLink" href="./output/report.html">דוח מלא ומיון לפי ציון</a><a href="./REPORT.md">20 הקליפים הגרועים ביותר</a><a href="./README.md">הוראות הרצה</a></nav>
+  </header>
+  <main id="main">
+    <section id="viewer" class="viewer-layout">
+      <aside class="controls">
+        <label>ספרייה<select id="viewerLibrary" aria-label="ספרייה"><option>טוען…</option></select></label>
+        <label>קליפ<select id="viewerClip" aria-label="קליפ"><option>טוען…</option></select></label>
+        <label>זווית<select id="viewerAngle"><option value="oblique">אלכסון</option><option value="front">חזית</option><option value="side">צד</option></select></label>
+        <label><input id="followRoot" type="checkbox" checked> מרכוז לפי השורש</label>
+        <p class="muted">כחול: שמאל · סגול: ימין · כתום: כדור · אדום: נקודה מתחת לרצפה.</p>
+        <p class="muted">זו תצוגת שלד מדוד; היא אינה מציגה את מעטפת הדמות או את נפח ההתנגשות.</p>
+        <div id="viewerMetrics" class="viewer-metrics" aria-live="polite"></div>
+        <div id="viewerLinks" class="viewer-link"></div>
+      </aside>
+      <div>
+        <div id="stage" class="stage"><div class="stage-message" id="viewerStatus" role="status">טוען דוח מקומי…</div></div>
+        <div class="playerbar"><button id="play" type="button" disabled>נגן</button><input id="timeline" type="range" min="0" max="0" value="0" step="1" aria-label="פריים נמדד" disabled><output id="time" class="time">0.000 s</output></div>
+        <p id="sampleNote" class="muted"></p>
+      </div>
+    </section>
+  </main>
+  <footer>כלי אבחון תנועה · ציון התחושה הוא אומדן הנדסי לפי הספים, ואינו תחליף לביקורת חזותית. נתון חסר אינו מסומן כתקין.</footer>
+</body>
+</html>
