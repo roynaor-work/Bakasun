@@ -62,7 +62,7 @@ try{
    const av=d.view.avatars.get(p.id),b=bonesOf(av),rows=[];let steps=0,lastFootDown=null;
    for(let t=0;t<130;t++){
     d.step(1,{...neutral()});d.render();const q=e.snapshot().players.find(o=>o.id===p.id),s=e.snapshot();av.root.updateMatrixWorld(true);
-    const rh=wp(b.RightHand),lh=wp(b.LeftHand),ball=s.ball;
+    const pw=h=>{const w=h.getWorldPosition(new h.position.constructor());return [w.x,w.y,w.z];},rh=pw(av.hands.r),lh=pw(av.hands.l),ball=s.ball;  // palms (the ball sits on the palm), not the wrist bones
     rows.push({t,act:q.act,actT:q.actT,y:q.y,x:q.x,speed:Math.hypot(q.vx,q.vz),handY:Math.max(rh[1],lh[1]),rh,lh,ballY:ball.y,ballState:ball.state,motion:av.motionState,lf:wp(b.LeftFoot)[1],rf:wp(b.RightFoot)[1],events:s.events});
     if(q.act==null&&t>20)break;
    }

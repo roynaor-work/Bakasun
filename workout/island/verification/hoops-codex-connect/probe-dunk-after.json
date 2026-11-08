@@ -1,17 +1,220 @@
-node:internal/modules/cjs/loader:1433
-  throw err;
-  ^
-
-Error: Cannot find module '/home/user/Bakasun/workout/island/tools/hoops-v8-probe.mjs'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1040:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1045:22)
-    at Function._load (node:internal/modules/cjs/loader:1216:25)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
+{
+ "mode": "dunk",
+ "type": "dunk",
+ "started": true,
+ "rimY": 3.05,
+ "maxHandY": 3.284343745078436,
+ "maxBallY": 3.323,
+ "maxJump": 0.8,
+ "handOverRim": 0.234,
+ "ballOverRim": 0.273,
+ "groundContactsBeforeJump": 0,
+ "takeoffTick": 31,
+ "releaseTick": 56,
+ "ticks": 130,
+ "startSpeed": 4.5,
+ "speedAtTakeoff": 0.48,
+ "speedThreeTicksBeforeTakeoff": 0.59,
+ "travelDistance": 0.83,
+ "rows": [
+  {
+   "t": 0,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1,
+   "ballY": 1.6,
+   "speed": 4.13,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 6,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.61,
+   "ballY": 1.6,
+   "speed": 2.68,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 12,
+   "act": "shoot",
+   "y": 0,
+   "handY": 2.19,
+   "ballY": 1.6,
+   "speed": 1.77,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 18,
+   "act": "shoot",
+   "y": 0,
+   "handY": 2.23,
+   "ballY": 1.6,
+   "speed": 1.17,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 24,
+   "act": "shoot",
+   "y": 0,
+   "handY": 2.58,
+   "ballY": 1.6,
+   "speed": 0.77,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 30,
+   "act": "shoot",
+   "y": 0,
+   "handY": 2.91,
+   "ballY": 1.6,
+   "speed": 0.51,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 36,
+   "act": "shoot",
+   "y": 0.34,
+   "handY": 3.17,
+   "ballY": 1.94,
+   "speed": 0.34,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 42,
+   "act": "shoot",
+   "y": 0.58,
+   "handY": 3.28,
+   "ballY": 2.18,
+   "speed": 0.22,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 48,
+   "act": "shoot",
+   "y": 0.74,
+   "handY": 3.27,
+   "ballY": 2.34,
+   "speed": 0.15,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 54,
+   "act": "shoot",
+   "y": 0.8,
+   "handY": 3.27,
+   "ballY": 2.4,
+   "speed": 0.1,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 60,
+   "act": "shoot",
+   "y": 0.77,
+   "handY": 2.88,
+   "ballY": 3.11,
+   "speed": 0.03,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 66,
+   "act": "shoot",
+   "y": 0.65,
+   "handY": 2.48,
+   "ballY": 3.02,
+   "speed": 0.02,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 72,
+   "act": "shoot",
+   "y": 0.44,
+   "handY": 2.16,
+   "ballY": 3.02,
+   "speed": 0.01,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 78,
+   "act": "shoot",
+   "y": 0.14,
+   "handY": 1.87,
+   "ballY": 3.02,
+   "speed": 0.01,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 84,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 90,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 96,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 102,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 108,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 114,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 120,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  },
+  {
+   "t": 126,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.71,
+   "ballY": 3.02,
+   "speed": 0,
+   "motion": "dunk_two_hands"
+  }
+ ],
+ "events": []
 }
-
-Node.js v22.23.4

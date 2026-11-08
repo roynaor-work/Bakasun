@@ -1,17 +1,38 @@
-node:internal/modules/cjs/loader:1433
-  throw err;
-  ^
-
-Error: Cannot find module '/home/user/Bakasun/workout/island/tools/hoops-v8-probe.mjs'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1040:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1045:22)
-    at Function._load (node:internal/modules/cjs/loader:1216:25)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
+{
+ "mode": "dribble",
+ "segments": {
+  "stand": {
+   "frames": 70,
+   "corrBallHand": 0.87,
+   "meanPalmBallWhenHigh": 0.28,
+   "minBall": 0.133,
+   "maxBall": 1.23,
+   "meanSpeed": 0,
+   "motions": [
+    "dribble_right"
+   ]
+  },
+  "walk": {
+   "frames": 80,
+   "corrBallHand": 0.88,
+   "meanPalmBallWhenHigh": 0.285,
+   "minBall": 0.13,
+   "maxBall": 1.181,
+   "meanSpeed": 1.92,
+   "motions": [
+    "dribble_right"
+   ]
+  },
+  "run": {
+   "frames": 110,
+   "corrBallHand": 0.88,
+   "meanPalmBallWhenHigh": 0.323,
+   "minBall": 0.132,
+   "maxBall": 1.12,
+   "meanSpeed": 4.33,
+   "motions": [
+    "dribble_right"
+   ]
+  }
+ }
 }
-
-Node.js v22.23.4

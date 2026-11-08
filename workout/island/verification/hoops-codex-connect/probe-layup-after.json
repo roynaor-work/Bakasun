@@ -1,17 +1,220 @@
-node:internal/modules/cjs/loader:1433
-  throw err;
-  ^
-
-Error: Cannot find module '/home/user/Bakasun/workout/island/tools/hoops-v8-probe.mjs'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1040:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1045:22)
-    at Function._load (node:internal/modules/cjs/loader:1216:25)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
+{
+ "mode": "layup",
+ "type": "layup",
+ "started": true,
+ "rimY": 3.05,
+ "maxHandY": 2.683272714343236,
+ "maxBallY": 3.51,
+ "maxJump": 0.6,
+ "handOverRim": -0.367,
+ "ballOverRim": 0.46,
+ "groundContactsBeforeJump": 1,
+ "takeoffTick": 36,
+ "releaseTick": 61,
+ "ticks": 130,
+ "startSpeed": 4.5,
+ "speedAtTakeoff": 1.08,
+ "speedThreeTicksBeforeTakeoff": 1.33,
+ "travelDistance": 1.58,
+ "rows": [
+  {
+   "t": 0,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.1,
+   "ballY": 1.6,
+   "speed": 4.09,
+   "motion": "layup_right"
+  },
+  {
+   "t": 6,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.53,
+   "ballY": 1.6,
+   "speed": 3.2,
+   "motion": "layup_right"
+  },
+  {
+   "t": 12,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.67,
+   "ballY": 1.6,
+   "speed": 3.2,
+   "motion": "layup_right"
+  },
+  {
+   "t": 18,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.67,
+   "ballY": 1.6,
+   "speed": 3.2,
+   "motion": "layup_right"
+  },
+  {
+   "t": 24,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.9,
+   "ballY": 1.6,
+   "speed": 2.48,
+   "motion": "layup_right"
+  },
+  {
+   "t": 30,
+   "act": "shoot",
+   "y": 0,
+   "handY": 2.27,
+   "ballY": 1.6,
+   "speed": 1.64,
+   "motion": "layup_right"
+  },
+  {
+   "t": 36,
+   "act": "shoot",
+   "y": 0.05,
+   "handY": 2.57,
+   "ballY": 1.65,
+   "speed": 1.08,
+   "motion": "layup_right"
+  },
+  {
+   "t": 42,
+   "act": "shoot",
+   "y": 0.32,
+   "handY": 2.68,
+   "ballY": 1.92,
+   "speed": 0.72,
+   "motion": "layup_right"
+  },
+  {
+   "t": 48,
+   "act": "shoot",
+   "y": 0.49,
+   "handY": 2.68,
+   "ballY": 2.1,
+   "speed": 0.47,
+   "motion": "layup_right"
+  },
+  {
+   "t": 54,
+   "act": "shoot",
+   "y": 0.59,
+   "handY": 2.68,
+   "ballY": 2.19,
+   "speed": 0.31,
+   "motion": "layup_right"
+  },
+  {
+   "t": 60,
+   "act": "shoot",
+   "y": 0.59,
+   "handY": 2.68,
+   "ballY": 2.19,
+   "speed": 0.21,
+   "motion": "layup_right"
+  },
+  {
+   "t": 66,
+   "act": "shoot",
+   "y": 0.51,
+   "handY": 1.9,
+   "ballY": 3.45,
+   "speed": 0.07,
+   "motion": "layup_right"
+  },
+  {
+   "t": 72,
+   "act": "shoot",
+   "y": 0.34,
+   "handY": 1.8,
+   "ballY": 3.51,
+   "speed": 0.06,
+   "motion": "layup_right"
+  },
+  {
+   "t": 78,
+   "act": "shoot",
+   "y": 0.09,
+   "handY": 1.53,
+   "ballY": 3.47,
+   "speed": 0.05,
+   "motion": "layup_right"
+  },
+  {
+   "t": 84,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.25,
+   "ballY": 3.33,
+   "speed": 0.04,
+   "motion": "layup_right"
+  },
+  {
+   "t": 90,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.1,
+   "speed": 0.04,
+   "motion": "layup_right"
+  },
+  {
+   "t": 96,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0.02,
+   "motion": "layup_right"
+  },
+  {
+   "t": 102,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0.01,
+   "motion": "layup_right"
+  },
+  {
+   "t": 108,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0.01,
+   "motion": "layup_right"
+  },
+  {
+   "t": 114,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0,
+   "motion": "layup_right"
+  },
+  {
+   "t": 120,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0,
+   "motion": "layup_right"
+  },
+  {
+   "t": 126,
+   "act": "shoot",
+   "y": 0,
+   "handY": 1.19,
+   "ballY": 3.05,
+   "speed": 0,
+   "motion": "layup_right"
+  }
+ ],
+ "events": []
 }
-
-Node.js v22.23.4
