@@ -153,7 +153,7 @@ export function runCatchSession(ctx) {
       if (e.type === 'launch') audio?.cue('whoosh');
       else if (e.type === 'catch') { audio?.cue(e.perfect ? 'perfect' : 'catch'); say(e.perfect ? 'catch.pop.perfect' : 'catch.pop.catch', e.perfect ? 'perfect' : 'good'); slow = .9; }
       else if (e.type === 'bossHit') { audio?.cue('bossHit'); say('catch.pop.bossHit', 'good', {hp: e.hp}); slow = .6; }
-      else if (e.type === 'crew') { audio?.cue('siren'); say('catch.pop.crew', 'warn', {left: engine.state.crewLeft + 1}); }
+      else if (e.type === 'crew') { audio?.cue('siren', {crew: true}); say('catch.pop.crew', 'warn', {left: engine.state.crewLeft + 1}); }
       else if (e.type === 'blocked') { audio?.cue('thud'); say('catch.pop.blocked', 'bad'); }
       else if (e.type === 'miss') { if (e.near) { audio?.cue('near'); say('catch.pop.near', 'warn'); slow = .5; } else { audio?.cue('miss'); say('catch.pop.miss', 'bad'); } }
       else if (e.type === 'hidden') { audio?.cue('miss'); say('catch.pop.hidden', 'bad'); }
