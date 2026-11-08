@@ -205,6 +205,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    // v8 motion needs: how far the pass goes (short chest passes are hand-offs), the engine's wind-up and reach times, and how long the ball
    // still has to fly to this receiver (the reception clip meets it)
    let passDist,eta;
+   const attackSide=s.dir?.[p.team]||1,rimDx=attackSide*court.rimX-p.x,rimDz=-p.z,rimDist=Math.hypot(rimDx,rimDz),nearHandler=!!handler&&handler.team!==p.team&&Math.hypot(handler.x-p.x,handler.z-p.z)<3.5;
    if(p.act==='pass'&&p.passTo){const q=s.players.find(o=>o.id===p.passTo);if(q)passDist=Math.hypot(q.x-p.x,q.z-p.z);}
    if(catching)eta=Math.hypot(s.ball.x-p.x,s.ball.z-p.z)/passFlightSpeed(s.ball.passKind,config.pass?.speed);
    av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
@@ -239,6 +240,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
     }
     const drop=top-court.ballR;av.dribbleCtx={u,drop:Math.min(0.28,drop*0.3)};
     bx=v.x+fx*0.18;bz=v.z+fz*0.18;by=court.ballR+drop*dribbleHeight(u);
+    // tall bodies (08/11): the dribble clip carries its own ball track (floor contact and hand in step)
+    if(av.dribbleBallWorld?.(v)){bx=v.x;bz=v.z;by=Math.max(court.ballR,v.y);}
    }
   }
   // smooth the hand-off when the engine takes over (release, pass)
@@ -320,7 +323,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
