@@ -217,7 +217,8 @@ export async function createTennisV7({scene,config,keep,params,surface,quality=0
  /** The lighting the package was designed under (its preview), applied by the view after a successful load. */
  const look={background:'#E7E5D7',fog:'#E7E5D7',hemi:['#EEF4E9','#9E9A77',1.35],sun:['#FFF0D4',2.7,[-13,22,9]],exposure:1.1};
  setQuality(quality);
- return {root,ball,look,spectators,floorOffset:FLOOR,setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
+ const venueParts=[loaded.venue,meshes.lod1,meshes.lod0,meshes.cheer,seats];
+ return {root,ball,look,spectators,floorOffset:FLOOR,hideVenue(){for(const p of venueParts)p.visible=false;ground.material.color.set('#2b3a3e');},showVenue(){for(const p of venueParts)p.visible=true;ground.material.color.set('#DBDDC8');},setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
   get level(){return level;},get governor(){return governor;},
   dispose(){for(const m of [meshes.lod1,meshes.lod0,meshes.cheer,seats])m.dispose?.();}};
 }
