@@ -5,7 +5,7 @@ import {createRacingAudio} from '../minigames/racing-audio.mjs';
 
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function launch(config={},equipment={}){
-  const race=createRacing({stage:1,seed:3,config:{countdown:0,walls:false,equipment,stage:{opponents:0,grid:1},...config}}),tr=race.track,p=race.state.player,top=race.stage.playerSpeed*Math.min(1.16,equipment.engine||1);
+  const race=createRacing({stage:1,seed:3,config:{countdown:0,walls:false,scrub:false,equipment,stage:{opponents:0,grid:1},...config}}),tr=race.track,p=race.state.player,top=race.stage.playerSpeed*Math.min(1.16,equipment.engine||1);
   const out={t100:null,t98:null,gears:new Set(),shifts:0,rpmMin:1,rpmMax:0};let g=p.gear;
   for(let t=0;t<60*60&&out.t98===null;t++){
     const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);

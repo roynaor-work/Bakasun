@@ -1,4 +1,4 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance } from './racing-tracks.mjs?v=island-v2-20261107-5';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-5';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
@@ -145,6 +145,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1);
     // Soft cap on cornering force at speed (about 4 g): full lock stops snapping the car around at 40+ m/s but keeps its authority.
     if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp/car.speed;yaw=limit*Math.tanh(yaw/limit);}
+    // racing-look-v1 cornering scrub (player only; ?racingLook=0 or config.scrub=false removes it): lateral acceleration above 20 m/s^2 bleeds speed (a drift bleeds at half the rate),
+    // so a corner of radius R settles near sqrt(20 R). Without it the car held top speed round every bend (Roy: the engine sound stuck at the top).
+    if(RACING_LOOK&&config.scrub!==false&&car.isPlayer&&!car.offroad){const over=Math.abs(yaw)*car.speed-20;if(over>0)car.speed=Math.max(8,car.speed-over*(drifting?.35:.4)*dt);}
     if(car.isPlayer&&Math.abs(steer)<.065&&config.steeringAssist!==false&&!car.offroad) {
       // Small guidance softens a released steering pad. It cannot negotiate a lap by itself.
       const look=track.sample(before.s+12), error=racingAngle(look.heading-car.heading);
