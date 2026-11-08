@@ -358,8 +358,13 @@ export class ActivityInterface {
     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage&&!(id==='soccer'&&this.data.config.minigames.soccer.league&&result.stage>=this.data.config.minigames.soccer.league.leagues.length*this.data.config.minigames.soccer.league.matchesPerLeague))dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
+    this.offerUpgrade(id,result,host=>{if(panel.isConnected)panel.after(host);});
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
     this.engine.narration.announce('minigame.result',result);
+  }
+  /** Upgrade offer after a stage (ui/upgrade-offer.mjs, loaded on first use). Silent on any failure; ?upgradeOffer=0 turns it off. */
+  offerUpgrade(id,result,place){
+    import('./upgrade-offer.mjs?v=island-v2-20261107-5').then(m=>m.offerUpgrade({engine:this.engine,activity:this.activity,data:this.data,t:this.t,gameId:id,result,place,sound:e=>this.sound.play(e)})).catch(()=>{});
   }
   /** Racing league (ui/racing-league.mjs, loaded on first use). ?racingLeague=0 removes every entry point. */
   racingLeagueOnly(){return this.leagueOn()&&new URLSearchParams(globalThis.location?.search||'').get('racingLevels')!=='1';}
@@ -382,6 +387,7 @@ export class ActivityInterface {
       const again={engine:this.engine,...this.leagueActions()};
       const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result,refresh:()=>this.racingLeagueScreen('result',result)}):m.seasonBody(again);
       dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
+      if(kind==='result')this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
   }
   racingLeagueResult(result){
