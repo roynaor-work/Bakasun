@@ -1,0 +1,3639 @@
+{
+  "license": "CC0-1.0",
+  "method": "Actual float32 GLB skin triangles; sphere fit at true contact events and whole path clearance at 120Hz; markers and ball paths only",
+  "samplingHz": 120,
+  "clips": [
+    {
+      "id": "dribble_slow",
+      "inputAssetSha256": "4492c5eda04f2bd9b319d439f501a9f25ff0924c67accf81733eef82dff78a07",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 8,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.12999999979439827,
+            0.04500003653066961,
+            1.3861814806297552
+          ],
+          "local": [
+            0.0025329664349555982,
+            -0.01660311967134476,
+            0.22517222166061385
+          ],
+          "ballCenter": [
+            0.13001412886211536,
+            0.11000000039626917,
+            1.490961975535959
+          ],
+          "centerCorrectionMeters": 0.016039310532298845,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898521633608972,
+            0.42366439477374884,
+            0.9055297556171131
+          ],
+          "regionalRadiusErrorMeters": 2.2137795763210733e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 20,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000013794225,
+            0.04500002125041769,
+            2.266181510158716
+          ],
+          "local": [
+            -0.002082563936710367,
+            -0.01603740453720093,
+            0.22552034258842454
+          ],
+          "ballCenter": [
+            -0.12995138004547763,
+            0.11000000010073518,
+            2.3715818685539714
+          ],
+          "centerCorrectionMeters": 0.016659268275971816,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374400291644788,
+            0.41852166408986813,
+            0.9080001372801585
+          ],
+          "regionalRadiusErrorMeters": 7.983869537708799e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 32,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000044843674,
+            0.04500002637316962,
+            3.1461815797256727
+          ],
+          "local": [
+            0.0025329664349556086,
+            -0.01660311967134477,
+            0.2251722216606142
+          ],
+          "ballCenter": [
+            0.1300141295216597,
+            0.11000000039642518,
+            3.2509620710555973
+          ],
+          "centerCorrectionMeters": 0.016039406052482313,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898521364227892,
+            0.4236644830140223,
+            0.9055297143395094
+          ],
+          "regionalRadiusErrorMeters": 1.2864104503851337e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 44,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000028672956,
+            0.045000022883484064,
+            4.026181535349181
+          ],
+          "local": [
+            -0.0020825639367103616,
+            -0.016037404537200928,
+            0.22552034258842474
+          ],
+          "ballCenter": [
+            -0.12995138019420613,
+            0.11000000039870701,
+            4.131581893744659
+          ],
+          "centerCorrectionMeters": 0.01665929346611957,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937440038230855,
+            0.41852165376052874,
+            0.9080001420392938
+          ],
+          "regionalRadiusErrorMeters": 2.84063148003888e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 56,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.1300000001250223,
+            0.04500001939380725,
+            4.906181490972743
+          ],
+          "local": [
+            0.002532966434955603,
+            -0.016603119671344757,
+            0.2251722216606139
+          ],
+          "ballCenter": [
+            0.13001412919810737,
+            0.11000000039655908,
+            5.010961978726389
+          ],
+          "centerCorrectionMeters": 0.01603931372302661,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852142401299,
+            0.4236645475478977,
+            0.905529684144937
+          ],
+          "regionalRadiusErrorMeters": 1.0049684834312345e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 68,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000020803992,
+            0.0450000155356929,
+            5.7861814406432766
+          ],
+          "local": [
+            -0.0020825639367103355,
+            -0.016037404537200935,
+            0.22552034258842424
+          ],
+          "ballCenter": [
+            -0.12995138011452215,
+            0.11000000039904867,
+            5.891581795462477
+          ],
+          "centerCorrectionMeters": 0.01665919518459007,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374400421095762,
+            0.4185217212154307,
+            0.9080001109466872
+          ],
+          "regionalRadiusErrorMeters": 1.1220645246279304e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 80,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000061014566,
+            0.04500002986290104,
+            6.666181624102689
+          ],
+          "local": [
+            0.002532966434955606,
+            -0.01660311967134474,
+            0.22517222166061324
+          ],
+          "ballCenter": [
+            0.1300141296834377,
+            0.11000000039635821,
+            6.770962117220753
+          ],
+          "centerCorrectionMeters": 0.01603945221776661,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898521334338222,
+            0.4236644507467062,
+            0.9055297294369703
+          ],
+          "regionalRadiusErrorMeters": 1.427110943308385e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 92,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000061880013,
+            0.04500000745105549,
+            7.546181334031527
+          ],
+          "local": [
+            -0.002082563936710349,
+            -0.016037404537200928,
+            0.22552034258842416
+          ],
+          "ballCenter": [
+            -0.12995138052257701,
+            0.11000000039980436,
+            7.651581685274448
+          ],
+          "centerCorrectionMeters": 0.016659084995841733,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374400420156444,
+            0.41852179419826036,
+            0.9080000773069508
+          ],
+          "regionalRadiusErrorMeters": 2.4896965045151376e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 433,
+        "maxClearanceCorrectionMeters": 0.949989422,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6.439639887
+      }
+    },
+    {
+      "id": "dribble_medium",
+      "inputAssetSha256": "e90bfd349f6489fde38bcbcc473dabb67da1e165f292a08113a594dbde53c98f",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 8,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.12999999889490757,
+            0.04500001845841735,
+            1.6329802505794038
+          ],
+          "local": [
+            0.002532966434955592,
+            -0.01660311967134475,
+            0.225172221660614
+          ],
+          "ballCenter": [
+            0.13001412775573395,
+            0.11000000712571947,
+            1.7377607329727605
+          ],
+          "centerCorrectionMeters": 0.016039350124765015,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898523508738857,
+            0.4236646165017425,
+            0.9055296518312093
+          ],
+          "regionalRadiusErrorMeters": 3.743753917984094e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 17,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12999999919952368,
+            0.044999999181109765,
+            2.8929802079777676
+          ],
+          "local": [
+            -0.002082563936710352,
+            -0.016037404537200914,
+            0.22552034258842465
+          ],
+          "ballCenter": [
+            -0.1299513789022536,
+            0.11000000716595816,
+            2.9983805520731055
+          ],
+          "centerCorrectionMeters": 0.016659233955241493,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374402132291926,
+            0.41852192444526864,
+            0.9080000172360378
+          ],
+          "regionalRadiusErrorMeters": 1.0575034042892284e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 26,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.12999999925514352,
+            0.04500000192800391,
+            4.152980251270212
+          ],
+          "local": [
+            0.0025329664349555926,
+            -0.016603119671344754,
+            0.22517222166061387
+          ],
+          "ballCenter": [
+            0.1300141281277665,
+            0.11000000712629446,
+            4.257760726511012
+          ],
+          "centerCorrectionMeters": 0.016039343663343645,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852329628166,
+            0.423664764754019,
+            0.9055295824746817
+          ],
+          "regionalRadiusErrorMeters": 9.011962565086407e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 35,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000013971386,
+            0.04499998079229694,
+            5.412980057846784
+          ],
+          "local": [
+            -0.002082563936710341,
+            -0.01603740453720093,
+            0.22552034258842432
+          ],
+          "ballCenter": [
+            -0.12995137985053248,
+            0.11000000716633757,
+            5.518380393001428
+          ],
+          "centerCorrectionMeters": 0.01665907488147421,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374402137892998,
+            0.418522093224531,
+            0.9079999394409429
+          ],
+          "regionalRadiusErrorMeters": 6.356958848208194e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 44,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.12999999973539927,
+            0.04500000403906693,
+            6.672980331103588
+          ],
+          "local": [
+            0.0025329664349556026,
+            -0.01660311967134476,
+            0.22517222166061374
+          ],
+          "ballCenter": [
+            0.1300141286197075,
+            0.11000000712685348,
+            6.777760806344386
+          ],
+          "centerCorrectionMeters": 0.01603942349712502,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898523380342047,
+            0.4236647490107357,
+            0.9055295898382726
+          ],
+          "regionalRadiusErrorMeters": 7.121303546853142e-12,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 53,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.129999999512922,
+            0.04499999305147371,
+            7.9329801579338834
+          ],
+          "local": [
+            -0.0020825639367103464,
+            -0.016037404537200928,
+            0.22552034258842485
+          ],
+          "ballCenter": [
+            -0.12995137921834804,
+            0.11000000716608456,
+            8.038380498452943
+          ],
+          "centerCorrectionMeters": 0.01665918033439145,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374402229481683,
+            0.4185219827644298,
+            0.907999990353073
+          ],
+          "regionalRadiusErrorMeters": 3.757032740470123e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 62,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000076651222,
+            0.044999968532991756,
+            9.19297995775848
+          ],
+          "local": [
+            0.002532966434955601,
+            -0.016603119671344754,
+            0.22517222166061446
+          ],
+          "ballCenter": [
+            0.1300141296495354,
+            0.11000000712677893,
+            9.297760416906023
+          ],
+          "centerCorrectionMeters": 0.01603903405982086,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852329679868,
+            0.423665069983799,
+            0.9055294396685558
+          ],
+          "regionalRadiusErrorMeters": 4.768672956512177e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 71,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.1300000020200779,
+            0.044999944014989364,
+            10.45297975758642
+          ],
+          "local": [
+            -0.002082563936710346,
+            -0.016037404537200935,
+            0.22552034258842538
+          ],
+          "ballCenter": [
+            -0.1299513817470735,
+            0.11000000716709658,
+            10.558380076647818
+          ],
+          "centerCorrectionMeters": 0.016658758523674693,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937440186314908,
+            0.4185224246031209,
+            0.9079997867052448
+          ],
+          "regionalRadiusErrorMeters": 1.415591088793633e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 80,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.130000000695915,
+            0.04500000826125792,
+            11.712980490771406
+          ],
+          "local": [
+            0.0025329664349555965,
+            -0.016603119671344764,
+            0.2251722216606144
+          ],
+          "ballCenter": [
+            0.13001412960359374,
+            0.1100000071279718,
+            11.817760969588479
+          ],
+          "centerCorrectionMeters": 0.01603958674201152,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898522874329908,
+            0.4236647050508981,
+            0.905529610418295
+          ],
+          "regionalRadiusErrorMeters": 1.4573696971442729e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 89,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12999999973540152,
+            0.04500000403907719,
+            12.972980331103985
+          ],
+          "local": [
+            -0.002082563936710343,
+            -0.016037404537200928,
+            0.22552034258842418
+          ],
+          "ballCenter": [
+            -0.12995137945290547,
+            0.11000000716666558,
+            13.07838067698747
+          ],
+          "centerCorrectionMeters": 0.016659358867454586,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937440207549623,
+            0.4185218818445192,
+            0.9080000368730935
+          ],
+          "regionalRadiusErrorMeters": 6.483597825290843e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 409,
+        "maxClearanceCorrectionMeters": 1.557554422,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 8.768649717
+      }
+    },
+    {
+      "id": "dribble_sprint",
+      "inputAssetSha256": "6c4560cd0fbf397c4bf5edfb67eb7697cea15fbb89d96fd9103ae6ba77fdd290",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 8,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.1300000016878846,
+            0.045000024550179735,
+            1.8797789633547235
+          ],
+          "local": [
+            0.002532966434955597,
+            -0.01660311967134475,
+            0.22517222166061407
+          ],
+          "ballCenter": [
+            0.1300141307423816,
+            0.11000000102789817,
+            1.9845594528968966
+          ],
+          "centerCorrectionMeters": 0.01603935220818295,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898521138383292,
+            0.4236645068569327,
+            0.9055297031899877
+          ],
+          "regionalRadiusErrorMeters": 7.945341745640988e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 15,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000174965373,
+            0.045000009844522085,
+            3.32644558310394
+          ],
+          "local": [
+            -0.002082563936710364,
+            -0.016037404537200938,
+            0.22552034258842465
+          ],
+          "ballCenter": [
+            -0.1299513816428457,
+            0.11000000103363741,
+            3.4318459361354687
+          ],
+          "centerCorrectionMeters": 0.016659233499594486,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937439983366901,
+            0.41852177410789687,
+            0.9080000865796566
+          ],
+          "regionalRadiusErrorMeters": 1.2270606475350831e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 22,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.1300000023000908,
+            0.045000010189110845,
+            4.7731123218830165
+          ],
+          "local": [
+            0.002532966434955586,
+            -0.016603119671344764,
+            0.22517222166061363
+          ],
+          "ballCenter": [
+            0.13001413137500803,
+            0.11000000102862992,
+            4.87789280427263
+          ],
+          "centerCorrectionMeters": 0.01603937025113377,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852104119931,
+            0.42366463892857065,
+            0.9055296414009039
+          ],
+          "regionalRadiusErrorMeters": 4.0235335896365854e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 29,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000322525673,
+            0.04499997888935875,
+            6.219778741680837
+          ],
+          "local": [
+            -0.002082563936710355,
+            -0.01603740453720093,
+            0.22552034258842513
+          ],
+          "ballCenter": [
+            -0.12995138312160412,
+            0.11000000103378549,
+            6.325179080407254
+          ],
+          "centerCorrectionMeters": 0.016659044434533164,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399812941274,
+            0.41852205564742023,
+            0.9079999568108724
+          ],
+          "regionalRadiusErrorMeters": 1.1935187005374104e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 36,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000340096055,
+            0.04500001087831437,
+            7.66644579944079
+          ],
+          "local": [
+            0.0025329664349556117,
+            -0.01660311967134476,
+            0.22517222166061374
+          ],
+          "ballCenter": [
+            0.1300141325078869,
+            0.11000000103009897,
+            7.7712262818304
+          ],
+          "centerCorrectionMeters": 0.016039514476508338,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852082134693,
+            0.423664633796734,
+            0.9055296438074647
+          ],
+          "regionalRadiusErrorMeters": 1.1116385589815536e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 43,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.1300000047008519,
+            0.04499994793435835,
+            9.113111900258358
+          ],
+          "local": [
+            -0.002082563936710378,
+            -0.01603740453720093,
+            0.22552034258842385
+          ],
+          "ballCenter": [
+            -0.1299513846003547,
+            0.11000000103393351,
+            9.21851222467966
+          ],
+          "centerCorrectionMeters": 0.01665885537009231,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399792224006,
+            0.4185223371856831,
+            0.9079998270425631
+          ],
+          "regionalRadiusErrorMeters": 1.1599187305089131e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 50,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000385765348,
+            0.04499996562295503,
+            10.559778666785672
+          ],
+          "local": [
+            0.002532966434955608,
+            -0.016603119671344757,
+            0.22517222166061407
+          ],
+          "ballCenter": [
+            0.13001413292104702,
+            0.1100000010281057,
+            10.664559129505754
+          ],
+          "centerCorrectionMeters": 0.016039028819077754,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852092083356,
+            0.4236650399521267,
+            0.9055294537793904
+          ],
+          "regionalRadiusErrorMeters": 1.4718491841980708e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 57,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.1300000030144587,
+            0.044999983311474354,
+            12.006445433312452
+          ],
+          "local": [
+            -0.0020825639367103477,
+            -0.01603740453720093,
+            0.22552034258842407
+          ],
+          "ballCenter": [
+            -0.12995138291035505,
+            0.11000000103376428,
+            12.111845773827005
+          ],
+          "centerCorrectionMeters": 0.016659071188111937,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399856754227,
+            0.4185220163103733,
+            0.9079999749414591
+          ],
+          "regionalRadiusErrorMeters": 9.66382834866053e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 64,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000560268213,
+            0.045000012256828634,
+            13.453112754554793
+          ],
+          "local": [
+            0.002532966434955578,
+            -0.016603119671344757,
+            0.22517222166061396
+          ],
+          "ballCenter": [
+            0.13001413477362633,
+            0.11000000103303703,
+            13.557893238732536
+          ],
+          "centerCorrectionMeters": 0.01603980471385271,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.02289852004458566,
+            0.4236646172958662,
+            0.9055296515472671
+          ],
+          "regionalRadiusErrorMeters": 1.147952691238352e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 71,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000765201897,
+            0.044999886024847384,
+            14.899778217415266
+          ],
+          "local": [
+            -0.0020825639367103624,
+            -0.016037404537200928,
+            0.22552034258842485
+          ],
+          "ballCenter": [
+            -0.12995138755783242,
+            0.11000000103422956,
+            15.005178513226344
+          ],
+          "centerCorrectionMeters": 0.016658477243079544,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399750820726,
+            0.41852290025840916,
+            0.9079995675073778
+          ],
+          "regionalRadiusErrorMeters": 1.0925470805833726e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 78,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13000000680882637,
+            0.04499990371332101,
+            16.346444983942227
+          ],
+          "local": [
+            0.002532966434955585,
+            -0.01660311967134476,
+            0.22517222166061546
+          ],
+          "ballCenter": [
+            0.1300141358784939,
+            0.11000000102840014,
+            16.451225416263934
+          ],
+          "centerCorrectionMeters": 0.01603864891333756,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.022898521137769058,
+            0.4236656077668991,
+            0.9055291881133415
+          ],
+          "regionalRadiusErrorMeters": 1.7437191968117105e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 85,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.13000000596566313,
+            0.04499992140117884,
+            17.793111750465613
+          ],
+          "local": [
+            -0.0020825639367103616,
+            -0.016037404537200928,
+            0.2255203425884215
+          ],
+          "ballCenter": [
+            -0.12995138586787067,
+            0.1100000010340604,
+            17.89851206236994
+          ],
+          "centerCorrectionMeters": 0.016658693057350845,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399815293347,
+            0.4185225793890813,
+            0.9079997154037589
+          ],
+          "regionalRadiusErrorMeters": 8.993138594926009e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 385,
+        "maxClearanceCorrectionMeters": 2.010966209,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 15.770357859
+      }
+    },
+    {
+      "id": "dribble_turn_left",
+      "inputAssetSha256": "cec1f7a5690ba2d903782bbca9a3a075b17f476b5419d3ed927201d9bee4be6a",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 8,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.13827946225935578,
+            0.045000036338038,
+            1.3167306849139115
+          ],
+          "local": [
+            0.0025329664349555848,
+            -0.016603119671344764,
+            0.22517222166061396
+          ],
+          "ballCenter": [
+            0.14060363823618147,
+            0.10999999987391651,
+            1.4214854008859465
+          ],
+          "centerCorrectionMeters": 0.016039306917405353,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.002929132106553524,
+            0.4236643928225605,
+            0.9058144967041506
+          ],
+          "regionalRadiusErrorMeters": 3.0777325132902433e-12,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 20,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.12520862168740848,
+            0.045000025527011246,
+            1.9832141558731615
+          ],
+          "local": [
+            -0.002082563936710281,
+            -0.01603740453720094,
+            0.22552034258842452
+          ],
+          "ballCenter": [
+            0.1630967648143849,
+            0.11000000140539481,
+            2.0815692620003903
+          ],
+          "centerCorrectionMeters": 0.016659267353710153,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.34408938996961974,
+            0.4185216342446911,
+            0.8405011203915723
+          ],
+          "regionalRadiusErrorMeters": 1.373677158134079e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 32,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.9287092351751048,
+            0.04500003991205962,
+            2.189703874219371
+          ],
+          "local": [
+            0.002532966434955686,
+            -0.016603119671344754,
+            0.225172221660614
+          ],
+          "ballCenter": [
+            1.0170606684743968,
+            0.11000000280271117,
+            2.2460330544609444
+          ],
+          "centerCorrectionMeters": 0.016039393089121536,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.7511688600201284,
+            0.423664385008431,
+            0.5062152038525597
+          ],
+          "regionalRadiusErrorMeters": 1.5734803737732506e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 44,
+          "bone": "RightFoot",
+          "oldMarker": [
+            1.5687239789659517,
+            0.04500002839489572,
+            2.2465813039599576
+          ],
+          "local": [
+            -0.0020825639367103763,
+            -0.016037404537200928,
+            0.22552034258842427
+          ],
+          "ballCenter": [
+            1.6721641809164383,
+            0.11000000193891853,
+            2.2263485851254696
+          ],
+          "centerCorrectionMeters": 0.01665929483634422,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.8874837046500261,
+            0.41852161613340627,
+            -0.19290497870647902
+          ],
+          "regionalRadiusErrorMeters": 4.730022484800145e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 56,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            1.85400047564963,
+            0.0450000267443181,
+            1.4330798903313606
+          ],
+          "local": [
+            0.0025329664349556624,
+            -0.01660311967134476,
+            0.2251722216606137
+          ],
+          "ballCenter": [
+            1.918166441814378,
+            0.11000000206768236,
+            1.3502446322910509
+          ],
+          "centerCorrectionMeters": 0.016039319585554476,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.5727298010650728,
+            0.4236644971824445,
+            -0.7017755829316867
+          ],
+          "regionalRadiusErrorMeters": 4.5742708232321405e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 68,
+          "bone": "RightFoot",
+          "oldMarker": [
+            2.126230341312392,
+            0.04500003319495922,
+            0.8458680537314164
+          ],
+          "local": [
+            -0.0020825639367103776,
+            -0.016037404537200917,
+            0.22552034258842488
+          ],
+          "ballCenter": [
+            2.141717344129921,
+            0.11000000425650733,
+            0.7416116802474426
+          ],
+          "centerCorrectionMeters": 0.016659230271854075,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.11466848857669167,
+            0.41852158893148156,
+            -0.9009388532668602
+          ],
+          "regionalRadiusErrorMeters": 1.4089592270671858e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 337,
+        "maxClearanceCorrectionMeters": 0.563031625,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 7.02582041
+      }
+    },
+    {
+      "id": "dribble_feint_left",
+      "inputAssetSha256": "c606e852531c5db9e3fe526dca549386a0eb00f15ea34fa420ef16bea431c450",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 30,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12999999847993576,
+            0.0450000269779609,
+            0.1950000052851631
+          ],
+          "local": [
+            -0.002082563936710343,
+            -0.016037404537200935,
+            0.22552034258842468
+          ],
+          "ballCenter": [
+            -0.1299513784108423,
+            0.109999998034558,
+            0.3004003672551601
+          ],
+          "centerCorrectionMeters": 0.016659222315423022,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937439999808636,
+            0.41852159548637763,
+            0.9080001689076116
+          ],
+          "regionalRadiusErrorMeters": 4.745431686492552e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0.016659222,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 0.762312949
+      }
+    },
+    {
+      "id": "shield_left",
+      "inputAssetSha256": "9e7307b32decb5644a72d9e8ea0b655e0ea8955b7f1a11f929082b0717ad1894",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12999999849203986,
+            0.045000026944385756,
+            0.19500000529057815
+          ],
+          "local": [
+            -0.002082563936710342,
+            -0.016037404537200935,
+            0.22552034258842465
+          ],
+          "ballCenter": [
+            -0.12995137842204005,
+            0.10999999803515663,
+            0.3004003672605752
+          ],
+          "centerCorrectionMeters": 0.016659222320805377,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937440000356633,
+            0.41852159574200953,
+            0.908000168789667
+          ],
+          "regionalRadiusErrorMeters": 4.889363497406762e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.016659222,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 0.69365016
+      }
+    },
+    {
+      "id": "dribble_turn_right",
+      "inputAssetSha256": "bc657a7e4027f98079167900a3b9edc34f4d1641037b77b8e1fb047dde0d5a5a",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 8,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            0.12170301785934669,
+            0.04500003624933972,
+            1.3197489068711346
+          ],
+          "local": [
+            0.0025329664349556004,
+            -0.016603119671344764,
+            0.22517222166061404
+          ],
+          "ballCenter": [
+            0.1194070931858787,
+            0.11000000072077047,
+            1.4245042458393933
+          ],
+          "centerCorrectionMeters": 0.016039303278164083,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.04285677937272303,
+            0.42366439896915536,
+            0.9048048261961814
+          ],
+          "regionalRadiusErrorMeters": 5.262015684293075e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 20,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.3715912189188511,
+            0.045000005122572996,
+            1.900174309211199
+          ],
+          "local": [
+            -0.002082563936710348,
+            -0.016037404537200928,
+            0.22552034258842452
+          ],
+          "ballCenter": [
+            -0.4093886028907059,
+            0.10999999665940637,
+            1.9985643216478242
+          ],
+          "centerCorrectionMeters": 0.016659229158880025,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.3079242246675069,
+            0.41852178140517565,
+            0.8544133603545492
+          ],
+          "regionalRadiusErrorMeters": 7.219641551259315e-10,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 32,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            -0.7760047629735012,
+            0.04500001449337554,
+            2.400135203292897
+          ],
+          "local": [
+            0.0025329664349555583,
+            -0.016603119671344754,
+            0.22517222166061393
+          ],
+          "ballCenter": [
+            -0.8643409955522817,
+            0.10999999766162219,
+            2.456488205226787
+          ],
+          "centerCorrectionMeters": 0.016039375419178686,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.7757941289483057,
+            0.4236645665688422,
+            0.4676021861832714
+          ],
+          "regionalRadiusErrorMeters": 1.5287646704109648e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 44,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -1.5353734619225026,
+            0.04500004706496891,
+            1.988729130087911
+          ],
+          "local": [
+            -0.0020825639367104136,
+            -0.016037404537200928,
+            0.22552034258842438
+          ],
+          "ballCenter": [
+            -1.6388322931258714,
+            0.11000000571557193,
+            1.968591850098142
+          ],
+          "centerCorrectionMeters": 0.016659312531314793,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.8949044681967524,
+            0.4185214757518506,
+            -0.15487339066469955
+          ],
+          "regionalRadiusErrorMeters": 1.3009861937751666e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 56,
+          "bone": "LeftFoot",
+          "oldMarker": [
+            -2.0505841170214754,
+            0.0450000445250367,
+            1.6032412020105777
+          ],
+          "local": [
+            0.0025329664349554542,
+            -0.01660311967134476,
+            0.2251722216606133
+          ],
+          "ballCenter": [
+            -2.1147724248950404,
+            0.11000000572960861,
+            1.5204232461063576
+          ],
+          "centerCorrectionMeters": 0.016039354233272914,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.5365283140248867,
+            0.42366436314441613,
+            -0.7298259214710375
+          ],
+          "regionalRadiusErrorMeters": 1.4851173624208514e-9,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 68,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -1.8703639498991795,
+            0.04500002606758514,
+            0.7996902583839933
+          ],
+          "local": [
+            -0.0020825639367102137,
+            -0.01603740453720093,
+            0.22552034258842485
+          ],
+          "ballCenter": [
+            -1.8859471305697164,
+            0.11000000256332783,
+            0.6954482208255309
+          ],
+          "centerCorrectionMeters": 0.016659220866746476,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.15299408355333916,
+            0.4185216437891792,
+            -0.8952275934518984
+          ],
+          "regionalRadiusErrorMeters": 1.7883997061041157e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 337,
+        "maxClearanceCorrectionMeters": 0.836440483,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6.355024362
+      }
+    },
+    {
+      "id": "dribble_feint_right",
+      "inputAssetSha256": "2491e2ed6cf934765f462667bd8adad773801de4d0141f8ed7ad71300908f39b",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 30,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12999999837467857,
+            0.04500001894942958,
+            0.19499999052169617
+          ],
+          "local": [
+            -0.0020825639367103425,
+            -0.01603740453720092,
+            0.2255203425884247
+          ],
+          "ballCenter": [
+            -0.12995137829190975,
+            0.10999999621996201,
+            0.30040035070218823
+          ],
+          "centerCorrectionMeters": 0.016659205762868674,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.01937439971567735,
+            0.41852165017338744,
+            0.908000143706928
+          ],
+          "regionalRadiusErrorMeters": 1.178926678502279e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0.016659206,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 0.762312949
+      }
+    },
+    {
+      "id": "shield_right",
+      "inputAssetSha256": "1cc194c41d09a21ded2c73849e8c8ecc793890cda002eccf7b927b9fbf33df55",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.1299999983822705,
+            0.04500001891600823,
+            0.19499999052546965
+          ],
+          "local": [
+            -0.0020825639367103767,
+            -0.016037404537200935,
+            0.22552034258842468
+          ],
+          "ballCenter": [
+            -0.12995137829490952,
+            0.10999999622053107,
+            0.30040035070596005
+          ],
+          "centerCorrectionMeters": 0.01665920576663172,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.019374399752903067,
+            0.41852165042767414,
+            0.9080001435889262
+          ],
+          "regionalRadiusErrorMeters": 1.1932385912682975e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.016659206,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 0.69365016
+      }
+    },
+    {
+      "id": "pass_ground_000",
+      "inputAssetSha256": "88404cb5f0958af5a11fc7a77c17088a9411a87b50583f6de8be45fd85621791",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12000000073482461,
+            0.11650541938904936,
+            0.5124693996442186
+          ],
+          "local": [
+            0.00004862008716799432,
+            -0.035075204283818315,
+            0.22499851043661745
+          ],
+          "ballCenter": [
+            -0.11888159168397396,
+            0.13871916721897598,
+            0.625297324367784
+          ],
+          "centerCorrectionMeters": 0.005390048186752207,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725354178650277,
+            0.19316417827354376,
+            0.9811182485908649
+          ],
+          "regionalRadiusErrorMeters": 5.960464066756543e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.005390048,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_045",
+      "inputAssetSha256": "c22c0c746ce61553ea8a5ce2a6dcfc489eeaa07ee5164ccf8181d87af3975c7c",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.18739955652544144,
+            0.10386514577502709,
+            0.36806257679123955
+          ],
+          "local": [
+            -0.00015086179427581392,
+            -0.03646314724216939,
+            0.22497956870769636
+          ],
+          "ballCenter": [
+            0.26740710734799045,
+            0.11798025867756264,
+            0.44946505820641347
+          ],
+          "centerCorrectionMeters": 0.00908063307026855,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.6970909399879869,
+            0.13432212025448825,
+            0.7042881437288319
+          ],
+          "regionalRadiusErrorMeters": 6.615814007737697e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.009080633,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_090",
+      "inputAssetSha256": "70a32dc4fba859cb3171ab762a0a571b1fece0b364b033f9d9d891bba141c829",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.31485776128802395,
+            0.08059654101920438,
+            0.05353141303818163
+          ],
+          "local": [
+            -0.0020825639367103373,
+            -0.016037404537200903,
+            0.22552034258842485
+          ],
+          "ballCenter": [
+            0.4263243697015858,
+            0.11304875059085995,
+            0.07677464643243355
+          ],
+          "centerCorrectionMeters": 0.008466813953966671,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.968390303343562,
+            0.12031292587471124,
+            0.2185063391703545
+          ],
+          "regionalRadiusErrorMeters": 4.002133346947545e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.008466814,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_135",
+      "inputAssetSha256": "340eba92c4df45933d74761e06c1213410f14612cd8729b40660156715f44017",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.08506096243849279,
+            0.06047371253743972,
+            -0.24619987746260713
+          ],
+          "local": [
+            0.00853977546309494,
+            -0.0124301056036179,
+            -0.07105848924547087
+          ],
+          "ballCenter": [
+            0.16215164829645357,
+            0.14332670811044268,
+            -0.3056855641089765
+          ],
+          "centerCorrectionMeters": 0.03524899151657552,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.6391244279511917,
+            0.5425130942903869,
+            -0.5451600756837681
+          ],
+          "regionalRadiusErrorMeters": 4.345880877387742e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.035248992,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_180",
+      "inputAssetSha256": "fdd21832a95c0abac2ee89ee4f466038400a3728cf67fce1e7f17fd4658c6106",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12000000089744099,
+            0.056211026124579976,
+            -0.35119342195279374
+          ],
+          "local": [
+            -0.00002554180759672669,
+            0.007486395396707928,
+            -0.05508970160363577
+          ],
+          "ballCenter": [
+            -0.11700561254471158,
+            0.15823411816290633,
+            -0.43925135308021906
+          ],
+          "centerCorrectionMeters": 0.04896743268826688,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.02745390998790277,
+            0.5215009088495233,
+            -0.852808938095455
+          ],
+          "regionalRadiusErrorMeters": 1.7140456692876782e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.057046415,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6.210362628
+      }
+    },
+    {
+      "id": "pass_ground_225",
+      "inputAssetSha256": "3a5df31c94b2463d98402a40059bc3793c5154cd997d291e9a6dfa5a39cd6a2d",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.32506096404337936,
+            0.06047373020308635,
+            -0.24619989150800797
+          ],
+          "local": [
+            -0.005041696131229384,
+            -0.009205281734466551,
+            -0.07108949869871141
+          ],
+          "ballCenter": [
+            -0.39980128726678704,
+            0.14448545920694184,
+            -0.3101151572680283
+          ],
+          "centerCorrectionMeters": 0.03510604148442444,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.6400446568712208,
+            0.5290877384068248,
+            -0.5571436101025952
+          ],
+          "regionalRadiusErrorMeters": 1.5425914018374343e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.035106041,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_270",
+      "inputAssetSha256": "5c3dc64d9b4b9487289d7cf2daa219a27f1b1ea5cc0d54d39c95ab2a469be26f",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.5548577355366773,
+            0.08059652338975899,
+            0.05353143301501456
+          ],
+          "local": [
+            -0.0020825639367103984,
+            -0.016037404537200935,
+            0.22552034258842465
+          ],
+          "ballCenter": [
+            -0.6660788280260711,
+            0.11347583144153152,
+            0.07676264370933779
+          ],
+          "centerCorrectionMeters": 0.00840593424503217,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.958019489446835,
+            0.13188416596983552,
+            0.25456870311659713
+          ],
+          "regionalRadiusErrorMeters": 1.7081283609776676e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.008405934,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_ground_315",
+      "inputAssetSha256": "950bab3f6a6622f7b6ebd69db15318127f0b62aca0cff11a3f07d6aafb92712e",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.4273995289148719,
+            0.10386511965432262,
+            0.36806254954044026
+          ],
+          "local": [
+            -0.003195117057900501,
+            -0.03646593114248704,
+            0.22500913803578396
+          ],
+          "ballCenter": [
+            -0.5083005026451477,
+            0.11780883735554738,
+            0.44867212256744776
+          ],
+          "centerCorrectionMeters": 0.009096712415385786,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.6830153715410316,
+            0.137113070207395,
+            0.7174189906999734
+          ],
+          "regionalRadiusErrorMeters": 5.253677493044506e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.009096712,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6
+      }
+    },
+    {
+      "id": "pass_lofted",
+      "inputAssetSha256": "85001eb5636dbe15e1a51123feb34d9e0f16ba68e951a69486a2c9d4f50a4fb5",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.11999999936731151,
+            0.11650540626267283,
+            0.5124694038699299
+          ],
+          "local": [
+            0.00004862008716796435,
+            -0.0350752042838183,
+            0.2249985104366173
+          ],
+          "ballCenter": [
+            -0.11888159030018033,
+            0.1387191541446618,
+            0.6252973285830836
+          ],
+          "centerCorrectionMeters": 0.005390054157857992,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725354320220864,
+            0.19316417872626232,
+            0.9811182485003297
+          ],
+          "regionalRadiusErrorMeters": 5.960464760645934e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390054,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 11.028519253
+      }
+    },
+    {
+      "id": "pass_cross_left",
+      "inputAssetSha256": "625749ede5381defd88edb0ad6bc22dcdd0cccd603f6ddf7c1d10ed4bc7f04b0",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 29,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.362231807369826,
+            0.1096245884839116,
+            0.4276518796791985
+          ],
+          "local": [
+            0.000006243586540259573,
+            -0.053983969613909714,
+            0.2259990274906158
+          ],
+          "ballCenter": [
+            -0.42521409997304704,
+            0.11082381688487711,
+            0.5269819343523859
+          ],
+          "centerCorrectionMeters": 0.007660004799203702,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.5438476965053471,
+            0.17007298187388953,
+            0.8217693495393653
+          ],
+          "regionalRadiusErrorMeters": 3.9867036061291827e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.007660005,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 18.32467755
+      }
+    },
+    {
+      "id": "pass_cross_right",
+      "inputAssetSha256": "0f41d3abb9c7d318176f58e81d40e056e646c6aa5084a7c2874159ea3d9b08f3",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 29,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.12223180265980359,
+            0.10962459615342449,
+            0.42765187588274445
+          ],
+          "local": [
+            0.000006243586540209808,
+            -0.05398396961390971,
+            0.22599902749061587
+          ],
+          "ballCenter": [
+            0.18529579622790243,
+            0.11081315451731974,
+            0.5269303237139
+          ],
+          "centerCorrectionMeters": 0.007658966061116368,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.544493991194438,
+            0.16998843173634645,
+            0.8213587685226041
+          ],
+          "regionalRadiusErrorMeters": 2.698464368622311e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.007658966,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 18.32467755
+      }
+    },
+    {
+      "id": "pass_through",
+      "inputAssetSha256": "28dc743b943c0ce28bc4adc101cc31fb60562e35f9a2a878b196d625077a7ad5",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.03283149923148687,
+            0.115687086718371,
+            0.5022823654395483
+          ],
+          "local": [
+            0.000048620087167956533,
+            -0.03507520428381836,
+            0.22499851043661742
+          ],
+          "ballCenter": [
+            -0.010081195225515736,
+            0.1374293664333185,
+            0.6128922156759353
+          ],
+          "centerCorrectionMeters": 0.005390034779980121,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.1978299120181037,
+            0.1890644310490151,
+            0.9618305291593843
+          ],
+          "regionalRadiusErrorMeters": 5.960464621868056e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0.005390035,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 12.501750024
+      }
+    },
+    {
+      "id": "shot_power",
+      "inputAssetSha256": "1d0278be9aa183b3d3f63ad6455eeb89f0b2c972f43d55305ed8b5c1c8de5bcc",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.11999999936133819,
+            0.11650541800908558,
+            0.512469408694782
+          ],
+          "local": [
+            0.000048620087167974585,
+            -0.035075204283818336,
+            0.22499851043661734
+          ],
+          "ballCenter": [
+            -0.11888159029681979,
+            0.13871916589109412,
+            0.6252973334079577
+          ],
+          "centerCorrectionMeters": 0.005390057410924459,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725354297501033,
+            0.19316417872643266,
+            0.9811182485005214
+          ],
+          "regionalRadiusErrorMeters": 5.960464760645934e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390057,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 17.007232274
+      }
+    },
+    {
+      "id": "shot_curled",
+      "inputAssetSha256": "770bc924353811b0ab7f412eb1d2efb42a14bcdaa4e60943f523e305791c457b",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.20789764764509386,
+            0.11565774624834059,
+            0.5021443503104261
+          ],
+          "local": [
+            0.00004862008716796358,
+            -0.03507520428381829,
+            0.22499851043661734
+          ],
+          "ballCenter": [
+            -0.2288329528540231,
+            0.13747302890796467,
+            0.6130977119862798
+          ],
+          "centerCorrectionMeters": 0.005390024345095143,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.18204721952144426,
+            0.1896992430549838,
+            0.9648176029949275
+          ],
+          "regionalRadiusErrorMeters": 5.9604643443123e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390024,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 18.0273851
+      }
+    },
+    {
+      "id": "shot_chip",
+      "inputAssetSha256": "78403d2261dd5fbf009a4aa9e97085de971d7fa607e4e33ce6a930d620d60220",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.11999999936579826,
+            0.11650540996461739,
+            0.5124694053201785
+          ],
+          "local": [
+            0.00004862008716797926,
+            -0.035075204283818294,
+            0.2249985104366174
+          ],
+          "ballCenter": [
+            -0.11888159029943025,
+            0.13871915784655078,
+            0.6252973300333509
+          ],
+          "centerCorrectionMeters": 0.005390055114767783,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.00972535431358451,
+            0.1931641787257792,
+            0.9811182485004906
+          ],
+          "regionalRadiusErrorMeters": 5.960464205534421e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390055,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 14.240611475
+      }
+    },
+    {
+      "id": "shot_volley",
+      "inputAssetSha256": "fbd97a4462e3132b147caa92d944080fa2fa6d51713a94f58bede153a30fc79e",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 30,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.1800000031596158,
+            0.621255266759373,
+            0.5541793730372602
+          ],
+          "local": [
+            0.00004862008716798645,
+            -0.035075204283818245,
+            0.2249985104366175
+          ],
+          "ballCenter": [
+            -0.17888159316049682,
+            0.6682804380010041,
+            0.6591185194872493
+          ],
+          "centerCorrectionMeters": 0.005390054176820818,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.00972536242451129,
+            0.4089169747765314,
+            0.9125197669449804
+          ],
+          "regionalRadiusErrorMeters": 5.960464621868056e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390054,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 15.644728096
+      }
+    },
+    {
+      "id": "first_touch_chest",
+      "inputAssetSha256": "123091e8425a126acac7365c3ac3836654b974f505002efbc378478b90ee485b",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 24,
+          "bone": "Chest",
+          "oldMarker": [
+            0,
+            1.2438513326982688,
+            0.015196154924681696
+          ],
+          "local": [
+            0.01575805671984899,
+            0.028208784934277847,
+            0.13527044731148194
+          ],
+          "ballCenter": [
+            -0.001426309657499051,
+            1.284153213286143,
+            0.1061217605846412
+          ],
+          "centerCorrectionMeters": 0.01068639104012312,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.15622151219830568,
+            0.6472621179060059,
+            0.7460875215752547
+          ],
+          "regionalRadiusErrorMeters": 2.2746173000687264e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 217,
+        "maxClearanceCorrectionMeters": 0.010686391,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 3.505018723
+      }
+    },
+    {
+      "id": "tackle_standing_clean",
+      "inputAssetSha256": "2f0f9260b9ddf83e416db91d0147ce4835c8eea0fbcd0f45b914d9aeeec3093e",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.15999999902238501,
+            0.11150542210778311,
+            0.6724694096493506
+          ],
+          "local": [
+            0.00004862008716797452,
+            -0.035075204283818294,
+            0.22499851043661745
+          ],
+          "ballCenter": [
+            -0.1588815893296164,
+            0.1337191722670296,
+            0.7852973339079526
+          ],
+          "centerCorrectionMeters": 0.005390057320315729,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725359760579104,
+            0.19316419852861993,
+            0.981118244547681
+          ],
+          "regionalRadiusErrorMeters": 5.960464066756543e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0.005390057,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.909090909
+      }
+    },
+    {
+      "id": "tackle_slide_clean",
+      "inputAssetSha256": "4bc04d72da272182adbf0f25b28890aaca5b4ad814122cb0c68caeb2fc92fcc5",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 39,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12060889739035265,
+            0.12153634655525014,
+            2.559671132820946
+          ],
+          "local": [
+            0.000048620087167947636,
+            -0.03507520428381822,
+            0.22499851043661717
+          ],
+          "ballCenter": [
+            -0.11949048941736343,
+            0.1423094679425727,
+            2.672773160301962
+          ],
+          "centerCorrectionMeters": 0.0053900518594282975,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725344805886145,
+            0.18063691699753978,
+            0.9835017650650305
+          ],
+          "regionalRadiusErrorMeters": 5.9604643443123e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 361,
+        "maxClearanceCorrectionMeters": 0.005390052,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.588235294
+      }
+    },
+    {
+      "id": "tackle_standing_miss",
+      "inputAssetSha256": "43249dcc42a33e9f7a8c1a1053a93b7319d0fbefd43fb456b4255115bfc87fb6",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 1.2
+      }
+    },
+    {
+      "id": "tackle_slide_miss",
+      "inputAssetSha256": "e0a4f836f3365af98fd0b14aa4d2871f80aca1119cbb6c601f7d91489881624d",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [],
+      "failures": [],
+      "path": {
+        "samples": 361,
+        "maxClearanceCorrectionMeters": 0,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 1.2
+      }
+    },
+    {
+      "id": "interception",
+      "inputAssetSha256": "55ffbefe40d140e834ba3663b06b314c3efe900cb51cfeb019bdf272091bf079",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 27,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.4199999869334539,
+            0.11150540939278947,
+            0.5224693876968012
+          ],
+          "local": [
+            0.00004862008716801356,
+            -0.03507520428381833,
+            0.2249985104366174
+          ],
+          "ballCenter": [
+            -0.4188815768712482,
+            0.13371915315778674,
+            0.6352973132106512
+          ],
+          "centerCorrectionMeters": 0.005390042143689157,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725362973094185,
+            0.19316414292612075,
+            0.9811182554629481
+          ],
+          "regionalRadiusErrorMeters": 5.960464621868056e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 241,
+        "maxClearanceCorrectionMeters": 0.005390042,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.727272727
+      }
+    },
+    {
+      "id": "header_standing",
+      "inputAssetSha256": "3f5a2fccbe507ff7792f85f4f61d4746d6b05217699bc46d052a3bf27ea38642",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "Head",
+          "oldMarker": [
+            0,
+            1.2859754184637016,
+            0.2750269866638656
+          ],
+          "local": [
+            0.000505104660987854,
+            0.0788266658782959,
+            0.1512723267078402
+          ],
+          "ballCenter": [
+            -0.00007179599262185899,
+            1.226982395536271,
+            0.37805492645135386
+          ],
+          "centerCorrectionMeters": 0.008726640354250727,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.0052445513421258165,
+            -0.6728829729860657,
+            0.739730355836945
+          ],
+          "regionalRadiusErrorMeters": 1.1394441223888663e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.00872664,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 6.610386093
+      }
+    },
+    {
+      "id": "header_jumping",
+      "inputAssetSha256": "f3190f117cc90f894e8bf2e6b90faee90e98cbcb42a6ccf34285253ddaf4a51c",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "Head",
+          "oldMarker": [
+            0,
+            1.6602939543848885,
+            0.3250269868501302
+          ],
+          "local": [
+            0.000505104660987854,
+            0.07882666587829587,
+            0.15127232670784013
+          ],
+          "ballCenter": [
+            -0.00007179599262185097,
+            1.601300931457458,
+            0.42805492663761835
+          ],
+          "centerCorrectionMeters": 0.008726631392017743,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.005244551342125744,
+            -0.6728829729860657,
+            0.739730355836945
+          ],
+          "regionalRadiusErrorMeters": 1.1394441223888663e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.008726631,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 8.501953112
+      }
+    },
+    {
+      "id": "header_defensive",
+      "inputAssetSha256": "785a03ac95a21cda59c2384cea5e04ec3cda1fcf70825056a0ff7135d7d38c4d",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "Head",
+          "oldMarker": [
+            0,
+            1.6602939543848885,
+            0.3250269868501302
+          ],
+          "local": [
+            0.000505104660987854,
+            0.07882666587829587,
+            0.15127232670784013
+          ],
+          "ballCenter": [
+            -0.00007179599262185097,
+            1.601300931457458,
+            0.42805492663761835
+          ],
+          "centerCorrectionMeters": 0.008726631392017743,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.005244551342125744,
+            -0.6728829729860657,
+            0.739730355836945
+          ],
+          "regionalRadiusErrorMeters": 1.1394441223888663e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.008726631,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 13.885549483
+      }
+    },
+    {
+      "id": "header_attacking",
+      "inputAssetSha256": "b5ea84774c94a4c9e78eda75a414fa4435c5d9ee70f4f5a8832811908276d093",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "Head",
+          "oldMarker": [
+            0,
+            1.6602939543848885,
+            0.3250269868501302
+          ],
+          "local": [
+            0.000505104660987854,
+            0.07882666587829587,
+            0.15127232670784013
+          ],
+          "ballCenter": [
+            -0.00007179599262185097,
+            1.601300931457458,
+            0.42805492663761835
+          ],
+          "centerCorrectionMeters": 0.008726631392017743,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.005244551342125744,
+            -0.6728829729860657,
+            0.739730355836945
+          ],
+          "regionalRadiusErrorMeters": 1.1394441223888663e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.008726631,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 9.259134136
+      }
+    },
+    {
+      "id": "set_throw_in",
+      "inputAssetSha256": "f39125bf612a48d5320100471914a196ec6b444503847462f894c509385c9d14",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 34,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.13232831005608123,
+            1.459852067956119,
+            0.38479102955763606
+          ],
+          "local": [
+            0.06481590867042543,
+            -0.089737832546234,
+            0.04869721084833144
+          ],
+          "ballCenter": [
+            0.0003649104428540035,
+            1.454569123894892,
+            0.4798831688915633
+          ],
+          "centerCorrectionMeters": 0.1336325075125459,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.6170650797081885,
+            0.2677711079520749,
+            0.7399522424797734
+          ],
+          "regionalRadiusErrorMeters": 2.4730369795056273e-7,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 34,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.13232831005608123,
+            1.459852067956119,
+            0.38479102955763606
+          ],
+          "local": [
+            -0.06363773345947267,
+            -0.08856219053268428,
+            0.0486552342772484
+          ],
+          "ballCenter": [
+            0.0003649104428540035,
+            1.454569123894892,
+            0.4798831688915633
+          ],
+          "centerCorrectionMeters": 0.1336325075125459,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.6211403095526812,
+            0.25708318372029354,
+            0.7403330010860231
+          ],
+          "regionalRadiusErrorMeters": 3.72943189441699e-7,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 2.4730369795056273e-7
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 3.72943189441699e-7
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.133632508,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 11.318547906
+      }
+    },
+    {
+      "id": "set_corner",
+      "inputAssetSha256": "8aa9ad283bf016a35e4c80491c107a4ee3d197549c65d2fc531d9b43bc96c774",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 30,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.12489567412685515,
+            0.10927519900796355,
+            0.42600812266815447
+          ],
+          "local": [
+            0.0000062435865402261795,
+            -0.05398396961390974,
+            0.22599902749061587
+          ],
+          "ballCenter": [
+            0.18933670662358054,
+            0.1108129966003232,
+            0.5242875122103526
+          ],
+          "centerCorrectionMeters": 0.007568534457614379,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.5563525975886324,
+            0.1732500857704826,
+            0.8126845605380364
+          ],
+          "regionalRadiusErrorMeters": 1.0438152009406565e-9,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.007568534,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 20.293701887
+      }
+    },
+    {
+      "id": "set_free_kick",
+      "inputAssetSha256": "7dd0c3e5c413b62cf4c143ec15946eda6833283c0be800f406419fb6f8cc1250",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 30,
+          "bone": "RightFoot",
+          "oldMarker": [
+            -0.12000000072018338,
+            0.11650539768947624,
+            0.5124693726744362
+          ],
+          "local": [
+            0.00004862008716795583,
+            -0.03507520428381838,
+            0.22499851043661748
+          ],
+          "ballCenter": [
+            -0.11888159160884884,
+            0.1387191386364033,
+            0.625297298752538
+          ],
+          "centerCorrectionMeters": 0.0053900268211243,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.009725354704600392,
+            0.19316411842101652,
+            0.9811182603695139
+          ],
+          "regionalRadiusErrorMeters": 5.960463789200787e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.005390027,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 17.587297304
+      }
+    },
+    {
+      "id": "set_penalty",
+      "inputAssetSha256": "d46cd9926e049cd54695b4e531620e6683a7d00aa0f4c49c361a65d3da5800db",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 28,
+          "bone": "RightFoot",
+          "oldMarker": [
+            0.012303750501608632,
+            0.11450686889721665,
+            0.4888734144567694
+          ],
+          "local": [
+            0.00004862008716801866,
+            -0.03507520428381831,
+            0.22499851043661742
+          ],
+          "ballCenter": [
+            0.046989520891275435,
+            0.13560811414502055,
+            0.5964674515143614
+          ],
+          "centerCorrectionMeters": 0.0053900382122090695,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.30161719608964016,
+            0.18349018499927866,
+            0.9356059101095686
+          ],
+          "regionalRadiusErrorMeters": 5.9604643443123e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 265,
+        "maxClearanceCorrectionMeters": 0.005390038,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 8.855667398
+      }
+    },
+    {
+      "id": "keeper_catch_up",
+      "inputAssetSha256": "cbce4d469003972aa7a15e15555817039f750df32ed62557f0ed6d45e51ed4a3",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.08881414118013042,
+            1.4785768037914788,
+            0.4063892935741539
+          ],
+          "local": [
+            0.05180200643772403,
+            -0.08935722924547954,
+            0.05780799543351005
+          ],
+          "ballCenter": [
+            -0.0003508374238748632,
+            1.4822355475536826,
+            0.5256894414584955
+          ],
+          "centerCorrectionMeters": 0.08902602824250212,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.333284538514535,
+            0.345599761820789,
+            0.8772013571675362
+          ],
+          "regionalRadiusErrorMeters": 6.938893903907228e-17,
+          "skinPenetrationMeters": 1.249000902703301e-16
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.08881414118013042,
+            1.4785768037914788,
+            0.4063892935741539
+          ],
+          "local": [
+            -0.0622370913827201,
+            -0.09040958381589737,
+            0.05506026042440163
+          ],
+          "ballCenter": [
+            -0.0003508374238748632,
+            1.4822355475536826,
+            0.5256894414584955
+          ],
+          "centerCorrectionMeters": 0.08902602824250212,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2447989907031581,
+            0.3551666227007183,
+            0.9021807603080886
+          ],
+          "regionalRadiusErrorMeters": 1.249000902703301e-16,
+          "skinPenetrationMeters": 1.249000902703301e-16
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 6.938893903907228e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 1.249000902703301e-16
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.119366295,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_up_left",
+      "inputAssetSha256": "e2410a49d93b3c57b0ed7831b2ac5187a45e087167af0bcb96d1deb811d8165d",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            0.13711282686590467,
+            1.4105477570218232,
+            0.34671467962969876
+          ],
+          "local": [
+            0.04401917415255614,
+            -0.0726632457656132,
+            0.054594820881108994
+          ],
+          "ballCenter": [
+            0.21024489860521914,
+            1.4238795484773552,
+            0.46775776353012954
+          ],
+          "centerCorrectionMeters": 0.07515309244562507,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.2646626561146926,
+            0.28177301474608196,
+            0.9222568224845075
+          ],
+          "regionalRadiusErrorMeters": 1.5569634082002182e-8,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.36337877270198543,
+            1.4505249503811923,
+            0.38178240601421737
+          ],
+          "local": [
+            -0.06577652692794803,
+            -0.09290355443954473,
+            0.055081680417060824
+          ],
+          "ballCenter": [
+            0.21024489860521914,
+            1.4238795484773552,
+            0.46775776353012954
+          ],
+          "centerCorrectionMeters": 0.07515309244562507,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.7941567480332091,
+            0.10234671393747491,
+            0.5990327284043158
+          ],
+          "regionalRadiusErrorMeters": 1.3105451532324786e-7,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 1.5569634082002182e-8
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 1.3105451532324786e-7
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.115591917,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_left",
+      "inputAssetSha256": "452f6ebc37a2de6951c4b001ca9bc880b19df07822a3024d426590cd2c564e87",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            0.2070777496015899,
+            1.0415925977875016,
+            0.4110814727263301
+          ],
+          "local": [
+            0.05095746309730262,
+            -0.08924675517836606,
+            0.05808534734729304
+          ],
+          "ballCenter": [
+            0.2946965157743949,
+            1.0453618177008688,
+            0.5306589681752001
+          ],
+          "centerCorrectionMeters": 0.08822121576738054,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.3332845769281281,
+            0.34559977320267027,
+            0.8772013380884126
+          ],
+          "regionalRadiusErrorMeters": 6.938893903907228e-17,
+          "skinPenetrationMeters": 6.938893903907228e-17
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.382700004443534,
+            1.0415925973289257,
+            0.41108147303283427
+          ],
+          "local": [
+            -0.04533774457495635,
+            -0.0717854514236242,
+            0.055294365816449795
+          ],
+          "ballCenter": [
+            0.2946965157743949,
+            1.0453618177008688,
+            0.5306589681752001
+          ],
+          "centerCorrectionMeters": 0.08822121576738054,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.3878704051903034,
+            0.18686066174804533,
+            0.9025738982867786
+          ],
+          "regionalRadiusErrorMeters": 1.6951767767281467e-10,
+          "skinPenetrationMeters": 6.938893903907228e-17
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 6.938893903907228e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 1.6951767767281467e-10
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.118882615,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_down_left",
+      "inputAssetSha256": "21f63cf4533032e7aa4eb6734e9e9b0b55884d2ddeea6341d5e3cab2593aabad",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            0.1112366468172469,
+            0.539562490414157,
+            0.32656954305728947
+          ],
+          "local": [
+            0.05260352790355686,
+            -0.09485810995101922,
+            0.05967070162296292
+          ],
+          "ballCenter": [
+            0.21666068087958393,
+            0.5221873163874445,
+            0.44507260418182504
+          ],
+          "centerCorrectionMeters": 0.10718407390695352,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.48018642144755475,
+            0.2043903289604956,
+            0.8530214499558681
+          ],
+          "regionalRadiusErrorMeters": 8.117118088790676e-13,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.34158200490321394,
+            0.5023524801832926,
+            0.35131796728612225
+          ],
+          "local": [
+            -0.06148198613961899,
+            -0.08149997963139129,
+            0.05175765717679334
+          ],
+          "ballCenter": [
+            0.21666068087958393,
+            0.5221873163874445,
+            0.44507260418182504
+          ],
+          "centerCorrectionMeters": 0.10718407390695352,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.5767212525354345,
+            0.42122560716736757,
+            0.699972559991063
+          ],
+          "regionalRadiusErrorMeters": 5.755354526293388e-12,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 8.117118088790676e-13
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 5.755354526293388e-12
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.122108696,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_down",
+      "inputAssetSha256": "0438f929ff7edac5179a305d665a1bc35cfec2e303e8b51c0e0206e1df996540",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.09748682700939189,
+            0.47772649604515605,
+            0.3676967713411575
+          ],
+          "local": [
+            0.055776648049924035,
+            -0.08822046894969092,
+            0.05585000605238714
+          ],
+          "ballCenter": [
+            -0.001547897220430597,
+            0.4804929030037289,
+            0.4844213939936061
+          ],
+          "centerCorrectionMeters": 0.09621409214292402,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.3651115627427808,
+            0.3271533321302255,
+            0.8715871981779073
+          ],
+          "regionalRadiusErrorMeters": 2.726423489751717e-8,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.09748682700939189,
+            0.47772649604515605,
+            0.3676967713411575
+          ],
+          "local": [
+            -0.065776526927948,
+            -0.0929035544395447,
+            0.055081680417060866
+          ],
+          "ballCenter": [
+            -0.001547897220430597,
+            0.4804929030037289,
+            0.4844213939936061
+          ],
+          "centerCorrectionMeters": 0.09621409214292402,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.30234710559403705,
+            0.36972674172536657,
+            0.878571775207952
+          ],
+          "regionalRadiusErrorMeters": 5.205202173452772e-8,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 2.726423489751717e-8
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 5.205202173452772e-8
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.123867262,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_down_right",
+      "inputAssetSha256": "3c42edd2851a8c4f7afd808731e153c88f9cbab2f973546721123868be9719ba",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.34158200490321394,
+            0.5023524801832926,
+            0.35131796728612225
+          ],
+          "local": [
+            0.06093177199363707,
+            -0.07743680477142324,
+            0.04964281618595119
+          ],
+          "ballCenter": [
+            -0.21864744102872807,
+            0.5222263073366683,
+            0.4463689082335044
+          ],
+          "centerCorrectionMeters": 0.12542467934681978,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.5636616815918267,
+            0.38464207446810017,
+            0.7309828884823165
+          ],
+          "regionalRadiusErrorMeters": 1.2079910349793721e-8,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            -0.1112366468172469,
+            0.539562490414157,
+            0.32656954305728947
+          ],
+          "local": [
+            -0.065776526927948,
+            -0.09290355443954461,
+            0.05508168041706083
+          ],
+          "ballCenter": [
+            -0.21864744102872807,
+            0.5222263073366683,
+            0.4463689082335044
+          ],
+          "centerCorrectionMeters": 0.12542467934681978,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.3784926273787541,
+            0.18697575099456626,
+            0.9065226966601253
+          ],
+          "regionalRadiusErrorMeters": 2.0707538957165372e-7,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 1.2079910349793721e-8
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 2.0707538957165372e-7
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.152170503,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_right",
+      "inputAssetSha256": "a6e9eb7d0806fe9ff1287b836053dbf3d68cec000cfd13e09ea63c1f5e37e626",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.382700004443534,
+            1.0415925973289257,
+            0.41108147303283427
+          ],
+          "local": [
+            0.05095745904986345,
+            -0.08924675523213274,
+            0.05808534890626331
+          ],
+          "ballCenter": [
+            -0.2950812396429579,
+            1.045361817818976,
+            0.5306589680605782
+          ],
+          "centerCorrectionMeters": 0.088221208280777,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.3332846087583467,
+            0.34559978970745153,
+            0.8772013194922593
+          ],
+          "regionalRadiusErrorMeters": 4.163336342344337e-17,
+          "skinPenetrationMeters": 4.163336342344337e-17
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            -0.2070777496015899,
+            1.0415925977875016,
+            0.4110814727263301
+          ],
+          "local": [
+            -0.04533774468410278,
+            -0.07178545188519796,
+            0.05529436586510537
+          ],
+          "ballCenter": [
+            -0.2950812396429579,
+            1.045361817818976,
+            0.5306589680605782
+          ],
+          "centerCorrectionMeters": 0.088221208280777,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.3878704147195416,
+            0.18686065318934753,
+            0.9025738959636165
+          ],
+          "regionalRadiusErrorMeters": 1.6948241421399501e-10,
+          "skinPenetrationMeters": 4.163336342344337e-17
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 4.163336342344337e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 1.6948241421399501e-10
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.118882613,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_catch_up_right",
+      "inputAssetSha256": "f9bba064f9cb6b36d8c32d2280ef8524f1d666ee385dd26c7caf25ed13b558af",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.36337877270198543,
+            1.4505249503811923,
+            0.38178240601421737
+          ],
+          "local": [
+            0.06879261136054993,
+            -0.08941930532455457,
+            0.04896296560764315
+          ],
+          "ballCenter": [
+            -0.21084780325608257,
+            1.4421406739711258,
+            0.46215368877950685
+          ],
+          "centerCorrectionMeters": 0.15560801006624517,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.7612577948987945,
+            0.23668207510468983,
+            0.6037119884762624
+          ],
+          "regionalRadiusErrorMeters": 1.9959034425198752e-13,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 33,
+          "bone": "LeftHand",
+          "oldMarker": [
+            -0.13711282686590467,
+            1.4105477570218232,
+            0.34671467962969876
+          ],
+          "local": [
+            -0.044955939054489136,
+            -0.0701708197593689,
+            0.05512416362762447
+          ],
+          "ballCenter": [
+            -0.21084780325608257,
+            1.4421406739711258,
+            0.46215368877950685
+          ],
+          "centerCorrectionMeters": 0.15560801006624517,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2616276008853074,
+            0.42512486791867166,
+            0.8664986123082542
+          ],
+          "regionalRadiusErrorMeters": 1.3879175586595238e-12,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 1.9959034425198752e-13
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 1.3879175586595238e-12
+        }
+      ],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.164614031,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.733326614
+      }
+    },
+    {
+      "id": "keeper_parry",
+      "inputAssetSha256": "399c02bbed1e417b253f1f3933b037bf0291dbdf3cd9ef7a89ad6a5be2a7c131",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 33,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.36337877270198543,
+            1.4505249503811923,
+            0.38178240601421737
+          ],
+          "local": [
+            0.024016683456477585,
+            -0.05596129328881214,
+            0.04874660186876608
+          ],
+          "ballCenter": [
+            -0.36761203578379414,
+            1.4508378912708533,
+            0.5018319561883235
+          ],
+          "centerCorrectionMeters": 0.010909264899997911,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2568176974650686,
+            0.011583945377056702,
+            0.966390439976639
+          ],
+          "regionalRadiusErrorMeters": 4.146449295028276e-10,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "path": {
+        "samples": 289,
+        "maxClearanceCorrectionMeters": 0.010909265,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 7.972990423
+      }
+    },
+    {
+      "id": "keeper_rush",
+      "inputAssetSha256": "318f4f61feb74a68b5697d9a06bffa5f420823a76f4b306590d922cb78423fe9",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 42,
+          "bone": "RightHand",
+          "oldMarker": [
+            -0.0918477697116756,
+            0.43655710406022985,
+            2.035812696160516
+          ],
+          "local": [
+            0.05433506913351637,
+            -0.08966560761229331,
+            0.05696707643263718
+          ],
+          "ballCenter": [
+            -0.0008513998255206869,
+            0.43990746087304655,
+            2.154271922846998
+          ],
+          "centerCorrectionMeters": 0.09145009042925223,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.3332845635180207,
+            0.3455996984259114,
+            0.8772013726440022
+          ],
+          "regionalRadiusErrorMeters": 5.551115123125783e-17,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 42,
+          "bone": "LeftHand",
+          "oldMarker": [
+            0.0918477697116756,
+            0.43655710406022985,
+            2.035812696160516
+          ],
+          "local": [
+            -0.06502783210077735,
+            -0.09091549613693863,
+            0.05450218213586014
+          ],
+          "ballCenter": [
+            -0.0008513998255206869,
+            0.43990746087304655,
+            2.154271922846998
+          ],
+          "centerCorrectionMeters": 0.09145009042925223,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2515575495333036,
+            0.356962215781288,
+            0.899609235044479
+          ],
+          "regionalRadiusErrorMeters": 3.240231841172836e-8,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 5.551115123125783e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 3.240231841172836e-8
+        }
+      ],
+      "path": {
+        "samples": 337,
+        "maxClearanceCorrectionMeters": 0.120856457,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.147613768
+      }
+    },
+    {
+      "id": "keeper_dive_left",
+      "inputAssetSha256": "940d7d97f6ba2f902b56b8fdcbae6707e37dbbd1bad45a44d0212f7c0f1a7849",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 39,
+          "bone": "RightHand",
+          "oldMarker": [
+            1.3229571208730135,
+            0.6249422812999166,
+            0.28067727745418386
+          ],
+          "local": [
+            0.05457714133115182,
+            -0.08969287502974795,
+            0.05688584614128259
+          ],
+          "ballCenter": [
+            1.4141955677567355,
+            0.6282653738489788,
+            0.3990552700698138
+          ],
+          "centerCorrectionMeters": 0.09168254784818529,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.33328460438625945,
+            0.3455997274530456,
+            0.8772013456803832
+          ],
+          "regionalRadiusErrorMeters": 4.163336342344337e-17,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 39,
+          "bone": "LeftHand",
+          "oldMarker": [
+            1.5072221127041492,
+            0.6249422901059769,
+            0.2806772749149415
+          ],
+          "local": [
+            -0.06506678393390111,
+            -0.09101892748497713,
+            0.054532331296139734
+          ],
+          "ballCenter": [
+            1.4141955677567355,
+            0.6282653738489788,
+            0.3990552700698138
+          ],
+          "centerCorrectionMeters": 0.09168254784818529,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2541795805977892,
+            0.3576545639370051,
+            0.8985966579629385
+          ],
+          "regionalRadiusErrorMeters": 3.530853187605487e-8,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 4.163336342344337e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 3.530853187605487e-8
+        }
+      ],
+      "path": {
+        "samples": 361,
+        "maxClearanceCorrectionMeters": 0.121002103,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.312814827
+      }
+    },
+    {
+      "id": "keeper_dive_right",
+      "inputAssetSha256": "5ada26f0f24b77c5ff58dd995b37439ec381e6b94a80883fd2334c51aca2adc6",
+      "calibrationImplementationSha256": "aa4a81c6dd43eb902a26e4756e62032704a4c9ab710d5663b14cd13c009c7bc7",
+      "events": [
+        {
+          "frame": 39,
+          "bone": "RightHand",
+          "oldMarker": [
+            -1.5072221127041492,
+            0.6249422901059769,
+            0.2806772749149415
+          ],
+          "local": [
+            0.05457714634358161,
+            -0.08969288728639511,
+            0.05688584906572968
+          ],
+          "ballCenter": [
+            -1.4159836602787517,
+            0.6282653734809898,
+            0.3990552699605741
+          ],
+          "centerCorrectionMeters": 0.09168254405567358,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            0.33328461650818114,
+            0.3455997590535214,
+            0.8772013286248161
+          ],
+          "regionalRadiusErrorMeters": 4.163336342344337e-17,
+          "skinPenetrationMeters": 0
+        },
+        {
+          "frame": 39,
+          "bone": "LeftHand",
+          "oldMarker": [
+            -1.3229571208730135,
+            0.6249422812999166,
+            0.28067727745418386
+          ],
+          "local": [
+            -0.06506677955004994,
+            -0.09101891584425036,
+            0.054532327902989154
+          ],
+          "ballCenter": [
+            -1.4159836602787517,
+            0.6282653734809898,
+            0.3990552699605741
+          ],
+          "centerCorrectionMeters": 0.09168254405567358,
+          "method": "actual-skinned-triangle",
+          "surfaceNormal": [
+            -0.2541795623737689,
+            0.3576545278311967,
+            0.8985966774884732
+          ],
+          "regionalRadiusErrorMeters": 3.530830207376656e-8,
+          "skinPenetrationMeters": 0
+        }
+      ],
+      "failures": [],
+      "handPair": [
+        {
+          "bone": "RightHand",
+          "radiusErrorMeters": 4.163336342344337e-17
+        },
+        {
+          "bone": "LeftHand",
+          "radiusErrorMeters": 3.530830207376656e-8
+        }
+      ],
+      "path": {
+        "samples": 361,
+        "maxClearanceCorrectionMeters": 0.1210021,
+        "maxMissExtraCorrectionMeters": 0,
+        "maxSkinPenetrationMeters": 0,
+        "maxBallSpeedMetersPerSecond": 2.312814827
+      }
+    }
+  ],
+  "failures": [],
+  "nativeMotionFramesUnchanged": true,
+  "pass": true,
+  "sourceMotionSha256": "fb8ff8bf329cc35d06f423baa56b71b690d000acd62cc4528e9a87a801c8a709",
+  "outputMotionSha256": "5ce04162744aa50606b087e3a40f1f997cc9405e11dea98c94916cf31e34318f"
+}

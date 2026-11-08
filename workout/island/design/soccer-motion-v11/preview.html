@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'">
+ <meta name="color-scheme" content="dark"><title>כדורגל · מעבדת תנועה 11</title><link rel="icon" href="data:,"><link rel="stylesheet" href="preview.css">
+ <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+ <header class="topbar"><a class="identity" href="preview.html"><span class="edition">11</span><span><small>האי שלי / כדורגל</small><strong>מעבדת תנועה</strong></span></a><div class="header-links"><a href="REPORT.md">דוח מדידות <span aria-hidden="true">↗</span></a><a href="LICENSES.md">מקורות</a></div></header>
+ <main>
+  <div class="intro"><div><p class="eyebrow">מהצעד הראשון ועד החגיגה</p><h1>כל המהלכים של כדורגל.</h1><p>כדרור, מסירה, בעיטה, הגנה — כל פעולה, פריים אחר פריים.</p></div><div class="library-status"><span id="loaded-count">—</span><small id="load-status" role="status">טוען את ספריית התנועה…</small><div class="loading-track"><i id="loading-bar"></i></div></div></div>
+  <div class="workspace">
+   <section class="stage-card" aria-label="תצוגת תנועה בתלת־ממד">
+    <div class="stage-top"><span class="live-pill"><i></i> מעבדת כדורגל</span><span id="phase">קליפ</span></div>
+    <div id="viewport"><div id="error" role="alert" hidden></div></div>
+    <div class="camera-controls" role="group" aria-label="זווית צפייה"><button data-view="three-quarter" class="active" aria-pressed="true" title="מבט שלושת רבעי">¾</button><button data-view="front" aria-pressed="false">חזית</button><button data-view="side" aria-pressed="false">צד</button><button data-view="top" aria-pressed="false">מעל</button></div>
+    <div class="stage-bottom"><div><p class="eyebrow" id="category-label">תנועה</p><h2 id="clip-title">מכינים את המגרש…</h2><div class="clip-identifier"><span id="clip-id" dir="ltr">soccer-motion-v11</span><button id="copy-id" title="העתקת מזהה הקליפ" aria-label="העתקת מזהה הקליפ">העתק</button></div></div><div class="frame-readout"><strong id="frame">00</strong><span>פריים / <b id="frame-total">00</b></span></div></div>
+    <div class="timeline-area"><label for="timeline"><output id="time">0.00 / 0.00 שנ׳</output><span id="event-count">—</span></label><input id="timeline" type="range" min="0" max="1" step="0.001" value="0"><div class="transport"><div class="step-buttons"><button id="step-back" aria-label="פריים אחורה">−1</button><button id="play" class="primary" aria-pressed="true">השהיה</button><button id="step-forward" aria-label="פריים קדימה">+1</button></div><button id="contact">למגע הבא <span aria-hidden="true">↗</span></button><label class="speed-control" for="speed">קצב <select id="speed"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></label></div></div>
+   </section>
+   <aside class="controls">
+    <section class="panel selection"><div class="panel-heading"><h2>ספריית התנועה</h2><span id="clip-count">—</span></div><label for="filter">סוג פעולה</label><select id="filter"><option value="all">כל הפעולות</option></select><label for="clip">קליפ</label><select id="clip"></select><div class="next-previous"><button id="previous">→ הקודם</button><button id="next">הבא ←</button></div><button id="review-all" class="review-button" aria-pressed="false">סיור בכל הקליפים <span aria-hidden="true">▷</span></button><small id="review-progress">בוחרים פעולה ומתחילים.</small></section>
+    <section class="panel"><h2>איך לנגן</h2><div class="segmented" role="group" aria-label="מצב ניגון"><button id="loop" class="active" aria-pressed="true">לולאה</button><button id="transition" aria-pressed="false">מעברים</button></div><div class="reference-row"><label for="reference-version">קליפי ייחוס</label><select id="reference-version"><option value="v10">v10</option><option value="v9">v9</option></select></div><p class="mode-note" id="mode-note">הניגון חוזר באמצעות צעד המשך בריצה או מעבר קצר בעמידה. המסלול ממשיך קדימה בכל חזרה.</p><button id="in-place" class="travel-toggle" aria-pressed="false">מסלול: פעיל · הצג במקום</button></section>
+    <section class="panel evidence"><div class="panel-heading"><h2>ברגע הזה</h2><span class="contact-dot" aria-hidden="true"></span></div><dl><div><dt>אירוע</dt><dd id="event">—</dd></div><div><dt>מגע</dt><dd id="contact-bone">—</dd></div><div><dt>רגל נטועה</dt><dd id="support">—</dd></div><div><dt>משך</dt><dd id="duration">—</dd></div><div><dt>מרחק</dt><dd id="distance">—</dd></div><div><dt>שחקנים</dt><dd id="actors">1</dd></div></dl><div class="legend"><span><i class="mint"></i> נטיעה</span><span><i class="amber"></i> מגע ומסלול</span></div></section>
+   </aside>
+  </div>
+  <section class="events-panel"><div class="panel-heading"><h2>מפת המגעים</h2><span>בחירת אירוע עוצרת בפריים שלו</span></div><div id="events" class="event-list"><p>אירועי הקליפ יופיעו כאן לאחר הטעינה.</p></div></section>
+ </main>
+ <footer><span>דמויות בדיוניות · תנועה מקורית ו־CC0</span><span>תצוגת נכסים לבדיקה · <a href="README.md">הוראות שימוש</a></span></footer>
+ <script type="module" src="preview.mjs"></script>
+</body>
+</html>

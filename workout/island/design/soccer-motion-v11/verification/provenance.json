@@ -1,0 +1,1848 @@
+{
+  "license": "CC0-1.0",
+  "library": "soccer-motion-v11",
+  "sourceCommits": {
+    "v10": "57c536e1291803161e069eff97987295c6194466",
+    "v9": "5d516207d66cdf91af062b93142e04c6dcbae131"
+  },
+  "sources": [
+    {
+      "role": "field",
+      "path": "../soccer-motion-v10/runtime/clips/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0"
+    },
+    {
+      "role": "keeper",
+      "path": "../soccer-motion-v10/runtime/clips/goalkeeper_hand_roll.glb",
+      "sha256": "56a6404d7a2a51f7e33caa4b8fda4d9e75e59dfe45c227f8ec46617d92ed5428",
+      "license": "CC0-1.0"
+    }
+  ],
+  "references": [
+    {
+      "id": "v9_idle_relaxed",
+      "asset": "reference/v9_idle_relaxed.glb",
+      "bytes": 791824,
+      "sha256": "290f6015e18c41d49c010e19896ff4b4639984332feda52817e63a092e1a84de",
+      "source": "../soccer-motion-v10/runtime/reference/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "version": "v9",
+      "nativeSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/idle_relaxed.glb",
+        "sha256": "ecaba993fcc541ce66b1d29830c8acd7d18984ffb6a794191f27e2345d0d2db1",
+        "note": "Native v9 animation channels re-baked by v10 onto decoded identical canonical CC0 geometry."
+      },
+      "duration": 2.4,
+      "nativeRate": 30,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "anchor": [
+            0.13,
+            0,
+            0.025
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "anchor": [
+            -0.13,
+            0,
+            -0.025
+          ]
+        }
+      ],
+      "referenceRootMotion": {
+        "mode": "reference-only",
+        "yawUnit": "degrees",
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.03333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.06666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.13333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.16666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.23333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.26666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.36666666666666664,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.0333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.0666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.033333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.066666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1666666666666665,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3333333333333335,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "v9_run",
+      "asset": "reference/v9_run.glb",
+      "bytes": 775364,
+      "sha256": "0928d2f27f78f234e71958fb86373c3d383b2e3c147ee406fe531f62e9a991c1",
+      "source": "../soccer-motion-v10/runtime/reference/run.glb",
+      "license": "CC0-1.0",
+      "version": "v9",
+      "nativeSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/run.glb",
+        "sha256": "acc2ac87de5070c79992ea1d662e7a59704197fdd84e4b0c281febca99a94c46",
+        "note": "Native v9 animation channels re-baked by v10 onto decoded identical canonical CC0 geometry."
+      },
+      "duration": 0.6,
+      "nativeRate": 30,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.13333333333333333,
+          "anchor": [
+            0.12,
+            0,
+            0.29999999999999993
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3,
+          "end": 0.43333333333333335,
+          "anchor": [
+            -0.12,
+            0,
+            1.65
+          ]
+        }
+      ],
+      "referenceRootMotion": {
+        "mode": "reference-only",
+        "yawUnit": "degrees",
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.03333333333333333,
+            "position": [
+              0,
+              0,
+              0.15
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.06666666666666667,
+            "position": [
+              0,
+              0,
+              0.3
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.1,
+            "position": [
+              0,
+              0,
+              0.45
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.13333333333333333,
+            "position": [
+              0,
+              0,
+              0.6
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.16666666666666666,
+            "position": [
+              0,
+              0,
+              0.75
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.2,
+            "position": [
+              0,
+              0,
+              0.9
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.23333333333333334,
+            "position": [
+              0,
+              0,
+              1.05
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.26666666666666666,
+            "position": [
+              0,
+              0,
+              1.2
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3,
+            "position": [
+              0,
+              0,
+              1.3499999999999999
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3333333333333333,
+            "position": [
+              0,
+              0,
+              1.5
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.36666666666666664,
+            "position": [
+              0,
+              0,
+              1.65
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4,
+            "position": [
+              0,
+              0,
+              1.8
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0,
+              0,
+              1.9500000000000002
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4666666666666667,
+            "position": [
+              0,
+              0,
+              2.1
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0,
+              0,
+              2.25
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0,
+              0,
+              2.4
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0,
+              0,
+              2.55
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0,
+              0,
+              2.6999999999999997
+            ],
+            "yaw": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "v10_idle_relaxed",
+      "asset": "reference/v10_idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "source": "../soccer-motion-v10/runtime/clips/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "version": "v10",
+      "duration": 2.4,
+      "nativeRate": 30,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "anchor": [
+            0.13,
+            0,
+            0.025
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "anchor": [
+            -0.13,
+            0,
+            -0.025
+          ]
+        }
+      ],
+      "referenceRootMotion": {
+        "mode": "reference-only",
+        "yawUnit": "degrees",
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.03333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.06666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.13333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.16666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.23333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.26666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.36666666666666664,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.7666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.8666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.9666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.0333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.0666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.1666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.2666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.3666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.4666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.5666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.6666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.7666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.8666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 1.9666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.033333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.066666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1333333333333333,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.1666666666666665,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2333333333333334,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.2666666666666666,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3333333333333335,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.3666666666666667,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 2.4,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "v10_run",
+      "asset": "reference/v10_run.glb",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "source": "../soccer-motion-v10/runtime/clips/run.glb",
+      "license": "CC0-1.0",
+      "version": "v10",
+      "duration": 0.6,
+      "nativeRate": 30,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.13333333333333333,
+          "anchor": [
+            0.12,
+            0,
+            0.29999999999999993
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3,
+          "end": 0.43333333333333335,
+          "anchor": [
+            -0.12,
+            0,
+            1.65
+          ]
+        }
+      ],
+      "referenceRootMotion": {
+        "mode": "reference-only",
+        "yawUnit": "degrees",
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.03333333333333333,
+            "position": [
+              0,
+              0,
+              0.15
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.06666666666666667,
+            "position": [
+              0,
+              0,
+              0.3
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.1,
+            "position": [
+              0,
+              0,
+              0.45
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.13333333333333333,
+            "position": [
+              0,
+              0,
+              0.6
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.16666666666666666,
+            "position": [
+              0,
+              0,
+              0.75
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.2,
+            "position": [
+              0,
+              0,
+              0.9
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.23333333333333334,
+            "position": [
+              0,
+              0,
+              1.05
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.26666666666666666,
+            "position": [
+              0,
+              0,
+              1.2
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3,
+            "position": [
+              0,
+              0,
+              1.3499999999999999
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.3333333333333333,
+            "position": [
+              0,
+              0,
+              1.5
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.36666666666666664,
+            "position": [
+              0,
+              0,
+              1.65
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4,
+            "position": [
+              0,
+              0,
+              1.8
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0,
+              0,
+              1.9500000000000002
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.4666666666666667,
+            "position": [
+              0,
+              0,
+              2.1
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0,
+              0,
+              2.25
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0,
+              0,
+              2.4
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0,
+              0,
+              2.55
+            ],
+            "yaw": 0
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0,
+              0,
+              2.6999999999999997
+            ],
+            "yaw": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1317 @@
+{
+  "scope": "All delivered files except this self-referential inventory; LICENSES.md also lists this inventory.",
+  "catalogSha256": "bb534e839771a59ee17349ca6fee9949fce801dddfabc20df696f9920aa14fa6",
+  "sourceMotionSha256": "8ac38953add06adfdeed50e5a9498aacf1d62e7b6560ef960e512781b073712f",
+  "evidencePass": true,
+  "problems": [],
+  "sources": [
+    {
+      "id": "geometry:field",
+      "path": "../soccer-motion-v10/runtime/clips/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "note": "Already decoded fictional v10 geometry, skin, materials and embedded images; ultimately MakeHuman CC0 v8"
+    },
+    {
+      "id": "geometry:keeper",
+      "path": "../soccer-motion-v10/runtime/clips/goalkeeper_hand_roll.glb",
+      "sha256": "56a6404d7a2a51f7e33caa4b8fda4d9e75e59dfe45c227f8ec46617d92ed5428",
+      "license": "CC0-1.0",
+      "note": "Already decoded fictional v10 geometry, skin, materials and embedded images; ultimately MakeHuman CC0 v8"
+    },
+    {
+      "id": "reference:v10_idle_relaxed",
+      "path": "../soccer-motion-v10/runtime/clips/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "note": "Decoded canonical reference animation; exact upstream path and content hash from bake provenance"
+    },
+    {
+      "id": "reference:v10_run",
+      "path": "../soccer-motion-v10/runtime/clips/run.glb",
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "license": "CC0-1.0",
+      "note": "Decoded canonical reference animation; exact upstream path and content hash from bake provenance"
+    },
+    {
+      "id": "reference:v9_idle_relaxed",
+      "path": "../soccer-motion-v10/runtime/reference/idle_relaxed.glb",
+      "sha256": "290f6015e18c41d49c010e19896ff4b4639984332feda52817e63a092e1a84de",
+      "license": "CC0-1.0",
+      "nativeSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/idle_relaxed.glb",
+        "sha256": "ecaba993fcc541ce66b1d29830c8acd7d18984ffb6a794191f27e2345d0d2db1",
+        "note": "Native v9 animation channels re-baked by v10 onto decoded identical canonical CC0 geometry."
+      },
+      "note": "Decoded canonical reference animation; exact upstream path and content hash from bake provenance"
+    },
+    {
+      "id": "reference:v9_run",
+      "path": "../soccer-motion-v10/runtime/reference/run.glb",
+      "sha256": "0928d2f27f78f234e71958fb86373c3d383b2e3c147ee406fe531f62e9a991c1",
+      "license": "CC0-1.0",
+      "nativeSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/run.glb",
+        "sha256": "acc2ac87de5070c79992ea1d662e7a59704197fdd84e4b0c281febca99a94c46",
+        "note": "Native v9 animation channels re-baked by v10 onto decoded identical canonical CC0 geometry."
+      },
+      "note": "Decoded canonical reference animation; exact upstream path and content hash from bake provenance"
+    },
+    {
+      "id": "v10:motion-source",
+      "path": "../soccer-motion-v10/runtime/motions.json",
+      "sha256": "7797e60e22b2b8c6caf49f31da385730f5049f49df631a091b3e8f410e78397d",
+      "license": "CC0-1.0",
+      "note": "CC0 v10 boundary poses sampled offline by v11 authoring"
+    },
+    {
+      "id": "v10:preview.css",
+      "path": "../soccer-motion-v10/preview.css",
+      "sha256": "9990ea0bab89627e31a1a0a265ab9e23899da43e41cc21d1905a4d2786cced75",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:preview.html",
+      "path": "../soccer-motion-v10/preview.html",
+      "sha256": "6754f010ba0505b987d3982adca72ae744284c9488964a1e3dc69280258f109a",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:preview.mjs",
+      "path": "../soccer-motion-v10/preview.mjs",
+      "sha256": "19363b2554e0aec4977750b2c8496bab9a78fef916b071d6c751f6d10ccd0856",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:runtime/player.mjs",
+      "path": "../soccer-motion-v10/runtime/player.mjs",
+      "sha256": "43d25f9c5b4c3136d690b7fe409661b04a8bc141c5dad973b6aa60e3178b59b3",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:source/bake.mjs",
+      "path": "../soccer-motion-v10/source/bake.mjs",
+      "sha256": "402da00529c036478b2c51de2d9a8dfb2ba4fac090db673c6f7c5cf3d96c4710",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:source/calibrate.mjs",
+      "path": "../soccer-motion-v10/source/calibrate.mjs",
+      "sha256": "6ffa4bd1a42116a5d1b8e73996b47dff381715f772205288f46df3d7280dcb39",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:source/glb.mjs",
+      "path": "../soccer-motion-v10/source/glb.mjs",
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:source/rig.mjs",
+      "path": "../soccer-motion-v10/source/rig.mjs",
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v10:verification/browser-check.mjs",
+      "path": "../soccer-motion-v10/verification/browser-check.mjs",
+      "sha256": "7d536bcabe55accd4755a738135685af43ed725f423fe23736d37bb8d4a91989",
+      "license": "CC0-1.0",
+      "note": "Existing CC0 v10 code/design adapted for v11"
+    },
+    {
+      "id": "v11:source/author.mjs",
+      "path": "source/author.mjs",
+      "sha256": "56e820d3395a535c6f242ad87e8fb568c6d8d0b079fe9d1c66a74ac956269e34",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:source/bake.mjs",
+      "path": "source/bake.mjs",
+      "sha256": "6eba2f4a9556a60966c131791faddf423ea5e06b4ca659df9fa9996a7776cc04",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:source/calibrate.mjs",
+      "path": "source/calibrate.mjs",
+      "sha256": "baad85d8488498406d5110f56a929176067e85a7d5750425f713e65088b312bc",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:source/report.mjs",
+      "path": "source/report.mjs",
+      "sha256": "bcade6fd989d283848f3d51bde368bcd28e9243c6b9e15e3416fc435dc7fea19",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:verification/browser-check.mjs",
+      "path": "verification/browser-check.mjs",
+      "sha256": "a39ae337314f44a94f177cfb57f8880f5299c012b497eb0740621c345b14c6f0",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:verification/check.mjs",
+      "path": "verification/check.mjs",
+      "sha256": "9c17d5c51833a84c5fd515b07223eb76b1e01af1b251974e212a8d543eb65032",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:verification/integrity.mjs",
+      "path": "verification/integrity.mjs",
+      "sha256": "b4e036588d05a7f630d6b9e021ea29687f1e8fe2aa6a965729d910385e1e8ac3",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:verification/reader.mjs",
+      "path": "verification/reader.mjs",
+      "sha256": "bb49648ff50b1c8d0027f0558d4cf983c61073981101c60a6e57243fc0c7a97f",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    },
+    {
+      "id": "v11:verification/surfaces.mjs",
+      "path": "verification/surfaces.mjs",
+      "sha256": "57396cbad8ca43351e7df8ee8e6f9d9cc78976d23797ae5bb6dce859ff6b4878",
+      "license": "CC0-1.0",
+      "note": "Original v11 authoring, processing or evidence generator"
+    }
+  ],
+  "files": [
+    {
+      "file": "LICENSES.md",
+      "bytes": 30273,
+      "sha256": "da7b0f527c239a8050bec23e00224646c6dd1ce83559e8d25194dc0e32bb9615",
+      "license": "CC0-1.0",
+      "description": "Original v11 documentation/provenance generated from current delivered files and measurements",
+      "sources": [
+        "v11:source/report.mjs"
+      ]
+    },
+    {
+      "file": "README.md",
+      "bytes": 9632,
+      "sha256": "5cb7af12629c9204a9cd73aaeea11864707adf35640e67fece6acd86d74aca79",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 39600,
+      "sha256": "1aafc8b4290c86fa8838e2e0a49e71c724406f9de8506b461332868e8ee61164",
+      "license": "CC0-1.0",
+      "description": "Original v11 documentation/provenance generated from current delivered files and measurements",
+      "sources": [
+        "v11:source/report.mjs"
+      ]
+    },
+    {
+      "file": "preview.css",
+      "bytes": 11594,
+      "sha256": "c6fc331e1763f245af5740a7fd4b80d188d3673d7b6782fee5d493e6f086b67e",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:preview.css"
+      ]
+    },
+    {
+      "file": "preview.html",
+      "bytes": 6155,
+      "sha256": "d277d0093b28502d49b7ff2fcde1fe0c03832d87510ce41ac741387bdf4ea060",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:preview.html"
+      ]
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 10423,
+      "sha256": "c872bfeb44ed35ca912d5ae6bae1fdcc944484e0e4ef8d7552d7e9b19bb39d95",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:preview.mjs"
+      ]
+    },
+    {
+      "file": "runtime/catalog.json",
+      "bytes": 4133449,
+      "sha256": "bb534e839771a59ee17349ca6fee9949fce801dddfabc20df696f9920aa14fa6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion and metadata; CC0 v10 reference poses and geometry documented separately",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source"
+      ]
+    },
+    {
+      "file": "runtime/clips/celebrate_player.glb",
+      "bytes": 799272,
+      "sha256": "b723711ad5c46afca7ef3651e80fba2effcf439f91639418f2527433250ea85a",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/celebrate_team.glb",
+      "bytes": 801104,
+      "sha256": "27f0b69ed6c0ca38b7f9ed21883958d9a930aaf525164bf6e122cb49d6a76fc9",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/collision_light.glb",
+      "bytes": 789432,
+      "sha256": "fa9205a56406d30383b917c0c29c7d7998a0b0aa01ca58427a98eafcb5c20988",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_feint_left.glb",
+      "bytes": 791528,
+      "sha256": "53281163a089a3316a3b2a82c2a40518c0212982f56ed078c874705f5991661a",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_feint_right.glb",
+      "bytes": 791528,
+      "sha256": "7b47dffad0f3510fc4a327633c19f1a3c3c68ec4ef7afdce67c13e2ec2edcec0",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_medium.glb",
+      "bytes": 819956,
+      "sha256": "d66fb2c1327fb95eb24eabfb73b0f990d8f52005bceb0c69813316fb468c8787",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_slow.glb",
+      "bytes": 818320,
+      "sha256": "6a7986e3f80b5e0d5c0a6739f9dbc8895c47812cb56e000940483b96dad1d2c6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_sprint.glb",
+      "bytes": 821412,
+      "sha256": "0fe4e1ff8b1a85804e1faa6067fee0eca9adce3603e4898ef1886262303a6bd0",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_turn_left.glb",
+      "bytes": 807640,
+      "sha256": "d82e7b8225731eabab9aab5146336b6bff0ca7cb4d200c41744bb07eb8fd69d6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/dribble_turn_right.glb",
+      "bytes": 807704,
+      "sha256": "2b14c3e75ab61dfaa662a42629f5c7e1a93626bb54e38761c8bdaa73e4c1a7b0",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/first_touch_chest.glb",
+      "bytes": 789668,
+      "sha256": "faa28aa9cf1e5f77b4c5c8ae19533051685342287cf24120eb052dfcc4009121",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/header_attacking.glb",
+      "bytes": 796072,
+      "sha256": "da0862f1dabccd8d2797cc53edc1fe72ff5aa6645f0259b37e8f691aa2d08258",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/header_defensive.glb",
+      "bytes": 796076,
+      "sha256": "96b5de55350e2b17c39b3e3fb85d2417ee45d614eaf057eeb8e90e798d8e3f9e",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/header_jumping.glb",
+      "bytes": 796072,
+      "sha256": "b011aef022bcf885fbf7a15326626716f756c498716633684e9aaa8701070273",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/header_standing.glb",
+      "bytes": 795556,
+      "sha256": "18d60e61faa91be73be7658da55395cfa3c1b2e04cfe6cdee0b036e4c941fcdf",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/interception.glb",
+      "bytes": 792044,
+      "sha256": "2f86259ce2aec16315b42fa83e19147685445721998999d24eef67406670e77e",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_after_goal.glb",
+      "bytes": 805904,
+      "sha256": "19678ec30e4e5c21e5384c07981656903e0b6575160c0f0157ac04c8f38f5245",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_down.glb",
+      "bytes": 804288,
+      "sha256": "f18f2bbb0831356ad0e4aac4a3983af86656f7005c9f14a8ad40f8f29a1c0edb",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_down_left.glb",
+      "bytes": 804284,
+      "sha256": "c83fd759f951bb81d2cb9e21dc4770b176563372412d0c900beae2fe85d4a9a6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_down_right.glb",
+      "bytes": 804292,
+      "sha256": "5f0bdfb1dd8089eb52a1597948daa5657fc73aaff4fe39e72d4ec5a921686f49",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_left.glb",
+      "bytes": 804380,
+      "sha256": "35718299798bca178e4817229e8baf6bc58552ec2ed3bf1a98bf7330cb9d1dc6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_right.glb",
+      "bytes": 804380,
+      "sha256": "9f3db5015ce1e7c4405e7adbbe4ae3d50c224aeaeee03eb8a141e49cbe96d2d1",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_up.glb",
+      "bytes": 804360,
+      "sha256": "fe1520078bff61e129c27e6a2ff38b2dffaba3ea56a4de4649f14cb4403ee366",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_up_left.glb",
+      "bytes": 804292,
+      "sha256": "30c0eae80016a5086a7a78b3244db59bfffe71896d9e54c622cfda6a32661328",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_catch_up_right.glb",
+      "bytes": 804312,
+      "sha256": "d1e98c93de0b146e0fa063cf5e84447095dbe91e5a68b3b721b2726ff4d7d433",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_dive_left.glb",
+      "bytes": 810624,
+      "sha256": "30801bb22a1674b02ad7b0412c4fe2dc7ab5f39b22ccc9837868751c94543f99",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_dive_right.glb",
+      "bytes": 810636,
+      "sha256": "0421d2f68bd93097473067a3795cc8252335748662c48eafab5bf8e670532926",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_parry.glb",
+      "bytes": 802612,
+      "sha256": "1a38b31f3c148d9d5c1a284ffb41f8a73b4a2bf3317c53a277e7acaa3967b6bd",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/keeper_rush.glb",
+      "bytes": 809612,
+      "sha256": "4c15f6b0ee98b8d294e988b1efbdd141588f9666586cda04a681cfa4bbd9a710",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:keeper"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_cross_left.glb",
+      "bytes": 795792,
+      "sha256": "ec5ff50b9e79cff0d34792f934cfc2dece85173f3d0f0b3fe9ff078f919d2d34",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_cross_right.glb",
+      "bytes": 795692,
+      "sha256": "09fccb7c1af84333a63b9116f80fe350f2fe5cec1e458389335b220437a8afb9",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_000.glb",
+      "bytes": 790184,
+      "sha256": "5a1923eea98cff83418e05dd5dc2d18acafaff35f505d42e0a9fc8e69cf3291d",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_045.glb",
+      "bytes": 790140,
+      "sha256": "5492e2b08110e0c0df19f62f608cec1a61595e5d2a51330e780e91d65a31af89",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_090.glb",
+      "bytes": 790148,
+      "sha256": "7a4aeb91fd9a03692b09f19fb2e0be9f5245988d9d70854e732f04564009eabe",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_135.glb",
+      "bytes": 790132,
+      "sha256": "2de2df81e241654e9ceef8c080a8fc060101310027634184af6563a53f620c9b",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_180.glb",
+      "bytes": 790176,
+      "sha256": "e30022d2412c6242e2b618997218c58cf4e94e9fd737dcb07eba027b342cdb4b",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_225.glb",
+      "bytes": 790236,
+      "sha256": "b02604a77ebc04edd0b173cfdab602f25a799365ba42ab2616fd54be5f65b0f0",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_270.glb",
+      "bytes": 790176,
+      "sha256": "574a8f4d682e187ea37e1615a446daf326403f7f09136f3c58939c647ab1f668",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_ground_315.glb",
+      "bytes": 790212,
+      "sha256": "72cb63fe2d5c6c3d74cd681a29feb628de7fffe2dff3b656ca023933deb0d017",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_lofted.glb",
+      "bytes": 793828,
+      "sha256": "5cfe867c1f9d58f30a7b2753e021d4c176e429043e452a9f9d28540b1df2463d",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/pass_through.glb",
+      "bytes": 791956,
+      "sha256": "9f791f19d476162b079697e00b3b659f22710c28ade9837fe1cb4f26dc2f1773",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/set_corner.glb",
+      "bytes": 795624,
+      "sha256": "0d7846c1bc0c7d69de328faa3c6d2a7eb48442fd2b5e35d8b2150930f390cee2",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/set_free_kick.glb",
+      "bytes": 795656,
+      "sha256": "acdf5d037fce7d2770dd97c480162eaecaf2300a14f2d7c4c6382f0dcc737d5e",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/set_penalty.glb",
+      "bytes": 793940,
+      "sha256": "74c5430301532902e597399b01fc4b1efa4cd316e84a6b06a0fde33b0beb03e4",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/set_throw_in.glb",
+      "bytes": 796744,
+      "sha256": "339160f58883084c87db1807623c18d9ad94f6fe5d23edc0a3cda58d8ddfefd0",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/set_wall.glb",
+      "bytes": 793800,
+      "sha256": "58a5a02e59559d14b6dd8686ee68fe83a570f07cb4deab20cb800d2e860abe8e",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shield_left.glb",
+      "bytes": 793384,
+      "sha256": "7635765ed8f6eb2e314917c1a1b19b179a82dfc583de160693d2e39abdc8e193",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shield_right.glb",
+      "bytes": 793420,
+      "sha256": "3487cf1c884ea38269896e3509e976291b35b32fb34958bb366e5f2e230e4780",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shot_chip.glb",
+      "bytes": 793820,
+      "sha256": "5f133d49d81004166b0ef7ba429d605f706dd6fd7431a98d023a1de655c4392c",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shot_curled.glb",
+      "bytes": 793880,
+      "sha256": "2ae2f808525c484c9530787c2617481214982677c5cb503317d76c24e87d89b8",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shot_power.glb",
+      "bytes": 793844,
+      "sha256": "c3b9b2671bb2716e086ab2a0e01f808e17b522b4ad10f3c0d4d837d3a9fd3985",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/shot_volley.glb",
+      "bytes": 793804,
+      "sha256": "f46f45d2aac65f46acc2a2889640c0369c5599e92d8cf48b1e0c2bde04879ccc",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/tackle_slide_clean.glb",
+      "bytes": 801624,
+      "sha256": "a595f090f8c9fe7f72f6e03e6591e22f90ae57e7d623ed4fea0686bd64e6a320",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/tackle_slide_miss.glb",
+      "bytes": 800104,
+      "sha256": "e0a4f836f3365af98fd0b14aa4d2871f80aca1119cbb6c601f7d91489881624d",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/tackle_standing_clean.glb",
+      "bytes": 791988,
+      "sha256": "8bd4f70c7d6d495d7fb304cad5ed95dc4b0c8cc8794694db839e3baacc214e49",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/clips/tackle_standing_miss.glb",
+      "bytes": 790416,
+      "sha256": "43249dcc42a33e9f7a8c1a1053a93b7319d0fbefd43fb456b4255115bfc87fb6",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion, contact calibration and binary bake on existing CC0 fictional geometry",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source",
+        "geometry:field"
+      ]
+    },
+    {
+      "file": "runtime/motions.json",
+      "bytes": 6556791,
+      "sha256": "8ac38953add06adfdeed50e5a9498aacf1d62e7b6560ef960e512781b073712f",
+      "license": "CC0-1.0",
+      "description": "Original v11 motion and metadata; CC0 v10 reference poses and geometry documented separately",
+      "sources": [
+        "v11:source/author.mjs",
+        "v11:source/calibrate.mjs",
+        "v11:source/bake.mjs",
+        "v10:motion-source"
+      ]
+    },
+    {
+      "file": "runtime/player.mjs",
+      "bytes": 26627,
+      "sha256": "f06188516f3fc6ba62fcbe46f451f08ed5d27e14d224fd5b6df8a13db8332538",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:runtime/player.mjs"
+      ]
+    },
+    {
+      "file": "runtime/reference/v10_idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "description": "Decoded CC0 reference; native v9/v10 identity preserved in provenance",
+      "sources": [
+        "reference:v10_idle_relaxed"
+      ]
+    },
+    {
+      "file": "runtime/reference/v10_run.glb",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "license": "CC0-1.0",
+      "description": "Decoded CC0 reference; native v9/v10 identity preserved in provenance",
+      "sources": [
+        "reference:v10_run"
+      ]
+    },
+    {
+      "file": "runtime/reference/v9_idle_relaxed.glb",
+      "bytes": 791824,
+      "sha256": "290f6015e18c41d49c010e19896ff4b4639984332feda52817e63a092e1a84de",
+      "license": "CC0-1.0",
+      "description": "Decoded CC0 reference; native v9/v10 identity preserved in provenance",
+      "sources": [
+        "reference:v9_idle_relaxed"
+      ]
+    },
+    {
+      "file": "runtime/reference/v9_run.glb",
+      "bytes": 775364,
+      "sha256": "0928d2f27f78f234e71958fb86373c3d383b2e3c147ee406fe531f62e9a991c1",
+      "license": "CC0-1.0",
+      "description": "Decoded CC0 reference; native v9/v10 identity preserved in provenance",
+      "sources": [
+        "reference:v9_run"
+      ]
+    },
+    {
+      "file": "source/author.mjs",
+      "bytes": 28253,
+      "sha256": "56e820d3395a535c6f242ad87e8fb568c6d8d0b079fe9d1c66a74ac956269e34",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "source/bake.mjs",
+      "bytes": 7986,
+      "sha256": "6eba2f4a9556a60966c131791faddf423ea5e06b4ca659df9fa9996a7776cc04",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:source/bake.mjs"
+      ]
+    },
+    {
+      "file": "source/calibrate.mjs",
+      "bytes": 22419,
+      "sha256": "baad85d8488498406d5110f56a929176067e85a7d5750425f713e65088b312bc",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:source/calibrate.mjs"
+      ]
+    },
+    {
+      "file": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:source/glb.mjs"
+      ]
+    },
+    {
+      "file": "source/report.mjs",
+      "bytes": 34718,
+      "sha256": "bcade6fd989d283848f3d51bde368bcd28e9243c6b9e15e3416fc435dc7fea19",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:source/rig.mjs"
+      ]
+    },
+    {
+      "file": "verification/browser-check.mjs",
+      "bytes": 10990,
+      "sha256": "a39ae337314f44a94f177cfb57f8880f5299c012b497eb0740621c345b14c6f0",
+      "license": "CC0-1.0",
+      "description": "CC0 v10 source adapted for this v11 delivery",
+      "sources": [
+        "v10:verification/browser-check.mjs"
+      ]
+    },
+    {
+      "file": "verification/browser.json",
+      "bytes": 1903947,
+      "sha256": "192af83cc20d61e668d79056c9222192ff25e7ecf4bd1cbcf84d1eda55d7d013",
+      "license": "CC0-1.0",
+      "description": "Original rendered evidence of fictional CC0 assets in the original v11 preview; no external image source",
+      "sources": [
+        "v11:verification/browser-check.mjs"
+      ]
+    },
+    {
+      "file": "verification/check.mjs",
+      "bytes": 33542,
+      "sha256": "9c17d5c51833a84c5fd515b07223eb76b1e01af1b251974e212a8d543eb65032",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "verification/contact-calibration.json",
+      "bytes": 110799,
+      "sha256": "56359649e235add0955898d4873c90078570b2190eea975f7133a9b19a834897",
+      "license": "CC0-1.0",
+      "description": "Original calibration record; source/output motion hashes and unchanged-pose declaration",
+      "sources": [
+        "v11:source/calibrate.mjs"
+      ]
+    },
+    {
+      "file": "verification/contact-surfaces.json",
+      "bytes": 108502,
+      "sha256": "340d424a898129407554520e4e502e7b71e57b228f4427198773f062140ac391",
+      "license": "CC0-1.0",
+      "description": "Measured skinned-mesh and ball-path evidence from delivered GLBs",
+      "sources": [
+        "v11:verification/surfaces.mjs"
+      ]
+    },
+    {
+      "file": "verification/integrity.mjs",
+      "bytes": 2280,
+      "sha256": "b4e036588d05a7f630d6b9e021ea29687f1e8fe2aa6a965729d910385e1e8ac3",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "verification/metrics.json",
+      "bytes": 428158,
+      "sha256": "a36bfa49dbc5f7aecf70c1b3a8edf35240f5117933e7da5c65888c4529d825b6",
+      "license": "CC0-1.0",
+      "description": "Measured evidence from delivered GLBs; validator is an external development tool",
+      "sources": [
+        "v11:verification/check.mjs",
+        "v11:verification/reader.mjs"
+      ]
+    },
+    {
+      "file": "verification/path-smoothing.json",
+      "bytes": 10762,
+      "sha256": "97ba3ce2857a5c05b88f16e59931fb37d7caa33ef0dfa6b47cab24f4731fbe2d",
+      "license": "CC0-1.0",
+      "description": "Original constrained dribble-path smoothing evidence, exact fixed contacts and input/output motion hash chain",
+      "sources": [
+        "v11:source/calibrate.mjs",
+        "v11:verification/surfaces.mjs"
+      ]
+    },
+    {
+      "file": "verification/preview-1280x800.png",
+      "bytes": 287171,
+      "sha256": "3536f3310d37117628b24dd60636045fb921b414bda95e6637202a7ec939db48",
+      "license": "CC0-1.0",
+      "description": "Original rendered evidence of fictional CC0 assets in the original v11 preview; no external image source",
+      "sources": [
+        "v11:verification/browser-check.mjs"
+      ]
+    },
+    {
+      "file": "verification/preview-390x844.png",
+      "bytes": 165976,
+      "sha256": "464b3020b990259c9205068c12bb9009d6a2cb32b67492a7fd504bc49bee320b",
+      "license": "CC0-1.0",
+      "description": "Original rendered evidence of fictional CC0 assets in the original v11 preview; no external image source",
+      "sources": [
+        "v11:verification/browser-check.mjs"
+      ]
+    },
+    {
+      "file": "verification/preview-844x390.png",
+      "bytes": 250210,
+      "sha256": "6d2147f651a81ea5a2b4655ff957ebeeb90eca152f776338fc08eea76eabda96",
+      "license": "CC0-1.0",
+      "description": "Original rendered evidence of fictional CC0 assets in the original v11 preview; no external image source",
+      "sources": [
+        "v11:verification/browser-check.mjs"
+      ]
+    },
+    {
+      "file": "verification/provenance.json",
+      "bytes": 36844,
+      "sha256": "509e2416925bbaead5f3a709d063ac81662ead247642fe4ab9530104d3e10440",
+      "license": "CC0-1.0",
+      "description": "Exact upstream source paths, commits and content hashes recorded during binary bake",
+      "sources": [
+        "v11:source/bake.mjs"
+      ]
+    },
+    {
+      "file": "verification/reader.mjs",
+      "bytes": 7063,
+      "sha256": "bb49648ff50b1c8d0027f0558d4cf983c61073981101c60a6e57243fc0c7a97f",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "verification/surfaces.mjs",
+      "bytes": 12877,
+      "sha256": "57396cbad8ca43351e7df8ee8e6f9d9cc78976d23797ae5bb6dce859ff6b4878",
+      "license": "CC0-1.0",
+      "description": "Original v11 code, choreography, design or documentation authored for this task",
+      "sources": []
+    },
+    {
+      "file": "verification/validator.json",
+      "bytes": 117190,
+      "sha256": "0a5e4d556bbfe8ac18705a8a7154179af5e28059266e86cbe2b364a8543f5752",
+      "license": "CC0-1.0",
+      "description": "Measured evidence from delivered GLBs; validator is an external development tool",
+      "sources": [
+        "v11:verification/check.mjs",
+        "v11:verification/reader.mjs"
+      ]
+    }
+  ]
+}
