@@ -1,7 +1,7 @@
 import {wingVisible} from './alien-v10-draw.mjs';
 import {alienV13Enabled,V13_SHIP_URL,fitScale} from './alien-v13.mjs';
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-5';
+import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-6';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 import {alienEnvironment} from './ultra-alien-environment.mjs';
 import {modelTriangles,fleetModel,liveFleetIds,bakeFleet} from './ultra-alien-fleet.mjs';

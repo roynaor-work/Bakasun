@@ -1,13 +1,13 @@
-import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-5';
+import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-6';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=island-v2-20261107-5';
-import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-5';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-5';
-import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-5';
+import {seededRandom} from './tennis.mjs?v=island-v2-20261107-6';
+import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-6';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-6';
+import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-6';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-5',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-6',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -28,7 +28,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const params=new URLSearchParams(globalThis.location?.search||''),v7Fallbacks=[];let v7=null;
   if(v7Enabled(config.environment,0,params)){
     try{
-      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-5');
+      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-6');
       v7=await createTennisV7({scene,config,keep,params,surface:surfaceFor(config.environment.v7,config.stage,params),quality:0,camera});
       if(disposed){v7.dispose();v7=null;}
     }catch(error){v7=null;v7Fallbacks.push('tennis v7 venue');}
@@ -39,7 +39,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   }
   // v11: evening sky, skyline, sponsor boards, glow and a billboard crowd between the 3D spectators (?tennisStadium=0 removes it).
   let stadium11=null;
-  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-5');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
+  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-6');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
   const courtPresentation=v7?{metrics:v7.courtMetrics}:createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
   const environment=v7||await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
   const ball=v7?v7.ball:new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);

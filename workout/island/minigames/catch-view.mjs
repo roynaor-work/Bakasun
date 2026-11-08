@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createActor} from './catch-actors.mjs?v=island-v2-20261107-5';
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-5';
+import {createActor} from './catch-actors.mjs?v=island-v2-20261107-6';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-6';
 
 /** Three.js side of "תפוס את הפושע". One street from the island's city models
  * (assets/game-catch/models: quantized, WebP-textured copies of the city-lab Meshy models; no WebAssembly because the island's CSP has no exception for it),

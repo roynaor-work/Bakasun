@@ -1,15 +1,15 @@
 /** Upgrade offer card at the end of a stage (07/11/2026). Loaded on demand from ui/activity.mjs; the kit (assets/upgrade-offer, Codex PR 354)
  * is display only. Buying goes through the existing paths, so nothing about the save changes. Any failure leaves the result screen as it was.
  * `?upgradeOffer=0` turns it off. */
-import {offerEnabled,stageEligible,stageKey,moneyCandidates,leagueCandidates,pickOffer,createOfferMemory,dismiss} from './upgrade-offer-core.mjs?v=island-v2-20261107-5';
+import {offerEnabled,stageEligible,stageKey,moneyCandidates,leagueCandidates,pickOffer,createOfferMemory,dismiss} from './upgrade-offer-core.mjs?v=island-v2-20261107-6';
 
 const memory=createOfferMemory();
 let kit=null;
 function loadKit(){
-  return kit??=import('../assets/upgrade-offer/offer.mjs?v=island-v2-20261107-5').then(mod=>{
+  return kit??=import('../assets/upgrade-offer/offer.mjs?v=island-v2-20261107-6').then(mod=>{
     if(!document.querySelector('link[data-upgrade-offer-css]')){
       const link=document.createElement('link');link.rel='stylesheet';link.dataset.upgradeOfferCss='true';
-      link.href=new URL('../assets/upgrade-offer/offer.css?v=island-v2-20261107-5',import.meta.url).href;document.head.append(link);
+      link.href=new URL('../assets/upgrade-offer/offer.css?v=island-v2-20261107-6',import.meta.url).href;document.head.append(link);
     }
     return mod;
   }).catch(error=>{kit=null;throw error;});
