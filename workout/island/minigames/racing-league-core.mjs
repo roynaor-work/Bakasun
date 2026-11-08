@@ -15,9 +15,9 @@ export const DRIVERS = Object.freeze([
 // racing-look-v1: the circuits now force braking (laps about 8% slower), so a season is 3, 4, 4 laps to stay under the 295 s race cap (?racingLook=0: 4, 5, 5).
 const LOOK = new URLSearchParams(globalThis.location?.search || '').get('racingLook') !== '0';
 export const SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: LOOK ? 3 : 4, minRank: 0, rating: 0.02 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: LOOK ? 4 : 5, minRank: 3, rating: 0.045 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: LOOK ? 4 : 5, minRank: 3, rating: 0.045 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: LOOK ? 4 : 5, minRank: 0, rating: 0.02 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: LOOK ? 5 : 6, minRank: 3, rating: 0.045 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: LOOK ? 5 : 6, minRank: 3, rating: 0.045 })
 ]);
 export const UPGRADES = Object.freeze({
   engine: { name: 'מנוע', perLevel: 0.03, key: 'engine', cap: 1.16 },
