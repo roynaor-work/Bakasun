@@ -58,10 +58,12 @@ const cleanCell = value => String(value).replaceAll('|', '\\|').replaceAll('\n',
 const passed = value => value ? 'עבר' : 'נכשל';
 const viewport = (value, kind) => Array.isArray(browser.viewports?.[kind]) ? browser.viewports[kind].join('×') : value?.viewport?.width && value?.viewport?.height ? `${value.viewport.width}×${value.viewport.height}` : value?.width && value?.height ? `${value.width}×${value.height}` : 'כמפורט ב־browser.json';
 const assetURL = (commit, version, relative) => `${REPO}/blob/${commit}/${DESIGN}/${version}/${relative}`;
+const sharedSoftwareURL = filename => assetURL(BASE_MAIN, 'hoops-motion-v8', `runtime/vendor/${filename}`);
+const sharedSoftwareHash = filename => browser.sharedSoftwareDependencies?.find(dependency => path.basename(dependency.path) === filename)?.sha256 || 'לא נרשם בבדיקת הדפדפן';
 
 let report = `# דוח מסירה — תנועות כדורסל v11
 
-נמסרו ${catalog.clips.length} מהלכים מקוריים × ${catalog.profiles.length} דמויות גבוהות = ${rows.length} ביצועים ב־30Hz, כל אחד כנתוני JSON וכ־GLB של אנימציה. רכז 1.88 מ׳, קיצוני 1.98 מ׳ וסנטר 2.08 מ׳. בסיס הענף הוא main בקומיט ${BASE_MAIN}. כל השינויים הם קבצים חדשים תחת workout/island/design/hoops-motion-v11/ בלבד. המודלים, הספריות והתצוגה נכללים בחבילה העצמאית; קוד המשחק לא חובר ולא השתנה.
+נמסרו ${catalog.clips.length} מהלכים מקוריים × ${catalog.profiles.length} דמויות גבוהות = ${rows.length} ביצועים ב־30Hz, כל אחד כנתוני JSON וכ־GLB של אנימציה. רכז 1.88 מ׳, קיצוני 1.98 מ׳ וסנטר 2.08 מ׳. בסיס הענף הוא main בקומיט ${BASE_MAIN}. כל השינויים הם קבצים חדשים מקוריים/CC0 תחת workout/island/design/hoops-motion-v11/ בלבד. המודלים והתצוגה נכללים בתיקייה; הניגון בתוך המאגר משתמש בשלוש ספריות תוכנה קיימות מתיקיית v8, ללא CDN. לא נוספו עותקי תוכנה חדשים. קוד המשחק לא חובר ולא השתנה.
 
 המספרים בדוח נוצרו מ־[measurements.json](verification/measurements.json), [gltf-validation.json](verification/gltf-validation.json) ו־[browser.json](verification/browser.json). המחולל של הדוח מסרב להפיק מסירת הצלחה כאשר חסרה מדידה, כאשר אחד מ־90 הביצועים נכשל או כאשר אין הוכחת חסימת WASM בדפדפן.
 
@@ -80,6 +82,8 @@ let report = `# דוח מסירה — תנועות כדורסל v11
 | סטיית ערוץ GLB מול JSON | ${s.maximumGLBValueError.toExponential(3)} | עד 0.00002 |
 | טעינה וניגון בדפדפן | ${browser.assetLoads.animations} אנימציות, ${browser.assetLoads.keyframes} נתוני JSON, ${browser.assetLoads.models} דמויות | כל הקבצים נטענים |
 | שגיאות HTTP / עמוד / בקשות / תצוגה | ${browser.httpErrors.length} / ${browser.pageErrors.length} / ${browser.requestErrors.length} / ${browser.previewErrors?.length || 0} | 0 |
+| קובצי תוכנה משותפים קיימים שנטענו | ${browser.sharedDependencyLoads?.length ?? 'לא נמדד'} | שלושה קובצי JavaScript קיימים ב־main, HTTP 200 |
+| בקשות ריצה ל־Draco / meshopt / WASM | ${browser.forbiddenRuntimeRequests?.length ?? 'לא נמדד'} | 0 |
 | חסימת WebAssembly בפועל | ${passed(browser.webAssembly.blockedByCSP)} | ניסיון קומפילציה נדחה ב־CSP והניגון ממשיך |
 
 ![סקירת מהלכים על שלוש הדמויות](verification/contact-sheet.png)
@@ -174,9 +178,9 @@ report += `
 
 ## טעינה, CSP וקריאת כל הקבצים
 
-כל ${s.gltfFiles} קובצי ה־GLB נמסרים ללא KHR_draco_mesh_compression וללא EXT_meshopt_compression. כל הנכסים נמצאים תחת runtime/; אין קובץ GLB דחוס שמחייב מפענח או עותק ריצה נוסף. הספריות המקומיות אינן מגדירות DracoLoader או MeshoptDecoder, ואינן פותחות worker. העמוד מוגש עם script-src 'self' ו־worker-src 'none', ללא היתר WASM.
+כל ${s.gltfFiles} קובצי ה־GLB נמסרים ללא KHR_draco_mesh_compression וללא EXT_meshopt_compression. כל נכסי המודלים והתנועה נמצאים תחת runtime/ של v11; אין קובץ GLB דחוס שמחייב מפענח או עותק ריצה נוסף. התצוגה אינה מגדירה DracoLoader או MeshoptDecoder, ואינה פותחת worker. היא משתמשת ב־three.module.js, GLTFLoader.js ו־BufferGeometryUtils.js הקיימים תחת hoops-motion-v8/runtime/vendor. לא נוסף להם עותק חדש והם נשארים ברישיון MIT הקיים, מחוץ לתיקיית v11. העמוד מוגש עם script-src 'self' ו־worker-src 'none', ללא היתר WASM.
 
-glTF Validator בגרסה ${cleanCell(validation.validatorVersion || 'המתועדת ב־gltf-validation.json')} בדק את כל המודלים והאנימציות. המאמת קורא כל קובץ בחבילה, מפענח GLB/JSON ותמונות ובודק תחביר JavaScript. בדיקת הדפדפן משרתת את תיקיית החבילה בלבד, טוענת את כל 90 הביצועים על שלוש הדמויות ודוגמת חמש נקודות זמן לכל קליפ. נבדק גם ניגון מתקדם. ניסיון WebAssembly.compile נדחה בפועל תחת CSP בזמן שהניגון ממשיך.
+glTF Validator בגרסה ${cleanCell(validation.validatorVersion || 'המתועדת ב־gltf-validation.json')} בדק את כל המודלים והאנימציות. המאמת קורא כל קובץ חדש בחבילה, מפענח GLB/JSON ותמונות ובודק תחביר JavaScript. שרת בדיקת הדפדפן מגיש את תיקיית v11 ואת שלושת קובצי התוכנה המשותפים המותרים בלבד; נתיב, רישיון ו־SHA-256 של כל תלות משותפת נרשמים ב־browser.json. ספריית הריצה מזוהה לפי REVISION 160 וקומיט main הקפוא; אין הנחה שהיא זהה בבתים לחבילת three של כלי הפיתוח. כל נכסי v11 נטענים מתוך v11; אין CDN או תלות בשירות חיצוני. הבדיקה טוענת את כל 90 הביצועים על שלוש הדמויות ודוגמת חמש נקודות זמן לכל קליפ. נבדק גם ניגון מתקדם. ניסיון WebAssembly.compile נדחה בפועל תחת CSP בזמן שהניגון ממשיך.
 
 תצוגת מחשב: ${viewport(browser.desktop, 'desktop')}; תצוגת טלפון: ${viewport(browser.mobile, 'mobile')}. פרטי גלילה, בדיקות משטחי עור, שגיאות וטעינות ב־browser.json. רינדור האימות משתמש ב־SwiftShader; אין כאן מדידת FPS או הבטחת ביצועים בחומרת טלפון.
 
@@ -186,7 +190,7 @@ glTF Validator בגרסה ${cleanCell(validation.validatorVersion || 'המתוע
 
 העמידה והמסלולים תוכננו לכל פעולה, אך מדדי מגע ותקינות glTF לבדם אינם ציון לריאליזם. התצוגה והצילומים מיועדים לביקורת תנועה. מקבל מסירה ולחץ הגנתי מיוצגים כסמני יעד/הקשר; החבילה אינה סימולציית מגע בין שחקנים. חיבור בין קליפים דורש יישור שורש ושימור עוגן אחרי ערבוב, ולעיתים IK נוסף. חזרת מהלך חד־פעמי בתצוגה היא איפוס סקירה ואינה מעבר חלק בעולם.
 
-הוראות שחזור וגרסאות הכלים ב־[source/README.md](source/README.md). אחרי יצירת הדוח יש להריץ שוב source/verify.mjs כדי לקרוא גם את כל קובצי התיעוד והרישוי הסופיים. [LICENSES.md](LICENSES.md) מונה מקור ורישיון לכל קובץ. כל הנכסים והתנועות מקוריים/CC0; תלויות התוכנה Three.js מסומנות בנפרד ב־MIT ונושאות את הודעת הרישיון המקורית.
+הוראות שחזור וגרסאות הכלים ב־[source/README.md](source/README.md), כולל פקודת sparse-checkout לתוכנה המשותפת הקיימת. אחרי יצירת הדוח יש להריץ שוב source/verify.mjs כדי לקרוא גם את כל קובצי התיעוד והרישוי הסופיים. [LICENSES.md](LICENSES.md) מונה מקור ורישיון לכל קובץ חדש. כל הקבצים החדשים מקוריים/CC0; תלויות התוכנה Three.js כבר נמצאות ב־main מחוץ לתיקיית המסירה, ברישיון MIT הקיים. מקורותיהן בקומיט הבסיס והודעת הרישיון החיצונית מפורטים במסמך הרישיונות.
 `;
 
 await fs.writeFile(path.join(ROOT, 'REPORT.md'), report);
@@ -203,17 +207,12 @@ async function inventory(directory) {
 }
 const paths = await inventory(ROOT);
 const v10Source = relative => `[hoops-motion-v10/${relative}](${assetURL(V10_COMMIT, 'hoops-motion-v10', relative)})`;
-const vendorSources = {
-  'runtime/vendor/three.module.js': 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js',
-  'runtime/vendor/GLTFLoader.js': 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js',
-  'runtime/vendor/BufferGeometryUtils.js': 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/utils/BufferGeometryUtils.js',
-  'runtime/vendor/THREE-LICENSE.txt': 'https://cdn.jsdelivr.net/npm/three@0.160.1/LICENSE',
-};
+if (paths.some(relative => relative.startsWith('runtime/vendor/'))) throw new Error('New third-party software copies must not be included in the all-CC0 v11 inventory.');
 let licenses = `# רישיונות ומקורות — hoops-motion-v11
 
-הנכסים, הכוריאוגרפיה, קוד המקור המקורי, התצוגה, התיעוד והמדידות שנוצרו למסירה זו מוקדשים לנחלת הכלל לפי [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode). ההקדשה חלה ככל שהדין מאפשר; נוסח CC0 המלא בקישור. הדמויות בדויות. אין מותגים, סמלי קבוצות או דמויות של אנשים אמיתיים. אין שימוש במוקאפ או בסריקה של אדם אמיתי.
+כל הקבצים החדשים בתיקיית hoops-motion-v11 — הנכסים, הכוריאוגרפיה, קוד המקור המקורי, התצוגה, התיעוד והמדידות — מקוריים/CC0 ומוקדשים לנחלת הכלל לפי [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode). ההקדשה חלה ככל שהדין מאפשר; נוסח CC0 המלא בקישור. הדמויות בדויות. אין מותגים, סמלי קבוצות או דמויות של אנשים אמיתיים. אין שימוש במוקאפ או בסריקה של אדם אמיתי.
 
-תלויות התוכנה Three.js הן ב־MIT ואינן מוצגות כ־CC0. הודעת הזכויות והרישיון המלאה נשמרת ב־[runtime/vendor/THREE-LICENSE.txt](runtime/vendor/THREE-LICENSE.txt). ההפרדה הזו מתייחסת לקוד התוכנה; כל נכסי האמנות והתנועה מקוריים/CC0.
+לא נוספו עותקי תוכנה של צד שלישי לתיקיית v11. התצוגה משתמשת בשלושה קובצי תוכנה שכבר קיימים ב־main מחוץ לתיקייה זו, תחת hoops-motion-v8/runtime/vendor. הם נשארים ברישיון MIT ואינם מוצגים כ־CC0. הודעת הזכויות והרישיון המלאה נמצאת ב־[LICENSE.three הקיים בקומיט הבסיס](${sharedSoftwareURL('LICENSE.three')}). לא נערך קובץ תוכנה קיים ולא שונה רישיונו.
 
 ## מקור קפוא של הדמויות
 
@@ -227,11 +226,19 @@ let licenses = `# רישיונות ומקורות — hoops-motion-v11
 
 ## תלויות תוכנה וכלים
 
-Three.js 0.160.1, GLTFLoader ו־BufferGeometryUtils מופצים כאן מקומית ב־MIT. ייבואי המודולים מותאמים לנתיבים המקומיים בחבילה. מקורות חבילה קפואי־גרסה מצוינים לכל קובץ בטבלה. הודעת MIT נשמרת ללא שינוי. התצוגה אינה טוענת ספריות, מודלים או תמונות משירות חיצוני בזמן הריצה.
+התצוגה משתמשת ב־Three.js r160, GLTFLoader ו־BufferGeometryUtils המקומיים שכבר נמצאים ב־main, קומיט ${BASE_MAIN}. הם אינם קבצים חדשים במסירה ואינם מועתקים לתיקיית v11. המקורות המדויקים במאגר:
 
-כלי הפיתוח @gltf-transform/core 4.2.1, gltf-validator 2.0.0-dev.3.10, Playwright 1.56.1 ו־Sharp 0.35.5 מותקנים ב־/tmp/hoops-v11-tools בלבד. קוד הכלים אינו חלק מהנכסים המופצים ואינו נכלל בהקדשת CC0 של החבילה. גרסת three בכלי הפיתוח היא 0.160.1, תואמת לספרייה המקומית.
+| תלות תוכנה קיימת, מחוץ לתיקיית v11 | מקור קפוא ב־main | SHA-256 שנמדד בדפדפן | רישיון קיים |
+|---|---|---|---|
+| three.module.js | [מקור](${sharedSoftwareURL('three.module.js')}) | ${sharedSoftwareHash('three.module.js')} | [MIT](${sharedSoftwareURL('LICENSE.three')}) |
+| GLTFLoader.js | [מקור](${sharedSoftwareURL('GLTFLoader.js')}) | ${sharedSoftwareHash('GLTFLoader.js')} | [MIT](${sharedSoftwareURL('LICENSE.three')}) |
+| BufferGeometryUtils.js | [מקור](${sharedSoftwareURL('BufferGeometryUtils.js')}) | ${sharedSoftwareHash('BufferGeometryUtils.js')} | [MIT](${sharedSoftwareURL('LICENSE.three')}) |
 
-## מקור ורישיון לכל קובץ
+התוכנה מזוהה לפי REVISION 160, גיבובי הקבצים והמקור הקפוא במאגר; אין כאן טענה לזהות בבתים מול npm three@0.160.1. מקור Three.js במעלה הזרם הוא [r160](https://github.com/mrdoob/three.js/tree/r160), ופרטי ההפצה הקיימת הם אלו שבקומיט main המקושר. התצוגה אינה טוענת ספריות, מודלים או תמונות משירות חיצוני בזמן הריצה. בשכפול sparse יש להוסיף את תיקיית התוכנה הקיימת לפי README.md. הודעת MIT נשארת ללא שינוי במיקומה הקיים מחוץ לתיקיית המסירה.
+
+כלי הפיתוח @gltf-transform/core 4.2.1, gltf-validator 2.0.0-dev.3.10, Playwright 1.56.1 ו־Sharp 0.35.5 מותקנים ב־/tmp/hoops-v11-tools בלבד. קוד הכלים אינו חלק מהנכסים המופצים ואינו נכלל בהקדשת CC0 של החבילה. גרסת three בכלי הפיתוח היא 0.160.1; התצוגה נבדקת מול ספריית r160 המשותפת הקיימת בפועל.
+
+## מקור ורישיון לכל קובץ חדש
 
 המלאי הבא נוצר מסריקת הקבצים הקיימים בפועל בתיקיית החבילה, כולל מסמכי הרישוי והמדידה עצמם.
 
@@ -240,11 +247,8 @@ Three.js 0.160.1, GLTFLoader ו־BufferGeometryUtils מופצים כאן מקו�
 `;
 for (const relative of paths) {
   let source = 'יצירה מקורית למסירת v11';
-  let license = 'CC0-1.0';
-  if (vendorSources[relative]) {
-    source = `[Three.js 0.160.1 — מקור תוכנה](${vendorSources[relative]})${relative==='runtime/vendor/three.module.js' ? '; עותק מקומי עם תיקון רווח לבן בלבד' : relative.endsWith('.js') ? '; עותק מקומי, ייבואי מודולים מותאמים לנתיבים בחבילה' : '; הודעת זכויות ורישיון מקורית'}; copyright three.js authors`;
-    license = '[MIT](runtime/vendor/THREE-LICENSE.txt)';
-  } else if (relative.startsWith('runtime/models/')) {
+  const license = 'CC0-1.0';
+  if (relative.startsWith('runtime/models/')) {
     source = `[עותק runtime זהה מ־hoops-tall-v1](${assetURL(TALL_COMMIT, 'hoops-tall-v1', `runtime/${path.basename(relative)}`)}) — ליבת MakeHuman CC0 ותוספות tall מקוריות, כמפורט לעיל`;
   } else if (relative === 'runtime/rig.json') {
     source = `[עותק זהה של rig.json מ־hoops-tall-v1](${assetURL(TALL_COMMIT, 'hoops-tall-v1', 'rig.json')}) — מידות ושלד CC0`;

@@ -1,6 +1,6 @@
 /** Original CC0-1.0. Actual GLB playback on hoops-tall-v1; isolated review viewports. */
-import * as THREE from './runtime/vendor/three.module.js';
-import {GLTFLoader} from './runtime/vendor/GLTFLoader.js';
+import * as THREE from '../hoops-motion-v8/runtime/vendor/three.module.js';
+import {GLTFLoader} from '../hoops-motion-v8/runtime/vendor/GLTFLoader.js';
 import {sampleFrame} from './runtime/math.mjs';
 
 const $=id=>document.getElementById(id);

@@ -12,7 +12,13 @@ npm install --cache /tmp/hoops-v11-npm-cache --prefix /tmp/hoops-v11-tools --no-
 
 ברירת המחדל של היצואן היא `/tmp/hoops-v11-tools`, וניתן להחליפה באמצעות `HOOPS_TOOLS_DIR`. המאמתים משתמשים באותו נתיב כברירת מחדל דרך `HOOPS_V11_TOOLS`. בשימוש בתיקייה אחרת יש להגדיר את שניהם לאותו נתיב. `CHROMIUM_PATH` מחליף את `/usr/bin/chromium` עבור בדיקת הדפדפן.
 
-שלושת קובצי התוכנה תחת `runtime/vendor/` הם עותקים מקומיים של Three.js 0.160.1 ו־GLTFLoader/BufferGeometryUtils התואמים לו, ברישיון MIT; הודעת הרישיון נשמרת ב־`THREE-LICENSE.txt`. אלה תלויות תוכנה, ואינן מוצגות כנכסי CC0. אין שימוש בדחיסת Draco או meshopt ואין מפענח WebAssembly בזמן הריצה. שאר כלי הפיתוח אינם מועתקים לחבילה.
+התצוגה משתמשת ב־Three.js r160 וב־GLTFLoader/BufferGeometryUtils שכבר נמצאים ב־`../hoops-motion-v8/runtime/vendor/` ב־main, קומיט `ae09529bc8fc9ff42f6aa76b8e79e7f760992f62`. אלה שלושה קובצי תוכנה קיימים ב־MIT עם הודעת הרישיון הקיימת `LICENSE.three`, מחוץ לתיקיית המסירה. לא נוספו עותקי תוכנה חדשים ולא שונה רישיונם. כל הקבצים החדשים בתיקיית v11 מקוריים/CC0. אין שימוש בדחיסת Draco או meshopt ואין מפענח WebAssembly בזמן הריצה. כלי הפיתוח אינם מועתקים לחבילה.
+
+בשכפול sparse יש לכלול את תיקיית התוכנה הקיימת כדי לאפשר ניגון ובדיקת דפדפן ללא CDN:
+
+```sh
+git sparse-checkout add workout/island/design/hoops-motion-v8/runtime/vendor
+```
 
 ## מקור הדמויות והצנרת
 
@@ -50,7 +56,7 @@ node workout/island/design/hoops-motion-v11/source/verify.mjs
 node workout/island/design/hoops-motion-v11/source/verify-browser.mjs
 ```
 
-הסקריפט מפעיל שרת מקומי שמגיש את החבילה בלבד; כך טעינה מוצלחת אינה נשענת על תיקיות עיצוב אחיות או על CDN. הוא בודק מחשב וטלפון ומייצר צילומי סקירה. SwiftShader מאפשר בדיקת רינדור, אך אינו מודד ביצועי GPU או חומרת טלפון.
+הסקריפט מפעיל שרת מקומי שמגיש את החבילה ובנוסף מאפשר רק את שלושת קובצי התוכנה המשותפים `three.module.js`, `GLTFLoader.js` ו־`BufferGeometryUtils.js` מתיקיית v8 הקיימת. נכסי v11 כולם נטענים מתיקיית v11; אין טעינה מ־CDN או משירות חיצוני. הסקריפט בודק מחשב וטלפון ומייצר צילומי סקירה. SwiftShader מאפשר בדיקת רינדור, אך אינו מודד ביצועי GPU או חומרת טלפון.
 
 5. ביקורת רציפות נוספת ב־30Hz, לקריאה בלבד, באמצעות FK עצמאי ללא ייבוא המחולל או מתמטיקת החבילה:
 

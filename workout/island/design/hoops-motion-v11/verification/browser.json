@@ -1,6 +1,38 @@
 {
   "schemaVersion": 1,
-  "method": "Chromium/Playwright software WebGL, actual delivered GLB animation mixers and skinned vertex samples; package-only HTTP server; not a hardware performance benchmark.",
+  "method": "Chromium/Playwright software WebGL, actual delivered GLB animation mixers and skinned vertex samples; HTTP server exposes this package plus exactly three existing tracked shared MIT JavaScript dependencies, recorded by SHA-256; not a hardware performance benchmark.",
+  "sharedSoftwareDependencies": [
+    {
+      "path": "../hoops-motion-v8/runtime/vendor/three.module.js",
+      "url": "/hoops-motion-v8/runtime/vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "license": "MIT",
+      "licenseFile": "../hoops-motion-v8/runtime/vendor/LICENSE.three",
+      "repositoryStatus": "Existing tracked main dependency; no copy added to v11",
+      "upstreamSource": "https://github.com/mrdoob/three.js/tree/r160"
+    },
+    {
+      "path": "../hoops-motion-v8/runtime/vendor/GLTFLoader.js",
+      "url": "/hoops-motion-v8/runtime/vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "license": "MIT",
+      "licenseFile": "../hoops-motion-v8/runtime/vendor/LICENSE.three",
+      "repositoryStatus": "Existing tracked main dependency; no copy added to v11",
+      "upstreamSource": "https://github.com/mrdoob/three.js/tree/r160"
+    },
+    {
+      "path": "../hoops-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "url": "/hoops-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "license": "MIT",
+      "licenseFile": "../hoops-motion-v8/runtime/vendor/LICENSE.three",
+      "repositoryStatus": "Existing tracked main dependency; no copy added to v11",
+      "upstreamSource": "https://github.com/mrdoob/three.js/tree/r160"
+    }
+  ],
   "viewports": {
     "desktop": [
       1440,
@@ -129653,7 +129685,7 @@
   },
   "playback": {
     "id": "dribble_crossover",
-    "timeSeconds": 0.3232,
+    "timeSeconds": 0.3399,
     "advanced": true
   },
   "figures": [
@@ -129798,15 +129830,15 @@
       "status": 200
     },
     {
-      "url": "/runtime/vendor/GLTFLoader.js",
+      "url": "/hoops-motion-v8/runtime/vendor/GLTFLoader.js",
       "status": 200
     },
     {
-      "url": "/runtime/vendor/BufferGeometryUtils.js",
+      "url": "/hoops-motion-v8/runtime/vendor/BufferGeometryUtils.js",
       "status": 200
     },
     {
-      "url": "/runtime/vendor/three.module.js",
+      "url": "/hoops-motion-v8/runtime/vendor/three.module.js",
       "status": 200
     },
     {
@@ -129814,7 +129846,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/models/center.glb",
+      "url": "/runtime/models/guard.glb",
       "status": 200
     },
     {
@@ -129822,19 +129854,19 @@
       "status": 200
     },
     {
-      "url": "/runtime/models/guard.glb",
+      "url": "/runtime/models/center.glb",
       "status": 200
     },
     {
-      "url": "blob:/436c27c9-96c7-4cef-b694-5b1d9b5829f8",
+      "url": "blob:/4a1285a2-0dcb-45a1-8223-0375bb5f0ab5",
       "status": 200
     },
     {
-      "url": "blob:/b262a00d-7d0f-4424-ac77-8416579a02e7",
+      "url": "blob:/f5840591-93fa-44cc-90a5-5a554099e4e8",
       "status": 200
     },
     {
-      "url": "blob:/5d1f78e0-cf90-4449-ad53-d19339c77a55",
+      "url": "blob:/1eec9ceb-abdd-4324-9976-34f4a04f8619",
       "status": 200
     },
     {
@@ -129843,6 +129875,10 @@
     },
     {
       "url": "/runtime/clips/guard/dribble_crossover.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/wing/dribble_crossover.json",
       "status": 200
     },
     {
@@ -129858,11 +129894,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/dribble_crossover.json",
+      "url": "/runtime/keyframes/guard/dribble_between_legs.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/dribble_between_legs.json",
+      "url": "/runtime/clips/guard/dribble_between_legs.glb",
       "status": 200
     },
     {
@@ -129870,7 +129906,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/guard/dribble_between_legs.glb",
+      "url": "/runtime/clips/center/dribble_between_legs.glb",
       "status": 200
     },
     {
@@ -129879,10 +129915,6 @@
     },
     {
       "url": "/runtime/keyframes/center/dribble_between_legs.json",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/center/dribble_between_legs.glb",
       "status": 200
     },
     {
@@ -129910,15 +129942,19 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/dribble_hesitation.json",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/guard/dribble_hesitation.glb",
       "status": 200
     },
     {
       "url": "/runtime/keyframes/wing/dribble_hesitation.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/guard/dribble_hesitation.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/wing/dribble_hesitation.glb",
       "status": 200
     },
     {
@@ -129930,7 +129966,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/dribble_hesitation.glb",
+      "url": "/runtime/keyframes/wing/dribble_step_back.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/guard/dribble_step_back.glb",
       "status": 200
     },
     {
@@ -129938,7 +129978,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/dribble_step_back.json",
+      "url": "/runtime/clips/wing/dribble_step_back.glb",
       "status": 200
     },
     {
@@ -129950,19 +129990,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/dribble_step_back.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/guard/dribble_step_back.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/guard/dribble_jab_step.json",
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/dribble_jab_step.glb",
+      "url": "/runtime/keyframes/wing/dribble_jab_step.json",
       "status": 200
     },
     {
@@ -129970,7 +130002,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/dribble_jab_step.json",
+      "url": "/runtime/clips/wing/dribble_jab_step.glb",
       "status": 200
     },
     {
@@ -129978,7 +130010,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/dribble_jab_step.json",
+      "url": "/runtime/keyframes/center/dribble_jab_step.json",
       "status": 200
     },
     {
@@ -129998,15 +130030,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/dribble_spin.json",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/center/dribble_spin.glb",
       "status": 200
     },
     {
-      "url": "/runtime/clips/guard/dribble_sprint.glb",
+      "url": "/runtime/keyframes/center/dribble_spin.json",
       "status": 200
     },
     {
@@ -130014,11 +130042,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/dribble_sprint.glb",
+      "url": "/runtime/keyframes/wing/dribble_sprint.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/dribble_sprint.json",
+      "url": "/runtime/clips/wing/dribble_sprint.glb",
       "status": 200
     },
     {
@@ -130030,19 +130058,11 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/guard/dribble_sprint.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/guard/dribble_protective.json",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/guard/dribble_protective.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/wing/dribble_protective.json",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/center/dribble_protective.json",
       "status": 200
     },
     {
@@ -130050,11 +130070,19 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/dribble_protective.glb",
+      "url": "/runtime/keyframes/wing/dribble_protective.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/pass_chest.json",
+      "url": "/runtime/clips/guard/dribble_protective.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/center/dribble_protective.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/center/dribble_protective.glb",
       "status": 200
     },
     {
@@ -130062,7 +130090,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/pass_chest.json",
+      "url": "/runtime/keyframes/wing/pass_chest.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/guard/pass_chest.json",
       "status": 200
     },
     {
@@ -130070,11 +130102,15 @@
       "status": 200
     },
     {
+      "url": "/runtime/keyframes/center/pass_chest.json",
+      "status": 200
+    },
+    {
       "url": "/runtime/clips/center/pass_chest.glb",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/pass_chest.json",
+      "url": "/runtime/clips/guard/pass_bounce.glb",
       "status": 200
     },
     {
@@ -130098,10 +130134,6 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/guard/pass_bounce.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/guard/pass_overhead.json",
       "status": 200
     },
@@ -130110,11 +130142,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/pass_overhead.glb",
+      "url": "/runtime/keyframes/wing/pass_overhead.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/pass_overhead.json",
+      "url": "/runtime/clips/wing/pass_overhead.glb",
       "status": 200
     },
     {
@@ -130134,6 +130166,10 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/wing/pass_behind_back.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/wing/pass_behind_back.json",
       "status": 200
     },
@@ -130146,14 +130182,6 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/pass_behind_back.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/guard/pass_jump.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/guard/pass_jump.json",
       "status": 200
     },
@@ -130162,15 +130190,19 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/pass_jump.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/wing/pass_jump.json",
       "status": 200
     },
     {
+      "url": "/runtime/clips/center/pass_jump.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/center/pass_jump.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/guard/pass_jump.glb",
       "status": 200
     },
     {
@@ -130190,11 +130222,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/pass_alley_oop.glb",
+      "url": "/runtime/keyframes/center/pass_alley_oop.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/pass_alley_oop.json",
+      "url": "/runtime/clips/center/pass_alley_oop.glb",
       "status": 200
     },
     {
@@ -130206,11 +130238,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/jump_shot.json",
+      "url": "/runtime/clips/wing/jump_shot.glb",
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/jump_shot.glb",
+      "url": "/runtime/keyframes/wing/jump_shot.json",
       "status": 200
     },
     {
@@ -130222,6 +130254,14 @@
       "status": 200
     },
     {
+      "url": "/runtime/keyframes/guard/fadeaway.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/wing/fadeaway.json",
+      "status": 200
+    },
+    {
       "url": "/runtime/clips/wing/fadeaway.glb",
       "status": 200
     },
@@ -130230,19 +130270,11 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/guard/fadeaway.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/wing/fadeaway.json",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/center/fadeaway.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/fadeaway.json",
+      "url": "/runtime/clips/guard/fadeaway.glb",
       "status": 200
     },
     {
@@ -130286,11 +130318,15 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/center/hook_shot.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/center/hook_shot.json",
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/hook_shot.glb",
+      "url": "/runtime/keyframes/guard/three_off_dribble.json",
       "status": 200
     },
     {
@@ -130302,15 +130338,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/three_off_dribble.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/center/three_off_dribble.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/guard/three_off_dribble.json",
       "status": 200
     },
     {
@@ -130318,15 +130346,19 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/wing/three_off_dribble.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/clips/guard/three_catch.glb",
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/three_catch.glb",
+      "url": "/runtime/keyframes/wing/three_catch.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/three_catch.json",
+      "url": "/runtime/clips/wing/three_catch.glb",
       "status": 200
     },
     {
@@ -130339,10 +130371,6 @@
     },
     {
       "url": "/runtime/keyframes/guard/three_catch.json",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/guard/shot_under_pressure.json",
       "status": 200
     },
     {
@@ -130366,7 +130394,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/rebound_offensive.glb",
+      "url": "/runtime/keyframes/guard/shot_under_pressure.json",
       "status": 200
     },
     {
@@ -130382,6 +130410,10 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/wing/rebound_offensive.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/center/rebound_offensive.json",
       "status": 200
     },
@@ -130390,15 +130422,19 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/rebound_defensive.json",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/guard/rebound_defensive.glb",
       "status": 200
     },
     {
+      "url": "/runtime/keyframes/guard/rebound_defensive.json",
+      "status": 200
+    },
+    {
       "url": "/runtime/clips/wing/rebound_defensive.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/center/rebound_defensive.glb",
       "status": 200
     },
     {
@@ -130410,14 +130446,6 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/rebound_defensive.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/guard/shot_block.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/keyframes/guard/shot_block.json",
       "status": 200
     },
@@ -130426,11 +130454,15 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/wing/shot_block.glb",
+      "url": "/runtime/keyframes/center/shot_block.json",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/shot_block.json",
+      "url": "/runtime/clips/guard/shot_block.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/wing/shot_block.glb",
       "status": 200
     },
     {
@@ -130438,15 +130470,15 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/guard/body_block.json",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/guard/body_block.glb",
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/wing/body_block.json",
+      "url": "/runtime/keyframes/guard/body_block.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/clips/center/body_block.glb",
       "status": 200
     },
     {
@@ -130458,11 +130490,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/center/body_block.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/guard/screen.json",
+      "url": "/runtime/keyframes/wing/body_block.json",
       "status": 200
     },
     {
@@ -130483,6 +130511,10 @@
     },
     {
       "url": "/runtime/clips/center/screen.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/guard/screen.json",
       "status": 200
     },
     {
@@ -130514,6 +130546,10 @@
       "status": 200
     },
     {
+      "url": "/runtime/clips/guard/steal.glb",
+      "status": 200
+    },
+    {
       "url": "/runtime/keyframes/wing/steal.json",
       "status": 200
     },
@@ -130526,23 +130562,7 @@
       "status": 200
     },
     {
-      "url": "/runtime/clips/guard/steal.glb",
-      "status": 200
-    },
-    {
       "url": "/runtime/clips/center/steal.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/guard/lane_intercept.json",
-      "status": 200
-    },
-    {
-      "url": "/runtime/clips/guard/lane_intercept.glb",
-      "status": 200
-    },
-    {
-      "url": "/runtime/keyframes/wing/lane_intercept.json",
       "status": 200
     },
     {
@@ -130550,14 +130570,41 @@
       "status": 200
     },
     {
-      "url": "/runtime/keyframes/center/lane_intercept.json",
+      "url": "/runtime/clips/guard/lane_intercept.glb",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/guard/lane_intercept.json",
       "status": 200
     },
     {
       "url": "/runtime/clips/center/lane_intercept.glb",
       "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/wing/lane_intercept.json",
+      "status": 200
+    },
+    {
+      "url": "/runtime/keyframes/center/lane_intercept.json",
+      "status": 200
     }
   ],
+  "sharedDependencyLoads": [
+    {
+      "url": "/hoops-motion-v8/runtime/vendor/GLTFLoader.js",
+      "status": 200
+    },
+    {
+      "url": "/hoops-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "status": 200
+    },
+    {
+      "url": "/hoops-motion-v8/runtime/vendor/three.module.js",
+      "status": 200
+    }
+  ],
+  "forbiddenRuntimeRequests": [],
   "assetLoads": {
     "models": 3,
     "animations": 90,

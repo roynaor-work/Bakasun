@@ -4,18 +4,26 @@ import path from 'node:path';
 import http from 'node:http';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
 
 const PACKAGE=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT=path.join(PACKAGE,'verification');
 const require=createRequire(path.join(process.env.HOOPS_V11_TOOLS||'/tmp/hoops-v11-tools','package.json'));
 const {chromium}=require('playwright'),sharp=require('sharp');
+const SHARED_VENDOR=path.resolve(PACKAGE,'../hoops-motion-v8/runtime/vendor');
+const SHARED_NAMES=['three.module.js','GLTFLoader.js','BufferGeometryUtils.js'];
+const sharedRoutes=new Map(SHARED_NAMES.map(name=>[`/hoops-motion-v8/runtime/vendor/${name}`,path.join(SHARED_VENDOR,name)]));
+const sharedSoftwareDependencies=await Promise.all(SHARED_NAMES.map(async name=>{
+  const bytes=await fs.readFile(path.join(SHARED_VENDOR,name));
+  return {path:`../hoops-motion-v8/runtime/vendor/${name}`,url:`/hoops-motion-v8/runtime/vendor/${name}`,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),license:'MIT',licenseFile:'../hoops-motion-v8/runtime/vendor/LICENSE.three',repositoryStatus:'Existing tracked main dependency; no copy added to v11',upstreamSource:'https://github.com/mrdoob/three.js/tree/r160'};
+}));
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.glb':'model/gltf-binary','.png':'image/png','.md':'text/plain; charset=utf-8'};
-// Serve only this package: successful loading proves no sibling design checkout
-// or remote CDN is silently supplying a runtime dependency.
+// Serve this package plus exactly three existing tracked shared JavaScript files.
+// No sibling model, Draco loader/decoder, Meshopt, WASM or CDN route is available.
 const server=http.createServer(async(request,response)=>{
   try{
-    const url=new URL(request.url,'http://localhost'),relative=decodeURIComponent(url.pathname).replace(/^\//,''),filename=path.resolve(PACKAGE,relative||'preview.html');
-    if(!filename.startsWith(PACKAGE+path.sep)){response.writeHead(403);response.end();return;}
+    const url=new URL(request.url,'http://localhost'),pathname=decodeURIComponent(url.pathname),relative=pathname.replace(/^\//,''),shared=sharedRoutes.get(pathname),filename=shared||path.resolve(PACKAGE,relative||'preview.html');
+    if(!shared&&(!filename.startsWith(PACKAGE+path.sep)||pathname.startsWith('/hoops-motion-v8/'))){response.writeHead(403);response.end();return;}
     const bytes=await fs.readFile(filename);
     response.writeHead(200,{'Content-Type':mime[path.extname(filename)]||'application/octet-stream','Content-Length':bytes.length,'Cache-Control':'no-store'});response.end(bytes);
   }catch(error){response.writeHead(error.code==='ENOENT'?404:500);response.end(error.code||'server error');}
@@ -25,7 +33,7 @@ const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const context=await browser.newContext({viewport:{width:1440,height:1050},deviceScaleFactor:1});
 const page=await context.newPage(),requests=new Map();
-const result={schemaVersion:1,method:'Chromium/Playwright software WebGL, actual delivered GLB animation mixers and skinned vertex samples; package-only HTTP server; not a hardware performance benchmark.',viewports:{desktop:[1440,1050],mobile:[390,844]},clips:[],httpErrors:[],requestErrors:[],pageErrors:[],consoleErrors:[]};
+const result={schemaVersion:1,method:'Chromium/Playwright software WebGL, actual delivered GLB animation mixers and skinned vertex samples; HTTP server exposes this package plus exactly three existing tracked shared MIT JavaScript dependencies, recorded by SHA-256; not a hardware performance benchmark.',sharedSoftwareDependencies,viewports:{desktop:[1440,1050],mobile:[390,844]},clips:[],httpErrors:[],requestErrors:[],pageErrors:[],consoleErrors:[]};
 page.on('response',response=>{requests.set(response.url().replace(base,''),response.status());if(response.status()>=400)result.httpErrors.push({url:response.url().replace(base,''),status:response.status()});});
 page.on('requestfailed',request=>result.requestErrors.push({url:request.url().replace(base,''),error:request.failure()?.errorText}));
 page.on('pageerror',error=>result.pageErrors.push(error.message));
@@ -155,11 +163,13 @@ try{
   result.previewErrors=await page.evaluate(()=>window.__hoopsV11.errors||[]);
   result.csp=await page.evaluate(()=>({policy:document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content,violations:window.__observedCSP}));
   result.requests=[...requests].map(([url,status])=>({url,status}));
+  result.sharedDependencyLoads=result.requests.filter(request=>sharedRoutes.has(request.url));
+  result.forbiddenRuntimeRequests=result.requests.filter(request=>/draco|meshopt|\.wasm(?:$|\?)/i.test(request.url));
   result.assetLoads={models:result.requests.filter(r=>/\/runtime\/models\/[^/]+\.glb$/.test(r.url)).length,animations:result.requests.filter(r=>/\/runtime\/clips\/[^/]+\/[^/]+\.glb$/.test(r.url)).length,keyframes:result.requests.filter(r=>/\/runtime\/keyframes\/[^/]+\/[^/]+\.json$/.test(r.url)).length};
   // Prefix-independent local server paths begin with /runtime/.
   const canonical=['Root','Hips','Spine','Chest','Neck','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand','LeftUpLeg','LeftLeg','LeftFoot','RightUpLeg','RightLeg','RightFoot'];
   const actorPass=result.clips.every(clip=>clip.snapshots.every(snapshot=>snapshot.actors.length===3&&snapshot.actors.map(actor=>actor.profile).sort().join(',')==='center,guard,wing'&&snapshot.actors.every(actor=>actor.profile===actor.dataProfile&&actor.dataId===clip.id&&actor.animationName===clip.id&&actor.finite&&actor.skins.length>0&&actor.sampledVertices>0&&actor.bones.length===canonical.length&&canonical.every(name=>actor.bones.includes(name))&&actor.skins.every(skin=>skin.bones.length===canonical.length)&&actor.maxQuaternionError<1e-5&&actor.maxScaleError<1e-8&&actor.ballWorld?.every(Number.isFinite)&&actor.animationTracks>=22&&Object.values(actor.parity).every(error=>error<2e-5))));
-  result.pass=actorPass&&!!result.webgl&&result.webAssembly.blockedByCSP&&result.playback.advanced&&result.httpErrors.length===0&&result.requestErrors.length===0&&result.pageErrors.length===0&&result.runtimeConsoleErrors.length===0&&result.previewErrors.length===0&&result.mobile.document<=result.mobile.viewport+1&&result.desktop.document<=result.desktop.viewport+1&&result.assetLoads.models===3&&result.assetLoads.animations===clips.length*3&&result.assetLoads.keyframes===clips.length*3;
+  result.pass=actorPass&&!!result.webgl&&result.webAssembly.blockedByCSP&&result.playback.advanced&&result.httpErrors.length===0&&result.requestErrors.length===0&&result.pageErrors.length===0&&result.runtimeConsoleErrors.length===0&&result.previewErrors.length===0&&result.mobile.document<=result.mobile.viewport+1&&result.desktop.document<=result.desktop.viewport+1&&result.assetLoads.models===3&&result.assetLoads.animations===clips.length*3&&result.assetLoads.keyframes===clips.length*3&&result.sharedDependencyLoads.length===3&&result.sharedDependencyLoads.every(request=>request.status===200)&&result.forbiddenRuntimeRequests.length===0;
   result.actorPass=actorPass;
 }catch(error){result.error={message:error.message,stack:error.stack};result.pass=false;}
 finally{

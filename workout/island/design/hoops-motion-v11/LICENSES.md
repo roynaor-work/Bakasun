@@ -1,8 +1,8 @@
 # רישיונות ומקורות — hoops-motion-v11
 
-הנכסים, הכוריאוגרפיה, קוד המקור המקורי, התצוגה, התיעוד והמדידות שנוצרו למסירה זו מוקדשים לנחלת הכלל לפי [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode). ההקדשה חלה ככל שהדין מאפשר; נוסח CC0 המלא בקישור. הדמויות בדויות. אין מותגים, סמלי קבוצות או דמויות של אנשים אמיתיים. אין שימוש במוקאפ או בסריקה של אדם אמיתי.
+כל הקבצים החדשים בתיקיית hoops-motion-v11 — הנכסים, הכוריאוגרפיה, קוד המקור המקורי, התצוגה, התיעוד והמדידות — מקוריים/CC0 ומוקדשים לנחלת הכלל לפי [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode). ההקדשה חלה ככל שהדין מאפשר; נוסח CC0 המלא בקישור. הדמויות בדויות. אין מותגים, סמלי קבוצות או דמויות של אנשים אמיתיים. אין שימוש במוקאפ או בסריקה של אדם אמיתי.
 
-תלויות התוכנה Three.js הן ב־MIT ואינן מוצגות כ־CC0. הודעת הזכויות והרישיון המלאה נשמרת ב־[runtime/vendor/THREE-LICENSE.txt](runtime/vendor/THREE-LICENSE.txt). ההפרדה הזו מתייחסת לקוד התוכנה; כל נכסי האמנות והתנועה מקוריים/CC0.
+לא נוספו עותקי תוכנה של צד שלישי לתיקיית v11. התצוגה משתמשת בשלושה קובצי תוכנה שכבר קיימים ב־main מחוץ לתיקייה זו, תחת hoops-motion-v8/runtime/vendor. הם נשארים ברישיון MIT ואינם מוצגים כ־CC0. הודעת הזכויות והרישיון המלאה נמצאת ב־[LICENSE.three הקיים בקומיט הבסיס](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/LICENSE.three). לא נערך קובץ תוכנה קיים ולא שונה רישיונו.
 
 ## מקור קפוא של הדמויות
 
@@ -16,11 +16,19 @@
 
 ## תלויות תוכנה וכלים
 
-Three.js 0.160.1, GLTFLoader ו־BufferGeometryUtils מופצים כאן מקומית ב־MIT. ייבואי המודולים מותאמים לנתיבים המקומיים בחבילה. מקורות חבילה קפואי־גרסה מצוינים לכל קובץ בטבלה. הודעת MIT נשמרת ללא שינוי. התצוגה אינה טוענת ספריות, מודלים או תמונות משירות חיצוני בזמן הריצה.
+התצוגה משתמשת ב־Three.js r160, GLTFLoader ו־BufferGeometryUtils המקומיים שכבר נמצאים ב־main, קומיט ae09529bc8fc9ff42f6aa76b8e79e7f760992f62. הם אינם קבצים חדשים במסירה ואינם מועתקים לתיקיית v11. המקורות המדויקים במאגר:
 
-כלי הפיתוח @gltf-transform/core 4.2.1, gltf-validator 2.0.0-dev.3.10, Playwright 1.56.1 ו־Sharp 0.35.5 מותקנים ב־/tmp/hoops-v11-tools בלבד. קוד הכלים אינו חלק מהנכסים המופצים ואינו נכלל בהקדשת CC0 של החבילה. גרסת three בכלי הפיתוח היא 0.160.1, תואמת לספרייה המקומית.
+| תלות תוכנה קיימת, מחוץ לתיקיית v11 | מקור קפוא ב־main | SHA-256 שנמדד בדפדפן | רישיון קיים |
+|---|---|---|---|
+| three.module.js | [מקור](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/three.module.js) | 3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6 | [MIT](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/LICENSE.three) |
+| GLTFLoader.js | [מקור](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/GLTFLoader.js) | 1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e | [MIT](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/LICENSE.three) |
+| BufferGeometryUtils.js | [מקור](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/BufferGeometryUtils.js) | 3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3 | [MIT](https://github.com/roynaor-work/Bakasun/blob/ae09529bc8fc9ff42f6aa76b8e79e7f760992f62/workout/island/design/hoops-motion-v8/runtime/vendor/LICENSE.three) |
 
-## מקור ורישיון לכל קובץ
+התוכנה מזוהה לפי REVISION 160, גיבובי הקבצים והמקור הקפוא במאגר; אין כאן טענה לזהות בבתים מול npm three@0.160.1. מקור Three.js במעלה הזרם הוא [r160](https://github.com/mrdoob/three.js/tree/r160), ופרטי ההפצה הקיימת הם אלו שבקומיט main המקושר. התצוגה אינה טוענת ספריות, מודלים או תמונות משירות חיצוני בזמן הריצה. בשכפול sparse יש להוסיף את תיקיית התוכנה הקיימת לפי README.md. הודעת MIT נשארת ללא שינוי במיקומה הקיים מחוץ לתיקיית המסירה.
+
+כלי הפיתוח @gltf-transform/core 4.2.1, gltf-validator 2.0.0-dev.3.10, Playwright 1.56.1 ו־Sharp 0.35.5 מותקנים ב־/tmp/hoops-v11-tools בלבד. קוד הכלים אינו חלק מהנכסים המופצים ואינו נכלל בהקדשת CC0 של החבילה. גרסת three בכלי הפיתוח היא 0.160.1; התצוגה נבדקת מול ספריית r160 המשותפת הקיימת בפועל.
+
+## מקור ורישיון לכל קובץ חדש
 
 המלאי הבא נוצר מסריקת הקבצים הקיימים בפועל בתיקיית החבילה, כולל מסמכי הרישוי והמדידה עצמם.
 
@@ -218,10 +226,6 @@ Three.js 0.160.1, GLTFLoader ו־BufferGeometryUtils מופצים כאן מקו�
 | [runtime/models/guard.glb](runtime/models/guard.glb) | [עותק runtime זהה מ־hoops-tall-v1](https://github.com/roynaor-work/Bakasun/blob/cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa/workout/island/design/hoops-tall-v1/runtime/guard.glb) — ליבת MakeHuman CC0 ותוספות tall מקוריות, כמפורט לעיל | CC0-1.0 |
 | [runtime/models/wing.glb](runtime/models/wing.glb) | [עותק runtime זהה מ־hoops-tall-v1](https://github.com/roynaor-work/Bakasun/blob/cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa/workout/island/design/hoops-tall-v1/runtime/wing.glb) — ליבת MakeHuman CC0 ותוספות tall מקוריות, כמפורט לעיל | CC0-1.0 |
 | [runtime/rig.json](runtime/rig.json) | [עותק זהה של rig.json מ־hoops-tall-v1](https://github.com/roynaor-work/Bakasun/blob/cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa/workout/island/design/hoops-tall-v1/rig.json) — מידות ושלד CC0 | CC0-1.0 |
-| [runtime/vendor/BufferGeometryUtils.js](runtime/vendor/BufferGeometryUtils.js) | [Three.js 0.160.1 — מקור תוכנה](https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/utils/BufferGeometryUtils.js); עותק מקומי, ייבואי מודולים מותאמים לנתיבים בחבילה; copyright three.js authors | [MIT](runtime/vendor/THREE-LICENSE.txt) |
-| [runtime/vendor/GLTFLoader.js](runtime/vendor/GLTFLoader.js) | [Three.js 0.160.1 — מקור תוכנה](https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js); עותק מקומי, ייבואי מודולים מותאמים לנתיבים בחבילה; copyright three.js authors | [MIT](runtime/vendor/THREE-LICENSE.txt) |
-| [runtime/vendor/THREE-LICENSE.txt](runtime/vendor/THREE-LICENSE.txt) | [Three.js 0.160.1 — מקור תוכנה](https://cdn.jsdelivr.net/npm/three@0.160.1/LICENSE); הודעת זכויות ורישיון מקורית; copyright three.js authors | [MIT](runtime/vendor/THREE-LICENSE.txt) |
-| [runtime/vendor/three.module.js](runtime/vendor/three.module.js) | [Three.js 0.160.1 — מקור תוכנה](https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js); עותק מקומי עם תיקון רווח לבן בלבד; copyright three.js authors | [MIT](runtime/vendor/THREE-LICENSE.txt) |
 | [source/README.md](source/README.md) | יצירה מקורית למסירת v11 | CC0-1.0 |
 | [source/audit-motion.mjs](source/audit-motion.mjs) | יצירה מקורית למסירת v11 | CC0-1.0 |
 | [source/author.mjs](source/author.mjs) | יצירה מקורית למסירת v11 | CC0-1.0 |
