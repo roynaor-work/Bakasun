@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {fanSlots} from '../workout/island/minigames/tennis-v11-stadium.mjs';
-import {SOUNDS} from '../workout/island/assets/audio/g4e/crowd-source.mjs';
+import {statSync} from 'node:fs';
 import {createTennisAudio} from '../workout/island/minigames/g4e-audio.mjs';
 
 const root=new URL('../workout/island/',import.meta.url);
@@ -22,12 +22,12 @@ test('tennis v11: fan slots fill the gaps between neighbours of one row only',()
   assert.equal(fanSlots([{id:1,x:0,y:1,z:0,yaw:0,sec:0,row:0},{id:2,x:.9,y:2,z:0,yaw:0,sec:0,row:1}]).length,0,'different rows are not neighbours');
 });
 
-test('tennis v11: the crowd sounds are soft: no peak above 0.5, a seamless loop, a quiet bed',()=>{
-  for(const [name,make] of Object.entries(SOUNDS)){
-    const [l,r]=make();let peak=0,sum=0;for(const c of [l,r])for(const v of c){peak=Math.max(peak,Math.abs(v));sum+=v*v;}
-    assert.ok(peak<=.5,`${name} peak ${peak}`);assert.ok(Math.sqrt(sum/(l.length*2))<.2,`${name} rms`);
-    if(name==='crowd-murmur')assert.ok(Math.abs(l[0]-l[l.length-1])<.08,'loop ends meet');
-  }
+test('tennis v12: the eight Codex crowd sounds are wired, each under 200KB, all together under 400KB',async()=>{
+  const config=JSON.parse(await readFile(new URL('data/config.json',root),'utf8')).minigames.tennis,names=['applauseShort','applauseMedium','applauseLarge','crowdBed','crowdOoh','crowdAw','crowdHush','matchCheer'];
+  let total=0;
+  for(const name of names){const path=config.audio.samples[name];assert.ok(path,name+' is in the config');const size=statSync(new URL(path,root)).size;assert.ok(size>5000&&size<=200000,`${name} ${size}`);total+=size;}
+  assert.ok(total<=400000,'crowd sounds total '+total);
+  for(const gone of ['applauseSoft','applauseBig'])assert.equal(config.audio.samples[gone],undefined,gone+' (the v11 synthesis) is replaced');
 });
 
 test('tennis v11: audio plays a sample at a controlled gain and ambient loops ease in without a jump',async()=>{
