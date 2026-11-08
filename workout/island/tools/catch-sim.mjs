@@ -31,11 +31,16 @@ export function driveChase(chase, driving, rnd) {
         if (score > bestFree) { bestFree = score; best = lane; }
       }
       want = rnd() < driving.miss ? want : best;
+      // close to the thief: go for him, side on if possible
+      const dxc = st.crim.x - st.x;
+      if (dxc > -9 && dxc < 24 && rnd() >= driving.miss) want = clamp(st.crim.lat, -1, 1);
     }
     chase.setSteer(clamp((want - st.lat) * 3.2, -1, 1));
     // boost on the open road, not into the next car
     let near = 99; for (const o of chase.obstacles) { if (o.kind === 'pad') continue; const ox = chase.obstacleX(o, st.t) - st.x; if (ox > 0 && ox < near && Math.abs(o.lat - st.lat) < .7) near = ox; }
-    chase.setBoost(st.tank > .12 && st.gap > C.catchGap + 2 && near > 16);
+    const dxb = st.crim.x - st.x;
+    chase.setBoost(st.tank > .12 && dxb > 3.5 && near > 16);
+    chase.setBrake(dxb < -1.5);
     chase.step(dt); chase.drainEvents();
   }
   return chase.result();

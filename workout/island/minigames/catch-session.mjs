@@ -38,7 +38,7 @@ export function runCatchSession(ctx) {
   const chase = withChase ? createChaseEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0;
+  let ramSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
@@ -89,6 +89,7 @@ export function runCatchSession(ctx) {
   const chaseBox = node('div', 'catch-chase'); chaseBox.hidden = true; hud.append(chaseBox);
   const gapText = node('bdi', 'catch-gap'), timeBar = node('span', 'catch-time'), timeFill = node('i'); timeBar.append(timeFill);
   const chaseTop = node('div', 'catch-chase-top'); chaseTop.append(gapText, timeBar); chaseBox.append(chaseTop);
+  const damageBox = node('div', 'catch-damage'), damageFill = node('span'); damageBox.setAttribute('role', 'meter'); damageBox.setAttribute('aria-label', t('catch.damage')); damageBox.append(node('small', '', t('catch.damage')), node('i')); damageBox.lastChild.append(damageFill); chaseBox.append(damageBox);
   const tankBar = node('div', 'catch-tank'), tankFill = node('span'); tankBar.append(tankFill); chaseBox.append(tankBar);
   const boostButton = node('button', 'catch-boost'); boostButton.type = 'button'; boostButton.setAttribute('aria-label', t('catch.boost')); boostButton.append(svg('boost', 34), node('span', '', t('catch.boost')));
   const brakeButton = node('button', 'catch-brake'); brakeButton.type = 'button'; brakeButton.setAttribute('aria-label', t('catch.brake')); brakeButton.append(svg('brake', 26), node('span', '', t('catch.brake')));
@@ -118,7 +119,7 @@ export function runCatchSession(ctx) {
   function stepChase(dt) {
     chase.step(dt); const events = chase.drainEvents();
     if (events.length) handleChase(events);
-    if (mode === 'chase' && chase.state.phase === 'run' && performance.now() - sirenAt > 760) { sirenAt = performance.now(); audio?.cue('siren'); }
+    if (mode === 'chase' && chase.state.phase === 'run' && performance.now() - sirenAt > 800) { sirenAt = performance.now(); audio?.cue('siren', {approach: clamp((chase.state.v - chase.state.crim.v) / 8, -1, 1)}); }
   }
   function handleChase(events) {
     view?.handleChase(events);
@@ -128,6 +129,7 @@ export function runCatchSession(ctx) {
       else if (e.type === 'crash') { audio?.cue('crash'); say(e.kind === 'cone' ? 'catch.pop.cone' : 'catch.pop.crash', 'bad'); }
       else if (e.type === 'crimCrash') { audio?.cue('crimCrash'); say('catch.pop.crimCrash', 'good'); }
       else if (e.type === 'pad') { audio?.cue('pad'); }
+      else if (e.type === 'ram') { audio?.cue('ram'); if (!ramSaid) { ramSaid = true; say('catch.pop.ram', 'good'); } }
       else if (e.type === 'crimBoost') { audio?.cue('nitro'); say('catch.pop.crimBoost', 'warn'); }
       else if (e.type === 'end') endChase();
     }
@@ -135,8 +137,8 @@ export function runCatchSession(ctx) {
   function endChase() {
     if (mode !== 'chase') return;
     const res = chase.result(); mode = 'bail'; chase.setBoost(false); chase.setSteer(0); keys.clear(); boostHeld = brakeHeld = false;
-    const key = res.closeness >= .66 ? 'catch.chase.close' : res.closeness >= .33 ? 'catch.chase.mid' : 'catch.chase.far';
-    say(key, res.closeness >= .66 ? 'good' : res.closeness >= .33 ? 'warn' : 'bad', {gap: Math.round(res.gap), throws: balance.throws + (res.mods.extraThrows || 0)});
+    const key = res.caught ? 'catch.chase.caught' : res.closeness >= .66 ? 'catch.chase.close' : res.closeness >= .33 ? 'catch.chase.mid' : 'catch.chase.far';
+    say(key, res.caught || res.closeness >= .66 ? 'good' : res.closeness >= .33 ? 'warn' : 'bad', {gap: Math.round(res.gap), throws: balance.throws + (res.mods.extraThrows || 0)});
     audio?.cue('brake');
     bailTimer = setTimeout(() => {
       if (disposed) return;
@@ -242,6 +244,7 @@ export function runCatchSession(ctx) {
   function refreshChaseHud() {
     const st = chase.state, spec = chase.spec;
     gapText.textContent = t('catch.gap', {gap: Math.max(0, Math.round(st.gap))});
+    damageFill.style.width = Math.round(st.damage * 100) + '%'; damageBox.dataset.hot = String(st.damage > .6);
     timeFill.style.width = clamp(100 - st.t / spec.seconds * 100, 0, 100) + '%'; tankFill.style.height = Math.round(st.tank / Math.max(1, st.tank > 1 ? st.tank : 1) * 100) + '%';
     boostButton.dataset.ready = String(st.tank > .12); tankBar.dataset.low = String(st.tank < .2);
     steerHint.hidden = !(st.phase === 'run' && st.t < 4 && !steerDrag);
