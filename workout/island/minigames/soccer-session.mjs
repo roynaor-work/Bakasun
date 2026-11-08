@@ -11,6 +11,7 @@ import {withSoccerV7Kits} from './soccer-v7.mjs';
 import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-5';
 import {gameContext} from './context.mjs?v=island-v2-20261107-5';
 import {expandSoccerConfig} from './soccer-squad.mjs';
+import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
 import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-5';
@@ -72,7 +73,7 @@ export function startSoccer(ctx) {
     try{
       const r=view?.report?.();if(!r)return;
       const lines=[`island ${new URL(import.meta.url).searchParams.get('v')||'dev'} · ${new Date().toISOString()}`,`assets ${r.assetStatus} · characters ${r.characters} · scene ${r.scene} · ${r.ms} ms · quality ${r.quality}`,`screen ${innerWidth}x${innerHeight} @${devicePixelRatio} · webgl2 ${r.webgl2} · gpu ${r.gpu||'?'}`,`ua ${navigator.userAgent}`];
-      if(r.characterError)lines.push('characters fell back: '+r.characterError);if(r.athleteError)lines.push('athlete fell back: '+r.athleteError);if(r.sceneError||r.sceneFailure)lines.push('scene fell back: '+(r.sceneFailure||r.sceneError));
+      lines.push(soccerMotionLoadReport());if(r.characterError)lines.push('characters fell back: '+r.characterError);if(r.athleteError)lines.push('athlete fell back: '+r.athleteError);if(r.sceneError||r.sceneFailure)lines.push('scene fell back: '+(r.sceneFailure||r.sceneError));
       globalThis.localStorage?.setItem('island.soccer.lastLoadReport',[...lines,...manualReportLines('soccer')].join('\n'));
       if(r.assetStatus!=='ready'||r.characters!=='design-glb-v2'||r.scene!=='design'){const note=element('div','soccer-load-note','הגרפיקה המלאה לא נטענה; דוח הטעינה שמור בתפריט הכדורגל');note.setAttribute('role','status');canvas.after(note);setTimeout(()=>note.remove(),7000);}
     }catch{}
