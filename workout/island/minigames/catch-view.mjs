@@ -11,7 +11,7 @@ import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-5';
 
 const FILES = {
   apartment: 'apartment', shop: 'shop', cafe: 'cafe', house: 'house', station: 'police-station',
-  taxi: 'taxi', truck: 'truck', bus: 'bus', roadblock: 'roadblock', policeCar: 'police-car', van: 'armored-van', bush: 'bush', getawayCar: 'getaway-car', tree: 'tree', lamp: 'lamp',
+  taxi: 'taxi', truck: 'truck', bus: 'bus', roadblock: 'roadblock', policeCar: 'police-car', van: 'armored-van', bush: 'bush', cone: 'cone', getawayCar: 'getaway-car', tree: 'tree', lamp: 'lamp',
 };
 const BUILDINGS = {apartment: {h: 11}, shop: {h: 6}, cafe: {h: 6.2}, house: {h: 5}, station: {h: 7.2}};
 const THEMES = {
@@ -86,6 +86,19 @@ function fitModel(gltf, {width, height, depth}) {
   return root;
 }
 
+/** Wheels spin, police roof lights flash: nodes named by the Codex models. Light materials are cloned per car. */
+function rigCar(root) {
+  const wheels = [], lights = {}; root.traverse(o => {
+    if (/^Wheel_/.test(o.name)) wheels.push(o);
+    if (o.name === 'Light_R' || o.name === 'Light_B') {
+      lights[o.name] = o; o.traverse(m => { if (m.isMesh) m.material = m.material.clone(); });
+    }
+  });
+  root.userData.wheels = wheels; root.userData.lights = lights; return root;
+}
+function lightOn(node, on) { node?.traverse(m => { if (m.isMesh && m.material) m.material.emissiveIntensity = on ? 3 : .15; }); }
+function spinWheels(root, d) { for (const w of root.userData.wheels || []) w.rotation.x += d; }
+
 class Particles {
   constructor(scene, {texture, size, additive, max = 90}) {
     this.max = max; this.items = [];
@@ -133,9 +146,10 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
   // ----- assets -----
   const gltfLoader = new GLTFLoader();
   const jobs = [], models = {}, pending = {total: 0, done: 0};
-  const load = (key, url) => { pending.total++; return gltfLoader.loadAsync(url).then(g => { models[key] = g; onProgress(++pending.done / pending.total); }); };
+  const CX_TURN = {policeCar: Math.PI / 2, getawayCar: Math.PI / 2, van: Math.PI / 2, roadblock: Math.PI / 2}; // Codex models face +Z, the street runs along +X
+  const load = (key, url) => { pending.total++; return gltfLoader.loadAsync(url).then(g => { if (CX_TURN[key]) { const w = new T.Group(); w.add(g.scene); g.scene.rotation.y = CX_TURN[key]; g.scene = w; } models[key] = g; onProgress(++pending.done / pending.total); }); };
   const modelUrl = name => { const u = new URL('models/' + name + '.glb', base); u.searchParams.set('v', DATA_VERSION); return u.href; };
-  const needed = new Set(['apartment', 'shop', 'cafe', 'house', 'station', 'lamp', 'tree', 'bush', 'policeCar', 'getawayCar']);
+  const needed = new Set(['apartment', 'shop', 'cafe', 'house', 'station', 'lamp', 'tree', 'bush', 'policeCar', 'getawayCar', 'cone']);
   for (const o of [...level.obstacles, ...movers]) needed.add(o.model);
   if (v2) for (const k of ['taxi', 'truck', 'bus', 'roadblock', 'van']) needed.add(k);
   for (const key of needed) jobs.push(load(key, modelUrl(FILES[key])));
@@ -195,7 +209,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     if (o.model !== 'tree' && o.model !== 'lamp') { const sh = blobShadow(shadowTex, root.userData.size.x * 1.15, root.userData.size.z * 1.6, .45); sh.position.set(o.x, .03, .55); scene.add(sh); }
   }
   // the police car that brought the officer, parked behind him
-  const squad = fitModel(models.policeCar, {width: 4.4}); squad.position.set(-5.6, 0, 2.6); squad.rotation.y = .12; scene.add(squad);
+  const squad = rigCar(fitModel(models.policeCar, {width: 4.4})); lightOn(squad.userData.lights.Light_R, true); lightOn(squad.userData.lights.Light_B, true); squad.position.set(-5.6, 0, 2.6); squad.rotation.y = .12; scene.add(squad);
   // the getaway car waiting at the end of the street
   const getaway = fitModel(models.getawayCar, {width: 4.2}); getaway.position.set(P.escapeX + 2.4, 0, .3); scene.add(getaway);
   let getawayX = getaway.position.x;
@@ -334,7 +348,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
   const chaseGroup = new T.Group(); chaseGroup.visible = false; scene.add(chaseGroup);
   let chase = null, mode = 'throw', chaseShift = 0, chaseCam = {x: 0, fov: 30}, sirenPhase = 0, crimBrake = 1, chaseEnded = 0;
   const carGlow = (color, size) => { const sp = new T.Sprite(new T.SpriteMaterial({map: glowTexture(color), transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); sp.scale.set(size, size, 1); return sp; };
-  const playerCar = fitModel(models.policeCar, {width: 4.4}), crimCar = fitModel(models.getawayCar, {width: 4.2});
+  const playerCar = rigCar(fitModel(models.policeCar, {width: 4.4})), crimCar = rigCar(fitModel(models.getawayCar, {width: 4.2}));
   chaseGroup.add(playerCar, crimCar);
   const flameP = carGlow('#ffb347', 2.6), flameC = carGlow('#ff8a3d', 2.2), redLight = carGlow('#ff3b3b', 1.3), blueLight = carGlow('#3b6bff', 1.3);
   flameP.position.set(-2.6, .55, 0); flameC.position.set(-2.4, .55, 0); redLight.position.set(.2, 1.65, -.35); blueLight.position.set(.2, 1.65, .35);
@@ -345,8 +359,8 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
   function makeProp(o) {
     let root;
     if (o.kind === 'traffic') root = fitModel(models[o.model], {width: o.model === 'bus' ? 7.5 : o.model === 'truck' ? 5.6 : 4.4});
-    else if (o.kind === 'barrier') root = fitModel(models.roadblock, {width: 2.6});
-    else if (o.kind === 'cone') { root = new T.Group(); for (let i = 0; i < 3; i++) { const c = new T.Mesh(new T.ConeGeometry(.28, .7, 10), coneMat); c.position.set((i - 1) * .5, .35, (i % 2) * .3); root.add(c); } }
+    else if (o.kind === 'barrier') root = fitModel(models.roadblock, {depth: 2.8});
+    else if (o.kind === 'cone') { root = new T.Group(); for (let i = 0; i < 3; i++) { const c = fitModel(models.cone, {height: .75}); c.position.set((i - 1) * .5, 0, (i % 2) * .3); root.add(c); } }
     else { root = new T.Mesh(new T.CircleGeometry(1.5, 24), padMat); root.rotation.x = -Math.PI / 2; root.position.y = .04; const holder = new T.Group(); holder.add(root); root = holder; }
     chaseGroup.add(root); return root;
   }
@@ -381,7 +395,8 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     // a battered car smokes, more the more it has taken
     if (st.damage > .2 && Math.random() < st.damage * .7) dust.emit(cx + 1.2, 1.0, laneZ(st.crim.lat), 1, {speed: 1, up: 1.6, color: [.5, .5, .5], gravity: -1.2, life: .9});
     flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(sirenPhase * 3) * .4); flameC.visible = st.crim.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(sirenPhase * 3) * .35);
-    const red = Math.sin(sirenPhase) > 0; redLight.visible = red; blueLight.visible = !red;
+    const red = Math.sin(sirenPhase) > 0; redLight.visible = blueLight.visible = false; lightOn(playerCar.userData.lights.Light_R, red); lightOn(playerCar.userData.lights.Light_B, !red);
+    spinWheels(playerCar, st.v * dt / .36); spinWheels(crimCar, st.crim.v * dt / .34);
     // obstacles inside the window around the officer
     const lo = st.x - 30, hi = st.x + 85, tn = st.t;
     for (const o of chase.obstacles) {
