@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="theme-color" content="#163d31">
+  <title>טניס · ספריית תנועה</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="22" cy="15" rx="10" ry="12" transform="rotate(32 22 15)"/><path d="m15 25-8 11m6-12 4 3M16 10l15 9M13 15l14 9M19 5l14 9M18 25l12-17M13 21 25 4"/></svg></span><div><p class="eyebrow">האי שלי / מעבדת תנועה</p><h1>טניס, בתנועה.</h1></div></div>
+    <div class="header-meta"><span id="count-chip" class="chip">46 קליפים</span><a href="REPORT.md">דוח המדידות <span aria-hidden="true">←</span></a></div>
+  </header>
+  <main>
+    <section class="stage" aria-label="תצוגת שחקן הטניס בתלת־ממד">
+      <div class="stage-heading"><span class="live-badge"><i></i>שלד קנוני · 18 עצמות · 30Hz</span><span id="status" role="status">טוען את הספרייה…</span></div>
+      <div id="viewport"><p id="error" role="alert" hidden></p><div class="view-help">גרירה לסיבוב · גלילה לקירוב</div></div>
+      <div class="stage-caption"><div><p class="eyebrow" id="category-label">מוכנות</p><h2 id="clip-title">ספריית תנועה לטניס</h2><p id="clip-id" dir="ltr">tennis-motion-v1</p></div><div class="frame-readout"><strong id="frame">00</strong><span>פריים / <b id="frame-total">00</b></span></div></div>
+      <div class="view-buttons" role="group" aria-label="זווית צפייה"><button data-view="three-quarter" aria-pressed="true">¾</button><button data-view="front" aria-pressed="false">חזית</button><button data-view="side" aria-pressed="false">צד</button><button data-view="top" aria-pressed="false">מעל</button></div>
+      <div class="stage-legend"><span><i class="trail-key"></i>מסלול ראש המחבט</span><span><i class="contact-key"></i>נקודת מגע</span><span><i class="plant-key"></i>נעילת רגל</span></div>
+    </section>
+    <aside>
+      <section class="panel library"><div class="panel-title"><h2>ספריית הקליפים</h2><span id="clip-count">46</span></div><label for="search">חיפוש תנועה</label><input id="search" type="search" placeholder="למשל: פורהנד, הגשה או ריצה" autocomplete="off"><div class="filters"><div><label for="category">משפחה</label><select id="category"><option value="all">כל התנועות</option></select></div><div><label for="clip">קליפ</label><select id="clip"></select></div></div><div class="clip-nav"><button id="previous">→ הקודם</button><button id="next">הבא ←</button></div></section>
+      <section class="panel player"><div class="panel-title"><h2>ניגון ובדיקה</h2><span id="loop-label">לולאה</span></div><button id="sequence" class="sequence-button" aria-pressed="false">רצף ריצה ← מכה ← ריצה</button><div class="transport"><button id="play" class="primary" aria-pressed="true">השהיה</button><button id="contact">לרגע המגע</button></div><label for="timeline" class="timeline-label"><span>זמן</span><output id="time">0.00 / 0.00 שנ׳</output></label><input id="timeline" type="range" min="0" max="1" step="0.001" value="0"><div class="play-options"><label for="speed">קצב ניגון</label><select id="speed"><option value="0.1">×0.1</option><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select><button id="trail-toggle" aria-pressed="true">מסלול מחבט</button></div></section>
+      <section class="panel measurement"><div class="panel-title"><h2>רגעי מפתח</h2><span class="dot-label">מדידה בעולם</span></div><dl><div><dt>משך</dt><dd id="duration">—</dd></div><div><dt>מגע</dt><dd id="event">—</dd></div><div><dt>מהירות במגע</dt><dd id="contact-speed">—</dd></div><div><dt>תמיכה</dt><dd id="support">—</dd></div></dl><div id="events" class="event-list"></div><p class="small-note">מסלול המחבט נמדד מהאנימציה הטעונה. אירועי הכדור הם סמני תצוגה לשילוב במשחק.</p></section>
+    </aside>
+  </main>
+  <footer><span>שחקן בדיוני · תנועה מקורית · CC0</span><span>קובצי ריצה ללא Draco, ללא meshopt וללא WebAssembly</span></footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

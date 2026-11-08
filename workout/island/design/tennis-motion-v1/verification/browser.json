@@ -1,0 +1,3511 @@
+{
+  "pass": true,
+  "clipCount": 46,
+  "allClipsLoaded": [
+    {
+      "id": "ready_idle",
+      "animation": "ready_idle",
+      "durationSeconds": 2,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "split_step",
+      "animation": "split_step",
+      "durationSeconds": 1.2000000476837158,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_forward",
+      "animation": "run_forward",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_backward",
+      "animation": "run_backward",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_left",
+      "animation": "run_left",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_right",
+      "animation": "run_right",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_forward_left",
+      "animation": "run_forward_left",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_forward_right",
+      "animation": "run_forward_right",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_back_left",
+      "animation": "run_back_left",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "run_back_right",
+      "animation": "run_back_right",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "shuffle_left",
+      "animation": "shuffle_left",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "shuffle_right",
+      "animation": "shuffle_right",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "brake",
+      "animation": "brake",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "change_direction_left",
+      "animation": "change_direction_left",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "change_direction_right",
+      "animation": "change_direction_right",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "recover_center",
+      "animation": "recover_center",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_flat_long",
+      "animation": "forehand_flat_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_flat_short",
+      "animation": "forehand_flat_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_topspin_long",
+      "animation": "forehand_topspin_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_topspin_short",
+      "animation": "forehand_topspin_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_slice_long",
+      "animation": "forehand_slice_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "forehand_slice_short",
+      "animation": "forehand_slice_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_flat_long",
+      "animation": "backhand_flat_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_flat_short",
+      "animation": "backhand_flat_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_topspin_long",
+      "animation": "backhand_topspin_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_topspin_short",
+      "animation": "backhand_topspin_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_slice_long",
+      "animation": "backhand_slice_long",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "backhand_slice_short",
+      "animation": "backhand_slice_short",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_toss",
+      "animation": "serve_toss",
+      "durationSeconds": 1.2000000476837158,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_trophy",
+      "animation": "serve_trophy",
+      "durationSeconds": 1.2000000476837158,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_contact",
+      "animation": "serve_contact",
+      "durationSeconds": 1.2000000476837158,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_follow_through",
+      "animation": "serve_follow_through",
+      "durationSeconds": 1.2000000476837158,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_first_full",
+      "animation": "serve_first_full",
+      "durationSeconds": 2.799999952316284,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "serve_second_full",
+      "animation": "serve_second_full",
+      "durationSeconds": 2.799999952316284,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "volley_forehand",
+      "animation": "volley_forehand",
+      "durationSeconds": 1.399999976158142,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "volley_backhand",
+      "animation": "volley_backhand",
+      "durationSeconds": 1.399999976158142,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "smash",
+      "animation": "smash",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "drop_forehand",
+      "animation": "drop_forehand",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "drop_backhand",
+      "animation": "drop_backhand",
+      "durationSeconds": 1.600000023841858,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "lob",
+      "animation": "lob",
+      "durationSeconds": 1.7999999523162842,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "celebrate_point",
+      "animation": "celebrate_point",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "disappointed",
+      "animation": "disappointed",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "racket_plant",
+      "animation": "racket_plant",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "hands_sky",
+      "animation": "hands_sky",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "handshake",
+      "animation": "handshake",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    },
+    {
+      "id": "fist_pump",
+      "animation": "fist_pump",
+      "durationSeconds": 2.4000000953674316,
+      "racketHead": true,
+      "extensions": [],
+      "loaded": true
+    }
+  ],
+  "webAssemblyDisabled": true,
+  "wasmAttempts": 0,
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'self'",
+  "consoleErrors": [],
+  "failedRequests": [],
+  "recoveredRequestFailures": [
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/run_backward.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/run_back_left.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/brake.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/change_direction_left.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/change_direction_right.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/forehand_topspin_short.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/backhand_flat_long.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/backhand_slice_long.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/volley_forehand.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    },
+    {
+      "url": "http://127.0.0.1:40937/workout/island/design/tennis-motion-v1/runtime/clips/drop_backhand.glb",
+      "failure": "net::ERR_ABORTED",
+      "verifiedCompleteBody": true,
+      "parsedByGltfLoader": true
+    }
+  ],
+  "httpBodyChecks": [
+    {
+      "id": "ready_idle",
+      "status": 200,
+      "bytes": 345312,
+      "sha256": "74b1b6835de475a8236505572f34027175c9229001095ad8204c16b17ff998a2",
+      "pass": true
+    },
+    {
+      "id": "split_step",
+      "status": 200,
+      "bytes": 337748,
+      "sha256": "70594dc241ca87042193157aab276d0845b730a956b9168164033dbc4b5fa0a4",
+      "pass": true
+    },
+    {
+      "id": "run_forward",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "36569565ce879d5edbd8e91a636b9fa61a2396fa6bd072521412b2e728bfd2b9",
+      "pass": true
+    },
+    {
+      "id": "run_backward",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "7471023b25c2be813570adc15ee21f4d83136f64cc681e54e3a49f81bdd3f595",
+      "pass": true
+    },
+    {
+      "id": "run_left",
+      "status": 200,
+      "bytes": 341536,
+      "sha256": "93d5be5c38595f7b866452a7b7846760dec2b2a24f743a63e5b1a81fe68e5ce4",
+      "pass": true
+    },
+    {
+      "id": "run_right",
+      "status": 200,
+      "bytes": 341536,
+      "sha256": "39f6b75b3e909f93cf8f9e62bd296cf3c2a1728d934e810e9d250fc0323e4e26",
+      "pass": true
+    },
+    {
+      "id": "run_forward_left",
+      "status": 200,
+      "bytes": 341544,
+      "sha256": "3302ce7c9573e70531f5554c80ab74ef6be41de500defc85ab51d2f856eb8024",
+      "pass": true
+    },
+    {
+      "id": "run_forward_right",
+      "status": 200,
+      "bytes": 341544,
+      "sha256": "1bd62c93153e29979fdc627e2210b323431f3b86b03e2dc506c62c605df31da1",
+      "pass": true
+    },
+    {
+      "id": "run_back_left",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "a7c5ae692232c595b7e878e826eb399886516d207357e19250d70599acf835c1",
+      "pass": true
+    },
+    {
+      "id": "run_back_right",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "b1148ebff0f3434de87f2d1ffe0230dfba362dcc1943371f912f93a05301e25a",
+      "pass": true
+    },
+    {
+      "id": "shuffle_left",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "934eaf89e666a846cd3c5504391960591efe272933591260ea9093170c52acc6",
+      "pass": true
+    },
+    {
+      "id": "shuffle_right",
+      "status": 200,
+      "bytes": 341540,
+      "sha256": "2089423d6fb3681fbe2ad04a38c8cbbd7ef47a26baa664df3055f69c9b8bdb46",
+      "pass": true
+    },
+    {
+      "id": "brake",
+      "status": 200,
+      "bytes": 341532,
+      "sha256": "ad09644578d58338c0edfaa6103f14fe53206cd7084795ae1d1386ab0ff991ae",
+      "pass": true
+    },
+    {
+      "id": "change_direction_left",
+      "status": 200,
+      "bytes": 341548,
+      "sha256": "c6f63f0977b396bbf9a799aba1bf9f04cfd18330c41375c736351421d6ba1b31",
+      "pass": true
+    },
+    {
+      "id": "change_direction_right",
+      "status": 200,
+      "bytes": 341548,
+      "sha256": "927756b4f71098ca258f3f052db3859c7c65e7eeaf6994f05d6b0d34791d7016",
+      "pass": true
+    },
+    {
+      "id": "recover_center",
+      "status": 200,
+      "bytes": 349144,
+      "sha256": "1238ef5e8a1ecf0d19712017dd111a14f06a509bfe8bd8c77616f8a77db327de",
+      "pass": true
+    },
+    {
+      "id": "forehand_flat_long",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "bb7feac7eecad0f4621447c217a5119949c7a3c1d2b855d9d228e3166e2bb70a",
+      "pass": true
+    },
+    {
+      "id": "forehand_flat_short",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "35f058782304a1420937e786b3ae25449ed0edc23ecce68d73951e832c9028b8",
+      "pass": true
+    },
+    {
+      "id": "forehand_topspin_long",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "632662a0211826d4f0d184a529cb1d38df84c827ffdb7303cab1dd5fe4648acb",
+      "pass": true
+    },
+    {
+      "id": "forehand_topspin_short",
+      "status": 200,
+      "bytes": 343640,
+      "sha256": "081bccc82b2b9b4fd2bfd404a162d7e8420322e3c15e4030bf8864524d54e855",
+      "pass": true
+    },
+    {
+      "id": "forehand_slice_long",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "951591da4f108bb44454ed4620121d2c97db94f0e6e4ce1e48b657297fadefaa",
+      "pass": true
+    },
+    {
+      "id": "forehand_slice_short",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "2fffc65f72827dbc1d2db1156f2ed4700bd22d8613efb94f80a1908ecb205d40",
+      "pass": true
+    },
+    {
+      "id": "backhand_flat_long",
+      "status": 200,
+      "bytes": 343632,
+      "sha256": "1d04edc9cacd0aae6bb6f228edfcdb3391bb975b316716f17b80522628ea6f29",
+      "pass": true
+    },
+    {
+      "id": "backhand_flat_short",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "e698820856d77b42a6501141db60c7c2c9bec58c775d040695a994f60141e55a",
+      "pass": true
+    },
+    {
+      "id": "backhand_topspin_long",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "99e4a2c2cb4922af07ebf96750f5f6954efeab6736fbc19940f5ce61a946b90e",
+      "pass": true
+    },
+    {
+      "id": "backhand_topspin_short",
+      "status": 200,
+      "bytes": 343640,
+      "sha256": "ba709c8f11c32a588bfd3dc871f65d1ff71fd0ecf73bb6f525915cb29edf17ac",
+      "pass": true
+    },
+    {
+      "id": "backhand_slice_long",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "2e1d8436892637ed7d701918a1a477b90d5f03e80537bde21bbdfe308a2addc7",
+      "pass": true
+    },
+    {
+      "id": "backhand_slice_short",
+      "status": 200,
+      "bytes": 343636,
+      "sha256": "17e325e6e887114f3d248c2e7d1c877e55cead1b12cba23777486ab97fcbd481",
+      "pass": true
+    },
+    {
+      "id": "serve_toss",
+      "status": 200,
+      "bytes": 337948,
+      "sha256": "684694f98ab86d7be16906c871ccc92905192dd4644b02d1d38c981c3705f155",
+      "pass": true
+    },
+    {
+      "id": "serve_trophy",
+      "status": 200,
+      "bytes": 337748,
+      "sha256": "b0a96964ec836c8ed67faa285a8475d1b8749dfbaae62bfd259151d47b4b21e3",
+      "pass": true
+    },
+    {
+      "id": "serve_contact",
+      "status": 200,
+      "bytes": 337940,
+      "sha256": "a5b7e1dabfbe6fc1eb780dbb2f230479150b4ed27fccb539be945a944fed0247",
+      "pass": true
+    },
+    {
+      "id": "serve_follow_through",
+      "status": 200,
+      "bytes": 337756,
+      "sha256": "728104e924819e53d9e194e9b1f4e5fe1ef7d8da322364ce92f14227612e5066",
+      "pass": true
+    },
+    {
+      "id": "serve_first_full",
+      "status": 200,
+      "bytes": 353348,
+      "sha256": "03eb126ec84af999f0f86793d3c448f0739376d2631e2d985975c8ca40cba4ae",
+      "pass": true
+    },
+    {
+      "id": "serve_second_full",
+      "status": 200,
+      "bytes": 353352,
+      "sha256": "c761f85cecf05bf43fc26298fd1a6cb44c2d61c58a8387226377183662b0ed14",
+      "pass": true
+    },
+    {
+      "id": "volley_forehand",
+      "status": 200,
+      "bytes": 339840,
+      "sha256": "3d89241d1ed325805968ae3a094d0e26871ec0a54b2c267d868eee9bb7967a62",
+      "pass": true
+    },
+    {
+      "id": "volley_backhand",
+      "status": 200,
+      "bytes": 339836,
+      "sha256": "dd63bebb6f55eedbdb220b7b2358d4b6490f763cd3e32e67e78dd8cf6ef131fb",
+      "pass": true
+    },
+    {
+      "id": "smash",
+      "status": 200,
+      "bytes": 341740,
+      "sha256": "a102a283a3374a5aebfd984b712d903b8517508bfe9439c8cd6529e93ff22986",
+      "pass": true
+    },
+    {
+      "id": "drop_forehand",
+      "status": 200,
+      "bytes": 341732,
+      "sha256": "0bdfeb5d6e8fdb6e94cd0965817793003be427ffa9fcf938b487a3051fe8ab8b",
+      "pass": true
+    },
+    {
+      "id": "drop_backhand",
+      "status": 200,
+      "bytes": 341732,
+      "sha256": "de2520076c58bcaab10b1857dcf9fb0086db020e929ff80791f7bc55ec636491",
+      "pass": true
+    },
+    {
+      "id": "lob",
+      "status": 200,
+      "bytes": 343620,
+      "sha256": "4ce097b691d6ab1e367b468d123302706fbac6502822190183a172a0e9254162",
+      "pass": true
+    },
+    {
+      "id": "celebrate_point",
+      "status": 200,
+      "bytes": 349144,
+      "sha256": "27b2d32e002662a7b529ed281aff5a31d1b62b1d53c64ca1eabbcfa98c688e88",
+      "pass": true
+    },
+    {
+      "id": "disappointed",
+      "status": 200,
+      "bytes": 349144,
+      "sha256": "d6202b5a3ae360e5a30bbc15a92d6a8e8c8dd6a6e80c8741d009a50d09b4dc60",
+      "pass": true
+    },
+    {
+      "id": "racket_plant",
+      "status": 200,
+      "bytes": 349324,
+      "sha256": "d56d2223b8be1b7f14f69d68e37b209b35e53548138bfbf16fa8ef7e6a588bdf",
+      "pass": true
+    },
+    {
+      "id": "hands_sky",
+      "status": 200,
+      "bytes": 349140,
+      "sha256": "1e4fc170ef7214431502f1efc13e86adca3126725d158d8fb5ef647026ccd155",
+      "pass": true
+    },
+    {
+      "id": "handshake",
+      "status": 200,
+      "bytes": 349140,
+      "sha256": "3405371d0ed7183760dd32abb95cd2c7b309f14532a597e9c2a7100961827225",
+      "pass": true
+    },
+    {
+      "id": "fist_pump",
+      "status": 200,
+      "bytes": 349140,
+      "sha256": "9c18273664413544dccfece83814f1b8ea58201df529ef8c970ffe4e1c28d001",
+      "pass": true
+    }
+  ],
+  "sequence": [
+    {
+      "boundarySeconds": 0.4,
+      "epsilonSeconds": 0.0003333333333333333,
+      "rootMidpointErrorMeters": 5.346820763918458e-10,
+      "headMidpointErrorMeters": 0.0000041011373518775796,
+      "rootVelocityChangeMps": 0.00000320809312448489,
+      "headVelocityChangeMps": 0.02460682411111522,
+      "states": [
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.3891457749199613,
+            1.5266536904613246,
+            1.4322852231500325
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.0391333333300001
+          ],
+          "timeSeconds": 0.39966666666666667,
+          "frame": 12,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.3891457749199613,
+            1.5266536904613246,
+            1.4322852231500325
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        },
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.38914060226228,
+            1.5265624104690296,
+            1.4332404727362653
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.04
+          ],
+          "timeSeconds": 0.4,
+          "frame": 12,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.38914060226228,
+            1.5265624104690296,
+            1.4332404727362653
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        },
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.38914283039362113,
+            1.526471628936279,
+            1.4341992233466687
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.0408666656006356
+          ],
+          "timeSeconds": 0.4003333333333334,
+          "frame": 12,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.38914283039362113,
+            1.526471628936279,
+            1.4341992233466687
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "boundarySeconds": 2.2,
+      "epsilonSeconds": 0.0003333333333333333,
+      "rootMidpointErrorMeters": 5.346822984364508e-10,
+      "headMidpointErrorMeters": 4.7165161107631543e-7,
+      "rootVelocityChangeMps": 0.00000320809312448489,
+      "headVelocityChangeMps": 0.0028299096664578926,
+      "states": [
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.35034382717870083,
+            1.4945691496136442,
+            1.9442502003939812
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.4300000015000072
+          ],
+          "timeSeconds": 2.199666666666667,
+          "frame": 66,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.35034382717870083,
+            1.4945691496136442,
+            1.9442502003939812
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        },
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.3503438223383022,
+            1.494569146561736,
+            1.944250191759033
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.4300000015000072
+          ],
+          "timeSeconds": 2.2,
+          "frame": 66,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.3503438223383022,
+            1.494569146561736,
+            1.944250191759033
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        },
+        {
+          "ready": true,
+          "sequence": true,
+          "id": "run_hit_run_demo",
+          "clipId": "run_hit_run_demo",
+          "trailPointCount": 181,
+          "headWorldMeters": [
+            -0.3503440025643475,
+            1.494569821567788,
+            1.9442495539907263
+          ],
+          "rootWorldMeters": [
+            0,
+            0,
+            1.4300000025693715
+          ],
+          "timeSeconds": 2.2003333333333335,
+          "frame": 66,
+          "durationSeconds": 3,
+          "playing": false,
+          "loaded": 46,
+          "clipCount": 46,
+          "trailSamples": 181,
+          "racketHeadWorldMeters": [
+            -0.3503440025643475,
+            1.494569821567788,
+            1.9442495539907263
+          ],
+          "events": [
+            {
+              "name": "racket_contact",
+              "domain": "presentation",
+              "frame": 39,
+              "atSeconds": 1.3,
+              "time": 0.5,
+              "node": "RacketHead",
+              "localPointMeters": [
+                0,
+                0,
+                0
+              ],
+              "worldPointMeters": [
+                -0.948842725,
+                0.685710181,
+                1.4467862845000072
+              ]
+            }
+          ],
+          "decoderConfigured": false,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "screenshots": [
+    "sequence.png",
+    "preview-desktop.png",
+    "preview-mobile.png",
+    "preview-landscape.png",
+    "serve_first_full.png",
+    "serve_second_full.png",
+    "volley_forehand.png",
+    "smash.png"
+  ],
+  "clips": [
+    {
+      "id": "ready_idle",
+      "sampledSeconds": 1,
+      "trailPointCount": 121,
+      "headWorldMeters": [
+        -0.35034383354745324,
+        1.4945691849988232,
+        0.5142502642843004
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "ready_idle",
+        "clipId": "ready_idle",
+        "trailPointCount": 121,
+        "headWorldMeters": [
+          -0.35034383354745324,
+          1.4945691849988232,
+          0.5142502642843004
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1,
+        "frame": 30,
+        "durationSeconds": 2,
+        "playing": false,
+        "loaded": 1,
+        "clipCount": 46,
+        "trailSamples": 121,
+        "racketHeadWorldMeters": [
+          -0.35034383354745324,
+          1.4945691849988232,
+          0.5142502642843004
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "split_step",
+      "sampledSeconds": 0.6,
+      "trailPointCount": 73,
+      "headWorldMeters": [
+        -0.3503438389722071,
+        1.4945691132320522,
+        0.5142501291736801
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "split_step",
+        "clipId": "split_step",
+        "trailPointCount": 73,
+        "headWorldMeters": [
+          -0.3503438389722071,
+          1.4945691132320522,
+          0.5142501291736801
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.6,
+        "frame": 18,
+        "durationSeconds": 1.2,
+        "playing": false,
+        "loaded": 2,
+        "clipCount": 46,
+        "trailSamples": 73,
+        "racketHeadWorldMeters": [
+          -0.3503438389722071,
+          1.4945691132320522,
+          0.5142501291736801
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_forward",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.3891406033998651,
+        1.5265624720491557,
+        2.4732404044837333
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_forward",
+        "clipId": "run_forward",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          2.4732404044837333
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          2.0799998927116947
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 3,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          2.4732404044837333
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_backward",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.3891406033998651,
+        1.5265624720491557,
+        -1.046759523990745
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_backward",
+        "clipId": "run_backward",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          -1.046759523990745
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          -1.4400000357627827
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 4,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          -1.046759523990745
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_left",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        1.6908592893118297,
+        1.5265624720491557,
+        0.3932405117720379
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_left",
+        "clipId": "run_left",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          1.6908592893118297,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "rootWorldMeters": [
+          2.0799998927116947,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 5,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          1.6908592893118297,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_right",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -2.4691404961115597,
+        1.5265624720491557,
+        0.3932405117720379
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_right",
+        "clipId": "run_right",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -2.4691404961115597,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "rootWorldMeters": [
+          -2.0799998927116947,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 6,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -2.4691404961115597,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_forward_left",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        1.0816415354427475,
+        1.5265624720491557,
+        1.8640226506146502
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_forward_left",
+        "clipId": "run_forward_left",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          1.0816415354427475,
+          1.5265624720491557,
+          1.8640226506146502
+        ],
+        "rootWorldMeters": [
+          1.4707821388426126,
+          0,
+          1.4707821388426126
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 7,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          1.0816415354427475,
+          1.5265624720491557,
+          1.8640226506146502
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_forward_right",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -1.8599227422424776,
+        1.5265624720491557,
+        1.8640226506146502
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_forward_right",
+        "clipId": "run_forward_right",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -1.8599227422424776,
+          1.5265624720491557,
+          1.8640226506146502
+        ],
+        "rootWorldMeters": [
+          -1.4707821388426126,
+          0,
+          1.4707821388426126
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 8,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -1.8599227422424776,
+          1.5265624720491557,
+          1.8640226506146502
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_back_left",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        1.0816415354427475,
+        1.5265624720491557,
+        -1.0775416270705749
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_back_left",
+        "clipId": "run_back_left",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          1.0816415354427475,
+          1.5265624720491557,
+          -1.0775416270705749
+        ],
+        "rootWorldMeters": [
+          1.4707821388426126,
+          0,
+          -1.4707821388426126
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 9,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          1.0816415354427475,
+          1.5265624720491557,
+          -1.0775416270705749
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "run_back_right",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -1.8599227422424776,
+        1.5265624720491557,
+        -1.0775416270705749
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "run_back_right",
+        "clipId": "run_back_right",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -1.8599227422424776,
+          1.5265624720491557,
+          -1.0775416270705749
+        ],
+        "rootWorldMeters": [
+          -1.4707821388426126,
+          0,
+          -1.4707821388426126
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 10,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -1.8599227422424776,
+          1.5265624720491557,
+          -1.0775416270705749
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "shuffle_left",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        0.6508593429559822,
+        1.5265624720491557,
+        0.3932405117720379
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "shuffle_left",
+        "clipId": "shuffle_left",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          0.6508593429559822,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "rootWorldMeters": [
+          1.0399999463558474,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 11,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          0.6508593429559822,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "shuffle_right",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -1.4291405497557124,
+        1.5265624720491557,
+        0.3932405117720379
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "shuffle_right",
+        "clipId": "shuffle_right",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -1.4291405497557124,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "rootWorldMeters": [
+          -1.0399999463558474,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 12,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -1.4291405497557124,
+          1.5265624720491557,
+          0.3932405117720379
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "brake",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.3891406033998651,
+        1.5265624720491557,
+        1.2671391930936327
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "brake",
+        "clipId": "brake",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          1.2671391930936327
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0.8738986813215948
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 13,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.3891406033998651,
+          1.5265624720491557,
+          1.2671391930936327
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "change_direction_left",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.08914060302743795,
+        1.5265624720491557,
+        1.693240451795019
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "change_direction_left",
+        "clipId": "change_direction_left",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.08914060302743795,
+          1.5265624720491557,
+          1.693240451795019
+        ],
+        "rootWorldMeters": [
+          0.30000000037242713,
+          0,
+          1.2999999400229814
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 14,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.08914060302743795,
+          1.5265624720491557,
+          1.693240451795019
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "change_direction_right",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.6891406037722922,
+        1.5265624720491557,
+        1.693240451795019
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "change_direction_right",
+        "clipId": "change_direction_right",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.6891406037722922,
+          1.5265624720491557,
+          1.693240451795019
+        ],
+        "rootWorldMeters": [
+          -0.30000000037242713,
+          0,
+          1.2999999400229814
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 15,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.6891406037722922,
+          1.5265624720491557,
+          1.693240451795019
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "recover_center",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        0.8108593721128772,
+        1.5265624883516806,
+        0.393240495825709
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "recover_center",
+        "clipId": "recover_center",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          0.8108593721128772,
+          1.5265624883516806,
+          0.393240495825709
+        ],
+        "rootWorldMeters": [
+          1.1999999761766444,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 16,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          0.8108593721128772,
+          1.5265624883516806,
+          0.393240495825709
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_flat_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -0.9488427545124847,
+        0.6857101896101819,
+        0.016786621067921958
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_flat_long",
+        "clipId": "forehand_flat_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -0.9488427545124847,
+          0.6857101896101819,
+          0.016786621067921958
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 17,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -0.9488427545124847,
+          0.6857101896101819,
+          0.016786621067921958
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.948842725,
+              0.685710181,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_flat_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -1.060849863480813,
+        1.1151708423916211,
+        -0.20366635027250218
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_flat_short",
+        "clipId": "forehand_flat_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -1.060849863480813,
+          1.1151708423916211,
+          -0.20366635027250218
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 18,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -1.060849863480813,
+          1.1151708423916211,
+          -0.20366635027250218
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.060849758,
+              1.115170781,
+              -0.203666699
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_topspin_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -0.9462120548343407,
+        0.6770243999541208,
+        0.01678661189848545
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_topspin_long",
+        "clipId": "forehand_topspin_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -0.9462120548343407,
+          0.6770243999541208,
+          0.01678661189848545
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 19,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -0.9462120548343407,
+          0.6770243999541208,
+          0.01678661189848545
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.946212074,
+              0.677024377,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_topspin_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -1.0617976631387143,
+        1.0992848792390844,
+        -0.20389828809398705
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_topspin_short",
+        "clipId": "forehand_topspin_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -1.0617976631387143,
+          1.0992848792390844,
+          -0.20389828809398705
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 20,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -1.0617976631387143,
+          1.0992848792390844,
+          -0.20389828809398705
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.061797596,
+              1.099284851,
+              -0.203898651
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_slice_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -0.946212045322741,
+        0.6770243669014728,
+        0.016786622731576085
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_slice_long",
+        "clipId": "forehand_slice_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -0.946212045322741,
+          0.6770243669014728,
+          0.016786622731576085
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 21,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -0.946212045322741,
+          0.6770243669014728,
+          0.016786622731576085
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.946212074,
+              0.677024377,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "forehand_slice_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -1.0617976922969037,
+        1.0992848245272417,
+        -0.2038982987325726
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "forehand_slice_short",
+        "clipId": "forehand_slice_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -1.0617976922969037,
+          1.0992848245272417,
+          -0.2038982987325726
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 22,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -1.0617976922969037,
+          1.0992848245272417,
+          -0.2038982987325726
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.061797596,
+              1.099284851,
+              -0.203898651
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_flat_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.6288428096429293,
+        0.6857101905964931,
+        0.016786602300228624
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_flat_long",
+        "clipId": "backhand_flat_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.6288428096429293,
+          0.6857101905964931,
+          0.016786602300228624
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 23,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.6288428096429293,
+          0.6857101905964931,
+          0.016786602300228624
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.628842725,
+              0.685710181,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_flat_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.7408498852750569,
+        1.1151708433779322,
+        -0.20366636904019747
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_flat_short",
+        "clipId": "backhand_flat_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.7408498852750569,
+          1.1151708433779322,
+          -0.20366636904019747
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 24,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.7408498852750569,
+          1.1151708433779322,
+          -0.20366636904019747
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.740849758,
+              1.115170781,
+              -0.203666699
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_topspin_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.6262119964368201,
+        0.6770244009404323,
+        0.016786593130786058
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_topspin_long",
+        "clipId": "backhand_topspin_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.6262119964368201,
+          0.6770244009404323,
+          0.016786593130786058
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 25,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.6262119964368201,
+          0.6770244009404323,
+          0.016786593130786058
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.626212074,
+              0.677024377,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_topspin_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.7417976335445372,
+        1.0992848802253958,
+        -0.20389830686168536
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_topspin_short",
+        "clipId": "backhand_topspin_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.7417976335445372,
+          1.0992848802253958,
+          -0.20389830686168536
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 26,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.7417976335445372,
+          1.0992848802253958,
+          -0.20389830686168536
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.741797596,
+              1.099284851,
+              -0.203898651
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_slice_long",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.6262119869252227,
+        0.6770243678877849,
+        0.016786603233632628
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_slice_long",
+        "clipId": "backhand_slice_long",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.6262119869252227,
+          0.6770243678877849,
+          0.016786603233632628
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 27,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.6262119869252227,
+          0.6770243678877849,
+          0.016786603233632628
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.626212074,
+              0.677024377,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "backhand_slice_short",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        0.7417976486025621,
+        1.0992848235233115,
+        -0.20389831132357178
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "backhand_slice_short",
+        "clipId": "backhand_slice_short",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          0.7417976486025621,
+          1.0992848235233115,
+          -0.20389831132357178
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 28,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          0.7417976486025621,
+          1.0992848235233115,
+          -0.20389831132357178
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.741797596,
+              1.099284851,
+              -0.203898651
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_toss",
+      "sampledSeconds": 0.6,
+      "trailPointCount": 73,
+      "headWorldMeters": [
+        -0.4806277076800555,
+        0.8094428462488867,
+        -0.3595214426754466
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_toss",
+        "clipId": "serve_toss",
+        "trailPointCount": 73,
+        "headWorldMeters": [
+          -0.4806277076800555,
+          0.8094428462488867,
+          -0.3595214426754466
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.6,
+        "frame": 18,
+        "durationSeconds": 1.2,
+        "playing": false,
+        "loaded": 29,
+        "clipCount": 46,
+        "trailSamples": 73,
+        "racketHeadWorldMeters": [
+          -0.4806277076800555,
+          0.8094428462488867,
+          -0.3595214426754466
+        ],
+        "events": [
+          {
+            "name": "ball_release",
+            "domain": "presentation",
+            "frame": 23,
+            "atSeconds": 0.766666667,
+            "time": 0.638888889,
+            "node": "LeftHand",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.2599317,
+              1.594161646,
+              0.077006223
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_trophy",
+      "sampledSeconds": 0.6,
+      "trailPointCount": 73,
+      "headWorldMeters": [
+        -0.4806277076800555,
+        0.8094428462488867,
+        -0.3595214426754466
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_trophy",
+        "clipId": "serve_trophy",
+        "trailPointCount": 73,
+        "headWorldMeters": [
+          -0.4806277076800555,
+          0.8094428462488867,
+          -0.3595214426754466
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.6,
+        "frame": 18,
+        "durationSeconds": 1.2,
+        "playing": false,
+        "loaded": 30,
+        "clipCount": 46,
+        "trailSamples": 73,
+        "racketHeadWorldMeters": [
+          -0.4806277076800555,
+          0.8094428462488867,
+          -0.3595214426754466
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_contact",
+      "sampledSeconds": 0.6,
+      "trailPointCount": 73,
+      "headWorldMeters": [
+        -0.2779537965953672,
+        2.1523603747427895,
+        0.01678562442543328
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_contact",
+        "clipId": "serve_contact",
+        "trailPointCount": 73,
+        "headWorldMeters": [
+          -0.2779537965953672,
+          2.1523603747427895,
+          0.01678562442543328
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.6,
+        "frame": 18,
+        "durationSeconds": 1.2,
+        "playing": false,
+        "loaded": 31,
+        "clipCount": 46,
+        "trailSamples": 73,
+        "racketHeadWorldMeters": [
+          -0.2779537965953672,
+          2.1523603747427895,
+          0.01678562442543328
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 18,
+            "atSeconds": 0.6,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.277953768,
+              2.15236031,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_follow_through",
+      "sampledSeconds": 0.6,
+      "trailPointCount": 73,
+      "headWorldMeters": [
+        0.20576067119694172,
+        0.49135358979402977,
+        0.5356214907336492
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_follow_through",
+        "clipId": "serve_follow_through",
+        "trailPointCount": 73,
+        "headWorldMeters": [
+          0.20576067119694172,
+          0.49135358979402977,
+          0.5356214907336492
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.6,
+        "frame": 18,
+        "durationSeconds": 1.2,
+        "playing": false,
+        "loaded": 32,
+        "clipCount": 46,
+        "trailSamples": 73,
+        "racketHeadWorldMeters": [
+          0.20576067119694172,
+          0.49135358979402977,
+          0.5356214907336492
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_first_full",
+      "sampledSeconds": 1.833333333,
+      "trailPointCount": 169,
+      "headWorldMeters": [
+        -0.27795382152405057,
+        2.1474029107214854,
+        0.016785191355111105
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_first_full",
+        "clipId": "serve_first_full",
+        "trailPointCount": 169,
+        "headWorldMeters": [
+          -0.27795382152405057,
+          2.1474029107214854,
+          0.016785191355111105
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.833333333,
+        "frame": 55,
+        "durationSeconds": 2.8,
+        "playing": false,
+        "loaded": 33,
+        "clipCount": 46,
+        "trailSamples": 169,
+        "racketHeadWorldMeters": [
+          -0.27795382152405057,
+          2.1474029107214854,
+          0.016785191355111105
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 55,
+            "atSeconds": 1.833333333,
+            "time": 0.654761905,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.277953768,
+              2.147402878,
+              0.016786283
+            ]
+          },
+          {
+            "name": "ball_release",
+            "domain": "presentation",
+            "frame": 23,
+            "atSeconds": 0.766666667,
+            "time": 0.273809524,
+            "node": "LeftHand",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.2599317,
+              1.604678912,
+              0.077006223
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "serve_second_full",
+      "sampledSeconds": 1.833333333,
+      "trailPointCount": 169,
+      "headWorldMeters": [
+        -0.2779538077463643,
+        2.1474029072360055,
+        0.016785430635272783
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "serve_second_full",
+        "clipId": "serve_second_full",
+        "trailPointCount": 169,
+        "headWorldMeters": [
+          -0.2779538077463643,
+          2.1474029072360055,
+          0.016785430635272783
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.833333333,
+        "frame": 55,
+        "durationSeconds": 2.8,
+        "playing": false,
+        "loaded": 34,
+        "clipCount": 46,
+        "trailSamples": 169,
+        "racketHeadWorldMeters": [
+          -0.2779538077463643,
+          2.1474029072360055,
+          0.016785430635272783
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 55,
+            "atSeconds": 1.833333333,
+            "time": 0.654761905,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.277953768,
+              2.147402878,
+              0.016786283
+            ]
+          },
+          {
+            "name": "ball_release",
+            "domain": "presentation",
+            "frame": 23,
+            "atSeconds": 0.766666667,
+            "time": 0.273809524,
+            "node": "LeftHand",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.2599317,
+              1.604678912,
+              0.077006223
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "volley_forehand",
+      "sampledSeconds": 0.7,
+      "trailPointCount": 85,
+      "headWorldMeters": [
+        -1.0874318100290283,
+        1.115170801242593,
+        0.01678635940124229
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "volley_forehand",
+        "clipId": "volley_forehand",
+        "trailPointCount": 85,
+        "headWorldMeters": [
+          -1.0874318100290283,
+          1.115170801242593,
+          0.01678635940124229
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.7,
+        "frame": 21,
+        "durationSeconds": 1.4,
+        "playing": false,
+        "loaded": 35,
+        "clipCount": 46,
+        "trailSamples": 85,
+        "racketHeadWorldMeters": [
+          -1.0874318100290283,
+          1.115170801242593,
+          0.01678635940124229
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 21,
+            "atSeconds": 0.7,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.087431833,
+              1.115170781,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "volley_backhand",
+      "sampledSeconds": 0.7,
+      "trailPointCount": 85,
+      "headWorldMeters": [
+        0.768407622098307,
+        1.0992848588456698,
+        0.016786356022407363
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "volley_backhand",
+        "clipId": "volley_backhand",
+        "trailPointCount": 85,
+        "headWorldMeters": [
+          0.768407622098307,
+          1.0992848588456698,
+          0.016786356022407363
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.7,
+        "frame": 21,
+        "durationSeconds": 1.4,
+        "playing": false,
+        "loaded": 36,
+        "clipCount": 46,
+        "trailSamples": 85,
+        "racketHeadWorldMeters": [
+          0.768407622098307,
+          1.0992848588456698,
+          0.016786356022407363
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 21,
+            "atSeconds": 0.7,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.768407639,
+              1.099284851,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "smash",
+      "sampledSeconds": 0.866666667,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -0.2779537750644935,
+        2.1508074272157125,
+        0.01678606799408118
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "smash",
+        "clipId": "smash",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -0.2779537750644935,
+          2.1508074272157125,
+          0.01678606799408118
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.866666667,
+        "frame": 26,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 37,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -0.2779537750644935,
+          2.1508074272157125,
+          0.01678606799408118
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 26,
+            "atSeconds": 0.866666667,
+            "time": 0.541666667,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -0.277953768,
+              2.150807396,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "drop_forehand",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        -1.0884076693936509,
+        1.099284885091342,
+        0.016786226414828666
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "drop_forehand",
+        "clipId": "drop_forehand",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          -1.0884076693936509,
+          1.099284885091342,
+          0.016786226414828666
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 38,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          -1.0884076693936509,
+          1.099284885091342,
+          0.016786226414828666
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 24,
+            "atSeconds": 0.8,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.088407639,
+              1.099284851,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "drop_backhand",
+      "sampledSeconds": 0.8,
+      "trailPointCount": 97,
+      "headWorldMeters": [
+        0.7684076208195623,
+        1.099284885091344,
+        0.016786227179639908
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "drop_backhand",
+        "clipId": "drop_backhand",
+        "trailPointCount": 97,
+        "headWorldMeters": [
+          0.7684076208195623,
+          1.099284885091344,
+          0.016786227179639908
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.8,
+        "frame": 24,
+        "durationSeconds": 1.6,
+        "playing": false,
+        "loaded": 39,
+        "clipCount": 46,
+        "trailSamples": 97,
+        "racketHeadWorldMeters": [
+          0.7684076208195623,
+          1.099284885091344,
+          0.016786227179639908
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 24,
+            "atSeconds": 0.8,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              0.768407639,
+              1.099284851,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "lob",
+      "sampledSeconds": 0.9,
+      "trailPointCount": 109,
+      "headWorldMeters": [
+        -1.0884076188173952,
+        1.0992848950571428,
+        0.016786505925544003
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "lob",
+        "clipId": "lob",
+        "trailPointCount": 109,
+        "headWorldMeters": [
+          -1.0884076188173952,
+          1.0992848950571428,
+          0.016786505925544003
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 0.9,
+        "frame": 27,
+        "durationSeconds": 1.8,
+        "playing": false,
+        "loaded": 40,
+        "clipCount": 46,
+        "trailSamples": 109,
+        "racketHeadWorldMeters": [
+          -1.0884076188173952,
+          1.0992848950571428,
+          0.016786505925544003
+        ],
+        "events": [
+          {
+            "name": "racket_contact",
+            "domain": "presentation",
+            "frame": 27,
+            "atSeconds": 0.9,
+            "time": 0.5,
+            "node": "RacketHead",
+            "localPointMeters": [
+              0,
+              0,
+              0
+            ],
+            "worldPointMeters": [
+              -1.088407639,
+              1.099284851,
+              0.016786283
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "celebrate_point",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.5120200737725344,
+        2.075741914031963,
+        0.06678628383592355
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "celebrate_point",
+        "clipId": "celebrate_point",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.5120200737725344,
+          2.075741914031963,
+          0.06678628383592355
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 41,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.5120200737725344,
+          2.075741914031963,
+          0.06678628383592355
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "disappointed",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.49923792032348574,
+        0.3146315575418531,
+        0.24048145094276288
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "disappointed",
+        "clipId": "disappointed",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.49923792032348574,
+          0.3146315575418531,
+          0.24048145094276288
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 42,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.49923792032348574,
+          0.3146315575418531,
+          0.24048145094276288
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "racket_plant",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.3000000113671474,
+        0.184999999684348,
+        0.11999999691781323
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "racket_plant",
+        "clipId": "racket_plant",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.3000000113671474,
+          0.184999999684348,
+          0.11999999691781323
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 43,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.3000000113671474,
+          0.184999999684348,
+          0.11999999691781323
+        ],
+        "events": [
+          {
+            "name": "racket_ground_contact",
+            "domain": "presentation",
+            "frame": 30,
+            "atSeconds": 1,
+            "time": 0.416666667,
+            "node": "Racket",
+            "localPointMeters": [
+              0,
+              0.685,
+              0
+            ],
+            "worldPointMeters": [
+              -0.3,
+              0,
+              0.12
+            ]
+          }
+        ],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "hands_sky",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.5120200737725344,
+        2.075741914031963,
+        0.06678628383592355
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "hands_sky",
+        "clipId": "hands_sky",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.5120200737725344,
+          2.075741914031963,
+          0.06678628383592355
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 44,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.5120200737725344,
+          2.075741914031963,
+          0.06678628383592355
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "handshake",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.3503438335480686,
+        1.494569184998834,
+        0.5142502642846793
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "handshake",
+        "clipId": "handshake",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.3503438335480686,
+          1.494569184998834,
+          0.5142502642846793
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 45,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.3503438335480686,
+          1.494569184998834,
+          0.5142502642846793
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    },
+    {
+      "id": "fist_pump",
+      "sampledSeconds": 1.2,
+      "trailPointCount": 145,
+      "headWorldMeters": [
+        -0.3503438231379316,
+        1.4945691529496634,
+        0.5142502223638419
+      ],
+      "state": {
+        "ready": true,
+        "sequence": false,
+        "id": "fist_pump",
+        "clipId": "fist_pump",
+        "trailPointCount": 145,
+        "headWorldMeters": [
+          -0.3503438231379316,
+          1.4945691529496634,
+          0.5142502223638419
+        ],
+        "rootWorldMeters": [
+          0,
+          0,
+          0
+        ],
+        "timeSeconds": 1.2,
+        "frame": 36,
+        "durationSeconds": 2.4,
+        "playing": false,
+        "loaded": 46,
+        "clipCount": 46,
+        "trailSamples": 145,
+        "racketHeadWorldMeters": [
+          -0.3503438231379316,
+          1.4945691529496634,
+          0.5142502223638419
+        ],
+        "events": [],
+        "decoderConfigured": false,
+        "errors": []
+      }
+    }
+  ]
+}

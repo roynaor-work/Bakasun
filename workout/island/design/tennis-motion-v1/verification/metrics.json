@@ -1,0 +1,2467 @@
+{
+  "pass": true,
+  "fps": 30,
+  "clipCount": 46,
+  "plantSamplingHz": 120,
+  "contactSpeedMethod": "World-space RacketHead central difference at contact frame ±1/30 s; additional ±1/3000 s SLERP derivative diagnostic.",
+  "maxPlantSlipMeters": 0.00618743,
+  "failures": [],
+  "compactSwingComparisons": [
+    {
+      "longClip": "forehand_flat_long",
+      "shortClip": "forehand_flat_short",
+      "longPathMeters": 2.44528949,
+      "shortPathMeters": 1.95810286,
+      "shortToLongRatio": 0.80076525
+    },
+    {
+      "longClip": "forehand_topspin_long",
+      "shortClip": "forehand_topspin_short",
+      "longPathMeters": 2.43411263,
+      "shortPathMeters": 2.03614547,
+      "shortToLongRatio": 0.83650421
+    },
+    {
+      "longClip": "forehand_slice_long",
+      "shortClip": "forehand_slice_short",
+      "longPathMeters": 2.44372555,
+      "shortPathMeters": 2.03502086,
+      "shortToLongRatio": 0.83275344
+    },
+    {
+      "longClip": "backhand_flat_long",
+      "shortClip": "backhand_flat_short",
+      "longPathMeters": 2.28932891,
+      "shortPathMeters": 1.7860537,
+      "shortToLongRatio": 0.78016474
+    },
+    {
+      "longClip": "backhand_topspin_long",
+      "shortClip": "backhand_topspin_short",
+      "longPathMeters": 2.29356545,
+      "shortPathMeters": 1.90896637,
+      "shortToLongRatio": 0.83231388
+    },
+    {
+      "longClip": "backhand_slice_long",
+      "shortClip": "backhand_slice_short",
+      "longPathMeters": 2.29621482,
+      "shortPathMeters": 1.89092169,
+      "shortToLongRatio": 0.82349512
+    }
+  ],
+  "clips": [
+    {
+      "id": "ready_idle",
+      "durationSeconds": 2,
+      "frames": 61,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00001242
+      },
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.8e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 60,
+          "samples": 241,
+          "maxSlipMeters": 1.8e-7,
+          "maxSoleHeightMeters": 1.7e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 60,
+          "samples": 241,
+          "maxSlipMeters": 1.8e-7,
+          "maxSoleHeightMeters": 1.7e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "split_step",
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 5e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "samples": 37,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 20,
+          "endFrame": 36,
+          "samples": 65,
+          "maxSlipMeters": 4.9e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "samples": 37,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 20,
+          "endFrame": 36,
+          "samples": 65,
+          "maxSlipMeters": 4.9e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_forward",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 9e-7,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00000925
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00260784,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.5e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00260784,
+          "maxSoleHeightMeters": 0.00258889
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00260784,
+          "maxSoleHeightMeters": 0.00258889
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00260784,
+          "maxSoleHeightMeters": 0.00258889
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00210869,
+          "maxSoleHeightMeters": 0.00208414
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_backward",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 1.8,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00009135
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.0009016,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.1e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.0009016,
+          "maxSoleHeightMeters": 0.00088612
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.0009016,
+          "maxSoleHeightMeters": 0.00088612
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.0009016,
+          "maxSoleHeightMeters": 0.00088612
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00087756,
+          "maxSoleHeightMeters": 0.00085067
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_left",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 9e-7,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00009166
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00618743,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.5e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00618743,
+          "maxSoleHeightMeters": 0.0058958
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00618743,
+          "maxSoleHeightMeters": 0.0058958
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.0029329,
+          "maxSoleHeightMeters": 0.00292082
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.0029329,
+          "maxSoleHeightMeters": 0.00292082
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_right",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 9e-7,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00009176
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00618743,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.5e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.0029329,
+          "maxSoleHeightMeters": 0.00292082
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.0029329,
+          "maxSoleHeightMeters": 0.00292082
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00618743,
+          "maxSoleHeightMeters": 0.0058958
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00260685,
+          "maxSoleHeightMeters": 0.00260508
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_forward_left",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 0.00000127,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00419301,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.2e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00419301,
+          "maxSoleHeightMeters": 0.00398574
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00419301,
+          "maxSoleHeightMeters": 0.00398574
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00266272,
+          "maxSoleHeightMeters": 0.00264524
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00266272,
+          "maxSoleHeightMeters": 0.00264524
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_forward_right",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 0.00000127,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00007605
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00419301,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.2e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00266272,
+          "maxSoleHeightMeters": 0.00264524
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00266272,
+          "maxSoleHeightMeters": 0.00264524
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00419301,
+          "maxSoleHeightMeters": 0.00398574
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00235974,
+          "maxSoleHeightMeters": 0.00231316
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_back_left",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 0.00000127,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00008256
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00423463,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.2e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00423463,
+          "maxSoleHeightMeters": 0.00417529
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00423463,
+          "maxSoleHeightMeters": 0.00417529
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00259541,
+          "maxSoleHeightMeters": 0.00252357
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00259541,
+          "maxSoleHeightMeters": 0.00252357
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "run_back_right",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.60000001,
+      "rootMaxAccelerationMps2": 0.00000127,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00005771
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00423463,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.2e-7,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00259541,
+          "maxSoleHeightMeters": 0.00252357
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00259541,
+          "maxSoleHeightMeters": 0.00252357
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00423463,
+          "maxSoleHeightMeters": 0.00417529
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00240461,
+          "maxSoleHeightMeters": 0.00237218
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "shuffle_left",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 1.30000002,
+      "rootMaxAccelerationMps2": 9e-7,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00004216
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00105614,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 8e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 12,
+          "samples": 49,
+          "maxSlipMeters": 0.00105614,
+          "maxSoleHeightMeters": 0.00103538
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 36,
+          "samples": 49,
+          "maxSlipMeters": 0.00105614,
+          "maxSoleHeightMeters": 0.00103538
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 24,
+          "samples": 49,
+          "maxSlipMeters": 0.00085414,
+          "maxSoleHeightMeters": 0.00084831
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 48,
+          "samples": 45,
+          "maxSlipMeters": 0.00085414,
+          "maxSoleHeightMeters": 0.00084831
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "shuffle_right",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 1.30000002,
+      "rootMaxAccelerationMps2": 9e-7,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": {
+        "positionMeters": 0,
+        "quaternionAngleRadians": 0.00009432
+      },
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00105614,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 8e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 12,
+          "samples": 49,
+          "maxSlipMeters": 0.00085414,
+          "maxSoleHeightMeters": 0.00084831
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 36,
+          "samples": 49,
+          "maxSlipMeters": 0.00085414,
+          "maxSoleHeightMeters": 0.00084831
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 24,
+          "samples": 49,
+          "maxSlipMeters": 0.00105614,
+          "maxSoleHeightMeters": 0.00103538
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 48,
+          "samples": 45,
+          "maxSlipMeters": 0.00085087,
+          "maxSoleHeightMeters": 0.0008499
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "brake",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 2.1418548,
+      "rootMaxAccelerationMps2": 3.4261326,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00135131,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00135131,
+          "maxSoleHeightMeters": 0.00132687
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00005235,
+          "maxSoleHeightMeters": 0.0000454
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00022932,
+          "maxSoleHeightMeters": 0.00022127
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00003841,
+          "maxSoleHeightMeters": 0.00003734
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "change_direction_left",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 1.99914117,
+      "rootMaxAccelerationMps2": 2.65088378,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00121987,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 6e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00118833,
+          "maxSoleHeightMeters": 0.00116674
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00061654,
+          "maxSoleHeightMeters": 0.00059427
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00075048,
+          "maxSoleHeightMeters": 0.00073562
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00121987,
+          "maxSoleHeightMeters": 0.00121315
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "change_direction_right",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 1.99914117,
+      "rootMaxAccelerationMps2": 2.65088378,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 4,
+      "maxPlantSlipMeters": 0.00118742,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 6e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00118742,
+          "maxSoleHeightMeters": 0.00116628
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00069358,
+          "maxSoleHeightMeters": 0.00067694
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.00081424,
+          "maxSoleHeightMeters": 0.00078939
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00103138,
+          "maxSoleHeightMeters": 0.00101794
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "recover_center",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 1.4996142,
+      "rootMaxAccelerationMps2": 2.4305553,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 6,
+      "maxPlantSlipMeters": 0.00063112,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 1.1e-7,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "samples": 29,
+          "maxSlipMeters": 0.00006509,
+          "maxSoleHeightMeters": 0.00006043
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 24,
+          "endFrame": 31,
+          "samples": 29,
+          "maxSlipMeters": 0.00060517,
+          "maxSoleHeightMeters": 0.00059021
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 48,
+          "endFrame": 55,
+          "samples": 29,
+          "maxSlipMeters": 0.00053409,
+          "maxSoleHeightMeters": 0.00052907
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 12,
+          "endFrame": 19,
+          "samples": 29,
+          "maxSlipMeters": 0.0003711,
+          "maxSoleHeightMeters": 0.00036259
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 43,
+          "samples": 25,
+          "maxSlipMeters": 0.00063112,
+          "maxSoleHeightMeters": 0.00062222
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 60,
+          "endFrame": 67,
+          "samples": 29,
+          "maxSlipMeters": 0.00014335,
+          "maxSoleHeightMeters": 0.00013742
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "forehand_flat_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.94884273,
+            0.68571018,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 13.32770189,
+          "slerpDerivativeSpeedMps": 14.07794865,
+          "faceNormalVelocityAlignment": 0.99999484,
+          "faceNormalSlerpVelocityAlignment": 0.99999462,
+          "contactSwingPathMeters": 2.44528949,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forehand_flat_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.06084976,
+            1.11517078,
+            -0.2036667
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 14.71678177,
+          "slerpDerivativeSpeedMps": 15.44194005,
+          "faceNormalVelocityAlignment": 0.97080838,
+          "faceNormalSlerpVelocityAlignment": 0.97078793,
+          "contactSwingPathMeters": 1.95810286,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forehand_topspin_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.94621207,
+            0.67702438,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 13.28736255,
+          "slerpDerivativeSpeedMps": 14.04797316,
+          "faceNormalVelocityAlignment": 0.99803039,
+          "faceNormalSlerpVelocityAlignment": 0.99829744,
+          "contactSwingPathMeters": 2.43411263,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forehand_topspin_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.0617976,
+            1.09928485,
+            -0.20389865
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 14.7800861,
+          "slerpDerivativeSpeedMps": 15.53768773,
+          "faceNormalVelocityAlignment": 0.99067398,
+          "faceNormalSlerpVelocityAlignment": 0.98985077,
+          "contactSwingPathMeters": 2.03614547,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forehand_slice_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.94621207,
+            0.67702438,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 13.28920309,
+          "slerpDerivativeSpeedMps": 14.04310694,
+          "faceNormalVelocityAlignment": 0.92154067,
+          "faceNormalSlerpVelocityAlignment": 0.92265492,
+          "contactSwingPathMeters": 2.44372555,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forehand_slice_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000282,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000282,
+          "maxSoleHeightMeters": 0.00000206
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000215,
+          "maxSoleHeightMeters": 0.00000156
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.0617976,
+            1.09928485,
+            -0.20389865
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 14.75951176,
+          "slerpDerivativeSpeedMps": 15.49998919,
+          "faceNormalVelocityAlignment": 0.78669509,
+          "faceNormalSlerpVelocityAlignment": 0.78909733,
+          "contactSwingPathMeters": 2.03502086,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_flat_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.62884273,
+            0.68571018,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 12.5413479,
+          "slerpDerivativeSpeedMps": 13.29073024,
+          "faceNormalVelocityAlignment": 0.99999966,
+          "faceNormalSlerpVelocityAlignment": 0.99999956,
+          "contactSwingPathMeters": 2.28932891,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_flat_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.74084976,
+            1.11517078,
+            -0.2036667
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 13.95285565,
+          "slerpDerivativeSpeedMps": 14.67717676,
+          "faceNormalVelocityAlignment": 0.97117539,
+          "faceNormalSlerpVelocityAlignment": 0.97113598,
+          "contactSwingPathMeters": 1.7860537,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_topspin_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.62621207,
+            0.67702438,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 12.50544919,
+          "slerpDerivativeSpeedMps": 13.26473955,
+          "faceNormalVelocityAlignment": 0.9975573,
+          "faceNormalSlerpVelocityAlignment": 0.99790177,
+          "contactSwingPathMeters": 2.29356545,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_topspin_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.7417976,
+            1.09928485,
+            -0.20389865
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 14.02414786,
+          "slerpDerivativeSpeedMps": 14.78006622,
+          "faceNormalVelocityAlignment": 0.99162087,
+          "faceNormalSlerpVelocityAlignment": 0.99076516,
+          "contactSwingPathMeters": 1.90896637,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_slice_long",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.62621207,
+            0.67702438,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 12.50190562,
+          "slerpDerivativeSpeedMps": 13.2549851,
+          "faceNormalVelocityAlignment": 0.95494419,
+          "faceNormalSlerpVelocityAlignment": 0.95403907,
+          "contactSwingPathMeters": 2.29621482,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backhand_slice_short",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00000528,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000528,
+          "maxSoleHeightMeters": 0.00000153
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 0.00000506,
+          "maxSoleHeightMeters": 0.00000301
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.7417976,
+            1.09928485,
+            -0.20389865
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 13.99531733,
+          "slerpDerivativeSpeedMps": 14.73497322,
+          "faceNormalVelocityAlignment": 0.99946808,
+          "faceNormalSlerpVelocityAlignment": 0.99932155,
+          "contactSwingPathMeters": 1.89092169,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serve_toss",
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 5e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "ball_release",
+          "frame": 23,
+          "atSeconds": 0.766666667,
+          "node": "LeftHand",
+          "worldPointMeters": [
+            0.2599317,
+            1.59416165,
+            0.07700622
+          ],
+          "pointErrorMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "serve_trophy",
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 5e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "serve_contact",
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 5e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 18,
+          "atSeconds": 0.6,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.27795377,
+            2.15236031,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 22.94274582,
+          "slerpDerivativeSpeedMps": 26.09088427,
+          "faceNormalVelocityAlignment": 0.99994147,
+          "faceNormalSlerpVelocityAlignment": 0.99828751,
+          "contactSwingPathMeters": 3.50055814,
+          "contactSwingWindowSeconds": [
+            0.3,
+            0.9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serve_follow_through",
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 5e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 36,
+          "samples": 145,
+          "maxSlipMeters": 5e-7,
+          "maxSoleHeightMeters": 4.8e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "serve_first_full",
+      "durationSeconds": 2.8,
+      "frames": 85,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 9e-8,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 84,
+          "samples": 337,
+          "maxSlipMeters": 9e-8,
+          "maxSoleHeightMeters": 9e-8
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 84,
+          "samples": 337,
+          "maxSlipMeters": 9e-8,
+          "maxSoleHeightMeters": 9e-8
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 55,
+          "atSeconds": 1.833333333,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.27795377,
+            2.14740288,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 22.87774425,
+          "slerpDerivativeSpeedMps": 26.12770744,
+          "faceNormalVelocityAlignment": 0.99993139,
+          "faceNormalSlerpVelocityAlignment": 0.99822573,
+          "contactSwingPathMeters": 3.49320126,
+          "contactSwingWindowSeconds": [
+            1.53333333,
+            2.13333333
+          ]
+        },
+        {
+          "name": "ball_release",
+          "frame": 23,
+          "atSeconds": 0.766666667,
+          "node": "LeftHand",
+          "worldPointMeters": [
+            0.2599317,
+            1.60467891,
+            0.07700622
+          ],
+          "pointErrorMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "serve_second_full",
+      "durationSeconds": 2.8,
+      "frames": 85,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 9e-8,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 84,
+          "samples": 337,
+          "maxSlipMeters": 9e-8,
+          "maxSoleHeightMeters": 9e-8
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 84,
+          "samples": 337,
+          "maxSlipMeters": 9e-8,
+          "maxSoleHeightMeters": 9e-8
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 55,
+          "atSeconds": 1.833333333,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.27795377,
+            2.14740288,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 18.86837187,
+          "slerpDerivativeSpeedMps": 20.3811224,
+          "faceNormalVelocityAlignment": 0.96109508,
+          "faceNormalSlerpVelocityAlignment": 0.95131666,
+          "contactSwingPathMeters": 3.20205767,
+          "contactSwingWindowSeconds": [
+            1.53333333,
+            2.13333333
+          ]
+        },
+        {
+          "name": "ball_release",
+          "frame": 23,
+          "atSeconds": 0.766666667,
+          "node": "LeftHand",
+          "worldPointMeters": [
+            0.2599317,
+            1.60467891,
+            0.07700622
+          ],
+          "pointErrorMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "volley_forehand",
+      "durationSeconds": 1.4,
+      "frames": 43,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 3.7e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 42,
+          "samples": 169,
+          "maxSlipMeters": 3.7e-7,
+          "maxSoleHeightMeters": 3.6e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 42,
+          "samples": 169,
+          "maxSlipMeters": 3.7e-7,
+          "maxSoleHeightMeters": 3.6e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 21,
+          "atSeconds": 0.7,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.08743183,
+            1.11517078,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 6.20476805,
+          "slerpDerivativeSpeedMps": 6.25737733,
+          "faceNormalVelocityAlignment": 0.99999065,
+          "faceNormalSlerpVelocityAlignment": 0.99999081,
+          "contactSwingPathMeters": 1.04201405,
+          "contactSwingWindowSeconds": [
+            0.4,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "volley_backhand",
+      "durationSeconds": 1.4,
+      "frames": 43,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 3.7e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 42,
+          "samples": 169,
+          "maxSlipMeters": 3.7e-7,
+          "maxSoleHeightMeters": 3.6e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 42,
+          "samples": 169,
+          "maxSlipMeters": 3.7e-7,
+          "maxSoleHeightMeters": 3.6e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 21,
+          "atSeconds": 0.7,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.76840764,
+            1.09928485,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 6.30257466,
+          "slerpDerivativeSpeedMps": 6.36145433,
+          "faceNormalVelocityAlignment": 0.98490587,
+          "faceNormalSlerpVelocityAlignment": 0.98458068,
+          "contactSwingPathMeters": 1.15474116,
+          "contactSwingWindowSeconds": [
+            0.4,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "smash",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 2.8e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 26,
+          "atSeconds": 0.866666667,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -0.27795377,
+            2.1508074,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 22.94265613,
+          "slerpDerivativeSpeedMps": 26.09064376,
+          "faceNormalVelocityAlignment": 0.99994538,
+          "faceNormalSlerpVelocityAlignment": 0.99829671,
+          "contactSwingPathMeters": 3.49910182,
+          "contactSwingWindowSeconds": [
+            0.56666667,
+            1.16666667
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drop_forehand",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 2.8e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 24,
+          "atSeconds": 0.8,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.08840764,
+            1.09928485,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 4.65058194,
+          "slerpDerivativeSpeedMps": 4.67522109,
+          "faceNormalVelocityAlignment": 0.8314585,
+          "faceNormalSlerpVelocityAlignment": 0.83224028,
+          "contactSwingPathMeters": 1.22670142,
+          "contactSwingWindowSeconds": [
+            0.5,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drop_backhand",
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 2.8e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "samples": 193,
+          "maxSlipMeters": 2.8e-7,
+          "maxSoleHeightMeters": 2.7e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 24,
+          "atSeconds": 0.8,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            0.76840764,
+            1.09928485,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 4.65058195,
+          "slerpDerivativeSpeedMps": 4.6752211,
+          "faceNormalVelocityAlignment": 0.99382053,
+          "faceNormalSlerpVelocityAlignment": 0.99366528,
+          "contactSwingPathMeters": 1.2267058,
+          "contactSwingWindowSeconds": [
+            0.5,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lob",
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 2.2e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 6e-8,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 2.2e-7,
+          "maxSoleHeightMeters": 2.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 54,
+          "samples": 217,
+          "maxSlipMeters": 2.2e-7,
+          "maxSoleHeightMeters": 2.2e-7
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_contact",
+          "frame": 27,
+          "atSeconds": 0.9,
+          "node": "RacketHead",
+          "worldPointMeters": [
+            -1.08840764,
+            1.09928485,
+            0.01678628
+          ],
+          "pointErrorMeters": 0,
+          "racketHeadSpeedMps": 9.35425628,
+          "slerpDerivativeSpeedMps": 9.55268778,
+          "faceNormalVelocityAlignment": 0.98637959,
+          "faceNormalSlerpVelocityAlignment": 0.98702923,
+          "contactSwingPathMeters": 2.22221304,
+          "contactSwingWindowSeconds": [
+            0.6,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "celebrate_point",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.3e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "disappointed",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.3e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "racket_plant",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 0.00002504,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 0.00002504,
+          "maxSoleHeightMeters": 0.00002382
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 0.00002504,
+          "maxSoleHeightMeters": 0.00002382
+        }
+      ],
+      "events": [
+        {
+          "name": "racket_ground_contact",
+          "frame": 30,
+          "atSeconds": 1,
+          "node": "Racket",
+          "worldPointMeters": [
+            -0.3,
+            0,
+            0.12
+          ],
+          "pointErrorMeters": 0,
+          "groundHeightMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "hands_sky",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.3e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "handshake",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.3e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        }
+      ],
+      "events": []
+    },
+    {
+      "id": "fist_pump",
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "rootMaxSpeedMps": 0,
+      "rootMaxAccelerationMps2": 0,
+      "rootMaxVerticalMeters": 0,
+      "loopClosure": null,
+      "footPlantCount": 2,
+      "maxPlantSlipMeters": 1.3e-7,
+      "maxQuaternionNormError": 0,
+      "maxBoneLengthErrorMeters": 0,
+      "minSoleHeightMeters": 0,
+      "maxGlbValueError": 3e-8,
+      "maxGlbTimeError": 1.1e-7,
+      "plants": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 72,
+          "samples": 289,
+          "maxSlipMeters": 1.3e-7,
+          "maxSoleHeightMeters": 1.2e-7
+        }
+      ],
+      "events": []
+    }
+  ]
+}
