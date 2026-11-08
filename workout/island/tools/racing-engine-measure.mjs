@@ -3,7 +3,7 @@ import {createRacing} from '../minigames/racing-physics.mjs';
 import {writeFile} from 'node:fs/promises';import {fileURLToPath} from 'node:url';
 const on=process.env.ENGINE!=='0',wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function accel(engineMul=1){
- const race=createRacing({stage:1,seed:3,config:{countdown:0,engine:on,walls:false,equipment:{engine:engineMul},stage:{opponents:0,grid:1}}}),tr=race.track,p=race.state.player,out={};
+ const race=createRacing({stage:1,seed:3,config:{countdown:0,engine:on,walls:false,scrub:false,equipment:{engine:engineMul},stage:{opponents:0,grid:1}}}),tr=race.track,p=race.state.player,out={};
  const top=race.stage.playerSpeed*Math.min(1.16,engineMul);let shifts=0,g=p.gear;
  for(let t=0;t<60*60;t++){const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);
   race.step(1/60,{steer:clamp(err*1.7,-1,1),autoAccelerate:true});const time=(t+1)/60;

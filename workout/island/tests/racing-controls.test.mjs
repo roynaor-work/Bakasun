@@ -34,7 +34,7 @@ function controlsFixture(t){
 }
 
 function raceAtHeading(heading,stage){
-  const race=createRacing({stage,seed:17,config:{countdown:0,steeringAssist:false,engine:false}});
+  const race=createRacing({stage,seed:17,config:{countdown:0,steeringAssist:false,engine:false,ers:false}});
   const distance=race.track.length*.24,point=race.track.sample(distance),player=race.state.player;
   const checkpoints=Math.floor(distance/(race.track.length/race.track.checkpoints.length));
   // An isolated, credited section avoids AI collisions and shortcut recovery in the short measurement.
@@ -56,7 +56,7 @@ function driverSideMovement(input,heading,stage){
 }
 
 function straightRace(t,speed=0){
-  const race=createRacing({seed:17,config:{countdown:0,steeringAssist:false,engine:false,stage:{opponents:0}}});
+  const race=createRacing({seed:17,config:{countdown:0,steeringAssist:false,engine:false,ers:false,stage:{opponents:0}}});
   const distance=race.track.length-2,point=race.track.sample(distance),checkpoints=15;
   Object.assign(race.state.player,{x:point.x,y:point.y,z:point.z,heading:point.heading,speed,
     s:point.s,routeS:distance,previousS:distance,progress:distance,lateral:0,offroad:false,checkpoints,nextCheckpoint:checkpoints+1});
