@@ -1,0 +1,10 @@
+<!doctype html><html dir="rtl" lang="he"><meta charset="utf-8"><body style="margin:0;background:#2f6b5e;color:#fff;font:14px sans-serif">
+<link rel="stylesheet" href="../../minigames/tennis.css">
+<div class="game-screen" data-game="tennis" style="display:flex;gap:70px;justify-content:center;align-items:center;height:200px">
+<div id="r" style="display:flex;gap:70px"></div></div>
+<script type="module">
+import {ratingIcon} from '../../minigames/tennis-ui.mjs';
+const names={perfect:'מושלם',good:'טוב',early:'מוקדם',late:'מאוחר'};
+for(const k of Object.keys(names)){const c=document.createElement('div');c.style.textAlign='center';c.innerHTML=`<div style="width:56px;height:56px;margin:0 auto 8px;transform:scale(2);transform-origin:center">${ratingIcon(k)}</div>${names[k]}`;document.getElementById('r').append(c);}
+window.ready=true;
+</script></html>

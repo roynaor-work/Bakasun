@@ -11186,6 +11186,9 @@
    "maximumSeconds": 3600,
    "v9": {
     "enabled": true,
+    "deep": {"enabled": true, "errorScale": {"easy": 0.35, "normal": 0.7, "hard": 1.1}, "buffer": {"easy": 0.5, "normal": 0.38, "hard": 0.24}, "aiMissScale": {"easy": 0.55, "normal": 1, "hard": 1},
+     "assist": {"easy": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "normal": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "hard": {"radius": 2.05, "step": 0.55, "speed": 1.65, "lead": 0.7}},
+     "rating": {"perfect": 0.25, "good": 0.6}},
     "hold": {"enabled": true, "seconds": 2.4, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.24, "normal": 0.2, "hard": 0.15}},
     "meter": {"enabled": true, "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},

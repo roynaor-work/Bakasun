@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {playPoint,baseConfig} from '../workout/island/verification/tennis-v10/sim.mjs';
 import {createTennis} from '../workout/island/minigames/tennis.mjs';
 
-const N=400,legacyConfig={...baseConfig,v9:{...baseConfig.v9,hold:{...baseConfig.v9.hold,enabled:false}}};
+const N=400,legacyConfig={...baseConfig,v9:{...baseConfig.v9,hold:{...baseConfig.v9.hold,enabled:false},deep:{...baseConfig.v9.deep,enabled:false}}};
 const classify=r=>{const land=r.landings.find(l=>l.by===0&&l.after===2),ret=r.cpuHits>r.cpuBefore;if(r.humanShots.length<2||r.cpuBefore===undefined)return null;
  if(!land&&!ret)return r.winner===1&&(r.end==='net'||r.end==='out')?'bad':null;if(land&&(Math.abs(land.z)>9.06||Math.abs(land.x)>4.16))return 'bad';return 'in';};
 const byZone=(config,offsets)=>{const g={};for(let i=0;i<N;i++){const t=offsets[i%offsets.length]*(i%2?1:-1);
