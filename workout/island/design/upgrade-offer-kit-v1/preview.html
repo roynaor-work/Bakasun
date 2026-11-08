@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>האי שלי · השדרוג הבא</title>
+  <link rel="icon" href="./icons/upgrade.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./offer.css">
+  <link rel="stylesheet" href="./preview.css">
+  <script type="module" src="./preview.mjs"></script>
+</head>
+<body>
+  <header class="page-head">
+    <div><p class="eyebrow">האי שלי / ערכת שדרוגים 01</p><h1>הסיבוב הבא מתחיל כאן.</h1>
+      <p class="intro">עוד קצת כוח, עוד קצת דיוק. שדרוג קטן להמשך הדרך.</p></div>
+    <a class="jump-link" href="#icons">לכל האייקונים <span aria-hidden="true">↓</span></a>
+  </header>
+  <main>
+    <section class="offers-section" aria-labelledby="offers-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / הצעת שדרוג</p><h2 id="offers-title">שלושה צעדים קדימה</h2></div>
+        <button id="replay" type="button">הפעל שוב את הפתיחה</button></div>
+      <p class="section-note">גם אחרי שלב חלקי אפשר להתחזק. בחרו בכפתור כדי לנסות.</p>
+      <div class="offer-grid" id="offers"></div>
+      <p id="demo-feedback" class="demo-feedback" role="status" aria-live="polite"></p>
+      <noscript>יש להפעיל JavaScript להצגת הכרטיסים והאייקונים.</noscript>
+    </section>
+    <section class="icons-section" id="icons" aria-labelledby="icons-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / שפה משותפת</p><h2 id="icons-title">22 אייקונים. כל המשחקים.</h2></div>
+        <p class="size-key"><bdi>24 · 48 · 72</bdi> פיקסלים</p></div>
+      <p class="section-note">כל אייקון מופיע בשלושה גדלים, על רקע בהיר ועל רקע כהה.</p>
+      <div id="icon-gallery"></div>
+    </section>
+  </main>
+  <footer>איורים מקוריים · קו אחיד · ללא הורדות חיצוניות <a href="./REPORT.md">דוח ובדיקות</a> <a href="./LICENSES.md">מקורות ורישוי</a></footer>
+</body>
+</html>

@@ -1,6 +1,7 @@
 import {wingVisible} from './alien-v10-draw.mjs';
+import {alienV13Enabled,V13_SHIP_URL,fitScale} from './alien-v13.mjs';
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-5';
+import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-6';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 import {alienEnvironment} from './ultra-alien-environment.mjs';
 import {modelTriangles,fleetModel,liveFleetIds,bakeFleet} from './ultra-alien-fleet.mjs';
@@ -40,13 +41,25 @@ export function createAlienView(ctx,model,adapters={}){
   }
   await Promise.all([balance.models.player,...balance.models.enemies].map(s=>models.load(s)));
  }
+ // v13: the Codex two-Vulcan ship replaces the player model when it loads; any failure keeps the earlier model and drawn cannons.
+ let ship13=null,ship13Loader=null;
+ async function loadShip13(){
+  if(adapters.loader||!alienV13Enabled()||!model.v12)return;
+  try{
+   ship13Loader=createV7Loader();const gltf=await ship13Loader.loadAsync(V13_SHIP_URL);if(disposed)return;
+   const root=gltf.scene,box=new T.Box3().setFromObject(root),size=box.getSize(new T.Vector3()),center=box.getCenter(new T.Vector3()),wrap=new T.Group(),inner=new T.Group();
+   inner.add(root);root.position.set(-center.x,0,-center.z);inner.scale.setScalar(fitScale(size));wrap.add(inner);wrap.rotation.y=Math.PI;
+   const barrels=['Barrel_L','Barrel_R'].map(n=>root.getObjectByName(n)).filter(Boolean);if(barrels.length!==2||!root.getObjectByName('Muzzle_L')||!root.getObjectByName('Muzzle_R'))throw Error('ship nodes');
+   player.clear();player.add(wrap);ship13={wrap,barrels,base:barrels.map(b=>b.rotation.z)};model.shipV13=true;
+  }catch{ship13=null;model.shipV13=false;}
+ }
  const ready=loadModels().then(()=>{
   if(disposed)return;const root=fleetModel(models,balance.models.player);
   if(root){player.clear();player.add(root);playerLoaded=true;}
   for(let i=0;i<balance.campaign.maxWings;i++){const wing=fleetModel(models,balance.models.player);if(wing){wing.visible=false;wingModels.push(wing);scene.add(wing);}}
   for(let i=0;i<balance.models.enemies.length;i++)costs[i]=modelTriangles(models.assets.get(balance.models.enemies[i].path));
   // A dedicated 512px dense-row LOD. The shared baker and other games stay as is.
-  impostors.push(...bakeFleet(renderer,scene,camera,models,balance.models.enemies));loaded=true;
+  impostors.push(...bakeFleet(renderer,scene,camera,models,balance.models.enemies));loaded=true;void loadShip13();
  });
  const shieldG=geo(new T.SphereGeometry(.5,12,8)),shieldM=mat(new T.MeshBasicMaterial({color:'#83deff',transparent:true,opacity:.075,wireframe:true,depthWrite:false}));
  const playerShield=new T.Mesh(shieldG,shieldM);scene.add(playerShield);
@@ -60,6 +73,7 @@ export function createAlienView(ctx,model,adapters={}){
   if(disposed)return;disposed=true;surface.removeEventListener('webglcontextlost',lost);environment.dispose();models.dispose();v7Loader?.dispose();
   for(const g of ownedG)g.dispose();for(const m of ownedM)m.dispose();for(const t of fallbackTextures)t.dispose();
   fallbackPlayer?.material.map.dispose();for(const i of impostors)if(i){i.material.dispose();i.texture.dispose();}
+  if(ship13){ship13.wrap.traverse(o=>{if(o.isMesh){o.geometry?.dispose();for(const m of [].concat(o.material||[]))m.dispose();}});ship13=null;model.shipV13=false;}ship13Loader?.dispose();ship13Loader=null;
   enemyShields.dispose();scene.clear();player.clear();wingModels.length=0;entities.clear();renderer.dispose();renderer.forceContextLoss();surface.width=surface.height=0;
  }
  function lost(e){e.preventDefault();failed=true;dispose();}surface.addEventListener('webglcontextlost',lost);resize();
@@ -72,13 +86,15 @@ export function createAlienView(ctx,model,adapters={}){
   e={root,representation,appearance:alienAppearance(balance,a.kind)};entities.set(a.id,e);return e;
  }
  return {ready,resize,dispose,get mode(){return failed?'canvas':'three';},
-  metrics(){return {defenseV7:v7Active,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,memory:{...renderer.info.memory},models:models.metrics(),playerLoaded,liveModels:liveCount,impostors:lodCount,sourceTexturesUnmodified:true,lodTextureSize:512,low,disposed,appearances:[...entities.values()].map(e=>({...e.appearance,representation:e.representation})),elevationDegrees:Math.atan2(camera.position.y,camera.position.z)*180/Math.PI};},
+  metrics(){return {shipV13:Boolean(ship13),defenseV7:v7Active,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,memory:{...renderer.info.memory},models:models.metrics(),playerLoaded,liveModels:liveCount,impostors:lodCount,sourceTexturesUnmodified:true,lodTextureSize:512,low,disposed,appearances:[...entities.values()].map(e=>({...e.appearance,representation:e.representation})),elevationDegrees:Math.atan2(camera.position.y,camera.position.z)*180/Math.PI};},
   degrade(fallback=false){if(fallback){failed=true;dispose();}else{low=true;resize();}},targetAt(x,y){return {x,y};},
   draw(p){if(disposed||failed)return false;try{
    environment.update(model.time,currentWidth/currentHeight);
    const fit=(x,y,pixels)=>worldLength(x,y,pixels),playerPixels=Math.min(76,currentHeight*.18);
-   player.position.set(...world(model.player.x,model.player.y));player.scale.setScalar(fit(model.player.x,model.player.y,playerPixels));
+   player.position.set(...world(model.player.x,model.player.y));player.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*(ship13?ctx.balance.v13?.shipScale||1:1)));
    player.rotation.z=-(model.player.bank||0)*.25;player.rotation.y=(model.player.bank||0)*.18;
+   if(ship13)ship13.barrels.forEach((b,i)=>{b.rotation.z=ship13.base[i]+(i?-1:1)*model.spinAngle;});
+   if(model.v12&&model.firing){const j=model.time*97;player.rotation.z+=Math.sin(j)*.018;player.position.x+=Math.sin(j*1.7)*fit(model.player.x,model.player.y,.9);}
    player.visible=!model.invulnerable||Math.floor(model.time*12)%2===0;
    playerShield.position.copy(player.position);playerShield.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*1.18));playerShield.visible=model.powerup===3||model.invulnerable>0;
    const visible=model.aliens.filter(a=>a.y+a.radius>0&&a.y-a.radius<config.height);

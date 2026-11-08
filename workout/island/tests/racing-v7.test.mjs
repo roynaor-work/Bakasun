@@ -116,13 +116,14 @@ test('crowd: spectators stand clear of the road on every track and stage, determ
  assert.equal(CROWD_CAP[2],0,'the lowest tier draws no crowd');assert.ok(CROWD_CAP[0]>CROWD_CAP[1]);
 });
 
+const AUDIO_FILES=["engine-high.mp3", "engine-high.ogg", "engine-idle.mp3", "engine-idle.ogg", "engine-low.mp3", "engine-low.ogg", "engine-mid.mp3", "engine-mid.ogg", "engine-redline.mp3", "engine-redline.ogg", "exhaust-pop-1.mp3", "exhaust-pop-1.ogg", "exhaust-pop-2.mp3", "exhaust-pop-2.ogg", "exhaust-pop-3.mp3", "exhaust-pop-3.ogg", "kerb-rumble.mp3", "kerb-rumble.ogg", "pass-whoosh.mp3", "pass-whoosh.ogg", "shift-down.mp3", "shift-down.ogg", "shift-up.mp3", "shift-up.ogg", "turbo-blowoff.mp3", "turbo-blowoff.ogg", "tyre-squeal.mp3", "tyre-squeal.ogg", "wind-speed.mp3", "wind-speed.ogg"].map(f=>'assets/racing-audio-v2/'+f);
 test('offline: racing is a game group with exactly the v7 files and the formula car, all cacheable, and the shell lists the new modules',async()=>{
  assert.equal(OFFLINE_GAMES.racing,'מרוצים');
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
- assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb'].sort());
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===18);
+ assert.ok(pathsFor(manifest,['racing']).length===48);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 

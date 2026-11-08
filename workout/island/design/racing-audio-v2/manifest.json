@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "sampleRate": 44100,
+  "channels": 1,
+  "targetLufs": -16,
+  "maxTruePeakDbfs": -3,
+  "loopEndExclusive": true,
+  "assets": [
+    {
+      "id": "engine-idle",
+      "kind": "engine",
+      "durationSeconds": 3.3,
+      "rpm": 4000,
+      "seed": 20261107,
+      "loop": {
+        "startSample": 7936,
+        "endSample": 140236,
+        "startSeconds": 0.1799546485260771,
+        "endSeconds": 3.1799546485260772,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "engine-idle.ogg",
+          "bytes": 121723,
+          "sha256": "03f340a14f32c58a3eb113db92fd2417ee6737c135f9a79e3d4eae521bf12ede"
+        },
+        "mp3": {
+          "path": "engine-idle.mp3",
+          "bytes": 67440,
+          "sha256": "440cd309798d85e3eba6f455f6e0a46a5e97ea28f8dd685e53694da28bdd39a6"
+        }
+      }
+    },
+    {
+      "id": "engine-low",
+      "kind": "engine",
+      "durationSeconds": 3.3,
+      "rpm": 6000,
+      "seed": 20261108,
+      "loop": {
+        "startSample": 6634,
+        "endSample": 138934,
+        "startSeconds": 0.15043083900226759,
+        "endSeconds": 3.1504308390022677,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "engine-low.ogg",
+          "bytes": 55068,
+          "sha256": "926155df384f71c15671931ec5fb85e5ece6b117ecf9ab79307167c138bd2270"
+        },
+        "mp3": {
+          "path": "engine-low.mp3",
+          "bytes": 67440,
+          "sha256": "44a7f594dfb37ccb8eb29bfddcae616489123c8e7aba0b8c66c5f0736dce4cc9"
+        }
+      }
+    },
+    {
+      "id": "engine-mid",
+      "kind": "engine",
+      "durationSeconds": 3.3,
+      "rpm": 9000,
+      "seed": 20261109,
+      "loop": {
+        "startSample": 5636,
+        "endSample": 137936,
+        "startSeconds": 0.12780045351473923,
+        "endSeconds": 3.1278004535147392,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "engine-mid.ogg",
+          "bytes": 57118,
+          "sha256": "ad5c6c03894f7bdd4af4c0691d7e64138d0afcde52a24ae9ab2f6d3fbbba085d"
+        },
+        "mp3": {
+          "path": "engine-mid.mp3",
+          "bytes": 67440,
+          "sha256": "dbbb9989f0be3780aea57762e1f3928c5313308748ce648be0a284ac2dbefd59"
+        }
+      }
+    },
+    {
+      "id": "engine-high",
+      "kind": "engine",
+      "durationSeconds": 3.3,
+      "rpm": 12000,
+      "seed": 20261110,
+      "loop": {
+        "startSample": 7197,
+        "endSample": 139497,
+        "startSeconds": 0.16319727891156463,
+        "endSeconds": 3.1631972789115648,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "engine-high.ogg",
+          "bytes": 57465,
+          "sha256": "bd5b84951c4bb31a9f07d326f2d7be45502fb235d9a6666a6879716b684e9e86"
+        },
+        "mp3": {
+          "path": "engine-high.mp3",
+          "bytes": 67440,
+          "sha256": "398d2db676d9bca9e932eaf14eed15cdee5acc48feda756896dfb304e0f7b1f1"
+        }
+      }
+    },
+    {
+      "id": "engine-redline",
+      "kind": "engine",
+      "durationSeconds": 3.3,
+      "rpm": 15000,
+      "seed": 20261111,
+      "loop": {
+        "startSample": 4618,
+        "endSample": 136918,
+        "startSeconds": 0.10471655328798186,
+        "endSeconds": 3.104716553287982,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "engine-redline.ogg",
+          "bytes": 59235,
+          "sha256": "0b3db6da925e86903bf5a6787dc69ff780e636694e025de9576dd1d2a7e76c75"
+        },
+        "mp3": {
+          "path": "engine-redline.mp3",
+          "bytes": 67440,
+          "sha256": "320e6a4c7cd125c4b95e1c9a57d65a0129ede287fa0a86ca672b4f72016438db"
+        }
+      }
+    },
+    {
+      "id": "shift-up",
+      "kind": "oneShot",
+      "durationSeconds": 0.55,
+      "rpm": null,
+      "seed": 20261112,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "shift-up.ogg",
+          "bytes": 9684,
+          "sha256": "6e45f3aa49a4a0b4417e7bea3bf6fd5c3f0a3d8457dd9d9cd6266c7369384652"
+        },
+        "mp3": {
+          "path": "shift-up.mp3",
+          "bytes": 12582,
+          "sha256": "312fbb9239438710b8441bcfaa37501481128a470062b17113d5e34c5bac0a9d"
+        }
+      }
+    },
+    {
+      "id": "shift-down",
+      "kind": "oneShot",
+      "durationSeconds": 0.65,
+      "rpm": null,
+      "seed": 20261113,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "shift-down.ogg",
+          "bytes": 11877,
+          "sha256": "94703847fec61f00c7a919006a3860a94b1ad9289d78cbc0be105a1c25ffea8a"
+        },
+        "mp3": {
+          "path": "shift-down.mp3",
+          "bytes": 14150,
+          "sha256": "10a11f459d93cf8c33c344f97f84f8c9f6f34cecd508b572c9de919e670cf335"
+        }
+      }
+    },
+    {
+      "id": "turbo-blowoff",
+      "kind": "oneShot",
+      "durationSeconds": 0.75,
+      "rpm": null,
+      "seed": 20261114,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "turbo-blowoff.ogg",
+          "bytes": 13559,
+          "sha256": "3c562ffeaebd1df7740173cd76165fe1456aa04d129594c7fe34fdbcca613d71"
+        },
+        "mp3": {
+          "path": "turbo-blowoff.mp3",
+          "bytes": 16240,
+          "sha256": "815f68228365c0ef4587d5aba09ab1f919b42cdc1fe1b3902c419229e067e002"
+        }
+      }
+    },
+    {
+      "id": "startup",
+      "kind": "oneShot",
+      "durationSeconds": 1.8,
+      "rpm": null,
+      "seed": 20261115,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "startup.ogg",
+          "bytes": 32799,
+          "sha256": "4c584e41165281992c30a6cae29f25c72411d7ec91af3b1007141adde158718d"
+        },
+        "mp3": {
+          "path": "startup.mp3",
+          "bytes": 37137,
+          "sha256": "e11d9ef047c2d9259ee93936ddedc2a0f900997371a2a9b0f6e46b67d0337086"
+        }
+      }
+    },
+    {
+      "id": "exhaust-pop-1",
+      "kind": "oneShot",
+      "durationSeconds": 0.5,
+      "rpm": null,
+      "seed": 20261116,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "exhaust-pop-1.ogg",
+          "bytes": 7538,
+          "sha256": "d81ff5aad7fc1fa88f671001f8945c00893b55387b669eb6178556100fdadc3d"
+        },
+        "mp3": {
+          "path": "exhaust-pop-1.mp3",
+          "bytes": 11537,
+          "sha256": "48540645c27918aeb4bfd496c2e33c7f84f90b01375176c2a1240d89bd05bb22"
+        }
+      }
+    },
+    {
+      "id": "exhaust-pop-2",
+      "kind": "oneShot",
+      "durationSeconds": 0.55,
+      "rpm": null,
+      "seed": 20261117,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "exhaust-pop-2.ogg",
+          "bytes": 7880,
+          "sha256": "9d2332de2b38fa98cb66d7067683cb7f9638a0a7e26b90b0e1ac4ec433b3555e"
+        },
+        "mp3": {
+          "path": "exhaust-pop-2.mp3",
+          "bytes": 12582,
+          "sha256": "78261946832a731be5695316c55cc061f710f179a0146b2101eeae9d8282c304"
+        }
+      }
+    },
+    {
+      "id": "exhaust-pop-3",
+      "kind": "oneShot",
+      "durationSeconds": 0.6,
+      "rpm": null,
+      "seed": 20261118,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "exhaust-pop-3.ogg",
+          "bytes": 8310,
+          "sha256": "d252d57affdf6780a07ff10f6e63229d24590f21e5adfdf163151380202fa971"
+        },
+        "mp3": {
+          "path": "exhaust-pop-3.mp3",
+          "bytes": 13105,
+          "sha256": "bb96c1da8a36375d8149c8e67b12b76815581d8343f0a9f1376df907534d8d29"
+        }
+      }
+    },
+    {
+      "id": "tyre-squeal",
+      "kind": "loop",
+      "durationSeconds": 3.3,
+      "rpm": null,
+      "seed": 20261119,
+      "loop": {
+        "startSample": 7655,
+        "endSample": 139955,
+        "startSeconds": 0.1735827664399093,
+        "endSeconds": 3.1735827664399094,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "tyre-squeal.ogg",
+          "bytes": 44033,
+          "sha256": "12cdb5b9f188ce037c9452ce928956d35c80b3ccbb8bcf8637baaa57790d341f"
+        },
+        "mp3": {
+          "path": "tyre-squeal.mp3",
+          "bytes": 67440,
+          "sha256": "895ec9e2b4810d7458a0a2826e6ed236388916a340d274aadf7575fa9e862b1f"
+        }
+      }
+    },
+    {
+      "id": "kerb-rumble",
+      "kind": "oneShot",
+      "durationSeconds": 0.8,
+      "rpm": null,
+      "seed": 20261120,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "kerb-rumble.ogg",
+          "bytes": 13731,
+          "sha256": "1949aebb5dcf3e8f112301d26594502ea351b8c7be5d37f50d9f09594d3ad47d"
+        },
+        "mp3": {
+          "path": "kerb-rumble.mp3",
+          "bytes": 17284,
+          "sha256": "89905d57641acf3f7aa3245958e25630c2acd15fd65daf5d64d7d082130953c0"
+        }
+      }
+    },
+    {
+      "id": "wind-speed",
+      "kind": "loop",
+      "durationSeconds": 3.3,
+      "rpm": null,
+      "seed": 20261121,
+      "loop": {
+        "startSample": 6618,
+        "endSample": 138918,
+        "startSeconds": 0.15006802721088436,
+        "endSeconds": 3.1500680272108843,
+        "lengthSamples": 132300,
+        "lengthSeconds": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "wind-speed.ogg",
+          "bytes": 47176,
+          "sha256": "24014617d739bd107a2f0587e697d30cd7e36fd1dbcf22d0074550c119874d95"
+        },
+        "mp3": {
+          "path": "wind-speed.mp3",
+          "bytes": 67440,
+          "sha256": "a02f2245bc246b8e9ef81389094655ebd0586b69f50d2502175cb7d79a69314f"
+        }
+      }
+    },
+    {
+      "id": "pass-whoosh",
+      "kind": "oneShot",
+      "durationSeconds": 1.3,
+      "rpm": null,
+      "seed": 20261122,
+      "loop": null,
+      "files": {
+        "ogg": {
+          "path": "pass-whoosh.ogg",
+          "bytes": 20038,
+          "sha256": "ba8ded6db5aef90f3fa4bee445d8e292606dbf0adc7bec9c18459f164d160f91"
+        },
+        "mp3": {
+          "path": "pass-whoosh.mp3",
+          "bytes": 27211,
+          "sha256": "50100abebd6d20a242a98ef7c117382a044dbf9c9a5e0b459f4de8e426489863"
+        }
+      }
+    }
+  ]
+}

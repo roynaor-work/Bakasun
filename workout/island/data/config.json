@@ -1253,6 +1253,8 @@
    }
   },
   "alienDefense": {
+   "v13": {"shipScale": 1.3, "cannonOffset": 11.3, "muzzleForward": 28, "loopGain": 1.5, "spinGain": 1.2, "flashGain": 0.6, "spinUpOverlap": 0.15},
+   "v12": {"rateMult": 0.15, "damageTrim": 0.9, "cannonOffset": 11, "sparkCool": 0.1, "hitSoundGap": 0.12, "pulseHz": 66, "maxShotsMult": 3, "spinRate": 70, "flashSeconds": 0.045},
    "v11": {"shotSecondsMult": 0.72, "laserEvery": [5, 6], "laserShots": [2, 4], "laserGap": 0.1, "laserDamage": 1.5, "laserPierce": 2, "blastHp": 3, "blastEvery": 5, "blastCooldown": 1.0, "earlyBolt": [0.66, 0.9, 0.95], "boltSpeed": [0.8, 0.85, 0.9], "bulletCap": [6, 5, 5], "volleyChance": [0.2, 0.05, 0.05], "bonusSeconds": 10, "pityKills": 28, "pitySeconds": 40},
    "v10": {"wingSeconds": 12, "wingBlinkSeconds": 2.5, "missileSpeed": 420, "missileTurn": 9, "missileFlightMult": 2.2, "trailLength": 14, "earlyBolt": [0.75, 0.8, 0.85]},
    "v9": {"hpBase": 3.6, "hpPerStage": 0.06, "hpMax": 4, "bonusKillsMult": 4, "extraWaves": 2, "secondsMult": 3, "livesAdd": 1, "boltSecondsMult": 1.3, "wavePauseSeconds": 1.2, "upgradeHp": 3.5},
@@ -13232,7 +13234,7 @@
      "difficulty": 1,
      "winMoney": 30,
      "winParts": 0,
-     "radiusScale": 1.068,
+     "radiusScale": 0.703,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13244,7 +13246,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.78,
+     "preview": 0.54,
      "tools": [
       "narrow",
       "wide"
@@ -13254,10 +13256,11 @@
      "obstacles": [],
      "chase": {
       "seconds": 32,
-      "crimSpeed": 20.18,
+      "crimSpeed": 19.7,
       "density": 0.35,
       "crimBoost": 999,
-      "skill": 0.55
+      "skill": 0.55,
+      "gap": 34.4
      },
      "crew": 1,
      "gust": 0
@@ -13268,7 +13271,7 @@
      "difficulty": 2,
      "winMoney": 38,
      "winParts": 0,
-     "radiusScale": 0.908,
+     "radiusScale": 0.649,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13280,7 +13283,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.67,
+     "preview": 0.5,
      "tools": [
       "narrow",
       "wide"
@@ -13297,10 +13300,11 @@
      ],
      "chase": {
       "seconds": 34,
-      "crimSpeed": 20.23,
+      "crimSpeed": 19.7,
       "density": 0.45,
       "crimBoost": 999,
-      "skill": 0.6
+      "skill": 0.6,
+      "gap": 35.3
      },
      "crew": 1,
      "gust": 0
@@ -13311,7 +13315,7 @@
      "difficulty": 3,
      "winMoney": 46,
      "winParts": 0,
-     "radiusScale": 0.818,
+     "radiusScale": 0.946,
      "wobble": {
       "angle": 0.25,
       "power": 0.005
@@ -13323,7 +13327,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.61,
+     "preview": 0.7,
      "tools": [
       "narrow",
       "wide",
@@ -13341,10 +13345,11 @@
      ],
      "chase": {
       "seconds": 36,
-      "crimSpeed": 20.04,
+      "crimSpeed": 19.7,
       "density": 0.55,
       "crimBoost": 10,
-      "skill": 0.65
+      "skill": 0.65,
+      "gap": 28.9
      },
      "crew": 1,
      "gust": 0
@@ -13355,7 +13360,7 @@
      "difficulty": 4,
      "winMoney": 54,
      "winParts": 0,
-     "radiusScale": 0.897,
+     "radiusScale": 0.97,
      "wobble": {
       "angle": 0.35,
       "power": 0.007
@@ -13369,7 +13374,7 @@
       "period": 4.0
      },
      "pop": null,
-     "preview": 0.66,
+     "preview": 0.71,
      "tools": [
       "narrow",
       "wide",
@@ -13387,10 +13392,11 @@
      ],
      "chase": {
       "seconds": 38,
-      "crimSpeed": 20.04,
+      "crimSpeed": 19.7,
       "density": 0.65,
       "crimBoost": 9,
-      "skill": 0.7
+      "skill": 0.7,
+      "gap": 28.3
      },
      "crew": 1,
      "gust": 0.3
@@ -13401,7 +13407,7 @@
      "difficulty": 5,
      "winMoney": 64,
      "winParts": 0,
-     "radiusScale": 1.319,
+     "radiusScale": 0.941,
      "wobble": {
       "angle": 0.5,
       "power": 0.01
@@ -13415,7 +13421,7 @@
       "period": 3.4
      },
      "pop": null,
-     "preview": 0.95,
+     "preview": 0.69,
      "tools": [
       "narrow",
       "wide",
@@ -13433,10 +13439,11 @@
      ],
      "chase": {
       "seconds": 40,
-      "crimSpeed": 20.02,
+      "crimSpeed": 19.7,
       "density": 0.75,
       "crimBoost": 8,
-      "skill": 0.72
+      "skill": 0.72,
+      "gap": 28
      },
      "crew": 1,
      "boss": {
@@ -13450,7 +13457,7 @@
      "difficulty": 6,
      "winMoney": 76,
      "winParts": 0,
-     "radiusScale": 1.05,
+     "radiusScale": 0.946,
      "wobble": {
       "angle": 0.6,
       "power": 0.012
@@ -13465,7 +13472,7 @@
       "pause": 0.8
      },
      "pop": null,
-     "preview": 0.85,
+     "preview": 0.7,
      "tools": [
       "narrow",
       "wide",
@@ -13489,10 +13496,11 @@
      ],
      "chase": {
       "seconds": 42,
-      "crimSpeed": 20.01,
+      "crimSpeed": 19.7,
       "density": 0.85,
       "crimBoost": 7.5,
-      "skill": 0.75
+      "skill": 0.75,
+      "gap": 28
      },
      "crew": 2,
      "crewGap": 5.5,
@@ -13515,7 +13523,7 @@
      "difficulty": 7,
      "winMoney": 90,
      "winParts": 0,
-     "radiusScale": 1.27,
+     "radiusScale": 1.17,
      "wobble": {
       "angle": 0.75,
       "power": 0.014
@@ -13530,7 +13538,7 @@
       "up": 2.4,
       "down": 1.0
      },
-     "preview": 0.91,
+     "preview": 0.85,
      "tools": [
       "narrow",
       "wide",
@@ -13560,10 +13568,11 @@
      ],
      "chase": {
       "seconds": 44,
-      "crimSpeed": 20.01,
+      "crimSpeed": 19.7,
       "density": 0.95,
       "crimBoost": 7,
-      "skill": 0.78
+      "skill": 0.78,
+      "gap": 28
      },
      "crew": 2,
      "crewGap": 5.5,
@@ -13575,7 +13584,7 @@
      "difficulty": 8,
      "winMoney": 106,
      "winParts": 0,
-     "radiusScale": 1.27,
+     "radiusScale": 1.379,
      "wobble": {
       "angle": 0.9,
       "power": 0.016
@@ -13592,7 +13601,7 @@
       "up": 2.2,
       "down": 1.0
      },
-     "preview": 0.91,
+     "preview": 0.99,
      "tools": [
       "narrow",
       "wide",
@@ -13629,10 +13638,11 @@
      ],
      "chase": {
       "seconds": 46,
-      "crimSpeed": 19.99,
+      "crimSpeed": 19.7,
       "density": 1.05,
       "crimBoost": 6.5,
-      "skill": 0.8
+      "skill": 0.8,
+      "gap": 28.3
      },
      "crew": 2,
      "crewGap": 5.5,
@@ -13707,10 +13717,11 @@
      ],
      "chase": {
       "seconds": 48,
-      "crimSpeed": 19.98,
+      "crimSpeed": 19.7,
       "density": 1.15,
       "crimBoost": 6,
-      "skill": 0.82
+      "skill": 0.82,
+      "gap": 24
      },
      "crew": 3,
      "crewGap": 3.2,
@@ -13733,7 +13744,7 @@
      "difficulty": 10,
      "winMoney": 150,
      "winParts": 0,
-     "radiusScale": 1.333,
+     "radiusScale": 1.153,
      "wobble": {
       "angle": 1.1,
       "power": 0.02
@@ -13751,7 +13762,7 @@
       "up": 2.0,
       "down": 1.1
      },
-     "preview": 0.96,
+     "preview": 0.84,
      "tools": [
       "narrow",
       "wide",
@@ -13788,10 +13799,11 @@
      ],
      "chase": {
       "seconds": 51,
-      "crimSpeed": 19.95,
+      "crimSpeed": 19.7,
       "density": 1.25,
       "crimBoost": 5.5,
-      "skill": 0.85
+      "skill": 0.85,
+      "gap": 32.6
      },
      "crew": 1,
      "boss": {
@@ -13873,7 +13885,14 @@
     "catchGap": 7,
     "baseSpeed": 20,
     "boostSpeed": 8,
-    "bumperGap": 4.6,
+    "contactLen": 4.2,
+    "contactWidth": 1.8,
+    "sideZone": 0.6,
+    "sideBonus": 1.8,
+    "ramRate": 0.24,
+    "crimPush": 1.6,
+    "ramDrag": 0.8,
+    "crimFlee": 16,
     "brakeSpeed": 9,
     "accel": 14,
     "decel": 22,

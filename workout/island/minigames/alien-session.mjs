@@ -1,12 +1,12 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-5';
-import {createControls} from './controls.mjs?v=island-v2-20261107-5';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-5';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-5';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-6';
+import {createControls} from './controls.mjs?v=island-v2-20261107-6';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-6';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-6';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-5';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-6';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-5';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-6';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */
@@ -24,7 +24,7 @@ export function alienFrameInput(controls,dt,flight,deadzone=.12){
 /** Alien-only lifecycle; the other games keep their existing canvas adapter. */
 export function runAlienSession(ctx,createModel,draw,createView){
  const {canvas,controls,status,dialog,balance:b,config,t}=ctx;
- const audio=createG2mAudio();
+ const audio=createG2mAudio({v13:b.v13});
  const model=createModel({...ctx,sound:audio.play,roundChoices:false,completion:'waves'}),paint=canvas.getContext('2d');
  if(!paint)throw Error('reason.gameStart');
  const art=createGameArt('alienDefense',config,b),quality={low:false};
