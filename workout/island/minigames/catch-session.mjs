@@ -205,12 +205,12 @@ export function runCatchSession(ctx) {
     if (steerDrag && e.pointerId === steerDrag.id) { const dy = e.clientY - steerDrag.y; chase.setSteer(clamp(dy / 46, -1, 1)); ringLine.style.width = Math.abs(dy) + 'px'; ringLine.style.transform = `rotate(${dy >= 0 ? Math.PI / 2 : -Math.PI / 2}rad)`; return; }
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    engine.setAim({angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx});
+    drag.to = {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; // eased in the frame loop so the line glides after the finger
     const len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx); ringLine.style.width = len + 'px'; ringLine.style.transform = `rotate(${ang}rad)`;
   }, {signal: abort.signal});
   const endDrag = e => {
     if (steerDrag && e.pointerId === steerDrag.id) { steerDrag = null; chase?.setSteer(0); ring.hidden = true; }
-    if (drag && e.pointerId === drag.id) { drag = null; ring.hidden = true; }
+    if (drag && e.pointerId === drag.id) { if (drag.to) engine?.setAim(drag.to); drag = null; ring.hidden = true; }
   };
   stageEl.addEventListener('pointerup', endDrag, {signal: abort.signal}); stageEl.addEventListener('pointercancel', endDrag, {signal: abort.signal});
   throwButton.addEventListener('click', release, {signal: abort.signal});
@@ -292,6 +292,7 @@ export function runCatchSession(ctx) {
     dt *= scale;
     const keyAngle = ((keys.has('ArrowUp') ? -1 : 0) + (keys.has('ArrowDown') ? 1 : 0)) * P.keyAngle * dt * 60, keyPower = ((keys.has('ArrowLeft') ? 1 : 0) + (keys.has('ArrowRight') ? -1 : 0)) * P.keyPower * dt * 60;
     if (engine.state.phase === 'aim' && (keyAngle || keyPower)) engine.setAim({angle: engine.aim.angle - keyAngle, power: engine.aim.power + keyPower});
+    if (drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: engine.aim.power + (drag.to.power - engine.aim.power) * k}); }
     acc += dt;
     while (acc >= STEP) { acc -= STEP; stepThrow(STEP); }
     view.update(dt, {});

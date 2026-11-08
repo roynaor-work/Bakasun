@@ -266,6 +266,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
   const dots = []; const dotGroup = new T.Group(); scene.add(dotGroup);
   for (let i = 0; i < 42; i++) { const s = new T.Sprite(new T.SpriteMaterial({map: dotTex, transparent: true, depthWrite: false, depthTest: false, blending: T.AdditiveBlending, color: '#8fdcff', fog: false})); s.renderOrder = 8; s.visible = false; dotGroup.add(s); dots.push(s); }
   const mark = new T.Mesh(new T.RingGeometry(.28, .4, 24), new T.MeshBasicMaterial({color: '#ff6a5c', transparent: true, depthTest: false, side: T.DoubleSide})); mark.renderOrder = 9; mark.visible = false; scene.add(mark);
+  const landRing = new T.Mesh(new T.RingGeometry(.42, .58, 32), new T.MeshBasicMaterial({color: '#ffd37a', transparent: true, opacity: .9, depthTest: false, side: T.DoubleSide})); landRing.renderOrder = 9; landRing.visible = false; scene.add(landRing);
   const sparks = new Particles(scene, {texture: starTex, size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 60});
   const caughtNets = thieves.map(() => { const n = new T.Mesh(new T.SphereGeometry(1, 18, 12), netMat.clone()); n.visible = false; n.userData = {t: 0, fade: 0, scale: 1}; scene.add(n); return n; });
   const flash = new T.Sprite(new T.SpriteMaterial({map: glowTexture('#ffffff'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, depthTest: false, fog: false})); flash.visible = false; flash.renderOrder = 10; scene.add(flash);
@@ -292,7 +293,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     }
     if (s.phase === 'impact' || s.phase === 'caught') { const f = s.flight; const fx = f?.catchX ?? f?.contact?.x ?? c.x; l = fx - (s.phase === 'caught' ? 3.2 : 5); r = fx + (s.phase === 'caught' ? 3.2 : 5); }
     else if (s.phase === 'flee' || s.phase === 'escape') { l = Math.max(-1.5, c.x - 9); r = c.x + 4; }
-    else if (s.phase === 'aim' || s.phase === 'throw') { l = -2; r = c.x + 3.2; }
+    else if (s.phase === 'aim' || s.phase === 'throw') { l = -2; r = s.baseX + (engine.level.move?.amp || 0) + 3.2; }
     // Far thieves: keep the characters readable by letting the officer slide off the left edge.
     if (r - l > 23) l = r - 23;
     const span = Math.max(10, r - l + 1.5), d = (span / 2) / Math.tan(hfov() / 2);
@@ -300,7 +301,14 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     cam.shake = Math.max(0, cam.shake - dt * 2.2);
     const sh = cam.shake * cam.shake * .6, ts = performance.now() / 1000;
     camera.position.set(cam.x - cam.d * .26 + Math.sin(ts * 47) * sh * .5, 3.1 + cam.d * .12 + Math.cos(ts * 53) * sh * .4, cam.d * .92 + 1);
-    look.set(cam.x + cam.d * .04, 1.55, 0); camera.lookAt(look);
+    look.set(cam.x + cam.d * .04, 1.55, 0);
+    if (handoff) { // chase -> throw: glide from the chase camera instead of cutting
+      handoff.t += dt; const k = smooth(handoff.t / .9), to = camera.position.clone();
+      camera.position.lerpVectors(handoff.p, to, k); look.lerpVectors(handoff.l, look, k);
+      camera.fov = handoff.fov + (30 - handoff.fov) * k; camera.updateProjectionMatrix(); chaseCam.fov = camera.fov;
+      if (handoff.t >= .9) handoff = null;
+    }
+    camera.lookAt(look);
   }
   const project = (x, y, z = 0) => { tmp.set(x, y, z).project(camera); return {x: (tmp.x * .5 + .5) * canvas.clientWidth, y: (-tmp.y * .5 + .5) * canvas.clientHeight, visible: tmp.z < 1}; };
 
@@ -323,6 +331,10 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
       const fade = 1 - i / dots.length * .55; d.material.opacity = fade; d.scale.setScalar(.34 * (1 - i / dots.length * .35));
     });
     if (pr && pr.blocked && pr.fraction >= 1) { mark.visible = true; mark.position.set(pr.land.x, pr.land.y, .95); mark.lookAt(camera.position); } else mark.visible = false;
+    if (pr && pr.help >= 1 && pr.land) { // early stages: where the net comes down; green = it would catch (aimHelp 2)
+      landRing.visible = true; landRing.position.set(pr.land.x, Math.max(.12, pr.land.y), .95); landRing.lookAt(camera.position);
+      landRing.material.color.set(pr.hit ? '#7dffb0' : '#ffd37a'); landRing.scale.setScalar(pr.hit ? 1.25 + Math.sin(performance.now() / 120) * .12 : 1);
+    } else landRing.visible = false;
   }
   function placeNet(f, fp) {
     const tool = toolOf(f.tool), R = tool.radius, open = smooth((fp.t / Math.max(.3, f.duration)) * 1.8);
@@ -346,7 +358,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
   // ----- car chase scene (v2) -----
   const throwStuff = [officer.root, ...thieves.map(t => t.actor.root), squad, getaway, ...obstacleViews, ...moverViews.map(m => m.root), ...(bossVan ? [bossVan] : []), dotGroup, mark];
   const chaseGroup = new T.Group(); chaseGroup.visible = false; scene.add(chaseGroup);
-  let chase = null, mode = 'throw', chaseShift = 0, chaseCam = {x: 0, fov: 30}, sirenPhase = 0, crimBrake = 1, chaseEnded = 0;
+  let handoff = null, chase = null, mode = 'throw', chaseShift = 0, chaseCam = {x: 0, fov: 30}, sirenPhase = 0, crimBrake = 1, chaseEnded = 0;
   const carGlow = (color, size) => { const sp = new T.Sprite(new T.SpriteMaterial({map: glowTexture(color), transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); sp.scale.set(size, size, 1); return sp; };
   const playerCar = rigCar(fitModel(models.policeCar, {width: 4.4})), crimCar = rigCar(fitModel(models.getawayCar, {width: 4.2}));
   chaseGroup.add(playerCar, crimCar);
@@ -372,9 +384,10 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     for (const t of thieves) t.actor.root.visible = false;
     for (const n of caughtNets) n.visible = false;
     groundNet.visible = false; projectile.visible = false; trail.visible = false; ropeLine.visible = false;
-    chaseCam.x = 0;
+    chaseCam.x = (ch.state.x || 0) + 5.5; handoff = null;
   }
   function leaveChase() {
+    handoff = {p: camera.position.clone(), l: look.clone(), fov: camera.fov, t: 0};
     mode = 'throw'; chase = null; chaseGroup.visible = false;
     for (const o of throwStuff) o.visible = true;
     thieves.forEach((t, i) => { t.actor.root.visible = i === 0; });
@@ -408,10 +421,10 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     // camera: behind and above, looking ahead; a boost pulls the lens wider
     const fovTarget = 32 + (st.boosting ? 5 : 0) + (st.v > 24 ? 1.5 : 0);
     chaseCam.fov = damp(chaseCam.fov, fovTarget, 5, dt); camera.fov = chaseCam.fov; camera.updateProjectionMatrix();
-    chaseCam.x = damp(chaseCam.x, px + 5.5, 6, dt); cam.shake = Math.max(0, cam.shake - dt * 2.2);
+    chaseCam.x = damp(chaseCam.x, st.x + 5.5, 6, dt); const cxw = chaseCam.x - chaseShift; cam.shake = Math.max(0, cam.shake - dt * 2.2);
     const sh = cam.shake * cam.shake * .6, ts = performance.now() / 1000;
-    camera.position.set(chaseCam.x - 14 + Math.sin(ts * 47) * sh * .4, 4.6 + Math.cos(ts * 53) * sh * .3, 13.2);
-    look.set(chaseCam.x + 2.5, 1.2, 1.6); camera.lookAt(look);
+    camera.position.set(cxw - 14 + Math.sin(ts * 47) * sh * .4, 4.6 + Math.cos(ts * 53) * sh * .3, 13.2);
+    look.set(cxw + 2.5, 1.2, 1.6); camera.lookAt(look);
     if (st.boosting && Math.random() < .6) dust.emit(px - 2.4, .3, laneZ(st.lat), 1, {speed: 2, up: .8, color: [1, .75, .4], gravity: 0, life: .35});
   }
   const dispatch = {
@@ -458,7 +471,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     },
     update(dt, snap) {
       if (mode === 'chase') { updateChase(dt); sparks.update(dt); dust.update(dt); renderer.render(scene, camera); return; }
-      camera.fov = 30; if (camera.fov !== chaseCam.fov) { chaseCam.fov = 30; camera.updateProjectionMatrix(); }
+      if (!handoff && camera.fov !== 30) { camera.fov = chaseCam.fov = 30; camera.updateProjectionMatrix(); }
       const s = engine.state, phase = s.phase, tn = engine.clock, cur = Math.min(s.crimIndex, thieves.length - 1);
       // thieves: the ones already caught stand wrapped in their nets, the current one acts, the rest are not on the street yet
       thieves.forEach((th, i) => {

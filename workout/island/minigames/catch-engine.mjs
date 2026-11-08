@@ -62,7 +62,8 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
   const rnd = seededRandom((seed * 2654435761 + stage * 97) >>> 0);
   const P = balance.physics, C = balance.criminal;
   const bonus = {net: Number(equipment.net) || 1, police: city.police || 0, level: level.radiusScale || 1};
-  const previewFraction = clamp(level.preview + (Number(equipment.scope) || 0), 0.15, 1);
+  const aimHelp = v2 ? (level.aimHelp || 0) : 0; // early stages: a longer arc, a landing ring and a green ring when the throw would catch
+  const previewFraction = clamp(level.preview + (Number(equipment.scope) || 0) + .15 * aimHelp, 0.15, 1);
   const tools = level.tools.map(id => toolValues(balance, id, bonus));
   const aim = {angle: P.angle.start, power: P.powerStart, tool: tools[0].id};
   const events = [];
@@ -155,7 +156,7 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
   }
 
   const api = {
-    balance, level, stage, tools, previewFraction, turn, bonus,
+    balance, level, stage, tools, previewFraction, aimHelp, turn, bonus,
     get state() { return s; },
     get aim() { return aim; },
     get wind() { return windAt(s.clock); },
@@ -186,7 +187,10 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
     preview() {
       const now = api.aimNow(), full = trajectory(now.angle, now.power, aim.tool, {withWind: false});
       const cut = full.duration * previewFraction, points = full.path.filter(p => p.t <= cut);
-      return {points, blocked: full.kind === 'blocked', land: full.path[full.path.length - 1], fraction: previewFraction, kind: full.kind};
+      const land = full.path[full.path.length - 1];
+      // aimHelp 2: would this throw catch the thief if released now (no wind)? The wind is still the player's to read.
+      const hit = aimHelp >= 2 && s.phase === 'aim' ? trajectory(now.angle, now.power, aim.tool, {withWind: false, resolve: true, t0: s.clock + P.throwSeconds}).kind === 'catch' : false;
+      return {points, blocked: full.kind === 'blocked', land, fraction: previewFraction, kind: full.kind, help: aimHelp, hit};
     },
     release() {
       if (s.phase !== 'aim') return null;
