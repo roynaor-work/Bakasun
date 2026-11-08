@@ -1,6 +1,6 @@
 import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
-globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
-globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV10=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV10=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
 import {pilotInput} from '../workout/island/tests/pilot.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';

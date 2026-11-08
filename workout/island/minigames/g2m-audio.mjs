@@ -1,10 +1,11 @@
+import {alienV12Enabled,vulcanSamples,vulcanSpin} from './alien-v12.mjs';
 import {alienV11Enabled,BOAR_MG,LASER_SFX,whiteNoise,playLayers} from './alien-v11.mjs';
 const EVENTS=['shot','hit','explosion','missileLaunch','missileExplosion','bonus','stageEnd'];
 export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-v2-20261107-5`,import.meta.url).href])));
 export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235,laser:.1,explosionBig:.36});
 /** Alien-only sample bank. The shared shell owns the existing island.sound switch. */
 export function createG2mAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
- let context,master,noise,white,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map(),v11=alienV11Enabled(),synth=[];
+ let context,master,noise,white,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map(),v11=alienV11Enabled(),v12=alienV12Enabled(),synth=[];let vulcan=null,vulcanBuffer=null,lastShot=-9,vulcanStarts=0;
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  function unlock(){
   if(disposed||!AudioContext)return;
@@ -15,7 +16,7 @@ export function createG2mAudio({storage=globalThis.localStorage,AudioContext=glo
  }
  unlock();
  const ready=context?Promise.all(Object.entries(G2M_SAMPLES).map(async([event,url])=>{try{const r=await fetcher(url);if(!r.ok)return;const b=await context.decodeAudioData(await r.arrayBuffer());if(!disposed){buffers.set(event,b);loaded++;}}catch{}})):Promise.resolve();
- function stop(){for(const s of sources){try{s.stop();}catch{}}sources.clear();}
+ function stop(){for(const s of sources){try{s.stop();}catch{}}sources.clear();if(vulcan&&context)stopVulcan(context.currentTime,true);}
  // A codec/network failure still produces a soft layered cue. Every voice has
  // an attack/release envelope; no hard-edged single oscillator fallback.
  function fallback(event,now){
@@ -25,11 +26,26 @@ export function createG2mAudio({storage=globalThis.localStorage,AudioContext=glo
   for(const ratio of [1,1.997]){const tone=context.createOscillator();tone.type='sine';tone.frequency.setValueAtTime(hz*ratio,now);tone.frequency.exponentialRampToValueAtTime(hz*ratio*.48,now+duration);voice(tone,level*(ratio===1?.65:.18));}
   const air=context.createBufferSource(),filter=context.createBiquadFilter();air.buffer=noise;filter.type='lowpass';filter.frequency.value=event==='missileLaunch'?1500:650;voice(air,level*.4,filter);
  }
+ function startVulcan(now){
+  try{if(!vulcanBuffer){const data=vulcanSamples(context.sampleRate,66);vulcanBuffer=context.createBuffer(1,data.length,context.sampleRate);vulcanBuffer.copyToChannel(data,0);}
+   const source=context.createBufferSource(),gain=context.createGain(),low=context.createBiquadFilter(),high=context.createBiquadFilter();source.buffer=vulcanBuffer;source.loop=true;
+   low.type='lowpass';low.frequency.value=4200;high.type='highpass';high.frequency.value=70;gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(1.7,now+.08);
+   source.playbackRate.setValueAtTime(.35,now);for(let i=1;i<=7;i++)source.playbackRate.linearRampToValueAtTime(vulcanSpin(i*.05,true).rate,now+i*.05);
+   source.connect(high);high.connect(low);low.connect(gain);gain.connect(master);source.start(now);vulcan={source,gain,start:now};vulcanStarts++;played++;
+  }catch{vulcan=null;}
+ }
+ function stopVulcan(now,fast=false){
+  const v=vulcan;if(!v)return;vulcan=null;const d=fast?.02:.45;
+  try{v.gain.gain.cancelScheduledValues(now);v.gain.gain.setValueAtTime(Math.max(.0001,v.gain.gain.value||1.7),now);v.gain.gain.linearRampToValueAtTime(.0001,now+d);
+   v.source.playbackRate.cancelScheduledValues(now);v.source.playbackRate.setValueAtTime(Math.max(.35,v.source.playbackRate.value||1),now);v.source.playbackRate.linearRampToValueAtTime(.3,now+d);v.source.stop(now+d+.02);v.source.onended=()=>{try{v.source.disconnect();v.gain.disconnect();}catch{}};
+  }catch{}
+ }
  function play(event){
   event=event==='upgrade'?'bonus':event;
   if(disposed||paused||muted()||!G2M_LEVELS[event]||sources.size>=18)return;
   unlock();if(context.state!=='running')return;
   const now=context.currentTime;
+  if(v12&&event==='shot'){lastShot=now;if(!vulcan)startVulcan(now);return;}
   if(v11&&(event==='shot'||event==='laser')){
    const spec=event==='shot'?BOAR_MG:LASER_SFX;if(now-(last.get(event)??-1)<spec.minGap)return;last.set(event,now);
    while(synth.length&&synth[0]<=now)synth.shift();if(synth.length>=8)return;synth.push(now+.2);
@@ -41,5 +57,5 @@ export function createG2mAudio({storage=globalThis.localStorage,AudioContext=glo
   try{if(event==='stageEnd')stop();if(buffers.has(event)){const source=context.createBufferSource();source.buffer=buffers.get(event);source.connect(master);source.onended=()=>{sources.delete(source);source.disconnect();};sources.add(source);source.start();}else fallback(event,now);played++;
   }catch{/* Device interruption is non-fatal. */}
  }
- return {ready,play,unlock,sync(){if(master)master.gain.value=muted()||paused?0:.3;if(muted())stop();},setPaused(value){paused=Boolean(value);if(paused){stop();if(context?.state==='running')void context.suspend().catch(()=>{});}else unlock();},metrics(){return {loaded,played,active:sources.size,muted:muted(),paused,disposed};},dispose({finishTail=false}={}){disposed=true;buffers.clear();const close=()=>{stop();if(context)void context.close().catch(()=>{});};if(finishTail&&sources.size)setTimeout(close,1300);else close();}};
+ return {ready,play,unlock,sync(){if(vulcan&&context&&context.currentTime-lastShot>.14)stopVulcan(context.currentTime);if(master)master.gain.value=muted()||paused?0:.3;if(muted())stop();},setPaused(value){paused=Boolean(value);if(paused){stop();if(context?.state==='running')void context.suspend().catch(()=>{});}else unlock();},metrics(){return {vulcanActive:Boolean(vulcan),vulcanStarts,loaded,played,active:sources.size,muted:muted(),paused,disposed};},dispose({finishTail=false}={}){disposed=true;buffers.clear();const close=()=>{stop();if(context)void context.close().catch(()=>{});};if(finishTail&&sources.size)setTimeout(close,1300);else close();}};
 }
