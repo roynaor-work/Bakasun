@@ -33,6 +33,31 @@ export function createCatchAudio({muted = () => false} = {}) {
     g.gain.setValueAtTime(gain, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
     src.connect(f).connect(g).connect(a.destination); src.start(t0);
   };
+  // ----- recorded siren loops: decoded once, looped through a gain node, playbackRate gives the Doppler -----
+  const LOOPS = {twoTone: 'siren-two-tone-loop', yelp: 'siren-yelp-loop'}, buffers = {}, loading = {};
+  let live = null, killTimer = 0;
+  const loopUrl = id => {
+    let ogg = false; try { ogg = Boolean(globalThis.document && document.createElement('audio').canPlayType('audio/ogg; codecs=vorbis')); } catch { /* ignore */ }
+    return new URL('../assets/game-catch/audio/' + LOOPS[id] + (ogg ? '.ogg' : '.mp3'), import.meta.url).href;
+  };
+  const fetchLoop = id => {
+    if (buffers[id] || loading[id]) return; const a = ensure(); if (!a || typeof fetch !== 'function') return;
+    loading[id] = fetch(loopUrl(id)).then(r => r.ok ? r.arrayBuffer() : Promise.reject(new Error('siren'))).then(b => a.decodeAudioData(b)).then(buf => { buffers[id] = buf; }).catch(() => { loading[id] = null; });
+  };
+  const stopLoop = () => {
+    const l = live; live = null; if (!l || !ac) return;
+    try { const t = ac.currentTime; l.g.gain.cancelScheduledValues(t); l.g.gain.setValueAtTime(l.g.gain.value, t); l.g.gain.linearRampToValueAtTime(0, t + .18); l.src.stop(t + .2); } catch { /* ignore */ }
+  };
+  const sirenLoop = (id, rate, holdMs) => {
+    const a = ensure(); if (!a || muted() || paused) return false;
+    fetchLoop(id); const buf = buffers[id]; if (!buf) return false;
+    if (live && live.id !== id) stopLoop();
+    if (!live) {
+      const src = a.createBufferSource(), g = a.createGain(); src.buffer = buf; src.loop = true; src.playbackRate.value = rate;
+      g.gain.setValueAtTime(0, a.currentTime); g.gain.linearRampToValueAtTime(.2, a.currentTime + .2); src.connect(g).connect(a.destination); src.start(); live = {id, src, g};
+    } else live.src.playbackRate.setTargetAtTime(rate, a.currentTime, .2);
+    clearTimeout(killTimer); killTimer = setTimeout(stopLoop, holdMs); return true;
+  };
   const cues = {
     tool: () => tone(620, .08, {type: 'triangle', gain: .08}),
     swing: () => noise(.22, {gain: .06, from: 700, to: 1600}),
@@ -41,12 +66,13 @@ export function createCatchAudio({muted = () => false} = {}) {
     miss: () => { tone(260, .28, {type: 'triangle', gain: .09, slide: -140}); },
     catch: () => { [523, 659, 784].forEach((f, i) => tone(f, .18, {type: 'triangle', gain: .12, delay: i * .08})); noise(.18, {gain: .05, from: 3200, to: 1200}); },
     perfect: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .12, delay: i * .07})); noise(.3, {gain: .07, from: 4200, to: 1500}); },
-    engine: () => tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160}),
+    engine: () => { fetchLoop('twoTone'); fetchLoop('yelp'); tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160}); },
     // Police siren: two alternating notes ("wee-woo"), each with a small glide, softened by a low-pass.
     // `approach` -1..1 gives a light Doppler shift: higher while the cars close in, lower when they pull apart.
+    // Real siren loops (Codex, CC0). The loop plays while the cue keeps arriving and fades out a moment after the last one.
     siren: arg => {
       const k = 1 + .045 * clamp(Number(arg?.approach) || 0, -1, 1);
-      siren(960 * k, 800 * k, 0); siren(740 * k, 880 * k, .4);
+      if (!sirenLoop(arg?.crew ? 'yelp' : 'twoTone', k, arg?.crew ? 1500 : 1100)) { siren(960 * k, 800 * k, 0); siren(740 * k, 880 * k, .4); }
     },
     count: () => tone(520, .12, {type: 'triangle', gain: .1}),
     go: () => { tone(780, .3, {type: 'triangle', gain: .12}); tone(1170, .3, {type: 'triangle', gain: .08, delay: .06}); },
@@ -64,6 +90,6 @@ export function createCatchAudio({muted = () => false} = {}) {
     cue(name, arg) { try { cues[name]?.(arg); } catch { /* audio is optional */ } },
     tick() { /* silent on purpose: dragging should not chatter */ },
     setPaused(v) { paused = Boolean(v); if (ac) { try { paused ? ac.suspend() : ac.resume(); } catch { /* ignore */ } } },
-    dispose() { try { ac?.close(); } catch { /* ignore */ } ac = null; },
+    dispose() { clearTimeout(killTimer); live = null; try { ac?.close(); } catch { /* ignore */ } ac = null; },
   };
 }
