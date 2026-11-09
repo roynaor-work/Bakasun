@@ -79,6 +79,7 @@ export function createCatchAudio({muted = () => false} = {}) {
     crash: () => { noise(.3, {gain: .12, from: 1400, to: 200}); tone(90, .3, {type: 'sawtooth', gain: .12, slide: -50}); },
     crimCrash: () => { noise(.25, {gain: .08, from: 1800, to: 400}); tone(300, .25, {type: 'triangle', gain: .09, slide: 260, delay: .1}); },
     pad: () => { tone(660, .12, {type: 'triangle', gain: .09}); tone(990, .16, {type: 'triangle', gain: .09, delay: .08}); },
+    scrape: () => { noise(.35, {gain: .09, from: 3800, to: 1200}); tone(1500, .2, {type: 'square', gain: .03, slide: -700}); },
     ram: () => { noise(.18, {gain: .12, from: 1600, to: 300}); tone(150, .16, {type: 'square', gain: .08, slide: -60}); },
     nitro: () => noise(.5, {gain: .06, from: 600, to: 3000}),
     brake: () => noise(.7, {gain: .07, from: 2600, to: 700}),

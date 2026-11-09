@@ -17,8 +17,10 @@ page.on('pageerror',e=>errors.push(e.message));
 page.on('console',m=>{if(/content security policy|violates/i.test(m.text()))csp.push(m.text());});
 page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&u.origin!==new URL(server.url).origin)outside.push(r.url());});
 const session=()=>page.evaluate(()=>window.__island.ui.activityInterface.current.session.snapshot);
-const solve=`(()=>{const e=window.__island.ui.activityInterface.current.session.engine,st=e.state;let best=null;
- for(const tool of e.tools.map(t=>t.id)){for(let a=12;a<=72&&!best;a+=1)for(let p=.2;p<=1&&!best;p+=.01){const f=e.trajectory(a,p,tool,{resolve:true,t0:e.clock+e.balance.physics.throwSeconds});if(f.kind==='catch')best=[a,p,tool];}if(best)break;}
+const solve=`(()=>{const e=window.__island.ui.activityInterface.current.session.engine,P=e.balance.physics,t0=e.clock+P.throwSeconds;let best=null;
+ for(const tool of e.tools.map(t=>t.id)){for(let a=12;a<=72&&!best;a+=1)for(let p=.2;p<=1&&!best;p+=.01){
+  const f0=e.trajectory(a,p,tool,{yaw:0,withWind:false}),c=e.criminalAt(t0+f0.duration),yaw=e.isArch?Math.atan2(c.z,c.x-P.release.x)*180/Math.PI:0;
+  const f=e.trajectory(a,p,tool,{resolve:true,t0,yaw});if(f.kind==='catch')best=[a,p,tool,yaw];}if(best)break;}
  return best;})()`;
 const launch=async (stage,{skipChase=true,target=page}={})=>{
   await target.evaluate(s=>window.__island.ui.activityInterface.launch('catchCriminal',undefined,s),stage);
@@ -65,9 +67,11 @@ try{
   assert.equal(await page.locator('.catch-tool').count(),2,'two tools on stage 1');
   await page.screenshot({path:join(out,'01-aim.png')});
   const before=await page.evaluate(()=>({...window.__island.ui.activityInterface.current.session.engine.aim}));
-  await page.mouse.move(380,230);await page.mouse.down();await page.mouse.move(330,250,{steps:6});await page.mouse.up();
+  await page.mouse.move(380,230);await page.mouse.down();await page.mouse.move(440,250,{steps:6});await page.mouse.up();await page.waitForTimeout(300);
   const after=await page.evaluate(()=>({...window.__island.ui.activityInterface.current.session.engine.aim}));
-  assert.ok(after.power>before.power&&after.angle>before.angle,'dragging left and down raises power and angle: '+JSON.stringify([before,after]));
+  assert.ok(after.yaw>before.yaw&&after.angle>before.angle,'dragging right and down turns the aim right and raises the angle: '+JSON.stringify([before,after]));
+  const pw=await page.locator('.catch-power').boundingBox();await page.mouse.click(pw.x+pw.width/2,pw.y+pw.height*.15);
+  assert.ok(await page.evaluate(()=>window.__island.ui.activityInterface.current.session.engine.aim.power)>.8,'the power meter is pulled by touch');
   console.log('drag aim: ok');
   // pause freezes the clock
   await page.locator('[data-action=game-pause]').click();
@@ -78,11 +82,14 @@ try{
   console.log('pause and resume: ok');
   // a solved throw wins stage 1, pays and unlocks stage 2
   const moneyBefore=await page.evaluate(()=>window.__island.engine.state.money);
-  const sol=await page.evaluate(solve);assert.ok(sol,'stage 1 has a solution');
-  await page.evaluate(([a,p,tool])=>{const s=window.__island.ui.activityInterface.current.session;s.engine.setTool(tool);s.engine.setAim({angle:a,power:p});},sol);
-  await page.locator('.catch-throw').click();
-  assert.equal((await session()).phase,'throw');
-  await page.waitForTimeout(900);await page.screenshot({path:join(out,'02-flight.png')});
+  // stage 1 needs two hits: the first through the button, the second through the engine
+  for(let k=0;k<2;k++){
+    const sol=await page.evaluate(solve);assert.ok(sol,'stage 1 has a solution (hit '+(k+1)+')');
+    await page.evaluate(([a,p,tool,yaw])=>{const s=window.__island.ui.activityInterface.current.session;s.engine.setTool(tool);s.engine.setAim({angle:a,power:p,yaw});},sol);
+    if(k===0){await page.locator('.catch-throw').click();assert.equal((await session()).phase,'throw');await page.waitForTimeout(900);await page.screenshot({path:join(out,'02-flight.png')});}
+    else await page.evaluate(()=>window.__island.ui.activityInterface.current.session.engine.release());
+    await page.evaluate(()=>{const s=window.__island.ui.activityInterface.current.session;for(let i=0;i<60*20&&!['aim','done'].includes(s.engine.state.phase)||(i===0);i++)s.debug.step(1/60);});
+  }
   await page.evaluate(()=>{const s=window.__island.ui.activityInterface.current.session;for(let i=0;i<60*20&&s.engine.state.phase!=='done';i++)s.debug.step(1/60);});
   await page.waitForSelector('[data-result=catchCriminal]');
   await page.screenshot({path:join(out,'03-result.png')});

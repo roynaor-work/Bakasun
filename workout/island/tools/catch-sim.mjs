@@ -63,7 +63,8 @@ export function plan(engine, skill, rnd) {
   const balance = engine.balance, P = balance.physics, Pt = P.throwSeconds, C = balance.criminal, level = engine.level;
   const order = ['narrow', 'rope', 'wide'].filter(id => engine.tools.some(t => t.id === id));
   const angles = [34, 44, 26, 54, 18, 64, 8, 72, 3];
-  const period = level.move?.period || (level.move?.kind === 'dash' ? 2 * (2 * level.move.amp / level.move.speed + level.move.pause) : 0);
+  const mv = engine.isArch ? level.zmove : level.move;
+  const period = mv?.period || (mv?.kind === 'dash' ? 2 * (2 * mv.amp / mv.speed + mv.pause) : 0);
   const popCycle = level.pop ? level.pop.up + level.pop.down : 0;
   const horizon = Math.max(period, popCycle, 0) + 0.4;
   const delays = [0]; for (let d = 0.2; d <= horizon; d += 0.2) delays.push(d);
@@ -73,7 +74,7 @@ export function plan(engine, skill, rnd) {
     for (const angle of angles) {
       for (const delay of delays) {
         // The thief's position at impact depends on the flight time; two fixed-point passes are enough.
-        let T = 1.2, x = 0, c;
+        let T = 1.2, x = 0, c, yaw = 0;
         const headShot = rnd() < skill.head;
         const ty = headShot ? 1.7 : 1.0;
         let power = null;
@@ -81,23 +82,27 @@ export function plan(engine, skill, rnd) {
           c = engine.criminalAt(engine.clock + delay + Pt + T); x = c.x;
           // Wind pushes the net sideways; the player corrects by a fraction of the drift.
           const drift = 0.5 * engine.wind * tool.windScale * T * T;
-          power = solvePower(balance, tool, angle, x - skill.windComp * drift, ty);
+          if (engine.isArch) { // the target sweeps across the street: aim the yaw at where it will be, fold the cross wind into the yaw
+            const dxr = x - P.release.x, zEff = (c.z || 0) - skill.windComp * drift;
+            yaw = Math.atan2(zEff, dxr) * 180 / Math.PI;
+            power = Math.abs(yaw) > (P.yawMax ?? 24) ? null : solvePower(balance, tool, angle, P.release.x + Math.hypot(dxr, zEff), ty);
+          } else power = solvePower(balance, tool, angle, x - skill.windComp * drift, ty);
           if (power === null) break;
           const speed = tool.vmax * (P.powerMin + (1 - P.powerMin) * power);
           T = Math.max(0.2, (2 * speed * Math.sin(angle * Math.PI / 180)) / tool.gravity * 0.97);
         }
         if (power === null || !c.exposed) continue;
         // Reject lines the preview shows as blocked.
-        const pre = engine.trajectory(angle, power, id, {withWind: false, t0: engine.clock + delay + Pt, resolve: true});
+        const pre = engine.trajectory(angle, power, id, {withWind: false, t0: engine.clock + delay + Pt, resolve: true, yaw});
         if (pre.kind !== 'catch') continue;
         // Score the candidate: wide margins beat narrow ones. Test a few perturbations of the final aim.
         let ok = 0, n = 0;
-        for (const [da, dp] of [[0, 0], [0.8, 0], [-0.8, 0], [0, 0.02], [0, -0.02]]) {
-          const r = engine.trajectory(angle + da, clamp(power + dp, 0, 1), id, {withWind: true, t0: engine.clock + delay + Pt, resolve: true});
+        for (const [da, dp, dy] of [[0, 0, 0], [0.8, 0, 0], [-0.8, 0, 0], [0, 0.02, 0], [0, -0.02, 0], [0, 0, 0.6], [0, 0, -0.6]]) {
+          const r = engine.trajectory(angle + da, clamp(power + dp, 0, 1), id, {withWind: true, t0: engine.clock + delay + Pt, resolve: true, yaw: yaw + dy});
           n++; if (r.kind === 'catch') ok++;
         }
         const score = ok / n - delay * 0.01 - (id === 'wide' ? 0.02 : 0);
-        if (!best || score > best.score) best = {id, angle, power, delay, score};
+        if (!best || score > best.score) best = {id, angle, power, delay, score, yaw};
         if (score >= 0.99) return best;
       }
     }
@@ -105,11 +110,11 @@ export function plan(engine, skill, rnd) {
   return best;
 }
 
-export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = false, driving = DRIVING.good} = {}) {
+export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = false, arch = v2, driving = DRIVING.good} = {}) {
   const rnd = seededRandom(seed * 7919 + stage);
   let chased = null, mods = {};
   if (v2) { chased = driveChase(createChaseEngine({balance, stage, seed}), driving, rnd); mods = chased.mods; }
-  const engine = createCatchEngine({balance, stage, seed, v2, mods});
+  const engine = createCatchEngine({balance, stage, seed, v2, mods, arch});
   const dt = 1 / 60;
   let guard = 0, throws = 0, hits = 0, flightTime = 0;
   while (engine.state.phase !== 'done' && guard++ < 60 * 120) {
@@ -122,7 +127,7 @@ export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = fal
       const plannedAt = engine.clock - (wait - p.delay), sway = engine.wobbleAt(plannedAt);
       // A short preview means the player has to extrapolate the arc: his aim gets less exact.
       const blur = 1 + 1.2 * (1 - engine.previewFraction);
-      engine.setAim({angle: p.angle - sway.angle + gauss(rnd) * skill.angle * blur, power: clamp(p.power - sway.power + gauss(rnd) * skill.power * blur, 0, 1)});
+      engine.setAim({angle: p.angle - sway.angle + gauss(rnd) * skill.angle * blur, power: clamp(p.power - sway.power + gauss(rnd) * skill.power * blur, 0, 1), yaw: engine.isArch ? (p.yaw || 0) - sway.yaw + gauss(rnd) * skill.angle * .55 * blur : 0});
       const f = engine.release(); throws++; flightTime += f.duration; if (f.kind === 'catch') hits++;
     }
     engine.step(dt);
@@ -153,7 +158,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const range = (args[1] && !args[1].startsWith('--') ? args[1] : '1-10').split('-').map(Number);
   const listArg = args.find(a => a.startsWith('--stages='));
   const stages = listArg ? listArg.slice(9).split(',').map(Number) : Array.from({length: (range[1] || range[0]) - range[0] + 1}, (_, i) => range[0] + i);
-  const v1 = args.includes('--v1'), onlyArg = args.find(a => a.startsWith('--only=')), skills = onlyArg ? Object.fromEntries(Object.entries(SKILLS).filter(([k]) => onlyArg.slice(7).split(',').includes(k))) : SKILLS, started = Date.now(), result = measure(games, stages, skills, defaultBalance, {v2: !v1});
+  const v1 = args.includes('--v1'), onlyArg = args.find(a => a.startsWith('--only=')), skills = onlyArg ? Object.fromEntries(Object.entries(SKILLS).filter(([k]) => onlyArg.slice(7).split(',').includes(k))) : SKILLS, started = Date.now(), result = measure(games, stages, skills, defaultBalance, {v2: !v1, arch: !args.includes('--noarch')});
   console.log('games per stage:', games, 'seconds:', ((Date.now() - started) / 1000).toFixed(1));
   for (const [name, rows] of Object.entries(result)) {
     console.log(`\n[${name}]  stage  catch%  first%  perfect%  throws  secs  coins`);

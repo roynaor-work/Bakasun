@@ -15,6 +15,8 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const lerp = (a, b, k) => a + (b - a) * k;
 
 export const laneZ = (lat, C) => C.laneCenter + lat * C.laneWidth;
+/** Bend of the road at street position x: -1..1 times the stage's `curve`. The street repeats every C.period metres. */
+export const curveAt = (x, C, curve = 0) => curve ? curve * Math.sin(2 * Math.PI * x / (C.period || 66)) : 0;
 
 /** Obstacles for the whole run, laid out up front from the seed so the chase is a pure function of inputs. */
 function layout(C, spec, rnd, length) {
@@ -37,8 +39,8 @@ function layout(C, spec, rnd, length) {
 }
 const obstacleX = (o, t) => o.kind === 'traffic' ? o.x + o.v * t : o.x;
 
-export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}}) {
-  const C = balance.chase, level = balance.levels[stage - 1], spec = level.chase;
+export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}, bends = true}) {
+  const C = balance.chase, level = balance.levels[stage - 1], spec = bends || !level.chase ? level.chase : {...level.chase, curve: 0};
   if (!spec) throw Error('catch: stage ' + stage + ' has no chase');
   const rnd = seededRandom((seed * 2246822519 + stage * 131) >>> 0);
   const length = spec.seconds * (C.baseSpeed + C.boostSpeed) + 160;
@@ -95,6 +97,16 @@ export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {}}
       const grip = s.stun > 0 ? .35 : 1;
       s.steer += (input.steer * grip - s.steer) * Math.min(1, dt * C.steerResponse);
       s.lat = clamp(s.lat + s.steer * C.steerSpeed * dt, -1, 1);
+      // v5 bends: the road swings left and right, a car that does not steer is carried to the outside; the kerb scrapes and slows
+      s.curveNow = curveAt(s.x, C, spec.curve);
+      if (spec.curve) {
+        s.lat += (C.curveDrift || 0) * s.curveNow * (s.v / 22) * dt;
+        if (Math.abs(s.lat) > 1) {
+          s.lat = clamp(s.lat, -1, 1); s.v *= 1 - Math.min(1, C.scrapeDrag * dt); s.scrape = (s.scrape || 0) + dt;
+          if ((s.scrapeCool || 0) <= 0) { s.scrapeCool = .45; events.push({type: 'scrape', side: Math.sign(s.curveNow)}); }
+        }
+        s.scrapeCool = Math.max(0, (s.scrapeCool || 0) - dt);
+      }
       s.boosting = Boolean(input.boost) && s.tank > 0 && s.stun <= 0;
       s.braking = Boolean(input.brake) && !s.boosting;
       if (s.boosting) s.tank = Math.max(0, s.tank - dt / C.boostSeconds); else s.tank = Math.min(tankMax, s.tank + dt * C.rechargePerSecond);

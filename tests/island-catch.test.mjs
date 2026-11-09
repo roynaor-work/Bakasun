@@ -260,19 +260,19 @@ test('catch v2: the session without a canvas plays only the throw, and ?catchV2=
 // ---------------- v3: overtaking and ramming ----------------
 test('catch v3: the officer can overtake, ramming fills the damage meter, a full meter stops the thief and ends the chase', () => {
   // boost down an empty road past the thief
-  const c = createChaseEngine({balance, stage: 1, seed: 1}); c.obstacles.length = 0; c.state.crim.x = 16; c.step(3);
+  const c = createChaseEngine({balance, stage: 1, seed: 1, bends: false}); c.obstacles.length = 0; c.state.crim.x = 16; c.step(3);
   let passed = false;
   for (let i = 0; i < 60 * 12 && c.state.phase !== 'end' && !passed; i++) { c.setSteer(c.state.crim.lat > c.state.lat ? .6 : -.6); c.setBoost(c.state.tank > .05); c.step(1 / 60); c.drainEvents(); passed = c.state.x > c.state.crim.x + 1; }
   assert.ok(passed || c.state.outcome === 'caught', 'with nothing in the way the officer reaches and passes him, or catches him on the way');
   // park the officer in contact with the thief: the meter fills and ends the chase as a catch
-  const d = createChaseEngine({balance, stage: 1, seed: 1}); d.obstacles.length = 0; d.step(3);
+  const d = createChaseEngine({balance, stage: 1, seed: 1, bends: false}); d.obstacles.length = 0; d.step(3);
   let events = [], steps = 0;
   while (d.state.phase !== 'end' && steps++ < 60 * 40) { d.state.x = d.state.crim.x - 1; d.state.lat = d.state.crim.lat + .8; d.state.v = d.state.crim.v + 2; d.step(1 / 60); events.push(...d.drainEvents()); }
   assert.equal(d.state.phase, 'end'); assert.equal(d.state.outcome, 'caught'); assert.ok(d.state.damage >= 1);
   assert.ok(events.some(e => e.type === 'ram' && e.side), 'a side hit is reported');
   const res = d.result(); assert.equal(res.caught, true); assert.equal(res.closeness, 1);
   // no contact: the damage stays at zero
-  const e = createChaseEngine({balance, stage: 1, seed: 1}); e.obstacles.length = 0; for (let i = 0; i < 60 * 6; i++) { e.step(1 / 60); e.drainEvents(); }
+  const e = createChaseEngine({balance, stage: 1, seed: 1, bends: false}); e.obstacles.length = 0; for (let i = 0; i < 60 * 6; i++) { e.step(1 / 60); e.drainEvents(); }
   assert.equal(e.state.damage, 0);
 });
 
@@ -284,13 +284,13 @@ test('catch v3: the siren is two alternating notes and the old sound is gone', a
 });
 
 test('catch v4: early stages show a landing ring and a green hit hint, later stages do not; the off switch restores the v3 balance', () => {
-  const mk = (stage, feel) => createCatchEngine({balance, stage, seed: 3, v2: true, feel});
+  const mk = (stage, feel, arch = false) => createCatchEngine({balance, stage, seed: 3, v2: true, feel, arch});
   const e1 = mk(1, true), e8 = mk(8, true), off = mk(1, false);
   assert.equal(e1.aimHelp, 2); assert.equal(e8.aimHelp, 0); assert.equal(off.aimHelp, 0);
   const p = e1.preview(); assert.equal(p.help, 2); assert.ok(p.land && typeof p.hit === 'boolean');
   assert.equal(e8.preview().hit, false);
   assert.equal(off.level.radiusScale, balance.levels[0].v3.radiusScale);
-  assert.equal(mk(1, true).level.radiusScale, balance.levels[0].radiusScale);
+  assert.equal(e1.level.radiusScale, balance.levels[0].v4.radiusScale, 'the side-view throw keeps the v4 values');
   assert.ok(e1.previewFraction > off.previewFraction, 'help lengthens the arc');
 });
 
@@ -302,4 +302,24 @@ test('catch v4: the chase camera follows in unwrapped street coordinates and the
   assert.match(src, /s\.baseX \+ \(engine\.level\.move\?\.amp \|\| 0\) \+ 3\.2/, 'aim framing does not chase the thief');
   const ses = await readFile(new URL('minigames/catch-session.mjs', root), 'utf8');
   assert.match(ses, /catchV4/);
+});
+
+test('catch v5: the archery throw has yaw, a cross wind, several throws and 2-3 hits; the thief sweeps across the street', () => {
+  const e = createCatchEngine({balance, stage: 5, seed: 2, v2: true, arch: true});
+  assert.equal(e.isArch, true); assert.equal(e.hitsNeeded, 3); assert.equal(e.throwsTotal, 6);
+  const a = e.trajectory(40, .6, 'narrow', {yaw: 0, withWind: false}), b = e.trajectory(40, .6, 'narrow', {yaw: 10, withWind: false});
+  assert.ok(Math.abs(a.path.at(-1).z) < 1e-9 && b.path.at(-1).z > 1, 'yaw sends the net sideways');
+  const zs = new Set(); for (let t = 0; t < 8; t += .4) zs.add(Math.round(e.criminalAt(t).z * 10)); assert.ok(zs.size > 4, 'the thief moves across the street');
+  const v4 = createCatchEngine({balance, stage: 5, seed: 2, v2: true, arch: false});
+  assert.equal(v4.isArch, false); assert.equal(v4.throwsTotal, balance.throws + 2, 'the v4 throw keeps three throws and the boss armour');
+  e.setAim({yaw: 99}); assert.equal(e.aim.yaw, balance.physics.yawMax);
+});
+
+test('catch v5: the road bends, a car that does not steer is carried to the outside, and ?catchV5=0 straightens it', () => {
+  const c = createChaseEngine({balance, stage: 8, seed: 1}); c.obstacles.length = 0; c.step(3);
+  let scraped = false; for (let i = 0; i < 60 * 14; i++) { c.step(1 / 60); if (c.drainEvents().some(e => e.type === 'scrape')) scraped = true; }
+  assert.ok(scraped || Math.abs(c.state.lat) >= .99, 'without steering the kerb is reached');
+  const s = createChaseEngine({balance, stage: 8, seed: 1, bends: false}); s.obstacles.length = 0; s.step(3);
+  for (let i = 0; i < 60 * 14; i++) { s.step(1 / 60); s.drainEvents(); }
+  assert.ok(Math.abs(s.state.lat) < .01, 'straight road: no drift');
 });
