@@ -1,6 +1,6 @@
 # הנחיות Codex להדבקה (07/11/2026, רועי: "תכין הכל, אני אעלה לשם")
 
-שמונה עשרה משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
+עשרים משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
 
 ## 1. סביבת מירוצים בסגנון פורמולה 1 (רמה: ultra למודלים, extra high למרקמים)
 ```
@@ -168,4 +168,51 @@ preview.html שמנגן כל צליל עם בקרת עוצמה.
 כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/tennis-crowd-3d-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/tennis-crowd-3d-v1/
 הרקע (רועי: "הקהל נראה כמו חתיכות קרטון ישרות"): הקהל בטניס הוא אטלס דו-ממדי שטוח, גם אחרי v13. המשימה: קהל תלת-ממדי קל לטניס באי: 12 וריאציות של אוהד יושב (GLB מרוסן אחד לכל וריאציה, עד 220 משולשים כל אחד, חולצות וצבעי עור ושיער שונים, ידיים למטה וידיים למעלה כשני מצבי אנימציה בפורמט morph או שני GLB), מתאים ל-InstancedMesh עם 600 מופעים (כמו במבנה של tennis-stadium-v1). הצללה אפויה בצבעי קודקוד, בלי טקסטורה גדולה. מגבלת משקל כוללת 400KB. ניואנסים: ראשים שמסתובבים בעקבות הכדור (מפת עצם ראש אם יש), קפיצה קלה בחגיגה, שונות בגובה ובגוף.
 מוכן כש: preview.html מציג את היציע עם 600 מופעים מזוויות המצלמה של המשחק (צד ומאחור), מונה משולשים (עד 132,000 לכל הקהל או לפי התקציב שבדוח), מדידת fps בתוכנה לפני/אחרי, ו-REPORT עם טבלת קבצים.
+```
+
+## 19. נכסי שחקני הוקי קרח (רמה: ultra)
+```
+משימה: נכסי שחקני הוקי קרח על שלד השחקנים המאוחד של האי.
+קישור: ענף claude/unified-athletes-v1 בריפו roynaor-work/Bakasun. קראו קודם
+workout/island/verification/unified-athletes-v1/REPORT.md ואת
+workout/island/minigames/athletes-roles.mjs (הערך hockey).
+
+כללים: קבצים חדשים בלבד, תחת workout/island/design/hockey-v1/. בלי נגיעה בקוד משחק, בגרסה, ב-ops ובבדיקות.
+רישיון CC0 לכל קובץ, עם מקור. עברית בלבד בטקסטים למשתמש, בלי סימני קריאה, ילדים בני 7 ומעלה.
+
+צעדים:
+1. גוף שחקן ושוער (GLB) על השלד הקנוני של 18 עצמות: Root, Hips, Spine, Chest, Neck, Head,
+   LeftArm, LeftForeArm, LeftHand, RightArm, RightForeArm, RightHand, LeftUpLeg, LeftLeg, LeftFoot,
+   RightUpLeg, RightLeg, RightFoot. אותו סדר ואותו מיקום מנוחה כמו
+   workout/island/assets/hoops-tall/motion.json (מערך CANON_BONES ב-athletes-core.mjs).
+   שחקן 1.85 מ', עד 8,000 משולשים. שוער עם רפידות, כפפה ומחסום ידיים, עד 10,000 משולשים.
+   קסדה, קסדה לשוער, גלגליות ולהבים. צבעי חולצה וקסדה לפי צבעי קבוצה (צבע קודקודים לפי אזורים,
+   כמו בגופי הכדורסל: uniform_primary, uniform_secondary, uniform_trim). ללא Draco.
+2. מקל כנכס נפרד (GLB) עם נקודת אחיזה ביד ימין ונקודת להב.
+3. קליפים בפורמט של workout/island/assets/soccer-v9/clips.json: schemaVersion 1, 30 פריימים בשנייה,
+   keyframes עם rotations לכל 18 העצמות ו-hipsOffsetMeters, לפחות:
+   החלקה: דחיפה (3 מהירויות), גלישה, חצייה שמאלה וימינה, בלימה (שני צדדים), פנייה 45/90/180,
+   החלקה אחורה, עמידה מוכנה (3 וריאציות).
+   פעולות: קליעת פרק יד, קליעת סלאפ, מסירה, קבלה, בדיקת גוף.
+   שוער: עמידה, נפילה לפרפר, החלקה לצד, עצירה עם כפפה גבוהה ונמוכה, עצירה עם מקל.
+   חגיגה: 3.
+   בכל קליפ: supports עם חלון מגע ללהב (במקום רגל נטועה), events (מגע במקל, שחרור), loop.
+4. רף איכות (חובה, כולל הוכחה בדוח): 
+   א. כל קליפ בכלי של Codex (node workout/island/design/motion-qa-v1/run.mjs) בציון תחושה לפחות 88.
+   ב. כל קליפ החלקה/הליכה עומד ב-ATHLETE_STANDARD של athletes-core.mjs: פיסוק זרוע עד 24°,
+      נדנוד לפי הטבלה, מרפק פנימי 40° עד 100°, נטייה קדימה לפחות כמו בטבלה
+      (הרצה: node workout/island/tools/athletes/measure.mjs).
+   ג. גיליון 8 פריימים לכל קליפ מרכזי.
+5. דוח REPORT.md ומניפסט בתיקייה, עם SHA-256 לכל קובץ.
+
+התוצאה הרצויה: PR טיוטה עם התיקייה, ובדיקה: node --test tests/island-athletes-unified.test.mjs
+עובר, ומדידת measure.mjs על הקליפים החדשים בלי כשלים.
+```
+
+## 20. גוף שחקן אחיד לכל משחקי הספורט (רמה: ultra)
+```
+המאגר: https://github.com/roynaor-work/Bakasun (ציבורי), ענף main. כדי לא להוריד הכול: git clone --depth 1 --filter=blob:none --sparse https://github.com/roynaor-work/Bakasun.git ; cd Bakasun ; git sparse-checkout set workout/island/design/motion2 workout/island/assets ; git fetch origin claude/unified-athletes-v1 ; git checkout FETCH_HEAD -- workout/island/verification/unified-athletes-v1 workout/island/minigames/athletes-core.mjs workout/island/minigames/athletes-roles.mjs
+כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/athlete-body-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/athlete-body-v1/
+הרקע (רועי: "אותם שחקנים באותה גרפיקה, לא שתי גרפיקות שונות"): בכדורגל השחקן הוא athlete.glb, ובכדורסל שלושה גופים מצוירים, ולכן הם נראים שונים. המשימה: גוף שחקן אחד על השלד הקנוני של 18 עצמות (CANON_BONES ב-athletes-core.mjs) שמחליף את שניהם: 1) שלושה מבנים (רכז, קיצוני, סנטר) בגובה 1.78 עד 2.08 מ' ושחקן כדורגל 1.75 עד 1.85 מ', מאותו מבנה גוף ואותם חומרים; 2) 6 גווני עור, 8 סגנונות שיער, נעליים, וצבעי תלבושת בצבעי קודקודים לפי אזורים (uniform_primary, uniform_secondary, uniform_trim) כך שאפשר לצבוע חולצה ומכנסיים לפי קבוצה ולפי ענף ספורט (ג'רזי כדורגל, גופייה כדורסל, חולצת טניס, ג'רזי הוקי); 3) חומר אחד (MeshToonMaterial או PBR פשוט עם גוון), תאורה זהה, אותו קו מתאר; 4) עד 7,000 משולשים לשחקן, UV משותף, טקסטורה 1024 אחת; 5) כל הגופים נטענים על קליפי soccer-v9/v10/v11, hoops-tall-v1 ו-hoops-v11 מהקטלוג המתוקן (design/motion-fix-v12/runtime/catalog.json) בלי עיוות מפרקים.
+בדיקות חובה: glTF validator, טעינה בלי Draco, הרצה של 5 קליפים מכל ספרייה על כל גוף וגיליון 8 פריימים, ומדידת הפרש מראה בין גוף כדורגל לכדורסל (צילום זה לצד זה באותה תאורה). מוכן כש: preview.html מציג את כל הגופים וצבעי התלבושת לפי ענף, ו-REPORT עם טבלת משולשים ומשקל.
 ```
