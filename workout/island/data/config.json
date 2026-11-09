@@ -12343,6 +12343,29 @@
      "minQuality": 1,
      "base": "design/hoops-v5/models/"
     },
+    "tall": {
+     "enabled": true,
+     "minQuality": 1,
+     "base": "assets/hoops-tall/",
+     "motion": "motion.json",
+     "profiles": {
+      "guard": "guard.glb",
+      "wing": "wing.glb",
+      "center": "center.glb"
+     },
+     "posProfile": {
+      "PG": "guard",
+      "SG": "guard",
+      "SF": "wing",
+      "PF": "center",
+      "C": "center"
+     },
+     "baseHeights": {
+      "guard": 188,
+      "wing": 198,
+      "center": 208
+     }
+    },
     "v8": {
      "enabled": true,
      "minQuality": 1,
