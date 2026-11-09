@@ -99,25 +99,33 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const LEG_MAP=[['Spine','Spine','Chest'],['Chest','Chest',null],['LeftUpLeg','UpperLeg_L','LowerLeg_L'],['LeftLeg','LowerLeg_L','Foot_L'],['RightUpLeg','UpperLeg_R','LowerLeg_R'],['RightLeg','LowerLeg_R','Foot_R']];
   function applyMotion(ch,i,state,p,dt){
     if(!motion)return;
-    const name=motionApi.clipFor({index:i,player:p,phase:state.phase,serving:p.serving,tossing:state.phase==='toss'&&state.server===i,winner:state.event?.winner},motion.clips);if(!name)return;
-    const clip=motion.clips[name],m=ch.motion||(ch.motion={name:null,time:0,from:null,blend:1,dirs:null});
-    if(m.name!==name){m.from=m.dirs;m.name=name;m.time=0;m.blend=m.from?0:1;}
-    const stroke=p.swing>0&&state.phase==='rally'&&!p.serving&&/^(forehand|backhand)/.test(name);
-    if(stroke)m.time=motionApi.strokeTime(clip,1-p.swing/(p.swingDuration||config.player.swingSeconds),config.animation.contactFraction);
-    else if(name==='serve_toss')m.time=Math.min(clip.dur,(state.tossProgress||0)*clip.dur);
-    else m.time+=dt*(/^run/.test(name)?T.MathUtils.clamp(Math.hypot(p.vx||0,p.vz||0)/3.5,.6,1.6):1);
-    m.blend=Math.min(1,m.blend+dt/.15);
-    const dirs=motionApi.segmentDirections(motion.bones,motionApi.sampleClip(clip,m.time));m.dirs=dirs;
-    const use=m.from&&m.blend<1?motionApi.blendDirections(m.from,dirs,T.MathUtils.smoothstep(m.blend,0,1)):dirs,rootQ=ch.root.getWorldQuaternion(new T.Quaternion());
+    const name=motionApi.clipFor({index:i,player:p,phase:state.phase,serving:p.serving,tossing:state.phase==='toss'&&state.server===i,winner:state.event?.winner},motion.clips),m=ch.motion||(ch.motion={name:null,time:0,from:null,blend:1,dirs:null,w:0});
+    // Clips the package did not admit (standing, running right, celebration) return null: the game's own pose is kept, and the clip pose is faded in/out
+    // over 0.15 s against the pose the bones already hold, so nothing pops on entering or leaving a clip.
+    m.w=T.MathUtils.clamp(m.w+(name?1:-1)*dt/.15,0,1);
+    if(name){
+      const clip=motion.clips[name];
+      if(m.name!==name){m.from=m.dirs;m.name=name;m.time=0;m.blend=m.from?0:1;}
+      const stroke=p.swing>0&&state.phase==='rally'&&!p.serving&&/^(forehand|backhand)/.test(name);
+      if(stroke)m.time=motionApi.strokeTime(clip,1-p.swing/(p.swingDuration||config.player.swingSeconds),config.animation.contactFraction);
+      else if(name==='serve_toss')m.time=Math.min(clip.dur,(state.tossProgress||0)*clip.dur);
+      else m.time+=dt*(/^run/.test(name)?T.MathUtils.clamp(Math.hypot(p.vx||0,p.vz||0)/3.5,.6,1.6):1);
+      m.blend=Math.min(1,m.blend+dt/.15);
+      const dirs=motionApi.segmentDirections(motion.bones,motionApi.sampleClip(clip,m.time));m.dirs=dirs;m.shown=m.from&&m.blend<1?motionApi.blendDirections(m.from,dirs,T.MathUtils.smoothstep(m.blend,0,1)):dirs;
+    }else if(m.name){m.name=null;m.from=null;}
+    ch.motionName=name;
+    if(m.w<=0||!m.shown)return;
+    const rootQ=ch.root.getWorldQuaternion(new T.Quaternion()),rootInv=rootQ.clone().invert(),weight=T.MathUtils.smoothstep(m.w,0,1);
     for(const [key,boneName,childName] of LEG_MAP){
       const bone=ch.bones[boneName];if(!bone)continue;
       const child=childName?ch.bones[childName]:(ch.bones.UpperChest||ch.bones.Neck);if(!child)continue;
-      bone.parent.updateWorldMatrix(true,false);
-      const parentQ=bone.parent.getWorldQuaternion(new T.Quaternion()),rest=ch.rest[boneName],restDir=child.position.clone().normalize().applyQuaternion(rest),
-        target=new T.Vector3(...use[key]).applyQuaternion(rootQ).applyQuaternion(parentQ.clone().invert());
+      bone.parent.updateWorldMatrix(true,false);bone.updateWorldMatrix(false,false);child.updateWorldMatrix(true,false);
+      const own=child.getWorldPosition(new T.Vector3()).sub(bone.getWorldPosition(new T.Vector3())).applyQuaternion(rootInv).normalize(),
+        goal=new T.Vector3(...m.shown[key]).lerp(own,1-weight).normalize(),
+        parentQ=bone.parent.getWorldQuaternion(new T.Quaternion()),rest=ch.rest[boneName],restDir=child.position.clone().normalize().applyQuaternion(rest),
+        target=goal.applyQuaternion(rootQ).applyQuaternion(parentQ.clone().invert());
       bone.quaternion.copy(new T.Quaternion().setFromUnitVectors(restDir,target.normalize()).multiply(rest));bone.updateMatrixWorld(true);
     }
-    ch.motionName=name;
   }
   function render(state,dt=0){
     if(disposed)return;
