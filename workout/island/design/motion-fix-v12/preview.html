@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'self'">
+<link rel="icon" href="data:,">
+<title>תיקון תנועה 12 · השוואה</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div><p class="eyebrow">מעבדת תנועה · 12</p><h1>אותה תנועה. לפני ואחרי.</h1><p class="intro">השוואה מסונכרנת של הקליפ המקורי והתיקון שנמדד.</p></div><nav><a href="report.html">דוח המדידות <span aria-hidden="true">↗</span></a><a href="REPORT.md">תיעוד</a></nav></header>
+<main>
+<section class="toolbar" aria-label="בחירת קליפ"><label>ספרייה<select id="library"><option>טוען…</option></select></label><label class="clip-select">קליפ<select id="clip"></select></label><label>סינון<select id="filter"><option value="all">כל הקליפים</option><option value="fixed">תוקנו</option><option value="blocked">חסומים</option></select></label><button id="next" title="הקליפ הבא">הבא ←</button></section>
+<section class="comparison" aria-label="תצוגת תלת ממד"><div class="pane-labels"><div><span class="tag before">לפני</span><strong id="before-score">—</strong><span id="before-type">המקור</span></div><div><span class="tag after">אחרי</span><strong id="after-score">—</strong><span id="after-type">קובץ הריצה</span></div></div><p id="timing-note" class="timing-disclosure" role="note"></p><div id="stage"><canvas id="canvas" aria-label="השוואת אנימציה בתלת ממד"></canvas><div class="stage-divider"></div><div id="status" role="status">טוען את ספריית התנועה…</div><div class="camera-hint">גרירה לסיבוב · גלילה לקירוב</div><div id="character-labels" class="character-labels"></div></div><div class="transport"><button id="play" aria-label="השהה" disabled>השהה</button><button id="restart" title="המתנה ← תנועה ← המתנה" disabled>מההתחלה</button><label class="timeline"><span id="time">0.00 / 0.00 שנ׳</span><input id="seek" aria-label="זמן בקליפ" type="range" min="0" max="1" step="0.0001" value="0" disabled></label><label class="speed">מהירות<select id="speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="1.5">1½×</option></select></label><button id="camera" title="איפוס מצלמה">מבט קדמי</button></div></section>
+<section class="details"><article class="note-card"><p class="eyebrow">תוצאת התיקון</p><h2 id="clip-name">—</h2><p id="reason">טוען…</p><div id="entry-status"></div><p class="fine-print" id="diagnostic-note">המדידות מתייחסות לקובץ הריצה. התצוגה אינה משנה את נתוני האנימציה.</p><p class="fine-print">בדיקת טעינה מלאה: <button class="text-button" id="verify">טען כל קליפ</button><span id="verify-status" role="status"></span></p></article><article class="metrics-card"><h2>המדדים, באותם ספים</h2><div class="table-scroll"><table><thead><tr><th>מדד</th><th>לפני</th><th>אחרי</th></tr></thead><tbody id="metrics"></tbody></table></div></article></section>
+</main><footer><span>קבצים מקומיים · ללא מפענח דחיסה · ללא WebAssembly</span><a href="LICENSES.md">רישיון ומקור לכל קובץ</a></footer><script type="module" src="preview.mjs"></script>
+</body></html>
