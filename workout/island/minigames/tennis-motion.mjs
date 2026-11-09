@@ -63,6 +63,6 @@ export async function loadMotion({base,fetcher=globalThis.fetch,params}={}){
  const response=await fetcher(new URL('../assets/tennis-motion-v1/core.json?v=island-v2-20261107-6',base));
  if(!response.ok)throw new Error('motion '+response.status);
  const data=await response.json();
- if(!data?.bones?.length||!data.clips?.ready_idle)throw new Error('motion data');
+ if(!data?.bones?.length||!data.clips?.run_forward)throw new Error('motion data');
  return {bones:data.bones,clips:data.clips};
 }
