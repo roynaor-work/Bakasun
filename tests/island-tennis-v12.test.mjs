@@ -15,7 +15,7 @@ const verdict=r=>{const v=r.shot.v9;return v.error==='net'||v.error==='out'?'err
 test('tennis v12: the bar fills over 2.4 s and the green is a wide window in the middle, not the first instant',()=>{
   assert.equal(hold.seconds,2.4);
   const seen=[0.2,0.5,0.8,1.2,1.6,2.0,2.4].map(t=>swingAt(t).bar);
-  assert.equal(seen[0].active,false,'a quick tap shows no bar');
+  assert.equal(seen[0].active,true,'v13: the bar is up while the ball comes, even for a quick tap');
   assert.ok(seen[2].zone==='green'&&seen[3].zone==='green','0.8 s and 1.2 s are green');
   const span=[...Array(25)].map((_,i)=>.1*i).filter(t=>swingAt(t).bar?.zone==='green').length*.1;
   assert.ok(span>=.9,`the green window is ${span.toFixed(1)} s wide`);

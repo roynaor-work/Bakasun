@@ -7,7 +7,7 @@ import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-7';
 import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-7';
 import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-7';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-7',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/tennis-kid.glb?v=island-v2-20261107-7',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -26,6 +26,15 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   // Tennis v7 (design/tennis-v7, copied to assets/tennis-v7): court surface, net, ball, venue, officials and the instanced crowd.
   // It is an upgrade, never a requirement: ?tennisV7=0, the config switch or any load failure keeps the previous court and crowd.
   const params=new URLSearchParams(globalThis.location?.search||''),v7Fallbacks=[];let v7=null;
+  // v13 (load time): everything that does not need the scene starts now, side by side, instead of one file after another (the cold start was a waterfall:
+  // venue, then stadium modules, then its pictures, then the player, then the motion data). Each early promise has its own catch, so a failure keeps the old fallbacks.
+  const V='?v=island-v2-20261107-7',stadiumOff=params.get('tennisStadium')==='0'||params.get('tennisStadium')==='v11'||!v7Enabled(config.environment,0,params);
+  const early={
+   character:fetch(characterUrl).then(r=>r.arrayBuffer()).catch(()=>null),
+   motion:import('./tennis-motion.mjs'+V).catch(()=>null), // the module only: its 430 KB of clips are fetched after the court is up
+   stadium12:stadiumOff?null:import('./tennis-v12-stadium.mjs'+V).then(m=>({m,assets:m.loadStadiumAssets({T,GLTFLoader,base:import.meta.url}).catch(()=>null)})).catch(()=>null),
+   stadium11:stadiumOff?null:import('./tennis-v11-stadium.mjs'+V).catch(()=>null),
+  };
   if(v7Enabled(config.environment,0,params)){
     try{
       const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-7');
@@ -39,8 +48,8 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   }
   // v11: evening sky, skyline, sponsor boards, glow and a billboard crowd between the 3D spectators (?tennisStadium=0 removes it).
   let stadium12=null,stadium11=null;
-  if(v7){try{const {createTennisV12Stadium}=await import('./tennis-v12-stadium.mjs?v=island-v2-20261107-7'),{GLTFLoader:Loader}=await import('../vendor/GLTFLoader.js');stadium12=await createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader:Loader,base:import.meta.url});if(disposed&&stadium12){stadium12.dispose();stadium12=null;}}catch(error){stadium12=null;v7Fallbacks.push('tennis v12 stadium');}}
-  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-7');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly:Boolean(stadium12)});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
+  if(v7){try{const pre=await early.stadium12;if(!pre)throw Error('stadium12');stadium12=await pre.m.createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base:import.meta.url,assets:pre.assets});if(disposed&&stadium12){stadium12.dispose();stadium12=null;}}catch(error){stadium12=null;if(!stadiumOff)v7Fallbacks.push('tennis v12 stadium');}}
+  if(v7){try{const {createTennisV11Stadium}=(await early.stadium11)||await import('./tennis-v11-stadium.mjs'+V);stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly:Boolean(stadium12)});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
   const courtPresentation=v7?{metrics:v7.courtMetrics}:createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
   const environment=v7||await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
   const ball=v7?v7.ball:new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);
@@ -61,7 +70,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const holders=[new T.Group(),new T.Group()];holders.forEach(h=>scene.add(h));const characters=[];
   // Parse the same existing GLB twice to get independent skeletons, without a new helper dependency.
   try{
-    const buffer=await (await fetch(characterUrl)).arrayBuffer();
+    const buffer=(await early.character)||await (await fetch(characterUrl)).arrayBuffer();
     for(let index=0;index<2;index++){
       const gltf=await new GLTFLoader().parseAsync(buffer.slice(0),'');
       if(disposed){gltf.scene.traverse(disposeObject);continue;}
@@ -95,7 +104,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   function burst(x,z){for(let i=0;i<r.particles;i++){const p=particleData[i];p.life=r.particleSeconds;p.vx=(rand()-.5)*5;p.vy=2+rand()*4;p.vz=(rand()-.5)*5;positions.set([x,.4,z],i*3);}particles.visible=true;}
   // tennis motion v1 (Codex clips): thighs, shins and spine follow the clip; arms and racket stay with the contact IK.
   let motion=null;const motionApi={};
-  import('./tennis-motion.mjs?v=island-v2-20261107-7').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;});
+  early.motion.then(async api=>{if(!api){motion=null;return;}const data=await api.loadMotion({base:import.meta.url,params}).catch(()=>null);if(data){Object.assign(motionApi,api);motion=data;}else motion=null;});
   const LEG_MAP=[['Spine','Spine','Chest'],['Chest','Chest',null],['LeftUpLeg','UpperLeg_L','LowerLeg_L'],['LeftLeg','LowerLeg_L','Foot_L'],['RightUpLeg','UpperLeg_R','LowerLeg_R'],['RightLeg','LowerLeg_R','Foot_R']];
   function applyMotion(ch,i,state,p,dt){
     if(!motion)return;
@@ -219,7 +228,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   function metrics(){return {tennisV7:false,stadium11:stadium11?.metrics??null,stadium12:stadium12?.metrics??null,motion:{loaded:Boolean(motion),clips:characters.map(c=>c.motionName||null)},v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
   function dispose(){if(disposed)return;disposed=true;observer?.disconnect();v7?.dispose();stadium11?.dispose();stadium12?.dispose();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
   setQuality(0);resize();
-  return {render,observeFrame,metrics,dispose,setQuality,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
+  return {render,observeFrame,metrics,dispose,get scene(){return new URLSearchParams(location.search).get('dev')==='1'||new URLSearchParams(location.search).has('perf')?scene:null;},setQuality,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
 }
 
 /** Keep the same round alive when a GPU context cannot be used. */

@@ -189,13 +189,13 @@ export async function createTennisV7({scene,config,keep,params,surface,quality=0
  }
  // --- quality tiers and the frame-time governor (crowd first: it is the cheapest thing to thin)
  const start=crowdStartLevel(v7,quality,params),governor=createCrowdGovernor({level:Math.max(0,start.level),pinned:start.pinned});
- let tier=quality;
+ let tier=quality,venueHidden=false; // v13: a quality change used to switch the v7 terraces back on under the v12 stadium (the thin beige stripes)
  function setQuality(q){
   tier=q;const wanted=crowdStartLevel(v7,q,params);
   const target=wanted.level<0?-1:wanted.pinned?wanted.level:Math.min(wanted.level,governor.level);
   if(target!==level)setCrowdLevel(target);
   crewMesh.visible=q<=(v7.crewMaxQuality??0);
-  loaded.venue.visible=true;
+  loaded.venue.visible=!venueHidden;
  }
  function observe(milliseconds){
   const stepped=governor.observe(milliseconds);
@@ -218,7 +218,7 @@ export async function createTennisV7({scene,config,keep,params,surface,quality=0
  const look={background:'#E7E5D7',fog:'#E7E5D7',hemi:['#EEF4E9','#9E9A77',1.35],sun:['#FFF0D4',2.7,[-13,22,9]],exposure:1.1};
  setQuality(quality);
  const venueParts=[loaded.venue,meshes.lod1,meshes.lod0,meshes.cheer,seats];
- return {root,ball,look,spectators,floorOffset:FLOOR,hideVenue(){for(const p of venueParts)p.visible=false;ground.material.color.set('#2b3a3e');},showVenue(){for(const p of venueParts)p.visible=true;ground.material.color.set('#DBDDC8');},setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
+ return {root,ball,look,spectators,floorOffset:FLOOR,hideVenue(){venueHidden=true;for(const p of venueParts)p.visible=false;ground.material.color.set('#2b3a3e');},showVenue(){venueHidden=false;for(const p of venueParts)p.visible=true;ground.material.color.set('#DBDDC8');},setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
   get level(){return level;},get governor(){return governor;},
   dispose(){for(const m of [meshes.lod1,meshes.lod0,meshes.cheer,seats])m.dispose?.();}};
 }

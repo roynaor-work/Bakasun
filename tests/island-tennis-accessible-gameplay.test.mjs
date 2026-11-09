@@ -196,3 +196,30 @@ test('accessible tennis: all 30 stages produce finite, moving begin/middle/end t
  }
  assert.ok(movement>50,'traces exercise actual movement');assert.ok(returns>20,'traces exercise real returns');
 });
+
+test('tennis v13: the computer\'s drop is playable: it lands a few metres behind the net, rises to a hittable height, and a runner at rank 1 returns most of them',()=>{
+ const d=base.drop;assert.ok(d.aiDepth>=3&&d.minApex>=.7&&d.aiFlightMin>=1.2);
+ const m=createTennis({config:base,stage:15,seed:5,difficulty:'normal',ranks:{speed:1,hit:3,serve:3}}),s=m.getState();
+ s.phase='rally';Object.assign(s.players[1],{x:0,z:-7.8,vx:0,vz:0});Object.assign(s.ball,{x:0,y:1,z:-6.2,vx:0,vy:0,vz:0,bounces:1,lastHitter:0});s.shot={side:0,serving:false};s.contact={side:1,x:0,z:-6.2,at:0,eta:0};
+ // force the computer's drop
+ const cfg=structuredClone(base);for(const l of cfg.levels){l.dropChance=1;l.lobChance=0;l.missChance=0;}
+ const m2=createTennis({config:cfg,stage:15,seed:5,difficulty:'normal',ranks:{speed:1,hit:3,serve:3}}),t=m2.getState();
+ t.phase='rally';Object.assign(t.players[1],{x:0,z:-7.8,vx:0,vz:0});Object.assign(t.ball,{x:0,y:1,z:-6.2,vx:0,vy:0,vz:0,bounces:1,lastHitter:0});t.shot={side:0,serving:false};t.contact={side:1,x:0,z:-6.2,at:0,eta:0};
+ for(let i=0;i<600&&!(t.shot.side===1&&t.shot.drop);i++)m2.update(dt);
+ assert.ok(t.shot.drop&&Math.abs(t.shot.targetZ)>=d.aiDepth-1e-6,'the drop lands '+d.aiDepth+' m behind the net');
+ let apex=0,bounced=false;for(let i=0;i<1200&&t.phase==='rally';i++){m2.update(dt);if(t.ball.bounces===1){bounced=true;apex=Math.max(apex,t.ball.y);}if(t.ball.bounces>1)break;}
+ assert.ok(bounced&&apex>=d.minApex-.12,'after the bounce the ball rises to about '+d.minApex+' m, got '+apex.toFixed(2));
+});
+
+test('tennis v13: the player model carries only the two clips the view plays, the cold start loads in parallel, and a quality change cannot bring the old terraces back',async()=>{
+ const glb=await readFile(new URL('../workout/island/assets/tennis-kid.glb',import.meta.url));
+ const jsonLength=glb.readUInt32LE(12),json=JSON.parse(glb.subarray(20,20+jsonLength).toString('utf8'));
+ assert.deepEqual(json.animations.map(a=>a.name).sort(),['run','stand'],'only the clips the tennis view uses');
+ assert.ok(glb.length<800_000,'the trimmed player is '+glb.length+' bytes (was 1.47 MB)');
+ const names=json.nodes.map(n=>n.name||'');for(const a of json.animations)for(const c of a.channels)assert.match(names[c.target.node],/^(UpperLeg|LowerLeg|Foot|Toe)_/);
+ const view=await readFile(new URL('../workout/island/minigames/tennis-view.mjs',import.meta.url),'utf8');
+ assert.match(view,/const early=\{[\s\S]*character:fetch\(characterUrl\)[\s\S]*stadium12:[\s\S]*loadStadiumAssets/,'the player, the stadium files and the modules start together');
+ assert.match(view,/tennis-kid\.glb/);
+ const venue=await readFile(new URL('../workout/island/minigames/tennis-v7-venue.mjs',import.meta.url),'utf8');
+ assert.match(venue,/loaded\.venue\.visible=!venueHidden/,'setQuality respects hideVenue');
+});
