@@ -1,6 +1,6 @@
 # הנחיות Codex להדבקה (07/11/2026, רועי: "תכין הכל, אני אעלה לשם")
 
-שבע עשרה משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
+שמונה עשרה משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
 
 ## 1. סביבת מירוצים בסגנון פורמולה 1 (רמה: ultra למודלים, extra high למרקמים)
 ```
@@ -160,4 +160,12 @@ preview.html שמנגן כל צליל עם בקרת עוצמה.
 המאגר: https://github.com/roynaor-work/Bakasun (ציבורי), ענף main. כדי לא להוריד הכול: git clone --depth 1 --filter=blob:none --sparse https://github.com/roynaor-work/Bakasun.git ; cd Bakasun ; git sparse-checkout set workout/island/design/motion2 ; for b in codex/motion-qa-v1 codex/soccer-motion-v9 codex/soccer-motion-v10 codex/soccer-motion-v11 codex/hoops-motion-v9 codex/hoops-motion-v10 codex/hoops-motion-v11 codex/hoops-tall-v1 codex/tennis-motion-v1; do git fetch origin $b ; done ; git checkout FETCH_HEAD -- workout/island/design/tennis-motion-v1 ; git checkout origin/codex/motion-qa-v1 -- workout/island/design/motion-qa-v1
 כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/motion-fix-v12 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/motion-fix-v12/
 הרקע: כלי ה-QA שלך (motion-qa-v1) מדד ממוצעי ציון: soccer-v8 93.3, soccer-v9 91.2, soccer-v10 84.9, hoops-v8 88.2, hoops-v9 87.6, hoops-v10 77.8, hoops-tall-v1 69.9 (347 מדדים אדומים). כלומר הספריות החדשות גרועות מהישנות, ולכן רועי לא מרגיש שיפור ("זה אפילו לא קרוב"). הגרועים: v9/cut_*_ball ו-brake_ball על דמויות hoops-tall (החלקת רגליים עד 0.30 מ', קפיצות פוזה 10-22 מעלות, פער יציאה מול idle). המשימה: לתקן, לא להוסיף: 1) להריץ את הכלי על כל הספריות כולל tennis-motion-v1, soccer-v11 ו-hoops-v11; 2) לכל קליפ עם ציון מתחת ל-80: לתקן את הסיבה (נעילת רגל/IK, החלקת ביניים, מיסוך קפיצות פוזה, מעבר רציף אל idle ומתוכו, ריטרגטינג מחדש לדמויות הגבוהות), ולהפיק גרסה מתוקנת תחת runtime/ באותו שם קליפ + חותמת גרסה; 3) לדווח ציון לפני ואחרי לכל קליפ. יעד: אפס מדדים אדומים, ממוצע ספרייה לפחות 88, ולא יותר מ-5% קליפים בצהוב. לא למחוק קליפים: אם אי אפשר לתקן, לסמן אותם בקובץ blocklist.json עם הסיבה. מוכן כש: report.html לפני/אחרי, טבלת סיכום, וכל הקליפים המתוקנים נטענים ב-preview.html על שלוש דמויות או על הדמות המתאימה.
+```
+
+## 18. קהל תלת-ממדי קל לטניס (רמה: extra high)
+```
+המאגר: https://github.com/roynaor-work/Bakasun (ציבורי), ענף main. כדי לא להוריד הכול: git clone --depth 1 --filter=blob:none --sparse https://github.com/roynaor-work/Bakasun.git ; cd Bakasun ; git sparse-checkout set workout/island/minigames workout/island/design/tennis-stadium-v1 workout/island/js
+כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/tennis-crowd-3d-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/tennis-crowd-3d-v1/
+הרקע (רועי: "הקהל נראה כמו חתיכות קרטון ישרות"): הקהל בטניס הוא אטלס דו-ממדי שטוח, גם אחרי v13. המשימה: קהל תלת-ממדי קל לטניס באי: 12 וריאציות של אוהד יושב (GLB מרוסן אחד לכל וריאציה, עד 220 משולשים כל אחד, חולצות וצבעי עור ושיער שונים, ידיים למטה וידיים למעלה כשני מצבי אנימציה בפורמט morph או שני GLB), מתאים ל-InstancedMesh עם 600 מופעים (כמו במבנה של tennis-stadium-v1). הצללה אפויה בצבעי קודקוד, בלי טקסטורה גדולה. מגבלת משקל כוללת 400KB. ניואנסים: ראשים שמסתובבים בעקבות הכדור (מפת עצם ראש אם יש), קפיצה קלה בחגיגה, שונות בגובה ובגוף.
+מוכן כש: preview.html מציג את היציע עם 600 מופעים מזוויות המצלמה של המשחק (צד ומאחור), מונה משולשים (עד 132,000 לכל הקהל או לפי התקציב שבדוח), מדידת fps בתוכנה לפני/אחרי, ו-REPORT עם טבלת קבצים.
 ```
