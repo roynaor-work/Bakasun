@@ -146,7 +146,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
     // bodies and the v3 venue (sprite crowd) and still start.
     // v5 (04/11) is the default venue now, so the v4 checks pin it off with ?hoopsV5=0 and v5 has its own checks below
-    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
     // v7 (05/11) is the default body set now: the v4/v5 checks pin it off with ?hoopsV7=0 and v7 has its own checks after the v5 ones
     const hoopsV7Base=hoopsBase.replace('&hoopsV7=0','');
     const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
@@ -230,7 +230,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     }finally{await v5v3.close();await v5v3.csp.assertClean();}
     // Basketball v8 (06/11, GPT hoops-arena-v8 + hoops-motion-v8): the hall and the authored passes under the production CSP, nothing from design/;
     // then the hall blocked (falls back to v5) and the motion pack blocked (v7 arm-IK passes, the hall stays).
-    const v8Base='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    const v8Base='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0';
     const v8=await fixture('hoops-v8-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       const requests=[];v8.page.on('request',r=>requests.push(r.url()));
@@ -259,6 +259,27 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.equal(live.error,null,'a missing motion pack never stops the game');assert.equal(live.m.v8Motion,false);assert.equal(live.m.v8,true);assert.deepEqual(live.m.v4Fallbacks,['v8 motion']);assert.equal(live.m.characterVersion,7);
       await v8motion.csp.assertClean();reports.push({name:'hoops-v8-fallback-motion-result',...live.m,loadTimes:undefined});
     }finally{await v8motion.close();await v8motion.csp.assertClean();}
+    // Basketball tall bodies + the v9 library (08/11, Codex): under the production CSP, from assets/ only; blocked files fall back to the v7 bodies.
+    const tallBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    const tall=await fixture('hoops-tall-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];tall.page.on('request',r=>requests.push(r.url()));
+      await tall.page.goto(server.url+tallBase,{waitUntil:'load'});
+      const live=await hoopsReady(tall.page);
+      assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.characterVersion,9);assert.deepEqual(live.m.v4Fallbacks,[]);
+      for(const f of ['guard.glb','wing.glb','center.glb','motion.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-tall/'+f)),f);
+      assert.ok(!requests.some(u=>/\/design\/hoops-(tall|motion)/.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(live.m.calls<=45,'one draw call per body: '+live.m.calls);
+      await tall.csp.assertClean();reports.push({name:'hoops-tall-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await tall.close();await tall.csp.assertClean();}
+    const tallFallback=await fixture('hoops-tall-fallback-v7',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await tallFallback.page.route(/assets\/hoops-tall\//,route=>route.abort());
+      await tallFallback.page.goto(server.url+tallBase,{waitUntil:'load'});
+      const live=await hoopsReady(tallFallback.page);
+      assert.equal(live.error,null,'a missing tall body never stops the game');assert.equal(live.m.tall,false);assert.equal(live.m.characterVersion,7);assert.ok(live.m.v4Fallbacks.includes('players-tall'));
+      await tallFallback.csp.assertClean();reports.push({name:'hoops-tall-fallback-v7-result',...live.m,loadTimes:undefined});
+    }finally{await tallFallback.close();await tallFallback.csp.assertClean();}
   }finally{
     await browser.close();await server.close();
     if(process.env.ISLAND_CSP_AUDIT_DIR){await mkdir(process.env.ISLAND_CSP_AUDIT_DIR,{recursive:true});await writeFile(path.join(process.env.ISLAND_CSP_AUDIT_DIR,'csp-negative-fixtures.json'),JSON.stringify(reports,null,2)+'\n');}

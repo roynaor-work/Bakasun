@@ -80,7 +80,7 @@ test('hoops view and players wire the v4 path with a silent fall back to v3',asy
  assert.ok(/loadPlayerAssets\(config\.assets,assetBase,onProgress,\{params,onFallback,quality\}\)/.test(view));
  assert.ok(/catch\(error\)\{onFallback\?\.\('players',error\);\}\s*\}\s*return loadPlayerAssetsV1/.test(players),'players fall back to the v3 bodies');
  assert.ok(/validate before anything visible changes/.test(models),'the v4 venue is checked before the arena is touched');
- assert.ok(/characterVersion:assets\.v7\?7:assets\.v2\?2:assets\.v4\?4:1/.test(view)&&/v4Fallbacks/.test(view),'metrics report which assets are live');
+ assert.ok(/characterVersion:(assets\.tall\?9:)?assets\.v7\?7:assets\.v2\?2:assets\.v4\?4:1/.test(view)&&/v4Fallbacks/.test(view),'metrics report which assets are live');
 });
 
 test('the 3D crowd is cut into culling chunks that share one vertex buffer and lose no triangle',()=>{
