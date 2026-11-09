@@ -85,7 +85,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,latency=9,
   const m={playingTicks:0,deadTicks:0,restTicks:0,stuckWindows:0,windows:0,maxStuck:0,thirds:[0,0,0],swings:0,progress10:0,progressN:0,coverage:0,coverageN:0,
     switches:0,autoSwitches:0,autoPingPong:0,pingPong:0,switchCorrect:0,switchJudged:0,mismatchTicks:0,defTicks:0,mismatchRun:0,mismatchRuns:[],roleTicks:{},ownerControlledTicks:0,
     touchToMove:[],manualSwitchLag:[],halves:0,restartTicks:0,eventsPlayed:0};
-  let lastTeam0Event=-9;let restartAt=null;const restartDur={};let prevControlledForShot=game.getState().controlled;let spell=null;let edgeRun=0,maxEdgeRun=0,cornerTicks=0;let pending=null,pendingShot=null,prevOwner=null,lastHolderTeam=null,prevControlled=game.getState().controlled,zone=null,lastSwitchAt=-9,lastSwitchFrom=null,pendingSwitchJudge=null;
+  let lastTeam0Event=-9;let restartAt=null;const restartDur={};let prevControlledForShot=game.getState().controlled;let spell=null;let edgeRun=0,maxEdgeRun=0,cornerTicks=0;let duel=null;const duels={engaged:0,won:0,beaten:0,open:0};let pending=null,pendingShot=null,prevOwner=null,lastHolderTeam=null,prevControlled=game.getState().controlled,zone=null,lastSwitchAt=-9,lastSwitchFrom=null,pendingSwitchJudge=null;
   let winStart=null,winX=0,winZ=0,winT=0,xMin=Infinity,xMax=-Infinity,covT=0,restT=0,stuckRun=0,sampleN=0,progAnchor=null;
   let touch=null;
   let elapsed=0;
@@ -146,6 +146,12 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,latency=9,
     T[team].possessionTicks++;if(spell&&spell.team===team)spell.ticks++;
     {const nearEdge=Math.abs(b.z)>config.pitch.width/2-2.2||Math.abs(b.x)>hx-2.2;edgeRun=nearEdge?edgeRun+step:0;maxEdgeRun=Math.max(maxEdgeRun,edgeRun);if(Math.abs(b.x)>hx-4&&Math.abs(b.z)>config.pitch.width/2-4)cornerTicks++;}
     const me=cur.players[cur.controlled];
+    // Defending duel: the selected player against a rival carrier. Engaged = within 2 m; won = the ball changes team within 1.5 s;
+    // beaten = the carrier is still the owner and more than 4 m away within 1.5 s of the engagement.
+    if(owner&&owner.team===1&&owner.role!=='keeper'){const dd=dist(me,owner);
+      if(!duel&&dd<2){duel={t:elapsed,id:owner.id};duels.engaged++;}
+      else if(duel&&duel.id===owner.id){if(elapsed-duel.t<=1.5&&dd>4){duels.beaten++;duel=null;}else if(elapsed-duel.t>1.5)duel=null;}}
+    else if(duel){if(owner&&owner.team===0&&elapsed-duel.t<=1.5)duels.won++;if(!owner||owner.team===0||elapsed-duel.t>1.5)duel=null;}
     m.roleTicks[me.role]=(m.roleTicks[me.role]||0)+1;
     if(b.owner===cur.controlled)m.ownerControlledTicks++;
     if(touch){
@@ -220,6 +226,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,latency=9,
   const sorted=[...m.mismatchRuns].sort((a,b)=>a-b),q=(arr,f)=>arr.length?arr[Math.min(arr.length-1,Math.floor(arr.length*f))]:null;
   const t2m=[...m.touchToMove].sort((a,b)=>a-b);
   out.game={
+    duelsEngaged:duels.engaged,duelsWon:duels.won,duelsBeaten:duels.beaten,
     totalGoals:T[0].goals+T[1].goals,totalShots:T[0].shots+T[1].shots,
     deadBall:secs?m.deadTicks*step/secs:0,restBall:secs?m.restTicks*step/secs:0,
     stuckWindows:m.windows?m.stuckWindows/m.windows:0,maxStuckSeconds:m.maxStuck,
