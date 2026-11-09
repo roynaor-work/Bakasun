@@ -689,7 +689,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(s.defenseIdle+1e-8>=(aiV2?autoSwitchDwell(config,advantage,candidate.id===leftId&&s.elapsed-leftAt<(aiConfig.switchBackSeconds??1.5)):config.autoSwitchSeconds))selectPlayer(candidate.id);
     }else{s.defenseIdle=0;s.autoSwitchCandidate=null;}
     if(role==='keeper')pendingSwitch=false;
-    if(pendingSwitch){const id=selectControlledPlayer(s,config,{manual:true,moveX:finite(input.moveX),moveZ:finite(input.moveZ)});if(id!==null){s.bufferedAction=null;selectPlayer(id);event('switch',{player:id});}pendingSwitch=false;}
+    if(pendingSwitch){const id=selectControlledPlayer(s,config,{manual:true,directional:aiV2,moveX:finite(input.moveX),moveZ:finite(input.moveZ)});if(id!==null){s.bufferedAction=null;selectPlayer(id);event('switch',{player:id});}pendingSwitch=false;}
     const p=players[s.controlled],mx=clamp(finite(input.moveX),-1,1),mz=clamp(finite(input.moveZ),-1,1),length=Math.hypot(mx,mz);
     s.aim=length>aiConfig.idleThreshold?{x:mx/length,z:mz/length}:{x:p.fx,z:p.fz};
     s.moving=length>aiConfig.idleThreshold;s.headerAim=s.moving?s.aim:null;
