@@ -310,3 +310,4 @@ Codex עצר נכון (PR #338 נסגר): אין לו קול עברי מאומת
 | 8 שחקנים אחידים | סשן חדש unified-athletes (018LH5qVyVoFZFRvd63DBobg), ענף claude/unified-athletes-v1 |
 | 9 פושע | catch (018LH5qWQs38) |
 - איחוד v20 כשהם חוזרים.
+- מרוצים (PR #383, `claude/racing-sound-start`): סיבה סבירה לסאונד שלא עובד בהתחלה: בנייד pointerdown/touchstart לא נחשבים פעולת משתמש לאודיו (רק pointerup/touchend/click), והנהג מחזיק את ההגה. תיקון: פתיחת אודיו בתחילת המירוץ + ניסיון חוזר כל חצי שנייה (`?racingSoundStart=0`). האצה ידנית ברירת מחדל, כפתור "אוטו" שנשמר ב-localStorage (`island.racing.auto`), `?racingAuto=1`. לא שוחזר בדפדפן אמיתי (רק בדיקת יחידה): נדרשת בדיקת טלפון. 3,585 עברו.
