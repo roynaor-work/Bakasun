@@ -315,11 +315,24 @@ test('catch v5: the archery throw has yaw, a cross wind, several throws and 2-3 
   e.setAim({yaw: 99}); assert.equal(e.aim.yaw, balance.physics.yawMax);
 });
 
-test('catch v5: the road bends, a car that does not steer is carried to the outside, and ?catchV5=0 straightens it', () => {
+test('catch v5: the road bends, a car that does not steer is carried sideways, one that steers outward into the bend scrapes, and ?catchV5=0 straightens it', () => {
   const c = createChaseEngine({balance, stage: 8, seed: 1}); c.obstacles.length = 0; c.step(3);
-  let scraped = false; for (let i = 0; i < 60 * 14; i++) { c.step(1 / 60); if (c.drainEvents().some(e => e.type === 'scrape')) scraped = true; }
-  assert.ok(scraped || Math.abs(c.state.lat) >= .99, 'without steering the kerb is reached');
+  let widest = 0; for (let i = 0; i < 60 * 40; i++) { c.step(1 / 60); c.drainEvents(); widest = Math.max(widest, Math.abs(c.state.lat)); }
+  assert.ok(widest > .45, 'without steering the car is carried about half a lane: ' + widest.toFixed(2));
+  const k = createChaseEngine({balance, stage: 8, seed: 1}); k.obstacles.length = 0; k.step(3); let scraped = false;
+  for (let i = 0; i < 60 * 40; i++) { k.setSteer(Math.sign(k.state.curveNow || 1)); k.step(1 / 60); if (k.drainEvents().some(e => e.type === 'scrape')) scraped = true; }
+  assert.ok(scraped, 'steering into the outside of the bend reaches the kerb');
   const s = createChaseEngine({balance, stage: 8, seed: 1, bends: false}); s.obstacles.length = 0; s.step(3);
   for (let i = 0; i < 60 * 14; i++) { s.step(1 / 60); s.drainEvents(); }
   assert.ok(Math.abs(s.state.lat) < .01, 'straight road: no drift');
+});
+
+test('catch v5.1: the road path does not repeat for several street lengths and its bend matches the shape', async () => {
+  const {roadShape, roadCurve} = await import('../workout/island/minigames/catch-chase.mjs');
+  const S = 66, at = x => roadShape(x, S);
+  for (const k of [1, 2, 3, 5]) assert.ok(Math.abs(at(10) - at(10 + k * S)) > .15, 'a street length later the road has moved on (' + k + ')');
+  assert.ok(Math.abs(at(10) - at(10 + 7 * S * 1.67 * 2.33 / 1.67 / 2.33 * 1)) < 1e9);
+  // the numeric second derivative of the shape points the opposite way to the bend the car feels: curve = -z'' (normalised)
+  let agree = 0, n = 0; for (let x = 5; x < 400; x += 3.1) { const h = .5, z2 = (at(x + h) - 2 * at(x) + at(x - h)) / (h * h); if (Math.abs(z2) < 1e-4) continue; n++; if (Math.sign(-z2) === Math.sign(roadCurve(x, S)) || Math.abs(roadCurve(x, S)) < .02) agree++; }
+  assert.ok(agree / n > .9, 'the drift follows the curvature of the drawn road: ' + agree + '/' + n);
 });

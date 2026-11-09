@@ -1,6 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {createActor} from './catch-actors.mjs?v=island-v2-20261107-6';
+import {ROAD_WAVES, roadShape} from './catch-chase.mjs?v=island-v2-20261107-6';
 import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-6';
 
 /** Three.js side of "תפוס את הפושע". One street from the island's city models
@@ -168,15 +169,15 @@ export async function createCatchView({canvas, arch: archOn = false, engine: ini
   // ----- street -----
   const P = balance.physics, S = balance.chase?.period || 66, streetEnd = 134, shadowTex = glowTexture('#000000');
   // v5 bends: the whole street is shifted sideways by A*sin(2*pi*x/S) in the vertex shader (uBend is 0 in the throw scene), so cars, buildings and kerbs bend together.
-  const BEND_A = 3.4, bendU = {value: 0}, BEND_W = 2 * Math.PI / S, bz = x => bendU.value * Math.sin(BEND_W * x), bendSprites = [];
+  const BEND_A = 1.7, bendU = {value: 0}, shiftU = {value: 0}, WAVES = ROAD_WAVES.map(w => ({w: 2 * Math.PI / (S * w.p), a: w.a, ph: w.ph})), bz = x => bendU.value * roadShape(x + shiftU.value, S), bendSprites = [];
   const bendify = root => root.traverse(o => {
     const m = o.isMesh ? o.material : null; if (!m || Array.isArray(m) || m.userData.bend || o.isSkinnedMesh || o.isPoints) return;
     m.userData.bend = true; const prev = m.onBeforeCompile;
     m.onBeforeCompile = (sh, r) => {
-      prev?.call(m, sh, r); sh.uniforms.uBend = bendU; sh.uniforms.uWave = {value: BEND_W};
-      sh.vertexShader = 'uniform float uBend;\nuniform float uWave;\n' + sh.vertexShader.replace('#include <project_vertex>', 'vec4 bendW = modelMatrix * vec4(transformed, 1.0); bendW.z += uBend * sin(uWave * bendW.x); vec4 mvPosition = viewMatrix * bendW; gl_Position = projectionMatrix * mvPosition;');
+      prev?.call(m, sh, r); sh.uniforms.uBend = bendU; sh.uniforms.uShift = shiftU; sh.uniforms.uW = {value: WAVES.map(w => w.w)};
+      sh.vertexShader = 'uniform float uBend;\nuniform float uShift;\nuniform float uW[3];\n' + sh.vertexShader.replace('#include <project_vertex>', 'vec4 bendW = modelMatrix * vec4(transformed, 1.0); float bx = bendW.x + uShift; bendW.z += uBend * (sin(uW[0] * bx) + .7 * sin(uW[1] * bx + 1.3) + .45 * sin(uW[2] * bx + 2.6)); vec4 mvPosition = viewMatrix * bendW; gl_Position = projectionMatrix * mvPosition;');
     };
-    m.customProgramCacheKey = () => 'bend1'; m.needsUpdate = true;
+    m.customProgramCacheKey = () => 'bend2'; m.needsUpdate = true;
   });
   const asphalt = asphaltTexture(theme), road = new T.Mesh(new T.PlaneGeometry(220, 8, 220, 1), new T.MeshStandardMaterial({map: asphalt, roughness: .95}));
   road.rotation.x = -Math.PI / 2; road.position.set(35, 0, 1.2); scene.add(road);
@@ -437,7 +438,7 @@ export async function createCatchView({canvas, arch: archOn = false, engine: ini
   }
   function updateChase(dt) {
     const st = chase.state, C = balance.chase;
-    chaseShift = Math.floor(st.x / S) * S;
+    chaseShift = Math.floor(st.x / S) * S; shiftU.value = chaseShift;
     const px = st.x - chaseShift, cx = st.crim.x - chaseShift;
     sirenPhase += dt * 9;
     playerCar.position.set(px, 0, laneZ(st.lat)); playerCar.rotation.y = -st.steer * .28; playerCar.rotation.z = -(st.boosting ? .03 : 0);

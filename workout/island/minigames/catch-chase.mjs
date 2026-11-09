@@ -16,7 +16,14 @@ const lerp = (a, b, k) => a + (b - a) * k;
 
 export const laneZ = (lat, C) => C.laneCenter + lat * C.laneWidth;
 /** Bend of the road at street position x: -1..1 times the stage's `curve`. The street repeats every C.period metres. */
-export const curveAt = (x, C, curve = 0) => curve ? curve * Math.sin(2 * Math.PI * x / (C.period || 66)) : 0;
+/** v5.1: the road is no longer one repeating wave. Three waves with periods of 1, 1.67 and 2.33 street lengths give a path that does not repeat
+ * for about 7 street lengths (460 m): S-bends, a long sweep and short wiggles. roadShape is the sideways position of the road (-2.15..2.15, times the stage's amplitude),
+ * roadCurve the bend the car feels (-1..1). The street model itself still repeats every C.period metres; the shader adds the bend by world x. */
+export const ROAD_WAVES = Object.freeze([{p: 1, a: 1, ph: 0}, {p: 1.67, a: .7, ph: 1.3}, {p: 2.33, a: .45, ph: 2.6}]);
+const ROAD_NORM = ROAD_WAVES.reduce((n, w) => n + w.a / (w.p * w.p), 0);
+export const roadShape = (x, period = 66) => ROAD_WAVES.reduce((z, w) => z + w.a * Math.sin(2 * Math.PI * x / (period * w.p) + w.ph), 0);
+export const roadCurve = (x, period = 66) => ROAD_WAVES.reduce((k, w) => k + w.a / (w.p * w.p) * Math.sin(2 * Math.PI * x / (period * w.p) + w.ph), 0) / ROAD_NORM;
+export const curveAt = (x, C, curve = 0) => curve ? curve * roadCurve(x, C.period || 66) : 0;
 
 /** Obstacles for the whole run, laid out up front from the seed so the chase is a pure function of inputs. */
 function layout(C, spec, rnd, length) {
@@ -96,13 +103,14 @@ export function createChaseEngine({balance, stage = 1, seed = 1, equipment = {},
       s.stun = Math.max(0, s.stun - dt);
       const grip = s.stun > 0 ? .35 : 1;
       s.steer += (input.steer * grip - s.steer) * Math.min(1, dt * C.steerResponse);
-      s.lat = clamp(s.lat + s.steer * C.steerSpeed * dt, -1, 1);
+      const L = C.laneLimit || 1; // the lanes are -1..1; the shoulder reaches +-laneLimit before the kerb scrapes
+      s.lat = clamp(s.lat + s.steer * C.steerSpeed * dt, -L, L);
       // v5 bends: the road swings left and right, a car that does not steer is carried to the outside; the kerb scrapes and slows
       s.curveNow = curveAt(s.x, C, spec.curve);
       if (spec.curve) {
         s.lat += (C.curveDrift || 0) * s.curveNow * (s.v / 22) * dt;
-        if (Math.abs(s.lat) > 1) {
-          s.lat = clamp(s.lat, -1, 1); s.v *= 1 - Math.min(1, C.scrapeDrag * dt); s.scrape = (s.scrape || 0) + dt;
+        if (Math.abs(s.lat) > L) {
+          s.lat = clamp(s.lat, -L, L); s.v *= 1 - Math.min(1, C.scrapeDrag * dt); s.scrape = (s.scrape || 0) + dt;
           if ((s.scrapeCool || 0) <= 0) { s.scrapeCool = .45; events.push({type: 'scrape', side: Math.sign(s.curveNow)}); }
         }
         s.scrapeCool = Math.max(0, (s.scrapeCool || 0) - dt);
