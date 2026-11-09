@@ -26,3 +26,9 @@ export function tennisIcon(kind){
  paths.drop='M4 14 Q12 2 19 16 Q21 22 27 23 M23 19 27 23 23 27 M4 27 H17 M10 22 V30';
  const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
+
+/** Timing rating as a pictogram (no words): star = perfect, ring = good, down arrow = early, up arrow = late. */
+export function ratingIcon(kind){
+ const shapes={perfect:'<path d="M14 2l3.6 7.6 8.4 1-6.2 5.8 1.7 8.3L14 20.4 6.5 24.7l1.7-8.3L2 10.6l8.4-1z" fill="#ffd16f" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>',good:'<circle cx="14" cy="14" r="9" fill="none" stroke="#67d398" stroke-width="3.2"/>',early:'<path d="M14 5v15M7 14l7 7 7-7" fill="none" stroke="#efc355" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>',late:'<path d="M14 23V8M7 14l7-7 7 7" fill="none" stroke="#efc355" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>'};
+ return `<svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">${shapes[kind]||''}</svg>`;
+}
