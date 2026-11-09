@@ -60,7 +60,7 @@ export function turnTo(from,to){
 }
 export async function loadMotion({base,fetcher=globalThis.fetch,params}={}){
  if(params?.get?.('tennisMotionV1')==='0')return null;
- const response=await fetcher(new URL('../assets/tennis-motion-v1/core.json?v=island-v2-20261107-6',base));
+ const response=await fetcher(new URL('../assets/tennis-motion-v1/core.json?v=island-v2-20261107-7',base));
  if(!response.ok)throw new Error('motion '+response.status);
  const data=await response.json();
  if(!data?.bones?.length||!data.clips?.ready_idle)throw new Error('motion data');
