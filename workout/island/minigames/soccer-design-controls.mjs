@@ -64,10 +64,15 @@ export function shapeStick(raw,thresholds,feel){
   return Math.min(1,(m-dead)/(sat-dead))**(feel.expo??1);
 }
 
-export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=>{}}){
+/** `autoSprint:false` = the sprint button is the only way to sprint (a full-tilt stick no longer latches a sprint on); `sprintTapMs` = a tap on
+ * the sprint button sprints for at least that long (a plain tap used to be one 1/60 s tick, which does nothing). Defaults keep the old behaviour. */
+/** Sprint on the button only (default): `?soccerAutoSprint=1` brings back the full-tilt stick latch. A tap sprints for 0.45 s. */
+export const soccerSprintMode=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerAutoSprint')==='1'?{autoSprint:true,sprintTapMs:0}:{autoSprint:false,sprintTapMs:450};
+export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=>{},autoSprint:allowAuto=true,sprintTapMs=0}){
+  let sprintUntil=0;
   let enabled=false,key='',allowed=new Set(),stick=null,movement={x:0,z:0},sprintSince=null,autoSprint=false,switchPulse=false;
   const actions=new Map(),arrows=new Set();
-  const reset=()=>{stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;switchPulse=false;actions.clear();arrows.clear();onCancel();};
+  const reset=()=>{sprintUntil=0;stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;switchPulse=false;actions.clear();arrows.clear();onCancel();};
   const setState=(value,available)=>{const next=[...available].sort().join(',');if(value!==key||next!==[...allowed].sort().join(',')){reset();key=value;allowed=new Set(available);}};
   const actionByPointer=id=>[...actions.values()].find(action=>action.pointer===id&&action.held);
   const begin=(action,pointer,x,y,rect,time)=>{
@@ -88,7 +93,8 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
     movement=shaped===0?{x:0,z:0}:{x:dx/length*shaped,z:dz/length*shaped};
     // One-finger sprint keeps the contract's geometry: it reads the physical tilt, not the curve.
     const magnitude=Math.min(1,length/radius);
-    if(magnitude>=thresholds.one_finger_sprint_on){if(sprintSince===null)sprintSince=time;}
+    if(!allowAuto){sprintSince=null;autoSprint=false;}
+    else if(magnitude>=thresholds.one_finger_sprint_on){if(sprintSince===null)sprintSince=time;}
     else if(!autoSprint||magnitude<thresholds.one_finger_sprint_off){sprintSince=null;if(magnitude<thresholds.one_finger_sprint_off)autoSprint=false;}
     const hit=zones.find(zone=>allowed.has(zone.action)&&x>=zone.rect.left&&x<=zone.rect.right&&y>=zone.rect.top&&y<=zone.rect.bottom);
     if(!hit){stick.candidate=null;return;}
@@ -109,7 +115,7 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
     move(pointer,x,y,time,zones){if(stick?.pointer===pointer){updateStick(x,y,time,zones);transfer(time);return;}const action=actionByPointer(pointer);if(action)moveAction(action,x,y);},
     end(pointer,x,y,time){
       if(stick?.pointer===pointer){if(stick.mode==='move')updateStick(x,y,time);else{const action=actionByPointer(pointer);if(action){moveAction(action,x,y);if(actions.has(action.action)){action.held=false;if(action.action==='switch')switchPulse=true;}}}stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;return;}
-      const action=actionByPointer(pointer);if(!action)return;moveAction(action,x,y);if(!actions.has(action.action))return;action.held=false;if(action.action==='switch')switchPulse=true;
+      const action=actionByPointer(pointer);if(!action)return;moveAction(action,x,y);if(!actions.has(action.action))return;action.held=false;if(action.action==='switch')switchPulse=true;if(action.action==='sprint'&&sprintTapMs>0)sprintUntil=Math.max(sprintUntil,action.time+sprintTapMs);
     },
     cancelPointer(pointer){if(stick?.pointer===pointer||actionByPointer(pointer))reset();},
     arrow(code,down){if(!enabled)return;if(down)arrows.add(code);else arrows.delete(code);},
@@ -122,6 +128,7 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
         const action=actions.get(name);if(!action)continue;
         input[`${name}Held`]=Boolean(action.held||action.pulse)||input[`${name}Held`];action.pulse=false;
       }
+      if(sprintTapMs>0&&time<sprintUntil&&allowed.has('sprint'))input.sprintHeld=true;
       for(const name of ['kick','pass']){
         const action=actions.get(name),length=Math.hypot(action?.dx||0,action?.dy||0),manual=length>=thresholds.swipe_min_distance_px;
         const aim=manual?normalize(action.dx,action.dy):action?.transferAim;
@@ -135,7 +142,7 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
 
 /** Soccer owns this recognizer; other games keep the shared controls module. */
 export function createSoccerDesignInput({root,nodes,config,interaction,onGesture=()=>{},onCancel=()=>{},autoAim,now=()=>performance.now()}){
-  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,feel:config.stick||null,onCancel}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
+  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,feel:config.stick||null,onCancel,...soccerSprintMode()}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
   const window=root.ownerDocument.defaultView,document=root.ownerDocument,stick=root.querySelector('#joystick'),knob=root.querySelector('#knob');
   let allowed=new Set(),enabled=false,viewportWidth=window.innerWidth,viewportHeight=window.innerHeight;
   const point=event=>[event.clientX??0,event.clientY??0];

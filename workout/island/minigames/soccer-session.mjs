@@ -12,7 +12,7 @@ import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107
 import {gameContext} from './context.mjs?v=island-v2-20261107-7';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
-import {applySoccerTeams,resolveSoccerTeams} from './soccer-teams.mjs';
+import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
 import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-7';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
@@ -57,7 +57,7 @@ export function soccerActionLabels(state,config){
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
-  const {balance:sourceBalance,canvas,controls,status,t}=ctx,teamsKey=resolveSoccerTeams(),balance=expandSoccerConfig(applySoccerTeams(sourceBalance,teamsKey));
+  const {balance:sourceBalance,canvas,controls,status,t}=ctx,teamsKey=resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS),balance=expandSoccerConfig(applySoccerTeams(sourceBalance,teamsKey));
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
